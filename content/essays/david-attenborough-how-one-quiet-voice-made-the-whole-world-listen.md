@@ -10,9 +10,12 @@ subtitle: "From black-and-white BBC to the edge of extinction and back"
 featured_image: "/images/medium/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen/e9cc168657d174fbcaa39903485390e4c012d6aee82477adf48f67f3d94d5a10.jpeg"
 featured_image_alt: "David Attenborough: How One Quiet Voice Made the Whole World Listen"
 description: "Minimalist narration isn’t supposed to change the world. With a steady tone, curious cadence, and enough wonder to move stone-faced politicians to tears, Dav..."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-18"
+    note: "Repaired malformed Markdown for four body images and normalized an imported apostrophe in one image label and caption; article wording and image sources are unchanged."
   - version: "1.1"
     date: "2026-05-15"
     note: "Updated May 15, 2026, after OIP back-archive review. Removed remote Medium body images, normalized imported punctuation, and replaced an unsupported late-career event claim with source-disciplined legacy language."
@@ -50,7 +53,7 @@ Broadcaster, naturalist, author, and planetary conscience.
 
 #### Early Life: Fossils and Field Guides
 
-![Young Attenborough \](/images/medium/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen/7c844e95b13747832b43acac547a004df8032e4c7a77fbdafdad774ac742af13.jpeg)
+![Young Attenborough](/images/medium/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen/7c844e95b13747832b43acac547a004df8032e4c7a77fbdafdad774ac742af13.jpeg)
 
 *Young Attenborough \| Source: BBC*
 
@@ -80,7 +83,7 @@ program in 1952 ~ not because he dreamed of being on TV, but because
 
 #### The Zoo Quest Years (1954-1963): Travel, Teeth, and Film Canisters
 
-![Attenborough with Zoo Quest \](/images/medium/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen/e054476f32670103ba21eb1c2c9dec02be6781cba0d2f1083d8bd3de392a7ab2.jpeg)
+![Attenborough with Zoo Quest](/images/medium/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen/e054476f32670103ba21eb1c2c9dec02be6781cba0d2f1083d8bd3de392a7ab2.jpeg)
 
 *Attenborough with Zoo Quest \| Source: BBC*
 
@@ -110,7 +113,7 @@ when it's hard to watch.***
 
 #### Building the BBC's Natural History Unit: The Big Picture
 
-![Attenborough as Director \](/images/medium/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen/44d247cbe742e51230845dc005213ebb4b867c5b8a0c9547da56f6689045bc27.jpeg)
+![Attenborough as Director](/images/medium/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen/44d247cbe742e51230845dc005213ebb4b867c5b8a0c9547da56f6689045bc27.jpeg)
 
 *Attenborough as Director \| Source: BBC*
 
@@ -139,9 +142,9 @@ single-celled organisms to humans.
 
 #### The Voice and the Blueprint: A New Way to Tell Nature Stories
 
-![Everyone’s Favorite Nature Uncle \](/images/medium/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen/e701867c75e694f074bb236f6d2d2d4f968c1fa91dfc9435478e34acd639f43f.jpeg)
+![Everyone's Favorite Nature Uncle](/images/medium/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen/e701867c75e694f074bb236f6d2d2d4f968c1fa91dfc9435478e34acd639f43f.jpeg)
 
-*Everyone’s Favorite Nature Uncle \| Source: BBC*
+*Everyone's Favorite Nature Uncle \| Source: BBC*
 
 
 **Attenborough didn't shout. He didn't moralize. He didn't even raise

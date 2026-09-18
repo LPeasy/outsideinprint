@@ -9,9 +9,12 @@ description: "Extreme weather data does not say every storm is unprecedented. It
 featured_image: "medium/39e3617269bd3ce2757d8b6d0bf6990bda121d46a73fbc206ab41017d99c2fde"
 featured_image_alt: "Chart showing U.S. extreme one-day precipitation events from 1910 to 2023."
 featured_image_caption: "EPA climate indicator chart on U.S. extreme one-day precipitation events."
-version: "1.3"
-edition: "Fourth web edition"
+version: "1.4"
+edition: "Fifth web edition"
 revision_history:
+  - version: "1.4"
+    date: "2026-09-18"
+    note: "Repaired escaped emphasis in a section heading; article wording and sources are unchanged."
   - version: "1.3"
     date: "2026-06-25"
     note: "Updated June 25, 2026, after COA2 value review to remove Medium residue, normalize fake-list blocks, and complete discovery metadata."
@@ -107,7 +110,7 @@ Or if you're a stats guy.
 
 > **and that's where the damage lives.**
 
-### What the Data Can \*and Can't\* Tell Us
+### What the Data Can *and Can't* Tell Us
 
 > ***Most national climate trend data starts around 1980.***
 

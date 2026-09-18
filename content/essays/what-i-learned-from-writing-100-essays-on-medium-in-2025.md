@@ -8,9 +8,12 @@ subtitle: "From zero followers to breakout stories ~ one writer’s honest exper
 featured_image: "medium/85db9a233bbe2b8ce8b37bf2cffb170d82db88760fa0ebb3fb2e14a0e881e798"
 featured_image_alt: "Writing 100 Essays on Medium"
 description: "The internet is noisy with hot takes and thin on verifiable facts. Sometime around December of 2024, I realized that quickly answering a question on the inte..."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-18"
+    note: "Repaired escaped emphasis in three passages and normalized imported quote characters in two chart captions; article wording, figures, and sources are unchanged."
   - version: "1.1"
     date: "2026-05-19"
     note: "Updated May 19, 2026, after OIP back-archive review. Removed remote Medium chart images, repaired internal OIP links, removed Medium import residue, normalized house style, and checked rendering."
@@ -44,7 +47,7 @@ Eventually I decided to start writing the essays I was searching for:
 
 **No followers. No plan.** Just a list of questions ~\
 and the knowledge that, hey, **if it's no good *then who cares
-anyway?\***
+anyway?***
 So I asked myself,
 
 > "What do you have to lose?"
@@ -180,7 +183,7 @@ within the first few weeks after publishing.
 
 > "Hey! Maybe I can be a writer..."
 
-**Other essays started slower.\**
+**Other essays started slower.**
 Some of them, like [The Rise, Fall, and Reemergence of the R-Word](/essays/the-rise-fall-and-reemergence-of-the-r-word-why-is-it-trending-again/) and [Why A Return to the Gold Standard would Break the Economy](/essays/why-a-return-to-the-gold-standard-would-break-the-economy/) started to get a few reads every day or two but never "broke
 out."
 
@@ -203,7 +206,7 @@ out."
 
 ### Breakouts vs Evergreen Essays ~ How Medium Stories Perform Over Time
 
-**If you're writing on Medium, it may help to think in two lanes.\**
+**If you're writing on Medium, it may help to think in two lanes.**
 The trick isn't to pick one lane over the other, but to **balance
 both.**
 
@@ -215,7 +218,7 @@ after the headlines move on.
 
 ![Top 10 stories by reads](oip-image:medium/597f8a7cf6738f762be826d657b4934b810710e6a95e9d555d102551e0e315ca)
 
-***Top 10 stories by reads** | Russia’s and Nottoway were breakouts | R-Word and Moore’s Law are evergreen*
+***Top 10 stories by reads** | Russia's and Nottoway were breakouts | R-Word and Moore's Law are evergreen*
 
 
 Some essays are **built to** **ride the wave** of the moment ~ they'll
@@ -236,7 +239,7 @@ The historical explainer [Nottoway Plantation Burns Down](/essays/nottoway-plant
 
 ![This chart shows two very different lifecycles](oip-image:medium/c26875c883b2301fadc219abba8ce620b3718e16ac0ba77004c33e0d8d2f4160)
 
-*This chart shows two very different lifecycles. “Russia’s Slow Surrender” drew immediate attention, spiking to 1,500 reads almost overnight before stalling out. In contrast, “The R-Word” and “Gold Standard” never broke big but continue to collect steady reads week after week. Breakout stories deliver a burst of visibility, while evergreen essays pay out slowly over time.*
+*This chart shows two very different lifecycles. "Russia's Slow Surrender" drew immediate attention, spiking to 1,500 reads almost overnight before stalling out. In contrast, "The R-Word" and "Gold Standard" never broke big but continue to collect steady reads week after week. Breakout stories deliver a burst of visibility, while evergreen essays pay out slowly over time.*
 
 
 Others are **built to last**, drawing in readers steadily through

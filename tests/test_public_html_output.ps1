@@ -299,6 +299,66 @@ function Convert-HtmlFragmentToText {
   return [System.Net.WebUtility]::HtmlDecode($withoutTags).Trim()
 }
 
+function Get-PieceBodyHtml {
+  param([string]$Html)
+
+  $depth = 0
+  $start = -1
+  foreach ($token in [regex]::Matches($Html, '(?is)</?div\b[^>]*>')) {
+    if ($start -lt 0) {
+      if ($token.Value -notmatch '^</' -and (Test-TagHasClass -Tag $token.Value -ClassName 'piece-body')) {
+        $start = $token.Index + $token.Length
+        $depth = 1
+      }
+      continue
+    }
+
+    if ($token.Value -match '^</') { $depth-- } else { $depth++ }
+    if ($depth -eq 0) {
+      return $Html.Substring($start, $token.Index - $start)
+    }
+  }
+
+  return $null
+}
+
+function Get-RenderedMarkdownLinkResidue {
+  param([string]$Html)
+
+  # Code examples and non-visible content may intentionally contain Markdown.
+  # Remove them before decoding visible text, retaining boundaries between blocks.
+  $visibleHtml = [regex]::Replace($Html, '(?is)<!--.*?-->|<(pre|code|script|style)\b[^>]*>.*?</\1\s*>', "`n")
+  $visibleHtml = [regex]::Replace($visibleHtml, '(?is)</?(?:p|div|li|h[1-6]|blockquote|br|td|th)\b[^>]*>', "`n")
+  $text = Convert-HtmlFragmentToText -Html $visibleHtml
+  # Require a recognizable URL/path so ordinary bracketed prose or math such as
+  # [x](y) is not treated as a broken link. Attribute values never enter this scan.
+  $pattern = '(?i)!?\[[^\]\r\n]*\]\(\s*(?:https?://|mailto:|oip-image:|/|\.{1,2}/|#)[^\r\n)]*\)'
+  return @([regex]::Matches($text, $pattern) | ForEach-Object { $_.Value })
+}
+
+function Test-RenderedMarkdownResidueHelpers {
+  $nestedBody = '<div class="piece-body"><div><p>Article</p></div></div><div>Outside</div>'
+  if ((Get-PieceBodyHtml -Html $nestedBody) -cne '<div><p>Article</p></div>') {
+    throw 'Piece-body extraction must retain nested content without including the following section.'
+  }
+  $brokenMarkup = '<p>![Recovered image ](/images/example.jpeg)</p><p>[A source](https://example.org)</p>'
+  if (@(Get-RenderedMarkdownLinkResidue -Html $brokenMarkup).Count -ne 2) {
+    throw 'Rendered Markdown detection must catch literal image and link syntax.'
+  }
+  $validMarkup = @'
+<p><img src="/images/example.jpeg" alt="![An intentional alt example](/example)"></p>
+<p><a href="/example">A valid link</a>, ordinary [x](y), and bracketed [1] citations.</p>
+<p><code>![Inline example](/example.jpeg)</code></p>
+<pre><code>[Block example](https://example.org)</code></pre>
+<script>const example = "![Script example](/example.jpeg)";</script>
+<style>/* ![Style example](/example.jpeg) */</style>
+<!-- ![Comment example](/example.jpeg) -->
+'@
+  if (@(Get-RenderedMarkdownLinkResidue -Html $validMarkup).Count -ne 0) {
+    throw 'Rendered Markdown detection must ignore valid markup, literal code examples, and hidden content.'
+  }
+}
+
 function Convert-YamlScalarToString {
   param([string]$Value)
 
@@ -638,6 +698,7 @@ function Get-SemanticPageIssues {
 }
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
+Test-RenderedMarkdownResidueHelpers
 $studioDataSource = Get-Content -LiteralPath (Join-Path $repoRoot 'data\studio.yaml') -Raw
 $studioEnabledMatch = [regex]::Match($studioDataSource, '(?m)^enabled:[ \t]*(true|false)[ \t]*\r?$')
 $studioInquiryEnabledMatch = [regex]::Match($studioDataSource, '(?m)^inquiry:[ \t]*\r?\n[ \t]+enabled:[ \t]*(true|false)[ \t]*\r?$')
@@ -703,6 +764,7 @@ $retiredRouteIssues = New-Object System.Collections.Generic.List[string]
 $publicPdfAffordanceHits = New-Object System.Collections.Generic.List[string]
 $appsPreviewIssues = New-Object System.Collections.Generic.List[string]
 $localizedMediumImageCount = 0
+$renderedArticleResidueScanCount = 0
 $targetPageHtml = @{}
 
 $requiredSemanticPages = [ordered]@{
@@ -735,6 +797,15 @@ $optionalDefaultListPages = @(
 )
 
 $requiredImportedMediaPages = [ordered]@{
+  'public/essays/the-max-mistake-why-hbos-name-change-backfired/index.html' = @{
+    ExpectedImagePrefix = '/images/medium/the-max-mistake-why-hbos-name-change-backfired/'
+  }
+  'public/essays/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen/index.html' = @{
+    ExpectedImagePrefix = '/images/medium/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen/'
+  }
+  'public/essays/who-is-pascal-siakam/index.html' = @{
+    ExpectedImagePrefix = '/images/medium/who-is-pascal-siakam/'
+  }
   'public/essays/biter-the-slang-word-that-hits/index.html' = @{
     ExpectedImagePrefix = '/images/rendered/essays/biter-the-slang-word-that-hits/'
     ForbiddenImagePattern = '/images/medium/biter-the-slang-word-that-hits/[^"''<>\s]+\.svg'
@@ -1755,6 +1826,13 @@ $requiredLegacyCleanupPages = @(
 foreach ($file in $htmlFiles) {
   $content = Get-Content -Path $file.FullName -Raw
   $relativePath = 'public/' + (Get-RepoRelativePath -RepoRoot $SiteDir -Path $file.FullName)
+  $residueScanBody = Get-PieceBodyHtml -Html $content
+  if ($null -ne $residueScanBody) {
+    $renderedArticleResidueScanCount++
+    foreach ($residue in @(Get-RenderedMarkdownLinkResidue -Html $residueScanBody)) {
+      $importedMediaIssues.Add("$relativePath => literal Markdown remains in visible article text: $residue")
+    }
+  }
   $primaryNavHtml = Get-PrimaryNavHtml -Html $content
   if (-not [string]::IsNullOrWhiteSpace($primaryNavHtml)) {
     $routePath = Get-PublicRoutePath -RelativePath $relativePath
@@ -1847,6 +1925,8 @@ foreach ($file in $htmlFiles) {
     ($requiredUxPages -contains $relativePath) -or
     ($relativePath -match '^public/archive(?:/page/\d+)?/index\.html$') -or
     ($requiredEssayHeroPages -contains $relativePath) -or
+    ($relativePath -ceq 'public/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/index.html') -or
+    ($relativePath -ceq 'public/essays/what-i-learned-from-writing-100-essays-on-medium-in-2025/index.html') -or
     ($relativePath -ceq 'public/essays/jack-stratton-and-the-vulfpeck-model/index.html')
   ) {
     $targetPageHtml[$relativePath] = $content
@@ -2599,6 +2679,134 @@ foreach ($check in $essayHeroChecks) {
   else {
     if ($heroMatch.Success) {
       $metadataIssues.Add("$relativePath => expected essays without a promoted hero candidate to omit the visible piece hero")
+    }
+  }
+}
+
+$hboPath = 'public/essays/the-max-mistake-why-hbos-name-change-backfired/index.html'
+if ($targetPageHtml.ContainsKey($hboPath)) {
+  $hboBody = [regex]::Match(
+    [string]$targetPageHtml[$hboPath],
+    '(?is)<div\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-body\b[^"]*"|''[^'']*\bpiece-body\b[^'']*''|[^\s>]*\bpiece-body\b[^\s>]*)[^>]*>(.*?)</div>\s*<div\b[^>]*\bclass\s*=\s*(?:"[^"]*\bpiece-aftermatter\b[^"]*"|''[^'']*\bpiece-aftermatter\b[^'']*''|[^\s>]*\bpiece-aftermatter\b[^\s>]*)'
+  )
+  if (-not $hboBody.Success) {
+    $importedMediaIssues.Add("$hboPath => missing article body for recovered image coverage")
+  }
+  else {
+    $bodyHtml = $hboBody.Groups[1].Value
+    $bodyImages = @(Get-OpenTags -Html $bodyHtml -TagName 'img')
+    $staticPrefix = '/images/medium/the-max-mistake-why-hbos-name-change-backfired/'
+    $expectedImages = @(
+      @{ Alt = 'HBO Logo Timeline'; File = '3c53b36844456f4a6e5f87b61e1757c7c3714a2a29bf6de00a2ef93c40397b92.jpeg' },
+      @{ Alt = 'Photo by Tim Mossholder on Unsplash'; File = '6ea1f299d8c58d3fe6ca91885602166aac76e909328e0870ce83a294ab6d43bd.jpeg' },
+      @{ Alt = 'HBO Classic Titles'; File = '8dc2ba89b5f4fcbdbb4eb5f733b30c982e121db90084e3ef16ba0ca908de1f2f.jpeg' },
+      @{ Alt = 'Photo by Sarah Kilian on Unsplash'; ImageID = 'medium/ec686e18de7c21b0892fabb04179d3a92b94245291f508d7fdc56af18af8fab7' },
+      @{ Alt = 'Tommy Boy Classic Quote'; File = '8f66de7d7b988d35d8857cc99e3ad0e3c7cec0d075723e56c9afced74d5ee7fc.jpeg' },
+      @{ Alt = 'Photo by Glenn Carstens-Peters on Unsplash'; File = 'a718c74c96814f122a87456ecb8c2d50700f90c7e0d392679ffc0374f4979f31.jpeg' }
+    )
+    if ($bodyImages.Count -ne $expectedImages.Count) {
+      $importedMediaIssues.Add("$hboPath => expected six rendered body images, found $($bodyImages.Count)")
+    }
+    for ($index = 0; $index -lt [Math]::Min($bodyImages.Count, $expectedImages.Count); $index++) {
+      $tag = $bodyImages[$index]
+      $expected = $expectedImages[$index]
+      $alt = [System.Net.WebUtility]::HtmlDecode((Get-AttributeValue -Tag $tag -Name 'alt'))
+      $src = [string](Get-AttributeValue -Tag $tag -Name 'src')
+      if ($alt -cne $expected.Alt) {
+        $importedMediaIssues.Add("$hboPath => body image $($index + 1) must retain alt '$($expected.Alt)' in its original position")
+      }
+      if ($expected.ContainsKey('File') -and $src -cne ($staticPrefix + $expected.File)) {
+        $importedMediaIssues.Add("$hboPath => body image $($index + 1) must retain its original static source")
+      }
+      if ($expected.ContainsKey('ImageID') -and (Get-AttributeValue -Tag $tag -Name 'data-oip-image-id') -cne $expected.ImageID) {
+        $importedMediaIssues.Add("$hboPath => managed body image must retain its registered asset")
+      }
+      if (-not $src.StartsWith('/') -or -not (Test-Path -LiteralPath (Join-Path $SiteDir $src.TrimStart('/')) -PathType Leaf)) {
+        $importedMediaIssues.Add("$hboPath => body image source is missing from generated output: $src")
+      }
+    }
+    if ((Convert-HtmlFragmentToText -Html $bodyHtml) -match '!\[[^\r\n]*\]\(') {
+      $importedMediaIssues.Add("$hboPath => raw Markdown image syntax must not appear in rendered article text")
+    }
+  }
+}
+
+$recoveredImageSequences = [ordered]@{
+  'david-attenborough-how-one-quiet-voice-made-the-whole-world-listen' = @(
+    @{ Alt = 'Young Attenborough'; File = '7c844e95b13747832b43acac547a004df8032e4c7a77fbdafdad774ac742af13.jpeg' },
+    @{ Alt = 'Attenborough with Zoo Quest'; File = 'e054476f32670103ba21eb1c2c9dec02be6781cba0d2f1083d8bd3de392a7ab2.jpeg' },
+    @{ Alt = 'Attenborough as Director'; File = '44d247cbe742e51230845dc005213ebb4b867c5b8a0c9547da56f6689045bc27.jpeg' },
+    @{ Alt = "Everyone’s Favorite Nature Uncle"; File = 'e701867c75e694f074bb236f6d2d2d4f968c1fa91dfc9435478e34acd639f43f.jpeg' },
+    @{ Alt = 'Photo by NASA on Unsplash'; File = 'c71da5e5f801b851182f4b57e16c3b9f350f27138ad4303203e38421a7d7c7ce.jpeg' },
+    @{ Alt = 'Photo by Markus Spiske on Unsplash'; File = '60a77f1af32af2f92c0ca05a3a44265333994130440334bc1a93181ac6438314.jpeg' }
+  )
+  'who-is-pascal-siakam' = @(
+    @{ Alt = ''; File = 'd4f3b8c59285252bb4007663892e623eba03ae3ed49b6c61eb9b57fcc5106af5.jpeg' },
+    @{ Alt = ''; File = 'd7666f62aa210ece447ba1ba241625a6f3a8438bd3d17d458e8ad39b8628a04f.jpeg' },
+    @{ Alt = ''; File = 'dd9cc428ee11261c9f6c53472a19960aa623c76faf9e816e2a672b661e1bc2ad.jpeg' },
+    @{ Alt = ''; File = 'e33383ae1ff9d63b790c6ad072c7d52c4b999c26c27f997e0d31ad63d4531f9d.jpeg' },
+    @{ Alt = ''; File = '3fb805543c2015e8b5db3c008e3fcdbc83e4b555b126b66f40371e4fe1b252c0.jpeg' },
+    @{ Alt = ''; File = 'fe1d81d371241196dd8bad5386e41daa5e0aacb6b766be14d08d2ead8406f65d.jpeg' },
+    @{ Alt = 'Pacers Hype Piece'; File = 'e9689af85c3a3f64f06256176b2cddf8ef8035447d1623292448a564e9b0f65f.jpeg' },
+    @{ Alt = 'Gainbridge Fieldhouse'; File = '6a1da78ae270d93bc2554a441a1ca3bcf63fe995dd478389c40a5b52a7df928d.jpeg' }
+  )
+}
+foreach ($slug in $recoveredImageSequences.Keys) {
+  $relativePath = "public/essays/$slug/index.html"
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $importedMediaIssues.Add("Missing generated page required for recovered body image coverage: $relativePath")
+    continue
+  }
+  $bodyHtml = Get-PieceBodyHtml -Html ([string]$targetPageHtml[$relativePath])
+  if ($null -eq $bodyHtml) {
+    $importedMediaIssues.Add("$relativePath => missing article body for recovered image coverage")
+    continue
+  }
+  $bodyImages = @(Get-OpenTags -Html $bodyHtml -TagName 'img')
+  $expectedImages = $recoveredImageSequences[$slug]
+  if ($bodyImages.Count -ne $expectedImages.Count) {
+    $importedMediaIssues.Add("$relativePath => expected $($expectedImages.Count) rendered body images, found $($bodyImages.Count)")
+  }
+  for ($index = 0; $index -lt [Math]::Min($bodyImages.Count, $expectedImages.Count); $index++) {
+    $tag = $bodyImages[$index]
+    $expected = $expectedImages[$index]
+    $alt = [System.Net.WebUtility]::HtmlDecode((Get-AttributeValue -Tag $tag -Name 'alt'))
+    $src = [string](Get-AttributeValue -Tag $tag -Name 'src')
+    # Preserve known labels without freezing legacy empty alts against later
+    # accessibility improvements; source identity and order are checked for all.
+    if (-not [string]::IsNullOrWhiteSpace($expected.Alt) -and $alt -cne $expected.Alt) {
+      $importedMediaIssues.Add("$relativePath => body image $($index + 1) must preserve its expected alt text")
+    }
+    if ($src -cne "/images/medium/$slug/$($expected.File)") {
+      $importedMediaIssues.Add("$relativePath => body image $($index + 1) must preserve its original source and sequence")
+    }
+    if (-not $src.StartsWith('/') -or -not (Test-Path -LiteralPath (Join-Path $SiteDir $src.TrimStart('/')) -PathType Leaf)) {
+      $importedMediaIssues.Add("$relativePath => body image source is missing from generated output: $src")
+    }
+  }
+}
+
+$repairedEmphasisFragments = [ordered]@{
+  'the-waters-rising-what-the-data-really-says-about-extreme-weather' = @(
+    "What the Data Can <em>and Can’t</em> Tell Us"
+  )
+  'what-i-learned-from-writing-100-essays-on-medium-in-2025' = @(
+    "<strong>if it’s no good <em>then who cares anyway?</em></strong>",
+    '<strong>Other essays started slower.</strong>',
+    "<strong>If you’re writing on Medium, it may help to think in two lanes.</strong>"
+  )
+}
+foreach ($slug in $repairedEmphasisFragments.Keys) {
+  $relativePath = "public/essays/$slug/index.html"
+  if (-not $targetPageHtml.ContainsKey($relativePath)) {
+    $legacyCleanupIssues.Add("Missing generated page required for repaired emphasis coverage: $relativePath")
+    continue
+  }
+  $bodyHtml = Get-PieceBodyHtml -Html ([string]$targetPageHtml[$relativePath])
+  $normalizedBody = [regex]::Replace([System.Net.WebUtility]::HtmlDecode($bodyHtml), '\s+', ' ')
+  foreach ($fragment in $repairedEmphasisFragments[$slug]) {
+    if (-not $normalizedBody.Contains($fragment)) {
+      $legacyCleanupIssues.Add("$relativePath => repaired emphasis must render as semantic HTML: $fragment")
     }
   }
 }
@@ -6073,6 +6281,10 @@ if ($importedMediaIssues.Count -gt 0) {
   throw ("Found imported media rendering regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $importedMediaIssues))
 }
 
+if ($renderedArticleResidueScanCount -eq 0) {
+  throw 'Expected rendered article bodies for the site-wide Markdown residue check.'
+}
+
 if ($articleLightboxIssues.Count -gt 0) {
   throw ("Found article image lightbox regressions in generated HTML. Samples: {0}" -f (Format-SampleList -Items $articleLightboxIssues))
 }
@@ -6098,5 +6310,6 @@ if ($uxIssues.Count -gt 0) {
 }
 
 Write-Host "Public HTML output regression test passed."
+Write-Host "Checked $renderedArticleResidueScanCount rendered article bodies for literal Markdown image/link residue."
 $global:LASTEXITCODE = 0
 exit 0

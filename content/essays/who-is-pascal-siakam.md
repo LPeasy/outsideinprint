@@ -11,9 +11,12 @@ featured_image: "/images/medium/who-is-pascal-siakam/fc07487bf85147720fa1d0b703e
 featured_image_caption: "Pascal Siakam | Source: Basketball Wiki"
 featured_image_alt: "Pascal Siakam"
 description: "Pascal Siakam's path from Cameroon to NBA champion and Pacers playoff leader, told through career records and sourced quotes."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-18"
+    note: "Repaired malformed Markdown for two body images; images, captions, and article text are unchanged."
   - version: "1.1"
     date: "2026-05-14"
     note: "Updated May 14, 2026, after OIP back-archive review. Removed remote body images and Medium promotional residue, normalized house style, and corrected the Pacers playoff chronology while preserving the 2025 profile frame."
@@ -152,7 +155,7 @@ In Game 4, he helped Indiana move to a commanding 3-1 series lead, one win away 
 
 #### Pascal Siakam Indiana Pacers as a Destination
 
-![Pacers Hype Piece \](/images/medium/who-is-pascal-siakam/e9689af85c3a3f64f06256176b2cddf8ef8035447d1623292448a564e9b0f65f.jpeg)
+![Pacers Hype Piece](/images/medium/who-is-pascal-siakam/e9689af85c3a3f64f06256176b2cddf8ef8035447d1623292448a564e9b0f65f.jpeg)
 
 *Pacers Hype Piece \| Source: Yahoo Sports*
 
@@ -179,7 +182,7 @@ Beyond the basketball, Pascal gives back to the community through the
 
 #### What's Next for Pascal Siakam
 
-![Gainbridge Fieldhouse \](/images/medium/who-is-pascal-siakam/6a1da78ae270d93bc2554a441a1ca3bcf63fe995dd478389c40a5b52a7df928d.jpeg)
+![Gainbridge Fieldhouse](/images/medium/who-is-pascal-siakam/6a1da78ae270d93bc2554a441a1ca3bcf63fe995dd478389c40a5b52a7df928d.jpeg)
 
 *Gainbridge Fieldhouse \| Source: Visit Indy*
 

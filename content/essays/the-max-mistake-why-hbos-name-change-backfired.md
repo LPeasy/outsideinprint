@@ -10,9 +10,12 @@ featured_image: "/images/medium/the-max-mistake-why-hbos-name-change-backfired/9
 featured_image_caption: "Photo by Oleksandra Bardash on Unsplash"
 featured_image_alt: "The Max Mistake: Why HBO’s Name Change Backfired"
 description: "If you’re confused, you’re not alone. This feels less like brand strategy and more like a midlife crisis complete with a haircut no one asked for, a question..."
-version: "1.3"
-edition: "Fourth web edition"
+version: "1.4"
+edition: "Fifth web edition"
 revision_history:
+  - version: "1.4"
+    date: "2026-09-18"
+    note: "Repaired malformed Markdown for the HBO timeline, classic titles, and Tommy Boy images; images, captions, and article text are unchanged."
   - version: "1.2"
     date: "2026-06-04"
     note: "Updated June 4, 2026, to repair visible Markdown emphasis residue in imported brand-name passages."
@@ -50,7 +53,7 @@ place.**
 
 #### From Prestige to Platform: A Quick Timeline
 
-![HBO Logo Timeline \](/images/medium/the-max-mistake-why-hbos-name-change-backfired/3c53b36844456f4a6e5f87b61e1757c7c3714a2a29bf6de00a2ef93c40397b92.jpeg)
+![HBO Logo Timeline](/images/medium/the-max-mistake-why-hbos-name-change-backfired/3c53b36844456f4a6e5f87b61e1757c7c3714a2a29bf6de00a2ef93c40397b92.jpeg)
 
 *HBO Logo Timeline \| Source: Me lol*
 
@@ -125,7 +128,7 @@ product line.
 
 #### What HBO Really Means
 
-![HBO Classic Titles \](/images/medium/the-max-mistake-why-hbos-name-change-backfired/8dc2ba89b5f4fcbdbb4eb5f733b30c982e121db90084e3ef16ba0ca908de1f2f.jpeg)
+![HBO Classic Titles](/images/medium/the-max-mistake-why-hbos-name-change-backfired/8dc2ba89b5f4fcbdbb4eb5f733b30c982e121db90084e3ef16ba0ca908de1f2f.jpeg)
 
 *HBO Classic Titles \| Source: User with ChatGPT*
 
@@ -185,7 +188,7 @@ any dunk could: the HBO name carried the trust that "Max" had blurred.
 
 #### The Return of HBO Max
 
-![Tommy Boy Classic Quote \](/images/medium/the-max-mistake-why-hbos-name-change-backfired/8f66de7d7b988d35d8857cc99e3ad0e3c7cec0d075723e56c9afced74d5ee7fc.jpeg)
+![Tommy Boy Classic Quote](/images/medium/the-max-mistake-why-hbos-name-change-backfired/8f66de7d7b988d35d8857cc99e3ad0e3c7cec0d075723e56c9afced74d5ee7fc.jpeg)
 
 *Tommy Boy Classic Quote \| Source: Movieclips.com*
 

@@ -315,6 +315,9 @@ function Get-CaptionPlainText {
   }
   $text = [regex]::Replace($text, '\[([^\]]+)\]\([^)]+\)', '$1')
   $text = [regex]::Replace($text, '[*_`]+', '')
+  # Decode caption separators before deriving alt text; otherwise the separator's
+  # escape survives truncation and escapes the generated image's closing bracket.
+  $text = $text.Replace('\|', '|')
   [System.Net.WebUtility]::HtmlDecode($text).Trim()
 }
 
@@ -331,6 +334,13 @@ function Get-AltFromCaption {
     }
   }
   ""
+}
+
+function New-RecoveredMarkdownImage {
+  param([string]$Alt, [string]$Destination)
+  # Alt is plain text here. Escape literal backslashes first, then both brackets.
+  $escapedAlt = $Alt.Replace('\', '\\').Replace('[', '\[').Replace(']', '\]')
+  '![{0}]({1})' -f $escapedAlt, $Destination
 }
 
 function Format-CaptionLine {
@@ -1056,7 +1066,7 @@ foreach ($essay in (Get-EssayFiles)) {
     $alt = Get-AltFromCaption -Alt $candidate.Alt -Caption $caption
     $block = @(
       "",
-      ('![{0}]({1})' -f ($alt -replace '\]', '\]'), $localPath),
+      (New-RecoveredMarkdownImage -Alt $alt -Destination $localPath),
       "",
       $caption,
       ""
