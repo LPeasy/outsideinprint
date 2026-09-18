@@ -128,7 +128,7 @@ test("homepage V2 owns separate proof, featured-reading, library, newsletter, an
 });
 
 test("collection detail section-front hooks have explicit inner-structure styling", () => {
-  assert.match(collectionSingle, /class="collection-section"/);
+  assert.match(collectionSingle, new RegExp(escapeRegex('<article class="collection-section{{ if $state.public }} collection-section--public{{ end }}{{ if $hasSections }} collection-section--grouped{{ end }}">')));
   assert.match(collectionSingle, /collection-section__header/);
   assert.match(collectionSingle, /collection-section__ledger/);
   assert.match(collectionSingle, /collection-section__lead/);

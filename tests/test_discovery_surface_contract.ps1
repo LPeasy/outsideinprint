@@ -1032,7 +1032,7 @@ foreach ($retiredSnippet in @(
 
 $collectionSingleTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/single.html') -Raw
 foreach ($requiredSnippet in @(
-  '<article class="collection-section">',
+  '<article class="collection-section{{ if $state.public }} collection-section--public{{ end }}{{ if $hasSections }} collection-section--grouped{{ end }}">',
   'collection-section__header',
   'collection-section__ledger',
   'collection-section__lead',
