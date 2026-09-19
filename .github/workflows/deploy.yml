@@ -252,7 +252,7 @@ jobs:
           OIP_HUGO_CONFIG: hugo.toml
           OIP_SITE_DIR: public
           OIP_HUGO_BIN: hugo
-        run: node --test tests/homepage_output.test.mjs tests/homepage_selection_behavior.test.mjs
+        run: node --test tests/homepage_output.test.mjs tests/homepage_selection_behavior.test.mjs tests/point7_ux_output.test.mjs
 
       - name: Test Reader Refinements
         env:

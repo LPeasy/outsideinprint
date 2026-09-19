@@ -24,7 +24,7 @@
         <div>
           <h2 id="home-v2-featured-title">Featured Articles</h2>
         </div>
-        <p>The latest publication, reader favorites, and defining work.</p>
+        <p>A flagship case study, the latest publication, and selected work.</p>
       </header>
 
       <div class="home-v2-featured__grid">
@@ -73,6 +73,7 @@
             {{- end -}}
             <article class="home-v2-featured__item{{ if $imageModel }} home-v2-featured__item--illustrated{{ end }}">
               {{- with $imageModel }}
+                <div class="home-v2-featured__art">
                 <a class="home-v2-featured__item-media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
                   {{- partial "images/picture.html" (dict
                     "model" .
@@ -82,6 +83,7 @@
                   ) -}}
                 </a>
                 {{ partial "home_featured_image_button.html" (dict "page" $page "model" .) }}
+                </div>
               {{- end }}
               <div class="home-v2-featured__item-copy">
               <p class="home-v2-featured__meta"><span>{{ $sectionLabel }}</span><span>{{ $page.ReadingTime }} min read</span>{{ with (index $readerMetrics $page.RelPermalink) }}{{ if ge .value $readerThreshold }}<span>{{ .display_label }}</span>{{ end }}{{ end }}</p>

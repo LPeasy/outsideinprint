@@ -80,7 +80,7 @@
   }
 
   function focusableElements() {
-    return Array.prototype.slice.call(overlay.querySelectorAll("button:not([disabled]), [tabindex]:not([tabindex='-1'])")).filter(function (element) {
+    return Array.prototype.slice.call(overlay.querySelectorAll("button:not([disabled]), a[href], [tabindex]:not([tabindex='-1'])")).filter(function (element) {
       var style = window.getComputedStyle(element);
       return element.tabIndex >= 0 && !element.hidden && !element.closest("[hidden]") && style.display !== "none" && style.visibility !== "hidden" && element.getClientRects().length > 0;
     });

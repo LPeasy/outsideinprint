@@ -137,7 +137,11 @@
           <h3 class="paper-route-summary__title" data-paper-route-summary-title>Run filed</h3>
           <p class="paper-route-summary__copy" data-paper-route-summary-copy></p>
           <div class="paper-route-results" data-paper-route-summary-metrics role="list" aria-label="Paper-Bob run results"></div>
-          <button type="button" class="paper-route-summary__restart" data-paper-route-summary-restart>Play again?</button>
+          <div class="paper-route-summary__actions">
+            <button type="button" class="paper-route-summary__restart" data-paper-route-summary-restart>Play again?</button>
+            <a href="{{ "essays/the-clock-by-the-door/" | relURL }}">Read a featured story</a>
+            <a href="{{ "collections/bobs-almanack/#almanack-collection-newsletter" | relURL }}">Get Saturday&rsquo;s edition</a>
+          </div>
         </div>
         <div class="paper-route-touch" data-paper-route-touch aria-label="Mobile gamepad controls" hidden>
           <div class="paper-route-touch__pad" data-paper-route-dpad aria-label="Movement controls">

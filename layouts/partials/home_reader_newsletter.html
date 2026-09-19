@@ -2,6 +2,13 @@
 {{- $provider := index $newsletter "provider" | default "" -}}
 {{- $buttondownUsername := index $newsletter "buttondown_username" | default "" -}}
 {{- $tag := index $newsletter "tag" | default "outside-in-print" -}}
+{{- $currentIssue := false -}}
+{{- with (partial "collections/lookup-definition.html" "bobs-almanack") -}}
+  {{- $issues := partial "collections/resolve-items.html" (dict "collection" . "publishedOnly" true) -}}
+  {{- with first 1 $issues -}}
+    {{- $currentIssue = index . 0 -}}
+  {{- end -}}
+{{- end -}}
 
 <section class="home-reader-banner home-reader-newsletter page-shell page-shell--wide" aria-labelledby="home-reader-banner-title">
   <div class="home-reader-banner__signup">
@@ -40,4 +47,35 @@
       </form>
     {{- end }}
   </div>
+
+  {{- with $currentIssue -}}
+    {{- $lead := dict -}}
+    {{- with .Params.essays -}}
+      {{- if gt (len .) 0 -}}
+        {{- $lead = index . 0 -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $virtue := .Params.virtue | default (dict) -}}
+    {{- $margin := .Params.margin | default (dict) -}}
+    {{- $oneNumber := index $margin "one_number" | default (dict) -}}
+    <div class="home-reader-newsletter__issue" aria-label="Current Bob's Almanack edition">
+      <div class="home-reader-newsletter__issue-heading">
+        <p>Inside the current edition</p>
+        <strong>Bob's Almanack</strong>
+        <span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>{{ with .Params.issue_number }} · No. {{ . }}{{ end }}</span>
+      </div>
+      <div class="home-reader-newsletter__issue-brief">
+        {{- with $lead.title -}}
+          <p><strong>New writing:</strong> {{ . }}{{ with $lead.description }} — {{ . }}{{ end }}</p>
+        {{- end -}}
+        {{- with $oneNumber.note -}}
+          <p><strong>One number:</strong> {{ . }}</p>
+        {{- end -}}
+        {{- with $virtue.name -}}
+          <p><strong>This week's virtue:</strong> {{ . }}</p>
+        {{- end -}}
+      </div>
+      <a class="home-reader-newsletter__issue-link" href="{{ .RelPermalink }}">Read the full issue <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  {{- end -}}
 </section>

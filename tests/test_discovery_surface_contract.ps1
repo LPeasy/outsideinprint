@@ -140,6 +140,8 @@ foreach ($route in $featuredRoutes) {
 foreach ($requiredSnippet in @(
   'partial "archive/longform-kind.html"',
   '$eligible = sort (sort $eligible "Title" "asc") "PublishDate" "desc"',
+  '$flagshipRoute := "/essays/the-dolphin-company/"',
+  'range where $eligible "RelPermalink" $flagshipRoute',
   'range first 1 $eligible',
   'not (in $selectedPaths .RelPermalink)',
   'first (sub 5 (len $featured)) $fallback',
@@ -181,9 +183,8 @@ if ($homeImageButton -notmatch '(?s)<button\b[^>]*type="button"[^>]*data-home-fe
 }
 foreach ($tag in @('button', 'a')) {
   $mobileArtwork = [regex]::Match($homeImageButton, '(?s)<' + $tag + '\b[^>]*>(?<body>.*?)</' + $tag + '>').Groups['body'].Value
-  if ($mobileArtwork -notmatch 'partial "images/picture\.html"' -or $mobileArtwork -notmatch '"loading" "lazy"' -or
-      $mobileArtwork -notmatch '"sizes" "120px"' -or $mobileArtwork -match '<svg\b|\bImage\b') {
-    throw 'Expected the mobile trigger and fallback to show the existing responsive illustration without an Image text/icon control.'
+  if ($mobileArtwork -match 'partial "images/picture\.html"|<img\b') {
+    throw 'Expected a separate zoom control without a duplicate illustration.'
   }
 }
 $mobileArtworkIndex = $homeV2Template.IndexOf('partial "home_featured_image_button.html"', [System.StringComparison]::Ordinal)
@@ -196,10 +197,10 @@ if ($homeImageDialog -notmatch '<dialog id="home-featured-image-dialog"[^>]*aria
     $homeImageDialog -notmatch '<button\b[^>]*data-home-featured-image-close[^>]*aria-label="Close illustration"') {
   throw 'Expected one labelled native image dialog with an image click-to-close control.'
 }
-if ($mainCss -notmatch '(?s)\.home-v2-featured__image-toggle\{[^}]*aspect-ratio:1;' -or
+if ($mainCss -notmatch '(?s)\.home-v2-featured__image-toggle\{[^}]*display:grid;' -or
     $mainCss -notmatch '(?s)@media \(max-width:768px\).*?\.home-v2-featured__item--illustrated\{[^}]*grid-template-columns:minmax\(0, 6rem\) minmax\(0, 1fr\);' -or
-    $mainCss -notmatch '(?s)@media \(max-width:768px\).*?\.home-v2-featured__image-toggle:not\(\[hidden\]\)\{[^}]*display:block;') {
-  throw 'Expected square supporting artwork beside the copy on both desktop and mobile through 768px.'
+    $mainCss -notmatch '(?s)@media \(max-width:768px\).*?\.home-v2-featured__item-media\{[^}]*display:block;') {
+  throw 'Expected article-linked supporting artwork beside the copy on both desktop and mobile.'
 }
 foreach ($requiredSnippet in @(
   '<section class="home-reader-banner page-shell page-shell--wide" aria-label="Outside In Print at a glance">',
@@ -277,7 +278,7 @@ foreach ($requiredSnippet in @(
   'homepage_v2_featured_lead',
   'homepage_v2_featured_supporting',
   'hugo.Data.homepage_metrics',
-  'The latest publication, reader favorites, and defining work.',
+  'A flagship case study, the latest publication, and selected work.',
   'Read the piece',
   'Browse the library',
   'Surprise me',

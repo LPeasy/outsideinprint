@@ -7,6 +7,7 @@
 <a
   class="{{ $class }}{{ if $currentSectionOnly }} nav-link--current-section{{ end }}"
   href="{{ $item.href }}"
+  aria-label="{{ $item.label }}{{ if $currentSectionOnly }}, current section{{ end }}"
   {{- if $currentPage }} aria-current="page"{{ end }}
   {{- with $item.analyticsEvent }} data-analytics-event="{{ . }}"{{ end }}
   {{- with $item.analyticsSourceSlot }} data-analytics-source-slot="{{ . }}"{{ end }}

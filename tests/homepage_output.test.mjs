@@ -98,11 +98,13 @@ test("Dolphin correction retains the original publication date and renders a con
     || text(dolphinHtml).includes(currentRevision[2]), "the complete correction note must render");
 });
 
-test("rendered homepage leads with the newest publishDate and preserves unique editorial supports", () => {
+test("rendered homepage leads with Dolphin, then the newest remaining publication", () => {
   const cards = [...html.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/g)]
     .filter((match) => /\bhome-v2-featured__(?:lead|item)\b/.test(attribute(`<article ${match[1]}>`, "class")));
   assert.ok(publishedRoutes.length >= 5, "the production archive must supply published reading pages");
-  const expected = [...new Set([publishedRoutes[0], ...pinnedRoutes.filter((route) =>
+  const flagship = publishedRoutes.includes(pinnedRoutes[0]) ? pinnedRoutes[0] : publishedRoutes[0];
+  const latest = publishedRoutes.find((route) => route !== flagship);
+  const expected = [...new Set([flagship, latest, ...pinnedRoutes.slice(1).filter((route) =>
     publishedRoutes.includes(route)), ...publishedRoutes])].slice(0, 5);
   assert.equal(cards.length, 5);
   for (const [index, card] of cards.entries()) {
@@ -150,18 +152,12 @@ test("rendered homepage leads with the newest publishDate and preserves unique e
         const fallbackMarkup = card[2].match(/(<a\b[^>]*data-home-featured-image-fallback[^>]*>)([\s\S]*?)<\/a>/);
         const trigger = triggerMarkup?.[1];
         const fallback = fallbackMarkup?.[1];
-        assert.ok(trigger, "the mobile square artwork opens the image dialog");
-        assert.ok(fallback, "an image link must work without JavaScript");
+        assert.ok(trigger, "the separate zoom control opens the image dialog");
+        assert.ok(fallback, "a zoom link must work without JavaScript");
         assert.doesNotMatch(meta, /data-home-featured-image-trigger|data-home-featured-image-fallback/);
         assert.ok(card[2].indexOf(trigger) < card[2].indexOf("home-v2-featured__item-copy"));
         for (const artwork of [triggerMarkup[2], fallbackMarkup[2]]) {
-          const mobileImage = artwork.match(/<img\b[^>]*>/)?.[0];
-          assert.ok(mobileImage, "mobile trigger and fallback must display the actual illustration");
-          assert.equal(attribute(mobileImage, "src"), attribute(illustration, "src"));
-          assert.equal(attribute(mobileImage, "alt"), attribute(illustration, "alt"));
-          assert.equal(attribute(mobileImage, "loading"), "lazy");
-          assert.equal(text(artwork), "");
-          assert.doesNotMatch(artwork, /<svg\b/);
+          assert.doesNotMatch(artwork, /<img\b/, "zoom controls must not duplicate the article image");
         }
         assert.equal(attribute(trigger, "type"), "button");
         assert.equal(attribute(trigger, "aria-controls"), "home-featured-image-dialog");
@@ -174,7 +170,7 @@ test("rendered homepage leads with the newest publishDate and preserves unique e
       }
     }
   }
-  assert.match(html, /The latest publication, reader favorites, and defining work\./);
+  assert.match(html, /A flagship case study, the latest publication, and selected work\./);
   assert.match(html, /Read the piece/);
   assert.doesNotMatch(html, /25 reads|Medium reads|(?:3\.4K|1\.95K|1\.8K) readers/);
 });
@@ -263,4 +259,24 @@ test("rendered homepage puts two reading links before one newsletter signup and 
   const homeBody = html.slice(html.indexOf(proofTag), html.indexOf(contributionTag));
   assert.doesNotMatch(homeBody, /href=(?:["'])?(?:https:\/\/outsideinprint\.org)?\/archive\//);
   assert.doesNotMatch(html, /The full imprint|Find your next question|home-v2-next__browse|Browse the archive|Search the library/);
+});
+
+test("homepage signup offers a brief from the current published Almanack edition", () => {
+  const collection = fs.readFileSync(path.join(siteDir, "collections/bobs-almanack/index.html"), "utf8");
+  const latestHeading = collection.match(/<h2\b[^>]*id=(?:"almanack-collection-latest-title"|almanack-collection-latest-title)[^>]*>\s*(<a\b[^>]*>)/)?.[1];
+  assert.ok(latestHeading, "the Almanack collection must identify its current issue");
+  const currentRoute = attribute(latestHeading, "href");
+  const briefStart = html.indexOf("home-reader-newsletter__issue");
+  const contributorStart = html.indexOf('aria-label="Become a contributor"', briefStart);
+  assert.ok(briefStart > html.indexOf('data-analytics-source-slot=homepage_reader_banner'));
+  assert.ok(contributorStart > briefStart);
+  const brief = html.slice(briefStart, contributorStart);
+  const fullIssueLink = [...brief.matchAll(/<a\b[^>]*>/g)]
+    .map((match) => match[0]).find((tag) => attribute(tag, "class") === "home-reader-newsletter__issue-link");
+  assert.ok(fullIssueLink);
+  assert.equal(attribute(fullIssueLink, "href"), currentRoute);
+  assert.match(brief, /New writing:/);
+  assert.match(brief, /One number:/);
+  assert.match(brief, /This week(?:'|&#39;|&#x27;)s virtue:/);
+  assert.equal((brief.match(/<form\b/g) || []).length, 0, "the brief must not add another signup form");
 });

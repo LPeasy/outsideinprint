@@ -747,7 +747,8 @@ test("homepage composition puts reading before newsletter and contribution", () 
   assert.match(cartoonLinkPartial, /<button/);
   assert.match(cartoonLinkPartial, /data-essay-cartoon-lightbox-trigger/);
   assert.match(cartoonLinkPartial, /data-gallery/);
-  assert.doesNotMatch(cartoonLinkPartial, /<a class="essay-cartoon-thumb/);
+  assert.match(cartoonLinkPartial, /<a class="essay-cartoon-thumb/);
+  assert.match(cartoonLinkPartial, /class="essay-cartoon-zoom"/);
   assert.match(baseLayout, /editorial\/cartoon-thumbnail-lightbox\.html/);
   assert.match(cartoonThumbnailLightbox, /data-essay-cartoon-lightbox/);
   assert.match(cartoonThumbnailLightbox, /<p id="essay-cartoon-lightbox-title" class="cartoon-lightbox__title" data-essay-cartoon-lightbox-title><\/p>/);

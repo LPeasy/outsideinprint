@@ -54,17 +54,29 @@ function renderSelection(t, overrides = {}, summaries = false) {
   return JSON.parse(fs.readFileSync(path.join(fixture, "public/index.html"), "utf8"));
 }
 
-test("latest lead uses actual release time and excludes non-public work even with preview flags", (t) => {
-  assert.deepEqual(renderSelection(t), ["/essays/latest/", dolphin, dialogue, owner, origami]);
+test("Dolphin leads, followed by the latest release, while preview-only work stays excluded", (t) => {
+  assert.deepEqual(renderSelection(t), [dolphin, "/essays/latest/", dialogue, owner, origami]);
 });
 
-test("a pinned latest lead stays unique and missing supporting work receives newest eligible fallback", (t) => {
+test("a newer flagship stays first and missing curated work receives newest eligible fallback", (t) => {
   const selection = renderSelection(t, {
     dolphin: { title: "The Dolphin Company", url: dolphin, date: "2020-06-01", publishDate: "2020-07-01" },
     dialogue: null,
   });
-  assert.deepEqual(selection, [dolphin, owner, origami, "/essays/latest/", "/essays/earlier/"]);
+  assert.deepEqual(selection, [dolphin, "/essays/latest/", owner, origami, "/essays/earlier/"]);
   assert.equal(new Set(selection).size, 5);
+});
+
+test("when the flagship is unavailable, the two newest releases lead", (t) => {
+  assert.deepEqual(renderSelection(t, { dolphin: null }), [
+    "/essays/latest/", "/essays/earlier/", dialogue, owner, origami,
+  ]);
+});
+
+test("a newly released curated piece occupies the latest slot only once", (t) => {
+  assert.deepEqual(renderSelection(t, {
+    dialogue: { title: "What I Had", url: dialogue, date: "2020-07-01" },
+  }), [dolphin, dialogue, owner, origami, "/essays/latest/"]);
 });
 
 test("lead descriptions are trimmed and plain text while blank descriptions retain shared fallbacks", (t) => {

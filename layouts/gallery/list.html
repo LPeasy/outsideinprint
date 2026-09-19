@@ -35,8 +35,9 @@
             <p class="m">{{ time.Format "Jan 2, 2006" .date }}</p>
             {{ partial "editorial/gallery-reading-link.html" $readingPage }}
           </div>
-          <figure class="cartoon-gallery-spotlight__figure">
-            <button
+          <figure class="cartoon-gallery-spotlight__figure cartoon-gallery__art">
+            {{ if $readingPage }}<a class="cartoon-gallery__read" href="{{ $readingPage.RelPermalink }}" aria-label="Read {{ $readingPage.Title }}">{{ end }}
+            {{ if not $readingPage }}<button
               type="button"
               class="cartoon-gallery__trigger"
               data-cartoon-lightbox-trigger
@@ -48,9 +49,8 @@
               data-alt="{{ .alt }}"
               data-width="{{ $currentImage.lightbox_width }}"
               data-height="{{ $currentImage.lightbox_height }}"
-              {{ with $readingPage }}data-essay="{{ .RelPermalink }}"{{ end }}
               aria-label="Open {{ .title }} fullscreen"
-            >
+            >{{ end }}
               {{ partial "images/picture.html" (dict
                 "model" $currentImage
                 "alt" .alt
@@ -59,7 +59,9 @@
                 "sizes" "(min-width: 72rem) 58rem, calc(100vw - 2rem)"
                 "lightbox" true
               ) }}
-            </button>
+            {{ if $readingPage }}</a>
+              <button type="button" class="cartoon-gallery__zoom" data-cartoon-lightbox-trigger data-cartoon-slug="{{ .slug }}" data-title="{{ .title }}" data-date="{{ .date }}" data-date-label="{{ time.Format "Jan 2, 2006" .date }}" data-image="{{ $currentImage.lightbox_url }}" data-alt="{{ .alt }}" data-width="{{ $currentImage.lightbox_width }}" data-height="{{ $currentImage.lightbox_height }}" data-essay="{{ $readingPage.RelPermalink }}" aria-label="Open {{ .title }} fullscreen"><span aria-hidden="true">⌕</span></button>
+            {{ else }}</button>{{ end }}
           </figure>
         </section>
       </div>
@@ -77,9 +79,11 @@
             "ref" .image
             "display" true
           ) }}
-          <article class="cartoon-gallery__item">
+          <article class="cartoon-gallery__item" data-gallery-item>
             <figure>
-              <button
+              <div class="cartoon-gallery__art">
+              {{ if $readingPage }}<a class="cartoon-gallery__read" href="{{ $readingPage.RelPermalink }}" aria-label="Read {{ $readingPage.Title }}">{{ end }}
+              {{ if not $readingPage }}<button
                 type="button"
                 class="cartoon-gallery__trigger"
                 data-cartoon-lightbox-trigger
@@ -91,9 +95,8 @@
                 data-alt="{{ .alt }}"
                 data-width="{{ $archiveImage.lightbox_width }}"
                 data-height="{{ $archiveImage.lightbox_height }}"
-                {{ with $readingPage }}data-essay="{{ .RelPermalink }}"{{ end }}
                 aria-label="Open {{ .title }} fullscreen"
-              >
+              >{{ end }}
                 {{ partial "images/picture.html" (dict
                   "model" $archiveImage
                   "alt" .alt
@@ -101,7 +104,10 @@
                   "sizes" "(min-width: 72rem) 20rem, (min-width: 48rem) 30vw, calc(100vw - 2rem)"
                   "lightbox" true
                 ) }}
-              </button>
+              {{ if $readingPage }}</a>
+                <button type="button" class="cartoon-gallery__zoom" data-cartoon-lightbox-trigger data-cartoon-slug="{{ .slug }}" data-title="{{ .title }}" data-date="{{ .date }}" data-date-label="{{ time.Format "Jan 2, 2006" .date }}" data-image="{{ $archiveImage.lightbox_url }}" data-alt="{{ .alt }}" data-width="{{ $archiveImage.lightbox_width }}" data-height="{{ $archiveImage.lightbox_height }}" data-essay="{{ $readingPage.RelPermalink }}" aria-label="Open {{ .title }} fullscreen"><span aria-hidden="true">⌕</span></button>
+              {{ else }}</button>{{ end }}
+              </div>
               <figcaption>
                 <span>{{ .title }}</span>
                 <time datetime="{{ .date }}">{{ time.Format "Jan 2, 2006" .date }}</time>
@@ -111,6 +117,7 @@
           </article>
         {{ end }}
       </div>
+      <button class="cartoon-gallery__load-more" type="button" data-gallery-load-more hidden>Load more illustrations</button>
     {{ else }}
       <div class="item">
         <div class="t">No illustrations are listed yet.</div>
@@ -294,4 +301,5 @@
       }
     })();
   </script>
+  {{ with resources.Get "js/gallery-load-more.js" | minify | fingerprint "sha384" }}<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>{{ end }}
 {{ end }}

@@ -55,7 +55,11 @@ test("reader banner contains only owner-provided proof and the newsletter offer 
   assert.equal((composition.match(/id="home-reader-email"/g) || []).length, 1);
   assert.equal((composition.match(/id="home-reader-banner-title"/g) || []).length, 1);
   assert.equal((homeV2.match(/partial "home_reader_newsletter\.html"/g) || []).length, 1);
-  assert.doesNotMatch(readerNewsletter, /home-reader-banner__proof|Bob(?:'|’)s Almanack|No ads ever|beyond the feed/);
+  assert.doesNotMatch(readerNewsletter, /home-reader-banner__proof|No ads ever|beyond the feed/);
+  assert.match(readerNewsletter, /partial "collections\/lookup-definition\.html" "bobs-almanack"/);
+  assert.match(readerNewsletter, /partial "collections\/resolve-items\.html"[\s\S]*"publishedOnly" true/);
+  assert.match(readerNewsletter, /home-reader-newsletter__issue/);
+  assert.match(readerNewsletter, /New writing:|One number:|This week's virtue:/);
 });
 
 test("support link appears once before the proof strip and lead summaries do not change supporting precedence", () => {
@@ -73,7 +77,7 @@ test("support link appears once before the proof strip and lead summaries do not
   assert.equal((homeV2.match(/partial "discovery\/page-summary\.html"/g) || []).length, 1);
 });
 
-test("featured reading leads with the latest publication and keeps four ordered editorial supports", () => {
+test("featured reading leads with Dolphin, then the latest publication and curated supports", () => {
   const routes = [
     "/essays/the-dolphin-company/",
     "/syd-and-oliver/what-i-had/",
@@ -85,8 +89,11 @@ test("featured reading leads with the latest publication and keeps four ordered 
   assert.deepEqual(indexes, [...indexes].sort((left, right) => left - right));
   assert.doesNotMatch(selected, /what-happened-at-camp-mystic|why-a-return-to-the-gold-standard|the-little-prince|russias-slow-surrender/);
   assert.match(selected, /\$eligible = sort \(sort \$eligible "Title" "asc"\) "PublishDate" "desc"/);
+  assert.match(selected, /\$flagshipRoute := "\/essays\/the-dolphin-company\/"/);
+  assert.match(selected, /range where \$eligible "RelPermalink" \$flagshipRoute/);
   assert.match(selected, /range first 1 \$eligible/);
-  assert.ok(selected.indexOf("range first 1 $eligible") < selected.indexOf("range $route := $supportingRoutes"));
+  assert.ok(selected.indexOf('range where $eligible "RelPermalink" $flagshipRoute') < selected.indexOf("range first 1 $eligible"));
+  assert.ok(selected.indexOf("range $eligible") < selected.indexOf("range $route := $supportingRoutes"));
   assert.match(selected, /partial "archive\/longform-kind\.html"/);
   assert.match(selected, /not \(in \$selectedPaths \.RelPermalink\)/);
   assert.match(selected, /first \(sub 5 \(len \$featured\)\) \$fallback/);
@@ -96,7 +103,7 @@ test("featured reading leads with the latest publication and keeps four ordered 
     assert.ok(!homeV2.includes(label), "metric values belong in the internal data record");
   }
   assert.match(homeV2, /hugo\.Data\.homepage_metrics/);
-  assert.match(homeV2, /The latest publication, reader favorites, and defining work\./);
+  assert.match(homeV2, /A flagship case study, the latest publication, and selected work\./);
   assert.match(homeV2, /Read the piece/);
   assert.doesNotMatch(homeV2, /Read the essay/);
   assert.doesNotMatch(metrics, /\d(?:K)? readers/);
@@ -194,7 +201,7 @@ test("featured lead reuses a published image and responsive rendering", () => {
   assert.doesNotMatch(homeV2, /<img\b/);
 });
 
-test("supporting illustrations stay square on mobile with a dialog and an artwork-link fallback", () => {
+test("supporting illustrations open articles on mobile with a separate zoom control", () => {
   assert.match(homeV2, /home-v2-featured__item\{\{ if \$imageModel \}\} home-v2-featured__item--illustrated/);
   assert.match(homeV2, /class="home-v2-featured__item-media" href="\{\{ \$page\.RelPermalink \}\}"/);
   assert.match(homeV2, /class="home-v2-featured__item-copy"/);
@@ -212,18 +219,14 @@ test("supporting illustrations stay square on mobile with a dialog and an artwor
   for (const tag of ["button", "a"]) {
     const artwork = featuredImageButton.match(new RegExp(`<${tag}\\b[^>]*>([\\s\\S]*?)<\\/${tag}>`))?.[1];
     assert.ok(artwork);
-    assert.match(artwork, /partial "images\/picture\.html"/);
-    assert.match(artwork, /"loading" "lazy"/);
-    assert.match(artwork, /"sizes" "120px"/);
-    assert.doesNotMatch(artwork, /<svg\b|\bImage\b/);
+    assert.doesNotMatch(artwork, /partial "images\/picture\.html"|<img\b/);
   }
   assert.match(featuredImageDialog, /<dialog id="home-featured-image-dialog"[^>]*aria-labelledby="home-featured-image-title"/);
   assert.match(featuredImageDialog, /<button\b[^>]*data-home-featured-image-close[^>]*aria-label="Close illustration"/);
-  assert.match(css, /\.home-v2-featured__image-toggle\{[^}]*aspect-ratio:1;/);
-  assert.match(css, /\.home-v2-featured__image-toggle img\{[^}]*object-fit:cover;/);
-  assert.match(css, /\.home-v2-featured__image-toggle\{[^}]*display:none;/);
+  assert.match(css, /\.home-v2-featured__image-toggle\{[^}]*display:grid;/);
+  assert.match(css, /\.home-v2-featured__art\{position:relative;/);
   assert.match(css, /@media \(max-width:768px\)[\s\S]*\.home-v2-featured__item--illustrated\{[^}]*grid-template-columns:minmax\(0, 6rem\) minmax\(0, 1fr\);/);
-  assert.match(css, /@media \(max-width:768px\)[\s\S]*\.home-v2-featured__image-toggle:not\(\[hidden\]\)\{[^}]*display:block;/);
+  assert.match(css, /@media \(max-width:768px\)[\s\S]*\.home-v2-featured__item-media\{[^}]*display:block;/);
 });
 
 test("contributor lane is public, specific, and linked from the homepage", () => {

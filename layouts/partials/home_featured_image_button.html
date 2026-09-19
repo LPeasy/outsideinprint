@@ -9,19 +9,8 @@
   data-height="{{ $model.lightbox_height }}"
   aria-label="View illustration for {{ $page.Title }}"
   aria-haspopup="dialog" aria-controls="home-featured-image-dialog" hidden>
-  {{- partial "images/picture.html" (dict
-    "model" $model
-    "alt" ($page.Params.featured_image_alt | default "")
-    "loading" "lazy"
-    "sizes" "120px"
-  ) -}}
+  <span aria-hidden="true">⌕</span>
 </button>
 <a class="home-v2-featured__image-toggle" data-home-featured-image-fallback
-  href="{{ $model.lightbox_url }}" aria-label="View illustration for {{ $page.Title }}">
-  {{- partial "images/picture.html" (dict
-    "model" $model
-    "alt" ($page.Params.featured_image_alt | default "")
-    "loading" "lazy"
-    "sizes" "120px"
-  ) -}}
+  href="{{ $model.lightbox_url }}" aria-label="View illustration for {{ $page.Title }}"><span aria-hidden="true">⌕</span>
 </a>

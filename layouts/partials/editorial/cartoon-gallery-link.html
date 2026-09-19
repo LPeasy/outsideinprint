@@ -7,9 +7,19 @@
     "ref" .image
     "display" true
   ) -}}
+  <span class="essay-cartoon-thumb-wrap">
+  <a class="essay-cartoon-thumb{{ with $class }} {{ . }}{{ end }}" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
+    {{- partial "images/picture.html" (dict
+      "model" $imageModel
+      "alt" ""
+      "loading" "lazy"
+      "sizes" "7rem"
+    ) -}}
+    <span>Read</span>
+  </a>
   <button
     type="button"
-    class="essay-cartoon-thumb{{ with $class }} {{ . }}{{ end }}"
+    class="essay-cartoon-zoom"
     data-essay-cartoon-lightbox-trigger
     data-cartoon-slug="{{ .slug }}"
     data-title="{{ .title }}"
@@ -22,13 +32,7 @@
     data-gallery="{{ (printf "gallery/?cartoon=%s" .slug) | absURL }}"
     aria-label="Open the illustration for {{ $page.Title }} fullscreen"
   >
-    {{- partial "images/picture.html" (dict
-      "model" $imageModel
-      "alt" ""
-      "loading" "lazy"
-      "sizes" "7rem"
-      "lightbox" true
-    ) -}}
-    <span>Illustration</span>
+    <span aria-hidden="true">⌕</span>
   </button>
+  </span>
 {{- end -}}

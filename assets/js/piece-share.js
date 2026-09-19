@@ -62,6 +62,7 @@
     }
 
     function showManualCopy() {
+      if (panel.hidden) showPanel();
       manual.hidden = false;
       input.value = shareUrl;
       status.textContent = "Copying is unavailable. The link is selected; copy it manually.";
@@ -110,12 +111,12 @@
 
       try {
         await navigator.clipboard.writeText(shareUrl);
-        if (panel.hidden || requestGeneration !== panelGeneration) {
+        if (requestGeneration !== panelGeneration) {
           return;
         }
         status.textContent = "Link copied.";
       } catch (error) {
-        if (panel.hidden || requestGeneration !== panelGeneration) {
+        if (requestGeneration !== panelGeneration) {
           return;
         }
         showManualCopy();

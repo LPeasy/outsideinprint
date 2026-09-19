@@ -150,17 +150,17 @@ test("dialog contents do not count as backdrop clicks and each activation uses i
   assert.equal(view.image.getAttribute("src"), "/images/rendered/piece-1/1600.webp");
 });
 
-test("resizing above 768px closes the modal and focuses the visible desktop illustration link", () => {
+test("the separate zoom control works across viewport sizes", () => {
   for (const legacyMedia of [false, true]) {
     const view = setup({ width: 768, legacyMedia });
     view.cards[0].trigger.dispatch("click");
     view.resize(769);
-    assert.equal(view.dialog.open, false);
-    assert.equal(view.cards[0].trigger.focused, 0);
-    assert.equal(view.cards[0].desktopLink.focused, 1);
-    assert.equal(view.bodyClasses.size, 0);
+    assert.equal(view.dialog.open, true);
+    view.closeButton.dispatch("click");
+    assert.equal(view.cards[0].trigger.focused, 1);
     view.cards[0].trigger.dispatch("click");
-    assert.equal(view.dialog.open, false, "hidden mobile controls cannot open the desktop dialog");
+    assert.equal(view.dialog.open, true);
+    view.closeButton.dispatch("click");
     view.resize(390);
     view.cards[0].trigger.dispatch("click");
     assert.equal(view.dialog.open, true);

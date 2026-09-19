@@ -90,7 +90,7 @@ test("every compact-opening rule is article-only and limited to 768px", () => {
 
 test("opening artwork stays visible, contained, and proportional instead of cropped", () => {
   const image = declarationsFor(".article-reading-page .piece-media-plate img");
-  assert.match(image, /max-height:\s*180px\s*;/);
+  assert.match(image, /max-height:\s*148px\s*;/);
   assert.match(image, /object-fit:\s*contain\s*;/);
   assert.match(image, /height:\s*auto\s*;/);
   assert.match(image, /width:\s*auto\s*;/);

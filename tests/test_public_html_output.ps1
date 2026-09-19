@@ -3423,8 +3423,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)The latest publication, reader favorites, and defining work\..*?home-v2-featured__lead.*?Read the piece.*?home-v2-featured__supporting'
-    Message = 'expected featured reading to explain the latest-publication lead and use a form-neutral reading action'
+    Pattern = '(?s)A flagship case study, the latest publication, and selected work\..*?home-v2-featured__lead.*?Read the piece.*?home-v2-featured__supporting'
+    Message = 'expected featured reading to explain the flagship lead and use a form-neutral reading action'
   },
   @{
     Path = 'public/index.html'
@@ -5856,18 +5856,22 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     [DateTimeOffset]::Parse($_.publishDate) -le $selectionObservationTime
   } | Sort-Object @{ Expression = { [DateTimeOffset]::Parse($_.publishDate) }; Descending = $true }, title |
     ForEach-Object { Get-SitePathFromHref -Href $_.permalink })
+  $flagshipPath = '/essays/the-dolphin-company/'
   $expectedLeadPaths = @($publishedReadingPaths | Select-Object -First 1)
+  if ($flagshipPath -in $publishedReadingPaths) {
+    $expectedLeadPaths = @($flagshipPath)
+  }
+  $latestRemainingPaths = @($publishedReadingPaths | Where-Object { $_ -notin $expectedLeadPaths } | Select-Object -First 1)
   $preferredSupportingPaths = @(
-    '/essays/the-dolphin-company/',
     '/syd-and-oliver/what-i-had/',
     '/essays/default-owner/',
     '/essays/reverse-origami/'
   )
-  $expectedSupportingPaths = @(@($preferredSupportingPaths + $publishedReadingPaths) | Where-Object {
+  $expectedSupportingPaths = @(@($latestRemainingPaths + $preferredSupportingPaths + $publishedReadingPaths) | Where-Object {
     $_ -notin $expectedLeadPaths -and $_ -in $publishedReadingPaths
   } | Select-Object -Unique | Select-Object -First 4)
   if (($homeLeadPaths -join '|') -cne ($expectedLeadPaths -join '|')) {
-    $uxIssues.Add("public/index.html => expected newest published reading piece '$($expectedLeadPaths -join ', ')' as the sole lead, found '$($homeLeadPaths -join ', ')'")
+    $uxIssues.Add("public/index.html => expected flagship reading piece '$($expectedLeadPaths -join ', ')' as the sole lead, found '$($homeLeadPaths -join ', ')'")
   }
   if (($homeSupportingPaths -join '|') -cne ($expectedSupportingPaths -join '|')) {
     $uxIssues.Add("public/index.html => expected the four approved supporting pieces in order '$($expectedSupportingPaths -join ', ')', found '$($homeSupportingPaths -join ', ')'")
@@ -5910,10 +5914,8 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   foreach ($mobileArt in @([regex]::Matches($homeIndexHtml, '(?s)<(?:button|a)\b[^>]*data-home-featured-image-(?:trigger|fallback)[^>]*>(?<body>.*?)</(?:button|a)>'))) {
     $artwork = $mobileArt.Groups['body'].Value
     $artworkImages = @(Get-OpenTags -Html $artwork -TagName 'img')
-    if ($artworkImages.Count -ne 1 -or (Get-AttributeValue -Tag $artworkImages[0] -Name 'loading') -cne 'lazy' -or
-        -not (Get-AttributeValue -Tag $artworkImages[0] -Name 'src') -or $artwork -match '<svg\b' -or
-        [regex]::Replace($artwork, '<[^>]+>', '').Trim()) {
-      $uxIssues.Add('public/index.html => mobile trigger and fallback must contain lazy artwork without an Image text/icon control')
+    if ($artworkImages.Count -ne 0) {
+      $uxIssues.Add('public/index.html => separate zoom controls must not duplicate the article-linked illustration')
     }
   }
   if ($homeIndexHtml -match '(?s)<p\b[^>]*class=(?:"home-v2-featured__meta"|home-v2-featured__meta)[^>]*>(?:(?!</p>).)*data-home-featured-image-(?:trigger|fallback)') {

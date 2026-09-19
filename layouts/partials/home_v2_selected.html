@@ -1,5 +1,5 @@
+{{- $flagshipRoute := "/essays/the-dolphin-company/" -}}
 {{- $supportingRoutes := slice
-  "/essays/the-dolphin-company/"
   "/syd-and-oliver/what-i-had/"
   "/essays/default-owner/"
   "/essays/reverse-origami/"
@@ -18,9 +18,23 @@
 {{- $featured := slice -}}
 {{- $selectedPaths := slice -}}
 
-{{- range first 1 $eligible -}}
+{{- range where $eligible "RelPermalink" $flagshipRoute -}}
   {{- $featured = $featured | append . -}}
   {{- $selectedPaths = $selectedPaths | append .RelPermalink -}}
+{{- end -}}
+
+{{- if eq (len $featured) 0 -}}
+  {{- range first 1 $eligible -}}
+    {{- $featured = $featured | append . -}}
+    {{- $selectedPaths = $selectedPaths | append .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range $eligible -}}
+  {{- if and (eq (len $featured) 1) (not (in $selectedPaths .RelPermalink)) -}}
+    {{- $featured = $featured | append . -}}
+    {{- $selectedPaths = $selectedPaths | append .RelPermalink -}}
+  {{- end -}}
 {{- end -}}
 
 {{- range $route := $supportingRoutes -}}
