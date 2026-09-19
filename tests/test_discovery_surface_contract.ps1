@@ -48,7 +48,6 @@ $requiredFiles = @(
   'layouts/partials/home_featured_image_button.html',
   'layouts/partials/home_featured_image_dialog.html',
   'assets/js/home-featured-image.js',
-  'assets/js/home-reader-note.js',
   'data/homepage_metrics.yaml',
   'layouts/partials/home_bookstore_spotlight.html',
   'layouts/partials/home_selected_collections.html',
@@ -334,10 +333,13 @@ if ($homeV2Template -match 'home-v2-next__contribute|Publish with us|Write for O
   throw 'Expected the homepage to omit the retired contributor box and its copy.'
 }
 
-$expectedHomeReaderNote = 'However you found this site—through a search, a shared link, or a single essay—you are welcome here. Outside In Print is for readers tired of being hurried from clip to clip and headline to headline. Step outside the feed, stay with an idea, ask for the evidence, and make up your own mind. Read whatever catches your eye. Follow a question farther than the algorithm would. Come back when you want something worth your attention.'
+$expectedHomeReaderNote = 'Outside In Print publishes independent reporting, essays, dialogues, and reflections. Find the evidence behind public issues and fresh perspectives on everyday life. Step away from doomscrolling, ads, and algorithmic feeds, and follow your own curiosity.'
 $homeReaderNoteMatches = [regex]::Matches($homeV2Template, '(?s)<p class="home-front-page__welcome-copy">(?<copy>.*?)</p>')
-if ($homeReaderNoteMatches.Count -ne 1 -or ([regex]::Replace($homeReaderNoteMatches[0].Groups['copy'].Value, '<[^>]+>', '').Trim()) -cne $expectedHomeReaderNote) {
-  throw 'Expected the focused homepage composition to keep the full reader note in one home-front-page__welcome-copy paragraph.'
+if ($homeReaderNoteMatches.Count -ne 1 -or $homeReaderNoteMatches[0].Groups['copy'].Value.Trim() -cne $expectedHomeReaderNote) {
+  throw 'Expected the focused homepage composition to keep one always-visible, three-sentence welcome paragraph.'
+}
+if ($homeV2Template -match 'home-reader-note-rest|data-reader-note-toggle|home-front-page__note-toggle|js/home-reader-note\.js') {
+  throw 'Expected the static homepage welcome to omit the retired suffix, toggle, and enhancement script.'
 }
 
 $homeReaderLinks = '<p class="home-front-page__welcome-links"><a href="{{ "about/" | relURL }}">About the imprint</a><a href="{{ "authors/robert-v-ussley/" | relURL }}">About the author</a></p>'

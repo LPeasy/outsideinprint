@@ -119,7 +119,7 @@ const currentCartoonSlug = readCurrentCartoonSlug(cartoonData);
 const dialoguesSection = fs.readFileSync(path.resolve("content/syd-and-oliver/_index.md"), "utf8");
 const css = fs.readFileSync(path.resolve("assets/css/main.css"), "utf8");
 const styleThemeWorkflow = fs.readFileSync(path.resolve("docs/style-theme-workflow.md"), "utf8");
-const readerNoteCopy = "However you found this site—through a search, a shared link, or a single essay—you are welcome here. Outside In Print is for readers tired of being hurried from clip to clip and headline to headline. Step outside the feed, stay with an idea, ask for the evidence, and make up your own mind. Read whatever catches your eye. Follow a question farther than the algorithm would. Come back when you want something worth your attention.";
+const readerNoteCopy = "Outside In Print publishes independent reporting, essays, dialogues, and reflections. Find the evidence behind public issues and fresh perspectives on everyday life. Step away from doomscrolling, ads, and algorithmic feeds, and follow your own curiosity.";
 
 test("masthead defines the grouped desktop and mobile navigation from one destination model", () => {
   assert.doesNotMatch(masthead, />Welcome</);
@@ -694,7 +694,8 @@ test("homepage composition puts reading before newsletter and contribution", () 
   assert.match(homeV2FrontPage, /A note to the reader/);
   const welcomeCopyParagraphs = Array.from(homeV2FrontPage.matchAll(/<p class="home-front-page__welcome-copy">([\s\S]*?)<\/p>/g));
   assert.equal(welcomeCopyParagraphs.length, 1);
-  assert.equal(welcomeCopyParagraphs[0][1].replace(/<[^>]+>/g, "").trim(), readerNoteCopy);
+  assert.equal(welcomeCopyParagraphs[0][1].trim(), readerNoteCopy);
+  assert.doesNotMatch(homeV2FrontPage, /home-reader-note-rest|data-reader-note-toggle|home-front-page__note-toggle|js\/home-reader-note\.js/);
   assert.match(
     homeV2FrontPage,
     /<p class="home-front-page__welcome-links"><a href="\{\{ "about\/" \| relURL \}\}">About the imprint<\/a><a href="\{\{ "authors\/robert-v-ussley\/" \| relURL \}\}">About the author<\/a><\/p>/,

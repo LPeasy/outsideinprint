@@ -19,7 +19,7 @@ const metrics = read("data/homepage_metrics.yaml");
 const config = read("hugo.toml");
 const contributor = read("content/contribute/index.md");
 const css = read("assets/css/main.css");
-const readerNoteCopy = "However you found this site—through a search, a shared link, or a single essay—you are welcome here. Outside In Print is for readers tired of being hurried from clip to clip and headline to headline. Step outside the feed, stay with an idea, ask for the evidence, and make up your own mind. Read whatever catches your eye. Follow a question farther than the algorithm would. Come back when you want something worth your attention.";
+const readerNoteCopy = "Outside In Print publishes independent reporting, essays, dialogues, and reflections. Find the evidence behind public issues and fresh perspectives on everyday life. Step away from doomscrolling, ads, and algorithmic feeds, and follow your own curiosity.";
 
 test("homepage delegates to the focused v2 composition", () => {
   assert.match(homepage, /partial "home_front_page\.html"/);
@@ -159,7 +159,8 @@ test("homepage follows the proof, note, featured reading, library, newsletter, c
   assert.match(homeV2, /A note to the reader/);
   const welcomeCopyParagraphs = Array.from(homeV2.matchAll(/<p class="home-front-page__welcome-copy">([\s\S]*?)<\/p>/g));
   assert.equal(welcomeCopyParagraphs.length, 1);
-  assert.equal(welcomeCopyParagraphs[0][1].replace(/<[^>]+>/g, "").trim(), readerNoteCopy);
+  assert.equal(welcomeCopyParagraphs[0][1].trim(), readerNoteCopy);
+  assert.doesNotMatch(homeV2, /home-reader-note-rest|data-reader-note-toggle|home-front-page__note-toggle|js\/home-reader-note\.js/);
   assert.match(
     homeV2,
     /<p class="home-front-page__welcome-links"><a href="\{\{ "about\/" \| relURL \}\}">About the imprint<\/a><a href="\{\{ "authors\/robert-v-ussley\/" \| relURL \}\}">About the author<\/a><\/p>/,

@@ -3372,7 +3372,7 @@ if ($targetPageHtml.ContainsKey('public/404.html')) {
   }
 }
 
-$expectedHomeReaderNote = 'However you found this site—through a search, a shared link, or a single essay—you are welcome here. Outside In Print is for readers tired of being hurried from clip to clip and headline to headline. Step outside the feed, stay with an idea, ask for the evidence, and make up your own mind. Read whatever catches your eye. Follow a question farther than the algorithm would. Come back when you want something worth your attention.'
+$expectedHomeReaderNote = 'Outside In Print publishes independent reporting, essays, dialogues, and reflections. Find the evidence behind public issues and fresh perspectives on everyday life. Step away from doomscrolling, ads, and algorithmic feeds, and follow your own curiosity.'
 
 $requiredUxChecks = @(
   @{
@@ -3402,13 +3402,14 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)home-front-page__welcome-copy[^>]*>However you found this site.*?headline to headline\.<span id=(?:"home-reader-note-rest"|home-reader-note-rest)> Step outside the feed.*?Come back when you want something worth your attention\.</span></p>'
-    Message = 'expected the complete note to remain visible in server-rendered markup, with only its later sentences inside the expandable span'
+    Pattern = '(?s)home-front-page__welcome-copy[^>]*>Outside In Print publishes independent reporting, essays, dialogues, and reflections\. Find the evidence behind public issues and fresh perspectives on everyday life\. Step away from doomscrolling, ads, and algorithmic feeds, and follow your own curiosity\.</p>'
+    Message = 'expected one always-visible, three-sentence homepage welcome paragraph'
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)<button\b(?=[^>]*data-reader-note-toggle)(?=[^>]*aria-controls=(?:"home-reader-note-rest"|home-reader-note-rest))(?=[^>]*aria-expanded=(?:"true"|true))(?=[^>]*\bhidden\b)[^>]*>Read the full note</button>'
-    Message = 'expected the reader-note button to be initially hidden with a valid expanded-state and target for progressive enhancement'
+    Pattern = 'home-reader-note-rest|data-reader-note-toggle|home-front-page__note-toggle|home-reader-note(?:\.min)?\.'
+    Message = 'expected the static homepage welcome to omit its retired suffix, toggle, and script'
+    ShouldNotMatch = $true
   },
   @{
     Path = 'public/index.html'
@@ -5923,8 +5924,8 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     $uxIssues.Add("public/index.html => expected $expectedBadgeCount qualifying source-backed reads badges, found $readerBadges")
   }
   $homeNoteMatch = [regex]::Match($homeIndexHtml, '(?s)<p[^>]*class=(?:"home-front-page__welcome-copy"|home-front-page__welcome-copy)[^>]*>(?<copy>.*?)</p>')
-  if (-not $homeNoteMatch.Success -or [System.Net.WebUtility]::HtmlDecode([regex]::Replace($homeNoteMatch.Groups['copy'].Value, '<[^>]+>', '')).Trim() -cne $expectedHomeReaderNote) {
-    $uxIssues.Add('public/index.html => the full original note must remain in the rendered paragraph without wording changes')
+  if (-not $homeNoteMatch.Success -or [System.Net.WebUtility]::HtmlDecode($homeNoteMatch.Groups['copy'].Value).Trim() -cne $expectedHomeReaderNote) {
+    $uxIssues.Add('public/index.html => expected the exact static three-sentence welcome without nested markup')
   }
   if ($homeIndexHtml -match 'Medium reads') {
     $uxIssues.Add('public/index.html => featured reader badges should omit the Medium label')

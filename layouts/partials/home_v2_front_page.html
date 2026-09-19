@@ -8,8 +8,7 @@
   <section class="home-front-page__orientation" aria-labelledby="home-reader-note-title">
     <h2 id="home-reader-note-title" class="home-front-page__welcome-label">A note to the reader</h2>
     <div class="home-front-page__welcome-body">
-      <p class="home-front-page__welcome-copy">However you found this site—through a search, a shared link, or a single essay—you are welcome here. Outside In Print is for readers tired of being hurried from clip to clip and headline to headline.<span id="home-reader-note-rest"> Step outside the feed, stay with an idea, ask for the evidence, and make up your own mind. Read whatever catches your eye. Follow a question farther than the algorithm would. Come back when you want something worth your attention.</span></p>
-      <button class="home-front-page__note-toggle" type="button" data-reader-note-toggle aria-expanded="true" aria-controls="home-reader-note-rest" hidden>Read the full note</button>
+      <p class="home-front-page__welcome-copy">Outside In Print publishes independent reporting, essays, dialogues, and reflections. Find the evidence behind public issues and fresh perspectives on everyday life. Step away from doomscrolling, ads, and algorithmic feeds, and follow your own curiosity.</p>
     </div>
     <p class="home-front-page__welcome-links"><a href="{{ "about/" | relURL }}">About the imprint</a><a href="{{ "authors/robert-v-ussley/" | relURL }}">About the author</a></p>
   </section>
@@ -116,8 +115,5 @@
 </section>
 {{ partial "home_featured_image_dialog.html" . }}
 {{- with resources.Get "js/home-featured-image.js" | minify | fingerprint "sha384" }}
-  <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
-{{- end }}
-{{- with resources.Get "js/home-reader-note.js" | minify | fingerprint "sha384" }}
   <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
 {{- end }}

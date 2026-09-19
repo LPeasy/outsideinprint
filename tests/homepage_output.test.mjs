@@ -179,23 +179,12 @@ test("supporting image enhancement has one native dialog and is loaded only on t
   assert.doesNotMatch(fs.readFileSync(path.join(siteDir, "gallery/index.html"), "utf8"), /home-featured-image(?:\.min)?\./);
 });
 
-test("rendered homepage has complete no-JavaScript note, hidden native control, and homepage-only enhancement", () => {
-  const expectedNote = "However you found this site—through a search, a shared link, or a single essay—you are welcome here. Outside In Print is for readers tired of being hurried from clip to clip and headline to headline. Step outside the feed, stay with an idea, ask for the evidence, and make up your own mind. Read whatever catches your eye. Follow a question farther than the algorithm would. Come back when you want something worth your attention.";
+test("rendered homepage has one always-visible three-sentence welcome", () => {
+  const expectedNote = "Outside In Print publishes independent reporting, essays, dialogues, and reflections. Find the evidence behind public issues and fresh perspectives on everyday life. Step away from doomscrolling, ads, and algorithmic feeds, and follow your own curiosity.";
   const note = html.match(/<p\b[^>]*class=(?:"home-front-page__welcome-copy"|home-front-page__welcome-copy)[^>]*>([\s\S]*?)<\/p>/)?.[1];
-  assert.equal(text(note), expectedNote);
-  const suffixTag = note.match(/<span\b[^>]*>/)?.[0];
-  assert.equal(attribute(suffixTag, "id"), "home-reader-note-rest");
-  assert.doesNotMatch(suffixTag, /\bhidden\b|aria-hidden/);
-  const toggle = html.match(/<button\b[^>]*data-reader-note-toggle[^>]*>/)?.[0];
-  assert.equal(attribute(toggle, "type"), "button");
-  assert.equal(attribute(toggle, "aria-controls"), "home-reader-note-rest");
-  assert.equal(attribute(toggle, "aria-expanded"), "true");
-  assert.match(toggle, /\bhidden(?:\s|>)/);
-  const script = html.match(/<script\b[^>]*home-reader-note[^>]*>/)?.[0];
-  assert.ok(script);
-  assert.match(script, /\bdefer(?:\s|>)/);
-  assert.match(attribute(script, "integrity"), /^sha384-/);
-  assert.ok(fs.existsSync(path.join(siteDir, attribute(script, "src"))));
+  assert.equal(note?.trim(), expectedNote);
+  assert.doesNotMatch(note, /<[^>]+>/);
+  assert.doesNotMatch(html, /home-reader-note-rest|data-reader-note-toggle|home-front-page__note-toggle|home-reader-note(?:\.min)?\./);
   const gallery = fs.readFileSync(path.join(siteDir, "gallery/index.html"), "utf8");
   assert.doesNotMatch(gallery, /home-reader-note(?:\.min)?\./);
   assert.doesNotMatch(html, /home-v2__subjects|Independent writing on history, economics, culture, and public life\./);

@@ -2071,26 +2071,6 @@ html[data-theme="light"] .paper-route-toggle{
   outline:3px solid var(--focus-ring);
   outline-offset:3px;
 }
-.home-front-page__note-toggle{
-  min-height:44px;
-  margin:.1rem 0 0;
-  padding:.35rem 0;
-  border:0;
-  background:none;
-  color:var(--accent);
-  font:700 .78rem/1.4 var(--font-ui);
-  text-decoration:underline;
-  text-underline-offset:.18em;
-  cursor:pointer;
-}
-.home-front-page__note-toggle:hover{
-  color:var(--accent-hover);
-}
-.home-front-page__note-toggle:focus-visible{
-  outline:3px solid var(--focus-ring);
-  outline-offset:3px;
-}
-
 .home-v2{
   margin-top:.15rem;
 }
