@@ -7616,7 +7616,15 @@ body.cartoon-lightbox-open{
 }
 .almanack-masthead .piece-byline-row{
   justify-content:center;
+  flex-wrap:nowrap;
   margin-top:.78rem;
+}
+.almanack-masthead .almanack-masthead__meta{
+  min-width:0;
+  flex:0 1 auto;
+}
+.almanack-masthead .piece-share{
+  flex:0 0 auto;
 }
 .piece-title-block h1{
   max-width:18ch;
