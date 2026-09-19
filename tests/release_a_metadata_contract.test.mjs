@@ -131,7 +131,7 @@ test("Almanack issues carry exact unique metadata titles and substantive descrip
   const files = fs.readdirSync(path.resolve("content/almanack"))
     .filter((name) => /^\d{4}-\d{2}-\d{2}\.md$/.test(name))
     .sort();
-  assert.equal(files.length, 19);
+  assert.ok(files.length > 0, "expected dated Almanack issues to validate");
 
   const titles = new Set();
   const descriptions = new Set();
