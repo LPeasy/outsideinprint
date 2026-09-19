@@ -71,9 +71,9 @@
       {{ partial "masthead.html" . }}
       <main id="main-content">
         {{ block "main" . }}{{ end }}
-        {{- $readerBridge := or (in (slice "/studio/" "/support/" "/gallery/") .RelPermalink) (and (in (slice "apps" "games" "shop") .Section) (not (in .RelPermalink "/sample/")) (not (in .RelPermalink "/thanks/"))) -}}
-        {{- if $readerBridge }}{{ partial "reader_bridge.html" . }}{{ end -}}
       </main>
+      {{- $readerBridge := or (in (slice "/studio/" "/support/" "/gallery/") .RelPermalink) (and (in (slice "apps" "games" "shop") .Section) (not (in .RelPermalink "/sample/")) (not (in .RelPermalink "/thanks/"))) -}}
+      {{- if $readerBridge }}{{ partial "reader_bridge.html" . }}{{ end -}}
       {{ partial "footer.html" . }}
     </div>
     {{ partial "editorial/cartoon-thumbnail-lightbox.html" . }}
