@@ -195,11 +195,17 @@ foreach ($tag in @('button', 'a')) {
     throw 'Expected the zoom control to use the shared decorative SVG magnifier.'
   }
 }
-$mobileArtworkIndex = $homeV2Template.IndexOf('partial "home_featured_image_button.html"', [System.StringComparison]::Ordinal)
-if ($mobileArtworkIndex -le $homeV2Template.IndexOf('class="home-v2-featured__item-media"', [System.StringComparison]::Ordinal) -or
-    $mobileArtworkIndex -ge $homeV2Template.IndexOf('class="home-v2-featured__item-copy"', [System.StringComparison]::Ordinal) -or
+$leadMediaIndex = $homeV2Template.IndexOf('class="home-v2-featured__lead-media"', [System.StringComparison]::Ordinal)
+$leadArtworkIndex = $homeV2Template.IndexOf('partial "home_featured_image_button.html"', [System.StringComparison]::Ordinal)
+$leadCopyIndex = $homeV2Template.IndexOf('class="home-v2-featured__lead-copy"', [System.StringComparison]::Ordinal)
+$supportMediaIndex = $homeV2Template.IndexOf('class="home-v2-featured__item-media"', [System.StringComparison]::Ordinal)
+$supportArtworkIndex = $homeV2Template.IndexOf('partial "home_featured_image_button.html"', $leadArtworkIndex + 1, [System.StringComparison]::Ordinal)
+if ([regex]::Matches($homeV2Template, 'partial "home_featured_image_button\.html"').Count -ne 2 -or
+    $leadMediaIndex -lt 0 -or $leadArtworkIndex -le $leadMediaIndex -or $leadArtworkIndex -ge $leadCopyIndex -or
+    $supportArtworkIndex -le $supportMediaIndex -or
+    $supportArtworkIndex -ge $homeV2Template.IndexOf('class="home-v2-featured__item-copy"', [System.StringComparison]::Ordinal) -or
     $homeV2Template -match 'home-v2-featured__meta[^\r\n]*partial "home_featured_image_button\.html"') {
-  throw 'Expected the mobile artwork beside the supporting copy, outside the metadata paragraph.'
+  throw 'Expected separate lead and supporting zoom controls beside linked artwork, outside the metadata paragraphs.'
 }
 if ($homeImageDialog -notmatch '<dialog id="home-featured-image-dialog"[^>]*aria-labelledby="home-featured-image-title"' -or
     $homeImageDialog -notmatch '<button\b[^>]*data-home-featured-image-close[^>]*aria-label="Close illustration"') {

@@ -122,12 +122,28 @@ test("rendered homepage leads with Dolphin, then the newest remaining publicatio
     assert.match(labels[1], /^\d+ min read$/);
     assert.deepEqual(labels.slice(2), badge ? [badge] : []);
     if (index === 0) {
-      assert.doesNotMatch(card[2], /home-v2-featured__item-media|data-home-featured-image-trigger/);
-      const leadImage = card[2].match(/<img\b[^>]*>/)?.[0];
-      if (leadImage) {
-        assert.equal(attribute(leadImage, "loading"), "eager");
-        assert.equal(attribute(leadImage, "fetchpriority"), "high");
-      }
+      assert.doesNotMatch(card[2], /home-v2-featured__item-media/);
+      const leadMedia = [...card[2].matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/g)]
+        .find((match) => attribute(match[1], "class").split(/\s+/).includes("home-v2-featured__lead-media"));
+      assert.ok(leadMedia, "flagship artwork remains an article link");
+      assert.equal(attribute(leadMedia[1], "href"), route);
+      const leadImage = leadMedia[2].match(/<img\b[^>]*>/)?.[0];
+      assert.ok(leadImage);
+      assert.equal(attribute(leadImage, "loading"), "eager");
+      assert.equal(attribute(leadImage, "fetchpriority"), "high");
+      const triggerMarkup = card[2].match(/(<button\b[^>]*data-home-featured-image-trigger[^>]*>)([\s\S]*?)<\/button>/);
+      const fallbackMarkup = card[2].match(/(<a\b[^>]*data-home-featured-image-fallback[^>]*>)([\s\S]*?)<\/a>/);
+      assert.ok(triggerMarkup, "flagship has a separate native zoom control");
+      assert.ok(fallbackMarkup, "flagship zoom works without JavaScript");
+      assert.ok(card[2].indexOf(triggerMarkup[1]) > card[2].indexOf(leadMedia[1]));
+      assert.ok(card[2].indexOf(triggerMarkup[1]) < card[2].indexOf("home-v2-featured__lead-copy"));
+      assert.equal(attribute(triggerMarkup[1], "type"), "button");
+      assert.equal(attribute(triggerMarkup[1], "aria-controls"), "home-featured-image-dialog");
+      assert.equal(attribute(triggerMarkup[1], "aria-haspopup"), "dialog");
+      assert.match(triggerMarkup[1], /\bhidden(?:\s|>)/);
+      assert.equal(attribute(triggerMarkup[1], "data-image"), attribute(fallbackMarkup[1], "href"));
+      assert.equal(attribute(triggerMarkup[1], "data-alt"), attribute(leadImage, "alt"));
+      assert.doesNotMatch(triggerMarkup[2] + fallbackMarkup[2], /<img\b/, "zoom controls do not duplicate flagship art");
     } else {
       const media = [...card[2].matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/g)]
         .filter((match) => attribute(match[1], "class").split(/\s+/).includes("home-v2-featured__item-media"));

@@ -5877,26 +5877,31 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
       $uxIssues.Add("public/index.html => expected homepage label '$($featuredLabelOverrides[$promoPath])' for '$promoPath'")
     }
   }
+  $leadImageLinks = @($homeAnchors | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-v2-featured__lead-media' })
   $supportingImageLinks = @($homeAnchors | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-v2-featured__item-media' })
-  $supportingImageTriggers = @(Get-OpenTags -Html $homeIndexHtml -TagName 'button' | Where-Object { $_ -match '\bdata-home-featured-image-trigger\b' })
-  $supportingImageFallbacks = @($homeAnchors | Where-Object { $_ -match '\bdata-home-featured-image-fallback\b' })
-  if ($supportingImageTriggers.Count -ne $supportingImageLinks.Count -or $supportingImageFallbacks.Count -ne $supportingImageLinks.Count) {
-    $uxIssues.Add('public/index.html => every supporting illustration must have one mobile artwork trigger and one no-JavaScript artwork fallback')
+  $featuredImageLinks = @($leadImageLinks + $supportingImageLinks)
+  $featuredImageTriggers = @(Get-OpenTags -Html $homeIndexHtml -TagName 'button' | Where-Object { $_ -match '\bdata-home-featured-image-trigger\b' })
+  $featuredImageFallbacks = @($homeAnchors | Where-Object { $_ -match '\bdata-home-featured-image-fallback\b' })
+  if ($leadImageLinks.Count -ne 1 -or (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $leadImageLinks[0] -Name 'href')) -notin $expectedLeadPaths) {
+    $uxIssues.Add('public/index.html => the flagship illustration must remain linked to its featured article')
+  }
+  if ($featuredImageTriggers.Count -ne $featuredImageLinks.Count -or $featuredImageFallbacks.Count -ne $featuredImageLinks.Count) {
+    $uxIssues.Add('public/index.html => every featured illustration must have one zoom trigger and one no-JavaScript artwork fallback')
   }
   foreach ($imageLink in $supportingImageLinks) {
     if ((Get-SitePathFromHref -Href (Get-AttributeValue -Tag $imageLink -Name 'href')) -notin $expectedSupportingPaths) {
       $uxIssues.Add('public/index.html => supporting illustration links must lead to their featured articles')
     }
   }
-  foreach ($trigger in $supportingImageTriggers) {
+  foreach ($trigger in $featuredImageTriggers) {
     $imageUrl = Get-AttributeValue -Tag $trigger -Name 'data-image'
     if (-not $imageUrl -or (Get-AttributeValue -Tag $trigger -Name 'type') -cne 'button' -or
         (Get-AttributeValue -Tag $trigger -Name 'aria-controls') -cne 'home-featured-image-dialog' -or
         $trigger -notmatch '\bhidden(?:\s|>)') {
-      $uxIssues.Add('public/index.html => mobile artwork triggers must start hidden with a real image target and native dialog relationship')
+      $uxIssues.Add('public/index.html => featured artwork triggers must start hidden with a real image target and native dialog relationship')
     }
-    if ($imageUrl -notin @($supportingImageFallbacks | ForEach-Object { Get-AttributeValue -Tag $_ -Name 'href' })) {
-      $uxIssues.Add('public/index.html => mobile artwork triggers must retain a matching image-link fallback')
+    if ($imageUrl -notin @($featuredImageFallbacks | ForEach-Object { Get-AttributeValue -Tag $_ -Name 'href' })) {
+      $uxIssues.Add('public/index.html => featured artwork triggers must retain a matching image-link fallback')
     }
   }
   foreach ($mobileArt in @([regex]::Matches($homeIndexHtml, '(?s)<(?:button|a)\b[^>]*data-home-featured-image-(?:trigger|fallback)[^>]*>(?<body>.*?)</(?:button|a)>'))) {

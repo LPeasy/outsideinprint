@@ -199,9 +199,14 @@ test("homepage follows the proof, note, featured reading, library, newsletter, c
 test("featured lead reuses a published image and responsive rendering", () => {
   assert.match(homeV2, /with \$page\.Params\.featured_image/);
   assert.match(homeV2, /partial "images\/model\.html"/);
+  assert.match(homeV2, /<div class="home-v2-featured__art">[\s\S]*?<a class="home-v2-featured__lead-media" href="\{\{ \$page\.RelPermalink \}\}"/);
   assert.match(homeV2, /partial "images\/picture\.html"/);
   assert.match(homeV2, /"loading" "eager"/);
   assert.match(homeV2, /"fetchpriority" "high"/);
+  const leadMedia = homeV2.indexOf('class="home-v2-featured__lead-media"');
+  const leadZoom = homeV2.indexOf('partial "home_featured_image_button.html"', leadMedia);
+  const leadCopy = homeV2.indexOf('class="home-v2-featured__lead-copy"');
+  assert.ok(leadMedia >= 0 && leadZoom > leadMedia && leadZoom < leadCopy);
   assert.doesNotMatch(homeV2, /<img\b/);
 });
 
@@ -213,9 +218,10 @@ test("supporting illustrations open articles on mobile with a separate zoom cont
   assert.match(homeV2, /if eq \$index 1[\s\S]*?\$supportImageSizes = "\(min-width: 72rem\) 24rem, \(min-width: 48rem\) 38vw, 100vw"/);
   assert.match(homeV2, /"loading" "lazy"[\s\S]*?"sizes" \$supportImageSizes/);
   assert.match(homeV2, /<span class="home-v2-featured__new-tag">New!<\/span>/);
-  const mobileArtIndex = homeV2.indexOf('partial "home_featured_image_button.html"');
+  const mobileArtIndex = homeV2.indexOf('partial "home_featured_image_button.html"', homeV2.indexOf('class="home-v2-featured__item-media"'));
   assert.ok(mobileArtIndex > homeV2.indexOf('class="home-v2-featured__item-media"'));
   assert.ok(mobileArtIndex < homeV2.indexOf('class="home-v2-featured__item-copy"'));
+  assert.equal((homeV2.match(/partial "home_featured_image_button\.html"/g) || []).length, 2);
   assert.doesNotMatch(homeV2, /home-v2-featured__meta[^\n]*partial "home_featured_image_button\.html"/);
   assert.equal((homeV2.match(/partial "home_featured_image_dialog\.html"/g) || []).length, 1);
   assert.match(homeV2, /resources\.Get "js\/home-featured-image\.js" \| minify \| fingerprint "sha384"/);

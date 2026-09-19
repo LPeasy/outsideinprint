@@ -36,15 +36,18 @@
             <article class="home-v2-featured__lead">
               {{- with $page.Params.featured_image }}
                 {{- $imageModel := partial "images/model.html" (dict "page" $page "ref" . "display" true) -}}
-                <a class="home-v2-featured__lead-media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
-                  {{- partial "images/picture.html" (dict
-                    "model" $imageModel
-                    "alt" ($page.Params.featured_image_alt | default "")
-                    "loading" "eager"
-                    "fetchpriority" "high"
-                    "sizes" "(min-width: 72rem) 42rem, (min-width: 48rem) 58vw, 100vw"
-                  ) -}}
-                </a>
+                <div class="home-v2-featured__art">
+                  <a class="home-v2-featured__lead-media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
+                    {{- partial "images/picture.html" (dict
+                      "model" $imageModel
+                      "alt" ($page.Params.featured_image_alt | default "")
+                      "loading" "eager"
+                      "fetchpriority" "high"
+                      "sizes" "(min-width: 72rem) 42rem, (min-width: 48rem) 58vw, 100vw"
+                    ) -}}
+                  </a>
+                  {{ partial "home_featured_image_button.html" (dict "page" $page "model" $imageModel) }}
+                </div>
               {{- end }}
               <div class="home-v2-featured__lead-copy">
                 <p class="home-v2-featured__meta"><span>{{ $sectionLabel }}</span><span>{{ $page.ReadingTime }} min read</span>{{ with (index $readerMetrics $page.RelPermalink) }}{{ if ge .value $readerThreshold }}<span>{{ .display_label }}</span>{{ end }}{{ end }}</p>
