@@ -1,0 +1,4 @@
+{{- $credits := hugo.Data.image_credits | default dict -}}
+{{- with index $credits (.id | default "") -}}
+  <span class="image-credit">Photo: <a href="{{ .source_url }}">{{ .author }}</a> · <a href="{{ .license_url }}">{{ .license }}</a>{{ with .changes }} · {{ . }}{{ end }}</span>
+{{- end -}}

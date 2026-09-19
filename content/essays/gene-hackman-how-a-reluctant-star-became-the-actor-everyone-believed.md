@@ -1,7 +1,7 @@
 ---
-featured_image: "essays/gene-hackman-how-a-reluctant-star-became-the-actor-everyone-believed/hero"
-featured_image_alt: "Abstract archival portrait-style hero image for Gene Hackman: How a Reluctant Star Became the Actor Everyone Believed."
-featured_image_caption: "Replacement hero image for the legacy web edition."
+featured_image: "essays/modern-bios/gene-hackman/portrait"
+featured_image_alt: "Gene Hackman seated in a patterned chair, holding a book at a signing."
+featured_image_caption: "Gene Hackman at a book signing in Albuquerque, May 2008."
 title: "Gene Hackman: How a Reluctant Star Became the Actor Everyone Believed"
 date: 2026-03-31
 draft: false

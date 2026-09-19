@@ -208,8 +208,23 @@ $focusedCleanupBaselineAliasCount = 500
 $focusedCleanupBaselineCoreReviewCount = 446
 $focusedCleanupBaselineReferencedCount = 454
 $focusedCleanupBaselineDerivativeCapableCount = 458
+$modernBioPortraits = @(
+  @{ id = 'essays/modern-bios/charlie-kirk/portrait'; slug = 'charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation'; person = 'Charlie Kirk' },
+  @{ id = 'essays/modern-bios/dick-cheney/portrait'; slug = 'dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center'; person = 'Dick Cheney' },
+  @{ id = 'essays/modern-bios/gene-hackman/portrait'; slug = 'gene-hackman-how-a-reluctant-star-became-the-actor-everyone-believed'; person = 'Gene Hackman' },
+  @{ id = 'essays/modern-bios/george-foreman/portrait'; slug = 'george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill'; person = 'George Foreman' },
+  @{ id = 'essays/modern-bios/ozzy-osbourne/portrait'; slug = 'ozzy-osbourne-how-heavy-metals-most-unruly-star-became-a-cultural-fixture'; person = 'Ozzy Osbourne' },
+  @{ id = 'essays/modern-bios/pope-francis/portrait'; slug = 'pope-francis-how-a-plainspoken-pope-reframed-moral-authority'; person = 'Pope Francis' }
+)
+$routinePhotoIds = @($modernBioPortraits | ForEach-Object { $_.id })
 $intentionallyRetiredManagedAssetIds = @(
-  'essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts'
+  'essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts',
+  'essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/hero',
+  'essays/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center/hero',
+  'essays/gene-hackman-how-a-reluctant-star-became-the-actor-everyone-believed/hero',
+  'essays/george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill/hero',
+  'essays/ozzy-osbourne-how-heavy-metals-most-unruly-star-became-a-cultural-fixture/hero',
+  'essays/pope-francis-how-a-plainspoken-pope-reframed-moral-authority/hero'
 )
 
 $assetIds = @(Get-OipPropertyNames -Value $manifest.assets | Sort-Object)
@@ -394,9 +409,22 @@ foreach ($assetId in $assetIds) {
 }
 
 Assert-Equal -Actual ([int]($classCounts['medium_import'] ?? 0)) -Expected 112 -Message 'Managed Medium canonical count changed.'
-Assert-Equal -Actual ([int]($classCounts['essay_photo'] ?? 0)) -Expected 13 -Message 'Supplemental essay-photo count changed.'
+Assert-Equal -Actual ([int]($classCounts['essay_photo'] ?? 0)) -Expected (13 + $routinePhotoIds.Count) -Message 'The 13 legacy essay photos plus the explicit Modern Bios portrait set must remain intact.'
+foreach ($photoId in $routinePhotoIds) {
+  if ($assetIds -cnotcontains $photoId) {
+    throw "Missing managed Modern Bios portrait: $photoId"
+  }
+  $photo = $manifest.assets.$photoId
+  Assert-Equal -Actual ([string]$photo.image_class) -Expected 'essay_photo' -Message "Modern Bios portrait must remain a photograph: $photoId"
+  Assert-Equal -Actual ([string]$photo.processing_hint) -Expected 'photo' -Message "Modern Bios portrait must use photographic processing: $photoId"
+  Assert-Equal -Actual ([string]$photo.usage_state) -Expected 'referenced' -Message "Modern Bios portrait must remain in use: $photoId"
+  Assert-Equal -Actual ([string]$photo.processing_state) -Expected 'derivative_capable' -Message "Modern Bios portrait must support bounded derivatives: $photoId"
+  if ([string]$photo.review_state -cne 'approved' -and -not ($AllowPendingReview -and [string]$photo.review_state -ceq 'pending_review')) {
+    throw "Modern Bios portrait must be visually approved before publication: $photoId"
+  }
+}
 $coreIllustrationCount = [int]($classCounts['editorial_cartoon'] ?? 0) + [int]($classCounts['essay_illustration'] ?? 0) + [int]($classCounts['medium_import'] ?? 0)
-Assert-Equal -Actual $coreIllustrationCount -Expected ($focusedCleanupBaselineCoreReviewCount + $routineManagedAssetCount) -Message 'Core responsive-image review cohort changed outside routine managed-art growth.'
+Assert-Equal -Actual $coreIllustrationCount -Expected ($focusedCleanupBaselineCoreReviewCount + $routineManagedAssetCount - $routinePhotoIds.Count) -Message 'Core responsive-image review cohort changed outside routine managed-art growth and explicit portrait additions.'
 Assert-Equal -Actual ([int]($usageCounts['retained_unreferenced'] ?? 0)) -Expected (5 + $intentionallyRetiredManagedAssetIds.Count) -Message 'The explicit retained-but-unreferenced source count changed.'
 Assert-Equal -Actual ([int]($usageCounts['referenced'] ?? 0)) -Expected ($focusedCleanupBaselineReferencedCount + $routineManagedAssetCount - $intentionallyRetiredManagedAssetIds.Count) -Message 'Referenced managed-source count changed outside routine managed-art growth and intentional retirement.'
 foreach ($retiredAssetId in $intentionallyRetiredManagedAssetIds) {
@@ -764,6 +792,52 @@ foreach ($referenceFile in $referenceFiles) {
     if ([regex]::IsMatch($text, $assetPattern, [System.Text.RegularExpressions.RegexOptions]::CultureInvariant)) {
       $logicalReferenceCounts[$assetId]++
     }
+  }
+}
+
+$imageCreditsPath = Join-Path $rootPath 'data/image_credits.json'
+if (-not (Test-Path -LiteralPath $imageCreditsPath -PathType Leaf)) {
+  throw 'Modern Bios portraits require central image credits.'
+}
+$imageCredits = Get-Content -LiteralPath $imageCreditsPath -Raw -Encoding utf8 | ConvertFrom-Json -AsHashtable
+foreach ($portrait in $modernBioPortraits) {
+  $credit = $imageCredits[$portrait.id]
+  if (-not $credit) {
+    throw "Modern Bios portrait is missing its central source/license credit: $($portrait.id)"
+  }
+  foreach ($field in @('author','license','changes')) {
+    if ([string]::IsNullOrWhiteSpace([string]$credit[$field])) {
+      throw "Modern Bios portrait credit needs '$field': $($portrait.id)"
+    }
+  }
+  foreach ($field in @('source_url','license_url')) {
+    $creditUri = $null
+    if (-not [uri]::TryCreate([string]$credit[$field], [System.UriKind]::Absolute, [ref]$creditUri) -or $creditUri.Scheme -cne 'https' -or -not $creditUri.Host) {
+      throw "Modern Bios portrait credit needs a valid HTTPS '$field': $($portrait.id)"
+    }
+  }
+  if ([string]$credit.license -notmatch '(?i)public domain|CC[ -]BY(?:[ -]SA)?[ -]\d|CC0') {
+    throw "Modern Bios portrait credit must identify a reuse license or public-domain status: $($portrait.id)"
+  }
+  $essayRelativePath = 'content/essays/' + $portrait.slug + '.md'
+  $essayPath = Join-Path $rootPath $essayRelativePath
+  $essayText = [string]$referenceTextByPath[$essayPath]
+  $frontMatter = [regex]::Match($essayText, '(?s)\A---\r?\n(?<yaml>.*?)\r?\n---').Groups['yaml'].Value
+  $heroPattern = '(?m)^featured_image:\s*["'']?' + [regex]::Escape($portrait.id) + '["'']?\s*$'
+  if (-not [regex]::IsMatch($frontMatter, $heroPattern)) {
+    throw "Modern Bios essay must select its recorded photographic portrait: $essayRelativePath"
+  }
+  $alt = [regex]::Match($frontMatter, '(?m)^featured_image_alt:\s*(?<value>[^\r\n]+)').Groups['value'].Value
+  $caption = [regex]::Match($frontMatter, '(?m)^featured_image_caption:\s*(?<value>[^\r\n]+)').Groups['value'].Value
+  if ($alt -notmatch [regex]::Escape($portrait.person) -or $alt -match '(?i)abstract|replacement hero|placeholder') {
+    throw "Modern Bios portrait needs descriptive, subject-specific alternative text: $essayRelativePath"
+  }
+  if ([string]::IsNullOrWhiteSpace($caption.Trim('"', "'", ' ')) -or $caption -match '(?i)replacement hero|placeholder') {
+    throw "Modern Bios portrait needs a descriptive caption; attribution lives in its central credit: $essayRelativePath"
+  }
+  $body = [regex]::Replace($essayText, '(?s)\A---\r?\n.*?\r?\n---', '')
+  if ($body.Contains($portrait.id, [System.StringComparison]::Ordinal)) {
+    throw "Modern Bios portrait must not duplicate the article hero in its body: $essayRelativePath"
   }
 }
 

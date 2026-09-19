@@ -1,0 +1,44 @@
+{
+  "essays/modern-bios/charlie-kirk/portrait": {
+    "author": "Gage Skidmore",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Charlie_Kirk_(53808961183).jpg",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "changes": "Resized and format-converted."
+  },
+  "essays/modern-bios/dick-cheney/portrait": {
+    "author": "Karen Ballard / White House",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Dick_Cheney.jpg",
+    "license": "Public domain",
+    "license_url": "https://commons.wikimedia.org/wiki/File:Dick_Cheney.jpg#Licensing",
+    "changes": "Resized and format-converted."
+  },
+  "essays/modern-bios/gene-hackman/portrait": {
+    "author": "Bill Chodubski (serreel)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Gene_hackman.jpg",
+    "license": "Public domain",
+    "license_url": "https://commons.wikimedia.org/wiki/File:Gene_hackman.jpg#Licensing",
+    "changes": "Resized and format-converted."
+  },
+  "essays/modern-bios/george-foreman/portrait": {
+    "author": "Bert Verhoeff / Anefo / Nationaal Archief",
+    "source_url": "https://commons.wikimedia.org/wiki/File:George_Foreman_1973.jpg",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "changes": "Resized and format-converted."
+  },
+  "essays/modern-bios/ozzy-osbourne/portrait": {
+    "author": "Kevin Burkett",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ozzy_Osbourne-2010.jpg",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "changes": "Resized and format-converted."
+  },
+  "essays/modern-bios/pope-francis/portrait": {
+    "author": "Ricardo Stuckert / PR",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Pope_Francis,_June_2024_(cropped).jpg",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "changes": "Crop by Yacàwotçã; resized and format-converted."
+  }
+}

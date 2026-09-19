@@ -7864,6 +7864,27 @@ body.cartoon-lightbox-open{
   border-top:0;
   text-align:right;
 }
+.image-credit{
+  display:block;
+  margin-top:.3rem;
+  color:var(--text-secondary);
+  font-family:var(--font-ui);
+  font-size:.75rem;
+  line-height:1.5;
+  overflow-wrap:anywhere;
+}
+.image-credit a{
+  color:inherit;
+  text-decoration:underline;
+  text-underline-offset:.15em;
+}
+.image-credit a:hover{
+  color:var(--text-primary);
+}
+.image-credit a:focus-visible{
+  outline:2px solid var(--focus-ring);
+  outline-offset:3px;
+}
 .piece-body figure{
   width:100%;
   max-width:100%;
@@ -8767,6 +8788,10 @@ html[data-theme="light"] .collection-section[data-collection-identity]{
   min-width:0;
 }
 .essay-cartoon-thumb-wrap--collection-artwork .essay-cartoon-thumb{
+  display:block;
+}
+.essay-cartoon-thumb-wrap--collection-artwork .essay-cartoon-thumb-media{
+  position:relative;
   display:block;
 }
 .essay-cartoon-thumb-wrap--collection-artwork .essay-cartoon-thumb img{

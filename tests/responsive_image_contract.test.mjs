@@ -23,8 +23,23 @@ test("responsive image manifest keeps the frozen baseline and processing default
   const focusedCleanupBaselineAliasCount = 500;
   const focusedCleanupBaselineCoreReviewCount = 446;
   const focusedCleanupBaselineReferencedCount = 454;
+  const modernBioPortraits = [
+    { id: "essays/modern-bios/charlie-kirk/portrait", slug: "charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation", person: "Charlie Kirk" },
+    { id: "essays/modern-bios/dick-cheney/portrait", slug: "dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center", person: "Dick Cheney" },
+    { id: "essays/modern-bios/gene-hackman/portrait", slug: "gene-hackman-how-a-reluctant-star-became-the-actor-everyone-believed", person: "Gene Hackman" },
+    { id: "essays/modern-bios/george-foreman/portrait", slug: "george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill", person: "George Foreman" },
+    { id: "essays/modern-bios/ozzy-osbourne/portrait", slug: "ozzy-osbourne-how-heavy-metals-most-unruly-star-became-a-cultural-fixture", person: "Ozzy Osbourne" },
+    { id: "essays/modern-bios/pope-francis/portrait", slug: "pope-francis-how-a-plainspoken-pope-reframed-moral-authority", person: "Pope Francis" },
+  ];
+  const routinePhotoIds = modernBioPortraits.map(({ id }) => id);
   const intentionallyRetiredManagedAssetIds = [
     "essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts",
+    "essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/hero",
+    "essays/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center/hero",
+    "essays/gene-hackman-how-a-reluctant-star-became-the-actor-everyone-believed/hero",
+    "essays/george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill/hero",
+    "essays/ozzy-osbourne-how-heavy-metals-most-unruly-star-became-a-cultural-fixture/hero",
+    "essays/pope-francis-how-a-plainspoken-pope-reframed-moral-authority/hero",
   ];
 
   const entries = Object.entries(manifest.assets);
@@ -39,13 +54,13 @@ test("responsive image manifest keeps the frozen baseline and processing default
   );
   assert.equal(
     entries.filter(([, asset]) => asset.image_class === "essay_photo").length,
-    13,
+    13 + routinePhotoIds.length,
   );
   assert.equal(
     entries.filter(([, asset]) =>
       ["editorial_cartoon", "essay_illustration", "medium_import"].includes(asset.image_class),
     ).length,
-    focusedCleanupBaselineCoreReviewCount + routineManagedAssetCount,
+    focusedCleanupBaselineCoreReviewCount + routineManagedAssetCount - routinePhotoIds.length,
   );
   assert.equal(
     entries.filter(([, asset]) => asset.usage_state === "retained_unreferenced").length,
@@ -59,6 +74,37 @@ test("responsive image manifest keeps the frozen baseline and processing default
   );
   for (const id of intentionallyRetiredManagedAssetIds) {
     assert.equal(manifest.assets[id].usage_state, "retained_unreferenced");
+  }
+  const imageCredits = JSON.parse(read("data/image_credits.json"));
+  for (const { id, slug, person } of modernBioPortraits) {
+    const photo = manifest.assets[id];
+    assert.ok(photo, `missing Modern Bios portrait: ${id}`);
+    assert.equal(photo.image_class, "essay_photo");
+    assert.equal(photo.processing_hint, "photo");
+    assert.equal(photo.processing_state, "derivative_capable");
+    assert.equal(photo.usage_state, "referenced");
+    assert.equal(photo.review_state, "approved");
+    const credit = imageCredits[id];
+    assert.ok(credit, `missing source/license credit: ${id}`);
+    for (const field of ["author", "license", "changes"]) {
+      assert.ok(typeof credit[field] === "string" && credit[field].trim(), `missing ${field} credit: ${id}`);
+    }
+    for (const field of ["source_url", "license_url"]) {
+      const url = new URL(credit[field]);
+      assert.equal(url.protocol, "https:");
+      assert.ok(url.hostname);
+    }
+    assert.match(credit.license, /public domain|CC[ -]BY(?:[ -]SA)?[ -]\d|CC0/i);
+    const essay = read(`content/essays/${slug}.md`);
+    const frontMatter = essay.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? "";
+    assert.match(frontMatter, new RegExp(`^featured_image:\\s*["']?${id}["']?\\s*$`, "m"));
+    const alt = frontMatter.match(/^featured_image_alt:\s*([^\r\n]+)/m)?.[1] ?? "";
+    const caption = frontMatter.match(/^featured_image_caption:\s*([^\r\n]+)/m)?.[1] ?? "";
+    assert.ok(alt.includes(person), `portrait alt must identify its subject: ${slug}`);
+    assert.doesNotMatch(alt, /abstract|replacement hero|placeholder/i);
+    assert.ok(caption.replace(/^["' ]+|["' ]+$/g, ""));
+    assert.doesNotMatch(caption, /replacement hero|placeholder/i);
+    assert.equal(essay.replace(/^---\r?\n[\s\S]*?\r?\n---/, "").includes(id), false, `duplicate body portrait: ${slug}`);
   }
   const sourceOnlyEntries = entries.filter(
     ([, asset]) => asset.processing_state === "source_only_unprocessable",

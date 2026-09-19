@@ -1,7 +1,7 @@
 ---
-featured_image: "essays/george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill/hero"
-featured_image_alt: "Abstract archival portrait-style hero image for George Foreman: How a Heavyweight Champion Turned Reinvention into His Greatest Skill."
-featured_image_caption: "Replacement hero image for the legacy web edition."
+featured_image: "essays/modern-bios/george-foreman/portrait"
+featured_image_alt: "George Foreman in a leather coat at Amsterdam Airport Schiphol, in a black-and-white photograph."
+featured_image_caption: "George Foreman arriving at Amsterdam Airport Schiphol, March 1973."
 title: "George Foreman: How a Heavyweight Champion Turned Reinvention into His Greatest Skill"
 date: 2026-03-31
 draft: false

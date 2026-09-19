@@ -237,6 +237,35 @@ test("collection artwork falls back to an article's own image without inventing 
   assert.doesNotMatch(artwork, /"slug"|data-gallery|hugo\.Data\.editorial_cartoons|Params\.images/);
 });
 
+test("registered photo credits are linked below expanded artwork and share the article caption", () => {
+  const credit = read("layouts/partials/images/credit.html");
+  const mediaPlate = read("layouts/partials/article/media-plate.html");
+  const cartoonLink = read("layouts/partials/editorial/cartoon-gallery-link.html");
+  for (const snippet of [
+    '$credits := hugo.Data.image_credits | default dict',
+    'with index $credits (.id | default "")',
+    '<span class="image-credit">Photo:',
+    '<a href="{{ .source_url }}">{{ .author }}</a>',
+    '<a href="{{ .license_url }}">{{ .license }}</a>',
+    'with .changes'
+  ]) {
+    assert.ok(credit.includes(snippet), snippet);
+  }
+  assert.doesNotMatch(credit, /data-analytics-|data-.*lightbox|<script/);
+  assert.ok(mediaPlate.includes('partial "images/credit.html" .model'));
+  assert.equal((mediaPlate.match(/<figcaption>/g) || []).length, 1);
+  assert.ok(mediaPlate.includes('{{ if or .caption $credit }}<figcaption>{{ with .caption }}{{ . }}{{ end }}{{ $credit }}</figcaption>{{ end }}'));
+  assert.ok(mediaPlate.includes('data-caption="{{ .caption }}"'));
+  assert.ok(cartoonLink.includes('if $collectionArtwork }}{{ $credit = partial "images/credit.html" $imageModel }}'));
+  assert.ok(cartoonLink.includes('{{ if $credit }}<span class="essay-cartoon-thumb-media">{{ end }}'));
+  assert.ok(cartoonLink.indexOf('class="essay-cartoon-thumb-media"') < cartoonLink.indexOf('<a class="essay-cartoon-thumb'));
+  assert.match(cartoonLink, /<\/button>\s*{{ if \$credit }}<\/span>{{ \$credit }}{{ end }}/);
+  assert.match(css, /\.essay-cartoon-thumb-wrap--collection-artwork \.essay-cartoon-thumb-media\s*\{[^}]*position:relative;[^}]*display:block;/);
+  assert.match(css, /\.image-credit\s*\{[^}]*overflow-wrap:anywhere;/);
+  assert.match(css, /\.image-credit a\s*\{[^}]*text-decoration:underline;/);
+  assert.match(css, /\.image-credit a:focus-visible\s*\{[^}]*outline:2px solid var\(--focus-ring\);/);
+});
+
 test("collections index renders a ruled broadsheet directory", () => {
   for (const snippet of [
     '{{ len $entries }} public collections &middot; {{ $totalPieces }} published pieces',

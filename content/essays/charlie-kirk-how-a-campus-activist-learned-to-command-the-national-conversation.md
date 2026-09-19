@@ -1,7 +1,7 @@
 ---
-featured_image: "essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/hero"
-featured_image_alt: "Abstract archival portrait-style hero image for Charlie Kirk: How a Campus Activist Learned to Command the National Conversation."
-featured_image_caption: "Replacement hero image for the legacy web edition."
+featured_image: "essays/modern-bios/charlie-kirk/portrait"
+featured_image_alt: "Charlie Kirk in a navy suit and red tie before a convention backdrop."
+featured_image_caption: "Charlie Kirk at The People's Convention in Detroit, June 2024."
 title: "Charlie Kirk: How a Campus Activist Learned to Command the National Conversation"
 date: 2026-03-31
 draft: false

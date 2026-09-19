@@ -17,7 +17,10 @@
   ) -}}
   {{- $imageAlt := "" -}}
   {{- if $collectionArtwork }}{{ $imageAlt = .alt }}{{ end -}}
+  {{- $credit := "" -}}
+  {{- if $collectionArtwork }}{{ $credit = partial "images/credit.html" $imageModel }}{{ end -}}
   <span class="essay-cartoon-thumb-wrap{{ if $collectionArtwork }} essay-cartoon-thumb-wrap--collection-artwork{{ end }}">
+  {{ if $credit }}<span class="essay-cartoon-thumb-media">{{ end }}
   <a class="essay-cartoon-thumb{{ with $class }} {{ . }}{{ end }}" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}"
     {{- if and $collectionArtwork $analyticsSourceSlot }}
       data-analytics-event="{{ $analyticsEvent }}"
@@ -63,5 +66,6 @@
       <span aria-hidden="true">⌕</span>
     {{ end }}
   </button>
+  {{ if $credit }}</span>{{ $credit }}{{ end }}
   </span>
 {{- end -}}

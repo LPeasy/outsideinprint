@@ -1,5 +1,6 @@
 {{ $sizes := "(max-width: 768px) min(306px, calc(100vw - 50px)), (min-width: 72rem) 30rem, (min-width: 48rem) 42vw, 100vw" }}
 {{ if .imageLed }}{{ $sizes = "(min-width: 55rem) 52rem, calc(100vw - 3rem)" }}{{ end }}
+{{ $credit := partial "images/credit.html" .model }}
 <figure class="{{ delimit .classes " " }}">
   <button
     type="button"
@@ -22,5 +23,5 @@
       "lightbox" true
     ) }}
   </button>
-  {{ with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+  {{ if or .caption $credit }}<figcaption>{{ with .caption }}{{ . }}{{ end }}{{ $credit }}</figcaption>{{ end }}
 </figure>
