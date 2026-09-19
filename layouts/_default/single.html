@@ -170,20 +170,19 @@
     <div class="piece-body">
       {{ $articleBody }}
     </div>
-    {{ if and (in (slice "essays" "reports" "working-papers") .Section) (ge .ReadingTime 8) (not .Params.studio_sample) }}
-      <template data-article-inline-signup>
-        {{ partial "newsletter_signup.html" (dict
-          "page" .
-          "class" "newsletter-signup--article-inline"
-          "sourceSlot" "article_inline_newsletter"
-        ) }}
-      </template>
-      {{ with resources.Get "js/article-inline-signup.js" | minify | fingerprint "sha384" }}
-        <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
-      {{ end }}
-    {{ end }}
-
     <div class="piece-aftermatter">
+      {{ if and (in (slice "essays" "reports" "working-papers") .Section) (ge .ReadingTime 8) (not .Params.studio_sample) }}
+        <template data-article-inline-signup>
+          {{ partial "newsletter_signup.html" (dict
+            "page" .
+            "class" "newsletter-signup--article-inline"
+            "sourceSlot" "article_inline_newsletter"
+          ) }}
+        </template>
+        {{ with resources.Get "js/article-inline-signup.js" | minify | fingerprint "sha384" }}
+          <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+        {{ end }}
+      {{ end }}
       {{ if $isStandardReadingPage }}
         {{ partial "collections/reading-path.html" . }}
       {{ end }}
