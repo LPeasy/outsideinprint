@@ -290,7 +290,7 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.doesNotMatch(cssRule(css, 'html[data-theme="light"] body'), /radial-gradient/);
 });
 
-test("homepage nav-to-support spacing stays compact without shrinking the support target", () => {
+test("homepage nav-to-stats spacing stays compact", () => {
   assert.match(cssRule(css, ".masthead.masthead--full"), /margin-bottom:6px;/);
   assert.match(cssRule(css, ".masthead--full .nav--section-rail"), /margin-bottom:6px;/);
   const fullNavMargins = [...css.matchAll(/(?:^|\n)\s*\.masthead--full \.nav--section-rail\s*\{([^}]*)\}/g)]
@@ -298,7 +298,7 @@ test("homepage nav-to-support spacing stays compact without shrinking the suppor
   assert.equal(fullNavMargins.length, 2, "desktop and mobile own the homepage navigation gap");
   for (const rules of fullNavMargins) assert.match(rules, /margin-bottom:6px;/);
   assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--full \.nav--section-rail\{\s*margin-bottom:6px;/);
-  assert.match(cssRule(css, ".home-v2__support a"), /min-height:44px;/);
+  assert.doesNotMatch(css, /\.home-v2__support/);
 });
 
 test("Jack Stratton modern bio preserves the complete localized visual sequence", () => {
@@ -687,7 +687,10 @@ test("homepage composition puts reading before newsletter and contribution", () 
   assert.match(homeFrontPage, /partial "home_v2_front_page\.html"/);
   assert.match(homeV2FrontPage, /id="home-front-page-title"/);
   assert.equal((homeV2FrontPage.match(/<h1\b/g) || []).length, 1);
-  assert.match(homeV2FrontPage, /partial "home_reader_banner\.html"/);
+  assert.match(masthead, /\{\{ if \$isHomeMasthead \}\}\{\{ partial "home_reader_banner\.html" \. \}\}\{\{ end \}\}/);
+  assert.ok(masthead.indexOf('data-paper-route-launch') < masthead.indexOf('partial "home_reader_banner.html"'));
+  assert.ok(masthead.indexOf('partial "home_reader_banner.html"') < masthead.indexOf('data-theme-toggle'));
+  assert.doesNotMatch(homeV2FrontPage, /partial "home_reader_banner\.html"/);
   assert.match(homeV2FrontPage, /A note to the reader/);
   const welcomeCopyParagraphs = Array.from(homeV2FrontPage.matchAll(/<p class="home-front-page__welcome-copy">([\s\S]*?)<\/p>/g));
   assert.equal(welcomeCopyParagraphs.length, 1);
@@ -705,7 +708,6 @@ test("homepage composition puts reading before newsletter and contribution", () 
   assert.doesNotMatch(homepage, /home_bookstore_spotlight|home_selected_collections|home_2045_launch|newsletter_signup/);
 
   const compositionOrder = [
-    'partial "home_reader_banner.html"',
     'class="home-front-page__orientation"',
     'class="home-v2-featured',
     'class="home-v2-library',
@@ -1067,9 +1069,11 @@ test("homepage editorial layout keeps the reader note compact and drops retired 
   assert.doesNotMatch(css, /\.home-manifesto(?:__[a-z-]+)?\s*\{/);
   assert.match(cssRule(css, ".home-reader-banner"), /border-top:4px double var\(--oip-rule-engraved-strong\);/);
   assert.match(cssRule(css, ".home-reader-banner.page-shell--wide"), /max-width:70rem;/);
+  assert.match(cssRule(css, ".masthead-proof"), /flex:1 1 auto;[\s\S]*max-width:42rem;/);
+  assert.doesNotMatch(css, /\.home-reader-banner\.home-reader-banner--proof/);
   assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-library\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
   assert.match(cssRule(css, ".home-reader-banner__proof"), /grid-template-columns:repeat\(3, minmax\(0, 1fr\)\);/);
-  assert.match(cssRule(css, ".home-reader-banner__proof-item"), /padding:\.5rem \.75rem \.48rem;/);
+  assert.match(cssRule(css, ".home-reader-banner__proof-item"), /min-height:34px;[\s\S]*padding:0 \.35rem;/);
   assert.match(cssRule(css, ".home-reader-banner__signup"), /gap:\.75rem 1\.4rem;[\s\S]*padding:\.72rem \.9rem \.78rem;/);
   assert.match(cssRule(css, ".home-reader-banner__form"), /grid-template-columns:minmax\(0, 1fr\) auto;/);
   assert.match(cssRule(css, ".home-reader-banner__controls button"), /min-height:2\.75rem;/);

@@ -25,6 +25,7 @@ banner:
   audience:
     value: 10000
     display_label: "10,000+"
+    compact_label: "10k+"
     unit_label: "Readers"
     source: "Owner-supplied homepage audience claim"
     metric_definition: "Inherited audience claim; the aggregation basis, covered platforms, overlap, and unique-reader definition have not been verified."

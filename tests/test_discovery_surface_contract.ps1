@@ -164,7 +164,8 @@ foreach ($requiredSnippet in @(
   'class="home-v2-featured__item-media" href="{{ $page.RelPermalink }}"',
   'class="home-v2-featured__item-copy"',
   '"loading" "lazy"',
-  '"sizes" "120px"',
+  '$supportImageSizes := "120px"',
+  '"sizes" $supportImageSizes',
   'partial "home_featured_image_button.html"',
   'partial "home_featured_image_dialog.html"',
   'resources.Get "js/home-featured-image.js" | minify | fingerprint "sha384"'
@@ -172,6 +173,11 @@ foreach ($requiredSnippet in @(
   if (-not $homeV2Template.Contains($requiredSnippet, [System.StringComparison]::Ordinal)) {
     throw "Expected homepage supporting illustrations and labels to contain: $requiredSnippet"
   }
+}
+if ($homeV2Template -notmatch '(?s)if eq \$index 1.*?\$supportImageSizes = "\(min-width: 72rem\) 24rem, \(min-width: 48rem\) 38vw, 100vw"' -or
+    $homeV2Template -notmatch 'home-v2-featured__item--latest' -or
+    $homeV2Template -notmatch '<span class="home-v2-featured__new-tag">New!</span>') {
+  throw 'Expected the latest supporting card to receive wide responsive artwork and its New! label.'
 }
 $dolphinSource = Get-Content -Path (Join-Path $repoRoot 'content/essays/the-dolphin-company.md') -Raw -Encoding utf8
 if ($dolphinSource -notmatch '(?m)^section_label: "Essay"\r?$') {
@@ -186,6 +192,9 @@ foreach ($tag in @('button', 'a')) {
   if ($mobileArtwork -match 'partial "images/picture\.html"|<img\b') {
     throw 'Expected a separate zoom control without a duplicate illustration.'
   }
+  if ($mobileArtwork -notmatch '<svg\b[^>]*aria-hidden="true"[^>]*>\s*<circle\b[^>]*>\s*</circle>\s*<path\b[^>]*>\s*</path>\s*</svg>') {
+    throw 'Expected the zoom control to use the shared decorative SVG magnifier.'
+  }
 }
 $mobileArtworkIndex = $homeV2Template.IndexOf('partial "home_featured_image_button.html"', [System.StringComparison]::Ordinal)
 if ($mobileArtworkIndex -le $homeV2Template.IndexOf('class="home-v2-featured__item-media"', [System.StringComparison]::Ordinal) -or
@@ -198,13 +207,18 @@ if ($homeImageDialog -notmatch '<dialog id="home-featured-image-dialog"[^>]*aria
   throw 'Expected one labelled native image dialog with an image click-to-close control.'
 }
 if ($mainCss -notmatch '(?s)\.home-v2-featured__image-toggle\{[^}]*display:grid;' -or
+    $mainCss -notmatch '(?s)\.home-v2-featured__image-toggle::before\{[^}]*background:rgba\(247,238,216,\.92\);' -or
+    $mainCss -notmatch '(?s)\.home-v2-featured__item--latest\.home-v2-featured__item--illustrated\{[^}]*display:block;' -or
+    $mainCss -notmatch '(?s)\.home-v2-featured__item--latest \.home-v2-featured__item-media img\{[^}]*object-fit:contain;' -or
     $mainCss -notmatch '(?s)@media \(max-width:768px\).*?\.home-v2-featured__item--illustrated\{[^}]*grid-template-columns:minmax\(0, 6rem\) minmax\(0, 1fr\);' -or
     $mainCss -notmatch '(?s)@media \(max-width:768px\).*?\.home-v2-featured__item-media\{[^}]*display:block;') {
-  throw 'Expected article-linked supporting artwork beside the copy on both desktop and mobile.'
+  throw 'Expected linked supporting artwork, a wide latest card, and a pale zoom icon across desktop and mobile.'
 }
 foreach ($requiredSnippet in @(
-  '<section class="home-reader-banner page-shell page-shell--wide" aria-label="Outside In Print at a glance">',
+  '<section class="masthead-proof" aria-label="Outside In Print at a glance">',
   'hugo.Data.homepage_metrics',
+  'class="home-reader-banner__proof-item home-reader-banner__proof-item--audience"',
+  '<strong class="home-reader-banner__audience-short" aria-hidden="true">{{ $metrics.audience.compact_label }}</strong>',
   '<a class="home-reader-banner__proof-item home-reader-banner__newsletter-link" href="#home-reader-banner-title">',
   '<strong>Weekly</strong>',
   '<span>Newsletter</span>'
@@ -215,6 +229,10 @@ foreach ($requiredSnippet in @(
 }
 if ($homeReaderBanner -match '<form\b|home-reader-banner__signup|home-reader-email|homepage_reader_banner') {
   throw 'Expected the homepage stats banner to contain no signup form, email field, or signup analytics.'
+}
+$homepageMetrics = Get-Content -Path (Join-Path $repoRoot 'data/homepage_metrics.yaml') -Raw -Encoding utf8
+if ($homepageMetrics -notmatch '(?m)^    compact_label: "10k\+"\r?$') {
+  throw 'Expected the narrow-screen audience alias to come from homepage metrics data.'
 }
 foreach ($requiredSnippet in @(
   '<section class="home-reader-banner home-reader-newsletter page-shell page-shell--wide" aria-labelledby="home-reader-banner-title">',
@@ -247,21 +265,20 @@ foreach ($singlePattern in @('<form\b', 'id="home-reader-banner-title"', 'id="ho
 if ($homeReaderNewsletter -match 'home-reader-banner__proof') {
   throw 'Expected the separate homepage newsletter partial to omit the opening proof strip.'
 }
-foreach ($partial in @('home_reader_banner.html', 'home_reader_newsletter.html')) {
-  if ([regex]::Matches($homeV2Template, [regex]::Escape('partial "' + $partial + '"')).Count -ne 1) {
-    throw "Expected exactly one homepage invocation of $partial."
-  }
+if ($homeV2Template -match [regex]::Escape('partial "home_reader_banner.html"')) {
+  throw 'Expected the stats strip in the homepage masthead, not the homepage body.'
+}
+if ([regex]::Matches($homeV2Template, [regex]::Escape('partial "home_reader_newsletter.html"')).Count -ne 1) {
+  throw 'Expected exactly one homepage newsletter invocation.'
 }
 if ($homeV2Template -match '<form\b') {
   throw 'Expected the homepage newsletter form to remain owned by its single signup partial.'
 }
-$homeSupportLabel = 'Support Independent Media'
-if ([regex]::Matches(($homeV2Template + $homeReaderBanner + $homeReaderNewsletter), [regex]::Escape($homeSupportLabel)).Count -ne 1 -or
-    -not $homeV2Template.Contains('<p class="home-v2__support page-shell page-shell--wide"><a href="{{ "support/" | relURL }}">Support Independent Media</a></p>', [System.StringComparison]::Ordinal)) {
-  throw 'Expected one native Support Independent Media link to support/ in the homepage introduction.'
+if (($homeV2Template + $homeReaderBanner + $homeReaderNewsletter) -match 'home-v2__support|Support Independent Media') {
+  throw 'Expected the homepage introduction to omit the Support Independent Media link.'
 }
 if ($homeV2Template -match 'home-v2__subjects|Independent writing on history, economics, culture, and public life\.') {
-  throw 'Expected the homepage support link to replace the former homepage subject sentence.'
+  throw 'Expected the homepage introduction to omit the former subject sentence.'
 }
 $homeLeadSummary = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_lead_summary.html') -Raw -Encoding utf8
 if ($homeLeadSummary -notmatch '(?s)strings\.TrimSpace.*?\.Params\.description.*?plainify' -or
@@ -272,7 +289,6 @@ if ($homeLeadSummary -notmatch '(?s)strings\.TrimSpace.*?\.Params\.description.*
 }
 foreach ($requiredSnippet in @(
   '<h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>',
-  'partial "home_reader_banner.html"',
   'A note to the reader',
   '<h2 id="home-v2-featured-title">Featured Articles</h2>',
   'homepage_v2_featured_lead',
@@ -337,8 +353,6 @@ if ($homeV2Template -match 'Medium reads') {
 }
 
 $homepageOrder = @(
-  'class="home-v2__support ',
-  'partial "home_reader_banner.html"',
   'class="home-front-page__orientation"',
   'class="home-v2-featured',
   'class="home-v2-library ',
@@ -474,6 +488,7 @@ foreach ($llmsDocument in @($llms, $llmsFull)) {
 
 $homeReaderBannerCssChecks = @(
   '.home-reader-banner__proof{',
+  '.masthead-proof{',
   '.home-v2-featured__grid{',
   '.home-v2-library.home-v2-next__links{',
   '.home-v2-next{',
@@ -487,29 +502,40 @@ foreach ($selector in $homeReaderBannerCssChecks) {
 
 $homeReaderBannerWideOverrideCss = [regex]::Match($mainCss, '(?s)\.home-reader-banner\.page-shell--wide\{(?<rules>.*?)\}')
 if (-not $homeReaderBannerWideOverrideCss.Success -or $homeReaderBannerWideOverrideCss.Groups['rules'].Value -notmatch [regex]::Escape('max-width:70rem;')) {
-  throw 'Expected the home-reader-banner page-shell--wide override to align the separate stats and newsletter regions at 70rem.'
+  throw 'Expected the newsletter banner to retain the 70rem homepage body measure.'
 }
-$homeSupportCss = [regex]::Match($mainCss, '(?s)\.home-v2__support\.page-shell--wide\{(?<rules>.*?)\}').Groups['rules'].Value
-foreach ($rule in @('max-width:70rem;', 'font-size:1rem;', 'line-height:1.4;', 'text-align:center;')) {
-  if (-not $homeSupportCss.Contains($rule, [System.StringComparison]::Ordinal)) {
-    throw "Expected the homepage support link to preserve its centered compact wide-shell type rule: $rule"
-  }
+$homeProofCss = [regex]::Match($mainCss, '(?s)\.masthead-proof\{(?<rules>.*?)\}')
+if (-not $homeProofCss.Success -or
+    $homeProofCss.Groups['rules'].Value -notmatch [regex]::Escape('flex:1 1 auto;') -or
+    $homeProofCss.Groups['rules'].Value -notmatch [regex]::Escape('max-width:42rem;') -or
+    $homeProofCss.Groups['rules'].Value -match 'border|background|box-shadow') {
+  throw 'Expected the homepage proof to flex between masthead controls without banner decoration.'
 }
-if ($mainCss -notmatch '(?s)\.home-v2__support a\{[^}]*min-height:44px;' -or
-    $mainCss -notmatch '(?s)\.home-v2__support a:focus-visible[^{}]*\{[^}]*outline:3px solid var\(--focus-ring\);') {
-  throw 'Expected the homepage support link to have a 44px target and visible keyboard focus.'
+if ($mainCss -notmatch '(?s)@media \(max-width:400px\)\{.*?\.masthead-proof \.home-reader-banner__proof\{[^}]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\);[^}]*grid-template-rows:repeat\(2, 22px\);' -or
+    $mainCss -notmatch '(?s)@media \(max-width:400px\)\{.*?\.masthead-proof \.home-reader-banner__newsletter-link\{[^}]*grid-column:2;[^}]*grid-row:1 / -1;[^}]*min-height:44px;' -or
+    $mainCss -notmatch '(?s)@media \(max-width:400px\)\{.*?\.masthead-proof \.home-reader-banner__audience-short\{[^}]*display:block;') {
+  throw 'Expected two compact metric rows beside a full-height newsletter link at 400px and below.'
 }
-if ($mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link\{[^}]*min-height:44px;' -or
+if ($mainCss -match '\.home-v2__support') {
+  throw 'Expected retired homepage support-link CSS to be absent.'
+}
+if ($mainCss -notmatch '(?s)\.home-reader-banner__proof-item\{[^}]*min-height:34px;' -or
+    $mainCss -notmatch '(?s)\.home-reader-banner__proof-item strong\{[^}]*font-size:clamp\(1\.08rem, 1\.65vw, 1\.25rem\);' -or
+    $mainCss -notmatch '(?s)\.home-reader-banner__proof-item span\{[^}]*font-size:\.71875rem;') {
+  throw 'Expected a squat 34px homepage proof strip with smaller, readable figures and labels.'
+}
+if ($mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link\{[^}]*position:relative;[^}]*min-height:34px;' -or
+    $mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link::before\{[^}]*position:absolute;[^}]*inset:-5px 0;' -or
     $mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link span\{[^}]*text-decoration:underline;' -or
     $mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link:focus-visible[^{}]*\{[^}]*outline:3px solid var\(--focus-ring\);' -or
     $mainCss -notmatch '(?s)\.home-v2-featured\{[^}]*margin-top:1\.25rem;' -or
     $mainCss -notmatch '(?s)@media \(max-width:520px\).*?\.home-v2-featured\{[^}]*margin-top:1rem;') {
-  throw 'Expected an underlined, keyboard-visible 44px newsletter link and the approved compact Featured Articles spacing.'
+  throw 'Expected an underlined, keyboard-visible newsletter link with a 44px tap target and compact Featured Articles spacing.'
 }
 
 $homeV2ContentWidthCss = [regex]::Match($mainCss, '(?s)\.home-v2-featured\.page-shell--wide,\s*\.home-v2-library\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{(?<rules>.*?)\}')
 if (-not $homeV2ContentWidthCss.Success -or $homeV2ContentWidthCss.Groups['rules'].Value -notmatch [regex]::Escape('max-width:70rem;')) {
-  throw 'Expected Featured Articles, library navigation, and contribution to share the stats, newsletter, and reader-note 70rem width.'
+  throw 'Expected Featured Articles, library navigation, and contribution to share the newsletter and reader-note 70rem width.'
 }
 
 $homeContributionCss = [regex]::Match($mainCss, '(?s)\.home-v2-next\{(?<rules>.*?)\}')
@@ -876,6 +902,9 @@ if ($mainCss -notmatch '(?s)\.home-v2-featured__grid\{[^}]*grid-template-columns
 }
 if ($mainCss -notmatch '(?s)@media \(max-width:900px\)\{.*?\.home-v2-featured__grid\{[^}]*grid-template-columns:1fr;') {
   throw 'Expected the featured-reading grid to collapse at 900px.'
+}
+if ($mainCss -notmatch '(?s)@media \(max-width:900px\)\{.*?\.home-v2-featured__header\{[^}]*grid-template-columns:1fr;[^}]*gap:\.55rem;') {
+  throw 'Expected the featured-reading header to stack at 900px with the grid.'
 }
 if ($mainCss -notmatch '(?s)@media \(max-width:520px\)\{.*?\.home-v2-featured__supporting\{\s*display:block;') {
   throw 'Expected supporting featured stories to stack at 520px.'
@@ -1498,6 +1527,10 @@ foreach ($requiredSnippet in @(
 }
 
 $mastheadPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/masthead.html') -Raw
+if ([regex]::Matches($mastheadPartial, [regex]::Escape('partial "home_reader_banner.html"')).Count -ne 1 -or
+    $mastheadPartial -notmatch '(?s)<div class="masthead-controls">.*?class="paper-route-toggle masthead-paper-route-toggle".*?\{\{ if \$isHomeMasthead \}\}\{\{ partial "home_reader_banner\.html" \. \}\}\{\{ end \}\}.*?class="theme-toggle masthead-theme-toggle"') {
+  throw 'Expected one homepage-only proof group between Paper Bob and the theme toggle inside the masthead controls.'
+}
 if ($mastheadPartial -match '<h1 class="title">') {
   throw 'Expected the editorial masthead brand to remain non-heading markup so homepage heading ownership stays in layouts/partials/home_front_page.html.'
 }

@@ -72,9 +72,13 @@
     {{ $plateImageWidth = $plateImageModel.lightbox_width }}
     {{ $plateImageHeight = $plateImageModel.lightbox_height }}
   {{ end }}
+  {{ $isImageLed := and .Params.image_led (eq $plateKind "hero") $plateImageModel }}
   {{ $headerClasses := slice "piece-header" "piece-header--calm" }}
   {{ if $plateImage }}
     {{ $headerClasses = $headerClasses | append "piece-header--side-plate" }}
+    {{ if $isImageLed }}
+      {{ $headerClasses = $headerClasses | append "piece-header--image-led" }}
+    {{ end }}
   {{ else }}
     {{ $headerClasses = $headerClasses | append "piece-header--text-only" }}
   {{ end }}
@@ -93,6 +97,9 @@
       <div class="piece-fleuron" aria-hidden="true"></div>
 
       <div class="piece-header-composition">
+        {{ if $isImageLed }}
+          {{ partial "article/media-plate.html" (dict "page" . "classes" $plateClasses "model" $plateImageModel "alt" $plateImageAlt "caption" $plateImageCaption "width" $plateImageWidth "height" $plateImageHeight "imageLed" $isImageLed) }}
+        {{ end }}
         <div class="piece-title-block">
           <h1>{{ .Title }}</h1>
           {{ partial "authors/byline.html" (dict "page" . "author" $meta.author) }}
@@ -103,31 +110,8 @@
           {{ end }}
         </div>
 
-        {{ if $plateImage }}
-          <figure class="{{ delimit $plateClasses " " }}">
-            <button
-              type="button"
-              class="piece-media-plate__trigger"
-              data-article-plate-lightbox-trigger
-              data-title="{{ .Title }}"
-              data-caption="{{ $plateImageCaption }}"
-              data-image="{{ $plateImageModel.lightbox_url }}"
-              data-alt="{{ $plateImageAlt }}"
-              {{ if gt $plateImageWidth 0 }}data-width="{{ $plateImageWidth }}"{{ end }}
-              {{ if gt $plateImageHeight 0 }}data-height="{{ $plateImageHeight }}"{{ end }}
-              aria-label="Open image fullscreen: {{ .Title }}"
-            >
-              {{ partial "images/picture.html" (dict
-                "model" $plateImageModel
-                "alt" $plateImageAlt
-                "loading" "eager"
-                "fetchpriority" "high"
-                "sizes" "(max-width: 768px) min(306px, calc(100vw - 50px)), (min-width: 72rem) 30rem, (min-width: 48rem) 42vw, 100vw"
-                "lightbox" true
-              ) }}
-            </button>
-            {{ with $plateImageCaption }}<figcaption>{{ . }}</figcaption>{{ end }}
-          </figure>
+        {{ if and $plateImage (not $isImageLed) }}
+          {{ partial "article/media-plate.html" (dict "page" . "classes" $plateClasses "model" $plateImageModel "alt" $plateImageAlt "caption" $plateImageCaption "width" $plateImageWidth "height" $plateImageHeight "imageLed" $isImageLed) }}
         {{ end }}
       </div>
 

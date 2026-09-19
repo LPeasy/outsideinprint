@@ -5,6 +5,7 @@ import path from "node:path";
 
 const homeFrontPage = fs.readFileSync(path.resolve("layouts/partials/home_front_page.html"), "utf8");
 const homeV2FrontPage = fs.readFileSync(path.resolve("layouts/partials/home_v2_front_page.html"), "utf8");
+const masthead = fs.readFileSync(path.resolve("layouts/partials/masthead.html"), "utf8");
 const homeReaderBanner = fs.readFileSync(path.resolve("layouts/partials/home_reader_banner.html"), "utf8");
 const homeReaderNewsletter = fs.readFileSync(path.resolve("layouts/partials/home_reader_newsletter.html"), "utf8");
 const aboutSingle = fs.readFileSync(path.resolve("layouts/about/single.html"), "utf8");
@@ -22,6 +23,7 @@ const libraryList = fs.readFileSync(path.resolve("layouts/library/list.html"), "
 const collectionSingle = fs.readFileSync(path.resolve("layouts/collections/single.html"), "utf8");
 const collectionMembership = fs.readFileSync(path.resolve("layouts/partials/collections/page-membership-block.html"), "utf8");
 const articleSingle = fs.readFileSync(path.resolve("layouts/_default/single.html"), "utf8");
+const articleMediaPlate = fs.readFileSync(path.resolve("layouts/partials/article/media-plate.html"), "utf8");
 const articlePlateLightbox = fs.readFileSync(path.resolve("layouts/partials/article/plate-lightbox.html"), "utf8");
 const layoutMatrix = fs.readFileSync(path.resolve("docs/layout-ownership-matrix.md"), "utf8");
 const css = fs.readFileSync(path.resolve("assets/css/main.css"), "utf8");
@@ -63,7 +65,6 @@ test("homepage V2 owns separate proof, featured-reading, library, newsletter, an
   assert.doesNotMatch(homeFrontPage, /home_bookstore_spotlight|home_selected_collections|newsletter_signup|home_2045_launch/);
 
   for (const snippet of [
-    'partial "home_reader_banner.html" .',
     'class="home-front-page__orientation"',
     'class="home-v2-featured page-shell page-shell--wide"',
     'class="home-v2-featured__grid"',
@@ -77,10 +78,14 @@ test("homepage V2 owns separate proof, featured-reading, library, newsletter, an
   ]) {
     assert.match(homeV2FrontPage, new RegExp(escapeRegex(snippet)));
   }
+  assert.match(masthead, /\{\{ if \$isHomeMasthead \}\}\{\{ partial "home_reader_banner\.html" \. \}\}\{\{ end \}\}/);
+  assert.ok(masthead.indexOf('data-paper-route-launch') < masthead.indexOf('partial "home_reader_banner.html"'));
+  assert.ok(masthead.indexOf('partial "home_reader_banner.html"') < masthead.indexOf('data-theme-toggle'));
+  assert.doesNotMatch(homeV2FrontPage, /partial "home_reader_banner\.html"/);
   assert.doesNotMatch(homeV2FrontPage, /home-bookstore|home-almanack|entry-threads--home|newsletter-signup--home-ribbon|home_imprint_statement|home-manifesto/);
 
   for (const snippet of [
-    'class="home-reader-banner page-shell page-shell--wide"',
+    'class="masthead-proof"',
     'class="home-reader-banner__proof"',
     'aria-label="Outside In Print at a glance"'
   ]) {
@@ -119,6 +124,7 @@ test("homepage V2 owns separate proof, featured-reading, library, newsletter, an
   }
 
   assert.match(css, /\.home-reader-banner\.page-shell--wide\{[^}]*max-width:70rem;/);
+  assert.match(css, /\.masthead-proof\{[^}]*flex:1 1 auto;[^}]*max-width:42rem;/);
   assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-library\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
   assert.match(css, /\.home-front-page__orientation\{[^}]*display:grid;[^}]*grid-template-areas:\s*"label"\s*"copy"\s*"links";[^}]*max-width:70rem;/);
   assert.match(css, /\.home-front-page__welcome-label\{[^}]*font-size:\.8125rem;[^}]*letter-spacing:\.1em;/);
@@ -323,7 +329,8 @@ test("article single template removes dead generic layout hooks and uses page-fl
   assert.match(articleSingle, /class="piece-header-composition"/);
   assert.match(articleSingle, /class="piece-record-rail"/);
   assert.match(articleSingle, /piece-record-rail__item--collection/);
-  assert.match(articleSingle, /data-article-plate-lightbox-trigger/);
+  assert.match(articleSingle, /partial "article\/media-plate\.html"/);
+  assert.match(articleMediaPlate, /data-article-plate-lightbox-trigger/);
   assert.match(articleSingle, /partial "article\/plate-lightbox\.html"/);
   assert.match(articleSingle, /class="piece-title-block/);
   assert.match(articleSingle, /class="article-publication-record"/);

@@ -213,6 +213,7 @@
         <span class="visually-hidden">Launch Paper-Bob arcade</span>
       </button>
     {{ end }}
+    {{ if $isHomeMasthead }}{{ partial "home_reader_banner.html" . }}{{ end }}
     <button class="theme-toggle masthead-theme-toggle" type="button" data-theme-toggle aria-pressed="true" title="Switch theme">
       <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <circle cx="12" cy="12" r="3.6"></circle>

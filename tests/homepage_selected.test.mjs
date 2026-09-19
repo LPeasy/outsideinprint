@@ -8,6 +8,7 @@ const read = (file) => fs.readFileSync(path.resolve(file), "utf8");
 const homepage = read("layouts/index.html");
 const homeFrontPage = read("layouts/partials/home_front_page.html");
 const homeV2 = read("layouts/partials/home_v2_front_page.html");
+const masthead = read("layouts/partials/masthead.html");
 const selected = read("layouts/partials/home_v2_selected.html");
 const readerBanner = read("layouts/partials/home_reader_banner.html");
 const readerNewsletter = read("layouts/partials/home_reader_newsletter.html");
@@ -32,7 +33,10 @@ test("reader banner contains only owner-provided proof and the newsletter offer 
   assert.match(readerBanner, /hugo\.Data\.homepage_metrics/);
   assert.match(metrics, /250\+/);
   assert.match(metrics, /10,000\+/);
+  assert.match(metrics, /compact_label: "10k\+"/);
   assert.match(readerBanner, /<strong>Weekly<\/strong>\s*<span>Newsletter<\/span>/);
+  assert.match(readerBanner, /<section class="masthead-proof"/);
+  assert.match(readerBanner, /class="home-reader-banner__audience-short" aria-hidden="true"/);
   assert.match(readerBanner, /aria-label="Outside In Print at a glance"/);
   assert.doesNotMatch(readerBanner, /<form\b|home-reader-banner__signup|home-reader-email|id="home-reader-banner-title"/);
   assert.match(readerBanner, /<a class="home-reader-banner__proof-item home-reader-banner__newsletter-link" href="#home-reader-banner-title">\s*<strong>Weekly<\/strong>\s*<span>Newsletter<\/span>\s*<\/a>/);
@@ -62,11 +66,12 @@ test("reader banner contains only owner-provided proof and the newsletter offer 
   assert.match(readerNewsletter, /New writing:|One number:|This week's virtue:/);
 });
 
-test("support link appears once before the proof strip and lead summaries do not change supporting precedence", () => {
-  const supportLabel = "Support Independent Media";
-  assert.match(homeV2, /<p class="home-v2__support page-shell page-shell--wide"><a href="\{\{ "support\/" \| relURL \}\}">Support Independent Media<\/a><\/p>/);
-  assert.equal(`${homeV2}\n${readerBanner}\n${readerNewsletter}`.split(supportLabel).length - 1, 1);
-  assert.ok(homeV2.indexOf(supportLabel) < homeV2.indexOf('partial "home_reader_banner.html"'));
+test("masthead proof sits between its controls and lead summaries keep supporting precedence", () => {
+  assert.doesNotMatch(homeV2, /home-v2__support|Support Independent Media/);
+  assert.match(masthead, /\{\{ if \$isHomeMasthead \}\}\{\{ partial "home_reader_banner\.html" \. \}\}\{\{ end \}\}/);
+  assert.ok(masthead.indexOf('data-paper-route-launch') < masthead.indexOf('partial "home_reader_banner.html"'));
+  assert.ok(masthead.indexOf('partial "home_reader_banner.html"') < masthead.indexOf('data-theme-toggle'));
+  assert.doesNotMatch(homeV2, /partial "home_reader_banner\.html"/);
   assert.doesNotMatch(homeV2, /home-v2__subjects|Independent writing on history, economics, culture, and public life\./);
   assert.match(leadSummary, /strings\.TrimSpace[\s\S]*\.Params\.description[\s\S]*plainify/);
   assert.match(leadSummary, /if not \$summary[\s\S]*partial "discovery\/page-summary\.html"/);
@@ -150,7 +155,7 @@ test("featured eligibility excludes drafts, future and expired work before choos
 test("homepage follows the proof, note, featured reading, library, newsletter, contributor sequence", () => {
   assert.equal((homeV2.match(/<h1\b/g) || []).length, 1);
   assert.match(homeV2, /<h1 id="home-front-page-title" class="title visually-hidden">/);
-  assert.match(homeV2, /partial "home_reader_banner\.html"/);
+  assert.match(masthead, /partial "home_reader_banner\.html"/);
   assert.match(homeV2, /A note to the reader/);
   const welcomeCopyParagraphs = Array.from(homeV2.matchAll(/<p class="home-front-page__welcome-copy">([\s\S]*?)<\/p>/g));
   assert.equal(welcomeCopyParagraphs.length, 1);
@@ -178,8 +183,6 @@ test("homepage follows the proof, note, featured reading, library, newsletter, c
   assert.doesNotMatch(homeV2, /home_imprint_statement|home-manifesto/);
 
   const order = [
-    'class="home-v2__support ',
-    'partial "home_reader_banner.html"',
     'class="home-front-page__orientation"',
     'class="home-v2-featured',
     'class="home-v2-library',
@@ -205,7 +208,10 @@ test("supporting illustrations open articles on mobile with a separate zoom cont
   assert.match(homeV2, /home-v2-featured__item\{\{ if \$imageModel \}\} home-v2-featured__item--illustrated/);
   assert.match(homeV2, /class="home-v2-featured__item-media" href="\{\{ \$page\.RelPermalink \}\}"/);
   assert.match(homeV2, /class="home-v2-featured__item-copy"/);
-  assert.match(homeV2, /"loading" "lazy"[\s\S]*?"sizes" "120px"/);
+  assert.match(homeV2, /\$supportImageSizes := "120px"/);
+  assert.match(homeV2, /if eq \$index 1[\s\S]*?\$supportImageSizes = "\(min-width: 72rem\) 24rem, \(min-width: 48rem\) 38vw, 100vw"/);
+  assert.match(homeV2, /"loading" "lazy"[\s\S]*?"sizes" \$supportImageSizes/);
+  assert.match(homeV2, /<span class="home-v2-featured__new-tag">New!<\/span>/);
   const mobileArtIndex = homeV2.indexOf('partial "home_featured_image_button.html"');
   assert.ok(mobileArtIndex > homeV2.indexOf('class="home-v2-featured__item-media"'));
   assert.ok(mobileArtIndex < homeV2.indexOf('class="home-v2-featured__item-copy"'));
@@ -220,11 +226,15 @@ test("supporting illustrations open articles on mobile with a separate zoom cont
     const artwork = featuredImageButton.match(new RegExp(`<${tag}\\b[^>]*>([\\s\\S]*?)<\\/${tag}>`))?.[1];
     assert.ok(artwork);
     assert.doesNotMatch(artwork, /partial "images\/picture\.html"|<img\b/);
+    assert.match(artwork, /<svg\b[^>]*aria-hidden="true"[^>]*>[\s\S]*?<circle\b[\s\S]*?<path\b[\s\S]*?<\/svg>/);
   }
   assert.match(featuredImageDialog, /<dialog id="home-featured-image-dialog"[^>]*aria-labelledby="home-featured-image-title"/);
   assert.match(featuredImageDialog, /<button\b[^>]*data-home-featured-image-close[^>]*aria-label="Close illustration"/);
   assert.match(css, /\.home-v2-featured__image-toggle\{[^}]*display:grid;/);
+  assert.match(css, /\.home-v2-featured__image-toggle::before\{[^}]*background:rgba\(247,238,216,\.92\);/);
   assert.match(css, /\.home-v2-featured__art\{position:relative;/);
+  assert.match(css, /\.home-v2-featured__item--latest\.home-v2-featured__item--illustrated\{[^}]*display:block;/);
+  assert.match(css, /\.home-v2-featured__item--latest \.home-v2-featured__item-media img\{[^}]*object-fit:contain;/);
   assert.match(css, /@media \(max-width:768px\)[\s\S]*\.home-v2-featured__item--illustrated\{[^}]*grid-template-columns:minmax\(0, 6rem\) minmax\(0, 1fr\);/);
   assert.match(css, /@media \(max-width:768px\)[\s\S]*\.home-v2-featured__item-media\{[^}]*display:block;/);
 });
@@ -259,24 +269,20 @@ test("new homepage system has responsive, keyboard-visible editorial styling", (
   assert.match(css, /\.home-v2-featured h3 a:focus-visible,[\s\S]*outline:3px solid var\(--focus-ring\)/);
   assert.match(css, /\.home-v2-next__links a,[\s\S]*min-height:44px/);
   assert.match(css, /\.home-reader-banner\.page-shell--wide\{[^}]*max-width:70rem;/);
-  const supportCss = css.match(/\.home-v2__support\.page-shell--wide\{([^}]*)\}/)?.[1] || "";
-  assert.match(supportCss, /max-width:70rem;/);
-  assert.match(supportCss, /font-size:1rem;/);
-  assert.match(supportCss, /line-height:1\.4;/);
-  assert.match(supportCss, /text-align:center;/);
-  assert.match(css, /\.home-v2__support a\{[^}]*min-height:44px;/);
-  assert.match(css, /\.home-v2__support a:focus-visible[^{}]*\{[^}]*outline:3px solid var\(--focus-ring\);/);
+  assert.doesNotMatch(css, /\.home-v2__support/);
   assert.match(css, /\.home-reader-banner__newsletter-link span\{[^}]*text-decoration:underline;/);
   assert.match(css, /\.home-reader-banner__newsletter-link:focus-visible[^{}]*\{[^}]*outline:3px solid var\(--focus-ring\);/);
-  assert.match(css, /\.home-reader-banner__newsletter-link\{[^}]*min-height:44px;/);
+  assert.match(css, /\.home-reader-banner__newsletter-link\{[^}]*min-height:34px;/);
+  assert.match(css, /\.home-reader-banner__newsletter-link::before\{[^}]*inset:-5px 0;/);
   assert.match(css, /\.home-v2-featured\{[^}]*margin-top:1\.25rem;/);
   assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-v2-featured\{[^}]*margin-top:1rem;/);
   assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-library\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
   assert.match(css, /\.home-front-page__orientation\{[^}]*display:grid;[^}]*grid-template-areas:\s*"label"\s*"copy"\s*"links";[^}]*max-width:70rem;/);
   assert.match(css, /\.home-front-page__welcome-copy\{[^}]*margin:0;[^}]*font-size:\.94rem;[^}]*line-height:1\.42;/);
   assert.match(css, /@media \(max-width:900px\)[\s\S]*\.home-v2-featured__grid\{[^}]*grid-template-columns:1fr/);
+  assert.match(css, /@media \(max-width:900px\)[\s\S]*\.home-v2-featured__header\{[^}]*grid-template-columns:1fr;[^}]*gap:\.55rem;/);
   assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-v2-featured__supporting\{\s*display:block/);
-  assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-reader-banner__proof-item\{[\s\S]*padding:\.45rem \.3rem \.42rem/);
+  assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-reader-banner__proof-item\{[^}]*padding:0 \.2rem/);
   assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-reader-banner__controls\{[\s\S]*grid-template-columns:minmax\(0, 1fr\) auto/);
   assert.match(css, /@media \(max-width:360px\)[\s\S]*\.home-reader-banner__controls\{\s*grid-template-columns:1fr/);
   assert.match(css, /@media \(max-width:720px\)[\s\S]*\.home-front-page__welcome-links\{[^}]*grid-template-columns:repeat\(2, minmax\(0, 1fr\)\)/);

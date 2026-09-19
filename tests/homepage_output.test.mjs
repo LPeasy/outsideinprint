@@ -53,20 +53,8 @@ const metricRecords = new Map([...metricsSource.matchAll(/^ {2}"([^"]+)":\n([\s\
     label: match[2].match(/^ {4}display_label: "([^"]+)"$/m)?.[1],
   }]));
 
-test("rendered support link precedes the stats and the newsletter cell reaches its focusable heading", () => {
-  const supportParagraphs = [...html.matchAll(/(<p\b[^>]*>)([\s\S]*?)<\/p>/g)]
-    .filter((match) => attribute(match[1], "class").split(/\s+/).includes("home-v2__support"));
-  assert.equal(supportParagraphs.length, 1);
-  const support = supportParagraphs[0];
-  const supportLinks = [...support[2].matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/g)];
-  assert.equal(supportLinks.length, 1);
-  assert.equal(attribute(supportLinks[0][1], "href"), "/support/");
-  assert.equal(text(supportLinks[0][2]), "Support Independent Media");
-  assert.equal(html.split("Support Independent Media").length - 1, 1);
-  assert.doesNotMatch(supportLinks[0][1], /\bonclick=|\brole=|\btabindex=/, "support uses a native link");
-  assert.ok(fs.existsSync(path.join(siteDir, "support/index.html")), "support destination must render");
-  assert.ok(html.indexOf(support[1]) < html.indexOf('aria-label="Outside In Print at a glance"'));
-  assert.ok(html.indexOf(support[1]) > html.indexOf("</nav>"), "the support link follows primary navigation");
+test("rendered stats open the homepage and the newsletter cell reaches its focusable heading", () => {
+  assert.doesNotMatch(html, /home-v2__support|Support Independent Media/);
   const newsletterLinks = [...html.matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/g)]
     .filter((match) => attribute(match[1], "class").split(/\s+/).includes("home-reader-banner__newsletter-link"));
   assert.equal(newsletterLinks.length, 1);
@@ -126,6 +114,9 @@ test("rendered homepage leads with Dolphin, then the newest remaining publicatio
     assert.ok(fs.existsSync(path.join(siteDir, route, "index.html")), `${route} must have a rendered destination`);
     const meta = card[2].match(/<p\b[^>]*class=(?:"home-v2-featured__meta"|home-v2-featured__meta)[^>]*>([\s\S]*?)<\/p>/)?.[1];
     assert.ok(meta);
+    const newTags = [...meta.matchAll(/(<span\b[^>]*>)([^<]*)<\/span>/g)]
+      .filter((match) => attribute(match[1], "class").split(/\s+/).includes("home-v2-featured__new-tag"));
+    assert.deepEqual(newTags.map((match) => text(match[2])), index === 1 ? ["New!"] : []);
     const labels = [...meta.matchAll(/<span>(.*?)<\/span>/g)].map((match) => text(match[1]));
     assert.equal(labels[0], kind);
     assert.match(labels[1], /^\d+ min read$/);
@@ -209,7 +200,15 @@ test("rendered homepage has complete no-JavaScript note, hidden native control, 
   assert.doesNotMatch(gallery, /home-reader-note(?:\.min)?\./);
   assert.doesNotMatch(html, /home-v2__subjects|Independent writing on history, economics, culture, and public life\./);
   assert.match(html, /250(?:\+|&#43;)<\/strong>\s*<span>Articles<\/span>/);
-  assert.match(html, /10,000(?:\+|&#43;)<\/strong>\s*<span>Readers<\/span>/);
+  const audience = html.match(/<div\b[^>]*class="[^"]*home-reader-banner__proof-item--audience[^"]*"[^>]*>([\s\S]*?)<\/div>/)?.[1];
+  assert.ok(audience);
+  const figures = [...audience.matchAll(/(<strong\b[^>]*>)([^<]*)<\/strong>/g)];
+  assert.equal(figures.length, 2);
+  assert.match(figures[0][2], /^10,000(?:\+|&#43;)$/);
+  assert.ok(attribute(figures[1][1], "class").split(/\s+/).includes("home-reader-banner__audience-short"));
+  assert.equal(attribute(figures[1][1], "aria-hidden"), "true");
+  assert.match(figures[1][2], /^10k(?:\+|&#43;)$/);
+  assert.match(audience, /<span>Readers<\/span>/);
 });
 
 test("rendered homepage puts two reading links before one newsletter signup and a contributor button", () => {
@@ -220,6 +219,8 @@ test("rendered homepage puts two reading links before one newsletter signup and 
   assert.ok(proofTag);
   assert.ok(newsletterTag);
   assert.ok(contributionTag);
+  assert.ok(html.indexOf('data-paper-route-launch') < html.indexOf(proofTag));
+  assert.ok(html.indexOf(proofTag) < html.indexOf('data-theme-toggle'));
   const contributionStart = html.indexOf(contributionTag) + contributionTag.length;
   const contributionBody = html.slice(contributionStart, html.indexOf("</section>", contributionStart));
   assert.match(contributionBody, /^\s*<a\b[^>]*>Become a contributor<\/a>\s*$/);
@@ -256,7 +257,7 @@ test("rendered homepage puts two reading links before one newsletter signup and 
   for (const id of ["home-reader-email", "home-reader-banner-title"]) {
     assert.equal(tags.filter((tag) => attribute(tag, "id") === id).length, 1, `${id} must remain unique`);
   }
-  const homeBody = html.slice(html.indexOf(proofTag), html.indexOf(contributionTag));
+  const homeBody = html.slice(html.indexOf('<main id="main-content">'), html.indexOf(contributionTag));
   assert.doesNotMatch(homeBody, /href=(?:["'])?(?:https:\/\/outsideinprint\.org)?\/archive\//);
   assert.doesNotMatch(html, /The full imprint|Find your next question|home-v2-next__browse|Browse the archive|Search the library/);
 });

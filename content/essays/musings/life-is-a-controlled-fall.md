@@ -20,6 +20,7 @@ description: "A short reflection on falling, getting back up, and feeling for th
 featured_image: "editorial/life-is-a-controlled-fall"
 featured_image_alt: "A person reaches for a golden foothold as a mountain path curls above a misty valley, painted in deep blue-violet shadow and luminous morning light."
 featured_image_caption: "Life Is a Controlled Fall."
+image_led: true
 version: "1.0"
 edition: "First web edition"
 featured: false

@@ -5,10 +5,6 @@
 <section class="home-v2" aria-labelledby="home-front-page-title">
   <h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>
 
-  <p class="home-v2__support page-shell page-shell--wide"><a href="{{ "support/" | relURL }}">Support Independent Media</a></p>
-
-  {{ partial "home_reader_banner.html" . }}
-
   <section class="home-front-page__orientation" aria-labelledby="home-reader-note-title">
     <h2 id="home-reader-note-title" class="home-front-page__welcome-label">A note to the reader</h2>
     <div class="home-front-page__welcome-body">
@@ -71,7 +67,9 @@
             {{- with $page.Params.featured_image -}}
               {{- $imageModel = partial "images/model.html" (dict "page" $page "ref" . "display" true) -}}
             {{- end -}}
-            <article class="home-v2-featured__item{{ if $imageModel }} home-v2-featured__item--illustrated{{ end }}">
+            {{- $supportImageSizes := "120px" -}}
+            {{- if eq $index 1 }}{{ $supportImageSizes = "(min-width: 72rem) 24rem, (min-width: 48rem) 38vw, 100vw" }}{{ end -}}
+            <article class="home-v2-featured__item{{ if $imageModel }} home-v2-featured__item--illustrated{{ end }}{{ if eq $index 1 }} home-v2-featured__item--latest{{ end }}">
               {{- with $imageModel }}
                 <div class="home-v2-featured__art">
                 <a class="home-v2-featured__item-media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
@@ -79,14 +77,14 @@
                     "model" .
                     "alt" ($page.Params.featured_image_alt | default "")
                     "loading" "lazy"
-                    "sizes" "120px"
+                    "sizes" $supportImageSizes
                   ) -}}
                 </a>
                 {{ partial "home_featured_image_button.html" (dict "page" $page "model" .) }}
                 </div>
               {{- end }}
               <div class="home-v2-featured__item-copy">
-              <p class="home-v2-featured__meta"><span>{{ $sectionLabel }}</span><span>{{ $page.ReadingTime }} min read</span>{{ with (index $readerMetrics $page.RelPermalink) }}{{ if ge .value $readerThreshold }}<span>{{ .display_label }}</span>{{ end }}{{ end }}</p>
+              <p class="home-v2-featured__meta">{{ if eq $index 1 }}<span class="home-v2-featured__new-tag">New!</span>{{ end }}<span>{{ $sectionLabel }}</span><span>{{ $page.ReadingTime }} min read</span>{{ with (index $readerMetrics $page.RelPermalink) }}{{ if ge .value $readerThreshold }}<span>{{ .display_label }}</span>{{ end }}{{ end }}</p>
               <h3><a href="{{ $page.RelPermalink }}"
                 data-analytics-event="internal_promo_click"
                 data-analytics-source-slot="homepage_v2_featured_supporting"

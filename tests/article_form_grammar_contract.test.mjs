@@ -8,6 +8,8 @@ function read(relativePath) {
 }
 
 const articleSingle = read("layouts/_default/single.html");
+const mediaPlatePartial = read("layouts/partials/article/media-plate.html");
+const imageLedMusing = read("content/essays/musings/life-is-a-controlled-fall.md");
 const homepage = read("layouts/index.html");
 const articlePlateLightbox = read("layouts/partials/article/plate-lightbox.html");
 const studioSampleExit = read("layouts/partials/article/studio-sample-exit.html");
@@ -37,7 +39,7 @@ test("article header follows the calm title-led form grammar", () => {
   const titleBlock = articleSingle.indexOf('class="piece-title-block"');
   const byline = articleSingle.indexOf('partial "authors/byline.html"', titleBlock);
   const subtitle = articleSingle.indexOf("with .Params.subtitle", byline);
-  const mediaPlate = articleSingle.indexOf('<figure class="{{ delimit $plateClasses " " }}">', subtitle);
+  const mediaPlate = articleSingle.indexOf('partial "article/media-plate.html"', subtitle);
   const recordRail = articleSingle.indexOf('class="piece-record-rail"');
   const body = articleSingle.indexOf('class="piece-body"');
   const articleClose = articleSingle.indexOf("</article>", body);
@@ -57,12 +59,12 @@ test("article header follows the calm title-led form grammar", () => {
   assert.ok(conditionalPlateLightboxInclude < articleClose);
   assert.equal(conditionalPlateLightboxAfterArticle, -1);
   assert.match(articleSingle, /partial "images\/model\.html"/);
-  assert.match(articleSingle, /partial "images\/picture\.html"/);
+  assert.match(mediaPlatePartial, /partial "images\/picture\.html"/);
   assert.match(articleSingle, /\$plateImageWidth = \$plateImageModel\.lightbox_width/);
   assert.match(articleSingle, /\$plateImageHeight = \$plateImageModel\.lightbox_height/);
   assert.match(articleSingle, /piece-header--side-plate/);
   assert.match(articleSingle, /piece-header--text-only/);
-  assert.match(articleSingle, /data-article-plate-lightbox-trigger/);
+  assert.match(mediaPlatePartial, /data-article-plate-lightbox-trigger/);
   assert.match(articleSingle, /partial "article\/plate-lightbox\.html" \./);
   assert.doesNotMatch(articleSingle, /piece-media-plate--full/);
   assert.doesNotMatch(articleSingle, /piece-header--full-plate/);
@@ -114,6 +116,22 @@ test("article header follows the calm title-led form grammar", () => {
   assert.match(articlePlateLightbox, /imageButton\.addEventListener\("click", closeLightbox\)/);
   assert.match(css, /\.piece-body img\.article-lightbox-image\{/);
   assert.match(css, /\.piece-body img\.article-lightbox-image:focus-visible\{/);
+});
+
+test("image-led musing places its shared illustration before the title without changing other articles", () => {
+  assert.match(imageLedMusing, /^image_led: true$/m);
+  assert.match(articleSingle, /\$isImageLed := and \.Params\.image_led \(eq \$plateKind "hero"\) \$plateImageModel/);
+  assert.match(articleSingle, /append "piece-header--image-led"/);
+  const firstPlate = articleSingle.indexOf('partial "article/media-plate.html"');
+  const title = articleSingle.indexOf('class="piece-title-block"', firstPlate);
+  const secondPlate = articleSingle.indexOf('partial "article/media-plate.html"', title);
+  assert.ok(firstPlate >= 0 && firstPlate < title && title < secondPlate);
+  assert.match(articleSingle.slice(firstPlate - 35, firstPlate), /if \$isImageLed/);
+  assert.match(articleSingle.slice(title, secondPlate), /if and \$plateImage \(not \$isImageLed\)/);
+  assert.match(mediaPlatePartial, /data-alt="\{\{ \.alt \}\}"/);
+  assert.match(mediaPlatePartial, /data-caption="\{\{ \.caption \}\}"/);
+  assert.match(mediaPlatePartial, /with \.caption \}\}<figcaption>/);
+  assert.match(mediaPlatePartial, /if \.imageLed \}\}\{\{ \$sizes = "\(min-width: 55rem\) 52rem, calc\(100vw - 3rem\)"/);
 });
 
 test("modern bios use dossier headers with portrait fallback and shared prose", () => {

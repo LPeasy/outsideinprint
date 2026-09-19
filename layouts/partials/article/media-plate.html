@@ -1,0 +1,26 @@
+{{ $sizes := "(max-width: 768px) min(306px, calc(100vw - 50px)), (min-width: 72rem) 30rem, (min-width: 48rem) 42vw, 100vw" }}
+{{ if .imageLed }}{{ $sizes = "(min-width: 55rem) 52rem, calc(100vw - 3rem)" }}{{ end }}
+<figure class="{{ delimit .classes " " }}">
+  <button
+    type="button"
+    class="piece-media-plate__trigger"
+    data-article-plate-lightbox-trigger
+    data-title="{{ .page.Title }}"
+    data-caption="{{ .caption }}"
+    data-image="{{ .model.lightbox_url }}"
+    data-alt="{{ .alt }}"
+    {{ if gt .width 0 }}data-width="{{ .width }}"{{ end }}
+    {{ if gt .height 0 }}data-height="{{ .height }}"{{ end }}
+    aria-label="Open image fullscreen: {{ .page.Title }}"
+  >
+    {{ partial "images/picture.html" (dict
+      "model" .model
+      "alt" .alt
+      "loading" "eager"
+      "fetchpriority" "high"
+      "sizes" $sizes
+      "lightbox" true
+    ) }}
+  </button>
+  {{ with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+</figure>

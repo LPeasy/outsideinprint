@@ -6,6 +6,7 @@ import path from "node:path";
 const read = (file) => fs.readFileSync(file, "utf8");
 const base = read("layouts/_default/baseof.html");
 const single = read("layouts/_default/single.html");
+const mediaPlatePartial = read("layouts/partials/article/media-plate.html");
 const css = read("assets/css/main.css");
 const mobileSizes = "(max-width: 768px) min(306px, calc(100vw - 50px)), (min-width: 72rem) 30rem, (min-width: 48rem) 42vw, 100vw";
 const illustratedRoutes = [
@@ -47,7 +48,7 @@ function cssRules(source, ancestors = []) {
   return rules;
 }
 
-const mobileRules = cssRules(css).filter((rule) => rule.selector.includes(".article-reading-page"));
+const mobileRules = cssRules(css).filter((rule) => rule.selector.includes(".article-reading-page") && !rule.selector.includes(".piece-header--image-led"));
 function declarationsFor(selector) {
   const matches = mobileRules.filter((rule) => rule.selector.split(",").some((part) => part.trim() === selector));
   assert.ok(matches.length, `expected mobile rule for ${selector}`);
@@ -88,6 +89,18 @@ test("every compact-opening rule is article-only and limited to 768px", () => {
   assert.match(declarationsFor(".article-reading-page .piece-header-composition"), /grid-template-columns:\s*(?:1fr|minmax\(0,\s*1fr\))\s*;/);
 });
 
+test("desktop masthead compaction opts in only for image-led articles", () => {
+  const desktopRules = cssRules(css).filter((rule) => rule.ancestors.some((ancestor) => /^@media\s*\(min-width:\s*769px\)$/.test(ancestor))
+    && rule.selector.includes(".article-reading-page"));
+  assert.ok(desktopRules.length >= 6, "expected a focused image-led desktop masthead treatment");
+  for (const rule of desktopRules) {
+    for (const selector of rule.selector.split(",")) {
+      assert.match(selector.trim(), /^\.article-reading-page:has\(\.piece-header--image-led\)\s+/, selector);
+      assert.doesNotMatch(selector, /\.masthead--full|\.home-v2|\.piece-body|\.piece-aftermatter/);
+    }
+  }
+});
+
 test("opening artwork stays visible, contained, and proportional instead of cropped", () => {
   const image = declarationsFor(".article-reading-page .piece-media-plate img");
   assert.match(image, /max-height:\s*148px\s*;/);
@@ -99,18 +112,18 @@ test("opening artwork stays visible, contained, and proportional instead of crop
   for (const rule of mobileRules.filter((item) => /piece-media-plate/.test(item.selector))) {
     assert.doesNotMatch(rule.declarations, /object-fit:\s*cover|overflow:\s*hidden|display:\s*none/);
   }
-  assert.ok(single.includes(mobileSizes), "image sizes must describe the compact mobile slot and retain desktop sizes");
+  assert.ok(mediaPlatePartial.includes(mobileSizes), "image sizes must describe the compact mobile slot and retain desktop sizes");
 });
 
 test("the existing native image button, credits, and unchanged article-body rendering are retained", () => {
-  const figure = single.match(/<figure class="\{\{ delimit \$plateClasses " " \}\}">([\s\S]*?)<\/figure>/)?.[1];
+  const figure = mediaPlatePartial.match(/<figure class="\{\{ delimit \.classes " " \}\}">([\s\S]*?)<\/figure>/)?.[1];
   assert.ok(figure);
   assert.equal((figure.match(/<button\b/g) || []).length, 1);
   assert.match(figure, /type="button"/);
   assert.match(figure, /data-article-plate-lightbox-trigger/);
-  assert.match(figure, /aria-label="Open image fullscreen: \{\{ \.Title \}\}"/);
-  assert.match(figure, /data-caption="\{\{ \$plateImageCaption \}\}"/);
-  assert.match(figure, /with \$plateImageCaption\s*}}<figcaption>\{\{ \. \}\}<\/figcaption>/);
+  assert.match(figure, /aria-label="Open image fullscreen: \{\{ \.page\.Title \}\}"/);
+  assert.match(figure, /data-caption="\{\{ \.caption \}\}"/);
+  assert.match(figure, /with \.caption\s*}}<figcaption>\{\{ \. \}\}<\/figcaption>/);
   assert.match(single, /partial "article\/plate-lightbox.html" \./);
   assert.match(single, /\$articleBody := partial "render_article_body.html" \./);
   assert.match(single, /<div class="piece-body">\s*{{ \$articleBody }}\s*<\/div>/);
@@ -163,6 +176,20 @@ test("rendered article headers keep one eager image, responsive sizes when manag
       assert.ok(header.includes(`<figcaption>${credits.get(route)}</figcaption>`), `${route} visible credit`);
     }
   }
+});
+
+test("image-led pilot renders its full-width illustration before its title", { skip: !process.env.OIP_SITE_DIR }, () => {
+  const html = read(path.join(path.resolve(process.env.OIP_SITE_DIR), "essays/life-is-a-controlled-fall/index.html"));
+  const header = articleHeader(html);
+  assert.ok(header);
+  assert.match(html, /<header class="[^"]*piece-header--image-led/);
+  assert.ok(header.indexOf("<figure") < header.indexOf("<h1>"));
+  assert.equal([...header.matchAll(/data-article-plate-lightbox-trigger/g)].length, 1);
+  const image = header.match(/<img\b[^>]*>/)?.[0];
+  assert.ok(image);
+  assert.match(attr(image, "alt"), /golden foothold/);
+  assert.equal(attr(image, "sizes"), "(min-width: 55rem) 52rem, calc(100vw - 3rem)");
+  assert.match(header, /<figcaption>Life Is a Controlled Fall\.<\/figcaption>/);
 });
 
 test("layout-only verification preserves article bodies and publication records against an optional baseline build", {

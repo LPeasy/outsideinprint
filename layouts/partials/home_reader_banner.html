@@ -1,13 +1,14 @@
 {{- $metrics := hugo.Data.homepage_metrics.banner -}}
 
-<section class="home-reader-banner page-shell page-shell--wide" aria-label="Outside In Print at a glance">
+<section class="masthead-proof" aria-label="Outside In Print at a glance">
   <div class="home-reader-banner__proof">
     <div class="home-reader-banner__proof-item">
       <strong>{{ $metrics.articles.display_label }}</strong>
       <span>{{ $metrics.articles.unit_label }}</span>
     </div>
-    <div class="home-reader-banner__proof-item">
+    <div class="home-reader-banner__proof-item home-reader-banner__proof-item--audience">
       <strong>{{ $metrics.audience.display_label }}</strong>
+      <strong class="home-reader-banner__audience-short" aria-hidden="true">{{ $metrics.audience.compact_label }}</strong>
       <span>{{ $metrics.audience.unit_label }}</span>
     </div>
     <a class="home-reader-banner__proof-item home-reader-banner__newsletter-link" href="#home-reader-banner-title">
