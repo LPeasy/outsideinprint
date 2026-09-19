@@ -5730,6 +5730,9 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   if ($homeNewsletterSections.Count -eq 1 -and (Get-AttributeValue -Tag $homeNewsletterSections[0] -Name 'aria-labelledby') -cne 'home-reader-banner-title') {
     $uxIssues.Add('public/index.html => expected the separate newsletter region to retain its existing heading label')
   }
+  if (-not $homeIndexHtml.Contains('Every Saturday: new writing, one revealing number, and a thought worth keeping.', [System.StringComparison]::Ordinal)) {
+    $uxIssues.Add('public/index.html => expected the explicit Saturday newsletter promise')
+  }
   if ($homeProofSections.Count -eq 1) {
     $proofStart = $homeIndexHtml.IndexOf($homeProofSections[0], [System.StringComparison]::Ordinal)
     $proofEnd = $homeIndexHtml.IndexOf('</section>', $proofStart, [System.StringComparison]::Ordinal)
@@ -5834,16 +5837,49 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     }
   }
   $selectionHugo = Resolve-PinnedHugo -RepoRoot $repoRoot
+  $freshnessFixture = Join-Path ([IO.Path]::GetTempPath()) ('oip-feature-freshness-' + [guid]::NewGuid().ToString('N'))
+  [void](New-Item -ItemType Directory -Path $freshnessFixture)
+  try {
+    [void](New-Item -ItemType Directory -Path (Join-Path $freshnessFixture 'layouts/partials') -Force)
+    [void](New-Item -ItemType Directory -Path (Join-Path $freshnessFixture 'content') -Force)
+    [IO.File]::WriteAllText((Join-Path $freshnessFixture 'hugo.toml'), 'baseURL = "https://fixture.invalid/"' + "`n" + 'disableKinds = ["taxonomy", "term", "RSS", "sitemap", "404"]')
+    [IO.File]::WriteAllText((Join-Path $freshnessFixture 'content/_index.md'), "---`ntitle: Freshness fixture`n---`n")
+    Copy-Item -LiteralPath (Join-Path $repoRoot 'layouts/partials/home_feature_freshness.html') -Destination (Join-Path $freshnessFixture 'layouts/partials/home_feature_freshness.html')
+    $fixtureCases = @(
+      @{ Name = 'zero'; Published = '2026-09-19T12:00:00Z'; Expected = 'New!' },
+      @{ Name = 'fresh'; Published = '2026-09-19T11:59:59Z'; Expected = 'New!' },
+      @{ Name = 'inside'; Published = '2026-09-05T12:00:01Z'; Expected = 'New!' },
+      @{ Name = 'boundary'; Published = '2026-09-05T12:00:00Z'; Expected = 'Latest' },
+      @{ Name = 'older'; Published = '2026-09-04T12:00:00Z'; Expected = 'Latest' },
+      @{ Name = 'future'; Published = '2026-09-19T12:00:01Z'; Expected = 'Latest' }
+    )
+    $fixtureTemplate = @('{{ $buildTime := time "2026-09-19T12:00:00Z" }}') + @($fixtureCases | ForEach-Object {
+      '<p id="' + $_.Name + '">{{ partial "home_feature_freshness.html" (dict "publishedAt" (time "' + $_.Published + '") "buildTime" $buildTime) }}</p>'
+    })
+    [IO.File]::WriteAllText((Join-Path $freshnessFixture 'layouts/index.html'), ($fixtureTemplate -join "`n"))
+    $fixtureOutput = & $selectionHugo.Command --source $freshnessFixture --panicOnWarning 2>&1
+    if ($LASTEXITCODE -ne 0) { throw "Homepage freshness fixture failed:`n$($fixtureOutput -join "`n")" }
+    $renderedFixture = Get-Content -LiteralPath (Join-Path $freshnessFixture 'public/index.html') -Raw -Encoding utf8
+    foreach ($case in $fixtureCases) {
+      $actual = [regex]::Match($renderedFixture, '<p id="' + $case.Name + '">(?<label>.*?)</p>').Groups['label'].Value
+      if ($actual -cne $case.Expected) {
+        throw "Homepage freshness fixture $($case.Name) expected '$($case.Expected)', found '$actual'."
+      }
+    }
+  }
+  finally {
+    if (Test-Path -LiteralPath $freshnessFixture -PathType Container) { Remove-Item -LiteralPath $freshnessFixture -Recurse -Force }
+  }
   $selectionConfig = if ($env:OIP_HUGO_CONFIG) { $env:OIP_HUGO_CONFIG } else { 'hugo.toml' }
   $publishedInventory = & $selectionHugo.Command list published --source $repoRoot --config $selectionConfig
   if ($LASTEXITCODE -ne 0) { throw 'Hugo published inventory failed during homepage selection validation.' }
   $selectionObservationTime = [DateTimeOffset]::UtcNow
-  $publishedReadingPaths = @($publishedInventory | ConvertFrom-Csv | Where-Object {
+  $publishedReadingRecords = @($publishedInventory | ConvertFrom-Csv | Where-Object {
     $_.kind -ceq 'page' -and $archiveReadingPaths.Contains((Get-SitePathFromHref -Href $_.permalink)) -and
     [DateTimeOffset]::Parse($_.date) -le $selectionObservationTime -and
     [DateTimeOffset]::Parse($_.publishDate) -le $selectionObservationTime
-  } | Sort-Object @{ Expression = { [DateTimeOffset]::Parse($_.publishDate) }; Descending = $true }, title |
-    ForEach-Object { Get-SitePathFromHref -Href $_.permalink })
+  } | Sort-Object @{ Expression = { [DateTimeOffset]::Parse($_.publishDate) }; Descending = $true }, title)
+  $publishedReadingPaths = @($publishedReadingRecords | ForEach-Object { Get-SitePathFromHref -Href $_.permalink })
   $flagshipPath = '/essays/the-dolphin-company/'
   $expectedLeadPaths = @($publishedReadingPaths | Select-Object -First 1)
   if ($flagshipPath -in $publishedReadingPaths) {
@@ -5864,6 +5900,45 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   if (($homeSupportingPaths -join '|') -cne ($expectedSupportingPaths -join '|')) {
     $uxIssues.Add("public/index.html => expected the four approved supporting pieces in order '$($expectedSupportingPaths -join ', ')', found '$($homeSupportingPaths -join ', ')'")
   }
+  $leadCardHtml = [regex]::Match($homeIndexHtml, '(?s)<article\b[^>]*class=(?:"home-v2-featured__lead"|home-v2-featured__lead)[^>]*>(?<body>.*?)</article>').Groups['body'].Value
+  $leadHeading = [regex]::Match($leadCardHtml, '(?s)<header\b(?=[^>]*home-v2-featured__lead-heading)[^>]*>(?<body>.*?)</header>').Groups['body'].Value
+  $leadCopy = [regex]::Match($leadCardHtml, '(?s)<div\b(?=[^>]*home-v2-featured__lead-copy)[^>]*>(?<body>.*?)</div>').Groups['body'].Value
+  if (-not $leadHeading -or $leadHeading -notmatch '(?s)home-v2-featured__meta.*?<h3>' -or
+      $leadCardHtml.IndexOf('home-v2-featured__lead-heading', [System.StringComparison]::Ordinal) -ge $leadCardHtml.IndexOf('home-v2-featured__art', [System.StringComparison]::Ordinal) -or
+      -not $leadCopy -or $leadCopy -match 'home-v2-featured__meta|<h3>' -or
+      $leadCopy -notmatch 'home-v2-featured__dek' -or $leadCopy -notmatch 'home-v2-featured__action') {
+    $uxIssues.Add('public/index.html => expected the flagship title and metadata above artwork, with summary and CTA below')
+  }
+  foreach ($supportCard in [regex]::Matches($homeIndexHtml, '(?s)(?<tag><article\b[^>]*>)(?<body>.*?)</article>')) {
+    if (-not (Test-TagHasClass -Tag $supportCard.Groups['tag'].Value -ClassName 'home-v2-featured__item')) { continue }
+    $supportCardHtml = $supportCard.Groups['body'].Value
+    $supportHeading = [regex]::Match($supportCardHtml, '(?s)<header\b(?=[^>]*home-v2-featured__item-heading)[^>]*>(?<body>.*?)</header>')
+    $supportCopy = [regex]::Match($supportCardHtml, '(?s)<div\b(?=[^>]*home-v2-featured__item-copy)[^>]*>(?<body>.*?)</div>')
+    $supportArtIndex = $supportCardHtml.IndexOf('home-v2-featured__art', [System.StringComparison]::Ordinal)
+    if (-not $supportHeading.Success -or $supportHeading.Groups['body'].Value -notmatch '(?s)home-v2-featured__meta.*?\d+ min read.*?<h3>' -or
+        -not $supportCopy.Success -or $supportCopy.Groups['body'].Value -match 'home-v2-featured__meta|<h3>' -or
+        $supportCopy.Groups['body'].Value -notmatch '<p>' -or
+        ($supportHeading.Index + $supportHeading.Length) -gt $supportCopy.Index -or
+        ($supportArtIndex -ge 0 -and ($supportHeading.Index + $supportHeading.Length) -gt $supportArtIndex)) {
+      $uxIssues.Add('public/index.html => each supporting card must retain one title and reading-time heading before artwork in DOM order, with a separate summary-only copy group')
+    }
+  }
+  $latestCardHtml = [regex]::Match($homeIndexHtml, '(?s)<article\b(?=[^>]*home-v2-featured__item--latest)[^>]*>(?<body>.*?)</article>').Groups['body'].Value
+  $latestMetaHtml = [regex]::Match($latestCardHtml, '(?s)<p\b(?=[^>]*home-v2-featured__meta)[^>]*>(?<body>.*?)</p>').Groups['body'].Value
+  $latestTimeTags = @(Get-OpenTags -Html $latestMetaHtml -TagName 'time')
+  $latestLabels = @([regex]::Matches($latestMetaHtml, '(?s)<span\b(?=[^>]*home-v2-featured__new-tag)[^>]*>(?<label>.*?)</span>'))
+  $latestPath = if ($expectedSupportingPaths.Count -gt 0) { $expectedSupportingPaths[0] } else { '' }
+  $latestRecord = @($publishedReadingRecords | Where-Object { (Get-SitePathFromHref -Href $_.permalink) -ceq $latestPath } | Select-Object -First 1)
+  if ($latestRecord.Count -ne 1 -or $latestTimeTags.Count -ne 1) {
+    $uxIssues.Add('public/index.html => expected a semantic publication date on the latest supporting card only')
+  }
+  else {
+    if ($latestLabels.Count -ne 1 -or $latestLabels[0].Groups['label'].Value -cnotin @('New!', 'Latest') -or
+        (Get-AttributeValue -Tag $latestTimeTags[0] -Name 'datetime') -cne $latestRecord[0].publishDate.Substring(0, 10) -or
+        $latestMetaHtml -notmatch '<time\b[^>]*>\s*[A-Z][a-z]{2} \d{1,2}, \d{4}\s*</time>') {
+      $uxIssues.Add('public/index.html => latest-card freshness and visible publication date must match the published inventory')
+    }
+  }
 
   $featuredLabelOverrides = @{
     '/essays/the-dolphin-company/' = 'Case study'
@@ -5879,6 +5954,38 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   }
   $leadImageLinks = @($homeAnchors | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-v2-featured__lead-media' })
   $supportingImageLinks = @($homeAnchors | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-v2-featured__item-media' })
+  $leadCtas = @($homeAnchors | Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'homepage_v2_featured_lead_cta' })
+  $supportingTrackedImages = @($homeAnchors | Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'homepage_v2_featured_supporting_image' })
+  if ($leadImageLinks.Count -ne 1 -or $leadCtas.Count -ne 1 -or $supportingTrackedImages.Count -ne $supportingImageLinks.Count) {
+    $uxIssues.Add('public/index.html => expected distinct lead-image, lead-CTA, and supporting-image promotion slots')
+  }
+  $trackedArtworkAndCtas = @($leadImageLinks + $leadCtas + $supportingImageLinks)
+  foreach ($promo in $trackedArtworkAndCtas) {
+    $slot = Get-AttributeValue -Tag $promo -Name 'data-analytics-source-slot'
+    $promoPath = Get-SitePathFromHref -Href (Get-AttributeValue -Tag $promo -Name 'href')
+    $titleMatches = @($homeAnchors | Where-Object {
+      (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -in @('homepage_v2_featured_lead', 'homepage_v2_featured_supporting') -and
+      (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href')) -ceq $promoPath
+    })
+    $expectedSlot = if (Test-TagHasClass -Tag $promo -ClassName 'home-v2-featured__lead-media') {
+      'homepage_v2_featured_lead_image'
+    } elseif (Test-TagHasClass -Tag $promo -ClassName 'home-v2-featured__item-media') {
+      'homepage_v2_featured_supporting_image'
+    } else {
+      'homepage_v2_featured_lead_cta'
+    }
+    if ($slot -cne $expectedSlot -or $titleMatches.Count -ne 1 -or
+        (Get-AttributeValue -Tag $promo -Name 'data-analytics-event') -cne 'internal_promo_click' -or
+        (Get-AttributeValue -Tag $promo -Name 'data-analytics-path') -cne $promoPath) {
+      $uxIssues.Add("public/index.html => $expectedSlot must identify the same article as its title link")
+      continue
+    }
+    foreach ($field in @('data-analytics-slug', 'data-analytics-title', 'data-analytics-section')) {
+      if ((Get-AttributeValue -Tag $promo -Name $field) -cne (Get-AttributeValue -Tag $titleMatches[0] -Name $field)) {
+        $uxIssues.Add("public/index.html => $expectedSlot must share $field with its title link")
+      }
+    }
+  }
   $featuredImageLinks = @($leadImageLinks + $supportingImageLinks)
   $featuredImageTriggers = @(Get-OpenTags -Html $homeIndexHtml -TagName 'button' | Where-Object { $_ -match '\bdata-home-featured-image-trigger\b' })
   $featuredImageFallbacks = @($homeAnchors | Where-Object { $_ -match '\bdata-home-featured-image-fallback\b' })

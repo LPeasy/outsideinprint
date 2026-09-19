@@ -45,6 +45,7 @@ $requiredFiles = @(
   'layouts/partials/home_reader_banner.html',
   'layouts/partials/home_reader_newsletter.html',
   'layouts/partials/home_lead_summary.html',
+  'layouts/partials/home_feature_freshness.html',
   'layouts/partials/home_featured_image_button.html',
   'layouts/partials/home_featured_image_dialog.html',
   'assets/js/home-featured-image.js',
@@ -156,11 +157,13 @@ $homeReaderBanner = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/hom
 $homeReaderNewsletter = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_reader_newsletter.html') -Raw -Encoding utf8
 $homeImageButton = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_featured_image_button.html') -Raw -Encoding utf8
 $homeImageDialog = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_featured_image_dialog.html') -Raw -Encoding utf8
+$homeFeatureFreshness = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_feature_freshness.html') -Raw -Encoding utf8
 foreach ($requiredSnippet in @(
   'eq $page.RelPermalink "/essays/the-dolphin-company/"',
   '$sectionLabel = "Case study"',
   'home-v2-featured__item--illustrated',
   'class="home-v2-featured__item-media" href="{{ $page.RelPermalink }}"',
+  'class="home-v2-featured__item-heading"',
   'class="home-v2-featured__item-copy"',
   '"loading" "lazy"',
   '$supportImageSizes := "120px"',
@@ -175,8 +178,17 @@ foreach ($requiredSnippet in @(
 }
 if ($homeV2Template -notmatch '(?s)if eq \$index 1.*?\$supportImageSizes = "\(min-width: 72rem\) 24rem, \(min-width: 48rem\) 38vw, 100vw"' -or
     $homeV2Template -notmatch 'home-v2-featured__item--latest' -or
-    $homeV2Template -notmatch '<span class="home-v2-featured__new-tag">New!</span>') {
-  throw 'Expected the latest supporting card to receive wide responsive artwork and its New! label.'
+    $homeV2Template -notmatch 'partial "home_feature_freshness\.html" \(dict "publishedAt" \$page\.PublishDate "buildTime" \$buildTime\)' -or
+    $homeV2Template -notmatch '<time datetime="\{\{ \$page\.PublishDate\.Format "2006-01-02" \}\}">\{\{ \$page\.PublishDate\.Format "Jan 2, 2006" \}\}</time>' -or
+    $homeV2Template -notmatch '\$buildTime := now') {
+  throw 'Expected the latest supporting card to retain wide artwork, semantic publication date, and build-time freshness label.'
+}
+if ($homeFeatureFreshness -notmatch '\$ageSeconds := sub \.buildTime\.Unix \.publishedAt\.Unix' -or
+    $homeFeatureFreshness -notmatch 'and \(ge \$ageSeconds 0\) \(lt \$ageSeconds 1209600\)' -or
+    $homeFeatureFreshness -notmatch '\$label := "Latest"' -or
+    $homeFeatureFreshness -notmatch '\$label = "New!"' -or
+    $homeFeatureFreshness -notmatch 'return \$label') {
+  throw 'Expected a bounded, nonfuture 14-day freshness helper with Latest fallback.'
 }
 $dolphinSource = Get-Content -Path (Join-Path $repoRoot 'content/essays/the-dolphin-company.md') -Raw -Encoding utf8
 if ($dolphinSource -notmatch '(?m)^section_label: "Essay"\r?$') {
@@ -196,28 +208,70 @@ foreach ($tag in @('button', 'a')) {
   }
 }
 $leadMediaIndex = $homeV2Template.IndexOf('class="home-v2-featured__lead-media"', [System.StringComparison]::Ordinal)
+$leadHeadingIndex = $homeV2Template.IndexOf('class="home-v2-featured__lead-heading"', [System.StringComparison]::Ordinal)
+$leadArtIndex = $homeV2Template.IndexOf('class="home-v2-featured__art"', [System.StringComparison]::Ordinal)
 $leadArtworkIndex = $homeV2Template.IndexOf('partial "home_featured_image_button.html"', [System.StringComparison]::Ordinal)
 $leadCopyIndex = $homeV2Template.IndexOf('class="home-v2-featured__lead-copy"', [System.StringComparison]::Ordinal)
 $supportMediaIndex = $homeV2Template.IndexOf('class="home-v2-featured__item-media"', [System.StringComparison]::Ordinal)
 $supportArtworkIndex = $homeV2Template.IndexOf('partial "home_featured_image_button.html"', $leadArtworkIndex + 1, [System.StringComparison]::Ordinal)
 if ([regex]::Matches($homeV2Template, 'partial "home_featured_image_button\.html"').Count -ne 2 -or
+    $leadHeadingIndex -lt 0 -or $leadHeadingIndex -ge $leadArtIndex -or $leadArtIndex -ge $leadMediaIndex -or
     $leadMediaIndex -lt 0 -or $leadArtworkIndex -le $leadMediaIndex -or $leadArtworkIndex -ge $leadCopyIndex -or
     $supportArtworkIndex -le $supportMediaIndex -or
     $supportArtworkIndex -ge $homeV2Template.IndexOf('class="home-v2-featured__item-copy"', [System.StringComparison]::Ordinal) -or
     $homeV2Template -match 'home-v2-featured__meta[^\r\n]*partial "home_featured_image_button\.html"') {
   throw 'Expected separate lead and supporting zoom controls beside linked artwork, outside the metadata paragraphs.'
 }
+$leadHeadingMarkup = $homeV2Template.Substring($leadHeadingIndex, $leadArtIndex - $leadHeadingIndex)
+$leadCopyEndIndex = $homeV2Template.IndexOf('</article>', $leadCopyIndex, [System.StringComparison]::Ordinal)
+$leadCopyMarkup = $homeV2Template.Substring($leadCopyIndex, $leadCopyEndIndex - $leadCopyIndex)
+if ($leadHeadingMarkup -notmatch '(?s)class="home-v2-featured__meta".*?<h3>' -or
+    $leadCopyMarkup -match 'home-v2-featured__meta|<h3>' -or
+    $leadCopyMarkup -notmatch 'home-v2-featured__dek' -or
+    $leadCopyMarkup -notmatch 'home-v2-featured__action') {
+  throw 'Expected the flagship heading metadata and title above its artwork, with only summary and CTA below.'
+}
+$supportHeadingIndex = $homeV2Template.IndexOf('class="home-v2-featured__item-heading"', [System.StringComparison]::Ordinal)
+$supportArtIndex = $homeV2Template.IndexOf('class="home-v2-featured__art"', $supportHeadingIndex, [System.StringComparison]::Ordinal)
+$supportCopyIndex = $homeV2Template.IndexOf('class="home-v2-featured__item-copy"', [System.StringComparison]::Ordinal)
+if ($supportHeadingIndex -ge $supportArtIndex -or $supportArtIndex -ge $supportMediaIndex -or $supportMediaIndex -ge $supportCopyIndex) {
+  throw 'Expected supporting card headings before linked artwork, followed by summary copy in actual HTML order.'
+}
+$supportHeadingMarkup = $homeV2Template.Substring($supportHeadingIndex, $supportArtIndex - $supportHeadingIndex)
+$supportCopyEndIndex = $homeV2Template.IndexOf('</article>', $supportCopyIndex, [System.StringComparison]::Ordinal)
+$supportCopyMarkup = $homeV2Template.Substring($supportCopyIndex, $supportCopyEndIndex - $supportCopyIndex)
+if ($supportHeadingMarkup -notmatch '(?s)class="home-v2-featured__meta".*?\$page\.ReadingTime.*?<h3>.*?</header>' -or
+    $supportCopyMarkup -match 'home-v2-featured__meta|<h3>' -or
+    $supportCopyMarkup -notmatch '(?s)partial "discovery/page-summary\.html" \$page.*?<p>\{\{ \. \}\}</p>') {
+  throw 'Expected each supporting title and reading-time line in one semantic heading, with only the summary in its copy group.'
+}
+foreach ($slot in @('homepage_v2_featured_lead_image', 'homepage_v2_featured_lead_cta', 'homepage_v2_featured_supporting_image')) {
+  $anchor = [regex]::Match($homeV2Template, '(?s)<a\b(?=[^>]*data-analytics-source-slot="' + $slot + '")[^>]*>')
+  if (-not $anchor.Success -or
+      $anchor.Value -notmatch 'data-analytics-event="internal_promo_click"' -or
+      $anchor.Value -notmatch 'data-analytics-slug="\{\{ \$slug \}\}"' -or
+      $anchor.Value -notmatch 'data-analytics-title="\{\{ \$page\.Title \}\}"' -or
+      $anchor.Value -notmatch 'data-analytics-section="\{\{ \$sectionLabel \}\}"' -or
+      $anchor.Value -notmatch 'data-analytics-path="\{\{ \$page\.RelPermalink \}\}"') {
+    throw "Expected $slot to retain distinct internal-promo attribution and article metadata."
+  }
+}
 if ($homeImageDialog -notmatch '<dialog id="home-featured-image-dialog"[^>]*aria-labelledby="home-featured-image-title"' -or
     $homeImageDialog -notmatch '<button\b[^>]*data-home-featured-image-close[^>]*aria-label="Close illustration"') {
   throw 'Expected one labelled native image dialog with an image click-to-close control.'
 }
 if ($mainCss -notmatch '(?s)\.home-v2-featured__image-toggle\{[^}]*display:grid;' -or
+    $mainCss -notmatch '(?s)\.home-v2-featured__item-heading\{[^}]*grid-column:1 / -1;' -or
+    $mainCss -notmatch '(?s)\.home-v2-featured__item--illustrated:not\(\.home-v2-featured__item--latest\)\{[^}]*grid-template-rows:auto 1fr;[^}]*row-gap:0;' -or
+    $mainCss -notmatch '(?s)\.home-v2-featured__item--illustrated:not\(\.home-v2-featured__item--latest\)\s*>\s*\.home-v2-featured__item-heading\{[^}]*grid-column:2;[^}]*grid-row:1;' -or
+    $mainCss -notmatch '(?s)\.home-v2-featured__item--illustrated:not\(\.home-v2-featured__item--latest\)\s*>\s*\.home-v2-featured__art\{[^}]*grid-column:1;[^}]*grid-row:1 / span 2;' -or
+    $mainCss -notmatch '(?s)\.home-v2-featured__item--illustrated:not\(\.home-v2-featured__item--latest\)\s*>\s*\.home-v2-featured__item-copy\{[^}]*grid-column:2;[^}]*grid-row:2;' -or
     $mainCss -notmatch '(?s)\.home-v2-featured__image-toggle::before\{[^}]*background:rgba\(247,238,216,\.92\);' -or
     $mainCss -notmatch '(?s)\.home-v2-featured__item--latest\.home-v2-featured__item--illustrated\{[^}]*display:block;' -or
     $mainCss -notmatch '(?s)\.home-v2-featured__item--latest \.home-v2-featured__item-media img\{[^}]*object-fit:contain;' -or
     $mainCss -notmatch '(?s)@media \(max-width:768px\).*?\.home-v2-featured__item--illustrated\{[^}]*grid-template-columns:minmax\(0, 6rem\) minmax\(0, 1fr\);' -or
     $mainCss -notmatch '(?s)@media \(max-width:768px\).*?\.home-v2-featured__item-media\{[^}]*display:block;') {
-  throw 'Expected linked supporting artwork, a wide latest card, and a pale zoom icon across desktop and mobile.'
+  throw 'Expected compact cards to keep heading and summary beside artwork, the latest card to keep its wide-art layout, and pale zoom icons across desktop and mobile.'
 }
 foreach ($requiredSnippet in @(
   '<section class="masthead-proof" aria-label="Outside In Print at a glance">',
@@ -244,6 +298,7 @@ foreach ($requiredSnippet in @(
   'From the imprint',
   '<h2 id="home-reader-banner-title" tabindex="-1">',
   'One thoughtful letter each week.',
+  'Every Saturday: new writing, one revealing number, and a thought worth keeping.',
   'No spam ever. Unsubscribe anytime.',
   'Join the newsletter',
   'class="home-reader-banner__form"',
@@ -536,8 +591,10 @@ if ($mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link\{[^}]*position
     $mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link::before\{[^}]*position:absolute;[^}]*inset:-5px 0;' -or
     $mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link span\{[^}]*text-decoration:underline;' -or
     $mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link:focus-visible[^{}]*\{[^}]*outline:3px solid var\(--focus-ring\);' -or
-    $mainCss -notmatch '(?s)\.home-v2-featured\{[^}]*margin-top:1\.25rem;' -or
-    $mainCss -notmatch '(?s)@media \(max-width:520px\).*?\.home-v2-featured\{[^}]*margin-top:1rem;') {
+    $mainCss -notmatch '(?s)\.home-v2-featured\{[^}]*margin-top:\.75rem;[^}]*padding-top:\.65rem;' -or
+    $mainCss -notmatch '(?s)\.home-v2-featured__header\{[^}]*padding-bottom:\.65rem;' -or
+    $mainCss -notmatch '(?s)\.home-v2-featured__lead\{[^}]*padding:\.9rem' -or
+    $mainCss -notmatch '(?s)\.home-v2-featured__lead-heading\{[^}]*margin-bottom:\.7rem;') {
   throw 'Expected an underlined, keyboard-visible newsletter link with a 44px tap target and compact Featured Articles spacing.'
 }
 

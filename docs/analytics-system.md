@@ -64,6 +64,12 @@ Event metadata can include the public page, product code, format, collection, an
 
 Existing discovery slots include `article_collection_context` for article collection links and `studio_sample_exit` for marked Studio links. Slot labels identify where a click occurred; they do not establish a later inquiry or sale.
 
+### Homepage featured-link measurement — September 19, 2026 changeover
+
+The homepage's existing `homepage_v2_featured_lead` and `homepage_v2_featured_supporting` slots count title-link clicks. The September 19, 2026 release adds `homepage_v2_featured_lead_image`, `homepage_v2_featured_lead_cta`, and `homepage_v2_featured_supporting_image` for the other article links using the same `internal_promo_click` event. Illustration zoom and fallback controls are not article links and should not count as article clicks. Group the relevant title, image, and CTA slots for post-publication lead or supporting-card click totals. Historical totals for the existing slots are title-only. September 19 is a partial measurement-changeover day; September 20 is the first full reporting day under the expanded coverage. Do not present the new grouped totals as continuous with that older baseline.
+
+The homepage Buttondown form posts directly to the provider. Keep `newsletter_submit` and its `homepage_reader_banner` slot as a form-attempt signal, never as a confirmation event. During weekly review, inspect Buttondown's provider-native confirmed active subscriber total and net change separately from GoatCounter attempts, using explicit periods. Do not calculate a homepage attempt-to-confirmed conversion rate: other signup channels, unsubscribes, and confirmation lag prevent a valid match. Keep subscriber identities out of GoatCounter, public files, and repository exports; do not join email addresses to site analytics. There is no site-side confirmed-subscriber callback; automated confirmation attribution would require a separate server-side integration and is outside this measurement change.
+
 ## Historical files are not current reporting
 
 The committed `data/analytics/*.json` snapshots last contain data dated **April 14, 2026**. The import/export scripts, fixtures, and SEO rollout reports are retained as historical tools. Do not use them as current traffic reports or refresh them as part of this reporting setup.

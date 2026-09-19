@@ -313,6 +313,117 @@ test("hosted pageview and form/link events send only sanitized GoatCounter data"
   }
 });
 
+test("homepage article links emit one surface-specific click each while newsletter submit remains an attempt", async () => {
+  const sentinels = ["HOMEPAGE_QUERY_SENTINEL", "HOMEPAGE_FRAGMENT_SENTINEL", "HOMEPAGE_EMAIL_SENTINEL"];
+  const buttondownRequests = [];
+  const { context, counts, page } = await newInstrumentedPage();
+  page.on("request", (request) => {
+    if (new URL(request.url()).hostname === "buttondown.com") {
+      buttondownRequests.push(request.url());
+    }
+  });
+
+  try {
+    await page.goto(
+      `${canonicalOrigin}/?private=HOMEPAGE_QUERY_SENTINEL#HOMEPAGE_FRAGMENT_SENTINEL`,
+      { waitUntil: "load" }
+    );
+    await waitFor(
+      () => counts.find((record) => !countData(record).event),
+      "The homepage did not send its intercepted pageview."
+    );
+
+    const links = [
+      { selector: ".home-v2-featured__lead h3 a", slot: "homepage_v2_featured_lead", count: 1 },
+      { selector: ".home-v2-featured__lead-media", slot: "homepage_v2_featured_lead_image" },
+      { selector: ".home-v2-featured__action a", slot: "homepage_v2_featured_lead_cta", count: 1 },
+      { selector: ".home-v2-featured__item h3 a", slot: "homepage_v2_featured_supporting", count: 4 },
+      { selector: ".home-v2-featured__item-media", slot: "homepage_v2_featured_supporting_image" }
+    ];
+    const illustrationCount = await page.locator(".home-v2-featured__lead-media, .home-v2-featured__item-media").count();
+    let expectedClicks = 0;
+
+    for (const entry of links) {
+      const anchors = page.locator(entry.selector);
+      const anchorCount = await anchors.count();
+      if (entry.count !== undefined) {
+        assert.equal(anchorCount, entry.count, `Unexpected homepage article-link count: ${entry.selector}`);
+      }
+      for (let index = 0; index < anchorCount; index += 1) {
+        const target = await anchors.nth(index).evaluate((node) => {
+          node.addEventListener("click", (event) => event.preventDefault(), { once: true });
+          node.click();
+          return {
+            path: new URL(node.href).pathname,
+            slug: node.dataset.analyticsSlug,
+            section: node.dataset.analyticsSection
+          };
+        });
+        expectedClicks += 1;
+        const clickEvents = await waitFor(
+          () => {
+            const events = counts.filter((record) => countData(record).path.startsWith("oip:internal_promo_click"));
+            return events.length === expectedClicks ? events : null;
+          },
+          `${entry.selector}[${index}] did not send exactly one article click.`
+        );
+        assert.deepEqual(eventParts(clickEvents[expectedClicks - 1]), {
+          name: "internal_promo_click",
+          fields: { path: target.path, slug: target.slug, section: target.section, source_slot: entry.slot }
+        });
+      }
+    }
+    assert.equal(expectedClicks, 6 + illustrationCount, "Featured article links include five titles, one lead CTA, and every rendered illustration.");
+
+    const zooms = page.locator("[data-home-featured-image-trigger]");
+    assert.equal(await zooms.count(), illustrationCount, "Each rendered featured illustration needs its own zoom control.");
+    assert.equal(await page.locator("[data-home-featured-image-fallback]").count(), illustrationCount);
+    for (let index = 0; index < illustrationCount; index += 1) {
+      const opened = await zooms.nth(index).evaluate((zoom) => {
+        const fallback = zoom.closest("article")?.querySelector("[data-home-featured-image-fallback]");
+        const dialog = document.querySelector("[data-home-featured-dialog]");
+        if (!fallback || !dialog) throw new Error("Missing homepage illustration fallback or dialog.");
+        fallback.addEventListener("click", (event) => event.preventDefault(), { once: true });
+        fallback.click();
+        zoom.click();
+        return dialog.open;
+      });
+      assert.equal(opened, true, `Illustration dialog did not open for featured card ${index + 1}.`);
+      const closed = await page.locator("[data-home-featured-image-close]").evaluate((button) => {
+        button.click();
+        return !button.closest("dialog").open;
+      });
+      assert.equal(closed, true, `Illustration dialog did not close for featured card ${index + 1}.`);
+    }
+
+    const form = page.locator('form[data-analytics-event="newsletter_submit"][data-analytics-source-slot="homepage_reader_banner"]');
+    assert.equal(await form.count(), 1, "Missing the homepage newsletter form.");
+    await form.locator('input[type="email"]').fill("HOMEPAGE_EMAIL_SENTINEL@example.com");
+    await form.evaluate((node) => {
+      node.addEventListener("submit", (event) => event.preventDefault(), { once: true });
+      node.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+    });
+    await waitFor(
+      () => counts.find((record) => countData(record).path.startsWith("oip:newsletter_submit")),
+      "The homepage newsletter form did not send its submission-attempt event."
+    );
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    const clickEvents = counts.filter((record) => countData(record).path.startsWith("oip:internal_promo_click"));
+    assert.equal(clickEvents.length, expectedClicks, "Illustration controls must not add article click events.");
+    const submitEvents = counts.filter((record) => countData(record).path.startsWith("oip:newsletter_submit"));
+    assert.equal(submitEvents.length, 1, "One prevented form submit must record one attempt, not a confirmation.");
+    assert.equal(eventParts(submitEvents[0]).fields.source_slot, "homepage_reader_banner");
+    assert.equal(buttondownRequests.length, 0, "The test must never request the live Buttondown subscribe endpoint.");
+    for (const record of counts) {
+      assert.equal(new URL(record.url).origin, countOrigin, "Analytics must be intercepted locally, not sent to another host.");
+      assertPrivacyBoundary(record, sentinels);
+    }
+  } finally {
+    await context.close();
+  }
+});
+
 test("image fallback keeps internal paths and drops off-site paths without leaking URL data", async () => {
   const sentinels = [
     "FALLBACK_QUERY_SENTINEL",

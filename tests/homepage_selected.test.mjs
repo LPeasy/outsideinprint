@@ -13,6 +13,7 @@ const selected = read("layouts/partials/home_v2_selected.html");
 const readerBanner = read("layouts/partials/home_reader_banner.html");
 const readerNewsletter = read("layouts/partials/home_reader_newsletter.html");
 const leadSummary = read("layouts/partials/home_lead_summary.html");
+const featureFreshness = read("layouts/partials/home_feature_freshness.html");
 const featuredImageButton = read("layouts/partials/home_featured_image_button.html");
 const featuredImageDialog = read("layouts/partials/home_featured_image_dialog.html");
 const metrics = read("data/homepage_metrics.yaml");
@@ -46,6 +47,7 @@ test("reader banner contains only owner-provided proof and the newsletter offer 
   assert.doesNotMatch(readerNewsletter, /Independent writing on history, economics, culture, and public life\./);
   assert.match(readerNewsletter, /<h2 id="home-reader-banner-title" tabindex="-1">/);
   assert.match(readerNewsletter, /One thoughtful letter each week\./);
+  assert.match(readerNewsletter, /Every Saturday: new writing, one revealing number, and a thought worth keeping\./);
   assert.match(readerNewsletter, /No spam ever\. Unsubscribe anytime\./);
   assert.match(readerNewsletter, /Join the newsletter/);
   assert.match(readerNewsletter, /eq \$provider "buttondown"/);
@@ -203,21 +205,43 @@ test("featured lead reuses a published image and responsive rendering", () => {
   assert.match(homeV2, /partial "images\/picture\.html"/);
   assert.match(homeV2, /"loading" "eager"/);
   assert.match(homeV2, /"fetchpriority" "high"/);
+  const leadHeading = homeV2.indexOf('class="home-v2-featured__lead-heading"');
   const leadMedia = homeV2.indexOf('class="home-v2-featured__lead-media"');
   const leadZoom = homeV2.indexOf('partial "home_featured_image_button.html"', leadMedia);
   const leadCopy = homeV2.indexOf('class="home-v2-featured__lead-copy"');
-  assert.ok(leadMedia >= 0 && leadZoom > leadMedia && leadZoom < leadCopy);
+  assert.ok(leadHeading >= 0 && leadHeading < leadMedia && leadZoom > leadMedia && leadZoom < leadCopy);
+  const headingMarkup = homeV2.slice(leadHeading, leadMedia);
+  const copyMarkup = homeV2.slice(leadCopy, homeV2.indexOf('</article>', leadCopy));
+  assert.match(headingMarkup, /class="home-v2-featured__meta"[\s\S]*?<h3>/);
+  assert.doesNotMatch(copyMarkup, /home-v2-featured__meta|<h3>/);
+  assert.match(copyMarkup, /home-v2-featured__dek/);
+  assert.match(copyMarkup, /home-v2-featured__action/);
+  for (const slot of ["homepage_v2_featured_lead_image", "homepage_v2_featured_lead_cta"]) {
+    assert.match(homeV2, new RegExp(`data-analytics-source-slot="${slot}"`));
+  }
   assert.doesNotMatch(homeV2, /<img\b/);
 });
 
-test("supporting illustrations open articles on mobile with a separate zoom control", () => {
+test("supporting cards retain semantic heading order, compact side-by-side copy, and separate mobile zoom controls", () => {
   assert.match(homeV2, /home-v2-featured__item\{\{ if \$imageModel \}\} home-v2-featured__item--illustrated/);
   assert.match(homeV2, /class="home-v2-featured__item-media" href="\{\{ \$page\.RelPermalink \}\}"/);
   assert.match(homeV2, /class="home-v2-featured__item-copy"/);
   assert.match(homeV2, /\$supportImageSizes := "120px"/);
   assert.match(homeV2, /if eq \$index 1[\s\S]*?\$supportImageSizes = "\(min-width: 72rem\) 24rem, \(min-width: 48rem\) 38vw, 100vw"/);
   assert.match(homeV2, /"loading" "lazy"[\s\S]*?"sizes" \$supportImageSizes/);
-  assert.match(homeV2, /<span class="home-v2-featured__new-tag">New!<\/span>/);
+  assert.match(homeV2, /partial "home_feature_freshness\.html" \(dict "publishedAt" \$page\.PublishDate "buildTime" \$buildTime\)/);
+  assert.match(homeV2, /<time datetime="\{\{ \$page\.PublishDate\.Format "2006-01-02" \}\}">\{\{ \$page\.PublishDate\.Format "Jan 2, 2006" \}\}<\/time>/);
+  assert.match(homeV2, /data-analytics-source-slot="homepage_v2_featured_supporting_image"/);
+  assert.match(featureFreshness, /1209600/);
+  const supportHeading = homeV2.indexOf('class="home-v2-featured__item-heading"');
+  const supportArt = homeV2.indexOf('class="home-v2-featured__art"', supportHeading);
+  const supportCopy = homeV2.indexOf('class="home-v2-featured__item-copy"');
+  assert.ok(supportHeading >= 0 && supportHeading < supportArt && supportArt < supportCopy);
+  const headingMarkup = homeV2.slice(supportHeading, supportArt);
+  const copyMarkup = homeV2.slice(supportCopy, homeV2.indexOf('</article>', supportCopy));
+  assert.match(headingMarkup, /class="home-v2-featured__meta"[\s\S]*?\$page\.ReadingTime[\s\S]*?<h3>[\s\S]*?<\/header>/);
+  assert.doesNotMatch(copyMarkup, /home-v2-featured__meta|<h3>/);
+  assert.match(copyMarkup, /partial "discovery\/page-summary\.html" \$page[\s\S]*?<p>\{\{ \. \}\}<\/p>/);
   const mobileArtIndex = homeV2.indexOf('partial "home_featured_image_button.html"', homeV2.indexOf('class="home-v2-featured__item-media"'));
   assert.ok(mobileArtIndex > homeV2.indexOf('class="home-v2-featured__item-media"'));
   assert.ok(mobileArtIndex < homeV2.indexOf('class="home-v2-featured__item-copy"'));
@@ -240,6 +264,11 @@ test("supporting illustrations open articles on mobile with a separate zoom cont
   assert.match(css, /\.home-v2-featured__image-toggle\{[^}]*display:grid;/);
   assert.match(css, /\.home-v2-featured__image-toggle::before\{[^}]*background:rgba\(247,238,216,\.92\);/);
   assert.match(css, /\.home-v2-featured__art\{position:relative;/);
+  assert.match(css, /\.home-v2-featured__item-heading\{[^}]*grid-column:1 \/ -1;/);
+  assert.match(css, /\.home-v2-featured__item--illustrated:not\(\.home-v2-featured__item--latest\)\{[^}]*grid-template-rows:auto 1fr;[^}]*row-gap:0;/);
+  assert.match(css, /\.home-v2-featured__item--illustrated:not\(\.home-v2-featured__item--latest\)\s*>\s*\.home-v2-featured__item-heading\{[^}]*grid-column:2;[^}]*grid-row:1;/);
+  assert.match(css, /\.home-v2-featured__item--illustrated:not\(\.home-v2-featured__item--latest\)\s*>\s*\.home-v2-featured__art\{[^}]*grid-column:1;[^}]*grid-row:1 \/ span 2;/);
+  assert.match(css, /\.home-v2-featured__item--illustrated:not\(\.home-v2-featured__item--latest\)\s*>\s*\.home-v2-featured__item-copy\{[^}]*grid-column:2;[^}]*grid-row:2;/);
   assert.match(css, /\.home-v2-featured__item--latest\.home-v2-featured__item--illustrated\{[^}]*display:block;/);
   assert.match(css, /\.home-v2-featured__item--latest \.home-v2-featured__item-media img\{[^}]*object-fit:contain;/);
   assert.match(css, /@media \(max-width:768px\)[\s\S]*\.home-v2-featured__item--illustrated\{[^}]*grid-template-columns:minmax\(0, 6rem\) minmax\(0, 1fr\);/);
@@ -281,8 +310,10 @@ test("new homepage system has responsive, keyboard-visible editorial styling", (
   assert.match(css, /\.home-reader-banner__newsletter-link:focus-visible[^{}]*\{[^}]*outline:3px solid var\(--focus-ring\);/);
   assert.match(css, /\.home-reader-banner__newsletter-link\{[^}]*min-height:34px;/);
   assert.match(css, /\.home-reader-banner__newsletter-link::before\{[^}]*inset:-5px 0;/);
-  assert.match(css, /\.home-v2-featured\{[^}]*margin-top:1\.25rem;/);
-  assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-v2-featured\{[^}]*margin-top:1rem;/);
+  assert.match(css, /\.home-v2-featured\{[^}]*margin-top:\.75rem;[^}]*padding-top:\.65rem;/);
+  assert.match(css, /\.home-v2-featured__header\{[^}]*padding-bottom:\.65rem;/);
+  assert.match(css, /\.home-v2-featured__lead\{[^}]*padding:\.9rem/);
+  assert.match(css, /\.home-v2-featured__lead-heading\{[^}]*margin-bottom:\.7rem;/);
   assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-library\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
   assert.match(css, /\.home-front-page__orientation\{[^}]*display:grid;[^}]*grid-template-areas:\s*"label"\s*"copy"\s*"links";[^}]*max-width:70rem;/);
   assert.match(css, /\.home-front-page__welcome-copy\{[^}]*margin:0;[^}]*font-size:\.94rem;[^}]*line-height:1\.42;/);

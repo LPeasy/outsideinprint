@@ -1,6 +1,7 @@
 {{- $featured := partial "home_v2_selected.html" . -}}
 {{- $readerThreshold := hugo.Data.homepage_metrics.reader_threshold -}}
 {{- $readerMetrics := hugo.Data.homepage_metrics.articles -}}
+{{- $buildTime := now -}}
 
 <section class="home-v2" aria-labelledby="home-front-page-title">
   <h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>
@@ -34,10 +35,28 @@
           {{- end -}}
           {{- if eq $index 0 }}
             <article class="home-v2-featured__lead">
+              <header class="home-v2-featured__lead-heading">
+                <p class="home-v2-featured__meta"><span>{{ $sectionLabel }}</span><span>{{ $page.ReadingTime }} min read</span>{{ with (index $readerMetrics $page.RelPermalink) }}{{ if ge .value $readerThreshold }}<span>{{ .display_label }}</span>{{ end }}{{ end }}</p>
+                <h3><a href="{{ $page.RelPermalink }}"
+                  data-analytics-event="internal_promo_click"
+                  data-analytics-source-slot="homepage_v2_featured_lead"
+                  data-analytics-slug="{{ $slug }}"
+                  data-analytics-title="{{ $page.Title }}"
+                  data-analytics-section="{{ $sectionLabel }}"
+                  data-analytics-path="{{ $page.RelPermalink }}"
+                >{{ $page.Title }}</a></h3>
+              </header>
               {{- with $page.Params.featured_image }}
                 {{- $imageModel := partial "images/model.html" (dict "page" $page "ref" . "display" true) -}}
                 <div class="home-v2-featured__art">
-                  <a class="home-v2-featured__lead-media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
+                  <a class="home-v2-featured__lead-media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}"
+                    data-analytics-event="internal_promo_click"
+                    data-analytics-source-slot="homepage_v2_featured_lead_image"
+                    data-analytics-slug="{{ $slug }}"
+                    data-analytics-title="{{ $page.Title }}"
+                    data-analytics-section="{{ $sectionLabel }}"
+                    data-analytics-path="{{ $page.RelPermalink }}"
+                  >
                     {{- partial "images/picture.html" (dict
                       "model" $imageModel
                       "alt" ($page.Params.featured_image_alt | default "")
@@ -50,17 +69,15 @@
                 </div>
               {{- end }}
               <div class="home-v2-featured__lead-copy">
-                <p class="home-v2-featured__meta"><span>{{ $sectionLabel }}</span><span>{{ $page.ReadingTime }} min read</span>{{ with (index $readerMetrics $page.RelPermalink) }}{{ if ge .value $readerThreshold }}<span>{{ .display_label }}</span>{{ end }}{{ end }}</p>
-                <h3><a href="{{ $page.RelPermalink }}"
+                {{- with (partial "home_lead_summary.html" $page) }}<p class="home-v2-featured__dek">{{ . }}</p>{{ end }}
+                <p class="home-v2-featured__action"><a href="{{ $page.RelPermalink }}"
                   data-analytics-event="internal_promo_click"
-                  data-analytics-source-slot="homepage_v2_featured_lead"
+                  data-analytics-source-slot="homepage_v2_featured_lead_cta"
                   data-analytics-slug="{{ $slug }}"
                   data-analytics-title="{{ $page.Title }}"
                   data-analytics-section="{{ $sectionLabel }}"
                   data-analytics-path="{{ $page.RelPermalink }}"
-                >{{ $page.Title }}</a></h3>
-                {{- with (partial "home_lead_summary.html" $page) }}<p class="home-v2-featured__dek">{{ . }}</p>{{ end }}
-                <p class="home-v2-featured__action"><a href="{{ $page.RelPermalink }}">Read the piece <span aria-hidden="true">&rarr;</span></a></p>
+                >Read the piece <span aria-hidden="true">&rarr;</span></a></p>
               </div>
             </article>
           {{- else }}
@@ -72,9 +89,27 @@
             {{- $supportImageSizes := "120px" -}}
             {{- if eq $index 1 }}{{ $supportImageSizes = "(min-width: 72rem) 24rem, (min-width: 48rem) 38vw, 100vw" }}{{ end -}}
             <article class="home-v2-featured__item{{ if $imageModel }} home-v2-featured__item--illustrated{{ end }}{{ if eq $index 1 }} home-v2-featured__item--latest{{ end }}">
+              <header class="home-v2-featured__item-heading">
+                <p class="home-v2-featured__meta">{{ if eq $index 1 }}<span class="home-v2-featured__new-tag">{{ partial "home_feature_freshness.html" (dict "publishedAt" $page.PublishDate "buildTime" $buildTime) }}</span>{{ end }}<span>{{ $sectionLabel }}</span><span>{{ $page.ReadingTime }} min read</span>{{ with (index $readerMetrics $page.RelPermalink) }}{{ if ge .value $readerThreshold }}<span>{{ .display_label }}</span>{{ end }}{{ end }}{{ if eq $index 1 }}<span><time datetime="{{ $page.PublishDate.Format "2006-01-02" }}">{{ $page.PublishDate.Format "Jan 2, 2006" }}</time></span>{{ end }}</p>
+                <h3><a href="{{ $page.RelPermalink }}"
+                  data-analytics-event="internal_promo_click"
+                  data-analytics-source-slot="homepage_v2_featured_supporting"
+                  data-analytics-slug="{{ $slug }}"
+                  data-analytics-title="{{ $page.Title }}"
+                  data-analytics-section="{{ $sectionLabel }}"
+                  data-analytics-path="{{ $page.RelPermalink }}"
+                >{{ $page.Title }}</a></h3>
+              </header>
               {{- with $imageModel }}
                 <div class="home-v2-featured__art">
-                <a class="home-v2-featured__item-media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
+                <a class="home-v2-featured__item-media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}"
+                  data-analytics-event="internal_promo_click"
+                  data-analytics-source-slot="homepage_v2_featured_supporting_image"
+                  data-analytics-slug="{{ $slug }}"
+                  data-analytics-title="{{ $page.Title }}"
+                  data-analytics-section="{{ $sectionLabel }}"
+                  data-analytics-path="{{ $page.RelPermalink }}"
+                >
                   {{- partial "images/picture.html" (dict
                     "model" .
                     "alt" ($page.Params.featured_image_alt | default "")
@@ -86,16 +121,7 @@
                 </div>
               {{- end }}
               <div class="home-v2-featured__item-copy">
-              <p class="home-v2-featured__meta">{{ if eq $index 1 }}<span class="home-v2-featured__new-tag">New!</span>{{ end }}<span>{{ $sectionLabel }}</span><span>{{ $page.ReadingTime }} min read</span>{{ with (index $readerMetrics $page.RelPermalink) }}{{ if ge .value $readerThreshold }}<span>{{ .display_label }}</span>{{ end }}{{ end }}</p>
-              <h3><a href="{{ $page.RelPermalink }}"
-                data-analytics-event="internal_promo_click"
-                data-analytics-source-slot="homepage_v2_featured_supporting"
-                data-analytics-slug="{{ $slug }}"
-                data-analytics-title="{{ $page.Title }}"
-                data-analytics-section="{{ $sectionLabel }}"
-                data-analytics-path="{{ $page.RelPermalink }}"
-              >{{ $page.Title }}</a></h3>
-              {{- with (partial "discovery/page-summary.html" $page) }}<p>{{ . }}</p>{{ end }}
+                {{- with (partial "discovery/page-summary.html" $page) }}<p>{{ . }}</p>{{ end }}
               </div>
             </article>
             {{- if eq $index (sub (len $featured) 1) }}</div>{{ end }}

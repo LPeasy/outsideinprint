@@ -1,0 +1,6 @@
+{{- $ageSeconds := sub .buildTime.Unix .publishedAt.Unix -}}
+{{- $label := "Latest" -}}
+{{- if and (ge $ageSeconds 0) (lt $ageSeconds 1209600) -}}
+  {{- $label = "New!" -}}
+{{- end -}}
+{{- return $label -}}

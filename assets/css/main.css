@@ -2082,8 +2082,8 @@ html[data-theme="light"] .paper-route-toggle{
   text-transform:uppercase;
 }
 .home-v2-featured{
-  margin-top:1.25rem;
-  padding-top:1.05rem;
+  margin-top:.75rem;
+  padding-top:.65rem;
   border-top:4px double var(--oip-rule-engraved-strong);
 }
 .home-v2-featured__header{
@@ -2091,7 +2091,7 @@ html[data-theme="light"] .paper-route-toggle{
   grid-template-columns:minmax(0, 1fr) minmax(16rem, 29rem);
   gap:1rem 2rem;
   align-items:end;
-  padding-bottom:.9rem;
+  padding-bottom:.65rem;
   border-bottom:1px solid var(--oip-rule-standard);
 }
 .home-v2-featured__header h2{
@@ -2119,8 +2119,11 @@ html[data-theme="light"] .paper-route-toggle{
 }
 .home-v2-featured__lead{
   min-width:0;
-  padding:1.25rem 1.5rem 1.1rem 0;
+  padding:.9rem 1.5rem 1.1rem 0;
   border-right:1px solid var(--oip-rule-standard);
+}
+.home-v2-featured__lead-heading{
+  margin-bottom:.7rem;
 }
 .home-v2-featured__lead-media{
   display:block;
@@ -2238,8 +2241,31 @@ html[data-theme="light"] .paper-route-toggle{
   gap:.85rem;
   align-items:start;
 }
+.home-v2-featured__item-heading{
+  grid-column:1 / -1;
+  min-width:0;
+}
+.home-v2-featured__item--illustrated:not(.home-v2-featured__item--latest){
+  grid-template-rows:auto 1fr;
+  row-gap:0;
+}
+.home-v2-featured__item--illustrated:not(.home-v2-featured__item--latest) > .home-v2-featured__item-heading{
+  grid-column:2;
+  grid-row:1;
+}
+.home-v2-featured__item--illustrated:not(.home-v2-featured__item--latest) > .home-v2-featured__art{
+  grid-column:1;
+  grid-row:1 / span 2;
+}
+.home-v2-featured__item--illustrated:not(.home-v2-featured__item--latest) > .home-v2-featured__item-copy{
+  grid-column:2;
+  grid-row:2;
+}
 .home-v2-featured__item--latest.home-v2-featured__item--illustrated{
   display:block;
+}
+.home-v2-featured__item--latest .home-v2-featured__item-heading{
+  margin-bottom:.7rem;
 }
 .home-v2-featured__item--latest .home-v2-featured__art{
   max-width:32rem;
@@ -2611,9 +2637,6 @@ html[data-theme="light"] .paper-route-toggle{
     margin:0 0 .22rem;
     font-size:.75rem;
     text-align:right;
-  }
-  .home-v2-featured{
-    margin-top:1rem;
   }
   .home-v2-featured__supporting{
     display:block;

@@ -33,12 +33,12 @@ const rows = csv.trim().split(/\r?\n/).map((line) =>
     .map((match) => match[1].replace(/^"|"$/g, "").replace(/""/g, '"')));
 const columns = rows.shift();
 const observationTime = Date.now();
-const publishedRoutes = rows.map((row) => Object.fromEntries(columns.map((column, index) => [column, row[index]])))
+const publishedPages = rows.map((row) => Object.fromEntries(columns.map((column, index) => [column, row[index]])))
   .map((row) => ({ ...row, route: new URL(row.permalink).pathname }))
   .filter((row) => row.kind === "page" && archiveRoutes.has(row.route)
     && Date.parse(row.date) <= observationTime && Date.parse(row.publishDate) <= observationTime)
-  .sort((a, b) => Date.parse(b.publishDate) - Date.parse(a.publishDate) || a.title.localeCompare(b.title))
-  .map((row) => row.route);
+  .sort((a, b) => Date.parse(b.publishDate) - Date.parse(a.publishDate) || a.title.localeCompare(b.title));
+const publishedRoutes = publishedPages.map((row) => row.route);
 const pinnedRoutes = [
   "/essays/the-dolphin-company/",
   "/syd-and-oliver/what-i-had/",
@@ -66,6 +66,7 @@ test("rendered stats open the homepage and the newsletter cell reaches its focus
   assert.ok(heading);
   assert.equal(attribute(heading, "tabindex"), "-1");
   assert.ok(html.indexOf(newsletterLinks[0][1]) < html.indexOf(heading));
+  assert.match(html, /Every Saturday: new writing, one revealing number, and a thought worth keeping\./);
 });
 
 test("Dolphin correction retains the original publication date and renders a consistent new edition record", () => {
@@ -107,21 +108,61 @@ test("rendered homepage leads with Dolphin, then the newest remaining publicatio
     if (route === "/essays/reverse-origami/") assert.equal(canonicalKind, "Musing");
     const metric = metricRecords.get(route);
     const badge = metric?.value >= threshold ? metric.label : "";
-    const promoLink = card[2].match(/<a\b[^>]*data-analytics-source-slot=[^>]*>/)?.[0];
+    const anchors = [...card[2].matchAll(/<a\b[^>]*>/g)].map((match) => match[0]);
+    const promoLink = anchors.find((tag) => attribute(tag, "data-analytics-source-slot") ===
+      (index === 0 ? "homepage_v2_featured_lead" : "homepage_v2_featured_supporting"));
     assert.ok(promoLink, `${route} must retain promotion tracking`);
     assert.equal(attribute(promoLink, "href"), route);
     assert.equal(attribute(promoLink, "data-analytics-section"), kind);
+    const assertPromo = (tag, slot) => {
+      assert.ok(tag, `${route} must expose ${slot}`);
+      for (const [name, value] of Object.entries({
+        "href": route,
+        "data-analytics-event": "internal_promo_click",
+        "data-analytics-source-slot": slot,
+        "data-analytics-slug": attribute(promoLink, "data-analytics-slug"),
+        "data-analytics-title": attribute(promoLink, "data-analytics-title"),
+        "data-analytics-section": kind,
+        "data-analytics-path": route,
+      })) assert.equal(attribute(tag, name), value, `${route} ${slot} ${name}`);
+    };
+    assertPromo(promoLink, index === 0 ? "homepage_v2_featured_lead" : "homepage_v2_featured_supporting");
     assert.ok(fs.existsSync(path.join(siteDir, route, "index.html")), `${route} must have a rendered destination`);
     const meta = card[2].match(/<p\b[^>]*class=(?:"home-v2-featured__meta"|home-v2-featured__meta)[^>]*>([\s\S]*?)<\/p>/)?.[1];
     assert.ok(meta);
     const newTags = [...meta.matchAll(/(<span\b[^>]*>)([^<]*)<\/span>/g)]
       .filter((match) => attribute(match[1], "class").split(/\s+/).includes("home-v2-featured__new-tag"));
-    assert.deepEqual(newTags.map((match) => text(match[2])), index === 1 ? ["New!"] : []);
+    const latestPublication = publishedPages.find((page) => page.route === route);
+    if (index === 1) {
+      assert.equal(newTags.length, 1, "latest card has one freshness tag");
+      assert.ok(["New!", "Latest"].includes(text(newTags[0][2])));
+    } else {
+      assert.equal(newTags.length, 0, "other cards have no freshness tag");
+    }
+    const dates = [...meta.matchAll(/<time\b[^>]*>([^<]+)<\/time>/g)];
+    assert.equal(dates.length, index === 1 ? 1 : 0);
+    if (index === 1) {
+      assert.equal(attribute(dates[0][0], "datetime"), latestPublication.publishDate.slice(0, 10));
+      assert.match(text(dates[0][1]), /^[A-Z][a-z]{2} \d{1,2}, \d{4}$/);
+    }
     const labels = [...meta.matchAll(/<span>(.*?)<\/span>/g)].map((match) => text(match[1]));
     assert.equal(labels[0], kind);
     assert.match(labels[1], /^\d+ min read$/);
-    assert.deepEqual(labels.slice(2), badge ? [badge] : []);
+    assert.deepEqual(labels.slice(2), [
+      ...(badge ? [badge] : []),
+      ...(index === 1 ? [text(dates[0][1])] : []),
+    ]);
     if (index === 0) {
+      const heading = card[2].match(/<header\b[^>]*class=(?:"home-v2-featured__lead-heading"|home-v2-featured__lead-heading)[^>]*>([\s\S]*?)<\/header>/)?.[1];
+      assert.ok(heading, "flagship metadata and title precede the artwork");
+      assert.match(heading, /home-v2-featured__meta[\s\S]*?<h3>/);
+      assert.ok(card[2].indexOf("home-v2-featured__lead-heading") < card[2].indexOf("home-v2-featured__art"));
+      const leadCopy = card[2].match(/<div\b[^>]*class=(?:"home-v2-featured__lead-copy"|home-v2-featured__lead-copy)[^>]*>([\s\S]*?)<\/div>/)?.[1];
+      assert.ok(leadCopy);
+      assert.doesNotMatch(leadCopy, /home-v2-featured__meta|<h3>/);
+      assert.match(leadCopy, /home-v2-featured__dek[\s\S]*?home-v2-featured__action/);
+      assertPromo(anchors.find((tag) => attribute(tag, "class").split(/\s+/).includes("home-v2-featured__lead-media")), "homepage_v2_featured_lead_image");
+      assertPromo(anchors.find((tag) => attribute(tag, "data-analytics-source-slot") === "homepage_v2_featured_lead_cta"), "homepage_v2_featured_lead_cta");
       assert.doesNotMatch(card[2], /home-v2-featured__item-media/);
       const leadMedia = [...card[2].matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/g)]
         .find((match) => attribute(match[1], "class").split(/\s+/).includes("home-v2-featured__lead-media"));
@@ -145,12 +186,23 @@ test("rendered homepage leads with Dolphin, then the newest remaining publicatio
       assert.equal(attribute(triggerMarkup[1], "data-alt"), attribute(leadImage, "alt"));
       assert.doesNotMatch(triggerMarkup[2] + fallbackMarkup[2], /<img\b/, "zoom controls do not duplicate flagship art");
     } else {
+      const heading = card[2].match(/<header\b[^>]*class=(?:"home-v2-featured__item-heading"|home-v2-featured__item-heading)[^>]*>([\s\S]*?)<\/header>/)?.[1];
+      const copy = card[2].match(/<div\b[^>]*class=(?:"home-v2-featured__item-copy"|home-v2-featured__item-copy)[^>]*>([\s\S]*?)<\/div>/)?.[1];
+      assert.ok(heading, `${route} has one dedicated heading before its artwork and summary in DOM order`);
+      assert.match(heading, /home-v2-featured__meta[\s\S]*?\d+ min read[\s\S]*?<h3>/);
+      assert.ok(heading.includes(promoLink), `${route} keeps its tracked title in the heading`);
+      assert.ok(copy);
+      assert.doesNotMatch(copy, /home-v2-featured__meta|<h3>/);
+      assert.match(copy, /<p>/);
+      assert.ok(card[2].indexOf("home-v2-featured__item-heading") < card[2].indexOf("home-v2-featured__item-copy"));
       const media = [...card[2].matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/g)]
         .filter((match) => attribute(match[1], "class").split(/\s+/).includes("home-v2-featured__item-media"));
       if (pinnedRoutes.includes(route)) assert.equal(media.length, 1, `${route} must reuse its existing illustration`);
       if (media.length) {
         assert.equal(media.length, 1);
+        assert.ok(card[2].indexOf("</header>") < card[2].indexOf("home-v2-featured__art"), `${route} closes its heading before the illustration in DOM order`);
         assert.equal(attribute(media[0][1], "href"), route);
+        assertPromo(media[0][1], "homepage_v2_featured_supporting_image");
         const illustration = media[0][2].match(/<img\b[^>]*>/)?.[0];
         assert.ok(illustration);
         assert.equal(attribute(illustration, "loading"), "lazy");
