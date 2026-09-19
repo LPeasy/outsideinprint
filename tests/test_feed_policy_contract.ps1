@@ -234,7 +234,15 @@ $rootFeed = Read-Feed 'index.xml' 'https://outsideinprint.org/index.xml' 'https:
 $archiveFeed = Read-Feed 'archive/index.xml' 'https://outsideinprint.org/archive/index.xml' 'https://outsideinprint.org/archive/' 50
 $essaysFeed = Read-Feed 'essays/index.xml' 'https://outsideinprint.org/essays/index.xml' 'https://outsideinprint.org/archive/' 50
 $dialogueFeed = Read-Feed 'syd-and-oliver/index.xml' 'https://outsideinprint.org/syd-and-oliver/index.xml' 'https://outsideinprint.org/collections/syd-and-oliver-dialogues/' 19
-$almanackFeed = Read-Feed 'almanack/index.xml' 'https://outsideinprint.org/almanack/index.xml' 'https://outsideinprint.org/collections/bobs-almanack/' 19
+[xml]$sitemap = Get-Content -LiteralPath (Join-Path $siteRoot 'sitemap.xml') -Raw -Encoding utf8
+$expectedAlmanackLinks = @(
+  $sitemap.urlset.url | ForEach-Object { [string]$_.loc } |
+    Where-Object { $_ -match '^https://outsideinprint\.org/almanack/\d{4}-\d{2}-\d{2}/$' } |
+    Sort-Object
+)
+Assert-True ($expectedAlmanackLinks.Count -gt 0) 'Production sitemap must contain published Almanack issues.'
+$almanackFeed = Read-Feed 'almanack/index.xml' 'https://outsideinprint.org/almanack/index.xml' 'https://outsideinprint.org/collections/bobs-almanack/' $expectedAlmanackLinks.Count
+Assert-True ((@($almanackFeed.Links | Sort-Object) -join "`n") -ceq ($expectedAlmanackLinks -join "`n")) 'Almanack feed must contain every published issue in the production sitemap exactly once.'
 $shopFeed = Read-Feed 'shop/index.xml' 'https://outsideinprint.org/shop/index.xml' 'https://outsideinprint.org/shop/' 2
 
 $archiveHtml = Get-Content -LiteralPath (Join-Path $siteRoot 'archive/index.html') -Raw -Encoding utf8
