@@ -130,7 +130,8 @@ test("image-led musing places its shared illustration before the title without c
   assert.match(articleSingle.slice(title, secondPlate), /if and \$plateImage \(not \$isImageLed\)/);
   assert.match(mediaPlatePartial, /data-alt="\{\{ \.alt \}\}"/);
   assert.match(mediaPlatePartial, /data-caption="\{\{ \.caption \}\}"/);
-  assert.match(mediaPlatePartial, /with \.caption \}\}<figcaption>/);
+  assert.ok(mediaPlatePartial.includes('{{ $credit := partial "images/credit.html" .model }}'));
+  assert.ok(mediaPlatePartial.includes('{{ if or .caption $credit }}<figcaption>{{ with .caption }}{{ . }}{{ end }}{{ $credit }}</figcaption>{{ end }}'));
   assert.match(mediaPlatePartial, /if \.imageLed \}\}\{\{ \$sizes = "\(min-width: 55rem\) 52rem, calc\(100vw - 3rem\)"/);
 });
 

@@ -123,7 +123,8 @@ test("the existing native image button, credits, and unchanged article-body rend
   assert.match(figure, /data-article-plate-lightbox-trigger/);
   assert.match(figure, /aria-label="Open image fullscreen: \{\{ \.page\.Title \}\}"/);
   assert.match(figure, /data-caption="\{\{ \.caption \}\}"/);
-  assert.match(figure, /with \.caption\s*}}<figcaption>\{\{ \. \}\}<\/figcaption>/);
+  assert.ok(mediaPlatePartial.includes('{{ $credit := partial "images/credit.html" .model }}'));
+  assert.ok(figure.includes('{{ if or .caption $credit }}<figcaption>{{ with .caption }}{{ . }}{{ end }}{{ $credit }}</figcaption>{{ end }}'));
   assert.match(single, /partial "article\/plate-lightbox.html" \./);
   assert.match(single, /\$articleBody := partial "render_article_body.html" \./);
   assert.match(single, /<div class="piece-body">\s*{{ \$articleBody }}\s*<\/div>/);
