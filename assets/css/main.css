@@ -11256,6 +11256,14 @@ html[data-theme="dark"] body.layout-bobs-almanack .site-footer__description{
 .almanack-quote--middle{
   margin-top:1.8rem;
 }
+.almanack-margin .almanack-quote--middle{
+  margin:0 0 .9rem;
+  padding:.75rem 0;
+}
+.almanack-margin .almanack-quote--middle blockquote{
+  font-size:1.12rem;
+  line-height:1.38;
+}
 .almanack-worth{
   max-width:58rem;
   margin:1.6rem auto 0;

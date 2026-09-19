@@ -193,6 +193,10 @@
       </div>
 
       <aside class="almanack-margin" aria-labelledby="almanack-margin-title">
+        <figure class="almanack-quote almanack-quote--middle">
+          <blockquote>{{ .Params.middle_quote }}</blockquote>
+          <figcaption>~ {{ .Params.middle_quote_attribution }}</figcaption>
+        </figure>
         <div class="almanack-margin__header">
           <h2 id="almanack-margin-title">In the Margins</h2>
           <p>figures, records, notices</p>
@@ -248,11 +252,6 @@
         {{ end }}
       </aside>
     </div>
-
-    <figure class="almanack-quote almanack-quote--middle">
-      <blockquote>{{ .Params.middle_quote }}</blockquote>
-      <figcaption>~ {{ .Params.middle_quote_attribution }}</figcaption>
-    </figure>
 
     <section class="almanack-worth" aria-labelledby="almanack-worth-title">
       <p class="almanack-section-label" id="almanack-worth-title">Worth Reprinting</p>
