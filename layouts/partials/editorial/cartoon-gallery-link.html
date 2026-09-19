@@ -1,27 +1,49 @@
 {{- $page := .page -}}
 {{- $cartoon := .cartoon -}}
 {{- $class := .class | default "" -}}
+{{- $collectionArtwork := .collectionArtwork | default false -}}
+{{- $analyticsSourceSlot := .analyticsSourceSlot | default "" -}}
+{{- $analyticsEvent := .analyticsEvent | default "internal_promo_click" -}}
+{{- $analyticsCollection := .analyticsCollection | default "" -}}
+{{- $imageSizes := "7rem" -}}
+{{- if $collectionArtwork -}}
+  {{- $imageSizes = "(min-width: 72rem) 30rem, (min-width: 641px) 46vw, calc(100vw - 2.25rem)" -}}
+{{- end -}}
 {{- with $cartoon -}}
   {{- $imageModel := partial "images/model.html" (dict
     "page" $page
     "ref" .image
     "display" true
   ) -}}
-  <span class="essay-cartoon-thumb-wrap">
-  <a class="essay-cartoon-thumb{{ with $class }} {{ . }}{{ end }}" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
+  {{- $imageAlt := "" -}}
+  {{- if $collectionArtwork }}{{ $imageAlt = .alt }}{{ end -}}
+  <span class="essay-cartoon-thumb-wrap{{ if $collectionArtwork }} essay-cartoon-thumb-wrap--collection-artwork{{ end }}">
+  <a class="essay-cartoon-thumb{{ with $class }} {{ . }}{{ end }}" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}"
+    {{- if and $collectionArtwork $analyticsSourceSlot }}
+      data-analytics-event="{{ $analyticsEvent }}"
+      data-analytics-source-slot="{{ $analyticsSourceSlot }}"
+      data-analytics-slug="{{ $page.Params.slug | default $page.File.BaseFileName }}"
+      data-analytics-title="{{ $page.Title }}"
+      data-analytics-section="{{ $page.Params.section_label | default (humanize $page.Section) }}"
+      data-analytics-path="{{ $page.RelPermalink }}"
+      {{- with $analyticsCollection }}
+        data-analytics-collection="{{ . }}"
+      {{- end }}
+    {{- end }}
+  >
     {{- partial "images/picture.html" (dict
       "model" $imageModel
-      "alt" ""
+      "alt" $imageAlt
       "loading" "lazy"
-      "sizes" "7rem"
+      "sizes" $imageSizes
     ) -}}
-    <span>Read</span>
+    {{ if not $collectionArtwork }}<span>Read</span>{{ end }}
   </a>
   <button
     type="button"
     class="essay-cartoon-zoom"
     data-essay-cartoon-lightbox-trigger
-    data-cartoon-slug="{{ .slug }}"
+    {{ if .slug }}data-cartoon-slug="{{ .slug }}"{{ end }}
     data-title="{{ .title }}"
     data-date="{{ .date }}"
     data-date-label="{{ time.Format "Jan 2, 2006" .date }}"
@@ -29,10 +51,17 @@
     data-alt="{{ .alt }}"
     data-width="{{ $imageModel.lightbox_width }}"
     data-height="{{ $imageModel.lightbox_height }}"
-    data-gallery="{{ (printf "gallery/?cartoon=%s" .slug) | absURL }}"
+    {{ if .slug }}data-gallery="{{ (printf "gallery/?cartoon=%s" .slug) | absURL }}"{{ end }}
     aria-label="Open the illustration for {{ $page.Title }} fullscreen"
   >
-    <span aria-hidden="true">⌕</span>
+    {{ if $collectionArtwork }}
+      <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="10.5" cy="10.5" r="6.5"></circle>
+        <path d="m16 16 5 5"></path>
+      </svg>
+    {{ else }}
+      <span aria-hidden="true">⌕</span>
+    {{ end }}
   </button>
   </span>
 {{- end -}}

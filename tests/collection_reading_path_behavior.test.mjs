@@ -288,6 +288,31 @@ test("collection pages preserve curated ordering and newest-first unweighted ord
   assert.ok(newest.indexOf('/essays/b/') < newest.indexOf('/essays/a/'));
 });
 
+test("Syd and Oliver opts into a duplicate-free oldest-first list without a promoted starter", (t) => {
+  const source = fs.readFileSync("data/collections.yaml", "utf8");
+  const syd = source.match(/^  - slug: syd-and-oliver-dialogues\r?\n([\s\S]*?)(?=^  - slug:|$(?![\s\S]))/m)?.[1];
+  assert.ok(syd, "the dialogue collection must exist");
+  assert.match(syd, /^    order: oldest-first$/m);
+  assert.doesNotMatch(syd, /^    start_here:/m);
+  assert.equal((source.match(/^    order: oldest-first$/gm) || []).length, 1, "other collections retain their current ordering");
+
+  const html = renderPath(t, {
+    collections: [{ slug: "alpha", title: "Chronological series", kind: "series", public: true, force_public: true, explicit_only: true, order: "oldest-first" }],
+    entries: {
+      a: { title: "Newest", date: "2020-03-01", collections: ["alpha"], collection_weight: 1 },
+      b: { title: "Oldest", date: "2020-01-01", collections: ["alpha"], collection_weight: 9 },
+      c: { title: "Zebra", date: "2020-02-01", collections: ["alpha"], collection_weight: 2 },
+      d: { title: "Alpha", date: "2020-02-01", collections: ["alpha"] },
+    },
+    collectionShell: true,
+    outputRoute: "collections/alpha",
+  });
+  const paths = [...html.matchAll(/class="fixture-collection-item" href="([^"]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(paths, ["/essays/b/", "/essays/d/", "/essays/c/", "/essays/a/"]);
+  assert.doesNotMatch(html, /collection-start-here-title/);
+  assert.match(html, /4 published pieces/);
+});
+
 const organizationCollection = (values = {}) => ({
   slug: "alpha", title: "Alpha collection", kind: "topic", public: true,
   force_public: true, explicit_only: true, start_here: "b", ...values,

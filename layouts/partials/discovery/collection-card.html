@@ -53,7 +53,8 @@
 {{- $metaLine := delimit $metaBits " &middot; " -}}
 
 {{- if eq $variant "broadsheet" -}}
-  <article class="collection-record{{ with $class }} {{ . }}{{ end }}">
+  <article class="collection-record{{ with $class }} {{ . }}{{ end }}"{{ with .identity }} data-collection-identity="{{ $entry.collection.slug }}" data-collection-type="{{ .type }}" style="{{ printf "--collection-ink-dark:%s;--collection-ink-light:%s" .ink .paper_ink | safeCSS }}"{{ end }}>
+    {{- with .identity }}{{ partial "collections/directory-mark.html" .mark }}{{ end -}}
     <div class="collection-record__meta">
       {{- with $eyebrow }}<span>{{ . }}</span>{{ end -}}
       <span>{{ $entry.state.count }} pieces</span>

@@ -13,20 +13,31 @@
   {{ else }}
     {{ $items := partial "collections/resolve-items.html" (dict "collection" $definition "publishedOnly" true) }}
     {{ $state := partial "collections/get-state.html" (dict "collection" $definition "items" $items) }}
+    {{ $pageIdentity := false }}
+    {{ with index hugo.Data.collection_identities $definition.slug }}
+      {{ if and $state.visible (eq .page_enabled true) }}
+        {{ $pageIdentity = . }}
+      {{ end }}
+    {{ end }}
     {{ $latest := false }}
     {{ with first 1 $items }}
       {{ $latest = index . 0 }}
     {{ end }}
     {{ $pastIssues := after 1 $items }}
 
-    <article class="almanack-collection page-shell page-shell--wide" aria-labelledby="almanack-collection-title">
+    <article class="almanack-collection page-shell page-shell--wide" aria-labelledby="almanack-collection-title"{{ with $pageIdentity }} data-collection-identity="{{ $definition.slug }}" data-collection-type="{{ .type }}" style="{{ printf "--collection-ink-dark:%s;--collection-ink-light:%s" .ink .paper_ink | safeCSS }}"{{ end }}>
       <header class="almanack-collection__nameplate">
         <div class="almanack-collection__strapline" aria-label="Sheet details">
           <span>Outside In Print</span>
           <span>Printer's Almanack Sheet</span>
           {{ with $latest }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>{{ end }}
         </div>
+        {{ with $pageIdentity }}
+          <div class="collection-section__nameplate">
+            {{ partial "collections/directory-mark.html" .mark }}
+        {{ end }}
         <h1 id="almanack-collection-title">Bob's Almanack</h1>
+        {{ with $pageIdentity }}</div>{{ end }}
         <p>{{ $definition.description }}</p>
         {{ if $latest }}
           <a class="almanack-collection__signup-link" href="#almanack-collection-newsletter">Get the weekly newsletter</a>

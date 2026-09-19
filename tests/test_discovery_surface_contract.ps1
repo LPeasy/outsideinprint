@@ -57,6 +57,8 @@ $requiredFiles = @(
   'layouts/partials/discovery/page-summary.html',
   'layouts/partials/discovery/page-list-item.html',
   'layouts/partials/discovery/collection-card.html',
+  'layouts/partials/collections/directory-mark.html',
+  'data/collection_identities.json',
   'layouts/partials/schema/significant-links.html',
   'layouts/partials/legacy_host_redirect.html',
   'assets/js/studio-inquiry.js',
@@ -1082,6 +1084,12 @@ foreach ($retiredSnippet in @(
 }
 
 $collectionsListTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/list.html') -Raw
+$collectionGroupID = [regex]::Escape('collections-group-{{ $group.key }}')
+$collectionGroupTitle = [regex]::Escape('{{ $group.title }}')
+$collectionGroupHeadingPattern = '(?s)<section\b[^>]*aria-labelledby="' + $collectionGroupID + '"[^>]*>\s*<header class="collections-broadsheet__section-header">\s*<h2\b[^>]*id="' + $collectionGroupID + '"[^>]*class="collections-broadsheet__section-title"[^>]*>\s*' + $collectionGroupTitle + '\s*</h2>.*?collections-broadsheet__section-meta.*?collections-broadsheet__section-intro.*?</header>\s*<div class="collections-broadsheet__records">'
+if ($collectionsListTemplate -notmatch $collectionGroupHeadingPattern) {
+  throw 'Expected each collections column to begin with a semantic header containing its linked h2, count, and introduction before the collection records.'
+}
 foreach ($requiredSnippet in @(
   '{{ len $entries }} public collections &middot; {{ $totalPieces }} published pieces',
   'section-front section-front--collections',
@@ -1095,6 +1103,7 @@ foreach ($requiredSnippet in @(
   'collections-broadsheet__section-meta',
   'collections-broadsheet__records',
   '"variant" "broadsheet"',
+  '"identity" (index hugo.Data.collection_identities .collection.slug)',
   'Series',
   'Topics'
 )) {
@@ -1127,7 +1136,7 @@ foreach ($retiredSnippet in @(
 
 $collectionSingleTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/single.html') -Raw
 foreach ($requiredSnippet in @(
-  '<article class="collection-section{{ if $state.public }} collection-section--public{{ end }}{{ if $hasSections }} collection-section--grouped{{ end }}">',
+  '<article class="collection-section{{ if $state.public }} collection-section--public{{ end }}{{ if $hasSections }} collection-section--grouped{{ end }}"',
   'collection-section__header',
   'collection-section__ledger',
   'collection-section__lead',
@@ -1213,6 +1222,112 @@ if ($collectionsData -match 'compact notices, and worth reprinting\.') {
 
 if ($collectionsData -match '(?s)- slug: civic-institutions-and-public-power.*?room_theme:') {
   throw 'Expected non-live collection civic-institutions-and-public-power not to define room_theme yet.'
+}
+
+# The directory's optional presentation registry must cover the explicitly public
+# definitions, including collections awaiting their minimum publication count.
+$collectionIdentities = Get-Content -Path (Join-Path $repoRoot 'data/collection_identities.json') -Raw | ConvertFrom-Json -AsHashtable
+if ($collectionIdentities -isnot [System.Collections.IDictionary]) {
+  throw 'Expected collection identities to be an object keyed by public collection slug.'
+}
+$publicCollectionSlugs = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+foreach ($definition in [regex]::Matches($collectionsData, '(?ms)^  - slug: (?<slug>[a-z0-9-]+)\r?\n(?<body>.*?)(?=^  - slug:|\z)')) {
+  if ($definition.Groups['body'].Value -match '(?m)^    public: true[ \t]*\r?$') {
+    [void]$publicCollectionSlugs.Add($definition.Groups['slug'].Value)
+  }
+}
+if ($publicCollectionSlugs.Count -eq 0 -or -not $publicCollectionSlugs.SetEquals([string[]]$collectionIdentities.Keys)) {
+  throw 'Expected one directory identity for every public collection, with no private or unknown collection identities.'
+}
+$collectionMarkPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/collections/directory-mark.html') -Raw
+$allowedCollectionMarks = @([regex]::Matches($collectionMarkPartial, '\bif eq \. "(?<mark>[a-z0-9]+(?:-[a-z0-9]+)*)"') | ForEach-Object { $_.Groups['mark'].Value })
+if ($allowedCollectionMarks.Count -eq 0 -or
+    $collectionMarkPartial -notmatch '<svg\b(?=[^>]*class="collection-record__mark")(?=[^>]*aria-hidden="true")(?=[^>]*focusable="false")[^>]*>') {
+  throw 'Expected finite inline directory marks to remain decorative and unfocusable.'
+}
+$usedCollectionMarks = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+$pageEnabledCollectionSlugs = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+foreach ($slug in $collectionIdentities.Keys) {
+  $identity = $collectionIdentities[$slug]
+  if ($identity -isnot [System.Collections.IDictionary] -or
+      @('mark', 'ink', 'paper_ink', 'type').Where({ -not $identity.Contains($_) }).Count -gt 0 -or
+      @($identity.Keys).Where({ $_ -cnotin @('mark', 'ink', 'paper_ink', 'type', 'page_enabled') }).Count -gt 0) {
+    throw "Expected ${slug}'s identity to contain mark, ink, paper_ink, type, and optionally page_enabled."
+  }
+  if ($identity.Contains('page_enabled')) {
+    if ($identity['page_enabled'] -isnot [bool]) {
+      throw "Expected ${slug}'s optional page_enabled identity flag to be Boolean."
+    }
+    if ($identity['page_enabled']) { [void]$pageEnabledCollectionSlugs.Add($slug) }
+  }
+  if ($identity['mark'] -isnot [string] -or $identity['mark'] -cnotin $allowedCollectionMarks -or
+      -not $usedCollectionMarks.Add($identity['mark'])) {
+    throw "Expected ${slug}'s identity to use a unique implemented directory mark."
+  }
+  if ($identity['type'] -isnot [string] -or $identity['type'] -cnotin @('serif', 'sans', 'italic', 'smallcaps')) {
+    throw "Expected ${slug}'s identity to use an allowed heading typography token."
+  }
+  foreach ($colorKey in @('ink', 'paper_ink')) {
+    if ($identity[$colorKey] -isnot [string] -or $identity[$colorKey] -cnotmatch '^#[0-9A-Fa-f]{6}$') {
+      throw "Expected ${slug}'s $colorKey to be a safe six-digit hexadecimal color."
+    }
+  }
+}
+if ($publicCollectionSlugs.Count -ne 17 -or -not $pageEnabledCollectionSlugs.SetEquals($publicCollectionSlugs) -or $pageEnabledCollectionSlugs.Contains('the-ledger')) {
+  throw 'Expected all 17 public collections, excluding The Ledger, to opt into their page identities.'
+}
+$collectionAlmanackTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/bobs-almanack.html') -Raw
+foreach ($collectionPageTemplate in @($collectionSingleTemplate, $collectionAlmanackTemplate)) {
+  foreach ($requiredSnippet in @(
+    '$pageIdentity := false',
+    'index hugo.Data.collection_identities $definition.slug',
+    'and $state.visible (eq .page_enabled true)',
+    '$pageIdentity = .',
+    'collection-section__nameplate'
+  )) {
+    if ($collectionPageTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+      throw "Expected each collection page template to contain the opt-in identity guard: $requiredSnippet"
+    }
+  }
+  $collectionOpeningTag = [regex]::Match($collectionPageTemplate, '(?s)<article class="(?:collection-section|almanack-collection).*?>').Value
+  if ($collectionOpeningTag -notmatch '(?s)with \$pageIdentity.*?data-collection-identity=.*?data-collection-type=.*?--collection-ink-dark:.*?--collection-ink-light:.*?end' -or
+      $collectionPageTemplate -notmatch '(?s)with \$pageIdentity\s*}}\s*<div class="collection-section__nameplate">\s*{{\s*partial "collections/directory-mark\.html" \.mark\s*}}\s*{{\s*end') {
+    throw 'Expected collection page colors, typography, and decorative nameplates to require the opt-in identity.'
+  }
+}
+foreach ($typography in @(
+  @{ type = 'serif'; declaration = 'font-family:var(--font-display);' },
+  @{ type = 'sans'; declaration = 'font-family:var(--font-ui);' },
+  @{ type = 'italic'; declaration = 'font-style:italic;' },
+  @{ type = 'smallcaps'; declaration = 'font-variant-caps:small-caps;' }
+)) {
+  $selector = '.collection-section[data-collection-identity][data-collection-type="' + $typography.type + '"] .collection-section__nameplate h1'
+  if ($mainCss -notmatch ('(?s)' + [regex]::Escape($selector) + '\s*\{[^}]*' + [regex]::Escape($typography.declaration))) {
+    throw "Expected collection page nameplates to honor the $($typography.type) identity typography."
+  }
+}
+if ($mainCss -notmatch '(?s)\.collection-section\[data-collection-identity\] \.collection-section__nameplate h1\s*\{[^}]*overflow-wrap:anywhere;') {
+  throw 'Expected long collection nameplates to wrap safely on narrow screens.'
+}
+foreach ($requiredSnippet in @(
+  '<article class="almanack-collection page-shell page-shell--wide"',
+  '<h1 id="almanack-collection-title">Bob''s Almanack</h1>',
+  'class="almanack-collection__register"',
+  'class="almanack-collection__sheet"',
+  'class="almanack-collection__principal"',
+  'aria-label="Issue marginalia"',
+  'class="almanack-collection__archive"'
+)) {
+  if ($collectionAlmanackTemplate -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected Bob's Almanack to preserve its bespoke newspaper structure: $requiredSnippet"
+  }
+}
+if ($collectionAlmanackTemplate -match 'partial "discovery/page-list-item\.html"') {
+  throw 'Expected the Almanack issue sheet not to be replaced by standard collection artwork rows.'
+}
+$relatedCollectionCardCalls = [regex]::Matches($collectionSingleTemplate, '(?s)partial "discovery/collection-card\.html" \(dict\b.*?\)\s*}}')
+if ($relatedCollectionCardCalls.Count -eq 0 -or @($relatedCollectionCardCalls | Where-Object { $_.Value -match '"identity"|collection_identities|\$pageIdentity' }).Count -gt 0) {
+  throw 'Expected related collection-card invocations to omit all page or directory identity inputs.'
 }
 
 $collectionsDoc = Get-Content -Path (Join-Path $repoRoot 'docs/collections-system.md') -Raw
@@ -1576,6 +1691,109 @@ if ($pageListItemPartial -match [regex]::Escape('item--variant-modernbio')) {
   throw 'Expected discovery/page-list-item.html to stop appending the Modern Bios row-variant class in shared archive rows.'
 }
 
+foreach ($requiredSnippet in @(
+  '$collectionImage := false',
+  'if .collectionArtwork | default false',
+  'partial "collections/artwork-for-page.html" (dict "page" $page "cartoon" $linkedCartoon)',
+  '$collectionArtwork := not (not $collectionImage)',
+  'item--collection-artwork',
+  'class="item__copy"',
+  'if not (.collectionArtwork | default false)',
+  '"cartoon" $collectionImage',
+  '"collectionArtwork" true',
+  '"analyticsEvent" $analyticsEvent',
+  '"analyticsSourceSlot" $analyticsSourceSlot',
+  '"analyticsCollection" $analyticsCollection'
+)) {
+  if ($pageListItemPartial -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected optional illustrated collection records to contain: $requiredSnippet"
+  }
+}
+$collectionArtworkPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/collections/artwork-for-page.html') -Raw -Encoding utf8
+foreach ($requiredSnippet in @(
+  '$artwork := false',
+  'if not $page.Params.image_exempt',
+  'with .cartoon',
+  '$artwork = .',
+  '$page.Params.featured_image | default ""',
+  '$page.Params.featured_image_alt | default $page.Title',
+  'if eq (partial "article/variant-key.html" $page) "modernbio"',
+  'with $page.Params.portrait_image',
+  '$page.Params.portrait_image_alt | default $page.Params.featured_image_alt | default $page.Title',
+  '(not (in (lower $image) "images/social/"))',
+  '"image" $image',
+  '"alt" $alt',
+  '"title" $page.Title',
+  '"date" ($page.Date.Format "2006-01-02")',
+  'return $artwork'
+)) {
+  if (-not $collectionArtworkPartial.Contains($requiredSnippet, [System.StringComparison]::Ordinal)) {
+    throw "Expected collection artwork to prefer linked gallery art, preserve image exemptions, and fall back to existing article artwork: $requiredSnippet"
+  }
+}
+if ($collectionArtworkPartial -match '"slug"|data-gallery|Params\.images') {
+  throw 'Expected collection fallback artwork to avoid fabricated gallery entries or generic sharing images.'
+}
+$collectionItemCalls = [regex]::Matches($collectionSingleTemplate, '(?s)partial "discovery/page-list-item\.html" \(dict\b.*?\)\s*}}')
+if ($collectionItemCalls.Count -ne 3 -or @($collectionItemCalls | Where-Object { -not $_.Value.Contains('"collectionArtwork" (not (not $pageIdentity))', [System.StringComparison]::Ordinal) }).Count -gt 0) {
+  throw 'Expected all standard collection record branches to enable large artwork only for opted-in identities.'
+}
+if ($mainCss -notmatch '(?s)\.collection-section__lead-record\.item--collection-artwork\s*\{[^}]*grid-column:1 / -1;') {
+  throw 'Expected illustrated Start Here records to span the full lead grid width.'
+}
+$collectionCopyIndex = $pageListItemPartial.IndexOf('class="item__copy"', [System.StringComparison]::Ordinal)
+$collectionSummaryIndex = $pageListItemPartial.IndexOf('with $summary', [System.StringComparison]::Ordinal)
+$collectionArtIndex = $pageListItemPartial.LastIndexOf('partial "editorial/cartoon-gallery-link.html"', [System.StringComparison]::Ordinal)
+if ($collectionCopyIndex -ge $collectionSummaryIndex -or $collectionSummaryIndex -ge $collectionArtIndex) {
+  throw 'Expected expanded collection records to keep the title, metadata, and summary before artwork in DOM order.'
+}
+$cartoonLinkPartial = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/editorial/cartoon-gallery-link.html') -Raw -Encoding utf8
+foreach ($requiredSnippet in @(
+  '$collectionArtwork := .collectionArtwork | default false',
+  '$imageSizes := "7rem"',
+  '(min-width: 72rem) 30rem, (min-width: 641px) 46vw, calc(100vw - 2.25rem)',
+  '"sizes" $imageSizes',
+  '"loading" "lazy"',
+  'essay-cartoon-thumb-wrap--collection-artwork',
+  'class="essay-cartoon-zoom"',
+  'data-essay-cartoon-lightbox-trigger',
+  'data-image="{{ $imageModel.lightbox_url }}"',
+  '<circle cx="10.5" cy="10.5" r="6.5"></circle>',
+  '<path d="m16 16 5 5"></path>',
+  '<span aria-hidden="true">⌕</span>'
+)) {
+  if ($cartoonLinkPartial -notmatch [regex]::Escape($requiredSnippet)) {
+    throw "Expected large collection artwork to preserve thumbnail defaults and reuse the existing zoom behavior: $requiredSnippet"
+  }
+}
+if ($cartoonLinkPartial -match 'data-home-featured-image-trigger') {
+  throw 'Expected collection illustration zooms to keep the existing lightbox controller and remain separate from article-click analytics.'
+}
+$collectionImageAnchor = [regex]::Match($cartoonLinkPartial, '(?s)<a class="essay-cartoon-thumb.*?>').Value
+foreach ($requiredSnippet in @(
+  'if and $collectionArtwork $analyticsSourceSlot',
+  'data-analytics-event="{{ $analyticsEvent }}"',
+  'data-analytics-source-slot="{{ $analyticsSourceSlot }}"',
+  'data-analytics-slug="{{ $page.Params.slug | default $page.File.BaseFileName }}"',
+  'data-analytics-title="{{ $page.Title }}"',
+  'data-analytics-section="{{ $page.Params.section_label | default (humanize $page.Section) }}"',
+  'data-analytics-path="{{ $page.RelPermalink }}"',
+  'data-analytics-collection="{{ . }}"'
+)) {
+  if (-not $collectionImageAnchor.Contains($requiredSnippet, [System.StringComparison]::Ordinal)) {
+    throw "Expected expanded article-image anchors to retain title-link analytics: $requiredSnippet"
+  }
+}
+$collectionZoomButton = [regex]::Match($cartoonLinkPartial, '(?s)<button\b.*?</button>').Value
+if ($collectionZoomButton -notmatch 'data-essay-cartoon-lightbox-trigger' -or $collectionZoomButton -match 'data-analytics-') {
+  throw 'Expected the magnifier to remain a separate, untracked lightbox button.'
+}
+foreach ($attribute in @('data-cartoon-slug', 'data-gallery')) {
+  if ($collectionZoomButton -notmatch ('(?s)if \.slug\s*}}' + $attribute + '=.*?{{\s*end')) {
+    throw "Expected fallback artwork to omit unsupported gallery metadata: $attribute"
+  }
+}
+
 if ($mainCss -match [regex]::Escape('.item--variant-modernbio')) {
   throw 'Expected assets/css/main.css to remove the shared-row Modern Bios inset rule styling.'
 }
@@ -1722,6 +1940,17 @@ if ($collectionCardPartial -notmatch 'if not \$eyebrow') {
 
 if ($collectionCardPartial -notmatch '\$eyebrow = title \$entry\.state\.kind') {
   throw 'Expected discovery/collection-card.html to default the eyebrow to the collection kind when no label is provided.'
+}
+
+$broadsheetCard = [regex]::Match($collectionCardPartial, '(?s)if eq \$variant "broadsheet"(?<body>.*?)else if eq \$variant "item"').Groups['body'].Value
+$broadsheetOpeningTag = [regex]::Match($broadsheetCard, '<article\b[^>]*>').Value
+if ($broadsheetOpeningTag -notmatch '(?s)with \.identity.*?data-collection-identity=.*?data-collection-type=.*?--collection-ink-dark:.*?--collection-ink-light:.*?end' -or
+    $broadsheetCard -notmatch 'with \.identity\s*}}\s*{{\s*partial "collections/directory-mark\.html" \.mark\s*}}\s*{{\s*end') {
+  throw 'Expected collection record colors, typography, and decorative marks to require the optional directory identity input.'
+}
+$nonBroadsheetCards = $collectionCardPartial.Replace($broadsheetCard, '')
+if ($nonBroadsheetCards -match 'data-collection-identity|data-collection-type|collections/directory-mark\.html') {
+  throw 'Expected directory identity styling to stay out of other collection card variants.'
 }
 
 $webpageHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/schema/webpage.html') -Raw

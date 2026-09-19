@@ -424,6 +424,137 @@ test("homepage article links emit one surface-specific click each while newslett
   }
 });
 
+test("collection title and artwork clicks share one event each while magnifiers remain untracked", async () => {
+  const sentinels = ["COLLECTION_QUERY_SENTINEL", "COLLECTION_FRAGMENT_SENTINEL", "COLLECTION_EMAIL_SENTINEL"];
+  const cases = [
+    { collection: "musings", articlePath: "/essays/life-is-a-controlled-fall/", gallery: true, imagePath: /\/images\/rendered\/editorial\/life-is-a-controlled-fall\// },
+    { collection: "reported-case-studies", articlePath: "/essays/the-dolphin-company/", gallery: false, imagePath: /\/images\/medium\/the-dolphin-company\// },
+    { collection: "modern-bios", articlePath: "/essays/jack-stratton-and-the-vulfpeck-model/", gallery: false, imagePath: /\/images\/medium\/jack-stratton-and-the-vulfpeck-model\// },
+    { collection: "syd-and-oliver-dialogues", articlePath: "/syd-and-oliver/smoke-and-brass/", textOnly: true }
+  ];
+  const { context, counts, page } = await newInstrumentedPage();
+  let expectedClicks = 0;
+
+  try {
+    for (const entry of cases) {
+      const collectionPath = `/collections/${entry.collection}/`;
+      await page.goto(
+        `${canonicalOrigin}${collectionPath}?private=COLLECTION_QUERY_SENTINEL&email=COLLECTION_EMAIL_SENTINEL%40example.com#COLLECTION_FRAGMENT_SENTINEL`,
+        { waitUntil: "load" }
+      );
+      await waitFor(
+        () => counts.find((record) => !countData(record).event && countData(record).path === collectionPath),
+        `${entry.collection} did not send its intercepted pageview.`
+      );
+      const record = page.locator(".collection-section__record").filter({
+        has: page.locator(`.t a[href="${entry.articlePath}"]`)
+      });
+      assert.equal(await record.count(), 1, `Expected one collection record for ${entry.articlePath}.`);
+      const title = record.locator(".t a");
+      const metadata = await title.evaluate((anchor) => ({
+        event: anchor.dataset.analyticsEvent,
+        sourceSlot: anchor.dataset.analyticsSourceSlot,
+        slug: anchor.dataset.analyticsSlug,
+        title: anchor.dataset.analyticsTitle,
+        section: anchor.dataset.analyticsSection,
+        path: anchor.dataset.analyticsPath,
+        collection: anchor.dataset.analyticsCollection
+      }));
+      assert.equal(metadata.event, "collection_click");
+      assert.equal(metadata.sourceSlot, "collection_page");
+      assert.equal(metadata.path, entry.articlePath);
+      assert.equal(metadata.collection, entry.collection);
+
+      const illustration = record.locator("a.essay-cartoon-thumb");
+      const zoom = record.locator("[data-essay-cartoon-lightbox-trigger]");
+      if (entry.textOnly) {
+        assert.equal(await illustration.count(), 0, "An image-exempt piece must remain text-only.");
+        assert.equal(await zoom.count(), 0, "An image-exempt piece must not have an empty magnifier.");
+      } else {
+        assert.equal(await illustration.count(), 1, `Missing artwork for ${entry.articlePath}.`);
+        assert.equal(await illustration.getAttribute("href"), entry.articlePath);
+        assert.match(await illustration.locator("img").getAttribute("src"), entry.imagePath);
+        assert.ok((await illustration.locator("img").getAttribute("alt"))?.trim(), "Expanded artwork needs meaningful alternative text.");
+        assert.deepEqual(await illustration.evaluate((anchor) => ({
+          event: anchor.dataset.analyticsEvent,
+          sourceSlot: anchor.dataset.analyticsSourceSlot,
+          slug: anchor.dataset.analyticsSlug,
+          title: anchor.dataset.analyticsTitle,
+          section: anchor.dataset.analyticsSection,
+          path: anchor.dataset.analyticsPath,
+          collection: anchor.dataset.analyticsCollection
+        })), metadata, "Image clicks must carry the exact same destination and collection metadata as title clicks.");
+      }
+
+      for (const anchor of entry.textOnly ? [title] : [title, illustration]) {
+        await anchor.evaluate((node) => {
+          node.addEventListener("click", (event) => event.preventDefault(), { once: true });
+          node.click();
+        });
+        expectedClicks += 1;
+        const clickEvents = await waitFor(
+          () => {
+            const events = counts.filter((count) => countData(count).path.startsWith("oip:collection_click"));
+            return events.length >= expectedClicks ? events : null;
+          },
+          `${entry.articlePath} did not send its collection click.`
+        );
+        assert.equal(clickEvents.length, expectedClicks, "One article-link activation must emit exactly one collection event.");
+        assert.deepEqual(eventParts(clickEvents[expectedClicks - 1]), {
+          name: "collection_click",
+          fields: {
+            path: entry.articlePath,
+            slug: metadata.slug,
+            section: metadata.section,
+            source_slot: "collection_page",
+            collection: entry.collection
+          }
+        });
+      }
+
+      if (!entry.textOnly) {
+        assert.equal(await zoom.count(), 1);
+        assert.equal(await zoom.evaluate((button) => Boolean(button.closest("[data-analytics-event]"))), false);
+        const viewer = await zoom.evaluate((button) => {
+          button.click();
+          const lightbox = document.querySelector("[data-essay-cartoon-lightbox]");
+          const gallery = lightbox.querySelector("[data-essay-cartoon-lightbox-gallery]");
+          return {
+            opened: !lightbox.hidden,
+            galleryVisible: !gallery.hidden,
+            galleryUrl: button.getAttribute("data-gallery"),
+            gallerySlug: button.getAttribute("data-cartoon-slug"),
+            image: lightbox.querySelector("[data-essay-cartoon-lightbox-image]").getAttribute("src")
+          };
+        });
+        assert.equal(viewer.opened, true, "The magnifier must open the existing image viewer.");
+        assert.equal(viewer.galleryVisible, entry.gallery, "Article-only artwork must not invent a gallery destination.");
+        assert.match(viewer.image, entry.imagePath);
+        if (entry.gallery) {
+          assert.ok(viewer.gallerySlug);
+          assert.equal(new URL(viewer.galleryUrl).searchParams.get("cartoon"), viewer.gallerySlug);
+        } else {
+          assert.equal(viewer.galleryUrl, null);
+          assert.equal(viewer.gallerySlug, null);
+        }
+        await page.keyboard.press("Escape");
+        assert.equal(await zoom.evaluate((button) => {
+          const lightbox = document.querySelector("[data-essay-cartoon-lightbox]");
+          return lightbox.hidden && document.activeElement === button;
+        }), true, "Escape must close the viewer and return keyboard focus to its magnifier.");
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      assert.equal(counts.filter((count) => countData(count).event).length, expectedClicks, "Magnifiers must not add article-click or other analytics events.");
+    }
+    for (const count of counts) {
+      assertPrivacyBoundary(count, sentinels);
+    }
+  } finally {
+    await context.close();
+  }
+});
+
 test("image fallback keeps internal paths and drops off-site paths without leaking URL data", async () => {
   const sentinels = [
     "FALLBACK_QUERY_SENTINEL",

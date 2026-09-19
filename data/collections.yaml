@@ -144,7 +144,7 @@ collections:
     explicit_only: true
     featured: true
     weight: 20
-    start_here: without-a-word
+    order: oldest-first
     related_collections:
       - moral-religious-philosophical-essays
       - simple-logic

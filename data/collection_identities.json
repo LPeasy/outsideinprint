@@ -1,0 +1,19 @@
+{
+  "bobs-almanack": { "mark": "sunrise", "ink": "#D1AE6D", "paper_ink": "#745019", "type": "smallcaps", "page_enabled": true },
+  "simple-logic": { "mark": "steps", "ink": "#8EAFCB", "paper_ink": "#31556E", "type": "sans", "page_enabled": true },
+  "musings": { "mark": "quill", "ink": "#A6B995", "paper_ink": "#496137", "type": "italic", "page_enabled": true },
+  "the-things-we-say": { "mark": "quotation", "ink": "#D2A190", "paper_ink": "#854631", "type": "serif", "page_enabled": true },
+  "syd-and-oliver-dialogues": { "mark": "dialogue", "ink": "#B4A0C8", "paper_ink": "#6E4C84", "type": "serif", "page_enabled": true },
+  "modern-bios": { "mark": "portrait", "ink": "#B7AA93", "paper_ink": "#66533D", "type": "smallcaps", "page_enabled": true },
+  "lit-review": { "mark": "book", "ink": "#D0A0AC", "paper_ink": "#824456", "type": "italic", "page_enabled": true },
+  "reported-case-studies": { "mark": "document", "ink": "#C7B394", "paper_ink": "#6D5637", "type": "serif", "page_enabled": true },
+  "risk-uncertainty": { "mark": "compass", "ink": "#D2BD76", "paper_ink": "#745B1B", "type": "sans", "page_enabled": true },
+  "geopolitics-trade-global-power": { "mark": "globe", "ink": "#87BCAF", "paper_ink": "#28675B", "type": "serif", "page_enabled": true },
+  "floods-water-built-environment": { "mark": "waves", "ink": "#89B7D3", "paper_ink": "#2E6383", "type": "serif", "page_enabled": true },
+  "technology-ai-machine-future": { "mark": "circuit", "ink": "#85C0CC", "paper_ink": "#296671", "type": "sans", "page_enabled": true },
+  "moral-religious-philosophical-essays": { "mark": "lantern", "ink": "#B4AAD2", "paper_ink": "#625286", "type": "italic", "page_enabled": true },
+  "civic-institutions-and-public-power": { "mark": "columns", "ink": "#CB9B92", "paper_ink": "#834B41", "type": "smallcaps", "page_enabled": true },
+  "household-economy-work-and-cost": { "mark": "house", "ink": "#BDB48B", "paper_ink": "#695F2C", "type": "serif", "page_enabled": true },
+  "money-banking-inflation": { "mark": "coins", "ink": "#A9BF88", "paper_ink": "#4D652D", "type": "serif", "page_enabled": true },
+  "brands-business-consumer-choice": { "mark": "tag", "ink": "#D8AD7E", "paper_ink": "#8A5320", "type": "serif", "page_enabled": true }
+}

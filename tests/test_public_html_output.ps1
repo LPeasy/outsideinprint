@@ -6307,7 +6307,8 @@ foreach ($definition in $standardCollectionDefinitions) {
   }
   $html = Get-Content -LiteralPath $pagePath -Raw
   $publishedMembers = @($collectionInventory.members[$slug] | Where-Object { $_.published })
-  $starter = @($publishedMembers | Where-Object { $_.slug -ceq [string]$definition.start_here })
+  $startHereSlug = if ($definition.ContainsKey('start_here')) { [string]$definition.start_here } else { '' }
+  $starter = @($publishedMembers | Where-Object { $_.slug -ceq $startHereSlug })
   $promotedSlug = if ($starter.Count -gt 0) { [string]$starter[0].slug } else { '' }
   $expectedSlugs = [System.Collections.Generic.List[string]]::new()
   if ($promotedSlug) { $expectedSlugs.Add($promotedSlug) }
@@ -6326,11 +6327,26 @@ foreach ($definition in $standardCollectionDefinitions) {
   }
   $itemLinks = @(Get-OpenTags -Html $html -TagName 'a' | Where-Object {
     (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'collection_page' -and
-    (Get-AttributeValue -Tag $_ -Name 'data-analytics-collection') -ceq $slug
+    (Get-AttributeValue -Tag $_ -Name 'data-analytics-collection') -ceq $slug -and
+    -not (Test-TagHasClass -Tag $_ -ClassName 'essay-cartoon-thumb')
   })
   $actualSlugs = @($itemLinks | ForEach-Object { Get-AttributeValue -Tag $_ -Name 'data-analytics-slug' })
   if (($actualSlugs -join '|') -cne ($expectedSlugs -join '|')) {
-    $uxIssues.Add("$relativePath => expected each published member once in collection/section order, with Start Here promoted; expected [$($expectedSlugs -join ', ')], found [$($actualSlugs -join ', ')]")
+    $uxIssues.Add("$relativePath => expected each published member title once in collection/section order, with optional Start Here promoted; expected [$($expectedSlugs -join ', ')], found [$($actualSlugs -join ', ')]")
+  }
+  $artworkLinks = @(Get-OpenTags -Html $html -TagName 'a' | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'essay-cartoon-thumb' })
+  foreach ($artworkLink in $artworkLinks) {
+    $artworkPath = Get-AttributeValue -Tag $artworkLink -Name 'href'
+    $matchingTitles = @($itemLinks | Where-Object { (Get-AttributeValue -Tag $_ -Name 'href') -ceq $artworkPath })
+    if ($matchingTitles.Count -ne 1) {
+      $uxIssues.Add("$relativePath => artwork destination '$artworkPath' must match exactly one member title link")
+      continue
+    }
+    foreach ($attribute in @('data-analytics-event', 'data-analytics-source-slot', 'data-analytics-collection', 'data-analytics-slug', 'data-analytics-title', 'data-analytics-section', 'data-analytics-path')) {
+      if ((Get-AttributeValue -Tag $artworkLink -Name $attribute) -cne (Get-AttributeValue -Tag $matchingTitles[0] -Name $attribute)) {
+        $uxIssues.Add("$relativePath => artwork link '$artworkPath' must retain its title link's $attribute")
+      }
+    }
   }
   if ($html -notmatch ('<li\b[^>]*>' + $publishedMembers.Count + ' published pieces</li>')) {
     $uxIssues.Add("$relativePath => published count must match the $($publishedMembers.Count) eligible source members")
@@ -6355,7 +6371,8 @@ foreach ($definition in $standardCollectionDefinitions) {
     $jumps = @(Get-OpenTags -Html $html -TagName 'a' | Where-Object { (Get-AttributeValue -Tag $_ -Name 'href') -ceq "#$headingID" })
     if ($jumps.Count -ne 1) { $uxIssues.Add("$relativePath => expected one native jump link to #$headingID") }
     $sectionSlugs = @(Get-OpenTags -Html $sectionHtml -TagName 'a' | Where-Object {
-      (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'collection_page'
+      (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'collection_page' -and
+      -not (Test-TagHasClass -Tag $_ -ClassName 'essay-cartoon-thumb')
     } | ForEach-Object { Get-AttributeValue -Tag $_ -Name 'data-analytics-slug' })
     $expectedSectionSlugs = @($expected.members | ForEach-Object { $_.slug })
     if (($sectionSlugs -join '|') -cne ($expectedSectionSlugs -join '|')) {

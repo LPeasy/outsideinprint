@@ -1,0 +1,27 @@
+{{- $page := .page -}}
+{{- $artwork := false -}}
+{{- if not $page.Params.image_exempt -}}
+  {{- with .cartoon -}}
+    {{- $artwork = . -}}
+  {{- else -}}
+    {{- $image := $page.Params.featured_image | default "" -}}
+    {{- $alt := $page.Params.featured_image_alt | default $page.Title -}}
+    {{- if eq (partial "article/variant-key.html" $page) "modernbio" -}}
+      {{- with $page.Params.portrait_image -}}
+        {{- $image = . -}}
+        {{- $alt = $page.Params.portrait_image_alt | default $page.Params.featured_image_alt | default $page.Title -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $image = strings.TrimSpace (printf "%v" $image) -}}
+    {{/* Social cards are sharing metadata, not an illustration fallback. */}}
+    {{- if and $image (not (in (lower $image) "images/social/")) -}}
+      {{- $artwork = dict
+        "image" $image
+        "alt" $alt
+        "title" $page.Title
+        "date" ($page.Date.Format "2006-01-02")
+      -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $artwork -}}

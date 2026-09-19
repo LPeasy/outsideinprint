@@ -13,6 +13,12 @@
   {{ else }}
     {{ $items := partial "collections/resolve-items.html" (dict "collection" $definition "publishedOnly" true) }}
     {{ $state := partial "collections/get-state.html" (dict "collection" $definition "items" $items) }}
+    {{ $pageIdentity := false }}
+    {{ with index hugo.Data.collection_identities $definition.slug }}
+      {{ if and $state.visible (eq .page_enabled true) }}
+        {{ $pageIdentity = . }}
+      {{ end }}
+    {{ end }}
     {{ $startHereSlug := lower (printf "%v" ($definition.start_here | default "")) }}
     {{ $startHere := false }}
     {{ if $startHereSlug }}
@@ -49,9 +55,14 @@
       {{ $relatedCollections = first 3 (append $primaryRelatedCollections $secondaryRelatedCollections) }}
     {{ end }}
 
-    <article class="collection-section{{ if $state.public }} collection-section--public{{ end }}{{ if $hasSections }} collection-section--grouped{{ end }}">
+    <article class="collection-section{{ if $state.public }} collection-section--public{{ end }}{{ if $hasSections }} collection-section--grouped{{ end }}"{{ with $pageIdentity }} data-collection-identity="{{ $definition.slug }}" data-collection-type="{{ .type }}" style="{{ printf "--collection-ink-dark:%s;--collection-ink-light:%s" .ink .paper_ink | safeCSS }}"{{ end }}>
       <header class="page-shell page-shell--grid collection-section__header">
+        {{ with $pageIdentity }}
+          <div class="collection-section__nameplate">
+            {{ partial "collections/directory-mark.html" .mark }}
+        {{ end }}
         <h1>{{ $definition.title }}</h1>
+        {{ with $pageIdentity }}</div>{{ end }}
         {{ with $definition.description }}<p class="page-intro collection-section__description">{{ . }}</p>{{ end }}
         <ul class="collection-section__ledger" aria-label="Collection details">
           <li>{{ title $state.kind }} collection</li>
@@ -79,6 +90,7 @@
           </div>
           {{ partial "discovery/page-list-item.html" (dict
             "page" .
+            "collectionArtwork" (not (not $pageIdentity))
             "class" "collection-section__record collection-section__lead-record"
             "analyticsEvent" "collection_click"
             "analyticsSourceSlot" "collection_page"
@@ -103,6 +115,7 @@
                 <li class="collection-section__item">
                   {{ partial "discovery/page-list-item.html" (dict
                     "page" .
+                    "collectionArtwork" (not (not $pageIdentity))
                     "analyticsEvent" "collection_click"
                     "analyticsSourceSlot" "collection_page"
                     "analyticsCollection" $definition.slug
@@ -130,6 +143,7 @@
               <li class="collection-section__item">
                 {{ partial "discovery/page-list-item.html" (dict
                   "page" .
+                  "collectionArtwork" (not (not $pageIdentity))
                   "analyticsEvent" "collection_click"
                   "analyticsSourceSlot" "collection_page"
                   "analyticsCollection" $definition.slug

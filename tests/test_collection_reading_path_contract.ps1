@@ -63,7 +63,7 @@ if ($articleSingle -match [regex]::Escape('partial "authors/card.html"')) {
 $readingPathIndex = $articleSingle.IndexOf('partial "collections/reading-path.html" .', [System.StringComparison]::Ordinal)
 $aftermatterIndex = $articleSingle.IndexOf('class="piece-aftermatter"', [System.StringComparison]::Ordinal)
 $recordIndex = $articleSingle.IndexOf('class="article-publication-record"', [System.StringComparison]::Ordinal)
-$newsletterIndex = $articleSingle.IndexOf('partial "newsletter_signup.html"', [System.StringComparison]::Ordinal)
+$newsletterIndex = $articleSingle.IndexOf('"class" "newsletter-signup--article-exit"', [System.StringComparison]::Ordinal)
 $journeyIndex = $articleSingle.IndexOf('"class" "journey-links--article-exit"', [System.StringComparison]::Ordinal)
 if ($aftermatterIndex -lt 0 -or $readingPathIndex -le $aftermatterIndex -or $recordIndex -le $readingPathIndex -or
     $newsletterIndex -le $recordIndex -or $journeyIndex -le $newsletterIndex) {
@@ -72,7 +72,7 @@ if ($aftermatterIndex -lt 0 -or $readingPathIndex -le $aftermatterIndex -or $rec
 
 $collectionSingle = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/single.html') -Raw
 foreach ($requiredSnippet in @(
-  '<article class="collection-section{{ if $state.public }} collection-section--public{{ end }}{{ if $hasSections }} collection-section--grouped{{ end }}">',
+  '<article class="collection-section{{ if $state.public }} collection-section--public{{ end }}{{ if $hasSections }} collection-section--grouped{{ end }}',
   '<h2 id="collection-start-here-title">Start Here</h2>',
   'class="collection-section__ledger"',
   '<ol class="collection-section__items">',

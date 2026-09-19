@@ -18,5 +18,10 @@
   {{ end }}
 {{ end }}
 
-{{ $ordered := partial "collections/sort-items.html" (dict "items" $items) }}
+{{ $ordered := slice }}
+{{ if eq ($collection.order | default "") "oldest-first" }}
+  {{ $ordered = sort (sort $items "Title" "asc") "Date" "asc" }}
+{{ else }}
+  {{ $ordered = partial "collections/sort-items.html" (dict "items" $items) }}
+{{ end }}
 {{ return $ordered }}

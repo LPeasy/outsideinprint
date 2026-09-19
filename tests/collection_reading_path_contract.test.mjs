@@ -50,7 +50,7 @@ test("article single includes the reading-path partial and shared progress scrip
 
 test("collection single promotes Start Here without visible progress hooks", () => {
   for (const snippet of [
-    '<article class="collection-section{{ if $state.public }} collection-section--public{{ end }}{{ if $hasSections }} collection-section--grouped{{ end }}">',
+    '<article class="collection-section{{ if $state.public }} collection-section--public{{ end }}{{ if $hasSections }} collection-section--grouped{{ end }}',
     '<h2 id="collection-start-here-title">Start Here</h2>',
     'class="collection-section__ledger"',
     '<ol class="collection-section__items">',

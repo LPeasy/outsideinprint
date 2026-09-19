@@ -45,17 +45,18 @@
         {{ $groupPieces := len (uniq $groupPiecePaths) }}
         {{ if gt (len $groupEntries) 0 }}
           <section class="collections-broadsheet__section" aria-labelledby="collections-group-{{ $group.key }}">
-            <div class="collections-broadsheet__section-header">
+            <header class="collections-broadsheet__section-header">
               <h2 id="collections-group-{{ $group.key }}" class="collections-broadsheet__section-title">{{ $group.title }}</h2>
               <p class="collections-broadsheet__section-meta">{{ len $groupEntries }} collections &middot; {{ $groupPieces }} pieces</p>
               <p class="collections-broadsheet__section-intro">{{ $group.description }}</p>
-            </div>
+            </header>
             <div class="collections-broadsheet__records">
               {{ range $groupEntries }}
                 {{ partial "discovery/collection-card.html" (dict
                   "entry" .
                   "variant" "broadsheet"
                   "label" $group.label
+                  "identity" (index hugo.Data.collection_identities .collection.slug)
                   "analyticsSourceSlot" "collections_directory"
                 ) }}
               {{ end }}

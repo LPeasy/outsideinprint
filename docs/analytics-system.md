@@ -64,6 +64,10 @@ Event metadata can include the public page, product code, format, collection, an
 
 Existing discovery slots include `article_collection_context` for article collection links and `studio_sample_exit` for marked Studio links. Slot labels identify where a click occurred; they do not establish a later inquiry or sale.
 
+### Collection illustration measurement — September 19, 2026 changeover
+
+Expanded collection illustration anchors use the same `collection_click` event, `collection_page` source slot, and article/collection metadata as their title links. This slot now combines title and illustration activations; it does not distinguish the two surfaces. Each link activation emits one event. Magnifiers only open the image viewer and must not emit an article-click event. September 19, 2026 is the measurement changeover: earlier collection-page totals covered titles only. September 19 is a partial changeover day; September 20 is the first full reporting day under the expanded coverage. Do not treat an increase across that boundary as evidence of readership growth, or refresh historical snapshots to manufacture continuity.
+
 ### Homepage featured-link measurement — September 19, 2026 changeover
 
 The homepage's existing `homepage_v2_featured_lead` and `homepage_v2_featured_supporting` slots count title-link clicks. The September 19, 2026 release adds `homepage_v2_featured_lead_image`, `homepage_v2_featured_lead_cta`, and `homepage_v2_featured_supporting_image` for the other article links using the same `internal_promo_click` event. Illustration zoom and fallback controls are not article links and should not count as article clicks. Group the relevant title, image, and CTA slots for post-publication lead or supporting-card click totals. Historical totals for the existing slots are title-only. September 19 is a partial measurement-changeover day; September 20 is the first full reporting day under the expanded coverage. Do not present the new grouped totals as continuous with that older baseline.

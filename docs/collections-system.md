@@ -31,6 +31,7 @@ Each collection in `data/collections.yaml` supports these fields:
 - `explicit_only`: disables fallback matching when true.
 - `featured`: legacy featured-surface metadata retained for compatibility; the active homepage and `/collections/` directory do not use it for ordering or presentation.
 - `weight`: ordering control for collection listings.
+- `order`: optional `oldest-first` sorts members by article `Date` ascending, with title ascending for equal dates, instead of using article weights. Omit it to retain the default weighted/newest-first ordering. Currently only Syd and Oliver Dialogues opts in.
 - `start_here`: optional page slug that gets a dedicated callout.
 - `sections`: optional ordered array of subject sections, each with a stable `id`, a reader-facing `title`, and an `items` array of canonical article slugs. These assignments organize existing membership; they do not create membership or override article order.
 - `related_collections`: ordered array of intentionally selected collection slugs for the standard detail page. The public surface uses up to three eligible destinations in this order, with no automatic recommendations or replacement links.
@@ -45,7 +46,7 @@ Collections use these page params:
 
 - `collections`: array of collection slugs. If present, this is the source of truth and its order controls article-page collection display.
 - `series`: legacy fallback support for collections that still resolve via series names.
-- `collection_weight`: optional ascending order within a collection. If missing, date descending is used.
+- `collection_weight`: optional ascending order within a collection. If missing, date descending is used. A collection's explicit `order: oldest-first` overrides these weights without changing article metadata.
 
 Example:
 
@@ -69,9 +70,9 @@ Resolution rules:
 2. If a page has no `collections`, fallback matching may be used.
 3. If a collection has `explicit_only: true`, fallback is never used for that collection.
 4. Public listings require `public: true`, either `count >= min_items` or `force_public: true`, and an eligible published `content/collections/<slug>.md` page. Counts include only published members: not draft, article date and release date no later than the build clock, and no elapsed expiry date. This also applies to public navigation in preview builds.
-5. Collection item order is `collection_weight` ascending, then date descending.
+5. Default collection item order is `collection_weight` ascending, then date descending. `order: oldest-first` opts a collection into article `Date` ascending, breaking equal dates by title ascending and ignoring weights only for that collection. Syd and Oliver Dialogues uses this order and has no promoted Start Here piece: all dialogues appear once in a continuous oldest-to-newest list.
 6. `resolve-items.html` retains raw resolution by default for editorial audits; `publishedOnly: true` filters it through `collections/is-published.html`. Public article resolution, directory entries, collection details, and collection schema use filtered membership.
-7. Subject sections filter this resolved order rather than sorting their `items` declarations. The collection definition controls section order; the existing article weights and dates control order inside each section.
+7. Subject sections filter this resolved order rather than sorting their `items` declarations. The collection definition controls section order; the collection's resolved member order controls order inside each section.
 
 ## Subject sections and related collections
 
@@ -139,7 +140,13 @@ Collections provide subject or series continuation at article endings and centra
 
 - The `/collections/` route renders a ruled broadsheet directory, not a dominant card grid.
 - The directory has one page title/deck and two editorial columns: `Series` and `Topics`.
+- Each column begins with a semantic header: its H2 sits in a full-width, lightly tinted band with bold uppercase UI type, followed by centered counts and explanatory copy. A clear vertical rule separates desktop columns; the same heading bands introduce the stacked groups on narrow screens. Collection rows retain their serif titles and left-aligned copy.
 - Each visible collection appears as a compact `collection-record` row with kind, title, description, piece count, scope metadata, and a quiet `Start here` link when present.
+- Directory rows use compact newspaper panels: square paper surfaces, double top rules, fine metadata dividers, bold serif headlines, and small gaps between entries. This treatment adds no copy or controls and is scoped to `collections-broadsheet__records`; related-collection rows on individual collection pages remain unchanged. Narrow-screen insets stay small to protect the reading measure.
+- `data/collection_identities.json` assigns each public directory entry its own light/dark ink pair, decorative printer's mark, and headline style (`serif`, `sans`, `italic`, or `smallcaps`). The inline SVG marks in `collections/directory-mark.html` are hidden from assistive technology and cannot receive focus. The directory alone passes the optional identity into the shared record partial; article pages and related-collection rows do not inherit it. These signatures do not consume legacy `room_theme` metadata, add fonts or image requests, or change visible copy, destinations, or analytics.
+- The optional boolean `page_enabled` enables a collection-page identity only when its collection is publicly visible; missing or false leaves the page unchanged. All 17 public collections are enabled, using their directory ink pair, emblem (32px desktop, 24px through 640px), and headline style. Standard pages have a double nameplate rule, quiet lower rule, and identity-colored article-title links and section labels. Long names wrap without changing the heading scale. Backgrounds, descriptions, metadata, order, related cards, and browse navigation remain unchanged. The nonpublic Ledger remains unthemed.
+- Enabled standard collections place each illustrated piece's existing title, metadata, and summary in the left half and uncropped responsive artwork in the right half. Illustrated Start Here entries span the full section width below their label. Through 640px, artwork follows the copy at full row width in both visual and document order. The optional `collectionArtwork` input leaves shared archive/library rows unchanged. `collections/artwork-for-page.html` uses an existing linked gallery illustration first, then the article's `featured_image` (with `portrait_image` taking precedence for Modern Bios). It preserves `image_exempt` pieces as text-only and does not use generic social cards or invent body-image fallbacks. Managed and legacy static images use the existing image model; non-gallery artwork omits gallery metadata so its zoom viewer has no misleading gallery link. The illustration remains an article link and copies its title link's `collection_click` event, `collection_page` slot, and destination metadata. Its separate 44px magnifier reuses the homepage's pale-disc styling and existing collection lightbox behavior, without article-click tracking. No new lightbox script, artwork, or image pipeline is introduced.
+- Intentional structures remain intact: Musings has no Start Here feature; Syd and Oliver Dialogues has no Start Here promotion and runs oldest first, newest at the bottom; The Things We Say retains its affirmation bank and jump navigation; Risk, Technology, and Civic Institutions retain grouped sections and jump navigation. Bob's Almanack keeps its bespoke newspaper sheet and issue register, adding its sunrise nameplate and amber ink. Its always-paper sheet uses the light-background ink in both site themes; the enabled nameplate scales down through 560px to keep its words intact beside the emblem. Individual Almanack issues are unchanged.
 - The index ignores `featured`; the field remains compatibility metadata and is not consumed by the active homepage.
 - Individual collection pages render as newspaper section fronts with the actual collection title as the H1 and its description immediately below. Dated analysis retains publication dates; collection promotion does not imply current reporting.
 - Bob's Almanack uses a bespoke collection layout and may be listed publicly only when its collection page and at least one issue are published in the same build.

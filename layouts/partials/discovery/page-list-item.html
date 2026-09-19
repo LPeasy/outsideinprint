@@ -14,6 +14,14 @@
 {{- $summary := "" -}}
 {{- $metaParts := slice -}}
 {{- $linkedCartoon := partial "editorial/cartoon-for-page.html" $page -}}
+{{- $collectionImage := false -}}
+{{- if .collectionArtwork | default false -}}
+  {{- $collectionImage = partial "collections/artwork-for-page.html" (dict "page" $page "cartoon" $linkedCartoon) -}}
+{{- end -}}
+{{- $collectionArtwork := not (not $collectionImage) -}}
+{{- if $collectionArtwork -}}
+  {{- $itemClasses = $itemClasses | append "item--collection-artwork" -}}
+{{- end -}}
 {{- if $showSummary -}}
   {{- $summary = partial "discovery/page-summary.html" $page -}}
 {{- end -}}
@@ -43,6 +51,7 @@
 {{- end -}}
 
 <article class="{{ delimit $itemClasses " " }}">
+  {{- if $collectionArtwork }}<div class="item__copy">{{ end }}
   {{- if and (eq $articleVariant "modernbio") (ne $collectionPlacement "kicker") }}<div class="item-series-marker">Modern Bios</div>{{ end }}
   {{- if and (gt (len $collections) 0) (eq $collectionPlacement "kicker") }}
     <div class="item-kicker item-kicker--collection">
@@ -70,8 +79,10 @@
         {{- end }}
       {{- end }}
     >{{ $page.Title }}</a></div>
-    {{- with $linkedCartoon }}
-      {{- partial "editorial/cartoon-gallery-link.html" (dict "page" $page "cartoon" .) -}}
+    {{- if not (.collectionArtwork | default false) }}
+      {{- with $linkedCartoon }}
+        {{- partial "editorial/cartoon-gallery-link.html" (dict "page" $page "cartoon" .) -}}
+      {{- end }}
     {{- end }}
   </div>
   {{- if gt (len $metaParts) 0 }}<div class="m">{{ delimit $metaParts " | " }}</div>{{ end }}
@@ -88,4 +99,15 @@
     </div>
   {{- end }}
   {{- with $summary }}<div class="d">{{ . }}</div>{{ end }}
+  {{- if $collectionArtwork }}
+    </div>
+    {{ partial "editorial/cartoon-gallery-link.html" (dict
+      "page" $page
+      "cartoon" $collectionImage
+      "collectionArtwork" true
+      "analyticsEvent" $analyticsEvent
+      "analyticsSourceSlot" $analyticsSourceSlot
+      "analyticsCollection" $analyticsCollection
+    ) }}
+  {{- end }}
 </article>
