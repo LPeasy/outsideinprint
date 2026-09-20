@@ -5,6 +5,7 @@ $repoRoot = Split-Path -Parent $PSScriptRoot
 
 $requiredFiles = @(
   'data/organization.yaml',
+  'static/images/brand/outside-in-print-share.png',
   'data/authors.yaml',
   'layouts/partials/authors/resolve.html',
   'layouts/partials/authors/directory.html',
@@ -78,8 +79,46 @@ if ($organizationData -notmatch 'default_author_id:\s*robert-v-ussley') {
   throw 'Expected data/organization.yaml to default published authorship to robert-v-ussley.'
 }
 
-if ($organizationData -notmatch 'image:\s*/images/social/outside-in-print-default\.png') {
-  throw 'Expected data/organization.yaml to define the default social image.'
+if ($organizationData -notmatch '(?m)^image:\s*/images/brand/outside-in-print-share\.png\s*$') {
+  throw 'Expected data/organization.yaml to define the branded fallback sharing image.'
+}
+if ($organizationData -notmatch '(?m)^image_alt:\s*["'']?Outside In Print masthead in off-white lettering on a black background\.["'']?\s*$') {
+  throw 'Expected the branded fallback to have accurate shared alternative text.'
+}
+$expectedLegacyShareImages = @(
+  '/images/social/outside-in-print-default.png',
+  '/images/social/oip-about.png',
+  '/images/social/oip-almanack.png',
+  '/images/social/oip-archive.png',
+  '/images/social/oip-authors.png',
+  '/images/social/oip-collections.png',
+  '/images/social/collection-bobs-almanack.png',
+  '/images/social/collection-civic-institutions-and-public-power.png',
+  '/images/social/collection-floods-water-built-environment.png',
+  '/images/social/collection-geopolitics-trade-global-power.png',
+  '/images/social/collection-lit-review.png',
+  '/images/social/collection-modern-bios.png',
+  '/images/social/collection-moral-religious-philosophical-essays.png',
+  '/images/social/collection-reported-case-studies.png',
+  '/images/social/collection-risk-uncertainty.png',
+  '/images/social/collection-syd-and-oliver-dialogues.png',
+  '/images/social/collection-technology-ai-machine-future.png',
+  '/images/social/collection-the-ledger.png'
+)
+$legacyShareBlock = [regex]::Match($organizationData, '(?m)^legacy_share_images:[ \t]*\r?\n(?<items>(?:[ \t]+-[^\r\n]*(?:\r?\n|$))+)').Groups['items'].Value
+$actualLegacyShareImages = @([regex]::Matches($legacyShareBlock, '(?m)^[ \t]+-[ \t]+["'']?(?<path>/images/social/[^\s"'']+\.png)["'']?[ \t]*\r?$') | ForEach-Object { $_.Groups['path'].Value })
+if ((($actualLegacyShareImages | Sort-Object) -join "`n") -cne (($expectedLegacyShareImages | Sort-Object) -join "`n")) {
+  throw 'Expected sharing-image remapping to cover only the 18 explicit legacy branded cards.'
+}
+
+$metadataImageHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/metadata_image.html') -Raw
+if ($metadataImageHelper -notmatch [regex]::Escape('if and $image $organizationImage (in (hugo.Data.organization.legacy_share_images | default slice) $image)')) {
+  throw 'Expected social-image remapping to use the explicit organization legacy-card list.'
+}
+foreach ($retainedImageSource in @('.Params.featured_image', '.Params.images', '.Params.image', 'partial "editorial/current-cartoon.html"')) {
+  if ($metadataImageHelper -notmatch [regex]::Escape($retainedImageSource)) {
+    throw "Expected branded fallback changes to preserve the existing specific-image source: $retainedImageSource"
+  }
 }
 
 $authorsData = Get-Content -Path (Join-Path $repoRoot 'data/authors.yaml') -Raw
@@ -138,6 +177,9 @@ foreach ($requiredSnippet in @(
 }
 
 $metadataPageHelper = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/metadata/page.html') -Raw
+if ($metadataPageHelper -notmatch '(?s)with hugo\.Data\.organization\.image\s*-?}}\s*{{-?\s*if eq \$image \(\. \| absURL\)\s*-?}}\s*{{-?\s*\$imageAlt = hugo\.Data\.organization\.image_alt \| default \$imageAlt') {
+  throw 'Expected shared branded alternative text only when the final image resolves to the organization image.'
+}
 foreach ($requiredSnippet in @(
   'partial "shop/product-data.html"',
   '.Params.metadata_title',

@@ -66,6 +66,11 @@
 {{- $imageType := $imageDetails.type | default "" -}}
 {{- $dates := partial "metadata/dates.html" . -}}
 {{- $imageAlt := .Params.image_alt | default .Params.featured_image_alt | default .Params.portrait_alt | default $title -}}
+{{- with hugo.Data.organization.image -}}
+  {{- if eq $image (. | absURL) -}}
+    {{- $imageAlt = hugo.Data.organization.image_alt | default $imageAlt -}}
+  {{- end -}}
+{{- end -}}
 {{- $author := partial "authors/resolve.html" (dict
   "page" .
   "fallbackDefault" (or $route.is_article_like (eq $route.name "author"))

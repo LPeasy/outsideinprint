@@ -1032,8 +1032,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/outside-in-print-default.png'
-    ExpectedImageAlt = 'Outside In Print Studio'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/archive/index.html' = @{
     Title = 'Archive'
@@ -1042,8 +1042,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/oip-archive.png'
-    ExpectedImageAlt = 'Outside In Print social card for the long-form archive.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/library/index.html' = @{
     Title = 'Library'
@@ -1068,8 +1068,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/oip-collections.png'
-    ExpectedImageAlt = 'Outside In Print social card for the collections directory.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/collections/musings/index.html' = @{
     Title = 'Musings'
@@ -1078,8 +1078,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/outside-in-print-default.png'
-    ExpectedImageAlt = 'Outside In Print social card for the Musings collection.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/collections/the-things-we-say/index.html' = @{
     Title = 'The Things We Say'
@@ -1088,8 +1088,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/outside-in-print-default.png'
-    ExpectedImageAlt = 'Outside In Print social card for The Things We Say collection.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/shop/index.html' = @{
     Title = 'Bookstore'
@@ -1134,8 +1134,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/oip-about.png'
-    ExpectedImageAlt = 'Outside In Print social card for the About page.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/contribute/index.html' = @{
     Title = 'Write for Outside In Print'
@@ -1144,8 +1144,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/outside-in-print-default.png'
-    ExpectedImageAlt = 'Write for Outside In Print'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/authors/index.html' = @{
     Title = 'Authors'
@@ -1154,8 +1154,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/oip-authors.png'
-    ExpectedImageAlt = 'Outside In Print social card for the author directory.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/authors/robert-v-ussley/index.html' = @{
     Title = 'Robert V. Ussley'
@@ -1172,8 +1172,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/collection-risk-uncertainty.png'
-    ExpectedImageAlt = 'Outside In Print social card for the Risk, Uncertainty, and Decision-Making collection.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/collections/geopolitics-trade-global-power/index.html' = @{
     Title = 'Geopolitics, Trade, and Global Power'
@@ -1182,8 +1182,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/collection-geopolitics-trade-global-power.png'
-    ExpectedImageAlt = 'Outside In Print social card for the Geopolitics, Trade, and Global Power collection.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/collections/civic-institutions-and-public-power/index.html' = @{
     Title = 'Civic Institutions and Public Power'
@@ -1192,8 +1192,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/collection-civic-institutions-and-public-power.png'
-    ExpectedImageAlt = 'Outside In Print social card for the Civic Institutions and Public Power collection.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/collections/bobs-almanack/index.html' = @{
     Title = 'Bob''s Almanack'
@@ -1202,8 +1202,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/collection-bobs-almanack.png'
-    ExpectedImageAlt = 'Outside In Print social card for the Bob''s Almanack collection.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/collections/the-ledger/index.html' = @{
     Title = 'The Ledger'
@@ -1212,8 +1212,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/collection-the-ledger.png'
-    ExpectedImageAlt = 'Outside In Print social card for The Ledger collection.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/collections/syd-and-oliver-dialogues/index.html' = @{
     Title = 'Syd and Oliver Dialogues'
@@ -1222,8 +1222,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/collection-syd-and-oliver-dialogues.png'
-    ExpectedImageAlt = 'Outside In Print social card for the Syd and Oliver Dialogues collection.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/collections/modern-bios/index.html' = @{
     Title = 'Modern Bios'
@@ -1232,8 +1232,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/collection-modern-bios.png'
-    ExpectedImageAlt = 'Outside In Print social card for the Modern Bios collection.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/collections/lit-review/index.html' = @{
     Title = 'Lit Review'
@@ -1242,8 +1242,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/collection-lit-review.png'
-    ExpectedImageAlt = 'Outside In Print social card for the Lit Review collection.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/collections/floods-water-built-environment/index.html' = @{
     Title = 'Floods, Water, and the Built Environment'
@@ -1252,8 +1252,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/collection-floods-water-built-environment.png'
-    ExpectedImageAlt = 'Outside In Print social card for the Floods, Water, and the Built Environment collection.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/collections/technology-ai-machine-future/index.html' = @{
     Title = 'Technology, AI, and the Machine Future'
@@ -1262,8 +1262,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/collection-technology-ai-machine-future.png'
-    ExpectedImageAlt = 'Outside In Print social card for the Technology, AI, and the Machine Future collection.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/collections/moral-religious-philosophical-essays/index.html' = @{
     Title = 'Moral, Religious, and Philosophical Essays'
@@ -1272,8 +1272,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/collection-moral-religious-philosophical-essays.png'
-    ExpectedImageAlt = 'Outside In Print social card for the Moral, Religious, and Philosophical Essays collection.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/collections/reported-case-studies/index.html' = @{
     Title = 'Reported Case Studies'
@@ -1282,8 +1282,8 @@ $requiredMetadataPages = [ordered]@{
     OgType = 'website'
     TwitterCard = 'summary_large_image'
     RequireImage = $true
-    ExpectedImage = 'https://outsideinprint.org/images/social/collection-reported-case-studies.png'
-    ExpectedImageAlt = 'Outside In Print social card for the Reported Case Studies collection.'
+    ExpectedImage = 'https://outsideinprint.org/images/brand/outside-in-print-share.png'
+    ExpectedImageAlt = 'Outside In Print masthead in off-white lettering on a black background.'
   }
   'public/random/index.html' = @{
     Title = 'Random'
@@ -2531,6 +2531,18 @@ foreach ($relativePath in $requiredMetadataPages.Keys) {
       }
       if ($twitterImage -ne $expectedImage) {
         $metadataIssues.Add("$relativePath => expected twitter:image '$expectedImage', found '$twitterImage'")
+      }
+      if ($expectedImage -ceq 'https://outsideinprint.org/images/brand/outside-in-print-share.png') {
+        foreach ($imageFact in @(
+          @{ Property = 'og:image:width'; Value = '1200' },
+          @{ Property = 'og:image:height'; Value = '630' },
+          @{ Property = 'og:image:type'; Value = 'image/png' }
+        )) {
+          $actualImageFact = Get-MetaContent -Html $html -AttributeName 'property' -AttributeValue $imageFact.Property
+          if ($actualImageFact -cne $imageFact.Value) {
+            $metadataIssues.Add("$relativePath => expected branded $($imageFact.Property) '$($imageFact.Value)', found '$actualImageFact'")
+          }
+        }
       }
     }
 

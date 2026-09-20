@@ -2,5 +2,25 @@ name: Outside In Print
 url: https://outsideinprint.org/
 description: Digital imprint for disciplined public judgment, publishing essays, dialogues, and working papers that test claims against evidence, incentives, tradeoffs, and downstream consequences.
 logo: /favicon.svg
-image: /images/social/outside-in-print-default.png
+image: /images/brand/outside-in-print-share.png
+image_alt: Outside In Print masthead in off-white lettering on a black background.
+legacy_share_images:
+  - /images/social/outside-in-print-default.png
+  - /images/social/oip-about.png
+  - /images/social/oip-authors.png
+  - /images/social/oip-collections.png
+  - /images/social/oip-almanack.png
+  - /images/social/oip-archive.png
+  - /images/social/collection-bobs-almanack.png
+  - /images/social/collection-civic-institutions-and-public-power.png
+  - /images/social/collection-floods-water-built-environment.png
+  - /images/social/collection-geopolitics-trade-global-power.png
+  - /images/social/collection-lit-review.png
+  - /images/social/collection-modern-bios.png
+  - /images/social/collection-moral-religious-philosophical-essays.png
+  - /images/social/collection-reported-case-studies.png
+  - /images/social/collection-risk-uncertainty.png
+  - /images/social/collection-syd-and-oliver-dialogues.png
+  - /images/social/collection-technology-ai-machine-future.png
+  - /images/social/collection-the-ledger.png
 default_author_id: robert-v-ussley

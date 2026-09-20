@@ -115,6 +115,11 @@
   {{- $image = printf "%v" $organizationImage -}}
 {{- end -}}
 
+{{- /* Retire only the named generic cards; article-specific artwork keeps its precedence. */ -}}
+{{- if and $image $organizationImage (in (hugo.Data.organization.legacy_share_images | default slice) $image) -}}
+  {{- $image = printf "%v" $organizationImage -}}
+{{- end -}}
+
 {{- if $gamesSocialImage -}}
   {{- .Scratch.Set "oip_metadata_image_details" (dict
     "width" $gamesSocialWidthResolved
