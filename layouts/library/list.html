@@ -69,20 +69,20 @@
   <div id="library-grouped-results">
     {{ range $group := $catalog.groups }}
       {{ $initialEntries := first $initialLimit $group.entries }}
-      <section class="library-group page-shell page-shell--reading" data-library-group data-library-group-key="{{ $group.key }}" aria-labelledby="library-group-{{ $group.key }}">
+      <section class="library-group page-shell page-shell--grid" data-library-group data-library-group-key="{{ $group.key }}" aria-labelledby="library-group-{{ $group.key }}">
         <h2 id="library-group-{{ $group.key }}" class="list-title" style="margin-top:22px;">{{ $group.title }}</h2>
         <p class="page-intro">{{ $group.description }}</p>
         <p class="m">Showing {{ len $initialEntries }} of {{ $group.count }} pieces in this type.</p>
         {{ range $initialEntries }}
           <div data-library-item data-library-surface="grouped" data-entry-id="{{ .id }}">
-            {{ partial "discovery/page-list-item.html" (dict "page" .page "showCollections" true "showSectionLabel" false) }}
+            {{ partial "discovery/page-list-item.html" (dict "page" .page "showCollections" true "showSectionLabel" false "collectionArtwork" true "class" "collection-section__record" "analyticsSourceSlot" "library_grouped") }}
           </div>
         {{ end }}
       </section>
     {{ end }}
   </div>
 
-  <section id="library-flat-results" class="library-results page-shell page-shell--reading" aria-labelledby="library-results-title" hidden>
+  <section id="library-flat-results" class="library-results page-shell page-shell--grid" aria-labelledby="library-results-title" hidden>
     <h2 id="library-results-title" class="list-title" style="margin-top:22px;" tabindex="-1">Results</h2>
     <div id="library-results-list" class="library-results__list"></div>
     <nav id="library-pagination" class="library-pagination" aria-label="Library result pages" hidden>
@@ -92,6 +92,8 @@
     </nav>
   </section>
 
+  {{ $artworkScript := resources.Get "js/library-artwork.js" | resources.Minify | resources.Fingerprint }}
+  <script src="{{ $artworkScript.RelPermalink }}" integrity="{{ $artworkScript.Data.Integrity }}"></script>
   <script>
     (function () {
       var controls = document.querySelector('[data-library-controls]');
@@ -114,6 +116,7 @@
       var nextButton = document.getElementById('library-next');
       var pageStatus = document.getElementById('library-page-status');
       var indexUrl = {{ $indexURL | jsonify | safeJS }};
+      var artworkTools = window.oipLibraryArtwork;
       var initialCount = {{ $initialCount }};
       var totalCount = {{ len $catalog.entries }};
       var catalogPromise = null;
@@ -123,7 +126,7 @@
       var currentState = null;
       var supportsUrl = typeof URL === 'function' && typeof window.history.replaceState === 'function' && typeof window.history.pushState === 'function';
 
-      if (!controls || !searchInput || !typeSelect || !yearSelect || !collectionSelect || !sortSelect || !resetButton || !browseButton || !summary || !empty || !error || !groupedRoot || !flatSection || !flatList || !resultsTitle || !pagination || !previousButton || !nextButton || !pageStatus || typeof fetch !== 'function') return;
+      if (!controls || !searchInput || !typeSelect || !yearSelect || !collectionSelect || !sortSelect || !resetButton || !browseButton || !summary || !empty || !error || !groupedRoot || !flatSection || !flatList || !resultsTitle || !pagination || !previousButton || !nextButton || !pageStatus || !artworkTools || typeof fetch !== 'function') return;
       controls.hidden = false;
 
       function defaultState() {
@@ -249,7 +252,9 @@
         wrapper.setAttribute('data-library-surface', 'results');
         wrapper.setAttribute('data-entry-id', item.id || item.url || '');
         var article = document.createElement('article');
-        article.className = 'item';
+        article.className = item.image ? 'item item--collection-artwork collection-section__record' : 'item';
+        var copy = item.image ? document.createElement('div') : article;
+        if (item.image) copy.className = 'item__copy';
         var titleRow = document.createElement('div');
         titleRow.className = 'item__title-row';
         var title = document.createElement('div');
@@ -257,19 +262,17 @@
         var link = document.createElement('a');
         link.href = item.url;
         link.textContent = item.title;
-        link.setAttribute('data-analytics-event', 'internal_promo_click');
-        link.setAttribute('data-analytics-source-slot', 'library_search');
-        link.setAttribute('data-analytics-path', item.url);
+        artworkTools.setArticleAnalytics(link, item);
         title.appendChild(link);
         titleRow.appendChild(title);
-        article.appendChild(titleRow);
+        copy.appendChild(titleRow);
 
         var meta = [];
         if (item.sectionLabel) meta.push(item.sectionLabel);
         if (item.date) meta.push(item.date);
         if (item.version) meta.push('v' + item.version);
         if (item.readingTime) meta.push(item.readingTime + ' min read');
-        appendText(article, 'm', meta.join(' | '));
+        appendText(copy, 'm', meta.join(' | '));
 
         if (Array.isArray(item.collections) && item.collections.length) {
           var collectionLine = document.createElement('div');
@@ -285,9 +288,13 @@
               collectionLine.appendChild(document.createTextNode(collection.title));
             }
           });
-          article.appendChild(collectionLine);
+          copy.appendChild(collectionLine);
         }
-        appendText(article, 'd', item.summary);
+        appendText(copy, 'd', item.summary);
+        if (item.image) {
+          article.appendChild(copy);
+          article.appendChild(artworkTools.renderArtwork(item));
+        }
         wrapper.appendChild(article);
         return wrapper;
       }

@@ -4,6 +4,7 @@ import test from "node:test";
 import vm from "node:vm";
 
 const template = fs.readFileSync("layouts/library/list.html", "utf8");
+const artworkScript = fs.readFileSync("assets/js/library-artwork.js", "utf8");
 const script = template.match(/<script>([\s\S]*?)<\/script>/)[1]
   .replace("{{ $indexURL | jsonify | safeJS }}", JSON.stringify("/library/index.json"))
   .replace("{{ $initialCount }}", "36")
@@ -86,12 +87,15 @@ function setup({ query = "", fetchImpl = async () => response(), noFetch = false
     querySelector: () => controls,
     getElementById: (id) => nodes.get(id),
     createElement: (tag) => new Element(tag),
+    createElementNS: (namespace, tag) => new Element(tag),
     createTextNode: (value) => Object.assign(new Element("text"), { textContent: value }),
   };
-  vm.runInNewContext(script, {
+  const context = {
     document, window, URL: noUrl ? undefined : URL,
     fetch: noFetch ? undefined : (...args) => { fetchCalls += 1; assert.equal(args[0], "/library/index.json"); return fetchImpl(...args); },
-  });
+  };
+  vm.runInNewContext(artworkScript, context);
+  vm.runInNewContext(script, context);
   return {
     nodes, controls, window, history,
     get fetchCalls() { return fetchCalls; },
@@ -121,6 +125,47 @@ test("Library keeps grouped selections and no-JavaScript fallback while browse c
   assert.equal(page.nodes.get("library-flat-results").hidden, true);
   assert.equal(page.nodes.get("library-sort").options[0].textContent, "Newest by type");
   assert.equal(setup({ noFetch: true }).controls.hidden, true);
+});
+
+test("Library gives grouped and filtered illustrated pieces matching read and zoom surfaces", async () => {
+  assert.match(template, /"collectionArtwork" true "class" "collection-section__record" "analyticsSourceSlot" "library_grouped"/);
+  assert.match(template, /library-group page-shell page-shell--grid/);
+  assert.match(template, /library-results page-shell page-shell--grid/);
+  assert.match(template, /resources.Get "js\/library-artwork\.js" \| resources.Minify \| resources.Fingerprint/);
+  const index = fs.readFileSync("layouts/library/list.libraryindex.json", "utf8");
+  assert.match(index, /"image" \(partial "library\/artwork-for-entry\.html" \.page\)/);
+  const viewer = fs.readFileSync("layouts/partials/editorial/cartoon-thumbnail-lightbox.html", "utf8");
+  assert.match(viewer, /document\.addEventListener\("click"[\s\S]*?closest\("\[data-essay-cartoon-lightbox-trigger\]"\)/);
+
+  const illustrated = {
+    ...items[0], date: "2026-02-01", slug: "piece-1", image: {
+      src: "/images/rendered/piece-1/640w.webp", avifSrcset: "/images/rendered/piece-1/640w.avif 640w",
+      webpSrcset: "/images/rendered/piece-1/640w.webp 640w", width: 640, height: 480,
+      imageId: "piece-1", alt: "A drawing", title: "Piece 001", date: "2026-01-01",
+      dateLabel: "Jan 1, 2026", lightboxSrc: "/images/rendered/piece-1/1600w.webp",
+      lightboxWidth: 1600, lightboxHeight: 1200, cartoonSlug: "piece-1",
+      gallery: "https://outsideinprint.org/gallery/?cartoon=piece-1",
+      credit: { author: "Artist", sourceUrl: "https://example.org/source", license: "CC BY", licenseUrl: "https://example.org/license", changes: "Resized." }
+    }
+  };
+  const page = setup({ query: "?view=all", fetchImpl: async () => response([illustrated, { ...items[1], image: false }]) });
+  await settle();
+  const rows = page.nodes.get("library-results-list").children;
+  const article = rows[0].children[0];
+  assert.equal(article.className, "item item--collection-artwork collection-section__record");
+  assert.equal(article.children[0].className, "item__copy");
+  const media = article.children[1].children[0];
+  const imageLink = media.children[0];
+  const zoom = media.children[1];
+  assert.equal(imageLink.href, illustrated.url);
+  assert.equal(imageLink.getAttribute("data-analytics-path"), illustrated.url);
+  assert.equal(imageLink.getAttribute("data-analytics-source-slot"), "library_search");
+  assert.equal(imageLink.children[0].tagName, "picture");
+  assert.equal(zoom.getAttribute("data-essay-cartoon-lightbox-trigger"), "");
+  assert.equal(zoom.getAttribute("data-image"), illustrated.image.lightboxSrc);
+  assert.equal(zoom.getAttribute("data-analytics-event"), undefined);
+  assert.equal(article.children[1].children[1].className, "image-credit");
+  assert.equal(rows[1].children[0].className, "item", "image-exempt pieces stay text-only");
 });
 
 test("Browse all presents a single 24-item cross-type newest-first list, with bounded page controls", async () => {

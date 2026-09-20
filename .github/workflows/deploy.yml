@@ -3,6 +3,7 @@ name: Build Hugo, Deploy to GitHub Pages
 on:
   push:
     branches: ["main"]
+  pull_request:
   workflow_dispatch:
   schedule:
     - cron: "17 0 * * *"
@@ -341,6 +342,7 @@ jobs:
           include-hidden-files: true
 
   deploy:
+    if: github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
