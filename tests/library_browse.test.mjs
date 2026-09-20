@@ -4,6 +4,7 @@ import test from "node:test";
 import vm from "node:vm";
 
 const template = fs.readFileSync("layouts/library/list.html", "utf8");
+const artworkScript = fs.readFileSync("assets/js/library-artwork.js", "utf8");
 const script = template.match(/<script>([\s\S]*?)<\/script>/)[1]
   .replace("{{ $indexURL | jsonify | safeJS }}", JSON.stringify("/library/index.json"))
   .replace("{{ $initialCount }}", "36")
@@ -89,10 +90,12 @@ function setup({ query = "", fetchImpl = async () => response(), noFetch = false
     createElementNS: (namespace, tag) => new Element(tag),
     createTextNode: (value) => Object.assign(new Element("text"), { textContent: value }),
   };
-  vm.runInNewContext(script, {
+  const context = {
     document, window, URL: noUrl ? undefined : URL,
     fetch: noFetch ? undefined : (...args) => { fetchCalls += 1; assert.equal(args[0], "/library/index.json"); return fetchImpl(...args); },
-  });
+  };
+  vm.runInNewContext(artworkScript, context);
+  vm.runInNewContext(script, context);
   return {
     nodes, controls, window, history,
     get fetchCalls() { return fetchCalls; },
@@ -128,6 +131,7 @@ test("Library gives grouped and filtered illustrated pieces matching read and zo
   assert.match(template, /"collectionArtwork" true "class" "collection-section__record" "analyticsSourceSlot" "library_grouped"/);
   assert.match(template, /library-group page-shell page-shell--grid/);
   assert.match(template, /library-results page-shell page-shell--grid/);
+  assert.match(template, /resources.Get "js\/library-artwork\.js" \| resources.Minify \| resources.Fingerprint/);
   const index = fs.readFileSync("layouts/library/list.libraryindex.json", "utf8");
   assert.match(index, /"image" \(partial "library\/artwork-for-entry\.html" \.page\)/);
   const viewer = fs.readFileSync("layouts/partials/editorial/cartoon-thumbnail-lightbox.html", "utf8");
