@@ -1,0 +1,42 @@
+{{- $page := . -}}
+{{- $cartoon := partial "editorial/cartoon-for-page.html" $page -}}
+{{- $artwork := partial "collections/artwork-for-page.html" (dict "page" $page "cartoon" $cartoon) -}}
+{{- $result := false -}}
+{{- with $artwork -}}
+  {{- $model := partial "images/model.html" (dict "page" $page "ref" .image "display" true) -}}
+  {{- $credit := false -}}
+  {{- with index (hugo.Data.image_credits | default dict) ($model.id | default "") -}}
+    {{- $credit = dict
+      "author" .author
+      "sourceUrl" .source_url
+      "license" .license
+      "licenseUrl" .license_url
+      "changes" (.changes | default "")
+    -}}
+  {{- end -}}
+  {{- $gallery := "" -}}
+  {{- with .slug -}}
+    {{- $gallery = (printf "gallery/?cartoon=%s" .) | absURL -}}
+  {{- end -}}
+  {{- $result = dict
+    "src" $model.fallback_url
+    "avifSrcset" $model.avif_srcset
+    "webpSrcset" $model.webp_srcset
+    "width" $model.intrinsic_width
+    "height" $model.intrinsic_height
+    "imageId" $model.id
+    "imageClass" ($model.image_class | default "")
+    "reviewState" ($model.review_state | default "")
+    "alt" .alt
+    "title" .title
+    "date" .date
+    "dateLabel" (time.Format "Jan 2, 2006" .date)
+    "lightboxSrc" $model.lightbox_url
+    "lightboxWidth" $model.lightbox_width
+    "lightboxHeight" $model.lightbox_height
+    "cartoonSlug" (.slug | default "")
+    "gallery" $gallery
+    "credit" $credit
+  -}}
+{{- end -}}
+{{- return $result -}}

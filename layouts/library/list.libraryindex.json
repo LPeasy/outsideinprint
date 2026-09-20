@@ -9,6 +9,7 @@
     "year" .year
     "date" .date
     "title" .title
+    "slug" (.page.Params.slug | default .page.File.BaseFileName)
     "sectionLabel" .section_label
     "version" .version
     "readingTime" .reading_time
@@ -18,6 +19,7 @@
     "topics" .topics
     "summary" .summary
     "searchText" .search_text
+    "image" (partial "library/artwork-for-entry.html" .page)
   ) -}}
 {{- end -}}
 {{- dict "version" 1 "count" (len $items) "items" $items | jsonify -}}
