@@ -1630,6 +1630,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/warm-roll-at-sunrise": {
+      "id": "editorial/warm-roll-at-sunrise",
+      "source": "images/originals/editorial/warm-roll-at-sunrise.png",
+      "sha256": "ecfd061c1e2688c264c2e3226bf728110d84526b52f8662cd031b7ac3c13b3c7",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/what-remains": {
       "id": "editorial/what-remains",
       "source": "images/originals/editorial/what-remains.png",
@@ -7585,6 +7599,7 @@
     "/images/editorial/two-paths-one-morning.png": "editorial/two-paths-one-morning",
     "/images/editorial/very-fine-lines-on-both-sides.png": "editorial/very-fine-lines-on-both-sides",
     "/images/editorial/warbonds.png": "editorial/warbonds",
+    "/images/editorial/warm-roll-at-sunrise.png": "editorial/warm-roll-at-sunrise",
     "/images/editorial/what-remains.png": "editorial/what-remains",
     "/images/editorial/when-life-gives-you.png": "editorial/when-life-gives-you",
     "/images/editorial/where-the-light-finds-me.png": "editorial/where-the-light-finds-me",
