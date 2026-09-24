@@ -958,6 +958,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/rain-before-breakfast": {
+      "id": "editorial/rain-before-breakfast",
+      "source": "images/originals/editorial/rain-before-breakfast.png",
+      "sha256": "36c87c27d5612717d3ce2d69bf9bcfa724b272da833720066fa66c82c5b31213",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/rephrase-that": {
       "id": "editorial/rephrase-that",
       "source": "images/originals/editorial/rephrase-that.png",
@@ -7551,6 +7565,7 @@
     "/images/editorial/prime-suspect.png": "editorial/prime-suspect",
     "/images/editorial/pull-the-lever.png": "editorial/pull-the-lever",
     "/images/editorial/quiet-filing.png": "editorial/quiet-filing",
+    "/images/editorial/rain-before-breakfast.png": "editorial/rain-before-breakfast",
     "/images/editorial/rephrase-that.png": "editorial/rephrase-that",
     "/images/editorial/see-the-world.png": "editorial/see-the-world",
     "/images/editorial/serpent-at-supper.png": "editorial/serpent-at-supper",

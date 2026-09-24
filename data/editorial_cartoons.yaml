@@ -1,4 +1,4 @@
-current: warm-roll-at-sunrise
+current: rain-before-breakfast
 cartoons:
   - slug: the-simple-lunch
     title: "The Simple Lunch"
@@ -1039,5 +1039,14 @@ cartoons:
     image: "editorial/warm-roll-at-sunrise"
     essay: "/essays/coming-right-up/"
     alt: "Two hands pull apart a steaming roll at a bakery table as sunrise glows through the window."
+    width: 1672
+    height: 941
+  - slug: rain-before-breakfast
+    title: "Rain Before Breakfast"
+    date: "2026-09-24"
+    publishDate: "2026-09-24T12:40:00-04:00"
+    image: "editorial/rain-before-breakfast"
+    essay: "/essays/rain-before-breakfast/"
+    alt: "An anonymous person rests in a wooden porch chair beside a keyring while rain falls over the yard and a drop hangs from a potted plant's leaf."
     width: 1672
     height: 941
