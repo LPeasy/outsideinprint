@@ -1742,6 +1742,7 @@ $requiredUxPages = @(
   'public/almanack/2026-08-22/index.html',
   'public/almanack/2026-08-29/index.html',
   'public/almanack/2026-09-12/index.html',
+  'public/almanack/2026-09-26/index.html',
   'public/shop/index.html',
   'public/shop/the-american-nightmare-keep-dreaming-kid/index.html',
   'public/shop/the-parable-of-the-sheep/index.html',
@@ -4303,8 +4304,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/collections/bobs-almanack/index.html'
-    Pattern = '(?s)Latest Issue.*?July 25, 2026.*?Paperwork cannot repair a car\..*?The Bolt Beside the Gas Tank'
-    Message = 'expected the Bob''s Almanack collection page to feature the July 25 issue and lead essay'
+    Pattern = '(?s)Latest Issue.*?No\. 21.*?/almanack/2026-09-26/.*?September 26, 2026.*?I am at peace\..*?Rain Before Breakfast'
+    Message = 'expected the Bob''s Almanack collection page to feature the September 26 issue and lead essay'
   },
   @{
     Path = 'public/almanack/2026-05-02/index.html'
@@ -4478,6 +4479,26 @@ $requiredUxChecks = @(
     Path = 'public/almanack/2026-09-12/index.html'
     Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?September 12, 2026.*?Issue 19'
     Message = 'expected the September 12 Almanack issue page to render its nameplate, date, and issue number'
+  },
+  @{
+    Path = 'public/almanack/2026-09-26/index.html'
+    Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?September 26, 2026.*?Issue 21.*?I am at peace\..*?Note from Bob.*?New from Outside In Print'
+    Message = 'expected the September 26 Almanack issue to render issue 21 with its opening quote and Note from Bob before the story cards'
+  },
+  @{
+    Path = 'public/almanack/2026-09-26/index.html'
+    Pattern = '(?s)<h1[^>]*id="?almanack-title"?[^>]*>\s*<a[^>]*href="?/collections/bobs-almanack/"?[^>]*>\s*Bob(?:''|&#39;)s Almanack\s*</a>\s*</h1>'
+    Message = 'expected the September 26 Almanack nameplate to link back to the Bob''s Almanack collection page'
+  },
+  @{
+    Path = 'public/almanack/2026-09-26/index.html'
+    Pattern = '(?s)<a[^>]*href="?/essays/rain-before-breakfast/"?[^>]*>\s*<picture.*?/images/rendered/editorial/rain-before-breakfast/.*?</a>.*?<a[^>]*href="?/essays/coming-right-up/"?[^>]*>\s*<picture.*?/images/rendered/editorial/warm-roll-at-sunrise/.*?</a>'
+    Message = 'expected the September 26 paired cartoons to link to their matching public essays'
+  },
+  @{
+    Path = 'public/almanack/2026-09-26/index.html'
+    Pattern = '(?s)almanack-quote--middle.*?<blockquote>Speak little, do much\.</blockquote>.*?</figure>\s*<div[^>]*class="?almanack-margin__header"?[^>]*>\s*<h2[^>]*>In the Margins</h2>'
+    Message = 'expected the September 26 Poor Richard quote directly above In the Margins'
   },
   @{
     Path = 'public/almanack/2026-07-04/index.html'
