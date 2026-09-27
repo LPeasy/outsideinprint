@@ -59,6 +59,8 @@ The command enumerates tracked files with NUL-delimited Git output, uses actual 
 
 The migration deliberately excludes compact Medium JPEG/JPG files, books, social cards, Paper-Bob, Idle Times, and the author portrait. Those assets must remain byte-identical to the bound baseline.
 
+The compact fleet retains all 316 physical JPEG/JPG files, with 314 current content/data references. Two exact owner-approved retirements account for the difference: the [Uncrustables hero replacement](editorial-audits/image-revisions/uncrustables-legacy-hero-retirement-20260913.md) and the [Generation Inflation wage-chart replacement with a sourced table](editorial-audits/generation-inflation-exact-approval-2026-09-27.md). The latter retains `/images/medium/generation-inflation/27b17e40974d5f4cc1ab36b7da14355c9864d641b5451a47a515e6b488a68ba0.jpeg` byte-for-byte with SHA-256 `27b17e40974d5f4cc1ab36b7da14355c9864d641b5451a47a515e6b488a68ba0`; the source contract requires its absence from content/data and the exact approved wage table with its EPI source in the essay. These explicit reference exceptions do not alter the frozen inventory, physical-file output count, or baseline byte/hash checks.
+
 ## Rendering contract
 
 The shared resolver, model, and picture partials serve article heroes, body figures, the homepage Featured Reading lead, Gallery and Almanack images, cards, lightboxes, and managed metadata images.

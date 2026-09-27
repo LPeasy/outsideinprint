@@ -858,7 +858,7 @@ foreach ($portrait in $modernBioPortraits) {
   }
 }
 
-# One owner-authorized hero replacement; the historical 316-file inventory and
+# Explicit owner-authorized replacements; the historical 316-file inventory and
 # byte/hash checks below remain unchanged. Do not retire other references implicitly.
 # Evidence: docs/editorial-audits/image-revisions/uncrustables-legacy-hero-retirement-20260913.md
 $retiredMediumHeroes = @(
@@ -896,7 +896,38 @@ foreach ($retiredHero in $retiredMediumHeroes) {
     throw "Retired Medium hero essay must select the recorded managed replacement: $($retiredHero.essay)"
   }
 }
-Assert-Equal -Actual $rawMediumReferences.Count -Expected (316 - $retiredMediumUrls.Count) -Message 'Content/data must retain every baseline compact Medium reference except explicitly replaced heroes.'
+# Evidence: docs/editorial-audits/generation-inflation-exact-approval-2026-09-27.md
+$retiredMediumWageChart = @{
+  url = '/images/medium/generation-inflation/27b17e40974d5f4cc1ab36b7da14355c9864d641b5451a47a515e6b488a68ba0.jpeg'
+  sha256 = '27b17e40974d5f4cc1ab36b7da14355c9864d641b5451a47a515e6b488a68ba0'
+  essay = 'content/essays/generation-inflation.md'
+  replacement = @'
+**Real hourly wage growth, 1979–2023**
+
+| Wage group | Inflation-adjusted growth |
+|---|---:|
+| Low wage: 10th percentile | 18.3% |
+| Middle wage: average of 40th–60th percentiles | 17.4% |
+| High wage: 90th percentile | 51.7% |
+
+Source: [EPI, corrected 2024 report, Appendix Figure A data table](https://www.epi.org/publication/swa-wages-2023/).
+'@
+}
+if (-not $retiredMediumUrls.Add($retiredMediumWageChart.url) -or $retainedRawMediumUrls -cnotcontains $retiredMediumWageChart.url) {
+  throw 'Retired Generation Inflation wage chart must identify one unique retained baseline file.'
+}
+$retiredWageChartPath = Join-Path $staticRoot $retiredMediumWageChart.url.TrimStart('/')
+Assert-Equal -Actual (Get-OipSha256 -Path $retiredWageChartPath) -Expected $retiredMediumWageChart.sha256 -Message 'Retired Generation Inflation wage chart bytes changed.'
+if ($rawMediumReferences.Contains($retiredMediumWageChart.url)) {
+  throw 'Retired Generation Inflation wage chart must not remain referenced in content/data.'
+}
+$wageEssayPath = Join-Path $rootPath $retiredMediumWageChart.essay
+$wageEssayText = ([string]$referenceTextByPath[$wageEssayPath]).Replace("`r`n", "`n").Replace("`r", "`n")
+$replacementWageTable = $retiredMediumWageChart.replacement.Replace("`r`n", "`n").Replace("`r", "`n")
+if (-not $wageEssayText.Contains($replacementWageTable, [System.StringComparison]::Ordinal)) {
+  throw 'Generation Inflation must retain the approved replacement wage table and its EPI source.'
+}
+Assert-Equal -Actual $rawMediumReferences.Count -Expected (316 - $retiredMediumUrls.Count) -Message 'Content/data must retain every baseline compact Medium reference except explicitly approved replacements.'
 $expectedRawMediumReferences = @($retainedRawMediumUrls | Where-Object { -not $retiredMediumUrls.Contains($_) })
 $actualRawMediumReferences = @($rawMediumReferences | Sort-Object)
 if (($actualRawMediumReferences -join "`n") -cne ($expectedRawMediumReferences -join "`n")) {
