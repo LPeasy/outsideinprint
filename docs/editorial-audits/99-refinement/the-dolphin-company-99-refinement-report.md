@@ -1,4 +1,64 @@
-# The Dolphin Company: bounded correction review
+# The Dolphin Company: source-link and correction review
+
+## September 27, 2026 review
+
+- Candidate: **3.0 / Sixth web edition**.
+- Source: `content/essays/the-dolphin-company.md`.
+- Editorial decision: **PASS for this bounded revision**, not a numerical quality certification or permission to bypass publication validation.
+- Original January 16, 2026 publication date, title, subtitle, route, collection, artwork, and central argument are unchanged.
+- Local implementation only. Publication requires a separate instruction and the established gate.
+
+### Changes
+
+Applied the accepted *The Warning Reached the Bridge* method to the essay's historical, biographical, welfare, regulatory, financial, and transfer claim clusters. Specific source links replace vague destinations where possible; document links include page pinpoints. The companion [source checklist](the-dolphin-company-source-checklist.md) records read passages, source roles, access limitations, remaining unknowns, and the exact revised-file hash.
+
+Source review required substantive corrections, not just hyperlink additions:
+
+1. Corrected Albor's initial adviser role and business-law degree; attributed the animal-care quotation to reported May 2025 testimony, not a 2024 interview.
+2. Replaced unverified quotations with labeled summaries or a traceable short quotation. Narrowed the newspaper history to what the existing clippings establish; removed unsupported scene reconstruction and third-party testimony.
+3. Distinguished more than $200 million of funded debt from all liabilities; identified the initial debtors without treating the entire worldwide group as one debtor.
+4. Distinguished the requested $8 million new cash, proposed $24 million facility including $16 million old-debt roll-up, and conditional $4 million interim authorization. Removed claims that requests established actual spending.
+5. Replaced permanent-closure language with the company's closure-until-further-notice account. Replaced operating-license revocation with DBPR's narrower license-surrender statement and identified the investigating division.
+6. Separated transport permission from actual destinations, financial accounting from specific collateral rights, company statements from independent findings, and SeaWorld attendance evidence from causation at The Dolphin Company.
+7. Preserved unresolved Mexican listing/jurisdiction and animal-ownership issues as unknowns. Added a historical-scope/source-role note and a visible September 27 revision entry. No claim is made that this is a current-status update.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+| Test | Result | Finding |
+|---|---|---|
+| Evidence | PASS | The revised factual clusters point to read agency documents, docket-stamped filings/orders, audited accounts, official announcements, local clipping images, and identified reporting. The checklist distinguishes third-party hosting, indexed text, prior checks, and unavailable originals. Unsupported quotations and stronger factual assertions were removed or narrowed. |
+| Logic | PASS | Requests, approvals, borrowing, and expenditure are distinct. Affiliate accounting does not prove particular animal liens; group geography does not establish court jurisdiction. The argument remains the risk of care depending on a distressed operator. |
+| Incentives | PASS | Acquisition growth, debt service, working cash, welfare costs, and creditor recovery remain visible without treating inferred incentives as proven intent or guaranteeing investor cash flows. |
+| Tradeoffs | PASS | Emergency finance may support care and creditor value together. Chapter 11 can preserve operations or lead to asset sales/liquidation; it does not guarantee recovery or solve care deficiencies. |
+| Consequences | PASS | Documented deaths, inspection deficiencies, closure, and placements are distinguished from predicted effects. Internal relocation and nonprofit rescue have different institutional settings without implying that either proves legal title or welfare quality. |
+| Uncertainty | PASS | Preliminary findings, a veterinarian's theory, official allegations, company accounts, and authorial interpretation have explicit boundaries. Unverified listing, court reach, later procedural stage, and ownership details remain unconfirmed. Public attitudes' contribution to this company's collapse is not quantified. |
+| Institutional Behavior | PASS | Operators, initial debtors, parent, listed affiliate, noteholders, courts, regulators, and nonprofit recipient are not collapsed into one actor. License scope, debt instruments, and timing are corrected. |
+
+## Media Framing Audit
+
+Decision: PASS
+
+| Test | Result | Finding |
+|---|---|---|
+| Media Frame Identified | PASS | The existing captivity-versus-finance narrative remains the author's frame, not a substitute for the inspection and financial record. |
+| Primary Source Rebuild | PASS | Welfare findings use hosted agency text; financing uses the motion, declaration, and interim order; accounting uses exchange-hosted audited statements. Secondary reporting is identified where the original waiver or testimony was not retrieved. |
+| Assumption Quarantine | PASS | No company release is treated as independent care verification; no proposed loan is treated as money spent; no transfer proves collateral status; no temporary closure or unspecified surrender becomes a permanent closure or operating-license revocation. |
+| Source Hierarchy | PASS | Government/agency text, court records, issuer disclosures, promotional accounts, and reporting have different documented roles. Prior checks remain dated rather than relabeled as fresh verification. |
+| Ideological Burden | PASS | The ethical argument is retained, while evidence that complicates it—including nonprofit rescue, conditional finance, and unknown cultural causation—is preserved rather than suppressed. |
+
+### Local verification and release boundary
+
+- Independent focused reviews covered the changed history/profile, financial, and welfare/regulatory source pairings. Reported issues were corrected; no remaining important mismatch was identified within that bounded review.
+- The running pinned-Hugo local preview rebuilt the essay. The rendered page confirms January 16 publication, version 3.0, Sixth web edition, the unchanged Reported Case Studies collection, revised source links, updated citation block, and the visible September 27 revision note.
+- Opening links were visually reviewed within the existing layout; the rendered financing link retains its `#page=3` pinpoint. One consolidated source check passed for preserved metadata/collection, all eight body-image references, prohibited house-style phrases, the checklist hash, and diff whitespace.
+- Local Node/browser contract suites were not run, duplicated, or added. PowerShell is unavailable on this Mac; the PowerShell source check and required publication gate remain pending a separate release instruction. Historical validation below does not validate this edition.
+- The downloadable PDF remains unchanged and is not represented as an updated version of this web edition. No assets, templates, scripts, infrastructure, other essays, or prior audit records were changed by this pass.
+
+## Historical record — September 17, 2026 bounded correction
+
+Everything below records the earlier version 2.0 review. Its production-build and source-contract results are historical, not fresh validation of version 3.0.
 
 - Review date: 2026-09-17
 - Source: `content/essays/the-dolphin-company.md`

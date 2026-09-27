@@ -10,9 +10,12 @@ featured_image: "essays/uncrustables-the-billion-dollar-peanut-butter-empire/her
 featured_image_caption: "The Simple Lunch ~ original editorial illustration for Outside In Print."
 featured_image_alt: "Round, crimped crustless peanut butter and jelly sandwiches sit on a blue plate beside a glass of milk and a paper lunch bag in golden kitchen window light."
 description: "Uncrustables turned a crustless PB&J into a frozen-food growth engine, but the real story is distribution, factory investment, and disciplined brand expansion."
-version: "1.3"
-edition: "Fourth web edition"
+version: "2.0"
+edition: "Fifth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Added claim-level source links and attributed the brand history, sales figures, demand account, and athlete marketing. Distinguished the fiscal 2026 billion-dollar target from reported fiscal 2024 sales, clarified the McCalla opening, and removed unsupported shelf-stable speculation. Preserved the March 2025 perspective, original publication date, artwork, and central argument."
   - version: "1.3"
     date: "2026-09-13"
     note: "Added The Simple Lunch as the original OIP impressionist chiaroscuro hero and Gallery artwork; removed one redundant transition sentence. Original publication date and argument are unchanged."
@@ -31,14 +34,14 @@ What's soft, sealed, and fueling everything from school lunches to locker rooms?
 
 Uncrustables.
 
-The crust-free, flash-frozen peanut butter and jelly sandwich went from school cafeterias to a freezer-aisle powerhouse. What started as a kitchen-table convenience product became one of J.M. Smucker's most important growth bets.
+By March 2025, the crust-free, frozen peanut butter and jelly sandwich had gone from school cafeterias to a freezer-aisle powerhouse. What started as a kitchen-table convenience product became one of J.M. Smucker's most important growth bets. The billion-dollar figure was a sales target, not an achieved annual total in the record discussed here.
 
 ![Photo by Sonder Quest on Unsplash](/images/medium/uncrustables-the-billion-dollar-peanut-butter-empire/f4d36b28b81279913abf6c59f947a624113e20293640553b0e928927c19ce172.jpeg)
 
 *Photo by Sonder Quest on Unsplash*
 
 
-Pro athletes eat them. Parents stock them. Social media keeps finding new ways to fry, dip, and remix them.
+Pro athletes eat them. Parents stock them. Online cooks turn them into new snacks.
 
 And Smucker's keeps doubling down: more production capacity, more flavors, and more distribution behind a product that works because it solves a very plain problem.
 
@@ -49,7 +52,7 @@ And Smucker's keeps doubling down: more production capacity, more flavors, and m
 *Photo by Riccardo Annandale on Unsplash*
 
 
-In 1995, David Geske and Len Kretchman were trying to solve the same lunch problem millions of parents know too well: kids who wanted peanut butter and jelly without the crust.
+According to [the brand's own history](https://www.smuckersuncrustables.com/articles/brand-history), David Geske and Len Kretchman began with a familiar lunch problem in 1995: kids who wanted peanut butter and jelly without the crust. Their wives, Kristen Geske and Emily Kretchman, suggested mass-producing the sandwiches.
 
 The insight was not glamorous. It was useful.
 
@@ -57,27 +60,27 @@ Cut the crust away, seal the bread, keep the filling inside, and freeze the sand
 
 That small design decision turned PB&J from a homemade lunch into a manufactured product.
 
-Smucker's bought the concept in 1998 and brought the distribution muscle. First-year sales were reported around $12 million, and the product kept expanding from there.
+Smucker's acquired the brand in 1998 and brought the distribution muscle. Looking back in 2024, its CEO [described its growth from a $12 million brand](https://investors.jmsmucker.com/news/news-details/2024/The-J.M.-Smucker-Co.-Celebrates-Opening-of-the-Newest-Uncrustables-Manufacturing-Facility-in-McCalla-Alabama/default.aspx).
 
-The company had tried to rethink peanut butter and jelly before. Goober, the peanut butter and jelly swirl, was clever. Uncrustables was different because it changed the format, not just the jar.
+Goober, Smucker's [peanut butter and jelly in a single jar](https://www.smuckers.com/peanut-butter/goober), is a clever convenience. Uncrustables went further by changing the format, not just the jar.
 
 Convenience was the moat. The sandwich was portable, freezer-friendly, portioned, and easy for schools, parents, and athletes to use without extra preparation.
 
 ### From Cafeterias To Freezer Aisles
 
-Uncrustables moved from lunchrooms to grocery freezers in 2000 with the basic flavors that made the product legible:
+The company's history dates the move into [grocery stores to 2000](https://www.smuckersuncrustables.com/articles/brand-history), with the basic flavors that made the product legible:
 
 - Peanut Butter and Grape Jelly
 - Peanut Butter and Strawberry Jam
 
 The early expansion worked because the product did not ask consumers to learn anything new. It took a familiar food and removed friction.
 
-Smucker's then widened the line:
+The same history records later additions:
 
 - Peanut Butter and Honey on Wheat Bread
 - Reduced Sugar PB&J
 - Chocolate Hazelnut Spread
-- Later flavor extensions, including raspberry
+- [Peanut Butter and Raspberry Spread, announced in September 2024](https://www.prnewswire.com/news-releases/uncrustables-launches-new-raspberry-flavor-the-first-new-pbj-in-10-years-302250315.html)
 
 Every new option did the same job: keep the core product recognizable while opening a slightly wider audience.
 
@@ -88,9 +91,9 @@ Every new option did the same job: keep the core product recognizable while open
 *Photo by SpaceX on Unsplash*
 
 
-Demand made Uncrustables a production story.
+Demand made Uncrustables a production story. In February 2023, Smucker said it [could not keep up with demand](https://www.jmsmucker.com/news-stories/blog-archive/demand-for-uncrustables) and was expanding capacity to address shortages.
 
-Smucker's built a bakery in Scottsville, Kentucky, then added a plant in Longmont, Colorado. The company later committed major capital to a large McCalla, Alabama, facility to support the brand's next stage.
+Smucker's built a bakery in Scottsville, Kentucky, then added a plant in Longmont, Colorado. It [announced a $1.1 billion investment](https://investors.jmsmucker.com/news/news-details/2021/The-J.M.-Smucker-Co.-to-Accelerate-Smuckers-Uncrustables-Growth-Through-Investment-in-New-Manufacturing-Facility-in-McCalla-Alabama-11-18-2021/default.aspx) in a manufacturing facility and distribution center in McCalla, Alabama, in 2021. The company [celebrated that facility's opening in November 2024](https://investors.jmsmucker.com/news/news-details/2024/The-J.M.-Smucker-Co.-Celebrates-Opening-of-the-Newest-Uncrustables-Manufacturing-Facility-in-McCalla-Alabama/default.aspx).
 
 A frozen PB&J can look simple on the shelf, but the business depends on industrial baking, freezing, packaging, cold-chain logistics, retail relationships, and enough capacity to keep freezers stocked.
 
@@ -112,9 +115,9 @@ The tradeoff is also clear. Bigger factories and broader distribution make the p
 
 Uncrustables are no longer just a kids' lunch item.
 
-Teams and athletes have embraced them because they are portable, familiar, and easy to eat around practices and games. That is not a miracle. It is exactly what the product was designed to do.
+Athlete enthusiasm brought the product an adult audience. [Fast Company's April 2024 reporting](https://www.fastcompany.com/91077676/uncrustables-billion-sales-inside-j-m-smucker-peanut-butter-jelly-travis-jason-kelce) described Travis Kelce's public enthusiasm and Smucker's subsequent sponsorship of three episodes of the brothers' New Heights podcast. Portability and familiarity help explain the appeal; an endorsement does not establish a nutritional advantage or improved performance.
 
-Social media added a second channel of attention. People fry them, air-fry them, dip them, and treat them like a snack canvas. Some of that is marketing. Some of it is genuine nostalgia.
+Online recipes added another channel of attention. Air-fryer maker GoWISE, for example, [recreated a TikTok-inspired Uncrustables doughnut](https://www.gowiseproducts.com/blogs/recipes/air-fried-pb-j-donuts). That is evidence of a product becoming material for another company's marketing, not a measure of how many consumers tried it. It is not preparation advice from Smucker, whose [FAQ discourages air-frying or toasting](https://www.smuckersuncrustables.com/frequently-asked-questions).
 
 The institutional behavior is familiar: a food company benefits when consumers turn a simple packaged product into a cultural object. The company does not need every joke, recipe, or athlete anecdote to be planned. It only needs the product to stay visible and easy to buy.
 
@@ -122,7 +125,7 @@ The institutional behavior is familiar: a food company benefits when consumers t
 
 Smucker's has treated Uncrustables like a priority brand because it has the qualities packaged-food companies want: repeat purchases, broad age appeal, a simple use case, and room for more capacity.
 
-The company has publicly discussed a long-term goal of turning Uncrustables into a billion-dollar annual brand. That target is ambitious, but not mysterious. The path runs through more production, more shelf space, more flavors, and possibly shelf-stable formats.
+In its November 2024 announcement, Smucker reported approximately $800 million in Uncrustables annual net sales for fiscal 2024 and set a [goal of $1 billion by the end of fiscal 2026](https://investors.jmsmucker.com/news/news-details/2024/The-J.M.-Smucker-Co.-Celebrates-Opening-of-the-Newest-Uncrustables-Manufacturing-Facility-in-McCalla-Alabama/default.aspx). That was a target, not a reported result. The proposed path ran through more production, broader distribution, and flavor extensions.
 
 ![Photo by Jon Tyson on Unsplash](/images/medium/uncrustables-the-billion-dollar-peanut-butter-empire/535010672d8ab6a41f8e9091030cc9a9e8c7c13c8d5407da42fdd8200e937581.jpeg)
 

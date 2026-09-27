@@ -1,5 +1,42 @@
 # The Bolt Beside the Gas Tank Source Checklist
 
+## Claim-Level Source Pass: September 27, 2026
+
+Reviewed revision: **2.0, Second web edition**. Original publication date remains July 21, 2026, including its existing timestamp. This bounded pass replaces the textbook product-page proxy with a primary judicial account and reads the cost report itself. It does not reconstruct Ford's complete engineering archive.
+
+Baseline essay SHA-256: `607295ad0172755b7e5e7859390ac8888f861a5e9d67666bf97501d3598d29db`.
+
+Revised essay SHA-256: `258ae583196500dc30282847254418229c5fc11ce115c8d46b0c84b0f12ac3fa`.
+
+| Claim cluster | Exact source and read location | Result, role, and limits |
+|---|---|---|
+| Production and prototype crash mechanisms | [*Grimshaw v. Ford Motor Co.*, 119 Cal. App. 3d 757 (1981)](https://law.justia.com/cases/california/court-of-appeal/3d/119/757.html), Facts, `Design of the Pinto Fuel System` and `Crash Tests`, printed pp.774–775 | PASS. Primary judicial text through Justia. Production fixed-barrier test at 21 mph tore the **fuel neck** and punctured the tank on a differential bolt. Mechanical prototypes were rear-struck by a moving barrier at 21 mph; fuel entered the driver's compartment in at least one test. Not all tests used identical vehicles or apparatus. |
+| How the appellate narrative weighs evidence | Same opinion, opening `Facts`, printed pp.772–773 | PASS. Court expressly views disputed evidence and inferences in the prevailing plaintiffs' favor. This procedural qualification is in the public prose. The account is not misrepresented as raw Ford logs or an independent reenactment. |
+| Alternative configurations | Same opinion, `Crash Tests`, printed p.775 | PASS after correction. Rubber bladders resisted puncture leakage at 21 mph fixed barrier; over-axle tanks passed at 31 mph fixed barrier; a rear-reinforced Pinto passed at 20 mph. The previous blanket 20 mph description was not supported by this primary account. |
+| Shield and other feasible changes | Same opinion, `The Cost to Remedy Design Deficiencies`, printed pp.775–776; management discussion pp.776–778 | PASS. The court lists a shield between housing and tank and records evidence of feasible, modest-cost fixes. The text no longer says costs or all production feasibility are simply unknown. It does not claim every alternative was equally suitable or attach the report's $11 fleet assumption to this shield. |
+| Program targets and design pressure | Same opinion, `Design of the Pinto Fuel System`, printed p.774 | PASS. Targets are at or below 2,000 pounds and no more than $2,000; styling preceded engineering in a rush project and dictated tank placement. The unverified exact development-cycle comparison and cargo-space motive were removed. |
+| Knowledge, approval chain and cost decision | Same opinion, `Management's Decision to Go Forward With Knowledge of Defects`, pp.776–778; `Disposition`, p.824 | PASS within the appellate standard. The record names Alexander, MacDonald and Iacocca, describes sign-offs and test results passed upward, and addresses testimony about cost-driven omission. Ford contested the punitive evidence; the appellate court upheld the judgment. The former assertion that the record names no responsible official/warning path is corrected. This is not knowledge imputed to every employee. |
+| Report purpose and provenance | [Ford, *Fatalities Associated with Crash Induced Fuel Leakage and Fires*](https://www.autosafety.org/wp-content/uploads/import/phpq3mJ7F_FordMemo.pdf#page=1), p.1 `Purpose and Background` / `Conclusion` | PASS. Original eight-page document scan hosted by the Center for Auto Safety, an advocacy organization, not a Ford or government server. First page identifies Environmental and Safety Engineering, E. S. Grush and C. S. Saunby, and NHTSA dockets 70-20 / 73-20. Its cost comparison concerns the rollover portion of a proposed standard. Public prose identifies the host and does not adopt the host's advocacy as fact. |
+| Cost table and arithmetic | Same scan, [p.6 Table 3](https://www.autosafety.org/wp-content/uploads/import/phpq3mJ7F_FordMemo.pdf#page=6) and explanatory paragraph below | PASS after correction. Visually read original: benefits **$49.5m**, not $49.15m; components total $49.53m, consistent with one-decimal rounding. Costs printed $137m, inputs 12.5m vehicles × $11 = $137.5m. The paragraph names NHTSA societal-cost values; this is not a damages-payment ledger. |
+| Memo chronology | Same scan, [p.8 References](https://www.autosafety.org/wp-content/uploads/import/phpq3mJ7F_FordMemo.pdf#page=8), reference 6; [Alexander Street catalog](https://search.alexanderstreet.com/preview/work/bibliographic_entity%7Cbibliographic_details%7C2083893) | PASS for the narrowed claim. The scan has no issue date, but cites an April 1972 NHTSA report, placing it after original Pinto design. Catalog says 1977, while other accounts give 1973; a catalog date cannot settle authorship date. No exact memo year is asserted as verified. The existing editorial image's `1977 MEMO` label is explicitly qualified in its caption, with no asset replacement. |
+| Modern value of statistical life | [OECD, `Theory and methods of mortality risk valuation`](https://www.oecd.org/en/publications/mortality-risk-valuation-in-policy-assessment_76ca89a2-en/full-report/theory-and-methods-of-mortality-risk-valuation_2e56c409.html), introductory definition and willingness-to-pay discussion | PASS. Marginal risk tradeoffs, not a particular person's worth. Revised prose separates this modern willingness-to-pay concept from the older societal-cost table in Ford's report. |
+| Defect, disagreement, scope, remedy and regulatory timing | [NHTSA-hosted packet](https://static.nhtsa.gov/odi/inv/2009/INOT-DP09005-47530.pdf), PDF pp.5–6 Ford June 15, 1978 Part 573 filing; PDF pp.7–8 owner letter | PASS. Ford records its disagreement with NHTSA's **initial** finding, estimates 1.4m vehicles, excludes station wagons, and describes filler separation/forward tank puncture, longer pipe/improved seal/front polyethylene shield and 1977-model rear-impact requirements. File is a 2011 Center for Auto Safety submission containing historical recall documents; its first two pages identify that route. It is not the full original NHTSA investigation or a newly issued defect finding. |
+
+### Access and Inspection Record
+
+- Relevant primary passages were read September 27, 2026. Justia supplies the opinion text; no judicial scan was authenticated against its transcription.
+- The cost-report PDF's search-index extract identified the correct filename (`phpq3mJ7F_FordMemo.pdf`, not the stale extra-`p` variants). Direct HTTP retrieval returned a PDF; the research browser returned 402. Because it has no text layer, the original scan images on pages 1, 6 and 8 were extracted in memory with the PDF skill and visually inspected. No downloaded copyrighted PDF or page images were added to the repository.
+- The federal recall packet's text and page positions were read from NHTSA. PDF page numbers in public `#page=` links are one-based and include the later submission cover pages.
+- The original textbook and private student analysis remain historical adaptation sources below, but their public product page is no longer presented as evidence for specific test claims. No private coursework or student metadata was exposed.
+
+### Boundary and Remaining Unknowns
+
+The exact issue date of the Ford cost report is not established by the inspected scan; the essay no longer depends on a particular year. The court's record supplies more management and feasibility evidence than the earlier narrow adaptation acknowledged, but not every internal conversation or a full comparative engineering analysis. No aggregate death/injury estimate is added. Recommended escalation steps and cross-office responsibility remain the author's analysis. Original date, title, URL, collection, image assets and central argument are preserved. Whole-number revision and visible history disclose the factual corrections. Consolidated preview and release checks belong to the coordinating task; this pass ran no builds, PowerShell checks, Node/browser suites, or remote writes.
+
+## Historical First-Edition Checklist
+
+The earlier record below is preserved for traceability. Its 1977 dating, benefit-table reading, alternative-test speeds and management-evidence limitations are superseded above; earlier PASS labels are not fresh verification.
+
 ## Source Mode
 
 Source mode: `LIMITED_SUPPLIED_RECORD`

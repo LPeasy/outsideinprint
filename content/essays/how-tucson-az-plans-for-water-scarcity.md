@@ -8,9 +8,9 @@ subtitle: "Four Ways to Manage Risk in a Desert City ~ and how tucson plans to w
 featured_image: "medium/aa98845fc72a30c1e966cff65d81fdafa57cb016625a49c707aa3c432ac2e3f5"
 featured_image_caption: "1938 postcard of Tucson."
 featured_image_alt: "1938 Postcard"
-description: "For decades it pumped groundwater faster than the aquifer could recharge, leading to shortages and sinkholes"
-version: "1.2"
-edition: "Third web edition"
+description: "For decades Tucson pumped groundwater faster than the aquifer could recharge, lowering water levels and contributing to land subsidence. Its long-range plan combines conservation, diversified supplies, and adaptation."
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-21"
@@ -18,6 +18,9 @@ revision_history:
   - version: "1.2"
     date: "2026-07-05"
     note: "Recovered and localized body images from Medium import archive; no substantive text change."
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Added claim-level source links; dated the water-supply figures to 2020; corrected land-subsidence, planning, and Colorado River allocation wording; and qualified project timing and uncertain outcomes. Preserved the September 2025 planning perspective, original publication date, artwork, and central argument."
 pdf: "/pdfs/how-tucson-az-plans-for-water-scarcity.pdf"
 featured: false
 
@@ -34,17 +37,21 @@ medium_source_url: "https://medium.com/@lawtonperret/how-tucson-az-plans-for-wat
 
 
 For decades it pumped groundwater faster than the aquifer could
-recharge, leading to shortages and sinkholes.
+recharge, lowering water levels and contributing to
+[land subsidence](https://pubs.usgs.gov/sir/2007/5190/).
 
-Then came the **Central Arizona Project** **(CAP)** ~ a 336-mile
+Then came the [**Central Arizona Project (CAP)**](https://www.cap-az.com/about/) ~ a 336-mile
 aqueduct bringing Colorado River water south and east from Lake Havasu.
 
-CAP's public history says construction began in 1973 and was completed
-in 1993.
+CAP's [public history](https://www.cap-az.com/about/history-of-cap/) says construction began in 1973 and was completed
+20 years later.
 
-> Today, about four out of five glasses of water in Tucson start their
-> journey in that canal ~ from Lake Havasu in the west all the way to
-> Tucson at the end of the line.
+> Colorado River water became Tucson Water's primary drinking-water
+> source ~ delivered through CAP, recharged into the aquifer, and then
+> recovered for use.
+
+That is the supply path described in the utility's
+[*One Water 2100* plan](https://tucsononewater.com/wp-content/uploads/2024/04/Tucson_Water_One_Water_2100_Plan_Print_Ready-1.pdf#page=3).
 
 ![](oip-image:medium/0844157f306924d63b26280e0e04d2f1986f4e4e76404355df8697184253ecff)
 
@@ -56,11 +63,11 @@ in 1993.
 For decades, its **dams powered the west and its canals greened the
 desert.**
 
-A century later, two-and-a-half-decades of drought have left the river
-at a crossroads. [Lake Mead](https://www.nps.gov/lake/index.htm) and
-[Lake Powell](https://www.nps.gov/cany/planyourvisit/lakelevels.htm), the twin reservoirs that
-store the river's flow, are now **half-empty bathtubs ~ pale rings
-visible.**
+By the time of this essay's September 2025 publication, drought
+[dating to 2000](https://www.usgs.gov/mission-areas/water-resources/science/integrated-water-science-basins-upper-colorado-river)
+had left the river at a crossroads. Lake Mead and Lake Powell, the twin
+reservoirs that store its flow, had reached
+[historically low levels](https://www.usbr.gov/ColoradoRiverBasin/documents/post2026/alternatives/Post-2026_Alternatives_Report_20250117_508.pdf#page=11).
 
 ![Hoover Dam at Lake Mead in 2001 vs 2015](oip-image:medium/555f275407a3014072d84c9ad7709ad3a9bd36bc91f8b7570a7425778b38e7e7)
 
@@ -69,8 +76,8 @@ visible.**
 
 ### The Colorado River is shrinking.
 
-Interstate agreements that divide up the river promise more water than
-it provides. That means cities like Tucson must prepare for a future in
+The USGS warns that present-day normal flows may not meet all the
+river's apportioned uses. That means cities like Tucson must prepare for a future in
 which their water supply is less predictable, and potentially much
 smaller.
 
@@ -88,24 +95,32 @@ water scarcity risk as they apply to cities in the American Southwest.
 *Tucson Area Water Supply Distribution | [Source](https://www.researchgate.net/figure/Source-of-water-production-for-Tucson-Water-from-1940-2017-Source-1_fig86_340643424)*
 
 
-> **Tucson gets its water from three sources:**
+> **Tucson Water's [2020 supply portfolio](https://wrrc.arizona.edu/news/reclaimed-water-opportunities-tucson) had three main sources:**
 
 - **82%** from the Colorado River via CAP.
 - **12%** recycled water, reused for irrigation and
   non-drinking purposes.
 - **6%** treated and remediated groundwater.
 
-The city banks unused CAP water underground as
-["storage credits"](https://www.azwater.gov/recharge/accounting) for the future. It uses block rate
-pricing to encourage conservation, and it has launched innovative
-projects like
-[***Pure Water Tucson***](https://tucsononewater.com/pure-water-tucson/) ~ **an advanced purification plant that will
-recycle wastewater directly into the drinking supply by the 2030s.**
+These are historical portfolio shares, including non-drinking uses ~ not
+percentages of a glass of tap water or a current supply breakdown.
+
+The city [banks unused CAP water underground](https://tucsononewater.com/wp-content/uploads/2025/03/One-Water-2100-Implementation-Report_Web_Digital_2023.pdf#page=7), earning
+[long-term storage credits](https://www.azwater.gov/recharge/accounting) for later recovery.
+Its [residential block rates](https://www.tucsonaz.gov/files/sharedassets/public/v/1/city-services/tucson-water/your-water-bill/5-year-rates.pdf)
+charge more per unit at higher use levels, creating an incentive to conserve.
+It has also proposed projects like
+[***Pure Water Tucson***](https://tucsononewater.com/pure-water-tucson/) ~ **advanced purification intended to turn
+recycled water into a drinking-water source.** The utility's
+[implementation report](https://tucsononewater.com/wp-content/uploads/2025/03/One-Water-2100-Implementation-Report_Web_Digital_2023.pdf#page=22)
+describes demonstration work, costs, regulation, and public acceptance as
+steps in a multiyear process, not a guaranteed completion date.
 
 Even with these efforts, the city lives under the shadow of the Colorado
-River Compact and the Bureau of Reclamation shortage declarations.
+River Compact and the Bureau of Reclamation's
+[shortage determinations](https://www.usbr.gov/newsroom/news-release/5211).
 
-> For Tucson, with more than half a million people, this isn't an
+> For Tucson, with [more than half a million people in the 2020 Census](https://www.census.gov/quickfacts/fact/table/tucsoncityarizona/POP715223), this isn't an
 > abstract crisis ~
 
 **The city is forced to think about risk**, and not just for the next
@@ -131,8 +146,9 @@ budget cycle, but **for the next 50 years and beyond.**
 3.  **Adaptive**
 4.  **Scenario**
 
-> **Tucson's One Water 2100 plan draws on all four traditions,** but
-> each general framework would steer the city in a different direction.
+> **These four lenses help us read Tucson's One Water 2100 plan.** They
+> are this essay's analytical framework, not four categories adopted by
+> the city.
 
 ![Four generic frameworks for managing risk](oip-image:medium/d44953c273cb2e6277217f577942f0bf3f2c1028ac37d36ca7648f51c0e37ffc)
 
@@ -147,40 +163,47 @@ budget cycle, but **for the next 50 years and beyond.**
 
 
 **Tucson Water's guiding document** is its
-[***One Water 2100* plan**](https://tucsononewater.com/about-one-water-2100/)**,** released in stages over the past decade.
+[***One Water 2100* plan**](https://tucsononewater.com/about-one-water-2100/),
+[adopted on October 17, 2023](https://content.govdelivery.com/accounts/AZTUCSON/bulletins/3764f73).
 
-**It rests on** **three pillars:**
+**For this risk-management comparison, three features stand out:**
 
 1.  **Diversification** ~ expanding reclaimed water,
     remediated groundwater, and eventually potable reuse.
-2.  **Adaptation** ~ a cycle of monitoring and
-    adjustment every 5 to 10 years.
+2.  **Adaptation** ~ monitoring conditions and
+    adjusting policy as they change.
 3.  **Scenario Planning** ~ building strategies that can
     survive a range of futures.
 
 #### **The plan lays out four scenarios,** with names designed to make the stakes memorable:
 
-- **Sustainable Oasis** ~ a future of conservation,
-  diversified supplies, and manageable climate stress.
-- **Thirsty Desert** ~ high growth, hotter climate,
-  shrinking CAP deliveries.
-- **Two Middle Ground Futures** ~ two variations that
-  combine elements of both.
+The utility's [implementation report](https://tucsononewater.com/wp-content/uploads/2025/03/One-Water-2100-Implementation-Report_Web_Digital_2023.pdf#page=5)
+summarizes their supply-and-demand assumptions:
+
+- **Sustainable Oasis** ~ lower demand and increased supply.
+- **Desert Oasis** ~ higher demand and increased supply.
+- **Counting Buckets** ~ lower demand and decreased supply.
+- **Thirsty Desert** ~ higher demand and decreased supply.
 
 > **Each scenario is tested against demand forecasts and river supply
 > projections.**
 
-**The city prioritizes policies that work "well enough" in all
-scenarios.**
+The city's [explanation of the scenarios](https://tucsononewater.com/public-input-for-draft-one-water-2100-plan/)
+projects enough supply through 2100 under its assumptions, with greater
+use of stored water and groundwater in the Thirsty Desert case. These
+are planning scenarios, not promises about what will happen.
+
+**The aim is to reduce vulnerability across different futures.**
 
 #### That's why reclaimed water and underground storage are emphasized:
 
-> They provide buffers across all potential futures.
+> They provide buffers ~ not immunity from every possible future.
 
 Tucson's plan calls for **periodic review** of their risk management
-decisions and process. **Every decade**, the city plans to re-run its
-models, check CAP deliveries against projections, and update
-conservation programs.
+decisions and process. Its stated goal is to
+[update the long-range plan about every ten years](https://tucsononewater.com/wp-content/uploads/2024/04/Tucson_Water_One_Water_2100_Plan_Print_Ready-1.pdf#page=3),
+with [annual progress reports](https://tucsononewater.com/public-input-for-draft-one-water-2100-plan/)
+to the Mayor and Council and the public between those larger revisions.
 
 > Perfect foresight is impossible.
 
@@ -202,16 +225,16 @@ river declines faster than expected, Tucson could be caught short.
 
 A **precautionary plan** would protect against that possibility by
 over-investing early. Residents might see higher water bills and
-stricter conservation rules, but the city would be almost immune to
-crisis.
+stricter conservation rules. It could reduce exposure to a crisis, but
+no investment program can eliminate drought or forecast error.
 
 #### Adaptive
 
-An **adaptive plan** would emphasize incremental steps. Tucson already
-leans this way, updating its One Water 2100 plan every decade and
-adjusting conservation programs as data comes in. The city treats
-groundwater as a last-resort backup, while learning from pilot projects
-in reuse and recharge.
+An **adaptive plan** would emphasize incremental steps. Tucson's
+combination of long-range reviews, annual reporting, and demonstration
+projects fits that approach. Groundwater and stored water provide a
+buffer, but relying on them more heavily changes what remains available
+for the future.
 
 #### Scenario
 
@@ -224,7 +247,7 @@ public visualize different outcomes.
 
 ***In practice,* Tucson blends the adaptive and scenario frameworks.**\
 Its planning documents include scenario names to engage the public,
-while its policies are designed to be adjusted every few years.
+while its implementation process allows adjustment as conditions change.
 
 That combination helps decision-makers avoid both the rigidity of
 overconfidence and the paralysis of uncertainty.
@@ -233,24 +256,28 @@ overconfidence and the paralysis of uncertainty.
 
 > ***The Colorado River is more than just Tucson's lifeline.***
 
-The river **irrigates roughly 5.5 million acres of farmland** and **supplies water
-to 40 million people.**
+Reclamation's [January 2025 overview](https://www.usbr.gov/ColoradoRiverBasin/documents/post2026/alternatives/Post-2026_Alternatives_Report_20250117_508.pdf#page=11)
+describes a system supporting **nearly 5.5 million acres of farmland** and
+**about 40 million people** across the southwestern United States and
+northwestern Mexico.
 
-The system generates hydropower at dams like the Hoover and Glen Canyon.
-
-Its annual economic **value is measured in the hundreds of billions**
-when you count agriculture, energy, and urban growth.
+The system also generates hydropower at dams like
+[Hoover](https://www.usbr.gov/lc/region/pao/faq.html) and
+[Glen Canyon](https://www.usbr.gov/uc/rm/crsp/).
 
 #### But the river is stretched thin ~
 
-The 1922 Compact assigned rights to 16.5 million acre-feet a year, when
-the river's long-term average is closer to 13 to 14 million.
+The [1922 Compact](https://www.usbr.gov/lc/region/pao/lawofrvr.html)
+apportioned 7.5 million acre-feet a year to each of the Upper and Lower
+Basins. The separate 1944 treaty committed 1.5 million acre-feet to Mexico.
+Those legal allocations are not a measurement of the water available in
+any particular year.
 
-> If the millennial drought continues, it may fall to 11 million.
+> Allocations do not make it rain.
 
-Mexico, entitled to 1.5 million acre-feet, faces salinity issues as
-flows diminish. Hydropower turbines at Hoover Dam may stop spinning if
-Lake Mead continues to fall in coming years.
+Water quality also complicates the accounting: the
+[1973 salinity agreement](https://www.usbr.gov/lc/region/pao/lawofrvr.html)
+required U.S. action to reduce salinity in water delivered to Mexico.
 
 **Downstream cities from Phoenix to Los Angeles face the same question
 Tucson is asking:**
@@ -273,8 +300,8 @@ Tucson is asking:**
 - **Scenario planning prepares minds as much as
   systems.**
 
-For Tucson, blending adaptive and scenario models has allowed the city
-to stretch every gallon. It banks water underground, treats wastewater
+For Tucson, blending adaptive and scenario models offers a way to
+stretch its supply. It banks water underground, treats wastewater
 as a resource, and frames futures that residents can imagine and debate.
 
 **Tucson's experience can serve as a model for how other mid-size cities
@@ -283,8 +310,11 @@ might successfully approach long-term uncertainty in the desert.**
 ### Sources
 
 - City of Tucson, [*One Water 2100 Plan*](https://tucsononewater.com/about-one-water-2100/)
-  planning documents and summaries.
+  planning documents and summaries; [*Inaugural Implementation Report 2023–2024*](https://tucsononewater.com/wp-content/uploads/2025/03/One-Water-2100-Implementation-Report_Web_Digital_2023.pdf), December 2024.
 - Tucson One Water, [Pure Water Tucson](https://tucsononewater.com/pure-water-tucson/).
-- Central Arizona Project, [CAP system history](https://centralarizonaproject.com/about/).
+- Central Arizona Project, [CAP system history](https://www.cap-az.com/about/history-of-cap/).
 - University of Arizona Water Resources Research Center, [reclaimed water overview](https://wrrc.arizona.edu/news/reclaimed-water-opportunities-tucson).
 - U.S. Geological Survey, [Colorado River basin summary](https://www.usgs.gov/mission-areas/water-resources/science/integrated-water-science-basins-upper-colorado-river).
+
+This essay retains its September 2025 planning perspective. Historical
+figures and projections above are not a live water-supply dashboard.

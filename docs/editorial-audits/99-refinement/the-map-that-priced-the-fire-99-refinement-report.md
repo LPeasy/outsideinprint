@@ -1,5 +1,41 @@
 # 99-Point Refinement Report
 
+## September 27, 2026 Source-Link Revision
+
+Decision: PASS
+
+Applies to **version 2.0, Fourth web edition**. This is a bounded editorial source audit, not a numerical score or a deployment result. Original publication date, title, URL, collection, artwork, section sequence and central argument are preserved. The [source checklist](the-map-that-priced-the-fire-source-checklist.md) records exact passages and access limitations.
+
+### Changes
+
+- Added nearby source links to the actual Jacksonville items, a representative sheet, the official fire history, collection interpretation, Coney Island sequence, EPA guidance and the exact historical-record regulation.
+- Rechecked the 1904 directory through the library's metadata and page OCR: the name count, civic fire list, bank corners and Klutho address have identified page records.
+- Narrowed sheet-count interpretation, specified the 1913 volume, and tied the surveyor-method account directly to LOC's quoted manual passage.
+- Distinguished EPA's suggested report format from binding historical-record review. Removed the unreverified Corps-specific example rather than attaching a plausible citation to an unread passage. The prose explicitly rejects treating an unremarkable map as proof of no contamination.
+- Recorded the body clarifications and removed example in visible revision history. No new source UI, asset, section, dependency, or public infrastructure was added.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+| Test | Decision | Evidence |
+|---|---|---|
+| Evidence | PASS | Exact atlas metadata, one inspected sheet, directory OCR, state fire history, LOC guides, EPA and official §312.24 support the factual clusters. The inaccessible Corps example is removed, not silently carried as verified. |
+| Logic | PASS | Private insurance needs explain map selection and later reuse; a larger sheet set is no longer treated as a direct density measure. |
+| Incentives | PASS | The essay separates underwriter pricing, commercial mapmaking, archive access, and modern environmental inquiry. |
+| Tradeoffs | PASS | Measured building detail is weighed against social omissions and the danger of mistaking precision for completeness. |
+| Consequences | PASS | It follows records into preservation, memory and property-risk inquiry without saying they alone establish environmental safety or legal protection. |
+| Uncertainty | PASS | Coverage, date, symbol and source limits remain explicit; no inaccessible report detail is retained as a premise. |
+| Institutional Behavior | PASS | Insurers select useful information, surveyors standardize it, archives preserve it, and modern readers must test it against other records. |
+
+### Current Review Limits
+
+This review checks bounded evidence-to-claim fit, not every atlas plate, a complete Jacksonville reconstruction, a site assessment, or legal advice. The local preview and publication gate are separate responsibilities of the coordinating task. No such validation is claimed here; PowerShell is unavailable on this Mac. No publication occurred.
+
+## Historical June 20, 2026 Refinement Report
+
+The prior report below is preserved as a historical record. Its package claims, score implications and validation language are not fresh evidence for version 2.0.
+
 Title: `The Map That Priced the Fire`
 Package: `2026-06-20-the-map-that-priced-the-fire-flagship`
 Date: `2026-06-20`

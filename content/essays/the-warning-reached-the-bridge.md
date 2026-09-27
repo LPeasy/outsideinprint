@@ -10,8 +10,12 @@ author_id: "robert-v-ussley"
 featured_image: "essays/the-warning-reached-the-bridge/hero"
 featured_image_alt: "An editorial cutaway of an ocean liner whose warning messages descend through decks toward lifeboats below."
 featured_image_caption: "A warning can cross an ocean and fail to cross an organization."
-version: "1.0"
-edition: "First web edition"
+version: "2.0"
+edition: "Second web edition"
+revision_history:
+  - version: "2.0"
+    date: "2026-09-26"
+    note: "Added claim-level links to the 1912 British inquiry and clarified the lookout timing, course response, accepted operating custom, and lifeboat capacity above the legal requirement. Original publication date and central argument are unchanged."
 featured: false
 collections:
   - "risk-uncertainty"
@@ -25,7 +29,7 @@ tags:
 
 The iceberg was hidden in the dark. The danger was not.
 
-Before *Titanic* struck ice on the night of April 14, 1912, the ship had received warnings about ice in or near its route. Yet it continued at high speed through a moonless night and a calm sea, conditions that made ice harder to see. At 11:40 p.m., the lookout saw what the organization had failed to act upon.
+Before *Titanic* struck ice on the night of April 14, 1912, the ship had [received warnings about ice in or near its route](https://www.titanicinquiry.org/BOTInq/BOTReport/botRepMessages.php). Yet it continued at high speed through a [moonless night and a calm sea](https://www.titanicinquiry.org/BOTInq/BOTReport/botRepFindings.php#a10), conditions that made ice harder to see. [Shortly before 11:40 p.m.](https://www.titanicinquiry.org/BOTInq/BOTReport/botRepCollision.php), the lookout saw what the organization had failed to act upon.
 
 The collision sank the ship. The decisions made before and after it turned the sinking into a mass-casualty disaster.
 
@@ -35,15 +39,15 @@ Risk systems often confuse receiving information with responding to it. A report
 
 But information does not protect anyone by itself. A warning becomes a safeguard only when somebody with authority changes the plan.
 
-The [British Wreck Commissioner's Inquiry](https://www.titanicinquiry.org/BOTInq/BOTReport/botRepFindings.php) found that *Titanic* received ice reports, did not alter course, and maintained excessive speed under the conditions. A credible warning could have led to slower speed, a different course, or stronger lookout coverage. None of those responses required knowledge of the future. They required professional judgment under uncertainty. The question was not whether a collision was certain. It was whether the cost of caution was reasonable when the possible consequence was catastrophic.
+The [British Wreck Commissioner's Inquiry](https://www.titanicinquiry.org/BOTInq/BOTReport/botRepFindings.php#a9) found that *Titanic* received ice reports, did not alter course in response to those reports, and maintained [excessive speed under the conditions](https://www.titanicinquiry.org/BOTInq/BOTReport/botRepFindings.php#a14). A credible warning could have led to slower speed, a different course, or stronger lookout coverage. None of those responses required knowledge of the future. They required professional judgment under uncertainty. The question was not whether a collision was certain. It was whether the cost of caution was reasonable when the possible consequence was catastrophic.
 
-The ship's officers faced pressure from custom as much as from any one person. Speed in ice-prone waters was not treated with the alarm it would receive after the disaster. The ship complied with the lifeboat rules then in force. Familiar practice and legal compliance created a comforting answer: this was how serious people operated serious ships.
+The inquiry described a [longstanding practice of maintaining speed near ice in clear weather](https://www.titanicinquiry.org/BOTInq/BOTReport/botRepAction.php). It rejected the suggestion that Captain Smith had been trying to set a record or please anyone aboard. The ship [complied with the lifeboat rules then in force](https://www.titanicinquiry.org/BOTInq/BOTReport/botRepFindings.php#a2). Familiar practice and legal compliance created a comforting answer: this was how serious people operated serious ships.
 
 That answer failed the people aboard.
 
 ## The Minimum Became the Standard
 
-*Titanic* carried 20 lifeboats with space for 1,178 people, far fewer than the number aboard. The rule governing lifeboat capacity had not kept pace with the size of passenger ships. The vessel could satisfy the regulation while remaining unable to evacuate everyone.
+*Titanic* carried [20 lifeboats with space for 1,178 people](https://www.titanicinquiry.org/BOTInq/BOTReport/botRepFindings.php#a5), far fewer than the number aboard. The rule governing lifeboat capacity [had not kept pace with the size of passenger ships](https://www.titanicinquiry.org/BOTInq/BOTReport/botRepBOT.php). The vessel exceeded the legal requirement while remaining unable to evacuate everyone.
 
 This is where legal compliance becomes morally dangerous. A minimum rule is useful when it captures the real hazard. When technology, scale, or operating conditions outrun the rule, the minimum can become a shield against judgment.
 

@@ -1,5 +1,45 @@
 # Source Checklist
 
+## Claim-Level Source Pass: September 27, 2026
+
+Reviewed revision: **2.0, Fourth web edition**. Original publication date and release timestamp remain June 20, 2026. This bounded pass follows the accepted *The Warning Reached the Bridge* method; it is not a new map survey or environmental assessment.
+
+Baseline essay SHA-256: `5bf6407eb0f746374d14b42f1080b60c5c408aabe1b449143eb9b49e2f0cfdc9`.
+
+Revised essay SHA-256: `f6e723b3b65ce73799057c8266d73c71dd15d073740cd913353f847bd8648c9d`.
+
+The passages below were read on September 27, 2026. PASS means support for the specified claim, not blanket certification of every possible use of these sources.
+
+| Claim cluster | Exact record and read location | Result, role, and limits |
+|---|---|---|
+| Opening atlas metadata | [LOC 1903 Jacksonville item](https://www.loc.gov/item/sanborn01286_005/), `Created / Published` and `Notes`; item JSON read directly from LOC | PASS. 1903, 78 sheets, six skeleton maps, bound. Metadata describes this atlas, not the general Sanborn collection. |
+| Building-level detail in the opening | [1903 atlas, sequence image 13](https://www.loc.gov/resource/g3934jm.g3934jm_g012861903/?sp=13), printed sheet 7 / digital file `01286_1903-0007` | PASS. The actual sheet was visually inspected: Main, Ocean, Newnan, Bay, Forsyth, and Adams streets; colored footprints, story/use annotations, City Hall, stores, laundry, warehouses, and water-line markings. Sequence 13, not sequence 7, displays printed sheet 7. This is a representative sheet, not a claim that every feature appears on every plate. |
+| Jacksonville atlas sequence | [1897 item](https://www.loc.gov/item/sanborn01286_004/), [1903 item](https://www.loc.gov/item/sanborn01286_005/), [1913 item](https://www.loc.gov/item/sanborn01286_006/), each item's `Notes` field read through LOC JSON | PASS. 47 sheets; 78 and six skeleton maps; 1913 **volume 1** has 128 sheets, congested-district map, eight skeleton maps. Revised text says a larger map set, not measured density, construction, population, or identical coverage. |
+| Fire origin, extent, casualties, martial law, rebuilding | [Florida Memory, Great Jacksonville Fire of 1901](https://floridamemory.com/learn/exhibits/photo_exhibits/jacksonvillefire/), introduction paragraphs 1–5 | PASS. Official state archival interpretation explicitly supports May 3, moss/mattress-factory origin, Davis/Beaver, 8:30 p.m., 2,368 buildings, 10,000 homeless, seven dead, 146 blocks, Jennings, May 17, and decade of rebuilding. Read the indexed full introduction after direct-fetch failures; this is not a contemporary incident report. |
+| 1904 directory size, rights, name count, fire stations, banks, architect | [Jacksonville Public Library directory](https://jaxpubliclibrary.contentdm.oclc.org/digital/compoundobject/collection/p16025coll10/id/3309). Library API `/digital/api/singleitem/collection/p16025coll10/id/3309`: 684 child pages, rights `No copyright - United States`. Child `2635`: Prefatory; `2644`: printed p.20; `2646`: printed p.22; `3243`: printed p.611 | PASS. Library-hosted OCR was read for 17,784 names, five stations/alarm boxes, bank corners, and H. J. Klutho at 108 W. Forsyth. The count is names in the directory, not a census population count. Bank locations are in the civic listing; no recovery rate is inferred from them. The directory's own boosterism is not adopted as evidence. |
+| Collection scale, insurer purpose, 1835 losses, Sanborn history | [LOC Introduction to the Collection](https://www.loc.gov/collections/sanborn-maps/articles-and-essays/introduction-to-the-collection/), opening inventory and historical narrative | PASS. Read full indexed text. The 12,000 places / 50,000 editions / 700,000 sheets are the collection essay's approximate historical description, not a newly measured digitization total. More than $20m 1835 losses and smaller-insurer failure are attributed to that institutional history. Sanborn is called a surveyor; an unsupported civil-engineer label was removed. |
+| 1905 manual and working method | Same LOC introduction, paragraphs beginning `To ensure uniform standards` and `Maps were drawn` | PASS. Manual date, purpose, and later editions are explicit. LOC quotes the instruction to use courthouse/real-estate records or measure with a tape when records are not readily obtainable. Revised text uses this identifiable passage rather than unnamed institutional guides. |
+| Colors, keys, industry-selected evidence, corrections | [LOC About this Collection](https://www.loc.gov/collections/sanborn-maps/about-this-collection/), `Sanborn Keys & Colors`, `Sanborn Keys, Legends, and Symbol Sheets`, correction-slip discussion; [LOC interpretation guide](https://guides.loc.gov/fire-insurance-maps/sanborn-interpreting), opening | PASS. Read indexed full institutional text. Colors and symbols require the relevant edition's key; changing coverage and correction dates limit comparisons. No new universal color key is invented. |
+| Coney Island sequence | [LOC Sanborn Time Series](https://www.loc.gov/collections/sanborn-maps/articles-and-essays/sanborn-time-series/), `Coney Island, 1895`, `1906`, `1930` | PASS as the Library's interpretation. Specific edition commentary supports wood construction, change in amusements, Dreamland fire and later park/arcade use. LOC explicitly says these interpretations illustrate a method rather than settle the history. No new independent plate-by-plate survey is claimed. |
+| AAI purpose, grant assessments, suggested report contents | [EPA Brownfields All Appropriate Inquiries](https://www.epa.gov/brownfields/brownfields-all-appropriate-inquiries), opening, required activities, and `Format for Reporting the Results`, especially `Records Review` | PASS. EPA requires grant-funded Phase I assessments to comply with AAI; its example reporting format is expressly **not** a regulatory requirement. Revised text distinguishes the two. Historical records are one part of a process that also includes interviews, government records and inspection. |
+| Historical-record review and professional judgment | [40 CFR §312.24, 2025 edition](https://www.govinfo.gov/content/pkg/CFR-2025-title40-vol30/pdf/CFR-2025-title40-vol30-sec312-24.pdf), printed p.414, paragraphs (a)–(b) | PASS. Official annual CFR text read. Historical records must be reviewed to meet the inquiry's objectives; listed possible records include fire insurance maps. Professional judgment applies to how far back the search must extend. This is not a claim that a Sanborn map alone confers a liability defense or rules out contamination. |
+| Public checklist provenance | LOC `About this Collection`, opening; LOC introduction, Walter W. Ristow attribution | PASS. The public checklist derives from the 1981 publication. Bibliographic/archival work is distinguished from the essay's interpretation of civic value. |
+
+### Removed Example and Access Limits
+
+- The earlier Upper St. Anthony Falls Corps example cannot be represented as freshly verified. Its existing December 2020 PDF returned an Akamai 403; a newer official Appendix E appeared in search with a Sanborn contents heading but returned 404. The full relevant section was not read this time.
+- With editorial approval, version 2.0 removes the report-specific year list, the claim that it found no unusual Sanborn entries, and the old public source-list link. EPA and §312.24 now support the narrower modern-use discussion. Lack of a mapped warning is expressly not proof of no contamination.
+- Several LOC and Florida Memory normal page requests were blocked to the research browser. The cited institutional texts were read through indexed full-text results, and the three exact LOC item metadata records were independently read through LOC's public JSON interface. No HTTP-success-only check substitutes for a passage check.
+- Directory verification used library-hosted OCR and metadata, not a new visual review of all 684 pages. The source identity, child IDs and printed pages above make the checked passages reproducible.
+
+### Analysis and Delivery Boundary
+
+The claims about memory, incentives, omission and civic use are the author's analysis. Hypothetical laundries, garages, tenants and property disputes are not newly discovered facts about Jacksonville. Original title, date, slug, collection, image assets, and central argument are preserved. The whole-number version bump reflects the narrowed factual prose, not merely link styling. No builds, PowerShell checks, Node/browser suites, publication, or remote writes were performed by this source pass; the coordinating task owns consolidated preview and validation.
+
+## Historical June 20, 2026 Checklist
+
+The record below is retained as history. Its PASS labels describe that earlier package and do not override the corrections and access limits above.
+
 Package: `2026-06-20-the-map-that-priced-the-fire-flagship`
 Title: `The Map That Priced the Fire`
 Date: `2026-06-20`

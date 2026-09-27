@@ -1,5 +1,47 @@
 # 99-Point Refinement Report
 
+## September 27, 2026 Source-Link Revision
+
+Decision: PASS
+
+Applies to **version 2.0, Second web edition**. This is bounded editorial evidence-to-claim review, not a score or publication result. Original date, title, URL, collection, artwork, and central argument are unchanged. See the [source checklist](the-bolt-beside-the-gas-tank-source-checklist.md) for read passages, page numbers, hosts and limits.
+
+### Material Corrections
+
+- Replaced the textbook product-page proxy with the *Grimshaw* opinion and stated its plaintiff-favorable appellate review standard.
+- Corrected the component torn in the production test and the differing alternative-test speeds; removed unverified duration/cargo-space precision.
+- Corrected the earlier claim that decision-makers and the warning path were absent from the record. The opinion records the approval chain, management evidence, feasible fixes and cost motivation; the public essay preserves the procedural limits and Ford's challenge.
+- Read the original cost-report scan. Table 3 says $49.5m in benefits, consistent with rounding $49.53m, not the earlier $49.15m transcription. It concerns fleetwide rollover-rule compliance and NHTSA societal costs, not a specific Pinto shield or projected victim payments.
+- Stopped treating the catalog's 1977 date as the writing date. The scan is undated but cites April 1972 material, enough for the narrower chronology. The unchanged editorial image's date label is qualified in its alt text and immediately below it, not presented as documentary proof.
+- Adjusted the final sentence to require action on the result, consistent with the court's evidence that the warning reached management.
+- Added page-level links to the historical recall filing and owner letter and distinguished their 2011 docket-hosting route from their 1978 content. Separated modern willingness-to-pay VSL from the older table's method.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+| Test | Decision | Evidence |
+|---|---|---|
+| Evidence | PASS | Actual judicial passages, the cost-report scan and historical recall documents replace indirect proxies; specific speeds, arithmetic, date limits and source roles are recorded. |
+| Logic | PASS | The duty to act on known danger follows from documented testing and management evidence without relying on the popular claim that one fleetwide memo dictated the original design. |
+| Incentives | PASS | Cost and schedule receive analysis, while cost-driven omitted fixes are attributed to the court's record rather than invented motives for every employee. |
+| Tradeoffs | PASS | Low price, low weight and timing are legitimate aims, weighed against occupant risk and the need to compare distinct countermeasures. |
+| Consequences | PASS | Tank puncture and leakage connect to ignition risk and post-sale repair; no unsupported aggregate casualty number is supplied. |
+| Uncertainty | PASS | The appellate standard, undated scan, illustrative date label, nonidentical test configurations and incomplete engineering archive are explicit. The essay does not manufacture uncertainty where the court actually records evidence. |
+| Institutional Behavior | PASS | Ford controlled design and approval; the opinion describes escalation to senior management; regulation and the later recall are kept distinct from the author's recommended governance procedure. |
+
+### Media and Source Framing
+
+Decision: PASS. The inherited `$11 versus victim payments` story is tested against the actual document. The judicial account is neither dismissed nor presented as a neutral laboratory transcript. Advocacy hosting is identified. The essay does not replace an anti-corporate cartoon with unsupported corporate exoneration.
+
+### Current Review Limits
+
+This pass does not resolve the report's exact writing date, authenticate every scan against an original, recreate the full litigation, or reassess all Pinto crashes. No artwork replacement was authorized; the date embedded in the existing illustration is disclosed as catalog-based and unverified. The source pass ran no builds, local suites or publication commands. Consolidated preview and publication validation remain separate; PowerShell is unavailable on this Mac. Nothing was deployed.
+
+## Historical First-Edition Refinement Report
+
+The record below describes the original package, including its then-pending package validator. It is not the current release status. Its date/table/test/management conclusions are superseded by the September 27 review above.
+
 Target: `story.md`
 
 Decision state: `TEXT_PASS_PACKAGE_HOLD`

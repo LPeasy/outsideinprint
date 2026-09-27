@@ -1,14 +1,17 @@
 ---
 title: "The Easement Under the Lake"
-subtitle: "The Army Corps has granted Dakota Access a new Lake Oahe easement, turning a buried pipe into a test of how the country prices water risk, tribal consultation, and energy certainty."
-description: "The Army Corps has granted Dakota Access a new Lake Oahe easement, turning a buried pipe into a test of water risk, tribal consultation, and energy certainty."
+subtitle: "The Army Corps has chosen a new Lake Oahe easement for Dakota Access, turning a buried pipe into a test of how the country prices water risk, tribal consultation, and energy certainty."
+description: "The Army Corps has chosen a new Lake Oahe easement for Dakota Access, turning a buried pipe into a test of water risk, tribal consultation, and energy certainty."
 date: 2026-05-22
 draft: false
 slug: "the-easement-under-the-lake"
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Added claim-level links and page references to the decision, environmental review, court opinion, and attributed reporting. Distinguished the decision to grant an easement from its later execution, clarified tribal participation in subsistence studies, and attributed transport-risk comparisons to the Corps' analysis. The original publication date, artwork, and May 2026 reporting frame are unchanged."
   - version: "1.1"
     date: "2026-05-31"
     note: "Updated May 31, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -31,9 +34,9 @@ tags:
 
 The most important object in the Dakota Access decision is a strip of permission under water.
 
-It is an easement: a legal right to occupy a narrow piece of federal land beneath Lake Oahe in North Dakota. On a map, it looks like paperwork. In the ground, it is a 30-inch oil pipeline crossing under a federal reservoir roughly half a mile upstream of the northern boundary of the Standing Rock Reservation.
+It is an easement: a legal right to occupy a narrow piece of federal land beneath Lake Oahe in North Dakota. On a map, it looks like paperwork. In the ground, it is a [30-inch oil pipeline crossing under a federal reservoir](https://usace.contentdm.oclc.org/utils/getfile/collection/p16021coll7/id/29126#page=5) roughly half a mile upstream of the northern boundary of the Standing Rock Reservation.
 
-On May 21, 2026, the U.S. Army Corps of Engineers, Omaha District, said it had signed the [Record of Decision for the Dakota Access Pipeline Final Environmental Impact Statement](https://www.nwo.usace.army.mil/Media/News-Releases/Article/4498134/record-of-decision-signed-for-dakota-access-pipeline-final-environmental-impact/). The agency selected Alternative 4, granting Dakota Access, LLC an easement with added conditions for the Lake Oahe crossing.
+On May 21, 2026, the U.S. Army Corps of Engineers, Omaha District, said it had signed the [Record of Decision for the Dakota Access Pipeline Final Environmental Impact Statement](https://www.nwo.usace.army.mil/Media/News-Releases/Article/4498134/record-of-decision-signed-for-dakota-access-pipeline-final-environmental-impact/). The agency selected Alternative 4: a new easement with added conditions for Dakota Access, LLC at the Lake Oahe crossing. The decision specified that [the grant would be executed after the required congressional-notification period](https://usace.contentdm.oclc.org/utils/getfile/collection/p16021coll7/id/29126#page=32).
 
 That decision closes one chapter of a fight that began as an infrastructure permit, became a national protest symbol, moved through federal court, and returned as a technical review of risk. The pipe has carried oil since 2017. The legal permission beneath the lake now has a new federal record around it.
 
@@ -43,13 +46,13 @@ The easement is small. The question around it is large: when a public agency gra
 
 ## The Record After the Fact
 
-Dakota Access is a 1,172-mile crude-oil pipeline linking the Bakken and Three Forks production areas with an oil market near Patoka, Illinois. The Corps' project page says the Lake Oahe crossing was built through horizontal directional drilling, with a 50-foot right-of-way plus the ground occupied by the pipe and related facilities.
+Dakota Access is a [roughly 1,172-mile crude-oil pipeline](https://public-inspection.federalregister.gov/2020-19993.pdf#page=2) linking the Bakken and Three Forks production areas with an oil market near Patoka, Illinois. The Corps' scoping notice describes the Lake Oahe crossing's horizontal directional drilling and a 50-foot right-of-way plus the ground occupied by the pipe and related facilities.
 
-The first federal permission came in 2016, supported by an environmental assessment and a finding of no significant impact. The easement followed in February 2017. Oil began moving on June 1, 2017.
+The [2016 crossing permission](https://usace.contentdm.oclc.org/utils/getfile/collection/p16021coll7/id/28531#page=5) was supported by an environmental assessment and a finding of no significant impact. The easement followed in February 2017. Oil began moving on June 1, 2017.
 
 Then the record caught up with the project.
 
-In March 2020, the U.S. District Court for the District of Columbia ordered the Corps to prepare a full Environmental Impact Statement for this portion of the pipeline because the crossing's effects were likely to be highly controversial. The Corps' [Dakota Access project page](https://www.nwo.usace.army.mil/Missions/Dam-and-Lake-Projects/Oil-and-Gas-Development/Dakota-Access-Pipeline/) now traces that later process: scoping in 2020, a draft EIS in 2023, tribal and public meetings, a Final EIS, and a Record of Decision signed in 2026.
+In March 2020, the U.S. District Court for the District of Columbia [required a full Environmental Impact Statement](https://law.justia.com/cases/federal/district-courts/district-of-columbia/dcdce/1:2016cv01534/180660/496/) for this portion of the pipeline. The court found unresolved expert disputes about its effects, not merely public opposition. The Corps' [Dakota Access project page](https://www.nwo.usace.army.mil/Missions/Dam-and-Lake-Projects/Oil-and-Gas-Development/Dakota-Access-Pipeline/) traces that later process: scoping in 2020, a draft EIS in 2023, tribal and public meetings, a Final EIS, and a Record of Decision signed in 2026.
 
 This is the strange civic shape of the case. The country built the pipe first. The full environmental record arrived years later.
 
@@ -63,7 +66,7 @@ That is why the easement deserves more attention than the slogans around it. The
 
 ## Five Ways to See One Pipe
 
-The Corps says it evaluated five alternatives for the Lake Oahe crossing. One would remove the pipeline. One would drain, clean, cap, and abandon it in place. One would issue an easement with earlier conditions. One would issue an easement with new conditions. One would reroute part of the line so the crossing avoided the lake.
+The Corps evaluated [five alternatives for the Lake Oahe crossing](https://usace.contentdm.oclc.org/utils/getfile/collection/p16021coll7/id/29126#page=9). One would remove the pipeline. One would drain, clean, cap, and abandon it in place. One would issue an easement with earlier conditions. One would issue an easement with new conditions. One would reroute part of the line so the crossing avoided the lake.
 
 That list is more useful than the usual public frame.
 
@@ -71,11 +74,11 @@ The inherited energy frame treats the decision as a victory over delay: the coun
 
 Both frames contain real facts. Each also tries to make the burden obvious before the evidence has done its work.
 
-The OIP frame starts elsewhere. A pipeline under a reservoir creates several civic goods and risks at once. It moves a high-volume commodity through a controlled route. It reduces some transport hazards that would come with trucks or rail. It creates concentrated spill risk at a water crossing. It asks nearby tribal communities to accept consequences they do not fully control. It asks a federal agency to translate environmental dispute into enforceable conditions.
+The OIP frame starts elsewhere. A pipeline under a reservoir creates several civic goods and risks at once. It moves a high-volume commodity through a controlled route. The Corps' analysis projects [greater accident risks from substitute truck and rail transport](https://usace.contentdm.oclc.org/utils/getfile/collection/p16021coll7/id/28531#page=15) in its rerouting scenario. The pipeline creates concentrated spill risk at a water crossing. It asks nearby tribal communities to accept consequences they do not fully control. It asks a federal agency to translate environmental dispute into enforceable conditions.
 
 The decision is an exercise in public risk accounting.
 
-The Corps' chosen alternative leaves the crossing in service while adding leak detection, groundwater and surface-water monitoring, water supply contingency planning, subsistence studies coordinated with affected Tribes, and independent expert review of leak-detection and safety systems. Those conditions are the agency's answer to a hard fact: public water risk can rarely be reduced to zero once a major system is already in place.
+The Corps' chosen alternative leaves the crossing in service while adding [monitoring and water-supply contingency requirements](https://usace.contentdm.oclc.org/utils/getfile/collection/p16021coll7/id/29126#page=32), independent review of leak-detection and safety technology, and an offer to support subsistence studies with affected Tribes. Those conditions are the agency's answer to a hard fact: public water risk can rarely be reduced to zero once a major system is already in place.
 
 The better question is how much risk remains, who sees it first, who can act on it, who bears the loss if controls fail, and who can force corrections during the life of the easement.
 
@@ -83,15 +86,15 @@ The better question is how much risk remains, who sees it first, who can act on 
 
 The word consultation can sound like ceremony. In this case it has to mean more than a meeting record.
 
-Lake Oahe is part of the Missouri River Mainstem Reservoir System, a federal project managed by the Corps. The pipeline crossing sits near the Standing Rock Reservation. The public record includes years of tribal objection, agency review, public comment, and litigation. The Corps says the Final EIS incorporated comments received from Tribes, cooperating agencies, and the public during the draft-review period.
+Lake Oahe is part of the Missouri River Mainstem Reservoir System, a federal project managed by the Corps. The pipeline crossing sits near the Standing Rock Reservation. The public record includes years of tribal objection, agency review, public comment, and litigation. The Corps' [decision describes its tribal and public review process](https://usace.contentdm.oclc.org/utils/getfile/collection/p16021coll7/id/29126#page=8) and says it responded to substantive comments in the Final EIS.
 
 That process should be judged by what survives into the operating permission.
 
-The new easement conditions make that test possible. Water monitoring can be audited. Leak-detection systems can be reviewed by outside experts. Contingency plans can be examined for speed, responsibility, contact points, replacement water, and public notice. Subsistence studies can show whether the agency understands how a spill would move through daily life as well as through a model.
+The selected easement conditions make that test possible. Water monitoring can be audited. Leak-detection systems can be reviewed by outside experts. Contingency plans can be examined for speed, responsibility, contact points, replacement water, and public notice. Subsistence studies can show whether the agency understands how a spill would move through daily life as well as through a model. The [study condition requires an offer to Standing Rock and Cheyenne River](https://usace.contentdm.oclc.org/utils/getfile/collection/p16021coll7/id/29126#page=34); either Tribe may decline without a study proceeding.
 
 Consultation becomes serious when it alters the obligations attached to permission.
 
-It also remains limited. A community can be consulted and lose. A Tribe can place objections in the record and watch the agency select continued operation. That is why process language should never be mistaken for consent. The Corps can say it consulted. Dakota Access can say the pipeline has a new easement. Standing Rock and other affected communities can say the risk has been assigned to them again.
+It also remains limited. A community can be consulted and lose. A Tribe can place objections in the record and watch the agency select continued operation. That is why process language should never be mistaken for consent. The Corps can say it consulted. Dakota Access can point to a decision in favor of a new easement. Standing Rock and other affected communities can say the risk has been assigned to them again.
 
 A serious account has to hold those facts together.
 
@@ -99,7 +102,7 @@ The federal agency owns the decision. The company owns the asset. The public own
 
 ## What the Easement Measures
 
-The Associated Press reported that the pipeline carries about 540,000 barrels per day, roughly 4 percent of daily U.S. oil production, and that further litigation is likely after the Corps' decision. Those figures explain why the crossing has proved so hard to close. The pipe is no longer an idea. It is an operating artery inside a fuel system.
+In its May 21, 2026 report, the [Associated Press put throughput at about 540,000 barrels per day](https://www.clickorlando.com/news/national/2026/05/21/a-decade-after-standing-rock-protests-contentious-segment-of-dakota-access-oil-pipeline-gets-ok/), roughly 4 percent of daily U.S. oil production, and anticipated further litigation. Those are reported operating figures, not the pipeline's authorized maximum capacity. They help explain why the crossing has proved so hard to close. The pipe is no longer an idea. It is an operating artery inside a fuel system.
 
 Energy infrastructure gains power through use. A project that might have been stopped before construction becomes harder to unwind after customers, producers, shippers, workers, lawyers, and regulators have built expectations around it. That does not make continued operation right by itself. It does reveal the incentive built into many infrastructure fights: build enough of the thing, and later review takes place under pressure.
 
