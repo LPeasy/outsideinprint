@@ -5213,13 +5213,13 @@ $requiredUxChecks += @(
   },
   @{
     Path = 'public/essays/what-happened-at-camp-mystic/index.html'
-    Pattern = "(?s)Eighth web edition.*?July 4: Warning, Rising Water, and Evacuation.*?Further Reading.*?The Water(?:&rsquo;|&#39;|'|’)s\s+Rising:\s+What\s+the\s+Data\s+Really\s+Says\s+About\s+Extreme\s+Weather"
+    Pattern = "(?s)Ninth web edition.*?July 4: Warning, Rising Water, and Evacuation.*?Further Reading.*?The Water(?:&rsquo;|&#39;|'|’)s\s+Rising:\s+What\s+the\s+Data\s+Really\s+Says\s+About\s+Extreme\s+Weather"
     Message = 'expected the Camp Mystic essay to render its revised edition, consolidated timeline heading, and finished further-reading close'
   },
   @{
     Path = 'public/essays/what-happened-at-camp-mystic/index.html'
-    Pattern = '(?s)article-publication-record.*?Version 2\.3'
-    Message = 'expected the Camp Mystic publication record to render version 2.3'
+    Pattern = '(?s)article-publication-record.*?Version 3\.0'
+    Message = 'expected the Camp Mystic publication record to render version 3.0'
   },
   @{
     Path = 'public/essays/what-happened-at-camp-mystic/index.html'
@@ -5235,13 +5235,13 @@ $requiredUxChecks += @(
   },
   @{
     Path = 'public/essays/jack-stratton-and-the-vulfpeck-model/index.html'
-    Pattern = '(?s)Sixth web edition.*?What(?:&rsquo;|&#39;|'')s Next for Jack Stratton and Vulfpeck.*?Source: Blue Funky Mamma'
+    Pattern = '(?s)Seventh web edition.*?What(?:&rsquo;|&#39;|'')s Next for Jack Stratton and Vulfpeck.*?Source: Blue Funky Mamma'
     Message = 'expected the Jack Stratton bio to render its revised edition, completed source label, and evergreen closing heading'
   },
   @{
     Path = 'public/essays/jack-stratton-and-the-vulfpeck-model/index.html'
-    Pattern = '(?s)article-publication-record.*?Version 1\.5'
-    Message = 'expected the Jack Stratton publication record to render version 1.5'
+    Pattern = '(?s)article-publication-record.*?Version 2\.0'
+    Message = 'expected the Jack Stratton publication record to render version 2.0'
   },
   @{
     Path = 'public/essays/jack-stratton-and-the-vulfpeck-model/index.html'
