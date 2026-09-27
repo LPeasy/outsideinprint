@@ -73,16 +73,18 @@ test("Dolphin correction retains the original publication date and renders a con
   const dolphinHtml = fs.readFileSync(path.join(siteDir, "essays/the-dolphin-company/index.html"), "utf8");
   const source = fs.readFileSync(path.resolve("content/essays/the-dolphin-company.md"), "utf8");
   assert.match(source, /^date: 2026-01-16\r?$/m);
-  assert.match(source, /^version: "2\.0"\r?$/m);
-  assert.match(source, /^edition: "Fifth web edition"\r?$/m);
-  assert.match(dolphinHtml, /Fifth web edition/);
+  assert.match(source, /^version: "3\.0"\r?$/m);
+  assert.match(source, /^edition: "Sixth web edition"\r?$/m);
+  assert.match(dolphinHtml, /Sixth web edition/);
   const citation = [...dolphinHtml.matchAll(/<code\b[^>]*>([\s\S]*?)<\/code>/g)]
-    .map((match) => text(match[1])).find((value) => value.includes("Version 2.0."));
+    .map((match) => text(match[1])).find((value) => value.includes("Version 3.0."));
   assert.ok(citation);
-  assert.match(citation, /Outside In Print, 2026-01-16\. Version 2\.0\. https:\/\/outsideinprint\.org\/essays\/the-dolphin-company\//);
-  const currentRevision = source.match(/revision_history:\s*\n\s+- version: "2\.0"\s*\n\s+date: "([^"]+)"\s*\n\s+note: "([^"]+)"/);
+  assert.match(citation, /Outside In Print, 2026-01-16\. Version 3\.0\. https:\/\/outsideinprint\.org\/essays\/the-dolphin-company\//);
+  const currentRevision = source.match(/revision_history:\s*\n\s+- version: "3\.0"\s*\n\s+date: "([^"]+)"\s*\n\s+note: "([^"]+)"/);
   assert.ok(currentRevision);
-  assert.match(text(dolphinHtml), new RegExp(`Version 2\\.0 \\| ${currentRevision[1]}`));
+  assert.equal(currentRevision[1], "2026-09-27");
+  assert.match(text(dolphinHtml), new RegExp(`Version 3\\.0 \\| ${currentRevision[1]}`));
+  assert.match(text(dolphinHtml), /Version 2\.0 \| 2026-09-17/, "the prior correction record remains visible");
   assert.ok(text(dolphinHtml).includes(currentRevision[2].replaceAll("'", "&#39;"))
     || text(dolphinHtml).includes(currentRevision[2]), "the complete correction note must render");
 });

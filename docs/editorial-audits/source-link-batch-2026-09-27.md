@@ -47,6 +47,8 @@ Do not regenerate or represent existing downloadable PDFs as updated web edition
 
 The first [GitHub publication run](https://github.com/LPeasy/outsideinprint/actions/runs/36297679376), for commit `05b5462b5a3935243964ff083ba1277506a6e321`, passed all seven philosophy audits but blocked deployment on five `medium_punctuation_artifact` lines in Tucson and Bolt. Build and deployment were skipped. The follow-up normalizes only those apostrophes, quotation marks, and the source-label date-range dash to ASCII and updates their source hashes. No factual wording, source URLs, image assets, or validation rules change. The prepared editions remain 2.0 because the blocked candidates never went live. Success must be established by the follow-up workflow, not inferred from this correction.
 
+The [second run](https://github.com/LPeasy/outsideinprint/actions/runs/36298009685), for `b23d15e99cdccc510e7c35c6095813dfcd436f7c`, passed source contracts, changed-essay guardrails, and the production build. Its homepage output scenario failed because it hardcoded Dolphin's superseded version 2.0 / Fifth web edition. The existing scenario now expects the approved 3.0 / Sixth web edition and September 27 revision, retains the original-date and full-note checks, and checks that the September 17 correction record remains visible. No check is removed or disabled, and no further article change is made. A narrow read-only scan found no other stale edition or corrected-copy expectations in the remaining output/browser checks. Deployment was skipped; the next workflow must establish success.
+
 ## Reviewed essay SHA-256 values
 
 These identify the reviewed source files, not deployment artifacts. Recheck only affected records if a candidate changes.
