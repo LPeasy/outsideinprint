@@ -357,7 +357,7 @@ test("Studio samples retain reader-ready copy and public revision records", () =
   assert.match(jackStrattonEssay, /^  - version: "1\.5"$/m);
   assert.match(jackStrattonEssay, /Source: Blue Funky Mamma/);
   assert.match(jackStrattonEssay, /\*\*\*Theo Katzman, Woody Goss, and Joe Dart\*\*\*\./);
-  assert.match(jackStrattonEssay, /\*\*\*Sleepify\*\*\*,\s+a\s+silent Spotify album/);
+  assert.match(jackStrattonEssay, /\*\*\*Sleepify\*\*\*,\s+\[a\s+silent Spotify album/);
   assert.doesNotMatch(
     jackStrattonEssay,
     /back-archive review|Recovered and localized|localized visual sequence|What's Next for Jack Stratton and Vulfpeck in 2025|At publication, the band had|more\s*> recently/i
