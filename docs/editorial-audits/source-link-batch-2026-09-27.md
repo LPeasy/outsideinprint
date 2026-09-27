@@ -43,6 +43,10 @@ PowerShell is unavailable on this Mac. The required checks were pending at local
 
 Do not regenerate or represent existing downloadable PDFs as updated web editions. No templates, scripts, analytics, assets, collection membership, or infrastructure were changed by this batch.
 
+## Publication follow-up
+
+The first [GitHub publication run](https://github.com/LPeasy/outsideinprint/actions/runs/36297679376), for commit `05b5462b5a3935243964ff083ba1277506a6e321`, passed all seven philosophy audits but blocked deployment on five `medium_punctuation_artifact` lines in Tucson and Bolt. Build and deployment were skipped. The follow-up normalizes only those apostrophes, quotation marks, and the source-label date-range dash to ASCII and updates their source hashes. No factual wording, source URLs, image assets, or validation rules change. The prepared editions remain 2.0 because the blocked candidates never went live. Success must be established by the follow-up workflow, not inferred from this correction.
+
 ## Reviewed essay SHA-256 values
 
 These identify the reviewed source files, not deployment artifacts. Recheck only affected records if a candidate changes.
@@ -51,8 +55,8 @@ These identify the reviewed source files, not deployment artifacts. Recheck only
 10286dae6e8b3d42d2ebfb3a5be5f619296eae8937f11d8ffdda9b7ee301a266  the-warning-reached-the-bridge.md
 6bb3777719a76544e0ae4d956b24f868a480e552e989557815545d66b87f6559  the-dolphin-company.md
 f6e723b3b65ce73799057c8266d73c71dd15d073740cd913353f847bd8648c9d  the-map-that-priced-the-fire.md
-d882eb65c1d18d34ac19f687fe75e40ed6a4e8e191c7d6b58665f2ecb187b13b  how-tucson-az-plans-for-water-scarcity.md
+13e74fb1ec9d24dce4503ce012c9fe4a1053b6645a0e9c8e178410d087df8d25  how-tucson-az-plans-for-water-scarcity.md
 8c0e34ac3750845e45d9d4ec1e1dbb75533011fcf9bb12934e31d035023a9c9d  uncrustables-the-billion-dollar-peanut-butter-empire.md
 6c7fd8bf7a8a5b70dc8a4b94ae6ffaa2bd989b09d41eb5d1200b96baa475f1d4  the-easement-under-the-lake.md
-258ae583196500dc30282847254418229c5fc11ce115c8d46b0c84b0f12ac3fa  the-bolt-beside-the-gas-tank.md
+998a1bf9d951e828dc115f97bd4b3830407cbd99ebbd62c62367f066b9d549d0  the-bolt-beside-the-gas-tank.md
 ```

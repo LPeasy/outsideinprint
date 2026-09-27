@@ -93,9 +93,9 @@ That kind of number can help with a rule for millions of cars, but it cannot set
 
 Putting the memo in its proper place leaves the gas-tank problem intact.
 
-![Editorial illustration of earlier crash-test photographs beside a cost memo labeled “1977 MEMO,” a catalog-based date not verified by the report scan.](oip-image:essays/the-bolt-beside-the-gas-tank/section-1)
+![Editorial illustration of earlier crash-test photographs beside a cost memo labeled "1977 MEMO," a catalog-based date not verified by the report scan.](oip-image:essays/the-bolt-beside-the-gas-tank/section-1)
 
-*Editorial illustration, not an original document. Its “1977 MEMO” label follows a [catalog date](https://search.alexanderstreet.com/preview/work/bibliographic_entity%7Cbibliographic_details%7C2083893); the report scan is undated and cites 1972 material. The date label is not evidence of when Ford wrote it.*
+*Editorial illustration, not an original document. Its "1977 MEMO" label follows a [catalog date](https://search.alexanderstreet.com/preview/work/bibliographic_entity%7Cbibliographic_details%7C2083893); the report scan is undated and cites 1972 material. The date label is not evidence of when Ford wrote it.*
 
 In 1978, the National Highway Traffic Safety Administration, known as NHTSA, issued an initial defect finding on certain Pintos and Mercury Bobcats. [Ford's recall documents preserved in the federal docket](https://static.nhtsa.gov/odi/inv/2009/INOT-DP09005-47530.pdf#page=6) describe an unreasonable risk of substantial fuel leaks in rear crashes at low or moderate speeds. The finding covered 1971-1976 Pintos and 1975-1976 Bobcats, but not station wagons.
 

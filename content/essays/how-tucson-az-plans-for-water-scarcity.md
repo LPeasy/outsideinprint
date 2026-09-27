@@ -157,9 +157,9 @@ budget cycle, but **for the next 50 years and beyond.**
 
 ### Tucson's One Water 2100 Plan
 
-![Tucson’s grand plan for the next 75 years](/images/medium/how-tucson-az-plans-for-water-scarcity/0c248e295f8fc356eb36c5d2b4dac1058e716d303ea3714320a824450ea58a25.jpeg)
+![Tucson's grand plan for the next 75 years](/images/medium/how-tucson-az-plans-for-water-scarcity/0c248e295f8fc356eb36c5d2b4dac1058e716d303ea3714320a824450ea58a25.jpeg)
 
-*Tucson’s grand plan for the next 75 years | [Source](https://tucsononewater.com)*
+*Tucson's grand plan for the next 75 years | [Source](https://tucsononewater.com)*
 
 
 **Tucson Water's guiding document** is its
@@ -310,7 +310,7 @@ might successfully approach long-term uncertainty in the desert.**
 ### Sources
 
 - City of Tucson, [*One Water 2100 Plan*](https://tucsononewater.com/about-one-water-2100/)
-  planning documents and summaries; [*Inaugural Implementation Report 2023–2024*](https://tucsononewater.com/wp-content/uploads/2025/03/One-Water-2100-Implementation-Report_Web_Digital_2023.pdf), December 2024.
+  planning documents and summaries; [*Inaugural Implementation Report 2023-2024*](https://tucsononewater.com/wp-content/uploads/2025/03/One-Water-2100-Implementation-Report_Web_Digital_2023.pdf), December 2024.
 - Tucson One Water, [Pure Water Tucson](https://tucsononewater.com/pure-water-tucson/).
 - Central Arizona Project, [CAP system history](https://www.cap-az.com/about/history-of-cap/).
 - University of Arizona Water Resources Research Center, [reclaimed water overview](https://wrrc.arizona.edu/news/reclaimed-water-opportunities-tucson).

@@ -6,7 +6,9 @@ Reviewed revision: **2.0, Second web edition**. Original publication date remain
 
 Baseline essay SHA-256: `607295ad0172755b7e5e7859390ac8888f861a5e9d67666bf97501d3598d29db`.
 
-Revised essay SHA-256: `258ae583196500dc30282847254418229c5fc11ce115c8d46b0c84b0f12ac3fa`.
+Revised essay SHA-256: `998a1bf9d951e828dc115f97bd4b3830407cbd99ebbd62c62367f066b9d549d0`.
+
+Predeployment CI follow-up: normalized the flagged quotation marks in the illustration's alt text and caption to repository-compatible ASCII. No claim, source destination, edition, or image changed.
 
 | Claim cluster | Exact source and read location | Result, role, and limits |
 |---|---|---|

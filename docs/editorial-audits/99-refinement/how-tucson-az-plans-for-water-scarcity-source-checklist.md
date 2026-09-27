@@ -9,7 +9,8 @@ Reviewed September 27, 2026, for version 2.0, Fourth web edition. This is a boun
 - Original publication date: September 22, 2025, unchanged.
 - Baseline: version 1.2, Third web edition.
 - Baseline essay SHA-256: `c4baef804453210fb996283ebe72e7d2d36be576440b085a277b0e940904e0b8`.
-- Revised essay SHA-256: `d882eb65c1d18d34ac19f687fe75e40ed6a4e8e191c7d6b58665f2ecb187b13b`.
+- Revised essay SHA-256: `13e74fb1ec9d24dce4503ce012c9fe4a1053b6645a0e9c8e178410d087df8d25`.
+- Predeployment CI follow-up: normalized the flagged apostrophes in an existing illustration's alt text/caption and the report-label dash to repository-compatible ASCII. No source destination, wording meaning, edition, or image changed.
 - Title, subtitle, slug, collection membership, original date, and all image destinations are preserved. The description repeats the corrected subsidence account instead of the unsupported sinkhole claim.
 - The four risk approaches and the three selected planning features are explicitly the essay's analytical framework, not an official city taxonomy.
 
