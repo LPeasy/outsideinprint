@@ -6,9 +6,12 @@ slug: "rethinking-coastal-retreat"
 section_label: "Essay"
 subtitle: "An Exploration"
 description: "From Managed Retreat to Federal Retreat. In 2023 alone, the United States experienced nearly $100 billion in climate-related disaster costs, much of it tied t..."
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Identified the Rincon benefit-cost ratio as a June 2023 draft buyout alternative including recreation benefits. Replaced the unsupported FEMA-attributed universal property-value guarantee with a qualified risk statement. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-04-28"
     note: "Updated April 28, 2026, after OIP back-archive review. Legacy Medium punctuation, list formatting, and Markdown rendering artifacts were cleaned; source, metadata, and rendering were checked."
@@ -42,7 +45,7 @@ However, implementing managed retreat often reveals critical flaws:
 
 - Inequities: Wealthier communities disproportionately benefit from buyouts because program criteria prioritize property values over social or environmental needs (PMC9607794). Vulnerable populations are frequently excluded, compounding existing disparities.
 
-- Economic Hurdles: The U.S. Army Corps of Engineers' $111 million plan for Rincón, Puerto Rico, proposed extensive buyouts and land restoration. However, the project's benefit-cost ratio of 0.29 revealed the financial challenges of scaling such efforts (USACE, 2024).
+- Economic Hurdles: A buyout alternative in the U.S. Army Corps of Engineers' [June 2023 draft study for Rincón, Puerto Rico, had a benefit-cost ratio of 0.29 including recreation benefits](https://usace.contentdm.oclc.org/digital/api/collection/p16021coll7/id/23935/download#page=63), revealing the financial challenges of scaling such efforts (USACE, 2023).
 
 While managed retreat offers long-term benefits, these examples illustrate the need for a more streamlined, equitable, and fiscally responsible approach.
 
@@ -56,7 +59,7 @@ After Hurricane Sandy in 2012, New York State initiated buyouts in flood-prone n
 
 ## Isle de Jean Charles, Louisiana
 
-A $48 million federal relocation project sought to move an Indigenous community threatened by rising sea levels. While the project emphasized preserving cultural ties, many residents resisted leaving their ancestral lands, complicating the relocation process (Environmental Justice Atlas, 2024).
+A [$48 million federal relocation project](https://dev.isledejeancharles.la.gov/about-isle-de-jean-charles) sought to move an Indigenous community threatened by rising sea levels. While the project emphasized preserving cultural ties, many residents resisted leaving their ancestral lands, complicating the relocation process (Environmental Justice Atlas, 2024).
 
 ## United Kingdom Coastal Realignment
 
@@ -68,7 +71,7 @@ These examples highlight that while managed retreat can be effective, it often e
 
 The federal government's current role in subsidizing risky development is unsustainable. Programs like FEMA's National Flood Insurance Program (NFIP) and disaster aid purchase depreciating, high-risk assets from private homeowners, transferring the financial burden to taxpayers.
 
-Properties in flood-prone areas are "guaranteed to go to zero" in value within decades, as rising sea levels and intensifying storms make them increasingly uninhabitable (FEMA, 2024). Subsidized flood insurance distorts market signals, encouraging further development in these zones. Instead of discouraging risky construction, these policies perpetuate a cycle of rebuilding and loss, with taxpayers footing the bill (NOAA, 2024).
+Some properties in flood-prone areas may lose value or become uninhabitable as sea levels rise and flood risks grow. Subsidized flood insurance distorts market signals, encouraging further development in these zones. Instead of discouraging risky construction, these policies perpetuate a cycle of rebuilding and loss, with taxpayers footing the bill (NOAA, 2024).
 
 The status quo is fiscally irresponsible. Without aligning economic incentives with climate realities, federal policies will continue to subsidize unsustainable development at the expense of long-term resilience.
 

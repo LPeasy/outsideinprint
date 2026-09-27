@@ -6,8 +6,12 @@ date: 2026-06-22
 draft: false
 slug: "the-card-in-the-catalog"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-09-27"
+    note: "Identified the linked LCSH volume as the archived 46th edition. Added or retained claim-level source links; original reporting frame and artwork retained."
 featured: false
 featured_image: "essays/the-card-in-the-catalog/hero"
 featured_image_alt: "An open oak card catalog drawer in a quiet reading room, with catalog cards arranged like search paths."
@@ -45,7 +49,7 @@ Older catalogs could serve a stable shelf well. A shelf list described books in 
 
 A single shelf order helped the person who already knew the shelf logic. Many readers came through another door, carrying a name, a subject, or a fragment. The card changed the grain of access by making each record movable, letting one book occupy several paths, and allowing the alphabet to absorb growth. It also made public search tactile. Readers handled the system. They could see the order, the blank space, the cross-reference, the worn edge, the hole and rod that kept the drawer from falling apart.
 
-The Library's own history of the card catalog, published in 2017, describes a long path that ran through European precedents, Harvard cataloging, Charles Coffin Jewett's national-catalog dreams, Charles Ammi Cutter's dictionary-catalog logic, and the Library of Congress's growing collection after the copyright law of 1870 began sending deposits to Washington. Herbert Putnam arrived as Librarian of Congress in 1899, and the Library faced a collection too large for older habits. The point of that lineage is practical: every catalog experiment tried to connect a person with a record before the person knew the collection well enough to move through it unaided.
+The [Library's own history of the card catalog, published in 2017](https://blogs.loc.gov/loc/2017/07/inquiring-minds-the-unheralded-story-of-the-card-catalog/), describes a long path that ran through European precedents, Harvard cataloging, Charles Coffin Jewett's national-catalog dreams, Charles Ammi Cutter's dictionary-catalog logic, and the Library of Congress's growing collection after the copyright law of 1870 began sending deposits to Washington. Herbert Putnam arrived as Librarian of Congress in 1899, and the Library faced a collection too large for older habits. The point of that lineage is practical: every catalog experiment tried to connect a person with a record before the person knew the collection well enough to move through it unaided.
 
 The card was useful because it solved a practical problem without shrinking it. Readers knew pieces. The library knew holdings. The catalog had to build several roads at once, then keep those roads open as collections grew.
 
@@ -89,13 +93,13 @@ This is the bargain every shared public record makes. Shared standards lower cos
 
 The card catalog made search look orderly because a great deal of disorder had already been absorbed by workers.
 
-The 1901 report is full of clerical detail that modern readers may slide past. Old manuscript author cards had to be revised. Subject cards had to be compiled. Titles cut out of old book catalogs had to be pasted on cards for temporary use. The public catalog in the Reading Room had to receive accessions, reclassified books, and corrected entries. The report counted 329,049 cards filed during the year.
+The [1901 report](https://archive.org/download/1900a1reportoflibr00libruoft/1900a1reportoflibr00libruoft_djvu.txt) is full of clerical detail that modern readers may slide past. Old manuscript author cards had to be revised. Subject cards had to be compiled. Titles cut out of old book catalogs had to be pasted on cards for temporary use. The public catalog in the Reading Room had to receive accessions, reclassified books, and corrected entries. The report counted 329,049 cards filed during the year.
 
 Filing sounds minor until the scale appears. A single misplaced card could misdirect a reader. A missed subject card could hide a book under the wrong road. A new heading could demand many small acts: typing, prefixing, checking, filing, withdrawing, cross-referencing, and teaching staff how the change should appear. The drawer looked calm because the work was repetitive, exact, and public-facing at once.
 
 The printed-card service added another layer. The Library had to receive orders, identify books precisely, print enough cards, keep stock, handle remittances, and ship cards to libraries that had different sizes and needs. The 1901 circular told libraries that a memorandum had to identify author, brief title, number of volumes, date, publisher, and place. The rule sounds fussy. It was the defense against ordering the wrong record.
 
-The 1907 report named the Card Section's work with the same practical texture. In addition to the Library of Congress series, cards were printed for the Department of Agriculture, the Geological Survey, Washington Public Library, and the War Department series. Different public bodies needed different slices of the record. The Post Office Department wanted cards on postal service. The Naval Observatory wanted astronomy, mathematics, and physics. The National Bureau of Standards wanted cards in scientific and technical fields tied to its work.
+The 1907 report named the Card Section's work with the same practical texture. In addition to the Library of Congress series, cards were printed for the Department of Agriculture, the Geological Survey, Washington Public Library, and the War Department series. Different public bodies needed [different slices of the record](https://www.govinfo.gov/content/pkg/SERIALSET-05363_00_00-002-0018-0000/pdf/SERIALSET-05363_00_00-002-0018-0000.pdf#page=80). The Post Office Department wanted cards on postal service. The Naval Observatory wanted astronomy, mathematics, and physics. The National Bureau of Standards wanted cards in scientific and technical fields tied to its work.
 
 The detail carries force without needing grand language. The card was a shared form, but the demand for cards followed real public duties. A scientific bureau, a military school, a public library, and a small town branch did not use a catalog in exactly the same way. The shared record traveled because it could be adapted to many public jobs.
 
@@ -135,7 +139,7 @@ The same document also shows why subject-heading work resists easy political sor
 
 Public comment followed. Congress also entered the picture. The Library's [FY 2017 Acquisitions and Bibliographic Access Directorate annual report](https://www.loc.gov/aba/publications/docs/aba-annualreport-fy17.pdf) said public feedback and added source consultation moved staff toward "Illegal immigration" in place of "Unauthorized immigration." It also noted a House committee instruction that, as far as practicable, the Library maintain certain headings reflecting terminology in Title 8 of the United States Code.
 
-The current published LCSH I volume shows the settled machinery in action. "Illegal aliens" appears as a former heading directing users to ["Illegal immigration" and "Noncitizens"](https://www.loc.gov/aba/publications/Archived-LCSH46/I.pdf). The dispute left marks in the catalog. It left former-heading references, local decisions, policy explanations, anger, relief, and a record of how language enters and exits authority.
+The archived 46th-edition LCSH I volume shows the settled machinery in action. "Illegal aliens" appears as a former heading directing users to ["Illegal immigration" and "Noncitizens"](https://www.loc.gov/aba/publications/Archived-LCSH46/I.pdf). The dispute left marks in the catalog. It left former-heading references, local decisions, policy explanations, anger, relief, and a record of how language enters and exits authority.
 
 This case is easy to flatten into a culture-war symbol. The cataloging lesson is harder and more useful. Public search needs stable words. Public trust needs revisable words. Law uses one vocabulary. Communities often use another. Libraries hold both legal and human descriptions. Each revision has costs: staff time, record repair, user retraining, local disagreement, and national attention.
 
@@ -229,7 +233,7 @@ The card catalog was a public search machine. It worked through trained cataloge
 
 The same standard should apply to the search box. A good public search system has to disclose enough of its logic for users to trust and challenge it. It has to protect readers whose searches reveal thought, fear, politics, faith, illness, grief, curiosity, or dissent. It has to revise language without pretending revision is free. It has to respect local knowledge without sacrificing the shared road that lets records move.
 
-None of those tasks will be solved by returning to drawers. The card catalog reached its physical limit. The Library's main catalog once held millions of cards in thousands of trays. Searching across collections, formats, and places now requires machines. The question is what kind of public bargain the machines inherit.
+None of those tasks will be solved by returning to drawers. The card catalog reached its physical limit. The Library's main catalog once held [millions of cards in thousands of trays](https://blogs.loc.gov/loc/2017/07/inquiring-minds-the-unheralded-story-of-the-card-catalog/). Searching across collections, formats, and places now requires machines. The question is what kind of public bargain the machines inherit.
 
 A good search system needs the virtues of the card without the card's constraints: visible description, shared standards, local correction, public stewardship, privacy, and a way for ordinary readers to understand why a result appears.
 

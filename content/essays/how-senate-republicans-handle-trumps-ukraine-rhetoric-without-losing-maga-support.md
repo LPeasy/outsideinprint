@@ -9,12 +9,15 @@ featured_image: "/images/medium/how-senate-republicans-handle-trumps-ukraine-rhe
 featured_image_caption: "Photo by Chad Stembridge on Unsplash"
 featured_image_alt: "How Senate Republicans Handle Trump’s Ukraine Rhetoric Without Losing MAGA Support"
 description: "Donald Trump called Ukrainian President Volodymyr Zelenskyy a ‘dictator’ and falsely claimed Ukraine provoked the war with Russia"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 pdf: "/pdfs/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support-7c8f018911df"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.1"
     date: "2026-05-04"
     note: "Updated May 4, 2026, after OIP back-archive review. Legacy Medium formatting, remote body images, punctuation artifacts, source-card residue, and targeted wording were cleaned while preserving the original publication frame."
@@ -42,13 +45,13 @@ That tension explains the shape of their response. They pushed back, but only so
 *Photo by Christophe Hautier on Unsplash*
 
 
-Senator Susan Collins stated the core fact plainly: Russia was the instigator of the war. Senator Thom Tillis, after visiting Kyiv, praised Zelenskyy's wartime leadership. Other Republicans made similar corrections, rejecting the claim that Ukraine started the conflict.
+[Senator Susan Collins stated the core fact plainly: Russia was the instigator of the war.](https://www.wuwm.com/politics-government/2025-02-19/gop-senators-fact-check-trumps-ukraine-rhetoric-while-still-backing-his-strategy) Senator Thom Tillis, after visiting Kyiv, praised Zelenskyy's wartime leadership. Other Republicans made similar corrections, rejecting the claim that Ukraine started the conflict.
 
 But most did not make the larger argument. They did not dwell on how Trump's rhetoric could strengthen Russia's narrative, weaken Ukraine's negotiating position, or complicate future aid.
 
 Instead, they threaded the needle. They corrected a false claim while avoiding a direct fight with the person who made it.
 
-Trump's closest allies took a different route. Senator Kevin Cramer framed Trump's language as a negotiating tactic. Senate Majority Leader John Thune sidestepped the dictator remark by saying the president speaks for himself.
+Trump's closest allies took a different route. [Senator Kevin Cramer framed Trump's language as a negotiating tactic.](https://www.wuwm.com/politics-government/2025-02-19/gop-senators-fact-check-trumps-ukraine-rhetoric-while-still-backing-his-strategy) Senate Majority Leader John Thune sidestepped the dictator remark by saying [the president speaks for himself](https://www.axios.com/2025/02/20/trump-zelensky-dictator-ukraine-congress-senate).
 
 The party's split was visible:
 

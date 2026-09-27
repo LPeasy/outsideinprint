@@ -10,9 +10,12 @@ featured_image: "/images/medium/you-paid-for-that-ct-scan/c726f9cdfc914b7f1c2e01
 featured_image_caption: "CT Scanner | Source"
 featured_image_alt: "CT Scanner"
 description: "But if you get a CT scan of your own body, you walk away with a jargon-heavy PDF and (after picking it up from the “medical records department”) a useless CD..."
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Qualified the diagnostic-phone absolute to recognize FDA-cleared mobile systems' limited uses. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-21"
     note: "Updated May 21, 2026, after OIP back-archive review. Patient-access, FDA framing, and house-style issues were checked."
@@ -47,9 +50,8 @@ and web viewers in some settings. The hardware ~ storage, RAM, graphics
 ~ is no longer the obvious barrier to letting a patient load and scroll
 through CT slices.
 
-Do phones fail the strict standards radiologists use for making official
-diagnoses? Yes. The screen isn't calibrated, the room is too bright, and
-the grayscale isn't as perfect as a medical screen.
+Ordinary phone viewing is not a substitute for a diagnostic workstation.
+Some [cleared mobile systems](https://www.accessdata.fda.gov/cdrh_docs/pdf10/K103785.pdf#page=1) permit diagnostic use under specified conditions.
 
 #### But you're not trying to act as a radiologist.
 
@@ -71,7 +73,7 @@ If a company gives patients a CT viewer, and a patient misreads what
 they see, delays care, and has a bad outcome, lawyers may start asking
 who "let" that person see the images.
 
-Regulators add another layer. FDA guidance treats diagnostic software
+Regulators add another layer. [FDA guidance](https://www.fda.gov/medical-devices/digital-health-center-excellence/device-software-functions-including-mobile-medical-applications) treats diagnostic software
 differently from general education or access tools; the second an app
 claims to help diagnose a patient-specific condition, it can enter
 medical-device territory.
@@ -108,8 +110,8 @@ The fix is straightforward:
 > This is about respect as much as tech.
 
 If we say patients "own" their medical data, that should mean more than
-a download button and a confusing PDF. HHS says the HIPAA right of
-access covers a broad designated record set, including medical records
+a download button and a confusing PDF. HHS says the [HIPAA right of
+access](https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/access/index.html) covers a broad designated record set, including medical records
 and imaging-related records such as X-rays. Being able to actually *see*
 your own insides ~ on the same phone you use for everything else ~ is a
 basic step toward treating people like partners in care, not bystanders.

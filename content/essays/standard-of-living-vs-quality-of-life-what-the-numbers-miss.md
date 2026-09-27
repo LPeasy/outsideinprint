@@ -11,9 +11,12 @@ featured_image: "/images/medium/standard-of-living-vs-quality-of-life-what-the-n
 featured_image_caption: "Photo by Mathieu Stern on Unsplash"
 featured_image_alt: "Standard of Living vs. Quality of Life: What the Numbers Miss"
 description: "Standard of living measures income and material conditions; quality of life also includes health, time, security, community, and meaning. Here is what GDP misses."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added supporting source hyperlinks or repaired source destinations; original prose, reporting frame, and artwork unchanged."
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, after OIP back-archive review. Remote Medium body images and promotional aftermatter were removed, import formatting was normalized, and economic claims were tightened."
@@ -69,7 +72,7 @@ Compare that against real per capita GDP.
 
 > They should move together, but they do not move together cleanly.
 
-Source note: FRED Series ID MEHOINUSA672N.
+Source note: [FRED Series ID MEHOINUSA672N](https://fred.stlouisfed.org/series/MEHOINUSA672N).
 
 Since the 1980s, GDP per capita has climbed more steadily than real median household income. The gap reveals a basic distribution problem: economic growth does not automatically translate into gains for the typical family.
 
@@ -109,7 +112,7 @@ It includes the material side of living, but also looks at things like:
 
 > The U.S. ranks near the top in GDP per person, but lower on many happiness and well-being measures.
 
-Source note: General Social Survey data cited in the 2019 World Happiness Report.
+Source note: General Social Survey data cited in the [2019 World Happiness Report](https://www.worldhappiness.report/ed/2019/the-sad-state-of-happiness-in-the-united-states-and-the-role-of-digital-media/).
 
 Despite economic growth, self-reported happiness among U.S. adults has not kept pace with rising output. That suggests quality of life, as lived and felt, cannot be reduced to production totals.
 
@@ -136,7 +139,7 @@ But the data tells a different story.
 
 Since the late 1980s, U.S. household wealth has grown dramatically. But that growth has not been evenly shared.
 
-The top slice of households controls a disproportionate share of wealth. The bottom half holds only a small share.
+The top slice of households controls a disproportionate share of wealth. The [bottom half holds only a small share](https://fred.stlouisfed.org/series/WFRBSB50215).
 
 This isn't a bug in the system.
 
@@ -185,7 +188,7 @@ But it is not enough.
 
 We need to make room for quality of life as a central idea. Not a fuzzy afterthought. A core metric.
 
-Some countries already do this. The OECD's Better Life Index, for example, looks at things like:
+Some countries already do this. The [OECD's Better Life Index](https://www.oecd.org/en/data/tools/well-being-data-monitor.html), for example, looks at things like:
 
 - Health
 - Education

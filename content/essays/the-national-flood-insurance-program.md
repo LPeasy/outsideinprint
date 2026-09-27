@@ -9,9 +9,12 @@ featured_image: "/images/medium/the-national-flood-insurance-program/a17c72f621f
 featured_image_caption: "Source: Peter G. Peterson Foundation"
 featured_image_alt: "The National Flood Insurance Program"
 description: "A Precarious Future Amid Rising Costs. Flooding is the most costly natural disaster in the United States, causing billions in damages annually. However, the..."
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected Risk Rating 2.0 pricing and flood-loss study attribution and scope. Added or retained claim-level source links; original reporting frame and artwork retained. Replaced the home-value multiplication with January 2024 policy and coverage totals, distinguishing insurance coverage from market value and annual claims."
   - version: "1.2"
     date: "2026-09-18"
     note: "Added descriptive alternative text to the hurricane-loss chart; artwork, captions, and article text are unchanged."
@@ -34,13 +37,13 @@ Climate change compounds these challenges, increasing the frequency and severity
 
 ## The NFIP's Financial Insolvency
 
-The NFIP's financial condition has deteriorated significantly over the past several decades. The program is burdened with a $20 billion debt to the U.S. Treasury, highlighting the systemic mismatch between its revenue from premiums and its liabilities (FEMA, 2024). The situation worsens during years of catastrophic flooding, when claims far exceed the program's financial capacity.
+The NFIP's financial condition has deteriorated significantly over the past several decades. The program is burdened with a [$20 billion debt to the U.S. Treasury](https://www.everycrsreport.com/files/2024-01-31_IF10988_5f31039f1ef920846b6daf3c4abca1d5876472cc.html), highlighting the systemic mismatch between its revenue from premiums and its liabilities (FEMA, 2024). The situation worsens during years of catastrophic flooding, when claims far exceed the program's financial capacity.
 
 Major disasters like Hurricane Katrina (2005) and Superstorm Sandy (2012) overwhelmed the NFIP, requiring massive federal loans to keep the program afloat (CRS, 2024). Even in less catastrophic years, the program struggles under the weight of escalating payouts.
 
-The NFIP currently insures 4.7 million properties, with the average insured home valued at over $300,000 (House Financial Services, 2024). Altogether, that's a staggering $1.41 trillion in insured value -- far exceeding the program's ability to cover potential losses. Yet premiums often fail to reflect the true risk of these properties.
+As of January 2024, the NFIP had [nearly 4.7 million policies providing almost $1.28 trillion in coverage](https://www.everycrsreport.com/files/2024-01-31_IF10988_5f31039f1ef920846b6daf3c4abca1d5876472cc.html) (CRS, 2024). That coverage is not the same as the homes' market value or an estimate of annual claims. Yet premiums often fail to reflect the true risk of these properties.
 
-Outdated FEMA flood maps, which determine premiums and risk zones, are a major culprit. These inaccuracies result in underpriced policies that leave the NFIP chronically underfunded. Subsidized premiums for high-risk properties further exacerbate this funding gap, perpetuating the program's reliance on taxpayer bailouts.
+Outdated FEMA flood maps are a major concern, though [Risk Rating 2.0 prices policies using individual-property risk factors](https://www.everycrsreport.com/files/2024-01-31_IF10988_5f31039f1ef920846b6daf3c4abca1d5876472cc.html), rather than mapped flood zones. Map inaccuracies can obscure risk even as the NFIP changes its pricing method. Subsidized premiums for high-risk properties further exacerbate this funding gap, perpetuating the program's reliance on taxpayer bailouts.
 
 ![NFIP premiums earned and losses paid from 1998 to 2018, with loss spikes in the years of Hurricanes Katrina, Sandy, and Harvey.](/images/medium/the-national-flood-insurance-program/25e17e40f081ee4becda9817ad98b4bdaeea5632c7d1ca7e560e9ac416c0b676.jpeg)
 
@@ -48,7 +51,7 @@ Source: Peter G. Peterson Foundation
 
 ## Rising Costs Due to Climate Change
 
-The financial pressures on the NFIP will only intensify as climate change accelerates flooding risks. Research shows that one-third of historical flood damages in the United States are attributable to climate-driven changes, such as heavier precipitation and rising sea levels (Stanford, 2021).
+The financial pressures on the NFIP will only intensify as climate change accelerates flooding risks. Research shows that one-third of historical flood damages in the United States are attributable to [changes in precipitation over 1988–2017](https://fse.fsi.stanford.edu/publication/contribution-historical-precipitation-change-us-flood-damages) (Stanford, 2021).
 
 ### Climate-Driven Flood Risks
 
@@ -56,7 +59,7 @@ The financial pressures on the NFIP will only intensify as climate change accele
 - Heavier rainfall: Inland areas are experiencing more frequent and intense flash floods, driven by shifting precipitation patterns.
 - Recurring disasters: 1-in-100-year floods are now occurring in some regions every decade.
 
-By 2050, even under moderate climate scenarios, annual flood damages are projected to increase by 26% (Stanford, 2021). The NFIP, originally designed to address historical flood patterns, is ill-equipped to manage the compounding effects of climate change.
+One study projects that [average annual U.S. flood losses will rise by 26.4% by 2050 because of climate change](https://www.nature.com/articles/s41558-021-01265-6) (Wing et al., 2022). The NFIP, originally designed to address historical flood patterns, is ill-equipped to manage the compounding effects of climate change.
 
 Adding to the program's challenges is the fact that subsidized premiums encourage development in flood-prone areas. Repeated claims from these high-risk properties account for a disproportionate share of payouts, creating a vicious cycle of debt and escalating liabilities (Princeton, 2024).
 

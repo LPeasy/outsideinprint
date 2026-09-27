@@ -9,9 +9,12 @@ featured_image: "/images/medium/uncertainty-is-not-a-technical-problem/452fe328a
 featured_image_caption: "Photo by Loic Leray on Unsplash"
 featured_image_alt: "Uncertainty Is Not a Technical Problem"
 description: "On uncertainty, risk modeling, and the incentives that reward precision over responsibility. Risk models can clarify choices, but they can also hide judgment when institutions treat precision as truth."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.1"
     date: "2026-05-22"
     note: "Updated May 22, 2026, after OIP back-archive review for source framing, Medium import cleanup, and house-style normalization."
@@ -146,7 +149,7 @@ become. Variability overwhelms marginal precision. Rare events shape
 consequences far more than averages. Human behavior refuses to conform
 to tidy assumptions.
 
-In decision analysis, this is the problem of **value of information**.
+In decision analysis, this is the problem of **[value of information](https://www.usgs.gov/publications/introduction-prediction-and-value-information)**.
 Reducing uncertainty has a cost, and the benefits of additional
 refinement diminish once it no longer changes choices.
 
@@ -215,7 +218,7 @@ sand.
 ### Source Note
 
 This essay draws on concepts from decision and risk analysis,
-particularly the distinction between **knowledge uncertainty**
+particularly the distinction between **[knowledge uncertainty](https://www.hec.usace.army.mil/confluence/fdadocs/techref/natural-variability-vs-knowledge-uncertainty-159155807.html)**
 (uncertainty arising from limits in data, models, and assumptions) and
 **natural variability** (uncertainty arising from real, irreducible
 variation in physical and human systems). It is informed by academic

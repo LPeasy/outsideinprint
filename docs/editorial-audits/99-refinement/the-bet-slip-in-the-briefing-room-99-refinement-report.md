@@ -1,3 +1,41 @@
+# Hyperlink-only editorial audit: the-bet-slip-in-the-briefing-room
+
+Date: 2026-09-27
+
+Source file: `content/essays/the-bet-slip-in-the-briefing-room.md`
+
+Version: `1.3`
+
+Audited SHA256: `be45c86eab6646ea7ef6ce54e03175f09764efdb3f6a91515ab8b1f6e82c8c51`
+
+Decision state: `LINK_ONLY_REVIEW_COMPLETE`
+
+Scope: Supporting hyperlink wrappers and required revision metadata only. This is a bounded source-fit review of the historical article, not a numerical regrade, a fresh full-archive fact audit, or publication authorization.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+| Test | Result | Record |
+|---|---|---|
+| Evidence | PASS | CFTC, Understanding Prediction Markets and Event Contracts, introductory explanation: yes/no outcomes, fixed payout, hedging/speculation, and potential price information. Link is limited to the contract explanation; existing Senate/DOJ/CFTC allegations and proposed-law distinctions remain intact. |
+| Logic | PASS | Market information value is separated from misuse of official access. |
+| Incentives | PASS | Public insiders and traders have different information incentives. |
+| Tradeoffs | PASS | Hedging/forecasting benefits are weighed against office integrity. |
+| Consequences | PASS | Trading incentives are traced to trust and enforcement costs. |
+| Uncertainty | PASS | Charged conduct remains alleged; proposed bills remain proposals. |
+| Institutional Behavior | PASS | Officials, agencies, platforms and public users bear distinct risks. |
+
+## Source-fit record
+
+CFTC, Understanding Prediction Markets and Event Contracts, introductory explanation: yes/no outcomes, fixed payout, hedging/speculation, and potential price information. Link is limited to the contract explanation; existing Senate/DOJ/CFTC allegations and proposed-law distinctions remain intact.
+
+See `the-bet-slip-in-the-briefing-room-source-checklist.md` for exact added anchors and `../core-link-only-flood-pair-2026-09-27.md` for private correction proposals and remaining limits. Images and captions were preserved; no new broad image certification is claimed. No tests, build or publication in this subtask.
+
+---
+
+## Preserved historical report (not current clearance)
+
 # 99 Refinement Report
 
 Decision state: `99_READY`
@@ -10,9 +48,9 @@ Image risk: `LOW`
 
 Final recommendation: Proceed with daily candidate packaging after AI-writing cleanup and image generation.
 
-## Editorial Philosophy Audit
+## Historical Editorial Philosophy Audit (superseded)
 
-Decision: PASS
+Historical decision (superseded): PASS
 
 | Dimension | Result | Note |
 | --- | --- | --- |

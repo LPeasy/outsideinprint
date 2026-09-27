@@ -6,9 +6,12 @@ date: 2026-05-26
 draft: false
 slug: "the-tank-at-the-fence-line"
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected NIOSH-versus-OSHA averaging windows. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-31"
     note: "Updated May 31, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -41,7 +44,7 @@ That is the public shape of a private tank.
 
 ## The Plant Inside the City
 
-GKN Aerospace's own materials describe its transparencies business as a leading military transparency supplier and a major commercial aircraft transparency supplier, with aerospace-grade acrylic material central to its market position. The company says its work includes aircraft windows, canopies, transparent armor, coatings, and specialized acrylic systems.
+[GKN Aerospace's own materials](https://www.gknaerospace.com/markets-solutions/niche-technologies/transparencies/) describe its transparencies business as a leading military transparency supplier and a major commercial aircraft transparency supplier, with aerospace-grade acrylic material central to its market position. The company says its work includes aircraft windows, canopies, transparent armor, coatings, and specialized acrylic systems.
 
 There is a reason methyl methacrylate would be there. The chemical is a building block for acrylic plastics and resins. It belongs to a supply chain that produces clear strength: windows, canopies, shields, cockpit parts, and the hard transparent surfaces that make aircraft possible. Those products sound clean because transparency sounds clean. The manufacturing record is messier. Strength, clarity, weight, coatings, and precision all have material histories.
 
@@ -73,7 +76,7 @@ Those sentences belong to the same emergency. They are hard to live under becaus
 
 Methyl methacrylate teaches the reader why the evacuation was plausible without turning the event into spectacle.
 
-NIOSH describes it as a colorless liquid with an acrid, fruity odor. It can enter through inhalation, ingestion, skin contact, and eye contact. The listed exposure limits are 100 ppm as an eight-hour time-weighted average under both NIOSH and OSHA entries. Its immediately dangerous to life or health value is listed at 1,000 ppm. The flash point, explosive limits, and vapor behavior make heat and confinement central to the hazard.
+NIOSH describes it as a colorless liquid with an acrid, fruity odor. It can enter through inhalation, ingestion, skin contact, and eye contact. The listed exposure limits are 100 ppm as a time-weighted average under both entries, with [NIOSH using up to a 10-hour workday and OSHA an eight-hour workday](https://www.cdc.gov/niosh/npg/pgintrod.html). Its immediately dangerous to life or health value is listed at 1,000 ppm. The flash point, explosive limits, and vapor behavior make heat and confinement central to the hazard.
 
 PubChem notes that methyl methacrylate vapor can travel and flash back toward an ignition source. The specific facts at Garden Grove remain subject to investigation, but the general lesson is already visible. Some chemicals have a short civic distance. They travel through air, drainage, emergency routes, school calendars, and family logistics faster than liability can be assigned.
 
@@ -89,9 +92,9 @@ A risk assessment starts by separating pieces that public language tends to coll
 
 The consequences included exposure, fire, evacuation, business closure, public expense, and household disruption. The uncertainty sat in the tank itself: temperature, pressure, crack behavior, vapor movement, weather, and the exact condition of the vessel.
 
-There was already a formal risk-assessment record for the facility, although it answered a narrower question. South Coast AQMD says an AB 2588 Health Risk Assessment evaluates how toxic emissions are released from a facility, how they disperse through the community, and how they may affect human health. Its [2025 annual report](https://www.aqmd.gov/docs/default-source/planning/risk-assessment/ab-2588-annual-report/2025.pdf) lists `GKN AEROSPACE TRANSPARENCY SYS INC` in Garden Grove as facility ID `140961`, with an approved HRA, estimated cancer risk of 6 chances in one million, non-cancer acute hazard index of 0, non-cancer chronic hazard index of 0.5, and an HRA approval year of 1996.
+There was already a formal risk-assessment record for the facility, although it answered a narrower question. [South Coast AQMD says an AB 2588 Health Risk Assessment](https://www.aqmd.gov/home/rules-compliance/compliance/toxic-hot-spots-ab-2588/health-risk-assessment) evaluates how toxic emissions are released from a facility, how they disperse through the community, and how they may affect human health. Its [2025 annual report](https://www.aqmd.gov/docs/default-source/planning/risk-assessment/ab-2588-annual-report/2025.pdf) lists `GKN AEROSPACE TRANSPARENCY SYS INC` in Garden Grove as facility ID `140961`, with an approved HRA, estimated cancer risk of 6 chances in one million, non-cancer acute hazard index of 0, non-cancer chronic hazard index of 0.5, and an HRA approval year of 1996.
 
-The record has a narrow job. A routine air-toxics HRA is a picture of permitted emissions and modeled exposure. The Garden Grove emergency was an accident-pathway problem. South Coast AQMD's own prioritization process says it considers toxicity, volume, and proximity to receptors such as hospitals, schools, daycare centers, worksites, and residences. Those are the right categories for a fence-line event. The public also needs the accident-side record: What did the facility's worst credible tank-failure scenario look like? Which receptors were mapped? Which road closures, shelters, and warning times were assumed? Which control failed first in the pathway?
+The record has a narrow job. A routine air-toxics HRA is a picture of permitted emissions and modeled exposure. The Garden Grove emergency was an accident-pathway problem. [South Coast AQMD's own prioritization process](https://www.aqmd.gov/home/rules-compliance/compliance/toxic-hot-spots-ab-2588/prioritization) says it considers toxicity, volume, and proximity to receptors such as hospitals, schools, daycare centers, worksites, and residences. Those are the right categories for a fence-line event. The public also needs the accident-side record: What did the facility's worst credible tank-failure scenario look like? Which receptors were mapped? Which road closures, shelters, and warning times were assumed? Which control failed first in the pathway?
 
 EPA's Risk Management Program materials point to the same distinction. EPA describes RMP*Comp as a tool for off-site consequence analyses, including worst-case and alternative scenarios, under the federal Risk Management Program.
 

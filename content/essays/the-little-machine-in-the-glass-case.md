@@ -7,8 +7,12 @@ draft: false
 slug: "the-little-machine-in-the-glass-case"
 collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - date: 2026-09-27
+    version: "1.1"
+    note: "Added nearby archive links for the 1877 Patent Office fire and later model disposal. Reporting and original publication date preserved."
 featured: false
 featured_image: "essays/the-little-machine-in-the-glass-case/hero"
 featured_image_alt: "A small wooden-and-brass patent model sits inside a glass display case in an old Patent Office room."
@@ -102,7 +106,7 @@ The change was practical. The country had more inventions, more applications, mo
 
 The public gallery looked democratic, but it had a maintenance bill. It needed cases, floors, labels, attendants, classification, access rules, and room for growth. The model room made invention visible, but visibility had volume. Every public record has an afterlife. Someone has to house it.
 
-The Patent Office fire of September 24, 1877, made that burden visible in smoke. A contemporary public account preserved by IP Mall describes a model room on the third story, fitted with cases and visited yearly by thousands of people. It reported about 200,000 models in the wider gallery and described rejected models stored near an inflammable loft. When the fire was contained, the north and west halls had been destroyed. The loss section counted 87,000 models in the two burned halls and noted that many papers and drawings had to be saved under pressure.
+The Patent Office fire of September 24, 1877, made that burden visible in smoke. A [contemporary public account preserved by IP Mall](https://ipmall.law.unh.edu/content/patent-history-materials-index-authentic-account-fire-september-24-1877-which-destroyed) describes a model room on the third story, fitted with cases and visited yearly by thousands of people. It reported about 200,000 models in the wider gallery and described rejected models stored near an inflammable loft. When the fire was contained, the north and west halls had been destroyed. The loss section counted 87,000 models in the two burned halls and noted that many papers and drawings had to be saved under pressure.
 
 The account is vivid, but the civic lesson is plain enough without melodrama. The same institution that made invention public had created a concentrated risk. Models, cases, wood, roof, attic storage, and public records met in one building. The fire did not disprove the patent bargain. It showed how much institutional work the bargain required.
 
@@ -174,7 +178,7 @@ The patent model therefore remains useful as a civic standard, even when it no l
 
 The end of routine models did not end the models. It created a new problem: what should be done with the accumulated objects?
 
-Hagley's summary is blunt enough. Many models failed to survive the nineteenth century. The 1836 and 1877 fires destroyed or damaged large numbers. In 1893, the models were removed from the Patent Office and placed in storage. In the early twentieth century, the Commerce Department gradually disposed of the collection. Some models went back to descendants. About 10,000 were accessioned by the Smithsonian. The remaining models were sold at auction.
+[Hagley's summary](https://www.hagley.org/patentmodels) is blunt enough. Many models failed to survive the nineteenth century. The 1836 and 1877 fires destroyed or damaged large numbers. In 1893, the models were removed from the Patent Office and placed in storage. In the early twentieth century, the Commerce Department gradually disposed of the collection. Some models went back to descendants. About 10,000 were accessioned by the Smithsonian. The remaining models were sold at auction.
 
 That disposal history belongs in the main story. It is the life cycle of public memory. The public office had demanded models for decades. The same office later lacked the room, purpose, or budget to keep all of them in the old way. Objects that had once helped secure legal rights became museum holdings, family relics, auction lots, private collections, educational displays, and lost things.
 

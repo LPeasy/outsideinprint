@@ -6,8 +6,12 @@ date: 2026-06-21
 draft: false
 slug: "the-curb-cut-at-the-corner"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - date: 2026-09-27
+    version: "1.1"
+    note: "Added the direct city-project link beside the Dinkytown example. Reporting and original publication date preserved."
 featured: false
 featured_image: "essays/the-curb-cut-at-the-corner/hero"
 featured_image_alt: "Editorial illustration of a city corner where a curb ramp, tactile warning domes, crosswalk, stroller, cane, wheelchair wheel, and hand truck meet in quiet morning light."
@@ -145,7 +149,7 @@ The corner can fail before it is built, during construction, or years after fina
 
 It can fail on paper if the city does not inventory barriers. It can fail in design if the ramp points away from the crosswalk or lacks a usable landing. It can fail during construction if field conditions are ignored or the contractor pours a slope steeper than the drawing. It can fail after a utility cut leaves a lip across the path. It can fail when a sign base sits in the clear width. It can fail when detectable warnings loosen, spall, or disappear under snow.
 
-Public records often show this as a work order or project page instead of a civil-rights drama. Minneapolis gives a modest example. The city's [50th Street ramp project](https://www.minneapolismn.gov/government/projects/50th-st-ramp/) states that work in the summer and fall of 2025 made more than 50 pedestrian ramps ADA-compliant along 50th Street, naming the corridor segments and noting completed status. A companion city project page for Dinkytown notes another curb-ramp improvement project in design. Those pages are ordinary capital-project records. They show access moving through location lists, construction seasons, and project status lines.
+Public records often show this as a work order or project page instead of a civil-rights drama. Minneapolis gives a modest example. The city's [50th Street ramp project](https://www.minneapolismn.gov/government/projects/50th-st-ramp/) states that work in the summer and fall of 2025 made more than 50 pedestrian ramps ADA-compliant along 50th Street, naming the corridor segments and noting completed status. A companion [city project page for Dinkytown](https://www.minneapolismn.gov/government/projects/dinkytown-ped-improvements/) notes another curb-ramp improvement project in design. Those pages are ordinary capital-project records. They show access moving through location lists, construction seasons, and project status lines.
 
 That is useful because the public usually encounters access this way. A resident does not ask for a theory of disability law when the ramp at the corner of a transit stop ponds after rain. The resident asks the city to fix a place. The city then has to sort the request. Is this a resurfacing-triggered alteration? Is it in the transition plan? Is it part of a larger corridor? Is it a complaint? Is it a maintenance problem? Is the ramp present but noncompliant? Is the ramp compliant on paper and unusable after damage?
 

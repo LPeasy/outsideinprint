@@ -9,10 +9,13 @@ featured_image: "/images/medium/why-superintelligence-strategy-gets-ai-governanc
 featured_image_caption: "Photo by Clay Banks on Unsplash"
 featured_image_alt: "Why Superintelligence Strategy Gets AI Governance Wrong"
 description: "Governments think they can control artificial intelligence. They can’t.The authors of Superintelligence Strategy propose a grand vision for AI governance"
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Added source links and replaced an unsupported corporate legal-duty claim with a comparative possibility; original argument, reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-08"
     note: "Updated May 8, 2026, after OIP back-archive review for source discipline, legacy Medium cleanup, punctuation normalization, and editorial philosophy audit."
@@ -30,9 +33,9 @@ medium_source_url: "https://medium.com/@lawtonperret/why-superintelligence-strat
 
 Governments think they can control artificial intelligence.
 
-They can't. The authors of Superintelligence Strategy propose a grand vision for AI governance.
+They can't. The authors of [Superintelligence Strategy](https://arxiv.org/abs/2503.05628v1) propose a grand vision for AI governance.
 
-They argue that states can prevent destabilizing AI development through a three-pronged strategy: deterrence (Mutual Assured AI Malfunction, or MAIM), nonproliferation, and competitiveness.
+They argue that states can prevent destabilizing AI development through a [three-pronged strategy: deterrence (Mutual Assured AI Malfunction, or MAIM), nonproliferation, and competitiveness](https://arxiv.org/abs/2503.05628v1).
 
 In their view, this mirrors Cold War nuclear strategy - sabotage, chip restrictions, and military superiority will keep AI breakthroughs in check.
 
@@ -102,7 +105,7 @@ Unlike the fragmented, market-driven approach of the U.S., China has clearer str
 
 - The Chinese Communist Party (CCP) directly oversees and influences AI research, ensuring it aligns with state priorities.
 - AI is being integrated across every sector, from surveillance and military strategy to economic planning and state propaganda.
-- State-backed firms like Baidu, Tencent, and Alibaba are required to share breakthroughs with the government, giving China a level of coordination and oversight that Western governments simply do not have.
+- State pressure on firms like Baidu, Tencent, and Alibaba could give China a level of coordination and oversight that Western governments do not have.
 China's government-led AI development model allows it to move faster than the West in AI deployment, but its reliance on Western semiconductor access remains a constraint.
 
 The U.S. negotiates with private corporations; China can direct state-linked firms more directly. The MAIM framework assumes states can check each other's AI ambitions, but what if one state is operating at a fundamentally different level of control?

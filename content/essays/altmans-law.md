@@ -10,9 +10,12 @@ featured_image: "/images/medium/altmans-law/c294e8d769c14dca54d5f71366a7f665406b
 featured_image_caption: "Photo by name_ gravity on Unsplash"
 featured_image_alt: "Altman’s Law"
 description: "For decades, Moore’s Law served as the foundation of technological forecasting, predicting that computing power would double roughly every two years due to i..."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added supporting source hyperlinks without changing the original prose."
   - version: "1.1"
     date: "2026-05-02"
     note: "Updated May 2, 2026, after OIP back-archive review. Legacy Medium image embeds, promotional residue, spacing, and punctuation artifacts were cleaned up; source, metadata, and rendering were checked."
@@ -30,7 +33,7 @@ This principle shaped hardware development and economic planning in the digital 
 
 Today, a new law is emerging: one that describes the unprecedented pace of artificial intelligence (AI) advancement.
 
-OpenAI's CEO Sam Altman recently made the following three observations in a blog post:
+OpenAI's CEO Sam Altman recently made the following three observations in [a blog post](https://blog.samaltman.com/three-observations):
 
 - The intelligence of an AI model roughly equals the log of the resources used to train and run it. These resources are chiefly training compute, data, and inference compute. It appears that you can spend arbitrary amounts of money and get continuous and predictable gains; the scaling laws that predict this are accurate over many orders of magnitude.
 - The cost to use a given level of AI falls about 10x every 12 months, and lower prices lead to much more use. You can see this in the token cost from GPT-4 in early 2023 to GPT-4o in mid-2024, where the price per token dropped about 150x in that time period. Moore's law changed the world at 2x every 18 months; this is unbelievably stronger.

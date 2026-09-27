@@ -7,9 +7,12 @@ section_label: "Essay"
 collections: ["household-economy-work-and-cost"]
 subtitle: "2000-2025"
 description: "Labor Force Participation in the United States: Trends and Drivers (2000-Present). Over the past two decades, the U.S. labor force participation rate (LFPR..."
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Distinguished declining participation rates from a shrinking worker headcount. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-04-27"
     note: "Updated April 27, 2026, after OIP back-archive review. Legacy Medium punctuation, list formatting, and Markdown rendering artifacts were cleaned; source, metadata, and rendering were checked."
@@ -25,7 +28,7 @@ medium_source_url: "https://medium.com/@lawtonperret/labor-force-participation-t
 
 ## Introduction
 
-Over the past two decades, the U.S. labor force participation rate (LFPR) has declined by nearly 5 percentage points, representing millions of Americans leaving the workforce. This shift reflects profound changes in demographics, health, and societal values that have redefined the nation's labor market. The implications extend far beyond economics, influencing public policy, income inequality, and national productivity.
+Over the past two decades, the U.S. labor force participation rate (LFPR) has declined by nearly 5 percentage points, meaning a smaller share of the population is participating in the workforce. This shift reflects profound changes in demographics, health, and societal values that have redefined the nation's labor market. The implications extend far beyond economics, influencing public policy, income inequality, and national productivity.
 
 From its peak of 67.3% in early 2000 to 62.7% in 2024, the LFPR's trajectory underscores structural changes that demand attention. How have factors such as aging populations, caregiving responsibilities, and evolving cultural attitudes contributed to this decline? Why do some regions thrive while others struggle? This analysis examines labor force participation trends, their underlying drivers, and their broader consequences for the U.S. economy and society.
 
@@ -47,7 +50,7 @@ Labor force participation is influenced by a combination of demographic, economi
 
 ### 1. Demographic Shifts and Aging
 
-- The aging Baby Boomer generation is the largest contributor to the LFPR's decline. Retirements accounted for nearly three-fourths of the increase in labor force nonparticipation between 1999 and 2022 (BLS, 2024).
+- The aging Baby Boomer generation is the largest contributor to the LFPR's decline. Retirements accounted for nearly three-fourths of the increase in labor force nonparticipation between 1999 and 2022 ([BLS, 2024](https://www.bls.gov/opub/mlr/2024/article/why-did-labor-force-nonparticipation-increase-from-1999-to-2022.htm)).
 - Rising dependency ratios mean fewer working-age individuals are supporting an aging population, intensifying pressure on programs like Social Security.
 
 ### 2. Educational Pursuits
@@ -84,7 +87,7 @@ The downward trend in labor force participation carries significant economic and
 
 ### 1. Economic Growth
 
-- A shrinking labor force reduces GDP growth and constrains national productivity.
+- Lower participation can constrain the labor force's contribution to economic growth.
 - Rising dependency ratios place fiscal strain on public programs like Medicare and Social Security.
 
 ### 2. Workforce Challenges

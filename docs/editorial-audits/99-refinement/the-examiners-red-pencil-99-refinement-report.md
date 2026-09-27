@@ -1,4 +1,127 @@
+# Current approved correction record — September 27, 2026
+
+File: `content/essays/the-examiners-red-pencil.md`  
+Version: `2.0 / Fifth web edition`  
+Final content SHA-256: `fc1734776a00d7922a17ecf6dceb4bb08c5785246287de5843baf1e0fec8f21c`
+
+Current disposition: **PASS (bounded editorial review)**. Corrected supervisory title, regulatory-package chronology and capital-estimate scope.
+
+Source-demonstrated factual corrections were owner-approved; broad revision, unsupported-claim deletion, illustration/caption changes and publication were not. [Exact changes and evidence](../core-approved-facts-history-2026-09-27.md). The edition advanced once from the original baseline; the unpublished link-only candidate is not a separate edition. Any preapproval hashes or unresolved/unapproved descriptions below are historical and do not override this record.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+- Evidence: PASS — Fed primary documents match the corrected proposal, chronology, title and estimate.
+- Logic: PASS — Examiner signals and later public liability are connected through a stated mechanism.
+- Incentives: PASS — Bank procedural resistance and examiner discretion both receive scrutiny.
+- Tradeoffs: PASS — Limits on arbitrary pressure are weighed against preventive judgment.
+- Consequences: PASS — Delayed correction, capital resilience and public support are traced.
+- Uncertainty: PASS — Proposals and Barr's estimate remain prospective and attributed.
+- Institutional Behavior: PASS — Management, directors, examiners, the Board and public risk bearers are distinguished.
+
+No formal publication gate, build, commit, remote write or publication was performed for this record. A bounded PASS is not an exhaustive factual certification or numerical grade.
+
+## Historical preapproval and integration records
+
 # OIP-99 Refinement Report
+
+## Approved factual corrections - 2026-09-27
+
+Corrected Bowman's title, the February proposal's actual scope, the March capital-package identity, and Barr's attributed estimate.
+
+This is the current controlling approval record. The preapproval version/hash and hyperlink-only description below are historical for this file. Final edition disclosure and content hash are pending the parent's central reconciliation. Artwork, captions and publication identity were not edited.
+
+Exact before/after text and sources: [approved-facts ledger](../core-approved-facts-history-2026-09-27.md#the-examiners-red-pencil). No build, test, commit or publication was run in this pass.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+| Criterion | Decision | Reason |
+|---|---|---|
+| Evidence | PASS | Fed primary documents match the corrected proposal, chronology, title and estimate. |
+| Logic | PASS | Examiner signals and later public liability are connected through a stated mechanism. |
+| Incentives | PASS | Bank procedural resistance and examiner discretion both receive scrutiny. |
+| Tradeoffs | PASS | Limits on arbitrary pressure are weighed against preventive judgment. |
+| Consequences | PASS | Delayed correction, capital resilience and public support are traced. |
+| Uncertainty | PASS | Proposals and Barr's estimate remain prospective and attributed. |
+| Institutional Behavior | PASS | Management, directors, examiners, the Board and public risk bearers are distinguished. |
+
+This bounded editorial PASS is conditional on final metadata/hash reconciliation and required publication checks; it is not a numeric score or independent safety certification.
+
+## Historical preapproval record
+
+
+## Current strict hyperlink-only revision - 2026-09-27
+
+Review date: `2026-09-27`
+Essay: `content/essays/the-examiners-red-pencil.md`
+Version: `1.3` - Fourth web edition
+Final content SHA-256: `5e5cb4b926b22121982fcd8ca481fc70b434b80f4781bc17b9de929f4f479a12`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+Public change: NONE; byte-identical baseline retained.
+
+Retained byte-identical baseline 1.3. Previously drafted 2.0 corrections and PASS are superseded; no public corrections or new links applied.
+
+## Editorial Philosophy Audit
+
+Decision: HOLD
+Decision State: `SOURCE_CHECK_REQUIRED`
+
+| Criterion | Decision | Reason |
+|---|---|---|
+| Evidence | HOLD | linked primary releases and dissent do not support the current package/date/number synthesis. |
+| Logic | HOLD | the capital argument joins distinct regulatory actions and denominators. |
+| Incentives | PASS | Bank demands for predictable supervision and examiner incentives remain legible. |
+| Tradeoffs | PASS | Early intervention and arbitrary supervisory pressure remain genuine competing concerns. |
+| Consequences | PASS | Public exposure is discussed as a risk rather than an observed failure caused by these proposals. |
+| Uncertainty | HOLD | wrong chronology and the estimate's scope remain unresolved, not cured by an existing citation. |
+| Institutional Behavior | HOLD | the office title and Fed-specific reputation-risk formulation need approved correction. |
+
+This piece is not publication-ready under the philosophy gate. Minimal proposed corrections require the author's approval; a supporting link is not a cure for incompatible wording.
+
+See [current source checklist](the-examiners-red-pencil-source-checklist.md) for read passages and access limits, and [private group ledger](../core-link-only-history-2026-09-27.md#the-examiners-red-pencil) for any exact approval proposals.
+
+This record supersedes every incompatible pre-rollback result below. Earlier corrected prose and associated PASS decisions are historical, not approval of the restored text. The user authorized supporting hyperlinks only; all proposed wording changes remain private and unapplied.
+
+Scope: full body and existing-record review, actual passage verification for new anchors and specific concerns, not a fresh exhaustive re-research of every retained citation. No numeric score, local test suite, build, commit or publication. No new edition or revision was invented.
+
+## Superseded pre-rollback research - 2026-09-27
+
+All following hashes, corrected-copy descriptions, scores and decisions refer to historical states. They do not apply to the current content hash above.
+
+Review date: `2026-09-27`
+Version: `2.0` - Fifth web edition
+Final content SHA-256: `fe4e227121e683cb005feb51936815c046f9c110c28c1df71da3ad807770d681`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+
+Material source-fit correction. Separated March 2026 risk-based capital proposals from earlier eSLR changes; removed the misplaced $13 billion comparison; corrected Barr's amount and population to 6 percent/$60 billion for G-SIB tier 1 requirements. Also linked and narrowed the reputation-risk proposal, corrected Bowman's office title, and removed an ambiguous weekday. Original reporting frame and thesis retained.
+
+Scope: full prose and existing source-record review, fresh passage verification for the changes documented in the companion checklist, and a bounded source-fit audit. This is not a new numeric grade, a comprehensive re-research certification, or a publication approval. Existing evidence was retained where the source placement and historical record were adequate.
+
+## Historical Editorial Philosophy Audit (superseded)
+
+Historical decision (superseded): PASS
+
+| Criterion | Decision | Reason |
+|---|---|---|
+| Evidence | PASS | Primary release and dissent now align the capital timeline, denominator, estimate, and proposed status; reputation-risk summary has its own official link. |
+| Logic | PASS | Retains the relationship among warnings, ratings, capital, and public risk without treating an estimated requirement cut as an observed failure. |
+| Incentives | PASS | Balances bank demand for predictable standards against supervisors' need for early action and risk visibility. |
+| Tradeoffs | PASS | Arbitrary shadow regulation and delayed correction remain real competing costs. |
+| Consequences | PASS | Potential public exposure is analysis, not a prediction that these proposals necessarily cause failures. |
+| Uncertainty | PASS | Barr's figures remain an attributed estimate; proposals and prior changes are separated; anonymous lobbying is not independent proof. |
+| Institutional Behavior | PASS | Vice Chair title and the distinct Board, agency, examiner, and bank roles are clearer; the Fed proposal is not conflated with other regulators' wording. |
+
+### Boundaries
+
+Original title, publication date, slug, membership, and artwork are preserved. Revision disclosure and edition advance describe this pass. No new visual assets, templates, tests, or release changes. Publication remains a separate parent workflow.
+
+## Historical refinement record
+
+The earlier candidate score and audit below are historical; they do not replace this revision's scope or findings.
+
 
 Package: `2026-05-26-the-examiners-red-pencil`
 Title: `The Examiner's Red Pencil`
@@ -23,9 +146,9 @@ The essay is publication-candidate ready because it rebuilds the Reuters lead fr
 - Tied the current policy shift to April 2026 Fed supervisory operating principles, May 2026 CAMELS comment process, June 2025 reputation-risk removal, February 2026 debanking proposal, March 2026 capital-rule dissent, and the Fed's 2023 Silicon Valley Bank review.
 - Removed formulaic AI-style contrast turns and echo-matters phrasing.
 
-## Editorial Philosophy Audit
+## Historical Editorial Philosophy Audit (superseded)
 
-Decision: PASS
+Historical decision (superseded): PASS
 
 - Evidence: PASS ~ Major factual claims are linked to Reuters as attributed current reporting and to Federal Reserve, FFIEC, Federal Register, and Fed SVB review records.
 - Logic: PASS ~ The argument follows the mechanism: examiner warning letter, supervisory threshold, rating translation, bank incentive, public-risk transfer.
@@ -37,7 +160,7 @@ Decision: PASS
 
 ## Media Framing Audit
 
-Decision: PASS
+Historical decision (superseded): PASS
 
 - Media Frame Identified: PASS ~ Reuters frames the event as Wall Street banks pushing a friendlier Fed to future-proof supervisory changes.
 - Primary Source Rebuild: PASS ~ The essay rebuilds from the Fed supervisory operating principles, FFIEC CAMELS notice, Federal Register proposal, Fed reputation-risk releases, capital-rule records, Barr dissent, and the SVB review.

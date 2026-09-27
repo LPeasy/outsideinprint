@@ -9,12 +9,15 @@ featured_image: "/images/medium/is-trump-seriously-asking-for-ukraines-mineral-r
 featured_image_caption: "Photo by Glib Albovsky on Unsplash"
 featured_image_alt: "Is Trump Seriously Asking for Ukraine’s Mineral Rights — Or Is This Just a Distraction?"
 description: "The U.S.-Russia peace talks in Riyadh signaled a shift toward de-escalation in Ukraine and a broader realignment of U.S. strategy toward the pacific"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 pdf: "/pdfs/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction-de6711fe7ecf"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.1"
     date: "2026-05-04"
     note: "Updated May 4, 2026, after OIP back-archive review. Legacy Medium formatting, remote body images, punctuation artifacts, source-card residue, and targeted wording were cleaned while preserving the original publication frame."
@@ -100,7 +103,7 @@ The danger is that transactional politics can mistake ownership for strategy. Co
 
 U.S. Treasury Secretary Scott Bessent presented a proposal to Zelenskyy in Kyiv. Ukrainian officials reportedly objected to the speed and terms of the proposal, including the absence of explicit security guarantees.
 
-After Keith Kellogg's visit to Kyiv, reporting suggested that talks had improved and that both sides were trying to finalize an agreement. Zelenskyy described the negotiations as a possible step forward while emphasizing the need for effective terms.
+After [Keith Kellogg's visit to Kyiv](https://www.president.gov.ua/en/news/prezident-ukrayini-zustrivsya-zi-specialnim-predstavnikom-pr-96229), [reporting suggested that talks had improved and that both sides were trying to finalize an agreement.](https://www.axios.com/2025/02/21/us-ukraine-mineral-deal-zelensky-talks) Zelenskyy described the negotiations as a possible step forward while emphasizing the need for effective terms.
 
 That sequence suggests the minerals demand was not merely rhetorical. It was part of a serious negotiation over the future shape of U.S.-Ukraine relations.
 

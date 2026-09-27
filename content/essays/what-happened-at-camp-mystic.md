@@ -9,9 +9,12 @@ featured_image: "medium/f9aa0d94b11672a7a6478a1488592d3b612bd493c11cc5ca238cfe5d
 featured_image_caption: "Inundation Map | Source: CNN"
 featured_image_alt: "Inundation Map"
 description: "A primer on the July 4, 2025 Camp Mystic flood tragedy, the Guadalupe River warning timeline, and the risk-planning failures it exposed."
-version: "2.3"
-edition: "Eighth web edition"
+version: "3.0"
+edition: "Ninth web edition"
 revision_history:
+  - version: "3.0"
+    date: "2026-09-27"
+    note: "Corrected the named Hunt-gauge observation, 1987 Guadalupe flood account, rainfall, cabin and planning details; attributed the first-responder account and removed the unverified opening quotation. Added or retained claim-level source links and corrected flagged graphics and captions. Original reporting frame and surrounding prose retained."
   - version: "1.1"
     date: "2026-05-17"
     note: "Clarified the warning timeline, casualty language, source framing, and punctuation."
@@ -46,11 +49,6 @@ collections:
 medium_source_url: "https://medium.com/@lawtonperret/what-happened-at-camp-mystic-8f61de2d0f27"
 ---
 
-> **"They were just screaming and praying. The water was moving too fast
-> to do anything."**
-
-> ***Rescuer, CNN interview***
-
 Overnight on July 3–4, 2025, a dangerous storm stalled over the Guadalupe
 River Basin.
 
@@ -61,9 +59,8 @@ near **Hunt, Texas,** was among the hardest hit.
 
 > Before dawn, rising water surged into parts of the camp.
 
-**Eyewitnesses say it happened fast** ~ tents and cabins surrounded in
-minutes, counselors shouting through darkness, girls scrambling barefoot
-toward higher ground.
+The [legislative report describes Nut Hut campers scrambling barefoot
+toward higher ground.](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=89)
 
 This was a tragedy ~ and a failure of risk communication, hazard
 awareness, and safety planning. And it's raising tough questions:
@@ -112,7 +109,7 @@ reconstructs the critical sequence this way (pp. 76-83):
 6. **3:23 a.m. · Campers move uphill.** A camp photograph showed campers walking from the Flats toward the office and Rec Hall in heavy rain as water pooled around them.
 {{< /article-timeline >}}
 
-> The Guadalupe River rose more than 25 feet in under 90 minutes.
+> The [Commerce Department's April 2026 review](https://www.oig.doc.gov/wp-content/OIGPublications/OIG-26-017-I-SECURED.pdf#page=14) places the Hunt gauge's crest at 37.52 feet at 5:10 a.m., about five miles downstream from Camp Mystic.
 
 > That's not a typo.
 
@@ -126,9 +123,8 @@ bureaucratic, and human.**
 
 > On the surface, the storm was extraordinary.
 
-Tropical moisture from Storm Barry collided with a high-pressure system
-and stalled over the Texas Hill Country, dropping as much as **16 inches
-of rain in 48 hours**.
+Intense overnight rainfall dropped roughly [**10 to 15 inches over the
+upper Guadalupe basin.**](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=47)
 
 > *The terrain was primed for disaster: steep slopes, limestone bedrock,
 > and poor soil absorption gave the water nowhere to go but down.*
@@ -161,16 +157,19 @@ floodway*.**
 
 > Geography only tells part of the story.
 
-![Guadalupe River inundation curve](oip-image:medium/7c4bad63f769d3b86b88aed8b2e32ee2596d415762d2505dec77aa7e9b03da49 "Guadalupe River inundation curve. Source: CNN.")
+![Selected historical Hunt gauge observations on July 4, 2025: about 10 feet around 3 a.m.; recorded crest 37.52 feet at 5:10 a.m. Central Daylight Time.](oip-image:essays/what-happened-at-camp-mystic/hunt-observations-corrected-20260927)
+
+*OIP graphic, made with ChatGPT from the [Commerce OIG review of USGS observations](https://www.oig.doc.gov/wp-content/OIGPublications/OIG-26-017-I-SECURED.pdf#page=5). Hunt gauge stage is not cabin water depth; these historical observations are not real-time receipt timestamps or an evacuation model.*
 
 The warning existed. The failure was turning an action-level alert into
 fast, cabin-by-cabin evacuation in darkness, heavy rain, and rising water.
 
 > **Camp Mystic lost power before dawn.**
 
-**River gauges failed** just as the surge accelerated.
+[**The Hunt gauge was destroyed** after its 5:10 a.m. crest.](https://www.oig.doc.gov/wp-content/OIGPublications/OIG-26-017-I-SECURED.pdf#page=14)
 
-**First responders were being swept away.**
+[**First responders were being swept away,** Kerrville city manager
+Dalton Rice said.](https://apnews.com/article/31c4e493e9f1b6d0406df310e74d3f98)
 
 By morning, deputies and first responders were urging evacuations and
 pulling people from dangerous water.
@@ -178,7 +177,7 @@ pulling people from dangerous water.
 > But it was too late.
 
 **The Bubble Inn**, a cabin caught at the confluence of the Guadalupe
-River and Cypress Creek, **was obliterated.**
+River and Cypress Creek, [**was inundated to its ceiling.**](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=85)
 
 > **Twenty-seven campers and counselors died, along with longtime owner
 > Dick Eastland.**
@@ -190,10 +189,10 @@ River and Cypress Creek, **was obliterated.**
 
 #### This wasn't the first time the Guadalupe River flooded.
 
-It was the [second mass casualty event](https://www.usatoday.com/story/graphics/2025/07/11/texas-floods-guadalupe-river-camp-mystic/84509122007/) related to
+It was [another mass casualty event](https://www.usatoday.com/story/graphics/2025/07/11/texas-floods-guadalupe-river-camp-mystic/84509122007/) related to
 flooding in the area.
 
-**In 1987,** [**ten teenagers died after their van was swept away in another Guadalupe River flood.**](https://www.everettpost.com/national/deadly-floods-at-camp-mystic-how-the-tragedy-compares-to-a-similar-event-in-1987)
+**In 1987,** [**ten teenagers died after leaving a stranded bus and van near Comfort in another Guadalupe River flood.**](https://www.weather.gov/ewx/wxevent-19870717)
 
 > That tragedy prompted calls for better planning and safer
 > infrastructure.
@@ -206,8 +205,8 @@ flooding in the area.
 
 **The risk faded into routine.**
 
-**Most summer camps don't plan for a 20-foot wall of water arriving in
-the dark with power out and no real-time alerts.**
+[**Camp Mystic's shelter-in-place planning did not match the danger
+that night.**](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=104)
 
 > Maybe they should.
 

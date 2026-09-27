@@ -9,9 +9,12 @@ featured_image: "/images/medium/whos-really-funding-terror/f7c9bf9f76e3c75c9b18d
 featured_image_caption: "Photo by Jp Valery on Unsplash"
 featured_image_alt: "Who’s Really Funding Terror?"
 description: "A Treasury risk assessment shows how terrorist financing risk moves through banks, charities, cash channels, crowdfunding, and crypto without reducing the problem to one simple culprit."
-version: "1.3"
-edition: "Fourth web edition"
+version: "1.4"
+edition: "Fifth web edition"
 revision_history:
+  - version: "1.4"
+    date: "2026-09-27"
+    note: "Corrected Treasury PDF physical-page count. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-21"
     note: "Updated May 21, 2026, after OIP back-archive review. Treasury-source framing, house style, and legacy source residue were checked."
@@ -188,7 +191,7 @@ Banks, wire services, and other money transmitters are central to risk
 and detection.
 
 Between 2020 and 2022, registered money services businesses filed the
-majority of suspicious activity reports tied to terrorist financing.
+[majority of suspicious activity reports tied to terrorist financing.](https://home.treasury.gov/system/files/136/2024-National-Terrorist-Financing-Risk-Assessment.pdf#page=19)
 That's a pretty strong hint about where a lot of concerning patterns
 show up first.
 
@@ -203,7 +206,7 @@ provide real relief and social services to people in extreme need.
 
 ***Treasury tries to walk a careful line.***
 
-The report stresses that **most U.S. charities have little exposure to
+[The report stresses](https://home.treasury.gov/system/files/136/2024-National-Terrorist-Financing-Risk-Assessment.pdf#page=26) that **most U.S. charities have little exposure to
 terrorist financing**, while acknowledging that **a small subset**,
 especially some international charities and outright sham groups, **can
 be misused.** Treasury's framing keeps the focus on specific risk
@@ -304,7 +307,7 @@ grade, I'd call it an **A**.
 Not because it answers every question or settles every argument, but
 because it offers a clear, structured story about who Treasury sees as today's main terrorist threats, how those actors are trying to raise and move money, where the U.S. financial system is most exposed, and where new cracks may be forming.
 
-> For a 100-plus-page government PDF that most people will never open,
+> For a 35-page government PDF that most people will never open,
 > that's a lot of information hiding in plain sight.
 
 ### Sources checked

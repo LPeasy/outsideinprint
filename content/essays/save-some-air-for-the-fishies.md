@@ -6,9 +6,12 @@ date: 2026-05-20
 draft: false
 slug: "save-some-air-for-the-fishies"
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Distinguished the study's overlapping warming and heatwave comparisons. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-30"
     note: "Updated May 30, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -47,9 +50,9 @@ The [U.S. Geological Survey](https://www.usgs.gov/special-topics/water-science-s
 
 Heat changes that balance at the base. Warmer water has lower oxygen capacity. Hot weather also speeds up biological activity. A river under heat stress can hold less oxygen while organisms and decay processes demand more of it.
 
-The research team described both forces. A [Chinese Academy of Sciences summary of the study](https://phys.org/news/2026-05-climate-oxygen-rivers-worldwide.html) says warming water explained nearly 63 percent of the observed deoxygenation, while heat waves accounted for about 22.7 percent. Other pressures included dams, flow alteration, runoff, and pollution.
+The research team described both forces. A [Chinese Academy of Sciences summary of the study](https://english.cas.cn/newsroom/research-news/202605/t20260513_1159285.shtml) says warming-driven loss of oxygen solubility explained nearly 63 percent of the observed deoxygenation. A separate comparison with average climatological temperatures attributed about 22.7 percent of deoxygenation to heat waves; the two percentages are not separate slices to add together. Other pressures included dams, flow alteration, runoff, and pollution.
 
-That distribution is useful because it resists a lazy story. Climate warming is the largest pressure in the study, yet the local damage often arrives through local systems: fertilizer washed off fields, stormwater pushed through pipes, sewer overflows, reservoirs that slow water, and permits written for rivers with older temperature patterns.
+That distinction is useful because it resists a lazy story. Climate warming is the largest pressure in the study, yet the local damage often arrives through local systems: fertilizer washed off fields, stormwater pushed through pipes, sewer overflows, reservoirs that slow water, and permits written for rivers with older temperature patterns.
 
 The oxygen meter sees all of it at once.
 

@@ -9,9 +9,12 @@ featured_image: "/images/medium/mingo-county-mud-in-the-water/1b7bc0f31b09835315
 featured_image_caption: "Photo by engin akyurt on Unsplash"
 featured_image_alt: "Mingo County: Mud in the Water"
 description: "Mingo County's water crisis shows how fragile small utility systems become when debt, deferred maintenance, weak capacity, and public-health risk converge."
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Replaced one resident/fire-chief paragraph with the approved WSAZ-backed resident/utility-manager account. Added bounded source links and repaired source destinations; all other prose, reporting frame, and artwork unchanged."
   - version: "1.1"
     date: "2026-05-09"
     note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, source-card residue, headings, spacing, and water-system claim framing were cleaned while preserving the original publication frame."
@@ -30,9 +33,9 @@ The water comes out brown. The pressure drops to nothing. Another boil notice. A
 
 In parts of Mingo County, West Virginia, residents have lived with recurring outages, discolored water, and the ordinary exhaustion of a system that does not reliably do the most basic thing a utility is supposed to do.
 
-The state Public Service Commission opened an investigation, but residents did not need an investigation to know something was wrong. They had already seen it in their sinks, showers, schools, and fire hydrants.
+The state Public Service Commission [opened an investigation](https://westvirginiawatch.com/2025/01/28/challenges-persist-for-mingo-water-system-as-wv-public-service-commission-opens-investigation/), but residents did not need an investigation to know something was wrong. They had already seen it in their sinks, showers, schools, and fire hydrants.
 
-One resident described waking up without water for days. A local fire chief described water being off and on for much of a month.
+One resident described [recurring outages and brown water](https://www.wsaz.com/2025/01/21/customers-voice-water-woe-frustrations-mingo-county/). The utility's manager acknowledged delayed cleaning of sediment basins.
 
 That is not just inconvenience. It is infrastructure failure entering daily life.
 
@@ -47,17 +50,17 @@ Mingo County is not unique. It is a warning about what happens when small system
 
 Water regulation is complicated because "legal" and "healthy" are not always the same claim.
 
-Federal drinking-water rules set enforceable limits. Public-health researchers and advocacy groups often use lower health-based guidelines. A utility can be in compliance with one standard while still raising serious questions under another.
+[Federal drinking-water rules set enforceable limits.](https://www.epa.gov/sdwa/how-epa-regulates-drinking-water-contaminants) Public-health researchers and advocacy groups often use lower health-based guidelines. A utility can be in compliance with one standard while still raising serious questions under another.
 
 That distinction matters in places like Mingo County, where residents already distrust what comes from the tap.
 
-Reports and water-quality summaries have flagged disinfection byproducts such as total trihalomethanes and chloroform as concerns. Those compounds can form when disinfectants react with organic matter in water. They are not proof that every glass is immediately dangerous, but they are a sign that treatment, source water, and system maintenance deserve scrutiny.
+[Reports and water-quality summaries](https://www.ewg.org/tapwater/system.php?pws=WV3303030) have flagged disinfection byproducts such as total trihalomethanes and chloroform as concerns. Those compounds can form [when disinfectants react with organic matter in water](https://www.epa.gov/dwreginfo/stage-1-and-stage-2-disinfectants-and-disinfection-byproducts-rules). They are not proof that every glass is immediately dangerous, but they are a sign that treatment, source water, and system maintenance deserve scrutiny.
 
 Trust breaks when residents are told a system is technically compliant while their lived experience says the water is brown, unreliable, or unsafe to use.
 
 ### The Small-System Trap
 
-The United States has tens of thousands of community water systems. Many are small. Many serve places with shrinking populations, low household incomes, old pipes, and limited tax bases.
+The United States has [tens of thousands of community water systems](https://www.epa.gov/system/files/documents/2025-01/final_508_epa_reporttocongress_11-19-24_0.pdf#page=8). Many are small. Many serve places with shrinking populations, low household incomes, old pipes, and limited tax bases.
 
 That structure creates a harsh incentive problem.
 
@@ -67,7 +70,7 @@ Delayed repairs become larger failures.
 
 Then the system needs emergency spending, which is more expensive than prevention and harder to plan.
 
-Mingo County's water problems fit that pattern. Reports have pointed to debt, maintenance needs, operational strain, and a customer base too small to carry the full burden alone.
+Mingo County's water problems fit that pattern. [Reports have pointed to debt, maintenance needs, operational strain, and a customer base too small to carry the full burden alone.](https://westvirginiawatch.com/2025/01/28/challenges-persist-for-mingo-water-system-as-wv-public-service-commission-opens-investigation/)
 
 ### The Governance Problem
 
@@ -135,6 +138,6 @@ You cannot build public trust on broken pipes.
 *Photo by Dan Meyers on Unsplash*
 
 
-- [Mingo County residents speak out about ongoing water issues](https://www.wowktv.com/)
-- [Customers voice water woe frustrations in Mingo County](https://www.wsaz.com/)
+- [Mingo County residents speak out about ongoing water issues](https://www.wowktv.com/news/west-virginia/mingo-county-wv/mingo-county-residents-speak-out-about-ongoing-water-issues/)
+- [Customers voice water woe frustrations in Mingo County](https://www.wsaz.com/2025/01/21/customers-voice-water-woe-frustrations-mingo-county/)
 - [Challenges persist for Mingo water system as WV Public Service Commission opens investigation](https://westvirginiawatch.com/2025/01/28/challenges-persist-for-mingo-water-system-as-wv-public-service-commission-opens-investigation/)

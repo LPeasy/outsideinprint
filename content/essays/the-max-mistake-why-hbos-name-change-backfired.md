@@ -10,9 +10,12 @@ featured_image: "/images/medium/the-max-mistake-why-hbos-name-change-backfired/9
 featured_image_caption: "Photo by Oleksandra Bardash on Unsplash"
 featured_image_alt: "The Max Mistake: Why HBO’s Name Change Backfired"
 description: "If you’re confused, you’re not alone. This feels less like brand strategy and more like a midlife crisis complete with a haircut no one asked for, a question..."
-version: "1.4"
-edition: "Fifth web edition"
+version: "2.0"
+edition: "Sixth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Retained claim-level source links and original prose, with approved streaming chronology, licensing, quotation and attribution corrections; removed the unverified meme anecdote and qualified branding claims. Original artwork and publication date unchanged."
   - version: "1.4"
     date: "2026-09-18"
     note: "Repaired malformed Markdown for the HBO timeline, classic titles, and Tommy Boy images; images, captions, and article text are unchanged."
@@ -32,15 +35,15 @@ medium_source_url: "https://medium.com/@lawtonperret/the-max-mistake-why-hbos-na
 
 ***If you're confused, you're not alone.***
 
-> First it was HBO.
+> First came HBO's streaming apps.
 
-> Then it became HBO Max.
+> Then came HBO Max.
 
 > Then just Max.
 
 > Now, they're undoing it.
 
-> HBO Max is back!
+> HBO Max is coming back!
 
 This feels **less like brand strategy** and ***more like a midlife
 crisis*** ~ complete with a haircut no one asked for, a questionable
@@ -58,17 +61,16 @@ place.**
 *HBO Logo Timeline \| Source: Me lol*
 
 
-> HBO Max launched in May 2020.
+> [HBO Max launched in May 2020](https://press.wbd.com/us/media-release/hbo-max-launch-may-27th).
 
-It wasn't just HBO ~ it was HBO **plus everything else WarnerMedia
-owned**: ***Friends, The Big Bang Theory, Studio Ghibli, Looney Tunes,
+It wasn't just HBO ~ it was HBO **plus WarnerMedia's library and licensed programming**: ***Friends, The Big Bang Theory, Studio Ghibli, Looney Tunes,
 DC movies, South Park.***
 
 **The name said it all:**
 
 > **"This is HBO... and more."**
 
-Then, in 2022 *WarnerMedia* merged with *Discovery Inc*. to form
+Then, in 2022 [*WarnerMedia* merged with *Discovery Inc*](https://www.wbd.com/discovery-and-att-close-warnermedia-transaction). to form
 **Warner Bros. Discovery.**
 
 That added a different mix of content ~ ***90 Day Fiancé, Property
@@ -78,7 +80,7 @@ everything.***
 The execs didn't want the platform to feel too *highbrow*. They wanted
 it to feel *universal*.
 
-So in May 2023, they dropped the "***HBO***" and rebranded the whole
+So in [May 2023](https://press.wbd.com/us/na/media-release/hbo-max/warner-bros-discoverys-enhanced-streaming-platform-max-launches-today), they dropped the "***HBO***" and rebranded the whole
 thing as just "***Max***."
 
 > It didn't go well.
@@ -94,27 +96,22 @@ thing as just "***Max***."
 
 > HBO sounds elite. Max sounds inclusive.
 
-In 2023, **Warner Bros. Discovery CEO David Zaslav** explained the name
-was "short and tight," and that removing "HBO" would help "broaden the
-audience."
+In 2023, **Warner Bros. Discovery streaming chief J.B. Perrette** [described Max as a broader offering for everyone in the household](https://ir.wbd.com/news-and-events/financial-news/financial-news-details/2023/WARNER-BROS.-DISCOVERY-UNVEILS-MAX-STREAMING-SERVICE/default.aspx).
 
 ***Translation:***
 
 > HBO might intimidate casual viewers. Max is... approachable.
 
-Even **Netflix co-CEO Ted Sarandos** didn't hold back. He told The New
-York Times in March 2025:
+Even **Netflix co-CEO Ted Sarandos** didn't hold back. He told [Variety](https://variety.com/2025/film/news/ted-sarandos-stranger-things-ending-marvel-fight-1236339714/) in March 2025:
 
-> "Max should have just been called HBO. That name means something.
-
-> Everyone knows it."
+> “When they’re serious, all those names will go away, and it’ll just be HBO.”
 
 > ~ Ted Sarandos, Netflix Co-CEO
 
 **He wasn't wrong.**
 
 ***HBO*** is one of the strongest names in the history of television. It
-stands for ***Home Box Office*** ~ a phrase that once meant ***theater
+stands for [***Home Box Office***](https://www.hbo.com/about/faqs) ~ a phrase that once meant ***theater
 quality entertainment in your living room***.
 
 > It's cinematic.
@@ -135,11 +132,11 @@ product line.
 
 **Let's take a moment.**
 
-HBO gave us ***The Sopranos, The Wire, Sex and the City, Six Feet Under,
-Curb Your Enthusiasm, Deadwood, Game of Thrones, Succession, Euphoria***
+[HBO gave us ***The Sopranos, The Wire, Sex and the City, Six Feet Under,
+Curb Your Enthusiasm, Deadwood, Game of Thrones, Succession, Euphoria***](https://press.wbd.com/nl/media-release/hbo-max-programming-highlights-unveiled-warnermedia-day?language_content_entity=en)
 ~ and that's just off the top of the head.
 
-For two decades,
+For years,
 
 > "It's not TV. It's HBO"
 
@@ -176,9 +173,7 @@ being forgettable.
 
 > Max was forgettable.
 
-Worse, it created confusion. Some users kept using the old HBO app.
-Others didn't know Max was the same service. Some assumed HBO was a
-separate add-on.
+Worse, the names invited confusion: was Max the same service, and was HBO a separate add-on?
 
 The rebrand that was supposed to "simplify" things just made everything
 more complicated.
@@ -195,11 +190,11 @@ any dunk could: the HBO name carried the trust that "Max" had blurred.
 
 By May 2025, the writing was on the wall:
 
-> The Max experiment failed.
+> As a name, the Max experiment failed.
 
 So Warner Bros. Discovery reversed course.
 
-> HBO Max is back.
+> HBO Max is coming back.
 
 In [Warner Bros. Discovery's May 14, 2025 announcement](https://press.wbd.com/us/media-release/warner-bros-discovery-announces-max-become-hbo-max-summer?language_content_entity=en),
 **Zaslav** framed the reversal around quality:
@@ -208,14 +203,7 @@ In [Warner Bros. Discovery's May 14, 2025 announcement](https://press.wbd.com/us
 
 > ~ David Zaslav, Warner Bros. Discovery CEO
 
-Of course, **this admission came two years ~ and millions in marketing
-costs ~ too late.**
-
-The brand's own social media team leaned into the backlash. They posted
-memes, played the self-deprecating card, and even dropped the viral
-"He's just a little guy" meme next to the HBO Max logo.
-
-> It was a rare moment of corporate humility. And oddly... it landed.
+Of course, **this admission came two years too late.**
 
 #### What This Tells Us About Streaming Strategy
 

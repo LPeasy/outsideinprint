@@ -7,9 +7,12 @@ draft: false
 slug: "the-stamp-on-the-meat-flagship"
 collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected voluntary recalls and plant-versus-lot identity. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-06-19"
     note: "Updated June 19, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -95,7 +98,7 @@ Current law gives inspectors authority to examine animals and carcasses, and it 
 
 Together, those parts describe a system larger than a single inspector's glance or a stack of plant paperwork. Animals receive inspection before slaughter. Carcasses and parts receive inspection after slaughter. Official marks and labels are controlled. Sanitation standard operating procedures must be written, implemented, monitored, and recorded. HACCP rules require official establishments to analyze food-safety hazards and maintain plans, records, corrective actions, and verification procedures for critical control points.
 
-By the time the shopper sees the stamp, the visible mark has become the surface of a deeper system. That system includes public employees, plant employees, controlled devices, approved labels, records, and a continuing power to retain, reject, condemn, detain, or recall product when something fails.
+By the time the shopper sees the stamp, the visible mark has become the surface of a deeper system. That system includes public employees, plant employees, controlled devices, approved labels, records, and a continuing power to retain, reject, condemn, or detain product when something fails, alongside [voluntary company recalls](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/understanding-fsis-food-recalls).
 
 The mark deserves more than mockery and less than worship. It has force because law and operations back it. It has limits because law and operations work through defined tasks, evidence, sampling, plant controls, and judgment. Inspection cannot suspend biology, make commerce frictionless, or turn every package into a perfect product. It reduces a set of public risks and gives the product a legal status.
 
@@ -197,7 +200,7 @@ Recalls can make the stamp look weak because they announce failure in a system t
 
 That is a system with memory.
 
-The establishment number is memory in compact form. It gives public notice a place to point. It helps distinguish one product from another product on the same shelf, one plant from another plant under the same corporate umbrella, and one lot from another lot in the same category. It gives consumers, retailers, distributors, regulators, and newsrooms a common reference.
+The establishment number is memory in compact form. It gives public notice a place to point. It helps distinguish one product from another product on the same shelf and one plant from another plant under the same corporate umbrella, while lot codes and dates distinguish lots. It gives consumers, retailers, distributors, regulators, and newsrooms a common reference.
 
 The public often wants recall notices to name brands because brands are what shoppers remember. The regulatory system also needs plant identity because plant identity is where public control can attach. The stamp connects those languages.
 

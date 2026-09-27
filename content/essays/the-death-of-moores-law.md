@@ -9,9 +9,12 @@ featured_image: "/images/medium/the-death-of-moores-law/c8f9f3c89cefb298ee7f1eab
 featured_image_caption: "Source: Author via ChatGPT."
 featured_image_alt: "The Death of Moore’s Law"
 description: "When Did It End, and What Comes Next?. This insight, later adjusted to a two-year doubling period, became known as Moore’s Law. It wasn’t just an observation..."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-09-27"
+    note: "Corrected Taiwan geography. Added or retained claim-level source links; original reporting frame and artwork retained. Replaced the industry-wide investment-cutoff claim with a bounded statement about increasing difficulty preserving cost advantages, linked to Intel's 2015 account."
   - version: "1.1"
     date: "2026-04-30"
     note: "Updated April 30, 2026, after OIP back-archive review. Localized available legacy images, cleaned import residue, and made minor copy and formatting corrections."
@@ -46,7 +49,7 @@ Companies like Intel, AMD, and TSMC treated the doubling of transistor density a
 
 However, by the mid-2010s, the pace of progress began to slow.
 
-The 22-nanometer node, introduced around 2012, marked a pivotal moment in the history of Moore’s Law. At this scale, transistors became so tiny that their size defies ordinary comprehension.
+The [22-nanometer node, introduced around 2012](https://download.intel.com/newsroom/kits/isscc/2012/pdfs/Intel-at-ISSCC_FactSheet.pdf), marked a pivotal moment in the history of Moore’s Law. At this scale, transistors became so tiny that their size defies ordinary comprehension.
 
 Imagine a single human hair, roughly 80,000 nanometers thick. If you were to shrink that hair down to just 22 nanometers, it would be thinner than the strands of a spider’s web and nearly invisible to the naked eye. Now consider that a modern microchip contains billions of these microscopic transistors, each working together to perform complex calculations at astonishing speeds.
 
@@ -54,7 +57,7 @@ At such a scale, the rules of classical physics begin to break down, and quantum
 
 The 22-nanometer node was an extraordinary achievement, but it marked the beginning of the end for Moore’s Law as we knew it. Beyond the physical challenges, the costs of continuing Moore’s Law became astronomical. Transitioning to smaller nodes, such as 10nm, 7nm, and 3nm, requires billions of dollars in research and development, as well as state-of-the-art production facilities.
 
-A single semiconductor fabrication plant can now cost upwards of $20 billion. By the mid-2010s, the economic returns of packing more transistors onto chips no longer justified the investment.
+A single semiconductor fabrication plant can now cost upwards of $20 billion. By the mid-2010s, [preserving the cost advantages of packing more transistors onto chips had become increasingly difficult](https://download.intel.com/newsroom/kits/isscc/2015/pdfs/Intel_ISSCC_factsheet.pdf#page=2).
 
 While transistor densities continue to improve, the cadence has slowed significantly, marking the end of Moore’s Law as originally conceived.
 
@@ -106,7 +109,7 @@ The slowing of Moore’s Law has far-reaching implications, not just for the tec
 
 The immense cost of staying at the cutting edge has concentrated the semiconductor industry into a few dominant players, including TSMC, Samsung, and Intel.
 
-This concentration has significant geopolitical implications. For example, Taiwan, home to TSMC, has become a critical player in global supply chains, raising concerns about economic and political stability in Southeast Asia.
+This concentration has significant geopolitical implications. For example, Taiwan, home to TSMC, has become a critical player in global supply chains, raising concerns about economic and political stability in East Asia.
 
 2. Energy Efficiency as a New Benchmark
 

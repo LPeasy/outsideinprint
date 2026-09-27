@@ -9,8 +9,8 @@ slug: "gene-hackman-how-a-reluctant-star-became-the-actor-everyone-believed"
 description: "A short biography of the American actor whose authority on screen always felt earned rather than performed."
 section_label: "Essay"
 subtitle: "A short biography of the American actor whose authority on screen always felt earned rather than performed."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 series:
   - "Modern Bios"
 collections:
@@ -39,12 +39,15 @@ tags:
   - "public-figure"
 repair_mojibake: true
 revision_history:
+  - version: "1.2"
+    date: "2026-09-27"
+    note: "Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original wording, paragraph structure, source-method framing, and artwork are preserved."
   - version: "1.1"
     date: "2026-05-26"
     note: "Updated May 26, 2026, after OIP back-archive review. Normalized imported punctuation, removed house-style shortcuts, and checked source framing."
 ---
 
-Before he became Gene Hackman, Oscar winner, director's dream, and one of the defining screen presences of modern American film, he was an unlikely candidate for stardom.
+Before he became Gene Hackman, [Oscar winner](https://www.oscars.org/oscars/ceremonies/1972), director's dream, and one of the defining screen presences of modern American film, he was an unlikely candidate for stardom.
 
 He did not arrive wrapped in glamour.
 
@@ -56,7 +59,7 @@ That is harder to achieve than it sounds. Film acting often asks for a kind of h
 
 That gift powered his career.
 
-Hackman could play cops, criminals, politicians, military men, lonely professionals, brittle fathers, and men whose confidence frayed at exactly the wrong moment. He understood how power works inside ordinary speech. He knew that command often speaks in a tired voice, that intimidation can arrive through patience, and that vanity hides inside competence more often than people admit. He read the emotional machinery of a role with uncommon precision. That gave his performances shape without making them feel overdesigned.
+Hackman could play [cops, criminals, politicians, military men](https://catalog.afi.com/Catalog/PersonDetails/57619), lonely professionals, brittle fathers, and men whose confidence frayed at exactly the wrong moment. He understood how power works inside ordinary speech. He knew that command often speaks in a tired voice, that intimidation can arrive through patience, and that vanity hides inside competence more often than people admit. He read the emotional machinery of a role with uncommon precision. That gave his performances shape without making them feel overdesigned.
 
 Audiences trusted him because he never seemed to flatter a character.
 
@@ -84,7 +87,7 @@ Even when he played men with status or command, he kept them vulnerable to petti
 
 He also knew when to leave.
 
-Retreat carries weight in a culture that rarely rewards it. Many actors keep chasing visibility long after their best work begins to blur into repetition. Hackman stepped away from the screen and left behind a body of work sturdy enough to speak for itself. The decision suited him. He had spent a career resisting vanity inside the work. He did not need to turn legacy into a daily performance.
+Retreat carries weight in a culture that rarely rewards it. Many actors keep chasing visibility long after their best work begins to blur into repetition. Hackman [stepped away from the screen](https://www.streetinsider.com/Reuters/Actor%2BGene%2BHackman%2Band%2Bwife%2Bfound%2Bdead%2Bat%2Bhome;%2Bcause%2Bof%2Bdeath%2Bunder%2Bprobe/24413011.html) and left behind a body of work sturdy enough to speak for itself. The decision suited him. He had spent a career resisting vanity inside the work. He did not need to turn legacy into a daily performance.
 
 His films kept the conversation going.
 

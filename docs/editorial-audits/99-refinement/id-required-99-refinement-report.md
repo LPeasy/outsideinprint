@@ -1,3 +1,41 @@
+# Hyperlink-only editorial audit: id-required
+
+Date: 2026-09-27
+
+Source file: `content/essays/id-required.md`
+
+Version: `1.2`
+
+Audited SHA256: `a41807ffcef712e421443131a5071f4382155da5ab12bbdd72eb5043987e13eb`
+
+Decision state: `LINK_ONLY_REVIEW_COMPLETE`
+
+Scope: Supporting hyperlink wrappers and required revision metadata only. This is a bounded source-fit review of the historical article, not a numerical regrade, a fresh full-archive fact audit, or publication authorization.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+| Test | Result | Record |
+|---|---|---|
+| Evidence | PASS | Federal Register, October 31, 2025, printed p. 48949 (PDF p. 2), describes SAVE as citizenship/immigration-status information for benefits, voter registration and list maintenance. It does not make voter-eligibility determinations. Link supplements existing USCIS guidance; May 2026 reporting frame stays unchanged, not a fresh statement of September law. |
+| Logic | PASS | Verification records support a defined eligibility process, not an automatic removal decision. |
+| Incentives | PASS | States, counties and applicants face different incentives and correction burdens. |
+| Tradeoffs | PASS | Roll integrity is weighed against administrative error and access costs. |
+| Consequences | PASS | Flags lead to notice, proof, correction and public-trust consequences. |
+| Uncertainty | PASS | May 2026 reporting and unsettled litigation are not silently made current. |
+| Institutional Behavior | PASS | Federal data suppliers, election administrators and citizens carry distinct powers and risks. |
+
+## Source-fit record
+
+Federal Register, October 31, 2025, printed p. 48949 (PDF p. 2), describes SAVE as citizenship/immigration-status information for benefits, voter registration and list maintenance. It does not make voter-eligibility determinations. Link supplements existing USCIS guidance; May 2026 reporting frame stays unchanged, not a fresh statement of September law.
+
+See `id-required-source-checklist.md` for exact added anchors and `../core-link-only-flood-pair-2026-09-27.md` for private correction proposals and remaining limits. Images and captions were preserved; no new broad image certification is claimed. No tests, build or publication in this subtask.
+
+---
+
+## Preserved historical report (not current clearance)
+
 # OIP-99 Refinement Report
 
 Package: `2026-05-17-id-required`
@@ -23,9 +61,9 @@ Final Recommendation: Ready as a revised daily candidate package for human revie
 - Preserved the three existing editorial images and captions.
 - Removed strict AI-tell contrast scaffolds while preserving the revised argument.
 
-## Editorial Philosophy Audit
+## Historical Editorial Philosophy Audit (superseded)
 
-Decision: PASS
+Historical decision (superseded): PASS
 
 Evidence: PASS
 
@@ -43,7 +81,7 @@ Institutional Behavior: PASS
 
 ## Media Framing Audit
 
-Decision: PASS
+Historical decision (superseded): PASS
 
 Media Frame Identified: PASS
 

@@ -7,9 +7,12 @@ section_label: "Essay"
 subtitle: "Making Strategic Choices When Everything’s on the Table"
 description: "Imagine you’re at an American buffet something like Golden Corral. You walk in hungry, and you’re surrounded by endless options"
 featured_image: "/images/medium/the-risk-management-buffet/0e0afc0ee25fab12957c07b3073aff1d4c61f1883bb4eb35fbb7e5656e14b053.jpg"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.1"
     date: "2026-05-21"
     note: "Updated May 21, 2026, from First web edition to Second web edition after OIP back-archive review. Remote Medium media, house-style issues, and rendering were checked."
@@ -45,7 +48,7 @@ what we'd call an **RMO**, or **Risk Management Option.**
 #### **What's an RMO?**
 
 > *A Risk Management Option (RMO) is a plan or strategy chosen to
-> reduce, transfer, or accept risk.
+> [reduce, transfer, or accept risk](https://csrc.nist.gov/glossary/term/risk_response).
 > RMOs balance cost, effectiveness, and the decision-maker's risk
 > appetite.*
 
@@ -71,7 +74,7 @@ down the line.**
 
 #### **What is Risk Appetite?**
 
-> *Your* ***"risk appetite"*** *is how hungry you are for uncertainty ~
+> *Your* ***["risk appetite"](https://csrc.nist.gov/glossary/term/risk_appetite)*** *is how hungry you are for uncertainty ~
 > how much risk you're willing to tolerate in pursuit of reward.
 > Overfill your plate and you might end up wasting a lot of your food.*
 

@@ -10,9 +10,12 @@ featured_image: "/images/medium/whos-drinking-all-the-modelo/645c97bb67718c4a25f
 featured_image_caption: "Photo by Soliman Cifuentes on Unsplash"
 featured_image_alt: "Who’s Drinking All the Modelo?"
 description: "“Every once in a while, a person comes along who defies the odds, who defies logic, and fulfills an incredible dream.”"
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Retained claim-level source links and original prose, with approved corrections to sales measures, ranking and population dates, sponsorship timing, and unsupported geographic claims; original artwork and publication date unchanged."
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, after OIP back-archive review. Remote Medium body images were removed, import formatting was normalized, and beer-market claims were tightened."
@@ -26,7 +29,7 @@ medium_source_url: "https://medium.com/@lawtonperret/whos-drinking-all-the-model
 
 > "Every once in a while, a person comes along who defies the odds, who defies logic, and fulfills an incredible dream."
 
-From the mayor of Philadelphia celebrating Rocky Balboa in *Rocky III*.
+From the mayor of Philadelphia celebrating Rocky Balboa in [*Rocky III*](https://www.imdb.com/title/tt0084602/characters/nm0186348/).
 
 ### How Modelo Became America's Best-Selling Beer
 
@@ -37,9 +40,9 @@ From the mayor of Philadelphia celebrating Rocky Balboa in *Rocky III*.
 
 After more than 20 years on the throne, Bud Light finally tapped out.
 
-In May 2023, Modelo Especial knocked Bud Light off the top spot in the American beer market.
+In the four weeks ending June 3, 2023, Modelo Especial [knocked Bud Light off the top spot in U.S. retail dollar sales](https://journalrecord.com/2023/06/14/bud-light-dethroned-as-americas-top-selling-beer/).
 
-The easiest explanation was Bud Light's marketing crisis with Dylan Mulvaney and the boycott that followed.
+The easiest explanation was [Bud Light's marketing crisis with Dylan Mulvaney and the boycott that followed](https://journalrecord.com/2023/06/14/bud-light-dethroned-as-americas-top-selling-beer/).
 
 But Modelo wasn't just waiting in the wings.
 
@@ -59,11 +62,7 @@ Modelo was doing something most brands had forgotten how to do: feel cool.
 
 ### Modelo's Stronghold
 
-Modelo Especial's surge is concentrated in a few high-octane markets, most notably California, Texas, and Illinois. These three states account for a significant share of national beer sales, and in all of them, Modelo is a top-tier brand.
-
-In cities like Los Angeles, Dallas, and Chicago, Modelo Especial is not just a beer. It is the beer.
-
-Modelo has also gained ground in northern regions like Minnesota and upstate New York, markets far from its original Latino base, thanks to national-scale distribution and cross-demographic appeal.
+In cities like [Los Angeles and Chicago](https://journalrecord.com/2023/06/14/bud-light-dethroned-as-americas-top-selling-beer/), Modelo Especial is not just a beer. It is the beer.
 
 Whether it is stocked at taquerias, corner stores, backyard parties, or bar patios, it is about as common as water.
 
@@ -76,19 +75,19 @@ Whether it is stocked at taquerias, corner stores, backyard parties, or bar pati
 *Photo by kazuend on Unsplash*
 
 
-Constellation Brands, the company that holds the exclusive U.S. rights to Modelo, reported nearly $7.5 billion in beer sales in fiscal 2023, up 11% from the previous year.
+Constellation Brands, the company that holds the exclusive U.S. rights to Modelo, [reported nearly $7.5 billion in beer-segment net sales in fiscal 2023, up 11% from the previous year](https://d1io3yog0oux5.cloudfront.net/_cba14301af6161410781f4de3a5ef08b/cbrands/db/963/9711/presentation/Q4_FY23_Earnings_Presentation_UPDATED_4.7.2023.pdf#page=5).
 
 > Constellation's rise began with a twist of fate.
 
-When AB InBev acquired Grupo Modelo in 2013, U.S. antitrust regulators forced the company to divest domestic rights. Constellation picked them up and turned that legal quirk into a major business win.
+When AB InBev acquired Grupo Modelo in 2013, [U.S. antitrust regulators forced the company to divest domestic rights](https://www.justice.gov/archives/opa/pr/justice-department-reaches-settlement-anheuser-busch-inbev-and-grupo-modelo-beer-case). Constellation picked them up and turned that legal quirk into a major business win.
 
-Modelo Especial drove much of that growth, with sales up 14% year over year.
+Modelo Especial drove much of that growth, with [distributor shipments to retailers up about 9% in fiscal 2023](https://d1io3yog0oux5.cloudfront.net/_cba14301af6161410781f4de3a5ef08b/cbrands/db/963/9711/presentation/Q4_FY23_Earnings_Presentation_UPDATED_4.7.2023.pdf#page=7).
 
 > The engine behind that performance?
 
 A combination of marketing discipline, distribution firepower, and brand clarity.
 
-Modelo's partnership with Reyes Beverage Group, the largest beer distributor in America, gives it deep retail reach. While Bud Light floundered with identity crises, Modelo kept things simple: fighting spirit, beach scenes, and gold foil.
+[Modelo's partnership with Reyes Beverage Group, the largest beer distributor in America](https://www.forbes.com/sites/dontse/2024/11/01/how-modelo-became-the-no-1-beer-brand-in-america/), gives it deep retail reach. While Bud Light floundered with identity crises, Modelo kept things simple: fighting spirit, beach scenes, and gold foil.
 
 You know exactly what you're getting: good beer with no strings attached.
 
@@ -100,13 +99,13 @@ You know exactly what you're getting: good beer with no strings attached.
 
 Modelo didn't just ride with the culture. It took an active role.
 
-The brand became the official beer of the UFC, a partnership that helped it dominate among younger, male consumers and cemented its image as the beer for fighters, fans, and anyone who liked their beer with a side of swagger.
+[The brand became the official beer of the UFC](https://www.globenewswire.com/news-release/2018/01/11/1287568/0/en/modelo-especial-announces-partnership-with-ufc-heavyweight-champion-stipe-miocic.html), a partnership that cemented its image as the beer for fighters, fans, and anyone who liked their beer with a side of swagger.
 
-Deals with the LA Galaxy, the Las Vegas Raiders, and a handful of college football properties only extended its reach.
+Deals with the [LA Galaxy](https://www.lagalaxy.com/news/the-la-galaxy-dignity-health-sports-park-and-modelo-raise-a-glass-to-decade-long-partnership-with-multi-year-renewal), the [Las Vegas Raiders](https://www.allegiantstadium.com/news/detail/modelo), and a handful of college football properties only extended its reach.
 
 These sponsorships put Modelo front and center on game day, tailgates, and barroom TVs across the country. And they worked.
 
-Analysts credit Modelo's brand success to its consistent image: tough, active, and authentic.
+To my eye, Modelo's brand success comes from its consistent image: tough, active, and authentic.
 
 While its marketing leans into Mexican pride and iconography, Modelo has managed to celebrate its heritage without getting boxed in by it, walking a cultural line few brands can manage.
 
@@ -116,11 +115,11 @@ While its marketing leans into Mexican pride and iconography, Modelo has managed
 
 That crossover appeal isn't hypothetical.
 
-Household data cited in 2024 coverage showed Modelo had moved well beyond a single demographic lane. Hispanic consumers remain central to the brand, but non-Hispanic households were buying it at large scale too. Craft breweries noticed and began chasing the same lane with Mexican-style lagers of their own.
+[Household data cited in 2024 coverage](https://www.nacsmagazine.com/Issues/October-2024/Mexican-Beer%E2%80%99s-%E2%80%98Fighting-Spirit%E2%80%99) showed Modelo had moved well beyond a single demographic lane. Hispanic consumers remain central to the brand, but non-Hispanic households were buying it at large scale too. Craft breweries noticed and began chasing the same lane with Mexican-style lagers of their own.
 
 Modelo's rise wasn't just about branding. It was about reading the map.
 
-America's Latino population has grown from roughly 12.5% in 2000 to nearly 20% today.
+America's Latino population has grown from roughly 12.5% in 2000 to [19.5% in 2023](https://www.census.gov/newsroom/press-releases/2024/population-estimates-characteristics.html).
 
 That is not just loyalty. It is strategic alignment.
 
@@ -132,11 +131,11 @@ But here's the twist:
 
 > Bud Light is fighting back.
 
-In late 2023, Anheuser-Busch signed a multiyear deal to make Bud Light the new official beer of the UFC, replacing Modelo.
+[In late 2023, Anheuser-Busch signed a multiyear deal to make Bud Light the new official beer of the UFC, replacing Modelo](https://s202.q4cdn.com/437702206/files/doc_news/2023/10/TKO_UFC-AB-Spon-Release_10-24-23_12pm_Final.pdf#page=1).
 
 It was a comeback cage match for a brand still reeling from a major sales drop.
 
-Bud Light had been a fixture in the UFC's early days before it stepped away in 2017.
+Bud Light had been a fixture in the UFC's early days before [Modelo's partnership began in 2018](https://www.ufc.com/news/ufc-and-modelo-announce-new-partnership).
 
 > Now it is back in the ring, gloves on, betting that fans are ready to forgive and forget.
 
@@ -150,7 +149,7 @@ Mexican beers now dominate the U.S. import market, accounting for a large majori
 
 But it is not all sunshine and lime wedges.
 
-In 2025, Constellation Brands warned of slowing beer growth and weaker demand from Hispanic consumers, with management pointing to economic pressure, immigration concerns, and tariff exposure. Aluminum costs also mattered because beer still moves through cans, trucks, retailers, and margins.
+[In 2025, Constellation Brands warned of slowing beer growth and weaker demand from Hispanic consumers, with management pointing to economic pressure, immigration concerns, and tariff exposure](https://www.roic.ai/quote/STZ:US/transcripts/2025-year/4-quarter). Aluminum costs also mattered because beer still moves through cans, trucks, retailers, and margins.
 
 Modelo is brewed in Mexico, one of its selling points, but also a potential business risk if tariffs or anti-Mexico rhetoric escalate.
 

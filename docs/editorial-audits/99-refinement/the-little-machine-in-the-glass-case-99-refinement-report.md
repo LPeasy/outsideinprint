@@ -1,3 +1,51 @@
+# Current link-only review — September 27, 2026
+
+File: `content/essays/the-little-machine-in-the-glass-case.md`  
+Version: `1.1 / Second web edition`  
+SHA-256: `a166f3e90470d2a122d60342faca53ff8422ae4dc0eeb11cf99e82f92ee2f6ac`
+
+Current status: **PASS (bounded citation revision)**. Original prose restored; only supported hyperlink additions/destination repairs and minor citation metadata are allowed. Minimal corrections remain private and unapproved. This checkpoint supersedes all earlier September 27 major-revision candidates below; their claims that prose corrections were applied are no longer current.
+
+Two anchors expose the 1877 Patent Office fire record and Hagley model history. Existing patent-office, museum and statutory sources remain; the mechanical model is not treated as proof of commercial success.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+This is a bounded citation revision, not a new numerical grade or blanket recertification of the archive.
+
+- Evidence: PASS — Two anchors expose the 1877 Patent Office fire record and Hagley model history. Existing patent-office, museum and statutory sources remain; the mechanical model is not treated as proof of commercial success.
+- Logic: PASS — The existing argument is unchanged; the new anchors support named facts rather than pretending to prove every inference.
+- Incentives: PASS — Existing actor incentives and accountability remain separate from source provenance; links add no motive allegations.
+- Tradeoffs: PASS — Existing qualifications and competing costs remain intact; no one-sided recommendation was added.
+- Consequences: PASS — The existing consequences remain analysis, not new measured outcomes claimed from a source.
+- Uncertainty: PASS — Reporting periods, rough estimates, attributed findings and access limitations are preserved; this update makes no prediction certain.
+- Institutional Behavior: PASS — Official/actor records retain their distinct roles; no institutional statement is silently converted into independent corroboration.
+
+Private proposals: `../core-link-only-root-approvals-2026-09-27.md`. No tests, production gate, commit, or publication performed by this record.
+
+## Superseded research history — not current clearance
+
+# Claim-link review: September 27, 2026
+
+Reviewed edition: `1.1 / Second web edition`. Link-only pass; original reporting, date, and artwork preserved. No new numerical grade or publication clearance.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+- Evidence: PASS - Both added links lead to inspected passages matching the existing fire and disposal claims; museum history and the contemporary account remain attributed.
+- Logic: PASS - A clearer physical model is not equated with proof that an invention works or that a patent's scope is justified.
+- Incentives: PASS - Private exclusion, disclosure, examination, storage, and public access remain distinct parts of the patent bargain.
+- Tradeoffs: PASS - Models' inspectability is weighed against expense, fire, space, and poor fit for some technologies; no return to universal models is proposed.
+- Consequences: PASS - Lost and scattered records are traced to public knowledge and examination costs without an invented causal estimate.
+- Uncertainty: PASS - The 1880 endpoint remains attributed to Hagley; unavailable original administrative details are not newly claimed as verified.
+- Institutional Behavior: PASS - Inventors, Congress, examiners, archivists, museums, and collectors retain different responsibilities across the record's life.
+
+## Historical report: June 28, 2026
+
+Earlier scores and readiness language below are historical; release gates remain pending.
+
 # OIP-99 Refinement Report
 
 Package: `output/evergreen_candidates/2026-06-28-the-little-machine-in-the-glass-case-flagship`  

@@ -6,8 +6,8 @@ date: 2026-06-02
 draft: false
 slug: "the-examiners-red-pencil"
 section_label: "Essay"
-version: "1.3"
-edition: "Fourth web edition"
+version: "2.0"
+edition: "Fifth web edition"
 featured: false
 featured_image: "essays/the-examiners-red-pencil/hero"
 featured_image_alt: "An editorial illustration of a red pencil resting across a thick bank examination report on a desk, with a vault door and green risk gauges in the background."
@@ -22,6 +22,9 @@ tags:
   - "institutions"
   - "supervision"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected supervisory title, regulatory-package chronology and capital-estimate scope. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-06-04"
     note: "Updated June 4, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -39,7 +42,7 @@ In bank supervision, an MRA is a written warning issued by an examiner for bank 
 
 [Reuters reported Tuesday](https://www.marketscreener.com/news/wall-street-banks-push-fed-to-future-proof-supervision-overhaul-sources-say-ce7f5adddf8dfe27) that large Wall Street banks are pressing the Federal Reserve to make its recent supervision changes durable enough to survive future political turnover. The Reuters frame is a lobbying story: banks want a friendlier Fed to lock in a friendlier regime. That frame supplies a useful lead. It cannot carry the essay.
 
-The public record points to a larger question. The Fed has been changing the way examiners use pressure. Chair for Supervision Michelle Bowman has argued for a more disciplined, risk-based examination culture. The Board has issued new [supervisory operating principles](https://www.federalreserve.gov/supervisionreg/files/statement-of-supervisory-operating-principles-20260430.pdf). The banking agencies have opened comment on a proposed update to the [Uniform Financial Institutions Rating System](https://ncua.gov/newsroom/press-release/2026/agencies-request-comment-financial-institutions-rating-system), the old CAMELS framework that turns bank condition into a supervisory grade. The Fed has also moved to strip [reputation risk](https://www.federalreserve.gov/newsevents/pressreleases/bcreg20250623a.htm) out of examination programs and has proposed rules aimed at debanking concerns.
+The public record points to a larger question. The Fed has been changing the way examiners use pressure. Vice Chair for Supervision Michelle Bowman has argued for a more disciplined, risk-based examination culture. The Board has issued new [supervisory operating principles](https://www.federalreserve.gov/supervisionreg/files/statement-of-supervisory-operating-principles-20260430.pdf). The banking agencies have opened comment on a proposed update to the [Uniform Financial Institutions Rating System](https://ncua.gov/newsroom/press-release/2026/agencies-request-comment-financial-institutions-rating-system), the old CAMELS framework that turns bank condition into a supervisory grade. The Fed has also moved to strip [reputation risk](https://www.federalreserve.gov/newsevents/pressreleases/bcreg20250623a.htm) out of examination programs and has proposed rules aimed at debanking concerns.
 
 Those changes sit inside one civic tradeoff. A vague examiner can become an unaccountable regulator. A timid examiner can become a historian of the next failure.
 
@@ -85,7 +88,7 @@ That lesson cuts both ways. A long list of findings can become clutter. A short 
 
 ## Reputation, Politics, and the Edge of the Charter
 
-The Fed's removal of reputation risk belongs in the same story. In June 2025, the Board announced that reputation risk would leave examination programs. In February 2026, the Fed proposed a definition for reputation risk and a bar on examiner use of it as a covered reason to criticize a bank's products, services, customers, or practices, with exceptions tied to objective evidence of legal and safety concerns.
+The Fed's removal of reputation risk belongs in the same story. In June 2025, the Board announced that reputation risk would leave examination programs. In February 2026, the Fed [proposed to codify the removal of reputation risk from supervision](https://www.federalreserve.gov/apps/proposals/FR-2026-0002-01/details) and prohibit supervisory pressure to deny services based on constitutionally protected political or religious beliefs or politically disfavored but lawful business activity.
 
 That change speaks to debanking fights. Banks have faced criticism for closing accounts tied to politically sensitive, lawful, or disliked businesses and customers. Regulators have faced criticism for letting a subjective phrase become a tool for indirect pressure.
 
@@ -97,7 +100,7 @@ That is the same red-pencil problem with a different cover page.
 
 ## Capital on the Other Side of the Desk
 
-The supervision fight also arrives while the Fed is revisiting capital rules. In March, the agencies proposed changes to the eSLR standards and said the revisions could reduce aggregate tier 1 capital requirements for bank holding companies by about $13 billion. Michael Barr, the former vice chair for supervision, dissented in a [public statement](https://www.federalreserve.gov/newsevents/pressreleases/barr-statement-20260319.htm), arguing that the combined effect of the eSLR proposal, stress-capital changes, and other measures could reduce required capital for the largest firms by more than $60 billion.
+The supervision fight also arrives while the Fed is revisiting capital rules. In March, the agencies [proposed changes to risk-based capital requirements and the systemic-risk surcharge for the largest banks](https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260319a.htm). Michael Barr, the former vice chair for supervision, dissented in a [public statement](https://www.federalreserve.gov/newsevents/pressreleases/barr-statement-20260319.htm), arguing that the March proposals, proposed stress-test changes, and recent eSLR changes together could reduce global systemically important banks' tier 1 capital requirements by 6 percent, or $60 billion.
 
 The number will be debated. The structure is the point. Supervision, capital, ratings, and examination findings are connected. A bank can be safer because it holds more capital. It can be safer because its liquidity risk is better managed. It can be safer because its governance is stronger. It can also appear safer because the official instruments that name weakness have been narrowed.
 

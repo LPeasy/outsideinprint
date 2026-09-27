@@ -8,9 +8,12 @@ collections: ["risk-uncertainty"]
 section_label: "Essay"
 subtitle: "How your monthly budget can explain two core ideas from probability, risk, and economics ~"
 description: "A practical guide to mutually exclusive and collectively exhaustive thinking, using a household budget to show how categories prevent overlap and omission."
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected double-counting and unallocated-balance examples. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-21"
     note: "Updated May 21, 2026, after OIP back-archive review. House-style issues, legacy punctuation, and rendering were checked."
@@ -84,9 +87,9 @@ Even if you never say it out loud, you're aiming for two things:
 
 #### Those two simple aims are the heart of the fancy terms
 
-- **Mutually exclusive** ~ categories do not overlap for
+- **[Mutually exclusive](https://web.mit.edu/urban_or_book/www/book/chapter2/2.1.html)** ~ categories do not overlap for
   a single item.
-- **Collectively exhaustive** ~ together, the categories
+- **[Collectively exhaustive](https://web.mit.edu/urban_or_book/www/book/chapter2/2.1.html)** ~ together, the categories
   cover every relevant part of the picture.
 
 You already care about both ideas whenever you ask, "Where did it all
@@ -110,8 +113,8 @@ You could call it entertainment.\
 You might even call it mental healthcare.
 
 If you aren't careful, that single charge can sneak into more than one
-category. Part of it ends up in groceries, part in fun, and you tell
-yourself you invested in self-care.
+category. The full \$18 ends up in groceries, the full \$18 in fun, and the
+full \$18 in self-care.
 
 On the statement, it's one transaction. On your budget, who knows???
 
@@ -150,9 +153,9 @@ Your take-home pay was \$3,000, but your seven buckets only add up to
 
 > There's a \$500 ghost in the machine ~
 
-When that happens, you have just seen what it means for a list of
-categories to ***not* be collectively exhaustive.** Your set leaves out
-something…
+If that \$500 remains in your account, it is an unallocated balance,
+not a missing expense. If it was spent but left out of your categories,
+you have just seen what it means to ***not* be collectively exhaustive.**
 
 #### Maybe you forgot:
 

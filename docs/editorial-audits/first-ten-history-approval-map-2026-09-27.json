@@ -1,0 +1,140 @@
+{
+  "date": "2026-09-27",
+  "scope": "User-approved batch items 1, 9 and 10 only; exact sequential public-file replacements from pre-edit snapshots.",
+  "snapshot_directory": "/tmp/oip-first-ten-history-oT57ni",
+  "files": [
+    {
+      "path": "content/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.md",
+      "snapshot": "/tmp/oip-first-ten-history-oT57ni/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.md",
+      "replacements": [
+        {
+          "before": "    note: \"Attributed the reported 5:10 a.m., 37.52-foot crest to Commerce OIG; distinguished illustrative evacuation assumptions from observations and removed unsupported gauge-to-cabin thresholds and dependent timing conclusions. Corrected analytical graphics and retained surrounding prose and claim-level source links.\"",
+          "after": "    note: \"Attributed the reported 5:10 a.m., 37.52-foot crest to Commerce OIG; distinguished illustrative evacuation assumptions from observations and removed unsupported gauge-to-cabin thresholds and dependent timing conclusions. Corrected analytical graphics, distinguished the separate campuses, removed unsupported same-day reporting precision, and acknowledged ABC’s preliminary-estimate caveat; surrounding prose retained.\"",
+          "count": 1
+        },
+        {
+          "before": "**Both of Carr's timelines** ~ 2:30 and revised 2:00 a.m. ~ **were\npublished on July 14, 2025**, in ***The Washington Post*** and ***ABC\nNews***, respectively.",
+          "after": "**Both of Carr's timelines** ~ 2:30 and revised 2:00 a.m. ~ were\nreported in ***The Washington Post*** and ***ABC News***, respectively.",
+          "count": 1
+        },
+        {
+          "before": "**Camp Mystic sits along a bend of the South Fork of the Guadalupe River\nin Hunt, Texas.**",
+          "after": "**Camp Mystic's Guadalupe River campus sits along a bend of the South Fork\nof the Guadalupe River in Hunt, Texas.**",
+          "count": 1
+        },
+        {
+          "before": "run parallel to the water, while the chapel and dining hall sit further\nuphill.",
+          "after": "run parallel to the water.",
+          "count": 1
+        },
+        {
+          "before": "![Camp Mystic grounds showing Cypress Lake and uphill areas.]",
+          "after": "![Camp Mystic grounds overview.]",
+          "count": 1
+        },
+        {
+          "before": "**At the crest sits Cypress Lake**, a reservoir that marks the highest\nground. Around it are the stables, the archery range, and newer cabins\nbuilt above the floodplain.",
+          "after": "[**Cypress Lake is a separate campus.**](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=54) Here, the focus is Camp Mystic's Guadalupe River campus, including Senior Hill and the Flats.",
+          "count": 1
+        },
+        {
+          "before": "**Descend the slope and you pass fields**",
+          "after": "**Across the Guadalupe River campus are fields**",
+          "count": 1
+        },
+        {
+          "before": "**Continue downhill and you reach the Flats** ~ a strip of cabins sit\njust about level with the river",
+          "after": "**The lower riverside area is known as the Flats** ~ a strip of cabins\nnear the river",
+          "count": 1
+        },
+        {
+          "before": "**Finally, at the bottom, the Guadalupe River**",
+          "after": "**Beside the camp, the Guadalupe River**",
+          "count": 1
+        },
+        {
+          "before": "On paper, that narrative sounds plausible.",
+          "after": "On paper, that narrative sounds plausible.\n\n[ABC described Carr's account as a preliminary estimate and noted its difference from his earlier Washington Post account.](https://abc11.com/post/camp-mystic-began-evacuating-45-minutes-flash-flooding-alert-spokesperson/17129239/)",
+          "count": 1
+        },
+        {
+          "before": "#### **3. Should ABC have questioned the camp spokesman's statements?**\n\nAnd if so, why didn't they?",
+          "after": "#### **3. How thoroughly did ABC test the camp spokesman's statements?**\n\nWhat evidence could have tested the timeline more firmly?",
+          "count": 1
+        }
+      ],
+      "records": [
+        "docs/editorial-audits/99-refinement/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025-source-checklist.md"
+      ],
+      "sha256": "cfdc2084c5eccec512149956330094ebc00199c2387f44984565d94df39893ab"
+    },
+    {
+      "path": "content/essays/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events.md",
+      "snapshot": "/tmp/oip-first-ten-history-oT57ni/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events.md",
+      "replacements": [
+        {
+          "before": "version: \"1.1\"\nedition: \"Second web edition\"",
+          "after": "version: \"2.0\"\nedition: \"Third web edition\"",
+          "count": 1
+        },
+        {
+          "before": "revision_history:\n  - version: \"1.1\"",
+          "after": "revision_history:\n  - version: \"2.0\"\n    date: \"2026-09-27\"\n    note: \"Reframed the local staffing inference as an institutional-capacity question; surrounding prose, publication date, and artwork retained.\"\n  - version: \"1.1\"",
+          "count": 1
+        },
+        {
+          "before": "Kerr County's public emergency-management materials pointed readers to a\nsheriff's-office structure and volunteer CERT support, not a deep\nprofessional planning bench.",
+          "after": "Public emergency-management materials alone do not establish the depth of a\ncounty's professional planning bench.",
+          "count": 1
+        },
+        {
+          "before": "It means the institution may have been built",
+          "after": "The question is whether the institution was built",
+          "count": 1
+        }
+      ],
+      "records": [
+        "docs/editorial-audits/99-refinement/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events-source-checklist.md"
+      ],
+      "sha256": "1d7b64bf9e293cba9982ff74d63509eb2e0a65f6a0ab3f8bb4562a68e0d149d1"
+    },
+    {
+      "path": "content/essays/the-world-is-back-at-the-poker-table.md",
+      "snapshot": "/tmp/oip-first-ten-history-oT57ni/the-world-is-back-at-the-poker-table.md",
+      "replacements": [
+        {
+          "before": "version: \"1.1\"\nedition: \"Second web edition\"",
+          "after": "version: \"2.0\"\nedition: \"Third web edition\"",
+          "count": 1
+        },
+        {
+          "before": "revision_history:\n  - version: \"1.1\"",
+          "after": "revision_history:\n  - version: \"2.0\"\n    date: \"2026-09-27\"\n    note: \"Removed three unmatched nominal-GDP forecast figures and linked the retained qualitative rankings, manufacturing/export role, and growth statement to sources available before original publication; surrounding argument and artwork retained.\"\n  - version: \"1.1\"",
+          "count": 1
+        },
+        {
+          "before": "The U.S. remains the world's largest economy at roughly $31.8 trillion in projected 2026 nominal GDP, well ahead of every rival.",
+          "after": "[The U.S. remains the world's largest economy by nominal GDP](https://datacatalogfiles.worldbank.org/ddh-published/0038130/DR0046441/GDP.pdf), well ahead of every rival.",
+          "count": 1
+        },
+        {
+          "before": "China holds the world's second-largest economy at roughly $20.6 trillion and remains central to global manufacturing and exports.",
+          "after": "[China holds the world's second-largest economy by nominal GDP](https://datacatalogfiles.worldbank.org/ddh-published/0038130/DR0046441/GDP.pdf) and remains central to [global manufacturing](https://www.imf.org/en/news/articles/2026/03/21/sp032226-chinas-new-chapter-rebalancing-and-unleashing-market-forces) and [exports](https://www.imf.org/-/media/files/publications/weo/2026/update/january/english/text.pdf#page=3).",
+          "count": 1
+        },
+        {
+          "before": "India is projected near $4.5 trillion in 2026 nominal GDP and continues to post strong growth.",
+          "after": "[India continues to post strong growth.](https://www.imf.org/-/media/files/publications/weo/2026/update/january/english/text.pdf#page=6)",
+          "count": 1
+        }
+      ],
+      "records": [
+        "docs/editorial-audits/99-refinement/the-world-is-back-at-the-poker-table-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/the-world-is-back-at-the-poker-table-source-checklist.md"
+      ],
+      "sha256": "8df145fd71f1786ed58d4622d3fc6ec3112456a025667197d6bdc1de151cae91"
+    }
+  ]
+}

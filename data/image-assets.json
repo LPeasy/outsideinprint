@@ -1840,6 +1840,57 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/evidence-types-corrected-20260927": {
+      "id": "essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/evidence-types-corrected-20260927",
+      "source": "images/originals/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/evidence-types-corrected-20260927.png",
+      "sha256": "afc4bae4f7ddbcd46e79d1d18fbdc863541827658874a7cd33f493973b5d59fc",
+      "width": 1513,
+      "height": 1039,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": {
+        "webp_quality": 90,
+        "avif_quality": 70
+      }
+    },
+    "essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/hunt-readings-corrected-20260927": {
+      "id": "essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/hunt-readings-corrected-20260927",
+      "source": "images/originals/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/hunt-readings-corrected-20260927.png",
+      "sha256": "6feb2801301dfcaac66c0b218e83ca18b6dc6b247a1ad1c1d4098b88c52da67b",
+      "width": 1586,
+      "height": 992,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": {
+        "webp_quality": 90,
+        "avif_quality": 70
+      }
+    },
+    "essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/illustrative-timing-corrected-20260927": {
+      "id": "essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/illustrative-timing-corrected-20260927",
+      "source": "images/originals/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/illustrative-timing-corrected-20260927.png",
+      "sha256": "e2650f7a155f554386b06056cc92276529a46f7c9de76fd1f083c247333c5e3c",
+      "width": 1586,
+      "height": 992,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": {
+        "webp_quality": 90,
+        "avif_quality": 70
+      }
+    },
     "essays/can-you-pass-the-pepper-please/hero": {
       "id": "essays/can-you-pass-the-pepper-please/hero",
       "source": "images/originals/essays/can-you-pass-the-pepper-please/hero.png",
@@ -2287,6 +2338,57 @@
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
+    },
+    "essays/flash-flood-alley-why-flash-floods-kill/preparedness-layers-corrected-20260927": {
+      "id": "essays/flash-flood-alley-why-flash-floods-kill/preparedness-layers-corrected-20260927",
+      "source": "images/originals/essays/flash-flood-alley-why-flash-floods-kill/preparedness-layers-corrected-20260927.png",
+      "sha256": "234785927f636929ffcdc23974bce5ff15e02f3b807a498a40ae225437d1ff98",
+      "width": 1024,
+      "height": 1536,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": {
+        "webp_quality": 90,
+        "avif_quality": 70
+      }
+    },
+    "essays/flash-flood-alley-why-flash-floods-kill/runoff-factors-corrected-20260927": {
+      "id": "essays/flash-flood-alley-why-flash-floods-kill/runoff-factors-corrected-20260927",
+      "source": "images/originals/essays/flash-flood-alley-why-flash-floods-kill/runoff-factors-corrected-20260927.png",
+      "sha256": "df935b6bfb444968b2255162727f0177afa21b85a87a61cc4ede5e2cd8ec7c5f",
+      "width": 1254,
+      "height": 1254,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": {
+        "webp_quality": 90,
+        "avif_quality": 70
+      }
+    },
+    "essays/flash-flood-alley-why-flash-floods-kill/warning-routes-corrected-20260927": {
+      "id": "essays/flash-flood-alley-why-flash-floods-kill/warning-routes-corrected-20260927",
+      "source": "images/originals/essays/flash-flood-alley-why-flash-floods-kill/warning-routes-corrected-20260927.png",
+      "sha256": "c01f74750485934c00595ea6c4aed292d8f5a0f61cbc7751af2d15303ce07de4",
+      "width": 1536,
+      "height": 1024,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": {
+        "webp_quality": 90,
+        "avif_quality": 70
+      }
     },
     "essays/forget-the-score/section-1": {
       "id": "essays/forget-the-score/section-1",
@@ -3142,6 +3244,23 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/timeline-corrected-20260927": {
+      "id": "essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/timeline-corrected-20260927",
+      "source": "images/originals/essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/timeline-corrected-20260927.png",
+      "sha256": "8570737a8dcf6e5527b44d45dee3c26b05acc02a93f7b621adf658357aecfc76",
+      "width": 1024,
+      "height": 1536,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": {
+        "webp_quality": 90,
+        "avif_quality": 70
+      }
+    },
     "essays/presidential-elections/hero": {
       "id": "essays/presidential-elections/hero",
       "source": "images/originals/essays/presidential-elections/hero.png",
@@ -3155,6 +3274,23 @@
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
+    },
+    "essays/public-vs-private-pay-who-really-earns-more/compensation-shares-corrected-20260927": {
+      "id": "essays/public-vs-private-pay-who-really-earns-more/compensation-shares-corrected-20260927",
+      "source": "images/originals/essays/public-vs-private-pay-who-really-earns-more/compensation-shares-corrected-20260927.png",
+      "sha256": "7d22d3ce45886b87f9989cea12b271973200195c350523389a29e414769f6650",
+      "width": 1896,
+      "height": 830,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": {
+        "webp_quality": 90,
+        "avif_quality": 70
+      }
     },
     "essays/rational-ignorance-in-the-u-s-presidential-electorate/hero": {
       "id": "essays/rational-ignorance-in-the-u-s-presidential-electorate/hero",
@@ -3207,10 +3343,27 @@
       "image_class": "essay_illustration",
       "processing_hint": "drawing",
       "review_state": "approved",
-      "usage_state": "referenced",
+      "usage_state": "retained_unreferenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
+    },
+    "essays/rethinking-invasive-species-management/case-hydrilla-floating-heart-corrected-20260927": {
+      "id": "essays/rethinking-invasive-species-management/case-hydrilla-floating-heart-corrected-20260927",
+      "source": "images/originals/essays/rethinking-invasive-species-management/case-hydrilla-floating-heart-corrected-20260927.png",
+      "sha256": "16818007ae045b46bd7ac6a8c66b4ef10ed21e8a01ecdca3a2fda8439fc40a5c",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": {
+        "webp_quality": 90,
+        "avif_quality": 70
+      }
     },
     "essays/rethinking-invasive-species-management/case-lionfish-zebra-mussels": {
       "id": "essays/rethinking-invasive-species-management/case-lionfish-zebra-mussels",
@@ -3235,10 +3388,27 @@
       "image_class": "essay_illustration",
       "processing_hint": "drawing",
       "review_state": "approved",
-      "usage_state": "referenced",
+      "usage_state": "retained_unreferenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
+    },
+    "essays/rethinking-invasive-species-management/case-python-monitor-corrected-20260927": {
+      "id": "essays/rethinking-invasive-species-management/case-python-monitor-corrected-20260927",
+      "source": "images/originals/essays/rethinking-invasive-species-management/case-python-monitor-corrected-20260927.png",
+      "sha256": "15399ec63ad17038103b2833c0edc6afc514cb2b784330556af7be29964b53e6",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": {
+        "webp_quality": 90,
+        "avif_quality": 70
+      }
     },
     "essays/rethinking-invasive-species-management/florida-ecosystem": {
       "id": "essays/rethinking-invasive-species-management/florida-ecosystem",
@@ -3571,10 +3741,27 @@
       "image_class": "essay_illustration",
       "processing_hint": "drawing",
       "review_state": "approved",
-      "usage_state": "referenced",
+      "usage_state": "retained_unreferenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
+    },
+    "essays/the-100-year-flood-is-not-what-you-think/section-5-corrected-20260927": {
+      "id": "essays/the-100-year-flood-is-not-what-you-think/section-5-corrected-20260927",
+      "source": "images/originals/essays/the-100-year-flood-is-not-what-you-think/section-5-corrected-20260927.png",
+      "sha256": "f0a3b8df0d4a7ce4d9fcfb9ea2dfee7731b53ba7ad72dd1ff8fb552a72b0286c",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": {
+        "webp_quality": 90,
+        "avif_quality": 70
+      }
     },
     "essays/the-100-year-flood-is-not-what-you-think/section-6": {
       "id": "essays/the-100-year-flood-is-not-what-you-think/section-6",
@@ -5732,6 +5919,23 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/scoped-trends-corrected-20260927": {
+      "id": "essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/scoped-trends-corrected-20260927",
+      "source": "images/originals/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/scoped-trends-corrected-20260927.png",
+      "sha256": "db556293b525482797acbcfc7bc734dc1bad73831d14fe09da73541e64255bc2",
+      "width": 1536,
+      "height": 1024,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": {
+        "webp_quality": 90,
+        "avif_quality": 70
+      }
+    },
     "essays/the-world-is-back-at-the-poker-table/back-room-chips": {
       "id": "essays/the-world-is-back-at-the-poker-table/back-room-chips",
       "source": "images/originals/essays/the-world-is-back-at-the-poker-table/back-room-chips.png",
@@ -5815,6 +6019,23 @@
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
+    },
+    "essays/what-happened-at-camp-mystic/hunt-observations-corrected-20260927": {
+      "id": "essays/what-happened-at-camp-mystic/hunt-observations-corrected-20260927",
+      "source": "images/originals/essays/what-happened-at-camp-mystic/hunt-observations-corrected-20260927.png",
+      "sha256": "8f674358d8c8a0739c93de99069ee9cbbe2e922fbec38abf119f0e96b977050d",
+      "width": 1981,
+      "height": 793,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": {
+        "webp_quality": 90,
+        "avif_quality": 70
+      }
     },
     "essays/what-i-let-in/section-1": {
       "id": "essays/what-i-let-in/section-1",
@@ -6035,7 +6256,7 @@
       "image_class": "medium_import",
       "processing_hint": "drawing",
       "review_state": "approved",
-      "usage_state": "referenced",
+      "usage_state": "retained_unreferenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
@@ -6203,7 +6424,7 @@
       "image_class": "medium_import",
       "processing_hint": "drawing",
       "review_state": "approved",
-      "usage_state": "referenced",
+      "usage_state": "retained_unreferenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
@@ -6287,7 +6508,7 @@
       "image_class": "medium_import",
       "processing_hint": "drawing",
       "review_state": "approved",
-      "usage_state": "referenced",
+      "usage_state": "retained_unreferenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
@@ -6315,7 +6536,7 @@
       "image_class": "medium_import",
       "processing_hint": "drawing",
       "review_state": "approved",
-      "usage_state": "referenced",
+      "usage_state": "retained_unreferenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
@@ -6819,7 +7040,7 @@
       "image_class": "medium_import",
       "processing_hint": "drawing",
       "review_state": "approved",
-      "usage_state": "referenced",
+      "usage_state": "retained_unreferenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
@@ -7099,7 +7320,7 @@
       "image_class": "medium_import",
       "processing_hint": "drawing",
       "review_state": "approved",
-      "usage_state": "referenced",
+      "usage_state": "retained_unreferenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
@@ -7197,7 +7418,7 @@
       "image_class": "medium_import",
       "processing_hint": "drawing",
       "review_state": "approved",
-      "usage_state": "referenced",
+      "usage_state": "retained_unreferenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
@@ -7365,7 +7586,7 @@
       "image_class": "medium_import",
       "processing_hint": "drawing",
       "review_state": "approved",
-      "usage_state": "referenced",
+      "usage_state": "retained_unreferenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
@@ -7393,7 +7614,7 @@
       "image_class": "medium_import",
       "processing_hint": "drawing",
       "review_state": "approved",
-      "usage_state": "referenced",
+      "usage_state": "retained_unreferenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
@@ -7435,7 +7656,7 @@
       "image_class": "medium_import",
       "processing_hint": "drawing",
       "review_state": "approved",
-      "usage_state": "referenced",
+      "usage_state": "retained_unreferenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
@@ -7629,6 +7850,9 @@
     "/images/essays/biter-the-slang-word-that-hits/style-fashion.jpg": "essays/biter-the-slang-word-that-hits/style-fashion",
     "/images/essays/biter-the-slang-word-that-hits/teeth.jpg": "essays/biter-the-slang-word-that-hits/teeth",
     "/images/essays/borrowed-hour/hero.png": "editorial/borrowed-hour",
+    "/images/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/evidence-types-corrected-20260927.png": "essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/evidence-types-corrected-20260927",
+    "/images/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/hunt-readings-corrected-20260927.png": "essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/hunt-readings-corrected-20260927",
+    "/images/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/illustrative-timing-corrected-20260927.png": "essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/illustrative-timing-corrected-20260927",
     "/images/essays/can-you-pass-the-pepper-please/hero.png": "essays/can-you-pass-the-pepper-please/hero",
     "/images/essays/can-you-pass-the-pepper-please/section-1.png": "essays/can-you-pass-the-pepper-please/section-1",
     "/images/essays/can-you-pass-the-pepper-please/section-2.png": "essays/can-you-pass-the-pepper-please/section-2",
@@ -7659,6 +7883,9 @@
     "/images/essays/first-step/hero.png": "editorial/the-trophy-case",
     "/images/essays/first-step/section-1.png": "essays/first-step/section-1",
     "/images/essays/first-step/section-2.png": "essays/first-step/section-2",
+    "/images/essays/flash-flood-alley-why-flash-floods-kill/preparedness-layers-corrected-20260927.png": "essays/flash-flood-alley-why-flash-floods-kill/preparedness-layers-corrected-20260927",
+    "/images/essays/flash-flood-alley-why-flash-floods-kill/runoff-factors-corrected-20260927.png": "essays/flash-flood-alley-why-flash-floods-kill/runoff-factors-corrected-20260927",
+    "/images/essays/flash-flood-alley-why-flash-floods-kill/warning-routes-corrected-20260927.png": "essays/flash-flood-alley-why-flash-floods-kill/warning-routes-corrected-20260927",
     "/images/essays/forget-the-score/hero.png": "editorial/the-crooked-row",
     "/images/essays/forget-the-score/section-1.png": "essays/forget-the-score/section-1",
     "/images/essays/from-variety-to-virtue/hero.png": "essays/from-variety-to-virtue/hero",
@@ -7730,12 +7957,16 @@
     "/images/essays/pay-attention-to-you/hero.png": "editorial/not-mine-to-carry",
     "/images/essays/pay-attention-to-you/section-1.png": "essays/pay-attention-to-you/section-1",
     "/images/essays/pope-francis-how-a-plainspoken-pope-reframed-moral-authority/hero.png": "essays/pope-francis-how-a-plainspoken-pope-reframed-moral-authority/hero",
+    "/images/essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/timeline-corrected-20260927.png": "essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/timeline-corrected-20260927",
     "/images/essays/presidential-elections/hero.png": "essays/presidential-elections/hero",
+    "/images/essays/public-vs-private-pay-who-really-earns-more/compensation-shares-corrected-20260927.png": "essays/public-vs-private-pay-who-really-earns-more/compensation-shares-corrected-20260927",
     "/images/essays/rational-ignorance-in-the-u-s-presidential-electorate/hero.png": "essays/rational-ignorance-in-the-u-s-presidential-electorate/hero",
     "/images/essays/ready-to-receive/section-1.png": "essays/ready-to-receive/section-1",
     "/images/essays/rethinking-coastal-retreat/hero.png": "essays/rethinking-coastal-retreat/hero",
+    "/images/essays/rethinking-invasive-species-management/case-hydrilla-floating-heart-corrected-20260927.png": "essays/rethinking-invasive-species-management/case-hydrilla-floating-heart-corrected-20260927",
     "/images/essays/rethinking-invasive-species-management/case-hydrilla-floating-heart.png": "essays/rethinking-invasive-species-management/case-hydrilla-floating-heart",
     "/images/essays/rethinking-invasive-species-management/case-lionfish-zebra-mussels.png": "essays/rethinking-invasive-species-management/case-lionfish-zebra-mussels",
+    "/images/essays/rethinking-invasive-species-management/case-python-monitor-corrected-20260927.png": "essays/rethinking-invasive-species-management/case-python-monitor-corrected-20260927",
     "/images/essays/rethinking-invasive-species-management/case-python-monitor.png": "essays/rethinking-invasive-species-management/case-python-monitor",
     "/images/essays/rethinking-invasive-species-management/florida-ecosystem.jpg": "essays/rethinking-invasive-species-management/florida-ecosystem",
     "/images/essays/rethinking-invasive-species-management/global-shipping.jpg": "essays/rethinking-invasive-species-management/global-shipping",
@@ -7765,6 +7996,7 @@
     "/images/essays/the-100-year-flood-is-not-what-you-think/section-2.png": "essays/the-100-year-flood-is-not-what-you-think/section-2",
     "/images/essays/the-100-year-flood-is-not-what-you-think/section-3.png": "essays/the-100-year-flood-is-not-what-you-think/section-3",
     "/images/essays/the-100-year-flood-is-not-what-you-think/section-4.png": "essays/the-100-year-flood-is-not-what-you-think/section-4",
+    "/images/essays/the-100-year-flood-is-not-what-you-think/section-5-corrected-20260927.png": "essays/the-100-year-flood-is-not-what-you-think/section-5-corrected-20260927",
     "/images/essays/the-100-year-flood-is-not-what-you-think/section-5.png": "essays/the-100-year-flood-is-not-what-you-think/section-5",
     "/images/essays/the-100-year-flood-is-not-what-you-think/section-6.png": "essays/the-100-year-flood-is-not-what-you-think/section-6",
     "/images/essays/the-100-year-flood-is-not-what-you-think/section-7.png": "essays/the-100-year-flood-is-not-what-you-think/section-7",
@@ -7930,12 +8162,14 @@
     "/images/essays/the-water-cycle/sample/v01-water-city-plate.png": "essays/the-water-cycle/sample/v01-water-city-plate",
     "/images/essays/the-water-cycle/sample/v02-waterway-rail-shift.png": "essays/the-water-cycle/sample/v02-waterway-rail-shift",
     "/images/essays/the-water-cycle/sample/v03-idaho-nfip-claim-records.png": "essays/the-water-cycle/sample/v03-idaho-nfip-claim-records",
+    "/images/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/scoped-trends-corrected-20260927.png": "essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/scoped-trends-corrected-20260927",
     "/images/essays/the-world-is-back-at-the-poker-table/back-room-chips.png": "essays/the-world-is-back-at-the-poker-table/back-room-chips",
     "/images/essays/the-world-is-back-at-the-poker-table/chips-in.png": "essays/the-world-is-back-at-the-poker-table/chips-in",
     "/images/essays/togetherness/hero.png": "essays/togetherness/hero",
     "/images/essays/uncrustables-the-billion-dollar-peanut-butter-empire/hero.png": "essays/uncrustables-the-billion-dollar-peanut-butter-empire/hero",
     "/images/essays/welcome-the-heat/section-1.png": "essays/welcome-the-heat/section-1",
     "/images/essays/what-grows/section-1.png": "essays/what-grows/section-1",
+    "/images/essays/what-happened-at-camp-mystic/hunt-observations-corrected-20260927.png": "essays/what-happened-at-camp-mystic/hunt-observations-corrected-20260927",
     "/images/essays/what-i-let-in/section-1.png": "essays/what-i-let-in/section-1",
     "/images/essays/when-can-states-draw-race-based-congressional-districts/hero.png": "essays/when-can-states-draw-race-based-congressional-districts/hero",
     "/images/essays/when-can-states-draw-race-based-congressional-districts/section-1.png": "essays/when-can-states-draw-race-based-congressional-districts/section-1",

@@ -1,5 +1,56 @@
 # Source Checklist
 
+## Current strict hyperlink-only record - 2026-09-27
+
+Review date: `2026-09-27`
+Essay: `content/essays/the-mailbox-at-the-clinic-door.md`
+Version: `1.2` - Third web edition
+Final content SHA-256: `44fb89a3f7dc326e6a4224c5bc69c06f922d792480937c4105110657adeee310`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+Public change: HYPERLINK-ONLY; original body words, punctuation, captions, order and artwork preserved.
+
+Link-scope result: supported added links; bounded Editorial Philosophy Audit PASS.
+
+Added two exact-phrase links to Danco's filed appendix, with PDF page fragments. Public prose and May reporting horizon remain unchanged.
+
+### Evidence and limits
+
+| Claim or action | Passage read on 2026-09-27 | Scope and limits |
+|---|---|---|
+| Fifth Circuit accepted Louisiana's sovereign/fiscal theories and likelihood of APA success at the emergency stage. | [Danco Supreme Court appendix](https://www.supremecourt.gov/DocketPDF/25/25A1207/407852/20260502123120215_Danco%20Stay%20Appendix%205-2-26.pdf#page=7): PDF pp. 7-16 show APA challenge, standing, sovereign and fiscal injury, likelihood of success; PDF p. 20 orders the stay pending appeal. | Court reasoning is attributed to the panel. It is not independently adopted medical causation, a final merits judgment, or a September legal status statement. |
+| Danco called the immediate order unprecedented and described operational uncertainty. | [Same appendix, PDF p. 64 / printed 62a](https://www.supremecourt.gov/DocketPDF/25/25A1207/407852/20260502123120215_Danco%20Stay%20Appendix%205-2-26.pdf#page=64), emergency administrative-stay motion: uncertainty for pharmacies, appointments, patients/providers, and governing REMS. | Interested manufacturer's advocacy, explicitly attributed, not the court's finding that the order was unprecedented. |
+| Existing FDA history, Supreme Court stay sequence, and Guttmacher statistic. | Full essay and prior source checklist read; existing primary docket/FDA/opinion links and attributed research link retained. | No redundant current-law or medical-efficacy re-audit. Public copy remains a dated report, not medical guidance. |
+
+### Private approval proposals
+
+No material factual correction identified in this bounded pass.
+
+This record supersedes every incompatible pre-rollback result below. Earlier corrected prose and associated PASS decisions are historical, not approval of the restored text. The user authorized supporting hyperlinks only; all proposed wording changes remain private and unapplied.
+
+Scope: full body and existing-record review, actual passage verification for new anchors and specific concerns, not a fresh exhaustive re-research of every retained citation. No numeric score, local test suite, build, commit or publication. Only the decimal revision and next edition were advanced; the disclosure is 'Added source links without changing prose.'
+
+## Superseded pre-rollback research - 2026-09-27
+
+All following hashes, corrected-copy descriptions, scores and decisions refer to historical states. They do not apply to the current content hash above.
+
+Review date: `2026-09-27`
+Version: `1.2` - Third web edition
+Final content SHA-256: `63fbf17a23d86ca9456bc68d0a3ac4086ba937d8ea3b7c4bceeb9826c6e58c25`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+
+Links-only revision. Added two precise appendix anchors without changing medical facts or the May 14, 2026 litigation snapshot. Original dates, route, collection, and images retained. This is not a September update on access or legal status.
+
+| Claim or action | Passage read on 2026-09-27 | Scope and limits |
+|---|---|---|
+| Fifth Circuit accepted Louisiana's sovereign/fiscal theories and likelihood of APA success at the emergency stage. | [Danco Supreme Court appendix](https://www.supremecourt.gov/DocketPDF/25/25A1207/407852/20260502123120215_Danco%20Stay%20Appendix%205-2-26.pdf#page=7): PDF pp. 7-16 show APA challenge, standing, sovereign and fiscal injury, likelihood of success; PDF p. 20 orders the stay pending appeal. | Court reasoning is attributed to the panel. It is not independently adopted medical causation, a final merits judgment, or a September legal status statement. |
+| Danco called the immediate order unprecedented and described operational uncertainty. | [Same appendix, PDF p. 64 / printed 62a](https://www.supremecourt.gov/DocketPDF/25/25A1207/407852/20260502123120215_Danco%20Stay%20Appendix%205-2-26.pdf#page=64), emergency administrative-stay motion: uncertainty for pharmacies, appointments, patients/providers, and governing REMS. | Interested manufacturer's advocacy, explicitly attributed, not the court's finding that the order was unprecedented. |
+| Existing FDA history, Supreme Court stay sequence, and Guttmacher statistic. | Full essay and prior source checklist read; existing primary docket/FDA/opinion links and attributed research link retained. | No redundant current-law or medical-efficacy re-audit. Public copy remains a dated report, not medical guidance. |
+
+The current companion report records the seven-part Editorial Philosophy Audit. Prior records below are historical and are superseded by this section where they conflict. No build, browser, Node, publication, or organization tests were run for this pass.
+
+## Historical source record
+
+
 Package: `2026-05-14-the-mailbox-at-the-clinic-door`
 
 ## Current Event Sources

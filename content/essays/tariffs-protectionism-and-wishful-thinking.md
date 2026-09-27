@@ -9,12 +9,15 @@ description: "When global powers face economic decline, they often turn to prote
 featured_image: "/images/medium/tariffs-protectionism-and-wishful-thinking/a2ca847bbd3c4228bf2346d7ece93cf9ac250f9a657cc827efdd0da7347319dc.jpg"
 featured_image_caption: "Photo by Maxim Hopman on Unsplash"
 featured_image_alt: "Tariffs, Protectionism, and Wishful Thinking"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 pdf: "/pdfs/tariffs-protectionism-and-wishful-thinking.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/tariffs-protectionism-and-wishful-thinking-e24c7c45838c"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.1"
     date: "2026-05-04"
     note: "Updated May 4, 2026, after OIP back-archive review. Legacy Medium formatting, remote body images, punctuation artifacts, source-card residue, and targeted wording were cleaned while preserving the original publication frame."
@@ -57,7 +60,7 @@ The Trump administration used tariffs as both economic policy and geopolitical l
 - Tariffs on imports from Canada and Mexico tied to border security and fentanyl claims.
 - Additional tariffs on Chinese imports.
 - A lower tariff category for Canadian energy imports.
-- A Fair and Reciprocal Plan aimed at tariff disparities with trading partners.
+- A [Fair and Reciprocal Plan](https://www.whitehouse.gov/releases/2025/02/reciprocal-trade-and-tariffs/) aimed at tariff disparities with trading partners.
 - Section 232 steel and aluminum tariffs framed around national security and industrial capacity.
 
 The administration argued that tariffs could force better terms, strengthen domestic production, and reduce dependence on rivals. The mechanism was not subtle: raise the cost of foreign access to the U.S. market, then use that pressure to extract concessions.
@@ -66,7 +69,7 @@ The administration argued that tariffs could force better terms, strengthen dome
 
 Tariffs can create benefits for some domestic producers. They can also preserve strategic capacity in sectors where dependence on hostile or unreliable suppliers carries national-security risk.
 
-But tariffs spread costs through the economy. Importers pay more. Consumers often face higher prices. Downstream manufacturers that rely on foreign inputs lose competitiveness. Trading partners may retaliate. Supply chains adjust, but not instantly and not without cost.
+But tariffs spread costs through the economy. [Importers pay more. Consumers often face higher prices.](https://libertystreeteconomics.newyorkfed.org/2019/05/new-china-tariffs-increase-costs-to-us-households/) Downstream manufacturers that rely on foreign inputs lose competitiveness. Trading partners may retaliate. Supply chains adjust, but not instantly and not without cost.
 
 That is why protectionism often overpromises. It presents industrial revival as if it can be ordered by statute, while the underlying causes of decline may involve productivity, investment, workforce skills, infrastructure, competition, and technology.
 

@@ -40,6 +40,21 @@ test("responsive image manifest keeps the frozen baseline and processing default
     "essays/george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill/hero",
     "essays/ozzy-osbourne-how-heavy-metals-most-unruly-star-became-a-cultural-fixture/hero",
     "essays/pope-francis-how-a-plainspoken-pope-reframed-moral-authority/hero",
+    // Corrected graphics; see docs/editorial-audits/image-revisions/flagged-graphics-20260927.md.
+    "essays/the-100-year-flood-is-not-what-you-think/section-5",
+    "essays/rethinking-invasive-species-management/case-python-monitor",
+    "essays/rethinking-invasive-species-management/case-hydrilla-floating-heart",
+    "medium/410a601d6503e9a566154c4622b5698c20f059c16bdabd976c0e2bb1cd67afc2",
+    "medium/d5ae33ce9140a26ea50ddcad6752dba0ced8a8c5d8b1492450eeca28fdafb00c",
+    "medium/31776846cc421ab1bcee6aaece5550347c944752cf9ee5c53b886ab28449b42f",
+    "medium/f8dcdf76053d3058b94d60d74509d2a44620d489fd1ef11307c1106c3a50e054",
+    "medium/153cece529a7ffda26838482590d4452bfeb0d433eb44eb31f56ddf970a662b4",
+    "medium/c50100c0dccbed7038ca041dea10befa36fe670c5eafa5f54c30070ca1e7be93",
+    "medium/7c4bad63f769d3b86b88aed8b2e32ee2596d415762d2505dec77aa7e9b03da49",
+    // Camp Mystic analytical corrections; see docs/editorial-audits/image-revisions/camp-mystic-timeline-graphics-20260927.md.
+    "medium/42145583d76ac3616def9f537a23dd218becdf4a7b344792606bfcc5f9e88c19",
+    "medium/edf9c9656e1f84536b0a965f37a58e7cb1e26100742c63990e5b133a04badb7c",
+    "medium/ed3b9f9e6208b9bfbcdab0d0460ba2217a8278685f91a746edc592a202c21a3f",
   ];
 
   const entries = Object.entries(manifest.assets);

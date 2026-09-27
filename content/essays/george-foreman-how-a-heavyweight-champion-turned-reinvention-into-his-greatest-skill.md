@@ -9,8 +9,8 @@ slug: "george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-gre
 description: "A short biography of the heavyweight champion whose greatest public skill became reinvention."
 section_label: "Essay"
 subtitle: "A short biography of the heavyweight champion whose greatest public skill became reinvention."
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 series:
   - "Modern Bios"
 collections:
@@ -39,6 +39,9 @@ tags:
   - "public-figure"
 repair_mojibake: true
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Retained source hyperlinks and corrected the chronology of Foreman's broader public life before his final retirement. The unpublished broad rewrite remains withdrawn; surrounding prose, source-method framing, artwork, and original publication date are unchanged."
   - version: "1.1"
     date: "2026-05-26"
     note: "Updated May 26, 2026, after OIP back-archive review. Normalized imported punctuation, removed house-style shortcuts, and checked source framing."
@@ -57,11 +60,11 @@ The public often sees power and assumes simplicity. Foreman's early image leaned
 
 Then Muhammad Ali changed the story.
 
-The 1974 "Rumble in the Jungle" became one of the defining events in sports history, and Foreman's loss placed him inside a narrative so famous that it threatened to fix his public identity permanently. Ali's brilliance dominated the mythology of that night. Foreman became, in many tellings, the necessary giant on the other side of the masterpiece. That is what happens when history turns a contest into legend. One man gets remembered as the author of the moment. The other risks becoming scenery.
+[The 1974 "Rumble in the Jungle"](https://www.tshaonline.org/handbook/entries/foreman-george-edward-big-george) became one of the defining events in sports history, and Foreman's loss placed him inside a narrative so famous that it threatened to fix his public identity permanently. Ali's brilliance dominated the mythology of that night. Foreman became, in many tellings, the necessary giant on the other side of the masterpiece. That is what happens when history turns a contest into legend. One man gets remembered as the author of the moment. The other risks becoming scenery.
 
 Foreman refused that fate.
 
-His life gained force because he kept moving after the moment that should have frozen him in place. He stepped away from boxing, changed personally and spiritually, and returned years later with a version of himself that few people had expected to see. The younger Foreman had projected danger and control. The older Foreman brought warmth, humor, patience, and an almost disarming openness. The transformation felt genuine because it did not erase the old power. It gave that power a new emotional setting.
+His life gained force because he kept moving after the moment that should have frozen him in place. He [stepped away from boxing, changed personally and spiritually, and returned years later](https://www.tshaonline.org/handbook/entries/foreman-george-edward-big-george) with a version of himself that few people had expected to see. The younger Foreman had projected danger and control. The older Foreman brought warmth, humor, patience, and an almost disarming openness. The transformation felt genuine because it did not erase the old power. It gave that power a new emotional setting.
 
 That shift made his comeback far more compelling than a simple return to the ring.
 
@@ -69,7 +72,7 @@ Foreman did not just resume a career. He reintroduced himself to the public. He 
 
 His later championship run turned reinvention into achievement.
 
-When Foreman reclaimed the heavyweight title in his forties, he accomplished something that felt almost outside the normal logic of elite sport. Heavyweight boxing has always left room for dramatic swings, but age usually narrows possibilities rather than expanding them. Foreman used experience, patience, timing, and durability to do something that looked improbable right up to the moment it became undeniable. The victory did more than restore his status. It reordered the meaning of his whole career.
+When Foreman [reclaimed the heavyweight title in his forties](https://www.tshaonline.org/handbook/entries/foreman-george-edward-big-george), he accomplished something that felt almost outside the normal logic of elite sport. Heavyweight boxing has always left room for dramatic swings, but age usually narrows possibilities rather than expanding them. Foreman used experience, patience, timing, and durability to do something that looked improbable right up to the moment it became undeniable. The victory did more than restore his status. It reordered the meaning of his whole career.
 
 He became larger than either version of himself.
 
@@ -77,7 +80,7 @@ The young destroyer and the older comeback champion now belonged to the same sto
 
 He was not finished.
 
-A great many athletes leave their sport with a name and a memory. Foreman left with those things and then built an even broader public life. His move into business, especially through the George Foreman Grill, became one of the most successful and culturally memorable celebrity-brand pairings of the modern era. That success did not rest on novelty alone. It rested on trust. Consumers believed him. He appeared approachable, persuasive, and grounded. He sold products with the same quality that had made his later boxing career so compelling: credibility earned through visible change.
+A great many athletes leave their sport with a name and a memory. Foreman built an even broader public life before his final retirement. His move into business, especially through the [George Foreman Grill](https://www.sec.gov/Archives/edgar/data/878280/000095013707015236/c15957e10vk.htm), became one of the most successful and culturally memorable celebrity-brand pairings of the modern era. That success did not rest on novelty alone. It rested on trust. Consumers believed him. He appeared approachable, persuasive, and grounded. He sold products with the same quality that had made his later boxing career so compelling: credibility earned through visible change.
 
 That business success revealed something important.
 

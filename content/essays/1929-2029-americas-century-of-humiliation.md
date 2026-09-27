@@ -6,9 +6,12 @@ slug: "1929-2029-americas-century-of-humiliation"
 collections: ["household-economy-work-and-cost"]
 section_label: "Essay"
 description: "A short essay arguing that the United States became world-historically successful while leaving millions of citizens to experience that success as humiliation, attrition, and spectatorship."
-version: "1.2"
-edition: "Second web edition"
+version: "1.3"
+edition: "Third web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added supporting source hyperlinks or repaired source destinations; original prose, reporting frame, and artwork unchanged."
   - version: "1.2"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
@@ -21,7 +24,7 @@ The United States spent the better part of a century becoming the richest and mo
 
 It won wars. Built suburbs. Created Hollywood. Invented the modern internet. Printed the world's reserve currency. Put men on the moon. Sold the moon landing on television.
 
-It also gave millions of people medical debt, hollowed-out towns, collapsing trust, and a customer service chatbot named Ashley.
+It also gave [millions of people medical debt](https://www.consumerfinance.gov/archive/newsroom/cfpb-finds-15-million-americans-have-medical-bills-on-their-credit-reports/), hollowed-out towns, collapsing trust, and a customer service chatbot named Ashley.
 
 Power and humiliation can live in the same house.
 
@@ -67,7 +70,7 @@ The country gained efficiency and lost ballast.
 
 ## 2004-2029: Wealth and Friction
 
-The financial crisis of 2007-2008 shattered trust.
+The [financial crisis of 2007-2008](https://www.federalreservehistory.org/essays/great-recession-and-its-aftermath) shattered trust.
 
 Then came the pandemic, inflation, housing shortages, endless subscriptions, and eggs becoming a luxury item for six weeks.
 

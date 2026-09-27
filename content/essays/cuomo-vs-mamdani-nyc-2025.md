@@ -9,9 +9,12 @@ subtitle: "Andrew Cuomo vs. Zohran Mamdani — What’s at Stake?"
 featured_image: "/images/medium/cuomo-vs-mamdani-nyc-2025/791f85e62d84073354870f23d6a2372b73eef587b3bb21ff9bd13e2a21ad422a.jpeg"
 featured_image_alt: "The 2025 New York City Democratic Mayoral Primary"
 description: "The NYC Democratic primary pits establishment favorite Andrew Cuomo against progressive newcomer Zohran Mamdani"
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected buses and income/corporate taxes in the historical platform summary. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-15"
     note: "Updated May 15, 2026, after OIP back-archive review. Removed remote Medium body images, normalized imported punctuation, corrected a candidate-description error, and added official ranked-choice result context while preserving the June 2025 frame."
@@ -43,8 +46,8 @@ later certified Mamdani as the Democratic nominee.
 
 **Cuomo leans on experience and centrism.**
 
-**Mamdani offers bold progressive reforms:** *rent freezes, free
-transit, and wealth taxes.*
+**Mamdani offers bold progressive reforms:** *[rent freezes, free
+buses, and higher income and corporate taxes](https://time.com/7296925/zohran-mamdani-nyc-mayoral-primary/).*
 
 Their stark contrast mirrors [**national ideological divides.**](https://www.pewresearch.org/politics/2024/04/09/changing-partisan-coalitions-in-a-politically-divided-nation/)
 

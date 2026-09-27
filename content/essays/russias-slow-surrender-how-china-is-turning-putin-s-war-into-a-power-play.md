@@ -9,14 +9,17 @@ featured_image: "/images/medium/russias-slow-surrender-how-china-is-turning-puti
 featured_image_caption: "Photo by Didssph on Unsplash"
 featured_image_alt: "Russia’s Slow Surrender: How China is Turning Putin’s War into a Power Play"
 description: "Russia's war in Ukraine has deepened its economic, military, and strategic reliance on China, leaving Moscow with less bargaining power over time."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 pdf: "/pdfs/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/russias-slow-surrender-how-china-is-turning-putin-s-war-into-a-power-play-aa864bf4bc15"
 collections:
   - geopolitics-trade-global-power
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.1"
     date: "2026-05-07"
     note: "Updated May 7, 2026, after OIP back-archive review. Remote Medium residue, formatting artifacts, source-sensitive claims, and editorial-philosophy evidence were checked."
@@ -63,7 +66,7 @@ What began as a pragmatic partnership is turning into one of economic entrapment
 
 Russia's military reliance on China has grown significantly. While Beijing avoids overt direct arms transfers, it has helped sustain Moscow's war effort through dual-use technology, including components relevant to drones, navigation, and military production.
 
-Estonian intelligence reports that China is a key conduit for critical Western drone components entering Russia, sustaining production that would otherwise face tighter constraints.
+[Estonian intelligence reports that China is a key conduit for critical Western drone components entering Russia](https://raport.valisluureamet.ee/2025/en/1-russian-armed-forces-and-the-war-in-ukraine/1-2-russia-is-committed-to-advancing-drone-technology/), sustaining production that would otherwise face tighter constraints.
 
 Although China officially calls for peace, its actions suggest otherwise.
 

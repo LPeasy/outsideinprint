@@ -1,0 +1,117 @@
+{
+  "date": "2026-09-27",
+  "mode": "built-in imagegen edits; visually reviewed before integration",
+  "assets": [
+    {
+      "key": "pay",
+      "path": "medium/410a601d6503e9a566154c4622b5698c20f059c16bdabd976c0e2bb1cd67afc2.png",
+      "prompt": "Edit this factual table, preserving its clean black grid, white background, black sans serif type, generous readability and horizontal layout. Correct the column headings and numbers. Reproduce exactly these three columns and six data rows; do not invent any values. Headers: Component | State/local government | Private industry. Rows: Wages and salaries | 61.6% | 70.3%; Total benefits | 38.4% | 29.7%; — Retirement and savings | 13.3% | 3.4%; — Health insurance | 11.2% | 6.9%; — Paid leave | 7.3% | 7.6%; — Legally required benefits | 5.3% | 7.3%. Above table a small title: 'Employer compensation shares · March 2025'. Below table small readable note: 'Selected benefit components; federal workers excluded. Source: BLS ECEC, Table 1.' No extra columns or rows. Preserve simple professional data-table appearance; not a decorative illustration.",
+      "old_id": "medium/410a601d6503e9a566154c4622b5698c20f059c16bdabd976c0e2bb1cd67afc2",
+      "id": "essays/public-vs-private-pay-who-really-earns-more/compensation-shares-corrected-20260927",
+      "slug": "public-vs-private-pay-who-really-earns-more",
+      "source": "images/originals/essays/public-vs-private-pay-who-really-earns-more/compensation-shares-corrected-20260927.png",
+      "alias": "/images/essays/public-vs-private-pay-who-really-earns-more/compensation-shares-corrected-20260927.png",
+      "generated": "/Users/lp1/.codex/generated_images/01a0b6db-3813-7f23-9561-44d879cd3f97/exec-d67d8e6c-4604-460a-b4ae-4a2206ebba5e.png"
+    },
+    {
+      "key": "python",
+      "path": "essays/rethinking-invasive-species-management/case-python-monitor.png",
+      "prompt": "Edit this existing OIP diagram narrowly. Preserve canvas, background, palette, layout, headings, left column, footer, all text and shapes EXCEPT replace the right-column sentence 'Eradication remains more plausible' with exactly 'Localized removal remains a management target'. Wrap the new sentence neatly in the existing right-hand box without crowding. Do not change anything else.",
+      "old_id": "essays/rethinking-invasive-species-management/case-python-monitor",
+      "id": "essays/rethinking-invasive-species-management/case-python-monitor-corrected-20260927",
+      "slug": "rethinking-invasive-species-management",
+      "source": "images/originals/essays/rethinking-invasive-species-management/case-python-monitor-corrected-20260927.png",
+      "alias": "/images/essays/rethinking-invasive-species-management/case-python-monitor-corrected-20260927.png",
+      "generated": "/Users/lp1/.codex/generated_images/01a0b6db-3813-7f23-9561-44d879cd3f97/exec-f3e13b6f-0efd-4f68-a522-fd0187c0c858.png"
+    },
+    {
+      "key": "hydrilla",
+      "path": "essays/rethinking-invasive-species-management/case-hydrilla-floating-heart.png",
+      "prompt": "Edit this existing OIP diagram narrowly. Preserve canvas, background, colors, typography, layout, headings, arrow, all left-column content and footer. Only replace the right-column three statements under 'Crested floating heart' with exactly: 'Established in affected waters'; 'Control established infestations'; 'Prevent spread to uninfested waters'. Wrap neatly without crowding. No additional changes.",
+      "old_id": "essays/rethinking-invasive-species-management/case-hydrilla-floating-heart",
+      "id": "essays/rethinking-invasive-species-management/case-hydrilla-floating-heart-corrected-20260927",
+      "slug": "rethinking-invasive-species-management",
+      "source": "images/originals/essays/rethinking-invasive-species-management/case-hydrilla-floating-heart-corrected-20260927.png",
+      "alias": "/images/essays/rethinking-invasive-species-management/case-hydrilla-floating-heart-corrected-20260927.png",
+      "generated": "/Users/lp1/.codex/generated_images/01a0b6db-3813-7f23-9561-44d879cd3f97/exec-671f7757-29a3-49f7-a0e8-a488ad5afa28.png"
+    },
+    {
+      "key": "probability",
+      "path": "essays/the-100-year-flood-is-not-what-you-think/section-5.png",
+      "prompt": "Correct the right-hand probability chart in this existing infographic. Preserve original cream newspaper palette, border, overall layout, all left-panel content, headline and footer. Right panel title remains 'PROBABILITY REALITY' and 'CHANCE OF AT LEAST ONE FLOOD'. Replace the misleading accelerating curve with three equal-size statistic cards, NO CHART, NO AXES, NO CURVE: '1 YEAR' over '1%'; '10 YEARS' over '9.6%'; '30 YEARS' over '26%'. Below them small readable formula 'P(at least one flood) = 1 − 0.99ⁿ' and note 'Independent years; constant 1% annual probability'. This eliminates misleading spatial interpolation while preserving correct exact rounded values. Keep generous readable spacing. No additional values or decorations.",
+      "old_id": "essays/the-100-year-flood-is-not-what-you-think/section-5",
+      "id": "essays/the-100-year-flood-is-not-what-you-think/section-5-corrected-20260927",
+      "slug": "the-100-year-flood-is-not-what-you-think",
+      "source": "images/originals/essays/the-100-year-flood-is-not-what-you-think/section-5-corrected-20260927.png",
+      "alias": "/images/essays/the-100-year-flood-is-not-what-you-think/section-5-corrected-20260927.png",
+      "generated": "/Users/lp1/.codex/generated_images/01a0b6db-3813-7f23-9561-44d879cd3f97/exec-a5066f18-912a-491d-85e2-7a26a86ba1af.png"
+    },
+    {
+      "key": "leo",
+      "path": "medium/d5ae33ce9140a26ea50ddcad6752dba0ced8a8c5d8b1492450eeca28fdafb00c.png",
+      "prompt": "Correct this existing black-on-white factual chronology. Keep simple clean sans-serif title and left-date/right-event layout, bold dates, ample row spacing, black square timeline marks, portrait canvas. Title exactly 'Timeline of Pope Leo XIV'. Replace rows with exactly these fifteen rows, all fully visible, no extra facts: 'Sept 14, 1955' | 'Born Robert Francis Prevost in Chicago, Illinois'; '1977' | 'Entered the Augustinian novitiate; graduated from Villanova'; 'June 19, 1982' | 'Ordained a priest in Rome'; '1985 / 1987 / 1988' | 'Peru mission / return to the United States / return to Peru'; '1998 / March 1999' | 'Elected Provincial Prior / assumed office'; '2001–2013' | 'Served as Prior General of the Augustinian Order'; '2014' | 'Appointed Apostolic Administrator of Chiclayo, Peru'; 'Sept 26, 2015' | 'Appointed Bishop of Chiclayo'; 'Jan 30, 2023' | 'Named Prefect of the Dicastery for Bishops'; 'Sept 30, 2023' | 'Created Cardinal by Pope Francis'; 'May 8, 2025' | 'Elected Pope Leo XIV — first pope from the United States'; 'May 14, 2025' | 'Offered Holy See help bringing enemies together for talks'; 'May 18, 2025' | 'Celebrated inaugural Papal Mass in St. Peter’s Square'; 'July 3, 2025' | 'New Mass formulary for the Care of Creation presented'; 'July 9, 2025' | 'Celebrated first Mass using the Care of Creation formulary'. Tiny footer 'Sources: Vatican biography and official 2025 addresses'. Do not abbreviate away distinctions. No illustration or color added.",
+      "old_id": "medium/d5ae33ce9140a26ea50ddcad6752dba0ced8a8c5d8b1492450eeca28fdafb00c",
+      "id": "essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/timeline-corrected-20260927",
+      "slug": "pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter",
+      "source": "images/originals/essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/timeline-corrected-20260927.png",
+      "alias": "/images/essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/timeline-corrected-20260927.png",
+      "generated": "/Users/lp1/.codex/generated_images/01a0b6db-3813-7f23-9561-44d879cd3f97/exec-9d07658c-fae8-4177-9e52-edcb07d1ae5d.png"
+    },
+    {
+      "key": "warning",
+      "path": "medium/f8dcdf76053d3058b94d60d74509d2a44620d489fd1ef11307c1106c3a50e054.png",
+      "prompt": "Correct this flash flood alert diagram, retaining white background, navy rounded boxes, white legible text, gray arrows, clean sans-serif font. Title 'Flash Flood Alert Routes'. Replace its single chain with TWO INDEPENDENT HORIZONTAL LANES, each left-to-right with its own arrows. TOP lane: box 'NWS flash flood warning' plus smaller '(considerable or catastrophic)' → box 'IPAWS / WEA' → box 'Compatible phones in affected area'. BOTTOM lane: box 'Local authorities' → box 'Local notification systems, e.g. CodeRED' → box 'Public'. NO arrows between the lanes; no local approval box on top lane. Footer exactly 'Local approval is not required for an NWS WEA.' Small source 'Source: National Weather Service'. Increase canvas width if needed to keep all text readable, preserving original restrained design. Do not add causal claims about a specific flood.",
+      "old_id": "medium/f8dcdf76053d3058b94d60d74509d2a44620d489fd1ef11307c1106c3a50e054",
+      "id": "essays/flash-flood-alley-why-flash-floods-kill/warning-routes-corrected-20260927",
+      "slug": "flash-flood-alley-why-flash-floods-kill",
+      "source": "images/originals/essays/flash-flood-alley-why-flash-floods-kill/warning-routes-corrected-20260927.png",
+      "alias": "/images/essays/flash-flood-alley-why-flash-floods-kill/warning-routes-corrected-20260927.png",
+      "generated": "/Users/lp1/.codex/generated_images/01a0b6db-3813-7f23-9561-44d879cd3f97/exec-51cede0c-81e3-42de-a386-6d07f027fcb4.png"
+    },
+    {
+      "key": "runoff",
+      "path": "medium/31776846cc421ab1bcee6aaece5550347c944752cf9ee5c53b886ab28449b42f.png",
+      "prompt": "Correct the unsupported plotted curves in this flood diagram. Keep its clean white background, black/navy sans-serif font, restrained blue accents. Replace graph entirely with a qualitative mechanism diagram, title 'Why Runoff Can Rise Quickly'. Three clearly separated input boxes: 'Heavy rain'; 'Limited infiltration' with smaller 'Paved or rocky surfaces'; 'Steep terrain' with smaller 'Water moves downhill rapidly'. Arrows from all three converge on one blue output box 'Rapid runoff and stream response'. No numbers, quantitative axes, time curves, or geographic comparisons. Footer exactly 'Illustrative mechanism — not measured runoff curves.' Small source 'Source: National Weather Service flood-hazards guidance'. Legible spacious square layout; no extra claims.",
+      "old_id": "medium/31776846cc421ab1bcee6aaece5550347c944752cf9ee5c53b886ab28449b42f",
+      "id": "essays/flash-flood-alley-why-flash-floods-kill/runoff-factors-corrected-20260927",
+      "slug": "flash-flood-alley-why-flash-floods-kill",
+      "source": "images/originals/essays/flash-flood-alley-why-flash-floods-kill/runoff-factors-corrected-20260927.png",
+      "alias": "/images/essays/flash-flood-alley-why-flash-floods-kill/runoff-factors-corrected-20260927.png",
+      "generated": "/Users/lp1/.codex/generated_images/01a0b6db-3813-7f23-9561-44d879cd3f97/exec-f33add4c-776e-4187-bd39-9551cba8763a.png"
+    },
+    {
+      "key": "layers",
+      "path": "medium/153cece529a7ffda26838482590d4452bfeb0d433eb44eb31f56ddf970a662b4.png",
+      "prompt": "Correct this misleading flood failure-chain graphic. Preserve its warm ivory paper and muted tan rounded box palette, black clean readable typography, portrait composition. Remove all chains and causal arrows. Title 'Four Layers of Flood Preparedness'. Four equal stacked cards separated by whitespace, NOT connected. Card1 heading 'Risk awareness', text 'Map exposure and identify safe destinations.' Card2 heading 'Gauge coverage', text 'Know what observations can and cannot show.' Card3 heading 'Warning channels', text 'NWS wireless alerts and local notifications are separate routes.' Card4 heading 'Evacuation response', text 'Turn warnings into practiced, timely action.' Footer 'Conceptual framework — not a reconstruction of the Camp Mystic disaster.' No allegations, historical timestamps, claim of offline gauges, or approval chain. Do not add new content.",
+      "old_id": "medium/153cece529a7ffda26838482590d4452bfeb0d433eb44eb31f56ddf970a662b4",
+      "id": "essays/flash-flood-alley-why-flash-floods-kill/preparedness-layers-corrected-20260927",
+      "slug": "flash-flood-alley-why-flash-floods-kill",
+      "source": "images/originals/essays/flash-flood-alley-why-flash-floods-kill/preparedness-layers-corrected-20260927.png",
+      "alias": "/images/essays/flash-flood-alley-why-flash-floods-kill/preparedness-layers-corrected-20260927.png",
+      "generated": "/Users/lp1/.codex/generated_images/01a0b6db-3813-7f23-9561-44d879cd3f97/exec-77600e02-9cf9-46ad-ab69-98697d06535c.png"
+    },
+    {
+      "key": "hunt",
+      "path": "medium/7c4bad63f769d3b86b88aed8b2e32ee2596d415762d2505dec77aa7e9b03da49.png",
+      "prompt": "Replace the erroneous CNN chart with a clearly original OIP factual observation card. Preserve clean white background, restrained navy and pale-blue visual language, wide horizontal canvas. Do NOT preserve CNN name, logo, attribution, original curve, flood bands, numeric axes or invented intermediate readings. Title 'Guadalupe River at Hunt · July 4, 2025'. Subtitle 'Selected historical gauge observations · Central Daylight Time'. Two spacious equal-size boxes left and right, no interpolated chart or line: LEFT 'Around 3:00 a.m.' / 'About 10 feet'; RIGHT '5:10 a.m.' / '37.52 feet · recorded crest'. Below, exactly 'Hunt is about 5 miles downstream of Camp Mystic. Gauge stage is not water depth at the cabins.' Small footer 'OIP graphic · Source: U.S. Department of Commerce OIG, OIG-26-017-I'. No other facts. These are selected historical observations, not a reconstruction or evacuation model.",
+      "old_id": "medium/7c4bad63f769d3b86b88aed8b2e32ee2596d415762d2505dec77aa7e9b03da49",
+      "id": "essays/what-happened-at-camp-mystic/hunt-observations-corrected-20260927",
+      "slug": "what-happened-at-camp-mystic",
+      "source": "images/originals/essays/what-happened-at-camp-mystic/hunt-observations-corrected-20260927.png",
+      "alias": "/images/essays/what-happened-at-camp-mystic/hunt-observations-corrected-20260927.png",
+      "generated": "/Users/lp1/.codex/generated_images/01a0b6db-3813-7f23-9561-44d879cd3f97/exec-7153f290-7906-4fc1-bcf4-a4babcf794a7.png",
+      "refinement_prompt": "Edit only the two clock icons in this factual graphic: remove both clock icons entirely, replacing their areas with the existing pale-blue box background. The generic clocks show incorrect times. Preserve all text, every date and number, both panels, borders, layout, footer and all remaining pixels as closely as possible. Do not add any icons or change type. Keep the existing text positions and overall dimensions."
+    },
+    {
+      "key": "climate",
+      "path": "medium/c50100c0dccbed7038ca041dea10befa36fe670c5eafa5f54c30070ca1e7be93.png",
+      "prompt": "Correct this overbroad weather-trend scorecard. Retain warm ivory background, muted coral and slate-gray palette, black legible sans-serif type, rounded panels; landscape canvas. Title 'Weather Trends: Specify the Measure'. Three equal panels with these exact scoped statements. Panel1 heading 'Heavy precipitation', label 'OBSERVED', text 'Contiguous 48 states, 1910–2023: extreme one-day precipitation has become more prevalent.' Panel2 heading 'Heat waves', label 'OBSERVED', text '50 large U.S. cities, 1960s–2020s: heat waves have become more frequent.' Panel3 heading 'Intense hurricanes', label 'PROJECTED', text 'Globally, with further warming: the share of very intense tropical cyclones is projected to increase. Total storm counts need not increase.' Footer exactly 'Rainfall is not flash-flood frequency. Trends depend on region, period and metric.' Small source line 'Sources: EPA Climate Change Indicators (2024); NOAA GFDL'. Remove all categorical 'Clearly Worsening' claims and unscoped hazard bullets. Do not add numbers, maps, charts, or claims.",
+      "old_id": "medium/c50100c0dccbed7038ca041dea10befa36fe670c5eafa5f54c30070ca1e7be93",
+      "id": "essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/scoped-trends-corrected-20260927",
+      "slug": "the-waters-rising-what-the-data-really-says-about-extreme-weather",
+      "source": "images/originals/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/scoped-trends-corrected-20260927.png",
+      "alias": "/images/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/scoped-trends-corrected-20260927.png",
+      "generated": "/Users/lp1/.codex/generated_images/01a0b6db-3813-7f23-9561-44d879cd3f97/exec-bf9315e4-c5c8-4c03-b22c-1fa5b39cab11.png"
+    }
+  ]
+}

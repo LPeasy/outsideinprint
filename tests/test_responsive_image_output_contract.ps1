@@ -267,9 +267,14 @@ $renderedAssetIds = [System.Collections.Generic.HashSet[string]]::new([System.St
 foreach ($renderedModel in $renderedModelsByRelativePath.Values) {
   [void]$renderedAssetIds.Add([string]$renderedModel.Id)
 }
-$missingFocusedCleanupDerivatives = @($focusedCleanupIds | Where-Object { -not $renderedAssetIds.Contains($_) })
+# Preserve the frozen cohort without requiring output for explicitly retired originals.
+# The source contract validates the exact documented retirement allowlist.
+$missingFocusedCleanupDerivatives = @($focusedCleanupIds | Where-Object {
+  [string]$manifest.assets.$_.usage_state -ceq 'referenced' -and
+  -not $renderedAssetIds.Contains($_)
+})
 if ($missingFocusedCleanupDerivatives.Count -gt 0) {
-  throw "Focused-cleanup assets are missing generated derivatives: $($missingFocusedCleanupDerivatives -join ', ')"
+  throw "Referenced focused-cleanup assets are missing generated derivatives: $($missingFocusedCleanupDerivatives -join ', ')"
 }
 
 $sourceLengths = @{}

@@ -6,9 +6,12 @@ date: 2026-05-14
 draft: false
 slug: "the-mailbox-at-the-clinic-door"
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.1"
     date: "2026-05-29"
     note: "Updated May 29, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -49,7 +52,7 @@ In January 2023, the FDA [approved a REMS modification](https://www.fda.gov/drug
 
 The distinction is practical. A REMS belongs to drug control; access politics sit around it. It can require certified prescribers, patient forms, special dispensing conditions, and pharmacy agreements. The FDA's point in 2023 was that the older location rule could be removed while the rest of the control structure remained. Louisiana's point is that the federal delivery route makes its state ban harder to enforce and, in the state's account, rests on an inadequate FDA record.
 
-The Fifth Circuit accepted Louisiana's theory at the emergency stage. In the appendix Danco filed at the Supreme Court, the panel order says Louisiana challenged the 2023 REMS under the Administrative Procedure Act, and the panel granted a stay pending appeal. The panel treated the removal of the in-person dispensing rule as a practical interference with Louisiana law. The panel also credited the state's fiscal-injury theory tied to medical costs and accepted its argument that the FDA's review was likely deficient.
+The Fifth Circuit accepted Louisiana's theory at the emergency stage. In [the appendix Danco filed at the Supreme Court](https://www.supremecourt.gov/DocketPDF/25/25A1207/407852/20260502123120215_Danco%20Stay%20Appendix%205-2-26.pdf#page=7), the panel order says Louisiana challenged the 2023 REMS under the Administrative Procedure Act, and the panel granted a stay pending appeal. The panel treated the removal of the in-person dispensing rule as a practical interference with Louisiana law. The panel also credited the state's fiscal-injury theory tied to medical costs and accepted its argument that the FDA's review was likely deficient.
 
 The filings since then sharpen the institutional stakes. Louisiana filed its response on May 7. Danco and GenBioPro filed replies on May 8. The Supreme Court docket filled with amici on both sides: states, members of Congress, former FDA commissioners, medical groups, reproductive-rights organizations, anti-abortion groups, drug-law scholars, local governments, and pharmacies. The volume of filings is its own signal. A distribution rule that once lived inside FDA paperwork now draws in state sovereignty, agency science, religious and medical claims, pharmaceutical regulation, Medicaid-cost theories, and emergency judicial power.
 
@@ -77,7 +80,7 @@ That is the tradeoff beneath the package. National drug regulation creates unifo
 
 Emergency orders move faster than the systems they alter.
 
-Danco's emergency filing captures that problem because it comes from a manufacturer caught inside the machinery. In the appendix filed with the Supreme Court, Danco's Fifth Circuit motion said the order was unprecedented and created immediate uncertainty over pharmacies, patients, providers, and the governing REMS. The Supreme Court first gave the parties a one-week administrative stay. By May 11, the docket had a response, replies, and enough outside briefs to show how far the practical consequences had already traveled.
+Danco's emergency filing captures that problem because it comes from a manufacturer caught inside the machinery. In the appendix filed with the Supreme Court, [Danco's Fifth Circuit motion](https://www.supremecourt.gov/DocketPDF/25/25A1207/407852/20260502123120215_Danco%20Stay%20Appendix%205-2-26.pdf#page=64) said the order was unprecedented and created immediate uncertainty over pharmacies, patients, providers, and the governing REMS. The Supreme Court first gave the parties a one-week administrative stay. By May 11, the docket had a response, replies, and enough outside briefs to show how far the practical consequences had already traveled.
 
 That is the overlooked civic fact in many legal emergencies. The order may be temporary; the behavior it changes is immediate. A pharmacy has to decide what to dispense. A provider has to decide what protocol to use. A patient has to decide what an appointment means. A manufacturer has to decide what its legal duties are. The agency has to decide how to interpret its own REMS after a court has stayed part of it.
 

@@ -1,0 +1,105 @@
+# Current owner-approved correction checkpoint — September 27, 2026
+
+File: `content/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.md`  
+Version: `2.0 / Fourth web edition`  
+Final content SHA-256: `1ef138af79e109deb821bade2b0ede3716521dd99aa587db47c71eaff3286ed5`
+
+Current disposition: **SCOPED PASS** for the restored-prose holds and the exact approved corrections. The owner approved the [final-nine bounded decisions](../final-nine-owner-decisions-2026-09-27.md) and this profile's [exact proposal](../final-nine-bios-leo-siakam-franklin-proposals-2026-09-27.md). This is the current candidate, not the withdrawn broad rewrite.
+
+The existing pending edition ordinal is unchanged. Only the pending September 27 version/note advances to 2.0; older revision entries, original date, title, route, collections, and artwork destinations/order remain. [Exact sequential replacement map and snapshots](../final-nine-leo-siakam-franklin-implementation-map-2026-09-27.json) bound every approved prose and source-link change.
+
+## Current source disposition
+
+The owner approved the exact short arrival and modesty excerpts, moral-perfection omission mark, single epitaph-word insertion, penny-line deletion, national age, document roles, subscription-library term, collaborative institutions, and book-scan label/icon. No surrounding humor, argument, source-method note, artwork, or broader slavery discussion was rewritten.
+
+- [Autobiography](https://www.gutenberg.org/files/148/148-h/148-h.htm): Philadelphia arrival (bread acquired after arrival), actual short pride/humility passage, omitted intervening moral-perfection text, subscription library, and civic collaborators. The modesty excerpt is a short self-mocking hypothetical in its source, not a new proof of universal modesty.
+- [National Archives biography](https://www.archives.gov/founding-docs/founding-fathers-pennsylvania): Declaration committee/drafting role and participation in the Constitutional Convention; both public repetitions repaired.
+- [USPS postmasters list](https://about.usps.com/who/profile/history/list-of-postmasters-general.htm): postal appointment; the article now says helped develop the system rather than sole creation.
+- [Full LOC epitaph transcription](https://www.loc.gov/exhibits/franklin/bf-trans61.html): insert “wholly”; closing “Corrected and amended” text is verified and retained. The existing edition-variation note covers retained modernization.
+- [Franklin Institute misquotations](https://fi.edu/en/science-and-education/benjamin-franklin/7-things-benjamin-franklin-never-said): penny-earned wording is removed, not silently attributed.
+- [Public-domain Reid edition, page 201](https://www.gutenberg.org/cache/epub/36151/pg36151-images.html): “Well done” saying remains with a link. Related artwork is unchanged.
+- Existing [Archive.org destination](https://archive.org/details/autobiobenfran00miffrich/page/n9/mode/2up) is a book scan: label and icon corrected; destination and other recommendations unchanged.
+
+Original publication date and uncertainty/genre framing stay unchanged. Exact short replacement quotation approval does not authorize a broad historical rewrite.
+
+## Editorial Philosophy Audit — current bounded candidate
+
+Decision: PASS
+
+| Test | Decision | Current-candidate evidence |
+|---|---|---|
+| Evidence | PASS | The public-domain Autobiography, National Archives, full LOC epitaph transcription, USPS records, and retained proverb source support the bounded factual and quotation repairs. No withdrawn broad contextual rewrite returns. |
+| Logic | PASS | The profile's humor and hero portrait remain recognizable interpretation; collaborative institution-building and Convention participation replace sole-founder and double-drafting shortcuts. |
+| Incentives | PASS | The author's observation that virtue is more persuasive when presented with humor, and the focus on practical civic usefulness, describe incentives without treating charm as measured proof of success. |
+| Tradeoffs | PASS | Self-improvement is paired with admitted failure and pride; confidence and humility remain competing qualities. The portrait does not claim that an attractive public self-image proves every act virtuous. |
+| Consequences | PASS | Named library, hospital, fire-company, postal, and diplomatic work grounds the legacy in institutions. Claims of literal single-person creation and inaccurate national chronology are corrected. |
+| Uncertainty | PASS | The existing memoir/source framing and edition-variation note remain; a stitched quotation is repaired, the unmatched modesty sentence is replaced by a verified short excerpt, and the misattributed penny line is removed. |
+| Institutional Behavior | PASS | Subscription access, collaborative civic projects, postal development, and Constitutional Convention participation now identify the correct institutional roles without restoring a new institutional-history section. |
+
+This scoped assessment does not certify every historical fact beyond the reviewed profile claims, award a numerical score, claim a new interview, or authorize skipping publication gates. The coordinator's [single consolidated exact-preservation comparison](../final-nine-implementation-2026-09-27.md) passed on its first run: 9/9 complete byte reconstructions with matching map hashes, protected metadata, artwork destinations/order, and older revision history; zero failures and zero reruns. Formal GitHub publication checks remain pending. No local tests, build, commit, remote write, or publication ran in this implementation.
+
+## Historical checkpoints — superseded for current clearance only
+
+Everything below is retained history. Old hashes, HOLD/PASS labels, candidate descriptions, and broad-rewrite text concern their named checkpoints and do not override the current hash-bound decision above.
+
+
+# Current prose-preservation rollback record — September 27, 2026
+
+File: `content/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.md`  
+Version: `1.3 / Fourth web edition`  
+Final content SHA-256: `cc0ae13f09b98a583e4a042e72f433cc3e302e66a85b15958dd3b8d21f7579c9`
+
+Current disposition: **HOLD — SOURCE_CHECK_REQUIRED**. The user requested restoration of the pre-source-pass prose while retaining supported hyperlinks. The withdrawn broad-rewrite candidate's PASS does not certify the restored wording. This is not a finding that every restored assertion is false.
+
+The original wording, paragraph structure, description and source-method metadata are restored from `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`. Supported links wrap existing words; no unsupported claim received a new citation. Version and edition advance once from that baseline, and the pending public revision note now describes the actual narrow change. Existing pre-batch history is preserved.
+
+No image, caption, artwork order or alternative-text exception applies.
+
+## Current evidence and approval questions
+
+- Restored prose again says the United States was barely four years old in 1790, describes drafting both founding documents, and calls the Library Company a public lending library. Minimal correction proposals must remain separate until approved.
+- Restored quotations contain stitched or unverified wording, the penny-earned attribution is unsupported, and the Archive.org scan is labeled audio. Source-method description/editor's note and original framing are restored; the earlier expanded slavery discussion and broad recasting are withdrawn.
+
+[Exact change map and private minimal-correction queue](../modern-bios-prose-preservation-b-2026-09-27.md) control this rollback. The earlier source checklist remains useful for previously read passages, but its descriptions of removed or corrected prose are historical, not the state of this restored candidate.
+
+## Editorial Philosophy Audit — current candidate
+
+Decision: SOURCE_CHECK_REQUIRED
+
+- Evidence: HOLD — the restored claims identified above need source evidence or owner-approved minimal corrections.
+- Uncertainty: HOLD — do not use the withdrawn rewrite's qualifications to certify wording that no longer appears.
+- Logic, Incentives, Tradeoffs, Consequences and Institutional Behavior: NOT_REASSESSED in this link-preservation operation; historical assessments are not a new full-profile certification.
+
+No publication, technical release gate, new interview, complete biography review or numerical score is implied. No local Node/browser tests or production build were run.
+
+## Historical source-pass records — withdrawn candidate, not current clearance
+
+# Benjamin Franklin Source Checklist
+
+Reviewed September 27, 2026. Scope: claim-level links and necessary corrections to the existing biography, not a comprehensive biography or new historical thesis. Version 2.0, Fourth web edition; original July 8, 2025 date retained.
+
+Essay SHA-256: `f01c0d51796b98d73560c7982785192b49ec3c5fa877a28f5534f989d67fad51`.
+
+## Read Sources and Claim Map
+
+| Claim cluster | Source and passage read | Application and limit |
+|---|---|---|
+| Family, apprentice, arrival and bread | [Autobiography, Harvard Classics edition](https://www.gutenberg.org/files/148/148-h/148-h.htm), Part I: family of seventeen, youngest son with two younger children; apprenticeship at twelve; flight at seventeen; Philadelphia arrival and three rolls | Identifies memoir as retrospective self-report. Replaces the invented combined quotation about pockets and rolls with an exact short excerpt. |
+| Printing career | [National Archives project guide](https://www.archives.gov/nhprc/projects/catalog/benjamin-franklin), opening biographical paragraphs; Autobiography Part III, David Hall partnership | Newspaper editor/printer by twenty-three; 1748 business transition distinguished from total retirement. No independent sales ranking asserted. |
+| Poor Richard wording and dates | [Poor Richard, 1733](https://founders.archives.gov/documents/Franklin/01-01-02-0093), July sayings; Autobiography Part III, opening almanac account; [NARA Franklin biography](https://www.archives.gov/founding-docs/founding-fathers-pennsylvania), Franklin entry | Dogs/fleas quotation matched, including capitalization and comma. Distinguishes first publication in 1732 from annual issues for 1733-1758. Does not claim Franklin originated every proverb. |
+| Pride and moral experiment | Autobiography Part II, thirteen-virtue list, tracking method, assessment of falling short, final pride paragraph | Replaces fabricated modesty quotation and stitched moral-perfection quotation. Exact humility excerpt and Jesus/Socrates rule checked. Self-assessed benefit is not a measured effect. |
+| Civic institutions | Autobiography Parts I-II subscription-library passages; Part III Union Fire Company, Thomas Bond hospital proposal, conditional public matching grant | Replaces sole-founder language with collaborative institutions and corrects free-public-library claim. Uses source mechanisms, not an unsupported assertion of personal benevolence. |
+| Electricity and inventions | [Franklin Institute kite account](https://fi.edu/en/science-and-education/benjamin-franklin/kite-key-experiment), charge-versus-strike explanation; [inventions page](https://fi.edu/en/science-and-education/benjamin-franklin/inventions), lightning rod, bifocals, stove and armonica entries | Institute's historical account is identified; no claim to have authenticated the experiment directly. Four named inventions retained without claiming sole invention of electricity. |
+| Constitutional work and France | NARA Franklin biography, Continental Congress, French commission, ministerial service and Constitutional Convention paragraphs | Corrects drafting both documents to Declaration committee membership and Convention delegation. Diplomacy described as collaboration; charm is not asserted as the cause of the alliance. |
+| Slavery and late abolitionism | [NARA Anti-Slavery Petitions](https://www.archives.gov/legislative/features/franklin), opening record of enslavement and newspaper sale advertisements, society presidency, 1789 essays and 1790 petition | Both early complicity and later abolitionist work appear. Read institutional account; no claim to have transcribed the handwritten petition. Death date checked here. |
+| Epitaph | [Library of Congress, In His Own Words](https://www.loc.gov/loc/lcib/0601/franklin.html), final epitaph section | Replaces altered long quotation with a short exact excerpt and paraphrase. Described as proposed epitaph, not his actual grave inscription. |
+| Postal appointment | [USPS postmasters list](https://about.usps.com/who/profile/history/list-of-postmasters-general.htm), Continental Congress table | July 26, 1775 appointment; no claim he created the entire postal system. |
+| Final sayings and quote graphic | [O. Leon Reid edition](https://www.gutenberg.org/cache/epub/36151/pg36151-images.html), page 201 proverb appendix; Harvard Classics Part III, street improvements and felicity paragraph | The retained graphic's "Well done" saying matches the read anthology. The final felicity quotation restores "produc'd". Removed the penny-earned saying; [Franklin Institute's misquotation article](https://fi.edu/en/science-and-education/benjamin-franklin/7-things-benjamin-franklin-never-said) distinguishes it from Franklin's wording. |
+
+## Corrections and Access Limits
+
+- Removed the impossible claim that the United States was barely four years old at Franklin's 1790 death. Removed unverified funeral crowd motives, generalized national honors and unsupported character absolutes.
+- Replaced the misleading Archive.org audio label and unverified trailer recommendation with read text and archival project guides. Existing artwork destinations and historical image credits remain; this is not a renewed image-rights audit. The author-made quote graphic was visually inspected and its wording sourced.
+- Exact LOC standalone epitaph transcription returned a tool error; the accessible LOC curator's article supplied the quoted excerpt. Franklinpapers.org's document view presented an agreement rather than the document; not counted as read. State Department milestone pages now showed retirement notices rather than historical content and were not cited. Founders Online's 1737 almanac failed retrieval, so the publicly linked "Well done" wording uses the actually read Reid-edition appendix, without assigning an unverified issue-year pinpoint.
+- Public-domain Franklin texts are historical sources, not neutral assessments. The 1909 edition's editorial chronology was not treated as overriding the more precise institutional records. The May 16, 2026 daily-backfill report is historical review history, not verification of this edition.
+- No full-book read, manuscript authentication, full scholarly historiography review or wholesale image audit is claimed. No tests, builds, commits or publication performed by this pass; consolidated source/output checks belong to the parent task, with formal CI and publication gates separate.

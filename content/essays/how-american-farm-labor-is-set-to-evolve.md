@@ -9,9 +9,12 @@ subtitle: "Again"
 featured_image: "/images/medium/how-american-farm-labor-is-set-to-evolve/dff114a907fa929b6f43c06c5643b2f9f242465875c39b6eaef5edffbcf6be33.jpeg"
 featured_image_alt: "How American Farm Labor is Set to Evolve…"
 description: "Farm Labor from 1950 to the Future. The American agricultural sector has long been the backbone of the nation's economy, feeding millions and driving exports...."
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected farmworker population, wage-comparison groups and H-2A certified-position measure. Added or retained claim-level source links; original reporting frame and artwork retained. Removed an unsupported mechanization percentage and unverified Murray bibliography entry, selected Kandel's identified 2008 report, and linked Martin's existing title."
   - version: "1.1"
     date: "2026-04-28"
     note: "Updated April 28, 2026, after OIP back-archive review. Legacy Medium punctuation, list formatting, and Markdown rendering artifacts were cleaned; source, metadata, and rendering were checked."
@@ -36,23 +39,23 @@ This essay examines the transformations in American farm labor since 1950, highl
 
 ## The Mid-Century Agricultural Boom and Labor Shifts (1950-1985)
 
-The decades following World War II were transformative for American agriculture. Rising global demand, government support, and technological innovation spurred an agricultural boom. Mechanization revolutionized farming practices, with machines like the mechanical cotton picker reducing the need for manual labor by up to 90% in certain crops. In the Midwest, tractors replaced farmhands, while automated harvesters transformed wheat and corn production.
+The decades following World War II were transformative for American agriculture. Rising global demand, government support, and technological innovation spurred an agricultural boom. Mechanization revolutionized farming practices, with machines like the mechanical cotton picker reducing the need for manual labor in some crops. In the Midwest, tractors replaced farmhands, while automated harvesters transformed wheat and corn production.
 
-However, not all sectors could mechanize. Fruits and vegetables, requiring delicate handling, still depended heavily on manual labor. To meet these needs, the U.S. turned to immigrant labor. The Bracero Program (1942-1964) brought millions of Mexican workers to American farms, offering temporary visas to address labor shortages. While the program met critical economic demands, it also exposed workers to exploitative conditions, often with little recourse.
+However, not all sectors could mechanize. Fruits and vegetables, requiring delicate handling, still depended heavily on manual labor. To meet these needs, the U.S. turned to immigrant labor. [The Bracero Program (1942-1964) brought millions of Mexican workers to American farms](https://amhistory.si.edu/docs/FOOD_Latin_Flavors.pdf), offering temporary visas to address labor shortages. While the program met critical economic demands, it also exposed workers to exploitative conditions, often with little recourse.
 
-The program's end coincided with the rise of the United Farm Workers (UFW) movement in the 1960s and 1970s. Led by Cesar Chavez and Dolores Huerta, the UFW fought for better wages, union protections, and improved working conditions. Strikes, boycotts, and marches drew national attention to farmworkers' struggles, marking a pivotal moment in the fight for agricultural labor rights.
+The program's end coincided with the rise of the United Farm Workers (UFW) movement in the 1960s and 1970s. [Led by Cesar Chavez and Dolores Huerta](https://www.nps.gov/people/dolores-huerta.htm), the UFW fought for better wages, union protections, and improved working conditions. Strikes, boycotts, and marches drew national attention to farmworkers' struggles, marking a pivotal moment in the fight for agricultural labor rights.
 
 ## Stabilization of the Farm Labor Force Since 1985
 
-By the mid-1980s, the farm labor force reached relative equilibrium. Mechanization had reduced the need for domestic labor in crops like cotton and wheat, while immigrant labor stabilized in sectors reliant on handpicking, such as fruits, vegetables, and tree nuts. Today, immigrant workers account for over 70% of the agricultural workforce, with nearly half being undocumented.
+By the mid-1980s, the farm labor force reached relative equilibrium. Mechanization had reduced the need for domestic labor in crops like cotton and wheat, while immigrant labor stabilized in sectors reliant on handpicking, such as fruits, vegetables, and tree nuts. [In 2020-22, 68% of surveyed hired crop farmworkers were foreign-born and 42% lacked work authorization; the survey excludes H-2A and livestock workers](https://www.ers.usda.gov/topics/farm-economy/farm-labor).
 
 Yet this stability masks persistent challenges:
 
-- Low Wages: Farmworkers earn among the lowest wages in the country, averaging $16.50 per hour in 2022, compared to $27.07 for all private-sector jobs.
+- Low Wages: Farmworkers earn among the lowest wages in the country, with [nonsupervisory field and livestock workers averaging $16.62 per hour in 2022, compared to $27.56 for production and nonsupervisory nonfarm workers](https://www.judiciary.senate.gov/imo/media/doc/2023-05-31%20-%20Testimony%20-%20Costa.pdf).
 
 - Seasonal Precarity: The seasonal nature of farm labor often leaves workers without healthcare or unemployment benefits.
 
-- Labor Shortages: Despite the growth of programs like the H-2A visa, which issued over 370,000 permits in 2023, farmers report widespread difficulty finding enough workers during peak seasons.
+- Labor Shortages: Despite the growth of programs like the H-2A visa, for which the [Department of Labor certified 378,513 positions in fiscal 2023](https://www.dol.gov/sites/dolgov/files/ETA/oflc/pdfs/H-2A_Selected_Statistics_FY2023_Q4.pdf), farmers report widespread difficulty finding enough workers during peak seasons.
 
 ## The Future of Farm Labor: Humanoid Robots Powered by LLMs
 
@@ -112,10 +115,8 @@ Farmworkers remain the backbone of American agriculture, and any technological r
 
 ## Read More
 
-- William Kandel, Profile of Hired Farmworkers: A 2020 Update, U.S. Department of Agriculture, Economic Research Service.
+- William Kandel, [Profile of Hired Farmworkers, A 2008 Update](https://www.ers.usda.gov/publications/46041), U.S. Department of Agriculture, Economic Research Service.
 
-- Philip L. Martin, Immigration and Farm Labor: Challenges and Opportunities, UC Davis.
+- Philip L. Martin, [Immigration and Farm Labor: Challenges and Opportunities](https://agbioforum.org/immigration-and-farm-labor-challenges-and-opportunities/), UC Davis.
 
-- Keith Murray, Mechanization and Labor in American Agriculture, 1945-1970, Agricultural History Journal.
-
-- U.S. Department of Agriculture Economic Research Service, Farm Labor: Background.
+- [U.S. Department of Agriculture Economic Research Service, Farm Labor: Background](https://www.ers.usda.gov/topics/farm-economy/farm-labor).

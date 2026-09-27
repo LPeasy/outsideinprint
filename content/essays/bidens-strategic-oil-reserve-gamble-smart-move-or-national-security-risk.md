@@ -9,10 +9,13 @@ featured_image: "/images/medium/bidens-strategic-oil-reserve-gamble-smart-move-o
 featured_image_caption: "Photo by Free Walking Tour Salzburg on Unsplash"
 featured_image_alt: "Biden’s Strategic Oil Reserve Gamble: Smart Move or National Security Risk?"
 description: "America's Strategic Petroleum Reserve became a price, security, and credibility test after the Biden administration's record oil release."
-version: "1.3"
-edition: "Fourth web edition"
+version: "2.0"
+edition: "Fifth web edition"
 
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected release/replenishment scope, stock month, release history, Treasury attribution, RSM quotation date and war-year arithmetic. Recast the DOE refill and Goldman passages as dated paraphrases and removed two unverified quotations. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.2"
     date: "2026-06-25"
     note: "Updated June 25, 2026, after COA2 value review to normalize fake-list and source-attribution residue, complete discovery metadata, and remove house-style hits."
@@ -53,9 +56,9 @@ The crisis highlighted the nation's dependence on foreign oil and prompted the U
 
 With an authorized storage capacity of 714 million barrels, it remains the world's largest emergency crude oil stockpile, stored in vast underground salt caverns along the Gulf Coast.
 
-Historically, the U.S. government has only tapped it during true emergencies - the Gulf War in 1991, Hurricane Katrina in 2005, and the Libyan civil war in 2011.
+Historically, [emergency releases have included the Gulf War in 1991, Hurricane Katrina in 2005, and the Libyan civil war in 2011](https://www.energy.gov/hgeo/opr/history-spr-releases). The reserve has also been used for test sales, exchanges and [congressionally mandated sales](https://www.energy.gov/ceser/articles/doe-plans-mandated-sale-crude-oil-strategic-petroleum-reserve).
 
-2022 was a bit different. Facing soaring inflation and record-high gas prices, the Biden administration unleashed an unprecedented 180-million-barrel release - accounting for nearly half the reserve.
+2022 was a bit different. Facing soaring inflation and record-high gas prices, the Biden administration unleashed an unprecedented 180-million-barrel release - the largest SPR release on record.
 
 It worked, at least in the short term: oil prices fell, and gasoline dropped from over $5 per gallon to under $3.
 
@@ -71,19 +74,17 @@ But the SPR was left dramatically depleted, and as global instability rises, the
 
 When President Biden took office in January 2021, the SPR held about 638 million barrels of crude oil.
 
-By November 2022, after a series of aggressive releases, the reserve had dwindled to around 370 million barrels - the lowest since the early 1980s.
+By December 2022, after a series of aggressive releases, [the reserve had dwindled to around 370 million barrels](https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=MCSSTUS1&f=M) - the lowest since the early 1980s.
 
 The Biden administration's largest sale, a record 180-million-barrel release in 2022, was framed by the administration as a necessary intervention to stabilize global markets following Russia's invasion of Ukraine.
 
-DOE said in November 2024 that "The President is committed to ensuring a stable, affordable supply of energy for Americans."
+In total, the Biden administration sold nearly 300 million barrels of oil from the SPR. [By the end of 2024, the Department of Energy (DOE) had purchased 59 million barrels at an average price of $76 per barrel and canceled 140 million barrels in congressionally mandated sales.](https://www.energy.gov/articles/biden-harris-administration-makes-final-purchase-strategic-petroleum-reserve-secures-200)
 
-In total, the Biden administration sold nearly 300 million barrels of oil from the SPR. By the end of 2024, the Department of Energy (DOE) had purchased 59 million barrels at an average price of $76 per barrel and canceled 140 million barrels in congressionally mandated sales.
-
-DOE also said in November 2024 that "This milestone cements President Biden and Vice President Harris' commitment of putting the economic and energy security of the American people first."
+DOE also said in November 2024 that ["This milestone cements President Biden and Vice President Harris' commitment of putting the economic and energy security of the American people first."](https://www.energy.gov/articles/biden-harris-administration-makes-final-purchase-strategic-petroleum-reserve-secures-200)
 
 The Biden administration has framed its buyback strategy as a financial win.
 
-DOE said in November 2024 that it had "fully utilized all funding allocated for crude oil purchases following the sale of 180 million barrels in response to the Russian invasion of Ukraine and secured 20 million more barrels at a good price for taxpayers."
+DOE said in November 2024 that it had ["fully utilized all funding allocated for crude oil purchases following the sale of 180 million barrels in response to the Russian invasion of Ukraine and secured 20 million more barrels at a good price for taxpayers."](https://www.energy.gov/articles/biden-harris-administration-makes-final-purchase-strategic-petroleum-reserve-secures-200)
 
 These numbers warrant scrutiny.
 
@@ -93,9 +94,9 @@ Canceling sales that had been mandated by Congress does not equate to replenishi
 
 The result?
 
-A depleted SPR with no real replenishment. Politicians often present numbers selectively, but the reality remains: the SPR is at its lowest level in decades.
+A depleted SPR with only partial replenishment. Politicians often present numbers selectively, but the reality remains: the SPR is at its lowest level in decades.
 
-On March 7, 2025, DOE said, "The Energy Department has not made any budget requests to Congress at this time."
+On March 7, 2025, DOE said, ["The Energy Department has not made any budget requests to Congress at this time."](https://www.investing.com/news/economic-indicators/us-energy-chief-to-seek-20-billion-to-refill-oil-reserve-bloomberg-news-reports-3915041)
 
 ### The Immediate Impact: Did Biden's Plan Work?
 
@@ -105,11 +106,11 @@ Crude oil prices, which had surged past $120 per barrel in mid-2022, began falli
 
 Gasoline prices followed suit, dropping from record highs of over $5 per gallon in June 2022 to around $3 per gallon by the end of the year.
 
-Biden's Treasury Department estimated in November 2024 that the SPR releases "lowered gasoline prices by as much as 40 cents per gallon" during the worst of the 2022 price surge.
+Biden's Treasury Department [estimated in July 2022 that coordinated U.S. and IEA releases lowered gasoline prices by roughly 17 to 42 cents per gallon](https://home.treasury.gov/news/press-releases/jy0887).
 
 While global demand shifts and OPEC production decisions also played a role, the SPR releases clearly eased market pressures.
 
-Goldman Sachs said in 2023 that "The drawdowns reduced the amount of necessary price-induced demand destruction and helped prevent an even worse price spike."
+Goldman Sachs [said in March 2022 that the release would reduce the need for higher prices to curb demand, but would not resolve the market's structural supply deficit](https://www.bloomberglinea.com/2022/03/31/us-markets-suffer-worst-quarterly-fall-since-2020-mexico-heads-latam-gains/?outputType=amp).
 
 ### The Long-Term Cost: Is America More Vulnerable Now?
 
@@ -119,7 +120,7 @@ Traditionally, the SPR has functioned as a last-resort safety net, not a tool fo
 
 According to the Energy Department, refilling the reserve to pre-2021 levels could take years and cost over $20 billion.
 
-A DOE spokesperson said in March 2025, "It will take years to refill the reserve... a request that size to Congress is not something the department would do immediately in one request given the other budget concerns."
+[A DOE spokesperson told Reuters in March 2025 that refilling would take years and that other budget demands made a single immediate funding request unlikely.](https://www.investing.com/news/economic-indicators/us-energy-chief-to-seek-20-billion-to-refill-oil-reserve-bloomberg-news-reports-3915041)
 
 While President Donald Trump has pledged to "immediately refill" the reserve, the process remains uncertain.
 
@@ -135,17 +136,15 @@ The Biden administration's SPR gamble looks even riskier in light of recent geop
 
 Both crises have introduced new volatility to global oil markets, complicating the long-term consequences of depleting the SPR.
 
-The war in Ukraine, now in its third year, continues to disrupt global energy supplies. Russia remains one of the world's top oil producers, and despite Western sanctions, it continues to export millions of barrels per day, primarily to China and India.
+The war in Ukraine, now in its fourth year, continues to disrupt global energy supplies. Russia remains one of the world's top oil producers, and despite Western sanctions, it continues to export millions of barrels per day, primarily to China and India.
 
 Any escalation - such as new sanctions or disruptions to Russian infrastructure - could send oil prices spiking again, putting additional strain on global markets.
-
-The U.S. Treasury Department said in November 2024 that "The SPR releases in 2022 helped mitigate the energy price shock caused by Russia's invasion, but the conflict remains an ongoing source of uncertainty for global oil supply."
 
 Meanwhile, the Israel-Hamas war - while not directly affecting oil production - has created fresh instability in the Middle East, a region responsible for over 30% of global oil output.
 
 The initial outbreak of hostilities briefly pushed oil prices to $87 per barrel before stabilizing.
 
-Anne Slattery of RSM said in October 2024, "As long as the conflict remains contained and does not directly involve Iran, the price of oil should ease back toward pre-conflict levels."
+Anne Slattery and her RSM coauthors wrote in October 2023, ["As long as the conflict remains contained and does not directly involve Iran, the price of oil should ease back toward pre-conflict levels."](https://realeconomy.rsmus.com/oil-price-increase-to-exert-limited-impact-following-attack-on-israel/)
 
 If Iran - a key backer of Hamas and a major oil exporter - becomes directly involved, the risk of supply disruptions could rise significantly.
 
@@ -177,7 +176,7 @@ The cancellation of the Keystone XL pipeline remains a flashpoint in the broader
 
 The pipeline, which would have transported 830,000 barrels per day of Canadian crude oil to U.S. refineries, was effectively killed when the Biden administration revoked its permit in early 2021.
 
-Upon the official termination of the Keystone XL pipeline project, TC Energy's President and CEO, François Poirier, stated:
+Upon the [official termination of the Keystone XL pipeline project](https://www.tcenergy.com/announcements/2021/2021-06-09-tc-energy-confirms-termination-of-keystone-xl-pipeline-project/), TC Energy's President and CEO, François Poirier, stated:
 
 "We value the strong relationships we've built through the development of this Project and the experience we've gained."
 
@@ -195,7 +194,7 @@ He pledged to immediately refill the reserve and reverse course on restrictive d
 
 However, the process of replenishing the SPR has proven far more complicated than campaign rhetoric suggested.
 
-U.S. Energy Secretary Chris Wright said in March 2025, "It will take years to refill the reserve... a request that size to Congress is not something the department would do immediately in one request given the other budget concerns."
+[DOE told Reuters in March 2025 that refilling would take years and that other budget demands made a single immediate funding request unlikely.](https://www.investing.com/news/economic-indicators/us-energy-chief-to-seek-20-billion-to-refill-oil-reserve-bloomberg-news-reports-3915041)
 
 Despite Trump's stated commitment to energy dominance, refilling the SPR remains a slow and costly process.
 

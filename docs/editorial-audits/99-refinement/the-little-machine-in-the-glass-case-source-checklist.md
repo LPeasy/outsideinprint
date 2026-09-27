@@ -1,3 +1,36 @@
+# Current link-only review — September 27, 2026
+
+File: `content/essays/the-little-machine-in-the-glass-case.md`  
+Version: `1.1 / Second web edition`  
+SHA-256: `a166f3e90470d2a122d60342faca53ff8422ae4dc0eeb11cf99e82f92ee2f6ac`
+
+Current status: **PASS (bounded citation revision)**. Original prose restored; only supported hyperlink additions/destination repairs and minor citation metadata are allowed. Minimal corrections remain private and unapproved. This checkpoint supersedes all earlier September 27 major-revision candidates below; their claims that prose corrections were applied are no longer current.
+
+Two anchors expose the 1877 Patent Office fire record and Hagley model history. Existing patent-office, museum and statutory sources remain; the mechanical model is not treated as proof of commercial success.
+
+## Current source scope
+
+- [contemporary public account preserved by IP Mall](https://ipmall.law.unh.edu/content/patent-history-materials-index-authentic-account-fire-september-24-1877-which-destroyed) — attached only to the existing phrase; source scope is described above.
+- [Hagley's summary](https://www.hagley.org/patentmodels) — attached only to the existing phrase; source scope is described above.
+
+Evidence was read in the current research pass or its preserved claim-level source record. Access failures are not source verification. Historical-source passages remain useful research, but discarded revisions and old final hashes are not release evidence. Private proposals: `../core-link-only-root-approvals-2026-09-27.md`. No release gate or publication performed.
+
+## Superseded research history — not current clearance
+
+# Claim-link review: September 27, 2026
+
+File: `content/essays/the-little-machine-in-the-glass-case.md`  
+Edition: `1.1 / Second web edition`  
+SHA-256: `b576285b491da49f6a25606af301af1d7f1e1230742be1944b0b2f90737e09f2`
+
+[IP Mall's preserved contemporary 1877 fire account](https://ipmall.law.unh.edu/content/patent-history-materials-index-authentic-account-fire-september-24-1877-which-destroyed) was read: The Model-Room and Its Contents describes the third story, visitors, and roughly 200,000 models; The Loss places 87,000 in the burned halls. [Hagley's collection history](https://www.hagley.org/patentmodels) was read for the 1893 move to storage, later disposition, Smithsonian accessions, and auctions. Links were added beside those existing passages. No historical figures or legal claims changed.
+
+Scope: completed body/source-record coverage review and verification of newly linked passages, not a fresh full historical or legal audit. All other prose, original date, routes, membership, and artwork remain unchanged. Earlier source caveats below remain in force. Combined publication gates are pending.
+
+## Historical source record: June 28, 2026
+
+The following records earlier research, not fresh retrieval performed in this pass.
+
 # Source Checklist
 
 Date: 2026-06-28  

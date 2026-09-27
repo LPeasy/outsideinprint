@@ -9,12 +9,15 @@ featured_image: "/images/medium/u-s-russia-peace-talks/41e06cd8fdffbd668544cdfd0
 featured_image_caption: "Photo by Gaël Gaborel - OrbisTerrae on Unsplash"
 featured_image_alt: "U.S.-Russia Peace Talks"
 description: "“The key really in all of this is ultimately going to be whether an agreement can be reached with all parties involved on an acceptable resolution to the con..."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 pdf: "/pdfs/u-s-russia-peace-talks.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/u-s-russia-peace-talks-6201189d23c9"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.1"
     date: "2026-05-04"
     note: "Updated May 4, 2026, after OIP back-archive review. Legacy Medium formatting, remote body images, punctuation artifacts, source-card residue, and targeted wording were cleaned while preserving the original publication frame."
@@ -40,7 +43,7 @@ The talks put several questions on the table at once: whether Washington could r
 
 ## The Riyadh Talks
 
-"We're going to appoint a high-level team from our end to help negotiate and work through the end of the conflict in Ukraine in a way that's enduring and acceptable to all the parties engaged." - Marco Rubio
+"We're going to appoint a high-level team from our end to help negotiate and work through the end of the conflict in Ukraine in a way that's enduring and acceptable to all the parties engaged." - [Marco Rubio](https://transcripts.cnn.com/show/cnr/date/2025-02-18/segment/23)
 
 The U.S. delegation described four broad objectives for the talks:
 
@@ -57,11 +60,11 @@ The risk is obvious. Russia's willingness to talk does not prove a willingness t
 
 ## Ukraine's Position
 
-"This needs to be a permanent end to the war and not a temporary end, as we've seen in the past. We know just the practical reality is that there is going to be some discussion of territory and there is going to be a discussion of security guarantees." - Mike Waltz
+"This needs to be a permanent end to the war and not a temporary end, as we've seen in the past. We know just the practical reality is that there is going to be some discussion of territory and there is going to be a discussion of security guarantees." - [Mike Waltz](https://transcripts.cnn.com/show/cnr/date/2025-02-18/segment/23)
 
 The central question is whether the United States was signaling openness to a settlement that would leave Russia in control of some occupied Ukrainian territory.
 
-Rubio and Waltz did not commit to requiring Russian withdrawal from all occupied territory. That aligned with Defense Secretary Pete Hegseth's statement that a return to Ukraine's pre-2014 borders was an unrealistic objective.
+Rubio and Waltz did not commit to requiring Russian withdrawal from all occupied territory. That aligned with [Defense Secretary Pete Hegseth's statement](https://www.defense.gov/News/Speeches/Speech/Article/4064113/opening-remarks-by-secretary-of-defense-pete-hegseth-at-ukraine-defense-contact/) that a return to Ukraine's pre-2014 borders was an unrealistic objective.
 
 That posture could become a diplomatic opening, or it could become de facto acceptance of Russian gains. The difference depends on the details: enforcement, security guarantees, sanctions policy, European participation, and Ukraine's own consent.
 
@@ -77,7 +80,7 @@ A rushed settlement could leave Ukraine vulnerable. The point is not that every 
 
 ## NATO's Future
 
-"No one else has been able to bring something together like what we saw today, because Donald Trump is the only leader in the world that can. So no one is being sidelined here." - Marco Rubio
+"No one else has been able to bring something together like what we saw today, because Donald Trump is the only leader in the world that can. So no one is being sidelined here." - [Marco Rubio](https://transcripts.cnn.com/show/cnr/date/2025-02-18/segment/23)
 
 One of the administration's clearest policy shifts was the expectation that Europe should assume primary responsibility for its own defense.
 

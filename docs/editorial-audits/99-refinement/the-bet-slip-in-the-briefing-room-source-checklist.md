@@ -1,3 +1,29 @@
+# Hyperlink-only source checklist: the-bet-slip-in-the-briefing-room
+
+Date: 2026-09-27
+
+Version: `1.3`
+
+Final SHA256: `be45c86eab6646ea7ef6ce54e03175f09764efdb3f6a91515ab8b1f6e82c8c51`
+
+Status: Source-link pass complete; normal publication gate remains separate
+
+## Supporting passages and limits
+
+CFTC, Understanding Prediction Markets and Event Contracts, introductory explanation: yes/no outcomes, fixed payout, hedging/speculation, and potential price information. Link is limited to the contract explanation; existing Senate/DOJ/CFTC allegations and proposed-law distinctions remain intact.
+
+## Exact new links
+
+- `CFTC describes event contracts` -> https://www.cftc.gov/LearnandProtect/PredictionMarkets
+
+## Preservation and private issues
+
+No public prose, caption, order, artwork, discovery metadata or original date was changed. Existing links remain. Private concerns and minimal proposed corrections are in `../core-link-only-flood-pair-2026-09-27.md`; these proposals are not applied. This checklist records the added links, not a new certification of every historical fact or quotation.
+
+---
+
+## Preserved historical source record
+
 # Source Checklist
 
 ## Core Sources Used

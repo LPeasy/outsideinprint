@@ -12,9 +12,12 @@ featured_image: "/images/medium/jack-stratton-and-the-vulfpeck-model/52bb101b412
 featured_image_caption: "Jack Stratton on stage | Source: Michelle Shiers"
 featured_image_alt: "Jack Stratton on stage"
 description: "A profile of Jack Stratton and Vulfpeck’s independent model, from Sleepify and Madison Square Garden to fan-first releases and creative control."
-version: "1.5"
-edition: "Sixth web edition"
+version: "2.0"
+edition: "Seventh web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Retained source hyperlinks and applied approved narrow chronology, source-attribution, catalog-scope, track-title, and quotation-transcription corrections. The opening wordplay, surrounding prose, artwork, and original publication date are preserved; the unpublished broad rewrite remains withdrawn."
   - version: "1.1"
     date: "2026-05-15"
     note: "Clarified source framing around Vulfpeck's independent model and standardized punctuation."
@@ -53,21 +56,21 @@ System***
 best known as the founder and creative leader of the funk/soul band
 **Vulfpeck**.
 
-> The band formed in Ann Arbor, Michigan in 2011.
+> [The band formed in Ann Arbor, Michigan in 2011.](https://alumni.umich.edu/michigan-alum/no-label-no-problem/)
 
 **Stratton shapes Vulf's distinctive** **sound**, **directs the**
 **business**, and contributes as a **multi-instrumentalist** on drums,
 keyboard, guitar, and bass.
 
 Stratton's philosophy, production approach, and outlook on music ~
-***and life*** ~ shine in an October 2024 interview with writer *Josh
-Fischel*, published in ***The Believer***.
+***and life*** ~ shine in [an October 2024 interview with writer *Josh
+Fischel*, published in ***The Believer***](https://www.thebeliever.net/an-interview-with-jack-stratton/).
 
 The conversation touches on everything from compression techniques and
 rhythm to the economics of streaming and the role of Yiddish in funk
 music.
 
-> All direct quotes from Stratton in this biography are drawn from that
+> Except for the concert-film quotation below, direct quotes from Stratton in this biography are drawn from that
 > interview.
 
 #### Jack Stratton's Early Life and Musical Education
@@ -77,18 +80,18 @@ music.
 *Jack and His Dad, Bert \| [Source: Bert Stratton](https://www.cleveland.com/entertainment/2022/06/vulfpecks-jack-stratton-and-his-dad-yiddishe-cups-bert-stratton-talk-cleveland-klezmer-music-qa.html?outputType=amp)*
 
 
-> Stratton grew up in Cleveland Heights, Ohio.
+> [Stratton grew up in Cleveland Heights, Ohio.](https://www.ideastream.org/show/sound-of-ideas/2022-06-23/jack-stratton-musician-and-cleveland-heights-native-comes-home-with-a-new-klezmer-band)
 
 He started playing drums early and performed in a variety of musical
 contexts, including his father's klezmer band, *Yiddishe Cup*.
 
-After cutting his teeth with Bert, he formed his own group: *Yiddishe
+Years later, he formed his own klezmer group: *Yiddishe
 Pirat*.
 
 > By the time Jack was in high school, he was leading a funk band called
 > *Calvin Coolidge.*
 
-He enrolled at the *University of Michigan's School of Music*, **where**
+He enrolled at the [*University of Michigan's School of Music*](https://smtd.umich.edu/alumni-awards/christopher-kendall-award/), **where**
 **he studied music technology** **and met** **his future** **Vulfpeck
 collaborators:**
 
@@ -109,20 +112,20 @@ influences**, laid the foundation for a group that would blend
 *Cory Wong, Jack, and Joe Dart \| [Source: StubHub](https://www.stubhub.com/vulfpeck-tickets/performer/1501197)*
 
 
-Vulfpeck was conceived in 2011 as *an imagined German rhythm section*,
+Vulfpeck was conceived in 2011 as [*an imagined German rhythm section*](https://alumni.umich.edu/michigan-alum/no-label-no-problem/),
 **modeled on American session musicians** of the 1960s and '70s ~ like
 the *Funk Brothers* and the *Wrecking Crew*.
 
-Stratton has credited a Reinhold Mack interview as the creative spark.
+Stratton has credited a [Reinhold Mack interview](https://jambands.com/features/2014/01/12/vulfpeck-keep-it-beastly/) as the creative spark.
 
-> The band released its first track, "Beastly," in April 2011, followed
+> The band released its first track, "Beastly," in 2011, followed
 > by four EPs between 2011 and 2014.
 
-The group gained national attention in 2014 with ***Sleepify***, a
+The group gained national attention in 2014 with ***Sleepify***, [a
 silent Spotify album released to generate royalties for an
-admission-free tour.
+admission-free tour](https://www.interlochenpublicradio.org/2014-09-22/how-this-ann-arbor-band-got-20-000-from-spotify-by-releasing-silent-album).
 
-The stunt **earned over \$20,000** and drew international media coverage
+The stunt **earned about \$20,000** and drew international media coverage
 before being removed by the platform.
 
 > "No one knows what's gonna happen when you do these stunts... It's
@@ -178,8 +181,8 @@ Influenced by engineers like *Willie Mitchell* and *Geoff Emerick*, he
 uses **modern tools** to emulate **analog textures** and recording
 environments.
 
-His **Vulf Compressor** plug-in, developed in coordination with
-*Goodhertz*, is widely used by producers seeking a vintage sound.
+His [**Vulf Compressor** plug-in, developed in coordination with
+*Goodhertz*](https://goodhertz.com/vulf-comp/), is used by producers seeking a vintage sound.
 
 > "I use computers and plug-ins to mimic a lot of older sounds that
 > would have been made analog... I've always thought, How can I enhance
@@ -198,23 +201,22 @@ is ***perfect for live shows.***
 *Vulfpeck at MSG \| [Source: Jambase](https://www.jambase.com/article/vulfpeck-madison-square-garden-chris-thile-dave-koz)*
 
 
-Under Stratton's leadership, Vulfpeck has released **six studio albums,
-a compilation, and multiple live albums.**
+Under Stratton's leadership, Vulfpeck has released **studio and live albums.**
 
 > Every show is a little derby ~ equal parts precision, chaos, and loose
 > strut.
 
-In 2019, they became **one of the first acts to sell out Madison Square
-Garden *without a manager or major label.***
+In 2019, they [**sold out Madison Square
+Garden *without a manager or major label.***](https://ca.billboard.com/fyi/music-biz-headlines-oct-11-2019)
 
-> That concert was released as ***Live at Madison Square Garden*** as a
+> That concert was released as [***Live at Madison Square Garden***](https://vulfpeck.bandcamp.com/album/live-at-madison-square-garden) as a
 > film and a record.
 
 Live at MSG might've been their most impressive show, but real fans
 remember ***the first time a crowd sang the Dean Town bassline without
 being prompted.***
 
-> Dublin, 2016. Lightning in a bottle.
+> [Dublin, 2017](https://www.youtube.com/watch?v=3ruXOh74xRE). Lightning in a bottle.
 
 **Their journey** ~ from *tight-knit Michigan venues* to one of the
 world's biggest stages ~ helped **define Vulfpeck as a DIY powerhouse.**
@@ -231,15 +233,15 @@ world's biggest stages ~ helped **define Vulfpeck as a DIY powerhouse.**
 
 > "Oh that's real baby. That's real life. We're getting into real life."
 
-> ~ Jack Stratton, lying on a shakti mat
+> ~ [Jack Stratton, lying on a mat in the concert film](https://www.jambase.com/article/vulfpeck-clarity-of-cal-concert-film)
 
-*In March 2025*, Vulfpeck released ***Clarity of Cal***, a live album
+[*In March 2025*, Vulfpeck released ***Clarity of Cal***](https://vulfpeck.bandcamp.com/album/clarity-of-cal), a live album
 drawn from performances at *The UC Theatre in Berkeley* and the
 *Hollywood Palladium in Los Angeles*. The record captures the band's
 precision, looseness, and audience rapport onstage.
 
 The tracklist features standout songs such as **"Big Dipper," "Tender
-Defender," "New Beastly," "The Heist," "Memories," "August 26,"** and
+Defender," "New Beastly," "The Heist," "Memories," "Aug 26,"** and
 **"This Is Not the Song I Wrote."**
 
 The set moves through funk, soul, and gospel touches. **"Tender
@@ -250,7 +252,7 @@ revisits the band's early catalog.
 
 *Clarity of Cal concert film | [Watch on YouTube](https://www.youtube.com/watch?v=8bLinctYcno)*
 
-The companion concert film, directed and edited by *Carter Knopik*,
+[The companion concert film, directed and edited by *Carter Knopik*](https://www.jambase.com/article/vulfpeck-clarity-of-cal-concert-film),
 includes candid pre-show moments and footage of Stratton explaining the
 album's title. ***"Clarity of Cal"*** was a phrase his father often
 repeated, drawn from a *Jack Kerouac* prose poem.
@@ -275,9 +277,9 @@ continents.***
 
 *The Fearless Flyers | [Source: Dervon Douglas](https://liveforlivemusic.com/features/the-fearless-flyers-iv-vulfpeck-interview-2024/)*
 
-Stratton also produces for ***The Fearless Flyers***, a Vulf Records
+Stratton also [produces for ***The Fearless Flyers***](https://vulf.bandcamp.com/album/the-fearless-flyers), a Vulf Records
 offshoot featuring *Cory Wong and Nate Smith*, and releases **solo
-material** under the name ***Vulfmon***.
+material** under the name [***Vulfmon***](https://vulf.bandcamp.com/album/here-we-go-jack).
 
 > Stratton doesn't just bring in collaborators ~ he curates them like
 > vintage records, turning each guest appearance into a signature
@@ -287,7 +289,7 @@ He works frequently with **vocalists** like ***Antwaun Stanley, Joey
 Dosik,*** and ***Monica Martin*** ~ and brings in **legends** like
 ***David T. Walker, James Gadson,*** and ***Bernard Purdie***.
 
-> "It's kind of a joke now ~ the collective Vulf sphere of what I have
+> "I mean, at this point, it's a joke: the collective Vulf sphere of what I have
 > access to as a producer... People can just do things. They don't even
 > work that hard at it."
 
@@ -314,7 +316,7 @@ His **lyrics**, when present, are chosen **for sound and rhythm** rather
 than storytelling.
 
 > "I wanted to write expensive, depth-filled, Radiohead lyrics... There's
-> a similar thing in literature too ~ lofty, biblical writing. Just
+> a similar thing in literature too ~ lofty, biblical writing... Just
 > thinking like that in a lyrical sense is kind of a new idea."
 
 > ~ Jack Stratton
@@ -331,14 +333,14 @@ the industry at large.**
 Stratton is a **vocal critic of opaque music industry systems**,
 especially in streaming and ticketing.
 
-> In 2021, he proposed a listener-based royalty model. He has also
+> He proposed a [listener-based royalty model](https://www.thebeliever.net/an-interview-with-jack-stratton/). He has also
 > advocated for artist-controlled ticketing systems.
 
 **Vulfpeck's 2023 residency**, ***The Schvitz***, was designed to test
 direct ticketing and logistics without third-party promoters.
 
 > "There are just these layers of industry people between you and the
-> actual ticketing portal... It's simple stuff, but artists are in the
+> actual ticketing portal... It's simple stuff... But the artists are in the
 > dark."
 
 > ~ Jack Stratton

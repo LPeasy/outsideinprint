@@ -9,9 +9,12 @@ featured_image: "/images/medium/make-fighter-jets-great-again-introducing-the-f-
 featured_image_caption: "Image source: Collins Aerospace. The F-47 name refers to Trump's status as the 47th president."
 featured_image_alt: "Make Fighter Jets Great Again: Introducing the F-47"
 description: "The F-47 announcement mixed Trump-era branding with a serious Air Force modernization decision: Boeing's sixth-generation fighter for the NGAD program."
-version: "1.3"
-edition: "Fourth web edition"
+version: "1.4"
+edition: "Fifth web edition"
 revision_history:
+  - version: "1.4"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.2"
     date: "2026-06-25"
     note: "Updated June 25, 2026, after COA2 value review to normalize imported list residue and remove house-style hits."
@@ -42,7 +45,7 @@ The F-47 is intended to replace the F-22 Raptor as the Air Force's premier air-s
 
 The broad promise is familiar: longer range, stealthier design, stronger sensors, advanced data links, and the ability to work with uncrewed aircraft. The details remain limited because the program is classified in important places.
 
-Boeing won the Engineering and Manufacturing Development contract, beating Lockheed Martin for the lead role. That detail gives Boeing a rare test because the company has not delivered a clean-sheet fighter of this kind since the McDonnell Douglas merger era.
+[Boeing won the Engineering and Manufacturing Development contract](https://www.af.mil/news/article-display/article/4131345/air-force-awards-contract-for-next-generation-air-dominance-ngad-platform-f-47/), beating Lockheed Martin for the lead role. That detail gives Boeing a rare test because the company has not delivered a clean-sheet fighter of this kind since the McDonnell Douglas merger era.
 
 The contract gives Boeing a rare opportunity and a heavy burden. If it performs, the company regains prestige in a market where Lockheed's F-35 has dominated attention. If it stumbles, the Air Force loses time it may not have.
 
@@ -94,7 +97,7 @@ That does not make the F-47 a mistake. It means the program has to prove that it
 
 The public cost picture remains incomplete. Trump avoided specifics, and some program details are classified.
 
-Outside estimates have pointed to a very expensive aircraft, while Air Force officials have suggested the service wants larger numbers and a more sustainable cost profile than the F-22. Both can be true at the level of aspiration. Neither guarantees delivery.
+Outside estimates have pointed to a very expensive aircraft, while [Air Force officials have suggested the service wants larger numbers and a more sustainable cost profile than the F-22.](https://www.af.mil/News/Article-Display/Article/4131094/statement-by-chief-of-staff-of-the-air-force-gen-david-allvin-on-the-usaf-ngad/) Both can be true at the level of aspiration. Neither guarantees delivery.
 
 Production risk is the part of the story that deserves more attention.
 

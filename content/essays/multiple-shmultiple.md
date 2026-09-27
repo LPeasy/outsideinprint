@@ -9,9 +9,12 @@ description: "A reported history of multiple personality disorder, recovered mem
 featured_image: "essays/multiple-shmultiple/hero"
 featured_image_alt: "Editorial illustration of a court file, a therapy chair, and scattered clinical notes arranged like a quiet stage for a diagnosis learning to speak."
 featured_image_caption: "The record begins as a sentence in a file, then widens into a room that could teach suffering a script."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added supporting source hyperlinks or repaired source destinations; original prose, reporting frame, and artwork unchanged."
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
@@ -127,7 +130,7 @@ The lie does not have to begin inside the patient. It can begin inside the proce
 
 Lindsay and Read's 1995 review of memory work made the careful distinction the culture often refused. Childhood sexual abuse is real. Some recovered memories may be true. Memory work can also yield false beliefs. The review described a culture of hypnosis, guided imagery, journaling, dream interpretation, body symptoms, family photographs, survivor groups, self-help books, and therapist encouragement, all used to search for hidden abuse histories. ([APA via ResearchGate][13])
 
-That is where *The Courage to Heal* belongs in this history: part of the mass-market movement that carried recovered-memory assumptions from clinics and workshops into ordinary homes. Lindsay and Read identified Bass and Davis's book as one of the central self-help texts in that culture, and noted that many practitioners reported recommending it. ([APA via ResearchGate][13])
+That is where *The Courage to Heal* belongs in this history: part of the mass-market movement that carried recovered-memory assumptions from clinics and workshops into ordinary homes. Lindsay and Read identified Bass and Davis's book as one of the central self-help texts in that culture, and noted that [many practitioners reported recommending it](https://people.uncw.edu/myersb/292/readings/readings/repressed.pdf#page=7). ([APA via ResearchGate][13])
 
 By the late 1980s and 1990s, memory work had left the clinic. It had become a genre, a workshop language, a survivor vocabulary, and a way to convert symptoms into suspected biography.
 
@@ -139,13 +142,13 @@ Satanic ritual abuse gave recovered-memory therapy a mythology large enough to e
 
 The claim became almost impossible to falsify because every disconfirming fact could be folded back into the theory.
 
-*Michelle Remembers*, published in 1980, helped fuse recovered memory with satanic ritual abuse. Lindsay and Read later described *Sybil* and *Michelle Remembers* as books that popularized the belief that severe trauma could be hidden from memory and later recovered through therapy. ([APA via ResearchGate][13])
+*Michelle Remembers*, published in 1980, helped fuse recovered memory with satanic ritual abuse. [Lindsay and Read later described *Sybil* and *Michelle Remembers*](https://people.uncw.edu/myersb/292/readings/readings/repressed.pdf#page=5) as books that popularized the belief that severe trauma could be hidden from memory and later recovered through therapy. ([APA via ResearchGate][13])
 
 Law enforcement had to deal with the claims in the real world.
 
 In 1992, Kenneth Lanning, a supervisory special agent in the FBI's Behavioral Science Unit at the National Center for the Analysis of Violent Crime, wrote an investigator's guide to allegations of ritual child abuse. Lanning said he had first heard satanic and occult child-abuse claims in the early 1980s and had initially tended to believe them. As the claims grew to hundreds of victims, thousands of offenders, and tens of thousands of alleged murders with little or no corroborative evidence, the similarity of the stories became a reason to question them. ([Wikisource][14])
 
-Lanning did not deny child abuse. He said his professional life had been committed to the issue. His point was evidentiary. When allegations had public, legal, and personal consequences, proof had to be stronger. He warned about contagion among intervenors and alleged victims, and about the danger of public hysteria becoming a self-fulfilling prophecy. ([Wikisource][14])
+Lanning did not deny child abuse. He said his professional life had been committed to the issue. His point was evidentiary. When allegations had public, legal, and personal consequences, proof had to be stronger. He warned about [contagion among intervenors and alleged victims](https://en.wikisource.org/wiki/Investigator%27s_guide_to_allegations_of_%27ritual%27_child_abuse/Chapter_6), and about the danger of public hysteria becoming a self-fulfilling prophecy. ([Wikisource][14])
 
 Near the end of the report, Lanning gave the public a standard psychiatry should have kept closer to hand: believe what investigation can corroborate. Until hard evidence appeared, he wrote, the public should not believe claims about baby breeding, baby eating, mass occult murder, or satanic conspiracies taking over daycare centers and institutions. The burden belonged to the people making those claims. ([Wikisource][14])
 

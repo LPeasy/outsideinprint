@@ -1,0 +1,338 @@
+{
+  "date": "2026-09-27",
+  "scope": "Five Modern Bios profiles: restore baseline prose; supported hyperlink wrappers and one owner-approved Leo graphic/caption exception only; no publication",
+  "profiles": [
+    {
+      "slug": "pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter",
+      "path": "content/essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter.md",
+      "baseline_commit": "5e21e40efd5e4bcfda8bac2284edb9bb36b341d6",
+      "baseline_version": "1.2",
+      "version": "1.3",
+      "edition": "Fourth web edition",
+      "sha256": "d86399981e6b67cfb5af4218ac4f41077b6928f265d4bd3c940836863fae0852",
+      "revision_note": "Added claim-level source links without changing surrounding prose; retained the approved corrected timeline, alternative text and caption.",
+      "allowed_metadata_changes": [
+        "version",
+        "edition",
+        "revision_history (one pending entry only)"
+      ],
+      "replacements": [
+        {
+          "kind": "hyperlink",
+          "before": "September 14, 1955",
+          "after": "[September 14, 1955](https://www.vatican.va/content/leo-xiv/en/biography/documents/biografia_leone-xiv.html)",
+          "url": "https://www.vatican.va/content/leo-xiv/en/biography/documents/biografia_leone-xiv.html"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "**Louis and Mildred Prevost**",
+          "after": "[**Louis and Mildred Prevost**](https://www.vatican.va/content/leo-xiv/en/biography/documents/biografia_leone-xiv.html)",
+          "url": "https://www.vatican.va/content/leo-xiv/en/biography/documents/biografia_leone-xiv.html"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "Villanova University in 1977",
+          "after": "[Villanova University in 1977](https://www.villanova.edu/university/media/press-releases/2025/pope.html)",
+          "url": "https://www.villanova.edu/university/media/press-releases/2025/pope.html"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "**He was ordained a priest in 1982 in Rome.**",
+          "after": "[**He was ordained a priest in 1982 in Rome.**](https://www.vatican.va/content/leo-xiv/en/biography/documents/biografia_leone-xiv.html)",
+          "url": "https://www.vatican.va/content/leo-xiv/en/biography/documents/biografia_leone-xiv.html"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "He became a naturalized Peruvian citizen in 2015.",
+          "after": "[He became a naturalized Peruvian citizen in 2015.](https://www.vatican.va/content/leo-xiv/en/biography/documents/biografia_leone-xiv.html)",
+          "url": "https://www.vatican.va/content/leo-xiv/en/biography/documents/biografia_leone-xiv.html"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "**Prior General of\nthe worldwide Augustinian Order**",
+          "after": "[**Prior General of\nthe worldwide Augustinian Order**](https://www.augustinianorder.org/pope-leo-xiv-son-of-saint-augustine)",
+          "url": "https://www.augustinianorder.org/pope-leo-xiv-son-of-saint-augustine"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "**In 2023, he was called to Rome to lead the Vatican Dicastery for\nBishops,**",
+          "after": "[**In 2023, he was called to Rome to lead the Vatican Dicastery for\nBishops,**](https://www.vaticannews.va/en/pope/news/2025-05/biography-of-robert-francis-prevost-pope-leo-xiv.html)",
+          "url": "https://www.vaticannews.va/en/pope/news/2025-05/biography-of-robert-francis-prevost-pope-leo-xiv.html"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "He was made a cardinal later that year.",
+          "after": "[He was made a cardinal later that year.](https://www.vatican.va/content/leo-xiv/en/biography/documents/biografia_leone-xiv.html)",
+          "url": "https://www.vatican.va/content/leo-xiv/en/biography/documents/biografia_leone-xiv.html"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "**In his first blessing**",
+          "after": "[**In his first blessing**](https://www.vatican.va/content/leo-xiv/en/messages/urbi/documents/20250508-prima-benedizione-urbietorbi.html)",
+          "url": "https://www.vatican.va/content/leo-xiv/en/messages/urbi/documents/20250508-prima-benedizione-urbietorbi.html"
+        },
+        {
+          "kind": "approved_graphic_caption",
+          "before": "![Made by Author with ChatGPT](oip-image:medium/d5ae33ce9140a26ea50ddcad6752dba0ced8a8c5d8b1492450eeca28fdafb00c)\n\n*Made by Author with ChatGPT*",
+          "after": "![Corrected timeline of Pope Leo XIV, from his birth in 1955 through July 9, 2025.](oip-image:essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/timeline-corrected-20260927)\n\n*OIP timeline, corrected with ChatGPT from the [official Vatican biography](https://www.vatican.va/content/leo-xiv/en/biography/documents/biografia_leone-xiv.html), the [May 14 peace offer](https://www.vatican.va/content/leo-xiv/en/speeches/2025/may/documents/20250514-giubileo-chiese-orientali.html), and the [Care of Creation Mass record](https://www.christianunity.va/content/unitacristiani/en/news/2025/2025-07-09-mass-for-the-care-of-creation.html). Historical cutoff: July 10, 2025.*"
+        }
+      ],
+      "remaining_questions": [
+        "Restored body chronology again treats Peru service as continuous from 1985 to 1998, describes provincial election as 1999, and calls the Care of Creation formulary a new liturgical rite. The approved corrected graphic is accurate; it does not cure those restored prose discrepancies.",
+        "Restored childhood/private anecdotes, exact quotations, plain-white attire, finance-review claim and inferred motives require evidence or a separately approved minimal correction. The first-blessing English wording differs from the linked official translation."
+      ]
+    },
+    {
+      "slug": "dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center",
+      "path": "content/essays/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center.md",
+      "baseline_commit": "5e21e40efd5e4bcfda8bac2284edb9bb36b341d6",
+      "baseline_version": "1.1",
+      "version": "1.2",
+      "edition": "Third web edition",
+      "sha256": "3e1807417e2cd63b3a4b0baac0056b0faeab880deaa3c71480f01848e02d84f7",
+      "revision_note": "Added claim-level source links while preserving the existing prose and source-method note.",
+      "allowed_metadata_changes": [
+        "version",
+        "edition",
+        "revision_history (one pending entry only)"
+      ],
+      "replacements": [
+        {
+          "kind": "hyperlink",
+          "before": "Congress, the White House, and the Pentagon",
+          "after": "[Congress, the White House, and the Pentagon](https://history.house.gov/People/Listing/C/CHENEY%2C-Richard-Bruce-%28C000344%29/)",
+          "url": "https://history.house.gov/People/Listing/C/CHENEY%2C-Richard-Bruce-%28C000344%29/"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "He favored swift action, broad security powers, and a muscular conception of American responsibility in the world.",
+          "after": "[He favored swift action, broad security powers, and a muscular conception of American responsibility in the world.](https://georgewbush-whitehouse.archives.gov/news/releases/2002/08/20020826.html)",
+          "url": "https://georgewbush-whitehouse.archives.gov/news/releases/2002/08/20020826.html"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "surveillance policy, detention policy",
+          "after": "[surveillance policy, detention policy](https://georgewbush-whitehouse.archives.gov/news/releases/2005/12/20051218-4.html)",
+          "url": "https://georgewbush-whitehouse.archives.gov/news/releases/2005/12/20051218-4.html"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "He believed the executive branch should act with confidence, defend its prerogatives, and resist constraints that might dilute its ability to respond quickly and forcefully.",
+          "after": "[He believed the executive branch should act with confidence, defend its prerogatives, and resist constraints that might dilute its ability to respond quickly and forcefully.](https://georgewbush-whitehouse.archives.gov/news/releases/2008/12/20081222.html)",
+          "url": "https://georgewbush-whitehouse.archives.gov/news/releases/2008/12/20081222.html"
+        }
+      ],
+      "remaining_questions": [
+        "No new proven factual contradiction was established in this rollback. The portrait's claims about private motives, public opinion and supporter/critic beliefs are restored as written; their source basis or explicit interpretive intent needs bounded review rather than wholesale rewriting.",
+        "The restored primary_sources_note says the profile was built from memoirs as well as records. The September source pass did not document a memoir read. Confirm historical author provenance or approve a narrow source-method-note correction; do not falsely certify new memoir review."
+      ]
+    },
+    {
+      "slug": "david-attenborough-how-one-quiet-voice-made-the-whole-world-listen",
+      "path": "content/essays/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.md",
+      "baseline_commit": "5e21e40efd5e4bcfda8bac2284edb9bb36b341d6",
+      "baseline_version": "1.3",
+      "version": "1.4",
+      "edition": "Fifth web edition",
+      "sha256": "0586e2f61e0789d8884633369ea5d0365173793d3ab9078cbfd441949590bd47",
+      "revision_note": "Added claim-level source links while preserving the existing prose, description and illustrations.",
+      "allowed_metadata_changes": [
+        "version",
+        "edition",
+        "revision_history (one pending entry only)"
+      ],
+      "replacements": [
+        {
+          "kind": "hyperlink",
+          "before": "He was born in 1926",
+          "after": "[He was born in 1926](https://australian.museum/about/history/people/sir-david-attenborough-om/)",
+          "url": "https://australian.museum/about/history/people/sir-david-attenborough-om/"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "Attenborough grew up in Leicester, England",
+          "after": "[Attenborough grew up in Leicester, England](https://australian.museum/about/history/people/sir-david-attenborough-om/)",
+          "url": "https://australian.museum/about/history/people/sir-david-attenborough-om/"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "He studied Natural Sciences at Cambridge, specializing in geology and\nzoology.",
+          "after": "[He studied Natural Sciences at Cambridge, specializing in geology and\nzoology.](https://australian.museum/about/history/people/sir-david-attenborough-om/)",
+          "url": "https://australian.museum/about/history/people/sir-david-attenborough-om/"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "in 1952",
+          "after": "[in 1952](https://www.weforum.org/stories/authors/david-attenborough/)",
+          "url": "https://www.weforum.org/stories/authors/david-attenborough/"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "Zoo Quest, a documentary series",
+          "after": "[Zoo Quest, a documentary series](https://www.weforum.org/stories/authors/david-attenborough/)",
+          "url": "https://www.weforum.org/stories/authors/david-attenborough/"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "The Living Planet (1984), The Trials of Life\n(1990), and The Blue Planet (2001)",
+          "after": "[The Living Planet (1984), The Trials of Life\n(1990), and The Blue Planet (2001)](https://www.weforum.org/stories/authors/david-attenborough/)",
+          "url": "https://www.weforum.org/stories/authors/david-attenborough/"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "Planet Earth II (2016)",
+          "after": "[Planet Earth II (2016)](https://www.bbcstudiospressroom.com/press/watching-nature-programs-makes-happier-new-bbc-research-reveals/)",
+          "url": "https://www.bbcstudiospressroom.com/press/watching-nature-programs-makes-happier-new-bbc-research-reveals/"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "A Life on Our Planet",
+          "after": "[A Life on Our Planet](https://silverbackfilms.tv/shows/david-attenborough-a-life-on-our-planet/)",
+          "url": "https://silverbackfilms.tv/shows/david-attenborough-a-life-on-our-planet/"
+        }
+      ],
+      "remaining_questions": [
+        "Restored chronology again conflates the 1973 return to program-making with 1979 Life on Earth, the 2006 HD original with the 4K sequel, the 1985 knighthood with the 2020 honor/2022 investiture, and the 2016 ship-naming decision with 2021.",
+        "Restored direct quotations, childhood exploits, monkey/snake anecdote, audience total, budget, commissioning claims and universal script-writing workflow need pinpoint evidence or minimal corrections approved separately. Affectionate metaphors and concluding tribute remain unchanged."
+      ]
+    },
+    {
+      "slug": "who-is-pascal-siakam",
+      "path": "content/essays/who-is-pascal-siakam.md",
+      "baseline_commit": "5e21e40efd5e4bcfda8bac2284edb9bb36b341d6",
+      "baseline_version": "1.4",
+      "version": "1.5",
+      "edition": "Sixth web edition",
+      "sha256": "654215482a569d489006e4ce5d86e928d4a2d0cd0eaca96c1fc9fb2cd2c75506",
+      "revision_note": "Added claim-level links and repaired a source URL without rewriting the prose.",
+      "allowed_metadata_changes": [
+        "version",
+        "edition",
+        "revision_history (one pending entry only)"
+      ],
+      "replacements": [
+        {
+          "kind": "hyperlink",
+          "before": "Born April 2, 1994, in **Douala, Cameroon**",
+          "after": "[Born April 2, 1994, in **Douala, Cameroon**](https://cdn.nba.com/teams/uploads/sites/1610612754/2025/04/2025-Indiana-Pacers-Playoff-Guide.pdf#page=48)",
+          "url": "https://cdn.nba.com/teams/uploads/sites/1610612754/2025/04/2025-Indiana-Pacers-Playoff-Guide.pdf#page=48"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "**Drafted 27th overall** by Toronto in 2016",
+          "after": "[**Drafted 27th overall** by Toronto in 2016](https://cdn.nba.com/teams/uploads/sites/1610612754/2025/04/2025-Indiana-Pacers-Playoff-Guide.pdf#page=48)",
+          "url": "https://cdn.nba.com/teams/uploads/sites/1610612754/2025/04/2025-Indiana-Pacers-Playoff-Guide.pdf#page=48"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "D-League **title**, and **earning Finals MVP.**",
+          "after": "[D-League **title**, and **earning Finals MVP.**](https://www.nba.com/raptors/holly-blog/raptors-905-road-to-championship)",
+          "url": "https://www.nba.com/raptors/holly-blog/raptors-905-road-to-championship"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "Pascal was traded to Indiana in January 2024.",
+          "after": "[Pascal was traded to Indiana in January 2024.](https://cdn.nba.com/teams/uploads/sites/1610612754/2025/04/2025-Indiana-Pacers-Playoff-Guide.pdf#page=48)",
+          "url": "https://cdn.nba.com/teams/uploads/sites/1610612754/2025/04/2025-Indiana-Pacers-Playoff-Guide.pdf#page=48"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "The 2024-25 season saw the Pacers jump to 50 wins.",
+          "after": "[The 2024-25 season saw the Pacers jump to 50 wins.](https://www.nba.com/news/pacers-team-record-comeback-for-50th-win)",
+          "url": "https://www.nba.com/news/pacers-team-record-comeback-for-50th-win"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "In Game 2 of the 2025 Eastern Conference Finals, Siakam erupted for 39 points.",
+          "after": "[In Game 2 of the 2025 Eastern Conference Finals, Siakam erupted for 39 points.](https://www.nba.com/game/ind-vs-nyk-0042400302)",
+          "url": "https://www.nba.com/game/ind-vs-nyk-0042400302"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "In Game 4, he helped Indiana move to a commanding 3-1 series lead, one win away from the Finals.",
+          "after": "[In Game 4, he helped Indiana move to a commanding 3-1 series lead, one win away from the Finals.](https://www.nba.com/game/nyk-vs-ind-0042400304)",
+          "url": "https://www.nba.com/game/nyk-vs-ind-0042400304"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "Three All-Star nods",
+          "after": "[Three All-Star nods](https://www.nba.com/watch/video/pascal-siakam-2025-east-all-star-reserve-highlights)",
+          "url": "https://www.nba.com/watch/video/pascal-siakam-2025-east-all-star-reserve-highlights"
+        },
+        {
+          "kind": "verified_url_repair",
+          "before": "https://www.si.com/nba/pacers/news/pascal-siakam-reveals-why-pacers-have-major-edge-over-opponents",
+          "after": "https://www.si.com/nba/pacers/onsi/news/pascal-siakam-reveals-why-pacers-have-major-edge-over-opponents",
+          "count": 2
+        }
+      ],
+      "remaining_questions": [
+        "Restored college line says junior, 21.9 points and 8.6 rebounds; the archived NMS record supports sophomore, 20.3 and 11.6. The restored 2019 playoff line uses regular-season 16.9/6.9 instead of postseason 19.0/7.1.",
+        "Restored blockquote-source guarantee and several quotations remain unverified in the read sources. First-player award/title superlative, D-League scoring period and foundation scope need evidence or separate approval. The caption is restored because separate owner approval was not established; proposed correction awaiting approval: Basketball Without Borders Camp in Cameroon to Basketball camp with Luc Mbah a Moute. Keep the NBA credit URL unchanged."
+      ]
+    },
+    {
+      "slug": "benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible",
+      "path": "content/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.md",
+      "baseline_commit": "5e21e40efd5e4bcfda8bac2284edb9bb36b341d6",
+      "baseline_version": "1.2",
+      "version": "1.3",
+      "edition": "Fourth web edition",
+      "sha256": "cc0ae13f09b98a583e4a042e72f433cc3e302e66a85b15958dd3b8d21f7579c9",
+      "revision_note": "Added claim-level source links while preserving the existing prose, description and illustrations.",
+      "allowed_metadata_changes": [
+        "version",
+        "edition",
+        "revision_history (one pending entry only)"
+      ],
+      "replacements": [
+        {
+          "kind": "hyperlink",
+          "before": "This biography is based on *The Autobiography of Benjamin Franklin*",
+          "after": "This biography is based on [*The Autobiography of Benjamin Franklin*](https://www.gutenberg.org/files/148/148-h/148-h.htm)",
+          "url": "https://www.gutenberg.org/files/148/148-h/148-h.htm"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "A printer's apprentice by twelve, a newspaper owner by twenty-three",
+          "after": "[A printer's apprentice by twelve, a newspaper owner by twenty-three](https://www.archives.gov/nhprc/projects/catalog/benjamin-franklin)",
+          "url": "https://www.archives.gov/nhprc/projects/catalog/benjamin-franklin"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "He studied electricity with his famous kite experiment (no, he didn't\nget struck by lightning ~ that's a myth!).",
+          "after": "[He studied electricity with his famous kite experiment (no, he didn't\nget struck by lightning ~ that's a myth!).](https://fi.edu/en/science-and-education/benjamin-franklin/kite-key-experiment)",
+          "url": "https://fi.edu/en/science-and-education/benjamin-franklin/kite-key-experiment"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "Franklin kept a journal tracking his progress toward 13 personal virtues",
+          "after": "[Franklin kept a journal tracking his progress toward 13 personal virtues](https://www.gutenberg.org/files/148/148-h/148-h.htm)",
+          "url": "https://www.gutenberg.org/files/148/148-h/148-h.htm"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "presided over the Pennsylvania Society for the Abolition of Slavery.",
+          "after": "[presided over the Pennsylvania Society for the Abolition of Slavery.](https://www.archives.gov/legislative/features/franklin)",
+          "url": "https://www.archives.gov/legislative/features/franklin"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "**Franklin died on April 17, 1790.**",
+          "after": "[**Franklin died on April 17, 1790.**](https://www.archives.gov/legislative/features/franklin)",
+          "url": "https://www.archives.gov/legislative/features/franklin"
+        },
+        {
+          "kind": "hyperlink",
+          "before": "Bifocals, Franklin stove, lightning\n  rod, glass armonica",
+          "after": "[Bifocals, Franklin stove, lightning\n  rod, glass armonica](https://fi.edu/en/science-and-education/benjamin-franklin/inventions)",
+          "url": "https://fi.edu/en/science-and-education/benjamin-franklin/inventions"
+        }
+      ],
+      "remaining_questions": [
+        "Restored prose again says the United States was barely four years old in 1790, describes drafting both founding documents, and calls the Library Company a public lending library. Minimal correction proposals must remain separate until approved.",
+        "Restored quotations contain stitched or unverified wording, the penny-earned attribution is unsupported, and the Archive.org scan is labeled audio. Source-method description/editor's note and original framing are restored; the earlier expanded slavery discussion and broad recasting are withdrawn."
+      ]
+    }
+  ]
+}

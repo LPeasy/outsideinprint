@@ -6,9 +6,12 @@ slug: "the-warning-label-in-the-weeds"
 section_label: "Essay"
 subtitle: "A Supreme Court fight over Roundup asks who gets to decide when a risk becomes visible on the bottle."
 description: "The Supreme Court's Roundup case turns a weedkiller label into a test of federal power, state lawsuits, farming, and public trust."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.2"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
@@ -37,7 +40,7 @@ It sits on a garage shelf, in a landscaping truck, in a farm shed, or beside a p
 
 On Monday, April 27, 2026, that small paper surface reached the Supreme Court.
 
-The case, [*Monsanto Company v. Durnell*](https://www.scotusblog.com/cases/case-files/monsanto-company-v-durnell/), asks whether the Federal Insecticide, Fungicide, and Rodenticide Act preempts a label-based failure-to-warn claim when the Environmental Protection Agency has not required the warning. Put plainly: if EPA approves a pesticide label without a cancer warning, can a state-law jury hold the company liable for failing to include one?
+The case, [*Monsanto Company v. Durnell*](https://www.supremecourt.gov/docket/docketfiles/html/public/24-1068.html), asks whether the Federal Insecticide, Fungicide, and Rodenticide Act preempts a label-based failure-to-warn claim when the Environmental Protection Agency has not required the warning. Put plainly: if EPA approves a pesticide label without a cancer warning, can a state-law jury hold the company liable for failing to include one?
 
 The answer will matter far beyond one brand. It will shape how risk travels through American law: by federal agency review, by state tort suits, by juries, by scientists, by farmers, by consumers, and by companies whose products sit in ordinary places until someone gets sick.
 
@@ -57,7 +60,7 @@ Pesticide law gives EPA heavy responsibility. Glyphosate has been registered as 
 
 That sentence is central to Monsanto's argument.
 
-FIFRA gives EPA authority over pesticide registration and labeling. It also blocks states from imposing labeling or packaging requirements that differ from federal requirements. Monsanto says that structure protects farmers, manufacturers, and regulators from a patchwork of warnings. A pesticide sold across the country, the company argues, needs one federally supervised label, not fifty practical versions created through court verdicts.
+FIFRA gives EPA authority over pesticide registration and labeling. It also [blocks states from imposing labeling or packaging requirements that differ from federal requirements](https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title7-section136v&num=0&edition=prelim). Monsanto says that structure protects farmers, manufacturers, and regulators from a patchwork of warnings. A pesticide sold across the country, the company argues, needs one federally supervised label, not fifty practical versions created through court verdicts.
 
 Bayer's [statement before argument](https://www.bayer.com/en/litigation-statement/supreme-court-argument) framed the case as a demand for regulatory clarity. The company said Congress created a nationwide framework for pesticide labels, and that companies should be able to rely on science-based federal approvals when bringing products to market.
 

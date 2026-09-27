@@ -7,8 +7,12 @@ draft: false
 slug: "the-bars-on-the-gum"
 collections: ["brands-business-consumer-choice"]
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "2.0"
+edition: "Second web edition"
+revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Retained source hyperlinks and narrowed two price-free barcode statements to ordinary manufacturer-coded labels; identified the NIST procedure as a model. Surrounding prose, artwork, and original publication date are unchanged."
 featured: false
 featured_image: "essays/the-bars-on-the-gum/hero"
 featured_image_alt: "A pack of gum with a stark UPC-like code resting beside a low grocery scanner under cool fluorescent light."
@@ -25,7 +29,7 @@ tags:
 
 ## The Pack At Marsh
 
-The package was small enough to vanish in a palm. A pack of Wrigley's Juicy Fruit gum crossed a scanner at a Marsh supermarket in Troy, Ohio, on June 26, 1974. The register read the code, found the price, and made the sale. [IBM's history of the UPC](https://www.ibm.com/history/upc) gives the price as 67 cents. The Smithsonian's supermarket scanner object record places one of the first ten Spectra Physics model A scanners in the museum collection and says the original pack of gum stayed with Clyde Dawson of Marsh Supermarkets.
+The package was small enough to vanish in a palm. A pack of Wrigley's Juicy Fruit gum crossed a scanner at a Marsh supermarket in Troy, Ohio, on June 26, 1974. The register read the code, found the price, and made the sale. [IBM's history of the UPC](https://www.ibm.com/history/upc) gives the price as 67 cents. The [Smithsonian's supermarket scanner object record](https://americanhistory.si.edu/collections/object/nmah_892778) places one of the first ten Spectra Physics model A scanners in the museum collection and says the original pack of gum stayed with Clyde Dawson of Marsh Supermarkets.
 
 The familiar version of the scene is tidy. It has a first scan, a first product, a first beep, and a little grocery-store theater. It lets a reader imagine technology entering commerce through a single counter. That scene is true enough as an event. It is too small as an explanation.
 
@@ -49,7 +53,7 @@ Invention stories often flatter the lone device. A person has an insight, a mach
 
 The grocery trade had reasons to want an answer. Supermarkets had grown into places where thousands of items moved through shelves, back rooms, delivery doors, coupons, weekly ads, and registers. A cashier could type a price, but a person at a keyboard also carried fatigue, memory, line pressure, and error. A clerk could stick prices on packages, but every price change turned into hand work. A manager could walk the aisles, but the store's own memory was scattered across shelf tags, invoices, delivery slips, handwritten counts, and the private knowledge of workers.
 
-IBM describes a 1970 call by grocery retailers and packaged-goods manufacturers for a standard machine-readable symbol. That account is corporate history and should be treated as an interested source. It also matches the museum record and later standards record: the retail problem was collective. A code used by only one manufacturer offered too little value to a supermarket. A scanner limited to one retailer's mark carried too much cost. A package marked only for one store lost value when it moved through wholesalers and rival chains.
+[IBM describes a 1970 call](https://www.ibm.com/history/upc) by grocery retailers and packaged-goods manufacturers for a standard machine-readable symbol. That account is corporate history and should be treated as an interested source. It also matches the museum record and later standards record: the retail problem was collective. A code used by only one manufacturer offered too little value to a supermarket. A scanner limited to one retailer's mark carried too much cost. A package marked only for one store lost value when it moved through wholesalers and rival chains.
 
 The selected symbol had to survive dirty hands, curved cans, shiny plastic, crushed corners, bad angles, speed, and a checker pulling a product across a glass window without performing a ritual. It needed human-readable digits because machines fail. It needed a check digit because errors happen. It needed a footprint small enough for candy and medicine, yet steady enough for cereal, soap, soup, and rice.
 
@@ -89,7 +93,7 @@ The [NBER paper by Emek Basker and Timothy Simcoe](https://www.nber.org/papers/w
 
 Infrastructure is often boring at the point of contact. The shopper sees the glass, hears the beep, and watches the total climb. The live force sits elsewhere. A price file has to match a shelf tag. A product master has to match a package. A supplier has to use the right identifier. A back room has to receive goods under names the system recognizes. A promotion has to know which code qualifies. A recall has to find the right lot or product family. A return has to point back to the sale.
 
-The UPC became the hinge for all those acts, though the bars themselves did not perform them. The barcode did not carry the price, reorder the case, check the promotion, or select the assortment. It pointed to records that did. Blaming or praising the barcode alone would confuse the mark with the system behind it.
+The UPC became the hinge for all those acts, though the bars themselves did not perform them. The ordinary manufacturer-coded barcode did not carry the price, reorder the case, check the promotion, or select the assortment. It pointed to records that did. Blaming or praising the barcode alone would confuse the mark with the system behind it.
 
 This is where private record systems take on public weight. A grocery store is private property. A shopper's weekly food purchase is ordinary public life. The scanner sits at the crossing. It turns private databases into lived facts for anyone buying milk, gum, diapers, bread, medicine, coffee, or dog food.
 
@@ -113,7 +117,7 @@ The barcode made variety easier to manage because it gave difference a cheap com
 
 That detail changed the politics of variety. A store can carry more products when it can count them without drowning in hand records. A manufacturer can propose more variants when it can give each one an address in the ordering and scanning system. A retailer can test the claim. If a new flavor moves, the record says so. If it sits, the record says that too.
 
-Basker and Simcoe's UPC research links adoption with variety-enhancing product change and larger retail supply chains. The phrase sounds bloodless until one stands in an aisle. The ordinary result is the long wall of nearly identical choices: gum flavors, cereal shapes, pasta sauces, toothpaste claims, seltzer cans, coffee pods, snack bags. The barcode did not create desire for novelty. It made the cost of naming novelty lower.
+[Basker and Simcoe's UPC research](https://www.nber.org/papers/w24040) links adoption with variety-enhancing product change and larger retail supply chains. The phrase sounds bloodless until one stands in an aisle. The ordinary result is the long wall of nearly identical choices: gum flavors, cereal shapes, pasta sauces, toothpaste claims, seltzer cans, coffee pods, snack bags. The barcode did not create desire for novelty. It made the cost of naming novelty lower.
 
 The shelf became easier to refresh and easier to crowd. A product could win because shoppers wanted it. A product could also win because the record made it easy to sell, replenish, promote, and compare. Technical legibility became part of market access. If a good has no scannable identity, it enters the modern store as an exception. Exceptions cost time.
 
@@ -129,7 +133,7 @@ The barcode therefore belongs in the history of attention. It made packages easi
 
 The barcode changed work before it changed rhetoric about work.
 
-The early scanner was not a self-checkout kiosk. It was a tool at a staffed counter. The patent language for a scanner at a checkout station assumes a checker who moves each package past the window and enters the human-readable code when the machine cannot read the label. That worker had to feed the system with body movement: reach, turn, pull, listen, bag, correct, repeat.
+The early scanner was not a self-checkout kiosk. It was a tool at a staffed counter. [The patent language for a scanner at a checkout station](https://patents.google.com/patent/US4064390) assumes a checker who moves each package past the window and enters the human-readable code when the machine cannot read the label. That worker had to feed the system with body movement: reach, turn, pull, listen, bag, correct, repeat.
 
 The public often hears automation as replacement. At the lane, the first effect was remeasurement. The store could ask how fast items moved through a line, how many errors occurred, how much labor a sale required, and how much throughput a checkout lane could support. The job changed because the machine made the work more measurable.
 
@@ -151,11 +155,11 @@ That hidden work has public consequence. A store's price file is only as trustwo
 
 There is a small democracy in a visible price. It gives the shopper an object to point at.
 
-The UPC weakened that old habit because the code does not contain the price. It identifies the product. The register retrieves the price from the store's system. That change lets stores update prices without touching every package. It also asks shoppers to trust a chain of records they cannot fully inspect while standing in line.
+The ordinary manufacturer-coded UPC weakened that old habit because the code does not contain the price. It identifies the product. The register retrieves the price from the store's system. That change lets stores update prices without touching every package. It also asks shoppers to trust a chain of records they cannot fully inspect while standing in line.
 
-This is where weights-and-measures law enters the story. Barcode trust did not remain a private promise. Public offices had to decide how to test scanner prices. [NIST Handbook 130, current 2026 edition](https://www.nist.gov/pml/owm/nist-handbook-130-current-edition), includes an "Examination Procedure for Price Verification" adopted through the National Conference on Weights and Measures. The [Section V PDF](https://www.nist.gov/document/2026-hb-130-section-v) says the procedure applies to retail stores, including those using UPC scanners and price-look-up codes at checkout, and defines the purpose as making sure consumers are charged the correct price.
+This is where weights-and-measures law enters the story. Barcode trust did not remain a private promise. Public offices had to decide how to test scanner prices. [NIST Handbook 130, current 2026 edition](https://www.nist.gov/pml/owm/nist-handbook-130-current-edition), includes an "Examination Procedure for Price Verification" adopted through the National Conference on Weights and Measures. The [Section V PDF](https://www.nist.gov/document/2026-hb-130-section-v) says the model procedure applies to retail stores, including those using UPC scanners and price-look-up codes at checkout, and defines the purpose as making sure consumers are charged the correct price.
 
-The procedure tells us what the public problem became. Inspectors compare the price charged at the register or device with the shelf, item, advertisement, or posted price. They sample items. They document findings. They distinguish overcharges, undercharges, and pricing files. The law-facing question is no longer "Can the machine read?" It is "Does the record the machine reaches match the promise made to the shopper?"
+The procedure tells us what the public problem became. [Inspectors compare the price charged at the register or device with the shelf, item, advertisement, or posted price](https://www.nist.gov/document/2026-hb-130-section-v#page=19). They sample items. They document findings. They distinguish overcharges, undercharges, and pricing files. The law-facing question is no longer "Can the machine read?" It is "Does the record the machine reaches match the promise made to the shopper?"
 
 That is the real scanner trust problem. A scanner can be optically accurate and publicly wrong. It can read the correct code and call the wrong price. It can identify the product and betray the shelf tag. It can do its narrow job perfectly while the system around it fails the buyer.
 

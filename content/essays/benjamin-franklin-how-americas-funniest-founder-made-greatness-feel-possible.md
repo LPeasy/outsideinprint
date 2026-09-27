@@ -11,9 +11,12 @@ description: "This biography is based on The Autobiography of Benjamin Franklin 
 featured_image: "/images/medium/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/60260729069245aec2c2513ff114e881be68451fae1ca363432ab40d1bdaab17.jpeg"
 featured_image_caption: "Source: Picryl"
 featured_image_alt: "Benjamin Franklin: How America’s Funniest Founder Made Greatness Feel Possible"
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Added claim-level sources and made limited corrections to quotations, institutional roles, and chronology; removed a misattributed saying and relabeled the existing book scan. Preserved the surrounding prose and artwork."
   - version: "1.1"
     date: "2026-05-16"
     note: "Updated May 16, 2026, after OIP back-archive review. Source framing, Medium import residue, and house-style issues were corrected."
@@ -27,7 +30,7 @@ medium_source_url: "https://medium.com/@lawtonperret/benjamin-franklin-how-ameri
 
 #### **Editor's Note**
 
-This biography is based on *The Autobiography of Benjamin Franklin* and
+This biography is based on [*The Autobiography of Benjamin Franklin*](https://www.gutenberg.org/files/148/148-h/148-h.htm) and
 other public-domain records, including Franklin's letters, essays, and
 inventions.
 
@@ -54,13 +57,11 @@ lightning wrangler, and sage of thrift ~
 > **He was just Ben.**
 
 The fifteenth child in a poor Boston family, **Franklin ran away to
-Philadelphia** with just a few coins in his pocket and a loaf of bread
-under his arms.
+Philadelphia** with just a few coins in his pocket.
 
-He writes in his *Autobiography* that he arrived
+He writes in his *Autobiography* that he
 
-> **"dirty from being so long in the boat, my pockets with rolls, and a
-> roll under each arm."**
+> [**"walk'd off with a roll under each arm, and eating the other."**](https://www.gutenberg.org/files/148/148-h/148-h.htm)
 
 > That image ~ scrappy, self-assured, and a bit absurd ~
 
@@ -72,7 +73,7 @@ He built his life the way he built his printing empire ~
 
 > equal parts discipline and charm.
 
-A printer's apprentice by twelve, a newspaper owner by twenty-three, and
+[A printer's apprentice by twelve, a newspaper owner by twenty-three](https://www.archives.gov/nhprc/projects/catalog/benjamin-franklin), and
 a bestselling author soon after, Franklin made his name writing as Poor
 Richard ~ a fictional old man full of homespun wisdom and dry wit.
 
@@ -95,8 +96,7 @@ self-aware.**
 
 He poked fun at himself constantly ~
 
-> **"I was generally a leader in measures, but had the uncommon modesty
-> not to insist on my own opinion when others were opposed to it."**
+> [**"I should probably be proud of my humility."**](https://www.gutenberg.org/files/148/148-h/148-h.htm)
 
 That balance ~ between confidence and comedy, ambition and humility ~
 made him unusually effective across rooms that did not usually trust the
@@ -105,14 +105,14 @@ same person.
 > Franklin "retired" from printing in his 40s and turned to science,
 > diplomacy, and public service.
 
-He studied electricity with his famous kite experiment (no, he didn't
-get struck by lightning ~ that's a myth!).
+[He studied electricity with his famous kite experiment (no, he didn't
+get struck by lightning ~ that's a myth!).](https://fi.edu/en/science-and-education/benjamin-franklin/kite-key-experiment)
 
-He founded libraries, hospitals, fire departments, and the postal
-system.
+He helped found [libraries, hospitals, and fire companies,](https://www.gutenberg.org/files/148/148-h/148-h.htm) and
+[helped develop the postal system.](https://about.usps.com/who/profile/history/list-of-postmasters-general.htm)
 
-He helped draft both the Declaration of Independence and the
-Constitution.
+[He helped draft the Declaration of Independence and participated in the
+Constitutional Convention.](https://www.archives.gov/founding-docs/founding-fathers-pennsylvania)
 
 As ambassador to France, he turned plain dress, scientific celebrity,
 and salon wit into diplomatic assets, winning support for the Revolution
@@ -132,7 +132,7 @@ Behind his wit and charm were two things:
 1.  A really good attitude
 2.  Relentless self-improvement
 
-Franklin kept a journal tracking his progress toward 13 personal virtues
+[Franklin kept a journal tracking his progress toward 13 personal virtues](https://www.gutenberg.org/files/148/148-h/148-h.htm)
 ~ from *Temperance* and *Industry* to *Humility* (***"Imitate Jesus and
 Socrates,"*** he wrote, with signature modesty).
 
@@ -142,9 +142,9 @@ Socrates,"*** he wrote, with signature modesty).
 
 #### **Franklin's virtue table tracked his moral performance**
 
-> **"I wished to live without committing any fault at any time, but I
+> [**"I wished to live without committing any fault at any time… But I
 > soon found I had undertaken a task of more difficulty than I had
-> imagined."**
+> imagined."**](https://www.gutenberg.org/files/148/148-h/148-h.htm)
 
 **He believed people could improve themselves.**
 
@@ -167,11 +167,11 @@ tinkering.
 Even in his eighties, he stayed sharp and active.
 
 He wrote essays against slavery, advocated for public education, and
-presided over the Pennsylvania Society for the Abolition of Slavery.
+[presided over the Pennsylvania Society for the Abolition of Slavery.](https://www.archives.gov/legislative/features/franklin)
 
-> **Franklin died on April 17, 1790.**
+> [**Franklin died on April 17, 1790.**](https://www.archives.gov/legislative/features/franklin)
 
-**The U.S. was barely four years old.**
+**The U.S. was nearly fourteen years old.**
 
 **Public honors followed in the United States and France.**
 
@@ -184,14 +184,14 @@ responsibility helped model an American public-service tradition built
 around voluntary associations, practical knowledge, and useful
 institutions.
 
-**Franklin wrote his own epitaph:**
+[**Franklin wrote his own epitaph:**](https://www.loc.gov/exhibits/franklin/bf-trans61.html)
 
 > "The Body of B. Franklin, Printer;
 > Like the Cover of an old Book,
 > Its Contents torn out,
 > And stript of its Lettering and Gilding,
 > Lies here, Food for Worms.
-> But the Work shall not be lost,
+> But the Work shall not be wholly lost,
 > For it will, as he believed, appear once more
 > In a new and more perfect Edition
 > Corrected and amended by the Author."
@@ -211,12 +211,12 @@ achievable.**
   yearly publication (1732-1758)
 - **The Autobiography of Benjamin Franklin** ~
   Unfinished but legendary memoir
-- **Library Company of Philadelphia** ~ America's first
-  public lending library
-- **Inventions** ~ Bifocals, Franklin stove, lightning
-  rod, glass armonica
-- **Founding Documents** ~ Helped draft both the
-  Declaration of Independence and the Constitution
+- **Library Company of Philadelphia** ~ [America's first
+  subscription library](https://www.gutenberg.org/files/148/148-h/148-h.htm)
+- **Inventions** ~ [Bifocals, Franklin stove, lightning
+  rod, glass armonica](https://fi.edu/en/science-and-education/benjamin-franklin/inventions)
+- **Founding Documents** ~ [Helped draft the Declaration of Independence
+  and participated in the Constitutional Convention](https://www.archives.gov/founding-docs/founding-fathers-pennsylvania)
 - **Postmaster General** ~ Revolutionized communication
   in the colonies
 - **Ambassador to France** ~ Secured vital French
@@ -231,10 +231,9 @@ achievable.**
 
 > Franklin believed in the betterment of self and society.
 
-He gave us lines like:
+He gave us lines like this:
 
-> *"A penny saved is a penny earned."\
-> "Well done is better than well said."*
+> [*"Well done is better than well said."*](https://www.gutenberg.org/cache/epub/36151/pg36151-images.html)
 
 > **But he didn't lecture.**
 
@@ -250,5 +249,5 @@ experiment.
 ### Explore More
 
 📘 [*The Autobiography of Benjamin Franklin* (full text): Project Gutenberg](https://www.gutenberg.org/ebooks/148)\
-🎧 [Audio version (LibriVox): Listen on Archive.org](https://archive.org/details/autobiobenfran00miffrich/page/n9/mode/2up)\
+📘 [Scanned edition: Read on Archive.org](https://archive.org/details/autobiobenfran00miffrich/page/n9/mode/2up)\
 📺 [PBS Documentary: *Benjamin Franklin* by Ken Burns: Watch Trailer](https://www.youtube.com/watch?v=v7wowg6Fy4I)

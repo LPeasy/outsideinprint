@@ -4,13 +4,16 @@ date: 2025-09-01
 draft: false
 slug: "risk-management-vs-risk-analysis-whats-the-difference"
 section_label: "Essay"
-subtitle: "A coastal city’s disaster forces them to rethink their EM protocols"
+subtitle: "A hypothetical coastal city’s disaster forces them to rethink their EM protocols"
 description: "This essay lays out the roles, responsibilities, and day-to-day realities of risk managers and risk analysts"
 featured_image: "medium/697afcd47059e365bcca0f5a04697d3d99818ae12a2f5a8adf20109dfab8fcdc"
 featured_image_alt: "Risk Management vs Risk Analysis: What’s the Difference?"
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Identified the coastal-city narrative as hypothetical in the opening and subtitle. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-19"
     note: "Updated May 19, 2026, after OIP back-archive review. Removed remote Medium body images, replaced chart-only sections with text summaries, normalized import punctuation, checked source framing, and verified rendering."
@@ -29,7 +32,7 @@ medium_source_url: "https://medium.com/@lawtonperret/risk-management-vs-risk-ana
 This essay lays out the roles, responsibilities, and day-to-day
 realities of risk managers and risk analysts.
 
-We follow a barrier-island city that skipped an evacuation order, lost
+We follow a hypothetical barrier-island city that skipped an evacuation order, lost
 lives, and now wants a new hurricane evacuation protocol ~
 
 Then we explicitly discuss the roles, responsibilities, and motivations
@@ -180,7 +183,7 @@ risk management.
 > **Management = *what we will do and why.***
 
 > Definitions adapted from Aven (2018), Aven & Zio (2014), and the SRA
-> Glossary (2018).
+> [Glossary (2018)](https://www.sra.org/wp-content/uploads/2020/04/SRA-Glossary-FINAL.pdf#page=8).
 
 ### Responsibilities of Risk Managers and Risk Analysts
 

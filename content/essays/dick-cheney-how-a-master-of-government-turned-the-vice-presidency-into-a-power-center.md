@@ -9,8 +9,8 @@ slug: "dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-
 description: "A compact civic portrait of the vice president who treated government as an instrument of concentrated power."
 section_label: "Essay"
 subtitle: "A compact civic portrait of the vice president who treated government as an instrument of concentrated power."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 series:
   - "Modern Bios"
 collections:
@@ -23,7 +23,7 @@ record_role_line:
   - "Vice President"
   - "Secretary of Defense"
   - "Congressional leader"
-primary_sources_note: "Built from speeches, memoirs, congressional and executive records, and contemporaneous reporting."
+primary_sources_note: "Built from speeches, congressional and executive records, and contemporaneous reporting."
 record_entries:
   - label: "Name"
     value: "Dick Cheney"
@@ -39,6 +39,9 @@ tags:
   - "public-figure"
 repair_mojibake: true
 revision_history:
+  - version: "1.2"
+    date: "2026-09-27"
+    note: "Retained claim-level source links and removed memoirs from the source-method note after the author confirmed none were used. Body prose, artwork, and original publication date are unchanged."
   - version: "1.1"
     date: "2026-05-26"
     note: "Updated May 26, 2026, after OIP back-archive review. Normalized imported punctuation, removed house-style shortcuts, and checked source framing."
@@ -52,7 +55,7 @@ Cheney never depended on magnetism. He did not rise through soaring rhetoric, ea
 
 Washington rewarded that kind of seriousness.
 
-Cheney moved through Congress, the White House, and the Pentagon with the bearing of someone who had little interest in political theater unless theater helped secure a practical end. He worked in an American tradition that values executive discipline, strategic clarity, and command during moments of danger. He believed government could not function well if it feared its own authority. That conviction shaped his public life. It gave him focus. It also placed him at the center of some of the fiercest arguments of his time.
+Cheney moved through [Congress, the White House, and the Pentagon](https://history.house.gov/People/Listing/C/CHENEY%2C-Richard-Bruce-%28C000344%29/) with the bearing of someone who had little interest in political theater unless theater helped secure a practical end. He worked in an American tradition that values executive discipline, strategic clarity, and command during moments of danger. He believed government could not function well if it feared its own authority. That conviction shaped his public life. It gave him focus. It also placed him at the center of some of the fiercest arguments of his time.
 
 His years as vice president fixed his place in history.
 
@@ -60,7 +63,7 @@ Under George W. Bush, Cheney helped redefine what the office could do. Earlier v
 
 September 11 made that conviction operational.
 
-The attacks transformed the country's political mood and reordered the priorities of the American state. Cheney entered that period with a settled worldview and a sharpened sense of executive necessity. He favored swift action, broad security powers, and a muscular conception of American responsibility in the world. He approached risk with the mindset of a man who believed hesitation could invite catastrophe. That posture carried enormous consequence. It influenced surveillance policy, detention policy, the architecture of the war on terror, and the larger turn toward an aggressively empowered national security state.
+The attacks transformed the country's political mood and reordered the priorities of the American state. Cheney entered that period with a settled worldview and a sharpened sense of executive necessity. [He favored swift action, broad security powers, and a muscular conception of American responsibility in the world.](https://georgewbush-whitehouse.archives.gov/news/releases/2002/08/20020826.html) He approached risk with the mindset of a man who believed hesitation could invite catastrophe. That posture carried enormous consequence. It influenced [surveillance policy, detention policy](https://georgewbush-whitehouse.archives.gov/news/releases/2005/12/20051218-4.html), the architecture of the war on terror, and the larger turn toward an aggressively empowered national security state.
 
 Supporters saw resolve in that approach.
 
@@ -76,7 +79,7 @@ That refusal deepened his image. He did not spend much energy asking to be loved
 
 It also made him easier to cast as a symbol.
 
-Cheney came to stand for more than his own offices. He represented a philosophy of rule. He believed the executive branch should act with confidence, defend its prerogatives, and resist constraints that might dilute its ability to respond quickly and forcefully. He saw the modern world as unstable, adversarial, and full of actors who would exploit weakness if they found it. That worldview did not emerge overnight. It took shape over decades of institutional life, and it hardened under the pressure of crisis. By the early twenty-first century, Cheney had become one of its clearest exponents.
+Cheney came to stand for more than his own offices. He represented a philosophy of rule. [He believed the executive branch should act with confidence, defend its prerogatives, and resist constraints that might dilute its ability to respond quickly and forcefully.](https://georgewbush-whitehouse.archives.gov/news/releases/2008/12/20081222.html) He saw the modern world as unstable, adversarial, and full of actors who would exploit weakness if they found it. That worldview did not emerge overnight. It took shape over decades of institutional life, and it hardened under the pressure of crisis. By the early twenty-first century, Cheney had become one of its clearest exponents.
 
 His biography reaches beyond partisanship.
 

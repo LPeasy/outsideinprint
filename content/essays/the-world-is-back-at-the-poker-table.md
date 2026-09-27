@@ -6,9 +6,12 @@ slug: "the-world-is-back-at-the-poker-table"
 section_label: "Essay"
 subtitle: "The post-Cold War game of one giant stack is ending."
 description: "A short essay arguing that the post-Cold War world of one dominant stack is fading as more states accumulate leverage in economics, energy, technology, and security."
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Removed three unmatched nominal-GDP forecast figures and linked the retained qualitative rankings, manufacturing/export role, and growth statement to sources available before original publication; surrounding argument and artwork retained."
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
@@ -38,7 +41,7 @@ The world is back at the poker table.
 
 ## The Big Stack
 
-The U.S. remains the world's largest economy at roughly $31.8 trillion in projected 2026 nominal GDP, well ahead of every rival.
+[The U.S. remains the world's largest economy by nominal GDP](https://datacatalogfiles.worldbank.org/ddh-published/0038130/DR0046441/GDP.pdf), well ahead of every rival.
 
 America's chips remain formidable: reserve currency status, deep capital markets, military reach, energy production, elite universities, and leading technology firms.
 
@@ -46,7 +49,7 @@ That remains the biggest stack in the room.
 
 ## The Patient Player
 
-China holds the world's second-largest economy at roughly $20.6 trillion and remains central to global manufacturing and exports.
+[China holds the world's second-largest economy by nominal GDP](https://datacatalogfiles.worldbank.org/ddh-published/0038130/DR0046441/GDP.pdf) and remains central to [global manufacturing](https://www.imf.org/en/news/articles/2026/03/21/sp032226-chinas-new-chapter-rebalancing-and-unleashing-market-forces) and [exports](https://www.imf.org/-/media/files/publications/weo/2026/update/january/english/text.pdf#page=3).
 
 China's chips look different: industrial capacity, export networks, infrastructure financing, population scale, and long planning horizons.
 
@@ -62,7 +65,7 @@ Some players build slowly. Russia often pushes early.
 
 ## The Rising Stack
 
-India is projected near $4.5 trillion in 2026 nominal GDP and continues to post strong growth.
+[India continues to post strong growth.](https://www.imf.org/-/media/files/publications/weo/2026/update/january/english/text.pdf#page=6)
 
 Its long-term chips are demographics, a growing consumer market, technology talent, strategic flexibility, and rising industrial capacity.
 

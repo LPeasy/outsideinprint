@@ -6,9 +6,12 @@ date: 2026-05-23
 draft: false
 slug: "the-door-that-would-not-open"
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Distinguished the court's site-application processing order from reimbursement payments. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-31"
     note: "Updated May 31, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -53,7 +56,7 @@ His [House Judiciary testimony](https://judiciary.house.gov/sites/evo-subsites/r
 
 That is free speech doing its plainest work. A citizen gathers tips, checks addresses, publishes what he sees, and lets the public compare the official record with the physical world. He did not need a media-class credential. The First Amendment was built for the person who speaks before institutions are ready to bless the speech.
 
-Axios [reported](https://www.axios.com/2025/12/29/nick-shirley-minnesota-fraud-vance-fbi-somali) in December that Shirley's video had drawn more than a million YouTube views and more than 100 million views on X, with Vice President JD Vance praising it and federal officials responding. CNN's syndicated January report, carried by local outlets, said Minnesota's Department of Children, Youth, and Families found children present at all but one site in checks of centers discussed in the video, while four centers remained under further review. Salon went further, publishing a headline that framed the episode as a "day care hoax" driven by "MAGA psychosexual weirdness."
+Axios [reported](https://www.axios.com/2025/12/29/nick-shirley-minnesota-fraud-vance-fbi-somali) in December that Shirley's video had drawn more than a million YouTube views and more than 100 million views on X, with Vice President JD Vance praising it and federal officials responding. CNN's syndicated January report, carried by local outlets, said Minnesota's Department of Children, Youth, and Families found children present at all but one site in checks of centers discussed in the video, while four centers remained under further review. Salon went further, publishing a [headline](https://www.salon.com/2026/01/05/minnesota-day-care-hoax-is-fueled-by-maga-psychosexual-weirdness/) that framed the episode as a "day care hoax" driven by "MAGA psychosexual weirdness."
 
 CNN's own [transcript](https://transcripts.cnn.com/show/esrs/date/2025-12-31/segment/01) preserves the absurdity of the institutional response. Whitney Wild asked whether Shirley had visited during normal hours, challenged the premise that a day-care door should be open, and then arrived at the line that became a summary of the whole encounter: "Are you 100 percent sure you're true?" Shirley answered, "Yeah, I am 100 percent sure I'm true."
 
@@ -77,7 +80,7 @@ The mechanism carries more public weight than any single clip.
 
 It turns fraud into a public-system failure. A reimbursement program built for speed, emergency access, and local sponsorship became a money pipe with too many weak valves. The agency record did contain warning signs. Minnesota's Office of the Legislative Auditor [found](https://www.auditor.leg.state.mn.us/sreview/2024/mdefof.htm) in 2024 that the Department of Education's inadequate oversight of Feeding Our Future created opportunities for fraud. The full review said MDE accepted an audit that failed to meet federal audit standards, took limited steps to confirm corrective-action claims, and missed indicators visible in documents it already had.
 
-The auditor's timeline is more damning than a doorstep because it shows a slow series of chances. Complaints accumulated. Serious deficiencies were issued. The FBI passed along allegations. MDE referred information to the FBI. Feeding Our Future sued and won court pressure over payments and site IDs. The agency made some moves, backed away from others, and terminated Feeding Our Future's participation on January 20, 2022, the day federal authorities executed search warrants.
+The [auditor's timeline](https://www.auditor.leg.state.mn.us/sreview/pdf/2024-mdefof.pdf#page=93) is more damning than a doorstep because it shows a slow series of chances. Complaints accumulated. Serious deficiencies were issued. The FBI passed along allegations. MDE referred information to the FBI. Feeding Our Future sued and won court pressure over site-application processing, not an order to continue reimbursements. The agency made some moves, backed away from others, and terminated Feeding Our Future's participation on January 20, 2022, the day federal authorities executed search warrants.
 
 Shirley's camera found the same weakness the auditor found in prose.
 

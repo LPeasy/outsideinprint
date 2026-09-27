@@ -10,9 +10,12 @@ featured_image: "/images/medium/elon-musk-doge-and-the-five-bullet-email-how-gwe
 featured_image_caption: "Photo by Markus Winkler on Unsplash"
 featured_image_alt: "Elon Musk, DOGE, and the Five-Bullet Email: How GWES Became a Federal Workforce Loyalty Test"
 description: "Elon Musk’s Influence on DOGE and the Federal Workforce. This past weekend, the Department of Government Efficiency (DOGE) issued a directive that sent shock..."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.1"
     date: "2026-05-05"
     note: "Updated May 5, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, heading formatting, joined paragraphs, author-promo residue, and several source-discipline wording issues were cleaned while preserving the original publication frame."
@@ -28,7 +31,7 @@ medium_source_url: "https://medium.com/@lawtonperret/elon-musk-doge-and-the-five
 
 This past weekend, the Office of Personnel Management sent a governmentwide email that DOGE and Elon Musk quickly turned into a stress test for the federal workforce.
 
-Using the Government-Wide Email System, an internal communication tool managed by OPM, the message asked federal employees to submit five bullet points summarizing their accomplishments from the past week.
+Using the Government-Wide Email System, an internal communication tool managed by OPM, [the message asked federal employees to submit five bullet points summarizing their accomplishments from the past week.](https://civilservicearchive.org/asset/ffaf5bfe-4d99-4b2b-81e4-13f5c535586f/OPM%20-%20Guidance%20on%20Government-wide%20email%208-5-2025.pdf)
 
 The deadline? Monday at 11:59 p.m.
 
@@ -72,7 +75,7 @@ It should be used to disseminate information, not as a tool to pressure employee
 
 Musk's "What did you get done this week?" refrain isn't new.
 
-He famously asked that question to Twitter CEO Parag Agrawal while negotiating his takeover of the social media platform, before firing Agrawal upon assuming control.
+[He famously asked that question to Twitter CEO Parag Agrawal](https://www.wired.com/story/doge-elon-musk-forced-resignation-email-twitter/) while negotiating his takeover of the social media platform, before firing Agrawal upon assuming control.
 
 The same phrase appeared in November, just after Musk was appointed to lead DOGE. He foreshadowed his approach by posting a mock message to federal employees asking what they got done that week.
 

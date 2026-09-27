@@ -7,9 +7,12 @@ section_label: "Essay"
 collections: ["money-banking-inflation","household-economy-work-and-cost"]
 subtitle: "December 11th, 2024"
 description: "Inflation in Transition: A Macroeconomic Analysis of the November 2024 CPI Report. I. Introduction: The Complex Landscape of Inflation"
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected the November 2024 monthly inflation sequence and rent/OER figures. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-04-27"
     note: "Updated April 27, 2026, after OIP back-archive review. Legacy Medium punctuation, list formatting, and Markdown rendering artifacts were cleaned; source, metadata, and rendering were checked."
@@ -27,7 +30,7 @@ Source: [BLS Consumer Price Index release for November 2024](https://www.bls.gov
 
 ## Introduction: The Complex Landscape of Inflation
 
-Inflation is more than a measure of rising prices. It reflects the intricate balance of supply and demand, consumer behavior, and structural forces within the economy. The November 2024 Consumer Price Index (CPI) report provides a snapshot of this evolving landscape, showing a 2.7% year-over-year increase in overall prices and a steady 0.3% month-over-month rise for the fourth consecutive month.
+Inflation is more than a measure of rising prices. It reflects the intricate balance of supply and demand, consumer behavior, and structural forces within the economy. The November 2024 Consumer Price Index (CPI) report provides a snapshot of this evolving landscape, showing a 2.7% year-over-year increase in overall prices and a [0.3% month-over-month rise after 0.2% in each of the prior four months](https://www.bls.gov/news.release/archives/cpi_12112024.htm).
 
 This moderate yet persistent inflation signals a transitional phase in the post-pandemic economy. Unlike the volatile spikes of 2021-2022, today's inflationary pressures are more stable but deeply entrenched in categories like shelter and services. By examining these trends through historical and theoretical lenses, this analysis explores the drivers behind the November CPI report and their broader implications for macroeconomic stability, policymaking, and societal well-being.
 
@@ -55,13 +58,13 @@ Today's inflation is a hybrid phenomenon, shaped by both supply and demand facto
 
 ### 1. Shelter: The Anchor of Core Inflation
 
-Shelter costs continued to dominate inflation trends, accounting for 40% of November's monthly CPI increase.
+Shelter costs continued to dominate inflation trends, [accounting for 40% of November's monthly CPI increase](https://www.bls.gov/news.release/archives/cpi_12112024.htm).
 
 - Key Data:
 
 - Shelter prices rose 0.3% month-over-month and 4.7% year-over-year, reflecting a slowdown from 2022 peaks but remaining a major driver of core inflation.
 
-- Rent inflation (+0.4%) outpaced owners' equivalent rent (+0.2%), highlighting pressures on renters in urban areas.
+- Rent and owners' equivalent rent both rose 0.2% in November.
 
 Analysis: Shelter inflation stems from both structural and cyclical factors:
 
@@ -71,7 +74,7 @@ Analysis: Shelter inflation stems from both structural and cyclical factors:
 
 ### 2. Food Prices: Diverging Trends
 
-The food index rose 0.4% in November, with contrasting trends within its subcategories:
+The [food index rose 0.4% in November](https://www.bls.gov/news.release/archives/cpi_12112024.htm), with contrasting trends within its subcategories:
 
 - Increases: Egg prices spiked 8.2% due to seasonal demand and lingering effects of avian flu.
 
@@ -81,7 +84,7 @@ Analysis: Food price trends illustrate how global commodity markets and domestic
 
 ### 3. Energy: A Deflationary Buffer
 
-Energy prices provided some relief, with a 3.2% year-over-year decline despite a 0.2% monthly increase:
+Energy prices provided some relief, with a [3.2% year-over-year decline despite a 0.2% monthly increase](https://www.bls.gov/news.release/archives/cpi_12112024.htm):
 
 - Gasoline: Prices fell 8.1% annually.
 
@@ -91,7 +94,7 @@ Analysis: Falling energy prices have been instrumental in moderating inflation, 
 
 ### 4. Core Inflation: Sticky Services
 
-Excluding food and energy, core inflation rose 0.3% month-over-month and 3.3% year-over-year, with services playing a dominant role:
+Excluding food and energy, core inflation rose [0.3% month-over-month and 3.3% year-over-year](https://www.bls.gov/news.release/archives/cpi_12112024.htm), with services playing a dominant role:
 
 - Shelter: +4.7% annually, remaining the largest contributor.
 

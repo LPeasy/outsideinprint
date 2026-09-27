@@ -9,9 +9,12 @@ description: "Control is impossible when everyone depends on the machine. School
 featured_image: "medium/5259adbea4308247944f02e7e6be83966064aba054b2c1a011a826f60635f8ba"
 featured_image_caption: "“In My Voice” | Art by Author"
 featured_image_alt: "“In My Voice”"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added supporting source hyperlinks without changing the original prose."
   - version: "1.1"
     date: "2026-05-22"
     note: "Updated May 22, 2026, after OIP back-archive review for source framing, Medium import cleanup, and house-style normalization."
@@ -59,7 +62,7 @@ scores, attendance, or budgets.
 
 #### Understanding 'Wicked Problems' ~ and Why AI Fits the Definition
 
-Coined by Horst Rittel and Melvin Webber (1973), a wicked problem ~
+Coined by [Horst Rittel and Melvin Webber (1973)](https://doi.org/10.1007/BF01405730), a wicked problem ~
 
 > ***1. Has no clear definition or endpoint***
 

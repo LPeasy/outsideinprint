@@ -9,9 +9,12 @@ description: "A Mexican Navy training ship struck the Brooklyn Bridge in May 202
 featured_image: "/images/medium/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e/d4ac2578972d0ab429bdc550e9efe6207616d5d9f20255765c44440108966e92.jpeg"
 featured_image_alt: "ARM Cuauhtemoc near the Brooklyn Bridge"
 featured_image_caption: "Source: The NYC Walking Show"
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected sails, preliminary cause attribution, planned voyage wording, Acapulco home port, sail area and the ship-height/bridge-clearance comparison. Repaired the design comparison, linked political quotations, marked causal judgments as analysis and removed the unsupported victim-naming timing claim. June 30, 2025 NTSB measurements are identified as later confirmation. Original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-14"
     note: "Updated May 14, 2026, after OIP back-archive review. Cleaned Medium import residue, promoted the localized lead image, normalized house style, and softened cause/responsibility language to match preliminary investigation records."
@@ -30,7 +33,7 @@ in their wake.***
 
 **On a quiet Saturday evening**, a majestic, triple-masted tall ship
 from Mexico sailed through New York City's East River, its string
-lights glowing, its sails full, its crew in dress whites.
+lights glowing, its [sails furled](https://www.ntsb.gov/investigations/Pages/DCA25MM039.aspx), its crew in dress whites.
 
 > Then the rigging snapped.
 
@@ -43,7 +46,7 @@ Navy training vessel, struck the ***Brooklyn Bridge***.
 reported seeing **crew members dangling from the shattered rigging**,
 suspended in harnesses, waiting to be pulled down.
 
-> The ship lost power and drifted in reverse into the bridge. The
+> [Early officials' accounts suggested the ship lost power](https://www.atlantanewsfirst.com/2025/05/18/mexican-navy-training-vessel-hits-new-yorks-brooklyn-bridge/), but the cause was preliminary. It moved in reverse into the bridge. The
 > Cuauhtémoc's masts shattered; the bridge suffered only minor damage.
 
 #### A Mexican Navy Training Ship With Global Symbolism
@@ -58,7 +61,7 @@ suspended in harnesses, waiting to be pulled down.
 stop in a cadet's education at the ***Heroica Escuela Naval Militar***.
 
 **Every year**, it embarks on a **global tour**. The 2025 voyage
-spanned **22 ports over 254 days** and was designed to test seamanship, showcase
+was [scheduled to span **22 ports over 254 days**](https://www.guerrero.gob.mx/2025/04/zarpa-nuevamente-de-acapulco-el-buque-escuela-cuauhtemoc/) and was designed to test seamanship, showcase
 culture, and project goodwill.
 
 > **Named after the last Aztec emperor,** the ship carries history and
@@ -67,11 +70,11 @@ culture, and project goodwill.
 **Cuauhtémoc** remains celebrated in Mexico as a national hero and **a
 symbol of resistance against conquest.**
 
-The vessel that bears his name was built in 1982 and [modeled after Germany's Gorch Fock I](https://en.m.wikipedia.org/wiki/German_training_ship_Gorch_Fock_(1958)),
+The vessel that bears his name was built in 1982 and is [similar in design to Germany's Gorch Fock](https://tallshipsonline.pl/sailing-ships/cuauhtemoc/),
 a tall ship designed to impress.
 
-With its towering masts, 2,377 square meters of sail, and home port in
-Veracruz, the Cuauhtémoc makes a spectacle of every arrival.
+With its towering masts, [2,368 square meters of sail](https://semar.gob.mx/boletin/2007/bol_152_07.htm), and home port in
+[Acapulco](https://acapulco.gob.mx/2025/04/participa-abelina-lopez-rodriguez-en-ceremonia-de-zarpe-del-buque-escuela-cuauhtemoc/), the Cuauhtémoc makes a spectacle of every arrival.
 
 > Cadets stand on the yards as it enters port, transforming the ship
 > itself into a stage for naval pageantry.
@@ -84,17 +87,17 @@ Veracruz, the Cuauhtémoc makes a spectacle of every arrival.
 
 > Within hours, the story was being shaped.
 
-**Mexico's President Claudia Sheinbaum** called it an ***"unfortunate
-accident."***
+**Mexico's President Claudia Sheinbaum** called it an ***["unfortunate
+accident."](https://www.washingtonpost.com/nation/2025/05/17/brooklyn-bridge-crash-mexican-navy-ship/)***
 
-**A New York City councilmember** called it ***"exceptionally
-reckless."***
+**A New York City councilmember** called it ***["exceptionally
+reckless."](https://www.washingtonpost.com/nation/2025/05/17/brooklyn-bridge-crash-mexican-navy-ship/)***
 
 Early accounts described a loss of control after departure. The [National Transportation Safety Board](https://www.ntsb.gov/investigations/Pages/DCA25MM039.aspx) opened an investigation and treated the available cause information as preliminary.
 
-There were 277 people aboard a vessel that towers 160 feet above the
-water, dangerously close to the Brooklyn Bridge's clearance at high
-tide.
+There were 277 people aboard a vessel that towers 158 feet above the
+water, higher than the Brooklyn Bridge's 127-foot clearance at mean high
+water, as the [NTSB's June 30, 2025 preliminary report later confirmed](https://www.ntsb.gov/investigations/Pages/DCA25MM039.aspx).
 
 > **So far, no public finding had assigned direct responsibility.**
 
@@ -106,7 +109,7 @@ That leaves hard questions for the Navy, the pilots, and the planners who approv
 
 Photo by Kelly Sikkema on Unsplash
 
-> This wasn't just a mechanical failure.
+> In my view, this wasn't just a question of mechanical failure.
 
 It was a **miscalculation in the mission** itself. A ship built for open
 waters was steered into a dense, unpredictable river for symbolism,
@@ -132,9 +135,9 @@ Photo by Nik on Unsplash
 **The investigation was ongoing,** and the public record did not yet
 support a final cause finding.
 
-> This isn't just about what failed in the engine room.
+> This isn't just about what may have failed in the engine room.
 
-***It's about what failed during planning.***
+***It's about whether planning failed.***
 
 Questions remain about route approvals, clearance checks, and **whether
 *diplomacy outweighed safety* in planning the visit.**
@@ -149,7 +152,7 @@ precariously.**
 
 Photo by K. Mitch Hodge on Unsplash
 
-> This was not only bad luck. It exposed a systems failure in operations,
+> In my view, this was not only bad luck. It exposed a systems failure in operations,
 > planning, and coordination.
 
 **Public sector missions**, especially ceremonial ones, are often
@@ -176,7 +179,6 @@ The **Brooklyn Bridge** has **reopened**.
 **Two sailors**, young people at the start of their naval
 careers, **died** in the crash.
 
-> At the original publication date, official public updates had not yet named them.
 > Their absence would be felt across the Cuauhtémoc.
 
 Whether this becomes a footnote or a turning point remains to be seen.

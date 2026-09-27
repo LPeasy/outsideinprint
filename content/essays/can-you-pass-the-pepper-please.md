@@ -9,8 +9,8 @@ description: "Internal ICE force reports show how civil detention can turn reque
 featured_image: "essays/can-you-pass-the-pepper-please/hero"
 featured_image_alt: "Editorial illustration of a detention lunchroom after a chemical agent release, with empty tables, orange haze, locked cell doors, and a report form on the floor."
 featured_image_caption: "The room clears. The report remains."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
   - version: "1.1"
     date: "2026-05-11"
@@ -18,6 +18,9 @@ revision_history:
   - version: "1.2"
     date: "2026-05-28"
     note: "Updated May 28, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added claim-level links to the original investigation, released incident records, data methodology, and detention standards. Reporting and original publication date remain unchanged."
 featured: false
 collections:
   - "civic-institutions-and-public-power"
@@ -37,11 +40,11 @@ tags:
 
 Pedro Cantú Ríos was eating lunch when the room changed.
 
-He was in the Anchorage Correctional Complex in Alaska, held in immigration custody inside a jail building, when guards fired plastic spheres into a communal space. The spheres burst into orange chemical dust. Cantú Ríos, who had a lung condition, told the Washington Post that the dust left him gasping. He put a towel over his face. "I thought I was going to die," he said.
+He was in the Anchorage Correctional Complex in Alaska, held in immigration custody inside a jail building, when guards fired plastic spheres into a communal space. The spheres burst into orange chemical dust. Cantú Ríos, who had a lung condition, [told the Washington Post](https://www.washingtonpost.com/business/2026/05/04/ice-detention-centers-force/) that the dust left him gasping. He put a towel over his face. "I thought I was going to die," he said.
 
 The official record has a different purpose. It does not begin with his lungs. It begins with orders, refusals, staff response, ventilation, and lockdown.
 
-In the Alaska incident, according to the Post's account of the internal records, some detainees were loudly cursing at staff, demanding their property, and refusing orders to return to cells. The incident report did not say the men acted violently or appeared on the verge of violence. DHS later said no detainee was directly struck by pepper-ball rounds and that staff opened a door for decontamination and ventilation.
+In the Alaska incident, according to the Post's account of the internal records, some detainees were loudly cursing at staff, demanding their property, and refusing orders to return to cells. The [incident report](https://www.washingtonpost.com/documents/1717f891-1ee5-4ee0-a1bb-62b1bb38f6bf.pdf#page=1) did not say the men acted violently or appeared on the verge of violence. DHS later said no detainee was directly struck by pepper-ball rounds and that staff opened a door for decontamination and ventilation.
 
 Those two accounts do not cancel each other out.
 
@@ -51,7 +54,7 @@ The gap between those accounts is where this story begins.
 
 The cloud gives the story its image. The report gives it its civic problem.
 
-The Washington Post obtained and analyzed internal ICE records called Daily Detainee Assault Reports. The records covered 1,460 use-of-force incidents at 98 ICE detention facilities from Jan. 1, 2024, through Feb. 28, 2026. They described punches, kicks, takedowns, restraint holds, restraint chairs, Tasers, pepper spray, and pepper balls.
+The Washington Post [obtained and analyzed internal ICE records](https://www.washingtonpost.com/business/2026/05/04/ice-detention-centers-force/) called Daily Detainee Assault Reports. The records covered 1,460 use-of-force incidents at 98 ICE detention facilities from Jan. 1, 2024, through Feb. 28, 2026. They described punches, kicks, takedowns, restraint holds, restraint chairs, Tasers, pepper spray, and pepper balls.
 
 During the first year of President Donald Trump's second term, the Post found, detention staff used force 37 percent more often than the prior year. The number of people subjected to force rose 54 percent, reaching 1,330 individuals. The detained population at those facilities rose 45 percent over the same period, based on Relevant Research estimates used by the Post.
 
@@ -61,7 +64,7 @@ The records do not prove that every use of force was unlawful, punitive, or unne
 
 Immigration detention sits in an uneasy legal and practical space.
 
-It is not supposed to be criminal punishment. People in ICE custody may be awaiting removal, asylum proceedings, bond hearings, transfer, paperwork, or court dates. Some have criminal convictions. Some have pending charges. Some have neither. The Post cited ICE data showing that 71 percent of detainees had no criminal convictions. ICE also describes immigration detention as non-punitive.
+It is not supposed to be criminal punishment. People in ICE custody may be awaiting removal, asylum proceedings, bond hearings, transfer, paperwork, or court dates. Some have criminal convictions. Some have pending charges. Some have neither. [The Post cited ICE data](https://www.washingtonpost.com/business/2026/05/04/ice-detention-centers-force/) showing that 71 percent of detainees had no criminal convictions. ICE also describes immigration detention as non-punitive.
 
 The buildings often operate like jails.
 
@@ -71,7 +74,7 @@ That does not make detention staff villains. It makes the setting important.
 
 Crowded custody is hard to manage. People can harm officers, other detainees, or themselves. A group refusal can become dangerous. A staff member who waits too long may create risk. A staff member who acts too fast may create another kind of risk. Any serious account has to leave room for force in a real emergency.
 
-ICE detention standards do the same. The Post reported that ICE standards authorize force only as a last resort, after reasonable efforts to resolve a situation have failed, and say force must not be used as punishment. The same reporting quoted DHS saying ICE officers are trained to use the minimum force necessary to resolve dangerous situations and receive de-escalation training.
+ICE detention standards do the same. The Post reported that [ICE standards authorize force only as a last resort](https://www.ice.gov/doclib/detention-standards/2025/nds2025.pdf), after reasonable efforts to resolve a situation have failed, and say force must not be used as punishment. The same reporting quoted DHS saying ICE officers are trained to use the minimum force necessary to resolve dangerous situations and receive de-escalation training.
 
 The question is not whether officers may ever intervene.
 
@@ -87,13 +90,13 @@ The file has limits. The Post said its analysis is likely an undercount. The rec
 
 Even with those limits, the file has weight.
 
-The Post reviewed hundreds of Daily Detainee Assault Report emails summarizing reported staff uses of force at 98 facilities. Its methodology says reporters extracted dates, numbers of detainees involved, facility names, law-enforcement agencies, and whether the report indicated pepper spray was deployed. Reporters also used Google Pinpoint's AI to identify possible injuries, then verified injury descriptions manually.
+The Post reviewed hundreds of Daily Detainee Assault Report emails summarizing reported staff uses of force at 98 facilities. Its [methodology](https://github.com/wpinvestigative/ice-reports#methodology) says reporters extracted dates, numbers of detainees involved, facility names, law-enforcement agencies, and whether the report indicated pepper spray was deployed. Reporters also used Google Pinpoint's AI to identify possible injuries, then verified injury descriptions manually.
 
 The record shows scale, and scale changes the question.
 
 A single incident can be argued over as one room: what was said, who refused, who escalated, who had authority, who saw what, who breathed what. A national file asks a broader question. It asks whether the system has a pattern in how ordinary detention conflicts become security incidents.
 
-The Post found that at least 106 detainees had been injured in use-of-force incidents since the beginning of 2024, with reports describing seizures, dislocated shoulders, broken arms, head injuries, and eye injuries. The paper also said the true number was probably higher because injuries were sometimes omitted from the reports.
+The Post found that [at least 106 detainees had been injured](https://www.washingtonpost.com/business/2026/05/04/ice-detention-centers-force/) in use-of-force incidents since the beginning of 2024, with reports describing seizures, dislocated shoulders, broken arms, head injuries, and eye injuries. The paper also said the true number was probably higher because injuries were sometimes omitted from the reports.
 
 That does not turn every officer into an abuser or every detainee into a passive victim. It does not answer each case. It does something more basic. It shows that the report form is not a clerical afterthought. It is one of the only public-facing ways a closed custody system explains how force entered a room.
 
@@ -112,7 +115,7 @@ A person can be described as asking, demanding, protesting, refusing, resisting,
 
 None of those word choices has to be dishonest to matter. A person can both demand medical care and refuse a count order. A group can both protest conditions and create a control problem. Staff can both try verbal direction and later use chemical agents. The record's job is to preserve those distinctions rather than flatten them.
 
-The phrase that does the most work in the Post story comes from the Stewart Detention Center in Georgia. In April 2025, according to one ICE report described by the Post, 35 detainees refused to enter their cells for count, saying they had not been seen by medical. After guards moved non-protesting detainees to the recreation yard, staff pepper sprayed those who remained. The reason given in the report was to "gain compliance and control of the pod."
+The phrase that does the most work in the Post story comes from the Stewart Detention Center in Georgia. In April 2025, according to [one ICE report described by the Post](https://www.washingtonpost.com/documents/9dc8e457-3beb-41d1-a118-cefeb725317e.pdf#page=1), 35 detainees refused to enter their cells for count, saying they had not been seen by medical. After guards moved non-protesting detainees to the recreation yard, staff pepper sprayed those who remained. The reason given in the report was to "gain compliance and control of the pod."
 
 That is how a complaint can change shape.
 
@@ -150,7 +153,7 @@ In Alaska, the issue was property. Detainees wanted belongings. Staff saw refusa
 
 At Stewart, the issue was medical care. A group said they had not been seen by medical and refused to enter cells for count. DHS told the Post that staff worked with the detainees to gain voluntary compliance and used pepper spray only after eight hours. CoreCivic, which operates Stewart, said force in that incident was used in response to detainees refusing verbal directives and was not punishment.
 
-At Torrance County Detention Facility in New Mexico, the scale was larger. The Post reported that guards used pepper spray on 65 detainees. A Cameroonian detainee who said he witnessed the March 2025 incident from a neighboring unit told the Post the men were holding a hunger strike over food and water conditions. DHS said the detainees refused lawful commands, became aggressive toward facility personnel, and that the incident was not related to water access. CoreCivic said force at Stewart and Torrance was applied because groups actively refused verbal directives, not because of peaceful requests.
+At Torrance County Detention Facility in New Mexico, the scale was larger. The Post reported that guards [used pepper spray on 65 detainees](https://www.washingtonpost.com/documents/f0bc142b-0eb8-440c-b2c3-d8cfef979486.pdf#page=1). A Cameroonian detainee who said he witnessed the March 2025 incident from a neighboring unit told the Post the men were holding a hunger strike over food and water conditions. [DHS said](https://www.washingtonpost.com/business/2026/05/04/ice-detention-centers-force/) the detainees refused lawful commands, became aggressive toward facility personnel, and that the incident was not related to water access. CoreCivic said force at Stewart and Torrance was applied because groups actively refused verbal directives, not because of peaceful requests.
 
 Those responses belong in the story because they sharpen the central question.
 
@@ -176,7 +179,7 @@ The answer may be more than one thing. That is why thin records leave too much u
 
 Contractors sit inside this story because much of immigration detention is carried out through public-private arrangements.
 
-The Post found that most facilities reporting use-of-force incidents last year were run by private contractors. Those companies are responsible for hiring security guards, training them on ICE standards, and making sure their actions follow those rules, according to interviews with former ICE officials cited by the Post.
+The Post found that [most facilities reporting use-of-force incidents last year were run by private contractors](https://www.washingtonpost.com/business/2026/05/04/ice-detention-centers-force/). Those companies are responsible for hiring security guards, training them on ICE standards, and making sure their actions follow those rules, according to interviews with former ICE officials cited by the Post.
 
 That fact should not become a slogan.
 
@@ -205,7 +208,7 @@ A report can protect staff when force is necessary. It can show why lesser steps
 
 The Post's findings suggest that the reporting practice is not carrying that burden well enough.
 
-Many reports used vague language or omitted key information, according to the Post. Some used phrases such as officers "guided" detainees to the ground, a wording the DHS Office for Civil Rights and Civil Liberties had criticized in a prior case as misleading. The Post also found that after Trump was sworn into office, facilities shifted toward shorter, more formulaic narratives. In 2025, the average narrative contained 40 words, about one-third as long as the year before.
+Many reports used vague language or omitted key information, according to the Post. Some used phrases such as officers "guided" detainees to the ground, a wording the DHS Office for Civil Rights and Civil Liberties had criticized in a prior case as misleading. The Post also found that after Trump was sworn into office, [facilities shifted toward shorter, more formulaic narratives](https://www.washingtonpost.com/business/2026/05/04/ice-detention-centers-force/). In 2025, the average narrative contained 40 words, about one-third as long as the year before.
 
 That is a small administrative fact with large consequences.
 

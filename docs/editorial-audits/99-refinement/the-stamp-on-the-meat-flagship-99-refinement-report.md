@@ -1,4 +1,127 @@
+# Current approved correction record — September 27, 2026
+
+File: `content/essays/the-stamp-on-the-meat-flagship.md`  
+Version: `2.0 / Third web edition`  
+Final content SHA-256: `da179a230673a30b7f1549ecc832d7f804a479f4b4beb783d93ac6a1c5a5c3b2`
+
+Current disposition: **PASS (bounded editorial review)**. Corrected voluntary recalls and plant-versus-lot identity.
+
+Source-demonstrated factual corrections were owner-approved; broad revision, unsupported-claim deletion, illustration/caption changes and publication were not. [Exact changes and evidence](../core-approved-facts-history-2026-09-27.md). The edition advanced once from the original baseline; the unpublished link-only candidate is not a separate edition. Any preapproval hashes or unresolved/unapproved descriptions below are historical and do not override this record.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+- Evidence: PASS — Statute, regulation and FSIS records support the corrected recall/identifier boundaries.
+- Logic: PASS — The portable-mark thesis follows from controlled inspection status, without turning it into a universal guarantee.
+- Incentives: PASS — Seller borrowing of official credibility and plant duties remain distinct.
+- Tradeoffs: PASS — National-market trust is weighed against inspection limits and consumer overreading.
+- Consequences: PASS — Traceability, recalls and downstream distribution failures are traced.
+- Uncertainty: PASS — Zero hazard, universal label assurance and perfect traceability are expressly disclaimed.
+- Institutional Behavior: PASS — FSIS, establishments, retailers and consumers retain distinct roles.
+
+No formal publication gate, build, commit, remote write or publication was performed for this record. A bounded PASS is not an exhaustive factual certification or numerical grade.
+
+## Historical preapproval and integration records
+
 # OIP-99 Refinement Report
+
+## Approved factual corrections - 2026-09-27
+
+Corrected voluntary company recalls and the distinction between plant identity and lot identifiers.
+
+This is the current controlling approval record. The preapproval version/hash and hyperlink-only description below are historical for this file. Final edition disclosure and content hash are pending the parent's central reconciliation. Artwork, captions and publication identity were not edited.
+
+Exact before/after text and sources: [approved-facts ledger](../core-approved-facts-history-2026-09-27.md#the-stamp-on-the-meat-flagship). No build, test, commit or publication was run in this pass.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+| Criterion | Decision | Reason |
+|---|---|---|
+| Evidence | PASS | Statute, regulation and FSIS records support the corrected recall/identifier boundaries. |
+| Logic | PASS | The portable-mark thesis follows from controlled inspection status, without turning it into a universal guarantee. |
+| Incentives | PASS | Seller borrowing of official credibility and plant duties remain distinct. |
+| Tradeoffs | PASS | National-market trust is weighed against inspection limits and consumer overreading. |
+| Consequences | PASS | Traceability, recalls and downstream distribution failures are traced. |
+| Uncertainty | PASS | Zero hazard, universal label assurance and perfect traceability are expressly disclaimed. |
+| Institutional Behavior | PASS | FSIS, establishments, retailers and consumers retain distinct roles. |
+
+This bounded editorial PASS is conditional on final metadata/hash reconciliation and required publication checks; it is not a numeric score or independent safety certification.
+
+## Historical preapproval record
+
+
+## Current strict hyperlink-only revision - 2026-09-27
+
+Review date: `2026-09-27`
+Essay: `content/essays/the-stamp-on-the-meat-flagship.md`
+Version: `1.1` - Second web edition
+Final content SHA-256: `e7fa8f0a51f229023ca2ab8f3a4be1eebed75bcd7856d86f7b127c121b8d3985`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+Public change: NONE; byte-identical baseline retained.
+
+Retained byte-identical baseline 1.1. No suitable additional link repairs the two source-fit issues without changing words. Earlier 2.0 correction and its PASS were rolled back.
+
+## Editorial Philosophy Audit
+
+Decision: HOLD
+Decision State: `SOURCE_CHECK_REQUIRED`
+
+| Criterion | Decision | Reason |
+|---|---|---|
+| Evidence | HOLD | source records contradict recall-power and plant-versus-lot wording; no misleading new anchor added. |
+| Logic | HOLD | the traceability argument currently gives the establishment number more specificity than it carries. |
+| Incentives | PASS | Producer, inspection, retail and consumer incentives remain articulated. |
+| Tradeoffs | PASS | The essay explains inspection limits rather than promising zero risk. |
+| Consequences | PASS | The discussion traces recall response and record continuity, but the two identified mechanisms need the proposed narrow correction. |
+| Uncertainty | HOLD | categorical recall and lot-identification wording remains pending approval. |
+| Institutional Behavior | HOLD | public detention/enforcement authority must remain distinct from voluntary company recalls. |
+
+This piece is not publication-ready under the philosophy gate. Minimal proposed corrections require the author's approval; a supporting link is not a cure for incompatible wording.
+
+See [current source checklist](the-stamp-on-the-meat-flagship-source-checklist.md) for read passages and access limits, and [private group ledger](../core-link-only-history-2026-09-27.md#the-stamp-on-the-meat-flagship) for any exact approval proposals.
+
+This record supersedes every incompatible pre-rollback result below. Earlier corrected prose and associated PASS decisions are historical, not approval of the restored text. The user authorized supporting hyperlinks only; all proposed wording changes remain private and unapplied.
+
+Scope: full body and existing-record review, actual passage verification for new anchors and specific concerns, not a fresh exhaustive re-research of every retained citation. No numeric score, local test suite, build, commit or publication. No new edition or revision was invented.
+
+## Superseded pre-rollback research - 2026-09-27
+
+All following hashes, corrected-copy descriptions, scores and decisions refer to historical states. They do not apply to the current content hash above.
+
+Review date: `2026-09-27`
+Version: `2.0` - Third web edition
+Final content SHA-256: `12a4436d99d9b16c1b43c3654088a84ab85ef2a99423fe231d37366e647468b8`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+
+Material correction. Clarified voluntary recalls versus official detention/seizure mechanisms and corrected establishment-number versus lot identification. Removed one duplicated phrase. Major version 2.0, one edition advance, dated disclosure; historical thesis and publication identity/artwork preserved.
+
+Scope: full prose and existing source-record review, fresh passage verification for the changes documented in the companion checklist, and a bounded source-fit audit. This is not a new numeric grade, a comprehensive re-research certification, or a publication approval. Existing evidence was retained where the source placement and historical record were adequate.
+
+## Historical Editorial Philosophy Audit (superseded)
+
+Historical decision (superseded): PASS
+
+| Criterion | Decision | Reason |
+|---|---|---|
+| Evidence | PASS | Freshly read FSIS passages correct two specific overstatements; detailed inspection and historical evidence retains its existing anchors. |
+| Logic | PASS | Separates the visible mark, plant identity, lot identification, inspection status, and recall response instead of merging their functions. |
+| Incentives | PASS | Maintains producer responsibility, public enforcement, retailer recall work, and consumer-information needs. |
+| Tradeoffs | PASS | Inspection is valuable but cannot guarantee zero pathogens, every label claim, or perfect downstream handling. |
+| Consequences | PASS | Recall failure can prompt a different legal response; consumers need combined identifiers rather than trusting a plant number alone. |
+| Uncertainty | PASS | Access limitation is recorded; no claim of direct-page retrieval or unqualified mandatory recall power remains. |
+| Institutional Behavior | PASS | FSIS requests/oversight, company recalls, and judicial seizure through DOJ are now explicitly distinct. |
+
+### Boundaries
+
+Original title, publication date, slug, membership, and artwork are preserved. Revision disclosure and edition advance describe this pass. No new visual assets, templates, tests, or release changes. Publication remains a separate parent workflow.
+
+## Historical refinement record
+
+The earlier candidate score and audit below are historical; they do not replace this revision's scope or findings.
+
 
 Package: `output/evergreen_candidates/2026-06-18-the-stamp-on-the-meat-flagship/`
 
@@ -72,7 +195,7 @@ Primary and official sources govern the package: current U.S. Code, GovInfo fede
 
 ## Media Framing Audit
 
-Decision: PASS
+Historical decision (superseded): PASS
 
 | Test | Result | Notes |
 |---|---|---|
@@ -82,9 +205,9 @@ Decision: PASS
 | Source Hierarchy | PASS | Primary/official records lead; direct FSIS access limits are disclosed. |
 | Ideological Burden | PASS | The draft assigns no blanket moral burden to regulators, industry, shoppers, or critics. |
 
-## Editorial Philosophy Audit
+## Historical Editorial Philosophy Audit (superseded)
 
-Decision: PASS
+Historical decision (superseded): PASS
 
 | Test | Result | Notes |
 |---|---|---|
@@ -143,10 +266,10 @@ Decision: PASS
 - [x] No `that matters` phrasing remains
 - [x] No adverbial `still` construction remains
 - [x] No unsupported live factual claims strengthened beyond source support
-- [x] Media Framing Audit is `Decision: PASS`
+- [x] Media Framing Audit is `Historical decision (superseded): PASS`
 - [x] Media frame identified, primary-source rebuild completed, assumptions quarantined, source hierarchy labeled, and ideological burden avoided
 - [x] Major redundancies, discrepancies, and unsubstantiated claims are listed in the line-by-line edit matrix
-- [x] Editorial Philosophy Audit is `Decision: PASS`
+- [x] Editorial Philosophy Audit is `Historical decision (superseded): PASS`
 - [x] All seven Editorial Philosophy Audit tests are PASS
 - [x] No ideological bias, loaded framing, partisan shorthand, tribal framing, or asymmetrical evidence treatment
 - [x] Disciplined independence maintained throughout

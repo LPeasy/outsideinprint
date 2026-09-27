@@ -7,9 +7,12 @@ section_label: "Essay"
 subtitle: "Examining the parallels between compute power, renewable energy, and battery technology"
 description: "Moore's Law, solar learning curves, wind costs, and battery scaling all show how technology improves under different constraints, incentives, and policy conditions."
 featured_image: "/images/medium/beyond-moores-law/2aae02b62e26713f72883871ed81f0a57d570de577814ea1767fd1f55bcda440.jpeg"
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected Moore chronology, onshore-wind category and battery-paper attribution. Added or retained claim-level source links; original reporting frame and artwork retained. Removed unsupported solar-price precision, scoped the cell-price measure and energy-density claims, and substituted an identified historical BloombergNEF battery-pack forecast."
   - version: "1.1"
     date: "2026-05-01"
     note: "Updated May 1, 2026, after OIP back-archive review for legacy punctuation cleanup, local image-path repair where needed, source checks, and targeted wording corrections."
@@ -30,7 +33,7 @@ medium_source_url: "https://medium.com/@lawtonperret/beyond-moores-law-b7838e31b
 
 Made using ChatGPT in January 2025.
 
-In our previous essay on Moore's Law, we explored how the doubling of transistors every two years has driven unprecedented progress in computing power and shaped the modern technological landscape. But could the principles underlying Moore's Law extend beyond computing? Renewable energy technologies like solar and wind, as well as battery storage systems, appear to exhibit similar patterns of exponential growth in efficiency and cost reductions.
+In our previous essay on Moore's Law, we explored how the [doubling of transistors every two years](https://newsroom.intel.com/press-kit/moores-law) has driven unprecedented progress in computing power and shaped the modern technological landscape. But could the principles underlying Moore's Law extend beyond computing? Renewable energy technologies like solar and wind, as well as battery storage systems, appear to exhibit similar patterns of exponential growth in efficiency and cost reductions.
 
 This essay delves deeper into these parallels, examining the similarities and differences between Moore's Law and advancements in renewable energy and battery technology. While all three domains share trends of rapid improvement and cost decline, their mechanisms, constraints, and implications are distinct, offering a nuanced understanding of technological progress.
 
@@ -42,7 +45,7 @@ Building on our earlier discussion of Moore's Law, we will contextualize the exp
 
 Made using ChatGPT in January 2025.
 
-Moore's Law is often regarded as one of the most influential principles in modern technology. First articulated by Gordon Moore in 1965, it predicted that the number of transistors on integrated circuits would double roughly every two years, leading to exponential growth in computing power. Over the past half-century, this trend has not only held but has also spurred massive advancements in computing, enabling the development of smaller, faster, and cheaper devices.
+Moore's Law is often regarded as one of the most influential principles in modern technology. First articulated by Gordon Moore in 1965 and [revised in 1975](https://www.intel.com/pressroom/archive/speeches/moore20030210.htm), it predicted that the number of transistors on integrated circuits would double roughly every two years, leading to exponential growth in computing power. Over the past half-century, this trend has not only held but has also spurred massive advancements in computing, enabling the development of smaller, faster, and cheaper devices.
 
 The law's success lies in its predictability: engineers could confidently anticipate increases in transistor density and plan their innovations accordingly. This predictability catalyzed the rapid expansion of the semiconductor industry, from microprocessors to the modern ubiquity of AI and cloud computing.
 
@@ -56,9 +59,9 @@ Made using ChatGPT in January 2025.
 
 ### Swanson's Law and the Learning Curve
 
-Renewable energy technologies, particularly solar photovoltaics (PV), have seen cost reductions reminiscent of Moore's Law. Swanson's Law posits that the price of solar PV modules drops by about 20% for every doubling of cumulative production. This has resulted in a staggering 96% decline in the cost of solar panels since 2000, making solar energy one of the cheapest sources of electricity globally.
+Renewable energy technologies, particularly solar photovoltaics (PV), have seen cost reductions reminiscent of Moore's Law. Swanson's Law posits that the price of solar PV modules drops by about 20% for every doubling of cumulative production. This has resulted in [a substantial decline in solar PV module prices](https://www.irena.org/publications/2022/Jul/Renewable-power-generation-costs-in-2021), making solar energy one of the cheapest sources of electricity globally.
 
-Wind energy has followed a similar path, with advancements in turbine design and manufacturing reducing costs while improving efficiency. By 2021, the global weighted-average cost of electricity from newly commissioned wind farms had fallen 68% since 2010, driven by larger turbines, optimized logistics, and scaling of production. These trends highlight how renewables have achieved cost parity with, and in some cases undercut, fossil fuel alternatives.
+Wind energy has followed a similar path, with advancements in turbine design and manufacturing reducing costs while improving efficiency. By 2021, the global weighted-average cost of electricity from newly commissioned [onshore wind farms had fallen 68% since 2010](https://www.irena.org/publications/2022/Jul/Renewable-power-generation-costs-in-2021), driven by larger turbines, optimized logistics, and scaling of production. These trends highlight how renewables have achieved cost parity with, and in some cases undercut, fossil fuel alternatives.
 
 ### Efficiency Improvements
 
@@ -76,11 +79,11 @@ Made using ChatGPT in January 2025.
 
 ### Cost Reductions and Production Scaling
 
-Batteries, particularly lithium-ion technology, have experienced significant cost reductions, declining by 97% since the 1990s. These reductions are largely driven by production scaling, with manufacturing facilities becoming more efficient as demand for electric vehicles (EVs) and energy storage systems grows. Analysts predict that the cost of battery packs could fall below \$100 per kilowatt-hour (kWh) by 2025, a critical threshold for EV affordability. Such cost declines have also enabled utility-scale battery deployments, making energy storage a viable solution for renewable intermittency.
+Lithium-ion cell prices per unit of energy have experienced significant cost reductions, [declining by 97% in real terms since 1991](https://pubs.rsc.org/en/content/articlelanding/2021/EE/D0EE02681F). These reductions are largely driven by production scaling, with manufacturing facilities becoming more efficient as demand for electric vehicles (EVs) and energy storage systems grows. BloombergNEF's 2023 outlook [forecast average battery-pack prices of \$113 per kilowatt-hour (kWh) in 2025](https://about.bnef.com/insights/clean-energy/lithium-ion-battery-pack-prices-hit-record-low-of-139-kwh/). Such cost declines have also enabled utility-scale battery deployments, making energy storage a viable solution for renewable intermittency.
 
 ### Energy Density and Performance Improvements
 
-In terms of energy density, batteries have made steady but slower progress compared to Moore's Law. Current lithium-ion batteries have energy densities of 250-300 watt-hours per kilogram (Wh/kg), with next-generation technologies like solid-state batteries promising to double or even triple this capacity. Emerging breakthroughs in lithium-metal and sodium-ion chemistries further highlight the innovation pipeline. These advancements are not only critical for extending EV range but also for reducing battery weight and size, which are key factors in transportation and aerospace applications.
+In terms of energy density, batteries have made steady but slower progress compared to Moore's Law. [Some lithium-ion cells have reached energy densities of 250-300 watt-hours per kilogram (Wh/kg)](https://www.nature.com/articles/s41586-022-05281-0), with [solid-state research targeting around 500 Wh/kg](https://www.energy.gov/sites/default/files/2021-06/bat518_wixom_2021_p_5-14_459pm_KF_TM.pdf#page=3). Emerging breakthroughs in lithium-metal and sodium-ion chemistries further highlight the innovation pipeline. These advancements are not only critical for extending EV range but also for reducing battery weight and size, which are key factors in transportation and aerospace applications.
 
 ### Challenges and Constraints
 
@@ -94,7 +97,7 @@ Made using ChatGPT in January 2025.
 
 ### Exponential Progress
 
-Computing, renewable energy, and batteries have all demonstrated exponential trends in cost reductions and performance improvements. Moore's Law predicts the doubling of transistor density every two years. Similarly, Swanson's Law shows that solar PV module prices decrease by about 20% with every doubling of cumulative production. Meanwhile, lithium-ion battery costs have fallen by 97% since the 1990s, driven by scaling and manufacturing efficiencies.
+Computing, renewable energy, and batteries have all demonstrated exponential trends in cost reductions and performance improvements. Moore's Law predicts the doubling of transistor density every two years. Similarly, Swanson's Law shows that solar PV module prices decrease by about 20% with every doubling of cumulative production. Meanwhile, lithium-ion cell prices per unit of energy have fallen by 97% in real terms since 1991, driven by scaling and manufacturing efficiencies.
 
 ### Adoption-Driven Feedback Loops
 
@@ -142,4 +145,4 @@ In many ways, the legacy of Moore's Law offers a blueprint: a testament to how f
 
 ## Sources checked
 
-The source trail for this essay includes Intel's overview of [Moore's Law and semiconductor technology](https://www.intel.com/content/www/us/en/silicon-innovations/moores-law-technology.html), IEEE Spectrum's coverage of [EUV lithography](https://spectrum.ieee.org/euv-lithography), PV Tech's explainer on [Swanson's Law](https://www.pv-tech.org/what-is-swansons-law/), IRENA's [global renewable energy cost report](https://www.irena.org/publications/2022/Aug/Global-Renewable-Energy-Costs), Nature Energy's history of [lithium-ion battery cost reductions](https://www.nature.com/articles/s41560-018-0108-1), Scientific American's overview of [solid-state battery development](https://www.scientificamerican.com/article/solid-state-batteries-poised-to-transform-electric-vehicles/), McKinsey's discussion of [technology feedback loops](https://www.mckinsey.com/business-functions/mckinsey-digital/our-insights/the-feedback-loop-of-technological-innovation), the International Energy Agency's [Renewables 2023 report](https://www.iea.org/reports/renewables-2023), and CSIS work on China's renewable supply chain.
+The source trail for this essay includes Intel's overview of [Moore's Law and semiconductor technology](https://www.intel.com/content/www/us/en/silicon-innovations/moores-law-technology.html), IEEE Spectrum's coverage of [EUV lithography](https://spectrum.ieee.org/euv-lithography), PV Tech's explainer on [Swanson's Law](https://www.pv-tech.org/what-is-swansons-law/), IRENA's [global renewable energy cost report](https://www.irena.org/publications/2022/Jul/Renewable-power-generation-costs-in-2021), Ziegler and Trancik's study of [lithium-ion battery cost reductions](https://pubs.rsc.org/en/content/articlelanding/2021/EE/D0EE02681F), Scientific American's overview of [solid-state battery development](https://www.scientificamerican.com/article/solid-state-batteries-poised-to-transform-electric-vehicles/), McKinsey's discussion of [technology feedback loops](https://www.mckinsey.com/business-functions/mckinsey-digital/our-insights/the-feedback-loop-of-technological-innovation), the International Energy Agency's [Renewables 2023 report](https://www.iea.org/reports/renewables-2023), and CSIS work on China's renewable supply chain.

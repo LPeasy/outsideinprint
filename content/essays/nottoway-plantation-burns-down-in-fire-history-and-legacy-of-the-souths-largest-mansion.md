@@ -8,9 +8,12 @@ subtitle: "A brief explainer about what the house was, how it evolved, and why i
 description: "It was the largest remaining antebellum mansion in the South: built by enslaved people, sold as a resort, and burned in 2025"
 featured_image: "/images/social/outside-in-print-default.png"
 featured_image_alt: "Outside In Print default social image"
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected Randolph's relocation origin, ballroom dimensions and Owen ownership chronology. Removed unsupported construction, tank and quarters details; replaced the postwar labor claim with the documented contract and limited the tourism critique to website presentation. Added supporting source links; surrounding argument, original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-14"
     note: "Updated May 14, 2026, after OIP back-archive review. Cleaned Medium import residue, removed remote body images, normalized house style, and tightened source-discipline language around Nottoway's fire and plantation legacy."
@@ -65,7 +68,7 @@ It was a monument to slavery and selective memory.
 *Recovered from the original Medium import archive; original caption unavailable.*
 
 
-**John Hampden Randolph** moved to Louisiana from Virginia with **a
+**John Hampden Randolph** [moved to Louisiana from Mississippi](https://64parishes.org/entry/nottoway-plantation-2) with **a
 fortune and a plan:**
 
 > Build a sugar empire and crown it with a grand mansion.
@@ -75,19 +78,13 @@ become one of the largest antebellum homes in the South. Randolph named it
 ***Nottoway*** after the county in Virginia where he was born.
 
 > Nottoway was a 64-room colossus in Greek Revival and Italianate
-> styles, with a 65-foot-long ballroom, gas lighting, indoor plumbing,
-> and a 10,000-gallon copper water tank.
+> styles, with [a 30-by-40-foot ballroom](https://npgallery.nps.gov/GetAsset/1415387c-7872-496a-ad80-f117e6f42ba5#page=2), gas lighting, and indoor plumbing.
 
 Randolph built Nottoway in just two years. Well, he didn't build it
-himself. Enslaved laborers did: hundreds of them. By 1860, Randolph owned
+himself. Enslaved laborers did. By 1860, Randolph owned
 155 enslaved people and controlled more than 6,000 acres.
 
-Behind the house, the quarters for enslaved workers were arranged in rows, just far
-enough to stay out of sight but close enough to be watched.
-
-After emancipation, many of them stayed on the property. Some had
-nowhere to go. Others had family who remained on the land. Most entered
-into sharecropping agreements, trading bondage for debt.
+After emancipation, Randolph [contracted with 53 formerly enslaved workers to return to work on his Louisiana lands](https://64parishes.org/entry/nottoway-plantation-2).
 
 > Decades later, that same house would be reborn as a tourist
 > attraction, its grandeur preserved and its history tucked away out of
@@ -101,20 +98,16 @@ into sharecropping agreements, trading bondage for debt.
 
 
 It changed hands a few times over the decades that followed, staying in
-the Owens family until 1977. It was sold to **Arlin Dease**, a history
+the [Owen family into the late 1970s](https://npgallery.nps.gov/GetAsset/1415387c-7872-496a-ad80-f117e6f42ba5#page=1). It was sold to **Arlin Dease**, a history
 enthusiast who **restored the property** and opened it for tours,
 weddings, and overnight stays.
 
-From that point forward, **Nottoway was marketed** not as a plantation,
-but **as a resort.** Later owners expanded it, adding guest rooms, a
+From that point forward, **Nottoway was marketed as a resort.** Later owners expanded it, adding guest rooms, a
 restaurant, and conference facilities. **Tourists** came to **marvel**
-at the white columns, oak-lined drive, and lavish interiors, often **without
-hearing** about the hundreds of people who lived, worked, and died on
-the land.
+at the white columns, oak-lined drive, and lavish interiors.
 
-While Nottoway was **added to the National Register of Historic Places**
-in 1980, its interpretive materials often **downplayed or ignored its
-origins.** The official website's history page focused entirely on the
+While Nottoway was **[added to the National Register of Historic Places](https://npgallery.nps.gov/AssetDetail/NRIS/80001733)**
+in 1980, its website presentation **downplayed its origins.** As a [May 21, 2025 commentary later noted](https://time.com/7287295/burning-of-nottoway-plantation/), the official website's history page focused entirely on the
 property's oak trees.
 
 #### Why the Nottoway Fire Divided Public Opinion
