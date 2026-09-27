@@ -162,7 +162,8 @@ async function installRoutes(page, options = {}) {
       return;
     }
 
-    if (["font", "image", "media", "stylesheet"].includes(request.resourceType())) {
+    if (["font", "image", "media"].includes(request.resourceType()) ||
+        (request.resourceType() === "stylesheet" && !options.allowStyles)) {
       await route.abort("blockedbyclient");
       return;
     }
@@ -550,6 +551,102 @@ test("collection title and artwork clicks share one event each while magnifiers 
     for (const count of counts) {
       assertPrivacyBoundary(count, sentinels);
     }
+  } finally {
+    await context.close();
+  }
+});
+
+test("filtered Library artwork opens a readable viewer in both themes without tracking zoom", async () => {
+  const sentinels = ["LIBRARY_QUERY_SENTINEL", "LIBRARY_FRAGMENT_SENTINEL", "LIBRARY_EMAIL_SENTINEL"];
+  const { context, counts, page } = await newInstrumentedPage({ allowStyles: true });
+
+  try {
+    await page.emulateMedia({ colorScheme: "light" });
+    await page.goto(
+      `${canonicalOrigin}/library/?private=LIBRARY_QUERY_SENTINEL&email=LIBRARY_EMAIL_SENTINEL%40example.com#LIBRARY_FRAGMENT_SENTINEL`,
+      { waitUntil: "load" }
+    );
+    await waitFor(
+      () => counts.find((record) => !countData(record).event && countData(record).path === "/library/"),
+      "The Library did not send its intercepted pageview."
+    );
+    assert.equal(await page.locator("#library-results-list [data-library-item]").count(), 0,
+      "The scenario must start with grouped results, before dynamic artwork is inserted.");
+    await page.locator("#library-collection").selectOption("musings");
+
+    const record = page.locator('#library-results-list [data-library-surface="results"]').filter({
+      has: page.locator("[data-essay-cartoon-lightbox-trigger][data-gallery]")
+    }).first();
+    const zoom = record.locator("[data-essay-cartoon-lightbox-trigger]");
+    await zoom.waitFor({ state: "visible" });
+    assert.equal(new URL(page.url()).searchParams.get("collection"), "musings");
+    assert.equal(await record.locator('.d a[href$="/collections/musings/"]').count(), 1,
+      "The magnifier must belong to a dynamically filtered Musings result.");
+    assert.equal(await zoom.evaluate((button) => Boolean(button.closest("[data-analytics-event]"))), false);
+    const artwork = await zoom.evaluate((button) => ({
+      src: button.dataset.image,
+      alt: button.dataset.alt,
+      title: button.dataset.title,
+      gallery: button.dataset.gallery
+    }));
+
+    const title = record.locator(".t a");
+    const target = await title.evaluate((anchor) => {
+      anchor.addEventListener("click", (event) => event.preventDefault(), { once: true });
+      return { path: new URL(anchor.href).pathname, slug: anchor.dataset.analyticsSlug, section: anchor.dataset.analyticsSection };
+    });
+    await title.click();
+    const articleClick = await waitFor(
+      () => counts.find((count) => countData(count).path.startsWith("oip:internal_promo_click")),
+      "The dynamic Library title did not send its intercepted article click."
+    );
+    assert.deepEqual(eventParts(articleClick), {
+      name: "internal_promo_click",
+      fields: { ...target, source_slot: "library_search" }
+    });
+
+    const viewer = page.locator("[data-essay-cartoon-lightbox]");
+    for (const theme of ["light", "dark"]) {
+      if (theme === "dark") await page.locator("[data-theme-toggle]").click();
+      assert.equal(await page.locator("html").getAttribute("data-theme"), theme);
+      await zoom.click();
+      await viewer.waitFor({ state: "visible" });
+      await page.mouse.move(0, 0);
+      assert.equal(await viewer.getAttribute("aria-hidden"), "false");
+      assert.equal(await viewer.locator("[data-essay-cartoon-lightbox-image]").getAttribute("src"), artwork.src);
+      assert.equal(await viewer.locator("[data-essay-cartoon-lightbox-image]").getAttribute("alt"), artwork.alt);
+      assert.equal(await viewer.locator("[data-essay-cartoon-lightbox-title]").textContent(), artwork.title);
+      assert.equal(await viewer.locator("[data-essay-cartoon-lightbox-gallery]").getAttribute("href"), artwork.gallery);
+      assert.equal(await viewer.locator(".cartoon-lightbox__close").evaluate((button) => document.activeElement === button), true,
+        "Opening the viewer must move keyboard focus to its close control.");
+
+      await page.keyboard.press("Tab");
+      const colors = await viewer.evaluate((lightbox) => Object.fromEntries([
+        ["close", ".cartoon-lightbox__close"],
+        ["title", "[data-essay-cartoon-lightbox-title]"],
+        ["date", "[data-essay-cartoon-lightbox-date]"],
+        ["gallery", "[data-essay-cartoon-lightbox-gallery]"]
+      ].map(([label, selector]) => [label, getComputedStyle(lightbox.querySelector(selector)).color])));
+      assert.deepEqual(colors, {
+        close: "rgb(234, 219, 193)", title: "rgb(234, 219, 193)",
+        date: "rgb(157, 151, 143)", gallery: "rgb(153, 173, 191)"
+      }, `${theme} page colors must not override the dark viewer's readable foregrounds.`);
+      await page.keyboard.press("Shift+Tab");
+      assert.equal(await viewer.locator(".cartoon-lightbox__close").evaluate((button) =>
+        document.activeElement === button && getComputedStyle(button).color === "rgb(153, 173, 191)"), true,
+        "The keyboard-focused close control must keep its light accent in either theme.");
+
+      await page.keyboard.press("Escape");
+      assert.equal(await viewer.isHidden(), true);
+      assert.equal(await viewer.getAttribute("aria-hidden"), "true");
+      assert.equal(await zoom.evaluate((button) => document.activeElement === button), true,
+        "Escape must restore focus to the dynamically inserted magnifier.");
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    assert.equal(counts.filter((count) => countData(count).event).length, 1,
+      "Only the title activation may emit an event; filtered magnifiers must remain untracked.");
+    for (const count of counts) assertPrivacyBoundary(count, sentinels);
   } finally {
     await context.close();
   }

@@ -15,7 +15,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  # Serialize production runs together without letting PR checks replace them.
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:

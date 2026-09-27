@@ -6147,6 +6147,12 @@ body.cartoon-lightbox-open{
   display:none;
 }
 .cartoon-lightbox{
+  /* The viewer always has a dark backdrop, even over the light page theme. */
+  color-scheme:dark;
+  --text-primary:var(--oip-paper);
+  --text-muted:#9d978f;
+  --accent-hover:#99adbf;
+  --focus-ring:rgba(153,173,191,.92);
   position:fixed;
   inset:0;
   z-index:1000;

@@ -308,6 +308,12 @@ if ($deployWorkflow -notmatch "\.\/tests\/test_ci_contract\.ps1") {
   throw "deploy.yml must run the CI contract test."
 }
 
+$concurrencyBlock = [regex]::Match($deployWorkflow, '(?ms)^concurrency:\s*\r?\n.*?(?=^\S|\z)').Value
+if ($concurrencyBlock -notmatch '(?m)^  group: pages-\$\{\{ github\.ref \}\}[ \t]*\r?$' -or
+    $concurrencyBlock -notmatch '(?m)^  cancel-in-progress: false[ \t]*\r?$') {
+  throw 'deploy.yml must isolate PR/ref queues while serializing main runs without canceling an active deployment.'
+}
+
 if ($deployWorkflow -notmatch "\.\/tests\/test_hugo_upgrade_contract\.ps1") {
   throw "deploy.yml must run the Hugo upgrade contract test."
 }
