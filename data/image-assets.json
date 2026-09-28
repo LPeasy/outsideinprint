@@ -1112,6 +1112,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/the-circle-opens": {
+      "id": "editorial/the-circle-opens",
+      "source": "images/originals/editorial/the-circle-opens.png",
+      "sha256": "2aaf8ee4bd68e489e9be1b428dd60f8815abc472d7879280429e901529a749cc",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/the-closed-window": {
       "id": "editorial/the-closed-window",
       "source": "images/originals/editorial/the-closed-window.png",
@@ -7797,6 +7811,7 @@
     "/images/editorial/the-altar-of-consent.png": "editorial/the-altar-of-consent",
     "/images/editorial/the-bridge-makes-room.png": "editorial/the-bridge-makes-room",
     "/images/editorial/the-cavalry-breaks-the-hill.png": "editorial/the-cavalry-breaks-the-hill",
+    "/images/editorial/the-circle-opens.png": "editorial/the-circle-opens",
     "/images/editorial/the-closed-window.png": "editorial/the-closed-window",
     "/images/editorial/the-cone-in-the-lane.png": "editorial/the-cone-in-the-lane",
     "/images/editorial/the-crooked-cake.png": "editorial/the-crooked-cake",

@@ -1,4 +1,4 @@
-current: rain-before-breakfast
+current: the-circle-opens
 cartoons:
   - slug: the-simple-lunch
     title: "The Simple Lunch"
@@ -1048,5 +1048,14 @@ cartoons:
     image: "editorial/rain-before-breakfast"
     essay: "/essays/rain-before-breakfast/"
     alt: "An anonymous person rests in a wooden porch chair beside a keyring while rain falls over the yard and a drop hangs from a potted plant's leaf."
+    width: 1672
+    height: 941
+  - slug: the-circle-opens
+    title: "The Circle Opens"
+    date: "2026-09-28"
+    publishDate: "2026-09-28T10:00:00-04:00"
+    image: "editorial/the-circle-opens"
+    essay: "/essays/the-circle-opens/"
+    alt: "An anonymous writer holds a pen over a blank page in a sunlit library room where others gather in a circle of chairs."
     width: 1672
     height: 941
