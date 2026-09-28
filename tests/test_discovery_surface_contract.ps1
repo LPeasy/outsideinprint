@@ -126,7 +126,7 @@ if ($homeFrontPageTemplate -notmatch [regex]::Escape('partial "home_v2_front_pag
 
 $homeSelectionTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_v2_selected.html') -Raw -Encoding utf8
 $featuredRoutes = @(
-  '"/essays/the-dolphin-company/"',
+  '"/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/"',
   '"/syd-and-oliver/what-i-had/"',
   '"/essays/default-owner/"',
   '"/essays/reverse-origami/"'
@@ -142,7 +142,7 @@ foreach ($route in $featuredRoutes) {
 foreach ($requiredSnippet in @(
   'partial "archive/longform-kind.html"',
   '$eligible = sort (sort $eligible "Title" "asc") "PublishDate" "desc"',
-  '$flagshipRoute := "/essays/the-dolphin-company/"',
+  '$flagshipRoute := "/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/"',
   'range where $eligible "RelPermalink" $flagshipRoute',
   'range first 1 $eligible',
   'not (in $selectedPaths .RelPermalink)',
@@ -356,7 +356,7 @@ foreach ($requiredSnippet in @(
   'homepage_v2_featured_lead',
   'homepage_v2_featured_supporting',
   'hugo.Data.homepage_metrics',
-  'A flagship case study, the latest publication, and selected work.',
+  'A featured essay, the latest publication, and selected work.',
   'Read the piece',
   'Browse the library',
   'Surprise me',

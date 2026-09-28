@@ -40,7 +40,7 @@ const publishedPages = rows.map((row) => Object.fromEntries(columns.map((column,
   .sort((a, b) => Date.parse(b.publishDate) - Date.parse(a.publishDate) || a.title.localeCompare(b.title));
 const publishedRoutes = publishedPages.map((row) => row.route);
 const pinnedRoutes = [
-  "/essays/the-dolphin-company/",
+  "/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/",
   "/syd-and-oliver/what-i-had/",
   "/essays/default-owner/",
   "/essays/reverse-origami/",
@@ -89,7 +89,7 @@ test("Dolphin correction retains the original publication date and renders a con
     || text(dolphinHtml).includes(currentRevision[2]), "the complete correction note must render");
 });
 
-test("rendered homepage leads with Dolphin, then the newest remaining publication", () => {
+test("rendered homepage leads with Fine China, then the newest remaining publication", () => {
   const cards = [...html.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/g)]
     .filter((match) => /\bhome-v2-featured__(?:lead|item)\b/.test(attribute(`<article ${match[1]}>`, "class")));
   assert.ok(publishedRoutes.length >= 5, "the production archive must supply published reading pages");
@@ -231,7 +231,7 @@ test("rendered homepage leads with Dolphin, then the newest remaining publicatio
       }
     }
   }
-  assert.match(html, /A flagship case study, the latest publication, and selected work\./);
+  assert.match(html, /A featured essay, the latest publication, and selected work\./);
   assert.match(html, /Read the piece/);
   assert.doesNotMatch(html, /25 reads|Medium reads|(?:3\.4K|1\.95K|1\.8K) readers/);
 });

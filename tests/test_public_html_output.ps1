@@ -3442,8 +3442,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)A flagship case study, the latest publication, and selected work\..*?home-v2-featured__lead.*?Read the piece.*?home-v2-featured__supporting'
-    Message = 'expected featured reading to explain the flagship lead and use a form-neutral reading action'
+    Pattern = '(?s)A featured essay, the latest publication, and selected work\..*?home-v2-featured__lead.*?Read the piece.*?home-v2-featured__supporting'
+    Message = 'expected featured reading to explain the essay lead and use a form-neutral reading action'
   },
   @{
     Path = 'public/index.html'
@@ -5918,7 +5918,7 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     [DateTimeOffset]::Parse($_.publishDate) -le $selectionObservationTime
   } | Sort-Object @{ Expression = { [DateTimeOffset]::Parse($_.publishDate) }; Descending = $true }, title)
   $publishedReadingPaths = @($publishedReadingRecords | ForEach-Object { Get-SitePathFromHref -Href $_.permalink })
-  $flagshipPath = '/essays/the-dolphin-company/'
+  $flagshipPath = '/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/'
   $expectedLeadPaths = @($publishedReadingPaths | Select-Object -First 1)
   if ($flagshipPath -in $publishedReadingPaths) {
     $expectedLeadPaths = @($flagshipPath)

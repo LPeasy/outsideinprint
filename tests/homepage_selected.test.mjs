@@ -84,9 +84,9 @@ test("masthead proof sits between its controls and lead summaries keep supportin
   assert.equal((homeV2.match(/partial "discovery\/page-summary\.html"/g) || []).length, 1);
 });
 
-test("featured reading leads with Dolphin, then the latest publication and curated supports", () => {
+test("featured reading leads with Fine China, then the latest publication and curated supports", () => {
   const routes = [
-    "/essays/the-dolphin-company/",
+    "/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/",
     "/syd-and-oliver/what-i-had/",
     "/essays/default-owner/",
     "/essays/reverse-origami/",
@@ -96,7 +96,7 @@ test("featured reading leads with Dolphin, then the latest publication and curat
   assert.deepEqual(indexes, [...indexes].sort((left, right) => left - right));
   assert.doesNotMatch(selected, /what-happened-at-camp-mystic|why-a-return-to-the-gold-standard|the-little-prince|russias-slow-surrender/);
   assert.match(selected, /\$eligible = sort \(sort \$eligible "Title" "asc"\) "PublishDate" "desc"/);
-  assert.match(selected, /\$flagshipRoute := "\/essays\/the-dolphin-company\/"/);
+  assert.match(selected, /\$flagshipRoute := "\/essays\/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet\/"/);
   assert.match(selected, /range where \$eligible "RelPermalink" \$flagshipRoute/);
   assert.match(selected, /range first 1 \$eligible/);
   assert.ok(selected.indexOf('range where $eligible "RelPermalink" $flagshipRoute') < selected.indexOf("range first 1 $eligible"));
@@ -110,7 +110,7 @@ test("featured reading leads with Dolphin, then the latest publication and curat
     assert.ok(!homeV2.includes(label), "metric values belong in the internal data record");
   }
   assert.match(homeV2, /hugo\.Data\.homepage_metrics/);
-  assert.match(homeV2, /A flagship case study, the latest publication, and selected work\./);
+  assert.match(homeV2, /A featured essay, the latest publication, and selected work\./);
   assert.match(homeV2, /Read the piece/);
   assert.doesNotMatch(homeV2, /Read the essay/);
   assert.doesNotMatch(metrics, /\d(?:K)? readers/);

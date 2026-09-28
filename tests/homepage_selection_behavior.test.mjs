@@ -7,7 +7,7 @@ import { execFileSync } from "node:child_process";
 
 const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.164.0/hugo")
   ? path.resolve(".tools/hugo-0.164.0/hugo") : "hugo");
-const dolphin = "/essays/the-dolphin-company/";
+const fineChina = "/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/";
 const dialogue = "/syd-and-oliver/what-i-had/";
 const owner = "/essays/default-owner/";
 const origami = "/essays/reverse-origami/";
@@ -30,7 +30,7 @@ function renderSelection(t, overrides = {}, summaries = false) {
   write("layouts/_default/single.html", "{{ .Title }}");
   write("layouts/_default/list.html", "{{ .Title }}");
   const entries = {
-    dolphin: { title: "The Dolphin Company", url: dolphin, date: "2020-01-01", section_label: "Essay" },
+    fineChina: { title: "Fine China", url: fineChina, date: "2020-01-01", section_label: "Essay" },
     dialogue: { title: "What I Had", url: dialogue, date: "2020-01-01", library_type: "dialogue" },
     owner: { title: "Default Owner", url: owner, date: "2020-01-01", section_label: "Essay" },
     origami: { title: "Reverse Origami", url: origami, date: "2020-01-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
@@ -54,21 +54,21 @@ function renderSelection(t, overrides = {}, summaries = false) {
   return JSON.parse(fs.readFileSync(path.join(fixture, "public/index.html"), "utf8"));
 }
 
-test("Dolphin leads, followed by the latest release, while preview-only work stays excluded", (t) => {
-  assert.deepEqual(renderSelection(t), [dolphin, "/essays/latest/", dialogue, owner, origami]);
+test("Fine China leads, followed by the latest release, while preview-only work stays excluded", (t) => {
+  assert.deepEqual(renderSelection(t), [fineChina, "/essays/latest/", dialogue, owner, origami]);
 });
 
 test("a newer flagship stays first and missing curated work receives newest eligible fallback", (t) => {
   const selection = renderSelection(t, {
-    dolphin: { title: "The Dolphin Company", url: dolphin, date: "2020-06-01", publishDate: "2020-07-01" },
+    fineChina: { title: "Fine China", url: fineChina, date: "2020-06-01", publishDate: "2020-07-01" },
     dialogue: null,
   });
-  assert.deepEqual(selection, [dolphin, "/essays/latest/", owner, origami, "/essays/earlier/"]);
+  assert.deepEqual(selection, [fineChina, "/essays/latest/", owner, origami, "/essays/earlier/"]);
   assert.equal(new Set(selection).size, 5);
 });
 
 test("when the flagship is unavailable, the two newest releases lead", (t) => {
-  assert.deepEqual(renderSelection(t, { dolphin: null }), [
+  assert.deepEqual(renderSelection(t, { fineChina: null }), [
     "/essays/latest/", "/essays/earlier/", dialogue, owner, origami,
   ]);
 });
@@ -76,7 +76,7 @@ test("when the flagship is unavailable, the two newest releases lead", (t) => {
 test("a newly released curated piece occupies the latest slot only once", (t) => {
   assert.deepEqual(renderSelection(t, {
     dialogue: { title: "What I Had", url: dialogue, date: "2020-07-01" },
-  }), [dolphin, dialogue, owner, origami, "/essays/latest/"]);
+  }), [fineChina, dialogue, owner, origami, "/essays/latest/"]);
 });
 
 test("lead descriptions are trimmed and plain text while blank descriptions retain shared fallbacks", (t) => {
