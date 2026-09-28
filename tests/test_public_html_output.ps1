@@ -3124,7 +3124,8 @@ else {
     $expectedCampMysticImageIds = @(
       'medium/a920fa69779c6bdb1900f3bb4221da3835781decd2517f6d5449ec61eaaef7d3',
       'medium/41eed8f56249fdadda5c9bf6714146ebac1841b1a5f956a41c8369f729333c1f',
-      'medium/7c4bad63f769d3b86b88aed8b2e32ee2596d415762d2505dec77aa7e9b03da49'
+      # Approved replacement of the superseded Hunt-gauge chart; retain the three-image sequence.
+      'essays/what-happened-at-camp-mystic/hunt-observations-corrected-20260927'
     )
     $campMysticManagedImageTags = @(
       Get-OpenTags -Html $campMysticBodyHtml -TagName 'img' |
