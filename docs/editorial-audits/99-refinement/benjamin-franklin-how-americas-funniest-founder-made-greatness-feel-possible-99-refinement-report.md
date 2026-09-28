@@ -2,7 +2,9 @@
 
 File: `content/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `1ef138af79e109deb821bade2b0ede3716521dd99aa587db47c71eaff3286ed5`
+Final content SHA-256: `cd1cc1ec50f8e107c2c8edcea14aa62ace1c172593717c7a16510b762dfff979`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **SCOPED PASS** for the restored-prose holds and the exact approved corrections. The owner approved the [final-nine bounded decisions](../final-nine-owner-decisions-2026-09-27.md) and this profile's [exact proposal](../final-nine-bios-leo-siakam-franklin-proposals-2026-09-27.md). This is the current candidate, not the withdrawn broad rewrite.
 

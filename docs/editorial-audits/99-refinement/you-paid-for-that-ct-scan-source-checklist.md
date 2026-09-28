@@ -2,7 +2,9 @@
 
 File: `content/essays/you-paid-for-that-ct-scan.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `27f21cc58abe83a104130b562742a5e850141ac92764d4ec34351fd2031ba00d`
+Final content SHA-256: `081f36b01670ba7b8d1a2bbb76781d2e6bf757e748fc502f44d8c3a0239ea569`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **PASS (bounded editorial review)**. Qualified the diagnostic-phone absolute to recognize FDA-cleared mobile systems' limited uses.
 

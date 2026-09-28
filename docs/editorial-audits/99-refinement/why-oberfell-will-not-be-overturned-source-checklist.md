@@ -2,7 +2,16 @@
 
 File: `content/essays/why-oberfell-will-not-be-overturned.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `9041e8281742090b91e00224c1992320c13f67b2570e3acddada51b9d82b3de9`
+Final content SHA-256: `aa5671af4fd150f58d7f3d2c271d0c9fb1269060bf66ace8be4c7e74bedbc48a`
+
+## Owner-approved release maintenance — September 27, 2026
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
+
+Normalized only 14 flagged body punctuation characters on 8 lines to ASCII. Words, numbers, links, paragraph order, artwork destinations, and meaning remain unchanged; this includes typography inside captions, alt text, and quotations, not any new quotation wording. The current pending revision note discloses this maintenance; version, edition, original publication date, other front matter, and older revision history remain unchanged. This is the owner's approved release-unblocking cleanup, not a resumed prose revision.
+
+The prior current source/philosophy decision below remains applicable because the bounded changes add no factual claim and change no argument or source attribution. The pre-cleanup content hash was `9041e8281742090b91e00224c1992320c13f67b2570e3acddada51b9d82b3de9`; the current release hash is the one above. [Exact replacements, snapshots, final hashes, and focused preservation result](../release-typography-social-metadata-map-2026-09-27.json) record the byte-level scope. Historical prior-candidate hashes below remain historical. No local test suite, production build, commit, or remote write was performed by this maintenance pass; formal publication gates remain pending.
+
 
 Current disposition: **bounded editorial PASS**. Owner-approved removal of the unmeasured first-crossing claim; original 2021 household figures now have matching Census/Commerce links. Prior Pew and statutory-recognition corrections remain unchanged.
 

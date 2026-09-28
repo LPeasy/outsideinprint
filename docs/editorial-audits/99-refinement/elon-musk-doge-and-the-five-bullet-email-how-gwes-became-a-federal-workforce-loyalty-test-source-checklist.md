@@ -4,7 +4,9 @@ Date: 2026-09-27
 
 Version: `1.3`
 
-Final SHA256: `f733d24c4f245919eca92e4d5beb8d4b63f32a9f2e72bad2acf66cc6814b6213`
+Final SHA256: `819d1f55a06155b89897a54105476902fd64116fb2950d4324a5d87b9ee8da1f`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Status: Source-link pass complete; normal publication gate remains separate
 
@@ -20,4 +22,3 @@ OPM/Ezell February 24, 2025 memo, first two pages, asks five bullets, manager co
 ## Preservation and private issues
 
 No public prose, caption, order, artwork, discovery metadata or original date was changed. Existing links remain. Private concerns and minimal proposed corrections are in `../core-link-only-flood-pair-2026-09-27.md`; these proposals are not applied. This checklist records the added links, not a new certification of every historical fact or quotation.
-

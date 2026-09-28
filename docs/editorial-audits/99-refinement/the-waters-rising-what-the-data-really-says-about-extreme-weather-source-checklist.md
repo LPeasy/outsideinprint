@@ -2,7 +2,16 @@
 
 File: `content/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather.md`  
 Version: `2.0 / Sixth web edition`  
-Final content SHA-256: `a5fd0734432b03cac279a5bb26a41881590f69b608722607c2cac4f8367f7e06`
+Final content SHA-256: `f4f593dc767ca37580ccc3b54e3c9672819a8079754b4b10c0f57b16e656c8ee`
+
+## Owner-approved release maintenance — September 27, 2026
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
+
+Normalized only 4 flagged body punctuation characters on 3 lines to ASCII. Words, numbers, links, paragraph order, artwork destinations, and meaning remain unchanged; this includes typography inside captions, alt text, and quotations, not any new quotation wording. The current pending revision note discloses this maintenance; version, edition, original publication date, other front matter, and older revision history remain unchanged. This is the owner's approved release-unblocking cleanup, not a resumed prose revision.
+
+The prior current source/philosophy decision below remains applicable because the bounded changes add no factual claim and change no argument or source attribution. The pre-cleanup content hash was `a5fd0734432b03cac279a5bb26a41881590f69b608722607c2cac4f8367f7e06`; the current release hash is the one above. [Exact replacements, snapshots, final hashes, and focused preservation result](../release-typography-social-metadata-map-2026-09-27.json) record the byte-level scope. Historical prior-candidate hashes below remain historical. No local test suite, production build, commit, or remote write was performed by this maintenance pass; formal publication gates remain pending.
+
 
 Current disposition: **PASS — scoped source clearance**. The owner confirmed that the sentence refers to FEMA map amendments and expressly approved “Permits were granted.” → “Map amendments were granted.” That exact sentence replacement resolves the remaining hold; emphasis and all other article bytes are unchanged.
 

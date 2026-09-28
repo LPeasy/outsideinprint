@@ -2,7 +2,16 @@
 
 File: `content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `f174470402aeca1fe7608fc1f16c2342adbfb49781fdf623b293a67e49f821dc`
+Final content SHA-256: `10588f3ef47b17fe0464b4e34144f8dd218a2d6733f1c6e820d6a080f90d63db`
+
+## Owner-approved release maintenance — September 27, 2026
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
+
+Added only `image: "oip-image:medium/61a52f886b9d1e4bdb9b1d293ab6bbd3419ed45b322e637926a8ce7894b1325e"` for the existing illustration's social-share metadata. No featured-image field, new artwork, body change, image movement, or image removal. The current pending revision note discloses this maintenance; version, edition, original publication date, other front matter, and older revision history remain unchanged. This is the owner's approved release-unblocking cleanup, not a resumed prose revision.
+
+The prior current source/philosophy decision below remains applicable because the bounded changes add no factual claim and change no argument or source attribution. The pre-cleanup content hash was `f174470402aeca1fe7608fc1f16c2342adbfb49781fdf623b293a67e49f821dc`; the current release hash is the one above. [Exact replacements, snapshots, final hashes, and focused preservation result](../release-typography-social-metadata-map-2026-09-27.json) record the byte-level scope. Historical prior-candidate hashes below remain historical. No local test suite, production build, commit, or remote write was performed by this maintenance pass; formal publication gates remain pending.
+
 
 Current disposition: **PASS (bounded editorial review)**. Made the example actually count the full charge multiple times and distinguished unallocated money from an omitted expense.
 

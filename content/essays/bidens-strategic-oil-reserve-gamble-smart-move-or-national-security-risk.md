@@ -15,7 +15,7 @@ edition: "Fifth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected release/replenishment scope, stock month, release history, Treasury attribution, RSM quotation date and war-year arithmetic. Recast the DOE refill and Goldman passages as dated paraphrases and removed two unverified quotations. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Corrected release/replenishment scope, stock month, release history, Treasury attribution, RSM quotation date and war-year arithmetic. Recast the DOE refill and Goldman passages as dated paraphrases and removed two unverified quotations. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.2"
     date: "2026-06-25"
     note: "Updated June 25, 2026, after COA2 value review to normalize fake-list and source-attribution residue, complete discovery metadata, and remove house-style hits."
@@ -32,7 +32,7 @@ collections:
   - geopolitics-trade-global-power
 ---
 
-Buried deep beneath the Gulf Coast lies one of America's most powerful weapons - not a missile or a tank, but oil.
+Buried deep beneath the Gulf Coast lies one of America's most powerful weapons: oil.
 
 The U.S. keeps a massive underground stockpile of oil - hundreds of millions of barrels.
 
@@ -222,4 +222,4 @@ Regardless of which view prevails, the bigger question is what happens next. Can
 
 One thing you can be sure of is that energy security is national security. The choices we make today define our ability to withstand the next oil shock, conflict, or supply disruption.
 
-The next crisis is not a question of 'if' but 'when.'
+The next crisis is a question of 'when.'

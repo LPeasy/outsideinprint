@@ -13,7 +13,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Identified the coastal-city narrative as hypothetical in the opening and subtitle. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Identified the coastal-city narrative as hypothetical in the opening and subtitle. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-19"
     note: "Updated May 19, 2026, after OIP back-archive review. Removed remote Medium body images, replaced chart-only sections with text summaries, normalized import punctuation, checked source framing, and verified rendering."
@@ -226,17 +226,15 @@ tradeoffs, and management accepts responsibility for the choice.
 **This story started with a bad call, three lives lost, and a help
 wanted ad.**
 
-The way to address risk isn't some magic model that can predict the
-future: **It's risk analysis and risk management.**
+The way to address risk is **risk analysis and risk management** rather
+than a magic model that can predict the future.
 
 > *The council sets the priorities and funds the effort. The city
 > manager builds the team, brings the plan forward, and owns the clock.
 > The analyst sharpens the picture so the people with authority can
 > decide what to do.*
 
-> Risk analysis and risk management aren't twins ~
-
-> they're partners.
+> Risk analysis and risk management are partners.
 
 **Analysis explains what could happen, how bad, how often, and how sure
 we are ~ and it shows the reasons behind those answers.**

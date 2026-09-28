@@ -2,7 +2,9 @@
 
 File: `content/essays/why-a-return-to-the-gold-standard-would-break-the-economy.md`  
 Version: `1.3 / Fourth web edition`  
-SHA-256: `030f80aae3ec5129fefb4e3698f0da7a9c18052e9d8c32055632a31c37307a18`
+SHA-256: `4f419f1c8fc2faa29aa42b812a3ed191f711b619ee69014ce99fdebe10400dae`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current status: **PASS (bounded citation revision)**. Original prose restored; only supported hyperlink additions/destination repairs and minor citation metadata are allowed. Minimal corrections remain private and unapproved. This checkpoint supersedes all earlier September 27 major-revision candidates below; their claims that prose corrections were applied are no longer current.
 
@@ -23,4 +25,3 @@ This is a bounded citation revision, not a new numerical grade or blanket recert
 - Institutional Behavior: PASS — Official/actor records retain their distinct roles; no institutional statement is silently converted into independent corroboration.
 
 Private proposals: `../core-link-only-root-approvals-2026-09-27.md`. No tests, production gate, commit, or publication performed by this record.
-

@@ -486,6 +486,68 @@ This paragraph is fine.
   Assert-True ($allowedStillExit -eq 0) "Expected literal still image/life and stood still phrasing to remain allowed."
   Assert-True (-not $allowedStillOutput.Contains("adverbial_still_construction")) "Expected literal still phrasing not to trigger the adverbial still rule."
 
+  # Shared authored-prose scanning: keep protected source text out, but do not
+  # let links, wrapping, pullquotes, or metadata hide an author's style scaffold.
+  $styleCases = @(
+    @{ Name = 'style-url-only'; Body = '[The record](https://example.test/still-open) and <https://example.test/still-pending>.'; Blocked = $false },
+    @{ Name = 'style-negation'; Body = 'The survey does not track the same people. The reported difference is not statistically significant.'; Blocked = $false },
+    @{ Name = 'style-action-negatives'; Body = "The number didn't double, but it rose. He did not invent the device, but he improved it. We do not know the cause, but the measurements are available."; Blocked = $false },
+    @{ Name = 'style-wrapped-action-negative'; Body = "The investigation did`nnot establish the cause, but it documented the damage."; Blocked = $false },
+    @{ Name = 'style-metadata-boundary'; Body = 'The record is complete.'; Metadata = "subtitle: `"All That Glitters Isn’t Always Gold`""; Description = 'A gold standard sounds like discipline, but it carries costs.'; Blocked = $false },
+    @{ Name = 'style-metadata-adjacent-boundary'; Body = 'The record is complete.'; Metadata = 'subtitle: "The result is not final"'; Description = 'It is available for review.'; Blocked = $false },
+    @{ Name = 'style-code'; Body = 'The identifier is `not noise but signal`, and the path is [the record](/still-open/that-matters/).'; Blocked = $false },
+    @{ Name = 'style-attributed'; Body = '> "The rule still applies. It is not noise, but a signal."' + "`n>`n> ~ Source Author"; Blocked = $false },
+    @{ Name = 'style-inline-quote'; Body = 'The researcher said: "It is not noise, but a signal that matters."'; Blocked = $false },
+    @{ Name = 'style-trailing-credit'; Body = '"The rule still applies. It is not noise, but a signal." - Source Author'; Blocked = $false },
+    @{ Name = 'style-linked-quote'; Body = '["The rule still applies. It is not noise, but a signal."](https://example.test/source)'; Blocked = $false },
+    @{ Name = 'style-source-note'; Body = 'The historical quotes are drawn from The Record by Source Author.' + "`n`n" + '"The rule still applies. It is not noise, but a signal."'; Blocked = $false },
+    @{ Name = 'style-source-title'; Body = "## Sources Checked`n`n- [Not Only Noise but a Signal That Matters](https://example.test/source)"; Blocked = $false },
+    @{ Name = 'style-history'; Body = "## Revision History`n`nThe old text still said not noise but a signal."; Blocked = $false },
+    @{ Name = 'style-visible-still'; Body = '[The rule still applies](https://example.test/still-open).'; Blocked = $true; Rule = 'adverbial_still_construction' },
+    @{ Name = 'style-visible-matters'; Body = '[That matters](https://example.test/record).'; Blocked = $true; Rule = 'that_matters_framing' },
+    @{ Name = 'style-link-distinction'; Body = '[That distinction matters](https://example.test/record).'; Blocked = $true; Rule = 'that_matters_framing' },
+    @{ Name = 'style-split-link-label'; Body = '[That](https://example.test/one) [matters](https://example.test/two).'; Blocked = $true; Rule = 'that_matters_framing' },
+    @{ Name = 'style-wrapped-matters'; Body = "That`nmatters for the record."; Blocked = $true; Rule = 'that_matters_framing' },
+    @{ Name = 'style-wrapped-distinction'; Body = "That distinction`nmatters for the record."; Blocked = $true; Rule = 'that_matters_framing' },
+    @{ Name = 'style-adjacent-label'; Body = '[Record](https://example.test/record) [still applies](https://example.test/record).'; Blocked = $true; Rule = 'adverbial_still_construction' },
+    @{ Name = 'style-contrast'; Body = 'It is not noise, but a signal.'; Blocked = $true; Rule = 'not_x_but_y_scaffold' },
+    @{ Name = 'style-contracted-contrast'; Body = "It isn't noise, but a signal."; Blocked = $true; Rule = 'not_x_but_y_scaffold' },
+    @{ Name = 'style-fragment-contrast'; Body = 'Not noise, but a signal.'; Blocked = $true; Rule = 'not_x_but_y_scaffold' },
+    @{ Name = 'style-fragment-after-sentence'; Body = 'Read the record. Not noise, but a signal.'; Blocked = $true; Rule = 'not_x_but_y_scaffold' },
+    @{ Name = 'style-not-just'; Body = 'This is not just a record, but a warning.'; Blocked = $true; Rule = 'not_x_but_y_scaffold' },
+    @{ Name = 'style-wrapped-contrast'; Body = "This is not only a record,`nbut also a warning."; Blocked = $true; Rule = 'not_x_but_y_scaffold' },
+    @{ Name = 'style-adjacent-sentences'; Body = "It isn't noise.`nIt's a signal."; Blocked = $true; Rule = 'not_x_but_y_scaffold' },
+    @{ Name = 'style-authored-pullquote'; Body = "> It isn't noise.`n>`n> It's a signal."; Blocked = $true; Rule = 'not_x_but_y_scaffold' },
+    @{ Name = 'style-quoted-pullquote'; Body = '> "This still applies."'; Blocked = $true; Rule = 'adverbial_still_construction' },
+    @{ Name = 'style-caption'; Body = '![Not only noise but a signal](/images/figure.jpg)'; Blocked = $true; Rule = 'not_x_but_y_scaffold' },
+    @{ Name = 'style-link-contrast'; Body = '[Not just noise, but a signal](https://example.test/source).'; Blocked = $true; Rule = 'not_x_but_y_scaffold' },
+    @{ Name = 'style-description'; Body = 'The record is complete.'; Description = 'This is not noise, but a signal.'; Blocked = $true; Rule = 'not_x_but_y_scaffold' },
+    @{ Name = 'style-wrapped-metadata'; Body = 'The record is complete.'; Metadata = "subtitle: >`n  This is not only a record,`n  but also a warning."; Blocked = $true; Rule = 'not_x_but_y_scaffold' },
+    @{ Name = 'style-subtitle'; Body = 'The record is complete.'; Metadata = 'subtitle: "That distinction matters."'; Blocked = $true; Rule = 'that_matters_framing' },
+    @{ Name = 'style-heading'; Body = '## That distinction matters'; Blocked = $true; Rule = 'that_matters_framing' },
+    @{ Name = 'style-featured-caption'; Body = 'The record is complete.'; Metadata = 'featured_image_caption: "That distinction matters."'; Blocked = $true; Rule = 'that_matters_framing' },
+    @{ Name = 'style-source-annotation'; Body = "## Sources Checked`n`n- [Source Title](https://example.test/source). This still applies."; Blocked = $true; Rule = 'adverbial_still_construction' }
+  )
+  $cleanStyleFixture = [System.IO.File]::ReadAllText((Join-Path $essayRoot 'clean.md'))
+  foreach ($case in $styleCases) {
+    $fixture = $cleanStyleFixture.Replace('clean-essay', $case.Name).Replace('This paragraph is fine.', $case.Body)
+    $fixture = $fixture.Replace('featured: false', 'featured: false' + "`nrevision_history:`n  - note: " + '"The old text still said not noise but a signal that matters."')
+    if ($case.ContainsKey('Description')) { $fixture = $fixture.Replace('A clean essay fixture.', $case.Description) }
+    if ($case.ContainsKey('Metadata')) { $fixture = $fixture.Replace('subtitle: ""', $case.Metadata) }
+    [System.IO.File]::WriteAllText((Join-Path $essayRoot ($case.Name + '.md')), $fixture, [System.Text.UTF8Encoding]::new($false))
+  }
+  $styleAllowedPaths = @($styleCases | Where-Object { -not $_.Blocked } | ForEach-Object { "content/essays/$($_.Name).md" }) -join ','
+  $styleAllowedOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths $styleAllowedPaths 2>&1 | Out-String
+  Assert-True ($LASTEXITCODE -eq 0) "Expected URLs, identifiers, attributed quotes, source titles, history and ordinary factual negations to pass."
+
+  $styleBlockedPaths = @($styleCases | Where-Object { $_.Blocked } | ForEach-Object { "content/essays/$($_.Name).md" }) -join ','
+  $styleBlockedOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths $styleBlockedPaths 2>&1 | Out-String
+  Assert-True ($LASTEXITCODE -eq 1) "Expected authored style scaffolds to remain blockers."
+  foreach ($case in @($styleCases | Where-Object { $_.Blocked })) {
+    $finding = '(?s)BLOCKER essays/' + [regex]::Escape($case.Name) + '\.md\s+(?:(?!BLOCKER).)*' + [regex]::Escape($case.Rule)
+    Assert-True ([regex]::IsMatch($styleBlockedOutput, $finding)) "Expected $($case.Rule) to identify $($case.Name), without relying on an unrelated blocker."
+  }
+
   $allowedLegacyStyleOutput = & $pwsh -NoProfile -ExecutionPolicy Bypass -File $guardrailScript -Root $tempRoot -Paths "content/essays/allowed-legacy-style.md" -StrictWarnings 2>&1 | Out-String
   $allowedLegacyStyleExit = $LASTEXITCODE
   Assert-True ($allowedLegacyStyleExit -eq 0) "Expected valid captions, lead-ins, and Markdown lists not to trigger strict warning mode."

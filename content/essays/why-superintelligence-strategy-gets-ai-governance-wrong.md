@@ -15,7 +15,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Added source links and replaced an unsupported corporate legal-duty claim with a comparative possibility; original argument, reporting frame and artwork retained."
+    note: "Added source links and replaced an unsupported corporate legal-duty claim with a comparative possibility; original argument, reporting frame and artwork retained. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-08"
     note: "Updated May 8, 2026, after OIP back-archive review for source discipline, legacy Medium cleanup, punctuation normalization, and editorial philosophy audit."
@@ -79,7 +79,7 @@ This presupposes a level of surveillance, enforcement, and coordination that doe
 
 You can bomb a missile silo. You can't bomb a GitHub repository. Unlike nuclear weapons, AI is a knowledge-based technology - once leaked, it cannot be "unmade."
 
-AI proliferation is not a centralized arms race - it is a decentralized, accelerating global movement.
+AI proliferation is a decentralized, accelerating global movement rather than a centralized arms race.
 
 
 ### Who Really Controls AI? Corporations vs. The State
@@ -133,7 +133,7 @@ But even before that, AI will fundamentally shift power dynamics.
 
 States with superior AI capabilities will gain asymmetric advantages in cyberwarfare, intelligence operations, and economic decision-making long before we reach superintelligence.
 
-Superintelligence is not a weapon - it is the end of strategic competition. The authors compare AI to nuclear weapons, suggesting that deterrence and mutual competition will shape its trajectory.
+Superintelligence is the end of strategic competition. The authors compare AI to nuclear weapons, suggesting that deterrence and mutual competition will shape its trajectory.
 
 This misunderstands the nature of intelligence explosion.
 
@@ -141,9 +141,7 @@ Once a nation or company crosses the threshold, there may be little room for "se
 
 The authors believe AI dominance will be contested, managed, and deterred through sabotage and military countermeasures.
 
-But superintelligence is not a conventional arms race.
-
-It is the last race. The assumption that governments will maintain effective restrictions on AI progress is pure wishful thinking, given competitive pressures, private sector acceleration, and the near-impossibility of monitoring AI development across decentralized networks.
+But superintelligence is the last race. The assumption that governments will maintain effective restrictions on AI progress is pure wishful thinking, given competitive pressures, private sector acceleration, and the near-impossibility of monitoring AI development across decentralized networks.
 
 The first-mover in superintelligence will dictate all future technological, economic, and military progress for a long time.
 
@@ -153,7 +151,7 @@ The first-mover in superintelligence will dictate all future technological, econ
 
 
 
-### AI No Longer Needs Supercomputers - Here's Why That Matters
+### AI No Longer Needs Supercomputers
 
 The paper proposes strict chip controls - treating AI hardware like enriched uranium, restricting high-end GPUs, tracking exports, and embedding geolocation locks.
 
@@ -161,7 +159,7 @@ The assumption is that without top-tier chips, bad actors cannot train dangerous
 
 But that's a short-term fix, not a long-term solution. AI models are becoming far more compute-efficient. Breakthroughs in model compression, low-rank adaptation, and transfer learning mean future models won't require cutting-edge chips.
 
-And older chips still work! Open-source models like Meta's LLaMA 2 already run on consumer-grade GPUs. You don't need a 500 billion dollar data center to fine-tune an effective AI.
+And older chips work! Open-source models like Meta's LLaMA 2 already run on consumer-grade GPUs. You don't need a 500 billion dollar data center to fine-tune an effective AI.
 
 China is stockpiling restricted chips and investing billions in domestic semiconductor production.
 
@@ -274,6 +272,6 @@ The first state or private actor to develop superintelligence could set the cour
 
 No sabotage doctrine, chip restriction, or international treaty will stop it.
 
-The question isn't whether AI proliferation will happen.
+AI proliferation will happen.
 
 The question is: who will be first?

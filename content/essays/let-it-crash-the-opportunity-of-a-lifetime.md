@@ -15,7 +15,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added supporting source hyperlinks or repaired source destinations; original prose, reporting frame, and artwork unchanged."
+    note: "Added supporting source hyperlinks or repaired source destinations; original argument, reporting frame, and artwork unchanged. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-09"
     note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, list formatting, promotional residue, and overbroad market-timing language were cleaned while preserving the original publication frame."
@@ -31,11 +31,9 @@ The economy does not have to be ending for asset prices to fall.
 
 Sometimes a crash is a collapse. Sometimes it is a repricing. Sometimes it is a painful reset after years of cheap money, stretched valuations, and asset inflation that mostly rewarded people who already owned something.
 
-That distinction matters.
-
 If you have stable income, manageable debt, and enough cash discipline to avoid panic, lower prices can create an opening. Not a guarantee. Not a slogan. An opening.
 
-For workers with no assets, the hardest part of the last fifteen years was not just high rent or high home prices. It was watching ownership move farther away while stocks, housing, and private-market valuations climbed.
+For workers with no assets, the hardest part of the last fifteen years combined high rent and high home prices with watching ownership move farther away while stocks, housing, and private-market valuations climbed.
 
 The bottom half of Americans owns only a small share of financial assets. Many households carry debt instead of equity. They own their labor, their skills, their relationships, and maybe a few fragile side hustles.
 
@@ -70,13 +68,13 @@ The cost lands on everyone trying to enter later.
 
 Workers lose jobs. Retirement accounts fall. Small businesses lose customers. Households that bought near the top can get trapped. Credit tightens exactly when people need flexibility.
 
-Those are not footnotes. They are the tradeoff.
+Those are the tradeoffs.
 
 But refusing every correction has a cost too. If weak companies are always rescued, bad capital allocation survives. If asset prices are protected at any level, younger and poorer households stay locked out. If the economy treats every decline as a policy emergency, risk gets privatized on the way up and socialized on the way down.
 
 Creative destruction renews capitalism only when it clears space for better uses of labor, capital, and talent. It fails when it simply concentrates losses on workers while insiders keep the gains.
 
-The goal is not pain. The goal is honest pricing.
+Honest pricing, rather than pain, is the goal.
 
 ### What A Downturn Can Offer
 
@@ -117,7 +115,7 @@ If the same cash-rich buyers scoop up discounted homes while workers remain cred
 
 A downturn creates conditions. It does not create discipline.
 
-Workers still have to save. Investors still have to avoid panic. Policymakers still have to resist the urge to rescue every inflated asset while ignoring the households that never got to participate in the boom.
+Workers must continue to save. Investors must continue to avoid panic. Policymakers must continue to resist the urge to rescue every inflated asset while ignoring the households that never got to participate in the boom.
 
 That is the institutional test.
 
@@ -148,4 +146,4 @@ For workers with income and no assets, the next downturn could be a chance to st
 
 That is the whole point: crashes do not treat everyone equally.
 
-The opportunity of a lifetime is not the crash itself. It is the chance to build a more durable balance sheet when the old pricing regime finally breaks.
+The opportunity of a lifetime is the chance to build a more durable balance sheet when the old pricing regime finally breaks, rather than the crash itself.

@@ -2,7 +2,9 @@
 
 File: `content/essays/risk-management-vs-risk-analysis-whats-the-difference.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `100cb8eee6f630236d8bd0922396467ae918c56f9933018a484080a49d8d9b73`
+Final content SHA-256: `b503501499e6374f52a690b49846e103b0f12b1a428603164cf8479139186c2a`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS (bounded editorial review)**. Owner confirms hypothetical; opening and subtitle now disclose it without changing the narrative.
 

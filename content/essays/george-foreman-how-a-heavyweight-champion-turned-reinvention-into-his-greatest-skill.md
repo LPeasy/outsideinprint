@@ -41,7 +41,7 @@ repair_mojibake: true
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Retained source hyperlinks and corrected the chronology of Foreman's broader public life before his final retirement. The unpublished broad rewrite remains withdrawn; surrounding prose, source-method framing, artwork, and original publication date are unchanged."
+    note: "Retained source hyperlinks and corrected the chronology of Foreman's broader public life before his final retirement. The unpublished broad rewrite remains withdrawn; surrounding argument, source-method framing, artwork, and original publication date are unchanged. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-26"
     note: "Updated May 26, 2026, after OIP back-archive review. Normalized imported punctuation, removed house-style shortcuts, and checked source framing."
@@ -68,7 +68,7 @@ His life gained force because he kept moving after the moment that should have f
 
 That shift made his comeback far more compelling than a simple return to the ring.
 
-Foreman did not just resume a career. He reintroduced himself to the public. He carried a different energy. He smiled more. He spoke more easily. He let people in. Fans who once admired his force from a distance now found themselves drawn to his personality. He became legible in a new way. People could see the fighter. They could also see the man. That distinction changed everything.
+Foreman resumed his career and reintroduced himself to the public. He carried a different energy. He smiled more. He spoke more easily. He let people in. Fans who once admired his force from a distance now found themselves drawn to his personality. He became legible in a new way. People could see the fighter. They could also see the man. That distinction changed everything.
 
 His later championship run turned reinvention into achievement.
 
@@ -80,11 +80,11 @@ The young destroyer and the older comeback champion now belonged to the same sto
 
 He was not finished.
 
-A great many athletes leave their sport with a name and a memory. Foreman built an even broader public life before his final retirement. His move into business, especially through the [George Foreman Grill](https://www.sec.gov/Archives/edgar/data/878280/000095013707015236/c15957e10vk.htm), became one of the most successful and culturally memorable celebrity-brand pairings of the modern era. That success did not rest on novelty alone. It rested on trust. Consumers believed him. He appeared approachable, persuasive, and grounded. He sold products with the same quality that had made his later boxing career so compelling: credibility earned through visible change.
+A great many athletes leave their sport with a name and a memory. Foreman built an even broader public life before his final retirement. His move into business, especially through the [George Foreman Grill](https://www.sec.gov/Archives/edgar/data/878280/000095013707015236/c15957e10vk.htm), became one of the most successful and culturally memorable celebrity-brand pairings of the modern era. That success rested on trust as well as novelty. Consumers believed him. He appeared approachable, persuasive, and grounded. He sold products with the same quality that had made his later boxing career so compelling: credibility earned through visible change.
 
 That business success revealed something important.
 
-Foreman understood that public identity can deepen when it grows more human. The grill worked because the man worked. People did not buy only the product. They bought the persona attached to it: cheerful, experienced, dependable, funny, and unmistakably real. That persona had been built through years of reinvention, public candor, and the rare willingness to let a second act look genuinely different from the first. Many public figures try to control perception. Foreman reshaped it by living through it.
+Foreman understood that public identity can deepen when it grows more human. The grill worked because the man worked. People bought the product and the persona attached to it: cheerful, experienced, dependable, funny, and unmistakably real. That persona had been built through years of reinvention, public candor, and the rare willingness to let a second act look genuinely different from the first. Many public figures try to control perception. Foreman reshaped it by living through it.
 
 His life came to stand for more than athletic excellence.
 

@@ -14,7 +14,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Retained claim-level source links and the institutional critique, with approved corrections to ownership, rent, funding, competition, logistics, psychology and street-pricing claims; removed three unsupported examples or statistics. Original artwork and publication date unchanged."
+    note: "Retained claim-level source links and the institutional critique, with approved corrections to ownership, rent, funding, competition, logistics, psychology and street-pricing claims; removed three unsupported examples or statistics. Original artwork and publication date unchanged. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-01"
     note: "Updated May 1, 2026, after OIP back-archive review for legacy punctuation cleanup, local image-path repair where needed, source checks, and targeted wording corrections."
@@ -23,7 +23,7 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-political-economy-of-airports-aef07847fa60"
 ---
 
-Airports are more than mere gateways for travel. They are complex ecosystems shaped by the interaction of market forces, public policy, and consumer behavior. The high prices for food, drinks, and basic necessities in airports are not incidental but rather the result of systemic economic structures, logistical constraints, and institutional arrangements. These inflated costs reflect broader trends, such as the blending of public and private interests, the challenges of maintaining infrastructure, and the monopolistic tendencies of airport retail markets.
+Airports are more than mere gateways for travel. They are complex ecosystems shaped by the interaction of market forces, public policy, and consumer behavior. The high prices for food, drinks, and basic necessities in airports result from systemic economic structures, logistical constraints, and institutional arrangements. These inflated costs reflect broader trends, such as the blending of public and private interests, the challenges of maintaining infrastructure, and the monopolistic tendencies of airport retail markets.
 
 This essay delves into the political economy of airports, exploring how pricing practices reflect the intersection of global trends, localized constraints, and structural inefficiencies. By understanding these dynamics, we gain insight into broader questions about the privatization of public spaces, equity in travel, and the challenges of funding critical infrastructure.
 
@@ -39,7 +39,7 @@ Airports rely on non-aeronautical revenue to help fund operations. This includes
 
 While this revenue imperative enables airports to maintain and expand facilities, it also drives up costs for travelers. [Concession leases are often tied to revenue-sharing agreements](https://nap.nationalacademies.org/skim.php?chap=121-136&record_id=13326), where vendors may pay the greater of a percentage of sales or a minimum annual guarantee. This gives airports a stake in concession sales, though higher prices do not automatically mean higher profits.
 
-However, it's important to note that these dynamics are not entirely tied to privatization. Even publicly owned airports face significant pressure to generate revenue, alongside [federal and municipal funding](https://www.faa.gov/newsroom/biden-harris-administration-announces-nearly-1-billion-grants-bipartisan-infrastructure). The result is a system where high prices are not merely a byproduct of privatization but an entrenched feature of airport economics.
+However, it's important to note that these dynamics are not entirely tied to privatization. Even publicly owned airports face significant pressure to generate revenue, alongside [federal and municipal funding](https://www.faa.gov/newsroom/biden-harris-administration-announces-nearly-1-billion-grants-bipartisan-infrastructure). The result is a system where high prices are an entrenched feature of airport economics, extending beyond privatization.
 
 Monopolistic Practices and Market Concentration
 
@@ -75,7 +75,7 @@ Addressing these challenges requires a rethinking of how airports are funded and
 
 Rethinking the Airport Economy
 
-The high prices travelers face in airports are not merely the result of logistical challenges or market quirks; they are deeply rooted in the political economy of airports. These spaces reflect broader systemic trends, from revenue pressures and limited competition to the commodification of public infrastructure.
+The high prices travelers face in airports reflect logistical challenges and market quirks, with deeper roots in the political economy of airports. These spaces reflect broader systemic trends, from revenue pressures and limited competition to the commodification of public infrastructure.
 
 While programs like street pricing offer hope for reform, they must be paired with broader systemic changes. Policymakers must consider whether airports should prioritize profitability or public service and address the equity implications of pricing practices that disproportionately burden vulnerable travelers. By addressing these underlying issues, we can create airport economies that balance efficiency, affordability, and accessibility, ensuring that public infrastructure serves all travelers, not just those who can afford the premium.
 

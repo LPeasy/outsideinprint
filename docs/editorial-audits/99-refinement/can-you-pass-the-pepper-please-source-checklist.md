@@ -2,7 +2,9 @@
 
 File: `content/essays/can-you-pass-the-pepper-please.md`  
 Version: `1.3 / Fourth web edition`  
-SHA-256: `c93cd4a1aa5bd38b9af469a5d4ec7a867099e7cfff749778bab2d97c35fac9d3`
+SHA-256: `8329b548d7d01c09a2094ab679e77f2595ddfdc27747d99549670cedc05a6b28`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current status: **PASS (bounded citation revision)**. Original prose restored; only supported hyperlink additions/destination repairs and minor citation metadata are allowed. Minimal corrections remain private and unapproved. This checkpoint supersedes all earlier September 27 major-revision candidates below; their claims that prose corrections were applied are no longer current.
 

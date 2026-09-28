@@ -15,7 +15,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added supporting source hyperlinks without changing the original prose."
+    note: "Added supporting source hyperlinks preserving the original argument. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-02"
     note: "Updated May 2, 2026, after OIP back-archive review. Legacy Medium image embeds, promotional residue, spacing, and punctuation artifacts were cleaned up; source, metadata, and rendering were checked."
@@ -45,7 +45,7 @@ Based on his observations, we define Altman's Law as follows:
 
 AI intelligence increases logarithmically with resource investment, while the cost of using that intelligence declines by an order of magnitude every 12 months. The socioeconomic value of increasing intelligence is super-exponential, ensuring sustained and growing investment in AI development. Unlike Moore's Law, which described a steady, hardware-driven march forward, Altman's Law characterizes AI progress as a runaway feedback loop, where intelligence gains and cost declines feed directly into further investment. This cycle accelerates AI development at a rate beyond traditional exponential growth.
 
-If this trajectory holds, AI will not only transform industries but redefine the very nature of intelligence itself.
+If this trajectory holds, AI will transform industries and redefine the very nature of intelligence itself.
 
 The Three Pillars of Altman's Law
 
@@ -74,7 +74,7 @@ In traditional industries, increasing intelligence or efficiency leads to increm
 
 Each small improvement in intelligence unlocks entirely new forms of value creation, accelerating the pace of change. Since the socioeconomic value of increasing AI intelligence grows at a super-exponential rate, there is no foreseeable reason for exponentially increasing investment to stop.
 
-AI's return on investment is accelerating, creating a feedback loop of growing intelligence, lower costs, and even greater economic disruption. This is not just a faster form of technological progress. It is an entirely new paradigm of intelligence acceleration.
+AI's return on investment is accelerating, creating a feedback loop of growing intelligence, lower costs, and even greater economic disruption. This faster form of technological progress is an entirely new paradigm of intelligence acceleration.
 
 From Exponential to Super-Exponential Growth
 
@@ -82,7 +82,7 @@ Moore's Law suggested predictable technological growth. Altman's Law suggests ru
 
 To grasp the difference, consider exponential growth, where a quantity doubles over fixed intervals (e.g., Moore's Law, where computing power doubled every 18 months). Super-exponential growth, however, means that the doubling time itself shrinks. Each cycle happens faster than the last.
 
-Imagine a rocket: Moore's Law is like constant acceleration, while Altman's Law is like a booster engine that continuously increases its thrust. With every iteration, AI doesn't just get smarter. It gets smarter faster than before, unlocking new capabilities and reshaping industries at an accelerating pace.
+Imagine a rocket: Moore's Law is like constant acceleration, while Altman's Law is like a booster engine that continuously increases its thrust. With every iteration, AI gets smarter faster than before, unlocking new capabilities and reshaping industries at an accelerating pace.
 
 The Economic Consequences of Altman's Law
 
@@ -103,7 +103,7 @@ While AI makes intelligence abundant, not all forms of value will become free. S
 
 Consider the Industrial Revolution: just as mechanized farming reduced the value of manual labor while making land and machinery more valuable, AI will erode the value of cognitive labor while making compute power, energy, and proprietary data even more essential.
 
-In this new era, opportunity will be defined not by what you know, but by what you own.
+In this new era, opportunity will be defined by ownership rather than knowledge.
 
 The Rise of AI-Centric Business Models
 
@@ -116,7 +116,7 @@ Preparing for the Age of Altman's Law
 *Photo by Ross Findon on Unsplash*
 
 
-Altman's Law is not just an observation. It's a warning shot for the future. Governments, businesses, and individuals must adapt now, or risk being blindsided by AI's acceleration.
+Altman's Law is an observation with a warning for the future. Governments, businesses, and individuals must adapt now, or risk being blindsided by AI's acceleration.
 
 - Policymakers must rethink taxation, regulation, and economic safety nets in a world where knowledge work loses value but physical constraints (such as land and energy) remain.
 - Businesses must redefine value creation, shifting away from labor-intensive models to AI-driven efficiencies. The future belongs to those who own compute power, proprietary data, and real-world assets.
@@ -124,10 +124,10 @@ Altman's Law is not just an observation. It's a warning shot for the future. Gov
 
 Just as Moore's Law shaped the last half-century of technological progress,
 
-Altman's Law will define the next. This shift is not just about making technology faster or cheaper. It's about the fundamental restructuring of intelligence itself.
+Altman's Law will define the next. This shift makes technology faster or cheaper while fundamentally restructuring intelligence itself.
 
-If Altman's predictions hold, the AI revolution isn't coming gradually. It's already here, accelerating at breakneck speed.
+If Altman's predictions hold, the AI revolution is already here, accelerating at breakneck speed.
 
-The challenge now is not merely keeping up, but understanding how to thrive in a world where intelligence is no longer a constraint, but an abundant, ever-expanding force.
+The challenge now is understanding how to thrive in a world where intelligence becomes an abundant, ever-expanding force rather than a constraint.
 
 Source note: Sam Altman's "Three Observations" frames the scaling, cost, and investment claims discussed here.

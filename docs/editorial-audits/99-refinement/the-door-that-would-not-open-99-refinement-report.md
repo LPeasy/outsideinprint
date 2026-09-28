@@ -2,7 +2,9 @@
 
 File: `content/essays/the-door-that-would-not-open.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `666880d6b9c4a385143d38c898891f124bd8fde0103dba2571c83a6d710b77bd`
+Final content SHA-256: `37e367918c224097e4097d43c26edda897856e7b6f3016c4bb2609e23f9d268f`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **PASS (bounded editorial review)**. Distinguished site-application court pressure from an order to continue reimbursements.
 

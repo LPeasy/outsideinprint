@@ -12,7 +12,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added source links without changing prose."
+    note: "Added source links and applied minimal style cleanup; facts and source wording unchanged."
   - version: "1.1"
     date: "2026-05-21"
     note: "Updated May 21, 2026, from First web edition to Second web edition after OIP back-archive review. Remote Medium media, house-style issues, and rendering were checked."
@@ -175,6 +175,4 @@ see them bring out a tray of hot, steamin' 'n' crispy fried chicken.
 
 > There's an art to managing risk ~ the art of the buffet.
 
-**Success isn't sampling everything or eating as much as possible ~**
-
-#### **It's knowing you made the best choices with what was on the table.**
+#### **Success is knowing you made the best choices with what was on the table.**

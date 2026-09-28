@@ -3,7 +3,9 @@
 Piece: **Charlie Kirk**  
 File: `content/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation.md`  
 Version: `2.0 / Third web edition`  
-Current essay SHA-256: `9206889037cf60d368748e5492bf24e47174a59e4db9b5e257c7ebc253dcffc8`
+Current essay SHA-256: `bc847961f25a0958fa8f23e8b2b8276278994b2359a1cb5b0a6c0479e13e44da`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — scoped to the named source/approval hold and retained hyperlink candidate.** This is not a complete biography or subject-matter recertification, a numerical grade, technical release clearance, or publication authorization.
 

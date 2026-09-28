@@ -17,7 +17,7 @@ medium_source_url: "https://medium.com/@lawtonperret/how-senate-republicans-hand
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added source links without changing prose."
+    note: "Added source links preserving the original argument. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-04"
     note: "Updated May 4, 2026, after OIP back-archive review. Legacy Medium formatting, remote body images, punctuation artifacts, source-card residue, and targeted wording were cleaned while preserving the original publication frame."
@@ -55,7 +55,7 @@ Trump's closest allies took a different route. [Senator Kevin Cramer framed Trum
 
 The party's split was visible:
 
-- Traditional defense hawks still saw Russia as a major threat.
+- Traditional defense hawks continued to see Russia as a major threat.
 - Trump-aligned Republicans treated Ukraine aid as leverage, burden, or bargaining chip.
 - Many senators tried to preserve both positions long enough to avoid a primary fight.
 
@@ -63,11 +63,11 @@ The party's split was visible:
 
 Republicans had already seen what happens when a lawmaker breaks too sharply with Trump. Liz Cheney became the cautionary example: once a party leader, then isolated from the coalition she had helped lead.
 
-That does not mean every Republican privately agreed with Trump's Ukraine rhetoric. Polling still showed a meaningful Republican constituency for maintaining or increasing U.S. aid to Ukraine. Many Republican voters continued to support alliances and saw Russia as a geopolitical threat.
+That does not mean every Republican privately agreed with Trump's Ukraine rhetoric. Polling continued to show a meaningful Republican constituency for maintaining or increasing U.S. aid to Ukraine. Many Republican voters continued to support alliances and saw Russia as a geopolitical threat.
 
 That divided audience gave senators a reason to hedge. They could signal to Reagan-era conservatives that the party had not fully abandoned its old foreign-policy instincts while avoiding language that would look like open defiance of Trump.
 
-The incentive structure was clear. A senator could correct the record and still survive politically. A senator who made Trump's judgment the issue risked turning a foreign-policy dispute into a loyalty test.
+The incentive structure was clear. A senator could correct the record without sacrificing political survival. A senator who made Trump's judgment the issue risked turning a foreign-policy dispute into a loyalty test.
 
 ## What Hedging Costs
 
@@ -80,7 +80,7 @@ Hedging can preserve room for maneuver. It can also weaken public accountability
 
 When lawmakers correct a false claim without naming the incentives behind it, they leave the mechanism intact. Trump can move the party's rhetoric, allies can soften the edges, and the policy debate drifts without a clear institutional check.
 
-That matters for Ukraine because U.S. credibility is part of the battlefield. If Moscow believes American support is politically brittle, it has reason to wait. If Kyiv believes U.S. support can vanish after one rhetorical turn, it has less leverage in negotiations.
+For Ukraine, U.S. credibility is part of the battlefield. If Moscow believes American support is politically brittle, it has reason to wait. If Kyiv believes U.S. support can vanish after one rhetorical turn, it has less leverage in negotiations.
 
 Republican senators were trying to avoid a binary choice between principle and survival. The problem is that foreign policy eventually forces choices. Aid packages, sanctions, security guarantees, and alliance commitments cannot be hedged forever.
 

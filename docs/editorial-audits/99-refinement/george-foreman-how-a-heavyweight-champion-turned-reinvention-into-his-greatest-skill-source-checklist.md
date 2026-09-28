@@ -3,7 +3,9 @@
 Piece: **George Foreman**  
 File: `content/essays/george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill.md`  
 Version: `2.0 / Third web edition`  
-Current essay SHA-256: `94d9e2bd2ee2d390c06dd3fa35b4987ea049c61bdf13e83d4e5271ad447432e2`
+Current essay SHA-256: `e8b356de9dcf1b0e4e7a675967827db80b65e64e5df4d534fe8867e243a4593e`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — scoped to the named source/approval hold and retained hyperlink candidate.** This is not a complete biography or subject-matter recertification, a numerical grade, technical release clearance, or publication authorization.
 

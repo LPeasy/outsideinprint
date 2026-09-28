@@ -5,7 +5,9 @@
 Review date: `2026-09-27`
 Essay: `content/essays/the-meter-at-the-curb.md`
 Version: `1.2` - Third web edition
-Final content SHA-256: `5eec1953156c5643f3f7e26a67566d28a88d2c50ded389aa6bddf55158825c8a`
+Final content SHA-256: `7b47e8e79c118c31a0c061e4a054dde08a29f79f8518ef13b2cd4955b163e4fb`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
 Public change: HYPERLINK-ONLY; original body words, punctuation, captions, order and artwork preserved.
 

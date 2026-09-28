@@ -12,7 +12,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected Moore chronology, onshore-wind category and battery-paper attribution. Added or retained claim-level source links; original reporting frame and artwork retained. Removed unsupported solar-price precision, scoped the cell-price measure and energy-density claims, and substituted an identified historical BloombergNEF battery-pack forecast."
+    note: "Corrected Moore chronology, onshore-wind category and battery-paper attribution. Added or retained claim-level source links; original reporting frame and artwork retained. Removed unsupported solar-price precision, scoped the cell-price measure and energy-density claims, and substituted an identified historical BloombergNEF battery-pack forecast. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-01"
     note: "Updated May 1, 2026, after OIP back-archive review for legacy punctuation cleanup, local image-path repair where needed, source checks, and targeted wording corrections."
@@ -45,7 +45,7 @@ Building on our earlier discussion of Moore's Law, we will contextualize the exp
 
 Made using ChatGPT in January 2025.
 
-Moore's Law is often regarded as one of the most influential principles in modern technology. First articulated by Gordon Moore in 1965 and [revised in 1975](https://www.intel.com/pressroom/archive/speeches/moore20030210.htm), it predicted that the number of transistors on integrated circuits would double roughly every two years, leading to exponential growth in computing power. Over the past half-century, this trend has not only held but has also spurred massive advancements in computing, enabling the development of smaller, faster, and cheaper devices.
+Moore's Law is often regarded as one of the most influential principles in modern technology. First articulated by Gordon Moore in 1965 and [revised in 1975](https://www.intel.com/pressroom/archive/speeches/moore20030210.htm), it predicted that the number of transistors on integrated circuits would double roughly every two years, leading to exponential growth in computing power. Over the past half-century, this trend has held and spurred massive advancements in computing, enabling the development of smaller, faster, and cheaper devices.
 
 The law's success lies in its predictability: engineers could confidently anticipate increases in transistor density and plan their innovations accordingly. This predictability catalyzed the rapid expansion of the semiconductor industry, from microprocessors to the modern ubiquity of AI and cloud computing.
 
@@ -83,7 +83,7 @@ Lithium-ion cell prices per unit of energy have experienced significant cost red
 
 ### Energy Density and Performance Improvements
 
-In terms of energy density, batteries have made steady but slower progress compared to Moore's Law. [Some lithium-ion cells have reached energy densities of 250-300 watt-hours per kilogram (Wh/kg)](https://www.nature.com/articles/s41586-022-05281-0), with [solid-state research targeting around 500 Wh/kg](https://www.energy.gov/sites/default/files/2021-06/bat518_wixom_2021_p_5-14_459pm_KF_TM.pdf#page=3). Emerging breakthroughs in lithium-metal and sodium-ion chemistries further highlight the innovation pipeline. These advancements are not only critical for extending EV range but also for reducing battery weight and size, which are key factors in transportation and aerospace applications.
+In terms of energy density, batteries have made steady but slower progress compared to Moore's Law. [Some lithium-ion cells have reached energy densities of 250-300 watt-hours per kilogram (Wh/kg)](https://www.nature.com/articles/s41586-022-05281-0), with [solid-state research targeting around 500 Wh/kg](https://www.energy.gov/sites/default/files/2021-06/bat518_wixom_2021_p_5-14_459pm_KF_TM.pdf#page=3). Emerging breakthroughs in lithium-metal and sodium-ion chemistries further highlight the innovation pipeline. These advancements are critical for extending EV range and reducing battery weight and size, which are key factors in transportation and aerospace applications.
 
 ### Challenges and Constraints
 

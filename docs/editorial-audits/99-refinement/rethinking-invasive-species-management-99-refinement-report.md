@@ -2,7 +2,9 @@
 
 File: `content/essays/rethinking-invasive-species-management.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `559b7ca41b9c80cf4798773bf0f72c4e21145773fd5ac7121a73c469703762d0`
+Final content SHA-256: `68cdd570087c84f0dfd653922758f15c7c4b38d428f017a49f61c349cd753ad8`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS for the bounded editorial hold-resolution pass**. The named current holds are resolved by the owner's approved corrections. This is not a new exhaustive fact-check, numerical grade, technical-release clearance, or publication authorization.
 

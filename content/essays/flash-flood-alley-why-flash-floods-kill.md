@@ -14,7 +14,7 @@ edition: "Fifth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected infiltration, historic flood details, warning-channel authority, alert chronology and the later documented evacuation start. Qualified evacuation difficulty, identified author wording and proposals, and removed the unsupported power-loss interval. Added or retained claim-level source links and corrected flagged graphics and captions; surrounding prose retained."
+    note: "Corrected infiltration, historic flood details, warning-channel authority, alert chronology and the later documented evacuation start. Qualified evacuation difficulty, identified author wording and proposals, and removed the unsupported power-loss interval. Added or retained claim-level source links and corrected flagged graphics and captions; surrounding argument retained. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-18"
     note: "Updated May 18, 2026, after OIP back-archive review. Removed Medium import residue, normalized punctuation and internal links, narrowed source-framed flood-warning claims, and checked rendering."
@@ -60,8 +60,8 @@ It runs off, **racing downhill** into dry creeks and narrow rivers.
 > That's how a shallow stream can become a 20-foot wall of water in
 > under an hour.
 
-***"Flash Flood Alley"*** is a nickname, not an official term, but
-hydrologists and emergency managers use it all the same.
+***"Flash Flood Alley"*** is an unofficial nickname that
+hydrologists and emergency managers use all the same.
 
 The term refers to **the I-35 corridor from San Antonio to Dallas**,
 cutting straight through the Hill Country. Extreme rain events are
@@ -329,9 +329,9 @@ It's not that people didn't try to evacuate...
   scale of the flood**
   (despite having an emergency plan reviewed shortly before the flood)
 
-> ***It wasn't just one agency or one decision.***
+> ***It reached across agencies and decisions.***
 
-> **It was decades of assumptions**
+> **Decades of assumptions**
 
 ***~ about weather, flood maps, warning time, and planning margins ~***
 
@@ -412,9 +412,8 @@ camping.
 #### **What is Flash Flood Alley?**
 
 "**Flash Flood Alley**" refers to the stretch of Central Texas between
-**San Antonio and Dallas**, especially the Hill Country. It's not an
-official designation, but experts use the term to describe the region's
-**extreme flash flood risk**. The combination of rocky terrain, steep
+**San Antonio and Dallas**, especially the Hill Country. Experts use the term to describe the region's
+**extreme flash flood risk**, without it being an official designation. The combination of rocky terrain, steep
 slopes, and narrow river valleys creates the perfect conditions for
 sudden, dangerous floods.
 

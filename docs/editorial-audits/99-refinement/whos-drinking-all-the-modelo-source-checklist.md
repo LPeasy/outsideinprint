@@ -5,7 +5,9 @@
 Decision: PASS
 
 - Current version: 2.0, Fourth web edition. This replaces the pending minor version within the same unpublished edition ordinal.
-- Current essay SHA-256: `108864f216c0d23e8a3136e09a7bc61d6136c5cb4a2d88e1b4dcd1fad955b53f`.
+- Current essay SHA-256: `c4d13ebb1fbba57bab70b994ce10644b8bb8024cf187978979541df5e301473f`.
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 - Approval: [final-nine owner decisions](../final-nine-owner-decisions-2026-09-27.md) and the owner's explicit approval of all nine bounded sets, including listed removals and the Chili's illustrative-origin confirmation.
 - Exact applied deltas: [Brands implementation map](../final-nine-brands-implementation-map-2026-09-27.json), from snapshot `/tmp/oip-final-nine-brands-dtFpi2/whos-drinking-all-the-modelo.md`.
 

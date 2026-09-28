@@ -12,7 +12,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected corporate-tax stability claim. Added or retained claim-level source links; original reporting frame and artwork retained. Described military spending as a major federal commitment rather than a stable quantity and linked that bounded claim to CBO's historical account."
+    note: "Corrected corporate-tax stability claim. Added or retained claim-level source links; original reporting frame and artwork retained. Described military spending as a major federal commitment rather than a stable quantity and linked that bounded claim to CBO's historical account. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-04-26"
     note: "Updated April 26, 2026, after OIP back-archive review, to clean Medium import artifacts and normalize Markdown rendering."
@@ -32,7 +32,7 @@ The American presidential election is a pivotal event, capturing national and gl
 
 ### The Role of Wealth in Shaping Electoral and Policy Outcomes
 
-Regardless of the outcome of presidential elections, a consistent pattern emerges: policy decisions overwhelmingly favor the wealthy elite. This phenomenon is not a product of conspiracy but rather a reflection of systemic incentives. Wealthy individuals and corporations dominate campaign financing, political lobbying, and policy advocacy, enabling them to exert outsized influence on governance.
+Regardless of the outcome of presidential elections, a consistent pattern emerges: policy decisions overwhelmingly favor the wealthy elite. This phenomenon reflects systemic incentives rather than conspiracy. Wealthy individuals and corporations dominate campaign financing, political lobbying, and policy advocacy, enabling them to exert outsized influence on governance.
 
 Studies, such as the [work of Gilens and Page (2014)](https://www.globalgovernancewatch.org/library/doclib/20140820_GilensandPageTestingTheories.pdf), have shown that the preferences of economic elites and organized interest groups are far more likely to be enacted than those of the general public. Tax policies, regulatory decisions, and fiscal priorities ~ regardless of which party holds the presidency ~ tend to align with elite interests. For instance, tax reforms such as the 2017 Tax Cuts and Jobs Act disproportionately benefited high-income earners and corporations, continuing a long-standing trend of privileging capital over labor.
 
@@ -40,7 +40,7 @@ This systemic alignment is not unique to one party or ideology. Democratic admin
 
 ### The Limited Impact of Presidential Outcomes on Policy
 
-While presidential elections capture the imagination and attention of the American public, the outcome of the election rarely dictates actual policy outcomes to the extent many voters might expect. The United States' system of governance is defined by its extensive checks and balances, which exist not only between the executive, legislative, and judicial branches but also across federal, state, and local levels. These mechanisms often dilute the direct impact of presidential authority on day-to-day governance.
+While presidential elections capture the imagination and attention of the American public, the outcome of the election rarely dictates actual policy outcomes to the extent many voters might expect. The United States' system of governance is defined by its extensive checks and balances, which exist both between the executive, legislative, and judicial branches and across federal, state, and local levels. These mechanisms often dilute the direct impact of presidential authority on day-to-day governance.
 
 #### Institutional Constraints
 The president's ability to unilaterally enact sweeping change is constrained by [Congress, which holds legislative authority](https://www.archives.gov/founding-docs/constitution-transcript), and by the judiciary, which ensures that executive actions comply with constitutional principles. Partisan gridlock in Congress further limits the president's capacity to translate campaign promises into legislative achievements.
@@ -72,12 +72,12 @@ Foreign policy, often viewed as the domain of national security and diplomacy, i
 
 For instance, access to oil markets has historically driven U.S. involvement in the Middle East, while technology companies increasingly shape cybersecurity and international data policies. Defense contractors play a central role in shaping military priorities, with significant lobbying efforts directed at maintaining high levels of defense spending.
 
-The alignment between corporate interests and foreign policy is not inherently negative but raises questions about the balance between national priorities and private gains. Policies framed as matters of national security often serve to protect or expand the global reach of American corporations, highlighting the interdependence of economic and geopolitical power.
+The alignment between corporate interests and foreign policy raises questions about the balance between national priorities and private gains without being inherently negative. Policies framed as matters of national security often serve to protect or expand the global reach of American corporations, highlighting the interdependence of economic and geopolitical power.
 
 ### Conclusion
 
 The relationship between the wealthy elite in America and long-term domestic and foreign policy is characterized by a complex interplay of influence, continuity, and systemic incentives. In the domestic sphere, the wealthy elite shape policy through their outsized control of political financing, lobbying efforts, and access to decision-makers. Their influence is reflected in tax policies, regulatory frameworks, and economic priorities that often align with their interests, reinforcing patterns of wealth concentration over time. While the federal government is limited by checks and balances, state and local policies frequently mirror these broader trends, creating a fragmented yet persistent alignment with elite priorities.
 
-In foreign policy, the interests of multinational corporations, defense contractors, and financial institutions often converge with national strategies, ensuring the global dominance of American economic and geopolitical power. Trade agreements, military interventions, and diplomatic relations are frequently framed in terms of national security but are deeply intertwined with corporate priorities, such as securing energy resources, expanding markets, and protecting intellectual property. This alignment does not suggest malevolence but rather a structural reality: the priorities of the wealthy elite naturally shape policy within a system where economic power and political influence are closely linked.
+In foreign policy, the interests of multinational corporations, defense contractors, and financial institutions often converge with national strategies, ensuring the global dominance of American economic and geopolitical power. Trade agreements, military interventions, and diplomatic relations are frequently framed in terms of national security but are deeply intertwined with corporate priorities, such as securing energy resources, expanding markets, and protecting intellectual property. This alignment suggests a structural reality rather than malevolence: the priorities of the wealthy elite naturally shape policy within a system where economic power and political influence are closely linked.
 
 Ultimately, the continuity in policy outcomes across administrations reflects the stability of this relationship. While the wealthy elite benefit disproportionately from the current system, their influence also underpins key aspects of governance, including economic growth and global leadership. However, this dynamic raises enduring questions about representation, equity, and the ability of the broader population to influence the direction of the nation's policies. Addressing these challenges will require institutional reforms that balance the realities of elite influence with the democratic ideals of accountability and shared prosperity.

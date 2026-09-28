@@ -6,7 +6,9 @@ Source file: `content/essays/make-fighter-jets-great-again-introducing-the-f-47.
 
 Version: `1.4`
 
-Audited SHA256: `e3f1da8fbcad96393ac30d79d8d66e7cd3a7fa6cedbf38e5a0a25a277ea4a2b5`
+Audited SHA256: `c6db01a118512f28755e431018afc8662b6143338b8082f3917cd1669d4c6ce1`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Decision state: `LINK_ONLY_REVIEW_COMPLETE`
 
@@ -31,4 +33,3 @@ Decision: PASS
 Air Force March 21, 2025 announcement names Boeing as Engineering and Manufacturing Development awardee. Allvin's March 21 statement describes intended lower cost than F-22, larger numbers, range and supportability. These are procurement statements/aspirations, not demonstrated operational performance; existing essay says so.
 
 See `make-fighter-jets-great-again-introducing-the-f-47-source-checklist.md` for exact added anchors and `../core-link-only-flood-pair-2026-09-27.md` for private correction proposals and remaining limits. Images and captions were preserved; no new broad image certification is claimed. No tests, build or publication in this subtask.
-

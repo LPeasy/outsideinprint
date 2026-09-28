@@ -14,7 +14,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected Risk Rating 2.0 pricing and flood-loss study attribution and scope. Added or retained claim-level source links; original reporting frame and artwork retained. Replaced the home-value multiplication with January 2024 policy and coverage totals, distinguishing insurance coverage from market value and annual claims."
+    note: "Corrected Risk Rating 2.0 pricing and flood-loss study attribution and scope. Added or retained claim-level source links; original reporting frame and artwork retained. Replaced the home-value multiplication with January 2024 policy and coverage totals, distinguishing insurance coverage from market value and annual claims. Normalized legacy body punctuation without changing wording. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.2"
     date: "2026-09-18"
     note: "Added descriptive alternative text to the hurricane-loss chart; artwork, captions, and article text are unchanged."
@@ -51,7 +51,7 @@ Source: Peter G. Peterson Foundation
 
 ## Rising Costs Due to Climate Change
 
-The financial pressures on the NFIP will only intensify as climate change accelerates flooding risks. Research shows that one-third of historical flood damages in the United States are attributable to [changes in precipitation over 1988–2017](https://fse.fsi.stanford.edu/publication/contribution-historical-precipitation-change-us-flood-damages) (Stanford, 2021).
+The financial pressures on the NFIP will only intensify as climate change accelerates flooding risks. Research shows that one-third of historical flood damages in the United States are attributable to [changes in precipitation over 1988-2017](https://fse.fsi.stanford.edu/publication/contribution-historical-precipitation-change-us-flood-damages) (Stanford, 2021).
 
 ### Climate-Driven Flood Risks
 
@@ -71,7 +71,7 @@ In flood-prone areas like coastal Louisiana or the suburbs of Miami, families re
 
 Source: Peter G. Peterson Foundation
 
-The federal government must take decisive action to phase out NFIP coverage for high-risk areas. Continuing to subsidize flood insurance in these zones not only perpetuates unsustainable development but also exposes taxpayers to ever-growing financial risks.
+The federal government must take decisive action to phase out NFIP coverage for high-risk areas. Continuing to subsidize flood insurance in these zones perpetuates unsustainable development and exposes taxpayers to ever-growing financial risks.
 
 ### Benefits of Phasing Out NFIP Coverage in High-Risk Areas
 
@@ -99,7 +99,7 @@ Phasing out the NFIP in high-risk areas does not mean abandoning vulnerable comm
 
 ## Conclusion
 
-The National Flood Insurance Program is at a critical crossroads. Burdened by debt, outdated risk assessments, and mounting liabilities from climate change, the NFIP is no longer sustainable in its current form. Reform is not just necessary -- it is fiscally and environmentally imperative.
+The National Flood Insurance Program is at a critical crossroads. Burdened by debt, outdated risk assessments, and mounting liabilities from climate change, the NFIP is no longer sustainable in its current form. Reform is fiscally and environmentally imperative.
 
 Ending federally subsidized flood insurance in high-risk areas would reduce the program's financial liabilities, discourage unsustainable development, and pave the way for more resilient land-use practices. By redirecting resources toward incentivizing climate-resilient development, the federal government can protect taxpayers, reduce disaster recovery costs, and promote a sustainable future.
 

@@ -11,7 +11,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Distinguished the study's overlapping warming and heatwave comparisons. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Distinguished the study's overlapping warming and heatwave comparisons. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-30"
     note: "Updated May 30, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -44,7 +44,7 @@ The study's central claim is plain enough: many rivers are losing some of that r
 
 ## What Water Can Carry
 
-Dissolved oxygen is not scenery. It is a condition of life inside the water column.
+Dissolved oxygen is a condition of life inside the water column.
 
 The [U.S. Geological Survey](https://www.usgs.gov/special-topics/water-science-school/science/dissolved-oxygen-and-water) explains dissolved oxygen as oxygen gas held in water and available to aquatic organisms. Cold, turbulent water usually carries more. Warm, slow water carries less. When algae and organic waste decay, bacteria consume oxygen as they break that material down. The river then has to absorb oxygen again through contact with the air, turbulence, plants, and mixing.
 

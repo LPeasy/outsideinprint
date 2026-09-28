@@ -2,7 +2,9 @@
 
 File: `content/essays/the-national-debt-is-screwing-you-heres-how.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `b61f4de49ff47bb9c031a89ce5364d10aa9a0169ffbf1d821f41b6965edf3d26`
+Final content SHA-256: `c8990e49ee4fbba0a242881341270e14367eb30434afaf522106cec88e948c04`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **bounded editorial PASS**. Owner-approved bounded Britain comparison applied in its original three-paragraph position. The text no longer presents loss of reserve-currency leadership as the single cause of Britain's subsequent inflation and geopolitical decline.
 

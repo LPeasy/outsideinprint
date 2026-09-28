@@ -2,7 +2,9 @@
 
 File: `content/essays/rational-ignorance-in-the-u-s-presidential-electorate.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `b5b8486112cfd3e565988283ae7908a5261a5eaf534dcc4d36eb2051c4192335`
+Final content SHA-256: `715a08d68fa0533ef577d411c75df3605679727d3c67dcf927565c6f164dd7ba`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — bounded source-link and approved-correction release review**. The owner-approved inference clarification resolves the remaining scoped hold; the previously corrected 1989–2022 wealth-share trend and its CBO link remain unchanged.
 

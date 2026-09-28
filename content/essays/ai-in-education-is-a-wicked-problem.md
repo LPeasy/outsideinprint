@@ -14,7 +14,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added supporting source hyperlinks without changing the original prose."
+    note: "Added supporting source hyperlinks preserving the original argument. Normalized legacy body punctuation without changing wording. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-22"
     note: "Updated May 22, 2026, after OIP back-archive review for source framing, Medium import cleanup, and house-style normalization."
@@ -44,12 +44,10 @@ Tech companies keep building faster tools for both.
 That's what makes this a [***wicked problem***](https://academic.oup.com/policyandsociety/article/36/3/385/6407931) ~ **something that can't be solved because the
 act of solving it changes what it is.**
 
-AI misuse in education isn't a passing issue ~ **it's unmanageable by
+AI misuse in education is **unmanageable by
 design.**
 
-> AI didn't break the system.
-
-> It revealed how automated it already was.
+> AI revealed how automated the system already was.
 
 ### Why AI Misuse in Education Can't Be Solved Like Other School Problems
 
@@ -75,9 +73,9 @@ Coined by [Horst Rittel and Melvin Webber (1973)](https://doi.org/10.1007/BF0140
 > Poverty, climate change, social media addiction ~ and now, AI in the
 > classroom.
 
-![“The Wicked Problem Loop”](oip-image:medium/4ebf48bacdff824a125b429a9410afd6a03bd15d67452e2b4a17743ab10836db)
+!["The Wicked Problem Loop"](oip-image:medium/4ebf48bacdff824a125b429a9410afd6a03bd15d67452e2b4a17743ab10836db)
 
-*“The Wicked Problem Loop” | Created by Author*
+*"The Wicked Problem Loop" | Created by Author*
 
 
 ### Why No One Owns the AI Problem in Education
@@ -110,7 +108,7 @@ for lesson plans.
 
 > Who broke the rules?
 
-**The machine hasn't replaced education ~ it's becoming part of it.**
+**The machine is becoming part of education without replacing it.**
 
 Teachers often rely on the same tools they warn students against.\
 Lesson plans, rubrics, and feedback.\
@@ -119,15 +117,15 @@ A teacher uses ChatGPT to summarize essays ~
 outsourcing judgment ***in the same way a student outsources
 authorship.***
 
-> That overlap isn't hypocrisy ~ it's survival.
+> That overlap is a survival response.
 
 **AI offers relief, and *both sides take it.***
 
 ### Why Detection and Governance Fail for the Same Reason
 
-![“The Futility of Control”](oip-image:medium/4b78e3e3d056a68126fbae12e3a387e2a1a93ba6a5bcdfe93955e75c0839c8c7)
+!["The Futility of Control"](oip-image:medium/4b78e3e3d056a68126fbae12e3a387e2a1a93ba6a5bcdfe93955e75c0839c8c7)
 
-*“The Futility of Control” | Created by Author*
+*"The Futility of Control" | Created by Author*
 
 
 > Every attempt at control creates a new loophole.
@@ -155,15 +153,15 @@ fail for the same reason ~
 
 > Responsibility diffuses until it disappears.
 
-### How AI Is Replacing Judgment ~ Not Just Labor
+### How AI Is Replacing Judgment and Labor
 
-![“The Erosion of Judgement”](oip-image:medium/77416938ef5aa442d49faa61f66857dd3c14ad457156a1596a35131d306c7f28)
+!["The Erosion of Judgement"](oip-image:medium/77416938ef5aa442d49faa61f66857dd3c14ad457156a1596a35131d306c7f28)
 
-*“The Erosion of Judgement” | Created by Author*
+*"The Erosion of Judgement" | Created by Author*
 
 
-When a student asks AI to "write an essay in my voice," they're not just
-skipping work. They're giving away the decision of what counts as
+When a student asks AI to "write an essay in my voice," they're
+skipping work and giving away the decision of what counts as
 "good".
 
 Teachers do something similar.
@@ -173,18 +171,16 @@ system that can't read nuance or intent.
 
 **Everyone ends up relying on the machine *to define quality.***
 
-> What's being lost isn't morality ~
-
-> it's the habit of thinking through a task yourself.
+> What's being lost is the habit of thinking through a task yourself.
 
 Education already rewards output over process ~ AI is just the next
 logical iteration.
 
 ### Why the AI Misuse Problem Can't Be Solved ~ Only Redefined
 
-![“The Reflection of Learning”](oip-image:medium/fd3d29842d5fa7dd8e071751beb3ce1bfd7fc051e86dd6d3d10ff003ccb8a042)
+!["The Reflection of Learning"](oip-image:medium/fd3d29842d5fa7dd8e071751beb3ce1bfd7fc051e86dd6d3d10ff003ccb8a042)
 
-*“The Reflection of Learning” | Art by Author*
+*"The Reflection of Learning" | Art by Author*
 
 
 > Rules always trail behavior.
@@ -206,12 +202,12 @@ demonstrations instead of text.
 > Students automate writing, teachers automate grading, and institutions
 > automate enforcement.
 
-**AI didn't break education ~ *it's holding up a mirror.***
+**AI is *holding up a mirror to education.***
 
 Incorporating AI can improve accessibility, especially for students with
 learning disabilities, but it can't replace critical thinking,
 reasoning, or collaboration.
 
-**If we don't like what we see, *maybe the issue isn't the machine ~***
+**If we don't like what we see, *maybe the issue is***
 
-> maybe it's that we stopped thinking for ourselves.
+> that we stopped thinking for ourselves.

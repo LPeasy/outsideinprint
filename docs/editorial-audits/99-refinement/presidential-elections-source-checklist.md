@@ -2,7 +2,9 @@
 
 File: `content/essays/presidential-elections.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `99f1300946fc026e06e4670a6dbead9cda15a6100b19c1b5d1dbcc17f1d1013f`
+Final content SHA-256: `006d3dc5a68c617286858518b2394d18b5da89bd8cbe51a6fb99f05e385c5475`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — bounded source-link and approved-correction release review**. The owner-approved military-spending correction resolves the remaining scoped hold; the earlier corporate-tax correction and IRS link remain unchanged.
 

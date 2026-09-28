@@ -4,7 +4,9 @@ Date: 2026-09-27
 
 Version: `1.3`
 
-Final SHA256: `74a61c7a5f8ae1102fd1083d007e0ede1797fdd5c8ca0c86fdefac0a917df686`
+Final SHA256: `64332f8b7db17e524a335e4e23cab59a7a2c98fcec38852eb9ae386951f75363`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Status: Source-link pass complete; normal publication gate remains separate
 
@@ -19,4 +21,3 @@ Estonian Foreign Intelligence Service 2025 report, section 1.2, Russian drone te
 ## Preservation and private issues
 
 No public prose, caption, order, artwork, discovery metadata or original date was changed. Existing links remain. Private concerns and minimal proposed corrections are in `../core-link-only-flood-pair-2026-09-27.md`; these proposals are not applied. This checklist records the added links, not a new certification of every historical fact or quotation.
-

@@ -4,7 +4,9 @@ Date: 2026-09-27
 
 Version: `1.3`
 
-Final SHA256: `6e20b9605789d919db9e928af4e97f64851068752902f41bdcdca8daf4c74a94`
+Final SHA256: `4b48f5e5f7222132290e98faba6561d18a4f38baed5b1b4d3bc6a321c303c892`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Status: Source-link pass complete; normal publication gate remains separate
 
@@ -20,4 +22,3 @@ Ukraine presidency February 20, 2025 meeting release confirms Kellogg's Kyiv vis
 ## Preservation and private issues
 
 No public prose, caption, order, artwork, discovery metadata or original date was changed. Existing links remain. Private concerns and minimal proposed corrections are in `../core-link-only-flood-pair-2026-09-27.md`; these proposals are not applied. This checklist records the added links, not a new certification of every historical fact or quotation.
-

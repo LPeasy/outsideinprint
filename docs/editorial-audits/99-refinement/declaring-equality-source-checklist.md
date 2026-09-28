@@ -2,7 +2,14 @@
 
 File: `content/essays/declaring-equality.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `1b0385d6f5f8dfe78cc9cb2d05b793fa24b0855cd7eb116de7ceeff2ead5b16a`
+Final content SHA-256: `7f54beb8242798eadeb7ea3bfce7a574d2adf160ab4b1b7dd1cfcfb894b11b89`
+
+## Owner-approved release maintenance — September 27, 2026
+
+Normalized only 32 flagged body punctuation characters on 18 lines to ASCII. Words, numbers, links, paragraph order, artwork destinations, and meaning remain unchanged; this includes typography inside captions, alt text, and quotations, not any new quotation wording. The current pending revision note discloses this maintenance; version, edition, original publication date, other front matter, and older revision history remain unchanged. This is the owner's approved release-unblocking cleanup, not a resumed prose revision.
+
+The prior current source/philosophy decision below remains applicable because the bounded changes add no factual claim and change no argument or source attribution. The pre-cleanup content hash was `1b0385d6f5f8dfe78cc9cb2d05b793fa24b0855cd7eb116de7ceeff2ead5b16a`; the current release hash is the one above. [Exact replacements, snapshots, final hashes, and focused preservation result](../release-typography-social-metadata-map-2026-09-27.json) record the byte-level scope. Historical prior-candidate hashes below remain historical. No local test suite, production build, commit, or remote write was performed by this maintenance pass; formal publication gates remain pending.
+
 
 Current disposition: **PASS (bounded editorial review)**. Corrected ERA deadlines/ratification chronology and Twenty-Seventh Amendment precedent.
 

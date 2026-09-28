@@ -2,7 +2,9 @@
 
 File: `content/essays/the-undead-state.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `a58492f913d0e580c2bde11bb0f2f2158a5edf4feb0fbdaf7bd4349602cf144d`
+Final content SHA-256: `fbaa238eeb4076669e2dd5765fe41400c57f867dec7a739f0f7087b42393cb6f`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **PASS (bounded editorial review)**. Corrected ICC transfer chronology and Chevron's overruling.
 

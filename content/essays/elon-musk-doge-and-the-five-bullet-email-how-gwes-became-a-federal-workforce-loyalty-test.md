@@ -15,7 +15,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added source links without changing prose."
+    note: "Added source links preserving the original argument. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-05"
     note: "Updated May 5, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, heading formatting, joined paragraphs, author-promo residue, and several source-discipline wording issues were cleaned while preserving the original publication frame."
@@ -79,7 +79,7 @@ Musk's "What did you get done this week?" refrain isn't new.
 
 The same phrase appeared in November, just after Musk was appointed to lead DOGE. He foreshadowed his approach by posting a mock message to federal employees asking what they got done that week.
 
-This wasn't just banter. It was a preview of things to come.
+The banter previewed things to come.
 
 Musk was signaling his intent to bring his brand of hard-edged efficiency culture to the federal workforce.
 
@@ -92,7 +92,7 @@ The five-bullet-point email was simply the first real test, a way to apply the s
 *Photo by charlesdeluvio on Unsplash*
 
 
-The five-bullet email wasn't just about gathering information. It was a power move, designed to identify who was willing to fall in line.
+The five-bullet email combined information gathering with a power move, designed to identify who was willing to fall in line.
 
 Some agencies complied.
 
@@ -162,18 +162,16 @@ Mishandle it, and the entire system will suffer.
 *Photo by Minh Pham on Unsplash*
 
 
-The GWES system was built to enhance communication, not enforce compliance. But DOGE's five-bullet-point email wasn't just about checking in.
+The GWES system was built to enhance communication, not enforce compliance. But DOGE's five-bullet-point email went beyond checking in.
 
 It was the first real test of Musk's vision for the federal workforce, one that echoes his past management style, from Twitter to Tesla.
 
 The implications go beyond one email.
 
-If DOGE continues down this path, the federal workforce may face a new era of workplace scrutiny, one dictated not by traditional oversight mechanisms, but by social media posts and sudden policy shifts.
+If DOGE continues down this path, the federal workforce may face a new era of workplace scrutiny, one dictated by social media posts and sudden policy shifts rather than traditional oversight mechanisms.
 
-If Musk's past playbook is any indication, this is just the beginning. For federal employees, the real question isn't just:
+If Musk's past playbook is any indication, this is just the beginning. For federal employees, one question leads to another:
 
 What did you get done this week?
-
-It's:
 
 Who's next?

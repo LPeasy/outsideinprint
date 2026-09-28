@@ -11,7 +11,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added source links without changing prose."
+    note: "Added source links and applied minimal style cleanup; facts and source wording unchanged."
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
@@ -125,7 +125,7 @@ There is a reason preservation reviews, environmental records, procurement rules
 
 That friction can become excessive. Agencies can take too long. Reviews can become ritual. Preservation can freeze useful improvements. The public can romanticize decay and then complain about ugliness. A serious account has to admit that.
 
-The cure for slow public process is not to surrender beauty. It is to make the process capable of saying yes to the right improvements.
+The cure for slow public process is to make the process capable of saying yes to the right improvements without surrendering beauty.
 
 ## The Anniversary Frame
 

@@ -2,7 +2,9 @@
 
 File: `content/essays/the-100-year-flood-is-not-what-you-think.md`  
 Version: `2.0 / Fifth web edition`  
-Final content SHA-256: `f2dfdf6f9791d5f8455af8d71cb5db83d6e08f8170fa05c465b047210b7b8112`
+Final content SHA-256: `e56de7fecea1d99c435561948490d28b7976f255c0805f9e4bc93a2bbebf72b0`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **BOUNDED EDITORIAL PASS**. The recorded cumulative-risk graphic blocker is resolved. The corrected figure uses probability cards and the stated constant-risk formula instead of a misleading accelerating curve; no surrounding prose changed.
 

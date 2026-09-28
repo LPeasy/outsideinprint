@@ -3,7 +3,9 @@
 Piece: **Jack Stratton**  
 File: `content/essays/jack-stratton-and-the-vulfpeck-model.md`  
 Version: `2.0 / Seventh web edition`  
-Current essay SHA-256: `bd1d0dd1f5ce059bd3ea68f7c49866f040c77282390468f3c20dccae0aa8d301`
+Current essay SHA-256: `bf42094f055b75be915b26eb5431dc3388197c87f18e1a22170448ef27c5a659`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — scoped editorial/source review of the approved prose-preserving candidate.** The named hold is resolved; this is not an exhaustive biography, numerical score, technical release clearance or deployment status.
 

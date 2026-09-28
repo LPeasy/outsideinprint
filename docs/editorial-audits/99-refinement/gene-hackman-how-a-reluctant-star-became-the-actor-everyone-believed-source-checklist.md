@@ -2,7 +2,9 @@
 
 Applies to version 1.2, Third web edition. Restored from baseline `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`; the unpublished version 2.0 rewrite is withdrawn, not an intervening public edition.
 
-Current essay SHA-256: `93c29621c22983a935da7320017197ea7f62ec8a530baa71bdb2d6344c6db512`.
+Current essay SHA-256: `16528afcf5f227e130c5f735eda0fec9e199dc316befad208f42b44e6191aa8e`.
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS**. Bounded editorial clearance for the link-only edition; no technical release approval or numeric score.
 

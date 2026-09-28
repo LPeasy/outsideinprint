@@ -6,7 +6,9 @@ Source file: `content/essays/uncertainty-is-not-a-technical-problem.md`
 
 Version: `1.3`
 
-Audited SHA256: `f56bbb130f2cdea0ea9873165758232a5235866da5fe3fca633b942f822f3fa5`
+Audited SHA256: `3645ee5f77ecbba72f908e5e4019ba4b9b77dff7f5914d30acf4e9cc7f77eeeb`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Decision state: `LINK_ONLY_REVIEW_COMPLETE`
 
@@ -31,4 +33,3 @@ Decision: PASS
 USACE HEC-FDA Technical Reference, Natural Variability vs. Knowledge Uncertainty, distinguishes random variability from uncertainty in parameters/models/consequences and notes modeling choices. USGS, Introduction to prediction and the value of information (2020), abstract explains information's value through improved decisions and whether to act or learn. Neither source proves every institutional-incentive inference.
 
 See `uncertainty-is-not-a-technical-problem-source-checklist.md` for exact added anchors and `../core-link-only-flood-pair-2026-09-27.md` for private correction proposals and remaining limits. Images and captions were preserved; no new broad image certification is claimed. No tests, build or publication in this subtask.
-

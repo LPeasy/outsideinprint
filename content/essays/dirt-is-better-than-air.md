@@ -14,7 +14,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected the rehabilitation-program chronology, scope of lost support, and levee-compaction wording; clarified Curole's use of technical knowledge and retained his verified quotation. Added supporting source links; surrounding prose, reporting frame, and artwork unchanged."
+    note: "Corrected the rehabilitation-program chronology, scope of lost support, and levee-compaction wording; clarified Curole's use of technical knowledge and retained his verified quotation. Added supporting source links; surrounding argument, reporting frame, and artwork unchanged. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-10"
     note: "Updated May 10, 2026, after OIP back-archive review for legacy Medium cleanup, source-discipline wording, punctuation normalization, and editorial philosophy audit."
@@ -36,7 +36,7 @@ When you build a levee, you don't fill it with air.
 
 You pack it with dirt: thick layers of clay and sand, compressed.
 
-It's not pretty, but it works.
+It works without being pretty.
 
 [Poor compaction can weaken a levee.](https://www.publications.usace.army.mil/portals/76/publications/engineermanuals/em_1110-2-1913.pdf)
 
@@ -62,7 +62,7 @@ Taking a deep breath instead of sending the angry text.
 
 Dirt.
 
-Calling your friend just to ask how they are, not because you need something, because you care.
+Calling your friend just to ask how they are because you care, rather than because you need something.
 
 Dirt.
 
@@ -70,7 +70,7 @@ Curole kept stacking dirt. Quietly. Without fanfare.
 
 He raised the levees higher than the federal standard then in force.
 
-Not with cutting-edge materials, just with time-tested earth.
+With time-tested earth rather than cutting-edge materials.
 
 It wasn't glamorous. It wasn't cheap.
 
@@ -136,10 +136,8 @@ Dirt is better than air. Always has been.
 
 ## Closing Note
 
-This isn't just a story about levees. It's a story about life.
+This story about levees is also a story about life.
 
 We all face storms. We all build walls to hold them back.
 
-The question isn't whether the pressure will come.
-
-The question is whether you've built with dirt or with air.
+When the pressure comes, the question is whether you've built with dirt or with air.

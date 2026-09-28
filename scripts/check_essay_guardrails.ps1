@@ -465,14 +465,106 @@ function Test-EditorialPhilosophyAuditEvidence {
   return $false
 }
 
-function Get-AdverbialStillConstructionHits {
+function Remove-HouseStyleUrls {
+  param([string]$Line)
+
+  # URL destinations are not authored prose. Keep link labels and delimiters so
+  # an adjacent visible phrase cannot disappear with the destination.
+  return [regex]::Replace($Line, '(?i)\bhttps?://[^\s<>"''\[\]\(\)]+', '')
+}
+
+function Get-HouseStyleProse {
   param([string]$Path)
 
-  $hits = New-Object System.Collections.Generic.List[object]
-  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
-    return $hits.ToArray()
+  $text = [System.IO.File]::ReadAllText($Path, [System.Text.Encoding]::UTF8).Replace("`r`n", "`n").Replace("`r", "`n")
+  $lines = @($text -split "`n")
+  $scanLines = [string[]]$lines.Clone()
+  $inFrontMatter = $lines.Count -gt 0 -and $lines[0] -ceq '---'
+  $visibleField = $false
+  $fence = ''
+  $sourceSectionLevel = 0
+  $historySectionLevel = 0
+
+  for ($i = 0; $i -lt $lines.Count; $i++) {
+    $line = $lines[$i]
+    if ($inFrontMatter) {
+      if ($visibleField -and ($line -ceq '---' -or $line -match '^[A-Za-z0-9_]+:')) {
+        # Separate scalar fields for both same-sentence and adjacent-sentence
+        # scans without adding lines or interrupting a soft-wrapped field.
+        $scanLines[$i - 1] += ' . .'
+      }
+      if ($i -gt 0 -and $line -ceq '---') { $inFrontMatter = $false; $visibleField = $false }
+      elseif ($line -match '^([A-Za-z0-9_]+):') {
+        $visibleField = $Matches[1] -in @('title', 'subtitle', 'description', 'featured_image_alt', 'featured_image_caption')
+        if ($visibleField) {
+          $value = $line.Substring($line.IndexOf(':') + 1).Trim()
+          if ($value.Length -ge 2 -and (($value.StartsWith('"') -and $value.EndsWith('"')) -or ($value.StartsWith("'") -and $value.EndsWith("'")))) {
+            $value = $value.Substring(1, $value.Length - 2)
+          }
+          $scanLines[$i] = $value
+        }
+      }
+      if (-not $visibleField) { $scanLines[$i] = '' }
+      continue
+    }
+    if ($line -match '^\s*(`{3,}|~{3,})') {
+      if (-not $fence) { $fence = $Matches[1].Substring(0, 1) }
+      elseif ($Matches[1].StartsWith($fence)) { $fence = '' }
+      $scanLines[$i] = ''; continue
+    }
+    if ($fence) { $scanLines[$i] = ''; continue }
+    if ($line -match '^\s*(#{1,6})\s+(.+?)\s*#*\s*$') {
+      $level = $Matches[1].Length
+      $heading = $Matches[2]
+      if ($sourceSectionLevel -and $level -le $sourceSectionLevel) { $sourceSectionLevel = 0 }
+      if ($historySectionLevel -and $level -le $historySectionLevel) { $historySectionLevel = 0 }
+      if ($heading -match '^(?i:Works Cited|References|Bibliography|Sources(?: Checked)?|Further Reading)\s*$') { $sourceSectionLevel = $level }
+      if ($heading -match '^(?i:Revision History|Publication History)\s*$') { $historySectionLevel = $level }
+    }
+    if ($historySectionLevel) {
+      $scanLines[$i] = ''
+    }
+    elseif ($sourceSectionLevel -and $line -match '^\s*(?:[-*]|\d+[.)])\s+') {
+      # Protect citation titles, not an author's annotation after the citation.
+      $sourceLine = [regex]::Replace($line, '\[[^\]\n]+\]\([^\s)]+\)', '')
+      $scanLines[$i] = [regex]::Replace($sourceLine, '\*[^*\n]+\*|["“][^"”\n]+["”]', '')
+    }
   }
 
+  # Mask only syntactically attributed quotations, not every blockquote or
+  # quoted phrase. Editorial verification of the attribution remains separate.
+  $scanText = $scanLines -join "`n"
+  $blankSpan = [System.Text.RegularExpressions.MatchEvaluator]{ param($match) [regex]::Replace($match.Value, '[^\n]', ' ') }
+  $linkedQuote = '(?s)\[[*_]*["“](?:(?!\n\s*\n).)+?["”][*_]*\]\(https?://[^\s)]+\)'
+  $scanText = [regex]::Replace($scanText, $linkedQuote, $blankSpan)
+  $attributedBlock = '(?m)^[ \t]*>[ \t]*[*_]*["“][^\n]*(?:\n[ \t]*>[^\n]*)*?["”][*_]*[ \t]*\n(?:[ \t]*>?[ \t]*\n)*[ \t]*>[ \t]*[*_]*[~—–-][ \t]+[^\n]+'
+  $scanText = [regex]::Replace($scanText, $attributedBlock, $blankSpan)
+  $creditedQuote = '(?m)^[ \t]*(?:>[ \t]*)?[*_]*["“][^\n]+["”][*_]*[ \t]+[~—–-][ \t]+(?:\[[^\]\n]+\]\(https?://[^\s)]+\)|[\p{Lu}][\p{L} .''-]+)[ \t]*$'
+  $scanText = [regex]::Replace($scanText, $creditedQuote, $blankSpan)
+  $introducedQuote = '(?is)\b(?:said|wrote|recalled|explained|put it|stated|declared)\s*[:,]\s*["“][^"”]+["”]'
+  $scanText = [regex]::Replace($scanText, $introducedQuote, $blankSpan)
+  if ($text -match '(?im)^[^\n]*\b(?:quotes|quotations)\b[^\n]*\b(?:drawn|taken)\s+from\b[^\n]*\bby\s+\S+') {
+    # An explicit document-wide source note can attribute standalone quotations.
+    $scanText = [regex]::Replace($scanText, '(?m)^[ \t]*(?:>[ \t]*)?[*_]*["“][^\n]+["”][*_]*[ \t]*$', $blankSpan)
+  }
+  $scanText = [regex]::Replace($scanText, '`[^`\n]+`', $blankSpan)
+  $scanText = [regex]::Replace($scanText, '<[^>\n]+>', $blankSpan)
+  $scanLines = @($scanText -split "`n")
+  for ($i = 0; $i -lt $scanLines.Count; $i++) {
+    $line = Remove-HouseStyleUrls -Line $scanLines[$i]
+    $line = [regex]::Replace($line, '(?<=\]\()[^\s)]*(?=\))', '')
+    $line = [regex]::Replace($line, '!?\[([^\]\n]+)\](?:\(\)|\[[^\]\n]*\])', '$1')
+    $line = [regex]::Replace($line, '^[ \t]*>[ \t]?', '')
+    $line = [regex]::Replace($line, '^[ \t]*#{1,6}[ \t]+', '')
+    $scanLines[$i] = $line -replace '[*_]', ''
+  }
+  return [pscustomobject]@{ Lines = $lines; ScanLines = $scanLines }
+}
+
+function Get-AdverbialStillConstructionHits {
+  param([object]$Prose)
+
+  $hits = New-Object System.Collections.Generic.List[object]
   $allowedNextWords = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
   foreach ($word in @('image', 'images', 'frame', 'frames', 'photo', 'photos', 'photograph', 'photographs', 'life', 'lifes', 'water', 'waters')) {
     [void]$allowedNextWords.Add($word)
@@ -483,24 +575,15 @@ function Get-AdverbialStillConstructionHits {
     [void]$allowedPreviousWords.Add($word)
   }
 
-  $text = [System.IO.File]::ReadAllText($Path, [System.Text.Encoding]::UTF8)
-  $lines = @($text -split "`r?`n")
-  $inFence = $false
+  $lines = @($Prose.Lines)
 
   for ($i = 0; $i -lt $lines.Count; $i++) {
     $line = [string]$lines[$i]
 
-    if ($line -match '^\s*```') {
-      $inFence = -not $inFence
-      continue
-    }
-    if ($inFence -or $line -match '^\s*>') {
-      continue
-    }
-
-    foreach ($match in [regex]::Matches($line, '\bstill\b', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)) {
-      $before = $line.Substring(0, $match.Index)
-      $after = $line.Substring($match.Index + $match.Length)
+    $scanLine = [string]$Prose.ScanLines[$i]
+    foreach ($match in [regex]::Matches($scanLine, '\bstill\b', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)) {
+      $before = $scanLine.Substring(0, $match.Index)
+      $after = $scanLine.Substring($match.Index + $match.Length)
       $previousMatch = [regex]::Match($before, '([A-Za-z]+)\W*$')
       $nextMatch = [regex]::Match($after, '^\W*([A-Za-z]+)')
 
@@ -527,42 +610,34 @@ function Get-AdverbialStillConstructionHits {
 }
 
 function Get-ThatMattersFramingHits {
-  param([string]$Path)
+  param([object]$Prose)
 
-  $hits = New-Object System.Collections.Generic.List[object]
-  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
-    return $hits.ToArray()
+  $pattern = '\bthat\s+matters\b|(?:^|[.!?]\s+)that\s+(?:(?![.!?]|\n\s*\n).){1,80}\bmatters\b'
+  return @(Get-HouseStylePatternHits -Prose $Prose -Pattern $pattern)
+}
+
+function Get-HouseStylePatternHits {
+  param([object]$Prose, [string]$Pattern)
+
+  $scanText = $Prose.ScanLines -join "`n"
+  $seenLines = [System.Collections.Generic.HashSet[int]]::new()
+  $options = [System.Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [System.Text.RegularExpressions.RegexOptions]::Singleline -bor [System.Text.RegularExpressions.RegexOptions]::Multiline
+  foreach ($match in [regex]::Matches($scanText, $Pattern, $options)) {
+    $lineNumber = [regex]::Matches($scanText.Substring(0, $match.Index), "`n").Count + 1
+    if (-not $seenLines.Add($lineNumber)) { continue }
+    $excerpt = ($match.Value -replace '\s+', ' ').Trim()
+    if ($excerpt.Length -gt 220) { $excerpt = $excerpt.Substring(0, 217) + '...' }
+    [pscustomobject]@{ Line = $lineNumber; Excerpt = $excerpt }
   }
+}
 
-  $text = [System.IO.File]::ReadAllText($Path, [System.Text.Encoding]::UTF8)
-  $lines = @($text -split "`r?`n")
-  $inFence = $false
+function Get-ContrastScaffoldHits {
+  param([object]$Prose)
 
-  for ($i = 0; $i -lt $lines.Count; $i++) {
-    $line = [string]$lines[$i]
-
-    if ($line -match '^\s*```') {
-      $inFence = -not $inFence
-      continue
-    }
-    if ($inFence -or $line -match '^\s*>') {
-      continue
-    }
-
-    if ($line -match '(?i)\bthat\s+matters\b|(?:^|[.!?]\s+)that\s+[^.!?]{1,80}\bmatters\b') {
-      $excerpt = ($line.Trim() -replace '\s+', ' ')
-      if ($excerpt.Length -gt 220) {
-        $excerpt = $excerpt.Substring(0, 217) + '...'
-      }
-
-      $hits.Add([pscustomobject]@{
-        Line = $i + 1
-        Excerpt = $excerpt
-      })
-    }
-  }
-
-  return $hits.ToArray()
+  $negative = '(?:\b(?:(?:is|are|was|were|be)\s+not|(?:isn|aren|wasn|weren)[''\u2019]t|not\s+(?:just|only|merely|simply))\b|(?:\A|[.!?]\s+|\n[ \t]*\n)[ \t]*not\b)'
+  $paired = $negative + '(?:(?![.!?]|\n\s*\n).){1,240}?\bbut(?:\s+also)?\b'
+  $adjacent = '\b(?:(?:is|are|was|were)\s+not|(?:isn|aren|wasn|weren)[''\u2019]t|not\s+(?:just|only|merely|simply))\b(?:(?![.!?]).){1,180}[.!?]\s+(?:(?:it|this|that|they|these|those)\s+(?:is|are|was|were)\b|(?:it|that)[''\u2019]s\b|they[''\u2019]re\b)'
+  return @(Get-HouseStylePatternHits -Prose $Prose -Pattern ($paired + '|' + $adjacent))
 }
 
 function Add-BlockingIssue {
@@ -1428,6 +1503,7 @@ $warningResults = New-Object System.Collections.Generic.List[object]
 $philosophyAuditResults = New-Object System.Collections.Generic.List[object]
 $stillConstructionResults = New-Object System.Collections.Generic.List[object]
 $thatMattersResults = New-Object System.Collections.Generic.List[object]
+$contrastResults = New-Object System.Collections.Generic.List[object]
 
 foreach ($row in $rows) {
   $issueTypes = @($row.issue_types)
@@ -1490,7 +1566,8 @@ foreach ($row in $rows) {
 }
 
 foreach ($targetPath in $targetPaths) {
-  $thatMattersHits = @(Get-ThatMattersFramingHits -Path $targetPath)
+  $prose = Get-HouseStyleProse -Path $targetPath
+  $thatMattersHits = @(Get-ThatMattersFramingHits -Prose $prose)
   if ($thatMattersHits.Count -gt 0) {
     $relativePath = Get-RepoRelativePath -RepoRoot $Root -PathValue $targetPath
     $displayPath = if ($relativePath.StartsWith('content/', [System.StringComparison]::OrdinalIgnoreCase)) {
@@ -1515,7 +1592,17 @@ foreach ($targetPath in $targetPaths) {
     continue
   }
 
-  $stillHits = @(Get-AdverbialStillConstructionHits -Path $targetPath)
+  $relativePath = Get-RepoRelativePath -RepoRoot $Root -PathValue $targetPath
+  $displayPath = $relativePath -replace '^content/', ''
+  $contrastHits = @(Get-ContrastScaffoldHits -Prose $prose)
+  if ($contrastHits.Count -gt 0) {
+    Add-BlockingIssue -Results $blockingResults -Path $displayPath -Issue 'not_x_but_y_scaffold'
+    foreach ($hit in $contrastHits) {
+      $contrastResults.Add([pscustomobject]@{ Path = $displayPath; Line = $hit.Line; Excerpt = $hit.Excerpt })
+    }
+  }
+
+  $stillHits = @(Get-AdverbialStillConstructionHits -Prose $prose)
   if ($stillHits.Count -eq 0) {
     continue
   }
@@ -1569,6 +1656,7 @@ Write-Host "  Warning files: $($warningResults.Count)"
 Write-Host "  Philosophy audit blocking files: $($philosophyAuditResults.Count)"
 Write-Host "  That-matters framing hits: $($thatMattersResults.Count)"
 Write-Host "  Adverbial still construction hits: $($stillConstructionResults.Count)"
+Write-Host "  Not-X-but-Y scaffold hits: $($contrastResults.Count)"
 Write-Host "  Audit report: $($ReportBasePath).json"
 
 foreach ($item in $blockingResults) {
@@ -1612,6 +1700,12 @@ foreach ($item in $thatMattersResults) {
 foreach ($item in $stillConstructionResults) {
   Write-Host ''
   Write-Host "STILL $($item.Path):$($item.Line)" -ForegroundColor Red
+  Write-Host "  $($item.Excerpt)" -ForegroundColor Red
+}
+
+foreach ($item in $contrastResults) {
+  Write-Host ''
+  Write-Host "CONTRAST $($item.Path):$($item.Line)" -ForegroundColor Red
   Write-Host "  $($item.Excerpt)" -ForegroundColor Red
 }
 

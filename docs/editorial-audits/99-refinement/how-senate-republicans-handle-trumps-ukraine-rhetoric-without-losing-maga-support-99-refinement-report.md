@@ -6,7 +6,9 @@ Source file: `content/essays/how-senate-republicans-handle-trumps-ukraine-rhetor
 
 Version: `1.3`
 
-Audited SHA256: `762c13792e989dfb81c7a21b7dc112fa7cb73e663785f78ead8f599ec1c2a1c4`
+Audited SHA256: `68c607184079c8a5eeac2bf494ee1bb870d18c486bcfdeb27971dea037e0eaef`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Decision state: `LINK_ONLY_REVIEW_COMPLETE`
 
@@ -31,4 +33,3 @@ Decision: PASS
 NPR original reporting by Davis/Grisales, syndicated by WUWM February 19, 2025: Collins says Russia initiated war; Tillis praises Zelenskyy; Cramer characterizes public negotiation. Axios February 20 reports Thune saying the president speaks for himself. These links support reported statements, not proof of private motives. Existing May 4 backfill audit reviewed polling context.
 
 See `how-senate-republicans-handle-trumps-ukraine-rhetoric-without-losing-maga-support-source-checklist.md` for exact added anchors and `../core-link-only-flood-pair-2026-09-27.md` for private correction proposals and remaining limits. Images and captions were preserved; no new broad image certification is claimed. No tests, build or publication in this subtask.
-

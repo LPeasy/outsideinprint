@@ -2,7 +2,9 @@
 
 File: `content/essays/flash-flood-alley-why-flash-floods-kill.md`  
 Version: `2.0 / Fifth web edition`  
-Final content SHA-256: `a9af57130db5ceaac407a8a46305e5005def2bf4a7c46c0a19ad25e79a20fde3`
+Final content SHA-256: `fddbe255a61be667e42435d81facde8d22711efdfc5cabbae5942e582064c745`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — named hold resolved**. The owner confirmed the opening flood aphorism as their own words and approved removal of the unsupported power-loss interval. Only quotation marks were removed from that aphorism and its closing callback; their wording and blockquote styling remain. Power loss remains stated without an invented timestamp. This is scoped clearance of the named source concerns, not a whole-archive certification.
 

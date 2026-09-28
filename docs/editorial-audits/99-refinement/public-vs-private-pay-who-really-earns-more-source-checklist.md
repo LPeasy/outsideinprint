@@ -2,7 +2,9 @@
 
 File: `content/essays/public-vs-private-pay-who-really-earns-more.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `80d36e5687da54fa62453fe8870fb5f811d070d35ee29efa1e593e8f7bada59d`
+Final content SHA-256: `be8eb9ab35097d541a8ccdf0c49eaf91de281ef0260981461b7e4ad4cedea68d`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **BOUNDED EDITORIAL PASS**. The recorded compensation-table blocker is resolved. March 2025 BLS shares, benefit labels and state/local scope are reconciled. Separate custom calculations remain owner-verified on Windows, not independently inspected.
 

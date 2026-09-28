@@ -2,7 +2,9 @@
 
 File: `content/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `cfdc2084c5eccec512149956330094ebc00199c2387f44984565d94df39893ab`
+Final content SHA-256: `6b7c85bbc84afcbb58330f25ac925770b69eeea3c6d9fb5e6a0676169b6219c0`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — scoped source and editorial clearance**. All listed approval issues for this piece are resolved in the current file.
 

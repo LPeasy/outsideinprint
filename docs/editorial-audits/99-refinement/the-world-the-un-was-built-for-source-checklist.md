@@ -2,7 +2,9 @@
 
 File: `content/essays/the-world-the-un-was-built-for.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `0f6fd7eb5f48d38441253052105cf03c5380b2f3f9c801c82eb64153b27ee31e`
+Final content SHA-256: `087fb5f005e63e417232f09ae84dfee2386a6cc9e2a23e589823a6afdb1c983a`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **BOUNDED EDITORIAL PASS**. The recorded founding-members caption hold is resolved. The caption now acknowledges the named original members instead of implying their absence. The earlier Refugee Convention correction remains; the cultural/institutional thesis is preserved as author interpretation, not newly certified.
 

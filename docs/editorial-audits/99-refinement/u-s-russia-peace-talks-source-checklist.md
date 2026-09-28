@@ -4,7 +4,9 @@ Date: 2026-09-27
 
 Version: `1.3`
 
-Final SHA256: `a879baabb963064dc2dc9422ca42dddbe556c1fae1d31dfc71ee0c60994aebe1`
+Final SHA256: `4545fac2808f1bf1f0754605b09757f1d6fb476f4baee8fbe006d36ba3ba021c`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Status: Source-link pass complete; normal publication gate remains separate
 
@@ -22,4 +24,3 @@ CNN's February 18, 2025 live transcript carries the direct Rubio/Waltz Riyadh re
 ## Preservation and private issues
 
 No public prose, caption, order, artwork, discovery metadata or original date was changed. Existing links remain. Private concerns and minimal proposed corrections are in `../core-link-only-flood-pair-2026-09-27.md`; these proposals are not applied. This checklist records the added links, not a new certification of every historical fact or quotation.
-

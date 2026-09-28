@@ -107,6 +107,14 @@ Current CI must fail when:
 
 Ref-to-ref changes limited to explicitly allowlisted non-editorial front matter may skip the Editorial Philosophy re-audit only when all remaining front matter and body text are unchanged after line-ending normalization.
 
+### House-style publication blockers
+
+Authored public-judgment prose must avoid adverbial `still`, `that matters` framing (including `that distinction matters`), and formulaic `not X, but Y` reframing, including equivalent adjacent-sentence constructions. These findings block publication. Use the smallest wording correction that preserves chronology, uncertainty, factual distinctions and the author's meaning; ordinary factual negation remains valid. Apply the review to authored titles, subtitles, descriptions, headings, captions and pull quotes as well as body paragraphs.
+
+Preserve verified quotations, external source titles, literal physical uses of `still`, URL destinations, identifiers and historical revision records. Visible authored link labels remain checked. Existing source-free and dialogue contracts retain their boundaries. There is no release-specific exact-line exception registry or warning-only downgrade.
+
+Pull-request guardrails compare the complete PR base and checked-out head, not the last synchronize increment. For the remediation directly based on the failed, undeployed release `ec9c93265c10d3a88e25bd4ad46c99decdbc4c07`, the comparison starts at pre-release `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6` so all 110 pending essays are checked together. Later release bases use the normal full-PR/push comparison.
+
 ## Local author workflow
 
 1. Create a draft with `.\tools\bin\custom\new-essay.cmd --title "My Title"` or edit an existing content Markdown file.

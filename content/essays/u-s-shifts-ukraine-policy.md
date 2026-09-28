@@ -14,7 +14,7 @@ edition: "Third web edition"
 revision_history:
   - version: "1.2"
     date: "2026-09-27"
-    note: "Added source links without changing prose."
+    note: "Added source links and applied minimal style cleanup; facts and source wording unchanged."
   - version: "1.1"
     date: "2026-05-03"
     note: "Updated May 3, 2026, after OIP back-archive review. Legacy Medium promotional residue, source-card fragments, list formatting, headings, spacing, and punctuation artifacts were cleaned up; source, metadata, and rendering were checked."
@@ -69,15 +69,15 @@ Hegseth's remarks make it clear that the U.S. is shifting its primary military f
 
 His statement that "deterrence cannot fail" in the Indo-Pacific underscores that the administration views China as a far greater strategic threat than Russia.
 
-This realignment is not just about priorities. It is about resource constraints. Hegseth explicitly states that "stark strategic realities" prevent the U.S. from being primarily focused on European security.
+This realignment concerns both priorities and resource constraints. Hegseth explicitly states that "stark strategic realities" prevent the U.S. from being primarily focused on European security.
 
-The military, economic, and political resources once dedicated to NATO and Ukraine will instead be reallocated to counter China's growing influence. This means European allies must not only meet higher defense spending targets but also prepare for a future where the U.S. is no longer a constant stabilizing force in the region.
+The military, economic, and political resources once dedicated to NATO and Ukraine will instead be reallocated to counter China's growing influence. This means European allies must meet higher defense spending targets and prepare for a future where the U.S. is no longer a constant stabilizing force in the region.
 
 This shift has global consequences:
 
 - For Europe, it means Washington expects them to handle their own security while the U.S. focuses on China.
 - For Asia-Pacific allies, it signals a stronger U.S. commitment to military deterrence, which could escalate tensions with Beijing.
-- For Russia, it suggests that while the U.S. is reducing direct involvement in Ukraine, it still seeks to weaken Moscow economically through energy policies and sanctions enforcement.
+- For Russia, it suggests that while the U.S. is reducing direct involvement in Ukraine, it continues to seek to weaken Moscow economically through energy policies and sanctions enforcement.
 
 ## Energy as a Tool of War and Diplomacy
 
@@ -90,13 +90,13 @@ However, this approach depends on two key factors:
 - Whether energy-producing nations will follow the U.S. lead, as OPEC countries may resist lowering prices.
 - Whether Europe can ramp up energy production fast enough to reduce dependence on Russian supply.
 
-If these efforts fail, Russia could still fund its war by increasing exports to China and India. While energy sanctions remain a powerful tool, they will only work if enforced globally and sustained over time.
+If these efforts fail, Russia could fund its war by increasing exports to China and India. While energy sanctions remain a powerful tool, they will only work if enforced globally and sustained over time.
 
 ## The Future of Transatlantic Relations and NATO's Survival
 
 "Our transatlantic alliance has endured for decades. And we fully expect that it will be sustained for generations to come. But this won't just happen. It will require our European allies to step into the arena and take ownership of conventional security on the continent."
 
-Hegseth's speech does not suggest an end to NATO, but it does imply a fundamental restructuring of the alliance. The U.S. will still support European security, but only under new conditions:
+Hegseth's speech does not suggest an end to NATO, but it does imply a fundamental restructuring of the alliance. The U.S. will continue to support European security, but only under new conditions:
 
 - European nations must take the lead in their own defense.
 - Financial and military commitments must be met at a much higher level.

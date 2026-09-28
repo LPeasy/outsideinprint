@@ -2,9 +2,11 @@
 
 September 27, 2026. Current release checkpoint. This supersedes earlier combined totals that retained nine Brands/Modern Bios holds; earlier source findings and checkpoint evidence remain historical.
 
+**Publication update:** PR 127 was merged after its required jobs passed, but the production full-batch guardrail failed before deployment. The owner subsequently required minimal style corrections with strict blockers and no wording exceptions; the [remediation record](source-link-release-guardrail-remediation-2026-09-27.md) governs that local-only pass. The release is **not live at this prepublication checkpoint**. No publication or remote writes are authorized by the latest instruction. The factual approval scopes below remain resolved. See [the exact earlier failure](publication-guardrail-blocker-2026-09-27.md).
+
 ## Approval and scope
 
-The owner explicitly approved all nine bounded correction sets, including the listed removals, and confirmed yes to the Chili's, Attenborough and Leo author-intent questions. [Exact decision record](final-nine-owner-decisions-2026-09-27.md). The owner separately directed that the complete pending batch be published after these decisions and the required checks clear; no additional publish instruction is required unless a new material blocker arises.
+The owner explicitly approved all nine bounded correction sets, including the listed removals, and confirmed yes to the Chili's, Attenborough and Leo author-intent questions. [Exact decision record](final-nine-owner-decisions-2026-09-27.md). The earlier direction to publish was superseded by the latest local-only style-cleanup plan. A separate publication instruction is now required.
 
 Chili's three reactions remain explicitly illustrative, including the hypothetical $14 purchase. Attenborough's forest imagery remains author-written imagined narration. Leo's seven narrative pull quotes retain the author's words under the approved quotation-mark treatment, alongside the separately approved factual corrections; his actual motto stays quoted. Stratton's platinum wordplay remains. Siakam's 16.9/6.9 figures are labeled regular-season figures. The short recovered Variety/RTS quotations and sourced Civilisation reference remain.
 
@@ -12,7 +14,7 @@ No broad rewrite returned. Each affected essay uses version 2.0 within its exist
 
 ## Exact implementation evidence
 
-| Essay | Pending edition | Current file SHA-256 |
+| Essay | Pending edition | Approved nine-step SHA-256, before typography follow-up |
 |---|---|---|
 | Modelo | Fourth | `108864f216c0d23e8a3136e09a7bc61d6136c5cb4a2d88e1b4dcd1fad955b53f` |
 | Max | Sixth | `1be641bd98e24736f33dac752e97f8f4dba5305ef00534f374c3749b9373c021` |
@@ -25,6 +27,8 @@ No broad rewrite returned. Each affected essay uses version 2.0 within its exist
 | Franklin | Fourth | `1ef138af79e109deb821bade2b0ede3716521dd99aa587db47c71eaff3286ed5` |
 
 Sequential replacements and pre-edit snapshot locations:
+
+These nine-step hashes and comparisons remain historical evidence. The subsequent approved typography/social-metadata follow-up updates current paired records for 14 essays, including Max and Leo; [its exact replacement map](release-typography-social-metadata-map-2026-09-27.json) supplies those final hashes without rewriting the earlier approvals.
 
 - [Brands exact map](final-nine-brands-implementation-map-2026-09-27.json).
 - [Stratton/Attenborough exact map](final-nine-stratton-attenborough-implementation-map-2026-09-27.json).

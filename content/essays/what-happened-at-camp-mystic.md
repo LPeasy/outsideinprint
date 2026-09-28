@@ -14,7 +14,7 @@ edition: "Ninth web edition"
 revision_history:
   - version: "3.0"
     date: "2026-09-27"
-    note: "Corrected the named Hunt-gauge observation, 1987 Guadalupe flood account, rainfall, cabin and planning details; attributed the first-responder account and removed the unverified opening quotation. Added or retained claim-level source links and corrected flagged graphics and captions. Original reporting frame and surrounding prose retained."
+    note: "Corrected the named Hunt-gauge observation, 1987 Guadalupe flood account, rainfall, cabin and planning details; attributed the first-responder account and removed the unverified opening quotation. Added or retained claim-level source links and corrected flagged graphics and captions. Original reporting frame and surrounding prose retained. Normalized legacy body punctuation without changing wording. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-17"
     note: "Clarified the warning timeline, casualty language, source framing, and punctuation."
@@ -49,7 +49,7 @@ collections:
 medium_source_url: "https://medium.com/@lawtonperret/what-happened-at-camp-mystic-8f61de2d0f27"
 ---
 
-Overnight on July 3–4, 2025, a dangerous storm stalled over the Guadalupe
+Overnight on July 3-4, 2025, a dangerous storm stalled over the Guadalupe
 River Basin.
 
 > By sunrise, it turned deadly.
@@ -116,9 +116,9 @@ reconstructs the critical sequence this way (pp. 76-83):
 ### **How the Camp Mystic Flood Became a Catastrophe**
 
 > The flood that overtook Camp Mystic in the early hours of July 4
-> wasn't just a natural disaster.
+> was a natural disaster.
 
-**It was a system failure on multiple levels ~ hydrological,
+**It was also a system failure on multiple levels ~ hydrological,
 bureaucratic, and human.**
 
 > On the surface, the storm was extraordinary.
@@ -187,7 +187,7 @@ River and Cypress Creek, [**was inundated to its ceiling.**](https://www.house.t
 
 ### **History Repeating Itself**
 
-#### This wasn't the first time the Guadalupe River flooded.
+#### The Guadalupe River had flooded before.
 
 It was [another mass casualty event](https://www.usatoday.com/story/graphics/2025/07/11/texas-floods-guadalupe-river-camp-mystic/84509122007/) related to
 flooding in the area.

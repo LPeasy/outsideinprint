@@ -11,7 +11,7 @@ edition: "Fifth web edition"
 revision_history:
   - version: "2.3"
     date: "2026-09-27"
-    note: "Added supporting source hyperlinks or repaired source destinations; original prose, reporting frame, and artwork unchanged."
+    note: "Added supporting source hyperlinks or repaired source destinations; reporting frame and artwork unchanged. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "2.2"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
@@ -46,7 +46,7 @@ That system already carried a moral message. It told the world that one path int
 
 The gold card changes the tone by changing the object.
 
-In [the White House executive order that created the program on September 19, 2025](https://www.whitehouse.gov/presidential-actions/2025/09/the-gold-card/), the required payment is not an investment in a commercial enterprise. It is an unrestricted gift to the Department of Commerce. The order says the administration wants to "prioritiz[e] the admission of aliens who will affirmatively benefit the Nation," and it treats a $1 million personal gift or a $2 million corporate gift as the relevant signal.
+In [the White House executive order that created the program on September 19, 2025](https://www.whitehouse.gov/presidential-actions/2025/09/the-gold-card/), the required payment is an unrestricted gift to the Department of Commerce rather than an investment in a commercial enterprise. The order says the administration wants to "prioritiz[e] the admission of aliens who will affirmatively benefit the Nation," and it treats a $1 million personal gift or a $2 million corporate gift as the relevant signal.
 
 The order does require Commerce to place the gifts in a separate Treasury fund and use them to promote commerce and American industry. That leaves the civic burden on the government after the transfer rather than on any specific investment, payroll, project, or measurable job creation by the applicant.
 

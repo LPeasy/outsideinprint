@@ -11,7 +11,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Removed three unmatched nominal-GDP forecast figures and linked the retained qualitative rankings, manufacturing/export role, and growth statement to sources available before original publication; surrounding argument and artwork retained."
+    note: "Removed three unmatched nominal-GDP forecast figures and linked the retained qualitative rankings, manufacturing/export role, and growth statement to sources available before original publication; surrounding argument and artwork retained. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
@@ -87,9 +87,7 @@ The world keeps relearning both lessons.
 
 ## What Counts as Chips Now
 
-Today's chips are not only tanks and gold.
-
-They include semiconductors, shipping lanes, rare minerals, energy flows, demographics, reserve currencies, data centers, and AI capacity.
+Today's chips include tanks and gold, along with semiconductors, shipping lanes, rare minerals, energy flows, demographics, reserve currencies, data centers, and AI capacity.
 
 A port can matter like an airbase.
 

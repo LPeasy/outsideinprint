@@ -2,7 +2,16 @@
 
 File: `content/essays/what-is-risk-a-four-part-framework.md`  
 Version: `2.0 / Sixth web edition`  
-Final content SHA-256: `697231d702eb0cdeee9386bb1932dede323a8bccce1a45ab5f87657047d09cdf`
+Final content SHA-256: `8b0c0b3703dba0c0c1430aa36a8b95b9feecc0fc2a4ad76c60b3e3cce51f4f10`
+
+## Owner-approved release maintenance — September 27, 2026
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
+
+Normalized only 5 flagged body punctuation characters on 3 lines to ASCII. Words, numbers, links, paragraph order, artwork destinations, and meaning remain unchanged; this includes typography inside captions, alt text, and quotations, not any new quotation wording. The current pending revision note discloses this maintenance; version, edition, original publication date, other front matter, and older revision history remain unchanged. This is the owner's approved release-unblocking cleanup, not a resumed prose revision.
+
+The prior current source/philosophy decision below remains applicable because the bounded changes add no factual claim and change no argument or source attribution. The pre-cleanup content hash was `697231d702eb0cdeee9386bb1932dede323a8bccce1a45ab5f87657047d09cdf`; the current release hash is the one above. [Exact replacements, snapshots, final hashes, and focused preservation result](../release-typography-social-metadata-map-2026-09-27.json) record the byte-level scope. Historical prior-candidate hashes below remain historical. No local test suite, production build, commit, or remote write was performed by this maintenance pass; formal publication gates remain pending.
+
 
 Current disposition: **BOUNDED EDITORIAL PASS**. The sole remaining recorded presentation blocker is resolved: the Panama image alt text and caption now describe the actual January 2019–November 2024 lake-level series without asserting an unsupported drought start date. The framework and shipping interpretation are unchanged.
 

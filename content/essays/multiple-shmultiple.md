@@ -14,7 +14,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added supporting source hyperlinks or repaired source destinations; original prose, reporting frame, and artwork unchanged."
+    note: "Added supporting source hyperlinks or repaired source destinations; original argument, reporting frame, and artwork unchanged. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
@@ -38,7 +38,7 @@ tags:
 
 An Illinois appellate opinion contains the sentence.
 
-Rhonda Bloom alleged that her doctors told her she had to uncover all her memories of satanic ritual abuse because "each memory could house a separate personality." The court was not finding the allegation true. It was summarizing a complaint in a case dismissed on limitations and legal-disability grounds. The sentence says almost everything. A memory could house a personality. A personality could house a history. A history could explain the patient. The therapist could then keep looking for more memories, more personalities, more hidden truth. ([Justia][12])
+Rhonda Bloom alleged that her doctors told her she had to uncover all her memories of satanic ritual abuse because "each memory could house a separate personality." The court was summarizing a complaint in a case dismissed on limitations and legal-disability grounds, without finding the allegation true. The sentence says almost everything. A memory could house a personality. A personality could house a history. A history could explain the patient. The therapist could then keep looking for more memories, more personalities, more hidden truth. ([Justia][12])
 
 That was the machine.
 

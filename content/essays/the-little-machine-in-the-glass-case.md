@@ -12,7 +12,7 @@ edition: "Second web edition"
 revision_history:
   - date: 2026-09-27
     version: "1.1"
-    note: "Added nearby archive links for the 1877 Patent Office fire and later model disposal. Reporting and original publication date preserved."
+    note: "Added nearby archive links for the 1877 Patent Office fire and later model disposal. Reporting and original publication date preserved. Applied minimal style cleanup without changing claims or verified quotations."
 featured: false
 featured_image: "essays/the-little-machine-in-the-glass-case/hero"
 featured_image_alt: "A small wooden-and-brass patent model sits inside a glass display case in an old Patent Office room."
@@ -244,6 +244,6 @@ Here is the invention, or at least a claim about one. Here is the public office.
 
 The patent model belongs to the nineteenth century, but its question is current. When private ambition asks for public power, what must it show? When the government grants that power, what must the public get back? When the record is open, who can really read it? When knowledge is filed, who keeps it alive?
 
-The model does not let us answer with slogans about genius or monopoly. It asks for a harder civic accounting. A good patent bargain is not proved by the inventor's cleverness, the office's seal, or the beauty of the miniature. It is proved by the quality of the public return.
+The model does not let us answer with slogans about genius or monopoly. It asks for a harder civic accounting. A good patent bargain is proved by the quality of the public return rather than the inventor's cleverness, the office's seal, or the beauty of the miniature.
 
 The little machine in the glass case is a relic of an older technology of proof. It is also a standing rebuke to every public system that asks for trust while hiding the parts. Public power should require private claimants to show their work. When the showing is clear, the bargain can be judged. When the showing becomes opaque, the right starts to look like a lock without a key.

@@ -2,7 +2,9 @@
 
 File: `content/essays/the-new-meta-economy.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `2256d2c9003d2b8ec5f2c3ee27d845214cc09bc18c948f8c7fd3c85f0ec67a27`
+Final content SHA-256: `dc1f1d112df223dadfe31ed08502188d5ae41b8dd8bc4250546b169838ba8470`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **PASS — bounded resolution of the named holds**.
 

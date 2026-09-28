@@ -13,7 +13,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected Randolph's relocation origin, ballroom dimensions and Owen ownership chronology. Removed unsupported construction, tank and quarters details; replaced the postwar labor claim with the documented contract and limited the tourism critique to website presentation. Added supporting source links; surrounding argument, original reporting frame and artwork retained."
+    note: "Corrected Randolph's relocation origin, ballroom dimensions and Owen ownership chronology. Removed unsupported construction, tank and quarters details; replaced the postwar labor claim with the documented contract and limited the tourism critique to website presentation. Added supporting source links; surrounding argument, original reporting frame and artwork retained. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-14"
     note: "Updated May 14, 2026, after OIP back-archive review. Cleaned Medium import residue, removed remote body images, normalized house style, and tightened source-discipline language around Nottoway's fire and plantation legacy."
@@ -46,9 +46,9 @@ medium_source_url: "https://medium.com/@lawtonperret/nottoway-plantation-burns-d
 mansion in White Castle, Louisiana. The fire spread fast, overtaking the
 entire structure. By morning, [**Nottoway Plantation**](https://www.nottoway.com), often described after Belle Grove's loss as the largest remaining antebellum mansion in the American South, was gone.
 
-What burned that night wasn't just a building.
+What burned that night was a building
 
-> It was **a symbol.**
+> and **a symbol.**
 
 It stood for Southern elegance and heritage.
 

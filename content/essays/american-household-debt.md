@@ -12,7 +12,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected New York Fed student-loan balances, ranking and trend, and the early-delinquency measure. Dated the rate-cut probability and replaced unsupported federal/private loan precision with a sourced share comparison. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Corrected New York Fed student-loan balances, ranking and trend, and the early-delinquency measure. Dated the rate-cut probability and replaced unsupported federal/private loan precision with a sourced share comparison. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-04-26"
     note: "Updated April 26, 2026, after OIP back-archive review, to clean Medium import artifacts and normalize Markdown rendering."
@@ -107,7 +107,7 @@ Labor cost trends and inflation data are central to the Federal Reserve's analys
 
 ### IV. Delinquency Trends and Financial Stress
 
-The overall delinquency rate rose to [3.5% in Q3 2024](https://www.newyorkfed.org/newsevents/news/research/2024/20241113), up from 3.2% in the previous quarter. While still below pre-pandemic levels, this upward trend highlights financial stress in certain segments.
+The overall delinquency rate rose to [3.5% in Q3 2024](https://www.newyorkfed.org/newsevents/news/research/2024/20241113), up from 3.2% in the previous quarter. While the rate remains below pre-pandemic levels, this upward trend highlights financial stress in certain segments.
 
 #### Subprime Borrowers
 Delinquencies remain disproportionately concentrated among subprime borrowers, who face higher borrowing costs and limited financial safety nets. This underscores systemic inequalities in credit access.

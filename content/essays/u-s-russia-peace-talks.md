@@ -17,7 +17,7 @@ medium_source_url: "https://medium.com/@lawtonperret/u-s-russia-peace-talks-6201
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added source links without changing prose."
+    note: "Added source links and applied minimal style cleanup; facts and source wording unchanged."
   - version: "1.1"
     date: "2026-05-04"
     note: "Updated May 4, 2026, after OIP back-archive review. Legacy Medium formatting, remote body images, punctuation artifacts, source-card residue, and targeted wording were cleaned while preserving the original publication frame."
@@ -37,7 +37,7 @@ collections:
 
 ## A Diplomatic Reset With Global Consequences
 
-The Riyadh talks between U.S. and Russian officials signaled an inflection point in America's global strategy. They were not only an attempt to test whether the war in Ukraine could be moved toward settlement. They also reflected a broader recalibration of U.S. foreign policy.
+The Riyadh talks between U.S. and Russian officials signaled an inflection point in America's global strategy. They attempted to test whether the war in Ukraine could be moved toward settlement and reflected a broader recalibration of U.S. foreign policy.
 
 The talks put several questions on the table at once: whether Washington could reopen channels with Moscow, whether European allies would be expected to carry more of the continent's security burden, and whether the United States could free attention and resources for a longer contest with China in the Indo-Pacific.
 
@@ -76,7 +76,7 @@ Key considerations remain:
 - European leaders worried that U.S.-Russia talks could marginalize both Europe and Ukraine.
 - A weaker U.S. commitment could embolden Russia if deterrence is not replaced by credible guarantees.
 
-A rushed settlement could leave Ukraine vulnerable. The point is not that every compromise is appeasement. It is that a settlement without enforceable security architecture can postpone conflict rather than end it.
+A rushed settlement could leave Ukraine vulnerable. A settlement without enforceable security architecture can postpone conflict rather than end it; that does not make every compromise appeasement.
 
 ## NATO's Future
 
@@ -84,7 +84,7 @@ A rushed settlement could leave Ukraine vulnerable. The point is not that every 
 
 One of the administration's clearest policy shifts was the expectation that Europe should assume primary responsibility for its own defense.
 
-Hegseth called for NATO members to move far beyond the 2% defense-spending benchmark. The demand placed pressure on governments that had already increased spending after Russia's invasion but still depended heavily on U.S. military capacity.
+Hegseth called for NATO members to move far beyond the 2% defense-spending benchmark. The demand placed pressure on governments that had already increased spending after Russia's invasion but depended heavily on U.S. military capacity.
 
 The implications for NATO were substantial:
 

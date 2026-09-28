@@ -14,7 +14,7 @@ edition: "Third web edition"
 revision_history:
   - version: "1.2"
     date: "2026-09-27"
-    note: "Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original wording, paragraph structure, source-method framing, and artwork are preserved."
+    note: "Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original argument, source-method framing, and artwork are preserved. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
@@ -83,7 +83,7 @@ A pope's residence, a pope's shoes, a pope's transportation, a pope's phrasing, 
 
 That is harder than it sounds.
 
-The Catholic Church is one of the oldest, largest, and most symbolically dense institutions on earth. Its habits accumulate over centuries. Its internal battles travel across languages, continents, and political systems. Any pope who tries to move it even slightly will meet resistance. Francis moved it by insisting on a pastoral grammar that many believers found immediately recognizable and many officials found uncomfortably demanding. He asked the Church to pay attention not only to moral law, but to moral wound. He asked it to think about accompaniment, patience, and human frailty without treating those realities as excuses. He asked it to sound less like a fortress guarding purity and more like a body sent to serve.
+The Catholic Church is one of the oldest, largest, and most symbolically dense institutions on earth. Its habits accumulate over centuries. Its internal battles travel across languages, continents, and political systems. Any pope who tries to move it even slightly will meet resistance. Francis moved it by insisting on a pastoral grammar that many believers found immediately recognizable and many officials found uncomfortably demanding. He asked the Church to pay attention to both moral law and moral wound. He asked it to think about accompaniment, patience, and human frailty without treating those realities as excuses. He asked it to sound less like a fortress guarding purity and more like a body sent to serve.
 
 [His environmental teaching](https://www.vatican.va/content/francesco/en/encyclicals/documents/papa-francesco_20150524_enciclica-laudato-si.html) carried that same instinct into global public life. Francis treated ecological crisis as a moral issue, not a technical side debate for specialists. He connected the destruction of the natural world to the degradation of human dignity. He wrote and spoke as if care for creation, care for the poor, and care for future generations belonged to one continuous ethic. In an era when leaders often split those issues apart for political convenience, he bound them together and called the result responsibility.
 

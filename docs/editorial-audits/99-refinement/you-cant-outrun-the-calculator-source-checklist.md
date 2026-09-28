@@ -2,7 +2,9 @@
 
 File: `content/essays/you-cant-outrun-the-calculator.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `27268d9d8399ad4a6fa74748c4beb0121a574f3d62edd4679cc5abd301ea7dbd`
+Final content SHA-256: `d7fceb30bd899c07e89b80436dd983ff5660da0dc6acde1316c5ef9a93b914ba`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **PASS — bounded resolution of the named attribution/benchmark hold.** The owner explicitly approved retaining Altman's reported competitive-programming progression, removing the unsupported September-model correspondence, and treating the year-end result as a possibility. Only the opening paragraph, matching source note and pending revision disclosure changed. Remaining career scenarios and political interpretation retain the original reporting frame.
 

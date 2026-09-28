@@ -2,7 +2,9 @@
 
 File: `content/essays/the-little-machine-in-the-glass-case.md`  
 Version: `1.1 / Second web edition`  
-SHA-256: `a166f3e90470d2a122d60342faca53ff8422ae4dc0eeb11cf99e82f92ee2f6ac`
+SHA-256: `22d20b72ff16a88df7e885e48ad1570390dd3c211c1a1817341732dd84c4b9d6`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current status: **PASS (bounded citation revision)**. Original prose restored; only supported hyperlink additions/destination repairs and minor citation metadata are allowed. Minimal corrections remain private and unapproved. This checkpoint supersedes all earlier September 27 major-revision candidates below; their claims that prose corrections were applied are no longer current.
 

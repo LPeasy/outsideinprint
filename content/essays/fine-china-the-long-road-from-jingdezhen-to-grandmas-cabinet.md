@@ -12,7 +12,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Retained source hyperlinks, corrected the chronology transition to European porcelain-making, and identified manufacturing shares as value-added. Surrounding prose, artwork, and original publication date are unchanged."
+    note: "Retained source hyperlinks, corrected the chronology transition to European porcelain-making, and identified manufacturing shares as value-added. Surrounding argument, artwork, and original publication date are unchanged. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-29"
     note: "Updated May 29, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -51,7 +51,7 @@ This mystery turned matter into power. The material exposed a gap. Europe could 
 
 ## China Before "China"
 
-Jingdezhen is not background. It is the production capital in the story. The [Smithsonian's Jingdezhen exhibition page](https://asia-archive.si.edu/exhibition/porcelain-production-jingdezhen/) describes the city as a center of global ceramics production since the fourteenth century, with trade expanding in the sixteenth century and global preeminence continuing after Europeans learned how to manufacture porcelain.
+Jingdezhen is the production capital in the story. The [Smithsonian's Jingdezhen exhibition page](https://asia-archive.si.edu/exhibition/porcelain-production-jingdezhen/) describes the city as a center of global ceramics production since the fourteenth century, with trade expanding in the sixteenth century and global preeminence continuing after Europeans learned how to manufacture porcelain.
 
 Ronald W. Fuchs II, writing for the [Chipstone Foundation's Ceramics in America](https://chipstone.org/article.php/691/Ceramics-in-America-2014/A-History-of-Chinese-Export-Porcelain-in-Ten-Objects), points to the combination that made Jingdezhen so difficult to displace: raw materials, skilled workers, government encouragement, and transport networks.
 
@@ -81,7 +81,7 @@ The most theatrical European porcelain collector was Augustus the Strong, electo
 
 [Fuchs gives the number that makes the obsession material](https://chipstone.org/article.php/691/Ceramics-in-America-2014/A-History-of-Chinese-Export-Porcelain-in-Ten-Objects): Augustus amassed about 21,000 pieces of Chinese and Japanese porcelain. In 1717, he traded 600 Saxon dragoons to Frederick William I of Prussia in exchange for 151 porcelain pieces, including the large vessels remembered as soldier vases.
 
-The trade sounds bizarre only if porcelain is treated as dishware. At court, porcelain was about command over global luxury and over useless beauty. A vase without practical use could become more socially powerful because of its uselessness. It did not serve the household. It elevated it.
+The trade sounds bizarre only if porcelain is treated as dishware. At court, porcelain was about command over global luxury and over useless beauty. A vase without practical use could become more socially powerful because of its uselessness. It elevated the household rather than serving a practical need.
 
 The parallel ambition was obvious. The court that could not buy enough porcelain would try to make it. [Meissen dates the first successful European hard-paste porcelain to January 1708](https://www.meissen.com/en/geschichte), through the work of Johann Friedrich Bottger and Ehrenfried Walther von Tschirnhaus, and the Royal-Polish and Electoral-Saxon Porcelain Manufactory to 1710.
 
@@ -135,4 +135,4 @@ Behind the glass sit objects whose ancestry runs back through Jingdezhen kilns, 
 
 The old plates remember something the modern label tends to forget. Before "China" meant cheap, it meant difficult. Before it meant mass-produced, it meant nearly impossible to copy. Before it meant disposable, it meant an object a king would trade soldiers to possess and a shipping magnate would build a room around.
 
-Grandma's china was never only dishware. It was the last household echo of a global status object, stacked carefully behind glass.
+Grandma's china was dishware and the last household echo of a global status object, stacked carefully behind glass.

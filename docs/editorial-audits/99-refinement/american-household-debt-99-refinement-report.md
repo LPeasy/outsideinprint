@@ -2,7 +2,9 @@
 
 File: `content/essays/american-household-debt.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `f26f3dbec98ce97652da32003f7a983513c67d63719df3c2dc270f763c28f4a0`
+Final content SHA-256: `78dd4fd389ae39987fe713099a2eb81a8c803acf6069f9b57822ed88d92016bc`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — bounded approved correction and source-link review**. The owner approved the dated market-probability framing and the qualitative federal/private loan-share comparison. Both are applied with matching source wrappers, resolving the named probability and incompatible-student-loan-statistic holds.
 

@@ -2,7 +2,9 @@
 
 File: `content/essays/mingo-county-mud-in-the-water.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `9b5265a6f9cc596e0a1282f7402f31313cfd0aa0579940c5e4bfa46ac76e85ac`
+Final content SHA-256: `f43f161805b17f244854b09eec0f18462ae9984feb56efc28497cc815e54ef9c`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS for the bounded editorial hold-resolution pass**. The named current holds are resolved. This is not a new exhaustive fact-check, numerical grade, engineering or health certification, technical-release clearance, or publication authorization.
 

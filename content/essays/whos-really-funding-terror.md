@@ -14,7 +14,7 @@ edition: "Fifth web edition"
 revision_history:
   - version: "1.4"
     date: "2026-09-27"
-    note: "Corrected Treasury PDF physical-page count. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Corrected Treasury PDF physical-page count. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-21"
     note: "Updated May 21, 2026, after OIP back-archive review. Treasury-source framing, house style, and legacy source residue were checked."
@@ -297,15 +297,13 @@ tension you live inside every time a wire transfer gets held up for
 
 If you work in **policy**, the NTFRA is one more proof point that the
 United States has fully leaned into a risk-based approach to financial
-crime. The goal is not to eliminate all terrorist financing. That is not
-realistic. The goal is to understand where the danger is concentrated and push
+crime. Eliminating all terrorist financing is not realistic. The goal is to understand where the danger is concentrated and push
 scarce resources in that direction.
 
 So if I had to give the **2024 Terrorist Financing Risk Assessment** a
 grade, I'd call it an **A**.
 
-Not because it answers every question or settles every argument, but
-because it offers a clear, structured story about who Treasury sees as today's main terrorist threats, how those actors are trying to raise and move money, where the U.S. financial system is most exposed, and where new cracks may be forming.
+It leaves questions and arguments unresolved, while offering a clear, structured story about who Treasury sees as today's main terrorist threats, how those actors are trying to raise and move money, where the U.S. financial system is most exposed, and where new cracks may be forming.
 
 > For a 35-page government PDF that most people will never open,
 > that's a lot of information hiding in plain sight.

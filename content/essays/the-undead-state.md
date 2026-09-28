@@ -14,7 +14,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected ICC transfer chronology and Chevron's overruling. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Corrected ICC transfer chronology and Chevron's overruling. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-03"
     note: "Updated May 3, 2026, after OIP back-archive review. Legacy Medium promotional residue, source-card fragments, headings, and punctuation artifacts were cleaned up; DOGE claims were softened to match the available record; source, metadata, and rendering were checked."
@@ -41,7 +41,7 @@ What began as a pragmatic solution soon became a defining feature of the America
 
 ## Growth and Specialization: The Rise of the Administrative State
 
-By the early 20th century, the federal government was no longer just an enforcer of laws but an active regulator of industries and social conditions. The Progressive Era brought agencies like the Food and Drug Administration (FDA) and the Federal Trade Commission (FTC), reflecting a belief that specialized expertise was necessary to handle economic and public health issues.
+By the early 20th century, the federal government had become both an enforcer of laws and an active regulator of industries and social conditions. The Progressive Era brought agencies like the Food and Drug Administration (FDA) and the Federal Trade Commission (FTC), reflecting a belief that specialized expertise was necessary to handle economic and public health issues.
 
 The New Deal of the 1930s expanded federal oversight, creating agencies like the Securities and Exchange Commission (SEC), Social Security Administration (SSA), and Tennessee Valley Authority (TVA) to manage economic recovery and public welfare. Unlike earlier agencies, these became permanent fixtures, cementing executive authority over economic policy.
 
@@ -65,9 +65,9 @@ The Pendleton Act (1883) and later civil service reforms shield bureaucrats from
 
 ### Judicial Deference and Administrative Rulemaking
 
-For decades, courts followed Chevron deference, instructing judges to defer to agency interpretations of vague statutes. This strengthened agency power and cemented regulations that became difficult to challenge. Although the [Supreme Court overruled Chevron deference in 2024](https://www.law.cornell.edu/supremecourt/text/22-451), agencies still wield significant rulemaking authority.
+For decades, courts followed Chevron deference, instructing judges to defer to agency interpretations of vague statutes. This strengthened agency power and cemented regulations that became difficult to challenge. Although the [Supreme Court overruled Chevron deference in 2024](https://www.law.cornell.edu/supremecourt/text/22-451), agencies retain significant rulemaking authority.
 
-These forces have collectively shaped a bureaucracy that is not only expansive but also deeply resistant to reform, precisely the conditions that DOGE has set out to dismantle.
+These forces have collectively shaped a bureaucracy that is expansive and deeply resistant to reform, precisely the conditions that DOGE has set out to dismantle.
 
 ## The Modern Bureaucratic State and the DOGE Reforms
 

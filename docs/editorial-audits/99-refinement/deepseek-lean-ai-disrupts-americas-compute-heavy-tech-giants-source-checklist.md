@@ -2,7 +2,9 @@
 
 File: `content/essays/deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `4c3f61d815ad7800397112d612ed1a50894149647e04525e1512fddc23d7876e`
+Final content SHA-256: `49ae6785180406e5190d5c3dbade771680b59453a1a023eea2bbd711d65baeb2`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — bounded source-link and approved-correction release review**. The explicitly approved cost and speculation clauses resolve the named all-in cost-comparison hold and the optional unnamed-analyst attribution concern; the earlier approved STaR training correction remains unchanged.
 

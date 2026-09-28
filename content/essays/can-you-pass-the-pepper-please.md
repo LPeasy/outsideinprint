@@ -20,7 +20,7 @@ revision_history:
     note: "Updated May 28, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added claim-level links to the original investigation, released incident records, data methodology, and detention standards. Reporting and original publication date remain unchanged."
+    note: "Added claim-level links to the original investigation, released incident records, data methodology, and detention standards. Reporting and original publication date remain unchanged. Applied minimal house-style cleanup without changing facts or sources."
 featured: false
 collections:
   - "civic-institutions-and-public-power"
@@ -82,7 +82,7 @@ The question is what happens when civil custody relies on jail tools to solve or
 
 ## The Numbers In The Force File
 
-The Post's records are useful because they are not one story from one room.
+The Post's records are useful because they extend beyond a single account from a single room.
 
 They are a file: many incidents, many facilities, many summaries, many uses of the same official language.
 
@@ -98,7 +98,7 @@ A single incident can be argued over as one room: what was said, who refused, wh
 
 The Post found that [at least 106 detainees had been injured](https://www.washingtonpost.com/business/2026/05/04/ice-detention-centers-force/) in use-of-force incidents since the beginning of 2024, with reports describing seizures, dislocated shoulders, broken arms, head injuries, and eye injuries. The paper also said the true number was probably higher because injuries were sometimes omitted from the reports.
 
-That does not turn every officer into an abuser or every detainee into a passive victim. It does not answer each case. It does something more basic. It shows that the report form is not a clerical afterthought. It is one of the only public-facing ways a closed custody system explains how force entered a room.
+That does not turn every officer into an abuser or every detainee into a passive victim. It does not answer each case. It does something more basic. It shows that the report form is one of the only public-facing ways a closed custody system explains how force entered a room.
 
 When power becomes physical, the paperwork matters.
 
@@ -107,7 +107,7 @@ When power becomes physical, the paperwork matters.
 
 ## The Words That Change The Event
 
-A report does not merely record an event. It gives the event a name.
+A report records an event and gives it a name.
 
 That is why the words matter.
 
@@ -191,7 +191,7 @@ ICE needs beds, movement, order, and compliance with federal standards. A contra
 
 By the time all of that reaches the form, it can be compressed into one word: compliance.
 
-That is the public-power problem. A private company operating under federal standards is not exercising merely private judgment. It is carrying out custody in the name of the United States. When force is used, the record cannot belong only to the building. It belongs to the public system that authorized the confinement, paid for the bed, set the standards, and received the report.
+That is the public-power problem. A private company operating under federal standards is carrying out custody in the name of the United States rather than exercising merely private judgment. When force is used, the record cannot belong only to the building. It belongs to the public system that authorized the confinement, paid for the bed, set the standards, and received the report.
 
 ![Editorial illustration of a civil detention facility drawn as a file cabinet with barred windows, bus lights outside, and a thin orange line moving through the drawers.](oip-image:essays/can-you-pass-the-pepper-please/section-2)
 *Capacity, custody, and paperwork become one machine when the locked room writes its own account.*
@@ -228,9 +228,7 @@ A serious answer begins with record discipline.
 
 Every use-of-force report should make the sequence visible. What was the immediate threat? What was the underlying complaint? What lesser steps were attempted? How long did the incident last? Who authorized force? Was medical staff consulted before force, if there was time? What medical review occurred afterward? Was video preserved? Were injuries reported later? Who reviewed the incident outside the direct chain involved in the event?
 
-These are not anti-officer questions.
-
-They are custody questions.
+These are custody questions rather than anti-officer questions.
 
 A staff member who made a reasonable decision in a difficult room benefits from a record that shows the decision clearly. A detainee who was harmed by unnecessary force benefits from a record that cannot hide behind vague verbs. A contractor benefits from standards that are not satisfied by formula. ICE benefits from a file that can survive outside review. The public benefits from knowing that civil detention does not become invisible when the door closes.
 
@@ -238,9 +236,7 @@ The second answer is pattern review.
 
 If the same facility repeatedly uses chemical agents during disputes over food, water, medical care, property, showers, crowding, or confinement conditions, the inquiry should not stop at the last order refused. It should also ask what produced the refusal. That means examining staffing, medical access, grievance systems, crowding, training, language access, transfer pressure, and contractor incentives.
 
-This is not a demand that every complaint be accepted at face value.
-
-It is a demand that complaints not disappear merely because they became operationally inconvenient.
+This is a demand that complaints not disappear merely because they became operationally inconvenient, without requiring every complaint to be accepted at face value.
 
 Custody will always need authority. Civil custody needs something more: a record that can show when authority was used because danger required it and when danger may have been created by unmet needs, bad conditions, poor communication, or a system stretched beyond its own standards.
 
@@ -254,7 +250,7 @@ The word "pepper" belongs to ordinary life before it belongs to chemical force. 
 
 No one in this story needs to be reduced to a role.
 
-The people held in detention are not symbols. The officers and guards are not props. The agency is not a single motive. The contractors are not a single explanation. The record is not a confession. It is a public document trying to carry a closed-room event.
+The people held in detention are not symbols. The officers and guards are not props. The agency is not a single motive. The contractors are not a single explanation. The record is a public document trying to carry a closed-room event, rather than a confession.
 
 That pressure is the civic story.
 

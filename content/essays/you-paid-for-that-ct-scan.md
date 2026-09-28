@@ -15,7 +15,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Qualified the diagnostic-phone absolute to recognize FDA-cleared mobile systems' limited uses. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Qualified the diagnostic-phone absolute to recognize FDA-cleared mobile systems' limited uses. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-21"
     note: "Updated May 21, 2026, after OIP back-archive review. Patient-access, FDA framing, and house-style issues were checked."
@@ -83,9 +83,7 @@ medical-device territory.
 > Doctors get slick tools. Patients get "unremarkable" reports and
 > plastic discs.
 
-Not because it's impossible!
-
-Because the incentives favor institutional caution over patient-facing
+Patient-facing clarity is possible. The incentives favor institutional caution over patient-facing
 clarity.
 
 ### What a patient CT app could be

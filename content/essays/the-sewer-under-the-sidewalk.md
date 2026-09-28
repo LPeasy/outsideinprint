@@ -11,7 +11,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Clarified that the advisory waiting period does not guarantee safe water. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Clarified that the advisory waiting period does not guarantee safe water. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.2"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
@@ -29,11 +29,11 @@ Ann McDonald thought the water was safe enough.
 
 Several weeks after a 2024 rainstorm, she took a kayak onto Alewife Brook outside Boston. The waiting period was not the problem. Public health officials recommend avoiding contact with receiving waters in the Massachusetts Water Resources Authority's combined sewer overflow network during rain and for 48 hours afterward, and she had waited much longer than that. When her kayak got caught in debris, she reached into the water to free it. Later that day, she got sick. She told the [Associated Press](https://apnews.com/article/combined-sewer-sewage-release-massachusetts-boston-bdb80fe18f7c6981c7d1dffe3a120caa) she attributed the illness to sewage in the brook.
 
-That is not proof that the brook made her sick. It is a scene that gives the issue its human shape.
+That scene gives the issue its human shape without proving that the brook made her sick.
 
 A person sees water. The advisory period has passed, but it is [not a guarantee that the water is safe](https://www.mwra.com/harbor/html/cso_reporting.htm). The pipe below the neighborhood tells a messier story.
 
-Alewife Brook runs through Cambridge, Arlington, and Somerville. It is not a postcard river. It is the kind of urban water that sits at the edge of daily life, near paths, dogs, runners, wildlife watchers, apartment buildings, roadways, parking lots, and backyards. AP reports that the brook receives millions of gallons of untreated sewage pollution each year from an older combined sewer system.
+Alewife Brook runs through Cambridge, Arlington, and Somerville. It is the kind of urban water that sits at the edge of daily life, near paths, dogs, runners, wildlife watchers, apartment buildings, roadways, parking lots, and backyards. AP reports that the brook receives millions of gallons of untreated sewage pollution each year from an older combined sewer system.
 
 That phrase sounds technical by design.
 
@@ -61,13 +61,13 @@ Too often, the escape route is a brook, river, harbor, or bay.
 
 The [EPA describes combined sewer systems](https://www.epa.gov/npdes/combined-sewer-overflows-csos) as networks that collect rainwater runoff, domestic sewage, and industrial wastewater in one pipe. When runoff exceeds system capacity, untreated stormwater and wastewater can discharge into nearby water bodies. MWRA's own [CSO notification page](https://www.mwra.com/harbor/html/cso_reporting.htm) gives the same basic logic: a large storm overwhelms the sewage system, rainwater mixes with wastewater, and the mixture discharges to nearby water.
 
-That is not a malfunction in the ordinary sense. It is a planned failure mode.
+That is a planned failure mode rather than a malfunction in the ordinary sense.
 
 The pipe was built with a release valve.
 
 ![Side-by-side illustration comparing an old combined sewer system with a separated stormwater and wastewater system during a rainstorm.](oip-image:essays/the-sewer-under-the-sidewalk/section-1)
 
-*A combined sewer is not just an old pipe. It is an old bargain about where the city sends water when the storm arrives.*
+*A combined sewer is an old pipe and an old bargain about where the city sends water when the storm arrives.*
 
 This old bargain once looked practical. One pipe was cheaper than two. Streets drained. Toilets flushed. The city kept moving. The river or brook absorbed the rest.
 
@@ -109,9 +109,7 @@ That is the hinge of the whole story.
 
 A typical year is useful for planning. It gives engineers a benchmark. It lets a model test a sequence of rain events rather than one dramatic hypothetical.
 
-People do not experience sewer failure as a typical year.
-
-They experience it as a storm.
+People experience sewer failure in a storm rather than a typical year.
 
 They experience it as a closed path, a smell, a wet basement, a warning sign, a child reaching toward water that a parent does not trust.
 
@@ -119,7 +117,7 @@ They experience it as a closed path, a smell, a wet basement, a warning sign, a 
 
 The fairest version of this essay has to say that MWRA has a real argument.
 
-The agency is not saying untreated wastewater in a brook is fine. It is saying full control is costly, disruptive, and not the only source of water pollution. Full separation would mean digging up streets and parking lots. It would redirect large volumes of stormwater, which can carry bacteria, nutrients, oil, trash, and other runoff from an urban watershed. The brook itself has limited capacity during wet weather.
+Without saying untreated wastewater in a brook is fine, the agency says full control is costly, disruptive, and not the only source of water pollution. Full separation would mean digging up streets and parking lots. It would redirect large volumes of stormwater, which can carry bacteria, nutrients, oil, trash, and other runoff from an urban watershed. The brook itself has limited capacity during wet weather.
 
 MWRA's board materials make a second point that is easy to miss in a simple sewage-versus-clean-water story. The agency's water quality modeling suggests that stormwater and upstream sources are the main causes of water quality exceedances on many wet-weather days. In its model, even eliminating CSOs in a 2050 typical year would not remove most water quality exceedance days without major reductions in other bacteria sources as well.
 
@@ -133,7 +131,7 @@ That argument deserves to be taken seriously.
 
 It does not end the debate.
 
-A combined sewer overflow is not just another source of pollution. It is a permitted release of untreated wastewater and stormwater into public water. Even if the measured water quality gain is smaller than residents expect, the civic meaning is larger.
+A combined sewer overflow is a permitted release of untreated wastewater and stormwater into public water. Even if the measured water quality gain is smaller than residents expect, the civic meaning is larger.
 
 A city can tell people not to touch the water for 48 hours after rain. Fine.
 
@@ -143,13 +141,13 @@ At what point does a greenway become a drainage easement with benches?
 
 ![A modest community meeting room with residents facing a projected rainfall map, with paper plans and a jar of cloudy brook water on a table.](oip-image:essays/the-sewer-under-the-sidewalk/section-2)
 
-*The argument is not only technical. It is about bills, trust, models, and what counts as clean enough.*
+*The technical argument also concerns bills, trust, models, and what counts as clean enough.*
 
 ## The $46 Question
 
-The number that makes the Alewife fight feel real is not only $1.28 billion.
+The $1.28 billion total is one number that makes the Alewife fight feel real.
 
-It is $46.
+Another is $46.
 
 AP reports that eliminating CSOs during stronger, less frequent storms would cost households an estimated $82 more per year in 2050, or $46 in today's dollars.
 
@@ -255,7 +253,7 @@ The lesson is not "build exactly what Portland built." The lesson is that a city
 
 Alewife Brook is easy to underestimate because it is small.
 
-It is not Boston Harbor. It is not the Charles River. It is not the kind of waterway that gets turned into a postcard for the region.
+It is neither Boston Harbor nor the Charles River, and it is not the kind of waterway that gets turned into a postcard for the region.
 
 That may be why it reveals the system so clearly.
 
@@ -263,7 +261,7 @@ Small urban waters reveal what a city really believes. Not what it says in clima
 
 Save the Alewife Brook was formed in 2020 by Kristin Anderson, whose home flooded with untreated sewage more than once after rainstorms, according to AP. The Mystic River Watershed Association has volunteers collect water samples from the brook for lab testing. David Stoff, who lives near the waterway and sits on Save the Alewife Brook's steering committee, told AP he had stopped his children from playing in the yard after sewage flooding.
 
-Those are not abstract stakeholders. They are people living next to the escape route.
+Those are people living next to the escape route.
 
 This is the part of the story that can get lost in the technical frame. A sewer model does not have a backyard. A rate chart does not have a child. A "2050 Typical Year" does not smell like anything.
 

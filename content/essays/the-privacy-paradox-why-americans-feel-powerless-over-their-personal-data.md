@@ -15,7 +15,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected study date, response categories and AI-aware denominator; narrowed the reading-frequency and consent statements and removed an unsupported trend claim. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Corrected study date, response categories and AI-aware denominator; narrowed the reading-frequency and consent statements and removed an unsupported trend claim. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-05"
     note: "Updated May 5, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, list formatting, source-card residue, and author-promo residue were cleaned while preserving the original publication frame."
@@ -53,7 +53,7 @@ And for government tracking, [71% are concerned, but 77% have little to no under
 
 People see the problem. They just don't have the tools to fix it.
 
-That's not an accident. Privacy policies aren't written to inform. They're written to exhaust.
+Privacy policies are written to exhaust rather than inform.
 
 - Companies bury details under pages of legalese, using phrases like "we may share your data with third parties" without saying who those third parties are.
 - Government agencies? They rarely even acknowledge the full extent of their data collection.
@@ -93,7 +93,7 @@ The Pew survey shows that 56% of Americans "always," "almost always," or "often"
 
 And companies count on that.
 
-Privacy policies aren't meant to be read. They're long, vague, and steeped in technical jargon.
+Privacy policies are long, vague, and steeped in technical jargon, discouraging readers.
 
 These documents serve one purpose: protecting companies from lawsuits, not informing users.
 
@@ -105,9 +105,9 @@ So they click.
 
 Even those who do care about privacy aren't given realistic options. Reading a single privacy policy can take dozens of minutes. A [2008 study](https://lorrie.cranor.org/pubs/readingPolicyCost-authorDraft.pdf) estimated that if the average American actually read every privacy policy they encountered in a year, it would take a full month of working days. That was over a decade ago.
 
-The takeaway is clear: Americans aren't ignoring privacy policies because they don't care. They're ignoring them because the system is built to be ignored.
+The takeaway is clear: Americans ignore privacy policies because the system is built to be ignored, rather than out of indifference.
 
-When nearly everyone skips reading the fine print, it's not a personal failing. It's a sign that the system itself is broken.
+When nearly everyone skips reading the fine print, it points to a broken system rather than a personal failing.
 
 ## Why People Don't Trust Privacy Settings to Protect Their Data
 
@@ -131,9 +131,9 @@ For some, privacy just isn't a priority. Nearly 3 in 10 Americans say it's "not 
 
 Whether due to fatigue, convenience, or simply growing up in a world where privacy is an afterthought, a significant portion of the public has checked out of the conversation entirely.
 
-When people trust themselves but not the system, when they feel overwhelmed yet indifferent, when they worry but still click "accept," the result is predictable: nothing changes.
+When people trust themselves but not the system, when they feel overwhelmed yet indifferent, when they worry but click "accept," the result is predictable: nothing changes.
 
-Americans aren't failing to protect their privacy. They've been set up to fail.
+Americans have been set up to fail at protecting their privacy.
 
 ## Why People Don't Trust Social Media With Their Personal Data
 
@@ -145,13 +145,13 @@ The Pew survey makes this clear:
 - 76% don't trust them to stop selling personal data
 - 71% don't think they'll be held accountable by the government.
 
-This isn't just skepticism. It's resignation.
+This skepticism has become resignation.
 
-People aren't waiting for tech companies to change their ways. They assume they never will.
+People assume tech companies will never change their ways.
 
 And they're probably right.
 
-Social media giants don't need public trust to survive. Facebook, Instagram, TikTok, and X (Twitter) are too ingrained in daily life. Even if people don't trust them, they still use them.
+Social media giants don't need public trust to survive. Facebook, Instagram, TikTok, and X (Twitter) are too ingrained in daily life. Even if people don't trust them, they use them.
 
 The result? No real pressure to change. These companies know that even after the latest scandal, users will log back in. Advertisers will keep paying for eyeballs. The cycle repeats.
 
@@ -161,7 +161,7 @@ Americans overwhelmingly believe there's no real oversight: just 29% think tech 
 
 If people don't believe regulators will protect them, why bother fighting for stricter rules?
 
-This is where privacy violations become just another fact of life. People don't just distrust social media companies. They've accepted that they can't be stopped.
+This is where privacy violations become just another fact of life. People distrust social media companies and have accepted that they can't be stopped.
 
 That kind of resignation is exactly what these platforms count on.
 
@@ -181,7 +181,7 @@ For every privacy setting, there's a loophole. For every tracker blocked, anothe
 
 This creates a troubling paradox: those who understand the system best have the least faith in it.
 
-Their skepticism isn't just a personal belief. It's a sign that the system itself is broken. If the people making an effort still feel powerless, what chance does the average user have?
+Their skepticism is a personal belief and a sign that the system itself is broken. If the people making an effort feel powerless, what chance does the average user have?
 
 ## How AI Is Making Data Privacy Worse (And Why It Matters)
 
@@ -201,7 +201,7 @@ But at what cost?
 
 If people already feel helpless in the face of corporate data collection, how will they push back against AI systems that operate in the background, learning from their every interaction?
 
-AI won't just track behavior. It will predict, profile, and manipulate. And if history is any guide, the public won't be given a meaningful choice in the matter.
+AI will track behavior, predict, profile, and manipulate. And if history is any guide, the public won't be given a meaningful choice in the matter.
 
 We've already accepted that privacy policies are unreadable. That surveillance is inevitable. That companies won't change.
 
@@ -228,7 +228,7 @@ And yet, most people accept the trade-off. They click "agree." They stay on plat
 
 AI will only deepen this cycle, automating data collection at a scale humans can't track, let alone control.
 
-This isn't the result of individual failure. It's the outcome of a system designed to extract data, obscure its use, and offer no real alternatives.
+This is the outcome of a system designed to extract data, obscure its use, and offer no real alternatives, rather than individual failure.
 
 As long as companies profit from surveillance nothing will change.
 

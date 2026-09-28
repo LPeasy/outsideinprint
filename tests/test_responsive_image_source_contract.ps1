@@ -902,12 +902,12 @@ $retiredMediumWageChart = @{
   sha256 = '27b17e40974d5f4cc1ab36b7da14355c9864d641b5451a47a515e6b488a68ba0'
   essay = 'content/essays/generation-inflation.md'
   replacement = @'
-**Real hourly wage growth, 1979–2023**
+**Real hourly wage growth, 1979-2023**
 
 | Wage group | Inflation-adjusted growth |
 |---|---:|
 | Low wage: 10th percentile | 18.3% |
-| Middle wage: average of 40th–60th percentiles | 17.4% |
+| Middle wage: average of 40th-60th percentiles | 17.4% |
 | High wage: 90th percentile | 51.7% |
 
 Source: [EPI, corrected 2024 report, Appendix Figure A data table](https://www.epi.org/publication/swa-wages-2023/).

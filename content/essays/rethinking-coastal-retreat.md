@@ -11,7 +11,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Identified the Rincon benefit-cost ratio as a June 2023 draft buyout alternative including recreation benefits. Replaced the unsupported FEMA-attributed universal property-value guarantee with a qualified risk statement. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Identified the Rincon benefit-cost ratio as a June 2023 draft buyout alternative including recreation benefits. Replaced the unsupported FEMA-attributed universal property-value guarantee with a qualified risk statement. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-04-28"
     note: "Updated April 28, 2026, after OIP back-archive review. Legacy Medium punctuation, list formatting, and Markdown rendering artifacts were cleaned; source, metadata, and rendering were checked."
@@ -55,7 +55,7 @@ Several managed retreat projects provide valuable insights into both the potenti
 
 ## Staten Island, New York
 
-After Hurricane Sandy in 2012, New York State initiated buyouts in flood-prone neighborhoods like Oakwood Beach. The program successfully reduced vulnerability and restored green buffer zones. However, uneven participation fragmented communities, leaving some homes abandoned and others still at risk (Stanford, 2018).
+After Hurricane Sandy in 2012, New York State initiated buyouts in flood-prone neighborhoods like Oakwood Beach. The program successfully reduced vulnerability and restored green buffer zones. However, uneven participation fragmented communities, leaving some homes abandoned and others remaining at risk (Stanford, 2018).
 
 ## Isle de Jean Charles, Louisiana
 
@@ -63,7 +63,7 @@ A [$48 million federal relocation project](https://dev.isledejeancharles.la.gov/
 
 ## United Kingdom Coastal Realignment
 
-In contrast, the UK has embraced managed retreat by converting high-risk areas into wetlands. These projects not only reduced flood risks but also restored natural habitats. However, high upfront costs remain a barrier to widespread adoption (Springer Link, 2024).
+In contrast, the UK has embraced managed retreat by converting high-risk areas into wetlands. These projects reduced flood risks and restored natural habitats. However, high upfront costs remain a barrier to widespread adoption (Springer Link, 2024).
 
 These examples highlight that while managed retreat can be effective, it often encounters cultural, logistical, and financial challenges that limit its scalability.
 

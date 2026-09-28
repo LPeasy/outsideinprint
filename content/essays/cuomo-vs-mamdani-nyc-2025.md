@@ -14,7 +14,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected buses and income/corporate taxes in the historical platform summary. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Corrected buses and income/corporate taxes in the historical platform summary. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-15"
     note: "Updated May 15, 2026, after OIP back-archive review. Removed remote Medium body images, normalized imported punctuation, corrected a candidate-description error, and added official ranked-choice result context while preserving the June 2025 frame."
@@ -98,7 +98,7 @@ echoing the post-Sanders era.
 *Created by Author with ChatGPT*
 
 
-**This contest isn't just about NYC** ~ it's a referendum on **the
+**This NYC contest** is also a referendum on **the
 future of the Democratic Party:**
 
 - **Experience vs. Change:** What do voters want in

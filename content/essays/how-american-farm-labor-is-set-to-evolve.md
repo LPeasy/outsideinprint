@@ -14,7 +14,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected farmworker population, wage-comparison groups and H-2A certified-position measure. Added or retained claim-level source links; original reporting frame and artwork retained. Removed an unsupported mechanization percentage and unverified Murray bibliography entry, selected Kandel's identified 2008 report, and linked Martin's existing title."
+    note: "Corrected farmworker population, wage-comparison groups and H-2A certified-position measure. Added or retained claim-level source links; original reporting frame and artwork retained. Removed an unsupported mechanization percentage and unverified Murray bibliography entry, selected Kandel's identified 2008 report, and linked Martin's existing title. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-04-28"
     note: "Updated April 28, 2026, after OIP back-archive review. Legacy Medium punctuation, list formatting, and Markdown rendering artifacts were cleaned; source, metadata, and rendering were checked."
@@ -41,7 +41,7 @@ This essay examines the transformations in American farm labor since 1950, highl
 
 The decades following World War II were transformative for American agriculture. Rising global demand, government support, and technological innovation spurred an agricultural boom. Mechanization revolutionized farming practices, with machines like the mechanical cotton picker reducing the need for manual labor in some crops. In the Midwest, tractors replaced farmhands, while automated harvesters transformed wheat and corn production.
 
-However, not all sectors could mechanize. Fruits and vegetables, requiring delicate handling, still depended heavily on manual labor. To meet these needs, the U.S. turned to immigrant labor. [The Bracero Program (1942-1964) brought millions of Mexican workers to American farms](https://amhistory.si.edu/docs/FOOD_Latin_Flavors.pdf), offering temporary visas to address labor shortages. While the program met critical economic demands, it also exposed workers to exploitative conditions, often with little recourse.
+However, not all sectors could mechanize. Fruits and vegetables, requiring delicate handling, continued to depend heavily on manual labor. To meet these needs, the U.S. turned to immigrant labor. [The Bracero Program (1942-1964) brought millions of Mexican workers to American farms](https://amhistory.si.edu/docs/FOOD_Latin_Flavors.pdf), offering temporary visas to address labor shortages. While the program met critical economic demands, it also exposed workers to exploitative conditions, often with little recourse.
 
 The program's end coincided with the rise of the United Farm Workers (UFW) movement in the 1960s and 1970s. [Led by Cesar Chavez and Dolores Huerta](https://www.nps.gov/people/dolores-huerta.htm), the UFW fought for better wages, union protections, and improved working conditions. Strikes, boycotts, and marches drew national attention to farmworkers' struggles, marking a pivotal moment in the fight for agricultural labor rights.
 
