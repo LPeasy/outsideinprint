@@ -5,7 +5,9 @@
 Decision: PASS
 
 - Current version: 2.0, Third web edition. This replaces the pending minor version within the same unpublished edition ordinal.
-- Current essay SHA-256: `6d0e56cd38f209c5f6b3376fd3d019a4a6e310a4623e4d5459c8060769d3c98d`.
+- Current essay SHA-256: `4863b491666a59b9d0013d7549ca836c22903557b0e061ddcbddf32168619fcd`.
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 - Approval: [final-nine owner decisions](../final-nine-owner-decisions-2026-09-27.md) and the owner's explicit approval of all nine bounded sets, including listed removals and the Chili's illustrative-origin confirmation.
 - Exact applied deltas: [Brands implementation map](../final-nine-brands-implementation-map-2026-09-27.json), from snapshot `/tmp/oip-final-nine-brands-dtFpi2/the-political-economy-of-airports.md`.
 

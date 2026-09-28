@@ -4,7 +4,9 @@ Date: 2026-09-27
 
 Version: `1.3`
 
-Final SHA256: `f56bbb130f2cdea0ea9873165758232a5235866da5fe3fca633b942f822f3fa5`
+Final SHA256: `3645ee5f77ecbba72f908e5e4019ba4b9b77dff7f5914d30acf4e9cc7f77eeeb`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Status: Source-link pass complete; normal publication gate remains separate
 
@@ -20,4 +22,3 @@ USACE HEC-FDA Technical Reference, Natural Variability vs. Knowledge Uncertainty
 ## Preservation and private issues
 
 No public prose, caption, order, artwork, discovery metadata or original date was changed. Existing links remain. Private concerns and minimal proposed corrections are in `../core-link-only-flood-pair-2026-09-27.md`; these proposals are not applied. This checklist records the added links, not a new certification of every historical fact or quotation.
-

@@ -11,7 +11,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added source links without changing prose."
+    note: "Added source links and applied minimal style cleanup; facts and source wording unchanged."
   - version: "1.2"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
@@ -82,7 +82,7 @@ The legal system has no easy way to hold that tension. Courts prefer questions t
 
 Glyphosate's regulatory history shows that strain. EPA [withdrew its 2020 interim registration review decision](https://www.epa.gov/pesticides/epa-withdraws-glyphosate-interim-decision) in September 2022 after the Ninth Circuit vacated the human-health portion and after the agency faced deadlines tied to ecological review and Endangered Species Act consultation. EPA says it is updating its evaluation of glyphosate's carcinogenic potential and working toward a final registration review decision.
 
-So the Court is not looking at a settled civic object. It is looking at a live administrative record printed on plastic.
+So the Court is looking at a live administrative record printed on plastic rather than a settled civic object.
 
 ![Rows of crops bend toward a courthouse-shaped horizon while a single paper label casts a long shadow over the field.](oip-image:essays/the-warning-label-in-the-weeds/section-1)
 

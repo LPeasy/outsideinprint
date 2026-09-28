@@ -8,12 +8,13 @@ collections: ["risk-uncertainty"]
 section_label: "Essay"
 subtitle: "How your monthly budget can explain two core ideas from probability, risk, and economics ~"
 description: "A practical guide to mutually exclusive and collectively exhaustive thinking, using a household budget to show how categories prevent overlap and omission."
+image: "oip-image:medium/61a52f886b9d1e4bdb9b1d293ab6bbd3419ed45b322e637926a8ce7894b1325e"
 version: "2.0"
 edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected double-counting and unallocated-balance examples. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Corrected double-counting and unallocated-balance examples. Added or retained claim-level source links; original reporting frame and artwork retained. Added an existing illustration for social sharing without changing the article layout. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-21"
     note: "Updated May 21, 2026, after OIP back-archive review. House-style issues, legacy punctuation, and rendering were checked."
@@ -40,7 +41,7 @@ balance is a lot smaller than you remember…
 
 > Where did all my money go?
 
-That question isn't just about money. It's about ***categories.***
+That question about money is also about ***categories.***
 
 You are trying to break one stack of cash into clean buckets: rent,
 food, gas, fun, savings.
@@ -123,7 +124,7 @@ dollar gets counted as if it belongs in multiple places. Your food
 spending looks higher than it really is. Your fun spending looks higher
 than it really is. Your self-care category too ~
 
-The problem isn't just cosmetic. Double counting mis-shapes the story.
+The problem goes beyond appearances. Double counting mis-shapes the story.
 You might conclude you're "investing heavily" in your well-being when in
 reality you just found three labels for the same night out.
 
@@ -339,8 +340,8 @@ Real life leaks around the edges, and you may keep a
 small "Other" bucket. That's totally fine. The key is that you've
 made it harder for overlap and blind spots to distort the picture.
 
-Seen that way, "mutually exclusive and collectively exhaustive" aren't
-just textbook phrases ~ they're habits of mind:
+Seen that way, "mutually exclusive and collectively exhaustive" are
+textbook phrases that become habits of mind:
 
 > One dollar, one story, and no dollars missing.
 

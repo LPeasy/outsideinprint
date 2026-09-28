@@ -14,7 +14,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Corrected Obama's initiative name. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Corrected Obama's initiative name. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-02"
     note: "Updated May 2, 2026, after OIP back-archive review. Legacy Medium image embeds, promotional residue, punctuation artifacts, and unsupported reputational phrasing were cleaned up; source, metadata, and rendering were checked."
@@ -61,7 +61,7 @@ The same could be said of Barack Obama's [Accountable Government Initiative](htt
 
 The pattern is clear: every few decades, an administration attempts to make government more efficient, but entrenched interests, political gridlock, and bureaucratic self-preservation limit the impact.
 
-In this sense, DOGE is a response to a long history of half-measures and abandoned efficiency crusades. The difference is that Musk and his team aren't just making recommendations. They are shutting down agencies by force, bypassing Congress, and daring anyone to stop them.
+In this sense, DOGE is a response to a long history of half-measures and abandoned efficiency crusades. The difference is that Musk and his team have moved beyond recommendations. They are shutting down agencies by force, bypassing Congress, and daring anyone to stop them.
 
 The Real Culprit: Congressional Neglect
 
@@ -138,7 +138,7 @@ The initiative thrives on frustration, on the idea that if nothing else has work
 
 This is why it's so hard to condemn DOGE.
 
-Not because it is right, but because the alternative, accepting the status quo, feels equally indefensible.
+Because the alternative, accepting the status quo, feels equally indefensible. That does not make DOGE right.
 
 The real tragedy is that this binary choice exists at all.
 

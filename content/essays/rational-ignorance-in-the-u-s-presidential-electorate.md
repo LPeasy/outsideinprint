@@ -12,7 +12,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected uneven wealth-share trend. Added or retained claim-level source links; original reporting frame and artwork retained. Recast the wealth-trend inference as persistence across changes in presidential leadership, not proof of independence from electoral outcomes."
+    note: "Corrected uneven wealth-share trend. Added or retained claim-level source links; original reporting frame and artwork retained. Recast the wealth-trend inference as persistence across changes in presidential leadership, not proof of independence from electoral outcomes. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-04-26"
     note: "Updated April 26, 2026, after OIP back-archive review, to clean Medium import artifacts and normalize Markdown rendering."
@@ -74,7 +74,7 @@ For the average citizen, particularly those in lower-income brackets, these dyna
 
 #### Emotional Strain in a Polarized Environment
 
-Engaging with presidential politics is not only cognitively demanding but emotionally taxing, particularly in today's polarized media landscape.
+Engaging with presidential politics is both cognitively demanding and emotionally taxing, particularly in today's polarized media landscape.
 
 ##### 1. Stress and Anxiety:
 
@@ -130,6 +130,6 @@ Disengagement from the presidential election is often framed as apathy or irresp
 
 ### VI. Conclusion: Choosing Rational Disengagement
 
-Willful ignorance in presidential elections is not a failure of democracy but a rational adaptation to its structural realities. For many individuals, disengaging from the presidential election cycle allows them to avoid cognitive and emotional burdens while focusing on aspects of life where they can exercise greater agency. This perspective reframes disengagement not as a problem to be solved but as a logical and potentially beneficial choice for those seeking stability and control in an increasingly polarized political environment.
+Willful ignorance in presidential elections is a rational adaptation to democracy's structural realities rather than a failure of democracy. For many individuals, disengaging from the presidential election cycle allows them to avoid cognitive and emotional burdens while focusing on aspects of life where they can exercise greater agency. This perspective reframes disengagement as a logical and potentially beneficial choice for those seeking stability and control in an increasingly polarized political environment, rather than a problem to be solved.
 
-Rather than viewing disengagement as a threat to democracy, it can be understood as an acknowledgment of the limitations of presidential politics. By shifting attention to state and local issues, individuals can achieve meaningful engagement without the stress and futility often associated with national elections. In this way, willful ignorance becomes not just rational, but prudent.
+Rather than viewing disengagement as a threat to democracy, it can be understood as an acknowledgment of the limitations of presidential politics. By shifting attention to state and local issues, individuals can achieve meaningful engagement without the stress and futility often associated with national elections. In this way, willful ignorance becomes both rational and prudent.

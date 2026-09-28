@@ -14,7 +14,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected March 2025 compensation shares and identified the state/local government comparison. Added or retained claim-level source links; original reporting frame retained. Corrected flagged graphics and captions without changing surrounding prose in this graphics pass."
+    note: "Corrected March 2025 compensation shares and identified the state/local government comparison. Added or retained claim-level source links; original reporting frame retained. Corrected flagged graphics and captions without changing surrounding prose in this graphics pass. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-18"
     note: "Updated May 18, 2026, after OIP back-archive review. Removed remote Medium chart media, normalized house style, checked BLS compensation framing, and preserved the original argument."
@@ -32,9 +32,9 @@ medium_source_url: "https://medium.com/@lawtonperret/public-vs-private-pay-who-r
 The custodian at your local public school probably makes more ~ **per
 hour, with benefits** ~ than the guy who just cleaned your hotel room.
 
-**It's not because one job is easier or harder. It's because one of them
-has a union, a pension, great health insurance, and a predictable
-schedule.**
+**The difference comes from one job having a union, a pension, great
+health insurance, and a predictable schedule, rather than being easier
+or harder.**
 
 The other has \$2 and some change in their pocket.
 
@@ -61,14 +61,14 @@ not always where you'd expect.
 > **This piece looks at *where, why, and how* the differences in pay,
 > benefits, and lifestyle add up.**
 
-> **Pay isn't just wages; it's the whole package.**
+> **Pay includes the whole package.**
 
 ### Job-by-Job: Public vs Private Pay Compared
 
 > Let's stack up a few familiar jobs side by side.
 
 - **Teachers**: A **public K-12 teacher makes more than
- a private** school teacher. Not just in salary ~ the pension and
+ a private** school teacher. Beyond salary, the pension and
  health insurance bump that advantage even further. If you're eyeing a
  teaching career, this is why public schools attract and keep more
  talent.
@@ -130,8 +130,8 @@ Take three snapshots:
  haul.
 3. **Custodians**: The custodian at the county
  courthouse usually makes more ~ and has stronger benefits ~ than the
- custodian at a chain hotel. The difference isn't skill or effort;
- it's the public sector's wage floor and access to unions.
+ custodian at a chain hotel. The difference comes from the public sector's wage floor and access to
+ unions rather than skill or effort.
 
 Some say **that split** ~ education vs STEM, public vs private ~
 
@@ -144,9 +144,9 @@ Some say **that split** ~ education vs STEM, public vs private ~
 
 > Zooming out, the patterns show up clearly in the averages.
 
-![On average, government jobs pay far more for blue-collar work, while white-collar pay is closer but still leans public](oip-image:medium/511e88398070970581caf192a5cca6ecc1864e5c78caee1c7ffb853707b00313)
+![On average, government jobs pay far more for blue-collar work, while white-collar pay is closer but continues to lean public](oip-image:medium/511e88398070970581caf192a5cca6ecc1864e5c78caee1c7ffb853707b00313)
 
-*On average, government jobs pay far more for blue-collar work, while white-collar pay is closer but still leans public. In elite roles, private compensation often dwarfs public. Source: BLS ECEC, March 2025.*
+*On average, government jobs pay far more for blue-collar work, while white-collar pay is closer but continues to lean public. In elite roles, private compensation often dwarfs public. Source: BLS ECEC, March 2025.*
 
 
 *In the author's BLS-based comparison, government jobs pay far more for
@@ -187,18 +187,18 @@ A maintenance worker might see government work as the clear winner.
 A high performing consultant in private industry might feel the
 opposite.
 
-**Both are right ~ the divide isn't just public vs private.**
+**Both are right ~ the divide includes public vs private**
 
-**It's blue-collar vs white-collar.**
+**and blue-collar vs white-collar.**
 
 > And here's the thing:\
-> The divide isn't just about wages.
+> The divide extends beyond wages.
 
 For both blue- and white-collar workers, **the kicker is how much of
 their pay comes in the form of benefits.**
 
-A custodian might be better off in government not only because of higher
-wages, but also because of a pension and health insurance. An economist
+A custodian might be better off in government because of higher
+wages as well as a pension and health insurance. An economist
 in the private sector might get a big salary bump, but far less in
 guaranteed retirement, health insurance benefits, and paid time off.
 
@@ -230,8 +230,8 @@ These [March 2025 ECEC figures](https://www.bls.gov/news.release/archives/ecec_0
 *Employer compensation shares, March 2025: state and local government versus private industry. Selected benefit components shown; federal workers excluded. [Source: BLS ECEC, Table 1](https://www.bls.gov/news.release/archives/ecec_06132025.htm).*
 
 
-For many state and federal employees, retirement isn't just a 401(k)
-match ~ it's a defined pension. That can mean decades of guaranteed
+For many state and federal employees, retirement extends beyond a 401(k)
+match to a defined pension. That can mean decades of guaranteed
 income.
 
 Private workers, meanwhile, tend to get more up front in salary and may
@@ -273,9 +273,9 @@ scales.
 
 *That's why the answer to "who gets paid more?" is so tricky.*
 
-> It's not just about today,
+> It's about today
 
-> it's also the promise of tomorrow.
+> and the promise of tomorrow.
 
 ### The Bottom Line: Public vs Private Pay Isn't One-Size-Fits-All
 
@@ -284,7 +284,7 @@ scales.
 - **Private-sector jobs offer higher upside with more
  risk.**
 
-> The trade-off isn't just economic ~ it's structural.
+> The trade-off is economic and structural.
 
 So when people ask **"Who gets paid more ~ private or public workers?"**
 

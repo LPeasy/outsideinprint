@@ -17,7 +17,7 @@ edition: "Seventh web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Retained source hyperlinks and applied approved narrow chronology, source-attribution, catalog-scope, track-title, and quotation-transcription corrections. The opening wordplay, surrounding prose, artwork, and original publication date are preserved; the unpublished broad rewrite remains withdrawn."
+    note: "Retained source hyperlinks and applied approved narrow chronology, source-attribution, catalog-scope, track-title, and quotation-transcription corrections. The opening wordplay, surrounding argument, artwork, and original publication date are preserved; the unpublished broad rewrite remains withdrawn. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-15"
     note: "Clarified source framing around Vulfpeck's independent model and standardized punctuation."
@@ -281,7 +281,7 @@ Stratton also [produces for ***The Fearless Flyers***](https://vulf.bandcamp.com
 offshoot featuring *Cory Wong and Nate Smith*, and releases **solo
 material** under the name [***Vulfmon***](https://vulf.bandcamp.com/album/here-we-go-jack).
 
-> Stratton doesn't just bring in collaborators ~ he curates them like
+> Stratton brings in collaborators and curates them like
 > vintage records, turning each guest appearance into a signature
 > seasoning.
 

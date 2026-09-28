@@ -14,7 +14,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Replaced one resident/fire-chief paragraph with the approved WSAZ-backed resident/utility-manager account. Added bounded source links and repaired source destinations; all other prose, reporting frame, and artwork unchanged."
+    note: "Replaced one resident/fire-chief paragraph with the approved WSAZ-backed resident/utility-manager account. Added bounded source links and repaired source destinations; the surrounding argument, reporting frame, and artwork unchanged. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-09"
     note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, source-card residue, headings, spacing, and water-system claim framing were cleaned while preserving the original publication frame."
@@ -37,9 +37,9 @@ The state Public Service Commission [opened an investigation](https://westvirgin
 
 One resident described [recurring outages and brown water](https://www.wsaz.com/2025/01/21/customers-voice-water-woe-frustrations-mingo-county/). The utility's manager acknowledged delayed cleaning of sediment basins.
 
-That is not just inconvenience. It is infrastructure failure entering daily life.
+That inconvenience is infrastructure failure entering daily life.
 
-Mingo County is not unique. It is a warning about what happens when small systems carry large liabilities, aging pipes, limited revenue, and too little institutional capacity.
+Mingo County illustrates a wider problem. It is a warning about what happens when small systems carry large liabilities, aging pipes, limited revenue, and too little institutional capacity.
 
 ### When Legal Does Not Mean Safe
 
@@ -50,11 +50,11 @@ Mingo County is not unique. It is a warning about what happens when small system
 
 Water regulation is complicated because "legal" and "healthy" are not always the same claim.
 
-[Federal drinking-water rules set enforceable limits.](https://www.epa.gov/sdwa/how-epa-regulates-drinking-water-contaminants) Public-health researchers and advocacy groups often use lower health-based guidelines. A utility can be in compliance with one standard while still raising serious questions under another.
+[Federal drinking-water rules set enforceable limits.](https://www.epa.gov/sdwa/how-epa-regulates-drinking-water-contaminants) Public-health researchers and advocacy groups often use lower health-based guidelines. A utility can be in compliance with one standard while continuing to raise serious questions under another.
 
-That distinction matters in places like Mingo County, where residents already distrust what comes from the tap.
+The distinction is important in places like Mingo County, where residents already distrust what comes from the tap.
 
-[Reports and water-quality summaries](https://www.ewg.org/tapwater/system.php?pws=WV3303030) have flagged disinfection byproducts such as total trihalomethanes and chloroform as concerns. Those compounds can form [when disinfectants react with organic matter in water](https://www.epa.gov/dwreginfo/stage-1-and-stage-2-disinfectants-and-disinfection-byproducts-rules). They are not proof that every glass is immediately dangerous, but they are a sign that treatment, source water, and system maintenance deserve scrutiny.
+[Reports and water-quality summaries](https://www.ewg.org/tapwater/system.php?pws=WV3303030) have flagged disinfection byproducts such as total trihalomethanes and chloroform as concerns. Those compounds can form [when disinfectants react with organic matter in water](https://www.epa.gov/dwreginfo/stage-1-and-stage-2-disinfectants-and-disinfection-byproducts-rules). They are a sign that treatment, source water, and system maintenance deserve scrutiny rather than proof that every glass is immediately dangerous.
 
 Trust breaks when residents are told a system is technically compliant while their lived experience says the water is brown, unreliable, or unsafe to use.
 
@@ -102,7 +102,7 @@ First, audit the system before collapse. Communities need honest inventories of 
 
 Second, publish the record. Test results, boil notices, maintenance backlogs, financial statements, and enforcement actions should be easy for residents to find and understand.
 
-Third, realign incentives. State and federal support should reward system health, not just crisis response. Rate design should protect low-income households without starving the utility. Regionalization, shared services, or outside technical assistance may be necessary where a small customer base cannot support a safe system alone.
+Third, realign incentives. State and federal support should reward system health as well as crisis response. Rate design should protect low-income households without starving the utility. Regionalization, shared services, or outside technical assistance may be necessary where a small customer base cannot support a safe system alone.
 
 None of that is simple. Water systems are expensive, local, and politically sensitive.
 
@@ -115,7 +115,7 @@ But the alternative is worse: wait until brown water, school closures, and emerg
 *Photo by the blowup on Unsplash*
 
 
-When a water system collapses, the damage is not only mechanical.
+When a water system collapses, the damage extends beyond mechanical failures.
 
 It costs money. It costs health. It costs trust.
 

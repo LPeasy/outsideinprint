@@ -12,7 +12,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected income-population, household-size and dollar-reference definitions, the income-share endpoint, and the service-occupation label; linked the verified occupation medians. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Corrected income-population, household-size and dollar-reference definitions, the income-share endpoint, and the service-occupation label; linked the verified occupation medians. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-04-27"
     note: "Updated April 27, 2026, after OIP back-archive review. Legacy Medium punctuation, list formatting, and Markdown rendering artifacts were cleaned; source, metadata, and rendering were checked."
@@ -28,7 +28,7 @@ medium_source_url: "https://medium.com/@lawtonperret/household-and-individual-we
 
 ## Introduction: Income Trends as a Reflection of Economic Transformation
 
-Income trends serve as one of the most critical indicators of a nation's economic health, revealing profound insights into labor markets, wealth distribution, and structural changes in the economy. In the United States, household and personal income trends over the past five decades underscore not only economic growth but also systemic disparities, regional differences, and the shifting composition of the middle class.
+Income trends serve as one of the most critical indicators of a nation's economic health, revealing profound insights into labor markets, wealth distribution, and structural changes in the economy. In the United States, household and personal income trends over the past five decades underscore economic growth and systemic disparities, regional differences, and the shifting composition of the middle class.
 
 This analysis examines the latest data on income trends, including wage growth, demographic inequities, and regional variations. By understanding these dynamics, we can better assess their impact on economic inequality, social mobility, and wealth accumulation in America.
 

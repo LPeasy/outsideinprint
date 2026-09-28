@@ -13,7 +13,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected Refugee Convention naturalization premise. Added or retained claim-level source links; original reporting frame retained. Corrected image captions without changing surrounding prose in this graphics pass."
+    note: "Corrected Refugee Convention naturalization premise. Added or retained claim-level source links; original reporting frame retained. Corrected image captions without changing surrounding prose in this graphics pass. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-25"
     note: "Updated May 25, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, house-style phrasing, and source framing were cleaned up; source, metadata, and rendering were checked."
@@ -33,7 +33,7 @@ rules meant to prevent a third. The result was a postwar framework ~ the
 [United Nations](https://www.archives.gov/milestone-documents/united-nations-charter), [the **Universal Declaration of Human Rights**](https://www.un.org/en/about-us/universal-declaration-of-human-rights), [refugee conventions](https://www.unhcr.org/about-unhcr/overview/1951-refugee-convention), and [NATO](https://mzv.gov.cz/nato.brussels/en/nato/official_documents_and_sources/dokumenty_a_zdroje.html) ~ that continues to define global
 order.
 
-These ideas were not abstract. They were shaped by specific societies,
+These ideas were shaped by specific societies,
 experiences, and assumptions. One Western mistake was assuming they could
 be applied indefinitely, without friction, and to populations that do
 not share the historical memory or moral foundations that made them
@@ -83,7 +83,7 @@ In 1945, most of Africa remained under imperial administration. Much of
 Asia had not yet completed postwar state formation. The Third World did
 not exist as a political bloc.
 
-This is not a critique. It is a description.
+This is a description.
 
 The rules were negotiated by states that shared recent memories of total
 war, had consolidated internal authority, treated borders as settled,
@@ -105,14 +105,12 @@ tools of survival rather than moral obligation. Following the Meiji
 Restoration and the devastation of World War II, Japan made a deliberate
 choice ~ preserve national continuity by internalizing Western legal,
 economic, and political forms faster and more thoroughly than its peers.
-This wasn't submission ~ *it was strategy.*
+This was *strategy.*
 
 Japan adopted constitutional governance, independent courts,
 bureaucratic professionalism, property rights, contract enforcement, and
-civil administration not because they were universal ideals, *but
-because they worked*. These institutions were not forced onto an alien
-society. They were embedded within one that already valued hierarchy,
-obligation, discipline, and social cohesion.
+civil administration *because they worked*, rather than because they were universal ideals. These institutions were embedded within a society that already valued hierarchy,
+obligation, discipline, and social cohesion, rather than forced onto an alien one.
 
 Western law didn't replace Japanese culture ~ it locked into it.
 
@@ -129,9 +127,7 @@ change. Social trust and legal coherence were preserved.
 Japan shows that Western institutions can travel ~ but only when they
 are absorbed by societies willing and able to uphold them in good faith.
 
-Japan is not an exception to the argument.
-
-It's evidence for it.
+Japan is evidence for the argument.
 
 ### What the "Third World" Actually Means ~ State Formation and Power
 
@@ -207,7 +203,7 @@ In doing so, the West has forgotten that freedom is not guaranteed, and
 that citizenship is a scarce and hard-won inheritance ~ not an
 entitlement.
 
-### Most of the World Never Forgot That Power Matters
+### Most of the World Never Forgot the Role of Power
 
 Most of the world remembers that life is harsh ~ that power,
 borders, and identity matter. In those societies, political behavior

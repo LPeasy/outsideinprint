@@ -14,7 +14,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected sails, preliminary cause attribution, planned voyage wording, Acapulco home port, sail area and the ship-height/bridge-clearance comparison. Repaired the design comparison, linked political quotations, marked causal judgments as analysis and removed the unsupported victim-naming timing claim. June 30, 2025 NTSB measurements are identified as later confirmation. Original reporting frame and artwork retained."
+    note: "Corrected sails, preliminary cause attribution, planned voyage wording, Acapulco home port, sail area and the ship-height/bridge-clearance comparison. Repaired the design comparison, linked political quotations, marked causal judgments as analysis and removed the unsupported victim-naming timing claim. June 30, 2025 NTSB measurements are identified as later confirmation. Original reporting frame and artwork retained. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-14"
     note: "Updated May 14, 2026, after OIP back-archive review. Cleaned Medium import residue, promoted the localized lead image, normalized house style, and softened cause/responsibility language to match preliminary investigation records."
@@ -109,9 +109,7 @@ That leaves hard questions for the Navy, the pilots, and the planners who approv
 
 Photo by Kelly Sikkema on Unsplash
 
-> In my view, this wasn't just a question of mechanical failure.
-
-It was a **miscalculation in the mission** itself. A ship built for open
+> In my view, this was a **miscalculation in the mission** itself. A ship built for open
 waters was steered into a dense, unpredictable river for symbolism,
 culture, and international diplomacy.
 
@@ -135,9 +133,9 @@ Photo by Nik on Unsplash
 **The investigation was ongoing,** and the public record did not yet
 support a final cause finding.
 
-> This isn't just about what may have failed in the engine room.
+> Alongside what may have failed in the engine room,
 
-***It's about whether planning failed.***
+***we must ask whether planning failed.***
 
 Questions remain about route approvals, clearance checks, and **whether
 *diplomacy outweighed safety* in planning the visit.**
@@ -152,7 +150,7 @@ precariously.**
 
 Photo by K. Mitch Hodge on Unsplash
 
-> In my view, this was not only bad luck. It exposed a systems failure in operations,
+> In my view, this exposed a systems failure in operations,
 > planning, and coordination.
 
 **Public sector missions**, especially ceremonial ones, are often

@@ -2,7 +2,9 @@
 
 File: `content/essays/its-hard-to-condemn-what-doge-is-doing.md`  
 Version: `1.3 / Fourth web edition`  
-Final content SHA-256: `707194ce17a999223bbd2621e5982ce93c006e696caad9a5827a088978024a06`
+Final content SHA-256: `c168a9a10a544223b5ea03077551852bf26655412a63303679f5237849ab682f`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS (bounded editorial review)**. Corrected Obama's initiative name.
 

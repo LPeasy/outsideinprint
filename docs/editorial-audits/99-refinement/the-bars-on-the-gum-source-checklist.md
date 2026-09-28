@@ -3,7 +3,9 @@
 Piece: **The Bars on the Gum**  
 File: `content/essays/the-bars-on-the-gum.md`  
 Version: `2.0 / Second web edition`  
-Current essay SHA-256: `2f4a5e82eae5069206aabb54d388bfd4604595eb6af8c55603db0b98bc46267e`
+Current essay SHA-256: `6601ed3b5501581f1eef08c7064cbe6a89dd4182afbb064a0472c2279eb9e798`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **PASS — scoped to the named source/approval hold and retained hyperlink candidate.** This is not a complete biography or subject-matter recertification, a numerical grade, technical release clearance, or publication authorization.
 

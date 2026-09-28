@@ -14,7 +14,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Attributed the reported 5:10 a.m., 37.52-foot crest to Commerce OIG; distinguished illustrative evacuation assumptions from observations and removed unsupported gauge-to-cabin thresholds and dependent timing conclusions. Corrected analytical graphics, distinguished the separate campuses, removed unsupported same-day reporting precision, and acknowledged ABC’s preliminary-estimate caveat; surrounding prose retained."
+    note: "Attributed the reported 5:10 a.m., 37.52-foot crest to Commerce OIG; distinguished illustrative evacuation assumptions from observations and removed unsupported gauge-to-cabin thresholds and dependent timing conclusions. Corrected analytical graphics, distinguished the separate campuses, removed unsupported same-day reporting precision, and acknowledged ABC’s preliminary-estimate caveat; surrounding argument retained. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.2"
     date: "2026-06-21"
     note: "Updated June 21, 2026, to replace imported placeholder SVGs with localized image assets, add body-image alt text, and clean adjacent caption/list residue."
@@ -94,8 +94,8 @@ limestone ~ summertime incarnate.
 
 > This terrain makes Mystic beautiful ~ and vulnerable.
 
-When the river overtops its banks, **water** doesn't just rise
-vertically ~ it **spreads sideways across the Flats**, cutting off
+When the river overtops its banks, **water** rises
+vertically and **spreads sideways across the Flats**, cutting off
 escape routes uphill and sweeping debris laterally.
 
 > Take a look at this [FEMA flood map](https://hazards-fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd&extent=-99.39123254462633,30.000432493861474,-99.34969049140369,30.01901356194827) of the camp.
@@ -186,9 +186,7 @@ If panic, weather, or debris slow things, the illustrative estimate drifts towar
 
 **Further delay** can push people into dangerous territory.
 
-> A nighttime evacuation is not a switch to flip ~
-
-> It's a fragile sequence of events.
+> A nighttime evacuation is a fragile sequence of events.
 
 Against a steep flood curve, delays can be the difference between
 guiding children uphill and carrying them through a rising current.
@@ -277,7 +275,7 @@ On paper, that narrative sounds plausible.
 
 - **Knowing whether your camp, school, or neighborhood
   sits in a floodway.**
-- **Understanding not just how high a river rises, but
+- **Understanding how high a river rises and
   how fast.**
 - **Practicing evacuation with the expectation that
   warnings may leave no grace period.**
@@ -302,9 +300,9 @@ What evidence could have tested the timeline more firmly?
 In the aftermath of tragedy, **repeating untested narratives risks
 reshaping public memory** at the expense of truth.
 
-**Mystic's tragedy is not about a single night in Texas ~**
+**Mystic's tragedy reaches beyond a single night in Texas ~**
 
-> It's about the narrow margin of safety when waters rise faster than
+> to the narrow margin of safety when waters rise faster than
 > people can move.
 
 ### More in the Camp Mystic Series ~ Flood Timeline, Risk, Accountability

@@ -6,7 +6,9 @@ Source file: `content/essays/u-s-shifts-ukraine-policy.md`
 
 Version: `1.2`
 
-Audited SHA256: `108a379879f6e884c3bdf0c60a06dc7448414cdb4c5f565952a47a20bd3f0eca`
+Audited SHA256: `bcbcb9bfb1b547be608ecbd38b8d3e69bf2b89ed4851a1ba7151cacbb0a0dcfd`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Decision state: `LINK_ONLY_REVIEW_COMPLETE`
 
@@ -31,4 +33,3 @@ Decision: PASS
 Hegseth February 12, 2025 speech, paragraphs on pre-2014 borders, 5% NATO spending, Europe/Indo-Pacific prioritization and energy-sanctions strategy, read in contemporaneous full transcript/audio documentation at Augen geradeaus. Original official Defense.gov source is retained and linked near the claims. Direct Defense.gov fetch is restricted; transcript reproduction supports passage fit.
 
 See `u-s-shifts-ukraine-policy-source-checklist.md` for exact added anchors and `../core-link-only-flood-pair-2026-09-27.md` for private correction proposals and remaining limits. Images and captions were preserved; no new broad image certification is claimed. No tests, build or publication in this subtask.
-

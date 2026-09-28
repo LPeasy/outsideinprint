@@ -3,7 +3,9 @@
 Piece: **Fine China**  
 File: `content/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet.md`  
 Version: `2.0 / Third web edition`  
-Current essay SHA-256: `736d389939933be568062f7c9e4f242bbbedd85e2708b535aaba44e6e2e78c1a`
+Current essay SHA-256: `2efb8c93e1661e39e646a801e9d8010803f4ea7fad6af38007a34f4d16c61f90`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — scoped to the named source/approval hold and retained hyperlink candidate.** This is not a complete biography or subject-matter recertification, a numerical grade, technical release clearance, or publication authorization.
 

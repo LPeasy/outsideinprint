@@ -2,7 +2,9 @@
 
 File: `content/essays/beyond-moores-law.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `c77728d58878a36a33a770faa713f901d097e553c305a096fcf2ed7f4653170b`
+Final content SHA-256: `127d478c87dfbfb45808e05a045e2cc4d892b42f0974bfde043f5e6a31b851eb`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — bounded source-link and approved-correction release review**. The named solar-series, cell/pack measure, historical pack-price forecast and energy-density scope holds are resolved through the exact approved qualifications and identified sources.
 

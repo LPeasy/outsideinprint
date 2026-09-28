@@ -2,7 +2,16 @@
 
 File: `content/essays/the-economics-of-the-mongol-empire.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `541ac9eb1a2761454e4aa2d860d4f0258dab8b2dea825ca62fbeda24d1e16771`
+Final content SHA-256: `ac46bc7a2f273ab81f6336604e38a4ab517b44a288ab13caa1a8dc69f3a57dc1`
+
+## Owner-approved release maintenance — September 27, 2026
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
+
+Normalized only 2 flagged body punctuation characters on 2 lines to ASCII. Words, numbers, links, paragraph order, artwork destinations, and meaning remain unchanged; this includes typography inside captions, alt text, and quotations, not any new quotation wording. The current pending revision note discloses this maintenance; version, edition, original publication date, other front matter, and older revision history remain unchanged. This is the owner's approved release-unblocking cleanup, not a resumed prose revision.
+
+The prior current source/philosophy decision below remains applicable because the bounded changes add no factual claim and change no argument or source attribution. The pre-cleanup content hash was `541ac9eb1a2761454e4aa2d860d4f0258dab8b2dea825ca62fbeda24d1e16771`; the current release hash is the one above. [Exact replacements, snapshots, final hashes, and focused preservation result](../release-typography-social-metadata-map-2026-09-27.json) record the byte-level scope. Historical prior-candidate hashes below remain historical. No local test suite, production build, commit, or remote write was performed by this maintenance pass; formal publication gates remain pending.
+
 
 Current disposition: **PASS — bounded resolution of the named hold**. The prior approved Yuan currency geography and metallic-backing corrections remain. The owner expressly approved changing the subtitle from first-ever creation to expansion of a global trade network and deleting only the unsupported direct Renaissance Italian-banking influence sentence. Those two public changes are applied; the six quotations and surrounding prose remain unchanged.
 

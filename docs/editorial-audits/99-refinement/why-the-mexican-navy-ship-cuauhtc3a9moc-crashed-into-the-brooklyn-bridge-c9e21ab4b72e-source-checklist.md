@@ -2,7 +2,9 @@
 
 File: `content/essays/why-the-mexican-navy-ship-cuauhtc3a9moc-crashed-into-the-brooklyn-bridge-c9e21ab4b72e.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `b246a11f6253922f1269ac4db28ea35cdd687b9cb5fe1abbb9e3c150a535e2f2`
+Final content SHA-256: `186a71a0756fd92125c78d3af2655db15727825ab8abeb5a6fd7ba8dbfa137e9`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **PASS — bounded resolution of the named hold**. The owner requested resolution of the remaining eleven with minimal changes, then expressly approved deleting the unsupported victim-naming timing sentence and briefly qualifying causal judgments as analysis. Applied: sail area 2,377 → 2,368 square meters; corrected 158-foot ship air draft versus 127-foot bridge clearance at mean high water; dated the NTSB evidence as later June 30, 2025 confirmation; linked both existing political quotations without changing their wording; scoped the Gorch Fock comparison without the unsupported I identifier; removed the naming-timing claim; distinguished mechanical/planning questions and the author's systems-failure judgment from official findings. Previous approved sails, cause-attribution, voyage and home-port corrections remain. The same pending 2.0 / Third web edition is retained, with a matching updated revision note.
 

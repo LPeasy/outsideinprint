@@ -4,7 +4,9 @@ Date: 2026-09-27
 
 Version: `1.4`
 
-Final SHA256: `e3f1da8fbcad96393ac30d79d8d66e7cd3a7fa6cedbf38e5a0a25a277ea4a2b5`
+Final SHA256: `c6db01a118512f28755e431018afc8662b6143338b8082f3917cd1669d4c6ce1`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Status: Source-link pass complete; normal publication gate remains separate
 
@@ -20,4 +22,3 @@ Air Force March 21, 2025 announcement names Boeing as Engineering and Manufactur
 ## Preservation and private issues
 
 No public prose, caption, order, artwork, discovery metadata or original date was changed. Existing links remain. Private concerns and minimal proposed corrections are in `../core-link-only-flood-pair-2026-09-27.md`; these proposals are not applied. This checklist records the added links, not a new certification of every historical fact or quotation.
-

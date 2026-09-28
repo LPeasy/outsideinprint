@@ -2,7 +2,9 @@
 
 File: `content/essays/the-sewer-under-the-sidewalk.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `1e8fdf2a7e1c3cc1560cad144e17b117833ce256c13a0b5115ccbda881899fba`
+Final content SHA-256: `3e2594b092c5a9926815996fa24496449eef8343fd08845fbc7d0f1d850aed15`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **PASS (bounded editorial review)**. Corrected the implication of guaranteed safety after the advisory period; existing future-model wording was already explicit and was not rewritten.
 

@@ -15,7 +15,7 @@ edition: "Sixth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Retained claim-level source links and original prose, with approved streaming chronology, licensing, quotation and attribution corrections; removed the unverified meme anecdote and qualified branding claims. Original artwork and publication date unchanged."
+    note: "Retained claim-level source links and original prose, with approved streaming chronology, licensing, quotation and attribution corrections; removed the unverified meme anecdote and qualified branding claims. Original artwork and publication date unchanged. Normalized legacy body punctuation without changing wording. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.4"
     date: "2026-09-18"
     note: "Repaired malformed Markdown for the HBO timeline, classic titles, and Tommy Boy images; images, captions, and article text are unchanged."
@@ -63,7 +63,7 @@ place.**
 
 > [HBO Max launched in May 2020](https://press.wbd.com/us/media-release/hbo-max-launch-may-27th).
 
-It wasn't just HBO ~ it was HBO **plus WarnerMedia's library and licensed programming**: ***Friends, The Big Bang Theory, Studio Ghibli, Looney Tunes,
+It was HBO **plus WarnerMedia's library and licensed programming**: ***Friends, The Big Bang Theory, Studio Ghibli, Looney Tunes,
 DC movies, South Park.***
 
 **The name said it all:**
@@ -77,8 +77,7 @@ That added a different mix of content ~ ***90 Day Fiancé, Property
 Brothers, Deadliest Catch, nature docs, true crime, and unscripted
 everything.***
 
-The execs didn't want the platform to feel too *highbrow*. They wanted
-it to feel *universal*.
+The execs wanted the platform to feel *universal* rather than too *highbrow*.
 
 So in [May 2023](https://press.wbd.com/us/na/media-release/hbo-max/warner-bros-discoverys-enhanced-streaming-platform-max-launches-today), they dropped the "***HBO***" and rebranded the whole
 thing as just "***Max***."
@@ -104,7 +103,7 @@ In 2023, **Warner Bros. Discovery streaming chief J.B. Perrette** [described Max
 
 Even **Netflix co-CEO Ted Sarandos** didn't hold back. He told [Variety](https://variety.com/2025/film/news/ted-sarandos-stranger-things-ending-marvel-fight-1236339714/) in March 2025:
 
-> “When they’re serious, all those names will go away, and it’ll just be HBO.”
+> "When they're serious, all those names will go away, and it'll just be HBO."
 
 > ~ Ted Sarandos, Netflix Co-CEO
 
@@ -140,17 +139,13 @@ For years,
 
 > "It's not TV. It's HBO"
 
-wasn't marketing ~ **it was a fact.**
+was **a fact.**
 
 **Sunday nights were sacred.** The static buzz before a new episode? It
 meant something.
 
-HBO didn't try to be everything.
-
-**It tried to be great.** And it delivered. This wasn't just a premium
-cable channel.
-
-It was **a cultural institution**.
+HBO **tried to be great.** And it delivered. This premium cable channel
+was **a cultural institution**.
 
 > Dropping the name didn't simplify things ~ it severed their identity.
 
@@ -212,9 +207,7 @@ Of course, **this admission came two years too late.**
 *Photo by [Glenn Carstens-Peters](https://abgeknipst.de) on [Unsplash](https://unsplash.com/)*
 
 
-**This wasn't just a name swap.**
-
-It was a masterclass in **what not to do with a brand *people actually
+**This name swap** was a masterclass in **what not to do with a brand *people actually
 trust.***
 
 In the race to "be everything," media companies are forgetting that
@@ -224,7 +217,7 @@ specificity is power.
 
 > You have to be yourself.
 
-**The HBO brand wasn't a liability. *It was an asset.***
+**The HBO brand was an asset.**
 
 > Trying to turn a boutique into a big-box store doesn't make loyal
 > customers stick around ~ it just makes the boutique harder to find.

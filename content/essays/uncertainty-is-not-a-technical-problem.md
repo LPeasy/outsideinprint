@@ -14,7 +14,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added source links without changing prose."
+    note: "Added source links and applied minimal style cleanup; facts and source wording unchanged."
   - version: "1.1"
     date: "2026-05-22"
     note: "Updated May 22, 2026, after OIP back-archive review for source framing, Medium import cleanup, and house-style normalization."
@@ -46,13 +46,11 @@ Other uncertainty exists because the world is inherently variable ~
 storms, systems, and people do not repeat themselves. No amount of
 precision can eliminate that.
 
-Modern institutions are not confused about this distinction. They are
+Modern institutions understand this distinction and are
 structured to suppress it. Precision offers clarity, defensibility, and
 comfort ~ even when it misrepresents reality.
 
-This essay argues that uncertainty is not a technical problem.
-
-It is a moral and institutional one.
+This essay argues that uncertainty is a moral and institutional problem rather than a technical one.
 
 ### Uncertainty Is Not the Same as Ignorance
 
@@ -69,7 +67,7 @@ Storms do not repeat themselves. Systems respond differently depending
 on timing and context. People behave differently even when faced with
 similar conditions. Even when models perform exactly as designed,
 outcomes can diverge widely because the sequence and interaction of
-events ~ not just their magnitude ~ shapes consequences.
+events, alongside their magnitude, shapes consequences.
 
 No amount of information eliminates that variability. At best, it can
 describe its range.
@@ -90,16 +88,14 @@ A range, on the other hand, demands participation. It forces us to ask
 uncomfortable questions: *Which outcome matters most? How bad is bad
 enough? What are we willing to tolerate?*
 
-Those are not technical questions.
-
-They are moral ones.
+Those are moral questions rather than technical ones.
 
 And modern systems are not designed to answer them well. So instead, we
 ask numbers to do the work of judgment for us.
 
 ### Why Institutions Reward False Precision
 
-This drift is not usually malicious. It is structural.
+This drift is structural, usually without malice.
 
 Institutions reward outputs that travel cleanly ~ numbers that fit
 neatly into briefings, tables, and approval memos. They penalize
@@ -157,14 +153,11 @@ Beyond that point, further precision improves confidence more than it
 improves decisions. Resources are spent perfecting what can be perfected
 rather than confronting what cannot be controlled.
 
-This is not a technical failure.
-
-It is an incentive problem.
+This is an incentive problem rather than a technical failure.
 
 ### When Risk Estimates Erode Public Trust
 
-Public trust erodes not because estimates are wrong, but because
-expectations are misaligned.
+Public trust erodes because expectations are misaligned, rather than because estimates are wrong.
 
 When a precise number is presented, people assume it carries a promise:
 *This is what will happen.* When reality deviates, the assumption
@@ -180,9 +173,7 @@ Both sides talk past each other.
 The numbers were never meant to predict a single outcome ~ but they were
 presented as if they did.
 
-The failure was not analytical.
-
-It was translational.
+The failure was translational rather than analytical.
 
 ### A Better Way to Think About Risk and Uncertainty
 
@@ -200,10 +191,9 @@ Analysis cannot eliminate judgment, but it can inform it if we are honest about 
 
 ### What Risk Models Are Asked to Hide
 
-Uncertainty is not a flaw in the system. It is a feature of reality.
+Uncertainty is a feature of reality rather than a flaw in the system.
 
-The problem is not that uncertainty exists, but that we keep asking
-technical tools to solve moral problems. We ask numbers to absorb
+The problem is that we keep asking technical tools to solve moral problems. We ask numbers to absorb
 responsibility, to stand in for wisdom.
 
 Eventually, reality comes knocking.
@@ -222,16 +212,13 @@ particularly the distinction between **[knowledge uncertainty](https://www.hec.u
 (uncertainty arising from limits in data, models, and assumptions) and
 **natural variability** (uncertainty arising from real, irreducible
 variation in physical and human systems). It is informed by academic
-frameworks that treat uncertainty not merely as a technical issue, but
-as a central factor in decision-making, responsibility, and
+frameworks that treat uncertainty as both a technical issue and a central factor in decision-making, responsibility, and
 communication.
 
-The aim here is not to reject quantitative analysis or modeling, but to
-clarify what such tools can ~ and cannot ~ do.
+The aim here is to clarify what quantitative analysis and modeling can ~ and cannot ~ do, without rejecting these tools.
 
 Precision has value.
 
 So does honesty.
 
-The tension between the two is not a flaw ~ it is the condition under
-which judgment must operate.
+The tension between the two is the condition under which judgment must operate.

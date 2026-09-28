@@ -11,7 +11,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Distinguished the court's site-application processing order from reimbursement payments. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Distinguished the court's site-application processing order from reimbursement payments. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-31"
     note: "Updated May 31, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -40,7 +40,7 @@ On May 22, 2026, the U.S. Attorney's Office in Minnesota [announced](https://www
 
 The day before, the Justice Department [announced](https://www.justice.gov/opa/pr/minnesota-health-care-fraud-takedown-results-charges-against-15-defendants-over-90m-fraud) a Minnesota Health Care Fraud Takedown charging 15 defendants in alleged schemes involving more than $90 million in intended loss. The department described owners of child-care centers and Medicaid providers, new Midwest fraud resources, and first-of-their-kind charges in several Minnesota-administered programs. The case-summary page [lists](https://www.justice.gov/criminal/criminal-fraud/health-care-fraud-unit/2026-minnesota-hcf-case-summaries) Fahima Mahamud, owner of Future Leaders Early Learning Center, as charged by Information in alleged schemes totaling $5,480,329 in federal funds. One portion involved inflated Feeding Our Future meal claims. Another involved the Child Care Assistance Program.
 
-Mahamud has been charged, so those claims remain allegations. Bock has been convicted and sentenced. The distinction is not etiquette. It is the spine of the story.
+Mahamud has been charged, so those claims remain allegations. Bock has been convicted and sentenced. The distinction is the spine of the story rather than etiquette.
 
 ## The American Thing He Did
 
@@ -96,7 +96,7 @@ That platform is also a business, with subscriptions and merchandise. A serious 
 
 The better conclusion is gratitude with eyes open. America needs people willing to go where polite institutions have learned to look away. America also needs those people to survive the economics of independent work without letting the economics choose the evidence. Shirley's Anti Fraud Club is a blunt answer to a broken press market: if legacy outlets will spend their energy disciplining outsiders, outsiders will build their own pipes to readers.
 
-Hero language has force here. The heroism is not sainthood. It is the courage to publish under attack, test official comfort against visible facts, and keep going after being smeared. A republic needs that kind of free-speech muscle. Without it, the record belongs to whoever controls the microphone.
+Hero language has force here. The heroism is the courage to publish under attack, test official comfort against visible facts, and keep going after being smeared, rather than sainthood. A republic needs that kind of free-speech muscle. Without it, the record belongs to whoever controls the microphone.
 
 ## The Co-Pay As Clue
 

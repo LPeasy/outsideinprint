@@ -15,7 +15,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Geographic/origin/predator facts corrected. Added or retained claim-level source links; original reporting frame retained. Corrected flagged graphics and captions. Qualified the python-eradication claim by current methods and described the moss-ball response as a prevention effort rather than a measured averted infestation."
+    note: "Geographic/origin/predator facts corrected. Added or retained claim-level source links; original reporting frame retained. Corrected flagged graphics and captions. Qualified the python-eradication claim by current methods and described the moss-ball response as a prevention effort rather than a measured averted infestation. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.2"
     date: "2026-06-26"
     note: "Restored local image assets, replaced duplicate placeholders with OIP diagrams, and removed decorative placeholder figures."
@@ -238,7 +238,7 @@ It is [a large, non-native lizard from Africa](https://myfwc.com/wildlifehabitat
 
 But here is the key difference:
 
-> Nile monitors are still in a limited range.
+> Nile monitors remain in a limited range.
 
 A few pockets in South Florida.
 
@@ -334,13 +334,11 @@ Coordination is tough. Strategy gets fragmented. The result is that high-value p
 
 If we want to get smarter about invasive species, we need a strategic shift.
 
-- Move money upstream. Do not just fund cleanup crews and long-term maintenance. Fund the scientists, spotters, and early responders.
+- Move money upstream. Alongside cleanup crews and long-term maintenance, fund the scientists, spotters, and early responders.
 - Reward prevention. Right now, there is little political or financial incentive to stop a problem before it starts. That has to change.
 - Scale what works. Big intergovernmental partnerships, especially federal-state cost-share models, could stretch limited budgets further and help states like Florida act early, not late.
 
-This is not about doing more.
-
-> It is about doing better.
+This is about doing better.
 
 ### Hope Lies on the Frontier
 
@@ -348,7 +346,7 @@ This is not about doing more.
 
 Photo by Richard Sagredo on Unsplash
 
-Florida is not failing to manage invasive species because it is doing nothing. It is failing because too much energy and money go toward species that are already entrenched, where success is no longer measured in wins, but in how slowly we lose.
+Florida is failing to manage invasive species despite taking action. It is failing because too much energy and money go toward species that are already entrenched, where success is no longer measured in wins, but in how slowly we lose.
 
 > But we can flip that script.
 

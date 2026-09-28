@@ -2,7 +2,9 @@
 
 File: `content/essays/why-superintelligence-strategy-gets-ai-governance-wrong.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `5ec9dc2630bd9c13f5e0d9aeb5e4ff4e79b1f2d98e528111527e9e8d849adda6`
+Final content SHA-256: `50ce723d19942f3887fc56be4b7da5348c99654141348778b2db589bb7ea8831`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **PASS — bounded resolution of the named holds**.
 

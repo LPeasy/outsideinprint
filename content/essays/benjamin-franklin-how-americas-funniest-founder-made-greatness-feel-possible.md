@@ -16,7 +16,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Added claim-level sources and made limited corrections to quotations, institutional roles, and chronology; removed a misattributed saying and relabeled the existing book scan. Preserved the surrounding prose and artwork."
+    note: "Added claim-level sources and made limited corrections to quotations, institutional roles, and chronology; removed a misattributed saying and relabeled the existing book scan. Preserved the surrounding argument and artwork. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-16"
     note: "Updated May 16, 2026, after OIP back-archive review. Source framing, Medium import residue, and house-style issues were corrected."
@@ -38,9 +38,8 @@ inventions.
 
 Historical image sources were checked during the web-edition review.
 
-> *This is not an academic profile.*
-
-> It's **a clear, readable account of Franklin's life and legacy**, told
+> Rather than an academic profile, this is **a clear, readable account
+> of Franklin's life and legacy**, told
 > with the same mix of wit, curiosity, and practicality that he brought
 > to everything he touched.
 
@@ -80,7 +79,7 @@ Richard ~ a fictional old man full of homespun wisdom and dry wit.
 > **"He that lies down with dogs shall rise up with fleas."**
 > *~ Poor Richard's Almanack*
 
-**Franklin's advice** wasn't just useful. It **was sly, funny, and
+**Franklin's advice** was useful. It **was also sly, funny, and
 self-aware.**
 
 > He understood that **virtue sells better wrapped in a joke.**
@@ -148,8 +147,8 @@ Socrates,"*** he wrote, with signature modesty).
 
 **He believed people could improve themselves.**
 
-Not through scolding, but through consistent effort and infinite
-tinkering.
+Through consistent effort and infinite
+tinkering rather than scolding.
 
 > ***He made self-discipline seem playful, progress seem possible, and
 > morality seem fun.***
@@ -196,8 +195,8 @@ institutions.
 > In a new and more perfect Edition
 > Corrected and amended by the Author."
 
-**When he died, crowds lined the streets of Philadelphia ~ not only for
-rank or fame, but for a public life that made usefulness feel
+**When he died, crowds lined the streets of Philadelphia ~ for rank,
+fame, and a public life that made usefulness feel
 achievable.**
 
 ### Key Projects & Works
@@ -239,8 +238,8 @@ He gave us lines like this:
 
 **He preferred persuasion to preaching, and humor to hubris.**
 
-His famous list of 13 virtues wasn't a moral checklist, but a life
-experiment.
+His famous list of 13 virtues was a life experiment rather than a moral
+checklist.
 
 > **"Human felicity is produced not so much by great pieces of good
 > fortune that seldom happen, as by little advantages that occur every

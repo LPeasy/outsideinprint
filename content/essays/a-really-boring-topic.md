@@ -14,7 +14,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected tunneling chronology/rock type. Added or retained claim-level source links; original reporting frame and artwork retained. Withdrew the unsupported market forecast and narrowed the digital-tool and material-recycling examples to the identified source evidence."
+    note: "Corrected tunneling chronology/rock type. Added or retained claim-level source links; original reporting frame and artwork retained. Withdrew the unsupported market forecast and narrowed the digital-tool and material-recycling examples to the identified source evidence. Normalized legacy body punctuation without changing wording."
   - version: "1.1"
     date: "2026-04-30"
     note: "Updated April 30, 2026, after OIP back-archive review. Localized legacy Medium image references, cleaned list formatting, and checked source, metadata, and rendering."
@@ -25,11 +25,11 @@ medium_source_url: "https://medium.com/@lawtonperret/a-really-boring-topic-94a32
 
 Beneath the Surface
 
-Exploring the Tunnel Boring Industry’s Past, Present, and Future
+Exploring the Tunnel Boring Industry's Past, Present, and Future
 
 All images created using ChatGPT in January 2025.
 
-The tunnel boring industry plays a pivotal role in shaping modern infrastructure, addressing the needs of an urbanizing and resource-hungry world. From its origins in 19th-century engineering breakthroughs to its adoption of cutting-edge technologies, this industry continues to expand what’s possible beneath the surface. This essay examines the history, emerging trends, future scenarios, and growth potential of the tunnel boring sector while reflecting on its broader impact on global development.
+The tunnel boring industry plays a pivotal role in shaping modern infrastructure, addressing the needs of an urbanizing and resource-hungry world. From its origins in 19th-century engineering breakthroughs to its adoption of cutting-edge technologies, this industry continues to expand what's possible beneath the surface. This essay examines the history, emerging trends, future scenarios, and growth potential of the tunnel boring sector while reflecting on its broader impact on global development.
 
 A Journey Through History
 
@@ -37,9 +37,9 @@ A Journey Through History
 
 The tunnel boring industry traces its roots to the 19th century, when [Marc Isambard Brunel pioneered the tunneling shield](https://content.tfl.gov.uk/research-guide-the-thames-tunnel.pdf), enabling the construction of the Thames Tunnel in 1843. This engineering marvel, the first known tunnel built beneath a navigable river, solved the challenge of safely excavating through unstable ground and laid the foundation for modern tunneling.
 
-The mid-20th century witnessed another leap forward with the invention of the [modern tunnel boring machine (TBM) by James S. Robbins in 1952](https://www.robbinstbm.com/about/history/). Robbins’ 1952 TBM excavated weak shale at the Oahe Dam in South Dakota; disc cutters followed in 1956 for harder limestone at the Humber River Sewer Tunnel in Canada. Subsequent innovations, such as bentonite tunneling machines in the 1960s, expanded capabilities to softer soils.
+The mid-20th century witnessed another leap forward with the invention of the [modern tunnel boring machine (TBM) by James S. Robbins in 1952](https://www.robbinstbm.com/about/history/). Robbins' 1952 TBM excavated weak shale at the Oahe Dam in South Dakota; disc cutters followed in 1956 for harder limestone at the Humber River Sewer Tunnel in Canada. Subsequent innovations, such as bentonite tunneling machines in the 1960s, expanded capabilities to softer soils.
 
-Major milestones like the [Channel Tunnel (1994)](https://www.getlinkgroup.com/en/our-group/history/), connecting the United Kingdom and France, and the [Gotthard Base Tunnel (2016), the world’s longest and deepest rail tunnel](https://www.ticino.ch/en/commons/details/The-Gotthard-Base-Tunnel/1219.html), showcase the transformative power of TBMs. These projects highlight the industry’s ability to tackle diverse geological and engineering challenges.
+Major milestones like the [Channel Tunnel (1994)](https://www.getlinkgroup.com/en/our-group/history/), connecting the United Kingdom and France, and the [Gotthard Base Tunnel (2016), the world's longest and deepest rail tunnel](https://www.ticino.ch/en/commons/details/The-Gotthard-Base-Tunnel/1219.html), showcase the transformative power of TBMs. These projects highlight the industry's ability to tackle diverse geological and engineering challenges.
 
 Emerging Trends and Technologies
 
@@ -71,7 +71,7 @@ Potential Scenarios for the Future
 
 ![](/images/medium/a-really-boring-topic/ea538b7e25f223ca7bc43066c7f57065e7ea8de3eeaa0140489cde40968621f8.jpeg)
 
-The tunnel boring industry’s importance could grow exponentially in response to emerging challenges and opportunities. Here are several scenarios where tunneling technologies may play a transformative role:
+The tunnel boring industry's importance could grow exponentially in response to emerging challenges and opportunities. Here are several scenarios where tunneling technologies may play a transformative role:
 
 1. Mining Asteroids and Other Planets
 
@@ -101,7 +101,7 @@ Demand for TBMs is driven by:
 
 - Urbanization: [By 2050, 68% of the global population is expected to live in urban areas](https://www.un.org/development/desa/en/news/population/2018-revision-of-world-urbanization-prospects.html), increasing the demand for underground infrastructure.
 
-- Infrastructure Investments: Governments worldwide are allocating significant funds for tunneling projects. In the U.S., the Infrastructure Investment and Jobs Act includes provisions for transit systems requiring tunnels, while China’s Belt and Road Initiative funds large-scale projects.
+- Infrastructure Investments: Governments worldwide are allocating significant funds for tunneling projects. In the U.S., the Infrastructure Investment and Jobs Act includes provisions for transit systems requiring tunnels, while China's Belt and Road Initiative funds large-scale projects.
 
 - Regional Growth: Asia-Pacific leads the market, with countries like China and India driving demand. North America and Europe are also heavily investing in underground infrastructure.
 
@@ -111,4 +111,4 @@ Conclusion
 
 The tunnel boring industry stands at the forefront of modern engineering, blending historical ingenuity with cutting-edge innovation. As the world urbanizes and grapples with climate change and resource scarcity, tunneling technologies will only grow in importance. From creating subterranean cities to enabling space mining, the possibilities for this industry are vast and transformative.
 
-Beneath our feet lies a world of potential, waiting to be uncovered. Whether it’s improving transportation, safeguarding cities, or reaching for the stars, the tunnel boring industry continues to redefine what humanity can achieve beneath the surface.
+Beneath our feet lies a world of potential, waiting to be uncovered. Whether it's improving transportation, safeguarding cities, or reaching for the stars, the tunnel boring industry continues to redefine what humanity can achieve beneath the surface.

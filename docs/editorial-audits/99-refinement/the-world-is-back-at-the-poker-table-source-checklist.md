@@ -2,7 +2,9 @@
 
 File: `content/essays/the-world-is-back-at-the-poker-table.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `8df145fd71f1786ed58d4622d3fc6ec3112456a025667197d6bdc1de151cae91`
+Final content SHA-256: `bc2adcc6b2ba071e5fcb676d1c1ef052f06eb2c05323787fbf6334e7ca5368ee`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **PASS — scoped source and editorial clearance**. All listed approval issues for this piece are resolved in the current file.
 

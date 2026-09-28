@@ -2,7 +2,9 @@
 
 File: `content/essays/cuomo-vs-mamdani-nyc-2025.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `52ffb1d6127461e2eeff78a44d7f2ce58c42d5506bd711c5eb95bacc0ed1f65b`
+Final content SHA-256: `ad25ea660d3b1ce0a5fab5c799af262da20fff4ac542210d8d7fe268e6a0523f`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS (bounded editorial review)**. Corrected buses and income/corporate taxes in the historical platform summary.
 

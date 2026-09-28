@@ -3,7 +3,9 @@
 Piece: **David Attenborough**  
 File: `content/essays/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.md`  
 Version: `2.0 / Fifth web edition`  
-Current essay SHA-256: `d3b3b7286a3bfe49559db1f62e19b8a1b3de86ec2fc6368e676ba870413d51b2`
+Current essay SHA-256: `dae815ab79c31ec43a33c8ea1a5b31e128aec69b7db56941d9f67d4b598bf9a3`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — scoped editorial/source review of the approved prose-preserving candidate.** The named hold is resolved; this is not an exhaustive biography, numerical score, technical release clearance or deployment status.
 

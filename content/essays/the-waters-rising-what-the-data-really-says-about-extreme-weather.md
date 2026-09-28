@@ -14,7 +14,7 @@ edition: "Sixth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected climate-record dates, precipitation metrics and comparison periods, hurricane projections, Texas rainfall scope, the Hunt-gauge observation and Camp Mystic event details. Added or retained claim-level source links and corrected flagged graphics and captions; surrounding prose retained."
+    note: "Corrected climate-record dates, precipitation metrics and comparison periods, hurricane projections, Texas rainfall scope, the Hunt-gauge observation and Camp Mystic event details. Added or retained claim-level source links and corrected flagged graphics and captions; surrounding prose retained. Normalized legacy body punctuation without changing wording. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.4"
     date: "2026-09-18"
     note: "Repaired escaped emphasis in a section heading; article wording and sources are unchanged."
@@ -148,7 +148,7 @@ The U.S. data shows the pattern.
 
 ![Chart showing U.S. extreme one-day precipitation events from 1910 to 2023.](oip-image:medium/39e3617269bd3ce2757d8b6d0bf6990bda121d46a73fbc206ab41017d99c2fde)
 
-**In EPA's 1910–2023 record, nine of the ten highest years for extreme
+**In EPA's 1910-2023 record, nine of the ten highest years for extreme
 one-day precipitation in the contiguous U.S. have** [**occurred since
 1995.**](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P101AXFE.txt)
 **The share of the country hit by very heavy daily rainfall has**
@@ -185,9 +185,7 @@ funnel rainwater straight into rivers.
 
 ![Map of Texas marking the Hill Country between Austin and San Antonio.](oip-image:medium/fe49c38c26d28df6603266a66af7c98a5337fb7c9dca2d977f3331fdc40bbb3a)
 
-**The 2025 Guadalupe River flood wasn't just intense.**
-
-**It was one of the most violent floods in over a century of records.**
+**The 2025 Guadalupe River flood was one of the most violent floods in over a century of records.**
 
 ### **What's Getting Worse, and What's Just Noise?**
 
@@ -203,7 +201,7 @@ funnel rainwater straight into rivers.
 
 ![Scoped weather trends: observed extreme one-day precipitation and city heat waves, distinguished from projected changes in the share of very intense tropical cyclones.](oip-image:essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/scoped-trends-corrected-20260927)
 
-*Selected measures, not a universal hazard scorecard. OIP graphic, made with ChatGPT from [EPA’s 2024 indicators, Figures 9 and 14](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P101AXFE.txt), and [NOAA GFDL’s hurricane assessment](https://www.gfdl.noaa.gov/global-warming-and-hurricanes/). Rainfall trends do not establish flash-flood frequency.*
+*Selected measures, not a universal hazard scorecard. OIP graphic, made with ChatGPT from [EPA's 2024 indicators, Figures 9 and 14](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P101AXFE.txt), and [NOAA GFDL's hurricane assessment](https://www.gfdl.noaa.gov/global-warming-and-hurricanes/). Rainfall trends do not establish flash-flood frequency.*
 
 While [**uncertainty**](https://www.numberanalytics.com/blog/ultimate-guide-weather-prediction-uncertainty)
 **surrounds all types of extreme weather events,**
@@ -213,9 +211,9 @@ While [**uncertainty**](https://www.numberanalytics.com/blog/ultimate-guide-weat
 
 **The big takeaway:**
 
-> **We're not just more exposed…**
+> **We're more exposed…**
 
-> For floods, fires, and heat, the damaging tail is moving in the wrong
+> And for floods, fires, and heat, the damaging tail is moving in the wrong
 > direction.
 
 ### **Was the Camp Mystic flood a fluke?**
@@ -236,7 +234,7 @@ While [**uncertainty**](https://www.numberanalytics.com/blog/ultimate-guide-weat
 [**Texas State Climatologist John Nielsen-Gammon**](https://texas2036.org/wp-content/uploads/2020/03/ClimateReport-1900to2036-1.pdf#page=13)
 **projected in his 2020 report that by 2036, Texas could see 6 to 10%
 higher extreme-rainfall intensity and 30 to 50% greater odds of extreme
-rain relative to 1950–1999.**
+rain relative to 1950-1999.**
 
 ### **A New Baseline for Risk**
 
@@ -263,9 +261,7 @@ high-risk categories through formal flood-map processes.
 
 **Generations of campers** slept there.
 
-> But this isn't just about one camp.
-
-**It's about the quiet assumptions,** baked into zoning laws and
+**This extends beyond one camp to the quiet assumptions,** baked into zoning laws and
 insurance tables, **the** **belief that the future will behave like the
 past.**
 

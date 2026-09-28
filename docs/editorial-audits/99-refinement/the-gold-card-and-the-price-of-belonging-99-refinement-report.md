@@ -2,7 +2,9 @@
 
 File: `content/essays/the-gold-card-and-the-price-of-belonging.md`  
 Version: `2.3 / Fifth web edition`  
-SHA-256: `1d6f5648f4c927a4aae31c4174cf7a6dbbc33838f576a65a76b811de22d589fe`
+SHA-256: `e996484b19085f362853aaa584ecf419a5978b0701e06b8ef9dd6e9326c40492`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current status: **PASS (bounded citation revision)**. Original prose restored; only supported hyperlink additions/destination repairs and minor citation metadata are allowed. Minimal corrections remain private and unapproved. This checkpoint supersedes all earlier September 27 major-revision candidates below; their claims that prose corrections were applied are no longer current.
 

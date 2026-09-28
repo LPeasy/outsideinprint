@@ -16,7 +16,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Qualified Social Security financing and inflation/asset-price claims; clarified the limits of the Britain comparison. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Qualified Social Security financing and inflation/asset-price claims; clarified the limits of the Britain comparison. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-08"
     note: "Updated May 8, 2026, after OIP back-archive review for source discipline, legacy Medium cleanup, punctuation normalization, and editorial philosophy audit."
@@ -65,7 +65,7 @@ Wars, tax cuts, corporate bailouts, stimulus checks - every president, Republica
 
 By the mid-2020s, the U.S. owed tens of trillions of dollars, and [official projections pointed higher over the next decade](https://www.cbo.gov/publication/60870). At this point, interest payments alone were becoming one of the biggest expenses in the federal budget.
 
-We're not just borrowing money to keep the government running - we're borrowing money to pay for the money we already borrowed.
+We're borrowing money to keep the government running and to pay for the money we already borrowed.
 
 It's like putting everything on a credit card and only paying the minimum balance each month. You're not getting out of debt - you're just making the bank rich while you get buried in interest.
 
@@ -95,7 +95,7 @@ Who pays for that? You do. Again. And the worst part? This whole cycle is making
 *Photo by Joshua Hoehne on Unsplash*
 
 
-Inflation isn't just about rising grocery bills - it's about who owns assets and who doesn't.
+Inflation affects grocery bills and the divide between those who own assets and those who don't.
 
 Think about it:
 
@@ -112,7 +112,7 @@ The rich get richer and it becomes harder for working-class people to afford thi
 
 ### What Happens When the U.S. Can't Pay Its Bills? (You Don't Want to Know)
 
-Right now, the U.S. can borrow unusually large amounts because the dollar is the world's reserve currency, meaning many countries and investors still trust dollar assets more than alternatives.
+Right now, the U.S. can borrow unusually large amounts because the dollar is the world's reserve currency, meaning many countries and investors trust dollar assets more than alternatives.
 
 That's why we've been able to run up trillions in debt without crashing the economy. But that trust isn't guaranteed.
 
@@ -161,7 +161,7 @@ We'll keep ignoring it until we hit a wall, and then the government will scrambl
 
 Fixing the debt doesn't mean gutting everything people rely on - it means setting priorities. That could mean slowing spending growth, closing tax loopholes that only benefit the ultra-wealthy, and making sure new programs actually have funding sources before they pass.
 
-It's not about cutting everything, it's about making the numbers add up.
+It's about making the numbers add up without cutting everything.
 
 
 ### Why You Can't Afford to Ignore This
@@ -171,9 +171,7 @@ It's not about cutting everything, it's about making the numbers add up.
 *Photo by Tolu Akinyemi 🇳🇬 on Unsplash*
 
 
-This isn't just some abstract problem for politicians to deal with.
-
-It's a slow-burning crisis that's already making life harder for working Americans. The cost of housing, healthcare, food, and retirement keeps rising while wages struggle to keep up.
+This is a slow-burning crisis that's already making life harder for working Americans. The cost of housing, healthcare, food, and retirement keeps rising while wages struggle to keep up.
 
 The government is spending money it doesn't have, helping rich people accumulate more wealth while leaving younger generations stuck with higher taxes and fewer opportunities.
 

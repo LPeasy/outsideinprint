@@ -15,7 +15,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Corrected the feasibility-study duration wording. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Corrected the feasibility-study duration wording. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-05"
     note: "Updated May 5, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, heading/list formatting, author-promo residue, and a USACE 3x3x3 description were cleaned while preserving the original publication frame."
@@ -45,7 +45,7 @@ Since 2012, USACE feasibility studies have generally been guided by the ["3x3x3"
 
 Some see it as bureaucratic bloat. In reality, feasibility studies actively safeguard public funds.
 
-Infrastructure mistakes don't just cost money. They can't always be undone.
+Infrastructure mistakes cost money and can't always be undone.
 
 A bad project can wipe out ecosystems, drain taxpayer dollars, or fail catastrophically. A methodical, well-researched approach prevents those outcomes.
 
@@ -59,7 +59,7 @@ If the change is small, it can be absorbed. If it's major, it can push a study b
 
 This deliberate pace frustrates people, but it exists for a reason.
 
-When you're building billion-dollar projects that shape the country's future, a little patience isn't a feature of calcified bureaucracy. It's common sense.
+When you're building billion-dollar projects that shape the country's future, a little patience is common sense.
 
 ## The High Cost of Rushing Infrastructure Projects
 
@@ -84,7 +84,7 @@ Now, the federal government is spending billions to undo damage that better plan
 
 This is what happens when planning takes a backseat to speed.
 
-Poorly conceived infrastructure isn't just inefficient. It's expensive. Fixing mistakes always costs more than preventing them. Some failures can't be repaired, no matter how much money is thrown at them.
+Poorly conceived infrastructure is inefficient and expensive. Fixing mistakes always costs more than preventing them. Some failures can't be repaired, no matter how much money is thrown at them.
 
 The Everglades weren't the first rushed project to backfire, and won't be the last. But they serve as a warning:
 
@@ -97,13 +97,13 @@ With major infrastructure, there's no second chance to get it right.
 *Photo by Mario Verduzco on Unsplash*
 
 
-The U.S. Army Corps of Engineers doesn't just build things. It decides whether things should be built at all. That's what the feasibility study process is for.
+The U.S. Army Corps of Engineers builds things and decides whether things should be built at all. That's what the feasibility study process is for.
 
 Every project, including hurricane barriers, floodwalls, and more, undergoes years of analysis before a shovel hits the ground.
 
 Is it necessary? Will it work?
 
-What are the risks? How much will it cost taxpayers, not just now, but decades from now?
+What are the risks? How much will it cost taxpayers, both now and decades from now?
 
 These questions don't have easy answers. Rushing them leads to expensive mistakes.
 
@@ -111,11 +111,11 @@ Take flood control. A poorly designed levee can fail under real-world conditions
 
 When that happens, disaster relief costs dwarf whatever was saved by cutting corners in the planning phase.
 
-The same is true for coastal protection, navigation projects, and environmental restoration. If a project isn't studied properly, the risk isn't just wasting money. It's making the problem worse.
+The same is true for coastal protection, navigation projects, and environmental restoration. If a project isn't studied properly, the risks include wasting money and making the problem worse.
 
 Private developers can afford to take risks. The federal government can't.
 
-A feasibility study isn't bureaucracy. It's insurance.
+A feasibility study provides insurance.
 
 It ensures taxpayer money funds projects that work. Done right, it saves far more than it costs.
 
@@ -136,11 +136,9 @@ Some projects take decades from planning to completion. By the time a new policy
 
 Changing course isn't always practical. If the policy change is minor, it can be worked in. But if it requires a major overhaul, new environmental justice guidelines, changes in cost-sharing rules, or new economic assumptions can delay a study by years.
 
-That's not just theoretical.
+If a study is halfway done and the rules change, engineers and economists must do more than tweak a few numbers. They start over. Models must be rerun, environmental assessments redone, justifications rewritten.
 
-If a study is halfway done and the rules change, engineers and economists don't just tweak a few numbers. They start over. Models must be rerun, environmental assessments redone, justifications rewritten.
-
-In some cases, a project that was once viable becomes unjustifiable, not because conditions have changed, but because the rules have.
+In some cases, a project that was once viable becomes unjustifiable, because the rules have changed even when conditions have not.
 
 USACE does not shift course every election cycle because long-term planning requires consistency.
 
@@ -157,15 +155,15 @@ Planning has to outlast politics. Otherwise, nothing ever gets built.
 
 Politicians come and go. Career professionals stay.
 
-That's one of USACE's biggest strengths. The people analyzing major federal projects aren't elected officials chasing quick wins.
+That's one of USACE's biggest strengths. The people analyzing major federal projects are engineers, economists, and planners, rather than elected officials chasing quick wins.
 
-They're engineers, economists, and planners who've spent decades studying what works and what fails.
+They've spent decades studying what works and what fails.
 
 They remember past mistakes. More importantly, they make sure we don't repeat them.
 
 Without that continuity, every new administration would be starting from scratch. Critical projects would be scrapped and revived in an endless loop. Studies would be abandoned midstream. Lessons learned the hard way would be forgotten.
 
-Federal agencies move slowly, but that slowness protects institutional memory. Decisions that affect the technical analysis are made based on data and experience, not just fleeting priorities.
+Federal agencies move slowly, but that slowness protects institutional memory. Decisions that affect the technical analysis are made based on data and experience, rather than fleeting priorities alone.
 
 Even as leadership changes, long-term projects stay on course. Without stability, infrastructure planning collapses into chaos.
 
@@ -186,7 +184,7 @@ A well-planned levee protects a city for a century. A rushed one fails when it's
 
 A carefully vetted restoration project can bring an ecosystem back to life. A poorly thought-out one can do more harm than good.
 
-USACE's deliberate pace isn't red tape. It's a safeguard.
+USACE's deliberate pace is a safeguard.
 
 Public funds should go toward projects built to last: projects that can withstand disasters and hold up under scrutiny.
 

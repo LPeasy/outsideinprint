@@ -13,7 +13,7 @@ edition: "Fifth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Identified independence and constant probability as calculation assumptions, not universal flood-map properties. Added or retained claim-level source links; original reporting frame retained. Corrected flagged graphics and captions without changing surrounding prose in this graphics pass."
+    note: "Identified independence and constant probability as calculation assumptions, not universal flood-map properties. Added or retained claim-level source links; original reporting frame retained. Corrected flagged graphics and captions without changing surrounding prose in this graphics pass. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.3"
     date: "2026-08-27"
     note: "Added a seven-part infographic series explaining the annual-chance definition, repeated exposure, mortgage-period probability, the insurance decision, and the limits of the model."
@@ -151,8 +151,7 @@ It's your responsibility.
 
 ### The Insurance Decision, In Plain English
 
-Choosing not to buy flood insurance in the 100-year floodplain isn't a
-principled stand against bad science. It's a bet.
+Choosing not to buy flood insurance in the 100-year floodplain is a bet.
 
 Vegas would give you roughly **3 to 1 odds.**
 

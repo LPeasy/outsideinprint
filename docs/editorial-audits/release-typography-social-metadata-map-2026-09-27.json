@@ -1,0 +1,674 @@
+{
+  "scope": "Owner-approved release-unblocking typography normalization and existing-image social metadata only.",
+  "date": "2026-09-27",
+  "punctuation_map": {
+    "U+2018": "'",
+    "U+2019": "'",
+    "U+201C": "\"",
+    "U+201D": "\"",
+    "U+2013": "-",
+    "U+2014": "-"
+  },
+  "counts": {
+    "essays": 14,
+    "punctuation_essays": 13,
+    "punctuation_characters": 127,
+    "punctuation_lines": 77,
+    "social_metadata_essays": 1,
+    "paired_records": 28
+  },
+  "verification": {
+    "status": "PASS",
+    "method": "One read-only consolidated comparison of actual snapshot and current bytes: sequential exact replacements reproduce all14 full files; body bytes equal original body after only approved ASCII punctuation conversion;28 current paired-record hashes match recorded final hashes. The exact replacement map also constrains metadata changes to the current pending note and MECE's added image field.",
+    "full_file_reconstructions": 14,
+    "body_scope_comparisons": 14,
+    "paired_record_hashes": 28,
+    "failures": 0,
+    "reruns": 0,
+    "formal_tests_and_builds_run": false
+  },
+  "files": [
+    {
+      "path": "content/essays/a-really-boring-topic.md",
+      "snapshot": "/tmp/oip-release-typography-zDYkzm/a-really-boring-topic.md",
+      "replacements": [
+        {
+          "before": "Exploring the Tunnel Boring Industry’s Past, Present, and Future\n",
+          "after": "Exploring the Tunnel Boring Industry's Past, Present, and Future\n",
+          "count": 1
+        },
+        {
+          "before": "The tunnel boring industry plays a pivotal role in shaping modern infrastructure, addressing the needs of an urbanizing and resource-hungry world. From its origins in 19th-century engineering breakthroughs to its adoption of cutting-edge technologies, this industry continues to expand what’s possible beneath the surface. This essay examines the history, emerging trends, future scenarios, and growth potential of the tunnel boring sector while reflecting on its broader impact on global development.\n",
+          "after": "The tunnel boring industry plays a pivotal role in shaping modern infrastructure, addressing the needs of an urbanizing and resource-hungry world. From its origins in 19th-century engineering breakthroughs to its adoption of cutting-edge technologies, this industry continues to expand what's possible beneath the surface. This essay examines the history, emerging trends, future scenarios, and growth potential of the tunnel boring sector while reflecting on its broader impact on global development.\n",
+          "count": 1
+        },
+        {
+          "before": "The mid-20th century witnessed another leap forward with the invention of the [modern tunnel boring machine (TBM) by James S. Robbins in 1952](https://www.robbinstbm.com/about/history/). Robbins’ 1952 TBM excavated weak shale at the Oahe Dam in South Dakota; disc cutters followed in 1956 for harder limestone at the Humber River Sewer Tunnel in Canada. Subsequent innovations, such as bentonite tunneling machines in the 1960s, expanded capabilities to softer soils.\n",
+          "after": "The mid-20th century witnessed another leap forward with the invention of the [modern tunnel boring machine (TBM) by James S. Robbins in 1952](https://www.robbinstbm.com/about/history/). Robbins' 1952 TBM excavated weak shale at the Oahe Dam in South Dakota; disc cutters followed in 1956 for harder limestone at the Humber River Sewer Tunnel in Canada. Subsequent innovations, such as bentonite tunneling machines in the 1960s, expanded capabilities to softer soils.\n",
+          "count": 1
+        },
+        {
+          "before": "Major milestones like the [Channel Tunnel (1994)](https://www.getlinkgroup.com/en/our-group/history/), connecting the United Kingdom and France, and the [Gotthard Base Tunnel (2016), the world’s longest and deepest rail tunnel](https://www.ticino.ch/en/commons/details/The-Gotthard-Base-Tunnel/1219.html), showcase the transformative power of TBMs. These projects highlight the industry’s ability to tackle diverse geological and engineering challenges.\n",
+          "after": "Major milestones like the [Channel Tunnel (1994)](https://www.getlinkgroup.com/en/our-group/history/), connecting the United Kingdom and France, and the [Gotthard Base Tunnel (2016), the world's longest and deepest rail tunnel](https://www.ticino.ch/en/commons/details/The-Gotthard-Base-Tunnel/1219.html), showcase the transformative power of TBMs. These projects highlight the industry's ability to tackle diverse geological and engineering challenges.\n",
+          "count": 1
+        },
+        {
+          "before": "The tunnel boring industry’s importance could grow exponentially in response to emerging challenges and opportunities. Here are several scenarios where tunneling technologies may play a transformative role:\n",
+          "after": "The tunnel boring industry's importance could grow exponentially in response to emerging challenges and opportunities. Here are several scenarios where tunneling technologies may play a transformative role:\n",
+          "count": 1
+        },
+        {
+          "before": "- Infrastructure Investments: Governments worldwide are allocating significant funds for tunneling projects. In the U.S., the Infrastructure Investment and Jobs Act includes provisions for transit systems requiring tunnels, while China’s Belt and Road Initiative funds large-scale projects.\n",
+          "after": "- Infrastructure Investments: Governments worldwide are allocating significant funds for tunneling projects. In the U.S., the Infrastructure Investment and Jobs Act includes provisions for transit systems requiring tunnels, while China's Belt and Road Initiative funds large-scale projects.\n",
+          "count": 1
+        },
+        {
+          "before": "Beneath our feet lies a world of potential, waiting to be uncovered. Whether it’s improving transportation, safeguarding cities, or reaching for the stars, the tunnel boring industry continues to redefine what humanity can achieve beneath the surface.\n",
+          "after": "Beneath our feet lies a world of potential, waiting to be uncovered. Whether it's improving transportation, safeguarding cities, or reaching for the stars, the tunnel boring industry continues to redefine what humanity can achieve beneath the surface.\n",
+          "count": 1
+        },
+        {
+          "before": "    note: \"Corrected tunneling chronology/rock type. Added or retained claim-level source links; original reporting frame and artwork retained. Withdrew the unsupported market forecast and narrowed the digital-tool and material-recycling examples to the identified source evidence.\"",
+          "after": "    note: \"Corrected tunneling chronology/rock type. Added or retained claim-level source links; original reporting frame and artwork retained. Withdrew the unsupported market forecast and narrowed the digital-tool and material-recycling examples to the identified source evidence. Normalized legacy body punctuation without changing wording.\"",
+          "count": 1
+        }
+      ],
+      "punctuation_characters": 8,
+      "punctuation_lines": 7,
+      "records": [
+        "docs/editorial-audits/99-refinement/a-really-boring-topic-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/a-really-boring-topic-source-checklist.md"
+      ],
+      "sha256": "4dd2e908ce7991e0fec400a3eab54bb063dded16052a0f3886331999db814d5c"
+    },
+    {
+      "path": "content/essays/ai-in-education-is-a-wicked-problem.md",
+      "snapshot": "/tmp/oip-release-typography-zDYkzm/ai-in-education-is-a-wicked-problem.md",
+      "replacements": [
+        {
+          "before": "![“The Wicked Problem Loop”](oip-image:medium/4ebf48bacdff824a125b429a9410afd6a03bd15d67452e2b4a17743ab10836db)\n",
+          "after": "![\"The Wicked Problem Loop\"](oip-image:medium/4ebf48bacdff824a125b429a9410afd6a03bd15d67452e2b4a17743ab10836db)\n",
+          "count": 1
+        },
+        {
+          "before": "*“The Wicked Problem Loop” | Created by Author*\n",
+          "after": "*\"The Wicked Problem Loop\" | Created by Author*\n",
+          "count": 1
+        },
+        {
+          "before": "![“The Futility of Control”](oip-image:medium/4b78e3e3d056a68126fbae12e3a387e2a1a93ba6a5bcdfe93955e75c0839c8c7)\n",
+          "after": "![\"The Futility of Control\"](oip-image:medium/4b78e3e3d056a68126fbae12e3a387e2a1a93ba6a5bcdfe93955e75c0839c8c7)\n",
+          "count": 1
+        },
+        {
+          "before": "*“The Futility of Control” | Created by Author*\n",
+          "after": "*\"The Futility of Control\" | Created by Author*\n",
+          "count": 1
+        },
+        {
+          "before": "![“The Erosion of Judgement”](oip-image:medium/77416938ef5aa442d49faa61f66857dd3c14ad457156a1596a35131d306c7f28)\n",
+          "after": "![\"The Erosion of Judgement\"](oip-image:medium/77416938ef5aa442d49faa61f66857dd3c14ad457156a1596a35131d306c7f28)\n",
+          "count": 1
+        },
+        {
+          "before": "*“The Erosion of Judgement” | Created by Author*\n",
+          "after": "*\"The Erosion of Judgement\" | Created by Author*\n",
+          "count": 1
+        },
+        {
+          "before": "![“The Reflection of Learning”](oip-image:medium/fd3d29842d5fa7dd8e071751beb3ce1bfd7fc051e86dd6d3d10ff003ccb8a042)\n",
+          "after": "![\"The Reflection of Learning\"](oip-image:medium/fd3d29842d5fa7dd8e071751beb3ce1bfd7fc051e86dd6d3d10ff003ccb8a042)\n",
+          "count": 1
+        },
+        {
+          "before": "*“The Reflection of Learning” | Art by Author*\n",
+          "after": "*\"The Reflection of Learning\" | Art by Author*\n",
+          "count": 1
+        },
+        {
+          "before": "    note: \"Added supporting source hyperlinks without changing the original prose.\"",
+          "after": "    note: \"Added supporting source hyperlinks without changing the original prose. Normalized legacy body punctuation without changing wording.\"",
+          "count": 1
+        }
+      ],
+      "punctuation_characters": 16,
+      "punctuation_lines": 8,
+      "records": [
+        "docs/editorial-audits/99-refinement/ai-in-education-is-a-wicked-problem-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/ai-in-education-is-a-wicked-problem-source-checklist.md"
+      ],
+      "sha256": "72f1b1422e5c31100a9d55906dab70643d1cec26670bb83a1a7fec9104bc38c8"
+    },
+    {
+      "path": "content/essays/declaring-equality.md",
+      "snapshot": "/tmp/oip-release-typography-zDYkzm/declaring-equality.md",
+      "replacements": [
+        {
+          "before": "[C-SPAN coverage of Biden’s statement](https://www.youtube.com/watch?v=CduiQUZMtSs)\n",
+          "after": "[C-SPAN coverage of Biden's statement](https://www.youtube.com/watch?v=CduiQUZMtSs)\n",
+          "count": 1
+        },
+        {
+          "before": "[President Joe Biden’s recent declaration of the Equal Rights Amendment (ERA) as “the law of the land”](https://www.govinfo.gov/content/pkg/DCPD-202500088/pdf/DCPD-202500088.pdf) has ignited a profound debate at the crossroads of constitutional law, political symbolism, and social justice advocacy. While the ERA represents decades of struggle for gender equality, Biden’s statement raises critical questions about the limits of executive authority, the complexities of constitutional amendment procedures, and the role of symbolic actions in shaping public discourse. This essay delves deeply into the ERA’s history, examines the legal and procedural hurdles it faces, and critiques the broader sociopolitical implications of the president’s declaration, placing it within the larger context of power, governance, and systemic change.\n",
+          "after": "[President Joe Biden's recent declaration of the Equal Rights Amendment (ERA) as \"the law of the land\"](https://www.govinfo.gov/content/pkg/DCPD-202500088/pdf/DCPD-202500088.pdf) has ignited a profound debate at the crossroads of constitutional law, political symbolism, and social justice advocacy. While the ERA represents decades of struggle for gender equality, Biden's statement raises critical questions about the limits of executive authority, the complexities of constitutional amendment procedures, and the role of symbolic actions in shaping public discourse. This essay delves deeply into the ERA's history, examines the legal and procedural hurdles it faces, and critiques the broader sociopolitical implications of the president's declaration, placing it within the larger context of power, governance, and systemic change.\n",
+          "count": 1
+        },
+        {
+          "before": "The ERA was [first introduced in 1923](https://www.everycrsreport.com/reports/R42979.html), reflecting the early 20th century’s growing momentum for women’s suffrage and broader gender equality. Designed to eliminate legal distinctions based on sex, the amendment aimed to enshrine equality into the fabric of U.S. governance.\n",
+          "after": "The ERA was [first introduced in 1923](https://www.everycrsreport.com/reports/R42979.html), reflecting the early 20th century's growing momentum for women's suffrage and broader gender equality. Designed to eliminate legal distinctions based on sex, the amendment aimed to enshrine equality into the fabric of U.S. governance.\n",
+          "count": 1
+        },
+        {
+          "before": "Biden’s Declaration: Law or Symbolism?\n",
+          "after": "Biden's Declaration: Law or Symbolism?\n",
+          "count": 1
+        },
+        {
+          "before": "In affirming the ERA as the “law of the land,” President Biden placed gender equality at the forefront of national discourse. His declaration aligns with the broader goals of his administration to advance civil rights and equity. However, the assertion is primarily symbolic, as the constitutional process for amendments outlined in [Article V](https://www.law.cornell.edu/constitution/articlev) does not grant the president authority to declare an amendment ratified.\n",
+          "after": "In affirming the ERA as the \"law of the land,\" President Biden placed gender equality at the forefront of national discourse. His declaration aligns with the broader goals of his administration to advance civil rights and equity. However, the assertion is primarily symbolic, as the constitutional process for amendments outlined in [Article V](https://www.law.cornell.edu/constitution/articlev) does not grant the president authority to declare an amendment ratified.\n",
+          "count": 1
+        },
+        {
+          "before": "While Biden’s statement elevates the ERA’s visibility, it risks misrepresenting its legal status. The National Archives, which oversees the certification of constitutional amendments, [has maintained that it cannot certify the ERA without additional congressional or judicial action](https://www.archives.gov/press/press-releases/2025/nr25-004). Furthermore, the expired deadline and contested rescissions remain significant obstacles, leaving the amendment’s status in a precarious legal limbo.\n",
+          "after": "While Biden's statement elevates the ERA's visibility, it risks misrepresenting its legal status. The National Archives, which oversees the certification of constitutional amendments, [has maintained that it cannot certify the ERA without additional congressional or judicial action](https://www.archives.gov/press/press-releases/2025/nr25-004). Furthermore, the expired deadline and contested rescissions remain significant obstacles, leaving the amendment's status in a precarious legal limbo.\n",
+          "count": 1
+        },
+        {
+          "before": "The ERA’s path to constitutional recognition is fraught with challenges that highlight the intricacies of amending the Constitution:\n",
+          "after": "The ERA's path to constitutional recognition is fraught with challenges that highlight the intricacies of amending the Constitution:\n",
+          "count": 1
+        },
+        {
+          "before": "1. The Ratification Deadline: Critics argue that the ERA’s 1982 deadline invalidates subsequent ratifications. Proponents counter that deadlines for amendments are not constitutionally required; the [27th Amendment, which took over 200 years to ratify, never had one](https://www.everycrsreport.com/reports/R42979.html).\n",
+          "after": "1. The Ratification Deadline: Critics argue that the ERA's 1982 deadline invalidates subsequent ratifications. Proponents counter that deadlines for amendments are not constitutionally required; the [27th Amendment, which took over 200 years to ratify, never had one](https://www.everycrsreport.com/reports/R42979.html).\n",
+          "count": 1
+        },
+        {
+          "before": "4. Congressional Stalemates: Efforts to remove the ERA’s ratification deadline have repeatedly stalled, reflecting deep partisan divides over gender equality, federal authority, and constitutional interpretation.\n",
+          "after": "4. Congressional Stalemates: Efforts to remove the ERA's ratification deadline have repeatedly stalled, reflecting deep partisan divides over gender equality, federal authority, and constitutional interpretation.\n",
+          "count": 1
+        },
+        {
+          "before": "President Biden’s declaration underscores the power of symbolism in mobilizing public opinion but also exposes the limitations of symbolic actions without substantive legal outcomes.\n",
+          "after": "President Biden's declaration underscores the power of symbolism in mobilizing public opinion but also exposes the limitations of symbolic actions without substantive legal outcomes.\n",
+          "count": 1
+        },
+        {
+          "before": "- Advocacy and Mobilization: Feminist organizations and civil rights advocates have praised the declaration as a catalyst for renewed activism. The ERA’s inclusion in public discourse reinforces its importance as a unifying issue for gender and LGBTQ+ equality.\n",
+          "after": "- Advocacy and Mobilization: Feminist organizations and civil rights advocates have praised the declaration as a catalyst for renewed activism. The ERA's inclusion in public discourse reinforces its importance as a unifying issue for gender and LGBTQ+ equality.\n",
+          "count": 1
+        },
+        {
+          "before": "- Polarization and Overreach: Critics argue that Biden’s move exemplifies executive overreach and politicizes the amendment process. They contend that such declarations could undermine the Constitution’s checks and balances, potentially eroding public trust in government institutions.\n",
+          "after": "- Polarization and Overreach: Critics argue that Biden's move exemplifies executive overreach and politicizes the amendment process. They contend that such declarations could undermine the Constitution's checks and balances, potentially eroding public trust in government institutions.\n",
+          "count": 1
+        },
+        {
+          "before": "- Societal Divides: The ERA debate reflects broader societal tensions regarding equality, governance, and the role of symbolic gestures. While the amendment’s principles enjoy widespread support, disagreements over its implementation reveal persistent ideological divides.\n",
+          "after": "- Societal Divides: The ERA debate reflects broader societal tensions regarding equality, governance, and the role of symbolic gestures. While the amendment's principles enjoy widespread support, disagreements over its implementation reveal persistent ideological divides.\n",
+          "count": 1
+        },
+        {
+          "before": "The ERA’s complex journey offers valuable insights into the challenges of systemic change in a constitutional democracy:\n",
+          "after": "The ERA's complex journey offers valuable insights into the challenges of systemic change in a constitutional democracy:\n",
+          "count": 1
+        },
+        {
+          "before": "1. The Role of Symbolism: While symbolic actions like Biden’s declaration can galvanize support, they must be paired with tangible legal and legislative efforts to achieve lasting change.\n",
+          "after": "1. The Role of Symbolism: While symbolic actions like Biden's declaration can galvanize support, they must be paired with tangible legal and legislative efforts to achieve lasting change.\n",
+          "count": 1
+        },
+        {
+          "before": "3. The Enduring Relevance of Equality: The ERA’s continued resonance highlights the evolving nature of equality in modern society. Its principles extend beyond gender to address broader issues of intersectionality, inclusivity, and human rights.\n",
+          "after": "3. The Enduring Relevance of Equality: The ERA's continued resonance highlights the evolving nature of equality in modern society. Its principles extend beyond gender to address broader issues of intersectionality, inclusivity, and human rights.\n",
+          "count": 1
+        },
+        {
+          "before": "President Biden’s declaration of the ERA as “the law of the land” is a bold assertion of America’s commitment to gender equality, but it also illuminates the complexities of constitutional change. The ERA’s legal challenges and procedural ambiguities reflect the inherent difficulties of enacting systemic reform in a deeply divided society.\n",
+          "after": "President Biden's declaration of the ERA as \"the law of the land\" is a bold assertion of America's commitment to gender equality, but it also illuminates the complexities of constitutional change. The ERA's legal challenges and procedural ambiguities reflect the inherent difficulties of enacting systemic reform in a deeply divided society.\n",
+          "count": 1
+        },
+        {
+          "before": "While symbolic gestures can inspire hope and mobilize action, they must be coupled with substantive efforts to navigate the intricate processes of law and governance. The ERA’s ultimate fate will depend on the collective will of policymakers, activists, and the public to bridge the gap between aspiration and reality, ensuring that the promise of equality becomes a tangible legacy for future generations.\n",
+          "after": "While symbolic gestures can inspire hope and mobilize action, they must be coupled with substantive efforts to navigate the intricate processes of law and governance. The ERA's ultimate fate will depend on the collective will of policymakers, activists, and the public to bridge the gap between aspiration and reality, ensuring that the promise of equality becomes a tangible legacy for future generations.\n",
+          "count": 1
+        },
+        {
+          "before": "    note: \"Corrected ERA deadlines/ratification chronology and Twenty-Seventh Amendment precedent. Added or retained claim-level source links; original reporting frame and artwork retained.\"",
+          "after": "    note: \"Corrected ERA deadlines/ratification chronology and Twenty-Seventh Amendment precedent. Added or retained claim-level source links; original reporting frame and artwork retained. Normalized legacy body punctuation without changing wording.\"",
+          "count": 1
+        }
+      ],
+      "punctuation_characters": 32,
+      "punctuation_lines": 18,
+      "records": [
+        "docs/editorial-audits/99-refinement/declaring-equality-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/declaring-equality-source-checklist.md"
+      ],
+      "sha256": "7f54beb8242798eadeb7ea3bfce7a574d2adf160ab4b1b7dd1cfcfb894b11b89"
+    },
+    {
+      "path": "content/essays/generation-inflation.md",
+      "snapshot": "/tmp/oip-release-typography-zDYkzm/generation-inflation.md",
+      "replacements": [
+        {
+          "before": "- Average undergraduate tuition and required fees rose from $1,289 in 1980–81 to $14,688 in 2022–23, in current dollars ([NCES](https://nces.ed.gov/programs/digest/d23/tables/dt23_330.10.asp)).\n",
+          "after": "- Average undergraduate tuition and required fees rose from $1,289 in 1980-81 to $14,688 in 2022-23, in current dollars ([NCES](https://nces.ed.gov/programs/digest/d23/tables/dt23_330.10.asp)).\n",
+          "count": 1
+        },
+        {
+          "before": "**Real hourly wage growth, 1979–2023**\n",
+          "after": "**Real hourly wage growth, 1979-2023**\n",
+          "count": 1
+        },
+        {
+          "before": "| Middle wage: average of 40th–60th percentiles | 17.4% |\n",
+          "after": "| Middle wage: average of 40th-60th percentiles | 17.4% |\n",
+          "count": 1
+        },
+        {
+          "before": "Between 1979 and 2023, workers at the 10th percentile of hourly wages saw just an 18.3% increase in real wages, equivalent to about 0.4% a year. Even those in the middle (average of the 40th–60th percentiles) experienced similarly meager gains of 17.4%. In contrast, higher-paid workers at the 90th percentile saw a more substantial rise of 51.7%, reflecting widening wage inequality ([EPI, 2024](https://www.epi.org/publication/swa-wages-2023/)).\n",
+          "after": "Between 1979 and 2023, workers at the 10th percentile of hourly wages saw just an 18.3% increase in real wages, equivalent to about 0.4% a year. Even those in the middle (average of the 40th-60th percentiles) experienced similarly meager gains of 17.4%. In contrast, higher-paid workers at the 90th percentile saw a more substantial rise of 51.7%, reflecting widening wage inequality ([EPI, 2024](https://www.epi.org/publication/swa-wages-2023/)).\n",
+          "count": 1
+        },
+        {
+          "before": "- [National Center for Education Statistics (NCES). Digest of Education Statistics 2023, Table 330.10. Average undergraduate tuition and required fees, all institutions, 1980–81 and 2022–23.](https://nces.ed.gov/programs/digest/d23/tables/dt23_330.10.asp)\n",
+          "after": "- [National Center for Education Statistics (NCES). Digest of Education Statistics 2023, Table 330.10. Average undergraduate tuition and required fees, all institutions, 1980-81 and 2022-23.](https://nces.ed.gov/programs/digest/d23/tables/dt23_330.10.asp)\n",
+          "count": 1
+        },
+        {
+          "before": "    note: \"Distinguished surveyed aspirations from measured living costs. Replaced mismatched price comparisons with defined official series, corrected real-wage figures, and replaced the wage illustration with a sourced table. Qualified only the adjoining purchasing-power claims and updated citations; surrounding prose and other artwork retained.\"",
+          "after": "    note: \"Distinguished surveyed aspirations from measured living costs. Replaced mismatched price comparisons with defined official series, corrected real-wage figures, and replaced the wage illustration with a sourced table. Qualified only the adjoining purchasing-power claims and updated citations; surrounding prose and other artwork retained. Normalized legacy body punctuation without changing wording.\"",
+          "count": 1
+        }
+      ],
+      "punctuation_characters": 7,
+      "punctuation_lines": 5,
+      "records": [
+        "docs/editorial-audits/99-refinement/generation-inflation-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/generation-inflation-source-checklist.md"
+      ],
+      "sha256": "17007140ae53d5e22dba8c2003bf4fc7808d7abf87467d206216da0cef74d093"
+    },
+    {
+      "path": "content/essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter.md",
+      "snapshot": "/tmp/oip-release-typography-zDYkzm/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter.md",
+      "replacements": [
+        {
+          "before": "![Pope Leo’s Inauguration](/images/medium/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/54f9bf2dba2609d3ac58119fd2080f2c79adcb50b24b92f488cf09254d5accfa.jpeg)\n",
+          "after": "![Pope Leo's Inauguration](/images/medium/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/54f9bf2dba2609d3ac58119fd2080f2c79adcb50b24b92f488cf09254d5accfa.jpeg)\n",
+          "count": 1
+        },
+        {
+          "before": "*Pope Leo’s Inauguration | Source: Wikimedia Commons*\n",
+          "after": "*Pope Leo's Inauguration | Source: Wikimedia Commons*\n",
+          "count": 1
+        },
+        {
+          "before": "    note: \"Added claim-level sources and made limited corrections to dates, factual details, and quotations; clarified author-written pull quotes and removed unsupported specifics. Preserved the approved timeline correction.\"",
+          "after": "    note: \"Added claim-level sources and made limited corrections to dates, factual details, and quotations; clarified author-written pull quotes and removed unsupported specifics. Preserved the approved timeline correction. Normalized legacy body punctuation without changing wording.\"",
+          "count": 1
+        }
+      ],
+      "punctuation_characters": 2,
+      "punctuation_lines": 2,
+      "records": [
+        "docs/editorial-audits/99-refinement/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter-source-checklist.md"
+      ],
+      "sha256": "3d09428e077284983094a00c731763594036b033a8bbaf3f06b8de078219a606"
+    },
+    {
+      "path": "content/essays/the-death-of-moores-law.md",
+      "snapshot": "/tmp/oip-release-typography-zDYkzm/the-death-of-moores-law.md",
+      "replacements": [
+        {
+          "before": "This insight, later adjusted to a two-year doubling period, became known as Moore’s Law. It wasn’t just an observation, it became the heartbeat of the semiconductor industry and a driving force behind the exponential growth of computing power.\n",
+          "after": "This insight, later adjusted to a two-year doubling period, became known as Moore's Law. It wasn't just an observation, it became the heartbeat of the semiconductor industry and a driving force behind the exponential growth of computing power.\n",
+          "count": 1
+        },
+        {
+          "before": "Moore, ever modest, later admitted that his prediction wasn’t meant to be a law of nature, joking that it was more of a marketing tool.\n",
+          "after": "Moore, ever modest, later admitted that his prediction wasn't meant to be a law of nature, joking that it was more of a marketing tool.\n",
+          "count": 1
+        },
+        {
+          "before": "The industry turned his prophecy into a reality. Over the next 55 years, Moore’s two-year doubling prediction was surprisingly accurate. Today, however, Moore’s Law has slowed significantly. As transistors shrink to near-atomic scales, the physical and economic realities of semiconductor manufacturing are forcing the industry to redefine the trajectory of progress.\n",
+          "after": "The industry turned his prophecy into a reality. Over the next 55 years, Moore's two-year doubling prediction was surprisingly accurate. Today, however, Moore's Law has slowed significantly. As transistors shrink to near-atomic scales, the physical and economic realities of semiconductor manufacturing are forcing the industry to redefine the trajectory of progress.\n",
+          "count": 1
+        },
+        {
+          "before": "Understanding when and why Moore’s Law “ended” reveals not just the limits of silicon but also the limitless possibilities of innovation.\n",
+          "after": "Understanding when and why Moore's Law \"ended\" reveals not just the limits of silicon but also the limitless possibilities of innovation.\n",
+          "count": 1
+        },
+        {
+          "before": "The Rise, Plateau, and Decline of Moore’s Law\n",
+          "after": "The Rise, Plateau, and Decline of Moore's Law\n",
+          "count": 1
+        },
+        {
+          "before": "For much of its history, Moore’s Law was a self-fulfilling prophecy.\n",
+          "after": "For much of its history, Moore's Law was a self-fulfilling prophecy.\n",
+          "count": 1
+        },
+        {
+          "before": "The [22-nanometer node, introduced around 2012](https://download.intel.com/newsroom/kits/isscc/2012/pdfs/Intel-at-ISSCC_FactSheet.pdf), marked a pivotal moment in the history of Moore’s Law. At this scale, transistors became so tiny that their size defies ordinary comprehension.\n",
+          "after": "The [22-nanometer node, introduced around 2012](https://download.intel.com/newsroom/kits/isscc/2012/pdfs/Intel-at-ISSCC_FactSheet.pdf), marked a pivotal moment in the history of Moore's Law. At this scale, transistors became so tiny that their size defies ordinary comprehension.\n",
+          "count": 1
+        },
+        {
+          "before": "Imagine a single human hair, roughly 80,000 nanometers thick. If you were to shrink that hair down to just 22 nanometers, it would be thinner than the strands of a spider’s web and nearly invisible to the naked eye. Now consider that a modern microchip contains billions of these microscopic transistors, each working together to perform complex calculations at astonishing speeds.\n",
+          "after": "Imagine a single human hair, roughly 80,000 nanometers thick. If you were to shrink that hair down to just 22 nanometers, it would be thinner than the strands of a spider's web and nearly invisible to the naked eye. Now consider that a modern microchip contains billions of these microscopic transistors, each working together to perform complex calculations at astonishing speeds.\n",
+          "count": 1
+        },
+        {
+          "before": "At such a scale, the rules of classical physics begin to break down, and quantum mechanics takes over. Electron tunneling, where electrons spontaneously pass through barriers they shouldn’t, creates instability, making further miniaturization increasingly difficult.\n",
+          "after": "At such a scale, the rules of classical physics begin to break down, and quantum mechanics takes over. Electron tunneling, where electrons spontaneously pass through barriers they shouldn't, creates instability, making further miniaturization increasingly difficult.\n",
+          "count": 1
+        },
+        {
+          "before": "The 22-nanometer node was an extraordinary achievement, but it marked the beginning of the end for Moore’s Law as we knew it. Beyond the physical challenges, the costs of continuing Moore’s Law became astronomical. Transitioning to smaller nodes, such as 10nm, 7nm, and 3nm, requires billions of dollars in research and development, as well as state-of-the-art production facilities.\n",
+          "after": "The 22-nanometer node was an extraordinary achievement, but it marked the beginning of the end for Moore's Law as we knew it. Beyond the physical challenges, the costs of continuing Moore's Law became astronomical. Transitioning to smaller nodes, such as 10nm, 7nm, and 3nm, requires billions of dollars in research and development, as well as state-of-the-art production facilities.\n",
+          "count": 1
+        },
+        {
+          "before": "While transistor densities continue to improve, the cadence has slowed significantly, marking the end of Moore’s Law as originally conceived.\n",
+          "after": "While transistor densities continue to improve, the cadence has slowed significantly, marking the end of Moore's Law as originally conceived.\n",
+          "count": 1
+        },
+        {
+          "before": "Rethinking Progress in the Post-Moore’s Law Era\n",
+          "after": "Rethinking Progress in the Post-Moore's Law Era\n",
+          "count": 1
+        },
+        {
+          "before": "The slowing of Moore’s Law doesn’t mean the end of computational progress. Instead, it has prompted a shift toward new strategies and innovations that prioritize efficiency, specialization, and architectural creativity.\n",
+          "after": "The slowing of Moore's Law doesn't mean the end of computational progress. Instead, it has prompted a shift toward new strategies and innovations that prioritize efficiency, specialization, and architectural creativity.\n",
+          "count": 1
+        },
+        {
+          "before": "The slowing of Moore’s Law has far-reaching implications, not just for the technology industry but for society as a whole. As the economics of semiconductor manufacturing shift, so too do the challenges and opportunities.\n",
+          "after": "The slowing of Moore's Law has far-reaching implications, not just for the technology industry but for society as a whole. As the economics of semiconductor manufacturing shift, so too do the challenges and opportunities.\n",
+          "count": 1
+        },
+        {
+          "before": "Conclusion: Moore’s Legacy and the Future of Computing\n",
+          "after": "Conclusion: Moore's Legacy and the Future of Computing\n",
+          "count": 1
+        },
+        {
+          "before": "“No exponential is forever, but we can delay ‘forever.’” The slowing of Moore’s Law marks the end of an era, but it also represents the beginning of a new chapter in computational innovation.\n",
+          "after": "\"No exponential is forever, but we can delay 'forever.'\" The slowing of Moore's Law marks the end of an era, but it also represents the beginning of a new chapter in computational innovation.\n",
+          "count": 1
+        },
+        {
+          "before": "Rather than mourning the end of Moore’s Law, we should view it as a natural evolution. The relentless shrinking of transistors may no longer define progress, but the pursuit of efficiency, creativity, and new paradigms will continue to push the boundaries of what is possible.\n",
+          "after": "Rather than mourning the end of Moore's Law, we should view it as a natural evolution. The relentless shrinking of transistors may no longer define progress, but the pursuit of efficiency, creativity, and new paradigms will continue to push the boundaries of what is possible.\n",
+          "count": 1
+        },
+        {
+          "before": "The legacy of Moore’s Law isn’t just about transistors; it’s the enduring belief that ingenuity can overcome even the most daunting challenges. In the post-Moore’s Law world, opportunities are endless, and the next great leap forward is just beyond the horizon.\n",
+          "after": "The legacy of Moore's Law isn't just about transistors; it's the enduring belief that ingenuity can overcome even the most daunting challenges. In the post-Moore's Law world, opportunities are endless, and the next great leap forward is just beyond the horizon.\n",
+          "count": 1
+        },
+        {
+          "before": "    note: \"Corrected Taiwan geography. Added or retained claim-level source links; original reporting frame and artwork retained. Replaced the industry-wide investment-cutoff claim with a bounded statement about increasing difficulty preserving cost advantages, linked to Intel's 2015 account.\"",
+          "after": "    note: \"Corrected Taiwan geography. Added or retained claim-level source links; original reporting frame and artwork retained. Replaced the industry-wide investment-cutoff claim with a bounded statement about increasing difficulty preserving cost advantages, linked to Intel's 2015 account. Normalized legacy body punctuation without changing wording.\"",
+          "count": 1
+        }
+      ],
+      "punctuation_characters": 31,
+      "punctuation_lines": 18,
+      "records": [
+        "docs/editorial-audits/99-refinement/the-death-of-moores-law-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/the-death-of-moores-law-source-checklist.md"
+      ],
+      "sha256": "4d4155901305070cb5079ec4e8207d64e27dee7ea6479d1b3a72a07a3c1d39bb"
+    },
+    {
+      "path": "content/essays/the-economics-of-the-mongol-empire.md",
+      "snapshot": "/tmp/oip-release-typography-zDYkzm/the-economics-of-the-mongol-empire.md",
+      "replacements": [
+        {
+          "before": "![Location of Ghengis Khan’s capitol city Karakorum](/images/medium/the-economics-of-the-mongol-empire/ef22902ff0efb5540cbfb990defdcd832d87afa1e85d0b5eb49252a1bd420636.jpg)\n",
+          "after": "![Location of Ghengis Khan's capitol city Karakorum](/images/medium/the-economics-of-the-mongol-empire/ef22902ff0efb5540cbfb990defdcd832d87afa1e85d0b5eb49252a1bd420636.jpg)\n",
+          "count": 1
+        },
+        {
+          "before": "*Location of Ghengis Khan’s capitol city Karakorum | Source*\n",
+          "after": "*Location of Ghengis Khan's capitol city Karakorum | Source*\n",
+          "count": 1
+        },
+        {
+          "before": "    note: \"Corrected Yuan currency geography and metallic backing, narrowed the trade-network priority claim and removed the unsupported direct Italian-banking influence sentence. Retained the six quotations checked against the book by the author. Added or retained claim-level source links; original reporting frame and artwork retained.\"",
+          "after": "    note: \"Corrected Yuan currency geography and metallic backing, narrowed the trade-network priority claim and removed the unsupported direct Italian-banking influence sentence. Retained the six quotations checked against the book by the author. Added or retained claim-level source links; original reporting frame and artwork retained. Normalized legacy body punctuation without changing wording.\"",
+          "count": 1
+        }
+      ],
+      "punctuation_characters": 2,
+      "punctuation_lines": 2,
+      "records": [
+        "docs/editorial-audits/99-refinement/the-economics-of-the-mongol-empire-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/the-economics-of-the-mongol-empire-source-checklist.md"
+      ],
+      "sha256": "247e7c32325e35f5ba0c4a601f361e795e304bbd573023692368efa52eed3167"
+    },
+    {
+      "path": "content/essays/the-max-mistake-why-hbos-name-change-backfired.md",
+      "snapshot": "/tmp/oip-release-typography-zDYkzm/the-max-mistake-why-hbos-name-change-backfired.md",
+      "replacements": [
+        {
+          "before": "> “When they’re serious, all those names will go away, and it’ll just be HBO.”\n",
+          "after": "> \"When they're serious, all those names will go away, and it'll just be HBO.\"\n",
+          "count": 1
+        },
+        {
+          "before": "    note: \"Retained claim-level source links and original prose, with approved streaming chronology, licensing, quotation and attribution corrections; removed the unverified meme anecdote and qualified branding claims. Original artwork and publication date unchanged.\"",
+          "after": "    note: \"Retained claim-level source links and original prose, with approved streaming chronology, licensing, quotation and attribution corrections; removed the unverified meme anecdote and qualified branding claims. Original artwork and publication date unchanged. Normalized legacy body punctuation without changing wording.\"",
+          "count": 1
+        }
+      ],
+      "punctuation_characters": 4,
+      "punctuation_lines": 1,
+      "records": [
+        "docs/editorial-audits/99-refinement/the-max-mistake-why-hbos-name-change-backfired-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/the-max-mistake-why-hbos-name-change-backfired-source-checklist.md"
+      ],
+      "sha256": "91870781a32406522e0d627b0f4c939a226fe96b20f0c49f0618e0af906ad474"
+    },
+    {
+      "path": "content/essays/the-national-flood-insurance-program.md",
+      "snapshot": "/tmp/oip-release-typography-zDYkzm/the-national-flood-insurance-program.md",
+      "replacements": [
+        {
+          "before": "The financial pressures on the NFIP will only intensify as climate change accelerates flooding risks. Research shows that one-third of historical flood damages in the United States are attributable to [changes in precipitation over 1988–2017](https://fse.fsi.stanford.edu/publication/contribution-historical-precipitation-change-us-flood-damages) (Stanford, 2021).\n",
+          "after": "The financial pressures on the NFIP will only intensify as climate change accelerates flooding risks. Research shows that one-third of historical flood damages in the United States are attributable to [changes in precipitation over 1988-2017](https://fse.fsi.stanford.edu/publication/contribution-historical-precipitation-change-us-flood-damages) (Stanford, 2021).\n",
+          "count": 1
+        },
+        {
+          "before": "    note: \"Corrected Risk Rating 2.0 pricing and flood-loss study attribution and scope. Added or retained claim-level source links; original reporting frame and artwork retained. Replaced the home-value multiplication with January 2024 policy and coverage totals, distinguishing insurance coverage from market value and annual claims.\"",
+          "after": "    note: \"Corrected Risk Rating 2.0 pricing and flood-loss study attribution and scope. Added or retained claim-level source links; original reporting frame and artwork retained. Replaced the home-value multiplication with January 2024 policy and coverage totals, distinguishing insurance coverage from market value and annual claims. Normalized legacy body punctuation without changing wording.\"",
+          "count": 1
+        }
+      ],
+      "punctuation_characters": 1,
+      "punctuation_lines": 1,
+      "records": [
+        "docs/editorial-audits/99-refinement/the-national-flood-insurance-program-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/the-national-flood-insurance-program-source-checklist.md"
+      ],
+      "sha256": "63d08322b7c3ad54dcee2b1bb18841af2f6064f81e65440d12e9ebded2df5f45"
+    },
+    {
+      "path": "content/essays/the-waters-rising-what-the-data-really-says-about-extreme-weather.md",
+      "snapshot": "/tmp/oip-release-typography-zDYkzm/the-waters-rising-what-the-data-really-says-about-extreme-weather.md",
+      "replacements": [
+        {
+          "before": "**In EPA's 1910–2023 record, nine of the ten highest years for extreme\n",
+          "after": "**In EPA's 1910-2023 record, nine of the ten highest years for extreme\n",
+          "count": 1
+        },
+        {
+          "before": "*Selected measures, not a universal hazard scorecard. OIP graphic, made with ChatGPT from [EPA’s 2024 indicators, Figures 9 and 14](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P101AXFE.txt), and [NOAA GFDL’s hurricane assessment](https://www.gfdl.noaa.gov/global-warming-and-hurricanes/). Rainfall trends do not establish flash-flood frequency.*\n",
+          "after": "*Selected measures, not a universal hazard scorecard. OIP graphic, made with ChatGPT from [EPA's 2024 indicators, Figures 9 and 14](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P101AXFE.txt), and [NOAA GFDL's hurricane assessment](https://www.gfdl.noaa.gov/global-warming-and-hurricanes/). Rainfall trends do not establish flash-flood frequency.*\n",
+          "count": 1
+        },
+        {
+          "before": "rain relative to 1950–1999.**\n",
+          "after": "rain relative to 1950-1999.**\n",
+          "count": 1
+        },
+        {
+          "before": "    note: \"Corrected climate-record dates, precipitation metrics and comparison periods, hurricane projections, Texas rainfall scope, the Hunt-gauge observation and Camp Mystic event details. Added or retained claim-level source links and corrected flagged graphics and captions; surrounding prose retained.\"",
+          "after": "    note: \"Corrected climate-record dates, precipitation metrics and comparison periods, hurricane projections, Texas rainfall scope, the Hunt-gauge observation and Camp Mystic event details. Added or retained claim-level source links and corrected flagged graphics and captions; surrounding prose retained. Normalized legacy body punctuation without changing wording.\"",
+          "count": 1
+        }
+      ],
+      "punctuation_characters": 4,
+      "punctuation_lines": 3,
+      "records": [
+        "docs/editorial-audits/99-refinement/the-waters-rising-what-the-data-really-says-about-extreme-weather-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/the-waters-rising-what-the-data-really-says-about-extreme-weather-source-checklist.md"
+      ],
+      "sha256": "a6220d3eedcaad8c8a3500d047f1f6945a72a23b674e64b58da715133f6efedb"
+    },
+    {
+      "path": "content/essays/what-happened-at-camp-mystic.md",
+      "snapshot": "/tmp/oip-release-typography-zDYkzm/what-happened-at-camp-mystic.md",
+      "replacements": [
+        {
+          "before": "Overnight on July 3–4, 2025, a dangerous storm stalled over the Guadalupe\n",
+          "after": "Overnight on July 3-4, 2025, a dangerous storm stalled over the Guadalupe\n",
+          "count": 1
+        },
+        {
+          "before": "    note: \"Corrected the named Hunt-gauge observation, 1987 Guadalupe flood account, rainfall, cabin and planning details; attributed the first-responder account and removed the unverified opening quotation. Added or retained claim-level source links and corrected flagged graphics and captions. Original reporting frame and surrounding prose retained.\"",
+          "after": "    note: \"Corrected the named Hunt-gauge observation, 1987 Guadalupe flood account, rainfall, cabin and planning details; attributed the first-responder account and removed the unverified opening quotation. Added or retained claim-level source links and corrected flagged graphics and captions. Original reporting frame and surrounding prose retained. Normalized legacy body punctuation without changing wording.\"",
+          "count": 1
+        }
+      ],
+      "punctuation_characters": 1,
+      "punctuation_lines": 1,
+      "records": [
+        "docs/editorial-audits/99-refinement/what-happened-at-camp-mystic-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/what-happened-at-camp-mystic-source-checklist.md"
+      ],
+      "sha256": "8046ab0bcc6e29a7ec7d8be266533347e478acddbafc905968de93f0bc507f5d"
+    },
+    {
+      "path": "content/essays/what-is-risk-a-four-part-framework.md",
+      "snapshot": "/tmp/oip-release-typography-zDYkzm/what-is-risk-a-four-part-framework.md",
+      "replacements": [
+        {
+          "before": "**During 2023–2024,** [**Panama experienced a historic\n",
+          "after": "**During 2023-2024,** [**Panama experienced a historic\n",
+          "count": 1
+        },
+        {
+          "before": "![Average water level in the Panama Canal’s Gatún Lake, January 2019–November 2024.](oip-image:medium/447fb77dcb865fceebe6bb741d15b292d45dbf5c079987fc195df58b297a7461)\n",
+          "after": "![Average water level in the Panama Canal's Gatún Lake, January 2019-November 2024.](oip-image:medium/447fb77dcb865fceebe6bb741d15b292d45dbf5c079987fc195df58b297a7461)\n",
+          "count": 1
+        },
+        {
+          "before": "*Average water level in the Panama Canal’s Gatún Lake, January 2019–November 2024. [Source: CNBC](https://www.cnbc.com/2024/11/12/panama-canal-cargo-container-trade-rebound-record-drought.html)*\n",
+          "after": "*Average water level in the Panama Canal's Gatún Lake, January 2019-November 2024. [Source: CNBC](https://www.cnbc.com/2024/11/12/panama-canal-cargo-container-trade-rebound-record-drought.html)*\n",
+          "count": 1
+        },
+        {
+          "before": "    note: \"Corrected Cape Town's response and Day Zero definition, and qualified Panama drought and fiscal-year comparisons. Added or retained claim-level source links; original reporting frame retained. Corrected image captions without changing surrounding prose in this graphics pass.\"",
+          "after": "    note: \"Corrected Cape Town's response and Day Zero definition, and qualified Panama drought and fiscal-year comparisons. Added or retained claim-level source links; original reporting frame retained. Corrected image captions without changing surrounding prose in this graphics pass. Normalized legacy body punctuation without changing wording.\"",
+          "count": 1
+        }
+      ],
+      "punctuation_characters": 5,
+      "punctuation_lines": 3,
+      "records": [
+        "docs/editorial-audits/99-refinement/what-is-risk-a-four-part-framework-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/what-is-risk-a-four-part-framework-source-checklist.md"
+      ],
+      "sha256": "3af7e1fd4dbf06bdb7f599f802ea33d117b146426d6c54eea07d5c6ed4e53691"
+    },
+    {
+      "path": "content/essays/why-oberfell-will-not-be-overturned.md",
+      "snapshot": "/tmp/oip-release-typography-zDYkzm/why-oberfell-will-not-be-overturned.md",
+      "replacements": [
+        {
+          "before": "In light of the Supreme Court’s recent decision in [Dobbs v. Jackson Women’s Health Organization (2022), which overturned Roe v. Wade](https://www.law.cornell.edu/supremecourt/text/19-1392), questions have arisen about the future of other landmark cases rooted in substantive due process.\n",
+          "after": "In light of the Supreme Court's recent decision in [Dobbs v. Jackson Women's Health Organization (2022), which overturned Roe v. Wade](https://www.law.cornell.edu/supremecourt/text/19-1392), questions have arisen about the future of other landmark cases rooted in substantive due process.\n",
+          "count": 1
+        },
+        {
+          "before": "This critique formed the backbone of the Dobbs majority opinion, which asserted that abortion was not a right “deeply rooted in the Nation’s history and traditions.”\n",
+          "after": "This critique formed the backbone of the Dobbs majority opinion, which asserted that abortion was not a right \"deeply rooted in the Nation's history and traditions.\"\n",
+          "count": 1
+        },
+        {
+          "before": "This dual reliance on both due process and equal protection strengthens Obergefell’s foundation.\n",
+          "after": "This dual reliance on both due process and equal protection strengthens Obergefell's foundation.\n",
+          "count": 1
+        },
+        {
+          "before": "The Supreme Court’s legitimacy depends, in part, on its ability to maintain public confidence. Overturning Obergefell would likely provoke widespread backlash, further eroding the Court’s credibility. In contrast to abortion, which remains a deeply divisive issue, marriage equality enjoys broad support across political and demographic groups, making it politically and socially risky for the Court to revisit the ruling.\n",
+          "after": "The Supreme Court's legitimacy depends, in part, on its ability to maintain public confidence. Overturning Obergefell would likely provoke widespread backlash, further eroding the Court's credibility. In contrast to abortion, which remains a deeply divisive issue, marriage equality enjoys broad support across political and demographic groups, making it politically and socially risky for the Court to revisit the ruling.\n",
+          "count": 1
+        },
+        {
+          "before": "The Conservative Court’s Approach Post-Dobbs\n",
+          "after": "The Conservative Court's Approach Post-Dobbs\n",
+          "count": 1
+        },
+        {
+          "before": "Although the Dobbs decision raised concerns about the future of substantive due process, the majority opinion explicitly limited its reasoning to abortion. Justice Samuel Alito emphasized that abortion is “fundamentally different” because it involves the potential life of an unborn child, a factor not present in cases like Obergefell. While [Justice Clarence Thomas’s concurrence suggested revisiting other substantive due process precedents, including Obergefell](https://www.law.cornell.edu/supremecourt/text/19-1392), this view did not command a majority of the Court.\n",
+          "after": "Although the Dobbs decision raised concerns about the future of substantive due process, the majority opinion explicitly limited its reasoning to abortion. Justice Samuel Alito emphasized that abortion is \"fundamentally different\" because it involves the potential life of an unborn child, a factor not present in cases like Obergefell. While [Justice Clarence Thomas's concurrence suggested revisiting other substantive due process precedents, including Obergefell](https://www.law.cornell.edu/supremecourt/text/19-1392), this view did not command a majority of the Court.\n",
+          "count": 1
+        },
+        {
+          "before": "The Court’s decision in 303 Creative LLC v. Elenis (2023), while controversial, reflects a commitment to balancing competing constitutional rights rather than an intent to narrow the scope of LGBTQ+ rights. By ruling that compelling speech in support of same-sex weddings could violate the First Amendment, the Court focused on the principle of individual expression rather than questioning the legitimacy of same-sex marriage itself. Importantly, the decision does not diminish the legal protections established in Obergefell v. Hodges but instead delineates the boundaries of how those protections interact with other constitutional freedoms. This approach suggests that the Court is more focused on resolving conflicts at the margins of constitutional rights than dismantling core precedents, reinforcing its role as an arbiter of competing liberties rather than an agent of restriction.\n",
+          "after": "The Court's decision in 303 Creative LLC v. Elenis (2023), while controversial, reflects a commitment to balancing competing constitutional rights rather than an intent to narrow the scope of LGBTQ+ rights. By ruling that compelling speech in support of same-sex weddings could violate the First Amendment, the Court focused on the principle of individual expression rather than questioning the legitimacy of same-sex marriage itself. Importantly, the decision does not diminish the legal protections established in Obergefell v. Hodges but instead delineates the boundaries of how those protections interact with other constitutional freedoms. This approach suggests that the Court is more focused on resolving conflicts at the margins of constitutional rights than dismantling core precedents, reinforcing its role as an arbiter of competing liberties rather than an agent of restriction.\n",
+          "count": 1
+        },
+        {
+          "before": "The Supreme Court’s cautious approach to LGBTQ+ rights post-Dobbs, as demonstrated in 303 Creative LLC v. Elenis, suggests a preference for resolving conflicts at the margins rather than dismantling core precedents like Obergefell. By focusing on balancing competing constitutional rights, the Court avoids the widespread legal and societal disruption that would follow a reversal of marriage equality. In a legal and cultural landscape where same-sex marriage has become deeply entrenched, the decision appears secure for the foreseeable future.\n",
+          "after": "The Supreme Court's cautious approach to LGBTQ+ rights post-Dobbs, as demonstrated in 303 Creative LLC v. Elenis, suggests a preference for resolving conflicts at the margins rather than dismantling core precedents like Obergefell. By focusing on balancing competing constitutional rights, the Court avoids the widespread legal and societal disruption that would follow a reversal of marriage equality. In a legal and cultural landscape where same-sex marriage has become deeply entrenched, the decision appears secure for the foreseeable future.\n",
+          "count": 1
+        },
+        {
+          "before": "    note: \"Corrected Pew vintage/percentages and federal recognition-law scope; sourced the 2021 household figures and removed the first-crossing assertion. Added or retained claim-level source links; original reporting frame and artwork retained.\"",
+          "after": "    note: \"Corrected Pew vintage/percentages and federal recognition-law scope; sourced the 2021 household figures and removed the first-crossing assertion. Added or retained claim-level source links; original reporting frame and artwork retained. Normalized legacy body punctuation without changing wording.\"",
+          "count": 1
+        }
+      ],
+      "punctuation_characters": 14,
+      "punctuation_lines": 8,
+      "records": [
+        "docs/editorial-audits/99-refinement/why-oberfell-will-not-be-overturned-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/why-oberfell-will-not-be-overturned-source-checklist.md"
+      ],
+      "sha256": "14e688da66f759a29237f0b842205a99820aa829c07f96d6f270a286d91d24c9"
+    },
+    {
+      "path": "content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md",
+      "snapshot": "/tmp/oip-release-typography-zDYkzm/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md",
+      "replacements": [
+        {
+          "before": "description: \"A practical guide to mutually exclusive and collectively exhaustive thinking, using a household budget to show how categories prevent overlap and omission.\"\n",
+          "after": "description: \"A practical guide to mutually exclusive and collectively exhaustive thinking, using a household budget to show how categories prevent overlap and omission.\"\nimage: \"oip-image:medium/61a52f886b9d1e4bdb9b1d293ab6bbd3419ed45b322e637926a8ce7894b1325e\"\n",
+          "count": 1
+        },
+        {
+          "before": "    note: \"Corrected double-counting and unallocated-balance examples. Added or retained claim-level source links; original reporting frame and artwork retained.\"",
+          "after": "    note: \"Corrected double-counting and unallocated-balance examples. Added or retained claim-level source links; original reporting frame and artwork retained. Added an existing illustration for social sharing without changing the article layout.\"",
+          "count": 1
+        }
+      ],
+      "punctuation_characters": 0,
+      "punctuation_lines": 0,
+      "records": [
+        "docs/editorial-audits/99-refinement/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go-source-checklist.md"
+      ],
+      "sha256": "45123c9567d549b6e5e8dc28d5ccfbeae2d57009d74e597a6dc707549a876839"
+    }
+  ]
+}

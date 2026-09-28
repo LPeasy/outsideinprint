@@ -15,7 +15,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added supporting source hyperlinks or repaired source destinations; original prose, reporting frame, and artwork unchanged."
+    note: "Added supporting source hyperlinks or repaired source destinations; reporting frame and artwork unchanged. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-09"
     note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, spacing, and source-sensitive monetary claims were cleaned while preserving the original publication frame."
@@ -31,13 +31,13 @@ What if your dollars were suddenly tied to a metal that cannot expand with the n
 
 That is the problem behind the gold standard.
 
-The idea sounds reassuring. Gold feels real, scarce, and hard to manipulate. But money is not just a symbol of value. It is also plumbing for wages, debt, credit, trade, banking, and emergency response.
+The idea sounds reassuring. Gold feels real, scarce, and hard to manipulate. But money is both a symbol of value and plumbing for wages, debt, credit, trade, banking, and emergency response.
 
-Reverting to gold-backed money would not simply discipline Washington. It would force the economy through a monetary straitjacket, with a severe one-time adjustment risk and a long-term bias toward deflation.
+Reverting to gold-backed money would constrain Washington and force the economy through a monetary straitjacket, with a severe one-time adjustment risk and a long-term bias toward deflation.
 
 Every few years, the idea returns in speeches, online arguments, and cable-news segments. It appeals to nostalgia for sound money and fear of inflation.
 
-But a policy can feel stable and still be dangerous.
+But a policy can feel stable yet be dangerous.
 
 ### Why The U.S. Left The Gold Standard
 
@@ -64,7 +64,7 @@ The biggest practical problem is simple: the United States does not hold enough 
 
 The U.S. government owns roughly 261 million troy ounces of gold. A broad money measure such as [M2](https://fred.stlouisfed.org/series/M2SL) is measured in the tens of trillions of dollars.
 
-Using early-2025 magnitudes, full backing would require gold to be valued at tens of thousands of dollars per ounce. A rough arithmetic target near $80,000 per ounce is not a forecast. It is a warning about scale.
+Using early-2025 magnitudes, full backing would require gold to be valued at tens of thousands of dollars per ounce. A rough arithmetic target near $80,000 per ounce is a warning about scale rather than a forecast.
 
 That kind of revaluation would not be a neat accounting exercise. It would redistribute wealth, scramble expectations, and invite a crisis of confidence over who gets redeemed, when, and at what price.
 
@@ -96,7 +96,7 @@ A gold standard also limits crisis response. Under a fiat system, the Federal Re
 
 Under a strict gold standard, the government's ability to respond would be tied to metal reserves instead of economic need.
 
-That is not discipline. It is institutional paralysis at the worst possible moment.
+That is institutional paralysis at the worst possible moment.
 
 ### The Political Appeal Is Emotional
 
@@ -114,7 +114,7 @@ Few mainstream economists support returning to gold because the historical recor
 
 The Reagan administration [studied the question in the early 1980s and rejected a return](https://fraser.stlouisfed.org/title/report-congress-commission-role-gold-domestic-international-monetary-systems-339/volume-i-6346/fulltext). Federal Reserve officials have also warned that a gold standard would remove the central bank's ability to adjust interest rates and money supply in a downturn.
 
-The appeal is not mainly technical. It is emotional.
+The appeal is mainly emotional.
 
 Gold seems clean compared with budget deficits, bank balance sheets, and central-bank discretion. It feels like a return to a time when money "meant something."
 
@@ -132,7 +132,7 @@ That makes gold useful as an asset and unreliable as the sole anchor for daily p
 
 A household budget cannot be run on a metal price that moves because investors are scared. A national payment system cannot be reduced to a vault count.
 
-The key institutional question is not whether gold is valuable. It is whether gold can govern a modern economy better than accountable monetary institutions can.
+The key institutional question is whether gold can govern a modern economy better than accountable monetary institutions can.
 
 The evidence says no.
 
@@ -157,6 +157,6 @@ Fiat money requires discipline. Central banks can make mistakes. Governments can
 
 But the answer to bad monetary governance is better governance, not a system that turns economic management over to the supply of a metal.
 
-What matters is not whether money is backed by gold. What matters is whether money can support work, contracts, saving, investment, and crisis response without losing public trust.
+What matters is whether money can support work, contracts, saving, investment, and crisis response without losing public trust.
 
 The gold standard sounds like a safe bet. In a modern economy, it is a gamble on rigidity.

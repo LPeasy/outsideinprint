@@ -13,7 +13,7 @@ edition: "Sixth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected Cape Town's response and Day Zero definition, and qualified Panama drought and fiscal-year comparisons. Added or retained claim-level source links; original reporting frame retained. Corrected image captions without changing surrounding prose in this graphics pass."
+    note: "Corrected Cape Town's response and Day Zero definition, and qualified Panama drought and fiscal-year comparisons. Added or retained claim-level source links; original reporting frame retained. Corrected image captions without changing surrounding prose in this graphics pass. Normalized legacy body punctuation without changing wording. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.3"
     date: "2026-06-21"
     note: "Updated June 21, 2026, during COA2 value review to remove reader-visible author-note and pseudo-heading residue and repair discovery metadata."
@@ -136,7 +136,7 @@ change* is a risk with an impressive amount of uncertainty.
 Perhaps you would rather be more specific and decide to focus on
 ***water scarcity* as the hazard.** [Water scarcity is a growing concern for many regions](https://www.unesco.org/en/articles/imminent-risk-global-water-crisis-warns-un-world-water-development-report-2023).
 
-**During 2023–2024,** [**Panama experienced a historic
+**During 2023-2024,** [**Panama experienced a historic
 drought.**](https://pancanal.com/en/the-canals-fy-2024-financial-results-reaffirm-its-focus-on-sustainability-and-vision-for-the-future/)
 
 ![Panama Canal](oip-image:medium/35cf1b3d2ef75c842717c70d507192a932891e2806c2e9e48aa250a74f6e874d)
@@ -157,9 +157,9 @@ communities, farms, and hydropower facilities ~ **prolonged droughts can
 squeeze a** **shared supply** and force decision makers into tough
 positions.
 
-![Average water level in the Panama Canal’s Gatún Lake, January 2019–November 2024.](oip-image:medium/447fb77dcb865fceebe6bb741d15b292d45dbf5c079987fc195df58b297a7461)
+![Average water level in the Panama Canal's Gatún Lake, January 2019-November 2024.](oip-image:medium/447fb77dcb865fceebe6bb741d15b292d45dbf5c079987fc195df58b297a7461)
 
-*Average water level in the Panama Canal’s Gatún Lake, January 2019–November 2024. [Source: CNBC](https://www.cnbc.com/2024/11/12/panama-canal-cargo-container-trade-rebound-record-drought.html)*
+*Average water level in the Panama Canal's Gatún Lake, January 2019-November 2024. [Source: CNBC](https://www.cnbc.com/2024/11/12/panama-canal-cargo-container-trade-rebound-record-drought.html)*
 
 
 
@@ -191,7 +191,7 @@ to a consequence."**
 #### Let's think about our lakehouse in Maine.
 
 The cabin sits in a mapped flood zone, but it is up on 8-foot stilts.
-It's not the nicest thing ever, but it's pretty awesome. You've put some
+It's pretty awesome, even if it isn't the nicest thing ever. You've put some
 money into it, but if a freak storm comes through ~ dumping a bunch of
 rain upstream ~ you'll probably flood.
 

@@ -14,7 +14,7 @@ edition: "Fifth web edition"
 revision_history:
   - version: "1.4"
     date: "2026-09-27"
-    note: "Added source links without changing prose."
+    note: "Added source links preserving the original argument. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.2"
     date: "2026-06-25"
     note: "Updated June 25, 2026, after COA2 value review to normalize imported list residue and remove house-style hits."
@@ -35,9 +35,9 @@ The name is a flex. The plane is a real defense-industrial decision.
 
 In March 2025, President Donald Trump announced the F-47 from the Oval Office, joined by Defense Secretary Pete Hegseth and Air Force Chief of Staff Gen. David Allvin. The branding was unmistakable: F-47, for the 47th president.
 
-The aircraft itself is not a joke. It is the Air Force's planned sixth-generation fighter, selected under the Next Generation Air Dominance program.
+The aircraft itself is the Air Force's planned sixth-generation fighter, selected under the Next Generation Air Dominance program.
 
-The useful question is not whether the name is subtle. It is what the program tells us about American airpower, industrial capacity, and the cost of staying ahead.
+The useful question is what the program tells us about American airpower, industrial capacity, and the cost of staying ahead.
 
 ### A Sixth-Generation Fighter
 
@@ -57,9 +57,9 @@ The more defensible claim is narrower: the Air Force wants an aircraft that can 
 
 That points to several likely priorities: lower detectability across radar and infrared signatures, greater range than current tactical fighters, advanced sensors and data fusion, integration with Collaborative Combat Aircraft and other uncrewed systems, and modular systems that can be upgraded as threats change.
 
-The cockpit is not just a cockpit in this model. It is a command node.
+The cockpit serves as a command node in this model.
 
-That is the institutional logic behind the program. The United States is not buying a single fast airplane. It is trying to preserve an air-combat network.
+That is the institutional logic behind the program. The United States is trying to preserve an air-combat network with this purchase.
 
 ### AI And Uncrewed Teammates
 
@@ -82,7 +82,7 @@ The F-47 is a message to China, Russia, allies, Congress, contractors, and the A
 
 China has been testing advanced fighter concepts. Russia has struggled to scale its own fifth-generation fleet but remains a nuclear-armed military power. U.S. allies watch American procurement decisions because their own planning depends on whether the United States can project power credibly.
 
-A sixth-generation fighter is therefore not just a weapon. It is an institutional bet on future air superiority.
+A sixth-generation fighter is therefore both a weapon and an institutional bet on future air superiority.
 
 The tradeoff is cost. Advanced aircraft consume money, engineering talent, maintenance capacity, and political attention. Every dollar spent on one exquisite platform is a dollar not spent on munitions stockpiles, drones, ships, air defenses, maintenance, or personnel.
 
@@ -114,7 +114,7 @@ Boeing has broken ground on major defense manufacturing capacity, but capacity i
 
 The F-47 name makes the announcement feel like campaign merch. That reaction is understandable.
 
-But the deeper issue is not branding. It is whether the procurement system can deliver a real capability on a timeline that matches the threat environment.
+But the deeper issue is whether the procurement system can deliver a real capability on a timeline that matches the threat environment.
 
 There is a serious aircraft behind the political theater. There are also serious risks: cost growth, schedule delay, software complexity, industrial bottlenecks, and the temptation to oversell a program that remains under development.
 

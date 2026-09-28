@@ -2,7 +2,9 @@
 
 File: `content/essays/multiple-shmultiple.md`  
 Version: `1.3 / Fourth web edition`  
-SHA-256: `1de6509636f6ef82402f0027882951c74724cdd272e8befd634132a107359f38`
+SHA-256: `04a84cb3dcea469ac560fdf2bcdd3bf6a9a693e6fa4380ce80f5a61c33ae0a28`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current status: **bounded editorial PASS**. The follow-up source-access review resolved the named book/disciplinary-record hold without changing any public text. Original prose, attribution, source links and revision metadata remain as restored. Earlier major-revision candidates below remain superseded; their prose changes are not restored by this decision.
 

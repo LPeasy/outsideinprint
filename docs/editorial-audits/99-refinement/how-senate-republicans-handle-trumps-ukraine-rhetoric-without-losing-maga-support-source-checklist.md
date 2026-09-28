@@ -4,7 +4,9 @@ Date: 2026-09-27
 
 Version: `1.3`
 
-Final SHA256: `762c13792e989dfb81c7a21b7dc112fa7cb73e663785f78ead8f599ec1c2a1c4`
+Final SHA256: `68c607184079c8a5eeac2bf494ee1bb870d18c486bcfdeb27971dea037e0eaef`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Status: Source-link pass complete; normal publication gate remains separate
 
@@ -21,4 +23,3 @@ NPR original reporting by Davis/Grisales, syndicated by WUWM February 19, 2025: 
 ## Preservation and private issues
 
 No public prose, caption, order, artwork, discovery metadata or original date was changed. Existing links remain. Private concerns and minimal proposed corrections are in `../core-link-only-flood-pair-2026-09-27.md`; these proposals are not applied. This checklist records the added links, not a new certification of every historical fact or quotation.
-

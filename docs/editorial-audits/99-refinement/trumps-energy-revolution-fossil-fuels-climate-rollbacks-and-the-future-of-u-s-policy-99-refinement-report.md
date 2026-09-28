@@ -2,7 +2,9 @@
 
 File: `content/essays/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy.md`  
 Version: `2.0 / Fifth web edition`  
-Final content SHA-256: `24de54a4241bdba67a89c071a5023b193d32614f8634ae69b9409d443f3c7461`
+Final content SHA-256: `8fac848eb3562bfa89feaee9e6ec973399855fa1853515fc51e6ceaea567e269`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **PASS — approved, scoped source corrections complete; not published.** The user approved batch items 2–3 and separately approved deleting the unverified 10 MW-by-2030 sentence. This current record supersedes the HOLD language and hashes preserved below; those entries describe earlier checkpoints, not outstanding decisions.
 

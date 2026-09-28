@@ -2,7 +2,16 @@
 
 File: `content/essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `128da994ace94558992ffc71df9777d11c403bd72dcfdf508b429cf0b1c5425a`
+Final content SHA-256: `30d7524c32ef307ded7a6e84e7feb825f97967c24a898e51cc4037899526aa4d`
+
+## Owner-approved release maintenance — September 27, 2026
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
+
+Normalized only 2 flagged body punctuation characters on 2 lines to ASCII. Words, numbers, links, paragraph order, artwork destinations, and meaning remain unchanged; this includes typography inside captions, alt text, and quotations, not any new quotation wording. The current pending revision note discloses this maintenance; version, edition, original publication date, other front matter, and older revision history remain unchanged. This is the owner's approved release-unblocking cleanup, not a resumed prose revision.
+
+The prior current source/philosophy decision below remains applicable because the bounded changes add no factual claim and change no argument or source attribution. The pre-cleanup content hash was `128da994ace94558992ffc71df9777d11c403bd72dcfdf508b429cf0b1c5425a`; the current release hash is the one above. [Exact replacements, snapshots, final hashes, and focused preservation result](../release-typography-social-metadata-map-2026-09-27.json) record the byte-level scope. Historical prior-candidate hashes below remain historical. No local test suite, production build, commit, or remote write was performed by this maintenance pass; formal publication gates remain pending.
+
 
 Current disposition: **SCOPED PASS** for the restored-prose holds and the exact approved corrections. The owner approved the [final-nine bounded decisions](../final-nine-owner-decisions-2026-09-27.md) and this profile's [exact proposal](../final-nine-bios-leo-siakam-franklin-proposals-2026-09-27.md). This is the current candidate, not the withdrawn broad rewrite.
 

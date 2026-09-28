@@ -5,7 +5,9 @@
 Decision: PASS
 
 - Current version: 2.0, Third web edition. This replaces the pending minor version within the same unpublished edition ordinal.
-- Current essay SHA-256: `4b451325f06e88524ef0295904e443d2a91a8c7d335fbb2e3d6007ee640b8f99`.
+- Current essay SHA-256: `2c22f8dc504781344eb561c453708720e648feb94c4bbdc8b4a391a649237f6f`.
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 - Approval: [final-nine owner decisions](../final-nine-owner-decisions-2026-09-27.md) and the owner's explicit approval of all nine bounded sets, including listed removals and the Chili's illustrative-origin confirmation.
 - Exact applied deltas: [Brands implementation map](../final-nine-brands-implementation-map-2026-09-27.json), from snapshot `/tmp/oip-final-nine-brands-dtFpi2/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025.md`.
 

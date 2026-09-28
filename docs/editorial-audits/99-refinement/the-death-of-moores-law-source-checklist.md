@@ -2,7 +2,16 @@
 
 File: `content/essays/the-death-of-moores-law.md`  
 Version: `1.2 / Third web edition`  
-Final content SHA-256: `36981cf62f46b295b1bf03d5197f9d7a87c9cd2030927a91917b459969b5443a`
+Final content SHA-256: `0c7332e6f1a5fa56a04c8ab6ffa377b678fe7d28cf5d6348a34fba2f40a830d0`
+
+## Owner-approved release maintenance — September 27, 2026
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
+
+Normalized only 31 flagged body punctuation characters on 18 lines to ASCII. Words, numbers, links, paragraph order, artwork destinations, and meaning remain unchanged; this includes typography inside captions, alt text, and quotations, not any new quotation wording. The current pending revision note discloses this maintenance; version, edition, original publication date, other front matter, and older revision history remain unchanged. This is the owner's approved release-unblocking cleanup, not a resumed prose revision.
+
+The prior current source/philosophy decision below remains applicable because the bounded changes add no factual claim and change no argument or source attribution. The pre-cleanup content hash was `36981cf62f46b295b1bf03d5197f9d7a87c9cd2030927a91917b459969b5443a`; the current release hash is the one above. [Exact replacements, snapshots, final hashes, and focused preservation result](../release-typography-social-metadata-map-2026-09-27.json) record the byte-level scope. Historical prior-candidate hashes below remain historical. No local test suite, production build, commit, or remote write was performed by this maintenance pass; formal publication gates remain pending.
+
 
 Current disposition: **PASS — bounded source-link and approved-correction release review**. The owner-approved cost-pressure sentence resolves the named investment-cutoff hold; the earlier approved Taiwan correction remains unchanged.
 

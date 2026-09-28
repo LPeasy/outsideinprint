@@ -15,7 +15,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected verified quotation/paraphrase treatment and replaced unsupported market and screen-time figures with nonnumeric wording. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Corrected verified quotation/paraphrase treatment and replaced unsupported market and screen-time figures with nonnumeric wording. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, after OIP back-archive review. Remote Medium body images were removed, import formatting was normalized, and source discipline was tightened."
@@ -45,7 +45,7 @@ Here's how Meta plans to do it.
 
 > "I think that this is really redefining what advertising is into an AI agent that delivers measurable business results at scale."
 
-Zuckerberg's vision of advertising isn't Mad Men. It's machine learning.
+Zuckerberg's vision of advertising is machine learning.
 
 You tell the AI what outcome you want: more customers, higher conversion, lower acquisition costs. It figures out the audience, the content, and the timing.
 
@@ -53,9 +53,7 @@ No creativity required. No media agency. Just a black box that sells stuff.
 
 > "If we deliver on this vision... AI will make advertising a meaningfully larger share of global GDP than it is today."
 
-That line should give you chills.
-
-Not because it's unrealistic, but because the business logic is clear.
+That line should give you chills because the business logic is clear.
 
 Advertising is already consuming a bigger slice of the economy. Meta plans to make that slice more automated, more targeted, and harder for businesses to avoid.
 
@@ -81,9 +79,7 @@ Your new account manager is an algorithm.
 
 The small talk, the upsell, the checkout flow: it's all handled by a system trained on your data, your preferences, and your last 100 product searches.
 
-This isn't theoretical.
-
-It is the logical progression of platform capitalism: standardize the interface, automate the interaction, and reduce human friction to zero.
+This is the logical progression of platform capitalism: standardize the interface, automate the interaction, and reduce human friction to zero.
 
 Think about it:
 
@@ -118,19 +114,17 @@ Ray-Ban Meta glasses are already on the market, and [Meta says sales have grown 
 
 AR glasses could become a major industry.
 
-Whoever owns that space doesn't just win your attention. They shape it.
+Whoever owns that space wins your attention and shapes it.
 
 Paraphrasing Zuckerberg: Meta AI... personalized so you can talk to it about interests you've shown while browsing Reels... and we built a social feed into it...
-
-That's not a productivity tool.
 
 That's a feedback loop. You engage with Meta content, the AI learns your behavior, then talks to you in real time to reinforce, refine, and monetize your preferences.
 
 Screens can already consume hours of daily attention.
 
-Meta's plan isn't to reduce screentime. It's to saturate it.
+Meta's plan is to saturate screentime.
 
-When the AI sees what you see, suggests what you want, and narrates your environment, it doesn't just help you write emails and plan vacations.
+When the AI sees what you see, suggests what you want, and narrates your environment, it goes beyond helping you write emails and plan vacations.
 
 It controls what, when, and how you experience the world.
 
@@ -145,19 +139,15 @@ If Zuckerberg gets his way, the final evolution of the algorithm will be a fully
 
 Zuckerberg talks about general intelligence, but Meta is also building a closed economic loop: ad networks, sales agents, content engines, and hardware interfaces under one roof.
 
-In Meta's world, attention is currency. Advertisements are not just how the economy gets sold. They become part of the economy itself.
+In Meta's world, attention is currency. Advertisements sell the economy and become part of the economy itself.
 
-Labor isn't simply "displaced." It is redefined as consumer behavior, interaction data, and automated service flow.
+Labor is displaced and redefined as consumer behavior, interaction data, and automated service flow.
 
-In this model, AI is not first presented as a tool for curing cancer, ending hunger, or building clean energy abundance.
-
-It is presented as a way to monetize attention more efficiently, then sell your interests, dreams, habits, and guilty pleasures back to you with automated, hyper-targeted advertisements.
+In this model, AI is presented first as a way to monetize attention more efficiently, then sell your interests, dreams, habits, and guilty pleasures back to you with automated, hyper-targeted advertisements, rather than as a tool for curing cancer, ending hunger, or building clean energy abundance.
 
 Call it innovation. Call it strategy. Call it the future.
 
-Just know that if this works, Meta won't just sell ads.
-
-They'll sell the economy back to itself, one personalized prompt at a time.
+Just know that if this works, Meta will sell ads and the economy back to itself, one personalized prompt at a time.
 
 ![Photo by Unseen Studio on Unsplash](/images/medium/the-new-meta-economy/9064025e30867e05f3e5c083e5b7a9c10e26715ea52979053975a076417cae06.jpg)
 

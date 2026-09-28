@@ -2,7 +2,9 @@
 
 File: `content/essays/nottoway-plantation-burns-down-in-fire-history-and-legacy-of-the-souths-largest-mansion.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `408839bb29c316717915882ce253806b1b4eae6d42386bb417ddbf6fe79da678`
+Final content SHA-256: `b263c31c611ca34e6615b0d8c8916f61fe0d4804439dbe1dfc84f9ecee78033e`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — bounded resolution of the named hold**. The owner expressly approved the narrow evidence-driven deletions and replacements after requesting resolution of the remaining eleven. Applied: Mississippi relocation origin; 30-by-40-foot ballroom; Owen ownership into the late 1970s; removal of the unsupported construction headcount, copper-tank claim and surveillance-layout sentence; documented contract with 53 formerly enslaved workers in place of unverified postwar motives/sharecropping claims; website-specific criticism in place of assertions about what tourists generally heard. The pending revision is reclassified as 2.0 without advancing the Fourth web edition again. Original date, title, subtitle, route, membership, artwork, captions, surrounding historical argument and voice are retained.
 

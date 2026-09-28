@@ -15,7 +15,7 @@ edition: "Fifth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Retained source links and applied approved narrow chronology, production-format, honors, ship-naming, and quotation corrections; removed specified unsupported anecdotes and workflow claims. The author confirmed the forest imagery as imagined narration, and conservation phrases are framed as author interpretation. Surrounding prose, illustrations, and original publication date are preserved."
+    note: "Retained source links and applied approved narrow chronology, production-format, honors, ship-naming, and quotation corrections; removed specified unsupported anecdotes and workflow claims. The author confirmed the forest imagery as imagined narration, and conservation phrases are framed as author interpretation. Surrounding argument, illustrations, and original publication date are preserved. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.3"
     date: "2026-09-18"
     note: "Repaired malformed Markdown for four body images and normalized an imported apostrophe in one image label and caption; article wording and image sources are unchanged."
@@ -88,7 +88,7 @@ that combined wildlife footage with on-location travelogues.**
 
 > This was the 1950s.
 
-Flying to Borneo to film orangutans wasn't just rare ~ ***it was
+Flying to Borneo to film orangutans was rare ~ ***and
 radical.***
 
 He didn't narrate from a sound booth. He hiked the jungle with a 16mm
@@ -107,8 +107,8 @@ when it's hard to watch.***
 *Attenborough as Director \| Source: BBC*
 
 
-**In the 1960s and early 1970s, Attenborough wasn't just hosting programs ~ *he was
-shaping the network.***
+**In the 1960s and early 1970s, Attenborough was hosting programs and *shaping
+the network.***
 
 As Controller of BBC Two and later Director of Programming, he
 helped commission landmark shows like [Monty Python's Flying Circus](https://rts.org.uk/article/michael-palin-talks-sir-david-attenborough-about-his-life-air) and
@@ -173,21 +173,21 @@ As Attenborough put it:
 ***Planet Earth* changed the game.**
 
 With [high-definition cameras](https://downloads.bbc.co.uk/annualreport/pdf/2006-07/bbcexec_eng_200607.pdf#page=8), helicopter rigs, and a [\$25 million budget](https://www.gmanetwork.com/news/newstv/content/262145/bbc-s-groundbreaking-series-planet-earth-airs-on-gma-news-tv-this-july/story/), ***it
-showed nature*** not just as subject, but ***as a spectacle***.
+showed nature*** as both subject and ***spectacle***.
 
 > It was cinema with feathers.
 
-Attenborough didn't just narrate the facts.
+Attenborough narrated the facts.
 
-***He made you feel them. I hear his style this way:***
+***He also made you feel them. I hear his style this way:***
 
 > In the forest canopy, time slows...
 
 > The sun filters through like ancient, stained glass.
 
-It wasn't just data and images.
+The data and images conveyed
 
-> ***It was reverence. A meditation.***
+> ***reverence. A meditation.***
 
 Millions of people ~ kids, couples, and world leaders ~ tuned in to see
 places they would never visit and ***animals*** ***they might never see
@@ -234,13 +234,13 @@ back. In other words:
 
 > It's not too late.
 
-It wasn't a threat. ***It was an invitation.***
+***It was an invitation rather than a threat.***
 
 #### Production Style: Precision and Pause
 
-**Attenborough's documentaries don't just inform.**
+**Attenborough's documentaries inform.**
 
-> They breathe.
+> They also breathe.
 
 They use silence like ***punctuation***.
 
@@ -252,7 +252,7 @@ The editing is *musical*, the pacing **deliberate**.
 
 > The tone is never hysterical.
 
-This isn't panic porn. ***It's planetary storytelling.***
+***This is planetary storytelling.***
 
 #### Legacy: From British Icon to Global Conscience
 
@@ -291,6 +291,6 @@ Not with that voice, that track record, and that moral weight.
 
 > He just showed us what we were losing and asked us to care.
 
-He didn't just narrate nature.
+He narrated nature.
 
-**He gave it a voice.**
+**He also gave it a voice.**

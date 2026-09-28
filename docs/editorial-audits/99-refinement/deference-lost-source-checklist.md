@@ -2,7 +2,9 @@
 
 File: `content/essays/deference-lost.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `767e40ecc66a9f523dd2592373479b083c979e12b40be8aab69356b580edc14b`
+Final content SHA-256: `68d820d1de0fa2d87102fb119e913ec3ff5399f7867a272cba14dc72cd14bad4`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS (bounded editorial review)**. Qualified the subtitle and body to distinguish possible effects from measured delay; corrected review/delegation and lawsuit chronology.
 

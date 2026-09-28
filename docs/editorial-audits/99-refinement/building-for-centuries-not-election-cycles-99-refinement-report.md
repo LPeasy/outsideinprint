@@ -2,7 +2,9 @@
 
 File: `content/essays/building-for-centuries-not-election-cycles.md`  
 Version: `1.3 / Fourth web edition`  
-Final content SHA-256: `3bda298e7b8468c99ce17822477f5a5b28ffa376956a75a873cd6e5a5a5b1fb6`
+Final content SHA-256: `e357ac8215e7f9f7a4d0e718986a8d6b23ed3c909617dc04ec548506e8167545`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS (bounded editorial review)**. Corrected the feasibility-study minimum/ceiling confusion; retained the patient-planning argument.
 

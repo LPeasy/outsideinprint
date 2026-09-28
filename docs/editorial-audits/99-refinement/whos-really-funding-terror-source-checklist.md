@@ -2,7 +2,9 @@
 
 File: `content/essays/whos-really-funding-terror.md`  
 Version: `1.4 / Fifth web edition`  
-Final content SHA-256: `dc99b9b8c668b4a333d688b508582fc3370c272b5852cd37f7e9dfa96fc22f5c`
+Final content SHA-256: `d028224f08a02a19bd3fea795a1d19913a3ef964a7109fc339381fae97caab38`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **PASS (bounded editorial review)**. Corrected Treasury PDF physical-page count.
 

@@ -13,7 +13,7 @@ edition: "Third web edition"
 revision_history:
   - version: "1.2"
     date: "2026-09-27"
-    note: "Added source links without changing prose."
+    note: "Added source links and applied minimal style cleanup; facts and source wording unchanged."
   - version: "1.1"
     date: "2026-06-17"
     note: "Updated June 17, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -49,7 +49,7 @@ The first parking meter made those conflicts visible in one narrow way. It did n
 
 The device became a civic machine because a watch measures private time while a parking meter measures public permission. The driver buys a limited interval in publicly owned space. The city gains an instrument for making turnover enforceable. The merchant gains a better chance that a customer can stop near the store. The officer gains a simple test: time remains or time has expired.
 
-Early parking-meter fights understood that the object carried more than a nickel. In [Ex parte Duncan](https://case-law.vlex.com/vid/ex-parte-duncan-27533-929496600), the Oklahoma Court of Criminal Appeals considered a challenge to Oklahoma City's parking-meter ordinance in 1937. The case treated the meter under police-power reasoning, the legal language of health, safety, welfare, and traffic order. That is a better starting point than the casual language of modern irritation. A parking meter is not simply a charge. It is a traffic rule with a cash drawer attached.
+Early parking-meter fights understood that the object carried more than a nickel. In [Ex parte Duncan](https://case-law.vlex.com/vid/ex-parte-duncan-27533-929496600), the Oklahoma Court of Criminal Appeals considered a challenge to Oklahoma City's parking-meter ordinance in 1937. The case treated the meter under police-power reasoning, the legal language of health, safety, welfare, and traffic order. That is a better starting point than the casual language of modern irritation. A parking meter is a traffic rule with a cash drawer attached.
 
 That cash drawer creates the permanent problem. If the meter is a traffic rule, the money should serve the public purpose. If the meter is a revenue source, the traffic purpose can become cover. The machine does both at once, and the city must prove which purpose governs its use.
 

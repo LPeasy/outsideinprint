@@ -6,7 +6,9 @@ Source file: `content/essays/u-s-russia-peace-talks.md`
 
 Version: `1.3`
 
-Audited SHA256: `a879baabb963064dc2dc9422ca42dddbe556c1fae1d31dfc71ee0c60994aebe1`
+Audited SHA256: `4545fac2808f1bf1f0754605b09757f1d6fb476f4baee8fbe006d36ba3ba021c`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Decision state: `LINK_ONLY_REVIEW_COMPLETE`
 
@@ -31,4 +33,3 @@ Decision: PASS
 CNN's February 18, 2025 live transcript carries the direct Rubio/Waltz Riyadh remarks: four objectives, territorial/security discussions, no-sidelining statement and conditional economic opportunities. Hegseth February 12 speech read via contemporaneous full transcript/audio documentation at Augen geradeaus, corroborating the original Defense.gov URL (direct access restricted). Links identify speakers/statements, not predictions as fact.
 
 See `u-s-russia-peace-talks-source-checklist.md` for exact added anchors and `../core-link-only-flood-pair-2026-09-27.md` for private correction proposals and remaining limits. Images and captions were preserved; no new broad image certification is claimed. No tests, build or publication in this subtask.
-

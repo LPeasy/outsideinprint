@@ -2,7 +2,9 @@
 
 File: `content/essays/household-and-individual-wealth-in-america.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `0f7d4d51cd5d15bdb8f6d7d22ca32e4fec12236cb10300b496b2ca9b999ccdb0`
+Final content SHA-256: `7cf82c68c5667a4e74426b7e81acead295aab2b1d120837bb681d433702d10ae`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — bounded approved correction**. The owner approved the Pew income-share endpoint of 2022/43% and `Service-occupation workers`. The verified $1,582/$772 occupation medians are unchanged and now directly linked to the matching BLS table. These resolve the two remaining named holds, not every possible factual question in the historical essay.
 

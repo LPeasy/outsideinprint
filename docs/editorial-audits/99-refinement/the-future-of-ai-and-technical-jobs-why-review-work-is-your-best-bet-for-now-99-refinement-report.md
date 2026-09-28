@@ -2,7 +2,9 @@
 
 File: `content/essays/the-future-of-ai-and-technical-jobs-why-review-work-is-your-best-bet-for-now.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `64885d2a055ed8d4f9cc47446a896a28c5dffcf66e676300ed763937346f49cc`
+Final content SHA-256: `d2b57d16539f2fcbaaa84394e3c088fbb7c77f7144c51e1dc9a51349c148a4b2`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **PASS (bounded editorial review)**. Corrected the Amazon résumé training-data denominator.
 

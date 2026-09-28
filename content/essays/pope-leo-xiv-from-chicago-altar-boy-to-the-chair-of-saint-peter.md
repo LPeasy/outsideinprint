@@ -16,7 +16,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Added claim-level sources and made limited corrections to dates, factual details, and quotations; clarified author-written pull quotes and removed unsupported specifics. Preserved the approved timeline correction."
+    note: "Added claim-level sources and made limited corrections to dates, factual details, and quotations; clarified author-written pull quotes and removed unsupported specifics. Preserved the approved timeline correction. Normalized legacy body punctuation without changing wording. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-17"
     note: "Updated May 17, 2026, after OIP back-archive review. Vatican biography details, Medium import residue, remote body images, and house-style issues were corrected."
@@ -113,9 +113,9 @@ Chiclayo.**
 
 ### **Global Leadership in the Augustinian Order**
 
-![Pope Leo’s Inauguration](/images/medium/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/54f9bf2dba2609d3ac58119fd2080f2c79adcb50b24b92f488cf09254d5accfa.jpeg)
+![Pope Leo's Inauguration](/images/medium/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/54f9bf2dba2609d3ac58119fd2080f2c79adcb50b24b92f488cf09254d5accfa.jpeg)
 
-*Pope Leo’s Inauguration | Source: Wikimedia Commons*
+*Pope Leo's Inauguration | Source: Wikimedia Commons*
 
 
 > [In 1998, he was elected Provincial Prior of the Augustinians in
@@ -263,7 +263,7 @@ prisoners,**
 
 > Pope Leo XIV appears intent on using his office:
 
-> Not for grandeur, but for service.
+> For service rather than grandeur.
 
 ### *Have questions?*
 

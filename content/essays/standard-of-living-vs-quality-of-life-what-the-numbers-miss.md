@@ -6,7 +6,7 @@ draft: false
 slug: "standard-of-living-vs-quality-of-life-what-the-numbers-miss"
 section_label: "Essay"
 collections: ["household-economy-work-and-cost"]
-subtitle: "GDP is UP… So Why Does Life Still Feel So Hard?"
+subtitle: "GDP is UP… So Why Does Life Feel So Hard?"
 featured_image: "/images/medium/standard-of-living-vs-quality-of-life-what-the-numbers-miss/0f2b5ab93973a8f53632b41ba12cfaaf0e21b0a75f2ab06b643fdd9ad3dbe04c.jpg"
 featured_image_caption: "Photo by Mathieu Stern on Unsplash"
 featured_image_alt: "Standard of Living vs. Quality of Life: What the Numbers Miss"
@@ -16,7 +16,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added supporting source hyperlinks or repaired source destinations; original prose, reporting frame, and artwork unchanged."
+    note: "Added supporting source hyperlinks or repaired source destinations; reporting frame and artwork unchanged. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, after OIP back-archive review. Remote Medium body images and promotional aftermatter were removed, import formatting was normalized, and economic claims were tightened."
@@ -44,7 +44,7 @@ Or is it something softer: feeling safe, optimistic, and at ease in your life?
 
 For most of us, it's all tangled together.
 
-You can have the newest iPhone and still feel broke. You can earn more than your parents did and still feel like you're behind.
+You can have the newest iPhone and feel broke. You can earn more than your parents did and feel like you're behind.
 
 That tension, between the numbers we hear and the lives we live, is at the heart of this story.
 
@@ -90,7 +90,7 @@ Our homes are bigger than ever.
 
 Our shelves are stocked with cheap electronics and endless options.
 
-> So then how and why does life still feel hard?
+> So then how and why does life feel hard?
 
 The answer is that standard of living, as it is traditionally measured, does not account for how people actually experience their lives.
 
@@ -141,9 +141,7 @@ Since the late 1980s, U.S. household wealth has grown dramatically. But that gro
 
 The top slice of households controls a disproportionate share of wealth. The [bottom half holds only a small share](https://fred.stlouisfed.org/series/WFRBSB50215).
 
-This isn't a bug in the system.
-
-It is the system working through assets. Wealth in the U.S. grows fastest not through wages, but through ownership: homes, stocks, and businesses. If you do not already have those things, you are not riding the wave in the same way.
+This is the system working through assets. Wealth in the U.S. grows fastest through ownership of homes, stocks, and businesses, rather than wages. If you do not already have those things, you are not riding the wave in the same way.
 
 Inequality like this reshapes lives. It determines:
 
@@ -176,13 +174,13 @@ If we only measure progress by income or GDP, we miss the point. We miss the fac
 
 That affects more than just people's moods.
 
-It shapes politics, culture, and trust in institutions. If people feel like they're doing everything right, working hard and staying afloat, and they still feel worse off, eventually they stop believing the system works.
+It shapes politics, culture, and trust in institutions. If people feel like they're doing everything right, working hard and staying afloat, and they feel worse off, eventually they stop believing the system works.
 
 ### Quality of Life: The Better Yardstick
 
 It's time to update the vocabulary.
 
-Standard of living still matters. We need ways to measure material well-being: whether people can afford homes, food, healthcare, or time off.
+Standard of living matters. We need ways to measure material well-being: whether people can afford homes, food, healthcare, or time off.
 
 But it is not enough.
 
@@ -234,13 +232,13 @@ Income without security. Output without rest. Access without time.
 
 > Growth without balance.
 
-It is not enough to make the economy bigger if it doesn't make our lives better.
+Making the economy bigger is not enough if it doesn't make our lives better.
 
-It is not enough to grow if we grow exhausted.
+Growth that leaves us exhausted falls short.
 
-> This isn't just a measurement problem. It's a moral one.
+> This is a measurement problem and a moral one.
 
-Maybe what we really want isn't a higher standard of living, but a better quality of life. Not just higher numbers, but deeper satisfaction.
+Maybe what we really want is a better quality of life: higher numbers paired with deeper satisfaction.
 
 > A life that feels sustainable, connected, and human.
 

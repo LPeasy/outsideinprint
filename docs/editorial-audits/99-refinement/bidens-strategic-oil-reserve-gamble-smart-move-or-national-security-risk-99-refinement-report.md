@@ -2,7 +2,9 @@
 
 File: `content/essays/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk.md`  
 Version: `2.0 / Fifth web edition`  
-Final content SHA-256: `e791b2fb68f637697c27fd34eaa4b6b272174b2e1f100d2e81fa87d11a1e98a8`
+Final content SHA-256: `e3f0874ea27cc20d67fada57611ab3a3de07502d0bcef398247fa6ecfa198869`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — approved, scoped source corrections complete; not published.** The user approved batch items 2–3 and separately approved deleting the unverified 10 MW-by-2030 sentence. This current record supersedes the HOLD language and hashes preserved below; those entries describe earlier checkpoints, not outstanding decisions.
 

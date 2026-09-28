@@ -2,7 +2,9 @@
 
 File: `content/essays/the-privacy-paradox-why-americans-feel-powerless-over-their-personal-data.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `17f52470736402ff330659c44d353ceafccbf0455520eace3a7cebe0521e91c1`
+Final content SHA-256: `660ebb918959cf12e7b3e9ae83ac9ec50a346e46b2bd363f5aef160e7e94974d`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current disposition: **PASS — bounded resolution of the named holds**.
 

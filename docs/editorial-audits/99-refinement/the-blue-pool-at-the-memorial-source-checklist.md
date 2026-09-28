@@ -5,7 +5,9 @@
 Review date: `2026-09-27`
 Essay: `content/essays/the-blue-pool-at-the-memorial.md`
 Version: `1.3` - Fourth web edition
-Final content SHA-256: `d7850ed3f692b210aa3e22ea81a476471d50ae85ce9bb79ba044bc5e6b44a675`
+Final content SHA-256: `9eef7c663c5584e10b3de3ff897bf159fadcd5a329c7db0d25218fafb8216c96`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
 Public change: HYPERLINK-ONLY; original body words, punctuation, captions, order and artwork preserved.
 

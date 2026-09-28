@@ -763,6 +763,33 @@ if ($deployWorkflow -notmatch "\.\/scripts\/check_essay_guardrails\.ps1") {
   throw "deploy.yml must run the essay guardrail check before building the site."
 }
 
+$essayGuardrailStep = Get-WorkflowStepBlock `
+  -WorkflowName 'deploy.yml' `
+  -WorkflowText $contractsJobBlock `
+  -StepName 'Check Essay Guardrails'
+if ($essayGuardrailStep -notmatch '(?s)\$eventName = "\$\{\{ github\.event_name \}\}"\s+if \(\$eventName -eq ''pull_request''\) \{\s*\$base = "\$\{\{ github\.event\.pull_request\.base\.sha \}\}"\s*\}\s*else \{\s*\$base = "\$\{\{ github\.event\.before \}\}"\s*\}') {
+  throw 'Essay guardrails must compare PRs with their base SHA; event.before is only the non-PR comparison base.'
+}
+if ($essayGuardrailStep -notmatch '(?s)if \(\[string\]::IsNullOrWhiteSpace\(\$base\) -or \(\$base -match ''\^0\+\$''\)\) \{\s*\$base = \(git rev-parse HEAD\^ 2>\$null\)\s*\}') {
+  throw 'Essay guardrails must retain the existing empty/zero-base HEAD^ fallback for manual and scheduled runs.'
+}
+if ($essayGuardrailStep -notmatch '(?s)if \(\$eventName -in @\(''pull_request'', ''push''\) -and\s+\$base -eq ''ec9c93265c10d3a88e25bd4ad46c99decdbc4c07''\) \{\s*\$base = ''5e21e40efd5e4bcfda8bac2284edb9bb36b341d6''\s*\}') {
+  throw 'The undeployed archive-batch recovery must widen only the exact ec9c932 PR/push boundary to its original baseline.'
+}
+$guardrailRequirements = '-RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit'
+foreach ($guardrailCommand in @(
+  ('./scripts/check_essay_guardrails.ps1 ' + $guardrailRequirements),
+  ('./scripts/check_essay_guardrails.ps1 -BaseRef $base -HeadRef "${{ github.sha }}" ' + $guardrailRequirements)
+)) {
+  if (-not $essayGuardrailStep.Contains($guardrailCommand, [StringComparison]::Ordinal)) {
+    throw 'Both essay-guardrail paths must retain every publication requirement and diff against the checked-out head.'
+  }
+}
+if ([regex]::Matches($essayGuardrailStep, '\./scripts/check_essay_guardrails\.ps1').Count -ne 2 -or
+    $essayGuardrailStep -match '(?m)^\s*(?:if:|continue-on-error:)') {
+  throw 'Essay guardrails must keep the two existing exclusive invocation paths without a skipped or duplicate recovery check.'
+}
+
 if ($deployWorkflow -notmatch "RequireEditorialPhilosophyAudit") {
   throw "deploy.yml must require Editorial Philosophy Audit evidence for changed non-draft essays, reports, and working papers."
 }

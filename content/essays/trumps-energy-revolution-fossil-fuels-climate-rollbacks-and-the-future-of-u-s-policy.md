@@ -19,7 +19,7 @@ collections:
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected 2023 energy-related CO2 metric, construction scope, reactor chronology and quotation wording. Clarified net-zero warming, design-specific reactor safety and California peak-demand advice; removed the unverified 10 MW-by-2030 plan sentence. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Corrected 2023 energy-related CO2 metric, construction scope, reactor chronology and quotation wording. Clarified net-zero warming, design-specific reactor safety and California peak-demand advice; removed the unverified 10 MW-by-2030 plan sentence. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.2"
     date: "2026-06-04"
     note: "Updated June 4, 2026, to repair a visible Markdown heading residue in the climate-leadership section break and clear house-style residue exposed by the formatting fix."
@@ -119,7 +119,7 @@ The IPCC finds that [sustained net-zero CO₂, together with strong reductions i
 
 Reaching that point requires global emissions cuts. Add the fact that global emissions have continued to climb, and it becomes clear that surpassing critical thresholds is increasingly likely.
 
-Planetary tipping points are not waiting around for American leadership; they respond to the aggregate of global emissions. That is why the institutional problem is so hard: one country can slow the trend, but no one country can control the whole risk alone.
+Planetary tipping points respond to the aggregate of global emissions without waiting around for American leadership. That is why the institutional problem is so hard: one country can slow the trend, but no one country can control the whole risk alone.
 
 U.S. inaction under Trump's second term might accelerate the timeline a bit, but the tragic irony is that
 
@@ -224,7 +224,7 @@ Allies and adversaries alike learned not to count on Washington's promises.
 
 In the end, the ambitious U.S. targets and pronouncements were written in sand. One might even say the American climate leadership era became a ["damning indictment of failed climate leadership"](https://www.un.org/sg/en/content/sg/statement/2022-02-28/secretary-generals-video-message-the-press-conference-launch-of-ipcc-report-scroll-down-for-languages), to quote UN Secretary-General António Guterres's harsh assessment of the world's overall efforts.
 
-The U.S. wasn't solely to blame for that failure, of course, but it demonstrated how even a leading nation's bold plans can evaporate overnight, casting doubt on the wisdom of relying on such leadership in the first place.
+Without bearing sole blame for that failure, the U.S. demonstrated how even a leading nation's bold plans can evaporate overnight, casting doubt on the wisdom of relying on such leadership in the first place.
 
 Thirdly, and most importantly, America's emissions cuts did little to change the trajectory of climate change so long as others didn't follow. While U.S. emissions did drop roughly 14% from 2005 to 2019, global emissions kept rising in that time.
 
@@ -246,7 +246,7 @@ This critique may sound cynical, but it reflects the disappointment of seeing th
 
 Sometimes, leading by example just makes you lonely, and leaves you looking a bit foolish when the herd goes the other way. In the end, America's prior climate leadership might be remembered as a noble miscalculation: a case of too much, too soon on the mitigation front without a realistic plan to bring the rest of the world along.
 
-Trump's second-term retreat, while damaging from a climate perspective, also lays bare an uncomfortable insight: perhaps the U.S. shouldn't have charged so far ahead to begin with. In a world addicted to carbon, going cold turkey alone was never going to work. The failure was not just Trump's doing; it was baked into a global approach that lacked enforcement and assumed rational cooperation that never fully materialized.
+Trump's second-term retreat, while damaging from a climate perspective, also lays bare an uncomfortable insight: perhaps the U.S. shouldn't have charged so far ahead to begin with. In a world addicted to carbon, going cold turkey alone was never going to work. Trump contributed to a failure baked into a global approach that lacked enforcement and assumed rational cooperation that never fully materialized.
 
 It's a harsh lesson in realpolitik versus idealism in climate policy.
 
@@ -311,7 +311,7 @@ Keep using what works and is available (oil/gas) until the alternatives genuinel
 
 Given the current state of technology and infrastructure, there's a compelling argument that this slower transition, one that does not prematurely kill the internal combustion engine, could avoid economic disruption while allowing incremental emissions improvements.
 
-It's not a fashionable viewpoint in climate circles, but it's one grounded in the engineering and economics of the present. Sometimes, letting the perfect be the enemy of the good (by insisting on zero-emission vehicles now) can backfire. A bit more patience with fossil fuels, paired with smart investment in future tech, might serve us better than hurriedly mandating EVs and then realizing we've simply moved the pollution upstream.
+It's a viewpoint grounded in the engineering and economics of the present, despite being unfashionable in climate circles. Sometimes, letting the perfect be the enemy of the good (by insisting on zero-emission vehicles now) can backfire. A bit more patience with fossil fuels, paired with smart investment in future tech, might serve us better than hurriedly mandating EVs and then realizing we've simply moved the pollution upstream.
 
 ## Nuclear Energy: The Hard Long-Term Question
 
@@ -359,9 +359,9 @@ Some molten salt reactor (MSR) designs [dissolve nuclear fuel in a hot salt liqu
 
 Thorium, a widely-available element, is used in these reactors by breeding it into uranium-233, offering potentially inexhaustible fuel if the technology pans out.
 
-The Chinese effort puts them at the forefront of MSR technology and thorium fuel cycle development. It's been colloquially referred to as harnessing an "artificial sun" on earth, since like the sun it produces heat that can generate power (though to be clear, MSRs are fission, not fusion, but China is working on fusion "artificial sun" projects too!).
+The Chinese effort puts them at the forefront of MSR technology and thorium fuel cycle development. It's been colloquially referred to as harnessing an "artificial sun" on earth, since like the sun it produces heat that can generate power (though to be clear, MSRs use fission rather than fusion; China is working on fusion "artificial sun" projects too!).
 
-Investing heavily in nuclear energy isn't just a pie-in-the-sky notion; it's becoming a geopolitical competition. Russia and France have long histories in nuclear tech, China is pouring billions into every reactor design imaginable, and startups in North America are developing everything from small modular reactors to fusion prototypes.
+Heavy investment in nuclear energy is becoming a geopolitical competition. Russia and France have long histories in nuclear tech, China is pouring billions into every reactor design imaginable, and startups in North America are developing everything from small modular reactors to fusion prototypes.
 
 The U.S. can ill afford to lag.
 
@@ -371,7 +371,7 @@ The reason is simple: if we want abundant energy and a stable climate, nuclear l
 
 Nuclear power, especially next-gen designs, offers a dispatchable, zero-carbon source that can replace coal and gas plant-for-plant.
 
-It's not without challenges (waste and safety concerns linger in the public mind), but those are engineering problems that can be solved, not fundamental physics limits. In fact, the new designs aim to solve many of those old headaches. Some advanced reactors will "burn" existing nuclear waste or use spent fuel as input (closing the fuel cycle).
+Its challenges (waste and safety concerns linger in the public mind) are engineering problems that can be solved rather than fundamental physics limits. In fact, the new designs aim to solve many of those old headaches. Some advanced reactors will "burn" existing nuclear waste or use spent fuel as input (closing the fuel cycle).
 
 Others use passive safety systems designed to maintain cooling during a loss of power.
 

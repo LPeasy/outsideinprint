@@ -2,7 +2,9 @@
 
 File: `content/essays/standard-of-living-vs-quality-of-life-what-the-numbers-miss.md`  
 Version: `1.3 / Fourth web edition`  
-SHA-256: `c6c4a35a67bfa0ddb8e6ae146afa3ed87ab34dd708d3b087beab844d2532245d`
+SHA-256: `195e7cc1deb12de1d9a675dd795ddf7163d51be7f2ac24db8081c66e573ce8c7`
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
 
 Current status: **PASS (bounded citation revision)**. Original prose restored; only supported hyperlink additions/destination repairs and minor citation metadata are allowed. Minimal corrections remain private and unapproved. This checkpoint supersedes all earlier September 27 major-revision candidates below; their claims that prose corrections were applied are no longer current.
 
@@ -23,4 +25,3 @@ This is a bounded citation revision, not a new numerical grade or blanket recert
 - Institutional Behavior: PASS — Official/actor records retain their distinct roles; no institutional statement is silently converted into independent corroboration.
 
 Private proposals: `../core-link-only-root-approvals-2026-09-27.md`. No tests, production gate, commit, or publication performed by this record.
-

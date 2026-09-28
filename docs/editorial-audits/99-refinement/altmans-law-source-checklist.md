@@ -6,7 +6,9 @@ Source: `content/essays/altmans-law.md`
 
 Reviewed version: `1.3`, Fourth web edition.
 
-Final file SHA-256: `e07edd11782e096ec8e216418fc3fde0e2c0793f867c6063dcf5ec6d7b5c1e7d`.
+Final file SHA-256: `76de2865bfbabaddc5a3c9c07ea3c041c1636b5dd843d393c2f4215843433834`.
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current Editorial Philosophy decision: PASS.
 

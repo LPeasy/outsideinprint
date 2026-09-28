@@ -15,7 +15,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Retained claim-level source links and original prose, with approved corrections to sales measures, ranking and population dates, sponsorship timing, and unsupported geographic claims; original artwork and publication date unchanged."
+    note: "Retained claim-level source links and original prose, with approved corrections to sales measures, ranking and population dates, sponsorship timing, and unsupported geographic claims; original artwork and publication date unchanged. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, after OIP back-archive review. Remote Medium body images were removed, import formatting was normalized, and beer-market claims were tightened."
@@ -44,9 +44,7 @@ In the four weeks ending June 3, 2023, Modelo Especial [knocked Bud Light off th
 
 The easiest explanation was [Bud Light's marketing crisis with Dylan Mulvaney and the boycott that followed](https://journalrecord.com/2023/06/14/bud-light-dethroned-as-americas-top-selling-beer/).
 
-But Modelo wasn't just waiting in the wings.
-
-It had been climbing steadily, powered by double-digit growth, clear branding, strong distribution, and demographic tailwinds.
+But Modelo had been climbing steadily, powered by double-digit growth, clear branding, strong distribution, and demographic tailwinds.
 
 Its rise was predictable.
 
@@ -62,7 +60,7 @@ Modelo was doing something most brands had forgotten how to do: feel cool.
 
 ### Modelo's Stronghold
 
-In cities like [Los Angeles and Chicago](https://journalrecord.com/2023/06/14/bud-light-dethroned-as-americas-top-selling-beer/), Modelo Especial is not just a beer. It is the beer.
+In cities like [Los Angeles and Chicago](https://journalrecord.com/2023/06/14/bud-light-dethroned-as-americas-top-selling-beer/), Modelo Especial is the beer.
 
 Whether it is stocked at taquerias, corner stores, backyard parties, or bar patios, it is about as common as water.
 
@@ -97,7 +95,7 @@ You know exactly what you're getting: good beer with no strings attached.
 
 ### From the Octagon to the Backyard
 
-Modelo didn't just ride with the culture. It took an active role.
+Modelo took an active role in the culture.
 
 [The brand became the official beer of the UFC](https://www.globenewswire.com/news-release/2018/01/11/1287568/0/en/modelo-especial-announces-partnership-with-ufc-heavyweight-champion-stipe-miocic.html), a partnership that cemented its image as the beer for fighters, fans, and anyone who liked their beer with a side of swagger.
 
@@ -117,15 +115,13 @@ That crossover appeal isn't hypothetical.
 
 [Household data cited in 2024 coverage](https://www.nacsmagazine.com/Issues/October-2024/Mexican-Beer%E2%80%99s-%E2%80%98Fighting-Spirit%E2%80%99) showed Modelo had moved well beyond a single demographic lane. Hispanic consumers remain central to the brand, but non-Hispanic households were buying it at large scale too. Craft breweries noticed and began chasing the same lane with Mexican-style lagers of their own.
 
-Modelo's rise wasn't just about branding. It was about reading the map.
+Modelo's rise combined branding with reading the map.
 
 America's Latino population has grown from roughly 12.5% in 2000 to [19.5% in 2023](https://www.census.gov/newsroom/press-releases/2024/population-estimates-characteristics.html).
 
-That is not just loyalty. It is strategic alignment.
+That loyalty reflects strategic alignment.
 
-Modelo did not just catch a demographic tailwind.
-
-It bet on long-term population dynamics, and now it is cashing in.
+Modelo caught a demographic tailwind, bet on long-term population dynamics, and now it is cashing in.
 
 But here's the twist:
 
@@ -133,7 +129,7 @@ But here's the twist:
 
 [In late 2023, Anheuser-Busch signed a multiyear deal to make Bud Light the new official beer of the UFC, replacing Modelo](https://s202.q4cdn.com/437702206/files/doc_news/2023/10/TKO_UFC-AB-Spon-Release_10-24-23_12pm_Final.pdf#page=1).
 
-It was a comeback cage match for a brand still reeling from a major sales drop.
+It was a comeback cage match for a brand reeling from a major sales drop.
 
 Bud Light had been a fixture in the UFC's early days before [Modelo's partnership began in 2018](https://www.ufc.com/news/ufc-and-modelo-announce-new-partnership).
 
@@ -149,7 +145,7 @@ Mexican beers now dominate the U.S. import market, accounting for a large majori
 
 But it is not all sunshine and lime wedges.
 
-[In 2025, Constellation Brands warned of slowing beer growth and weaker demand from Hispanic consumers, with management pointing to economic pressure, immigration concerns, and tariff exposure](https://www.roic.ai/quote/STZ:US/transcripts/2025-year/4-quarter). Aluminum costs also mattered because beer still moves through cans, trucks, retailers, and margins.
+[In 2025, Constellation Brands warned of slowing beer growth and weaker demand from Hispanic consumers, with management pointing to economic pressure, immigration concerns, and tariff exposure](https://www.roic.ai/quote/STZ:US/transcripts/2025-year/4-quarter). Aluminum costs also mattered because beer moves through cans, trucks, retailers, and margins.
 
 Modelo is brewed in Mexico, one of its selling points, but also a potential business risk if tariffs or anti-Mexico rhetoric escalate.
 
@@ -160,9 +156,7 @@ Modelo is brewed in Mexico, one of its selling points, but also a potential busi
 *Photo by Arturo Esparza on Unsplash*
 
 
-> Modelo's ascent isn't just a story about beer.
-
-It is a case study in what happens when a brand knows who it is, chooses its battles, and invests smartly in distribution and marketing in key markets.
+> Modelo's ascent is a case study in what happens when a brand knows who it is, chooses its battles, and invests smartly in distribution and marketing in key markets.
 
 While Bud Light and Michelob Ultra scrambled to stay relevant, Modelo planted its flag squarely in the heart of America.
 

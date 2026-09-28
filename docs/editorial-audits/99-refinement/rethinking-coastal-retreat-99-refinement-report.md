@@ -2,7 +2,9 @@
 
 File: `content/essays/rethinking-coastal-retreat.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `19a4bf3d982f5194296431c319b42c0fa9e4156433c0c89c24ebda1ba61942c8`
+Final content SHA-256: `1c6432c6c38d30e13c563c2b5592a95e25cfeab75f8984c3c8297cb77faeedee`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS for the bounded editorial hold-resolution pass**. The named current hold is resolved by the owner's approved correction. This is not a new exhaustive fact-check, numerical grade, technical-release clearance, or publication authorization.
 

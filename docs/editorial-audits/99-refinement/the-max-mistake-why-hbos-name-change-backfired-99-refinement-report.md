@@ -5,7 +5,16 @@
 Decision: PASS
 
 - Current version: 2.0, Sixth web edition. This replaces the pending minor version within the same unpublished edition ordinal.
-- Current essay SHA-256: `1be641bd98e24736f33dac752e97f8f4dba5305ef00534f374c3749b9373c021`.
+- Current essay SHA-256: `a43e1f351aca3a0e0d8490029a5f0a9b75894bec8e36d84446c6db5a8b01c0f8`.
+
+## Owner-approved release maintenance — September 27, 2026
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
+
+Normalized only 4 flagged body punctuation characters on 1 lines to ASCII. Words, numbers, links, paragraph order, artwork destinations, and meaning remain unchanged; this includes typography inside captions, alt text, and quotations, not any new quotation wording. The current pending revision note discloses this maintenance; version, edition, original publication date, other front matter, and older revision history remain unchanged. This is the owner's approved release-unblocking cleanup, not a resumed prose revision.
+
+The prior current source/philosophy decision below remains applicable because the bounded changes add no factual claim and change no argument or source attribution. The pre-cleanup content hash was `1be641bd98e24736f33dac752e97f8f4dba5305ef00534f374c3749b9373c021`; the current release hash is the one above. [Exact replacements, snapshots, final hashes, and focused preservation result](../release-typography-social-metadata-map-2026-09-27.json) record the byte-level scope. Historical prior-candidate hashes below remain historical. No local test suite, production build, commit, or remote write was performed by this maintenance pass; formal publication gates remain pending.
+
 - Approval: [final-nine owner decisions](../final-nine-owner-decisions-2026-09-27.md) and the owner's explicit approval of all nine bounded sets, including listed removals and the Chili's illustrative-origin confirmation.
 - Exact applied deltas: [Brands implementation map](../final-nine-brands-implementation-map-2026-09-27.json), from snapshot `/tmp/oip-final-nine-brands-dtFpi2/the-max-mistake-why-hbos-name-change-backfired.md`.
 

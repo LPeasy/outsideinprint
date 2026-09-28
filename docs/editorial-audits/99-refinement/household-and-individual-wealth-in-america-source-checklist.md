@@ -2,7 +2,9 @@
 
 File: `content/essays/household-and-individual-wealth-in-america.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `0f7d4d51cd5d15bdb8f6d7d22ca32e4fec12236cb10300b496b2ca9b999ccdb0`
+Final content SHA-256: `7cf82c68c5667a4e74426b7e81acead295aab2b1d120837bb681d433702d10ae`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — bounded approved correction**. The two remaining named holds are resolved by matching source tables and the owner's approved endpoint/category corrections. Earlier approved income-definition changes remain unchanged.
 

@@ -14,7 +14,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Qualified the subtitle and body to distinguish possible effects from measured delay. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Qualified the subtitle and body to distinguish possible effects from measured delay. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-03"
     note: "Updated May 3, 2026, after OIP back-archive review. Legacy Medium promotional residue, source-card fragments, spacing, and punctuation artifacts were cleaned up; source, metadata, and rendering were checked."
@@ -43,13 +43,13 @@ This shift reconfigures agency authority. Agencies have always had to weigh exec
 
 The Chevron doctrine was built on three core justifications: agency expertise, political accountability, and administrative efficiency. Courts deferred to agencies because they had technical expertise and operated within the executive branch, making them politically accountable to elected officials. Chevron also streamlined governance, allowing agencies to fill legislative gaps without prolonged judicial intervention.
 
-However, this legal landscape gradually shifted. The Supreme Court narrowed Chevron's scope over time, excluding informal agency guidance from receiving deference and imposing stricter requirements for rulemaking. Loper Bright was not an abrupt reversal but rather the culmination of decades of judicial skepticism toward unelected bureaucrats wielding expansive authority. The Court ultimately ruled that deference gave agencies too much power over statutory interpretation, contradicting the requirement that courts, not agencies, exercise independent judgment in legal interpretation.
+However, this legal landscape gradually shifted. The Supreme Court narrowed Chevron's scope over time, excluding informal agency guidance from receiving deference and imposing stricter requirements for rulemaking. Rather than an abrupt reversal, Loper Bright was the culmination of decades of judicial skepticism toward unelected bureaucrats wielding expansive authority. The Court ultimately ruled that deference gave agencies too much power over statutory interpretation, contradicting the requirement that courts, not agencies, exercise independent judgment in legal interpretation.
 
 With Chevron overturned, the balance of power in administrative law fundamentally shifted.
 
 ## The End of Chevron vs. the Push for Agency Responsiveness
 
-With Chevron overturned, agencies no longer enjoy automatic deference in interpreting ambiguous statutes. However, courts may still apply [Skidmore deference, a weaker form of deference in which agency interpretations are considered persuasive but not binding](https://www.law.cornell.edu/supremecourt/text/22-451). This means that agencies must now justify their interpretations not just to the executive branch but also to the courts, creating an additional layer of legal scrutiny.
+With Chevron overturned, agencies no longer enjoy automatic deference in interpreting ambiguous statutes. However, courts may continue to apply [Skidmore deference, a weaker form of deference in which agency interpretations are considered persuasive but not binding](https://www.law.cornell.edu/supremecourt/text/22-451). This means that agencies must now justify their interpretations to both the executive branch and the courts, creating an additional layer of legal scrutiny.
 
 The end of Chevron fundamentally changes how agencies respond to executive directives. Agencies have long struggled to balance executive priorities with statutory interpretation, bureaucratic inertia, and shifting political directives. Now, rather than navigating ambiguity with Chevron-enabled flexibility, they must anticipate heightened judicial scrutiny, potentially slowing an already complex process.
 
@@ -65,7 +65,7 @@ In essence, Loper Bright may not create new inefficiencies so much as it replace
 
 ## Conclusion: The Shift in Power and the Future of Agency Responsiveness
 
-The Supreme Court's decision in Loper Bright is not just a procedural shift. It is a fundamental redistribution of power between the executive branch, the judiciary, and the administrative state. By eliminating Chevron, the Court has redefined agency discretion, requiring independent judicial interpretation of statutes while preserving delegated agency discretion.
+The Supreme Court's decision in Loper Bright is a procedural shift and a fundamental redistribution of power between the executive branch, the judiciary, and the administrative state. By eliminating Chevron, the Court has redefined agency discretion, requiring independent judicial interpretation of statutes while preserving delegated agency discretion.
 
 This shift fundamentally alters how agencies navigate legal ambiguity. Agencies have never been perfectly responsive to executive will, as statutory limitations and bureaucratic inertia have always shaped their actions. But rather than using Chevron-backed discretion to interpret ambiguous laws, they now face a new constraint: the looming presence of judicial intervention. The elimination of Chevron may not create new inefficiencies so much as it replaces administrative discretion with heightened judicial oversight.
 

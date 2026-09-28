@@ -2,7 +2,14 @@
 
 File: `content/essays/a-really-boring-topic.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `c748e52730bc8cd3c0edcca2b8f62e4c44f148a4738357826e034fd542d1231c`
+Final content SHA-256: `4dd2e908ce7991e0fec400a3eab54bb063dded16052a0f3886331999db814d5c`
+
+## Owner-approved release maintenance — September 27, 2026
+
+Normalized only 8 flagged body punctuation characters on 7 lines to ASCII. Words, numbers, links, paragraph order, artwork destinations, and meaning remain unchanged; this includes typography inside captions, alt text, and quotations, not any new quotation wording. The current pending revision note discloses this maintenance; version, edition, original publication date, other front matter, and older revision history remain unchanged. This is the owner's approved release-unblocking cleanup, not a resumed prose revision.
+
+The prior current source/philosophy decision below remains applicable because the bounded changes add no factual claim and change no argument or source attribution. The pre-cleanup content hash was `c748e52730bc8cd3c0edcca2b8f62e4c44f148a4738357826e034fd542d1231c`; the current release hash is the one above. [Exact replacements, snapshots, final hashes, and focused preservation result](../release-typography-social-metadata-map-2026-09-27.json) record the byte-level scope. Historical prior-candidate hashes below remain historical. No local test suite, production build, commit, or remote write was performed by this maintenance pass; formal publication gates remain pending.
+
 
 Current disposition: **PASS — bounded source-link and approved-correction release review**. All three named market-forecast and equipment-example holds are resolved through the owner's exact approved replacements and narrowly matched source wrappers.
 

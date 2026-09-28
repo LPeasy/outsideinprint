@@ -35,6 +35,8 @@ For changed essays, run the direct PowerShell guardrail before the full build:
 
 The guardrail blocks forbidden `that matters` phrasing and adverbial `still` constructions, except quoted/literal/title-source uses covered by the house-style rule, fully declared source-free Musings under `editorial/musings-series-contract.md`, and fully declared source-free Affirmations under `editorial/the-things-we-say-publication-contract.md`.
 
+Formulaic `not X, but Y` reframing and equivalent adjacent-sentence constructions also block authored public-judgment prose under [Publishing Policy](../PUBLISHING_POLICY.md#house-style-publication-blockers). Preserve factual qualifications when making minimal corrections. URL destinations are not prose; visible authored link labels remain checked. No source-link-release style exceptions or warning-only downgrade apply.
+
 The front-page image workflow validates source-free Musings and source-free Affirmations through separate exact predicates. Association-only repairs must use `scripts/update_front_page_cartoon.ps1 -LinkExistingSlug <image-slug> -EssayPath "/essays/<piece-slug>/"`; this mode preserves the existing `current` pointer and does not copy or replace artwork.
 
 For changed non-draft essays, reports, and working papers, require Editorial Philosophy Audit evidence before publishing:

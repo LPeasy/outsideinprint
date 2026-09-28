@@ -2,7 +2,9 @@
 
 File: `content/essays/is-doge-legal.md`  
 Version: `2.0 / Fourth web edition`  
-Final content SHA-256: `911189dfca11236c0581573e9278958a050938b86e637c248ff391f6ad24709d`
+Final content SHA-256: `14d0ea5bf67af91752b5501406d9c1b48a08572c822b32ad0f569a09d249e2d9`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — bounded source-link and approved-correction release review**. The owner-approved SGE/pay clarification resolves the remaining scoped hold; the earlier approved USAID, SGE timing and Clinton/Bowsher corrections remain unchanged.
 

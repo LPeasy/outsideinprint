@@ -17,7 +17,7 @@ medium_source_url: "https://medium.com/@lawtonperret/tariffs-protectionism-and-w
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added source links without changing prose."
+    note: "Added source links and applied minimal style cleanup; facts and source wording unchanged."
   - version: "1.1"
     date: "2026-05-04"
     note: "Updated May 4, 2026, after OIP back-archive review. Legacy Medium formatting, remote body images, punctuation artifacts, source-card residue, and targeted wording were cleaned while preserving the original publication frame."
@@ -81,7 +81,7 @@ Trump's version of protectionism differed from Britain's because it treated tari
 
 That broader frame makes the policy more flexible, but also more dangerous. If every economic dispute becomes a security emergency, trade policy becomes less predictable. Allies may begin to price U.S. access as conditional and unstable. Rivals may adapt by building alternative markets and supply chains.
 
-The policy could still produce targeted gains. A tariff threat can sometimes force negotiation. Strategic industries may deserve protection where national security risks are real. The hard question is whether the gains exceed the costs imposed on consumers, allies, exporters, and downstream firms.
+The policy could produce targeted gains. A tariff threat can sometimes force negotiation. Strategic industries may deserve protection where national security risks are real. The hard question is whether the gains exceed the costs imposed on consumers, allies, exporters, and downstream firms.
 
 ## Conclusion
 
@@ -96,4 +96,4 @@ But economic dominance cannot be legislated into existence. It depends on invest
 
 Protectionism is often a response to decline. It is rarely a full solution to decline.
 
-The lesson from Britain is not that all tariffs are always wrong. It is that trade barriers cannot substitute for the deeper work of building an economy that can compete. If the United States uses tariffs as a narrow bargaining tool, it may gain leverage. If it uses them as a substitute for adaptation, it risks repeating an old imperial mistake in a new language.
+Britain shows that trade barriers cannot substitute for the deeper work of building an economy that can compete; that does not make all tariffs always wrong. If the United States uses tariffs as a narrow bargaining tool, it may gain leverage. If it uses them as a substitute for adaptation, it risks repeating an old imperial mistake in a new language.

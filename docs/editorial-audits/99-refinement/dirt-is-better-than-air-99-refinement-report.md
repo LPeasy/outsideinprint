@@ -2,7 +2,9 @@
 
 File: `content/essays/dirt-is-better-than-air.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `504ca0c531a56eebc4d5c8732d383b5c125795f09386a72cd8f4a4f280b46997`
+Final content SHA-256: `9fb3a30db89e081f4d9a4c4b6d07daf9e4b87b9e6b9029fd1e009b264e39b42a`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS for the bounded editorial hold-resolution pass**. The named current holds are resolved. This is not a new exhaustive fact-check, numerical grade, engineering or health certification, technical-release clearance, or publication authorization.
 

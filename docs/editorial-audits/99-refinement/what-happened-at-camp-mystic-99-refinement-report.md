@@ -2,7 +2,16 @@
 
 File: `content/essays/what-happened-at-camp-mystic.md`  
 Version: `3.0 / Ninth web edition`  
-Final content SHA-256: `bade6b51ca738c69ff98e733b06cabe84d095fede8d6d70e8cf326b0ae367558`
+Final content SHA-256: `690fdbbb0ff00369bfbab4c1977369d4db749a3344759d3630863754043ff42c`
+
+## Owner-approved release maintenance — September 27, 2026
+
+Owner-approved minimal style cleanup (2026-09-27): facts, links and verified quotations are preserved; the existing source/philosophy decision remains applicable. Earlier link-only, prose-preservation and typography statements (including 'words unchanged') describe prior source or typography work, not these style edits; formal checks and publication remain pending.
+
+Normalized only 1 flagged body punctuation characters on 1 lines to ASCII. Words, numbers, links, paragraph order, artwork destinations, and meaning remain unchanged; this includes typography inside captions, alt text, and quotations, not any new quotation wording. The current pending revision note discloses this maintenance; version, edition, original publication date, other front matter, and older revision history remain unchanged. This is the owner's approved release-unblocking cleanup, not a resumed prose revision.
+
+The prior current source/philosophy decision below remains applicable because the bounded changes add no factual claim and change no argument or source attribution. The pre-cleanup content hash was `bade6b51ca738c69ff98e733b06cabe84d095fede8d6d70e8cf326b0ae367558`; the current release hash is the one above. [Exact replacements, snapshots, final hashes, and focused preservation result](../release-typography-social-metadata-map-2026-09-27.json) record the byte-level scope. Historical prior-candidate hashes below remain historical. No local test suite, production build, commit, or remote write was performed by this maintenance pass; formal publication gates remain pending.
+
 
 Current disposition: **PASS — named hold resolved**. The owner approved removal of the unverified CNN opening quotation and credit. Those two blocks are removed; the newly sourced Rice/AP first-responder account is retained with explicit attribution. This is scoped clearance of the named source concerns, not a whole-archive certification.
 

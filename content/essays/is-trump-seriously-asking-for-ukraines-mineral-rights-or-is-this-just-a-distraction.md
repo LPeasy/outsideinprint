@@ -17,7 +17,7 @@ medium_source_url: "https://medium.com/@lawtonperret/is-trump-seriously-asking-f
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added source links without changing prose."
+    note: "Added source links preserving the original argument. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-04"
     note: "Updated May 4, 2026, after OIP back-archive review. Legacy Medium formatting, remote body images, punctuation artifacts, source-card residue, and targeted wording were cleaned while preserving the original publication frame."
@@ -51,7 +51,7 @@ Denmark rejected the idea, and polling showed Greenlanders overwhelmingly oppose
 
 Greenland could say no. Ukraine, fighting for survival and dependent on outside support, had far less room to refuse.
 
-That asymmetry matters. A deal between a secure ally and the United States is one thing. A deal between a wartime government and its essential security patron is another.
+The asymmetry is consequential. A deal between a secure ally and the United States is one thing. A deal between a wartime government and its essential security patron is another.
 
 ## Why Ukraine's Minerals Matter
 
@@ -70,9 +70,9 @@ The tradeoff is that resource access can blur the line between partnership and e
 
 A U.S.-Ukraine minerals agreement could strengthen deterrence if American companies, financing, and political commitments make Ukraine's security more important to Washington.
 
-But investment alone is not a security guarantee. Mines, contracts, and joint funds do not stop missiles. Russia would still test the limits of U.S. commitment unless the agreement was tied to enforceable support.
+But investment alone is not a security guarantee. Mines, contracts, and joint funds do not stop missiles. Russia would continue to test the limits of U.S. commitment unless the agreement was tied to enforceable support.
 
-That is why Zelenskyy's reported concern over security guarantees mattered. Ukraine did not only need a buyer or investor. It needed assurance that the United States would not take the upside while leaving Ukraine exposed to the risk.
+That is why Zelenskyy's reported concern over security guarantees mattered. Ukraine needed a buyer or investor and assurance that the United States would not take the upside while leaving Ukraine exposed to the risk.
 
 ## The Transactional Logic
 
@@ -105,7 +105,7 @@ U.S. Treasury Secretary Scott Bessent presented a proposal to Zelenskyy in Kyiv.
 
 After [Keith Kellogg's visit to Kyiv](https://www.president.gov.ua/en/news/prezident-ukrayini-zustrivsya-zi-specialnim-predstavnikom-pr-96229), [reporting suggested that talks had improved and that both sides were trying to finalize an agreement.](https://www.axios.com/2025/02/21/us-ukraine-mineral-deal-zelensky-talks) Zelenskyy described the negotiations as a possible step forward while emphasizing the need for effective terms.
 
-That sequence suggests the minerals demand was not merely rhetorical. It was part of a serious negotiation over the future shape of U.S.-Ukraine relations.
+That sequence suggests the minerals demand was part of a serious negotiation over the future shape of U.S.-Ukraine relations.
 
 If finalized on balanced terms, the agreement could bind the United States more closely to Ukraine's reconstruction and security. If finalized under pressure, it could deepen Ukrainian dependence without solving the strategic problem that made the deal necessary.
 
@@ -122,4 +122,4 @@ A minerals agreement could serve both countries if it joins economic development
 
 But if the United States seeks resource access without real guarantees, the deal risks becoming extraction under wartime pressure.
 
-The question is not whether Ukraine's minerals matter. They do. The question is who bears the risk, who gains power, and whether the agreement strengthens Ukraine's sovereignty or monetizes its vulnerability.
+Ukraine's minerals matter. The question is who bears the risk, who gains power, and whether the agreement strengthens Ukraine's sovereignty or monetizes its vulnerability.

@@ -2,7 +2,9 @@
 
 File: `content/essays/save-some-air-for-the-fishies.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `9d8934590f26620b374dc9a69c58ad2dd80699697fe9b8327b2e6d565d9f7929`
+Final content SHA-256: `25c84a0579ac042e02d45a3994230733471321c2a6705402f07ff9d4fdc4da48`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS (bounded editorial review)**. Distinguished overlapping warming-solubility and heatwave comparisons; retained oxygen-loss argument and local-evidence limits.
 

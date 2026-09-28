@@ -5,7 +5,7 @@ draft: false
 slug: "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025"
 collections: ["brands-business-consumer-choice"]
 section_label: "Essay"
-subtitle: "Chili’s isn’t just competing with fast food ~ it’s eating their lunch."
+subtitle: "Chili’s is eating fast food’s lunch."
 featured_image: "/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf.jpeg"
 featured_image_caption: "McDonald's vs. Chili's | Source: User with ChatGPT"
 featured_image_alt: "McDonald's and Chili's value comparison illustration"
@@ -15,7 +15,7 @@ edition: "Third web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Retained claim-level source links and original prose, with an approved evaluative title and corrections to the dated offer, service, takeout and pricing claims; labeled the author-written reactions illustrative, including the hypothetical purchase. Original URL, artwork and publication date unchanged."
+    note: "Retained claim-level source links and original prose, with an approved evaluative title and corrections to the dated offer, service, takeout and pricing claims; labeled the author-written reactions illustrative, including the hypothetical purchase. Original URL, artwork and publication date unchanged. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-14"
     note: "Updated May 14, 2026, after OIP back-archive review. Removed Medium promotional residue, normalized house style, and tightened value/pricing claims around Chili's and fast-food competition."
@@ -28,8 +28,8 @@ medium_source_url: "https://medium.com/@lawtonperret/why-more-people-are-choosin
 
 **Fast food used to mean cheap food.**
 
-***It*** ***wasn't*** ***gourmet***, but it was **quick, easy, and
-affordable.** You could grab lunch for five or six bucks and get back to
+It was **quick, easy, and
+affordable,** without being ***gourmet.*** You could grab lunch for five or six bucks and get back to
 work.
 
 > That's a thing of the past.
@@ -42,7 +42,7 @@ By 2025, the complaint had become familiar: fast-food combos were landing near c
 
 > "Is fast food even fast or cheap anymore?"
 
-It's not just about the money. **It's the value.**
+It's about the money **and the value.**
 
 If you're paying sit-down prices, you want sit-down service. But a takeaway fast-food combo can leave you with the same paper bag, no table service, **and what feels like less value.**
 
@@ -81,7 +81,7 @@ plates, with actual waiters.
 
 When a fast-food burger combo lands near the price of a Chili's burger deal with chips, salsa, and a drink, it flips the equation.
 
-> You don't just get more food ~ you get more bang for your buck.
+> You get more food and more bang for your buck.
 
 #### Chili's "3 for Me" Deal Is Beating Fast Food on Value and Convenience
 
@@ -124,7 +124,7 @@ meal.**
 
 > McDonald's vs Chili's \| Source: User with ChatGPT
 
-> This isn't just luck. Chili's made a few smart moves that paid off.
+> Chili's made a few smart moves that paid off.
 
 First, **[they simplified the menu](https://investors.brinker.com/files/doc_financials/2024/ar/608891-Brinker-2024-AR-BMK.pdf#page=9)**. Fewer items. Faster prep. Lower
 overhead. They kept a $10.99 starting offer while raising prices elsewhere on the menu.
@@ -155,8 +155,7 @@ chase whatever was cheapest. Now we're asking:
 
 > What do I get for my money?
 
-**That's why Chili's is winning.** Not because it's the lowest price.
-**Because it feels like a good deal.**
+**That's why Chili's is winning: it feels like a good deal,** even when it isn't the lowest price.
 
 I see **the same value appeal in places like Aldi and Costco.** People
 are fine spending money ~ if it feels like they got something.
@@ -167,6 +166,6 @@ are fine spending money ~ if it feels like they got something.
 
 > A little dignity.
 
-That's the shift: **value isn't just about numbers.**
+That's the shift: **value goes beyond numbers** to
 
-> It's about feeling like you got your money's worth.
+> feeling like you got your money's worth.

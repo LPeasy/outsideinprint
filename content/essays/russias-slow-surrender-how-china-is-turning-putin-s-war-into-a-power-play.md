@@ -19,7 +19,7 @@ collections:
 revision_history:
   - version: "1.3"
     date: "2026-09-27"
-    note: "Added source links without changing prose."
+    note: "Added source links preserving the original argument. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-07"
     note: "Updated May 7, 2026, after OIP back-archive review. Remote Medium residue, formatting artifacts, source-sensitive claims, and editorial-philosophy evidence were checked."
@@ -83,14 +83,14 @@ Meanwhile, Moscow's growing dependence creates an asymmetric partnership, one wh
 *Photo by Aron Visuals on Unsplash*
 
 
-Russia is not yet a Chinese vassal state, but the war is moving it toward deeper dependence.
+The war is moving Russia toward deeper dependence, although it is not yet a Chinese vassal state.
 
-If Moscow secures a swift end to the war, it may still reclaim some independence.
+If Moscow secures a swift end to the war, it may yet reclaim some independence.
 
 But with each passing month, its reliance on China deepens, narrowing its ability to act autonomously.
 
 At some point, Russia may no longer have an easy way out. Its economy could be embedded in China's supply chains, its industries dependent on Chinese investment, and its military reliant on Beijing's technology.
 
-By then, Moscow would have little choice but to align with China, not as an equal, but as a junior partner.
+By then, Moscow would have little choice but to align with China, as a junior partner rather than an equal.
 
 Putin's war, meant to restore Russian strength, may instead leave Moscow closer to client-state dependence on Beijing.

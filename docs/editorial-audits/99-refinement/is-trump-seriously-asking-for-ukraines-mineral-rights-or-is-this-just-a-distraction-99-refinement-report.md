@@ -6,7 +6,9 @@ Source file: `content/essays/is-trump-seriously-asking-for-ukraines-mineral-righ
 
 Version: `1.3`
 
-Audited SHA256: `6e20b9605789d919db9e928af4e97f64851068752902f41bdcdca8daf4c74a94`
+Audited SHA256: `4b48f5e5f7222132290e98faba6561d18a4f38baed5b1b4d3bc6a321c303c892`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Decision state: `LINK_ONLY_REVIEW_COMPLETE`
 
@@ -31,4 +33,3 @@ Decision: PASS
 Ukraine presidency February 20, 2025 meeting release confirms Kellogg's Kyiv visit and negotiation/security-guarantee context. Axios February 21 contemporaneous negotiating report supports improved talks and effort to finalize terms, not an executed agreement. Greenland/mineral context remains covered by the historical May 4 source review; no new sweeping certification.
 
 See `is-trump-seriously-asking-for-ukraines-mineral-rights-or-is-this-just-a-distraction-source-checklist.md` for exact added anchors and `../core-link-only-flood-pair-2026-09-27.md` for private correction proposals and remaining limits. Images and captions were preserved; no new broad image certification is claimed. No tests, build or publication in this subtask.
-

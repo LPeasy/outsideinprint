@@ -14,7 +14,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected USAID formation, SGE timing and Clinton/Bowsher holdings. Added or retained claim-level source links; original reporting frame and artwork retained. Clarified that Musk's reported lack of salary describes his role, not a requirement of SGE status, and linked the existing salary statement to the contemporaneous report."
+    note: "Corrected USAID formation, SGE timing and Clinton/Bowsher holdings. Added or retained claim-level source links; original reporting frame and artwork retained. Clarified that Musk's reported lack of salary describes his role, not a requirement of SGE status, and linked the existing salary statement to the contemporaneous report. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-03"
     note: "Updated May 3, 2026, after OIP back-archive review. Legacy Medium image embeds, promotional residue, source-card fragments, legal overstatement, headings, and punctuation artifacts were cleaned up; source, metadata, and rendering were checked."
@@ -95,11 +95,11 @@ The 119th Congress represents the first Republican-controlled government since T
 
 ### Republican Lawmakers Caught Between Trump and Their Districts
 
-While top Republican leaders, including Speaker Johnson and Vice President Vance, have embraced DOGE, rank-and-file members are beginning to push back, not against the idea of cutting government, but against the specific consequences of how DOGE is doing it.
+While top Republican leaders, including Speaker Johnson and Vice President Vance, have embraced DOGE, rank-and-file members are beginning to push back against the specific consequences of how DOGE is doing it rather than the idea of cutting government.
 
 Sen. Katie Britt (R-AL) is fighting to shield university research institutions in Alabama from DOGE's cuts, warning that federal funding reductions could devastate medical and scientific research.
 
-Sen. Jerry Moran (R-KS) has raised alarms over the collapse of USAID's food aid program, arguing that humanitarian assistance is not just a moral obligation but also a key support system for American farmers.
+Sen. Jerry Moran (R-KS) has raised alarms over the collapse of USAID's food aid program, arguing that humanitarian assistance is both a moral obligation and a key support system for American farmers.
 
 Rep. Mike Simpson (R-ID) is concerned about hiring freezes at national parks, which could disrupt tourism revenue in Western states.
 
@@ -172,7 +172,7 @@ This precedent concerns who may execute a budget law, not a general prohibition 
 
 This case determined that the president cannot fire officials from independent regulatory agencies without cause if those agencies were created by Congress with specific independence protections. [It arose when President Franklin Roosevelt attempted to remove a member of the Federal Trade Commission (FTC) without cause.](https://www.law.cornell.edu/supremecourt/text/295/602) The Court ruled that agencies with congressional protections operate outside of direct presidential control.
 
-Humphrey's Executor is not a general civil-service mass-firing case, but it does show that Congress can place legal limits on presidential removal power. Worker-protection claims against DOGE would also depend on civil-service statutes, due process, appropriations law, and the specific legal status of the employees affected.
+Humphrey's Executor shows that Congress can place legal limits on presidential removal power, without being a general civil-service mass-firing case. Worker-protection claims against DOGE would also depend on civil-service statutes, due process, appropriations law, and the specific legal status of the employees affected.
 
 ## Synthesis: The Likely Effect of These Precedents on DOGE
 
@@ -199,7 +199,7 @@ If courts rule against DOGE, its power to shut down agencies, cut jobs, and acce
 
 If courts side with Trump, DOGE could set a precedent for future administrations to bypass Congress in dismantling federal agencies.
 
-At its core, the legal battle over DOGE is not just about efficiency. It is a fight over the fundamental limits of executive power.
+At its core, the legal battle over DOGE concerns efficiency and the fundamental limits of executive power.
 
 If DOGE survives legal scrutiny, it could redefine executive power in modern governance, making presidential control over agencies broader than ever before.
 

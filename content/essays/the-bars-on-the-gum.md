@@ -12,7 +12,7 @@ edition: "Second web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Retained source hyperlinks and narrowed two price-free barcode statements to ordinary manufacturer-coded labels; identified the NIST procedure as a model. Surrounding prose, artwork, and original publication date are unchanged."
+    note: "Retained source hyperlinks and narrowed two price-free barcode statements to ordinary manufacturer-coded labels; identified the NIST procedure as a model. Artwork and original publication date are unchanged. Applied minimal style cleanup without changing claims or verified quotations."
 featured: false
 featured_image: "essays/the-bars-on-the-gum/hero"
 featured_image_alt: "A pack of gum with a stark UPC-like code resting beside a low grocery scanner under cool fluorescent light."
@@ -37,7 +37,7 @@ The scanner did not know gum. It knew a pattern. The register did not know appet
 
 The gum is useful because it refuses grandeur. It was candy-counter ordinary, cheap enough to be forgettable, and small enough to make the machinery around it look absurd. A helium-neon laser, a rotating mirror, a computerized register, a new standard, a national numbering system, and a store willing to risk money on adoption all met on the wrapper of a chewing-gum pack. If a system can read gum, it can read a supermarket.
 
-A barcode looks like the last thing added to a package. The recipe is settled. The brand is printed. The weight, warnings, logo, flavor, coupon, and sales claim are already there. The bars seem like packaging debris. In practice, they became the package's address inside a larger order. The gum did not become more edible. It became more accountable.
+A barcode looks like the last thing added to a package. The recipe is settled. The brand is printed. The weight, warnings, logo, flavor, coupon, and sales claim are already there. The bars seem like packaging debris. In practice, they became the package's address inside a larger order. The gum became more accountable.
 
 The public bargain changed at the same instant. A visible price on a can or sticker had once let a shopper accuse the object. The UPC pointed elsewhere. Price lived in a file. Stock lived in a file. The receipt became the shopper's late view into a system already trusted at the moment of sale. The small code carried a new rule for ordinary life: the object in the hand was no longer the whole record.
 
@@ -133,7 +133,7 @@ The barcode therefore belongs in the history of attention. It made packages easi
 
 The barcode changed work before it changed rhetoric about work.
 
-The early scanner was not a self-checkout kiosk. It was a tool at a staffed counter. [The patent language for a scanner at a checkout station](https://patents.google.com/patent/US4064390) assumes a checker who moves each package past the window and enters the human-readable code when the machine cannot read the label. That worker had to feed the system with body movement: reach, turn, pull, listen, bag, correct, repeat.
+The early scanner was a tool at a staffed counter rather than a self-checkout kiosk. [The patent language for a scanner at a checkout station](https://patents.google.com/patent/US4064390) assumes a checker who moves each package past the window and enters the human-readable code when the machine cannot read the label. That worker had to feed the system with body movement: reach, turn, pull, listen, bag, correct, repeat.
 
 The public often hears automation as replacement. At the lane, the first effect was remeasurement. The store could ask how fast items moved through a line, how many errors occurred, how much labor a sale required, and how much throughput a checkout lane could support. The job changed because the machine made the work more measurable.
 
@@ -229,7 +229,7 @@ The barcode sped checkout, widened practical variety, supported supply-chain coo
 
 The pack of Juicy Fruit at Marsh did not contain all of that. It opened the door. The object matters because it shows the scale of modern systems. A person buys gum. A store tests a scanner. A code joins a wrapper to a database. A standards council gains proof. A manufacturer sees a path. A worker changes motion. A shopper learns to trust a receipt.
 
-The black bars are not the system. They are the handle.
+The black bars are the handle of the system.
 
 When the next code arrives on more packages, it will likely look like a convenience. Scan for details. Scan for freshness. Scan for recall data. Scan for a coupon. Scan for the story behind the product. The old gum suggests the better first question: what record is being made public, what record is being kept private, and who has to trust the difference?
 

@@ -41,7 +41,7 @@ repair_mojibake: true
 revision_history:
   - version: "1.2"
     date: "2026-09-27"
-    note: "Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original wording, paragraph structure, source-method framing, and artwork are preserved."
+    note: "Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original argument, source-method framing, and artwork are preserved. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-26"
     note: "Updated May 26, 2026, after OIP back-archive review. Normalized imported punctuation, removed house-style shortcuts, and checked source framing."
@@ -97,6 +97,4 @@ That kind of presence cannot be manufactured very easily.
 
 Studios can build stars. Publicists can build mystique. Directors can build moments. An actor has to build the person. Hackman did that again and again with unusual force and very little fuss. He turned understatement into command. He turned roughness into credibility. He turned craft into something so seamless it almost vanished.
 
-Gene Hackman did not make greatness look flashy.
-
-He made it look earned.
+Gene Hackman made greatness look earned rather than flashy.

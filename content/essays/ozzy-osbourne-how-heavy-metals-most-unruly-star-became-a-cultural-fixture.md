@@ -41,7 +41,7 @@ repair_mojibake: true
 revision_history:
   - version: "1.2"
     date: "2026-09-27"
-    note: "Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original wording, paragraph structure, source-method framing, and artwork are preserved."
+    note: "Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original argument, source-method framing, and artwork are preserved. Applied minimal house-style cleanup without changing facts or sources."
   - version: "1.1"
     date: "2026-05-26"
     note: "Updated May 26, 2026, after OIP back-archive review. Normalized imported punctuation, removed house-style shortcuts, and checked source framing."
@@ -63,7 +63,7 @@ The band carried a worldview. It understood modern life as noisy, mechanized, sp
 
 [His solo career](https://rockhall.com/inductees/ozzy-osbourne/) proved he could carry that force on his own.
 
-That chapter revealed another part of his appeal. Ozzy did not survive because he remained fixed in one exact form. He survived because he kept translating himself without losing the core of his identity. His solo work preserved the theatrical darkness and sonic heft that made him famous, but it also sharpened his persona. He became less just a frontman and more a fully portable symbol of rock excess, misbehavior, and endurance. Audiences knew what they were getting with Ozzy. Chaos would be nearby. So would humor. So would danger, real or stylized.
+That chapter revealed another part of his appeal. Ozzy survived by continually translating himself without losing the core of his identity. His solo work preserved the theatrical darkness and sonic heft that made him famous, but it also sharpened his persona. He became less just a frontman and more a fully portable symbol of rock excess, misbehavior, and endurance. Audiences knew what they were getting with Ozzy. Chaos would be nearby. So would humor. So would danger, real or stylized.
 
 Public life amplified every part of that image.
 

@@ -14,7 +14,7 @@ edition: "Fourth web edition"
 revision_history:
   - version: "2.0"
     date: "2026-09-27"
-    note: "Corrected Yuan currency geography and metallic backing, narrowed the trade-network priority claim and removed the unsupported direct Italian-banking influence sentence. Retained the six quotations checked against the book by the author. Added or retained claim-level source links; original reporting frame and artwork retained."
+    note: "Corrected Yuan currency geography and metallic backing, narrowed the trade-network priority claim and removed the unsupported direct Italian-banking influence sentence. Retained the six quotations checked against the book by the author. Added or retained claim-level source links; original reporting frame and artwork retained. Normalized legacy body punctuation without changing wording. Applied minimal style cleanup without changing claims or verified quotations."
   - version: "1.1"
     date: "2026-05-03"
     note: "Updated May 3, 2026, after OIP back-archive review. Legacy Medium image embeds, promotional residue, source-card fragments, spelling, spacing, and punctuation artifacts were cleaned up; source, metadata, and rendering were checked."
@@ -32,7 +32,7 @@ History often remembers Genghis Khan as a ruthless conqueror, but his most lasti
 
 Military conquest was only the first step.
 
-What made the Mongol Empire unique was not just its military prowess but its ability to establish a stable, efficient, and interconnected trade network that laid the foundations for modern globalization.
+What made the Mongol Empire unique was its military prowess and its ability to establish a stable, efficient, and interconnected trade network that laid the foundations for modern globalization.
 
 ## Source Note
 
@@ -42,7 +42,7 @@ His book provides an in-depth examination of the Mongol Empire's impact on globa
 
 While some details have been synthesized for brevity, the core insights remain rooted in Weatherford's meticulous research.
 
-This essay is intended to highlight how Genghis Khan's policies extended beyond military conquest, shaping early globalization and influencing economic principles still relevant today.
+This essay is intended to highlight how Genghis Khan's policies extended beyond military conquest, shaping early globalization and influencing economic principles relevant today.
 
 ## The Mongol Free Market and Religious Tolerance
 
@@ -56,9 +56,9 @@ Nowhere was this more evident than in Karakorum, the Mongol capital and the beat
 
 It was a marketplace of ideas ~ where East met West in ways that reshaped the world.
 
-![Location of Ghengis Khan’s capitol city Karakorum](/images/medium/the-economics-of-the-mongol-empire/ef22902ff0efb5540cbfb990defdcd832d87afa1e85d0b5eb49252a1bd420636.jpg)
+![Location of Ghengis Khan's capitol city Karakorum](/images/medium/the-economics-of-the-mongol-empire/ef22902ff0efb5540cbfb990defdcd832d87afa1e85d0b5eb49252a1bd420636.jpg)
 
-*Location of Ghengis Khan’s capitol city Karakorum | Source*
+*Location of Ghengis Khan's capitol city Karakorum | Source*
 
 
 The Mongols built a sophisticated road network linking Karakorum to the furthest reaches of their empire. Safe passage, standardized trade policies, and religious tolerance made the city a magnet for commerce.
@@ -94,7 +94,7 @@ Genghis Khan's grandson established the Yuan Dynasty in China, and his economic 
 
 "In twenty-five years, the Mongol army subjugated more lands and people than the Romans had conquered in four hundred years."
 
-While Genghis Khan laid the foundation, it was under Kublai Khan that these reforms were institutionalized. The Mongols' transition from conquerors to administrators demonstrated a deeper truth: economic integration, not just military dominance, helps turn conquest into durable power.
+While Genghis Khan laid the foundation, it was under Kublai Khan that these reforms were institutionalized. The Mongols' transition from conquerors to administrators demonstrated a deeper truth: economic integration alongside military dominance helps turn conquest into durable power.
 
 One of the greatest challenges of pre-modern commerce was inconsistency ~ different regions had their own currencies, weights, and measures, making large-scale trade cumbersome.
 
@@ -102,7 +102,7 @@ The Mongols pushed large parts of Eurasia toward more consistent standards.
 
 The Yuan Dynasty in China introduced paper money as a standardized currency. While the Chinese had experimented with paper currency before, the Yuan enforced its use in China.
 
-Its paper money depended on government enforcement and, at times, [precious-metal backing](https://afe.easia.columbia.edu/mongols/history/history4.htm). The Mongols also standardized weights and measures, streamlining taxation and trade. The system still depended on fiscal credibility and state enforcement; earlier experiments tied to silk did not solve the problem.
+Its paper money depended on government enforcement and, at times, [precious-metal backing](https://afe.easia.columbia.edu/mongols/history/history4.htm). The Mongols also standardized weights and measures, streamlining taxation and trade. The system continued to depend on fiscal credibility and state enforcement; earlier experiments tied to silk did not solve the problem.
 
 ![Yuan Dynasty Banknote Printing Plate](/images/medium/the-economics-of-the-mongol-empire/919835b20215daf4d522e3b70b6f08f63a0732dc1cd97954a408d869688459e3.jpg)
 
@@ -117,7 +117,7 @@ Beyond securing trade routes, the Mongols introduced financial tools that revolu
 
 "Without the vision of a goal, a man cannot manage his own life, much less the lives of others."
 
-The economic policies of the Mongols weren't just about accumulating wealth; they reshaped entire societies.
+The economic policies of the Mongols went beyond accumulating wealth; they reshaped entire societies.
 
 The knowledge transfer enabled by Mongol trade networks played a crucial role in the European Renaissance. The idea of a connected, economically interdependent world, one in which goods, capital, and information flowed freely across borders, can be traced back to the Mongol era.
 
@@ -162,9 +162,7 @@ Genghis Khan may be remembered primarily as a conqueror, but his real revolution
 
 By creating a trade network that spanned continents, enforcing standardized commerce policies, and fostering religious and cultural tolerance, the Mongols laid the groundwork for the modern global economy.
 
-Their empire wasn't just a military machine.
-
-It was a commercial experiment on a continental scale, far ahead of its time.
+Their empire was a military machine and a commercial experiment on a continental scale, far ahead of its time.
 
 ## Sources Checked
 

@@ -2,7 +2,9 @@
 
 File: `content/essays/how-american-farm-labor-is-set-to-evolve.md`  
 Version: `2.0 / Third web edition`  
-Final content SHA-256: `e22a0aaae2a1f6d136350c6fa9fc5c59cfa39103c52291e5571ccfd178b861f7`
+Final content SHA-256: `0b5bdb677a669e551c9e37ca135b2fc67dc4537c758561cb4a461024ec115975`
+
+Subsequent owner-approved minimal style cleanup preserves facts, source links, uncertainty, and verified quotations. The pending edition is unchanged; earlier checks describe their recorded candidates, and the current hash above includes this cleanup. Earlier prose-preservation statements below refer to the source/typography stages, not this style cleanup.
 
 Current disposition: **PASS — bounded source-link and approved-correction release review**. The named mechanization-percentage and bibliography holds are resolved through the approved qualification, identified Kandel work, exact Martin-title link and limited Murray-entry removal.
 
