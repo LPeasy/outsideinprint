@@ -2699,10 +2699,10 @@ foreach ($check in $essayHeroChecks) {
 $polishArticleChecks = [ordered]@{
   'togetherness' = @{ Version = '1.1'; Edition = 'Second web edition'; Date = '2026-07-15' }
   'what-i-learned-from-writing-100-essays-on-medium-in-2025' = @{ Version = '1.4'; Edition = 'Fifth web edition'; Date = '2025-09-09' }
-  'the-national-flood-insurance-program' = @{ Version = '1.2'; Edition = 'Third web edition'; Date = '2024-12-15' }
-  'who-is-pascal-siakam' = @{ Version = '1.4'; Edition = 'Fifth web edition'; Date = '2025-05-28' }
+  'the-national-flood-insurance-program' = @{ Version = '2.0'; Edition = 'Fourth web edition'; Date = '2024-12-15'; RevisionDate = '2026-09-27'; PriorVersion = '1.2' }
+  'who-is-pascal-siakam' = @{ Version = '2.0'; Edition = 'Sixth web edition'; Date = '2025-05-28'; RevisionDate = '2026-09-27'; PriorVersion = '1.4' }
   'tiktok-the-trojan-horse-of-global-influence' = @{
-    Version = '2.0'; Edition = 'Third web edition'; Date = '2025-01-23'
+    Version = '3.0'; Edition = 'Fourth web edition'; Date = '2025-01-23'; RevisionDate = '2026-09-27'; PriorVersion = '2.0'
     Teaser = "A 2025 essay weighing TikTok's creative and economic benefits against risks involving data, algorithms, and political influence."
     Collection = 'geopolitics-trade-global-power'
   }
@@ -2741,8 +2741,12 @@ foreach ($slug in $polishArticleChecks.Keys) {
   }
   $revisionValues = @($spans | Where-Object { Test-TagHasClass -Tag $_.Groups['tag'].Value -ClassName 'revision-history__meta' } |
     ForEach-Object { Convert-HtmlFragmentToText -Html $_.Groups['text'].Value })
-  if ($revisionValues -cnotcontains ('Version ' + $expected.Version + ' | 2026-09-18')) {
+  $expectedRevisionDate = [string](Get-ExpectedEntryValue -Entry $expected -Key 'RevisionDate' -Default '2026-09-18')
+  if ($revisionValues -cnotcontains ('Version ' + $expected.Version + ' | ' + $expectedRevisionDate)) {
     $metadataIssues.Add("$relativePath => missing the dated revision entry for version $($expected.Version)")
+  }
+  if ($expected.ContainsKey('PriorVersion') -and $revisionValues -cnotcontains ('Version ' + $expected.PriorVersion + ' | 2026-09-18')) {
+    $metadataIssues.Add("$relativePath => missing the retained September 18 revision entry for version $($expected.PriorVersion)")
   }
   $libraryEntries = @($polishLibraryItems | Where-Object { $_.url -ceq "/essays/$slug/" })
   if ($libraryEntries.Count -ne 1 -or $libraryEntries[0].date -cne $expected.Date -or $libraryEntries[0].version -cne $expected.Version) {
