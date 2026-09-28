@@ -14,18 +14,12 @@ Merch order automation is not implemented yet. Before proposing or building orde
 
 - Use the repo-local wrappers under `tools\bin\generated\`. Do not assume global `node`, `hugo`, or `pwsh`.
 - Prefer the essay scaffold for new public writing: `.\tools\bin\custom\new-essay.cmd --title "My Title"`.
-- Run target-file essay guardrails before a full build:
+- Run target-file essay guardrails for changed published prose:
   `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md`
 - For publication-ready essay, report, and working-paper changes, run the philosophy gate:
   `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md -RequireEditorialPhilosophyAudit`
-- Preview locally while drafting with `.\tools\bin\generated\hugo.cmd server -D`.
-- Before publishing, run the normal gate:
-  `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_source_contract.ps1`
-  `.\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning`
-  `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1`
-  `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1`
-  `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild`
-  `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_output_contract.ps1 -SiteDir public`
+- For routine publishing, use the source-only fast gate in [docs/local-validation-policy.md](docs/local-validation-policy.md): package/staged validators where applicable, target guardrails, and collection checks for changed membership. New artwork gets direct original review and targeted registrar/staged checks; CI runs the whole-library image source contract. Audit the exact diff before updating `main`.
+- Preview or run a full local Hugo build only for visual, template, responsive, image-pipeline, or complex scheduling changes that need rendered evidence. Do not build the full image library for routine copy or artwork publication; GitHub Actions owns the production build and generated-output tests.
 - Do not run local npm or npx commands as a required OIP publishing gate. GitHub Actions owns public-site contracts and analytics snapshot coverage.
 - At each new Syd & Oliver publication, register its existing hero in the Gallery and promote it as the front-page illustration using `scripts/update_front_page_cartoon.ps1 -DialoguePath '/syd-and-oliver/<slug>/'`; include the Gallery data change in that release. See `docs/publishing-workflow.md` for draft and scheduling behavior.
 - Treat `main` as the publish action. The site goes live through `.github/workflows/deploy.yml` after push or merge to `main`.
@@ -33,11 +27,8 @@ Merch order automation is not implemented yet. Before proposing or building orde
 ## Important exceptions
 
 - A direct-EPUB activation release with no image, template, CSS, shortcode,
-  render-hook, or responsive-image-pipeline change may omit the responsive-image
-  source and output contracts. It must still run the production Hugo build,
-  write the public build manifest, run the public-route smoke test, and validate
-  fresh public HTML output. Any excluded-path change restores the full normal
-  gate.
+  render-hook, or responsive-image-pipeline change may use the source-only
+  fast gate. GitHub Actions retains the production build and output checks.
 - PDFs are paused and are not part of the public publishing workflow.
 - Medium migrations follow the import and normalization path in [docs/publishing-workflow.md](docs/publishing-workflow.md), not the normal new-essay path.
 - Essays are the first-class publishing workflow. Reports and working papers are more manual but still require the Editorial Philosophy Audit before publication. Syd & Oliver dialogue/fiction pieces remain outside the hard philosophy gate unless explicitly treated as public-judgment work.

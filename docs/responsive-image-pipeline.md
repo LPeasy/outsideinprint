@@ -99,12 +99,13 @@ The earlier focused-cleanup acceptance ceiling and live-baseline savings check w
 
 ## Validation and visual review
 
-Run the source gate before Hugo so stale hashes, dimensions, aliases, source copies, or unapproved review states fail early:
+CI runs the exhaustive source contract on every publish. Run it locally for structural or bulk manifest/alias changes, image-pipeline changes, or CI diagnosis; routine image additions use the registrar or package/staged-payload checks and direct original review. The focused migration test is for migration work, not every routine image addition:
 
 ```powershell
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_source_contract.ps1
-.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_focused_legacy_image_migration.ps1
 ```
+
+Review a routine new original at full size for composition, legibility, accidental text, and rights/alt-text fit. Record that review in its package, then promote only that manifest entry from `pending_review` to `approved`. The unchanged, deterministic source and derivative pipelines are checked by CI; routine approval does not require a full local Hugo image build or whole-library source test. Inspect WebP, AVIF, social crops, and mobile layouts locally when the artwork contains fine text or charts, needs a crop or quality override, changes processing behavior, or the user requests rendered signoff.
 
 During migration only, a maintainer may run the same structural checks while review states remain pending:
 
@@ -115,7 +116,7 @@ During migration only, a maintainer may run the same structural checks while rev
 `-AllowPendingReview` is local-only. It does not skip schema, source, hash, dimension, alias, reference, deduplication, or storage checks. CI and publication gates must omit it, require every derivative-capable asset to have `review_state: approved`, and require the sole corrupt quarantine to retain `review_state: rejected_corrupt_source`.
 The sole `rejected_corrupt_source` quarantine is not a review bypass: it is fail-closed, cannot enter the rendering model, and must remain absent from public output.
 
-After a production build, run the generated-output gate:
+CI runs the generated-output gate after its production build. Run it locally only after a conditional local build under [Local Validation Policy](local-validation-policy.md):
 
 ```powershell
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_output_contract.ps1 -SiteDir public

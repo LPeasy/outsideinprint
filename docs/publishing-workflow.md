@@ -9,14 +9,26 @@ This is the canonical process for publishing new public content on Outside In Pr
 
 ## Toolchain bootstrap
 
-Bootstrap the pinned repo-local toolchain before local publishing work:
+For routine source-only validation in a new Windows worktree, provision only the pinned PowerShell runtime:
+
+```powershell
+cmd /c "call tools\generate_tool_wrappers.cmd && call tools\provision_toolchain.cmd -Tools pwsh && call tools\validate_toolchain.cmd -Tools pwsh"
+```
+
+For a local Hugo preview/build, add only Hugo after the PowerShell preflight:
+
+```powershell
+cmd /c "call tools\provision_toolchain.cmd -Tools hugo && call tools\validate_toolchain.cmd -Tools hugo"
+```
+
+Bootstrap the complete toolchain only for a task that actually needs all runtimes:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\tools\bootstrap_toolchain_assets.ps1
 cmd /c "call tools\generate_tool_wrappers.cmd && call tools\provision_toolchain.cmd && call tools\validate_toolchain.cmd"
 ```
 
-Use the generated wrappers under `tools\bin\generated\` for local commands after bootstrap.
+Use the generated wrappers under `tools\bin\generated\` after provisioning. Do not download every runtime for a copy, metadata check, or Hugo-only preview.
 
 Current pinned contract:
 
@@ -114,7 +126,7 @@ If a piece belongs in an existing collection, add explicit `collections` front m
    .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_collection_organization_contract.ps1
    ```
 
-6. Verify `/collections/`, the collection page, and member pages in a local build. Related destinations must be explicitly declared and publicly eligible; unavailable links are omitted without automatic replacement.
+6. Check the source membership and related destinations. Preview `/collections/`, the collection page, and member pages locally only when the layout or eligibility behavior is changing; GitHub Actions verifies their rendered output on routine additions. Related destinations must be explicitly declared and publicly eligible; unavailable links are omitted without automatic replacement.
 
 Essays are the first-class publishing workflow. Reports and working papers can still be published manually and must pass the Editorial Philosophy Audit before publication. Syd & Oliver dialogue/fiction pieces do not use this hard gate unless a specific piece is explicitly treated as public-judgment work.
 
@@ -188,7 +200,7 @@ These are character dialogues. Do not append sourcing apparatus or factual-revie
 
 ## Local preview and publish validation
 
-Run the target-file guardrail before a full build:
+Run the target-file guardrail for changed prose:
 
 ```powershell
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md
@@ -202,17 +214,24 @@ For publication-ready essays, reports, and working papers, require Editorial Phi
 
 Use the same flag with `content\reports\<slug>.md` or `content\working-papers\<slug>.md` for those sections. Accepted evidence is a per-piece OIP-99 report under `docs/editorial-audits/99-refinement/`, a daily backfill ledger/report entry for the slug, or a compact COA2 ledger/report entry under `docs/editorial-audits/coa2-value-review/` for COA2 review work. Per-piece reports must show `Decision: PASS` and PASS rows for Evidence, Logic, Incentives, Tradeoffs, Consequences, Uncertainty, and Institutional Behavior. Ledger-backed evidence must include an `editorial_philosophy` PASS object and a matching report with the same PASS rows.
 
-During drafting, preview locally with:
+Preview locally when visual or template behavior needs review:
 
 ```powershell
 .\tools\bin\generated\hugo.cmd server -D
 ```
 
-Before publishing, run the normal local publish gate:
+The default publish gate is source-only. Use the relevant package/staged validator, target guardrails, and collection organization contract when membership changes. For routine new artwork, use the registrar/staged checks and direct review of the original. Run the exhaustive responsive-image source contract locally for structural or bulk manifest/alias changes, image-pipeline changes, or CI diagnosis; CI runs it on every publish:
 
 ```powershell
-.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_source_contract.ps1
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_collection_organization_contract.ps1
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_source_contract.ps1
+```
+
+Run only the checks relevant to the changed paths. Before the remote write, inspect `git status --short --untracked-files=all`, the exact diff, and `git diff --check`. Do not run `hugo server -D` and then a second full production build for routine content or artwork. New artwork needs direct visual review of its original, accurate alt text, and an approved manifest entry; CI validates the full image source library, generated formats, and output budget.
+
+Run one full local render only when layout/templates, shortcodes, render hooks, responsive CSS, or image processing change; when fine text/crops require derivative inspection; when a future route or collection behavior cannot be established from source; or to diagnose a failing CI run. If justified, use the full gate in [Local Validation Policy](local-validation-policy.md):
+
+```powershell
 .\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1
@@ -220,26 +239,25 @@ Before publishing, run the normal local publish gate:
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_output_contract.ps1 -SiteDir public
 ```
 
-What this gate is meant to catch:
+The source gate catches:
 
 - changed-essay residue and missing descriptions
 - missing Editorial Philosophy Audit evidence for changed non-draft essays, reports, and working papers
 - forbidden `that matters` phrasing and discouraged adverbial `still` constructions in changed public prose
 - hero/frontmatter conflicts such as placeholder heroes, missing heroes with real early lead images, and duplicate hero/body lead images
-- broken public routes
 - incomplete or invalid subject-section assignments and invalid related-collection references
-- generated HTML regressions
-- CI-only Node/browser regressions remain delegated to GitHub Actions and are not forced through local npm.
+
+GitHub Actions catches broken public routes, generated HTML/image regressions, and Node/browser failures before Pages deploys. Do not repeat those output checks locally by default.
 
 ## Publish path through main
 
 Publishing happens through `main`.
 
-1. Commit the validated content changes.
-2. Push or merge to `main`.
+1. Commit only the validated content changes.
+2. Update `main`, preferably through the GitHub connector/API.
 3. `.github/workflows/deploy.yml` runs the contract tests, changed-essay guardrails, Hugo build, generated-output checks, and GitHub Pages deploy.
 
-There is no separate manual publish step after `main` is updated. `main` is the publish action.
+There is no separate manual publish step after `main` is updated. `main` is the publish action, but a CI failure leaves that commit on `main` without a new Pages deployment. Repair failed CI before another publish. Check deployment once after its expected completion or accept an owner's live confirmation; avoid repeated status polling.
 
 ## Future-dated publishing
 

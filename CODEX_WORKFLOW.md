@@ -125,9 +125,8 @@ Require Codex to always return:
 Adjust as needed for your environment; keep command output in each task response.
 
 ```powershell
-# Bootstrap and validate the repo-local toolchain first
-powershell -ExecutionPolicy Bypass -File .\tools\bootstrap_toolchain_assets.ps1
-cmd /c "call tools\generate_tool_wrappers.cmd && call tools\provision_toolchain.cmd && call tools\validate_toolchain.cmd"
+# Provision PowerShell only for routine source checks
+cmd /c "call tools\generate_tool_wrappers.cmd && call tools\provision_toolchain.cmd -Tools pwsh && call tools\validate_toolchain.cmd -Tools pwsh"
 
 # Scaffold a new essay draft
 .\tools\bin\custom\new-essay.cmd --title "My Title"
@@ -138,7 +137,8 @@ cmd /c "call tools\generate_tool_wrappers.cmd && call tools\provision_toolchain.
 # Before publishing a non-draft essay, require Editorial Philosophy Audit evidence
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md -RequireEditorialPhilosophyAudit
 
-# Build site/output and run generated-output regression coverage
+# Build only when rendered behavior needs local review; CI always runs this gate
+cmd /c "call tools\provision_toolchain.cmd -Tools hugo && call tools\validate_toolchain.cmd -Tools hugo"
 .\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1

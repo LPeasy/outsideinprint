@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
-    [string]$ManifestPath = "tools/toolchain.manifest.json"
+    [string]$ManifestPath = "tools/toolchain.manifest.json",
+    [string[]]$Tools = @()
 )
 
 Set-StrictMode -Version Latest
@@ -13,8 +14,17 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = Get-ToolchainRepoRoot -ScriptRoot $PSScriptRoot
 $manifest = Get-ToolchainManifest -ManifestPath $ManifestPath -RepoRoot $repoRoot
+$selectedTools = @($manifest.tools)
+if ($Tools.Count -gt 0) {
+    foreach ($name in $Tools) {
+        if ($name -notin @($manifest.tools | ForEach-Object { $_.name })) {
+            throw "Unknown tool in -Tools: $name"
+        }
+    }
+    $selectedTools = @($manifest.tools | Where-Object { $_.name -in $Tools })
+}
 
-foreach ($tool in $manifest.tools) {
+foreach ($tool in $selectedTools) {
     Invoke-ToolProvisioning -Tool $tool -Manifest $manifest -RepoRoot $repoRoot
 }
 

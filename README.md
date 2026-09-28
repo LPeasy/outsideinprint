@@ -12,12 +12,13 @@ A minimalist Hugo site for publishing essays, fiction, dialogues, and working pa
 
 ## Toolchain
 
-Bootstrap the repo-local toolchain payloads, then generate/provision/validate the manifest-driven wrappers:
+For routine source-only publishing checks, generate wrappers and provision only PowerShell:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\tools\bootstrap_toolchain_assets.ps1
-cmd /c "call tools\generate_tool_wrappers.cmd && call tools\provision_toolchain.cmd && call tools\validate_toolchain.cmd"
+cmd /c "call tools\generate_tool_wrappers.cmd && call tools\provision_toolchain.cmd -Tools pwsh && call tools\validate_toolchain.cmd -Tools pwsh"
 ```
+
+For a conditional local preview/build, provision Hugo alone as shown in [the publishing workflow](docs/publishing-workflow.md). Bootstrap the full toolchain only for work that needs all runtimes.
 
 The current toolchain contract is pinned to:
 
@@ -44,17 +45,11 @@ Use `docs/publishing-workflow.md` as the canonical process. The normal publish p
    - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md`
 3. Before setting `draft: false` or publishing a changed essay, run the philosophy gate:
    - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md -RequireEditorialPhilosophyAudit`
-4. Validate managed image sources, then build the site locally:
-   - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_source_contract.ps1`
-   - `.\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning`
-5. Write the fresh-build manifest and run the publish smoke and image-output tests:
-   - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1`
-   - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1`
-   - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild`
-   - `.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_output_contract.ps1 -SiteDir public`
-6. Commit and push or merge to `main`.
+4. For changed managed artwork, inspect the original and verify its registrar/staged-payload checks; CI runs the whole-library image source contract.
+5. Run package/staged validators and relevant collection checks, then audit the exact diff.
+6. Update `main`, preferably through the GitHub connector/API. GitHub Actions builds Hugo and checks rendered pages and image output before Pages deployment.
 
-Publishing happens through `.github/workflows/deploy.yml` after `main` is updated. For metadata, collections, Medium migration, and special-case paths, see `docs/publishing-workflow.md`.
+Run a local full Hugo build only when rendered behavior needs direct review or CI diagnosis. Publishing happens through `.github/workflows/deploy.yml` after `main` is updated. For metadata, collections, Medium migration, and special-case paths, see `docs/publishing-workflow.md`.
 Local OIP publish work does not force npm or npx checks; CI owns public-site contracts and analytics snapshot coverage.
 
 ## PDF status

@@ -4,30 +4,21 @@ This policy covers local Outside In Print publishing and content-maintenance wor
 
 ## Decision
 
-Local OIP validation uses Hugo plus PowerShell tests only. Do not run npm, npx, or Node package-manager commands as a required local gate for essay, cartoon, collection, or public-site publishing work.
+Routine local OIP publishing uses source checks, not a full Hugo build. Do not run npm, npx, or Node package-manager commands as a required local gate for essay, cartoon, collection, or public-site publishing work.
 
 This is intentional. The local Windows/Codex environment has repeatedly produced access and path failures in Node package-manager commands that do not reflect publish quality. Retrying, reinstalling, or forcing those commands wastes time and adds noise.
 
-## Local Publish Gate
+## Default Fast Gate
 
-Use this gate before publishing public-site content:
+Before updating `main`, work from current `origin/main` and inspect `git status --short --untracked-files=all`, the exact diff, and `git diff --check`. Run the package and staged-payload validators when the content type provides them. Run target-file guardrails for changed published prose, including `-RequireEditorialPhilosophyAudit` where required. For routine artwork, inspect the original and its alt text; use the image registrar and staged-payload validator where available to check source bytes, dimensions, hashes, and manifest registration. CI runs the exhaustive responsive-image source contract on every publish. Run it locally only for structural or bulk manifest/alias changes, image-pipeline changes, or to diagnose a CI failure:
 
 ```powershell
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_source_contract.ps1
-.\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning
-.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1
-.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1
-.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild
-.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_output_contract.ps1 -SiteDir public
 ```
 
-The responsive-image source gate validates the canonical manifest, source hashes,
-dimensions, aliases, and review state before Hugo runs. The output gate validates
-generated formats, responsive markup, no-upscale behavior, source exclusion, and
-the Pages/image/file-count budgets. Full details live in
-[`docs/responsive-image-pipeline.md`](responsive-image-pipeline.md).
+The exhaustive source contract validates canonical hashes, dimensions, aliases, and review state without generating derivatives; it covers the entire library and is not the default local gate for a routine image addition. For collection changes, run the collection source audit and review any count-dependent assertions; do not include its generated report unless that report is intentionally part of the change. For a text-only correction with unchanged image sources and rendering code, do not run image checks or provision Hugo.
 
-For changed essays, run the direct PowerShell guardrail before the full build:
+For changed essays, run the direct PowerShell guardrail:
 
 ```powershell
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md
@@ -45,8 +36,34 @@ For changed non-draft essays, reports, and working papers, require Editorial Phi
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\scripts\check_essay_guardrails.ps1 -Paths .\content\essays\my-title.md -RequireEditorialPhilosophyAudit
 ```
 
+For source-only validation in a new Windows worktree, generate wrappers and provision only PowerShell:
+
+```powershell
+cmd /c "call tools\generate_tool_wrappers.cmd && call tools\provision_toolchain.cmd -Tools pwsh && call tools\validate_toolchain.cmd -Tools pwsh"
+```
+
+For a conditional local Hugo preview or build, provision Hugo alone after that preflight:
+
+```powershell
+cmd /c "call tools\provision_toolchain.cmd -Tools hugo && call tools\validate_toolchain.cmd -Tools hugo"
+```
+
+## Conditional Local Render
+
+Do not run `hugo server -D` plus a production build merely to approve each routine article or image. Inspect the original artwork directly and record its visual review; the stable derivative pipeline is tested in CI. Run one local preview or full build when the change touches layouts, shortcodes, render hooks, image processing, responsive CSS, or a complex/scheduled route whose output cannot be checked from source. Also use it when fine text, charts, crops, or a new processing mode require visual inspection of derivatives, or when diagnosing a CI failure. Reuse a warm cache and avoid a second full build when the first one already answers the question.
+
+When a full local build is justified, use the existing sequence after provisioning Hugo:
+
+```powershell
+.\tools\bin\generated\hugo.cmd --gc --minify --panicOnWarning
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\write_public_build_manifest.ps1
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_route_smoke.ps1
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_public_html_output.ps1 -RequireFreshBuild
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_output_contract.ps1 -SiteDir public
+```
+
 ## CI Boundary
 
-GitHub Actions remains authoritative for CI-only public-site contracts and analytics snapshot checks. Dashboard publishing is paused; do not reintroduce local npm or npx checks as a substitute.
+`.github/workflows/deploy.yml` runs the complete Hugo image build, generated-output contracts, route/HTML checks, browser tests, and Pages deployment. It is the authoritative release gate. A failed CI build blocks a new deployment but leaves the failed commit on `main`; repair it before another publish. Check CI once after its expected run time or use owner-supplied live confirmation, rather than polling continuously. Dashboard publishing is paused; do not reintroduce local npm or npx checks as a substitute.
 
 If a local OIP skill or workflow asks for npm or npx during public-site publishing, treat the instruction as stale and update the workflow instead of forcing the command through.
