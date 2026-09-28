@@ -1,4 +1,4 @@
-current: the-circle-opens
+current: one-more-block
 cartoons:
   - slug: the-simple-lunch
     title: "The Simple Lunch"
@@ -1050,12 +1050,12 @@ cartoons:
     alt: "An anonymous person rests in a wooden porch chair beside a keyring while rain falls over the yard and a drop hangs from a potted plant's leaf."
     width: 1672
     height: 941
-  - slug: the-circle-opens
-    title: "The Circle Opens"
+  - slug: one-more-block
+    title: "One More Block"
     date: "2026-09-28"
-    publishDate: "2026-09-28T10:00:00-04:00"
-    image: "editorial/the-circle-opens"
-    essay: "/essays/the-circle-opens/"
-    alt: "An anonymous writer holds a pen over a blank page in a sunlit library room where others gather in a circle of chairs."
+    publishDate: "2026-09-28T12:18:00-04:00"
+    image: "editorial/one-more-block"
+    essay: "/essays/one-more-block/"
+    alt: "An anonymous person walks up a shaded neighborhood sidewalk toward a sunlit crossing while a neighbor sweeps leaves beside a house."
     width: 1672
     height: 941
