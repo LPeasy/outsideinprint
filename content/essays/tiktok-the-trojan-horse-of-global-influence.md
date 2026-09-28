@@ -8,9 +8,12 @@ subtitle: "A 2025 essay weighing TikTok's creative and economic benefits against
 featured_image: "/images/medium/tiktok-the-trojan-horse-of-global-influence/a8232adfa4bde25e8b21a4830b941a336b8d1f29f04e63649adb01d93e21d4c3.jpeg"
 featured_image_alt: "TikTok: The Trojan Horse of Global Influence"
 description: "A 2025 essay weighing TikTok's creative and economic benefits against risks involving data, algorithms, and political influence."
-version: "2.0"
-edition: "Third web edition"
+version: "3.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "3.0"
+    date: "2026-09-27"
+    note: "Corrected ODNI date/election scope and divest-or-ban holding; identified the 95-minute estimate's global Q2 2022 scope and the GDP estimate's commissioned-study basis. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "2.0"
     date: "2026-09-18"
     note: "Replaced the truncated subtitle and discovery description with a complete summary identifying the essay's 2025 context; the article body is unchanged."
@@ -32,11 +35,11 @@ TikTok has redefined how people engage with the digital world. With its addictiv
 
 TikTok's recommendation algorithm, which curates content tailored to user behavior, is a masterstroke of engagement. By analyzing metrics such as watch time and interactions, the platform ensures users are served an endless stream of relevant and captivating videos. While this is the source of TikTok's success, it also represents a significant vulnerability.
 
-The algorithm's ability to amplify specific narratives creates fertile ground for exploitation. During the 2020 U.S. presidential election, TikTok was implicated in amplifying grassroots campaigns that disrupted political rallies. This demonstrated the platform's capacity to influence real-world events on a large scale. In 2022, the U.S. Office of the Director of National Intelligence (ODNI) reported that TikTok accounts tied to the Chinese government targeted American political candidates, further underscoring its susceptibility to misuse. These incidents reveal how TikTok's algorithm can act as both a cultural force and a weapon for shaping political outcomes.
+The algorithm's ability to amplify specific narratives creates fertile ground for exploitation. During the 2020 U.S. presidential election, TikTok was implicated in amplifying grassroots campaigns that disrupted political rallies. This demonstrated the platform's capacity to influence real-world events on a large scale. In [2024, the U.S. Office of the Director of National Intelligence (ODNI) reported that TikTok accounts tied to the Chinese government reportedly targeted American political candidates during the 2022 midterms](https://www.odni.gov/files/ODNI/documents/assessments/ATA-2024-Unclassified-Report.pdf#page=12), further underscoring its susceptibility to misuse. These incidents reveal how TikTok's algorithm can act as both a cultural force and a weapon for shaping political outcomes.
 
 ### Geopolitical Ties: A Unique Risk
 
-TikTok's ownership by ByteDance, a Beijing-based company, places it in a precarious position. Chinese law, particularly the 2017 National Intelligence Law, requires domestic companies to cooperate with state intelligence efforts. Despite TikTok's claims that U.S. user data is stored domestically, these legal obligations create a plausible pathway for state access. With a U.S. user base exceeding 170 million and an average daily usage of 95 minutes per user, the platform collects an unprecedented volume of data, including behavioral insights that could be weaponized.
+TikTok's ownership by ByteDance, a Beijing-based company, places it in a precarious position. Chinese law, particularly the 2017 National Intelligence Law, requires domestic companies to cooperate with state intelligence efforts. Despite TikTok's claims that U.S. user data is stored domestically, these legal obligations create a plausible pathway for state access. With a U.S. user base exceeding 170 million and [a Sensor Tower estimate of 95 minutes of daily use globally in the second quarter of 2022](https://sensortower.com/blog/tiktok-power-user-curve), the platform collects an unprecedented volume of data, including behavioral insights that could be weaponized.
 
 The concern extends beyond data collection. Reports have documented TikTok's censorship of content critical of the Chinese government, including posts about the Tiananmen Square massacre and the Uyghur genocide. While TikTok denies allegations of influence by Beijing, these incidents suggest a troubling alignment between the platform's practices and Chinese state interests. This alignment raises an unsettling question: could TikTok be covertly shaping narratives to serve geopolitical objectives?
 
@@ -48,7 +51,7 @@ The platform's algorithm can micro-target individuals, delivering content design
 
 ### Balancing Benefits and Risks
 
-TikTok's defenders point to its economic and cultural contributions. Small businesses, particularly during the COVID-19 pandemic, have leveraged TikTok to reach new customers, collectively contributing $24.2 billion to the U.S. GDP in 2023, according to Oxford Economics. Creators have built lucrative careers, and marginalized communities have found spaces for self-expression. These benefits are real and significant.
+TikTok's defenders point to its economic and cultural contributions. Small businesses, particularly during the COVID-19 pandemic, have leveraged TikTok to reach new customers, [collectively supporting an estimated $24.2 billion in U.S. GDP in 2023, according to a TikTok-commissioned Oxford Economics study.](https://a-us.storyblok.com/f/1018266/x/de2d6d149f/tiktok_us_impact.pdf) Creators have built lucrative careers, and marginalized communities have found spaces for self-expression. These benefits are real and significant.
 
 However, these gains must be weighed against the platform's risks. The same algorithm that empowers small businesses can amplify disinformation. The same space that fosters creativity can also promote societal division. Moreover, alternatives exist. Platforms like YouTube Shorts and Instagram Reels offer similar opportunities without the geopolitical entanglements that accompany TikTok's ownership.
 
@@ -56,7 +59,7 @@ The cost-benefit analysis becomes clearer when considering the potential consequ
 
 ### Proposed Solutions: Beyond a Ban
 
-Critics of TikTok often advocate for divestiture or a ban, such as the U.S. Supreme Court's 2025 decision requiring ByteDance to sell its U.S. operations. While such measures address immediate concerns, they are not sufficient on their own. A comprehensive approach is necessary to mitigate the risks posed by TikTok and similar platforms.
+Critics of TikTok often advocate for divestiture or a ban, such as the [U.S. Supreme Court's 2025 decision upholding a divest-or-ban law](https://www.law.cornell.edu/supremecourt/text/24-656). While such measures address immediate concerns, they are not sufficient on their own. A comprehensive approach is necessary to mitigate the risks posed by TikTok and similar platforms.
 
 Policymakers should prioritize transparency in algorithms, enforce stricter data privacy laws, and establish independent oversight mechanisms for foreign-owned tech companies. These measures would ensure that platforms like TikTok are held accountable without stifling innovation. Additionally, fostering domestic competition in the social media space could reduce reliance on foreign-owned platforms and strengthen digital sovereignty.
 

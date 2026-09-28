@@ -7,9 +7,12 @@ collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "A Circus"
 description: "The Presidential Election as a Circus. Wealth, Policy, and Power in Modern American Society"
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected corporate-tax stability claim. Added or retained claim-level source links; original reporting frame and artwork retained. Described military spending as a major federal commitment rather than a stable quantity and linked that bounded claim to CBO's historical account."
   - version: "1.1"
     date: "2026-04-26"
     note: "Updated April 26, 2026, after OIP back-archive review, to clean Medium import artifacts and normalize Markdown rendering."
@@ -31,7 +34,7 @@ The American presidential election is a pivotal event, capturing national and gl
 
 Regardless of the outcome of presidential elections, a consistent pattern emerges: policy decisions overwhelmingly favor the wealthy elite. This phenomenon is not a product of conspiracy but rather a reflection of systemic incentives. Wealthy individuals and corporations dominate campaign financing, political lobbying, and policy advocacy, enabling them to exert outsized influence on governance.
 
-Studies, such as the work of Gilens and Page (2014), have shown that the preferences of economic elites and organized interest groups are far more likely to be enacted than those of the general public. Tax policies, regulatory decisions, and fiscal priorities ~ regardless of which party holds the presidency ~ tend to align with elite interests. For instance, tax reforms such as the 2017 Tax Cuts and Jobs Act disproportionately benefited high-income earners and corporations, continuing a long-standing trend of privileging capital over labor.
+Studies, such as the [work of Gilens and Page (2014)](https://www.globalgovernancewatch.org/library/doclib/20140820_GilensandPageTestingTheories.pdf), have shown that the preferences of economic elites and organized interest groups are far more likely to be enacted than those of the general public. Tax policies, regulatory decisions, and fiscal priorities ~ regardless of which party holds the presidency ~ tend to align with elite interests. For instance, tax reforms such as the 2017 Tax Cuts and Jobs Act disproportionately benefited high-income earners and corporations, continuing a long-standing trend of privileging capital over labor.
 
 This systemic alignment is not unique to one party or ideology. Democratic administrations have similarly implemented policies favoring financial and corporate elites, often in the name of economic growth or national security. While the rhetoric of campaigns often emphasizes populist themes, the structural reality is that economic power translates into political influence, creating a continuity that transcends electoral outcomes.
 
@@ -40,7 +43,7 @@ This systemic alignment is not unique to one party or ideology. Democratic admin
 While presidential elections capture the imagination and attention of the American public, the outcome of the election rarely dictates actual policy outcomes to the extent many voters might expect. The United States' system of governance is defined by its extensive checks and balances, which exist not only between the executive, legislative, and judicial branches but also across federal, state, and local levels. These mechanisms often dilute the direct impact of presidential authority on day-to-day governance.
 
 #### Institutional Constraints
-The president's ability to unilaterally enact sweeping change is constrained by Congress, which holds legislative authority, and by the judiciary, which ensures that executive actions comply with constitutional principles. Partisan gridlock in Congress further limits the president's capacity to translate campaign promises into legislative achievements.
+The president's ability to unilaterally enact sweeping change is constrained by [Congress, which holds legislative authority](https://www.archives.gov/founding-docs/constitution-transcript), and by the judiciary, which ensures that executive actions comply with constitutional principles. Partisan gridlock in Congress further limits the president's capacity to translate campaign promises into legislative achievements.
 
 #### Decentralized Governance
 
@@ -48,7 +51,7 @@ Federalism distributes significant policymaking authority to states and municipa
 
 #### Continuity Across Administrations
 
-Key aspects of American policy, particularly economic and foreign policy, often reflect continuity across presidential administrations. This is because institutional priorities, bureaucratic inertia, and the influence of entrenched interest groups make abrupt changes difficult to achieve. For example, military spending and corporate tax policies have remained relatively stable despite shifts in presidential leadership.
+Key aspects of American policy, particularly economic and foreign policy, often reflect continuity across presidential administrations. This is because institutional priorities, bureaucratic inertia, and the influence of entrenched interest groups make abrupt changes difficult to achieve. For example, [military spending has remained a major federal commitment](https://www.cbo.gov/content/discretionary-spending-options) despite shifts in presidential leadership, although [corporate tax rates have changed substantially](https://www.irs.gov/irb/2018-18_IRB#NOT-2018-38).
 
 These structural realities suggest that while the presidential election is symbolically significant and commands national attention, the actual impact of its outcome on most Americans' lives is less dramatic than the spectacle implies.
 
@@ -78,4 +81,3 @@ The relationship between the wealthy elite in America and long-term domestic and
 In foreign policy, the interests of multinational corporations, defense contractors, and financial institutions often converge with national strategies, ensuring the global dominance of American economic and geopolitical power. Trade agreements, military interventions, and diplomatic relations are frequently framed in terms of national security but are deeply intertwined with corporate priorities, such as securing energy resources, expanding markets, and protecting intellectual property. This alignment does not suggest malevolence but rather a structural reality: the priorities of the wealthy elite naturally shape policy within a system where economic power and political influence are closely linked.
 
 Ultimately, the continuity in policy outcomes across administrations reflects the stability of this relationship. While the wealthy elite benefit disproportionately from the current system, their influence also underpins key aspects of governance, including economic growth and global leadership. However, this dynamic raises enduring questions about representation, equity, and the ability of the broader population to influence the direction of the nation's policies. Addressing these challenges will require institutional reforms that balance the realities of elite influence with the democratic ideals of accountability and shared prosperity.
-

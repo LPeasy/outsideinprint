@@ -1,5 +1,55 @@
 # Source Checklist
 
+## Current strict hyperlink-only record - 2026-09-27
+
+Review date: `2026-09-27`
+Essay: `content/essays/the-mailbox-at-the-edge-of-the-road.md`
+Version: `1.2` - Third web edition
+Final content SHA-256: `eae8c0b44a4846eefd059bb787864f4247a00171e67d0cb36a4c4dbdc1f1ec7d`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+Public change: HYPERLINK-ONLY; original body words, punctuation, captions, order and artwork preserved.
+
+Link-scope result: supported added links; bounded Editorial Philosophy Audit PASS.
+
+Added two USPS RFD anchors to existing road-improvement and old-stop phrases. Kept the original annual-report wording; the previously drafted PRC replacement was rolled back.
+
+### Evidence and limits
+
+- [USPS Rural Free Delivery](https://about.usps.com/who/profile/history/rural-free-delivery.htm), sections on passable roads, road improvements, and small post offices. RFD encouraged road improvements; the 1899 Carroll County trial discontinued 63 small offices. Supports direction, not a nationwide causal magnitude. Read the actual passage on 2026-09-27.
+- Existing Founders Online, postal-history, mailbox-standard and statutory citations retained after prose/record review. No fresh comprehensive postal audit.
+
+### Private approval proposals
+
+No material factual correction identified in this bounded pass.
+
+Additional scope note: The original vague 'annual reports' attribution remains unmodified; no additional PRC link was attached as a substitute for a specific annual report.
+
+This record supersedes every incompatible pre-rollback result below. Earlier corrected prose and associated PASS decisions are historical, not approval of the restored text. The user authorized supporting hyperlinks only; all proposed wording changes remain private and unapplied.
+
+Scope: full body and existing-record review, actual passage verification for new anchors and specific concerns, not a fresh exhaustive re-research of every retained citation. No numeric score, local test suite, build, commit or publication. Only the decimal revision and next edition were advanced; the disclosure is 'Added source links without changing prose.'
+
+## Superseded pre-rollback research - 2026-09-27
+
+All following hashes, corrected-copy descriptions, scores and decisions refer to historical states. They do not apply to the current content hash above.
+
+Review date: `2026-09-27`
+Version: `1.2` - Third web edition
+Final content SHA-256: `9e91a7a4502c7bd6600ca3d62ac6311cfdca7eda51ca6936505ba318750063e1`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+
+Citation-level revision. Added nearby RFD links and replaced an unnamed reference to annual reporting with the specific 2008 PRC report. Historical argument and all publication identity/artwork fields are unchanged.
+
+| Claim or action | Passage read on 2026-09-27 | Scope and limits |
+|---|---|---|
+| RFD encouraged road improvements and reduced demand for some small post offices. | [USPS, Rural Free Delivery](https://about.usps.com/who/profile/history/rural-free-delivery.htm): roads had to be passable; RFD spurred improvements; increasing routes accompanied declining numbers of small post offices; Carroll County's 1899 trial discontinued 63 small offices. | Supports the historical direction, not a nationwide quantified causal estimate or every social effect in the author's interpretation. No historical totals added. |
+| Universal service involves cost, reach, service quality, and legal duty. | [PRC, Report on Universal Postal Service and the Postal Monopoly, December 19, 2008](https://www.prc.gov/sites/default/files/reports/USO%20Report.pdf#page=13), PDF pp. 13-14 / printed pp. 3-4: statutory basis, budget constraints, geographic scope, access, frequency, affordability, quality, user rights. | Explicitly named and dated as a 2008 report. Does not establish current finances, current prices, or current legal amendments. Removed vague annual-report attribution. |
+| Franklin quotations, postal sequence, mailbox specifications, and statutory service principle. | Full essay and existing checklist read; Founders Online, Postal Museum, USPS, DMM, and statutory links retained. | Not represented as a fresh line-by-line re-research of already sourced claims. |
+
+The current companion report records the seven-part Editorial Philosophy Audit. Prior records below are historical and are superseded by this section where they conflict. No build, browser, Node, publication, or organization tests were run for this pass.
+
+## Historical source record
+
+
 Package: `output/daily_candidates/2026-06-04-the-mailbox-at-the-edge-of-the-road/`
 
 Story: The Mailbox at the Edge of the Road

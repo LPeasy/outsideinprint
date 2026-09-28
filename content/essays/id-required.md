@@ -6,9 +6,12 @@ date: 2026-05-19T10:56:33-04:00
 draft: false
 slug: "id-required"
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.1"
     date: "2026-05-30"
     note: "Updated May 30, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -93,7 +96,7 @@ A citizenship list is the back office of the system. It asks whether the record 
 
 Both questions are legitimate. Both can be mishandled.
 
-USCIS describes SAVE, the Systematic Alien Verification for Entitlements program, as an information service for citizenship or immigration-status verification. It supplies verification information. It does not decide registration, roll status, or voting eligibility. A federal response travels through state law and county procedure before it reaches a voter.
+[USCIS describes SAVE, the Systematic Alien Verification for Entitlements program, as an information service for citizenship or immigration-status verification.](https://www.govinfo.gov/content/pkg/FR-2025-10-31/pdf/2025-19735.pdf#page=2) It supplies verification information. It does not decide registration, roll status, or voting eligibility. A federal response travels through state law and county procedure before it reaches a voter.
 
 A SAVE result can be useful evidence. It can also be incomplete evidence. Naturalized citizens, derivative citizens, people with missing markers in SSA data, people with old immigration records, and people caught by name or number errors can require further review.
 

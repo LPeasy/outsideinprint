@@ -9,9 +9,12 @@ featured_image: "/images/medium/the-future-of-ai-and-technical-jobs-why-review-w
 featured_image_caption: "Photo by Markus Winkler on Unsplash"
 featured_image_alt: "The Future of AI and Technical Jobs: Why Review Work Is Your Best Bet (For Now)"
 description: "AI Is Here, And It's Changing Everything. The AI revolution isn't on the horizon; it's already reshaping entire industries"
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected the Amazon résumé training-data denominator. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-05"
     note: "Updated May 5, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, heading/list formatting, joined paragraphs, source-card residue, and author-promo residue were cleaned while preserving the original publication frame."
@@ -52,9 +55,9 @@ Despite AI's rapid advancements, there are fundamental weaknesses that require h
 - An engineering model might propose a structurally unsound design.
 - A cybersecurity AI might overlook an exploit due to gaps in its training data.
 
-One of the most infamous examples comes from Amazon's failed AI hiring tool.
+One of the most infamous examples comes from [Amazon's failed AI hiring tool](https://www.reuters.com/article/world/insight-amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-against-women-idUSKCN1MK0AG/).
 
-Designed to automate candidate selection, the system analyzed 10 years of hiring data, but because the majority of previous hires were men, the AI taught itself that male candidates were preferable.
+Designed to automate candidate selection, the system analyzed 10 years of submitted resumes, but because most came from men, the AI taught itself that male candidates were preferable.
 
 It penalized resumes that mentioned "women's" (such as "women's chess club captain") and even downgraded graduates from all-women's colleges.
 

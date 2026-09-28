@@ -1,5 +1,5 @@
 ---
-title: "Why More People Are Choosing Chili’s Over McDonald’s in 2025"
+title: "Why Chili’s Looks Like a Better Deal Than McDonald’s in 2025"
 date: 2025-05-21
 draft: false
 slug: "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025"
@@ -10,9 +10,12 @@ featured_image: "/images/medium/why-more-people-are-choosing-chilis-over-mcdonal
 featured_image_caption: "McDonald's vs. Chili's | Source: User with ChatGPT"
 featured_image_alt: "McDonald's and Chili's value comparison illustration"
 description: "Fast food stopped feeling cheap for many customers, and Chili's 3 for Me menu turned casual dining into a value competitor."
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Retained claim-level source links and original prose, with an approved evaluative title and corrections to the dated offer, service, takeout and pricing claims; labeled the author-written reactions illustrative, including the hypothetical purchase. Original URL, artwork and publication date unchanged."
   - version: "1.1"
     date: "2026-05-14"
     note: "Updated May 14, 2026, after OIP back-archive review. Removed Medium promotional residue, normalized house style, and tightened value/pricing claims around Chili's and fast-food competition."
@@ -31,7 +34,7 @@ work.
 
 > That's a thing of the past.
 
-By 2025, the complaint had become familiar: fast-food combos were landing near casual-dining prices, and customers were noticing. Social feeds filled with angry receipts and disbelief:
+By 2025, the complaint had become familiar: fast-food combos were landing near casual-dining prices, and customers were noticing. The complaint can sound like this (illustrative reactions, including a hypothetical $14 purchase):
 
 > "How is McDonald's more expensive than Chili's?"
 
@@ -41,9 +44,7 @@ By 2025, the complaint had become familiar: fast-food combos were landing near c
 
 It's not just about the money. **It's the value.**
 
-If you're paying sit-down prices, you want sit-down service. But fast
-food often gives you the same paper bag, no refills, no table, **and
-now, no deal.**
+If you're paying sit-down prices, you want sit-down service. But a takeaway fast-food combo can leave you with the same paper bag, no table service, **and what feels like less value.**
 
 > The fallback has become a frustration. And that opens the door for a
 > comeback nobody saw coming.
@@ -65,7 +66,7 @@ Photo by Mockup Graphics on Unsplash
 
 **Then, *during Covid*, indoor dining collapsed.**
 
-Chili's locations went dark. People got used to eating in their cars and
+[Chili's dining rooms went dark](https://investors.brinker.com/news/news-details/2020/Brinker-International-Reports-COVID-19-Impact-Update-And-Third-Quarter-Of-Fiscal-2020-Results-04-29-2020/default.aspx). People got used to eating in their cars and
 ordering through apps. **It looked like the end of the sit-down burger
 era.**
 
@@ -92,24 +93,19 @@ When a fast-food burger combo lands near the price of a Chili's burger deal with
 
 > Their price just makes sense.
 
-The secret weapon is the ["3 for Me" menu](https://investors.brinker.com/news/news-details/2025/Chilis-Takes-Another-Swing-at-Fast-Food-with-the-Debut-of-the-All-New-Big-QP-Burger-to-its-3-For-Me-Menu-04-15-2025/default.aspx). It's not flashy, but it
-delivers:
+The secret weapon is the ["3 for Me" menu](https://investors.brinker.com/news/news-details/2025/Chilis-Takes-Another-Swing-at-Fast-Food-with-the-Debut-of-the-All-New-Big-QP-Burger-to-its-3-For-Me-Menu-04-15-2025/default.aspx). The April 2025 Big QP promotion offered:
 
-- One drink
-- One appetizer (like soup, salad, or fries)
-- One entrée (like a cheeseburger, chicken tenders, or a
- salad)
-- A big bag of chips and a cup of salsa
+- One unlimited fountain drink
+- Bottomless chips and salsa
+- One Big QP burger with fries
 
-> ***All for \$10.99 to \$13.99, depending on what you pick.***
+> ***Advertised at $10.99.***
 
-And here's the kicker: ***you don't have to dine in.* You can order it
-to go.**
+And here's the kicker: ***Chili's also offers takeout;* that doesn't mean every promotion carries over unchanged.**
 
 That means **you get the portions of a sit-down restaurant ~** without
 committing to the full sit-down experience. If you're on your lunch
-break or just want to eat at home, you can grab the same Chili's
-meal, packaged up, ready to roll.
+break or just want to eat at home, you can grab a Chili's meal, packaged up, ready to roll.
 
 > Compare this to a standard fast-food burger combo: the customer gets
 > the sandwich, fries, and drink, but not the table service, refills, or
@@ -130,9 +126,8 @@ meal.**
 
 > This isn't just luck. Chili's made a few smart moves that paid off.
 
-First, **they simplified the menu**. Fewer items. Faster prep. Lower
-overhead. That let them hold prices steady while other chains kept
-creeping up.
+First, **[they simplified the menu](https://investors.brinker.com/files/doc_financials/2024/ar/608891-Brinker-2024-AR-BMK.pdf#page=9)**. Fewer items. Faster prep. Lower
+overhead. They kept a $10.99 starting offer while raising prices elsewhere on the menu.
 
 Second, **they protected the experience,** but didn't gate it behind a
 table. If you want to eat inside, great. But if you're busy, you can
@@ -163,7 +158,7 @@ chase whatever was cheapest. Now we're asking:
 **That's why Chili's is winning.** Not because it's the lowest price.
 **Because it feels like a good deal.**
 
-You're **seeing the same thing at places like Aldi and Costco.** People
+I see **the same value appeal in places like Aldi and Costco.** People
 are fine spending money ~ if it feels like they got something.
 
 > A full plate.

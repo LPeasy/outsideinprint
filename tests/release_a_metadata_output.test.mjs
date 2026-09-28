@@ -125,7 +125,7 @@ test("rendered targeted descriptions and titles match their source records", () 
 test("revision history controls Open Graph, Article schema, and sitemap lastmod", () => {
   const html = readOutput("essays/the-warning-label-in-the-weeds/index.html");
   const expectedPublished = "2026-04-27T00:00:00-04:00";
-  const expectedModified = "2026-05-11T00:00:00-04:00";
+  const expectedModified = "2026-09-27T00:00:00-04:00";
   assert.equal(attribute(html, "meta", "property", "article:published_time"), expectedPublished);
   assert.equal(attribute(html, "meta", "property", "article:modified_time"), expectedModified);
   const article = jsonLdNodes(html).find((node) => node?.["@type"] === "Article");

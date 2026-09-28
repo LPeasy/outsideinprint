@@ -1,5 +1,75 @@
 # OIP-99 Refinement Report
 
+## Current strict hyperlink-only revision - 2026-09-27
+
+Review date: `2026-09-27`
+Essay: `content/essays/the-meter-at-the-curb.md`
+Version: `1.2` - Third web edition
+Final content SHA-256: `5eec1953156c5643f3f7e26a67566d28a88d2c50ded389aa6bddf55158825c8a`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+Public change: HYPERLINK-ONLY; original body words, punctuation, captions, order and artwork preserved.
+
+Linked only the existing city names Austin and Houston to their official parking-district records. Public TODOs and all other words remain unchanged.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+Decision State: `PASS`
+
+| Criterion | Decision | Reason |
+|---|---|---|
+| Evidence | PASS | City records substantiate the two named examples without a shared revenue formula. |
+| Logic | PASS | Turnover, revenue dedication, and revenue dependence remain distinct mechanisms. |
+| Incentives | PASS | Merchant turnover, municipal income, driver scarcity, and neighborhood funding remain visible. |
+| Tradeoffs | PASS | Pricing benefits remain balanced against unequal ability to pay and transport alternatives. |
+| Consequences | PASS | Potential penalty burdens remain analytical concerns; new links make no prevalence claim. |
+| Uncertainty | PASS | Public research TODOs remain explicit verification needs, not silently resolved evidence. They are an editorial cleanup suggestion, not a newly discovered factual error. |
+| Institutional Behavior | PASS | Municipal districts and private concessions are not conflated. |
+
+PASS is bounded to this reviewed text and record, not an independent numerical regrade or permission to publish.
+
+See [current source checklist](the-meter-at-the-curb-source-checklist.md) for read passages and access limits, and [private group ledger](../core-link-only-history-2026-09-27.md#the-meter-at-the-curb) for any exact approval proposals.
+
+This record supersedes every incompatible pre-rollback result below. Earlier corrected prose and associated PASS decisions are historical, not approval of the restored text. The user authorized supporting hyperlinks only; all proposed wording changes remain private and unapplied.
+
+Scope: full body and existing-record review, actual passage verification for new anchors and specific concerns, not a fresh exhaustive re-research of every retained citation. No numeric score, local test suite, build, commit or publication. Only the decimal revision and next edition were advanced; the disclosure is 'Added source links without changing prose.'
+
+## Superseded pre-rollback research - 2026-09-27
+
+All following hashes, corrected-copy descriptions, scores and decisions refer to historical states. They do not apply to the current content hash above.
+
+Review date: `2026-09-27`
+Version: `1.2` - Third web edition
+Final content SHA-256: `3867a65690a07c490a4e809dd00cdb9ee9871c504315c37b8f9ae681beeb001c`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+
+Citation/clarity revision. Linked two city examples and removed reader-visible research TODOs, retaining their limits as plain-language qualifications. No new revenue formula, burden estimate, legal outcome, or thesis was introduced.
+
+Scope: full prose and existing source-record review, fresh passage verification for the changes documented in the companion checklist, and a bounded source-fit audit. This is not a new numeric grade, a comprehensive re-research certification, or a publication approval. Existing evidence was retained where the source placement and historical record were adequate.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+| Criterion | Decision | Reason |
+|---|---|---|
+| Evidence | PASS | Named Austin and Houston examples now lead to read city records; remaining quantitative and legal anchors keep existing links. |
+| Logic | PASS | Distinguishes turnover, revenue dedication, and revenue dependence without claiming city programs prove a universal result. |
+| Incentives | PASS | Merchant turnover, municipal income, driver scarcity, and neighborhood revenue incentives remain visible. |
+| Tradeoffs | PASS | Pricing benefits are balanced against unequal ability to pay and lack of transport substitutes. |
+| Consequences | PASS | Compounding penalties remain conditional on local law; no generalized magnitude or cross-city finding is asserted. |
+| Uncertainty | PASS | Replaces internal TODOs with explicit limits on shared formulas and generalized burden claims. |
+| Institutional Behavior | PASS | City administration, advisory districts, enforcement, and private concessions keep separate roles. |
+
+### Boundaries
+
+Original title, publication date, slug, membership, and artwork are preserved. Revision disclosure and edition advance describe this pass. No new visual assets, templates, tests, or release changes. Publication remains a separate parent workflow.
+
+## Historical refinement record
+
+The earlier candidate score and audit below are historical; they do not replace this revision's scope or findings.
+
+
 Package: `output/daily_candidates/2026-06-07-the-meter-at-the-curb`
 Story: `The Meter at the Curb`
 Date: `2026-06-07`

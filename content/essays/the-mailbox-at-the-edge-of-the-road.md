@@ -7,8 +7,8 @@ draft: false
 slug: "the-mailbox-at-the-edge-of-the-road"
 collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 featured: false
 featured_image: "essays/the-mailbox-at-the-edge-of-the-road/hero"
 featured_image_alt: "A rural mailbox at the edge of a gravel road, with postal route lines suggested in the road surface and a carrier vehicle distant on the horizon."
@@ -22,6 +22,9 @@ tags:
   - "Civic Systems"
   - "Roads"
 revision_history:
+  - version: "1.2"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.1"
     date: "2026-06-04"
     note: "Updated June 4, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -61,7 +64,7 @@ The distinction matters for the mailbox story because Franklin's postal country 
 >
 > ~ Poor Richard, [1738](https://founders.archives.gov/documents/Franklin/01-02-02-0035)
 
-Rural Free Delivery was never only about mail. A carrier could not reliably serve scattered homes without passable roads, named or numbered routes, regular schedules, and households willing to gather at the roadside. The new service pushed rural communities to improve the road beneath the carrier's wheels.
+Rural Free Delivery was never only about mail. A carrier could not reliably serve scattered homes without passable roads, named or numbered routes, regular schedules, and households willing to gather at the roadside. [The new service pushed rural communities to improve the road beneath the carrier's wheels](https://about.usps.com/who/profile/history/rural-free-delivery.htm).
 
 The Post Office Department did not invent rural-road politics, and it did not pave America by itself. Local roads had their own tax fights, labor duties, mud seasons, county habits, and engineering limits. Yet RFD created a direct incentive: if a route could not be traveled, service suffered. If a road improved, the farm household gained more regular access to letters, newspapers, parcels, catalogs, money orders, government notices, and commercial life.
 
@@ -93,7 +96,7 @@ That split is easy to miss. The mailbox is private property, but it belongs to a
 >
 > ~ Poor Richard Improved, [1758](https://founders.archives.gov/documents/Franklin/01-07-02-0146)
 
-RFD also changed the small post office. Before home delivery reached deep into rural America, a country post office was often a social and commercial node. It might sit inside a store. It might anchor a village. It gave a postmaster work, a place local people recognized, and a reason for neighbors to pass through the same room. Bringing mail to rural roads made service easier for many households and weakened the need for some old stops.
+RFD also changed the small post office. Before home delivery reached deep into rural America, a country post office was often a social and commercial node. It might sit inside a store. It might anchor a village. It gave a postmaster work, a place local people recognized, and a reason for neighbors to pass through the same room. Bringing mail to rural roads made service easier for many households and [weakened the need for some old stops](https://about.usps.com/who/profile/history/rural-free-delivery.htm).
 
 There is no honest way to treat this only as progress or only as loss. The household gained time, reach, privacy, news, and commercial access. Rural merchants gained customers and competition. Catalog houses gained readers. County roads gained another reason to improve. Some postmasters and town centers lost traffic. The federal service became more personal at the house and less personal at the counter.
 

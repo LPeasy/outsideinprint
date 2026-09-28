@@ -11,9 +11,12 @@ featured_image: "/images/medium/who-is-pascal-siakam/fc07487bf85147720fa1d0b703e
 featured_image_caption: "Pascal Siakam | Source: Basketball Wiki"
 featured_image_alt: "Pascal Siakam"
 description: "Pascal Siakam's path from Cameroon to NBA champion and Pacers playoff leader, told through career records and sourced quotes."
-version: "1.4"
-edition: "Fifth web edition"
+version: "2.0"
+edition: "Sixth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Added claim-level sources; corrected college statistics, the 2019 statistical period, camp caption, and foundation scope; repaired quotation omissions and removed three unverified quotations while preserving the May 2025 profile frame."
   - version: "1.4"
     date: "2026-09-18"
     note: "Added descriptive alternative text to the Cameroon map; artwork, captions, and article text are unchanged."
@@ -34,12 +37,14 @@ medium_source_url: "https://medium.com/@lawtonperret/who-is-pascal-siakam-7b1ed9
 **Pascal Siakam** ~ from childhood in Cameroon to NBA All-Star, and his
 pivotal role in Indiana's 2025 playoff run, ***in his own words.***
 
-> Whenever you see a block quote, it comes directly from one of these
-> three sources:
+> Quoted remarks are linked to their sources; other blockquotes are
+> captions or narration.
 
 - [Taking a Chance on the Unknown | By Pascal Siakam](https://www.theplayerstribune.com/articles/pascal-siakam-toronto-raptors-cameroon)
 
-- [Pascal Siakam Reveals Why Pacers Have Major Edge Over Opponents](https://www.si.com/nba/pacers/news/pascal-siakam-reveals-why-pacers-have-major-edge-over-opponents)
+- [Toronto Forever | By Pascal Siakam](https://www.theplayerstribune.com/posts/pascal-siakam-toronto-raptors-indianapolis-pacers-nba-basketball)
+
+- [Pascal Siakam Reveals Why Pacers Have Major Edge Over Opponents](https://www.si.com/nba/pacers/onsi/news/pascal-siakam-reveals-why-pacers-have-major-edge-over-opponents)
 
 - [NBA insider's latest Pacers report will have fans jumping for joy](https://8points9seconds.com/nba-insider-s-latest-pacers-report-will-have-fans-jumping-joy)
 
@@ -49,13 +54,13 @@ pivotal role in Indiana's 2025 playoff run, ***in his own words.***
 
 > Cameroon \| Source: Wikimedia Commons
 
-Born April 2, 1994, in **Douala, Cameroon**, Pascal was the youngest of
+[Born April 2, 1994, in **Douala, Cameroon**](https://cdn.nba.com/teams/uploads/sites/1610612754/2025/04/2025-Indiana-Pacers-Playoff-Guide.pdf#page=48), Pascal was the youngest of
 four brothers in a devout Catholic household. **At 11, his father sent
 him to St. Andrew's Seminary** in Bafia, where the daily schedule
 included prayer, classes, and chores.
 
-> "I was only 11 years old… I missed my family. I missed playing soccer
-> with my friends. I missed home."
+> ["I was only 11 years old… I missed my family. I missed playing soccer
+> with my friends. I missed home."](https://www.theplayerstribune.com/articles/pascal-siakam-toronto-raptors-cameroon)
 
 He bristled at the strict routines, but the discipline he picked up
 there paved the way for his success.
@@ -64,17 +69,15 @@ there paved the way for his success.
 
 ![](/images/medium/who-is-pascal-siakam/d7666f62aa210ece447ba1ba241625a6f3a8438bd3d17d458e8ad39b8628a04f.jpeg)
 
-> Basketball Without Borders Camp in Cameroon | Source: [NBA](https://www.nba.com/clippers/gallery/photos-basketball-without-borders-w/luc-mbah-moute)
+> Basketball camp with Luc Mbah a Moute | Source: [NBA](https://www.nba.com/clippers/gallery/photos-basketball-without-borders-w/luc-mbah-moute)
 
 Soccer was king in Douala, and basketball was an afterthought ~ until
-one year, **Luc Mbah a Moute** ran a basketball camp in town.
+one year, [**Luc Mbah a Moute** ran a basketball camp.](https://www.theplayerstribune.com/articles/pascal-siakam-toronto-raptors-cameroon)
 
 > He recognized Pascal's potential.
 
 Basketball Without Borders invited him to play, and Pascal realized for
 the first time that the NBA could be within reach.
-
-> "That was the moment I realized maybe I could play."
 
 At 18, he departed Cameroon for God's Academy in Lewisville, Texas.
 
@@ -85,14 +88,14 @@ At 18, he departed Cameroon for God's Academy in Lewisville, Texas.
 > Pascal Siakam at New Mexico State | Source: [NMS](https://nmstatesports.com/sports/mens-basketball/roster/pascal-siakam/1970)
 
 In ***Las Cruces***, he quickly established himself. He won **WAC
-Freshman of the Year**, and by his junior season he was averaging **21.9
-points** and **8.6 rebounds**, earning **WAC Player of the Year.**
+Freshman of the Year**, and by his [sophomore season he was averaging **20.3
+points** and **11.6 rebounds**, earning **WAC Player of the Year.**](https://nmstatesports.com/roster.aspx?rp_id=1970)
 
 That production made the scouting bet look much less speculative.
 
-> "Talking to \[Coach Marvin Menzies\] was always easy. It didn't feel
+> ["Talking to \[Coach Marvin Menzies\] was always easy. … It didn't feel
 > like I was being recruited. It just felt like I was being welcomed
-> home."
+> home."](https://www.theplayerstribune.com/articles/pascal-siakam-toronto-raptors-cameroon)
 
 That sense of belonging unlocked his confidence.
 
@@ -104,14 +107,11 @@ He gave New Mexico State a reliable proof of concept.
 
 > Pascal in the G League \| Source: NBA GLeague X
 
-**Drafted 27th overall** by Toronto in 2016, Pascal spent parts of his
+[**Drafted 27th overall** by Toronto in 2016](https://cdn.nba.com/teams/uploads/sites/1610612754/2025/04/2025-Indiana-Pacers-Playoff-Guide.pdf#page=48), Pascal spent parts of his
 rookie season in the G League.
 
-Instead of pouting, **he dominated ~** averaging over 18 points,
-**winning** **a** D-League **title**, and **earning Finals MVP.**
-
-> "Spending time in the G League taught me patience and work ethic. I
-> knew I had to earn everything."
+Instead of pouting, **he dominated ~** [averaging over 18 points,](https://www.nba.com/player/1627783/pascal-siakam/bio)
+**winning** **a** [D-League **title**, and **earning Finals MVP.**](https://www.nba.com/raptors/holly-blog/raptors-905-road-to-championship)
 
 Those long bus rides and back-to-back games forged the toughness he'd
 need on NBA courts.
@@ -124,16 +124,16 @@ need on NBA courts.
 
 "Spicy P" flourished in Toronto.
 
-In **2019** he was a **full-time starter**, averaging **16.9 points and
-6.9 rebounds** in the playoffs en route to the franchise's first **NBA
+In **2019** he was a **full-time starter**, [averaging **16.9 points and
+6.9 rebounds** in the regular season](https://cdn.nba.com/teams/uploads/sites/1610612754/2025/04/2025-Indiana-Pacers-Playoff-Guide.pdf#page=48) en route to the franchise's first **NBA
 championship.**
 
-> He became the first player to win Most Improved and a title in the
-> same season.
+> [He became the first player to win Most Improved and a title in the
+> same season.](https://www.nba.com/raptors/pascal-siakam-no-ceilings)
 
-> "Toronto made me feel like I belonged from day one. I loved the
-> diversity… discovering all of that let me take my guard down and be
-> me… I'll always be a part of this community."
+> ["Toronto made me feel like I belonged from day one. I loved the
+> diversity… discovering all of that… it kind of let me take my guard down and be
+> me… I'll always be a part of this community."](https://www.theplayerstribune.com/posts/pascal-siakam-toronto-raptors-indianapolis-pacers-nba-basketball)
 
 #### Pascal Siakam Pacers Playoff Performance
 
@@ -141,20 +141,20 @@ championship.**
 
 > Siakam in Indiana \| Source: SB Nation
 
-Pascal was traded to Indiana in January 2024. The Pacers reached the
+[Pascal was traded to Indiana in January 2024.](https://cdn.nba.com/teams/uploads/sites/1610612754/2025/04/2025-Indiana-Pacers-Playoff-Guide.pdf#page=48) The Pacers reached the
 Eastern Conference Finals that spring, then returned the next season with a more established core.
 
-The 2024-25 season saw the Pacers jump to 50 wins.
+[The 2024-25 season saw the Pacers jump to 50 wins.](https://www.nba.com/news/pacers-team-record-comeback-for-50th-win)
 
 They defeated their first two 2025 playoff matchups and, at the time this profile was published, were battling the New York Knicks in the Eastern Conference Finals.
 
-In Game 2 of the 2025 Eastern Conference Finals, Siakam erupted for 39 points.
+[In Game 2 of the 2025 Eastern Conference Finals, Siakam erupted for 39 points.](https://www.nba.com/game/ind-vs-nyk-0042400302)
 
-In Game 4, he helped Indiana move to a commanding 3-1 series lead, one win away from the Finals.
+[In Game 4, he helped Indiana move to a commanding 3-1 series lead, one win away from the Finals.](https://www.nba.com/game/nyk-vs-ind-0042400304)
 
-> "What makes us special as a team is just we have different weapons.
+> ["What makes us special as a team is just we have different weapons.
 > We're not consumed with who's gonna do what. However the game presents
-> itself, that's how we go and take it. It doesn't matter who scores."
+> itself, that's how we go and take it. It doesn't matter who scores."](https://www.si.com/nba/pacers/onsi/news/pascal-siakam-reveals-why-pacers-have-major-edge-over-opponents)
 
 #### Pascal Siakam Indiana Pacers as a Destination
 
@@ -167,10 +167,10 @@ The Pacers organization had become one of the league's more credible playoff sto
 
 On the Pat McAfee Show, **Shams Charania** praised Indiana:
 
-> "\[The Pacers\] are turning into a real destination. I think players
+> ["\[The Pacers\] are turning into a real destination. I think players
 > look at Tyrese Haliburton, look at Pascal Siakam, and what this front
 > office has done such a good job of… they've done everything they can
-> to scout players that they know wanna win and wanna compete."
+> to scout players that they know wanna win and wanna compete."](https://8points9seconds.com/nba-insider-s-latest-pacers-report-will-have-fans-jumping-joy)
 
 From a 35-47 record in 2022-23 to a 3-1 conference finals lead in 2025,
 Indiana's transformation owes a lot to Pascal's presence and leadership.
@@ -180,8 +180,8 @@ Indiana's transformation owes a lot to Pascal's presence and leadership.
 Beyond the basketball, Pascal gives back to the community through the
 [**PS43 Foundation.**](https://www.ps43foundation.com)
 
-> The charity supports education and youth sports in Cameroon and
-> Canada.
+> [The charity supports education and life-skills development for
+> young people.](https://www.ps43foundation.com)
 
 #### What's Next for Pascal Siakam
 
@@ -192,14 +192,8 @@ Beyond the basketball, Pascal gives back to the community through the
 
 At 31, Pascal straddles veteran savvy and prime athleticism.
 
-Three All-Star nods, two All-NBA selections, a championship, and a G
+[Three All-Star nods](https://www.nba.com/watch/video/pascal-siakam-2025-east-all-star-reserve-highlights), two All-NBA selections, a championship, and a G
 League title.
-
-But he insists the story isn't over ~ not even close:
-
-> "Every year I try to get better, to be more consistent, especially in
-> big moments. I still want to push my game, help this team win, and
-> show people what we can do."
 
 As Indiana pushed toward its first Finals trip since 2000,
 "Spicy P" was at the center of it all.
@@ -231,6 +225,6 @@ Whether he ends up hoisting the trophy or not:
 
 - [Taking a Chance on the Unknown | By Pascal Siakam](https://www.theplayerstribune.com/articles/pascal-siakam-toronto-raptors-cameroon)
 
-- [Pascal Siakam Reveals Why Pacers Have Major Edge Over Opponents](https://www.si.com/nba/pacers/news/pascal-siakam-reveals-why-pacers-have-major-edge-over-opponents)
+- [Pascal Siakam Reveals Why Pacers Have Major Edge Over Opponents](https://www.si.com/nba/pacers/onsi/news/pascal-siakam-reveals-why-pacers-have-major-edge-over-opponents)
 
 - [NBA insider's latest Pacers report will have fans jumping for joy](https://8points9seconds.com/nba-insider-s-latest-pacers-report-will-have-fans-jumping-joy)

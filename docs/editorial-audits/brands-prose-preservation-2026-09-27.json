@@ -1,0 +1,235 @@
+{
+  "date": "2026-09-27",
+  "scope": "Six Brands essays; prose-preserving rollback of unpublished broad revisions",
+  "baseline": "5e21e40efd5e4bcfda8bac2284edb9bb36b341d6",
+  "status": "local-only; factual approval/evidence outstanding",
+  "line_endings": "LF; baseline mixed CRLF/LF normalized without changing paragraphs",
+  "files": [
+    {
+      "slug": "whos-drinking-all-the-modelo",
+      "path": "content/essays/whos-drinking-all-the-modelo.md",
+      "version": "1.3",
+      "edition": "Fourth web edition",
+      "sha256": "5d6c538c0c939e1cbce71a463e5419ea0a03950b645de9f90efd9f8864b1f118",
+      "disposition": "SOURCE_CHECK_REQUIRED",
+      "hold": "Restored 14% brand-sales claim conflicts with the FY23 presentation's approximately 9% depletions measure. Original city/state rankings, sponsorship causality and the 2017 sponsorship endpoint need evidence; ranking period/channel and dated population framing need minimal clarification.",
+      "replacements": [
+        {
+          "before": "*Rocky III*",
+          "after": "[*Rocky III*](https://www.imdb.com/title/tt0084602/characters/nm0186348/)",
+          "kind": "link"
+        },
+        {
+          "before": "Bud Light's marketing crisis with Dylan Mulvaney and the boycott that followed",
+          "after": "[Bud Light's marketing crisis with Dylan Mulvaney and the boycott that followed](https://journalrecord.com/2023/06/14/bud-light-dethroned-as-americas-top-selling-beer/)",
+          "kind": "link"
+        },
+        {
+          "before": "reported nearly $7.5 billion in beer sales in fiscal 2023, up 11% from the previous year",
+          "after": "[reported nearly $7.5 billion in beer sales in fiscal 2023, up 11% from the previous year](https://d1io3yog0oux5.cloudfront.net/_cba14301af6161410781f4de3a5ef08b/cbrands/db/963/9711/presentation/Q4_FY23_Earnings_Presentation_UPDATED_4.7.2023.pdf#page=5)",
+          "kind": "link"
+        },
+        {
+          "before": "U.S. antitrust regulators forced the company to divest domestic rights",
+          "after": "[U.S. antitrust regulators forced the company to divest domestic rights](https://www.justice.gov/archives/opa/pr/justice-department-reaches-settlement-anheuser-busch-inbev-and-grupo-modelo-beer-case)",
+          "kind": "link"
+        },
+        {
+          "before": "Modelo's partnership with Reyes Beverage Group, the largest beer distributor in America",
+          "after": "[Modelo's partnership with Reyes Beverage Group, the largest beer distributor in America](https://www.forbes.com/sites/dontse/2024/11/01/how-modelo-became-the-no-1-beer-brand-in-america/)",
+          "kind": "link"
+        },
+        {
+          "before": "The brand became the official beer of the UFC",
+          "after": "[The brand became the official beer of the UFC](https://www.globenewswire.com/news-release/2018/01/11/1287568/0/en/modelo-especial-announces-partnership-with-ufc-heavyweight-champion-stipe-miocic.html)",
+          "kind": "link"
+        },
+        {
+          "before": "Las Vegas Raiders",
+          "after": "[Las Vegas Raiders](https://www.allegiantstadium.com/news/detail/modelo)",
+          "kind": "link"
+        },
+        {
+          "before": "Household data cited in 2024 coverage",
+          "after": "[Household data cited in 2024 coverage](https://www.nacsmagazine.com/Issues/October-2024/Mexican-Beer%E2%80%99s-%E2%80%98Fighting-Spirit%E2%80%99)",
+          "kind": "link"
+        },
+        {
+          "before": "In late 2023, Anheuser-Busch signed a multiyear deal to make Bud Light the new official beer of the UFC, replacing Modelo",
+          "after": "[In late 2023, Anheuser-Busch signed a multiyear deal to make Bud Light the new official beer of the UFC, replacing Modelo](https://s202.q4cdn.com/437702206/files/doc_news/2023/10/TKO_UFC-AB-Spon-Release_10-24-23_12pm_Final.pdf#page=1)",
+          "kind": "link"
+        },
+        {
+          "before": "In 2025, Constellation Brands warned of slowing beer growth and weaker demand from Hispanic consumers, with management pointing to economic pressure, immigration concerns, and tariff exposure",
+          "after": "[In 2025, Constellation Brands warned of slowing beer growth and weaker demand from Hispanic consumers, with management pointing to economic pressure, immigration concerns, and tariff exposure](https://www.roic.ai/quote/STZ:US/transcripts/2025-year/4-quarter)",
+          "kind": "link"
+        }
+      ]
+    },
+    {
+      "slug": "the-bars-on-the-gum",
+      "path": "content/essays/the-bars-on-the-gum.md",
+      "version": "1.1",
+      "edition": "Second web edition",
+      "sha256": "77ad3b8e265a3e75abee9ca6239213cdf93e77d8d7d127f0168c4137c26c5e96",
+      "disposition": "SOURCE_CHECK_REQUIRED",
+      "hold": "Restored universal statements that the UPC never carries price omit store-coded random-weight labels. NIST's model procedure needs its jurisdictional-adoption limit distinguished from binding law. The interpretive labor/trust argument is preserved, not treated as a measured causal claim.",
+      "replacements": [
+        {
+          "before": "Smithsonian's supermarket scanner object record",
+          "after": "[Smithsonian's supermarket scanner object record](https://americanhistory.si.edu/collections/object/nmah_892778)",
+          "kind": "link"
+        },
+        {
+          "before": "IBM describes a 1970 call",
+          "after": "[IBM describes a 1970 call](https://www.ibm.com/history/upc)",
+          "kind": "link"
+        },
+        {
+          "before": "Basker and Simcoe's UPC research",
+          "after": "[Basker and Simcoe's UPC research](https://www.nber.org/papers/w24040)",
+          "kind": "link"
+        },
+        {
+          "before": "The patent language for a scanner at a checkout station",
+          "after": "[The patent language for a scanner at a checkout station](https://patents.google.com/patent/US4064390)",
+          "kind": "link"
+        },
+        {
+          "before": "Inspectors compare the price charged at the register or device with the shelf, item, advertisement, or posted price",
+          "after": "[Inspectors compare the price charged at the register or device with the shelf, item, advertisement, or posted price](https://www.nist.gov/document/2026-hb-130-section-v#page=19)",
+          "kind": "link"
+        }
+      ]
+    },
+    {
+      "slug": "fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet",
+      "path": "content/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet.md",
+      "version": "1.2",
+      "edition": "Third web edition",
+      "sha256": "5d9ed18e572740d4eb023666f63efe2b3a0a69aae1f92a7c22276de4d5d28d12",
+      "disposition": "SOURCE_CHECK_REQUIRED",
+      "hold": "The transition 'The next move' follows the 1717 exchange but introduces the earlier 1708/1710 manufacturing milestones. The manufacturing-share measure should be identified as value-added; the dated country-of-origin commentary is not a current population survey.",
+      "replacements": [
+        {
+          "before": "kiln technologies that could fire hot enough to vitrify the body",
+          "after": "[kiln technologies that could fire hot enough to vitrify the body](https://potweb.ashmolean.org/jep/PotJEP06.html)",
+          "kind": "link"
+        },
+        {
+          "before": "V&A's account of blue-and-white export history",
+          "after": "[V&A's account of blue-and-white export history](https://www.vam.ac.uk/articles/chinese-blue-and-white-ceramics)",
+          "kind": "link"
+        },
+        {
+          "before": "Fuchs gives the number that makes the obsession material",
+          "after": "[Fuchs gives the number that makes the obsession material](https://chipstone.org/article.php/691/Ceramics-in-America-2014/A-History-of-Chinese-Export-Porcelain-in-Ten-Objects)",
+          "kind": "link"
+        },
+        {
+          "before": "Meissen dates the first successful European hard-paste porcelain to January 1708",
+          "after": "[Meissen dates the first successful European hard-paste porcelain to January 1708](https://www.meissen.com/en/geschichte)",
+          "kind": "link"
+        },
+        {
+          "before": "Met's export porcelain essay",
+          "after": "[Met's export porcelain essay](https://www.metmuseum.org/essays/east-and-west-chinese-export-porcelain)",
+          "kind": "link"
+        },
+        {
+          "before": "Fuchs writes that armorial porcelain tied wealth to family heritage",
+          "after": "[Fuchs writes that armorial porcelain tied wealth to family heritage](https://chipstone.org/article.php/691/Ceramics-in-America-2014/A-History-of-Chinese-Export-Porcelain-in-Ten-Objects)",
+          "kind": "link"
+        },
+        {
+          "before": "V&A connects blue-and-white collecting to the Aesthetic Movement",
+          "after": "[V&A connects blue-and-white collecting to the Aesthetic Movement](https://www.vam.ac.uk/articles/chinese-blue-and-white-ceramics)",
+          "kind": "link"
+        },
+        {
+          "before": "https://www.news.iastate.edu/news/media-driven-attitudes-about-made-china-label-affect-product-and-country",
+          "after": "https://phys.org/news/2016-03-media-driven-attitudes-china-affect-product.html",
+          "kind": "verified_url_repair"
+        }
+      ]
+    },
+    {
+      "slug": "the-max-mistake-why-hbos-name-change-backfired",
+      "path": "content/essays/the-max-mistake-why-hbos-name-change-backfired.md",
+      "version": "1.5",
+      "edition": "Sixth web edition",
+      "sha256": "6a4d8890ee35f7c3e2e57d08272d57a70470bcb02b0e67603a6891431c42726c",
+      "disposition": "SOURCE_CHECK_REQUIRED",
+      "hold": "Restored catalog-ownership wording includes licensed programming; 2023 Zaslav and March 2025 Sarandos quotations remain unverified as written. User-behavior anecdotes, marketing-cost amount and meme provenance need evidence. The branding judgment is preserved but cannot certify financial failure.",
+      "replacements": [
+        {
+          "before": "HBO Max launched in May 2020",
+          "after": "[HBO Max launched in May 2020](https://press.wbd.com/us/media-release/hbo-max-launch-may-27th)",
+          "kind": "link"
+        },
+        {
+          "before": "*WarnerMedia* merged with *Discovery Inc*",
+          "after": "[*WarnerMedia* merged with *Discovery Inc*](https://www.wbd.com/discovery-and-att-close-warnermedia-transaction)",
+          "kind": "link"
+        },
+        {
+          "before": "May 2023",
+          "after": "[May 2023](https://press.wbd.com/us/na/media-release/hbo-max/warner-bros-discoverys-enhanced-streaming-platform-max-launches-today)",
+          "kind": "link"
+        },
+        {
+          "before": "***Home Box Office***",
+          "after": "[***Home Box Office***](https://www.hbo.com/about/faqs)",
+          "kind": "link"
+        },
+        {
+          "before": "HBO gave us ***The Sopranos, The Wire, Sex and the City, Six Feet Under,\nCurb Your Enthusiasm, Deadwood, Game of Thrones, Succession, Euphoria***",
+          "after": "[HBO gave us ***The Sopranos, The Wire, Sex and the City, Six Feet Under,\nCurb Your Enthusiasm, Deadwood, Game of Thrones, Succession, Euphoria***](https://press.wbd.com/nl/media-release/hbo-max-programming-highlights-unveiled-warnermedia-day?language_content_entity=en)",
+          "kind": "link"
+        }
+      ]
+    },
+    {
+      "slug": "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025",
+      "path": "content/essays/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025.md",
+      "version": "1.2",
+      "edition": "Third web edition",
+      "sha256": "bb26a7a4e7d19b1b2b1808ab1a8155fd6ee0325c068e93148fc080d3e88673f9",
+      "disposition": "SOURCE_CHECK_REQUIRED",
+      "hold": "Restored 3 for Me list double-counts chips/salsa and gives an unverified national upper price. The anonymous reaction quotations need source links or approval to label them illustrative. Closure/To-Go/price-holding and customer-switching assertions need narrow scope or evidence.",
+      "replacements": [
+        {
+          "before": "they simplified the menu",
+          "after": "[they simplified the menu](https://investors.brinker.com/files/doc_financials/2024/ar/608891-Brinker-2024-AR-BMK.pdf#page=9)",
+          "kind": "link"
+        }
+      ]
+    },
+    {
+      "slug": "the-political-economy-of-airports",
+      "path": "content/essays/the-political-economy-of-airports.md",
+      "version": "1.2",
+      "edition": "Third web edition",
+      "sha256": "a78aa724e76bb2288c0e35b645c69d7d301ae6b2a281f7ea1d61cd6d2af3d1e4",
+      "disposition": "SOURCE_CHECK_REQUIRED",
+      "hold": "Restored global concessions percentage, declining-investment narrative, universal/exclusive contracts, stress/whole-dollar pricing mechanisms and environmental-compliance rent premium remain unsupported. The local price rule allows a premium rather than an at-street-price cap; contract percentage rent can be a greater-of calculation rather than an additive charge.",
+      "replacements": [
+        {
+          "before": "Concession leases are often tied to revenue-sharing agreements",
+          "after": "[Concession leases are often tied to revenue-sharing agreements](https://nap.nationalacademies.org/skim.php?chap=121-136&record_id=13326)",
+          "kind": "link"
+        },
+        {
+          "before": "Limited storage space within airports",
+          "after": "[Limited storage space within airports](https://nap.nationalacademies.org/skim.php?chap=173-187&record_id=13326)",
+          "kind": "link"
+        },
+        {
+          "before": "https://www.panynj.gov/content/dam/airports/pdfs/concessionaire-street-pricing-manual.pdf",
+          "after": "https://www.panynj.gov/content/dam/airports/pdfs/PANYNJ_StreetPricingManual_V4.0.pdf#page=8",
+          "kind": "verified_url_repair"
+        }
+      ]
+    }
+  ]
+}

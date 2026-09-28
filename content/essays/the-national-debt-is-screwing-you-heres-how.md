@@ -10,10 +10,13 @@ featured_image: "/images/medium/the-national-debt-is-screwing-you-heres-how/0a38
 featured_image_caption: "Photo by Jp Valery on Unsplash"
 featured_image_alt: "The National Debt Is Screwing You — Here’s How"
 description: "Imagine a 70-year-old maxing out a credit card in their grandkid’s name — then walking away, leaving them with the bill"
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Qualified Social Security financing and inflation/asset-price claims; clarified the limits of the Britain comparison. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-08"
     note: "Updated May 8, 2026, after OIP back-archive review for source discipline, legacy Medium cleanup, punctuation normalization, and editorial philosophy audit."
@@ -60,7 +63,7 @@ The economy was strong, tax revenue was high, and spending wasn't out of control
 
 Wars, tax cuts, corporate bailouts, stimulus checks - every president, Republican and Democrat, has played a role in blowing up the debt.
 
-By the mid-2020s, the U.S. owed tens of trillions of dollars, and official projections pointed higher over the next decade. At this point, interest payments alone were becoming one of the biggest expenses in the federal budget.
+By the mid-2020s, the U.S. owed tens of trillions of dollars, and [official projections pointed higher over the next decade](https://www.cbo.gov/publication/60870). At this point, interest payments alone were becoming one of the biggest expenses in the federal budget.
 
 We're not just borrowing money to keep the government running - we're borrowing money to pay for the money we already borrowed.
 
@@ -79,7 +82,7 @@ Now, as Millennials and Gen Z enter their prime working years, we're stuck with:
 - Higher taxes in the future to cover interest payments.
 - Fewer government services because money is tied up paying off old debt.
 - Less investment in things that actually help people - roads, schools, infrastructure, job programs.
-- A Social Security system that might not even be around by the time we retire.
+- A Social Security system [facing a financing shortfall that could reduce scheduled benefits](https://www.ssa.gov/oact/TRSUM/2024/index.html).
 Your paycheck gets taxed, but the government already spent that money years ago - so they just borrow more.
 
 Who pays for that? You do. Again. And the worst part? This whole cycle is making rich people even richer while pushing regular people further away from prosperity.
@@ -96,10 +99,10 @@ Inflation isn't just about rising grocery bills - it's about who owns assets and
 
 Think about it:
 
-- When prices go up, stocks, real estate, and other investments also go up.
+- Some asset prices can rise with inflation, but stocks and other investments do not rise automatically.
 - Who owns those things? Wealthy people.
 - Who doesn't? Most working-class Americans.
-The government's borrowing and spending drive inflation, which makes assets more valuable. But if you're living paycheck to paycheck, you don't own anything that benefits from this inflation.
+The government's borrowing and spending can contribute to inflation, which can make some assets more valuable. But if you're living paycheck to paycheck, you don't own anything that benefits from this inflation.
 
 Instead, you just get squeezed. And here's the kicker - When the government writes checks, the first people cashing them aren't you or me - it is often the firms, contractors, bondholders, and asset owners already positioned to receive public or financial flows.
 
@@ -118,11 +121,11 @@ That's why we've been able to run up trillions in debt without crashing the econ
 - That could push borrowing costs higher, weaken the dollar, and add inflation pressure.
 If that happens, the U.S. could face painful cuts to government programs, higher taxes, or both just to keep basic services running.
 
-This already happened to Britain in the mid-20th century when the British pound lost its status as the world's top currency.
+Britain offers a warning, not an exact parallel: [the pound lost its leading international role as the dollar rose](https://www.bankofengland.co.uk/speech/2025/july/meaning-of-reserve-currency-remarks-andrew-bailey).
 
-The result?
+The broader story?
 
-A weaker economy, skyrocketing inflation, and a permanent loss of global influence.
+Economic pressures and a loss of global influence, driven by more than currency status alone.
 
 The U.S. is not immune to reserve-currency risk, even if the timing and scale are uncertain.
 

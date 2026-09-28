@@ -8,9 +8,12 @@ subtitle: "Why the 100-year flood can happen more than once in a century"
 description: "A 100-year flood is a 1% annual chance, not a once-per-century promise. Over a 30-year mortgage, repeated exposure adds up to about a 26% chance."
 featured_image: "/images/medium/the-100-year-flood-is-not-what-you-think/96718dd1ce6457c535506421a4afbbb633458940478ba3165a382cfaa93d70aa.jpeg"
 featured_image_alt: "The 100-Year Flood Is Not What You Think"
-version: "1.3"
-edition: "Fourth web edition"
+version: "2.0"
+edition: "Fifth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Identified independence and constant probability as calculation assumptions, not universal flood-map properties. Added or retained claim-level source links; original reporting frame retained. Corrected flagged graphics and captions without changing surrounding prose in this graphics pass."
   - version: "1.3"
     date: "2026-08-27"
     note: "Added a seven-part infographic series explaining the annual-chance definition, repeated exposure, mortgage-period probability, the insurance decision, and the limits of the model."
@@ -36,7 +39,7 @@ Something you can shrug off ~ if you plan to sell before retirement.
 
 **But that's not how the math works at all.**
 
-A "100-year flood" does **not** mean one flood every hundred years. It
+A ["100-year flood"](https://www.usgs.gov/water-science-school/science/water-qa-we-had-a-100-year-flood-two-years-a-row-how-can-be) does **not** mean one flood every hundred years. It
 means something far more mundane and far more dangerous: **a** **1%
 chance every year**, repeated over and over again.
 
@@ -61,7 +64,7 @@ A 100-year flood has a 1% annual probability. In shorthand, **p =
 0.01** is the chance of a flood in a given year, and **1 - p = 0.99**
 is the chance of **no** flood in that year.
 
-Now assume what all of the flood maps quietly assume ~ that each year is
+Now assume for this calculation ~ that each year is
 independent and the probability stays constant every time.
 
 No memory.\
@@ -142,9 +145,9 @@ floodplain, then understanding the risk isn't optional ~
 
 It's your responsibility.
 
-![A crossed-out once-per-century timeline contrasts with a cumulative-risk curve rising from 1% in one year to 9.6% in ten years and 26% in thirty years.](oip-image:essays/the-100-year-flood-is-not-what-you-think/section-5)
+![Probability cards: 1% in one year, 9.6% in ten years and 26% in thirty years, assuming independent years and constant 1% annual probability.](oip-image:essays/the-100-year-flood-is-not-what-you-think/section-5-corrected-20260927)
 
-*The annual probability stays at 1%; cumulative exposure rises with time.*
+*The annual probability stays at 1%; the modeled chance of at least one flood is 1 − 0.99ⁿ, assuming independent years and constant annual probability. The cards show rounded values, not a plotted curve.*
 
 ### The Insurance Decision, In Plain English
 

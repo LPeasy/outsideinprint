@@ -1,0 +1,111 @@
+{
+  "date": "2026-09-27",
+  "scope": "User-approved first-ten batch items 2–3; exact energy essay replacements, including permitted revision-note changes and claim-level source wrappers. No publication.",
+  "snapshot_directory": "/tmp/oip-first-ten-energy-XmGOOc",
+  "files": [
+    {
+      "path": "content/essays/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk.md",
+      "absolute_path": "/Users/lp1/Developer/OIP-WebDev/outsideinprint-v2/content/essays/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk.md",
+      "replacements": [
+        {
+          "before": "    note: \"Corrected release/replenishment scope, stock month, release history, Treasury attribution, RSM quotation date and war-year arithmetic. Added or retained claim-level source links; original reporting frame and artwork retained.\"",
+          "after": "    note: \"Corrected release/replenishment scope, stock month, release history, Treasury attribution, RSM quotation date and war-year arithmetic. Recast the DOE refill and Goldman passages as dated paraphrases and removed two unverified quotations. Added or retained claim-level source links; original reporting frame and artwork retained.\"",
+          "count": 1
+        },
+        {
+          "before": "DOE said in November 2024 that \"The President is committed to ensuring a stable, affordable supply of energy for Americans.\"\n\n",
+          "after": "",
+          "count": 1
+        },
+        {
+          "before": "Goldman Sachs said in 2023 that \"The drawdowns reduced the amount of necessary price-induced demand destruction and helped prevent an even worse price spike.\"",
+          "after": "Goldman Sachs [said in March 2022 that the release would reduce the need for higher prices to curb demand, but would not resolve the market's structural supply deficit](https://www.bloomberglinea.com/2022/03/31/us-markets-suffer-worst-quarterly-fall-since-2020-mexico-heads-latam-gains/?outputType=amp).",
+          "count": 1
+        },
+        {
+          "before": "A DOE spokesperson said in March 2025, \"It will take years to refill the reserve... a request that size to Congress is not something the department would do immediately in one request given the other budget concerns.\"",
+          "after": "[A DOE spokesperson told Reuters in March 2025 that refilling would take years and that other budget demands made a single immediate funding request unlikely.](https://www.investing.com/news/economic-indicators/us-energy-chief-to-seek-20-billion-to-refill-oil-reserve-bloomberg-news-reports-3915041)",
+          "count": 1
+        },
+        {
+          "before": "The U.S. Treasury Department said in November 2024 that \"The SPR releases in 2022 helped mitigate the energy price shock caused by Russia's invasion, but the conflict remains an ongoing source of uncertainty for global oil supply.\"\n\n",
+          "after": "",
+          "count": 1
+        },
+        {
+          "before": "U.S. Energy Secretary Chris Wright said in March 2025, \"It will take years to refill the reserve... a request that size to Congress is not something the department would do immediately in one request given the other budget concerns.\"",
+          "after": "[DOE told Reuters in March 2025 that refilling would take years and that other budget demands made a single immediate funding request unlikely.](https://www.investing.com/news/economic-indicators/us-energy-chief-to-seek-20-billion-to-refill-oil-reserve-bloomberg-news-reports-3915041)",
+          "count": 1
+        }
+      ],
+      "snapshot": "/tmp/oip-first-ten-energy-XmGOOc/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk.md",
+      "sha256": "e791b2fb68f637697c27fd34eaa4b6b272174b2e1f100d2e81fa87d11a1e98a8",
+      "records": [
+        "docs/editorial-audits/99-refinement/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/bidens-strategic-oil-reserve-gamble-smart-move-or-national-security-risk-source-checklist.md"
+      ]
+    },
+    {
+      "path": "content/essays/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy.md",
+      "absolute_path": "/Users/lp1/Developer/OIP-WebDev/outsideinprint-v2/content/essays/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy.md",
+      "replacements": [
+        {
+          "before": "    note: \"Corrected 2023 energy-related CO2 metric, construction scope, reactor chronology and quotation wording. Added or retained claim-level source links; original reporting frame and artwork retained.\"",
+          "after": "    note: \"Corrected 2023 energy-related CO2 metric, construction scope, reactor chronology and quotation wording. Clarified net-zero warming, design-specific reactor safety and California peak-demand advice; removed the unverified 10 MW-by-2030 plan sentence. Added or retained claim-level source links; original reporting frame and artwork retained.\"",
+          "count": 1
+        },
+        {
+          "before": "These tipping points loom regardless of U.S. policy. Even if Washington had remained aggressive on climate action, the inertia in the earth system means some further warming is already baked in.",
+          "after": "These tipping points loom regardless of U.S. policy. Even if Washington had remained aggressive on climate action, continued global emissions mean further warming remains likely.",
+          "count": 1
+        },
+        {
+          "before": "The IPCC notes that due to thermal inertia, we're locked into at least some additional warming over the next decade \"even if we were to reach net-zero emissions tomorrow\".",
+          "after": "The IPCC finds that [sustained net-zero CO₂, together with strong reductions in other greenhouse gases, can stabilize warming](https://www.ipcc.ch/report/ar6/wg3/chapter/chapter-3/).",
+          "count": 1
+        },
+        {
+          "before": "In other words, stopping on a dime is not possible. The climate system has momentum, and the brakes only do so much. Add the fact that global emissions have continued to climb, and it becomes clear that surpassing critical thresholds is increasingly likely.",
+          "after": "Reaching that point requires global emissions cuts. Add the fact that global emissions have continued to climb, and it becomes clear that surpassing critical thresholds is increasingly likely.",
+          "count": 1
+        },
+        {
+          "before": "Recent events in California provided a cautionary tale. In late 2022, just one week after announcing a 2035 ban on new gas car sales,",
+          "after": "Recent events in California provided a cautionary tale. In August 2022, days after [California approved its 2035 new-car emissions rule](https://ww2.arb.ca.gov/news/california-moves-accelerate-100-new-zero-emission-vehicle-sales-2035),",
+          "count": 1
+        },
+        {
+          "before": "California's grid operators begged EV owners not to charge their cars during a heatwave (to avoid blackouts). The state's grid, strained by air conditioning demand and reduced power supply, could barely support the existing number of EVs, let alone the millions more that policy would require. This incident, essentially telling drivers \"please don't charge your mandated electric cars!\", was a poignant reminder that infrastructure can be a limiting factor.",
+          "after": "California's grid operator [urged EV owners to avoid charging from 4 to 9 p.m. during a heatwave, and to charge before 4 p.m. instead](https://www.caiso.com/Documents/california-iso-issues-flex-alert-for-today-aug-31.pdf). The grid was strained by air conditioning demand and tightening power supplies; the alert did not establish that existing EV numbers exceeded its capacity. This incident was a poignant reminder that infrastructure can be a limiting factor.",
+          "count": 1
+        },
+        {
+          "before": "Now they plan to build a larger 10 MW demonstration thorium reactor in the Gobi Desert by 2030.\n\n",
+          "after": "",
+          "count": 1
+        },
+        {
+          "before": "Molten salt reactors (MSRs) are an advanced concept where the nuclear fuel is dissolved in a hot salt liquid that circulates as both fuel and coolant. They have inherent safety advantages (if the reactor overheats, the salt can drain into a passive storage tank and solidify, stopping the reaction).",
+          "after": "Some molten salt reactor (MSR) designs [dissolve nuclear fuel in a hot salt liquid that circulates as both fuel and coolant](https://www.ornl.gov/publication/liquid-fuel-molten-salt-reactors-thorium-utilization). Some designs include [drain tanks that keep fuel subcritical and remove decay heat](https://info.ornl.gov/sites/publications/Files/Pub197043.pdf).",
+          "count": 1
+        },
+        {
+          "before": "Others are walk-away safe, meaning even in total loss of power they won't meltdown, a far cry from Chernobyl or Fukushima scenarios.",
+          "after": "Others use passive safety systems designed to maintain cooling during a loss of power.",
+          "count": 1
+        },
+        {
+          "before": "Gates's Natrium, for instance, and other small modular reactors are engineered to eliminate the potential for the kinds of failures that have haunted nuclear's reputation. And because they're smaller and often factory-produced, they promise lower costs and faster deployment.",
+          "after": "[TerraPower says Natrium uses passive heat removal and a low-pressure cooling system to reduce accident risks](https://www.terrapower.com/faq/). And because they're smaller and often factory-produced, they promise lower costs and faster deployment.",
+          "count": 1
+        }
+      ],
+      "snapshot": "/tmp/oip-first-ten-energy-XmGOOc/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy.md",
+      "sha256": "24de54a4241bdba67a89c071a5023b193d32614f8634ae69b9409d443f3c7461",
+      "records": [
+        "docs/editorial-audits/99-refinement/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/trumps-energy-revolution-fossil-fuels-climate-rollbacks-and-the-future-of-u-s-policy-source-checklist.md"
+      ]
+    }
+  ]
+}

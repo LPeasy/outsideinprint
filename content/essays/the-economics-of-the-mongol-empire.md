@@ -4,14 +4,17 @@ date: 2025-02-17
 draft: false
 slug: "the-economics-of-the-mongol-empire"
 section_label: "Essay"
-subtitle: "How Genghis Khan Created the First Global Trade Network"
+subtitle: "How Genghis Khan Expanded a Global Trade Network"
 featured_image: "/images/medium/the-economics-of-the-mongol-empire/60342f090c96aae087a5ed7917af61424689ccc02035e6e48d930d3f394b2fb7.jpeg"
 featured_image_caption: "Photo by Ryan Brooklyn on Unsplash"
 featured_image_alt: "The Economics of the Mongol Empire"
 description: "History often remembers Genghis Khan as a ruthless conqueror, but his most lasting impact was also economic: a protected trade network across much of Eurasia."
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected Yuan currency geography and metallic backing, narrowed the trade-network priority claim and removed the unsupported direct Italian-banking influence sentence. Retained the six quotations checked against the book by the author. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-03"
     note: "Updated May 3, 2026, after OIP back-archive review. Legacy Medium image embeds, promotional residue, source-card fragments, spelling, spacing, and punctuation artifacts were cleaned up; source, metadata, and rendering were checked."
@@ -47,7 +50,7 @@ This essay is intended to highlight how Genghis Khan's policies extended beyond 
 
 While many pre-modern states restricted trade based on political or religious biases, the Mongols took a different approach: Genghis Khan decreed religious freedom across his empire, a policy that had profound economic effects.
 
-Unlike other rulers, who taxed and restricted foreign merchants, the Mongols welcomed them. Muslim, Christian, and Buddhist traders found Mongol lands hospitable, encouraging cross-cultural trade.
+Unlike other rulers, who taxed and restricted foreign merchants, [the Mongols welcomed them.](https://afe.easia.columbia.edu/mongols/history/history4.htm) Muslim, Christian, and Buddhist traders found Mongol lands hospitable, encouraging cross-cultural trade.
 
 Nowhere was this more evident than in Karakorum, the Mongol capital and the beating heart of their vast trade empire. A city unlike any before it, Karakorum became a crossroads of civilizations, where Chinese engineers, Persian astronomers, European merchants, and Central Asian craftsmen worked side by side. It was more than a political center.
 
@@ -97,9 +100,9 @@ One of the greatest challenges of pre-modern commerce was inconsistency ~ differ
 
 The Mongols pushed large parts of Eurasia toward more consistent standards.
 
-The Yuan Dynasty in China introduced paper money as a standardized currency. While the Chinese had experimented with paper currency before, the Mongols enforced its use throughout their empire.
+The Yuan Dynasty in China introduced paper money as a standardized currency. While the Chinese had experimented with paper currency before, the Yuan enforced its use in China.
 
-It is a remarkable early example of fiat money backed not by gold or silver, but by government decree. The Mongols also standardized weights and measures, streamlining taxation and trade. The system still depended on fiscal credibility and state enforcement; earlier experiments tied to silk did not solve the problem.
+Its paper money depended on government enforcement and, at times, [precious-metal backing](https://afe.easia.columbia.edu/mongols/history/history4.htm). The Mongols also standardized weights and measures, streamlining taxation and trade. The system still depended on fiscal credibility and state enforcement; earlier experiments tied to silk did not solve the problem.
 
 ![Yuan Dynasty Banknote Printing Plate](/images/medium/the-economics-of-the-mongol-empire/919835b20215daf4d522e3b70b6f08f63a0732dc1cd97954a408d869688459e3.jpg)
 
@@ -109,8 +112,6 @@ It is a remarkable early example of fiat money backed not by gold or silver, but
 They even established a transcontinental postal system, an early version of today's express courier networks. This allowed for the rapid movement of goods, messages, and officials across thousands of miles, reducing transaction costs and increasing economic efficiency.
 
 Beyond securing trade routes, the Mongols introduced financial tools that revolutionized commerce. Promissory notes and credit systems let merchants trade across vast distances without carrying large sums of money, an early form of banking.
-
-These innovations would later influence banking systems in Renaissance Italy, where merchants adopted similar credit mechanisms to facilitate long-distance trade.
 
 ## Mongol Economics and the Birth of the Modern World
 

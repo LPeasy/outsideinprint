@@ -8,9 +8,12 @@ section_label: "Essay"
 subtitle: "A Commentary"
 description: "Modern American society is characterized by a capitalist economic framework and a democratic political system. However, the interplay between wealth and gove..."
 featured_image: "/images/social/outside-in-print-default.png"
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-09-27"
+    note: "Corrected year-end 2023 wealth share and measurement label using the retrieved revised series. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-04-26"
     note: "Updated April 26, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -27,7 +30,7 @@ Modern American society is characterized by a capitalist economic framework and 
 
 #### 1. Concentration of Wealth
 
-- Economic inequality in the U.S. has grown markedly over recent decades, with the top 1% of households controlling approximately 32% of total wealth (Federal Reserve, 2023).
+- Economic inequality in the U.S. has grown markedly over recent decades, with the top 1% of households controlling approximately [30% of total household net worth at the end of 2023](https://fred.stlouisfed.org/data/WFRBST01134) (Federal Reserve).
 
 - This concentration of resources enables a small group of individuals and families to exert disproportionate influence over political and economic systems, creating barriers to broad-based representation.
 
@@ -41,7 +44,7 @@ Modern American society is characterized by a capitalist economic framework and 
 
 #### 3. Policy Outcomes Favoring the Wealthy
 
-- Research indicates that the preferences of economic elites and organized interest groups have a greater impact on policy outcomes than the preferences of average citizens (Gilens and Page, 2014).
+- Research indicates that the preferences of economic elites and organized interest groups have a greater impact on policy outcomes than the preferences of average citizens ([Gilens and Page, 2014](https://www.cambridge.org/core/journals/perspectives-on-politics/article/div-classtitletesting-theories-of-american-politics-elites-interest-groups-and-average-citizensdiv/62327F513959D0A304D4893B382B992B)).
 
 - Policies such as tax cuts for high earners, deregulation, and limited enforcement of antitrust laws often reflect elite priorities, even when they diverge from public opinion.
 
@@ -49,7 +52,7 @@ Modern American society is characterized by a capitalist economic framework and 
 
 - While the American Dream is rooted in the ideal of upward mobility, structural barriers such as unequal access to education, healthcare, and housing have made economic advancement increasingly difficult for lower-income groups.
 
-- Gerrymandering, voter suppression efforts, and disproportionate representation in the Senate further limit the ability of average citizens to influence governance.
+- Gerrymandering, voter suppression efforts, and disproportionate [representation in the Senate](https://www.law.cornell.edu/constitution/articlei) further limit the ability of average citizens to influence governance.
 
 ### Self-Perpetuation of Wealth and Power
 
@@ -80,4 +83,3 @@ Furthermore, the wealthy are not a monolithic group; their interests and ideolog
 #### 3. Pathways for Reform
 
 - Addressing these issues requires institutional changes, such as campaign finance reform, progressive taxation, stronger antitrust enforcement, and policies to enhance economic mobility (e.g., universal access to education and healthcare).
-

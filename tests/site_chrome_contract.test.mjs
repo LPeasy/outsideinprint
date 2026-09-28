@@ -302,8 +302,8 @@ test("homepage nav-to-stats spacing stays compact", () => {
 });
 
 test("Jack Stratton modern bio preserves the complete localized visual sequence", () => {
-  assert.match(jackStrattonEssay, /^version: "1\.5"$/m);
-  assert.match(jackStrattonEssay, /^edition: "Sixth web edition"$/m);
+  assert.match(jackStrattonEssay, /^version: "2\.0"$/m);
+  assert.match(jackStrattonEssay, /^edition: "Seventh web edition"$/m);
   assert.match(jackStrattonEssay, /^featured_image_caption: "Jack Stratton on stage \| Source: Michelle Shiers"$/m);
   assert.match(jackStrattonEssay, /^featured_image_alt: "Jack Stratton on stage"$/m);
   assert.doesNotMatch(jackStrattonEssay, /!\[[^\]\r\n]*\\\]\(/);
@@ -340,8 +340,9 @@ test("Jack Stratton modern bio preserves the complete localized visual sequence"
 });
 
 test("Studio samples retain reader-ready copy and public revision records", () => {
-  assert.match(campMysticEssay, /^version: "2\.3"$/m);
-  assert.match(campMysticEssay, /^edition: "Eighth web edition"$/m);
+  assert.match(campMysticEssay, /^version: "3\.0"$/m);
+  assert.match(campMysticEssay, /^edition: "Ninth web edition"$/m);
+  assert.match(campMysticEssay, /^revision_history:\r?\n  - version: "3\.0"$/m);
   assert.match(campMysticEssay, /^  - version: "2\.3"$/m);
   assert.match(campMysticEssay, /^### July 4: Warning, Rising Water, and Evacuation$/m);
   assert.match(campMysticEssay, /^### Further Reading$/m);
@@ -352,10 +353,11 @@ test("Studio samples retain reader-ready copy and public revision records", () =
   );
 
   assert.match(jackStrattonEssay, /^#### What's Next for Jack Stratton and Vulfpeck$/m);
+  assert.match(jackStrattonEssay, /^revision_history:\r?\n  - version: "2\.0"$/m);
   assert.match(jackStrattonEssay, /^  - version: "1\.5"$/m);
   assert.match(jackStrattonEssay, /Source: Blue Funky Mamma/);
   assert.match(jackStrattonEssay, /\*\*\*Theo Katzman, Woody Goss, and Joe Dart\*\*\*\./);
-  assert.match(jackStrattonEssay, /\*\*\*Sleepify\*\*\*,\s+a\s+silent Spotify album/);
+  assert.match(jackStrattonEssay, /\*\*\*Sleepify\*\*\*,\s+\[a\s+silent Spotify album/);
   assert.doesNotMatch(
     jackStrattonEssay,
     /back-archive review|Recovered and localized|localized visual sequence|What's Next for Jack Stratton and Vulfpeck in 2025|At publication, the band had|more\s*> recently/i

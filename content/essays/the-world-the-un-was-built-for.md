@@ -8,9 +8,12 @@ subtitle: "How Postwar Human Rights, Migration Norms, and Global Institutions We
 featured_image: "medium/cc8c8bffe2bc792723dbd459180973ed10ecd5475abadc1a558d3e26bb1ca050"
 featured_image_alt: "The World the UN Was Built For"
 description: "In the years after World War II, the victors attempted something new. After two global wars in a single generation, they agreed to a set of rules meant to pr..."
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected Refugee Convention naturalization premise. Added or retained claim-level source links; original reporting frame retained. Corrected image captions without changing surrounding prose in this graphics pass."
   - version: "1.1"
     date: "2026-05-25"
     note: "Updated May 25, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, house-style phrasing, and source framing were cleaned up; source, metadata, and rendering were checked."
@@ -68,7 +71,7 @@ The system worked ~ **within the societies it was designed for**.
 
 ![United Nations membership by decade](oip-image:medium/cf87d44f6e14106cf84c491686d72a57f3c45a3a924b5615f1609cb7374953ff)
 
-***United Nations membership by decade.*** *Most of Africa, the Middle East, and South Asia were not yet sovereign states in 1945 and were not represented at* [*the system*](http://UN.org)*’s founding.*
+***United Nations membership by decade.*** *Many states joined during decolonization; the [original 51 members](https://www.un.org/en/about-us/growth-in-un-membership) already included India, Egypt, Iran, Iraq, Lebanon, Saudi Arabia, Syria and Turkey.*
 
 
 
@@ -181,9 +184,8 @@ universal rights across borders.
 
 ### Migration and Moral Asymmetry ~ When Humanitarian Norms Outrun State Capacity
 
-Refugee protections were originally designed to manage temporary
-displacement among culturally adjacent populations, not permanent
-demographic transformation. Over time, those protections hardened into
+The 1951 Refugee Convention addressed postwar displacement and also
+[provided for the naturalization of refugees](https://www.unhcr.org/my/publications/note-international-protection-addendum-2-implementation-1951-convention-and-1967). Over time, those protections hardened into
 moral absolutes, even as the conditions that justified them disappeared.
 
 The result is moral asymmetry.

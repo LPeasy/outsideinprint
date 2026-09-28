@@ -1,3 +1,29 @@
+# Hyperlink-only source checklist: id-required
+
+Date: 2026-09-27
+
+Version: `1.2`
+
+Final SHA256: `a41807ffcef712e421443131a5071f4382155da5ab12bbdd72eb5043987e13eb`
+
+Status: Source-link pass complete; normal publication gate remains separate
+
+## Supporting passages and limits
+
+Federal Register, October 31, 2025, printed p. 48949 (PDF p. 2), describes SAVE as citizenship/immigration-status information for benefits, voter registration and list maintenance. It does not make voter-eligibility determinations. Link supplements existing USCIS guidance; May 2026 reporting frame stays unchanged, not a fresh statement of September law.
+
+## Exact new links
+
+- `USCIS describes SAVE, the Systematic Alien Verification for Entitlements program, as an information service for citizenship or immigration-status verification.` -> https://www.govinfo.gov/content/pkg/FR-2025-10-31/pdf/2025-19735.pdf#page=2
+
+## Preservation and private issues
+
+No public prose, caption, order, artwork, discovery metadata or original date was changed. Existing links remain. Private concerns and minimal proposed corrections are in `../core-link-only-flood-pair-2026-09-27.md`; these proposals are not applied. This checklist records the added links, not a new certification of every historical fact or quotation.
+
+---
+
+## Preserved historical source record
+
 # Source Checklist
 
 Package: `2026-05-17-id-required`

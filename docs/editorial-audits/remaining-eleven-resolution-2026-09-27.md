@@ -1,0 +1,64 @@
+# Remaining eleven: narrow resolution record
+
+September 27, 2026. Local editorial work only; no publication authorization.
+
+The owner requested resolution of the eleven remaining original-core holds and subsequently approved the bounded decisions recorded here. Preserve surrounding prose, original publication identity, imagery and argument except for those exact authorized corrections. Current per-piece hash-bound records and the latest approval batch control over historical proposals.
+
+## Current checkpoint
+
+**All eleven named holds are resolved within their approved scopes:** Nottoway, What Happened at Camp Mystic, Cuauhtémoc, Flash Flood Alley, Calculator, Mongol Empire, Generation Inflation, The Water's Rising, Camp Mystic Evacuation Timeline, Biden's SPR and Trump's Energy Revolution. Camp's separately approved geography/reporting-context fixes and the two energy essays' remaining decisions are now implemented.
+
+The original **35-item queue is 35 resolved / 0 pending**. The two additional formerly unchanged-core holds, Short-Term Costs and Poker Table, are also resolved by their approved bounded revisions, leaving **0 core holds**. Five of the fourteen separate Brands/Bios holds are resolved in the first-ten approval batch; **9 known combined-release holds remain, all in Brands/Bios**. These inventories are distinct, not additive duplicate counts. Nothing has been published.
+
+Current evidence for the latest changes: [first-ten central approval record](first-ten-remaining-approved-2026-09-27.md), [energy exact-replacement map](first-ten-energy-approval-map-2026-09-27.json), [history exact-replacement map](first-ten-history-approval-map-2026-09-27.json), and the current paired per-piece records. Root's latest consolidated preservation check **PASSED**: 10/10 exact-file reproductions, 20/20 current hash/PASS records, all seven current audit dimensions, unchanged image destinations/order and byte-identical Cheney body; zero failures and zero reruns. Earlier successful checks below remain historical; this latest result covers the first-ten edits, not formal publication gates.
+
+The two energy essays remain `2.0 / Fifth web edition`. Current SHA-256 values are `e791b2fb68f637697c27fd34eaa4b6b272174b2e1f100d2e81fa87d11a1e98a8` for Biden's SPR and `24de54a4241bdba67a89c071a5023b193d32614f8634ae69b9409d443f3c7461` for Trump's Energy Revolution. Both current paired records carry scoped PASS; their exact approval limits and source provenance remain explicit.
+
+The owner confirmed that The Water's Rising refers to FEMA map amendments and approved the exact sentence `Permits were granted.` → `Map amendments were granted.` It is applied; surrounding bytes, emphasis and pending version `2.0 / Sixth web edition` remain unchanged. Current paired records carry scoped PASS with SHA-256 `a5fd0734432b03cac279a5bb26a41881590f69b608722607c2cac4f8367f7e06`.
+
+The author confirmed checking all six Weatherford quotations against the book. They remain byte-for-byte unchanged. The approved subtitle qualification and deletion of the unsupported direct Italian-banking influence sentence are applied; no edition/page references or independent assistant verification are invented. Current Mongol SHA-256: `541ac9eb1a2761454e4aa2d860d4f0258dab8b2dea825ca62fbeda24d1e16771`.
+
+## Source discoveries that preserve wording
+
+- **What Happened at Camp Mystic:** contemporaneous [AP reporting](https://apnews.com/article/31c4e493e9f1b6d0406df310e74d3f98) records Kerrville city manager Dalton Rice's first-responder account. Preserve that sentence with attribution; the later discovery makes its previously offered deletion unnecessary. The owner approved removal of the unlocated CNN opener/credit and Flash Flood's unsupported power-loss interval. The owner confirmed that Flash Flood's quoted aphorism is their own wording and approved retaining it without quotation marks.
+- **Cuauhtémoc:** the [Mexican Navy's November 4, 2007 release](https://semar.gob.mx/boletin/2007/bol_152_07.htm), final specifications, supports 2,368 square meters of sail. The political quotation links are now supported. The university/museum-style Gorch Fock comparison and the article's publication-time naming assertion must not be inferred from unrelated records.
+- **Energy essays:** current paired source records document recovered DOE, RSM, Gates, Heritage, UN and Climate Action Tracker quotations. The owner separately approved deletion of the two unlocated DOE/Treasury quotation sentences and dated paraphrases for Goldman and both refill passages. Those decisions are applied; recovered quotations elsewhere are preserved, not used as blanket proof.
+
+## Root-owned source questions
+
+### Camp Mystic evacuation reconstruction
+
+**Current: approved and applied; scoped PASS.** The earlier three corrected analytical graphics, removal of unsupported 15/25/32-foot gauge-to-cabin thresholds and explicit inclusive 30–70-minute author-scenario label remain. [Numerical/graphic correction evidence](image-revisions/camp-mystic-timeline-graphics-20260927.md). The owner subsequently approved separating the Cypress Lake and Guadalupe campuses with adjacent transitions and one alt-text correction, removing only unsupported same-July-14 reporting precision, and acknowledging ABC's preliminary-estimate caveat without presupposing a reporting failure. Those separate corrections are now applied. Current SHA-256: `cfdc2084c5eccec512149956330094ebc00199c2387f44984565d94df39893ab`; version remains `2.0 / Fourth web edition`.
+
+The inherited geography/reporting-context questions identified by independent review are resolved within those explicit approvals, not silently cleared by the numerical work. The earlier [logic check](camp-mystic-model-logic-check-2026-09-27.md) and [reverse calculation](camp-mystic-reverse-calculation-2026-09-27.md) remain historical diagnostic evidence, not outstanding instructions to restore the removed thresholds or certify the Windows model. The current clearance does not validate an operational evacuation model, convert downstream observations into cabin inundation times, or provide exhaustive engineering certification.
+
+### You Can't Outrun the Calculator
+
+New event identification replaces the earlier SoftBank-event lead:
+
+- [University of Tokyo's event record](https://globe.u-tokyo.ac.jp/en/news/news_250203.html) identifies the February 3, 2025 talk and embeds the [original university recording](https://www.youtube.com/watch?v=8LmfkUb2uIY).
+- The [university's February 13 report](https://www.u-tokyo.ac.jp/focus/en/articles/z1304_00042.html) corroborates the event and participants. Its publication date is after the essay; the event itself preceded it.
+- A [February 11 reproduced transcript of Matthew Berman's discussion and inserted Altman clips](https://blog.biocomm.ai/2025/02/11/openai-ceo-super-human-coders-by-end-of-2025-matthew-berman/) includes Altman's first-person progression from roughly millionth to top 10,000, o3 around 175th, an internal benchmark around 50, and a possible number-one result by year-end. Distinguish those inserted remarks from Berman's surrounding commentary. This is a transcript reproduction, not independently heard audio or a retrieved university transcript.
+- The original recording's metadata and English automatic-caption track were accessible, but the caption response was empty. No audio was listened to; no timestamp verification is claimed. The September o1-preview release/ranking correspondence is not established by the reproduced passage.
+
+**Approved and applied:** retain the trajectory explicitly as Altman's competitive-programming benchmark claims, remove the unverified September-model correspondence, and preserve the year-end claim as a possibility. The source note exposes the reproduced-transcript provenance. Current paired records give scoped PASS with SHA-256 `27268d9d8399ad4a6fa74748c4beb0121a574f3d62edd4679cc5abd301ea7dbd`. No other body paragraphs or artwork changed; version 2.0 / Fourth web edition remains the same pending release.
+
+### Generation Inflation
+
+Intended grain: nominal price comparisons must use the same defined item/measure at each endpoint; wage comparisons are cumulative real hourly wage growth by wage group, 1979–2023. Neither nominal price increases nor wage percentiles by themselves establish a generation's overall purchasing power or wealth.
+
+New evidence:
+
+- [Visual Capitalist's November 29, 2024 reproduced Empower table](https://www.voronoiapp.com/wealth/What-Does-Financial-Success-Look-Like-for-Americans-3222) explicitly gives Gen Z $9,469,847 and Boomers $1,049,172, with the survey question and September 13–14, 2024 dates. This supports the existing rounded figures as reported survey results. It is a secondary reproduction, not a newly obtained original Empower table. The [current Empower page](https://www.empower.com/the-currency/money/secret-success-research) supports the study population and method but omits the generational table. Preserve that provenance distinction rather than implying direct original-table inspection.
+- [EPI's corrected March 2024 report](https://www.epi.org/publication/swa-wages-2023/), Appendix Figure A's data table, gives 2023 cumulative changes from 1979 of 18.3% low wage (10th percentile), 20.8% lower-middle (average 20th–40th), 17.4% middle (average 40th–60th), 23.4% upper-middle (average 60th–80th), and 51.7% high wage (90th percentile). Its correction notice identifies older computational errors. Table 1's middle-wage levels and Figure A's shorter 2019–2023 changes are distinct measures, not replacements for long-run totals. Extracted PDF chart labels were inconsistent with the HTML data-table labels; do not treat OCR position as authoritative or silently reproduce the old graphic.
+- Official matched-series endpoints verified: [BLS white pan bread, cost per pound, via FRED](https://fred.stlouisfed.org/data/APU0000702111), January 1980 $0.501 / January 2023 $1.888; [Census/HUD annual median new-home sales prices, via FRED](https://fred.stlouisfed.org/data/MSPNHSUSA), 1980 $64,600 / 2023 $428,600; [NCES Digest 2023 Table 330.10](https://nces.ed.gov/programs/digest/d23/tables/dt23_330.10.asp), all-institutions tuition and required fees in current dollars, 1980–81 $1,289 / 2022–23 $14,688, excluding room/board and aid. BLS price levels are not quality-adjusted indexes; NCES has a pre-1996 institutional-classification caveat. These defined replacements do not validate the original unspecific 1950-to-2023 examples.
+
+**Owner reviewed and approved the exact replacements; now applied.** Only the [listed price/wage passages, one wage image-to-table replacement and citations](generation-inflation-exact-approval-2026-09-27.md) changed. The inaccurate original wage image file is retained for recovery, and every other illustration and all unlisted prose remain unchanged. No derived price percentages have been computed or certified in this record. Current paired records show scoped PASS with SHA-256 `32a0f4b7b6ae669035929ce311af2e45c6eed96f08316da4a33cbde16d8af8a6`.
+
+## Historical verification checkpoints and delivery boundary
+
+Recovery copies and exact replacement maps are held in `/tmp/oip-history-eleven-6g5Jee/`, `/tmp/oip-environment-eleven-Ptcj73/` and `/tmp/oip-energy-eleven-TPsrrQ/`; root-owned snapshots are in `/tmp/oip-root-eleven-jwzEkR/`. One consolidated focused comparison passed first time for all ten edited essays and all twenty paired hashes at that checkpoint. Eight files reproduce byte-for-byte from snapshots plus recorded sequential replacements. Calculator's three approved spans were diff-reviewed and all other bytes match; Generation Inflation's exact proposed paragraphs/bullets/table and unchanged surrounding bytes were checked, with the original image retained. No failure reruns occurred. Check scripts: `/tmp/oip-history-eleven-6g5Jee/check-eight-preservation.py` and `/tmp/oip-root-eleven-jwzEkR/check-root-preservation.py`.
+
+After the later Water's Rising sentence correction, one focused byte-for-byte preservation and paired-hash comparison passed for that essay: the prior snapshot plus the single approved sentence replacement reproduces the current file, and both current records carry the matching hash above. This was the only subsequent preservation check; the other nine essays were not rerun.
+
+Those prior custom preservation checks are not the formal publication gate and do not certify the later first-ten changes. The current consolidated preservation PASS is recorded in [the central first-ten record](first-ten-remaining-approved-2026-09-27.md), with zero failures and zero reruns. PowerShell was unavailable in the earlier recorded host check; no toolchain re-probe/install, Node/browser suite, production build, commit, remote write or publication was performed here. Required release gates remain pending.

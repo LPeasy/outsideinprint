@@ -7,9 +7,12 @@ collections: ["civic-institutions-and-public-power"]
 section_label: "Essay"
 subtitle: "An Exploration"
 description: "The Rationality of Willful Ignorance in Presidential Elections: A Theoretical and Structural Exploration"
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected uneven wealth-share trend. Added or retained claim-level source links; original reporting frame and artwork retained. Recast the wealth-trend inference as persistence across changes in presidential leadership, not proof of independence from electoral outcomes."
   - version: "1.1"
     date: "2026-04-26"
     note: "Updated April 26, 2026, after OIP back-archive review, to clean Medium import artifacts and normalize Markdown rendering."
@@ -31,7 +34,7 @@ This paper argues that for the majority of Americans, particularly those in lowe
 
 #### The Cost-Benefit Analysis of Participation
 
-While democratic theory places great emphasis on informed participation, the individual incentives for engaging in presidential elections are weak. According to Anthony Downs's An Economic Theory of Democracy (1957), rational individuals weigh the costs of acquiring political knowledge against the infinitesimal likelihood that their vote will influence the outcome.
+While democratic theory places great emphasis on informed participation, the individual incentives for engaging in presidential elections are weak. According to [Anthony Downs's](https://cooperative-individualism.org/downs-anthony_an-economic-theory-of-political-action-1957-apr.pdf) An Economic Theory of Democracy (1957), rational individuals weigh the costs of acquiring political knowledge against the infinitesimal likelihood that their vote will influence the outcome.
 
 ##### 1. Marginal Utility of a Single Vote:
 
@@ -59,11 +62,11 @@ Presidential elections are framed as contests between competing visions, yet the
 
 ##### 2. Elite Influence:
 
-- Both major parties are deeply reliant on wealthy donors and corporate sponsors, whose interests heavily influence policymaking. Research by Gilens and Page (2014) demonstrates that U.S. policy outcomes frequently align with the preferences of economic elites, regardless of the preferences of the general public.
+- Both major parties are deeply reliant on wealthy donors and corporate sponsors, whose interests heavily influence policymaking. [Research by Gilens and Page (2014)](https://www.globalgovernancewatch.org/library/doclib/20140820_GilensandPageTestingTheories.pdf) demonstrates that U.S. policy outcomes frequently align with the preferences of economic elites, regardless of the preferences of the general public.
 
 ##### 3. Economic Inequality:
 
-- Persistent inequality transcends presidential administrations. For example, the share of wealth controlled by the top 1% has grown steadily under both Democratic and Republican leadership, reflecting systemic forces that operate independently of electoral outcomes.
+- Persistent inequality transcends presidential administrations. For example, [the share of wealth controlled by the top 1% grew overall from 1989 to 2022](https://www.cbo.gov/publication/60807), a period of both Democratic and Republican leadership, suggesting that systemic forces can persist across changes in presidential leadership.
 
 For the average citizen, particularly those in lower-income brackets, these dynamics suggest that presidential elections offer little opportunity for meaningful change in their material conditions.
 
@@ -130,5 +133,3 @@ Disengagement from the presidential election is often framed as apathy or irresp
 Willful ignorance in presidential elections is not a failure of democracy but a rational adaptation to its structural realities. For many individuals, disengaging from the presidential election cycle allows them to avoid cognitive and emotional burdens while focusing on aspects of life where they can exercise greater agency. This perspective reframes disengagement not as a problem to be solved but as a logical and potentially beneficial choice for those seeking stability and control in an increasingly polarized political environment.
 
 Rather than viewing disengagement as a threat to democracy, it can be understood as an acknowledgment of the limitations of presidential politics. By shifting attention to state and local issues, individuals can achieve meaningful engagement without the stress and futility often associated with national elections. In this way, willful ignorance becomes not just rational, but prudent.
-
-

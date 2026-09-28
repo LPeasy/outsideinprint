@@ -1,3 +1,35 @@
+# Current link-only review — September 27, 2026
+
+File: `content/essays/the-curb-cut-at-the-corner.md`  
+Version: `1.1 / Second web edition`  
+SHA-256: `092d45426645d87ea54fbc8bcafb380d26a6bc48497e900fe37e378f7ffeddb1`
+
+Current status: **PASS (bounded citation revision)**. Original prose restored; only supported hyperlink additions/destination repairs and minor citation metadata are allowed. Minimal corrections remain private and unapproved. This checkpoint supersedes all earlier September 27 major-revision candidates below; their claims that prose corrections were applied are no longer current.
+
+One city-project anchor supports the existing Dinkytown example. Legal, archival and agency sources already cover the remaining factual clusters; no source is offered as evidence of nationwide compliance.
+
+## Current source scope
+
+- [city project page for Dinkytown](https://www.minneapolismn.gov/government/projects/dinkytown-ped-improvements/) — attached only to the existing phrase; source scope is described above.
+
+Evidence was read in the current research pass or its preserved claim-level source record. Access failures are not source verification. Historical-source passages remain useful research, but discarded revisions and old final hashes are not release evidence. Private proposals: `../core-link-only-root-approvals-2026-09-27.md`. No release gate or publication performed.
+
+## Superseded research history — not current clearance
+
+# Claim-link review: September 27, 2026
+
+File: `content/essays/the-curb-cut-at-the-corner.md`  
+Edition: `1.1 / Second web edition`  
+SHA-256: `945907ccf73d5c52df15d4520c11949e413399fce18ad17e1ed25251f69ebcd9`
+
+[Minneapolis's Dinkytown project page](https://www.minneapolismn.gov/government/projects/dinkytown-ped-improvements/) was read on September 27. Its project overview describes curb-ramp upgrades and its Project phase section says design; the page states it was last updated June 8, 2026. One missing direct link was attached to that existing example. No new project completion or current construction claim was added.
+
+Scope: completed body/source-record coverage review and verification of newly linked passages, not a fresh full historical or legal audit. All other prose, original date, routes, membership, and artwork remain unchanged. Earlier source caveats below remain in force. Combined publication gates are pending.
+
+## Historical source record: June 21, 2026
+
+The following records earlier research, not fresh retrieval performed in this pass.
+
 # Source Checklist
 
 Candidate: `The Curb Cut at the Corner`

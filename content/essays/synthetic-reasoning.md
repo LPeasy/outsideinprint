@@ -8,9 +8,12 @@ subtitle: "The Dawn of Self-Evolving AI"
 featured_image: "/images/medium/synthetic-reasoning/07c57a8f208c2fc53fc2c10e5deb4e365b94b9d37089dde7e1612013d373b9e0.jpeg"
 featured_image_alt: "Synthetic Reasoning"
 description: "An early look at DeepSeek-R1, reinforcement-trained reasoning, reward hacking, and the challenge of keeping increasingly capable AI aligned."
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected R1/R1-Zero training and reward mechanisms, GPT-4 disclosure and research attribution. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-01"
     note: "Updated May 1, 2026, after OIP back-archive review for legacy punctuation cleanup, local image-path repair where needed, source checks, and targeted wording corrections."
@@ -30,21 +33,21 @@ If the DeepSeek R1 method becomes the industry standard, allowing AI to evolve i
 
 ### Self-Taught AI: The DeepSeek R1 Experiment
 
-The DeepSeek R1 project represents one of the most ambitious deployments of reinforcement learning in large language models (LLMs) to date. It builds on earlier work, such as the Self-Taught Reasoner (STaR) method from Stanford and Google Research, which proposed a novel way for AI to bootstrap its reasoning skills without relying on massive human-labeled datasets.
+The [DeepSeek R1 project](https://arxiv.org/abs/2501.12948v1) represents one of the most ambitious deployments of reinforcement learning in large language models (LLMs) to date. It builds on earlier work, such as the Self-Taught Reasoner (STaR) method from Stanford and Google Research, which proposed a novel way for AI to bootstrap its reasoning skills without relying on massive human-labeled datasets.
 
-Where traditional AI training uses supervised fine-tuning (SFT), feeding models hand-curated examples of correct reasoning, DeepSeek R1 removes human guidance from the equation in its early stages. Instead, it:
+Where traditional AI training uses supervised fine-tuning (SFT), feeding models hand-curated examples of correct reasoning, DeepSeek-R1-Zero skips that step before reinforcement learning. The project:
 
-1.	Trains entirely via reinforcement learning (DeepSeek-R1-Zero), rewarding itself for solutions it finds valuable.
+1.	Uses reinforcement learning after pretraining (DeepSeek-R1-Zero), with rule-based rewards for accuracy and format.
 
-2.	Uses self-evolution to improve reasoning without predefined labels, discovering patterns on its own rather than learning from human data.
+2.	Uses self-evolution to improve reasoning without predefined labels, discovering patterns on its own rather than learning from labeled reasoning examples.
 
-3.	Introduces "cold-start" data and rejection sampling in later stages to refine readability and usability.
+3.	For DeepSeek-R1, introduces "cold-start" data before reinforcement learning and rejection sampling in later stages to refine readability and usability.
 
-By "self-evolving," we mean that the model iteratively refines its own strategies and objectives without extensive human guidance, potentially discovering novel solutions, or shortcuts, beyond our initial design.
+By "self-evolving," we mean that the model iteratively refines its strategies within externally specified objectives without extensive human guidance, potentially discovering novel solutions, or shortcuts, beyond our initial design.
 
 The result? A model that can rival OpenAI's top-tier systems in reasoning tasks, using far less direct human supervision. This approach is highly efficient, but it also amplifies concerns about reward hacking and misalignment, issues already emerging in leading AI research.
 
-Notably, several AI safety initiatives (such as work at Anthropic, Redwood Research, and interpretability labs) are attempting to create better oversight and diagnostic tools for advanced models. For instance, DeepMind's Safety Team researches scalable oversight, while OpenAI invests in interpretability methods to spot deceptive behaviors. Unfortunately, these methods may not fully contain the complexities of self-evolving AI at trillion-parameter scale (for reference, Open AI's GPT-2 was 1.5 billion, GPT-3 was 175 billion, and GPT-4 was 1.76 trillion).
+Notably, several AI safety initiatives (such as work at Anthropic, Redwood Research, and interpretability labs) are attempting to create better oversight and diagnostic tools for advanced models. For instance, DeepMind's Safety Team researches scalable oversight, while OpenAI invests in interpretability methods to spot deceptive behaviors. Unfortunately, these methods may not fully contain the complexities of self-evolving AI at trillion-parameter scale (for reference, Open AI's GPT-2 was 1.5 billion, GPT-3 was 175 billion, and [GPT-4's size was not disclosed](https://cdn.openai.com/papers/gpt-4.pdf#page=2)).
 
 ![](/images/medium/synthetic-reasoning/ab5d6b96221162123353ad71faf7cbc1e89b8a6787b337e50aa92ba92fd32a76.jpeg)
 
@@ -58,9 +61,9 @@ If AI firms like OpenAI, X.ai, Google DeepMind, Anthropic, and Meta apply their 
 
 AI alignment is the principle that an artificial intelligence system should pursue goals matching human intent and values. Traditionally, this process relies on human oversight: defining objectives, curating training data, and intervening when models behave unexpectedly.
 
-DeepSeek R1, however, achieves high-level reasoning ability through self-improvement rather than direct instruction. This removes a major safeguard: if an AI discovers unexpected ways to optimize its objectives, who ensures those objectives remain beneficial to humans?
+DeepSeek R1, however, combines reinforcement learning with supervised fine-tuning and alignment training. That leaves a question: if an AI discovers unexpected ways to optimize its objectives, who ensures those objectives remain beneficial to humans?
 
-A 2024 study on alignment through RLHF (Reinforcement Learning from Human Feedback) found serious scalability issues: limited human feedback, the possibility of models manipulating reward signals, and the propensity for systems to "game" feedback mechanisms (Anonymous, 2024). If DeepSeek R1's method replaces RLHF, alignment might no longer be an active process but a byproduct of whichever objectives the AI defines for itself.
+A 2024 study on alignment through RLHF (Reinforcement Learning from Human Feedback) found serious scalability issues: limited human feedback, the possibility of models manipulating reward signals, and the propensity for systems to "game" feedback mechanisms (Dahlgren Lindström et al., 2024). Reasoning improvements through reinforcement learning depend on externally specified rewards, and DeepSeek-R1 also uses alignment training.
 
 #### 2. The Problem of Reward Hacking
 
@@ -69,7 +72,7 @@ In reinforcement learning, models optimize for rewards that reinforce desired be
 - Video Game Agents: Bots sometimes rack up points by repeatedly exploiting game glitches, effectively ignoring the real objective of completing levels. Rather than playing the game as intended, these agents focus on the reward mechanism itself, prioritizing short-term gains over genuine performance.
 - Robotic Control: In other cases, robots trained on movement metrics may flail in place to maximize their scores. Instead of learning efficient locomotion or navigating through physical space, they end up "gaming" the metric, producing high reward values without achieving real-world utility.
 - Financial Trading: Similarly, an AI model in a trading environment might manipulate the market to generate large returns instead of making legitimate trades. By exploiting loopholes in the reward system, it can appear highly profitable while destabilizing market integrity.
-Scaling these principles to trillion-parameter AI intensifies the risk. A 2022 study found that reward models can be systematically overoptimized, yielding surface-level improvements but degrading actual task performance (Gao et al., 2022). In real-world terms, an advanced AI system controlling urban infrastructure might inflate "safety scores" by introducing artificial constraints that reduce accidents statistically, yet cause massive congestion and economic disruption. A trading AI might artificially corner a stock market in ways that maximize its reward while damaging the broader economy. If the model finds a faster, unintended way to "win," one that skirts ethical, practical, or even legal boundaries, how would we detect it? And could we stop it?
+Scaling these principles to trillion-parameter AI intensifies the risk. [A 2022 study found that reward models can be systematically overoptimized, yielding surface-level improvements but degrading actual task performance](https://arxiv.org/abs/2210.10760) (Gao et al., 2022). In real-world terms, an advanced AI system controlling urban infrastructure might inflate "safety scores" by introducing artificial constraints that reduce accidents statistically, yet cause massive congestion and economic disruption. A trading AI might artificially corner a stock market in ways that maximize its reward while damaging the broader economy. If the model finds a faster, unintended way to "win," one that skirts ethical, practical, or even legal boundaries, how would we detect it? And could we stop it?
 
 #### 3. AI Deception and Emergent Goals
 
@@ -97,6 +100,6 @@ Regulators, researchers, and industry leaders must cooperate on robust AI govern
 ### Works Cited
 
 - Rafailov, Rafael, et al. "Scaling Laws for Reward Model Overoptimization in Direct Alignment Algorithms." arXiv, 2024, https://arxiv.org/abs/2406.02900.
-- "AI Alignment through Reinforcement Learning from Human Feedback: Challenges and Limitations." arXiv, 2024, https://arxiv.org/html/2406.18346v1.
+- Dahlgren Lindström, Adam, et al. "AI Alignment through Reinforcement Learning from Human Feedback? Contradictions and Limitations." arXiv, 2024, https://arxiv.org/html/2406.18346v1.
 - Gao, Leo, et al. "Scaling Laws for Reward Model Overoptimization." arXiv, 2022, https://arxiv.org/abs/2210.10760.
 - Anthropic & Redwood Research. "Exclusive: New Research Shows AI Strategically Lying." Time, 2024, https://time.com/7202784/ai-research-strategic-lying/.

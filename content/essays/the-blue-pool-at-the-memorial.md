@@ -6,9 +6,12 @@ date: 2026-05-10
 draft: false
 slug: "the-blue-pool-at-the-memorial"
 section_label: "Essay"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
@@ -112,7 +115,7 @@ The country should care how its capital looks. The Mall should be maintained. Fe
 
 Process is how that interest becomes reliable.
 
-The AP reported that Trump has pressed to paint the Eisenhower Executive Office Building white, a proposal involving a historic federal building beside the White House. The same report said a federal planning review has asked for more detail on the project. That is exactly what review should do. It does not need to reject beauty in advance. It should help beauty make its case through material, cost, justification, preservation effect, public comment, and fit with the building's history.
+The AP reported that Trump has pressed to paint the Eisenhower Executive Office Building white, a proposal involving a historic federal building beside the White House. The same report said [a federal planning review has asked for more detail on the project](https://www.ncpc.gov/news/item/261/3/). That is exactly what review should do. It does not need to reject beauty in advance. It should help beauty make its case through material, cost, justification, preservation effect, public comment, and fit with the building's history.
 
 The point is simple enough: public beauty deserves public discipline.
 

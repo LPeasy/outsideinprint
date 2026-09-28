@@ -1,0 +1,261 @@
+{
+  "files": [
+    {
+      "path": "content/essays/jack-stratton-and-the-vulfpeck-model.md",
+      "snapshot": "/tmp/oip-final-nine-stratton-attenborough.mpFg4w/jack-stratton-and-the-vulfpeck-model.md",
+      "replacements": [
+        {
+          "before": "> All direct quotes from Stratton in this biography are drawn from that\n> interview.",
+          "after": "> Except for the concert-film quotation below, direct quotes from Stratton in this biography are drawn from that\n> interview.",
+          "count": 1
+        },
+        {
+          "before": "After cutting his teeth with Bert, he formed his own group:",
+          "after": "Years later, he formed his own klezmer group:",
+          "count": 1
+        },
+        {
+          "before": "Stratton has credited a Reinhold Mack interview as the creative spark.",
+          "after": "Stratton has credited a [Reinhold Mack interview](https://jambands.com/features/2014/01/12/vulfpeck-keep-it-beastly/) as the creative spark.",
+          "count": 1
+        },
+        {
+          "before": "in April 2011",
+          "after": "in 2011",
+          "count": 1
+        },
+        {
+          "before": "earned over \\$20,000",
+          "after": "earned about \\$20,000",
+          "count": 1
+        },
+        {
+          "before": "is widely used by producers",
+          "after": "is used by producers",
+          "count": 1
+        },
+        {
+          "before": "**six studio albums,\na compilation, and multiple live albums.**",
+          "after": "**studio and live albums.**",
+          "count": 1
+        },
+        {
+          "before": "In 2019, they became **one of the first acts to sell out Madison Square\nGarden *without a manager or major label.***",
+          "after": "In 2019, they [**sold out Madison Square\nGarden *without a manager or major label.***](https://ca.billboard.com/fyi/music-biz-headlines-oct-11-2019)",
+          "count": 1
+        },
+        {
+          "before": "> Dublin, 2016. Lightning in a bottle.",
+          "after": "> [Dublin, 2017](https://www.youtube.com/watch?v=3ruXOh74xRE). Lightning in a bottle.",
+          "count": 1
+        },
+        {
+          "before": "August 26",
+          "after": "Aug 26",
+          "count": 1
+        },
+        {
+          "before": "> ~ Jack Stratton, lying on a shakti mat",
+          "after": "> ~ [Jack Stratton, lying on a mat in the concert film](https://www.jambase.com/article/vulfpeck-clarity-of-cal-concert-film)",
+          "count": 1
+        },
+        {
+          "before": "It's kind of a joke now ~",
+          "after": "I mean, at this point, it's a joke:",
+          "count": 1
+        },
+        {
+          "before": "lofty, biblical writing. Just",
+          "after": "lofty, biblical writing... Just",
+          "count": 1
+        },
+        {
+          "before": "It's simple stuff, but artists are in the\n> dark.",
+          "after": "It's simple stuff... But the artists are in the\n> dark.",
+          "count": 1
+        },
+        {
+          "before": "> In 2021, he proposed a listener-based royalty model.",
+          "after": "> He proposed a [listener-based royalty model](https://www.thebeliever.net/an-interview-with-jack-stratton/).",
+          "count": 1
+        },
+        {
+          "before": "version: \"1.6\"\nedition: \"Seventh web edition\"",
+          "after": "version: \"2.0\"\nedition: \"Seventh web edition\"",
+          "count": 1
+        },
+        {
+          "before": "revision_history:\n  - version: \"1.6\"",
+          "after": "revision_history:\n  - version: \"2.0\"",
+          "count": 1
+        },
+        {
+          "before": "note: \"Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original wording, paragraph structure, source-method framing, and artwork are preserved.\"",
+          "after": "note: \"Retained source hyperlinks and applied approved narrow chronology, source-attribution, catalog-scope, track-title, and quotation-transcription corrections. The opening wordplay, surrounding prose, artwork, and original publication date are preserved; the unpublished broad rewrite remains withdrawn.\"",
+          "count": 1
+        }
+      ],
+      "sha256": "bd1d0dd1f5ce059bd3ea68f7c49866f040c77282390468f3c20dccae0aa8d301",
+      "records": [
+        "docs/editorial-audits/99-refinement/jack-stratton-and-the-vulfpeck-model-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/jack-stratton-and-the-vulfpeck-model-source-checklist.md"
+      ]
+    },
+    {
+      "path": "content/essays/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.md",
+      "snapshot": "/tmp/oip-final-nine-stratton-attenborough.mpFg4w/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen.md",
+      "replacements": [
+        {
+          "before": "His father was principal of University College Leicester.",
+          "after": "His father was [principal of University College Leicester](https://le.ac.uk/about/history/attenboroughs/family).",
+          "count": 1
+        },
+        {
+          "before": "He boiled down animal bones.\n\n",
+          "after": "",
+          "count": 1
+        },
+        {
+          "before": "He mapped local wildlife ranges before he hit puberty.\n\n",
+          "after": "",
+          "count": 1
+        },
+        {
+          "before": "> \"I was quite obsessive about natural history,\" he later admitted.\n> \"That was the beginning of everything.\"\n\n",
+          "after": "",
+          "count": 1
+        },
+        {
+          "before": "program [in 1952](https://www.weforum.org/stories/authors/david-attenborough/) ~ not because he dreamed of being on TV, but because\n**he was \"mildly irritated by the way animals were being presented.\"**",
+          "after": "program [in 1952](https://www.weforum.org/stories/authors/david-attenborough/).",
+          "count": 1
+        },
+        {
+          "before": "One episode drew criticism for showing a monkey being fed to a snake.\n\n> \"I was accused of promoting cruelty,\" he recalled.\n\n> \"But that was nature doing what it does.\"\n\n",
+          "after": "",
+          "count": 1
+        },
+        {
+          "before": "#### Building the BBC's Natural History Unit: The Big Picture",
+          "after": "#### Shaping the BBC: The Big Picture",
+          "count": 1
+        },
+        {
+          "before": "In the 1970s, Attenborough wasn't just hosting programs",
+          "after": "In the 1960s and early 1970s, Attenborough wasn't just hosting programs",
+          "count": 1
+        },
+        {
+          "before": "he\ncommissioned landmark shows like Monty Python's Flying Circus and\nCivilisation, while quietly building the most ambitious wildlife\nproduction team in history.",
+          "after": "he\nhelped commission landmark shows like [Monty Python's Flying Circus](https://rts.org.uk/article/michael-palin-talks-sir-david-attenborough-about-his-life-air) and\n[Civilisation](https://rts.org.uk/article/bbc-needs-broaden-its-range-says-sir-david-attenborough).",
+          "count": 1
+        },
+        {
+          "before": "In 1979, **he returned to the field to narrate and write *Life on\nEarth***",
+          "after": "After [returning to program-making in 1973](https://www.weforum.org/stories/authors/david-attenborough/), **he narrated and wrote *Life on\nEarth* in 1979**",
+          "count": 1
+        },
+        {
+          "before": "> Over 500 million people watched it.",
+          "after": "> [An estimated 500 million people watched it.](https://bbcearth.ca/shows/making-life-on-earth-attenboroughs-greatest-adventure/)",
+          "count": 1
+        },
+        {
+          "before": "In the booth, Attenborough records the final line:",
+          "after": "As Attenborough put it:",
+          "count": 1
+        },
+        {
+          "before": "> \"I never wanted to be the star,\" he once said. \"The animals are the\n> stars.\"",
+          "after": "> [\"In the programmes I do, the animals tend to be the stars.\"](https://rts.org.uk/article/bbc-needs-broaden-its-range-says-sir-david-attenborough)",
+          "count": 1
+        },
+        {
+          "before": "With 4K cameras, helicopter rigs, and a \\$25 million budget,",
+          "after": "With [high-definition cameras](https://downloads.bbc.co.uk/annualreport/pdf/2006-07/bbcexec_eng_200607.pdf#page=8), helicopter rigs, and a [\\$25 million budget](https://www.gmanetwork.com/news/newstv/content/262145/bbc-s-groundbreaking-series-planet-earth-airs-on-gma-news-tv-this-july/story/),",
+          "count": 1
+        },
+        {
+          "before": "***He made you feel them:***",
+          "after": "***He made you feel them. I hear his style this way:***",
+          "count": 1
+        },
+        {
+          "before": "> \"In the forest canopy, time slows...",
+          "after": "> In the forest canopy, time slows...",
+          "count": 1
+        },
+        {
+          "before": "> The sun filters through like ancient, stained glass.\"",
+          "after": "> The sun filters through like ancient, stained glass.",
+          "count": 1
+        },
+        {
+          "before": "In State of the Planet (2000), he asked:",
+          "after": "The question I hear in State of the Planet (2000) is:",
+          "count": 1
+        },
+        {
+          "before": "> \"Can we go on living like this?\"",
+          "after": "> Can we go on living like this?",
+          "count": 1
+        },
+        {
+          "before": "By 2020, he'd stopped asking that question.",
+          "after": "By 2020, he was offering an answer.",
+          "count": 1
+        },
+        {
+          "before": "Then he did something rare in environmental media: he offered a path\nback:",
+          "after": "Then he did something rare in environmental media: he offered a path\nback. In other words:",
+          "count": 1
+        },
+        {
+          "before": "> \"Rewild the world,\" he said.",
+          "after": "> Rewild the world.",
+          "count": 1
+        },
+        {
+          "before": "> \"It's not too late.\"",
+          "after": "> It's not too late.",
+          "count": 1
+        },
+        {
+          "before": "His scripts are written last, not first ~ only after the footage is shot\nand the scenes are sequenced.\n\nHe watches the cut, sits in a sound booth, and begins to speak.\n\n",
+          "after": "",
+          "count": 1
+        },
+        {
+          "before": "> Emmys, BAFTAs, the Order of Merit, two knighthoods (the second from\n> Queen Elizabeth in 1985, and a Knight Grand Cross from King Charles in\n> 2022).",
+          "after": "> Emmys, BAFTAs, the Order of Merit, a [knighthood in 1985](https://www.weforum.org/stories/authors/david-attenborough/) and [appointment as Knight Grand Cross in 2020](https://www.thegazette.co.uk/notice/3645550), with the latter [presented by Charles, then Prince of Wales, in 2022](https://www.itv.com/news/london/2022-06-08/sir-david-attenborough-collects-high-honour-from-prince-of-wales-at-windsor).",
+          "count": 1
+        },
+        {
+          "before": "In 2021, a new research vessel was nearly named ***Boaty McBoatface***,\nbut public outcry led to the more sensible **RRS Sir David\nAttenborough.**",
+          "after": "In 2016, ***Boaty McBoatface*** won a public naming poll,\nbut the [government chose **RRS Sir David\nAttenborough** for the research ship and gave the poll-winning name to an undersea vehicle](https://www.gov.uk/government/news/uks-200-million-polar-research-ship-named-in-honour-of-sir-david-attenborough).",
+          "count": 1
+        },
+        {
+          "before": "version: \"1.4\"\nedition: \"Fifth web edition\"",
+          "after": "version: \"2.0\"\nedition: \"Fifth web edition\"",
+          "count": 1
+        },
+        {
+          "before": "revision_history:\n  - version: \"1.4\"",
+          "after": "revision_history:\n  - version: \"2.0\"",
+          "count": 1
+        },
+        {
+          "before": "note: \"Added claim-level source links while preserving the existing prose, description and illustrations.\"",
+          "after": "note: \"Retained source links and applied approved narrow chronology, production-format, honors, ship-naming, and quotation corrections; removed specified unsupported anecdotes and workflow claims. The author confirmed the forest imagery as imagined narration, and conservation phrases are framed as author interpretation. Surrounding prose, illustrations, and original publication date are preserved.\"",
+          "count": 1
+        }
+      ],
+      "sha256": "d3b3b7286a3bfe49559db1f62e19b8a1b3de86ec2fc6368e676ba870413d51b2",
+      "records": [
+        "docs/editorial-audits/99-refinement/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen-source-checklist.md"
+      ]
+    }
+  ]
+}

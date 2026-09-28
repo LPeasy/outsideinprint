@@ -8,9 +8,12 @@ subtitle: "STaR and the Self-Improving Reasoning Ideas Behind DeepSeek"
 featured_image: "/images/medium/deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants/bd004c2ef628161dabf422814a612a5ec128b8ab922e1e9015faea0e3ae8ef49.jpeg"
 featured_image_alt: "DeepSeek: Lean AI Disrupts America's Compute-Heavy Tech Giants"
 description: "How did a relatively small AI company manage to challenge the titans of tech? DeepSeek, using reinforcement learning and self-improving reasoning ideas, may have crack..."
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected STaR training versus inference mechanism. Added or retained claim-level source links; original reporting frame and artwork retained. Recast the unsupported all-in competitor-cost comparison as a question and the unnamed-analyst attribution as an explicitly speculative possibility."
   - version: "1.1"
     date: "2026-05-01"
     note: "Updated May 1, 2026, after OIP back-archive review for legacy punctuation cleanup, local image-path repair where needed, source checks, and targeted wording corrections."
@@ -27,11 +30,11 @@ Created using Chat GPT in January, 2025.
 
 How did a relatively small AI company manage to challenge the titans of tech? DeepSeek, using reinforcement learning and self-improving reasoning ideas in the same broad family as STaR (Self-Taught Reasoner), may have cracked the code for achieving high-performance AI without the need for colossal resources.
 
-What makes this family of techniques so important? Unlike traditional AI approaches that rely on enormous annotated datasets or a few carefully chosen examples, STaR trains models to spot and correct their own mistakes. Each model rationalizes its solutions step by step, identifies errors, and refines its logic on the fly. This cyclical learning process enables the system to grow smarter without constant human intervention.
+What makes this family of techniques so important? Unlike traditional AI approaches that rely on enormous annotated datasets or a few carefully chosen examples, STaR trains models to spot and correct their own mistakes. Each model rationalizes its solutions step by step, uses correct answers to generate new rationales and improves through repeated fine-tuning. This cyclical learning process enables the system to grow smarter without constant human intervention.
 
-Introduced in a 2022 paper by researchers at Stanford University and Google Research, including Eric Zelikman, Yuhuai Wu, Jesse Mu, and Noah D. Goodman, STaR offered a breakthrough insight: models could improve by "reasoning backward." Rather than predicting forward blindly, they start from correct answers and build rationales that align with those results. This method slashes the need for large, human-labeled datasets, which are expensive and time-consuming to create. Consequently, even a relatively small STaR-driven model can rival the performance of systems that traditionally required immense computational power.
+Introduced in [a 2022 paper](https://arxiv.org/abs/2203.14465) by researchers at Stanford University and Google Research, including Eric Zelikman, Yuhuai Wu, Jesse Mu, and Noah D. Goodman, STaR offered a breakthrough insight: models could improve by "reasoning backward." Rather than predicting forward blindly, they start from correct answers and build rationales that align with those results. This method slashes the need for large, human-labeled datasets, which are expensive and time-consuming to create. Consequently, even a relatively small STaR-driven model can rival the performance of systems that traditionally required immense computational power.
 
-DeepSeek amplified the broader approach, using large-scale reinforcement learning, cold-start data, and distillation around its R1 model. By prioritizing iteration over brute force, the company achieved state-of-the-art accuracy across diverse tasks, all while avoiding the astronomical costs of its larger competitors. The result? DeepSeek challenges the long-standing assumption that bigger always means better in AI, a disruption poised to reshape the entire competitive landscape.
+DeepSeek amplified the broader approach, using [large-scale reinforcement learning, cold-start data, and distillation around its R1 model](https://arxiv.org/html/2501.12948v1). By prioritizing iteration over brute force, the company achieved state-of-the-art accuracy across diverse tasks, raising questions about the cost of competitive AI. The result? DeepSeek challenges the long-standing assumption that bigger always means better in AI, a disruption poised to reshape the entire competitive landscape.
 
 The Impact of DeepSeek:
 
@@ -59,7 +62,7 @@ Investor Revaluation and Policy Context
 
 Consider the shifting priorities of venture capitalists and public markets. If DeepSeek's low-cost strategy demonstrates higher profitability, investors may pressure established companies to prioritize short-term gains over ambitious moonshot projects. Simultaneously, U.S. policy initiatives like the CHIPS Act reflect significant investment in advanced semiconductor manufacturing. But what if future AI models no longer demand such specialized chips? Public funds could face scrutiny, sparking debates about how to best allocate resources for innovation.
 
-Some analysts suggest another possibility: that the sudden emergence of an R1-like system could be part of a broader strategy. Given China's rapid progress in AI development, there is a nonzero chance that R1's release serves as an information warfare tactic. If true, this move could aim to destabilize U.S. investment in compute-heavy AI infrastructure, forcing American firms to recalibrate their strategies. While evidence for this remains speculative, it underscores the intersection of geopolitics, technological advancement, and strategic resource allocation.
+A more speculative possibility is that the sudden emergence of an R1-like system could be part of a broader strategy. Given China's rapid progress in AI development, there is a nonzero chance that R1's release serves as an information warfare tactic. If true, this move could aim to destabilize U.S. investment in compute-heavy AI infrastructure, forcing American firms to recalibrate their strategies. While evidence for this remains speculative, it underscores the intersection of geopolitics, technological advancement, and strategic resource allocation.
 
 Open-Source and Talent Migration
 

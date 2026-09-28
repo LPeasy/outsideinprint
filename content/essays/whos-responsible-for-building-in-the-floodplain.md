@@ -8,9 +8,12 @@ subtitle: "Camp Mystic, Zoning Laws, and the Limits of Federal Power"
 featured_image: "/images/medium/whos-responsible-for-building-in-the-floodplain/921f46f4d09c0c7ddcc7a9ad8642115e20fea0355d83ec02b6a06e1d9fe8f1ed.jpeg"
 featured_image_alt: "Who’s Responsible for Building in the Floodplain?"
 description: "A Camp Mystic essay on shared floodplain responsibility, local zoning, FEMA flood maps, federal flood insurance, alert protocols, and the limits of simple federal blame."
-version: "1.3"
-edition: "Fourth web edition"
+version: "2.0"
+edition: "Fifth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Qualified federal/state/local authority and voluntary buyout scope, and corrected warning channels and documented evacuation timing. Clarified the camp death count, map amendments versus permits, state plan review and earlier alert; narrowed unsupported grandfathering, county-delay and flood-level claims. Added or retained claim-level source links; original reporting frame and corrected image captions retained."
   - version: "1.1"
     date: "2026-05-18"
     note: "Updated May 18, 2026, after OIP back-archive review. Removed Medium import residue, normalized internal links, corrected minor wording, and narrowed floodplain-responsibility claims to match the available institutional record."
@@ -28,7 +31,7 @@ collections:
 medium_source_url: "https://medium.com/@lawtonperret/whos-responsible-for-building-in-the-floodplain-b468f42f536d"
 ---
 
-> After 27 people died at Camp Mystic on July 4, a colleague told me
+> After [27 campers and counselors died at Camp Mystic on July 4](https://www.ksat.com/news/ksat-investigates/2025/07/08/state-inspected-camp-mystic-two-days-before-deadly-floods-camp-had-emergency-plan/), a colleague told me
 
 > something I haven't stopped thinking about:
 
@@ -71,17 +74,17 @@ dangerous places.
 
 ### Who Controls Where We Build?
 
-> The federal government doesn't control zoning and development law.
+> The federal government doesn't exercise general local zoning authority.
 
-![](/images/medium/whos-responsible-for-building-in-the-floodplain/ec1c5ae8cc535e537d38cab44b3ad9d53f539c19a4264bcf69416e0518501cfc.jpeg)
+![CBS News Confirmed aerial graphic locates the Guadalupe River and Cypress Lake Camp Mystic sites near Hunt, Texas.](/images/medium/whos-responsible-for-building-in-the-floodplain/ec1c5ae8cc535e537d38cab44b3ad9d53f539c19a4264bcf69416e0518501cfc.jpeg)
 
-*Source: <a*
+*Source: CBS News Confirmed. This location graphic is not a regulatory floodway map.*
 
 
 **That power belongs to local governments ~** counties, cities, and
 towns ~ acting under authority granted by the states. It's been that way
-since a **1926 Supreme Court case** (*Village of Euclid v. Ambler
-Realty*) **upheld zoning as a legitimate local safety tool.**
+since a **1926 Supreme Court case** (*[Village of Euclid v. Ambler
+Realty](https://tile.loc.gov/storage-services/service/ll/usrep/usrep272/usrep272365/usrep272365.pdf#page=31)*) **upheld zoning as a legitimate local safety tool.**
 
 > That means cities and counties get to decide where the homes, summer
 > camps, and trailer parks exist.
@@ -103,9 +106,9 @@ zones.
 
 That leaves the hard question: why were cabins in the floodway?
 
-Some were built decades ago and were likely grandfathered in.
+Some were built decades ago.
 
-Others were approved as part of more recent expansions.
+Later [FEMA map amendments affected parts of the property](https://apnews.com/article/e12bee8d5f88301363861ca12c19b929); those are not local building permits.
 
 Some questions turn on local approvals, map determinations, and appeals,
 not a simple federal ban.
@@ -113,8 +116,8 @@ not a simple federal ban.
 > The federal government's role is to communicate flood risk
 > ~ think FEMA flood maps and NWS alerts.
 
-The federal government does not have the authority to restrict
-construction on private and state-owned property.
+The federal government can restrict some construction on private and
+state-owned property through laws such as [dredged-or-fill-material permit requirements](https://www.law.cornell.edu/uscode/text/33/1344).
 
 There are numerous examples of obviously risky places where people
 choose to live: barrier islands along the Intracoastal Waterway, the
@@ -126,15 +129,15 @@ programs to influence localities.
 Federal flood insurance is often mandated by lenders for properties
 located in high-risk flood zones (if the property is financed).
 
-That being said, zoning law is determined by local governments, period.
+That being said, local governments generally administer zoning under state law.
 
 **Local governments** **approve building plans.**
 
-**They sign off** on emergency preparedness plans.
+**State camp inspectors** also review [written emergency plans](https://www.ksat.com/news/ksat-investigates/2025/07/08/state-inspected-camp-mystic-two-days-before-deadly-floods-camp-had-emergency-plan/).
 
 They inspect the buildings, dot the i's, and cross the t's.
 
-> ***All FEMA can do is communicate the risk.***
+> ***FEMA also [conditions flood-insurance eligibility on floodplain-management standards](https://www.law.cornell.edu/cfr/text/44/59.24).***
 
 ### What does FEMA Actually Do?
 
@@ -167,8 +170,6 @@ year.**
 
 **You could have two "100-year" floods back-to-back.**
 
-> In fact, some Texas towns have.
-
 The problem is that **these numbers rely on historical data ~**
 
 assuming the past is a good guide to the future.
@@ -178,7 +179,7 @@ assuming the past is a good guide to the future.
 
 **On the 4th of July, the water**
 
-**rose well beyond the 100-year level.**
+**rose far beyond its banks.**
 
 Rain poured in from rivulets and tributaries.
 
@@ -217,39 +218,39 @@ The National Weather Service issued its **first flash flood warning at
 **At 4:22 a.m.,** a local **firefighter requested that Kerr County send
 out a CodeRED** alert to residents in Hunt, TX.
 
-> Local alert delivery lagged behind the weather warning timeline.
+> [An earlier CodeRED alert was read at camp at 1:51 a.m.](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026); the 4:22 request was not the first local alert.
 
 > [Essay #1](/essays/what-happened-at-camp-mystic/) lays out the full
 > warning timeline.
 
-> [Essay #3](/essays/flash-flood-alley-why-flash-floods-kill/) breaks
-> down how those delays turned deadly.
+> [Essay #3](/essays/flash-flood-alley-why-flash-floods-kill/) examines
+> the gap between warnings and action.
 
-By the time Camp Mystic **began evacuating around 4:45 a.m.**, it was
-**already too late** for many.
+The [Texas Legislature's June 2026 report](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=80)
+places the start of cabin evacuation **around 3:00 a.m.**, after water had begun entering cabins.
 
 **Here's how it is supposed to work:**
 
 1. The National Weather Service issues the
- alerts.
-2. Local officials get the message to the people on the
- ground.
+ alerts; [considerable and catastrophic flash flood warnings trigger Wireless Emergency Alerts](https://www.weather.gov/mkx/flashflood_updates_WEA).
+2. Local officials operate additional notification channels, such as
+ CodeRED; they do not have to approve NWS Wireless Emergency Alerts.
 3. Individuals and organizations (like Camp Mystic)
  respond to the alerts.
 
 ### Can the Federal Government Force People to Move?
 
-> No.
+> Not through [FEMA's voluntary buyout program](https://www.law.cornell.edu/cfr/text/44/80.11).
 
 The federal government ***can*** ***incentivize*** relocation by funding
 voluntary buyouts or limiting future disaster aid.
 
-It ***can't force*** local governments to evacuate a town, shut down a
+Through that program, it ***can't force*** local governments to evacuate a town, shut down a
 summer camp, or relocate a community in advance of a storm.
 
 > Why?
 
-Under current law, **the feds don't have zoning authority.**
+Under current law, **the feds don't have general local zoning authority.**
 
 They **can't commandeer states to enforce land use policies** (New York
 v. United States, 1992).
@@ -284,9 +285,8 @@ program, and administered the map and insurance framework.
 
 **The county?**
 
-It knew the area was hazardous, controlled local review and alert
-activation, had tools to require better planning or elevation, and did
-not move alerts quickly enough.
+It had floodplain-review and local-alert responsibilities; the timing
+and adequacy of its actions require scrutiny.
 
 **The camp?**
 

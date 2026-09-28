@@ -1,5 +1,75 @@
 # OIP-99 Refinement Report
 
+## Current strict hyperlink-only revision - 2026-09-27
+
+Review date: `2026-09-27`
+Essay: `content/essays/the-mailbox-at-the-edge-of-the-road.md`
+Version: `1.2` - Third web edition
+Final content SHA-256: `eae8c0b44a4846eefd059bb787864f4247a00171e67d0cb36a4c4dbdc1f1ec7d`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+Public change: HYPERLINK-ONLY; original body words, punctuation, captions, order and artwork preserved.
+
+Added two USPS RFD anchors to existing road-improvement and old-stop phrases. Kept the original annual-report wording; the previously drafted PRC replacement was rolled back.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+Decision State: `PASS`
+
+| Criterion | Decision | Reason |
+|---|---|---|
+| Evidence | PASS | USPS passages support the two newly linked historical effects. Other nearby primary citations remain; no new numeric outcome is asserted. |
+| Logic | PASS | The road and network argument does not establish that postal delivery alone paved America. |
+| Incentives | PASS | Household access, carrier operations, road standards, and postal costs remain visible. |
+| Tradeoffs | PASS | Convenience and reach remain balanced against loss of some local gathering places. |
+| Consequences | PASS | The author's civic interpretation remains distinct from the cited historical effects. |
+| Uncertainty | PASS | The new anchors imply no present postal balance-sheet finding; the historical PRC report read previously was not substituted into the public copy. |
+| Institutional Behavior | PASS | USPS operational effects remain separate from the author's universal-service argument. |
+
+PASS is bounded to this reviewed text and record, not an independent numerical regrade or permission to publish.
+
+See [current source checklist](the-mailbox-at-the-edge-of-the-road-source-checklist.md) for read passages and access limits, and [private group ledger](../core-link-only-history-2026-09-27.md#the-mailbox-at-the-edge-of-the-road) for any exact approval proposals.
+
+This record supersedes every incompatible pre-rollback result below. Earlier corrected prose and associated PASS decisions are historical, not approval of the restored text. The user authorized supporting hyperlinks only; all proposed wording changes remain private and unapplied.
+
+Scope: full body and existing-record review, actual passage verification for new anchors and specific concerns, not a fresh exhaustive re-research of every retained citation. No numeric score, local test suite, build, commit or publication. Only the decimal revision and next edition were advanced; the disclosure is 'Added source links without changing prose.'
+
+## Superseded pre-rollback research - 2026-09-27
+
+All following hashes, corrected-copy descriptions, scores and decisions refer to historical states. They do not apply to the current content hash above.
+
+Review date: `2026-09-27`
+Version: `1.2` - Third web edition
+Final content SHA-256: `9e91a7a4502c7bd6600ca3d62ac6311cfdca7eda51ca6936505ba318750063e1`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+
+Citation-level revision. Added nearby RFD links and replaced an unnamed reference to annual reporting with the specific 2008 PRC report. Historical argument and all publication identity/artwork fields are unchanged.
+
+Scope: full prose and existing source-record review, fresh passage verification for the changes documented in the companion checklist, and a bounded source-fit audit. This is not a new numeric grade, a comprehensive re-research certification, or a publication approval. Existing evidence was retained where the source placement and historical record were adequate.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+| Criterion | Decision | Reason |
+|---|---|---|
+| Evidence | PASS | New links support RFD's road/office effects and identify the particular universal-service report; existing quoted material keeps its links. |
+| Logic | PASS | Mailbox-to-road-to-network mechanism remains an historical argument, not a claim that postal delivery alone paved America. |
+| Incentives | PASS | Preserves incentives for households, carriers, road authorities, merchants, and postal planners. |
+| Tradeoffs | PASS | Retains convenience and reach alongside the loss of some local gathering points and service-cost pressure. |
+| Consequences | PASS | Historical service changes are separated from the author's interpretation of civic presence; no new numeric outcome asserted. |
+| Uncertainty | PASS | Dated PRC evidence is not presented as a current postal balance sheet or proof of every broader consequence. |
+| Institutional Behavior | PASS | USPS operational standards and PRC service dimensions remain distinct from author recommendations. |
+
+### Boundaries
+
+Original title, publication date, slug, membership, and artwork are preserved. Revision disclosure and edition advance describe this pass. No new visual assets, templates, tests, or release changes. Publication remains a separate parent workflow.
+
+## Historical refinement record
+
+The earlier candidate score and audit below are historical; they do not replace this revision's scope or findings.
+
+
 Package: `output/daily_candidates/2026-06-04-the-mailbox-at-the-edge-of-the-road/`
 
 Title: The Mailbox at the Edge of the Road

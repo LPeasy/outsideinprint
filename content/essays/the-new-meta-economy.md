@@ -10,9 +10,12 @@ featured_image: "/images/medium/the-new-meta-economy/bcb3e2d1414e3aa992a7e91e09e
 featured_image_caption: "Photo by Dima Solomin on Unsplash"
 featured_image_alt: "The New Meta Economy"
 description: "Glasses that see what you see. Bots that sell what you want. Welcome to The New Meta Economy"
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected verified quotation/paraphrase treatment and replaced unsupported market and screen-time figures with nonnumeric wording. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, after OIP back-archive review. Remote Medium body images were removed, import formatting was normalized, and source discipline was tightened."
@@ -28,7 +31,7 @@ Glasses that see what you see. Bots that sell what you want.
 
 Welcome to The New Meta Economy.
 
-Mark Zuckerberg says AI is transforming everything. But if you read Meta's first-quarter 2025 remarks, what it is really transforming is how efficiently Meta can sell you things, replace some human work, and insert itself between your eyes and the world.
+Mark Zuckerberg says AI is transforming everything. But if you read [Meta's first-quarter 2025 remarks](https://s21.q4cdn.com/399680738/files/doc_financials/2025/q1/Transcripts/META-Q1-2025-Earnings-Call-Transcript.pdf#page=1), what it is really transforming is how efficiently Meta can sell you things, replace some human work, and insert itself between your eyes and the world.
 
 Forget the hype around artificial general intelligence or digital utopias.
 
@@ -40,7 +43,7 @@ It is about a company with billions of daily users reshaping economic activity a
 
 Here's how Meta plans to do it.
 
-> "I think this is really redefining what advertising is into an AI agent that delivers measurable business results at scale."
+> "I think that this is really redefining what advertising is into an AI agent that delivers measurable business results at scale."
 
 Zuckerberg's vision of advertising isn't Mad Men. It's machine learning.
 
@@ -62,15 +65,15 @@ And Meta wants to own the whole shebang.
 
 ### AI as Labor Replacement and Customer Service Layer
 
-> "This phenomenon (running businesses entirely on Meta's platforms) hasn't yet spread to developed countries because the cost of labor is too high... but AI should solve this."
+Paraphrasing Zuckerberg: This phenomenon (running businesses entirely on Meta's platforms) hasn't yet spread to developed countries because the cost of labor is too high... but AI should solve this.
 
-Meta already runs commerce in places like Thailand and Vietnam through messaging apps. But in higher-wage countries, the math doesn't work yet.
+[Meta already runs commerce in places like Thailand and Vietnam through messaging apps](https://s21.q4cdn.com/399680738/files/doc_financials/2025/q1/Transcripts/META-Q1-2025-Earnings-Call-Transcript.pdf#page=2). But in higher-wage countries, the math doesn't work yet.
 
 Zuck predicts that AI models will replace some high-wage service work: web design, sales support, marketing operations, and customer service.
 
 Fewer people. More bots. No breaks, no training, no wages.
 
-> "Just like every business today has an email address... they'll also have an AI business agent that can do customer support and sales."
+Paraphrasing Zuckerberg: Just like every business today has an email address... they'll also have an AI business agent that can do customer support and sales.
 
 The sales floor becomes an LLM.
 
@@ -111,19 +114,19 @@ Zuckerberg has been pushing the metaverse for years, but this is different.
 
 This is about owning the interface: the physical and virtual space where attention lives.
 
-Ray-Ban Meta glasses are already on the market, and Meta says sales have grown quickly.
+Ray-Ban Meta glasses are already on the market, and [Meta says sales have grown quickly](https://s21.q4cdn.com/399680738/files/doc_financials/2025/q1/Transcripts/META-Q1-2025-Earnings-Call-Transcript.pdf#page=3).
 
-Analysts expect AR glasses to become a $50 billion industry by 2030.
+AR glasses could become a major industry.
 
 Whoever owns that space doesn't just win your attention. They shape it.
 
-> "Meta AI... personalized so you can talk to it about interests you've shown while browsing Reels... and we built a social feed into it..."
+Paraphrasing Zuckerberg: Meta AI... personalized so you can talk to it about interests you've shown while browsing Reels... and we built a social feed into it...
 
 That's not a productivity tool.
 
 That's a feedback loop. You engage with Meta content, the AI learns your behavior, then talks to you in real time to reinforce, refine, and monetize your preferences.
 
-The average American adult already spends more than 7 hours per day staring at a screen.
+Screens can already consume hours of daily attention.
 
 Meta's plan isn't to reduce screentime. It's to saturate it.
 

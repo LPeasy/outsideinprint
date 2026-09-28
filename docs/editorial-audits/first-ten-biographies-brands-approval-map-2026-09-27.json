@@ -1,0 +1,189 @@
+{
+  "files": [
+    {
+      "path": "content/essays/george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill.md",
+      "snapshot": "/tmp/oip-first-ten-brands-bios.0sdQze/george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill.md",
+      "replacements": [
+        {
+          "before": "Foreman left with those things and then built an even broader public life.",
+          "after": "Foreman built an even broader public life before his final retirement.",
+          "count": 1
+        },
+        {
+          "before": "version: \"1.2\"\nedition: \"Third web edition\"",
+          "after": "version: \"2.0\"\nedition: \"Third web edition\"",
+          "count": 1
+        },
+        {
+          "before": "revision_history:\n  - version: \"1.2\"",
+          "after": "revision_history:\n  - version: \"2.0\"",
+          "count": 1
+        },
+        {
+          "before": "note: \"Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original wording, paragraph structure, source-method framing, and artwork are preserved.\"",
+          "after": "note: \"Retained source hyperlinks and corrected the chronology of Foreman's broader public life before his final retirement. The unpublished broad rewrite remains withdrawn; surrounding prose, source-method framing, artwork, and original publication date are unchanged.\"",
+          "count": 1
+        }
+      ],
+      "sha256": "94d9e2bd2ee2d390c06dd3fa35b4987ea049c61bdf13e83d4e5271ad447432e2",
+      "records": [
+        "docs/editorial-audits/99-refinement/george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill-source-checklist.md"
+      ]
+    },
+    {
+      "path": "content/essays/the-bars-on-the-gum.md",
+      "snapshot": "/tmp/oip-first-ten-brands-bios.0sdQze/the-bars-on-the-gum.md",
+      "replacements": [
+        {
+          "before": "The barcode did not carry the price, reorder the case, check the promotion, or select the assortment.",
+          "after": "The ordinary manufacturer-coded barcode did not carry the price, reorder the case, check the promotion, or select the assortment.",
+          "count": 1
+        },
+        {
+          "before": "The UPC weakened that old habit because the code does not contain the price.",
+          "after": "The ordinary manufacturer-coded UPC weakened that old habit because the code does not contain the price.",
+          "count": 1
+        },
+        {
+          "before": "says the procedure applies to retail stores",
+          "after": "says the model procedure applies to retail stores",
+          "count": 1
+        },
+        {
+          "before": "version: \"1.1\"\nedition: \"Second web edition\"",
+          "after": "version: \"2.0\"\nedition: \"Second web edition\"",
+          "count": 1
+        },
+        {
+          "before": "revision_history:\n  - version: \"1.1\"",
+          "after": "revision_history:\n  - version: \"2.0\"",
+          "count": 1
+        },
+        {
+          "before": "note: \"Retained claim-level source links while restoring original prose from an unpublished revision; original artwork and publication date unchanged.\"",
+          "after": "note: \"Retained source hyperlinks and narrowed two price-free barcode statements to ordinary manufacturer-coded labels; identified the NIST procedure as a model. Surrounding prose, artwork, and original publication date are unchanged.\"",
+          "count": 1
+        }
+      ],
+      "sha256": "2f4a5e82eae5069206aabb54d388bfd4604595eb6af8c55603db0b98bc46267e",
+      "records": [
+        "docs/editorial-audits/99-refinement/the-bars-on-the-gum-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/the-bars-on-the-gum-source-checklist.md"
+      ]
+    },
+    {
+      "path": "content/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet.md",
+      "snapshot": "/tmp/oip-first-ten-brands-bios.0sdQze/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet.md",
+      "replacements": [
+        {
+          "before": "The next move was obvious.",
+          "after": "The parallel ambition was obvious.",
+          "count": 1
+        },
+        {
+          "before": "global manufacturing output",
+          "after": "global manufacturing value-added",
+          "count": 1
+        },
+        {
+          "before": "version: \"1.2\"\nedition: \"Third web edition\"",
+          "after": "version: \"2.0\"\nedition: \"Third web edition\"",
+          "count": 1
+        },
+        {
+          "before": "revision_history:\n  - version: \"1.2\"",
+          "after": "revision_history:\n  - version: \"2.0\"",
+          "count": 1
+        },
+        {
+          "before": "note: \"Retained claim-level source links while restoring original prose from an unpublished revision; original artwork and publication date unchanged.\"",
+          "after": "note: \"Retained source hyperlinks, corrected the chronology transition to European porcelain-making, and identified manufacturing shares as value-added. Surrounding prose, artwork, and original publication date are unchanged.\"",
+          "count": 1
+        }
+      ],
+      "sha256": "736d389939933be568062f7c9e4f242bbbedd85e2708b535aaba44e6e2e78c1a",
+      "records": [
+        "docs/editorial-audits/99-refinement/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet-source-checklist.md"
+      ]
+    },
+    {
+      "path": "content/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation.md",
+      "snapshot": "/tmp/oip-first-ten-brands-bios.0sdQze/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation.md",
+      "replacements": [
+        {
+          "before": "Kirk's critics saw a different story.",
+          "after": "My own critical reading at the time was different.",
+          "count": 1
+        },
+        {
+          "before": "They argued that he amplified",
+          "after": "He amplified",
+          "count": 1
+        },
+        {
+          "before": "They viewed his style as",
+          "after": "His style was",
+          "count": 1
+        },
+        {
+          "before": "Some accused him of turning",
+          "after": "He turned",
+          "count": 1
+        },
+        {
+          "before": "Those criticisms did not slow him down.",
+          "after": "Criticism did not slow him down.",
+          "count": 1
+        },
+        {
+          "before": "In many cases, they sharpened",
+          "after": "In many cases, it sharpened",
+          "count": 1
+        },
+        {
+          "before": "version: \"1.2\"\nedition: \"Third web edition\"",
+          "after": "version: \"2.0\"\nedition: \"Third web edition\"",
+          "count": 1
+        },
+        {
+          "before": "revision_history:\n  - version: \"1.2\"",
+          "after": "revision_history:\n  - version: \"2.0\"",
+          "count": 1
+        },
+        {
+          "before": "note: \"Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original wording, paragraph structure, source-method framing, and artwork are preserved.\"",
+          "after": "note: \"Retained source hyperlinks and identified the critical passage as the author's own judgment at the time, with matching pronoun changes. The unpublished broad rewrite remains withdrawn; surrounding prose, source-method framing, artwork, and original publication date are unchanged.\"",
+          "count": 1
+        }
+      ],
+      "sha256": "9206889037cf60d368748e5492bf24e47174a59e4db9b5e257c7ebc253dcffc8",
+      "records": [
+        "docs/editorial-audits/99-refinement/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation-source-checklist.md"
+      ]
+    },
+    {
+      "path": "content/essays/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center.md",
+      "snapshot": "/tmp/oip-first-ten-brands-bios.0sdQze/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center.md",
+      "replacements": [
+        {
+          "before": "primary_sources_note: \"Built from speeches, memoirs, congressional and executive records, and contemporaneous reporting.\"",
+          "after": "primary_sources_note: \"Built from speeches, congressional and executive records, and contemporaneous reporting.\"",
+          "count": 1
+        },
+        {
+          "before": "note: \"Added claim-level source links while preserving the existing prose and source-method note.\"",
+          "after": "note: \"Retained claim-level source links and removed memoirs from the source-method note after the author confirmed none were used. Body prose, artwork, and original publication date are unchanged.\"",
+          "count": 1
+        }
+      ],
+      "sha256": "32ab70011fa61039b0530fcc0502cee9846fa1dc9928dd8fe019ef0d4c57bb08",
+      "records": [
+        "docs/editorial-audits/99-refinement/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center-source-checklist.md"
+      ]
+    }
+  ]
+}

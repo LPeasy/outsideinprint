@@ -6,9 +6,12 @@ slug: "its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-p
 section_label: "Essay"
 subtitle: ""
 description: "It’s tough to weigh short term costs against what people perceive as low probability events"
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Reframed the local staffing inference as an institutional-capacity question; surrounding prose, publication date, and artwork retained."
   - version: "1.1"
     date: "2026-05-18"
     note: "Updated May 18, 2026, after OIP back-archive review. Removed Medium source-dump formatting, normalized prose, narrowed claims about local emergency-management capacity, and checked rendering."
@@ -40,10 +43,9 @@ But when a warning system depends on interpreting FEMA maps, National
 Weather Service products, grant applications, and siren-cost tradeoffs,
 somebody has to translate technical risk into public decisions.
 
-Kerr County's public emergency-management materials pointed readers to a
-sheriff's-office structure and volunteer CERT support, not a deep
-professional planning bench. That does not mean the people involved were
-negligent. It means the institution may have been built for familiar
+Public emergency-management materials alone do not establish the depth of a
+county's professional planning bench. That does not mean the people involved were
+negligent. The question is whether the institution was built for familiar
 emergencies, not for a low-frequency, high-consequence flood.
 
 Without a person or process responsible for that translation, a siren

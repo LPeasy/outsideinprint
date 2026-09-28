@@ -1,4 +1,60 @@
+# Current link-only review — September 27, 2026
+
+File: `content/essays/can-you-pass-the-pepper-please.md`  
+Version: `1.3 / Fourth web edition`  
+SHA-256: `c93cd4a1aa5bd38b9af469a5d4ec7a867099e7cfff749778bab2d97c35fac9d3`
+
+Current status: **PASS (bounded citation revision)**. Original prose restored; only supported hyperlink additions/destination repairs and minor citation metadata are allowed. Minimal corrections remain private and unapproved. This checkpoint supersedes all earlier September 27 major-revision candidates below; their claims that prose corrections were applied are no longer current.
+
+Twelve nearby anchors expose the original investigation, released incident records, methodology and detention standards. Attribution and access limits remain; this is not a new independent census of all force events.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+This is a bounded citation revision, not a new numerical grade or blanket recertification of the archive.
+
+- Evidence: PASS — Twelve nearby anchors expose the original investigation, released incident records, methodology and detention standards. Attribution and access limits remain; this is not a new independent census of all force events.
+- Logic: PASS — The existing argument is unchanged; the new anchors support named facts rather than pretending to prove every inference.
+- Incentives: PASS — Existing actor incentives and accountability remain separate from source provenance; links add no motive allegations.
+- Tradeoffs: PASS — Existing qualifications and competing costs remain intact; no one-sided recommendation was added.
+- Consequences: PASS — The existing consequences remain analysis, not new measured outcomes claimed from a source.
+- Uncertainty: PASS — Reporting periods, rough estimates, attributed findings and access limitations are preserved; this update makes no prediction certain.
+- Institutional Behavior: PASS — Official/actor records retain their distinct roles; no institutional statement is silently converted into independent corroboration.
+
+Private proposals: `../core-link-only-root-approvals-2026-09-27.md`. No tests, production gate, commit, or publication performed by this record.
+
+## Superseded research history — not current clearance
+
 # OIP-99 Refinement Report
+
+## Current source-link revision - September 27, 2026
+
+Reviewed version: `1.3`, Fourth web edition. Original date: `2026-05-05`.
+
+Essay SHA-256: `541f498dcdb834b95401b0e9c35ac96d9e4d78cd607f3dcc5fb53e9885ed3db1`.
+
+Decision state: `99_READY` for the bounded editorial source-link pass; release checks remain separate.
+
+Added twelve claim-level links without changing substantive body wording: the canonical investigation, three released incident records, its public methodology, and the official detention standards. The original story's attribution, official responses, uncertainty, artwork, and structure are preserved. See the current source checklist for read passages and the ICE PDF access limit. No build, test suite, browser review, or publication was performed by this reviewer.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+| Dimension | Result | Note |
+| --- | --- | --- |
+| Evidence | PASS | Existing factual clusters now lead to the read original investigation and released records; standards are tied to the indexed official policy passage, with access limits recorded. |
+| Logic | PASS | The argument concerns record quality and oversight; it does not infer that every use of force was unlawful from aggregate counts. |
+| Incentives | PASS | Capacity, facility control, contractor performance, detainee needs, and compressed reporting are identified without assigning a single motive. |
+| Tradeoffs | PASS | Staff safety, necessary intervention, privacy, and investigative needs remain alongside accountability concerns. |
+| Consequences | PASS | The essay traces how incidents become records and how missing detail limits later public scrutiny. |
+| Uncertainty | PASS | Reporting totals are attributed rather than independently certified; incomplete coverage, disputed motives, and official responses remain visible. |
+| Institutional Behavior | PASS | ICE, DHS, contractors, guards, and detainees retain distinct roles in custody and record production. |
+
+## Historical candidate review - not the current release finding
+
+The following record concerns an earlier candidate. Its references to death and facility-data context do not describe the current public body. Current evidence and readiness are controlled by the review above.
 
 Workflow: `oip_daily_candidate_99_refinement`
 
@@ -32,7 +88,7 @@ Image risk: `LOW`
 
 Decision state: `99_READY`
 
-## Editorial Philosophy Audit
+## Historical Editorial Philosophy Audit
 
 Decision: PASS
 

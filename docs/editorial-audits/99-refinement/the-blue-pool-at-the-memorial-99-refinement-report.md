@@ -1,5 +1,75 @@
 # OIP-99 Refinement Report
 
+## Current strict hyperlink-only revision - 2026-09-27
+
+Review date: `2026-09-27`
+Essay: `content/essays/the-blue-pool-at-the-memorial.md`
+Version: `1.3` - Fourth web edition
+Final content SHA-256: `d7850ed3f692b210aa3e22ea81a476471d50ae85ce9bb79ba044bc5e6b44a675`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+Public change: HYPERLINK-ONLY; original body words, punctuation, captions, order and artwork preserved.
+
+Added one NCPC anchor to the existing federal-review phrase. No prose changed.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+Decision State: `PASS`
+
+| Criterion | Decision | Reason |
+|---|---|---|
+| Evidence | PASS | New NCPC link resolves the named review to a read primary passage; prior pool and golf claims remain attributed to their existing records. |
+| Logic | PASS | Public review is presented as a method for assessing improvements, not as proof that the proposal is good or bad. |
+| Incentives | PASS | Preserves the distinction between presidential taste, agency review, and public use without inventing motives. |
+| Tradeoffs | PASS | Allows maintenance and beauty benefits alongside preservation, access, and review costs. |
+| Consequences | PASS | Possible durability and public-space effects remain possibilities rather than measured outcomes. |
+| Uncertainty | PASS | Retains the May reporting frame and the ending's uncertainty about how coating and proposals will develop. |
+| Institutional Behavior | PASS | NCPC's request is now identifiable as concept review with later decisions remaining, rather than anonymous federal resistance. |
+
+PASS is bounded to this reviewed text and record, not an independent numerical regrade or permission to publish.
+
+See [current source checklist](the-blue-pool-at-the-memorial-source-checklist.md) for read passages and access limits, and [private group ledger](../core-link-only-history-2026-09-27.md#the-blue-pool-at-the-memorial) for any exact approval proposals.
+
+This record supersedes every incompatible pre-rollback result below. Earlier corrected prose and associated PASS decisions are historical, not approval of the restored text. The user authorized supporting hyperlinks only; all proposed wording changes remain private and unapplied.
+
+Scope: full body and existing-record review, actual passage verification for new anchors and specific concerns, not a fresh exhaustive re-research of every retained citation. No numeric score, local test suite, build, commit or publication. Only the decimal revision and next edition were advanced; the disclosure is 'Added source links without changing prose.'
+
+## Superseded pre-rollback research - 2026-09-27
+
+All following hashes, corrected-copy descriptions, scores and decisions refer to historical states. They do not apply to the current content hash above.
+
+Review date: `2026-09-27`
+Version: `1.3` - Fourth web edition
+Final content SHA-256: `9159b647a4ed326ea2c1fb46eef39498eff8e655379a9eb20ab931b60abf6511`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+
+Citation-level revision. The federal-building review now links to the commission's own May account instead of relying only on AP's attribution. The May 10 reporting frame, thesis, structure, title, date, route, collection, and artwork remain unchanged.
+
+Scope: full prose and existing source-record review, fresh passage verification for the changes documented in the companion checklist, and a bounded source-fit audit. This is not a new numeric grade, a comprehensive re-research certification, or a publication approval. Existing evidence was retained where the source placement and historical record were adequate.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+| Criterion | Decision | Reason |
+|---|---|---|
+| Evidence | PASS | New NCPC link resolves the named review to a read primary passage; prior pool and golf claims remain attributed to their existing records. |
+| Logic | PASS | Public review is presented as a method for assessing improvements, not as proof that the proposal is good or bad. |
+| Incentives | PASS | Preserves the distinction between presidential taste, agency review, and public use without inventing motives. |
+| Tradeoffs | PASS | Allows maintenance and beauty benefits alongside preservation, access, and review costs. |
+| Consequences | PASS | Possible durability and public-space effects remain possibilities rather than measured outcomes. |
+| Uncertainty | PASS | Retains the May reporting frame and the ending's uncertainty about how coating and proposals will develop. |
+| Institutional Behavior | PASS | NCPC's request is now identifiable as concept review with later decisions remaining, rather than anonymous federal resistance. |
+
+### Boundaries
+
+Original title, publication date, slug, membership, and artwork are preserved. Revision disclosure and edition advance describe this pass. No new visual assets, templates, tests, or release changes. Publication remains a separate parent workflow.
+
+## Historical refinement record
+
+The earlier candidate score and audit below are historical; they do not replace this revision's scope or findings.
+
+
 Package: `2026-05-10-the-blue-pool-at-the-memorial`
 
 Essay: `The Blue Pool at the Memorial`

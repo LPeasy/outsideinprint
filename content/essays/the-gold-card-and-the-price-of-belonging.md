@@ -6,9 +6,12 @@ slug: "the-gold-card-and-the-price-of-belonging"
 section_label: "Essay"
 subtitle: "Trump's new visa program has approved only one person so far. It says a great deal about what kind of immigrant the country now wants to honor."
 description: "The Trump Gold Card turns money into evidence of merit, exposing a harder logic inside American immigration policy."
-version: "2.2"
-edition: "Fourth web edition"
+version: "2.3"
+edition: "Fifth web edition"
 revision_history:
+  - version: "2.3"
+    date: "2026-09-27"
+    note: "Added supporting source hyperlinks or repaired source destinations; original prose, reporting frame, and artwork unchanged."
   - version: "2.2"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
@@ -63,7 +66,7 @@ The civic fiction has been reduced to a receipt.
 
 The deeper change lies in the legal and symbolic work the gift is being asked to perform.
 
-The executive order says the Secretary of State and the Secretary of Homeland Security should treat the gift as evidence of eligibility under [8 U.S.C. 1153(b)(1)(A)](https://www.whitehouse.gov/presidential-actions/2025/09/the-gold-card/) and [8 U.S.C. 1153(b)(2)](https://www.whitehouse.gov/presidential-actions/2025/09/the-gold-card/) ~ the existing EB-1 and EB-2 employment-based tracks. The [gold card site says](https://www.trumpcard.gov/) that a successful applicant, subject to availability, receives lawful permanent resident status "as an EB-1 or EB-2 visa holder."
+The executive order says the Secretary of State and the Secretary of Homeland Security should treat the gift as evidence of eligibility under [8 U.S.C. 1153(b)(1)(A)](https://www.law.cornell.edu/uscode/text/8/1153#b_1_A) and [8 U.S.C. 1153(b)(2)](https://www.law.cornell.edu/uscode/text/8/1153#b_2) ~ the existing EB-1 and EB-2 employment-based tracks. The [gold card site says](https://www.trumpcard.gov/) that a successful applicant, subject to availability, receives lawful permanent resident status "as an EB-1 or EB-2 visa holder."
 
 That is a remarkable translation.
 

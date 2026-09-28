@@ -6,9 +6,12 @@ slug: "the-sewer-under-the-sidewalk"
 section_label: "Essay"
 subtitle: "How an old Boston-area brook became a test of what America is willing to pay for yesterday's pipes in tomorrow's weather."
 description: "An essay on Alewife Brook, Boston-area combined sewer overflows, MWRA's cleanup plan, and the public cost of climate-era pipe decisions."
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Clarified that the advisory waiting period does not guarantee safe water. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.2"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
@@ -28,7 +31,7 @@ Several weeks after a 2024 rainstorm, she took a kayak onto Alewife Brook outsid
 
 That is not proof that the brook made her sick. It is a scene that gives the issue its human shape.
 
-A person sees water. A public rule says the danger should have passed. The pipe below the neighborhood tells a messier story.
+A person sees water. The advisory period has passed, but it is [not a guarantee that the water is safe](https://www.mwra.com/harbor/html/cso_reporting.htm). The pipe below the neighborhood tells a messier story.
 
 Alewife Brook runs through Cambridge, Arlington, and Somerville. It is not a postcard river. It is the kind of urban water that sits at the edge of daily life, near paths, dogs, runners, wildlife watchers, apartment buildings, roadways, parking lots, and backyards. AP reports that the brook receives millions of gallons of untreated sewage pollution each year from an older combined sewer system.
 
@@ -90,13 +93,13 @@ That is real progress. A cleaner Boston Harbor did not happen by accident.
 
 Progress is not the same as completion.
 
-AP reports that Alewife Brook alone had 23 discharges in 2025. Local groups want full sewer separation, which would keep sewage and storm runoff in different pipes. MWRA's current proposal takes a narrower path. The plan would use storage tanks, partial sewer separation, and related upgrades to reduce discharges through 16 outfalls owned by MWRA, Cambridge, and Somerville.
+[AP reports that Alewife Brook alone had 23 discharges in 2025](https://apnews.com/article/combined-sewer-sewage-release-massachusetts-boston-bdb80fe18f7c6981c7d1dffe3a120caa). Local groups want full sewer separation, which would keep sewage and storm runoff in different pipes. MWRA's current proposal takes a narrower path. The plan would use storage tanks, partial sewer separation, and related upgrades to reduce discharges through 16 outfalls owned by MWRA, Cambridge, and Somerville.
 
 The price tag is about $1.28 billion.
 
 The technical standard is the real fight.
 
-MWRA staff evaluated four control levels for the future 2050 planning year: limited CSOs in a 2050 typical year, zero CSOs in a 2050 typical year, zero CSOs in a 2050 5-year, 24-hour design storm, and zero CSOs in a 2050 25-year, 24-hour design storm. Staff recommended a plan aimed at zero CSOs in a "2050 Typical Year" for the affected waters.
+MWRA staff evaluated [four control levels for the future 2050 planning year](https://www.mwra.com/media/file/2026-02-04-mwra-board-directors-meeting-materials#page=4): limited CSOs in a 2050 typical year, zero CSOs in a 2050 typical year, zero CSOs in a 2050 5-year, 24-hour design storm, and zero CSOs in a 2050 25-year, 24-hour design storm. Staff recommended a plan aimed at zero CSOs in a "2050 Typical Year" for the affected waters.
 
 That sounds stronger than it is.
 

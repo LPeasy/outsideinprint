@@ -10,9 +10,12 @@ description: "Why USACE Takes Its Time: Infrastructure Built to Last. The U.S. A
 featured_image: "/images/medium/building-for-centuries-not-election-cycles/6dd004b4e2f7bf049ca17b3b694ff61968bab6e565c47cab696474a92471e04a.jpeg"
 featured_image_caption: "Photo by Justin Wilkens on Unsplash"
 featured_image_alt: "Building for Centuries Not Election Cycles"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Corrected the feasibility-study duration wording. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-05"
     note: "Updated May 5, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, heading/list formatting, author-promo residue, and a USACE 3x3x3 description were cleaned while preserving the original publication frame."
@@ -34,7 +37,7 @@ These projects shape communities, economies, and ecosystems for generations.
 
 That's why USACE doesn't rush.
 
-Since 2012, USACE feasibility studies have generally been guided by the "3x3x3" rule:
+Since 2012, USACE feasibility studies have generally been guided by the ["3x3x3" rule](https://www.usace.army.mil/Media/News/NewsSearch/Article/643197/the-corps-feasibility-study-finding-a-balanced-solution/):
 
 - No more than three years
 - No more than $3 million
@@ -65,7 +68,7 @@ When you're building billion-dollar projects that shape the country's future, a 
 *Photo by Alexander Mils on Unsplash*
 
 
-History is full of cautionary tales about what happens when big projects move too fast. One of the worst? The large-scale drainage of Florida's wetlands in the early 20th century.
+History is full of cautionary tales about what happens when big projects move too fast. One of the worst? The [large-scale drainage of Florida's wetlands](https://www.nps.gov/ever/learn/historyculture/developeverglades.htm) in the early 20th century.
 
 At the time, the plan seemed simple: drain the Everglades, prevent flooding, and open up new farmland.
 
@@ -127,7 +130,7 @@ Feasibility studies ensure projects are guided by science and necessity, not pol
 
 Every four or eight years, a new administration comes in with new priorities. Infrastructure, climate policy, and funding strategies shift. But the federal government doesn't turn on a dime. It can't.
 
-A feasibility study takes at least three years.
+A feasibility study can take several years.
 
 Some projects take decades from planning to completion. By the time a new policy takes effect, many projects are already deep into study.
 

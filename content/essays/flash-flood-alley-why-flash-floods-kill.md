@@ -9,9 +9,12 @@ featured_image: "medium/bc148062f555057b86125c97330c9157489ac6f13f06b0b6b48845e8
 featured_image_caption: "Flash Flood Alley | Source: Austin Chronicle"
 featured_image_alt: "Flash Flood Alley"
 description: "A Texas Hill Country flood-risk essay on steep terrain, fast runoff, warning systems, Camp Mystic, and why flash floods can turn warning time into minutes."
-version: "1.3"
-edition: "Fourth web edition"
+version: "2.0"
+edition: "Fifth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected infiltration, historic flood details, warning-channel authority, alert chronology and the later documented evacuation start. Qualified evacuation difficulty, identified author wording and proposals, and removed the unsupported power-loss interval. Added or retained claim-level source links and corrected flagged graphics and captions; surrounding prose retained."
   - version: "1.1"
     date: "2026-05-18"
     note: "Updated May 18, 2026, after OIP back-archive review. Removed Medium import residue, normalized punctuation and internal links, narrowed source-framed flood-warning claims, and checked rendering."
@@ -50,7 +53,7 @@ Tourists come for the picturesque rivers and limestone cliffs.
 The region's **steep slopes and limestone bedrock** make it one of the
 fastest-draining flood environments in the country.
 
-**Rain doesn't soak in.**
+**Rain can fall faster than the ground can absorb it.**
 
 It runs off, **racing downhill** into dry creeks and narrow rivers.
 
@@ -66,21 +69,21 @@ common, and the terrain makes those events far more dangerous.
 
 **This region has history:**
 
-- **Blanco River, 2015:** Rose over 30 feet in 3 hours,
- killing 13 people in Wimberley and sweeping homes from their
- foundations.
-- **Llano River, 2018:** Crested at a record 39.9 feet,
- snapping the 85-year-old FM 2900 bridge in half.
-- **Guadalupe River, 1987:** A church van was swept away
- in Hunt, killing 10 teenagers.
+- **Blanco River, 2015:** [Rose from near 5 feet to near 41 feet in four hours](https://www.weather.gov/media/wrn/calendar/NationalWaterModel.pdf#page=20),
+ with the flood [killing 12 people](https://webapps.usgs.gov/infrm/pubs/InFRM_SanMarcos_Report_Sep2016.pdf)
+ and sweeping homes from their foundations.
+- **Llano River, 2018:** [Crested at 39.9 feet](https://player.wbap.com/2018/10/20/west-central-texas-breathes-relief-from-dangerous-flooding/),
+ snapping the [49-year-old RM 2900 bridge](https://www.txdot.gov/projects/projects-studies/austin/rm2900-kingsland-bridge-replacement.html) in half.
+- **Guadalupe River, 1987:** [A church bus and van became stranded
+ near Comfort; ten teenagers died after leaving the vehicles.](https://www.weather.gov/ewx/wxevent-19870717)
 
 Past Hill Country floods show the pattern. The Blanco River rose from
 base flow to catastrophic levels in a few hours in 2015, and the damage
 pattern along the river showed how fast a channel can strip vegetation,
 damage homes, and overwhelm ordinary evacuation assumptions.
 
-> "People think flash floods just mean lots of water. In the Hill
-> Country, the water *runs you down*."
+> People think flash floods just mean lots of water. In the Hill
+> Country, the water *runs you down*.
 
 #### Series Note
 
@@ -123,9 +126,9 @@ opportunity to evacuate.
 
 #### Flash floods aren't like that.
 
-![Flood Timing Comparison](oip-image:medium/31776846cc421ab1bcee6aaece5550347c944752cf9ee5c53b886ab28449b42f)
+![Heavy rain, limited infiltration and steep terrain can combine to produce rapid runoff and stream response.](oip-image:essays/flash-flood-alley-why-flash-floods-kill/runoff-factors-corrected-20260927)
 
-*Flood Timing Comparison | Made by Author with ChatGPT*
+*Illustrative flood-response factors, not measured runoff curves. OIP diagram, made with ChatGPT from [NWS flood-hazards guidance](https://www.weather.gov/safety/flood-hazards).*
 
 
 **They arrive fast,** often with **less than an hour of warning**, and
@@ -157,9 +160,9 @@ water.***
 In theory, the **National Weather Service (NWS) alert process** follows
 a straightforward path from the NWS to the public.
 
-![NWS Alert Process](oip-image:medium/f8dcdf76053d3058b94d60d74509d2a44620d489fd1ef11307c1106c3a50e054)
+![Separate routes for NWS wireless emergency alerts and local notification systems such as CodeRED.](oip-image:essays/flash-flood-alley-why-flash-floods-kill/warning-routes-corrected-20260927)
 
-*NWS Alert Process | Made by Author with ChatGPT*
+*OIP diagram, made with ChatGPT. [NWS considerable and catastrophic flash flood warnings trigger WEA](https://www.weather.gov/mkx/flashflood_updates_WEA); local notification systems are a separate route, not an approval step for NWS WEA.*
 
 
 > The flash flood alert system has multiple layers ~
@@ -169,7 +172,7 @@ a straightforward path from the NWS to the public.
 > *The NWS is responsible for monitoring rainfall, gauging risk, and
 > issuing the first formal alerts.*
 
-**These alerts follow a standard progression:**
+**These alert types do not require a fixed progression:**
 
 1. **Flash Flood Watch**: Conditions are favorable for
  a flash flood
@@ -179,9 +182,9 @@ a straightforward path from the NWS to the public.
  alert for catastrophic flooding and life-threatening
  conditions
 
-> *Once these alerts are issued, local officials and automated systems
-> have to move warnings into mass notification channels like CodeRED or
-> Wireless Emergency Alerts (WEAs).*
+> *[NWS warnings tagged considerable or catastrophic trigger Wireless
+> Emergency Alerts (WEAs)](https://www.weather.gov/mkx/flashflood_updates_WEA) without waiting for local CodeRED approval.
+> Local officials operate CodeRED as a separate notification channel.*
 
 > **Delays cost lives when every minute counts.**
 
@@ -203,7 +206,7 @@ a straightforward path from the NWS to the public.
 Some problems can't be solved overnight. But others can be addressed
 with **better systems, faster protocols, and smarter communication.**
 
-> **Here's where experts say progress is possible:**
+> **Here's where I see progress as possible:**
 
 1. **Automate local alert triggers** when NWS issues a
  Flash Flood Emergency
@@ -235,16 +238,17 @@ timeline looked something like this:
 
 - **1:14 a.m.**: **First Flash Flood Warning** issued by
  NWS
+- **1:51 a.m.**: [Edward Eastland read an earlier Kerr County CodeRED alert.](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=78)
+- **Around 3:00 a.m.**: Cabin evacuation began, according to the
+ [Texas Legislature's June 2026 report.](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=80)
 - **4:03 a.m.**: Upgraded to **Flash Flood
  Emergency**
 - **4:22 a.m.**: A local firefighter requested CodeRED
  alert activation for Hunt, TX, according to later dispatch reporting
-- **~4:45 a.m.:** Camp Mystic evacuation efforts were underway,
- according to early public reporting
 - **5:10 a.m.**: The USGS Hunt gauge, downstream of Camp Mystic,
- crested at 37.52 feet, according to the Commerce Department OIG review
+ crested at 37.52 feet, according to the Commerce Department [OIG review](https://www.oig.doc.gov/wp-content/OIGPublications/OIG-26-017-I-SECURED.pdf#page=14)
 
-**Camp Mystic lost power** sometime between **4:30 and 5:00 a.m.**
+**Camp Mystic lost power.**
 
 **Wireless alerts did not reach everyone in the same way or at the same
 time.** Later reporting and public records focused on the gap between
@@ -256,12 +260,12 @@ There were **no physical warning sirens** near the camp.
 *(There were discussions about sirens years before the flood. More on
 that in the next essay.)*
 
-While Kerr County did eventually issue **CodeRED** alerts, it wasn't
-fast enough.
+Kerr County issued **CodeRED** alerts, but an alert received was not
+the same as an evacuation begun.
 
 > A 15-minute delay can mean the difference between life and death.
 
-### Why Camp Mystic Couldn't Evacuate in Time
+### Why Evacuating Camp Mystic Was Difficult
 
 **It's easy to say people should've evacuated.**
 
@@ -304,21 +308,21 @@ It's not that people didn't try to evacuate...
 
 > The timeline and terrain made it
 
-> nearly impossible.
+> [increasingly difficult once water entered the cabins.](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=106)
 
 ### How Multiple System Failures Turned a Flash Flood Into a Tragedy
 
-![Made by User with ChatGPT](oip-image:medium/153cece529a7ffda26838482590d4452bfeb0d433eb44eb31f56ddf970a662b4)
+![Four distinct layers of flood preparedness: risk awareness, gauge coverage, warning channels and evacuation response.](oip-image:essays/flash-flood-alley-why-flash-floods-kill/preparedness-layers-corrected-20260927)
 
-*Made by User with ChatGPT*
+*OIP conceptual framework, made with ChatGPT; not a causal reconstruction of Camp Mystic. The [Commerce OIG review](https://www.oig.doc.gov/wp-content/OIGPublications/OIG-26-017-I-SECURED.pdf#page=15) distinguishes missing South Fork river-gauge coverage from warning distribution and response.*
 
 
 **Flash floods test emergency response systems at every level.**
 
 > On July 4th, the system failed:
 
-- **Alert systems were too slow**
-- **Rain gauges weren't functioning**
+- [**Warnings did not lead to prompt evacuation**](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=104)
+- **River-gauge coverage was missing upstream of Hunt on the South Fork**
 - **Emergency communications were fragmented**
 - **Site planning placed kids in harm's way**
 - **The camp's emergency planning did not appear to match the speed and
@@ -373,9 +377,9 @@ Mystic**, and the **responsibilities of** (and relationship between)
 
 > ***And if nothing changes, it won't be the last.***
 
-> **Because** "in the hill country,
+> **Because** in the hill country,
 
-> the water runs you down."
+> the water runs you down.
 
 ### *Frequently Asked Questions* ***About the July 4 Texas Flood and Flash Flood All*ey**
 
@@ -416,21 +420,21 @@ sudden, dangerous floods.
 
 #### **Why do flash floods happen so fast in the Hill Country?**
 
-The ground here is made of **limestone**, which doesn't absorb water.
+The ground here includes **limestone**, and heavy rain can exceed its ability to absorb water.
 When heavy rain hits, it runs off fast ~ rushing into dry creeks and
 riverbeds. In the right conditions, a trickle can become a **20-foot
 wall of water** in less than an hour.
 
 #### **Why didn't Camp Mystic evacuate sooner?**
 
-It's a mix of delayed warnings, **offline gauges**, **power outages**,
+It's a mix of warning-to-action delays, **gauge-coverage gaps**, **power outages**,
 and **poor communication**. Flash Flood Warnings were issued starting at
-1:14 a.m., but evacuation didn't begin until close to 4:45 a.m. By 5:15
-a.m., it was too late.
+1:14 a.m. The [Texas Legislature's June 2026 report](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=80)
+places the start of cabin evacuation around 3:00 a.m., after water had begun entering cabins.
 
 #### **What is a Flash Flood Emergency?**
 
-This is the **highest alert** the National Weather Service can issue. It
+This is the **highest-severity designation in a flash flood warning**. It
 means **life-threatening flooding** is happening or imminent. Flash
 Flood Emergencies are rare and reserved for the worst scenarios, like
 dam breaks or extreme rainfall over vulnerable terrain.

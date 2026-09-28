@@ -1,4 +1,80 @@
+# Current approved correction record — September 27, 2026
+
+File: `content/essays/the-stamp-on-the-meat-flagship.md`  
+Version: `2.0 / Third web edition`  
+Final content SHA-256: `da179a230673a30b7f1549ecc832d7f804a479f4b4beb783d93ac6a1c5a5c3b2`
+
+Current disposition: **PASS (bounded editorial review)**. Corrected voluntary recalls and plant-versus-lot identity.
+
+Source-demonstrated factual corrections were owner-approved; broad revision, unsupported-claim deletion, illustration/caption changes and publication were not. [Exact changes and evidence](../core-approved-facts-history-2026-09-27.md). The edition advanced once from the original baseline; the unpublished link-only candidate is not a separate edition. Any preapproval hashes or unresolved/unapproved descriptions below are historical and do not override this record.
+
+No formal publication gate, build, commit, remote write or publication was performed for this record. A bounded PASS is not an exhaustive factual certification or numerical grade.
+
+## Historical preapproval and integration records
+
 # Source Checklist
+
+## Approved factual corrections - 2026-09-27
+
+Corrected voluntary company recalls and the distinction between plant identity and lot identifiers.
+
+This is the current controlling approval record. The preapproval version/hash and hyperlink-only description below are historical for this file. Final edition disclosure and content hash are pending the parent's central reconciliation. Artwork, captions and publication identity were not edited.
+
+Exact before/after text and sources: [approved-facts ledger](../core-approved-facts-history-2026-09-27.md#the-stamp-on-the-meat-flagship). No build, test, commit or publication was run in this pass.
+
+## Historical preapproval record
+
+
+## Current strict hyperlink-only record - 2026-09-27
+
+Review date: `2026-09-27`
+Essay: `content/essays/the-stamp-on-the-meat-flagship.md`
+Version: `1.1` - Second web edition
+Final content SHA-256: `e7fa8f0a51f229023ca2ab8f3a4be1eebed75bcd7856d86f7b127c121b8d3985`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+Public change: NONE; byte-identical baseline retained.
+
+Link-scope result: supported added links; publication assessment HOLD pending author review.
+
+Retained byte-identical baseline 1.1. No suitable additional link repairs the two source-fit issues without changing words. Earlier 2.0 correction and its PASS were rolled back.
+
+### Evidence and limits
+
+| Claim or action | Passage read on 2026-09-27 | Scope and limits |
+|---|---|---|
+| FSIS recalls are voluntary company actions; refusal can lead to detention and a request for judicial seizure. | [FSIS, Understanding FSIS Food Recalls](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/understanding-fsis-food-recalls), What is a food recall? / Who decides when a recall is necessary?: company-initiated voluntary recall, sometimes at FSIS request; detention and DOJ seizure action if warranted. | Direct page returned 403. Search returned the full official factsheet text, dated September 26, 2024; relevant sections were read, not inferred from a title/snippet. No FDA mandatory-recall authority is imported into FSIS. |
+| Establishment number identifies the producing establishment, not a particular lot on its own. | Same official factsheet, How can consumers identify recalled products?: establishment number assigned to producing establishment; releases include available labels, lot codes, best/use dates, and establishment numbers. | Documents the uncorrected overstatement. No claim that every product label or recall includes every identifier. |
+| Inspection history, law, and process. | Full essay and prior detailed checklist read; existing GovInfo, eCFR, FMIA, AMS, and FSIS links retained. | Bounded source-fit pass, not a new comprehensive food-law opinion or assurance of zero food risk. |
+
+### Private approval proposals
+
+2 specific proposals are recorded in [the private group ledger](../core-link-only-history-2026-09-27.md#the-stamp-on-the-meat-flagship). Public prose has NOT been corrected. No unsupported claim was given a misleading supporting link.
+
+This record supersedes every incompatible pre-rollback result below. Earlier corrected prose and associated PASS decisions are historical, not approval of the restored text. The user authorized supporting hyperlinks only; all proposed wording changes remain private and unapplied.
+
+Scope: full body and existing-record review, actual passage verification for new anchors and specific concerns, not a fresh exhaustive re-research of every retained citation. No numeric score, local test suite, build, commit or publication. No new edition or revision was invented.
+
+## Superseded pre-rollback research - 2026-09-27
+
+All following hashes, corrected-copy descriptions, scores and decisions refer to historical states. They do not apply to the current content hash above.
+
+Review date: `2026-09-27`
+Version: `2.0` - Third web edition
+Final content SHA-256: `12a4436d99d9b16c1b43c3654088a84ab85ef2a99423fe231d37366e647468b8`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+
+Material correction. Clarified voluntary recalls versus official detention/seizure mechanisms and corrected establishment-number versus lot identification. Removed one duplicated phrase. Major version 2.0, one edition advance, dated disclosure; historical thesis and publication identity/artwork preserved.
+
+| Claim or action | Passage read on 2026-09-27 | Scope and limits |
+|---|---|---|
+| FSIS recalls are voluntary company actions; refusal can lead to detention and a request for judicial seizure. | [FSIS, Understanding FSIS Food Recalls](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/understanding-fsis-food-recalls), What is a food recall? / Who decides when a recall is necessary?: company-initiated voluntary recall, sometimes at FSIS request; detention and DOJ seizure action if warranted. | Direct page returned 403. Search returned the full official factsheet text, dated September 26, 2024; relevant sections were read, not inferred from a title/snippet. No FDA mandatory-recall authority is imported into FSIS. |
+| Establishment number identifies the producing establishment, not a particular lot on its own. | Same official factsheet, How can consumers identify recalled products?: establishment number assigned to producing establishment; releases include available labels, lot codes, best/use dates, and establishment numbers. | Corrects overstatement. No claim that every product label or recall includes every identifier. |
+| Inspection history, law, and process. | Full essay and prior detailed checklist read; existing GovInfo, eCFR, FMIA, AMS, and FSIS links retained. | Bounded source-fit pass, not a new comprehensive food-law opinion or assurance of zero food risk. |
+
+The current companion report records the seven-part Editorial Philosophy Audit. Prior records below are historical and are superseded by this section where they conflict. No build, browser, Node, publication, or organization tests were run for this pass.
+
+## Historical source record
+
 
 Title: The Stamp on the Meat
 

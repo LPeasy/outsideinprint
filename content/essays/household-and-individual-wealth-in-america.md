@@ -7,9 +7,12 @@ section_label: "Essay"
 collections: ["household-economy-work-and-cost"]
 subtitle: "Dec. 14th, 2024"
 description: "Household and Personal Income Trends in the United States. I. Introduction: Income Trends as a Reflection of Economic Transformation"
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected income-population, household-size and dollar-reference definitions, the income-share endpoint, and the service-occupation label; linked the verified occupation medians. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-04-27"
     note: "Updated April 27, 2026, after OIP back-archive review. Legacy Medium punctuation, list formatting, and Markdown rendering artifacts were cleaned; source, metadata, and rendering were checked."
@@ -39,7 +42,7 @@ Household income encompasses all revenue sources within a household, including w
 
 - Lower and Upper Income: Households earning less than two-thirds or more than double the median, respectively.
 
-For 2023, middle-income households earned between $53,740 and $161,220, based on a national median of $80,610 (Pew Research, 2024).
+[Pew's 2024 analysis](https://www.pewresearch.org/2024/05/31/the-state-of-the-american-middle-class/) defines middle income as roughly $61,000 to $183,000 annually for a three-person household, in 2023 dollars.
 
 ### 2. Personal Income
 
@@ -49,7 +52,7 @@ Personal income refers to individual earnings, primarily derived from wages or s
 
 - Cost of Living: Adjustments ensure comparability across regions with varying economic conditions.
 
-- Inflation: All income figures are reported in 2023 dollars, adjusted using the Chained Consumer Price Index for All Urban Consumers (C-CPI-U).
+- Inflation: The historical household-income figures and current-dollar weekly earnings use different reference periods and should not be compared as a single constant-dollar series.
 
 ## Long-Term Trends in Household Income
 
@@ -73,7 +76,7 @@ Household income varies widely across states and regions:
 
 The middle class is shrinking, highlighting increasing income inequality:
 
-- In 1970, middle-income households held 62% of U.S. total income; by 2023, this figure fell to 42%.
+- [In 1970, middle-income households held 62% of U.S. total income; by 2022, this figure fell to 43%.](https://www.pewresearch.org/2024/05/31/the-state-of-the-american-middle-class/)
 
 - Meanwhile, upper-income households have captured a growing share of wealth, while lower-income households face stagnating or declining incomes (Pew Research, 2024).
 
@@ -81,13 +84,13 @@ The middle class is shrinking, highlighting increasing income inequality:
 
 ### 1. Wage Growth and Occupational Variances
 
-According to the Bureau of Labor Statistics (BLS), median weekly earnings for full-time workers reached $1,165 in Q3 2024, a 4.2% annual increase:
+According to the [Bureau of Labor Statistics (BLS)](https://www.bls.gov/news.release/archives/wkyeng_10172024.htm), median weekly earnings for full-time workers reached $1,165 in Q3 2024, a 4.2% annual increase:
 
 - By Occupation:
 
-- Management and professional roles had the highest earnings at $1,582 per week.
+- Management and professional roles had the highest earnings at [$1,582 per week](https://www.bls.gov/news.release/archives/wkyeng_10172024.htm).
 
-- Service-sector workers earned significantly less, with a median of $772, reflecting disparities in labor market rewards.
+- Service-occupation workers earned significantly less, with a median of [$772](https://www.bls.gov/news.release/archives/wkyeng_10172024.htm), reflecting disparities in labor market rewards.
 
 - By Industry: High-growth sectors like technology and finance offer significantly higher wages, contributing to geographic and demographic income gaps (BLS, 2024).
 
@@ -99,7 +102,7 @@ Despite wage growth, significant disparities persist:
 
 - Racial Disparities:
 
-- Asians earned the highest median weekly wages ($1,568), followed by Whites ($1,184), Blacks ($962), and Hispanics ($904).
+- Asians earned the highest [median weekly wages](https://www.bls.gov/news.release/archives/wkyeng_10172024.htm) ($1,568), followed by Whites ($1,184), Blacks ($962), and Hispanics ($904).
 
 - Structural inequalities in education, job access, and industry representation underpin these differences.
 
@@ -107,7 +110,7 @@ Despite wage growth, significant disparities persist:
 
 Education remains one of the strongest predictors of income:
 
-- Workers with a bachelor's degree earned a median of $1,697 per week, while those without a high school diploma earned only $734 (BLS, 2024).
+- Workers aged 25 and over with at least a bachelor's degree earned a median of $1,697 per week, while those without a high school diploma earned only $734 (BLS, 2024).
 
 - However, rising tuition costs and student debt burdens create barriers to higher education, perpetuating wage gaps.
 
@@ -115,7 +118,7 @@ Education remains one of the strongest predictors of income:
 
 ### 1. Shrinking Representation
 
-The middle class has declined from 61% of the U.S. population in 1971 to 51% in 2023 (Pew Research, 2024):
+The middle class has declined from 61% of the U.S. population in 1971 to 51% in 2023 ([Pew Research, 2024](https://www.pewresearch.org/2024/05/31/the-state-of-the-american-middle-class/)):
 
 - Upper-Income Growth: Households in this tier grew from 11% to 19%.
 

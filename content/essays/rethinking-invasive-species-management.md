@@ -10,9 +10,12 @@ featured_image: "essays/rethinking-invasive-species-management/hero-python"
 featured_image_caption: "Photo by Michael Jerrard on Unsplash"
 featured_image_alt: "Close view of a coiled python."
 description: "Florida spends millions fighting species it will never get rid of — while the ones it could stop slip right past"
-version: "1.2"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Geographic/origin/predator facts corrected. Added or retained claim-level source links; original reporting frame retained. Corrected flagged graphics and captions. Qualified the python-eradication claim by current methods and described the moss-ball response as a prevention effort rather than a measured averted infestation."
   - version: "1.2"
     date: "2026-06-26"
     note: "Restored local image assets, replaced duplicate placeholders with OIP diagrams, and removed decorative placeholder figures."
@@ -52,7 +55,7 @@ There are a lot of plants and animals in the U.S. that did not start here.
 
 Tomatoes? Native to South America.
 
-Lettuce? Ancient Egypt.
+Lettuce? [First cultivated in ancient Egypt](https://www.invasivespeciesinfo.gov/what-are-invasive-species).
 
 Cows? Brought over by European settlers.
 
@@ -88,9 +91,9 @@ It is beautiful. It is delicate. And in the last hundred years, we have re-engin
 
 In the early 1900s, Florida's wetlands were seen as obstacles to agriculture and development.
 
-So engineers built canals, levees, and drainage systems to "reclaim" land. Entire ecosystems were drained or rerouted.
+So engineers built [canals, levees, and drainage systems](https://www.nps.gov/ever/learn/historyculture/developeverglades.htm) to "reclaim" land. Entire ecosystems were drained or rerouted.
 
-> The Everglades lost more than half its original footprint.
+> South Florida lost about half its original wetland area.
 
 As the state's human population boomed, so did the number of ways invasive species could get in.
 
@@ -104,7 +107,7 @@ Photo by Joshua J. Cotten on Unsplash
 
 This one is infamous.
 
-Burmese pythons, native to Southeast Asia, were popular in the exotic pet trade.
+[Burmese pythons, native to Southeast Asia, were popular in the exotic pet trade](https://myfwc.com/wildlifehabitats/profiles/reptiles/snakes/burmese-python/).
 
 Some escaped. Others were released when they got too big to handle. They found a perfect home in the Everglades and started breeding.
 
@@ -126,7 +129,7 @@ The result? Dense, dry stands where there used to be one-of-a-kind natural Flori
 
 Photo by william william on Unsplash
 
-Shipping ports are another pathway.
+[Shipping ports are another pathway](https://invasivespecies.wa.gov/address-pathways/shipping-and-international-trade/).
 
 Ballast water from international cargo ships can carry microscopic larvae, eggs, or seeds. Insects hitch rides on wooden pallets or in shipping containers. Once they are released into the wild, some of them take off.
 
@@ -215,23 +218,23 @@ When we wait too long, we inherit the curse.
 
 ### Case Study 1: Burmese Pythons vs. Nile Monitors
 
-If you know one invasive species in Florida, it is probably the Burmese python. These snakes have become the poster child for ecological disaster. They are huge, hard to find, and already established. Studies have shown severe native-mammal declines in parts of the Everglades where pythons are present.
+If you know one invasive species in Florida, it is probably the Burmese python. These snakes have become the poster child for ecological disaster. They are huge, hard to find, and already established. [Studies have shown severe native-mammal declines in parts of the Everglades where pythons are present](https://pubs.usgs.gov/publication/70004570).
 
 > But the thing about pythons?
 
 We missed our shot. By the time we took them seriously, they were already breeding across hundreds of square miles.
 
-![Comparison diagram for Burmese pythons and Nile monitors.](oip-image:essays/rethinking-invasive-species-management/case-python-monitor)
+![Comparison of Burmese python management and localized Nile monitor removal.](oip-image:essays/rethinking-invasive-species-management/case-python-monitor-corrected-20260927)
 
-> OIP diagram | Pythons are already in maintenance mode; Nile monitors still present a narrower target.
+> OIP diagram | Landscape python management and [localized Nile monitor removal](https://myfwc.com/wildlifehabitats/profiles/reptiles/lizards/nile-monitor/) require different approaches.
 
-So we hunt them. Track them. Put bounties on them. We will be doing that indefinitely because there is no realistic path to eradication. Just maintenance.
+So we hunt them. Track them. Put bounties on them. With current methods, there is [no realistic path to landscape-scale eradication](https://www.nps.gov/ever/learn/news/everglades-national-park-and-fwc-to-expand-python-removal-efforts.htm). Just maintenance.
 
 Now let's talk about another invasive reptile, one you may not have heard of:
 
 > The Nile monitor.
 
-It is a large, non-native lizard from Africa. It can prey on eggs, birds, and small mammals, and it moves through water and land well enough to worry managers.
+It is [a large, non-native lizard from Africa](https://myfwc.com/wildlifehabitats/profiles/reptiles/lizards/nile-monitor/). It can prey on eggs, birds, and small mammals, and it moves through water and land well enough to worry managers.
 
 But here is the key difference:
 
@@ -245,9 +248,9 @@ FWC and regional partners are monitoring them, so managers have better informati
 
 ### Case Study 2: Hydrilla vs. Crested Floating Heart
 
-![Comparison diagram for hydrilla and crested floating heart.](oip-image:essays/rethinking-invasive-species-management/case-hydrilla-floating-heart)
+![Management of established hydrilla and crested floating heart, with prevention in uninfested waters.](oip-image:essays/rethinking-invasive-species-management/case-hydrilla-floating-heart-corrected-20260927)
 
-> OIP diagram | Hydrilla is a maintenance burden; crested floating heart is still a better prevention target.
+> OIP diagram | [Hydrilla](https://ask.ifas.ufl.edu/publication/AG404) and [crested floating heart](https://plant-directory.ifas.ufl.edu/plant-directory/nymphoides-cristata/) both require control where established and prevention in uninfested waters.
 
 If you fish or boat in Florida, you have probably tangled with hydrilla. This submerged aquatic plant is everywhere, clogging lakes, blocking boat ramps, and jamming up stormwater systems.
 
@@ -263,7 +266,7 @@ It is beautiful: big, white flowers with frilly edges. But do not let the looks 
 
 It spreads fast and forms thick surface mats that block out sunlight and damage aquatic ecosystems.
 
-Right now, it remains a localized threat in parts of North and Central Florida. But it is moving, and early control efforts compete for money and staff with species that already dominate the budget.
+It has [established infestations across peninsular Florida, including South Florida](https://plant-directory.ifas.ufl.edu/plant-directory/nymphoides-cristata/). But it is moving, and early control efforts compete for money and staff with species that already dominate the budget.
 
 ### Case Study 3: Lionfish vs. Zebra Mussels in Retail
 
@@ -275,7 +278,7 @@ Right now, it remains a localized threat in parts of North and Central Florida. 
 
 > Invasive Lionfish | Source: NOAA
 
-The lionfish is the exotic villain of Florida's reefs. Striking red and white stripes. Venomous spines. No natural predators in the Atlantic.
+The lionfish is the exotic villain of Florida's reefs. Striking red and white stripes. Venomous spines. [Few natural predators in the Atlantic](https://oceanservice.noaa.gov/facts/lionfish.html).
 
 > Lionfish eat many smaller reef species and reproduce quickly.
 
@@ -291,13 +294,13 @@ But here is a quieter success story you might have missed.
 
 > Zebra Mussels | Source: NOAA
 
-In 2021, someone noticed zebra mussels attached to decorative moss balls sold in aquarium stores.
+[In 2021, someone noticed zebra mussels attached to decorative moss balls sold in aquarium stores](https://www.usgs.gov/news/featured-story/invasive-zebra-mussels-found-pet-stores-21-states).
 
 Zebra mussels are one of the most destructive aquatic invaders in the country, clogging pipes, damaging water systems, and crowding out native species.
 
 > Thanks to that early warning, federal and state agencies acted fast.
 
-They pulled the products from shelves, launched a coordinated response, and likely prevented a major new infestation.
+They pulled the products from shelves and launched a [coordinated response](https://www.usgs.gov/news/featured-story/invasive-zebra-mussels-found-pet-stores-21-states) to prevent a major new infestation.
 
 The point here?
 

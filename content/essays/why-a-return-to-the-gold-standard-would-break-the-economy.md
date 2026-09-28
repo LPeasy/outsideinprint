@@ -10,9 +10,12 @@ description: "A gold standard sounds like discipline, but the arithmetic points 
 featured_image: "/images/medium/why-a-return-to-the-gold-standard-would-break-the-economy/b20b0f68d3f48fd5a5a22035ff5ff670094552486b74d98c6a1d5c3e71346552.jpeg"
 featured_image_caption: "Photo by Jingming Pan on Unsplash"
 featured_image_alt: "Returning to the Gold Standard Will Break the Economy"
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added supporting source hyperlinks or repaired source destinations; original prose, reporting frame, and artwork unchanged."
   - version: "1.1"
     date: "2026-05-09"
     note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, spacing, and source-sensitive monetary claims were cleaned while preserving the original publication frame."
@@ -47,9 +50,9 @@ For much of American history, the dollar was tied to gold. Paper money could be 
 
 That limit sounded prudent until the economy needed flexibility.
 
-During the Great Depression, the gold standard restricted the government's ability to increase liquidity when banks were failing, prices were falling, and unemployment was soaring. In 1933, President Franklin Roosevelt stopped domestic dollar-gold convertibility.
+During the Great Depression, the gold standard restricted the government's ability to increase liquidity when banks were failing, prices were falling, and unemployment was soaring. In 1933, [President Franklin Roosevelt stopped domestic dollar-gold convertibility](https://www.federalreservehistory.org/essays/roosevelts-gold-program).
 
-After World War II, the Bretton Woods system kept a narrower version alive. Foreign governments could redeem dollars for gold at $35 per ounce. By the 1960s, U.S. spending and foreign dollar claims strained that system. In 1971, President Richard Nixon ended convertibility.
+After World War II, the Bretton Woods system kept a narrower version alive. Foreign governments could redeem dollars for gold at $35 per ounce. By the 1960s, U.S. spending and foreign dollar claims strained that system. In 1971, [President Richard Nixon ended convertibility](https://www.federalreservehistory.org/essays/gold-convertibility-ends).
 
 The world moved to fiat money because a modern credit economy needs a monetary system that can expand and contract when circumstances change.
 
@@ -59,7 +62,7 @@ That flexibility can be abused. But removing it entirely creates a different and
 
 The biggest practical problem is simple: the United States does not hold enough gold to back the money supply at ordinary gold prices.
 
-The U.S. government owns roughly 261 million troy ounces of gold. A broad money measure such as M2 is measured in the tens of trillions of dollars.
+The U.S. government owns roughly 261 million troy ounces of gold. A broad money measure such as [M2](https://fred.stlouisfed.org/series/M2SL) is measured in the tens of trillions of dollars.
 
 Using early-2025 magnitudes, full backing would require gold to be valued at tens of thousands of dollars per ounce. A rough arithmetic target near $80,000 per ounce is not a forecast. It is a warning about scale.
 
@@ -109,7 +112,7 @@ That is not discipline. It is institutional paralysis at the worst possible mome
 
 Few mainstream economists support returning to gold because the historical record is not flattering.
 
-The Reagan administration studied the question in the early 1980s and rejected a return. Federal Reserve officials have also warned that a gold standard would remove the central bank's ability to adjust interest rates and money supply in a downturn.
+The Reagan administration [studied the question in the early 1980s and rejected a return](https://fraser.stlouisfed.org/title/report-congress-commission-role-gold-domestic-international-monetary-systems-339/volume-i-6346/fulltext). Federal Reserve officials have also warned that a gold standard would remove the central bank's ability to adjust interest rates and money supply in a downturn.
 
 The appeal is not mainly technical. It is emotional.
 

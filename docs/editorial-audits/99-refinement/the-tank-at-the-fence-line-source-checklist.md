@@ -1,10 +1,58 @@
-# Source Checklist: The Tank at the Fence Line
+# Current approved correction record — September 27, 2026
+
+File: `content/essays/the-tank-at-the-fence-line.md`  
+Version: `2.0 / Third web edition`  
+Final content SHA-256: `89dbc6b37b5a854dc431e2b91e12dd210719a40054e2b646fe8177a0283886e6`
+
+Current disposition: **PASS (bounded editorial review)**. Corrected NIOSH-versus-OSHA averaging windows; exposure limit unchanged.
+
+Source-demonstrated factual corrections were owner-approved; broad revision, unsupported-claim deletion, illustration/caption changes and publication were not. [Exact changes and evidence](../core-approved-facts-existing-2026-09-27.md). The edition advanced once from the original baseline; the unpublished link-only candidate is not a separate edition. Any preapproval hashes or unresolved/unapproved descriptions below are historical and do not override this record.
+
+No formal publication gate, build, commit, remote write or publication was performed for this record. A bounded PASS is not an exhaustive factual certification or numerical grade.
+
+## Historical preapproval and integration records
+
+# Tank - Current Source Checklist
+
+Review date: 2026-09-27
+
+Source: `content/essays/the-tank-at-the-fence-line.md`
+
+Reviewed version: `1.2`, Third web edition.
+
+Final file SHA-256: `e9a7727570699da1f325f18ff9020ec4fe7d2fbf7b863a11dbb37f9e91fd094e`.
+
+Current Editorial Philosophy decision: HOLD.
+
+Scope: September 27 hyperlink-only pass against restored baseline `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`. Original article prose and reporting frame are retained. No public factual correction was applied. No tests, build or publication was run by this reviewer.
+
+## Checked source fit
+
+- **Tank:** Three added anchors expose [GKN's own product description](https://www.gknaerospace.com/markets-solutions/niche-technologies/transparencies/) and AQMD's [HRA definition](https://www.aqmd.gov/home/rules-compliance/compliance/toxic-hot-spots-ab-2588/health-risk-assessment) and [prioritization criteria](https://www.aqmd.gov/home/rules-compliance/compliance/toxic-hot-spots-ab-2588/prioritization). Read the product sections for cabin windows, canopies, acrylic, and transparent armor; HRA emissions/dispersal/health definition; and toxicity, volume, receptor-proximity criteria. No new RMP or evacuation-time links were added: current EPA extraction returned navigation only, and Orange County's changed incident page did not expose the original May 21 timestamp. These access limits do not independently disprove the earlier records. AP attribution and the unresolved-cause/RMP cautions stay intact.
+
+Only the newly attached source passages were freshly checked in this pass; earlier links were retained after bounded coverage review. Source access limitations described in the [group ledger](../core-link-only-existing-2026-09-27.md) are not silently treated as successful verification.
+
+## Remaining approval items
+
+Identified factual/source issues remain in the public text. Exact original snippets, smallest proposed replacements, and supporting records are in the **Tank - HOLD** subsection of the [private group ledger](../core-link-only-existing-2026-09-27.md). None are authorized or applied by this report.
+
+The seven current test decisions are in the [refinement report](the-tank-at-the-fence-line-99-refinement-report.md). This checklist makes no independent all-archive certification.
+
+## Superseded record - preserved for history
+
+### Archived title: Source Checklist: The Tank at the Fence Line
+
+## Current link-only checkpoint - 2026-09-27
+
+Final file SHA-256: `e9a7727570699da1f325f18ff9020ec4fe7d2fbf7b863a11dbb37f9e91fd094e` (version `1.2`, Third web edition). GKN product descriptions, AQMD's HRA definition, and AQMD's toxicity/volume/receptor-priority passage were read and linked at their existing body references. No prose was corrected. The [current group ledger](../core-link-only-existing-2026-09-27.md) records precise evidence, access limitations, the seven-part audit, and the pending NIOSH averaging-window correction. Current Philosophy decision: HOLD; the historical PASS below is not current certification. EPA's current pages exposed navigation only, and the revised county page did not expose the original May 21 timestamp; those sources were not newly linked or freshly certified.
+
+## Historical source checklist - preserved
 
 Package: `2026-05-26-the-tank-at-the-fence-line`
 
-Editorial Philosophy Audit: PASS
+Historical Editorial Philosophy Audit: PASS
 
-Media Framing Audit: PASS
+Historical Media Framing Audit: PASS
 
 ## Primary, Official, Direct, Or Public-Record Sources
 

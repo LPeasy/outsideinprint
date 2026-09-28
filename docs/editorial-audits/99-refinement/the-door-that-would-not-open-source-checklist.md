@@ -1,4 +1,57 @@
+# Current approved correction record — September 27, 2026
+
+File: `content/essays/the-door-that-would-not-open.md`  
+Version: `2.0 / Third web edition`  
+Final content SHA-256: `666880d6b9c4a385143d38c898891f124bd8fde0103dba2571c83a6d710b77bd`
+
+Current disposition: **PASS (bounded editorial review)**. Distinguished site-application court pressure from an order to continue reimbursements.
+
+Source-demonstrated factual corrections were owner-approved; broad revision, unsupported-claim deletion, illustration/caption changes and publication were not. [Exact changes and evidence](../core-approved-facts-root-2026-09-27.md). The edition advanced once from the original baseline; the unpublished link-only candidate is not a separate edition. Any preapproval hashes or unresolved/unapproved descriptions below are historical and do not override this record.
+
+No formal publication gate, build, commit, remote write or publication was performed for this record. A bounded PASS is not an exhaustive factual certification or numerical grade.
+
+## Historical preapproval and integration records
+
+# Current link-only review — September 27, 2026
+
+File: `content/essays/the-door-that-would-not-open.md`  
+Version: `1.2 / Third web edition`  
+SHA-256: `b7052d04efece4901e4194928cc04af475af388463833b80a89cbfc2bd81d937`
+
+Current status: **HOLD / SOURCE_CHECK_REQUIRED**. Original prose restored; only supported hyperlink additions/destination repairs and minor citation metadata are allowed. Minimal corrections remain private and unapproved. This checkpoint supersedes all earlier September 27 major-revision candidates below; their claims that prose corrections were applied are no longer current.
+
+Two anchors expose the named Salon headline and OLA timeline. The preserved judicial-pressure passage needs the site-application versus payment distinction; the links do not endorse the entire interpretation of CNN or causal claims about later prosecutions.
+
+## Current source scope
+
+- [headline](https://www.salon.com/2026/01/05/minnesota-day-care-hoax-is-fueled-by-maga-psychosexual-weirdness/) — attached only to the existing phrase; source scope is described above.
+- [auditor's timeline](https://www.auditor.leg.state.mn.us/sreview/pdf/2024-mdefof.pdf#page=93) — attached only to the existing phrase; source scope is described above.
+
+Evidence was read in the current research pass or its preserved claim-level source record. Access failures are not source verification. Historical-source passages remain useful research, but discarded revisions and old final hashes are not release evidence. Private proposals: `../core-link-only-root-approvals-2026-09-27.md`. No release gate or publication performed.
+
+## Superseded research history — not current clearance
+
 # Source Checklist
+
+## September 27, 2026 claim-link review
+
+Local candidate: version 2.0 / Third web edition; original May 23, 2026 date and May reporting frame preserved. Baseline commit `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`.
+Final essay SHA-256: `1d21dc4b36161d9645383cd412fd178c422f1903d05c229837167c555068b90f`.
+
+| Claim cluster | Passage read | Result and limits |
+|---|---|---|
+| Bock conviction, sentence, totals and sponsor mechanism | [DOJ May 22 release](https://www.justice.gov/usao-mn/pr/feeding-our-future-ringleader-sentenced-500-months), sentence and trial-facts paragraphs | Retain official attribution; distinguish conviction from unrelated charges. |
+| May takedown, Mahamud meal and co-pay allegations | [DOJ May 21 release](https://www.justice.gov/opa/pr/minnesota-health-care-fraud-takedown-results-charges-against-15-defendants-over-90m-fraud), opening and Child Care Fraud; [case summary](https://www.justice.gov/criminal/criminal-fraud/health-care-fraud-unit/2026-minnesota-hcf-case-summaries), U.S. v. Fahima Mahamud | Renew link at detailed cluster. Charges remain allegations in May frame; live summary updated July 29 is not a later disposition check. Summary inconsistently says indictment after information; essay correctly uses information. |
+| Shirley's site visits and funding claims | [House-hosted testimony](https://judiciary.house.gov/sites/evo-subsites/republicans-judiciary.house.gov/files/evo-media-document/shirley-testimony.pdf#page=1), one-page account and conclusion | Direct participant account, not independent fraud findings. Opening now expressly attributed. |
+| Audience and state checks | [Axios December 29](https://www.axios.com/2025/12/29/nick-shirley-minnesota-fraud-vance-fbi-somali), Zoom in; [AP January 2](https://apnews.com/article/01658dfbab49ca8b00c8d1622f671238), state inspection account | Historical platform views, not unique readers. AP indexed report supports nine checks, one unopened site and four continuing inquiries; operational check is not full reimbursement clearance. |
+| CNN exchange and Salon framing | [CNN transcript](https://transcripts.cnn.com/show/esrs/date/2025-12-31/segment/01), Wild/Shirley sequence; [Salon January 5](https://www.salon.com/2026/01/05/minnesota-day-care-hoax-is-fueled-by-maga-psychosexual-weirdness/), headline | Existing quoted exchange accurate, but prior interpretation omitted legitimate preceding question. Restore context. Commentary is evidence of framing only. |
+| Oversight failure and litigation | [OLA full report](https://www.auditor.leg.state.mn.us/sreview/pdf/2024-mdefof.pdf), printed pp. 69-75, 85-94, 100-102 | Precise PDF links added. Correct distinction between judicial criticism of payment suspension and contempt for site-application delays. Audit/prosecution predates December 2025 video; no causal credit inferred. |
+| Platform and incentives | [Anti Fraud Club](https://www.antifraudclub.com/), newsletter and shop; [April 30 post](https://www.antifraudclub.com/p/nick-shirley-s-minnesota-fraud-investigation-triggers-federal-raids), date/headline | Replace stale live-feed titles, reader count and submission-path claims with dated direct record. Headline's claim to cause raids expressly attributed, not endorsed. |
+| Co-pay program mechanics | [DCYF provider page](https://dcyf.mn.gov/child-care-assistance-program-information-child-care-providers), CCAP billing and payments | Supports direct payments and possible family co-payments. Verification benefits and burdens are author analysis, not a demonstrated fraud-prevention study. |
+
+No unresolved mismatch found in the bounded prose pass. Supportive opinion on independent reporting is preserved; questioning evidence is explicitly legitimate, and no ethnicity establishes guilt. No independent authentication of every site visit, viewer or reimbursement. No new outcomes after May imported.
+
+## Historical package record (not current release clearance)
 
 Package: `2026-05-23-the-door-that-would-not-open`
 

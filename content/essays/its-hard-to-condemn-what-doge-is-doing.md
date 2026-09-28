@@ -9,9 +9,12 @@ subtitle: "The Wrecking Ball We Deserve?"
 featured_image: "/images/medium/its-hard-to-condemn-what-doge-is-doing/d0e770bbe36eaacb02b0485d21c33b388d5975eb34ddcb15f38b678658bb506e.jpeg"
 featured_image_alt: "It’s Hard to Condemn what DOGE is Doing"
 description: "There is something undeniably compelling about what the Department of Government Efficiency (DOGE) is doing, even as its methods raise hard questions about accountability and institutional risk."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Corrected Obama's initiative name. Added or retained claim-level source links; original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-02"
     note: "Updated May 2, 2026, after OIP back-archive review. Legacy Medium image embeds, promotional residue, punctuation artifacts, and unsupported reputational phrasing were cleaned up; source, metadata, and rendering were checked."
@@ -33,7 +36,7 @@ Not because it's a noble cause, nor because it's being carried out in a particul
 
 Rather, it's difficult to condemn because DOGE taps into a frustration that has long simmered beneath the surface of American governance.
 
-The U.S. federal bureaucracy is, by most measures, bloated. Agencies overlap in jurisdiction, funding allocations are opaque, and entire institutions survive on inertia rather than necessity.
+The U.S. federal bureaucracy is, by most measures, bloated. [Agencies overlap in jurisdiction](https://www.gao.gov/products/gao-24-106915), funding allocations are opaque, and entire institutions survive on inertia rather than necessity.
 
 If DOGE is wielding an axe instead of a scalpel, it's only because decades of failed reform efforts have left few other tools available.
 
@@ -48,13 +51,13 @@ DOGE is hardly the first attempt to rein in government excess.
 
 In the early 20th century, progressive reformers sought to streamline public administration through the creation of independent commissions and civil service protections.
 
-The Hoover Commission (1947 to 1949), chaired by former President Herbert Hoover, was one of the most notable attempts to restructure the federal government. It produced sweeping recommendations for reducing redundancy, consolidating agencies, and making the executive branch more efficient.
+The [Hoover Commission (1947 to 1949), chaired by former President Herbert Hoover](https://www.archives.gov/research/guide-fed-records/groups/264.html), was one of the most notable attempts to restructure the federal government. It produced sweeping recommendations for reducing redundancy, consolidating agencies, and making the executive branch more efficient.
 
 Some of its proposals were enacted, but others fell by the wayside as political inertia took hold.
 
 Later efforts, like the Grace Commission under Ronald Reagan in the 1980s, identified billions in potential savings but struggled to enact meaningful change.
 
-The same could be said of Barack Obama's Government Accountability and Efficiency Initiative, which aimed to modernize federal agencies but was met with bureaucratic resistance and ultimately delivered modest results.
+The same could be said of Barack Obama's [Accountable Government Initiative](https://obamawhitehouse.archives.gov/the-press-office/2011/06/13/executive-order-13576-delivering-efficient-effective-and-accountable-gov), which aimed to modernize federal agencies but was met with bureaucratic resistance and ultimately delivered modest results.
 
 The pattern is clear: every few decades, an administration attempts to make government more efficient, but entrenched interests, political gridlock, and bureaucratic self-preservation limit the impact.
 

@@ -9,9 +9,12 @@ subtitle: "Jobs, Benefits, and Work-Life Trade-Offs Across Sectors"
 featured_image: "medium/e08e2d9e594e88fe577e132b4ab69e9bf449fe573bd5abd1e3db0ccdb88311ce"
 featured_image_alt: "Public vs Private Pay: Who Really Earns More?"
 description: "Public-sector compensation combines wages, benefits, pensions, and job security differently across occupations. This guide explains why simple averages mislead."
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected March 2025 compensation shares and identified the state/local government comparison. Added or retained claim-level source links; original reporting frame retained. Corrected flagged graphics and captions without changing surrounding prose in this graphics pass."
   - version: "1.1"
     date: "2026-05-18"
     note: "Updated May 18, 2026, after OIP back-archive review. Removed remote Medium chart media, normalized house style, checked BLS compensation framing, and preserved the original argument."
@@ -217,12 +220,14 @@ benefits.**
 
 *Some public workers get a smaller paycheck ~ but a bigger bag overall.*
 
+These [March 2025 ECEC figures](https://www.bls.gov/news.release/archives/ecec_06132025.htm) cover state and local government, not federal employees; occupational mix differs between sectors.
+
 - **Public Sector** ~ 62% wages, 38% benefits
-- **Private Sector** ~ 71% wages, 29% benefits
+- **Private Sector** ~ 70% wages, 30% benefits
 
-![Breakdown of Average Distribution of Pay](oip-image:medium/410a601d6503e9a566154c4622b5698c20f059c16bdabd976c0e2bb1cd67afc2)
+![Employer compensation shares for state and local government and private industry, March 2025.](oip-image:essays/public-vs-private-pay-who-really-earns-more/compensation-shares-corrected-20260927)
 
-*Breakdown of Average Distribution of Pay: Public vs Private Sectors*
+*Employer compensation shares, March 2025: state and local government versus private industry. Selected benefit components shown; federal workers excluded. [Source: BLS ECEC, Table 1](https://www.bls.gov/news.release/archives/ecec_06132025.htm).*
 
 
 For many state and federal employees, retirement isn't just a 401(k)
@@ -296,7 +301,7 @@ The only real answer is:
 - U.S. Bureau of Labor Statistics, Occupational
  Employment and Wage Statistics (OEWS) →
  [https://www.bls.gov/oes/](https://www.bls.gov/oes/)
-- BLS Employer Costs for Employee Compensation (ECEC) →
+- [BLS Employer Costs for Employee Compensation (ECEC)](https://www.bls.gov/news.release/archives/ecec_06132025.htm) →
  [https://www.bls.gov/ncs/ect/](https://www.bls.gov/ncs/ect/)
 - Congressional Budget Office →
  [https://www.cbo.gov/](https://www.cbo.gov/)

@@ -9,9 +9,12 @@ description: "Extreme weather data does not say every storm is unprecedented. It
 featured_image: "medium/39e3617269bd3ce2757d8b6d0bf6990bda121d46a73fbc206ab41017d99c2fde"
 featured_image_alt: "Chart showing U.S. extreme one-day precipitation events from 1910 to 2023."
 featured_image_caption: "EPA climate indicator chart on U.S. extreme one-day precipitation events."
-version: "1.4"
-edition: "Fifth web edition"
+version: "2.0"
+edition: "Sixth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected climate-record dates, precipitation metrics and comparison periods, hurricane projections, Texas rainfall scope, the Hunt-gauge observation and Camp Mystic event details. Added or retained claim-level source links and corrected flagged graphics and captions; surrounding prose retained."
   - version: "1.4"
     date: "2026-09-18"
     note: "Repaired escaped emphasis in a section heading; article wording and sources are unchanged."
@@ -112,12 +115,11 @@ Or if you're a stats guy.
 
 ### What the Data Can *and Can't* Tell Us
 
-> ***Most national climate trend data starts around 1980.***
+> ***National climate trend records do not share a single start date.***
 
-**That's not arbitrary**. It is when we began getting consistent
-satellite coverage, Doppler radar, and standardized instrumentation
-across the country. But it does mean **we're working with a limited
-window.**
+**The record depends on what we measure.** [EPA's 2024 assessment
+shows national temperature data from 1901 and extreme one-day
+precipitation data from 1910.](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P101AXFE.txt)
 
 > Older floods, fires, and heatwaves may be missing from the record or
 > measured inconsistently… and
@@ -146,11 +148,12 @@ The U.S. data shows the pattern.
 
 ![Chart showing U.S. extreme one-day precipitation events from 1910 to 2023.](oip-image:medium/39e3617269bd3ce2757d8b6d0bf6990bda121d46a73fbc206ab41017d99c2fde)
 
-**Nine of the ten wettest years on record have** [**happened since
-1995.**](https://www.epa.gov/climate-indicators/climate-change-indicators-heavy-precipitation)
+**In EPA's 1910–2023 record, nine of the ten highest years for extreme
+one-day precipitation in the contiguous U.S. have** [**occurred since
+1995.**](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P101AXFE.txt)
 **The share of the country hit by very heavy daily rainfall has**
-[**grown about 0.5% per decade**](https://www.epa.gov/climate-indicators/climate-change-indicators-us-and-global-precipitation)
-**since 1910.** That is a slow rise, but a relentless one, and most of
+[**grown about 0.5 percentage points per decade**](https://www.epa.gov/sites/default/files/2021-04/documents/heavy-precip_td.pdf#page=6)
+**from 1910 through 2020.** That is a slow rise, but a relentless one, and most of
 the increase has come since 1980.
 
 [**More rain now falls in short bursts**](https://www.noaa.gov/stories/ask-scientist-extreme-rainfall-why-it-happens-and-how-we-predict-it),
@@ -158,9 +161,9 @@ not daylong showers. That means more flash floods and runoff.
 [**Heatwaves are longer,**](https://newsroom.ucla.edu/releases/duration-of-heat-waves-accelerating-faster-than-global-warming)
 **hotter, and cover more ground.** Cold extremes are becoming less
 common, while record highs are becoming the norm. There may not be more
-storms overall, [but the strongest storms, Category 3 and above, are
-increasing](https://www.pnj.com/story/weather/hurricanes/2025/03/21/hurricanes-not-more-frequent-stronger/82572283007/),
-along with rainfall and wind speeds.
+storms overall, [but warming is projected to increase the share reaching
+Category 4 or 5, along with tropical-cyclone rainfall rates and average
+intensity.](https://www.gfdl.noaa.gov/global-warming-and-hurricanes/)
 
 ### **Texas Is Flash Flood Ground Zero**
 
@@ -171,8 +174,8 @@ along with rainfall and wind speeds.
 
 ![Texas map showing overall precipitation trend by county from 1895 to 2023.](oip-image:medium/b21d49d59abe9fffed3fc8b549a7d9ec5de79b63d896fb0a72bb044812de20b7)
 
-**Central and Eastern Texas now average about 10% more annual rainfall**
-than a century ago. Several of the wettest months in state history
+[**Parts of Central and Eastern Texas have seen annual rainfall increase
+by 15% or more over the past century.**](https://climatexas.tamu.edu/products/special-reports/2024%20Climate%20Report-compressed.pdf#page=11) Several of the wettest months in state history
 occurred just in the last 20 years. More rain falls in intense
 downpours, separated by longer dry spells.
 
@@ -198,7 +201,9 @@ funnel rainwater straight into rivers.
 
 **Here's a rough breakdown:**
 
-![Summary graphic comparing clearly worsening and unclear or variable extreme weather trends.](oip-image:medium/c50100c0dccbed7038ca041dea10befa36fe670c5eafa5f54c30070ca1e7be93)
+![Scoped weather trends: observed extreme one-day precipitation and city heat waves, distinguished from projected changes in the share of very intense tropical cyclones.](oip-image:essays/the-waters-rising-what-the-data-really-says-about-extreme-weather/scoped-trends-corrected-20260927)
+
+*Selected measures, not a universal hazard scorecard. OIP graphic, made with ChatGPT from [EPA’s 2024 indicators, Figures 9 and 14](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P101AXFE.txt), and [NOAA GFDL’s hurricane assessment](https://www.gfdl.noaa.gov/global-warming-and-hurricanes/). Rainfall trends do not establish flash-flood frequency.*
 
 While [**uncertainty**](https://www.numberanalytics.com/blog/ultimate-guide-weather-prediction-uncertainty)
 **surrounds all types of extreme weather events,**
@@ -215,7 +220,7 @@ While [**uncertainty**](https://www.numberanalytics.com/blog/ultimate-guide-weat
 
 ### **Was the Camp Mystic flood a fluke?**
 
-> [**The Guadalupe River rose more than 25 feet in under 90 minutes.**](https://waterdata.usgs.gov/monitoring-location/USGS-08165500/#dataTypeId=continuous-00065--887047781&period=P7D)
+> [**The Commerce Department's April 2026 review places the Hunt gauge's crest at 37.52 feet at 5:10 a.m., about five miles downstream from Camp Mystic.**](https://www.oig.doc.gov/wp-content/OIGPublications/OIG-26-017-I-SECURED.pdf#page=14)
 
 > "That's not normal."
 
@@ -223,13 +228,15 @@ While [**uncertainty**](https://www.numberanalytics.com/blog/ultimate-guide-weat
 
 ![Map of the Guadalupe River Basin, Kerr County, and Camp Mystic.](oip-image:medium/d5d6535a7eb0a21a23db5acb6801f1c8aebee162d072c53e03b818938512a56e)
 
-[Tropical moisture from Storm Barry stalled over the Hill Country, dropping 16 inches of rain in 48 hours.](https://weather.com/news/weather/news/2025-07-06-how-guadalupe-texas-flooding-happened-forecast)
+[Intense overnight rainfall dropped roughly 10 to 15 inches over the upper Guadalupe basin.](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=47)
 
-> The flood wiped out power, snapped gauges, and obliterated cabins.
+> The flood disrupted power, [destroyed the Hunt gauge,](https://www.oig.doc.gov/wp-content/OIGPublications/OIG-26-017-I-SECURED.pdf#page=14)
+> and [inundated cabins.](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=85)
 
-[**Texas State Climatologist John Nielsen-Gammon**](https://texas2036.org/texas-will-face-more-extreme-weather/)
-**projects that by 2036, Texas could see 6 to 10% higher rainfall
-intensity and 30 to 50% more frequent extreme rain events.**
+[**Texas State Climatologist John Nielsen-Gammon**](https://texas2036.org/wp-content/uploads/2020/03/ClimateReport-1900to2036-1.pdf#page=13)
+**projected in his 2020 report that by 2036, Texas could see 6 to 10%
+higher extreme-rainfall intensity and 30 to 50% greater odds of extreme
+rain relative to 1950–1999.**
 
 ### **A New Baseline for Risk**
 
@@ -249,7 +256,7 @@ than they realize.
 > **Some Camp Mystic cabins sat inside a mapped regulatory floodway,
 > and the paperwork did not remove the physical risk.**
 
-**Permits were granted.**
+**Map amendments were granted.**
 
 Some buildings were allowed to remain or were removed from mapped
 high-risk categories through formal flood-map processes.
@@ -275,4 +282,3 @@ past.**
 ***Because what happened at Camp Mystic could happen again,***
 
 > **And next time we need to be ready.**
-

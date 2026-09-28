@@ -9,9 +9,12 @@ description: "The Senate's prediction-market ban shows why event markets become 
 featured_image: "essays/the-bet-slip-in-the-briefing-room/hero"
 featured_image_alt: "Editorial illustration of a prediction-market ticket resting on a closed briefing folder at a long Senate table, with a dim trading board reflected in polished wood."
 featured_image_caption: "The bet slip looks harmless until it sits beside tomorrow's official decision."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.1"
     date: "2026-05-11"
     note: "Updated May 11, 2026, for OIP house-style cleanup of continuity phrasing and that-matters scaffolding."
@@ -47,7 +50,7 @@ The public office is a place where tomorrow sometimes arrives early.
 
 A prediction market sells a priced claim about an event.
 
-The CFTC describes event contracts as products that often use yes-or-no outcomes, fixed payouts, and prices that reflect traders' estimates of future events. A trader might pay 70 cents for a contract that pays one dollar if a predicted event occurs. If the event happens, the trader earns the difference after costs. If the event fails, the stake is lost. The CFTC says these contracts can be used to hedge real-world risk or to speculate, and that market prices can sometimes aggregate information in useful ways.
+The [CFTC describes event contracts](https://www.cftc.gov/LearnandProtect/PredictionMarkets) as products that often use yes-or-no outcomes, fixed payouts, and prices that reflect traders' estimates of future events. A trader might pay 70 cents for a contract that pays one dollar if a predicted event occurs. If the event happens, the trader earns the difference after costs. If the event fails, the stake is lost. The CFTC says these contracts can be used to hedge real-world risk or to speculate, and that market prices can sometimes aggregate information in useful ways.
 
 That is the serious argument for prediction markets. They can make uncertainty visible. They can discipline wishful thinking. They can expose when public commentary and private expectation diverge. A poll asks people what they say. A market asks what they will risk.
 

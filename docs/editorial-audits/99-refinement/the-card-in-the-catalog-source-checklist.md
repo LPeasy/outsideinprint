@@ -1,3 +1,61 @@
+# Current approved correction record — September 27, 2026
+
+File: `content/essays/the-card-in-the-catalog.md`  
+Version: `1.1 / Second web edition`  
+Final content SHA-256: `77f37544b5b78d9afffc4f302c435775498acac087d7de6343cfcf15500c0bb8`
+
+Current disposition: **PASS (bounded editorial review)**. Qualified the existing LCSH link as the archived 46th edition.
+
+Source-demonstrated factual corrections were owner-approved; broad revision, unsupported-claim deletion, illustration/caption changes and publication were not. [Exact changes and evidence](../core-approved-facts-root-2026-09-27.md). The edition advanced once from the original baseline; the unpublished link-only candidate is not a separate edition. Any preapproval hashes or unresolved/unapproved descriptions below are historical and do not override this record.
+
+No formal publication gate, build, commit, remote write or publication was performed for this record. A bounded PASS is not an exhaustive factual certification or numerical grade.
+
+## Historical preapproval and integration records
+
+# Current link-only review — September 27, 2026
+
+File: `content/essays/the-card-in-the-catalog.md`  
+Version: `1.1 / Second web edition`  
+SHA-256: `7d46d79bab030b75095443e3acd319964dfc86e8e7c42d19d1899d4197d4740a`
+
+Current status: **HOLD / SOURCE_CHECK_REQUIRED**. Original prose restored; only supported hyperlink additions/destination repairs and minor citation metadata are allowed. Minimal corrections remain private and unapproved. This checkpoint supersedes all earlier September 27 major-revision candidates below; their claims that prose corrections were applied are no longer current.
+
+Four anchors expose the 2017 LC history, 1901 report, and 1907 report. The linked 46th-edition LCSH volume is archival; calling it current needs one approved qualification.
+
+## Current source scope
+
+- [Library's own history of the card catalog, published in 2017](https://blogs.loc.gov/loc/2017/07/inquiring-minds-the-unheralded-story-of-the-card-catalog/) — attached only to the existing phrase; source scope is described above.
+- [1901 report](https://archive.org/download/1900a1reportoflibr00libruoft/1900a1reportoflibr00libruoft_djvu.txt) — attached only to the existing phrase; source scope is described above.
+- [different slices of the record](https://www.govinfo.gov/content/pkg/SERIALSET-05363_00_00-002-0018-0000/pdf/SERIALSET-05363_00_00-002-0018-0000.pdf#page=80) — attached only to the existing phrase; source scope is described above.
+- [millions of cards in thousands of trays](https://blogs.loc.gov/loc/2017/07/inquiring-minds-the-unheralded-story-of-the-card-catalog/) — attached only to the existing phrase; source scope is described above.
+
+Evidence was read in the current research pass or its preserved claim-level source record. Access failures are not source verification. Historical-source passages remain useful research, but discarded revisions and old final hashes are not release evidence. Private proposals: `../core-link-only-root-approvals-2026-09-27.md`. No release gate or publication performed.
+
+## Superseded research history — not current clearance
+
+# Claim-link source record: September 27, 2026
+
+Reviewed file: `content/essays/the-card-in-the-catalog.md`  
+Edition: `1.1 / Second web edition`  
+SHA-256: `83c85fdbbf580e7946b5d5c43b1b64311c3841613fc1cca7eb2f897724512bcb`
+
+## Passages inspected for this revision
+
+- [LC's 2017 catalog-history interview](https://blogs.loc.gov/loc/2017/07/inquiring-minds-the-unheralded-story-of-the-card-catalog/): substantive indexed primary text supports Jewett, Harvard/Abbot, Cutter, the post-1870 deposit problem, Putnam's catalog work, and the scale of the physical catalog. Direct retrieval was blocked; this record does not claim direct-page access.
+- [1901 annual-report OCR](https://archive.org/download/1900a1reportoflibr00libruoft/1900a1reportoflibr00libruoft_djvu.txt): actual OCR read, printed pp. 29-30 and 69-72, supports 329,049 cards, the catalog's purposes, ordering/pricing, remittances, and state-commission routing. Nearby link added for labor/card volume; noisy OCR is not used for extended quotation.
+- [1907 annual report](https://www.govinfo.gov/content/pkg/SERIALSET-05363_00_00-002-0018-0000/pdf/SERIALSET-05363_00_00-002-0018-0000.pdf): PDF text inspected in memory. PDF p. 75 / printed p. 60 gives 952 subscribers and the size-group counts; PDF p. 80 / printed p. 65 describes departmental card series. Links now point to those PDF pages.
+- [FY 2017 ABA annual report](https://www.loc.gov/aba/publications/docs/aba-annualreport-fy17.pdf#page=18): p. 18 supports proposed heading changes, public feedback, and congressional direction concerning Title 8 terminology. PDF pinpoint added.
+
+## Retained context and limits
+
+Also read LC's 1998 LCSH history, Avram obituary, OCLC's bibliographic-format introduction, ALA's OPAC privacy guidance, and NISO's privacy-principles summary. The April 2026 kiosk release was available as substantive indexed primary text. These support the retained institutional context; this pass is not a fresh certification of every unchanged claim.
+
+The 1904 report, 2016 heading-decision PDF, archived LCSH46 I volume, and Understanding MARC page were unavailable to fresh direct retrieval. The earlier source-hardening record below remains the disclosed basis for their unchanged claims. No new claim depends on newly reading those unavailable files. The essay now describes the linked LCSH volume as archived, not current. No source gap discovered in the added links remains unresolved.
+
+## Historical source-hardening record: June 22, 2026
+
+The following describes the earlier review, not access performed on September 27.
+
 # Source Checklist
 
 Candidate: `The Card in the Catalog`

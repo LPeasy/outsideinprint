@@ -1,0 +1,383 @@
+{
+  "files": [
+    {
+      "path": "content/essays/whos-drinking-all-the-modelo.md",
+      "snapshot": "/tmp/oip-final-nine-brands-dtFpi2/whos-drinking-all-the-modelo.md",
+      "replacements": [
+        {
+          "before": "version: \"1.3\"\nedition: \"Fourth web edition\"\nrevision_history:\n  - version: \"1.3\"",
+          "after": "version: \"2.0\"\nedition: \"Fourth web edition\"\nrevision_history:\n  - version: \"2.0\"",
+          "count": 1
+        },
+        {
+          "before": "note: \"Retained claim-level source links while restoring original prose from an unpublished revision; original artwork and publication date unchanged.\"",
+          "after": "note: \"Retained claim-level source links and original prose, with approved corrections to sales measures, ranking and population dates, sponsorship timing, and unsupported geographic claims; original artwork and publication date unchanged.\"",
+          "count": 1
+        },
+        {
+          "before": "In May 2023, Modelo Especial knocked Bud Light off the top spot in the American beer market.",
+          "after": "In the four weeks ending June 3, 2023, Modelo Especial [knocked Bud Light off the top spot in U.S. retail dollar sales](https://journalrecord.com/2023/06/14/bud-light-dethroned-as-americas-top-selling-beer/).",
+          "count": 1
+        },
+        {
+          "before": "beer sales in fiscal 2023",
+          "after": "beer-segment net sales in fiscal 2023",
+          "count": 1
+        },
+        {
+          "before": "with sales up 14% year over year.",
+          "after": "with [distributor shipments to retailers up about 9% in fiscal 2023](https://d1io3yog0oux5.cloudfront.net/_cba14301af6161410781f4de3a5ef08b/cbrands/db/963/9711/presentation/Q4_FY23_Earnings_Presentation_UPDATED_4.7.2023.pdf#page=7).",
+          "count": 1
+        },
+        {
+          "before": "nearly 20% today",
+          "after": "[19.5% in 2023](https://www.census.gov/newsroom/press-releases/2024/population-estimates-characteristics.html)",
+          "count": 1
+        },
+        {
+          "before": "before it stepped away in 2017.",
+          "after": "before [Modelo's partnership began in 2018](https://www.ufc.com/news/ufc-and-modelo-announce-new-partnership).",
+          "count": 1
+        },
+        {
+          "before": "Modelo Especial's surge is concentrated in a few high-octane markets, most notably California, Texas, and Illinois. These three states account for a significant share of national beer sales, and in all of them, Modelo is a top-tier brand.\n\n",
+          "after": "",
+          "count": 1
+        },
+        {
+          "before": "Los Angeles, Dallas, and Chicago",
+          "after": "[Los Angeles and Chicago](https://journalrecord.com/2023/06/14/bud-light-dethroned-as-americas-top-selling-beer/)",
+          "count": 1
+        },
+        {
+          "before": "Modelo has also gained ground in northern regions like Minnesota and upstate New York, markets far from its original Latino base, thanks to national-scale distribution and cross-demographic appeal.\n\n",
+          "after": "",
+          "count": 1
+        },
+        {
+          "before": "helped it dominate among younger, male consumers and ",
+          "after": "",
+          "count": 1
+        },
+        {
+          "before": "Analysts credit Modelo's brand success to its consistent image: tough, active, and authentic.",
+          "after": "To my eye, Modelo's brand success comes from its consistent image: tough, active, and authentic.",
+          "count": 1
+        },
+        {
+          "before": "Deals with the LA Galaxy,",
+          "after": "Deals with the [LA Galaxy](https://www.lagalaxy.com/news/the-la-galaxy-dignity-health-sports-park-and-modelo-raise-a-glass-to-decade-long-partnership-with-multi-year-renewal),",
+          "count": 1
+        }
+      ],
+      "sha256": "108864f216c0d23e8a3136e09a7bc61d6136c5cb4a2d88e1b4dcd1fad955b53f",
+      "records": [
+        "docs/editorial-audits/99-refinement/whos-drinking-all-the-modelo-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/whos-drinking-all-the-modelo-source-checklist.md"
+      ]
+    },
+    {
+      "path": "content/essays/the-max-mistake-why-hbos-name-change-backfired.md",
+      "snapshot": "/tmp/oip-final-nine-brands-dtFpi2/the-max-mistake-why-hbos-name-change-backfired.md",
+      "replacements": [
+        {
+          "before": "version: \"1.5\"\nedition: \"Sixth web edition\"\nrevision_history:\n  - version: \"1.5\"",
+          "after": "version: \"2.0\"\nedition: \"Sixth web edition\"\nrevision_history:\n  - version: \"2.0\"",
+          "count": 1
+        },
+        {
+          "before": "note: \"Retained claim-level source links while restoring original prose from an unpublished revision; original artwork and publication date unchanged.\"",
+          "after": "note: \"Retained claim-level source links and original prose, with approved streaming chronology, licensing, quotation and attribution corrections; removed the unverified meme anecdote and qualified branding claims. Original artwork and publication date unchanged.\"",
+          "count": 1
+        },
+        {
+          "before": "First it was HBO.",
+          "after": "First came HBO's streaming apps.",
+          "count": 1
+        },
+        {
+          "before": "Then it became HBO Max.",
+          "after": "Then came HBO Max.",
+          "count": 1
+        },
+        {
+          "before": "HBO Max is back!",
+          "after": "HBO Max is coming back!",
+          "count": 1
+        },
+        {
+          "before": "HBO Max is back.",
+          "after": "HBO Max is coming back.",
+          "count": 1
+        },
+        {
+          "before": "plus everything else WarnerMedia\nowned",
+          "after": "plus WarnerMedia's library and licensed programming",
+          "count": 1
+        },
+        {
+          "before": "For two decades,",
+          "after": "For years,",
+          "count": 1
+        },
+        {
+          "before": "The Max experiment failed.",
+          "after": "As a name, the Max experiment failed.",
+          "count": 1
+        },
+        {
+          "before": "this admission came two years ~ and millions in marketing\ncosts ~ too late.",
+          "after": "this admission came two years too late.",
+          "count": 1
+        },
+        {
+          "before": "In 2023, **Warner Bros. Discovery CEO David Zaslav** explained the name\nwas \"short and tight,\" and that removing \"HBO\" would help \"broaden the\naudience.\"",
+          "after": "In 2023, **Warner Bros. Discovery streaming chief J.B. Perrette** [described Max as a broader offering for everyone in the household](https://ir.wbd.com/news-and-events/financial-news/financial-news-details/2023/WARNER-BROS.-DISCOVERY-UNVEILS-MAX-STREAMING-SERVICE/default.aspx).",
+          "count": 1
+        },
+        {
+          "before": "Worse, it created confusion. Some users kept using the old HBO app.\nOthers didn't know Max was the same service. Some assumed HBO was a\nseparate add-on.",
+          "after": "Worse, the names invited confusion: was Max the same service, and was HBO a separate add-on?",
+          "count": 1
+        },
+        {
+          "before": "He told The New\nYork Times in March 2025:",
+          "after": "He told [Variety](https://variety.com/2025/film/news/ted-sarandos-stranger-things-ending-marvel-fight-1236339714/) in March 2025:",
+          "count": 1
+        },
+        {
+          "before": "> \"Max should have just been called HBO. That name means something.\n\n> Everyone knows it.\"",
+          "after": "> “When they’re serious, all those names will go away, and it’ll just be HBO.”",
+          "count": 1
+        },
+        {
+          "before": "The brand's own social media team leaned into the backlash. They posted\nmemes, played the self-deprecating card, and even dropped the viral\n\"He's just a little guy\" meme next to the HBO Max logo.\n\n> It was a rare moment of corporate humility. And oddly... it landed.\n\n",
+          "after": "",
+          "count": 1
+        }
+      ],
+      "sha256": "1be641bd98e24736f33dac752e97f8f4dba5305ef00534f374c3749b9373c021",
+      "records": [
+        "docs/editorial-audits/99-refinement/the-max-mistake-why-hbos-name-change-backfired-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/the-max-mistake-why-hbos-name-change-backfired-source-checklist.md"
+      ]
+    },
+    {
+      "path": "content/essays/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025.md",
+      "snapshot": "/tmp/oip-final-nine-brands-dtFpi2/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025.md",
+      "replacements": [
+        {
+          "before": "title: \"Why More People Are Choosing Chili’s Over McDonald’s in 2025\"",
+          "after": "title: \"Why Chili’s Looks Like a Better Deal Than McDonald’s in 2025\"",
+          "count": 1
+        },
+        {
+          "before": "version: \"1.2\"\nedition: \"Third web edition\"\nrevision_history:\n  - version: \"1.2\"",
+          "after": "version: \"2.0\"\nedition: \"Third web edition\"\nrevision_history:\n  - version: \"2.0\"",
+          "count": 1
+        },
+        {
+          "before": "note: \"Retained claim-level source links while restoring original prose from an unpublished revision; original artwork and publication date unchanged.\"",
+          "after": "note: \"Retained claim-level source links and original prose, with an approved evaluative title and corrections to the dated offer, service, takeout and pricing claims; labeled the author-written reactions illustrative, including the hypothetical purchase. Original URL, artwork and publication date unchanged.\"",
+          "count": 1
+        },
+        {
+          "before": "Social feeds filled with angry receipts and disbelief:",
+          "after": "The complaint can sound like this (illustrative reactions, including a hypothetical $14 purchase):",
+          "count": 1
+        },
+        {
+          "before": "Chili's locations went dark.",
+          "after": "[Chili's dining rooms went dark](https://investors.brinker.com/news/news-details/2020/Brinker-International-Reports-COVID-19-Impact-Update-And-Third-Quarter-Of-Fiscal-2020-Results-04-29-2020/default.aspx).",
+          "count": 1
+        },
+        {
+          "before": "But fast\nfood often gives you the same paper bag, no refills, no table, **and\nnow, no deal.**",
+          "after": "But a takeaway fast-food combo can leave you with the same paper bag, no table service, **and what feels like less value.**",
+          "count": 1
+        },
+        {
+          "before": "That let them hold prices steady while other chains kept\ncreeping up.",
+          "after": "They kept a $10.99 starting offer while raising prices elsewhere on the menu.",
+          "count": 1
+        },
+        {
+          "before": "You're **seeing the same thing at places like Aldi and Costco.**",
+          "after": "I see **the same value appeal in places like Aldi and Costco.**",
+          "count": 1
+        },
+        {
+          "before": "It's not flashy, but it\ndelivers:",
+          "after": "The April 2025 Big QP promotion offered:",
+          "count": 1
+        },
+        {
+          "before": "- One drink\n- One appetizer (like soup, salad, or fries)\n- One entrée (like a cheeseburger, chicken tenders, or a\n salad)\n- A big bag of chips and a cup of salsa\n\n> ***All for \\$10.99 to \\$13.99, depending on what you pick.***",
+          "after": "- One unlimited fountain drink\n- Bottomless chips and salsa\n- One Big QP burger with fries\n\n> ***Advertised at $10.99.***",
+          "count": 1
+        },
+        {
+          "before": "***you don't have to dine in.* You can order it\nto go.**",
+          "after": "***Chili's also offers takeout;* that doesn't mean every promotion carries over unchanged.**",
+          "count": 1
+        },
+        {
+          "before": "the same Chili's\nmeal",
+          "after": "a Chili's meal",
+          "count": 1
+        }
+      ],
+      "sha256": "4b451325f06e88524ef0295904e443d2a91a8c7d335fbb2e3d6007ee640b8f99",
+      "records": [
+        "docs/editorial-audits/99-refinement/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025-source-checklist.md"
+      ]
+    },
+    {
+      "path": "content/essays/the-political-economy-of-airports.md",
+      "snapshot": "/tmp/oip-final-nine-brands-dtFpi2/the-political-economy-of-airports.md",
+      "replacements": [
+        {
+          "before": "version: \"1.2\"\nedition: \"Third web edition\"\nrevision_history:\n  - version: \"1.2\"",
+          "after": "version: \"2.0\"\nedition: \"Third web edition\"\nrevision_history:\n  - version: \"2.0\"",
+          "count": 1
+        },
+        {
+          "before": "note: \"Retained claim-level source links while restoring original prose from an unpublished revision; original artwork and publication date unchanged.\"",
+          "after": "note: \"Retained claim-level source links and the institutional critique, with approved corrections to ownership, rent, funding, competition, logistics, psychology and street-pricing claims; removed three unsupported examples or statistics. Original artwork and publication date unchanged.\"",
+          "count": 1
+        },
+        {
+          "before": "Most are publicly owned and operated,",
+          "after": "Most airports in the [FAA's national airport plan are publicly owned and operated](https://www.faa.gov/sites/faa.gov/files/npias-2023-2027-narrative.pdf#page=7),",
+          "count": 1
+        },
+        {
+          "before": "Since the mid-20th century, airports have increasingly relied on non-aeronautical revenue to fund operations.",
+          "after": "Airports rely on non-aeronautical revenue to help fund operations.",
+          "count": 1
+        },
+        {
+          "before": "where vendors pay a percentage of their sales to the airport in addition to rent.",
+          "after": "where vendors may pay the greater of a percentage of sales or a minimum annual guarantee.",
+          "count": 1
+        },
+        {
+          "before": "Every item sold in a terminal must pass through rigorous security protocols, adding time and cost to the supply chain.",
+          "after": "Deliveries to secure terminal areas face screening requirements, adding time and cost to the supply chain.",
+          "count": 1
+        },
+        {
+          "before": "necessitates frequent deliveries and just-in-time inventory management, further inflating expenses.",
+          "after": "can require frequent deliveries, adding handling costs.",
+          "count": 1
+        },
+        {
+          "before": "reliance on just-in-time logistics may reduce storage costs for vendors but increases overall system costs, which are ultimately passed on to consumers.",
+          "after": "reliance on just-in-time logistics can trade lower storage costs for more frequent deliveries.",
+          "count": 1
+        },
+        {
+          "before": "In 2022, Airports Council International reported that concessions alone accounted for approximately 20-25% of airport income globally. ",
+          "after": "",
+          "count": 1
+        },
+        {
+          "before": " For instance, rounding prices to whole-dollar amounts (e.g., $5.00 for a coffee) reduces cognitive resistance, as travelers perceive the cost as inevitable.",
+          "after": "",
+          "count": 1
+        },
+        {
+          "before": " For instance, airports may charge premium rents to vendors who comply with environmental standards, further driving up prices.",
+          "after": "",
+          "count": 1
+        },
+        {
+          "before": " as public investment declines",
+          "after": "",
+          "count": 1
+        },
+        {
+          "before": "This shift reflects a decline in public investment in infrastructure, as governments encourage self-sufficiency by adopting market-based revenue models.",
+          "after": "This reflects an emphasis on financial self-sufficiency, not necessarily a decline in public investment.",
+          "count": 1
+        },
+        {
+          "before": "particularly as federal and municipal funding declines",
+          "after": "alongside [federal and municipal funding](https://www.faa.gov/newsroom/biden-harris-administration-announces-nearly-1-billion-grants-bipartisan-infrastructure)",
+          "count": 1
+        },
+        {
+          "before": "from declining public investment to rising market concentration and the commodification of public infrastructure",
+          "after": "from revenue pressures and limited competition to the commodification of public infrastructure",
+          "count": 1
+        },
+        {
+          "before": "limited competition and monopolistic vendor arrangements",
+          "after": "limited competition and concession arrangements",
+          "count": 1
+        },
+        {
+          "before": "Travelers, as captive consumers in stressful situations, are more willing to pay inflated prices, a dynamic that vendors and airport authorities exploit.",
+          "after": "Travelers with limited alternatives may accept prices they would reject elsewhere.",
+          "count": 1
+        },
+        {
+          "before": "This incentivizes higher prices, as both vendors and airports profit from inflated sales.",
+          "after": "This gives airports a stake in concession sales, though higher prices do not automatically mean higher profits.",
+          "count": 1
+        },
+        {
+          "before": "The monopolistic structure of airport retail is a critical driver of high prices. Vendors typically secure exclusive contracts through competitive bidding, allowing them to dominate specific product categories within terminals. For instance, a single company may hold the exclusive rights to sell coffee or operate convenience stores.",
+          "after": "Airport concession arrangements vary, but limited competition within a terminal can give vendors pricing power.",
+          "count": 1
+        },
+        {
+          "before": "This lack of competition creates an environment where vendors can charge prices far above market rates, knowing travelers have few alternatives.",
+          "after": "Where competition is limited, vendors can charge a premium, knowing travelers have few alternatives.",
+          "count": 1
+        },
+        {
+          "before": "While monopolistic practices in airports are particularly stark, they reflect broader economic trends in market concentration. Across industries, from healthcare to telecommunications, rising consolidation has reduced competition and driven up consumer costs. Airports mirror this trend on a localized scale, with exclusivity contracts creating monopolies that benefit vendors and airport authorities but burden travelers.",
+          "after": "The concern echoes a broader question about market concentration. When concession arrangements restrict competition, they can benefit vendors and airport authorities while burdening travelers.",
+          "count": 1
+        },
+        {
+          "before": "Behavioral economics suggests that people in such states are less price-sensitive and more willing to pay for immediate gratification.",
+          "after": "My concern is that fatigue and time pressure can make comparison shopping harder.",
+          "count": 1
+        },
+        {
+          "before": "Moreover, airports exploit psychological framing through strategic pricing.",
+          "after": "To my eye, airport pricing also works through framing.",
+          "count": 1
+        },
+        {
+          "before": "While these practices are effective, they also raise important ethical questions.",
+          "after": "These practices also raise important ethical questions.",
+          "count": 1
+        },
+        {
+          "before": "These inefficiencies are compounded by airports' geographic isolation. Many are located miles from urban centers, increasing transportation costs for vendors.",
+          "after": "Long delivery routes can add transportation costs for vendors.",
+          "count": 1
+        },
+        {
+          "before": "These initiatives, while laudable, often come with additional costs that are passed on to consumers.",
+          "after": "These initiatives, while laudable, can involve costs; whether travelers pay more depends on funding and concession terms.",
+          "count": 1
+        },
+        {
+          "before": "Programs like \"street pricing,\" which cap terminal prices at levels comparable to those outside the airport, have shown promise in reducing costs. However, these initiatives remain limited in scope and difficult to enforce, particularly in airports reliant on high concession revenue.",
+          "after": "Programs like \"street pricing\" constrain markups above comparable outside prices. At the Port Authority's New York/New Jersey airports, the [January 2025 cap was street price plus 15%, with a separate employee-benefit surcharge of up to 3% before tax](https://www.panynj.gov/content/dam/airports/pdfs/PANYNJ_StreetPricingManual_V4.0.pdf#page=8).",
+          "count": 1
+        }
+      ],
+      "sha256": "6d0e56cd38f209c5f6b3376fd3d019a4a6e310a4623e4d5459c8060769d3c98d",
+      "records": [
+        "docs/editorial-audits/99-refinement/the-political-economy-of-airports-99-refinement-report.md",
+        "docs/editorial-audits/99-refinement/the-political-economy-of-airports-source-checklist.md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "baseline_commit": "5e21e40efd5e4bcfda8bac2284edb9bb36b341d6",
+  "date": "2026-09-27",
+  "scope": "Six Modern Bios; original prose and metadata restored, exact-word links only",
+  "backup": "/tmp/oip-brands-bios-rollback-6OmB62",
+  "articles": [
+    {
+      "path": "content/essays/gene-hackman-how-a-reluctant-star-became-the-actor-everyone-believed.md",
+      "slug": "gene-hackman-how-a-reluctant-star-became-the-actor-everyone-believed",
+      "baseline_version": "1.1",
+      "version": "1.2",
+      "edition": "Third web edition",
+      "revision_note": "Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original wording, paragraph structure, source-method framing, and artwork are preserved.",
+      "sha256": "93c29621c22983a935da7320017197ea7f62ec8a530baa71bdb2d6344c6db512",
+      "editorial_disposition": "PASS",
+      "links": [
+        {
+          "before": "Oscar winner",
+          "after": "[Oscar winner](https://www.oscars.org/oscars/ceremonies/1972)",
+          "url": "https://www.oscars.org/oscars/ceremonies/1972"
+        },
+        {
+          "before": "cops, criminals, politicians, military men",
+          "after": "[cops, criminals, politicians, military men](https://catalog.afi.com/Catalog/PersonDetails/57619)",
+          "url": "https://catalog.afi.com/Catalog/PersonDetails/57619"
+        },
+        {
+          "before": "stepped away from the screen",
+          "after": "[stepped away from the screen](https://www.streetinsider.com/Reuters/Actor%2BGene%2BHackman%2Band%2Bwife%2Bfound%2Bdead%2Bat%2Bhome;%2Bcause%2Bof%2Bdeath%2Bunder%2Bprobe/24413011.html)",
+          "url": "https://www.streetinsider.com/Reuters/Actor%2BGene%2BHackman%2Band%2Bwife%2Bfound%2Bdead%2Bat%2Bhome;%2Bcause%2Bof%2Bdeath%2Bunder%2Bprobe/24413011.html"
+        }
+      ]
+    },
+    {
+      "path": "content/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation.md",
+      "slug": "charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation",
+      "baseline_version": "1.1",
+      "version": "1.2",
+      "edition": "Third web edition",
+      "revision_note": "Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original wording, paragraph structure, source-method framing, and artwork are preserved.",
+      "sha256": "15a4675c632cb9236b2da943128120f2b508f84c4ba7e59ddcf3346ae8d3c775",
+      "editorial_disposition": "SOURCE_CHECK_REQUIRED",
+      "links": [
+        {
+          "before": "In 2012, he co-founded Turning Point USA",
+          "after": "[In 2012, he co-founded Turning Point USA](https://politifact.com/article/2025/sep/10/charlie-kirk-dead-shot-at-a-utah-college-turning/)",
+          "url": "https://politifact.com/article/2025/sep/10/charlie-kirk-dead-shot-at-a-utah-college-turning/"
+        },
+        {
+          "before": "an organization that treated youth politics as a central battleground rather than a side project",
+          "after": "[an organization that treated youth politics as a central battleground rather than a side project](https://tpusa.com/wp-content/uploads/2025/04/Spring-Free-America-Tour-1.pdf#page=3)",
+          "url": "https://tpusa.com/wp-content/uploads/2025/04/Spring-Free-America-Tour-1.pdf#page=3"
+        },
+        {
+          "before": "A confrontation on campus could become a clip.",
+          "after": "[A confrontation on campus could become a clip.](https://www.investing.com/news/politics-news/charlie-kirks-rhetoric-inspired-supporters-enraged-foes-4237756)",
+          "url": "https://www.investing.com/news/politics-news/charlie-kirks-rhetoric-inspired-supporters-enraged-foes-4237756"
+        }
+      ]
+    },
+    {
+      "path": "content/essays/jack-stratton-and-the-vulfpeck-model.md",
+      "slug": "jack-stratton-and-the-vulfpeck-model",
+      "baseline_version": "1.5",
+      "version": "1.6",
+      "edition": "Seventh web edition",
+      "revision_note": "Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original wording, paragraph structure, source-method framing, and artwork are preserved.",
+      "sha256": "7d44f52211732169277f08eb438e3f04777826c6f87c74ef95c499823e2c7a0e",
+      "editorial_disposition": "SOURCE_CHECK_REQUIRED",
+      "links": [
+        {
+          "before": "The band formed in Ann Arbor, Michigan in 2011.",
+          "after": "[The band formed in Ann Arbor, Michigan in 2011.](https://alumni.umich.edu/michigan-alum/no-label-no-problem/)",
+          "url": "https://alumni.umich.edu/michigan-alum/no-label-no-problem/"
+        },
+        {
+          "before": "an October 2024 interview with writer *Josh\nFischel*, published in ***The Believer***",
+          "after": "[an October 2024 interview with writer *Josh\nFischel*, published in ***The Believer***](https://www.thebeliever.net/an-interview-with-jack-stratton/)",
+          "url": "https://www.thebeliever.net/an-interview-with-jack-stratton/"
+        },
+        {
+          "before": "Stratton grew up in Cleveland Heights, Ohio.",
+          "after": "[Stratton grew up in Cleveland Heights, Ohio.](https://www.ideastream.org/show/sound-of-ideas/2022-06-23/jack-stratton-musician-and-cleveland-heights-native-comes-home-with-a-new-klezmer-band)",
+          "url": "https://www.ideastream.org/show/sound-of-ideas/2022-06-23/jack-stratton-musician-and-cleveland-heights-native-comes-home-with-a-new-klezmer-band"
+        },
+        {
+          "before": "*University of Michigan's School of Music*",
+          "after": "[*University of Michigan's School of Music*](https://smtd.umich.edu/alumni-awards/christopher-kendall-award/)",
+          "url": "https://smtd.umich.edu/alumni-awards/christopher-kendall-award/"
+        },
+        {
+          "before": "*an imagined German rhythm section*",
+          "after": "[*an imagined German rhythm section*](https://alumni.umich.edu/michigan-alum/no-label-no-problem/)",
+          "url": "https://alumni.umich.edu/michigan-alum/no-label-no-problem/"
+        },
+        {
+          "before": "a\nsilent Spotify album released to generate royalties for an\nadmission-free tour",
+          "after": "[a\nsilent Spotify album released to generate royalties for an\nadmission-free tour](https://www.interlochenpublicradio.org/2014-09-22/how-this-ann-arbor-band-got-20-000-from-spotify-by-releasing-silent-album)",
+          "url": "https://www.interlochenpublicradio.org/2014-09-22/how-this-ann-arbor-band-got-20-000-from-spotify-by-releasing-silent-album"
+        },
+        {
+          "before": "**Vulf Compressor** plug-in, developed in coordination with\n*Goodhertz*",
+          "after": "[**Vulf Compressor** plug-in, developed in coordination with\n*Goodhertz*](https://goodhertz.com/vulf-comp/)",
+          "url": "https://goodhertz.com/vulf-comp/"
+        },
+        {
+          "before": "***Live at Madison Square Garden***",
+          "after": "[***Live at Madison Square Garden***](https://vulfpeck.bandcamp.com/album/live-at-madison-square-garden)",
+          "url": "https://vulfpeck.bandcamp.com/album/live-at-madison-square-garden"
+        },
+        {
+          "before": "*In March 2025*, Vulfpeck released ***Clarity of Cal***",
+          "after": "[*In March 2025*, Vulfpeck released ***Clarity of Cal***](https://vulfpeck.bandcamp.com/album/clarity-of-cal)",
+          "url": "https://vulfpeck.bandcamp.com/album/clarity-of-cal"
+        },
+        {
+          "before": "The companion concert film, directed and edited by *Carter Knopik*",
+          "after": "[The companion concert film, directed and edited by *Carter Knopik*](https://www.jambase.com/article/vulfpeck-clarity-of-cal-concert-film)",
+          "url": "https://www.jambase.com/article/vulfpeck-clarity-of-cal-concert-film"
+        },
+        {
+          "before": "produces for ***The Fearless Flyers***",
+          "after": "[produces for ***The Fearless Flyers***](https://vulf.bandcamp.com/album/the-fearless-flyers)",
+          "url": "https://vulf.bandcamp.com/album/the-fearless-flyers"
+        },
+        {
+          "before": "***Vulfmon***",
+          "after": "[***Vulfmon***](https://vulf.bandcamp.com/album/here-we-go-jack)",
+          "url": "https://vulf.bandcamp.com/album/here-we-go-jack"
+        }
+      ]
+    },
+    {
+      "path": "content/essays/george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill.md",
+      "slug": "george-foreman-how-a-heavyweight-champion-turned-reinvention-into-his-greatest-skill",
+      "baseline_version": "1.1",
+      "version": "1.2",
+      "edition": "Third web edition",
+      "revision_note": "Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original wording, paragraph structure, source-method framing, and artwork are preserved.",
+      "sha256": "fba49ccd215b8a93fb7d7948bad38cd9cb30b1f9248720caaafbfa682e8a439f",
+      "editorial_disposition": "SOURCE_CHECK_REQUIRED",
+      "links": [
+        {
+          "before": "The 1974 \"Rumble in the Jungle\"",
+          "after": "[The 1974 \"Rumble in the Jungle\"](https://www.tshaonline.org/handbook/entries/foreman-george-edward-big-george)",
+          "url": "https://www.tshaonline.org/handbook/entries/foreman-george-edward-big-george"
+        },
+        {
+          "before": "stepped away from boxing, changed personally and spiritually, and returned years later",
+          "after": "[stepped away from boxing, changed personally and spiritually, and returned years later](https://www.tshaonline.org/handbook/entries/foreman-george-edward-big-george)",
+          "url": "https://www.tshaonline.org/handbook/entries/foreman-george-edward-big-george"
+        },
+        {
+          "before": "reclaimed the heavyweight title in his forties",
+          "after": "[reclaimed the heavyweight title in his forties](https://www.tshaonline.org/handbook/entries/foreman-george-edward-big-george)",
+          "url": "https://www.tshaonline.org/handbook/entries/foreman-george-edward-big-george"
+        },
+        {
+          "before": "George Foreman Grill",
+          "after": "[George Foreman Grill](https://www.sec.gov/Archives/edgar/data/878280/000095013707015236/c15957e10vk.htm)",
+          "url": "https://www.sec.gov/Archives/edgar/data/878280/000095013707015236/c15957e10vk.htm"
+        }
+      ]
+    },
+    {
+      "path": "content/essays/pope-francis-how-a-plainspoken-pope-reframed-moral-authority.md",
+      "slug": "pope-francis-how-a-plainspoken-pope-reframed-moral-authority",
+      "baseline_version": "1.1",
+      "version": "1.2",
+      "edition": "Third web edition",
+      "revision_note": "Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original wording, paragraph structure, source-method framing, and artwork are preserved.",
+      "sha256": "3ff003bcc5c2538f5f076d5d579ec81569f9df5a9a669a08a6571510157a82f9",
+      "editorial_disposition": "PASS",
+      "links": [
+        {
+          "before": "Jorge Mario Bergoglio of Buenos Aires, a Jesuit priest",
+          "after": "[Jorge Mario Bergoglio of Buenos Aires, a Jesuit priest](https://www.vatican.va/content/francesco/en/biography/documents/papa-francesco-biografia-bergoglio.html)",
+          "url": "https://www.vatican.va/content/francesco/en/biography/documents/papa-francesco-biografia-bergoglio.html"
+        },
+        {
+          "before": "He chose a simpler style.",
+          "after": "[He chose a simpler style.](https://www.archivioradiovaticana.va/storico/2013/03/14/pope_francis_pays_his_hotel_bill,_avoids_pomp_and_visits_chapel/en1-673443)",
+          "url": "https://www.archivioradiovaticana.va/storico/2013/03/14/pope_francis_pays_his_hotel_bill,_avoids_pomp_and_visits_chapel/en1-673443"
+        },
+        {
+          "before": "His environmental teaching",
+          "after": "[His environmental teaching](https://www.vatican.va/content/francesco/en/encyclicals/documents/papa-francesco_20150524_enciclica-laudato-si.html)",
+          "url": "https://www.vatican.va/content/francesco/en/encyclicals/documents/papa-francesco_20150524_enciclica-laudato-si.html"
+        },
+        {
+          "before": "He returned often to joy as well.",
+          "after": "[He returned often to joy as well.](https://www.vatican.va/content/francesco/en/apost_exhortations/documents/papa-francesco_esortazione-ap_20131124_evangelii-gaudium.html)",
+          "url": "https://www.vatican.va/content/francesco/en/apost_exhortations/documents/papa-francesco_esortazione-ap_20131124_evangelii-gaudium.html"
+        },
+        {
+          "before": "He wanted bishops to smell like the people they served.",
+          "after": "[He wanted bishops to smell like the people they served.](https://www.vatican.va/content/francesco/en/speeches/2013/september/documents/papa-francesco_20130919_convegno-nuovi-vescovi.html)",
+          "url": "https://www.vatican.va/content/francesco/en/speeches/2013/september/documents/papa-francesco_20130919_convegno-nuovi-vescovi.html"
+        }
+      ]
+    },
+    {
+      "path": "content/essays/ozzy-osbourne-how-heavy-metals-most-unruly-star-became-a-cultural-fixture.md",
+      "slug": "ozzy-osbourne-how-heavy-metals-most-unruly-star-became-a-cultural-fixture",
+      "baseline_version": "1.1",
+      "version": "1.2",
+      "edition": "Third web edition",
+      "revision_note": "Updated September 27, 2026, with source hyperlinks on existing wording. The unpublished prose rewrite was withdrawn; original wording, paragraph structure, source-method framing, and artwork are preserved.",
+      "sha256": "61644f7ce574a41e7cdaaa8b81986f0f68b74b6aa5324a544bcc80119176cd1f",
+      "editorial_disposition": "PASS",
+      "links": [
+        {
+          "before": "a working-class kid from Birmingham",
+          "after": "[a working-class kid from Birmingham](https://rockhall25.wpenginepowered.com/wp-content/uploads/2025/09/2024-Induction-Ceremony-Program-Essay-Ozzy-Osbourne.pdf#page=3)",
+          "url": "https://rockhall25.wpenginepowered.com/wp-content/uploads/2025/09/2024-Induction-Ceremony-Program-Essay-Ozzy-Osbourne.pdf#page=3"
+        },
+        {
+          "before": "His solo career",
+          "after": "[His solo career](https://rockhall.com/inductees/ozzy-osbourne/)",
+          "url": "https://rockhall.com/inductees/ozzy-osbourne/"
+        },
+        {
+          "before": "substance abuse",
+          "after": "[substance abuse](https://rockhall25.wpenginepowered.com/wp-content/uploads/2025/09/2024-Induction-Ceremony-Program-Essay-Ozzy-Osbourne.pdf#page=6)",
+          "url": "https://rockhall25.wpenginepowered.com/wp-content/uploads/2025/09/2024-Induction-Ceremony-Program-Essay-Ozzy-Osbourne.pdf#page=6"
+        },
+        {
+          "before": "The Osbournes",
+          "after": "[The Osbournes](https://www.televisionacademy.com/shows/osbournes)",
+          "url": "https://www.televisionacademy.com/shows/osbournes"
+        },
+        {
+          "before": "injury",
+          "after": "[injury](https://www.ozzy.com/archives/news/ozzy-osbourne-uk-european-tour-cancellation)",
+          "url": "https://www.ozzy.com/archives/news/ozzy-osbourne-uk-european-tour-cancellation"
+        }
+      ]
+    }
+  ]
+}

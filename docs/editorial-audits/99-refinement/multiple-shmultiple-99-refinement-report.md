@@ -1,4 +1,64 @@
+# Current link-only review — September 27, 2026
+
+File: `content/essays/multiple-shmultiple.md`  
+Version: `1.3 / Fourth web edition`  
+SHA-256: `1de6509636f6ef82402f0027882951c74724cdd272e8befd634132a107359f38`
+
+Current status: **bounded editorial PASS**. The follow-up source-access review resolved the named book/disciplinary-record hold without changing any public text. Original prose, attribution, source links and revision metadata remain as restored. Earlier major-revision candidates below remain superseded; their prose changes are not restored by this decision.
+
+Three nearby anchors identify Lindsay/Read on therapist recommendations and the Sybil/Michelle examples, and Lanning on contagion. The existing Nathan book was now readable at PDF page 118 and chapter 9 note 12; the date, typed-letter description and short quotation match. The reproduced complaint and contemporary Psychiatric Times licensing/settlement account were also read. Original archives and a certified licensing order were not obtained, and the article does not claim otherwise. [Current evidence and limits](../core-hold-resolution-civic-2026-09-27.md#multiple-shmultiple--resolved-by-reading-the-existing-sources).
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+Decision state: `99_READY` for the bounded source-link release only.
+
+- Evidence: PASS — The specific withheld quotation, chronology and attributed disciplinary claims match the now-read cited passages; source provenance is qualified in the public text.
+- Logic: PASS — Publication fashion and selected false-positive cases are distinguished from every individual's diagnosis; the author's institutional critique remains argument, not a new causal experiment.
+- Incentives: PASS — The preserved argument identifies diagnostic authority, expectations and publication incentives without claiming new private-motive evidence.
+- Tradeoffs: PASS — Real abuse, dissociation, suffering and the strongest case for treatment remain explicitly acknowledged.
+- Consequences: PASS — Patient harms and legal exposure remain attributed to complaints and reporting; a settlement is not called a verdict.
+- Uncertainty: PASS — Reproductions, reported archival interpretation, allegations and a six-case study are identified; no independent inspection of original clinical/archival records is implied.
+- Institutional Behavior: PASS — Clinicians, publishers, courts and professional organizations retain distinct roles within the author's critical interpretation.
+
+This is a bounded seven-part editorial decision, not a comprehensive contemporary medical-literature review, a new numerical score, or publication authorization.
+
+The access question in `../core-link-only-root-approvals-2026-09-27.md` is superseded by the current evidence record. No tests, production gate, commit, or publication performed by this record.
+
+## Superseded research history — not current clearance
+
 # 99 Refinement Report
+
+## Current source-link revision - September 27, 2026
+
+Reviewed version: `2.0`, Fourth web edition. Original date: `2026-05-04`.
+
+Essay SHA-256: `a0106f01f77ae3ef31f8e2bdba489b361f94aa8c6c0f7517c65143226506f46b`.
+
+Decision state: `99_READY` for the bounded editorial pass; technical release checks remain separate.
+
+The essay already had sixteen reference destinations. This pass retained sound links, improved source proximity and access, and added limits where a historical or small-sample study could be overread. Publisher PDFs replace two Sage landing pages; the Lindsay/Read paper now uses a readable university-hosted copy with claim-specific page numbers; Lanning links now open the relevant chapters. Nathan's attributed letter account links to an NPR interview rather than a third-party full-book PDF, with unsupported destination-specific precision removed. The discovery description drops an unbounded claim about the entire profession. No original publication date, title, route, artwork, or collection change.
+
+## Editorial Philosophy Audit
+
+Historical decision (superseded): PASS
+
+| Dimension | Result | Note |
+| --- | --- | --- |
+| Evidence | PASS | The reviewed historical claims match identified court text, reproduced complaint, original research, professional guidance, and attributed reporting; inaccessible originals are expressly not claimed as verified. |
+| Logic | PASS | New limits separate publication fashion from diagnostic validity and selected false-positive cases from general conclusions about DID. |
+| Incentives | PASS | The essay identifies how diagnostic authority, treatment expectations, publishing, and legal exposure can reward self-confirming accounts. |
+| Tradeoffs | PASS | The case for trauma care and the cost of dismissing genuine suffering remain alongside the risk of suggestion and false diagnosis. |
+| Consequences | PASS | The analysis follows treatment claims into patient distress, accusations, litigation, and professional accountability while distinguishing claims from verdicts. |
+| Uncertainty | PASS | Explicit date and sample limits now accompany critical reviews and the six-person study; attribution and archival-access caveats remain. |
+| Institutional Behavior | PASS | Diagnostic manuals, clinicians, courts, researchers, publishers, and professional societies have distinct roles; no blanket rejection of trauma or dissociation is inferred. |
+
+No tests, build, browser review, or publication were performed by this reviewer. Detailed read passages and access limits are in the current source checklist.
+
+## Historical candidate review - not the current release finding
+
+The remainder preserves the earlier review. Its old destinations, readiness language, and score do not substitute for the dated review above.
 
 Decision state: `99_READY`
 
@@ -30,9 +90,9 @@ Image risk: `LOW`
 
 Decision state: `99_READY`
 
-## Editorial Philosophy Audit
+## Historical Editorial Philosophy Audit
 
-Decision: PASS
+Historical decision (superseded): PASS
 
 | Dimension | Result | Note |
 | --- | --- | --- |

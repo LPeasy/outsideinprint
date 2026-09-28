@@ -9,9 +9,12 @@ featured_image: "/images/medium/dirt-is-better-than-air/4fabc777aec2477ce67e4c59
 featured_image_caption: "Photo by Justin Wilkens on Unsplash"
 featured_image_alt: "Dirt Is Better Than Air"
 description: "In South Lafourche, Louisiana, storms are part of life. Windell Curole's levee lesson is simple: build with weight before pressure arrives."
-version: "1.1"
-edition: "Second web edition"
+version: "2.0"
+edition: "Third web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected the rehabilitation-program chronology, scope of lost support, and levee-compaction wording; clarified Curole's use of technical knowledge and retained his verified quotation. Added supporting source links; surrounding prose, reporting frame, and artwork unchanged."
   - version: "1.1"
     date: "2026-05-10"
     note: "Updated May 10, 2026, after OIP back-archive review for legacy Medium cleanup, source-discipline wording, punctuation normalization, and editorial philosophy audit."
@@ -27,7 +30,7 @@ In South Lafourche, Louisiana, storms are just part of life. They come hard and 
 
 The engineers had rules. The feds had policies.
 
-Curole had local judgment, shaped by storms and sharpened by pressure. He didn't trust risk margins or empty promises. So he made a call: build higher. And do it now.
+Curole had local judgment, shaped by storms and sharpened by pressure. He combined technical knowledge with local judgment. So he made a call: build higher. And do it now.
 
 When you build a levee, you don't fill it with air.
 
@@ -35,9 +38,9 @@ You pack it with dirt: thick layers of clay and sand, compressed.
 
 It's not pretty, but it works.
 
-Leave a gap, a tiny pocket of air, and that becomes the weakest point.
+[Poor compaction can weaken a levee.](https://www.publications.usace.army.mil/portals/76/publications/engineermanuals/em_1110-2-1913.pdf)
 
-The water finds it. Exploits it. Breaks it.
+Water can exploit that weakness.
 
 Life works the same way.
 
@@ -65,7 +68,7 @@ Dirt.
 
 Curole kept stacking dirt. Quietly. Without fanfare.
 
-He raised the levees higher than the federal standard then in force and reinforced them beyond the specifications the district had been given.
+He raised the levees higher than the federal standard then in force.
 
 Not with cutting-edge materials, just with time-tested earth.
 
@@ -73,11 +76,11 @@ It wasn't glamorous. It wasn't cheap.
 
 And it definitely wasn't federal policy.
 
-When the district pushed past federal requirements, the U.S. Army Corps of Engineers eventually decertified the system from its rehabilitation program.
+After unauthorized work failed a Corps inspection, the system [lost active status in the Corps' rehabilitation program in 2011](https://antigravitymagazine.com/feature/windell-curole/).
 
 The message was clear: it did not follow the post-Katrina standards.
 
-No money. No support.
+No rehabilitation-program support.
 
 But Curole didn't back down.
 
@@ -87,13 +90,13 @@ When the bottom falls out, you don't rise to the occasion. You fall to the level
 
 On August 29, 2021, Hurricane Ida smashed through south Louisiana.
 
-A Category 4 storm, with winds near 150 miles per hour at landfall, hit the coast near Port Fourchon.
+A [Category 4 storm, with winds near 150 miles per hour at landfall](https://www.nhc.noaa.gov/archive/2021/al09/al092021.update.08291653.shtml), hit the coast near Port Fourchon.
 
 The system was tested like never before. The water rose and caused minor overtopping in places.
 
 No structural failures were reported inside the South Lafourche levee system.
 
-Local reporting after Ida said no storm-surge water got into homes or businesses within the district.
+[Local reporting after Ida](https://www.fox8live.com/2021/10/06/hurricane-ida-piled-massive-amounts-debris-onto-south-lafourche-levees/) said no storm-surge water got into homes or businesses within the district.
 
 The levees held.
 
@@ -107,7 +110,7 @@ Because they were full of dirt.
 
 And Windell Curole, high and dry behind his levee, finally proved what he'd been saying all along:
 
-"Dirt is better than air."
+"[Dirt is better than air.](https://antigravitymagazine.com/feature/windell-curole/)"
 
 Air feels good until it's all you've got.
 

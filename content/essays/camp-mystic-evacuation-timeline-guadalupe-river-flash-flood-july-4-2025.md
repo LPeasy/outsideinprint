@@ -9,9 +9,12 @@ featured_image: "/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-
 featured_image_caption: "Map of the Guadalupe River with Camp Mystic on the South Fork"
 featured_image_alt: "Map of the Guadalupe River"
 description: "When reporters began reconstructing the events at Camp Mystic on the night of July 4, 2025, the story turned on a timeline"
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Attributed the reported 5:10 a.m., 37.52-foot crest to Commerce OIG; distinguished illustrative evacuation assumptions from observations and removed unsupported gauge-to-cabin thresholds and dependent timing conclusions. Corrected analytical graphics, distinguished the separate campuses, removed unsupported same-day reporting precision, and acknowledged ABC’s preliminary-estimate caveat; surrounding prose retained."
   - version: "1.2"
     date: "2026-06-21"
     note: "Updated June 21, 2026, to replace imported placeholder SVGs with localized image assets, add body-image alt text, and clean adjacent caption/list residue."
@@ -39,9 +42,8 @@ evacuations began closer to 2:00 a.m. Just forty-five minutes after the
 National Weather Service issued a "life-threatening flash flooding"
 alert to phones.
 
-**Both of Carr's timelines** ~ 2:30 and revised 2:00 a.m. ~ **were
-published on July 14, 2025**, in ***The Washington Post*** and ***ABC
-News***, respectively.
+**Both of Carr's timelines** ~ 2:30 and revised 2:00 a.m. ~ were
+reported in ***The Washington Post*** and ***ABC News***, respectively.
 
 #### **On the surface, the difference may seem trivial.**
 
@@ -61,12 +63,11 @@ counselors lost their lives.
 
 *GIS view of Camp Mystic in Kerr County, Texas. Source: [Camp Mystic Cypress Lake page](https://www.campmystic.com/cypress-lake/).*
 
-**Camp Mystic sits along a bend of the South Fork of the Guadalupe River
-in Hunt, Texas.**
+**Camp Mystic's Guadalupe River campus sits along a bend of the South Fork
+of the Guadalupe River in Hunt, Texas.**
 
 Its layout is deceptively idyllic: activity fields, cabins, and docks
-run parallel to the water, while the chapel and dining hall sit further
-uphill.
+run parallel to the water.
 
 **Many of the oldest cabins stand just a few hundred feet from the
 riverbank**, on ground barely higher than the water ~ **some within the
@@ -76,21 +77,19 @@ mapped floodway.**
 
 > Imagine walking through the camp with [Camp Mystic's brochure](https://www.campmystic.com/wp-content/uploads/2024/03/11.30.23-Brochure-Camp-Mystic%C2%AE-for-Girls-compressed.pdf) in hand.
 
-![Camp Mystic grounds showing Cypress Lake and uphill areas.](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/5f50bfe9c8da0808fdc11588a895e7d6e3b12987fdd98a42cf8f3095858800ab.jpeg)
+![Camp Mystic grounds overview.](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/5f50bfe9c8da0808fdc11588a895e7d6e3b12987fdd98a42cf8f3095858800ab.jpeg)
 
-**At the crest sits Cypress Lake**, a reservoir that marks the highest
-ground. Around it are the stables, the archery range, and newer cabins
-built above the floodplain.
+[**Cypress Lake is a separate campus.**](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=54) Here, the focus is Camp Mystic's Guadalupe River campus, including Senior Hill and the Flats.
 
-**Descend the slope and you pass fields**, a recreation hall, and older
+**Across the Guadalupe River campus are fields**, a recreation hall, and older
 bunkhouses.
 
 ![Camp Mystic grounds showing the lower Flats area near the Guadalupe River.](/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/e1199c96ad016b9e923e7b14c1532643361a8f3aeffba6f521832c6c86d83bf0.jpeg)
 
-**Continue downhill and you reach the Flats** ~ a strip of cabins sit
-just about level with the river (far right on your map).
+**The lower riverside area is known as the Flats** ~ a strip of cabins
+near the river (far right on your map).
 
-**Finally, at the bottom, the Guadalupe River** bends through the
+**Beside the camp, the Guadalupe River** bends through the
 limestone ~ summertime incarnate.
 
 > This terrain makes Mystic beautiful ~ and vulnerable.
@@ -124,8 +123,8 @@ upstream can **raise the river ten feet or more** in under an hour.
 This is Llano River in the same region during the floods on July 4th,
 2025.
 
-> Each jump up the river gauge represents entire sections of the camp
-> underwater.
+> A rising Hunt gauge does not by itself establish which sections of the
+> camp are underwater.
 
 ### Flash-Flood Evacuation Math ~ Mobilization, Distance, Bottlenecks, Headcount
 
@@ -133,30 +132,34 @@ This is Llano River in the same region during the floods on July 4th,
 
 *Flash Flood Emergency vs. Flash Flood Warning. Source: [Weather.com flood-safety explainer](https://weather.com/safety/floods/news/2025-04-04-flash-flood-emergency-warning-dangerous-life-threatening).*
 
-> Emergency modelers approach this question with a handful of inputs:
+> For this illustrative author estimate, I use a handful of inputs:
 
 **Population size, mobilization lag, movement speed, distance to safety,
 and chokepoints along the way.**
 
-For a camp like Mystic ~ **roughly** **400-500 campers plus staff** ~
-the parameters fall into a sobering range.
+For this illustration, assume **400-500 campers plus staff** ~ not a
+verified evacuation headcount. The figures below are assumptions, not
+measured conditions or universal planning standards.
 
 **Mobilization:** waking people, calming them, organizing groups,
 assigning leaders: **20-40 minutes**.
 
 **Walking speed at night with children** **on wet ground**: **1-2 feet
-per second** (0.7-1.3 mph). In rain and darkness, planners use **1
-ft/sec** as the realistic value.
+per second** (0.7-1.3 mph). I use **1 ft/sec** for this illustration.
 
 **Distance from the lowest cabins to higher ground: 300-700 feet**
 uphill, depending on location.
 
-**Operational reality:** counselors must move groups in waves, stop for
-slips or crying, and often double back to guide stragglers.
+**Possible delays:** counselors may move groups in waves, stop for
+slips or crying, or double back to guide stragglers.
 
 #### A quick check tells the story:
 
-At 1 ft/sec, covering 500 feet to safety takes **8-10 minutes once a group is moving.** You can't move 100 people in one wave. Groups of 10-20 campers with 2 staff imply **multiple waves**, spread over **30-50 minutes**. Add mobilization lag, and the total clearance time stretches to **30-70 minutes.**
+At 1 ft/sec, covering 500 feet takes **8 minutes 20 seconds once a group is moving**, rounded here to **8-10 minutes**. Adding **20-40 minutes** of mobilization gives **28-50 minutes**, roughly **30-50 minutes including mobilization**, not an additional wave interval.
+
+Groups of 10-20 campers with 2 staff, moving partly in parallel, are another assumption. Group size alone does not establish how many can move at once or how long everyone takes to clear.
+
+An additional **0-20 minutes** for disruption would extend that illustration to roughly **30-70 minutes**. That allowance is back-inferred to explain the range, not measured. The range includes mobilization and does not establish whole-camp clearance time.
 
 ### Flats Cabins at Camp Mystic ~ Lowest Elevation, Highest Flood Risk
 
@@ -164,14 +167,10 @@ At 1 ft/sec, covering 500 feet to safety takes **8-10 minutes once a group is mo
 
 The red box on the right shows the location of the cabins in the flats.
 
-Each cabin would have held 10-15 campers (a few hundred total in the
-flats). If counselors focused solely on those cabins, **mobilization**
-(**20-40 minutes**) plus **movement uphill** (**8-10 minutes per
-group**) estimates suggest it could take around **30-70 minutes** just
-to clear the flats.
-
-By then, the river gauge would already have been climbing through **15
-feet** ~ and water would have entered the cabins.
+For a Flats-only illustration, assume 10-15 campers per cabin and a few
+hundred in total. The same **30-70-minute** scenario would depend on
+staffing, concurrent groups and delays; it is not a demonstrated time
+to clear those cabins.
 
 ### Why 30 Minutes Matters ~ Nighttime Evacuation vs a Rising Flash Flood
 
@@ -179,57 +178,56 @@ feet** ~ and water would have entered the cabins.
 
 *Every second matters in an emergency evacuation. Source: [image reference](https://sl.bing.net/b2co3AsqnBI).*
 
-If everything goes right, you might get everyone to higher ground in
+Within this illustrative scenario, an individual group might complete mobilization and movement in
 **30 or 40 minutes**.
 
-If panic, weather, or debris slow things, the estimate drifts toward
+If panic, weather, or debris slow things, the illustrative estimate drifts toward
 **70 minutes**.
 
-**Any delay** and you start pushing into dangerous territory.
+**Further delay** can push people into dangerous territory.
 
 > A nighttime evacuation is not a switch to flip ~
 
 > It's a fragile sequence of events.
 
-Against a vertical flood curve, delays are the difference between
+Against a steep flood curve, delays can be the difference between
 guiding children uphill and carrying them through a rising current.
 
 **Wait to "assess the flooding"?**
 
-**You miss the safe evacuation window.**
+**You may miss the safe evacuation window.**
 
-### USGS Hunt Gauge ~ Guadalupe River Rise 1:00-4:30 a.m. on July 4, 2025
+### USGS Hunt Gauge ~ Selected Observations on July 4, 2025
 
 ![USGS Hunt gauge hydrograph for the Guadalupe River on July 4, 2025.](oip-image:medium/a5ae03a4e1a16023ecb29be50d855e253024e9df861f7f85926c40a2d2c525f7)
 
 *USGS and NOAA data show the Guadalupe River rose nearly 30 feet in four hours, a record crest surpassing 1932.*
 
-The **first riverside cabins** in the Flats begin to flood when the
-river reaches **15 feet**.
+Hunt gauge stages cannot be translated directly into cabin-flooding
+thresholds without a documented site-specific relationship. The gauge
+alone does not establish when the Flats were inundated.
 
-**Severe flooding** across much of the property begins around **25
-feet** based on FEMA flood maps.
-
-> Anything above **32 feet and** the camp is overwhelmed.
-
-It helps to **zoom in on** the critical hours between **1:00 and 4:30
+It helps to **zoom in on** the critical hours between **2:00 and 4:35
 a.m. ~**
 
-![Zoomed hydrograph showing 1:00 to 4:30 a.m. flood thresholds.](oip-image:medium/42145583d76ac3616def9f537a23dd218becdf4a7b344792606bfcc5f9e88c19)
+![Selected Hunt gauge stages on July 4, 2025, CDT: 7.98 feet at 2:00 a.m., 8.82 at 2:30, 10.10 at 3:00 and 29.45 at 4:35. Gauge stage is not cabin flood depth.](oip-image:essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/hunt-readings-corrected-20260927)
 
-*Zooming in: key thresholds for flooding and the critical 1:00-4:30 a.m. window.*
+*Selected approved USGS observations, in Central Daylight Time: [2:00-3:00 a.m. records](https://api.waterdata.usgs.gov/ogcapi/v1/collections/continuous/items?f=json&monitoring_location_id=USGS-08165500&parameter_code=00065&time=2025-07-04T07%3A00%3A00Z%2F2025-07-04T08%3A00%3A00Z&limit=300) and [later records](https://api.waterdata.usgs.gov/ogcapi/v1/collections/continuous/items?f=json&monitoring_location_id=USGS-08165500&parameter_code=00065&time=2025-07-04T07%3A30%3A00Z%2F2025-07-04T11%3A00%3A00Z&limit=300). These readings do not establish cabin-flooding thresholds.*
 
-> ***At 1:00 a.m., the Guadalupe stood at 7.7 feet.***
+> ***At 1:00 a.m., the Guadalupe stood at [7.7 feet](https://api.waterdata.usgs.gov/ogcapi/v1/collections/continuous/items?f=json&monitoring_location_id=USGS-08165500&parameter_code=00065&time=2025-07-04T05%3A55%3A00Z%2F2025-07-04T06%3A05%3A00Z&limit=10).***
 
-> ***By 4:35 a.m., it blasted up to 37.5 feet.***
+> ***Commerce OIG [reports a 37.52-foot crest at 5:10 a.m.](https://www.oig.doc.gov/wp-content/OIGPublications/OIG-26-017-I-SECURED.pdf#page=14)***
 
-#### Against the evacuation estimates, the window shrinks quickly ~
+The [corresponding USGS entry](https://api.waterdata.usgs.gov/ogcapi/v1/collections/continuous/items?f=json&monitoring_location_id=USGS-08165500&parameter_code=00065&time=2025-07-04T07%3A30%3A00Z%2F2025-07-04T11%3A00%3A00Z&limit=300) carries the timing qualifier `DAYUNKNOWN`; it does not independently establish that exact crest time.
 
-If counselors began mobilizing at **2:00 a.m.**, they had perhaps an
-hour before the Flats were inundated.
+#### Comparing the estimates with the reported starts ~
 
-If movement began closer to **2:30**, the evacuation was already
-colliding with floodwater.
+If counselors began mobilizing at **2:00 a.m.**, the illustrative
+**30-70-minute** range begins at that point.
+
+A **2:30 a.m.** start shifts that illustration half an hour later.
+Neither scenario establishes whether evacuation would finish before
+water entered the cabins.
 
 ### Reported Evacuation Timeline vs Hydrograph ~ Testing the Narrative
 
@@ -250,15 +248,17 @@ had seen "***dozens of times before***."
 
 On paper, that narrative sounds plausible.
 
+[ABC described Carr's account as a preliminary estimate and noted its difference from his earlier Washington Post account.](https://abc11.com/post/camp-mystic-began-evacuating-45-minutes-flash-flooding-alert-spokesperson/17129239/)
+
 ### Compared Against the Hunt Gauge, the Spokesperson Timeline Needs Testing
 
-![Reported evacuation timelines compared with the Guadalupe River hydrograph.](oip-image:medium/edf9c9656e1f84536b0a965f37a58e7cb1e26100742c63990e5b133a04badb7c)
+![Illustrative 30-70-minute timing, including mobilization: a 2:00 a.m. start gives 2:30-3:10; a 2:30 a.m. start gives 3:00-3:40. These are not observed clearance or flood-arrival times.](oip-image:essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/illustrative-timing-corrected-20260927)
 
-*Reported evacuation timelines compared to the hydrograph. Both versions collide with floodwaters.*
+*Author scenario, not observed clearance: applying the same 30-70-minute assumption to the two [reported spokesperson estimates](https://abc11.com/post/camp-mystic-began-evacuating-45-minutes-flash-flooding-alert-spokesperson/17129239/). This clock arithmetic does not establish whether routes were safe or when cabins flooded.*
 
-![ABC News claims excerpt about Camp Mystic evacuation timing.](oip-image:medium/ed3b9f9e6208b9bfbcdab0d0460ba2217a8278685f91a746edc592a202c21a3f)
+![Evidence distinction: reported 2:00 or 2:30 a.m. starts are spokesperson estimates; Hunt readings are downstream observations; the 30-70-minute evacuation range is an illustrative author scenario.](oip-image:essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/evidence-types-corrected-20260927)
 
-*Claims in ABC's coverage of the tragedy.*
+*OIP comparison, not an ABC findings table: [reported accounts](https://abc11.com/post/camp-mystic-began-evacuating-45-minutes-flash-flooding-alert-spokesperson/17129239/), [USGS observations](https://api.waterdata.usgs.gov/ogcapi/v1/collections/continuous/items?f=json&monitoring_location_id=USGS-08165500&parameter_code=00065&time=2025-07-04T07%3A30%3A00Z%2F2025-07-04T11%3A00%3A00Z&limit=300), and author assumptions have different evidentiary roles.*
 
 ### Flash-Flood Readiness for Camps and Schools ~ Practical Takeaways
 
@@ -268,7 +268,7 @@ On paper, that narrative sounds plausible.
 
 **Camp Mystic's loss underscores a difficult truth:**
 
-> The evacuation window is often **shorter than the time it takes to
+> The evacuation window can be **shorter than the time it takes to
 > mobilize.**
 
 #### **Preparation cannot guarantee survival,** but it can improve the odds.
@@ -293,11 +293,11 @@ Was movement underway before the first cabins flooded, or only after water was a
 
 #### **2. How can organizations like Mystic prepare for rapid-onset disasters?**
 
-If it takes 30 ~ 70 minutes to move a sleeping population, **what systems or drills can bridge that gap?**
+If mobilization and movement take an illustrative 30 ~ 70 minutes, **what systems or drills can bridge that gap?**
 
-#### **3. Should ABC have questioned the camp spokesman's statements?**
+#### **3. How thoroughly did ABC test the camp spokesman's statements?**
 
-And if so, why didn't they?
+What evidence could have tested the timeline more firmly?
 
 In the aftermath of tragedy, **repeating untested narratives risks
 reshaping public memory** at the expense of truth.

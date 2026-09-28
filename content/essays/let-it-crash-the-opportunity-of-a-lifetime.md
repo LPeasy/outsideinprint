@@ -10,9 +10,12 @@ featured_image: "/images/medium/let-it-crash-the-opportunity-of-a-lifetime/87fb7
 featured_image_caption: "Photo by Valery Fedotov on Unsplash"
 featured_image_alt: "Let It Crash: The Opportunity of a Lifetime"
 description: "Market crashes are painful, but lower asset prices can create entry points for workers who have income, cash discipline, and the patience to avoid panic."
-version: "1.2"
-edition: "Third web edition"
+version: "1.3"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.3"
+    date: "2026-09-27"
+    note: "Added supporting source hyperlinks or repaired source destinations; original prose, reporting frame, and artwork unchanged."
   - version: "1.1"
     date: "2026-05-09"
     note: "Updated May 9, 2026, after OIP back-archive review. Legacy Medium image embeds, punctuation artifacts, list formatting, promotional residue, and overbroad market-timing language were cleaned while preserving the original publication frame."
@@ -89,8 +92,8 @@ The opportunity belongs to people who can keep a margin of safety:
 
 - Maintain emergency cash.
 - Avoid high-interest debt.
-- Buy gradually instead of pretending to know the bottom.
-- Favor assets with durable cash flows or broad diversification.
+- [Buy gradually](https://www.investor.gov/introduction-investing/investing-basics/glossary/dollar-cost-averaging) instead of pretending to know the bottom.
+- Favor assets with durable cash flows or [broad diversification](https://www.investor.gov/introduction-investing/investing-basics/investment-products/mutual-funds-and-exchange-traded-funds-etfs/mutual-funds).
 - Protect employability before chasing upside.
 - Remember that liquidity matters when the labor market weakens.
 

@@ -10,9 +10,12 @@ featured_image: "/images/medium/you-cant-outrun-the-calculator/664e2a13dae8e16d0
 featured_image_caption: "Photo by Crissy Jarvis on Unsplash"
 featured_image_alt: "You Can’t Outrun the Calculator"
 description: "In a recent discussion, Sam Altman, CEO of OpenAI, laid out a trajectory that should give every software engineer pause. Just a few years ago, OpenAI’s codin..."
-version: "1.2"
-edition: "Third web edition"
+version: "2.0"
+edition: "Fourth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Attributed the coding rankings to Altman's competitive-programming benchmark claims, removed the unverified September model correspondence, and clarified the year-end possibility. Added source links; surrounding prose, original reporting frame and artwork retained."
   - version: "1.1"
     date: "2026-05-02"
     note: "Updated May 2, 2026, after OIP back-archive review. Legacy Medium image embeds, promotional residue, spacing, and punctuation artifacts were cleaned up; source, metadata, and rendering were checked."
@@ -24,7 +27,7 @@ featured: false
 medium_source_url: "https://medium.com/@lawtonperret/you-cant-outrun-the-calculator-fc4a5c608f1c"
 ---
 
-In a recent discussion, Sam Altman, CEO of OpenAI, laid out a trajectory that should give every software engineer pause. Just a few years ago, OpenAI's coding models were equivalent to a mediocre programmer: the millionth best in the world. By September 2024, the release of GPT-4 saw AI coding capabilities rise to the level of the 10,000th best coder. By early 2025, the company's internal models ranked around 50th. If Altman's projections hold, by the end of this year, OpenAI will have an AI that surpasses the best human programmer on the planet.
+In a [recent discussion at the University of Tokyo](https://globe.u-tokyo.ac.jp/en/news/news_250203.html), Sam Altman, CEO of OpenAI, laid out a trajectory that should give every software engineer pause. He described OpenAI's first reasoning model as roughly the millionth-best competitive programmer in the world. A later model reached roughly the top 10,000, he said. By early 2025, he said, the company's internal benchmark was around 50th. If Altman's projections hold, by the end of this year, OpenAI could have an AI that surpasses the best human competitive programmers on benchmark tasks.
 
 For engineers who once took comfort in the notion that AI would assist rather than replace them, the accelerating progress of AI coding models suggests a different reality. The trajectory is not linear; it's exponential. And if this pattern holds, it's not a matter of whether AI will surpass human coders. It's a question of when, and more importantly, what happens next.
 
@@ -86,7 +89,7 @@ The Governance Challenge: Can We Keep Up?
 
 As artificial intelligence coding models approach superhuman capabilities, questions surrounding AI governance become unavoidable. The rapid acceleration of AI development poses a fundamental challenge: how do we regulate something that evolves faster than our ability to understand it? Former Vice President Kamala Harris has emphasized the importance of responsible AI governance, warning that AI policy must account for risks to humanity, individuals, communities, institutions, and vulnerable populations. This perspective underscores the need for proactive regulation, ensuring AI's immense power is not misused or allowed to spiral out of human control.
 
-However, there are those who see regulation as an impediment to progress. Current Vice President J.D. Vance has taken a starkly different stance, stating, "I'm not here this morning to talk about AI safety, which was the title of the conference a couple of years ago. I'm here to talk about AI opportunity." His position reflects a growing faction that prioritizes AI's potential over its risks, advocating for fewer regulatory restrictions to push AI science beyond the limits of current governance structures. In this view, slowing AI's development in the name of safety is seen as a hindrance to American innovation and global competitiveness.
+However, there are those who see regulation as an impediment to progress. Current Vice President J.D. Vance has taken a starkly different stance, stating, ["I'm not here this morning to talk about AI safety, which was the title of the conference a couple of years ago. I'm here to talk about AI opportunity."](https://www.presidency.ucsb.edu/documents/remarks-the-vice-president-the-artificial-intelligence-action-summit-paris-france) His position reflects a growing faction that prioritizes AI's potential over its risks, advocating for fewer regulatory restrictions to push AI science beyond the limits of current governance structures. In this view, slowing AI's development in the name of safety is seen as a hindrance to American innovation and global competitiveness.
 
 The tension between these perspectives, AI as a transformative force to be harnessed versus AI as a destabilizing force to be controlled, will define the coming years. If AI coders become capable of self-improvement, the regulatory challenge will not just be about ethical AI use but about maintaining any meaningful oversight at all. While laws and safety guidelines may be drafted, the reality is that AI development will likely continue to outpace regulation, driven by the imperative to innovate. This raises a critical question: Can governance keep up, or will AI's rapid evolution render human oversight obsolete?
 
@@ -105,4 +108,4 @@ The real challenge isn't whether AI will surpass human coders. That is all but i
 
 So, if you're a coder wondering what comes next, the answer is simple: adapt, or be outpaced. Because no matter how fast you are, you can't outrun the calculator.
 
-Source note: The original Medium import referenced OpenAI coding benchmark research, J.D. Vance's Paris AI Summit remarks, Sam Altman's comments on coding agents, and Wes Roth's video discussion of Altman's statements.
+Source note: The original Medium import referenced OpenAI coding benchmark research, J.D. Vance's Paris AI Summit remarks, Sam Altman's comments on coding agents, and Wes Roth's video discussion of Altman's statements. The opening now follows Altman's February 3, 2025 university remarks in the [event recording](https://www.youtube.com/watch?v=8LmfkUb2uIY), with the ranking passage available in a [reproduced transcript of his remarks](https://blog.biocomm.ai/2025/02/11/openai-ceo-super-human-coders-by-end-of-2025-matthew-berman/). These are his reported benchmark claims, not an independent ranking of all working programmers.

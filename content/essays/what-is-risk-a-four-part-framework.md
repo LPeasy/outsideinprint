@@ -8,9 +8,12 @@ subtitle: "A practical way to use hazard, pathway, consequence, and uncertainty"
 description: "A practical four-part framework for thinking about risk: hazard, pathway, consequence, and uncertainty."
 featured_image: "/images/medium/what-is-risk-a-four-part-framework/c5d17c0978b1a86a5144dea14f43e6da15d3559347c45d71edd7d9a334e79ab2.jpeg"
 featured_image_alt: "What Is Risk? A Four-Part Framework"
-version: "1.4"
-edition: "Fifth web edition"
+version: "2.0"
+edition: "Sixth web edition"
 revision_history:
+  - version: "2.0"
+    date: "2026-09-27"
+    note: "Corrected Cape Town's response and Day Zero definition, and qualified Panama drought and fiscal-year comparisons. Added or retained claim-level source links; original reporting frame retained. Corrected image captions without changing surrounding prose in this graphics pass."
   - version: "1.3"
     date: "2026-06-21"
     note: "Updated June 21, 2026, during COA2 value review to remove reader-visible author-note and pseudo-heading residue and repair discovery metadata."
@@ -112,7 +115,7 @@ hazard.
 Overtopping in extreme floods, internal erosion, and age-related
 deterioration are all potential failure modes.
 
-> *Historic cases like [Teton Dam in 1976](https://www.intermountainhistories.org/items/show/93) and multiple New Orleans levee and floodwall failures in 2005 show how latent defects can become system-level threats under the right, or perhaps wrong, conditions.*
+> *Historic cases like [Teton Dam in 1976](https://www.usbr.gov/pn/snakeriver/dams/uppersnake/teton/) and multiple New Orleans levee and floodwall failures in 2005 show how latent defects can become system-level threats under the right, or perhaps wrong, conditions.*
 
 ### Read More on Levee Management
 
@@ -122,10 +125,9 @@ deterioration are all potential failure modes.
 global risks.**
 
 Consider **recent cases of megacities** like [Capetown, South Africa](https://www.brookings.edu/articles/cape-town-lessons-from-managing-water-scarcity/) taking their
-**municipal water supplies** to the brink of disaster. If not for a
-miraculous rain event ending the "400-year drought" *(the drought lasted
-roughly four years)*, the city would have reached "Day 0" ~ completely
-running out of water with no realistic plan to acquire more.
+**municipal water supplies** to the brink of disaster. [Conservation measures,
+water transfers, and returning rain helped avert "Day 0"](https://resource.capetown.gov.za/documentcentre/Documents/City%20strategies%2C%20plans%20and%20frameworks/Resilience_Strategy.pdf) ~ the planned
+shutdown of much of the piped supply and a switch to rationed collection.
 
 In this context, **you might identify *climate change in general* as the
 hazard**, with myriad consequences and hundreds of pathways. *Climate
@@ -134,8 +136,8 @@ change* is a risk with an impressive amount of uncertainty.
 Perhaps you would rather be more specific and decide to focus on
 ***water scarcity* as the hazard.** [Water scarcity is a growing concern for many regions](https://www.unesco.org/en/articles/imminent-risk-global-water-crisis-warns-un-world-water-development-report-2023).
 
-**Back in 2022,** [**Panama**](https://www.youtube.com/watch?v=fuKDBPw8wQA) **experienced their "worst
-drought ever."**
+**During 2023–2024,** [**Panama experienced a historic
+drought.**](https://pancanal.com/en/the-canals-fy-2024-financial-results-reaffirm-its-focus-on-sustainability-and-vision-for-the-future/)
 
 ![Panama Canal](oip-image:medium/35cf1b3d2ef75c842717c70d507192a932891e2806c2e9e48aa250a74f6e874d)
 
@@ -155,15 +157,16 @@ communities, farms, and hydropower facilities ~ **prolonged droughts can
 squeeze a** **shared supply** and force decision makers into tough
 positions.
 
-![Panamanian drought started in late 2022](oip-image:medium/447fb77dcb865fceebe6bb741d15b292d45dbf5c079987fc195df58b297a7461)
+![Average water level in the Panama Canal’s Gatún Lake, January 2019–November 2024.](oip-image:medium/447fb77dcb865fceebe6bb741d15b292d45dbf5c079987fc195df58b297a7461)
 
-*Panamanian drought started in late 2022. [Source: CNBC](https://www.cnbc.com/2024/11/12/panama-canal-cargo-container-trade-rebound-record-drought.html)*
+*Average water level in the Panama Canal’s Gatún Lake, January 2019–November 2024. [Source: CNBC](https://www.cnbc.com/2024/11/12/panama-canal-cargo-container-trade-rebound-record-drought.html)*
 
 
 
 **Despite the drought hype, tonnage moving through the canal did not
-decline dramatically in 2023** (down just 1.5% from record high tonnage
-in 2022).
+decline dramatically in fiscal 2023** (down just 1.5% from record high tonnage
+in fiscal 2022). That comparison does not capture the later restrictions:
+[deep-draft transits fell 21% in fiscal 2024](https://pancanal.com/en/the-canals-fy-2024-financial-results-reaffirm-its-focus-on-sustainability-and-vision-for-the-future/).
 
 If you'd like to know more, [this New Security Beat article](https://www.newsecuritybeat.org/2024/07/no-the-panama-canal-is-not-running-dry/) is a helpful companion.
 
@@ -431,7 +434,7 @@ choices and inform leaders, not to claim certainty.
 
 > "When in doubt, test it out."
 
-[***Sensitivity analysis***](https://www.sciencedirect.com/topics/engineering/sensitivity-analysis) is a kind of "what-if" technique that studies
+[***Sensitivity analysis***](https://www.nist.gov/publications/efficient-sensitivity-analysis-method-network-simulation-models) is a kind of "what-if" technique that studies
 how changing inputs or assumptions in a model affect its outputs.
 
 **Document choices and assumptions** so if you predict the wrong future

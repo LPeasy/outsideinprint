@@ -8,9 +8,12 @@ draft: false
 slug: "the-meter-at-the-curb"
 section_label: "Essay"
 collections: ["civic-institutions-and-public-power"]
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.1"
     date: "2026-06-17"
     note: "Updated June 17, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
@@ -128,7 +131,7 @@ Revenue is not inherently corrupt. A city owns and maintains the street. Managin
 
 The problem starts when revenue becomes the point and turnover becomes the story told to the public. A meter can be defended as a traffic tool while being managed as a cash instrument. A fine can be defended as enforcement while being budgeted as income. A city can design a rule that catches violators more efficiently than it solves the curb problem.
 
-Parking benefit districts try to answer this suspicion by tying meter revenue to visible local improvements. Pasadena's [Old Pasadena Parking Meter Zone Advisory Commission](https://www.cityofpasadena.net/commissions/old-pasadena-parking-meter-zone-advisory-commission/) is one official example of a city treating meter-zone revenue as a district governance question. Austin and Houston have used parking-benefit district models as well, though current municipal-code text should be pulled and checked before a publish version leans on exact legal percentages or fund formulas.
+Parking benefit districts try to answer this suspicion by tying meter revenue to visible local improvements. Pasadena's [Old Pasadena Parking Meter Zone Advisory Commission](https://www.cityofpasadena.net/commissions/old-pasadena-parking-meter-zone-advisory-commission/) is one official example of a city treating meter-zone revenue as a district governance question. [Austin](https://www.austintexas.gov/transportation-public-works/programs/parking-and-transportation-management-districts) and [Houston](https://www.houstontx.gov/parking/20130430.html) have used parking-benefit district models as well, though current municipal-code text should be pulled and checked before a publish version leans on exact legal percentages or fund formulas.
 
 That caveat is important. Revenue dedication can be oversold. A city may promise a neighborhood that meters will pay for improvements. The neighborhood may then support pricing because the money appears to return. Yet the arrangement can also make local interests dependent on continued parking charges. A district may come to prefer the revenue stream even when curb needs change.
 

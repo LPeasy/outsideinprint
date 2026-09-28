@@ -1,5 +1,54 @@
 # Source Checklist
 
+## Current strict hyperlink-only record - 2026-09-27
+
+Review date: `2026-09-27`
+Essay: `content/essays/the-blue-pool-at-the-memorial.md`
+Version: `1.3` - Fourth web edition
+Final content SHA-256: `d7850ed3f692b210aa3e22ea81a476471d50ae85ce9bb79ba044bc5e6b44a675`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+Public change: HYPERLINK-ONLY; original body words, punctuation, captions, order and artwork preserved.
+
+Link-scope result: supported added links; bounded Editorial Philosophy Audit PASS.
+
+Added one NCPC anchor to the existing federal-review phrase. No prose changed.
+
+### Evidence and limits
+
+| Claim or action | Passage read on 2026-09-27 | Scope and limits |
+|---|---|---|
+| Federal planning review asked for more detail about painting the Eisenhower Executive Office Building. | [NCPC, May 2026 Commission Meeting](https://www.ncpc.gov/news/item/261/3/), published May 8: concept review requested paint/application, maintenance/removal information, pedestrian-view renderings, and an on-site mockup; later preliminary and final reviews would follow. | New nearby link supports the review request, not the project's eventual approval, cost, durability, or artistic value. |
+| Existing pool and golf reporting. | Full essay and prior source checklist read; existing AP, NPS, and Washington Post links retained. | No fresh full reporting audit. AP's direct fetch failed during this pass; no new AP-derived fact added and no claim that the full AP report was revalidated. |
+
+### Private approval proposals
+
+No material factual correction identified in this bounded pass.
+
+This record supersedes every incompatible pre-rollback result below. Earlier corrected prose and associated PASS decisions are historical, not approval of the restored text. The user authorized supporting hyperlinks only; all proposed wording changes remain private and unapplied.
+
+Scope: full body and existing-record review, actual passage verification for new anchors and specific concerns, not a fresh exhaustive re-research of every retained citation. No numeric score, local test suite, build, commit or publication. Only the decimal revision and next edition were advanced; the disclosure is 'Added source links without changing prose.'
+
+## Superseded pre-rollback research - 2026-09-27
+
+All following hashes, corrected-copy descriptions, scores and decisions refer to historical states. They do not apply to the current content hash above.
+
+Review date: `2026-09-27`
+Version: `1.3` - Fourth web edition
+Final content SHA-256: `9159b647a4ed326ea2c1fb46eef39498eff8e655379a9eb20ab931b60abf6511`
+Baseline: `5e21e40efd5e4bcfda8bac2284edb9bb36b341d6`
+
+Citation-level revision. The federal-building review now links to the commission's own May account instead of relying only on AP's attribution. The May 10 reporting frame, thesis, structure, title, date, route, collection, and artwork remain unchanged.
+
+| Claim or action | Passage read on 2026-09-27 | Scope and limits |
+|---|---|---|
+| Federal planning review asked for more detail about painting the Eisenhower Executive Office Building. | [NCPC, May 2026 Commission Meeting](https://www.ncpc.gov/news/item/261/3/), published May 8: concept review requested paint/application, maintenance/removal information, pedestrian-view renderings, and an on-site mockup; later preliminary and final reviews would follow. | New nearby link supports the review request, not the project's eventual approval, cost, durability, or artistic value. |
+| Existing pool and golf reporting. | Full essay and prior source checklist read; existing AP, NPS, and Washington Post links retained. | No fresh full reporting audit. AP's direct fetch failed during this pass; no new AP-derived fact added and no claim that the full AP report was revalidated. |
+
+The current companion report records the seven-part Editorial Philosophy Audit. Prior records below are historical and are superseded by this section where they conflict. No build, browser, Node, publication, or organization tests were run for this pass.
+
+## Historical source record
+
+
 Package: `2026-05-10-the-blue-pool-at-the-memorial`
 
 Date: 2026-05-10

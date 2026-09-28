@@ -9,9 +9,12 @@ featured_image: "/images/medium/u-s-shifts-ukraine-policy/3fa0cde399f43f2bae75fa
 featured_image_caption: "Photo by Marek Studzinski on Unsplash"
 featured_image_alt: "U.S. Shifts Ukraine Policy"
 description: "Secretary of Defense Pete Hegseth’s remarks at the Ukraine Defense Contact Group (UDCG) on February 12th signal a dramatic shift in U.S. foreign policy under..."
-version: "1.1"
-edition: "Second web edition"
+version: "1.2"
+edition: "Third web edition"
 revision_history:
+  - version: "1.2"
+    date: "2026-09-27"
+    note: "Added source links without changing prose."
   - version: "1.1"
     date: "2026-05-03"
     note: "Updated May 3, 2026, after OIP back-archive review. Legacy Medium promotional residue, source-card fragments, list formatting, headings, spacing, and punctuation artifacts were cleaned up; source, metadata, and rendering were checked."
@@ -22,7 +25,7 @@ collections:
   - geopolitics-trade-global-power
 ---
 
-Secretary of Defense Pete Hegseth's remarks at the Ukraine Defense Contact Group (UDCG) on February 12th signal a dramatic shift in U.S. foreign policy under President Trump.
+[Secretary of Defense Pete Hegseth's remarks at the Ukraine Defense Contact Group (UDCG) on February 12th](https://www.defense.gov/News/Speeches/Speech/Article/4064113/opening-remarks-by-secretary-of-defense-pete-hegseth-at-ukraine-defense-contact/) signal a dramatic shift in U.S. foreign policy under President Trump.
 
 The speech outlines a strategic pivot away from Europe and toward the Indo-Pacific, a reduced U.S. role in Ukraine's defense, and a clear expectation that European nations take primary responsibility for their own security.
 
@@ -42,7 +45,7 @@ Without NATO backing, any security guarantees could be less reliable, raising co
 
 ## A Reshaped NATO and the Burden on Europe
 
-"Safeguarding European security must be an imperative for European members of NATO. As part of this, Europe must provide the overwhelming share of future lethal and nonlethal aid to Ukraine. … 2% is not enough; President Trump has called for 5%, and I agree."
+"Safeguarding European security must be an imperative for European members of NATO. As part of this, Europe must provide the overwhelming share of future lethal and nonlethal aid to Ukraine. … [2% is not enough; President Trump has called for 5%, and I agree.](https://www.defense.gov/News/Speeches/Speech/Article/4064113/opening-remarks-by-secretary-of-defense-pete-hegseth-at-ukraine-defense-contact/)"
 
 Hegseth's speech reinforces the Trump administration's longstanding position: European nations must take responsibility for their own security.
 
@@ -78,7 +81,7 @@ This shift has global consequences:
 
 ## Energy as a Tool of War and Diplomacy
 
-"To further enable effective diplomacy and drive down energy prices that fund the Russian war machine, President Trump is unleashing American energy production and encouraging other nations to do the same. Lower energy prices coupled with more effective enforcement of energy sanctions will help bring Russia to the table."
+"[To further enable effective diplomacy and drive down energy prices that fund the Russian war machine](https://www.defense.gov/News/Speeches/Speech/Article/4064113/opening-remarks-by-secretary-of-defense-pete-hegseth-at-ukraine-defense-contact/), President Trump is unleashing American energy production and encouraging other nations to do the same. Lower energy prices coupled with more effective enforcement of energy sanctions will help bring Russia to the table."
 
 The Trump administration plans to use energy policy as a strategic weapon. By boosting U.S. energy production and urging Europe to do the same, Washington aims to drive down global prices, undercutting Russia's primary revenue source.
 
