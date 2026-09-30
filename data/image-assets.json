@@ -1756,6 +1756,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/words-rising-from-silence": {
+      "id": "editorial/words-rising-from-silence",
+      "source": "images/originals/editorial/words-rising-from-silence.png",
+      "sha256": "dd33a0872b09f1077af38543e92a95a872a06694d2f42848065877d5b165141f",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": "",
+      "quality_override": null
+    },
     "essays/1929-2029-americas-century-of-humiliation/hero": {
       "id": "essays/1929-2029-americas-century-of-humiliation/hero",
       "source": "images/originals/essays/1929-2029-americas-century-of-humiliation/hero.png",
@@ -5317,6 +5331,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/the-noise-of-the-crowd/section-1": {
+      "id": "essays/the-noise-of-the-crowd/section-1",
+      "source": "images/originals/essays/the-noise-of-the-crowd/section-1.png",
+      "sha256": "667697b3a06ce35b243d33ec3145b00627626c9df09d20f55a6d0efd042eddf7",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": "",
+      "quality_override": null
+    },
     "essays/the-other-end/section-1": {
       "id": "essays/the-other-end/section-1",
       "source": "images/originals/essays/the-other-end/section-1.png",
@@ -7857,6 +7885,7 @@
     "/images/editorial/who-do-you-know-here.png": "editorial/who-do-you-know-here",
     "/images/editorial/who-paid-the-nazis.png": "editorial/who-paid-the-nazis",
     "/images/editorial/whose-yes.png": "editorial/whose-yes",
+    "/images/editorial/words-rising-from-silence.png": "editorial/words-rising-from-silence",
     "/images/essays/1929-2029-americas-century-of-humiliation/hero.png": "essays/1929-2029-americas-century-of-humiliation/hero",
     "/images/essays/after-the-cup-falls/section-1.png": "essays/after-the-cup-falls/section-1",
     "/images/essays/american-household-debt/hero.png": "essays/american-household-debt/hero",
@@ -8128,6 +8157,7 @@
     "/images/essays/the-model-that-could-not-leave/hero.png": "essays/the-model-that-could-not-leave/hero",
     "/images/essays/the-model-that-could-not-leave/section-1.png": "essays/the-model-that-could-not-leave/section-1",
     "/images/essays/the-model-that-could-not-leave/section-2.png": "essays/the-model-that-could-not-leave/section-2",
+    "/images/essays/the-noise-of-the-crowd/section-1.png": "essays/the-noise-of-the-crowd/section-1",
     "/images/essays/the-other-end/section-1.png": "essays/the-other-end/section-1",
     "/images/essays/the-part-that-is-mine/section-1.png": "essays/the-part-that-is-mine/section-1",
     "/images/essays/the-repair/hero.png": "editorial/mending-table",
