@@ -236,37 +236,39 @@ test.after(async () => {
 });
 
 test("Almanack attribution survives sample navigation and tracks attempts without subscriber data", async () => {
-  const { context, counts, page } = await newInstrumentedPage();
-  const buttondownRequests = [];
-  page.on("request", request => {
-    if (new URL(request.url()).hostname === "buttondown.com") buttondownRequests.push(request.url());
-  });
-  try {
-    const label = "almanack-organic|platform=instagram|segment=weekend|post=weekend-01";
-    await page.goto(`${canonicalOrigin}/subscribe/weekend/?utm_source=instagram&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=weekend-01&private=FUNNEL_PRIVATE_SENTINEL`, { waitUntil: "load" });
-    await waitFor(() => counts.some(record => countData(record).path.startsWith("oip:funnel_view")), "Missing landing view event.");
-    assert.equal(await page.evaluate(() => window.oipAnalyticsEventReferrer()), label);
-    const stored = await page.evaluate(() => JSON.parse(sessionStorage.getItem("oip.almanack-acquisition.v1")));
-    assert.deepEqual(Object.keys(stored).sort(), ["expires", "platform", "post", "segment"]);
-    const form = page.locator("form[data-analytics-event='newsletter_submit']");
-    await form.evaluate(node => node.requestSubmit());
-    assert.equal(counts.filter(record => countData(record).path.startsWith("oip:newsletter_submit")).length, 0, "Invalid email must not count as an attempt.");
-    await page.locator(".subscriber-funnel__sample h3 a").nth(1).click();
-    await page.waitForLoadState("load");
-    assert.equal(await page.evaluate(() => window.oipAnalyticsEventReferrer()), label);
-    await page.goto(`${canonicalOrigin}/subscribe/weekend/`, { referer: `${canonicalOrigin}/essays/after-the-cup-falls/`, waitUntil: "load" });
-    await form.locator("input[type=email]").fill("funnel-email-sentinel@example.com");
-    await form.evaluate(node => {
-      node.addEventListener("submit", event => event.preventDefault(), { once: true });
-      node.requestSubmit();
+  for (const [platform, post] of [["instagram", "weekend-01"], ["pinterest", "weekend-01"], ["instagram", "weekend-bio"]]) {
+    const { context, counts, page } = await newInstrumentedPage();
+    const buttondownRequests = [];
+    page.on("request", request => {
+      if (new URL(request.url()).hostname === "buttondown.com") buttondownRequests.push(request.url());
     });
-    const attempt = await waitFor(() => counts.find(record => countData(record).path.startsWith("oip:newsletter_submit")), "Missing signup attempt.");
-    assert.equal(countData(attempt).referrer, label);
-    assert.equal(eventParts(attempt).fields.source_slot, "funnel_weekend");
-    assert.equal(buttondownRequests.length, 0, "Browser QA must never submit to Buttondown.");
-    for (const record of counts) assertPrivacyBoundary(record, ["FUNNEL_PRIVATE_SENTINEL", "funnel-email-sentinel"]);
-    assert.ok(counts.every(record => !/confirmed|subscription_success/.test(countData(record).path)));
-  } finally { await context.close(); }
+    try {
+      const label = `almanack-organic|platform=${platform}|segment=weekend|post=${post}`;
+      await page.goto(`${canonicalOrigin}/subscribe/weekend/?utm_source=${platform}&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=${post}&private=FUNNEL_PRIVATE_SENTINEL`, { waitUntil: "load" });
+      await waitFor(() => counts.some(record => countData(record).path.startsWith("oip:funnel_view")), "Missing landing view event.");
+      assert.equal(await page.evaluate(() => window.oipAnalyticsEventReferrer()), label);
+      const stored = await page.evaluate(() => JSON.parse(sessionStorage.getItem("oip.almanack-acquisition.v1")));
+      assert.deepEqual(Object.keys(stored).sort(), ["expires", "platform", "post", "segment"]);
+      const form = page.locator("form[data-analytics-event='newsletter_submit']");
+      await form.evaluate(node => node.requestSubmit());
+      assert.equal(counts.filter(record => countData(record).path.startsWith("oip:newsletter_submit")).length, 0, "Invalid email must not count as an attempt.");
+      await page.locator(".subscriber-funnel__sample h3 a").nth(1).click();
+      await page.waitForLoadState("load");
+      assert.equal(await page.evaluate(() => window.oipAnalyticsEventReferrer()), label);
+      await page.goto(`${canonicalOrigin}/subscribe/weekend/`, { referer: `${canonicalOrigin}/essays/after-the-cup-falls/`, waitUntil: "load" });
+      await form.locator("input[type=email]").fill("funnel-email-sentinel@example.com");
+      await form.evaluate(node => {
+        node.addEventListener("submit", event => event.preventDefault(), { once: true });
+        node.requestSubmit();
+      });
+      const attempt = await waitFor(() => counts.find(record => countData(record).path.startsWith("oip:newsletter_submit")), "Missing signup attempt.");
+      assert.equal(countData(attempt).referrer, label);
+      assert.equal(eventParts(attempt).fields.source_slot, "funnel_weekend");
+      assert.equal(buttondownRequests.length, 0, "Browser QA must never submit to Buttondown.");
+      for (const record of counts) assertPrivacyBoundary(record, ["FUNNEL_PRIVATE_SENTINEL", "funnel-email-sentinel"]);
+      assert.ok(counts.every(record => !/confirmed|subscription_success/.test(countData(record).path)));
+    } finally { await context.close(); }
+  }
 });
 
 test("Almanack attribution replaces prior entries and expires after thirty minutes", async () => {

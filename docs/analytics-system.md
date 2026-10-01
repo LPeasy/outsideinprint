@@ -4,7 +4,16 @@
 
 Three separate entry pages (`/subscribe/weekend/`, `/subscribe/everyday-history/`, and `/subscribe/dialogue/`) use the same existing Buttondown newsletter account and tag. Their visible signup names Bob's Almanack; existing signup copy elsewhere is unchanged.
 
-Use `utm_campaign=almanack-organic`, `utm_medium=organic_social`, and an allowlisted `utm_source` (`facebook`, `instagram`, `linkedin`, or `x`). `utm_content` must be the route segment followed by `-01`, `-02`, `-03`, or `-04`, giving twelve fixed post codes. Example: `/subscribe/weekend/?utm_source=instagram&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=weekend-01`. Use the same code for the same core post across platforms.
+Use `utm_campaign=almanack-organic`, `utm_medium=organic_social`, and an allowlisted `utm_source` (`facebook`, `instagram`, `linkedin`, `pinterest`, or `x`). For individual posts, `utm_content` must be the route segment followed by `-01`, `-02`, `-03`, or `-04`, preserving the twelve fixed post codes. Use the same code for the same core post across platforms. The shared Weekends profile link has one additional fixed code, `weekend-bio`, accepted only on `/subscribe/weekend/`. It identifies the shared bio placement; it cannot identify which post led someone to the profile. Do not assign `weekend-01` to a shared bio link or interpret bio visits as post-01 results.
+
+Ready-to-use links:
+
+| Placement | Link |
+| --- | --- |
+| Pinterest Weekends post 01 | `https://outsideinprint.org/subscribe/weekend/?utm_source=pinterest&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=weekend-01` |
+| Instagram shared Weekends bio | `https://outsideinprint.org/subscribe/weekend/?utm_source=instagram&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=weekend-bio` |
+
+Replace the existing Instagram Weekends destination with the complete bio URL, preserving all four parameters exactly once. Auto-added `utm_source=ig`, `utm_medium=social`, and `utm_content=link_in_bio` without the campaign are not valid Almanack attribution; duplicate or rewritten parameters are rejected. The Pinterest URL already uses an individual post code. These links require the updated adapter to be released before the new platform and bio code can be attributed; the source change does not update any social profile or retroactively relabel visits.
 
 The analytics adapter stores only platform, route-derived segment, post code, and expiry in tab-scoped `sessionStorage` (`oip.almanack-acquisition.v1`). It expires thirty minutes after the tagged entry, without extending on navigation. A valid new entry replaces the old one; explicit invalid or other campaign parameters clear it. It survives same-origin sample reading and return navigation. Missing or blocked storage never prevents signup. Analytics-off builds do not access this storage. No email, visitor ID, arbitrary query value, or raw referrer is added to analytics or storage.
 
@@ -12,7 +21,7 @@ Pageview and event referrers carry the fixed label `almanack-organic|platform=in
 
 The provider form still posts directly to Buttondown with the existing `outside-in-print` tag. There is no client confirmation callback, acquisition tag, webhook, or subscriber export in this change. Report provider-confirmed new subscribers separately from attempts; per-post confirmed conversions are unavailable. Existing subscribers and repeated submissions must not be counted as new confirmed acquisitions merely because a tag or attempt exists.
 
-Focused checks: `tests/test_subscriber_funnel_contract.ps1` and the Almanack cases in `tests/hosted_analytics_browser.test.mjs`. Browser checks intercept analytics and prevent all real provider submissions.
+Focused checks: `tests/almanack_attribution.test.mjs` runs the adapter directly with a simulated clock and tab storage and is included in `tests/all.test.mjs`. `tests/test_subscriber_funnel_contract.ps1` checks rendered landing pages; the Almanack cases in `tests/hosted_analytics_browser.test.mjs` validate network behavior in CI. Browser checks intercept analytics and prevent all real provider submissions.
 
 ## Weekly email is the main report
 
