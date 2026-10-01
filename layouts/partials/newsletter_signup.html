@@ -3,10 +3,10 @@
 {{ $provider := lower (default "" $newsletter.provider) }}
 {{ $sourceSlot := default "newsletter_module" .sourceSlot }}
 {{ $cadence := $newsletter.cadence }}
-{{ $title := $newsletter.title }}
-{{ $contents := $newsletter.contents }}
+{{ $title := .title | default $newsletter.title }}
+{{ $contents := .contents | default $newsletter.contents }}
 {{ $pricePromise := $newsletter.price_promise }}
-{{ $buttonLabel := $newsletter.button_label }}
+{{ $buttonLabel := .buttonLabel | default $newsletter.button_label }}
 {{ $sampleURL := $newsletter.sample_url }}
 {{ $sampleLabel := $newsletter.sample_label }}
 {{ $privacyPromise := $newsletter.privacy_promise }}
