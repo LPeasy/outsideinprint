@@ -1767,7 +1767,7 @@
       "review_state": "approved",
       "usage_state": "referenced",
       "processing_state": "derivative_capable",
-      "processing_note": "",
+      "processing_note": null,
       "quality_override": null
     },
     "essays/1929-2029-americas-century-of-humiliation/hero": {
@@ -5342,7 +5342,7 @@
       "review_state": "approved",
       "usage_state": "referenced",
       "processing_state": "derivative_capable",
-      "processing_note": "",
+      "processing_note": null,
       "quality_override": null
     },
     "essays/the-other-end/section-1": {
