@@ -229,6 +229,9 @@ jobs:
           set -euo pipefail
           hugo version
 
+      - name: Test Almanack Email Review Renderer
+        run: python3 -m unittest discover -s tests -p test_almanack_email.py
+
       - name: Test Collection Organization Source Contract
         shell: pwsh
         run: ./tests/test_collection_organization_contract.ps1

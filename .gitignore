@@ -13,6 +13,7 @@
 /qa/artifacts/
 /qa/post-deploy-report.md
 /output/
+__pycache__/
 /reports/almanack-data-review/
 /reports/essay-guardrails.*
 
@@ -22,4 +23,3 @@ tools/_downloads/
 tools/_install_logs/
 tools/_work/
 # <<< DependencyTemplate toolchain <<<
-

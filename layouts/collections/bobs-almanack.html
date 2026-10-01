@@ -257,7 +257,7 @@
             </section>
 
             <section class="almanack-collection__rail-section">
-              <h2>Aphorism Slots</h2>
+              <h2>Aphorisms</h2>
               <ol class="almanack-collection__aphorisms">
                 {{ with $latest.Params.opening_quote }}<li>{{ . }}</li>{{ end }}
                 {{ with $latest.Params.middle_quote }}<li>{{ . }}</li>{{ end }}
@@ -350,7 +350,7 @@
               <section class="almanack-collection__rail-section">
                 <h2>One Number</h2>
                 <p class="almanack-collection__figure">{{ . }}</p>
-                {{ with $oneNumber.note }}<p>{{ . }}</p>{{ end }}
+                {{ with $oneNumber.note }}<p>{{ . }} {{ with $oneNumber.source_url }}<a class="almanack-collection__source-link" href="{{ . }}">Source</a>{{ end }}</p>{{ end }}
               </section>
             {{ end }}
 
@@ -359,6 +359,7 @@
                 <h2>One Document</h2>
                 <p class="almanack-collection__figure">{{ . }}</p>
                 <p>{{ $oneDocument.issued_by }}{{ with $oneDocument.date }}, {{ . }}{{ end }}</p>
+                {{ with $oneDocument.url }}<a class="almanack-collection__source-link" href="{{ . }}">Source</a>{{ end }}
               </section>
             {{ end }}
 
@@ -374,10 +375,10 @@
               <section class="almanack-collection__rail-section">
                 <h2>Margin Ledger</h2>
                 <ul class="almanack-collection__margin-list">
-                  {{ range first 2 $results }}<li>{{ .text }}</li>{{ end }}
-                  {{ range first 2 $records }}<li>{{ .text }}</li>{{ end }}
-                  {{ range first 1 $finalBows }}<li>{{ .text }}</li>{{ end }}
-                  {{ range first 1 $obituaries }}<li>{{ .text }}</li>{{ end }}
+                  {{ range first 2 $results }}<li>{{ .text }} {{ with .url }}<a class="almanack-collection__source-link" href="{{ . }}">Source</a>{{ end }}</li>{{ end }}
+                  {{ range first 2 $records }}<li>{{ .text }} {{ with .url }}<a class="almanack-collection__source-link" href="{{ . }}">Source</a>{{ end }}</li>{{ end }}
+                  {{ range first 1 $finalBows }}<li>{{ .text }} {{ with .url }}<a class="almanack-collection__source-link" href="{{ . }}">Source</a>{{ end }}</li>{{ end }}
+                  {{ range first 1 $obituaries }}<li>{{ .text }} {{ with .url }}<a class="almanack-collection__source-link" href="{{ . }}">Source</a>{{ end }}</li>{{ end }}
                 </ul>
               </section>
               {{ end }}
