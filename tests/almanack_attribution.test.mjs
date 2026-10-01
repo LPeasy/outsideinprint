@@ -8,6 +8,8 @@ const origin = "https://outsideinprint.org";
 const storageKey = "oip.almanack-acquisition.v1";
 const entryTime = Date.parse("2026-10-01T12:00:00Z");
 const retentionMs = 30 * 60 * 1000;
+const bioSegments = ["weekend", "everyday-history", "dialogue"];
+const newEntries = [["pinterest", "weekend", "weekend-01"], ...bioSegments.map(segment => ["instagram", segment, `${segment}-bio`])];
 
 function campaign(platform, segment, post) {
   return `${origin}/subscribe/${segment}/?utm_source=${platform}&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=${post}`;
@@ -53,7 +55,7 @@ function load({ url, storage = new Map(), clock = { now: entryTime }, enabled = 
       // Form values exist, but must never be read into analytics or storage.
       listeners.get("submit")?.({ target: {
         matches: selector => selector === "[data-analytics-event]",
-        dataset: { analyticsEvent: "newsletter_submit", analyticsSourceSlot: "funnel_weekend" },
+        dataset: { analyticsEvent: "newsletter_submit", analyticsSourceSlot: `funnel_${location.pathname.split("/")[2]}` },
         elements: { email: { value: "SUBSCRIBER_PII_SENTINEL@example.com" } }
       } });
     }
@@ -80,25 +82,34 @@ test("Almanack accepts Pinterest and preserves every existing platform and numbe
   }
 });
 
-test("Almanack shared Weekends bio has a distinct fixed code from post 01", () => {
-  const bio = load({ url: campaign("instagram", "weekend", "weekend-bio") });
-  const post = load({ url: campaign("instagram", "weekend", "weekend-01") });
-  assert.equal(bio.window.goatcounter.referrer(), label("instagram", "weekend", "weekend-bio"));
-  assert.notEqual(bio.window.goatcounter.referrer(), post.window.goatcounter.referrer());
-  assert.equal(JSON.parse(bio.storage.get(storageKey)).post, "weekend-bio");
-  for (const [segment, code] of [["dialogue", "weekend-bio"], ["dialogue", "dialogue-bio"], ["everyday-history", "everyday-history-bio"]]) {
-    const view = load({ url: campaign("instagram", segment, code) });
-    assert.equal(view.window.goatcounter.referrer(), "direct_unknown");
-    assert.equal(view.storage.size, 0);
+test("Almanack shared bios have three route-matched fixed codes distinct from post 01", () => {
+  for (const segment of bioSegments) {
+    const code = `${segment}-bio`;
+    const bio = load({ url: campaign("instagram", segment, code) });
+    const post = load({ url: campaign("instagram", segment, `${segment}-01`) });
+    assert.equal(bio.window.goatcounter.referrer(), label("instagram", segment, code));
+    assert.notEqual(bio.window.goatcounter.referrer(), post.window.goatcounter.referrer());
+    assert.equal(JSON.parse(bio.storage.get(storageKey)).post, code);
+    for (const other of bioSegments.filter(other => other !== segment)) {
+      const view = load({ url: campaign("instagram", other, code) });
+      assert.equal(view.window.goatcounter.referrer(), "direct_unknown");
+      assert.equal(view.storage.size, 0);
+    }
+    const arbitrary = load({ url: campaign("instagram", segment, `${code}-arbitrary`) });
+    assert.equal(arbitrary.window.goatcounter.referrer(), "direct_unknown");
+    assert.equal(arbitrary.storage.size, 0);
   }
+  const unknown = load({ url: campaign("instagram", "unknown", "unknown-bio") });
+  assert.equal(unknown.window.goatcounter.referrer(), "direct_unknown");
+  assert.equal(unknown.storage.size, 0);
 });
 
 test("Pinterest and bio entries survive sample navigation without extending thirty-minute retention", () => {
-  for (const [platform, post] of [["pinterest", "weekend-01"], ["instagram", "weekend-bio"]]) {
+  for (const [platform, segment, post] of newEntries) {
     const storage = new Map();
     const clock = { now: entryTime };
-    const tagged = campaign(platform, "weekend", post);
-    const expected = label(platform, "weekend", post);
+    const tagged = campaign(platform, segment, post);
+    const expected = label(platform, segment, post);
     load({ url: tagged, storage, clock });
     const original = storage.get(storageKey);
     clock.now += 10 * 60 * 1000;
@@ -106,7 +117,7 @@ test("Pinterest and bio entries survive sample navigation without extending thir
     assert.equal(sample.window.goatcounter.referrer(), expected);
     assert.equal(storage.get(storageKey), original);
     clock.now = entryTime + retentionMs - 1;
-    const returned = load({ referrer: `${origin}/essays/after-the-cup-falls/`, storage, clock });
+    const returned = load({ url: `${origin}/subscribe/${segment}/`, referrer: `${origin}/essays/after-the-cup-falls/`, storage, clock });
     assert.equal(returned.window.goatcounter.referrer(), expected);
     assert.equal(storage.get(storageKey), original);
     clock.now++;
@@ -174,17 +185,17 @@ test("Stored attribution rejects extra fields, unknown codes, corrupt data, and 
 });
 
 test("Storage denial preserves current-page Pinterest and bio attribution", () => {
-  for (const [platform, post] of [["pinterest", "weekend-01"], ["instagram", "weekend-bio"]]) {
-    const view = load({ url: campaign(platform, "weekend", post), denyStorage: true });
+  for (const [platform, segment, post] of newEntries) {
+    const view = load({ url: campaign(platform, segment, post), denyStorage: true });
     view.submit();
-    assert.equal(view.window.goatcounter.referrer(), label(platform, "weekend", post));
-    assert.equal(view.counts.at(-1).referrer, label(platform, "weekend", post));
+    assert.equal(view.window.goatcounter.referrer(), label(platform, segment, post));
+    assert.equal(view.counts.at(-1).referrer, label(platform, segment, post));
   }
 });
 
 test("Disabled analytics and unapproved hosts do not access acquisition storage or emit events", () => {
-  for (const [platform, post] of [["pinterest", "weekend-01"], ["instagram", "weekend-bio"]]) {
-    const url = campaign(platform, "weekend", post);
+  for (const [platform, segment, post] of newEntries) {
+    const url = campaign(platform, segment, post);
     for (const options of [{ url, enabled: false }, { url: url.replace(origin, "https://preview.example") }]) {
       const view = load({ ...options, denyStorage: true });
       view.submit();
@@ -196,12 +207,12 @@ test("Disabled analytics and unapproved hosts do not access acquisition storage 
 });
 
 test("Pinterest and bio newsletter events remain attempts and contain no subscriber or arbitrary URL data", () => {
-  for (const [platform, post] of [["pinterest", "weekend-01"], ["instagram", "weekend-bio"]]) {
-    const view = load({ url: `${campaign(platform, "weekend", post)}&private=URL_PII_SENTINEL#FRAGMENT_PII_SENTINEL` });
+  for (const [platform, segment, post] of newEntries) {
+    const view = load({ url: `${campaign(platform, segment, post)}&private=URL_PII_SENTINEL#FRAGMENT_PII_SENTINEL` });
     view.submit();
     const attempt = view.counts.at(-1);
     assert.match(attempt.path, /^oip:newsletter_submit\|/);
-    assert.equal(attempt.referrer, label(platform, "weekend", post));
+    assert.equal(attempt.referrer, label(platform, segment, post));
     assert.deepEqual(Object.keys(attempt).sort(), ["event", "path", "referrer", "title"]);
     assert.doesNotMatch(JSON.stringify([...view.counts, [...view.storage]]), /PII_SENTINEL|confirmed|subscription_success|utm_/);
     assert.equal(view.counts.filter(payload => /oip:essay_read/.test(payload.path)).length, 0);

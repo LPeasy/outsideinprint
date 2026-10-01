@@ -236,15 +236,19 @@ test.after(async () => {
 });
 
 test("Almanack attribution survives sample navigation and tracks attempts without subscriber data", async () => {
-  for (const [platform, post] of [["instagram", "weekend-01"], ["pinterest", "weekend-01"], ["instagram", "weekend-bio"]]) {
+  for (const [platform, segment, post] of [
+    ["instagram", "weekend", "weekend-01"],
+    ["pinterest", "weekend", "weekend-01"],
+    ...["weekend", "everyday-history", "dialogue"].map(segment => ["instagram", segment, `${segment}-bio`])
+  ]) {
     const { context, counts, page } = await newInstrumentedPage();
     const buttondownRequests = [];
     page.on("request", request => {
       if (new URL(request.url()).hostname === "buttondown.com") buttondownRequests.push(request.url());
     });
     try {
-      const label = `almanack-organic|platform=${platform}|segment=weekend|post=${post}`;
-      await page.goto(`${canonicalOrigin}/subscribe/weekend/?utm_source=${platform}&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=${post}&private=FUNNEL_PRIVATE_SENTINEL`, { waitUntil: "load" });
+      const label = `almanack-organic|platform=${platform}|segment=${segment}|post=${post}`;
+      await page.goto(`${canonicalOrigin}/subscribe/${segment}/?utm_source=${platform}&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=${post}&private=FUNNEL_PRIVATE_SENTINEL`, { waitUntil: "load" });
       await waitFor(() => counts.some(record => countData(record).path.startsWith("oip:funnel_view")), "Missing landing view event.");
       assert.equal(await page.evaluate(() => window.oipAnalyticsEventReferrer()), label);
       const stored = await page.evaluate(() => JSON.parse(sessionStorage.getItem("oip.almanack-acquisition.v1")));
@@ -255,7 +259,7 @@ test("Almanack attribution survives sample navigation and tracks attempts withou
       await page.locator(".subscriber-funnel__sample h3 a").nth(1).click();
       await page.waitForLoadState("load");
       assert.equal(await page.evaluate(() => window.oipAnalyticsEventReferrer()), label);
-      await page.goto(`${canonicalOrigin}/subscribe/weekend/`, { referer: `${canonicalOrigin}/essays/after-the-cup-falls/`, waitUntil: "load" });
+      await page.goto(`${canonicalOrigin}/subscribe/${segment}/`, { referer: page.url(), waitUntil: "load" });
       await form.locator("input[type=email]").fill("funnel-email-sentinel@example.com");
       await form.evaluate(node => {
         node.addEventListener("submit", event => event.preventDefault(), { once: true });
@@ -263,7 +267,7 @@ test("Almanack attribution survives sample navigation and tracks attempts withou
       });
       const attempt = await waitFor(() => counts.find(record => countData(record).path.startsWith("oip:newsletter_submit")), "Missing signup attempt.");
       assert.equal(countData(attempt).referrer, label);
-      assert.equal(eventParts(attempt).fields.source_slot, "funnel_weekend");
+      assert.equal(eventParts(attempt).fields.source_slot, `funnel_${segment}`);
       assert.equal(buttondownRequests.length, 0, "Browser QA must never submit to Buttondown.");
       for (const record of counts) assertPrivacyBoundary(record, ["FUNNEL_PRIVATE_SENTINEL", "funnel-email-sentinel"]);
       assert.ok(counts.every(record => !/confirmed|subscription_success/.test(countData(record).path)));

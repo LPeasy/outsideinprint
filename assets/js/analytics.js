@@ -36,7 +36,7 @@
       ["facebook", "instagram", "linkedin", "pinterest", "x"].indexOf(value.platform) !== -1 &&
       segments.indexOf(value.segment) !== -1 &&
       (["01", "02", "03", "04"].some(function (number) { return value.post === value.segment + "-" + number; }) ||
-        (value.segment === "weekend" && value.post === "weekend-bio")) &&
+        value.post === value.segment + "-bio") &&
       typeof value.expires === "number" && Number.isFinite(value.expires) &&
       value.expires > Date.now() && value.expires <= Date.now() + 30 * 60 * 1000;
   }
