@@ -228,11 +228,107 @@ test.before(async () => {
   assert.match(home, /data-goatcounter=https:\/\/outsideinprint\.goatcounter\.com\/count|data-goatcounter="https:\/\/outsideinprint\.goatcounter\.com\/count"/);
   assert.match(home, /src=(?:"[^"\s]*goatcounter[^"\s]*"|[^>\s]*goatcounter[^>\s]*)/i);
   assert.match(home, /window\.oipAnalytics=\{(?:(?!<\/script>).)*enabled:(?:!0|true)/s, "Browser contract requires an analytics-enabled production Hugo build.");
-  browser = await chromium.launch({ headless: true });
+  browser = await chromium.launch({ headless: true, executablePath: process.env.OIP_BROWSER_EXECUTABLE || undefined });
 });
 
 test.after(async () => {
   await browser?.close();
+});
+
+test("Almanack attribution survives sample navigation and tracks attempts without subscriber data", async () => {
+  const { context, counts, page } = await newInstrumentedPage();
+  const buttondownRequests = [];
+  page.on("request", request => {
+    if (new URL(request.url()).hostname === "buttondown.com") buttondownRequests.push(request.url());
+  });
+  try {
+    const label = "almanack-organic|platform=instagram|segment=weekend|post=weekend-01";
+    await page.goto(`${canonicalOrigin}/subscribe/weekend/?utm_source=instagram&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=weekend-01&private=FUNNEL_PRIVATE_SENTINEL`, { waitUntil: "load" });
+    await waitFor(() => counts.some(record => countData(record).path.startsWith("oip:funnel_view")), "Missing landing view event.");
+    assert.equal(await page.evaluate(() => window.oipAnalyticsEventReferrer()), label);
+    const stored = await page.evaluate(() => JSON.parse(sessionStorage.getItem("oip.almanack-acquisition.v1")));
+    assert.deepEqual(Object.keys(stored).sort(), ["expires", "platform", "post", "segment"]);
+    const form = page.locator("form[data-analytics-event='newsletter_submit']");
+    await form.evaluate(node => node.requestSubmit());
+    assert.equal(counts.filter(record => countData(record).path.startsWith("oip:newsletter_submit")).length, 0, "Invalid email must not count as an attempt.");
+    await page.locator(".subscriber-funnel__sample h3 a").nth(1).click();
+    await page.waitForLoadState("load");
+    assert.equal(await page.evaluate(() => window.oipAnalyticsEventReferrer()), label);
+    await page.goto(`${canonicalOrigin}/subscribe/weekend/`, { referer: `${canonicalOrigin}/essays/after-the-cup-falls/`, waitUntil: "load" });
+    await form.locator("input[type=email]").fill("funnel-email-sentinel@example.com");
+    await form.evaluate(node => {
+      node.addEventListener("submit", event => event.preventDefault(), { once: true });
+      node.requestSubmit();
+    });
+    const attempt = await waitFor(() => counts.find(record => countData(record).path.startsWith("oip:newsletter_submit")), "Missing signup attempt.");
+    assert.equal(countData(attempt).referrer, label);
+    assert.equal(eventParts(attempt).fields.source_slot, "funnel_weekend");
+    assert.equal(buttondownRequests.length, 0, "Browser QA must never submit to Buttondown.");
+    for (const record of counts) assertPrivacyBoundary(record, ["FUNNEL_PRIVATE_SENTINEL", "funnel-email-sentinel"]);
+    assert.ok(counts.every(record => !/confirmed|subscription_success/.test(countData(record).path)));
+  } finally { await context.close(); }
+});
+
+test("Almanack attribution replaces prior entries and expires after thirty minutes", async () => {
+  const { context, counts, page } = await newInstrumentedPage();
+  try {
+    await page.clock.install();
+    await page.goto(`${canonicalOrigin}/subscribe/weekend/?utm_source=x&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=weekend-01`, { waitUntil: "load" });
+    await page.goto(`${canonicalOrigin}/subscribe/dialogue/?utm_source=linkedin&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=dialogue-04`, { referer: `${canonicalOrigin}/subscribe/weekend/`, waitUntil: "load" });
+    assert.equal(await page.evaluate(() => window.oipAnalyticsEventReferrer()), "almanack-organic|platform=linkedin|segment=dialogue|post=dialogue-04");
+    await page.clock.fastForward(30 * 60 * 1000 + 1);
+    await page.locator("form[data-analytics-event='newsletter_submit']").evaluate(node => node.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true })));
+    const attempt = await waitFor(() => counts.find(record => countData(record).path.startsWith("oip:newsletter_submit")), "Missing expired attempt.");
+    assert.equal(countData(attempt).referrer, "internal");
+    assert.equal(await page.evaluate(() => sessionStorage.getItem("oip.almanack-acquisition.v1")), null);
+    assert.equal(counts.filter(record => /oip:essay_read/.test(countData(record).path)).length, 0, "Landing pages must not count as essay reads.");
+  } finally { await context.close(); }
+});
+
+test("Almanack rejects unrecognized and duplicate codes without leaking raw query values", async () => {
+  for (const query of [
+    "utm_source=facebook&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=QUERY_PII_SENTINEL",
+    "utm_source=instagram&utm_source=x&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=weekend-01",
+    "utm_source=instagram&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=dialogue-01"
+  ]) {
+    const { context, counts, page } = await newInstrumentedPage();
+    try {
+      await page.goto(`${canonicalOrigin}/subscribe/weekend/?${query}`, { waitUntil: "load" });
+      await waitFor(() => counts.length > 0, "Missing pageview.");
+      assert.equal(await page.evaluate(() => window.oipAnalyticsEventReferrer()), "direct_unknown");
+      assert.equal(await page.evaluate(() => sessionStorage.getItem("oip.almanack-acquisition.v1")), null);
+      for (const record of counts) assertPrivacyBoundary(record, ["QUERY_PII_SENTINEL"]);
+    } finally { await context.close(); }
+  }
+});
+
+test("Almanack works with storage denied and does not touch storage when analytics is off", async () => {
+  for (const enabled of [true, false]) {
+    const { context, counts, page } = await newInstrumentedPage({
+      transformHtml: html => transformAnalyticsConfig(html, { enabled }),
+      initScript: () => {
+        window.__storageReads = 0;
+        Object.defineProperty(window, "sessionStorage", { get() {
+          window.__storageReads++;
+          throw new DOMException("Storage denied", "SecurityError");
+        } });
+      }
+    });
+    const errors = [];
+    page.on("pageerror", error => errors.push(error.message));
+    try {
+      await page.goto(`${canonicalOrigin}/subscribe/everyday-history/?utm_source=facebook&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=everyday-history-02`, { waitUntil: "load" });
+      assert.equal(await page.locator("form").getAttribute("action"), "https://buttondown.com/api/emails/embed-subscribe/OutsideInPrint");
+      if (enabled) {
+        await waitFor(() => counts.length > 0, "Storage denial must not block analytics.");
+        assert.equal(await page.evaluate(() => window.oipAnalyticsEventReferrer()), "almanack-organic|platform=facebook|segment=everyday-history|post=everyday-history-02");
+      } else {
+        assert.equal(counts.length, 0);
+        assert.equal(await page.evaluate(() => window.__storageReads), 0);
+      }
+      assert.deepEqual(errors, []);
+    } finally { await context.close(); }
+  }
 });
 
 test("hosted pageview and form/link events send only sanitized GoatCounter data", async () => {

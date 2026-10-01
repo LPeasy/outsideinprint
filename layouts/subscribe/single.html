@@ -1,0 +1,52 @@
+{{ define "main" }}
+  {{ $css := resources.Get "css/subscriber-funnel.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{ $artPage := false }}
+  {{ with first 1 (where site.RegularPages "RelPermalink" .Params.art_page) }}{{ $artPage = index . 0 }}{{ end }}
+  {{ if not $artPage }}{{ errorf "Missing subscriber funnel artwork page %q" .Params.art_page }}{{ end }}
+  <article class="subscriber-funnel page-shell page-shell--wide" aria-labelledby="funnel-title" data-subscriber-funnel="{{ .Params.segment }}">
+    <div class="subscriber-funnel__opening">
+      <header class="subscriber-funnel__header">
+        <p class="subscriber-funnel__eyebrow">Outside In Print ~ the Saturday letter</p>
+        <h1 id="funnel-title">{{ .Title }}</h1>
+        <p class="subscriber-funnel__intro">{{ .Params.intro }}</p>
+        <p class="subscriber-funnel__byline">By Robert V. Ussley</p>
+        <a class="subscriber-funnel__jump" href="#get-almanack">Get Bob&rsquo;s Almanack</a>
+      </header>
+      <figure class="subscriber-funnel__art">
+        {{ partial "images/picture.html" (dict
+          "page" $artPage
+          "ref" $artPage.Params.featured_image
+          "alt" $artPage.Params.featured_image_alt
+          "sizes" "(max-width: 760px) calc(100vw - 48px), 520px"
+          "loading" "eager"
+          "fetchpriority" "high"
+        ) }}
+        <figcaption>Illustration from <a href="{{ $artPage.RelPermalink }}" data-analytics-event="internal_promo_click" data-analytics-source-slot="funnel_{{ .Params.segment }}_art" data-analytics-path="{{ $artPage.RelPermalink }}">{{ $artPage.Title }}</a></figcaption>
+      </figure>
+    </div>
+    {{ partial "newsletter_signup.html" (dict
+      "page" .
+      "class" "newsletter-signup--page subscriber-funnel__signup"
+      "anchorID" "get-almanack"
+      "sourceSlot" (printf "funnel_%s" .Params.segment)
+      "title" "Bob's Almanack ~ the Saturday letter"
+      "contents" "New essays, original pictures, and work from the archive. One email each Saturday (free)."
+      "buttonLabel" "Get Bob's Almanack"
+    ) }}
+    <section class="subscriber-funnel__samples" aria-labelledby="funnel-samples-title">
+      <h2 id="funnel-samples-title">Read a little first.</h2>
+      <div class="subscriber-funnel__sample-grid">
+        {{ range .Params.samples }}
+          {{ $sample := false }}
+          {{ with first 1 (where site.Pages "RelPermalink" .url) }}{{ $sample = index . 0 }}{{ end }}
+          {{ if not $sample }}{{ errorf "Missing subscriber funnel sample %q" .url }}{{ end }}
+          <article class="subscriber-funnel__sample">
+            <h3><a href="{{ $sample.RelPermalink }}" data-analytics-event="internal_promo_click" data-analytics-source-slot="funnel_{{ $.Params.segment }}_sample" data-analytics-path="{{ $sample.RelPermalink }}">{{ .title }}</a></h3>
+            <p>{{ .description }}</p>
+          </article>
+        {{ end }}
+      </div>
+    </section>
+  </article>
+{{ end }}

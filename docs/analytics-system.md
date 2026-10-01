@@ -1,5 +1,19 @@
 # Analytics System
 
+## Bob's Almanack organic landing pages
+
+Three separate entry pages (`/subscribe/weekend/`, `/subscribe/everyday-history/`, and `/subscribe/dialogue/`) use the same existing Buttondown newsletter account and tag. Their visible signup names Bob's Almanack; existing signup copy elsewhere is unchanged.
+
+Use `utm_campaign=almanack-organic`, `utm_medium=organic_social`, and an allowlisted `utm_source` (`facebook`, `instagram`, `linkedin`, or `x`). `utm_content` must be the route segment followed by `-01`, `-02`, `-03`, or `-04`, giving twelve fixed post codes. Example: `/subscribe/weekend/?utm_source=instagram&utm_medium=organic_social&utm_campaign=almanack-organic&utm_content=weekend-01`. Use the same code for the same core post across platforms.
+
+The analytics adapter stores only platform, route-derived segment, post code, and expiry in tab-scoped `sessionStorage` (`oip.almanack-acquisition.v1`). It expires thirty minutes after the tagged entry, without extending on navigation. A valid new entry replaces the old one; explicit invalid or other campaign parameters clear it. It survives same-origin sample reading and return navigation. Missing or blocked storage never prevents signup. Analytics-off builds do not access this storage. No email, visitor ID, arbitrary query value, or raw referrer is added to analytics or storage.
+
+Pageview and event referrers carry the fixed label `almanack-organic|platform=instagram|segment=weekend|post=weekend-01`. `funnel_view` counts a landing-page load; `internal_promo_click` counts sample/illustration clicks; `newsletter_submit` counts a browser-valid submission attempt, not a confirmed subscription or unique new subscriber. Browser traffic can be blocked or undercounted. These pages are excluded from essay-read events.
+
+The provider form still posts directly to Buttondown with the existing `outside-in-print` tag. There is no client confirmation callback, acquisition tag, webhook, or subscriber export in this change. Report provider-confirmed new subscribers separately from attempts; per-post confirmed conversions are unavailable. Existing subscribers and repeated submissions must not be counted as new confirmed acquisitions merely because a tag or attempt exists.
+
+Focused checks: `tests/test_subscriber_funnel_contract.ps1` and the Almanack cases in `tests/hosted_analytics_browser.test.mjs`. Browser checks intercept analytics and prevent all real provider submissions.
+
 ## Weekly email is the main report
 
 Outside In Print has selected GoatCounter's hosted weekly email for routine traffic review. The hosted dashboard at <https://outsideinprint.goatcounter.com> is optional for closer inspection. Use Google Search Console occasionally to check search impressions, clicks, and indexing; site analytics cannot measure search exposure before someone visits.
@@ -29,8 +43,9 @@ The client sends page paths, public page titles, and the existing events below. 
 
 - `google`, `bing`, `newsletter`, `social`, `ai_referral`, `other`, `internal`, `direct_unknown`
 - `newsletter-2045-launch` and `social-2045-launch` for the approved campaign
+- `almanack-organic|platform=<fixed-platform>|segment=<fixed-segment>|post=<fixed-post>` for the organic landing-page campaign described above
 
-Same-site navigation is classified as `internal` first. The only campaign identifier accepted is the exact value `2045-launch`: `utm_source=buttondown` maps to the newsletter campaign label, and `facebook`, `instagram`, `linkedin`, or `x` map to the social campaign label. Other campaign values fall back to the referring site's classification. Full external referrer URLs, arbitrary campaign text, and query values are not analytics fields.
+Without a valid, unexpired Almanack entry, same-site navigation is classified as `internal` first. The existing `2045-launch` behavior remains: `utm_source=buttondown` maps to the newsletter campaign label, and `facebook`, `instagram`, `linkedin`, or `x` map to the grouped social campaign label. The new `almanack-organic` campaign accepts only the route, platform, medium, and post combinations documented above and retains them across same-site navigation. Other campaign values fall back to the referring site's classification. Full external referrer URLs, arbitrary campaign text, and query values are not analytics fields.
 
 ### Ready-to-share 2045 product links
 

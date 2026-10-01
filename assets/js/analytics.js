@@ -9,9 +9,11 @@
   var localHost = /^(localhost|127(?:\.[0-9]{1,3}){3}|\[::1\])$/.test(hostname);
   var allowedHost = (hostname === "outsideinprint.org" && window.location.protocol === "https:") ||
     (config.allowLocal === true && localHost && /^https?:$/.test(window.location.protocol));
-  var sourceLabel = classifySource();
-
   config.enabled = config.enabled === true && allowedHost;
+  var acquisition = config.enabled ? funnelAcquisition() : null;
+  var sourceLabel = acquisition
+    ? "almanack-organic|platform=" + acquisition.platform + "|segment=" + acquisition.segment + "|post=" + acquisition.post
+    : classifySource();
   window.oipAnalyticsEventReferrer = function () {
     return sourceLabel;
   };
@@ -25,6 +27,65 @@
 
   if (!config.enabled) {
     return;
+  }
+
+  // Only fixed campaign codes are retained. Never store or send arbitrary URL data.
+  function validAcquisition(value) {
+    var segments = ["weekend", "everyday-history", "dialogue"];
+    return value && Object.keys(value).sort().join(",") === "expires,platform,post,segment" &&
+      ["facebook", "instagram", "linkedin", "x"].indexOf(value.platform) !== -1 &&
+      segments.indexOf(value.segment) !== -1 &&
+      ["01", "02", "03", "04"].some(function (number) { return value.post === value.segment + "-" + number; }) &&
+      typeof value.expires === "number" && Number.isFinite(value.expires) &&
+      value.expires > Date.now() && value.expires <= Date.now() + 30 * 60 * 1000;
+  }
+
+  function funnelAcquisition() {
+    var key = "oip.almanack-acquisition.v1";
+    var params = new URLSearchParams(window.location.search);
+    var segment = {
+      "/subscribe/weekend/": "weekend",
+      "/subscribe/everyday-history/": "everyday-history",
+      "/subscribe/dialogue/": "dialogue"
+    }[window.location.pathname];
+    var value = null;
+    var supplied = params.has("utm_campaign") || params.has("utm_source") || params.has("utm_content") || params.has("utm_medium");
+
+    if (supplied) {
+      if (segment && ["utm_campaign", "utm_source", "utm_content", "utm_medium"].every(function (name) { return params.getAll(name).length === 1; }) &&
+          params.get("utm_campaign") === "almanack-organic" && params.get("utm_medium") === "organic_social") {
+        value = {
+          platform: params.get("utm_source"),
+          segment: segment,
+          post: params.get("utm_content"),
+          expires: Date.now() + 30 * 60 * 1000
+        };
+        if (!validAcquisition(value)) {
+          value = null;
+        }
+      }
+      try {
+        if (value) {
+          window.sessionStorage.setItem(key, JSON.stringify(value));
+        } else {
+          window.sessionStorage.removeItem(key);
+        }
+      } catch (error) {
+        // Storage denial must not affect navigation, signup, or this page's attribution.
+      }
+      return value;
+    }
+
+    try {
+      value = JSON.parse(window.sessionStorage.getItem(key));
+      if (validAcquisition(value)) {
+        return value;
+      }
+      window.sessionStorage.removeItem(key);
+    } catch (error) {
+      // Missing, corrupt, or blocked storage falls back to ordinary source classification.
+    }
+    return null;
   }
 
   function matchesHost(host, domains) {
@@ -204,6 +265,12 @@
       return null;
     }
 
+    // Recheck expiry during long page visits as well as on navigation.
+    if (acquisition && !validAcquisition(acquisition)) {
+      acquisition = null;
+      sourceLabel = classifySource();
+      try { window.sessionStorage.removeItem("oip.almanack-acquisition.v1"); } catch (error) {}
+    }
     return {
       path: path,
       title: props.title || pageContext.title || eventName,
@@ -424,6 +491,9 @@
     true
   );
 
+  if (/^\/subscribe\/(weekend|everyday-history|dialogue)\/$/.test(pageContext.path || "")) {
+    track("funnel_view", currentPageProps());
+  }
   trackReadProgress();
   flushPendingCounts();
   window.addEventListener("load", flushPendingCounts);
