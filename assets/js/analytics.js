@@ -33,9 +33,10 @@
   function validAcquisition(value) {
     var segments = ["weekend", "everyday-history", "dialogue"];
     return value && Object.keys(value).sort().join(",") === "expires,platform,post,segment" &&
-      ["facebook", "instagram", "linkedin", "x"].indexOf(value.platform) !== -1 &&
+      ["facebook", "instagram", "linkedin", "pinterest", "x"].indexOf(value.platform) !== -1 &&
       segments.indexOf(value.segment) !== -1 &&
-      ["01", "02", "03", "04"].some(function (number) { return value.post === value.segment + "-" + number; }) &&
+      (["01", "02", "03", "04"].some(function (number) { return value.post === value.segment + "-" + number; }) ||
+        value.post === value.segment + "-bio") &&
       typeof value.expires === "number" && Number.isFinite(value.expires) &&
       value.expires > Date.now() && value.expires <= Date.now() + 30 * 60 * 1000;
   }
