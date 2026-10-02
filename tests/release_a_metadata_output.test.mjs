@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import { execFileSync } from "node:child_process";
 
 const siteDir = path.resolve(process.env.OIP_SITE_DIR || "public");
 
@@ -64,8 +65,33 @@ function jsonLdNodes(html) {
 }
 
 test("rendered Almanack metadata is unique and agrees across consumers", () => {
+  // Hugo owns draft and publication eligibility; missing published output remains an error.
+  const hugo = process.env.OIP_HUGO_BIN || "hugo";
+  assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.164\.0/);
+  const inventoryArgs = ["list", "published", "--config", process.env.OIP_HUGO_CONFIG || "hugo.toml"];
+  const manifestPath = path.join(siteDir, ".oip-build-manifest.json");
+  const clock = process.env.OIP_HUGO_CLOCK || (fs.existsSync(manifestPath)
+    ? JSON.parse(fs.readFileSync(manifestPath, "utf8")).generatedAtUtc : "");
+  if (clock) inventoryArgs.push("--clock", clock);
+  const csv = execFileSync(hugo, inventoryArgs, { encoding: "utf8" });
+  const rows = csv.trim().split(/\r?\n/).map((line) =>
+    [...line.matchAll(/(?:^|,)("(?:[^"]|"")*"|[^,]*)/g)]
+      .map((match) => match[1].replace(/^"|"$/g, "").replace(/""/g, '"')));
+  const columns = rows.shift();
+  const publishedRoutes = new Set(rows.map((row) => Object.fromEntries(
+    columns.map((column, index) => [column, row[index]])))
+    .filter((row) => row.kind === "page" && row.section === "almanack")
+    .map((row) => new URL(row.permalink).pathname));
   const issueFiles = fs.readdirSync(path.resolve("content/almanack"))
-    .filter((name) => /^\d{4}-\d{2}-\d{2}\.md$/.test(name));
+    .filter((name) => /^\d{4}-\d{2}-\d{2}\.md$/.test(name))
+    .filter((name) => {
+      const issueDate = name.replace(/\.md$/, "");
+      const published = publishedRoutes.has(`/almanack/${issueDate}/`);
+      if (!published) assert.ok(!fs.existsSync(path.join(siteDir, `almanack/${issueDate}/index.html`)),
+        `${issueDate} draft/future issue must remain absent`);
+      return published;
+    });
+  assert.ok(issueFiles.length > 0, "expected published Almanack issues");
   const renderedTitles = new Set();
   const renderedDescriptions = new Set();
 
