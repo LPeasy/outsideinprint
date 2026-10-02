@@ -3373,6 +3373,48 @@
         "avif_quality": 70
       }
     },
+    "essays/precious-and-honored/hero": {
+      "id": "essays/precious-and-honored/hero",
+      "source": "images/originals/essays/precious-and-honored/hero.png",
+      "sha256": "d2f0b5f1fc5894a85bbbfe7ba94133d060ad862853c9ce8429f4ecfefdb15929",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
+    "essays/precious-and-honored/making-amends": {
+      "id": "essays/precious-and-honored/making-amends",
+      "source": "images/originals/essays/precious-and-honored/making-amends.png",
+      "sha256": "6b55e76a7a31106732d9f42b3d311ec4399f3f2a6013c6544fe3697d30c12596",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
+    "essays/precious-and-honored/reconciliation": {
+      "id": "essays/precious-and-honored/reconciliation",
+      "source": "images/originals/essays/precious-and-honored/reconciliation.png",
+      "sha256": "c354b0036296a02fbc5eb179876e71d9128dc89759c1430205dcaa71522391a8",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "essays/presidential-elections/hero": {
       "id": "essays/presidential-elections/hero",
       "source": "images/originals/essays/presidential-elections/hero.png",
@@ -8092,6 +8134,9 @@
     "/images/essays/pay-attention-to-you/section-1.png": "essays/pay-attention-to-you/section-1",
     "/images/essays/pope-francis-how-a-plainspoken-pope-reframed-moral-authority/hero.png": "essays/pope-francis-how-a-plainspoken-pope-reframed-moral-authority/hero",
     "/images/essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/timeline-corrected-20260927.png": "essays/pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter/timeline-corrected-20260927",
+    "/images/essays/precious-and-honored/hero.png": "essays/precious-and-honored/hero",
+    "/images/essays/precious-and-honored/making-amends.png": "essays/precious-and-honored/making-amends",
+    "/images/essays/precious-and-honored/reconciliation.png": "essays/precious-and-honored/reconciliation",
     "/images/essays/presidential-elections/hero.png": "essays/presidential-elections/hero",
     "/images/essays/public-vs-private-pay-who-really-earns-more/compensation-shares-corrected-20260927.png": "essays/public-vs-private-pay-who-really-earns-more/compensation-shares-corrected-20260927",
     "/images/essays/rational-ignorance-in-the-u-s-presidential-electorate/hero.png": "essays/rational-ignorance-in-the-u-s-presidential-electorate/hero",

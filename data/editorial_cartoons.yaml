@@ -1,5 +1,15 @@
-current: jesus-alongside-me
+current: precious-and-honored
 cartoons:
+  - slug: "precious-and-honored"
+    title: "Precious and Honored"
+    date: "2026-10-04"
+    publishDate: "2026-10-04T05:00:00-04:00"
+    image: "essays/precious-and-honored/hero"
+    essay: "/essays/precious-and-honored/"
+    alt: "A person stands at the open doorway of a stone church, with warm light falling across the threshold."
+    caption: "We can bring the truth with us when we return."
+    width: 1672
+    height: 941
   - slug: jesus-alongside-me
     title: "Jesus Alongside Me"
     date: "2026-10-03"
