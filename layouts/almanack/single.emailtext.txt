@@ -1,5 +1,5 @@
 {{ $m := partial "almanack/email-model.html" . -}}
-Bob's Almanack
+{{ if eq $m.issue.editorial_contract "almanack-v1" }}{{ .Title }}{{ else }}Bob's Almanack{{ end }}
 {{ $m.date }} · Issue {{ $m.issue.issue_number }}
 Outside In Print weekly sheet
 {{ with $m.issue.review_notice }}{{ . }}{{ end }}

@@ -67,6 +67,22 @@ class RenderedEmailTests(unittest.TestCase):
         source = source.replace('worth_reprinting:\n', 'worth_reprinting:\n  rationale: "A reason to revisit who enters the public record this week."\n')
         return "---" + source + "---\nBODY_DUPLICATION_SENTINEL\n", excerpt
 
+    def test_issue22_preserves_approved_subject_link_and_all_five_pieces(self):
+        source = (REPO / "content/almanack/2026-10-03.md").read_text(encoding="utf-8")
+        metadata, html, plain = self.render(source)
+        parsed = ParsedEmail(html)
+        self.assertEqual(metadata["subject"], "Bob\u2019s Almanack ~ October 3, 2026 ~ Issue 22")
+        self.assertEqual(metadata["issue_number"], 22)
+        self.assertEqual(len(metadata["content"]["essays"]), 5)
+        self.assertEqual(len(parsed.images), 6)
+        self.assertIn("https://outsideinprint.org/collections/the-restless-heart/", parsed.links)
+        self.assertNotIn("[The Restless Heart](", html)
+        self.assertEqual(metadata["content"]["worth_reprinting"]["title"], "Say Less to Say More")
+        for essay in metadata["content"]["essays"]:
+            self.assertIn(essay["title"], plain)
+            self.assertIn(essay.get("excerpt", essay.get("capsule", "")), plain)
+        self.assertIn("I\u2019m grateful for this day and its opportunities.", plain)
+
     def test_legacy_source_preserves_issue_facts_artwork_and_canonical_number(self):
         metadata, html, plain = self.render(self.source)
         parsed = ParsedEmail(html)

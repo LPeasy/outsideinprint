@@ -28,7 +28,7 @@
   <article class="almanack-issue page-shell page-shell--wide" aria-labelledby="almanack-title">
     <header class="almanack-masthead">
       <p class="almanack-kicker">Outside In Print weekly sheet</p>
-      <h1 id="almanack-title"><a href="{{ "collections/bobs-almanack/" | relURL }}">Bob's Almanack</a></h1>
+      <h1 id="almanack-title"><a href="{{ "collections/bobs-almanack/" | relURL }}">{{ if eq .Params.editorial_contract "almanack-v1" }}{{ .Title }}{{ else }}Bob's Almanack{{ end }}</a></h1>
       <div class="piece-byline-row">
         <div class="almanack-masthead__meta">
           <time datetime="{{ $issueDate.Format "2006-01-02" }}">{{ $issueDate.Format "January 2, 2006" }}</time>
@@ -92,7 +92,7 @@
     {{ with .Params.bob_note }}
       <section class="almanack-note" aria-labelledby="almanack-note-title">
         <p class="almanack-section-label" id="almanack-note-title">Note from Bob</p>
-        <p>{{ . }}</p>
+        <p>{{ if eq $.Params.editorial_contract "almanack-v1" }}{{ . | markdownify }}{{ else }}{{ . }}{{ end }}</p>
       </section>
     {{ end }}
 
@@ -204,7 +204,7 @@
       <aside class="almanack-margin" aria-labelledby="almanack-margin-title">
         <figure class="almanack-quote almanack-quote--middle">
           <blockquote>{{ .Params.middle_quote }}</blockquote>
-          <figcaption>~ {{ .Params.middle_quote_attribution }}</figcaption>
+          <figcaption>~ {{ .Params.middle_quote_attribution }}{{ if eq .Params.editorial_contract "almanack-v1" }}{{ with .Params.middle_quote_source_url }} · <a href="{{ . }}">Source</a>{{ end }}{{ end }}</figcaption>
         </figure>
         <div class="almanack-margin__header">
           <h2 id="almanack-margin-title">In the Margins</h2>
@@ -284,7 +284,7 @@
     </figure>
 
     <footer class="almanack-footer">
-      <p>Outside In Print</p>
+      <p>{{ if eq .Params.editorial_contract "almanack-v1" }}<a href="{{ "" | absURL }}">Outside In Print</a>{{ else }}Outside In Print{{ end }}</p>
       <p>Color over the lines. Read beyond the feed. Think for yourself.</p>
     </footer>
   </article>

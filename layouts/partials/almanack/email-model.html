@@ -13,7 +13,7 @@
   "issue" $issue
   "date" (.Date.Format "January 2, 2006")
   "date_key" (.Date.Format "2006-01-02")
-  "subject" (printf "Bob's Almanack ~ %s ~ Issue %v" (.Date.Format "January 2, 2006") $issue.issue_number)
+  "subject" ($issue.approved_email_subject | default (printf "Bob's Almanack ~ %s ~ Issue %v" (.Date.Format "January 2, 2006") $issue.issue_number))
   "preheader" $preheader
   "essays" $essays
   "margin" ($issue.margin | default (dict))
