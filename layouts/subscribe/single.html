@@ -6,13 +6,25 @@
   {{ if not $artPage }}{{ errorf "Missing subscriber funnel artwork page %q" .Params.art_page }}{{ end }}
   <article class="subscriber-funnel page-shell page-shell--wide" aria-labelledby="funnel-title" data-subscriber-funnel="{{ .Params.segment }}">
     <div class="subscriber-funnel__opening">
-      <header class="subscriber-funnel__header">
-        <p class="subscriber-funnel__eyebrow">Outside In Print ~ the Saturday letter</p>
-        <h1 id="funnel-title">{{ .Title }}</h1>
-        <p class="subscriber-funnel__intro">{{ .Params.intro }}</p>
-        <p class="subscriber-funnel__byline">By Robert V. Ussley</p>
-        <a class="subscriber-funnel__jump" href="#get-almanack">Get Bob&rsquo;s Almanack</a>
-      </header>
+      <div class="subscriber-funnel__lead">
+        <header class="subscriber-funnel__header">
+          <p class="subscriber-funnel__eyebrow">Outside In Print ~ the Saturday letter</p>
+          <h1 id="funnel-title">{{ .Title }}</h1>
+          <a class="subscriber-funnel__jump newsletter-signup__button" href="#get-almanack">Get Bob&rsquo;s Almanack</a>
+          <p class="subscriber-funnel__intro">{{ .Params.intro }}</p>
+          <p class="subscriber-funnel__byline">By Robert V. Ussley</p>
+        </header>
+        {{ partial "newsletter_signup.html" (dict
+          "page" .
+          "class" "newsletter-signup--page subscriber-funnel__signup"
+          "anchorID" "get-almanack"
+          "focusTarget" true
+          "sourceSlot" (printf "funnel_%s" .Params.segment)
+          "title" "Bob's Almanack ~ the Saturday letter"
+          "contents" "New essays, original pictures, and work from the archive. One email each Saturday (free)."
+          "buttonLabel" "Get Bob's Almanack"
+        ) }}
+      </div>
       <figure class="subscriber-funnel__art">
         {{ partial "images/picture.html" (dict
           "page" $artPage
@@ -25,15 +37,6 @@
         <figcaption>Illustration from <a href="{{ $artPage.RelPermalink }}" data-analytics-event="internal_promo_click" data-analytics-source-slot="funnel_{{ .Params.segment }}_art" data-analytics-path="{{ $artPage.RelPermalink }}">{{ $artPage.Title }}</a></figcaption>
       </figure>
     </div>
-    {{ partial "newsletter_signup.html" (dict
-      "page" .
-      "class" "newsletter-signup--page subscriber-funnel__signup"
-      "anchorID" "get-almanack"
-      "sourceSlot" (printf "funnel_%s" .Params.segment)
-      "title" "Bob's Almanack ~ the Saturday letter"
-      "contents" "New essays, original pictures, and work from the archive. One email each Saturday (free)."
-      "buttonLabel" "Get Bob's Almanack"
-    ) }}
     <section class="subscriber-funnel__samples" aria-labelledby="funnel-samples-title">
       <h2 id="funnel-samples-title">Read a little first.</h2>
       <div class="subscriber-funnel__sample-grid">
