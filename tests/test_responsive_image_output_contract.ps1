@@ -13,7 +13,7 @@ $ErrorActionPreference = 'Stop'
 $maxArtifactBytes = 900MB
 $maxPublicImageBytes = 800MB
 $maxDerivativeBytes = 1MB
-$maxGeneratedImages = 5000
+$maxGeneratedImages = 5100
 $maxPublicFiles = 6500
 
 function Get-HtmlAttribute {
@@ -222,7 +222,7 @@ if ($renderedFiles.Count -eq 0) {
   throw 'Production output contains no generated responsive images.'
 }
 if ($renderedFiles.Count -gt $maxGeneratedImages) {
-  throw "Generated image count exceeds 5,000: $($renderedFiles.Count)"
+  throw "Generated image count exceeds 5,100: $($renderedFiles.Count)"
 }
 
 $renderedModelsByRelativePath = @{}

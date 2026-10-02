@@ -1,5 +1,15 @@
-current: all-is-a-gift
+current: jesus-alongside-me
 cartoons:
+  - slug: jesus-alongside-me
+    title: "Jesus Alongside Me"
+    date: "2026-10-03"
+    publishDate: "2026-10-03T05:00:00-04:00"
+    image: "essays/jesus-alongside-me/hero"
+    essay: "/essays/jesus-alongside-me/"
+    alt: "A person sits with an open hand on a wooden chapel bench as warm window light falls across the pews."
+    caption: "Prayer gives the day a place before God."
+    width: 1672
+    height: 941
   - slug: the-simple-lunch
     title: "The Simple Lunch"
     date: "2026-09-13"

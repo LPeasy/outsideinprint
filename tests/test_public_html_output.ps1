@@ -3,11 +3,13 @@
 param(
   [string]$SiteDir = (Join-Path (Split-Path -Parent $PSScriptRoot) "public"),
   [string]$ExpectedHomePath = "/",
-  [switch]$RequireFreshBuild
+  [switch]$RequireFreshBuild,
+  [string]$Clock = ''
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
+$validationNow = if ($Clock) { [datetimeoffset]::Parse($Clock) } else { [datetimeoffset]::UtcNow }
 
 . (Join-Path $PSScriptRoot 'helpers/public_output_common.ps1')
 
@@ -607,7 +609,7 @@ function Test-CartoonEntryPublished {
     return $false
   }
 
-  $easternNow = [System.TimeZoneInfo]::ConvertTime([datetimeoffset]::UtcNow, (Get-OipEasternTimeZone))
+  $easternNow = [System.TimeZoneInfo]::ConvertTime($validationNow, (Get-OipEasternTimeZone))
   return (ConvertTo-OipDateTimeOffset -Value $releaseValue) -le $easternNow
 }
 
@@ -3350,7 +3352,7 @@ else {
 }
 
 foreach ($relativePath in $requiredLlmsOutputs.Keys) {
-  $fullPath = Join-Path $repoRoot $relativePath
+  $fullPath = Join-Path $SiteDir ($relativePath -replace '^public/', '')
   if (-not (Test-Path $fullPath -PathType Leaf)) {
     $indexationIssues.Add("Missing generated discovery output: $relativePath")
     continue
@@ -5909,9 +5911,11 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     if (Test-Path -LiteralPath $freshnessFixture -PathType Container) { Remove-Item -LiteralPath $freshnessFixture -Recurse -Force }
   }
   $selectionConfig = if ($env:OIP_HUGO_CONFIG) { $env:OIP_HUGO_CONFIG } else { 'hugo.toml' }
-  $publishedInventory = & $selectionHugo.Command list published --source $repoRoot --config $selectionConfig
+  $selectionInventoryArgs = @('list', 'published', '--source', $repoRoot, '--config', $selectionConfig)
+  if ($Clock) { $selectionInventoryArgs += @('--clock', $Clock) }
+  $publishedInventory = & $selectionHugo.Command @selectionInventoryArgs
   if ($LASTEXITCODE -ne 0) { throw 'Hugo published inventory failed during homepage selection validation.' }
-  $selectionObservationTime = [DateTimeOffset]::UtcNow
+  $selectionObservationTime = $validationNow
   $publishedReadingRecords = @($publishedInventory | ConvertFrom-Csv | Where-Object {
     $_.kind -ceq 'page' -and $archiveReadingPaths.Contains((Get-SitePathFromHref -Href $_.permalink)) -and
     [DateTimeOffset]::Parse($_.date) -le $selectionObservationTime -and
@@ -6261,7 +6265,7 @@ foreach ($articlePath in @(
 
 # Reuse Hugo's validated source inventory so expected membership and order come
 # from real front matter, publication rules, and the existing item resolver.
-$collectionInventory = & (Join-Path $PSScriptRoot 'test_collection_organization_contract.ps1') -PassThru
+$collectionInventory = & (Join-Path $PSScriptRoot 'test_collection_organization_contract.ps1') -PassThru -Clock $Clock
 $directoryHtml = [string]$targetPageHtml['public/collections/index.html']
 $directoryDefinitions = @($collectionInventory.collections | Where-Object { $collectionInventory.public_collection_slugs -ccontains $_.slug })
 $directoryAllPaths = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)

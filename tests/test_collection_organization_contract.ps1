@@ -2,7 +2,8 @@
 param(
   [string]$Root = (Split-Path -Parent $PSScriptRoot),
   [string]$HugoPath = $env:OIP_HUGO_BIN,
-  [switch]$PassThru
+  [switch]$PassThru,
+  [string]$Clock = ''
 )
 
 Set-StrictMode -Version Latest
@@ -79,7 +80,12 @@ try {
   [System.IO.File]::WriteAllText((Join-Path $fixture 'layouts/_default/list.html'), '{{ .Title }}')
   [System.IO.File]::WriteAllText((Join-Path $fixture 'layouts/_default/list.libraryindex.json'), '{{ dict | jsonify }}')
   [System.IO.File]::WriteAllText((Join-Path $fixture 'layouts/_default/rss.xml'), '<rss version="2.0"/>')
-  $buildOutput = & $HugoPath --source $fixture --buildDrafts --buildFuture --buildExpired --panicOnWarning 2>&1
+  $buildArgs = @('--source', $fixture, '--buildDrafts', '--buildFuture', '--buildExpired', '--panicOnWarning')
+  if ($Clock) {
+    [void][datetimeoffset]::Parse($Clock)
+    $buildArgs += @('--clock', $Clock)
+  }
+  $buildOutput = & $HugoPath @buildArgs 2>&1
   if ($LASTEXITCODE -ne 0) { throw "Collection source inventory failed:`n$($buildOutput -join "`n")" }
   $inventory = Get-Content -LiteralPath (Join-Path $fixture 'public/index.json') -Raw | ConvertFrom-Json -AsHashtable -Depth 100
 
