@@ -14,8 +14,8 @@
   <div class="home-reader-banner__signup">
     <div class="home-reader-banner__pitch">
       <p class="home-reader-banner__eyebrow">From the imprint</p>
-      <h2 id="home-reader-banner-title" tabindex="-1">One thoughtful letter each week.</h2>
-      <p>Every Saturday: new writing, one revealing number, and a thought worth keeping.</p>
+      <h2 id="home-reader-banner-title" tabindex="-1">{{ index $newsletter "title" }}</h2>
+      <p>{{ index $newsletter "contents" }}</p>
       <p>No spam ever. Unsubscribe anytime.</p>
     </div>
 
@@ -40,10 +40,15 @@
             spellcheck="false"
             required
           >
-          <button type="submit">Join the newsletter</button>
+          <button type="submit">{{ index $newsletter "button_label" }}</button>
         </div>
         <input type="hidden" name="embed" value="1">
         {{- with $tag }}<input type="hidden" name="tag" value="{{ . }}">{{ end }}
+        <input type="hidden" name="utm_campaign" value="" disabled>
+        <input type="hidden" name="utm_medium" value="" disabled>
+        <input type="hidden" name="utm_source" value="" disabled>
+        <input type="hidden" name="metadata__oip_segment" value="" disabled>
+        <input type="hidden" name="metadata__oip_post" value="" disabled>
         <p><a href="{{ "privacy/" | relURL }}">Privacy details</a></p>
       </form>
     {{- end }}

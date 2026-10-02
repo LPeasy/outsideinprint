@@ -39,6 +39,9 @@ jobs:
       - name: Test Node Contracts
         run: node --test tests/all.test.mjs
 
+      - name: Test manual Almanack signup report
+        run: python3 -m unittest discover -s tests -p test_almanack_signup_report.py
+
       - name: Test CI Contract
         shell: pwsh
         run: |
@@ -290,6 +293,9 @@ jobs:
 
       - name: Test Piece Sharing
         run: node --test --test-concurrency=1 tests/piece_share_browser.test.mjs
+
+      - name: Test native Almanack signup with offline provider mocks
+        run: node --test --test-concurrency=1 tests/almanack_signup_browser.test.mjs
 
       - name: Remove public PDF artifacts
         shell: bash

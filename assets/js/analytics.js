@@ -442,6 +442,26 @@
     });
   }
 
+  function applyNewsletterAcquisition(form) {
+    // Revalidate the original state. Calling funnelAcquisition here would restart
+    // expiry on a tagged page. Disabled controls are omitted from native POSTs.
+    var value = config.enabled && validAcquisition(acquisition) ? acquisition : null;
+    var fields = {
+      utm_campaign: value ? "almanack-organic" : "",
+      utm_medium: value ? "organic_social" : "",
+      utm_source: value ? value.platform : "",
+      metadata__oip_segment: value ? value.segment : "",
+      metadata__oip_post: value ? value.post : ""
+    };
+    Object.keys(fields).forEach(function (name) {
+      var field = form.elements && form.elements[name];
+      if (field && field.type === "hidden") {
+        field.value = fields[name];
+        field.disabled = !value;
+      }
+    });
+  }
+
   document.addEventListener(
     "submit",
     function (event) {
@@ -458,6 +478,9 @@
         return;
       }
 
+      if (eventName === "newsletter_submit") {
+        applyNewsletterAcquisition(form);
+      }
       track(eventName, mergeProps(datasetProps(form), currentPageProps()));
     },
     true
