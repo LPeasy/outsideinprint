@@ -139,7 +139,13 @@
               {{ end }}
               <div class="almanack-lead__body">
                 <h2><a href="{{ $leadHref }}">{{ .title }}</a></h2>
-                <p>{{ .description }}</p>
+                {{ with .excerpt }}
+                  <p class="almanack-section-label">From the essay</p>
+                  {{ range split . "\n\n" }}<p>{{ . }}</p>{{ end }}
+                  <p><a href="{{ $leadHref }}">Read the full essay &rarr;</a></p>
+                {{ else }}
+                  <p>{{ .description }}</p>
+                {{ end }}
               </div>
             </article>
           {{ end }}
@@ -178,7 +184,7 @@
                     </a>
                   {{ end }}
                   <h3><a href="{{ $itemHref }}">{{ .title }}</a></h3>
-                  <p>{{ .description }}</p>
+                  <p>{{ .capsule | default .description }}</p>
                 </article>
               {{ end }}
             </div>
@@ -261,8 +267,12 @@
         {{ $worthHref = $worthURL | relURL }}
       {{ end }}
       <h2><a href="{{ $worthHref }}">{{ $worth.title }}</a></h2>
-      <p class="almanack-worth__deck">{{ $worth.description }}</p>
-      {{ with $worth.blurb }}<p class="almanack-worth__blurb">{{ . }}</p>{{ end }}
+      {{ with $worth.rationale }}
+        <p class="almanack-worth__blurb">{{ . }}</p>
+      {{ else }}
+        <p class="almanack-worth__deck">{{ $worth.description }}</p>
+        {{ with $worth.blurb }}<p class="almanack-worth__blurb">{{ . }}</p>{{ end }}
+      {{ end }}
     </section>
 
     <figure class="almanack-quote almanack-quote--closing">

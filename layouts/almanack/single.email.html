@@ -1,0 +1,64 @@
+{{- $m := partial "almanack/email-model.html" . -}}
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{{ $m.subject }}</title></head>
+<body style="margin:0;background:#f4eddf;color:#332a22;font-family:Georgia,'Times New Roman',serif;line-height:1.6;">
+<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;" aria-hidden="true">{{ $m.preheader }}</div>
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f4eddf;"><tr><td align="center">
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:680px;"><tr><td style="padding:24px;">
+<header style="padding:12px 0;">
+{{ with $m.issue.email_masthead.image_url }}
+<img src="{{ . }}" alt="{{ $m.issue.email_masthead.image_alt }}" width="600" style="display:block;width:100%;max-width:600px;height:auto;margin:0 auto;">
+{{ else }}
+<div style="border-top:2px solid #74624d;border-bottom:1px solid #74624d;padding:12px 0;">
+<p style="margin:0;font-size:13px;">Outside In Print weekly sheet</p>
+<h1 style="margin:4px 0;font-size:34px;line-height:1.2;">Bob's Almanack</h1>
+<p style="margin:4px 0;">{{ $m.date }} · Issue {{ $m.issue.issue_number }}</p>
+</div>
+{{ end }}
+{{ with $m.issue.review_notice }}<p style="font-size:14px;">{{ . }}</p>{{ end }}
+<p style="margin:8px 0 0;font-size:14px;"><a style="color:#346782;" href="{{ partial "almanack/email-link.html" $m.issue.canonical_url }}">{{ if $m.issue.review_notice }}Original published issue{{ else }}View the web version{{ end }}</a></p>
+</header>
+<blockquote style="margin:24px 0;"><p>{{ $m.issue.opening_quote }}</p><p style="font-size:14px;">~ {{ $m.issue.opening_quote_attribution }}</p></blockquote>
+{{ with $m.issue.campaign }}
+<section style="border-top:1px solid #b0a087;padding:16px 0;">
+{{ with .image }}{{ with $m.issue.campaign.email_image }}<img src="{{ . }}" alt="{{ $m.issue.campaign.image_alt }}" width="240" style="display:block;max-width:100%;height:auto;">{{ end }}{{ end }}
+<h2>{{ .headline }}</h2><p>{{ .message }}</p>
+{{ with .cta_url }}<p><a style="color:#346782;" href="{{ partial "almanack/email-link.html" . }}">{{ $m.issue.campaign.cta_label }}</a></p>{{ end }}
+</section>
+{{ end }}
+{{ with $m.issue.bob_note }}<section><h2 style="font-size:16px;">Note from Bob</h2><p>{{ . }}</p></section>{{ end }}
+<section style="border-top:1px solid #b0a087;padding-top:16px;">
+<h2 style="font-size:16px;">New from Outside In Print</h2>
+{{ range $i, $essay := $m.essays }}
+{{ $href := partial "almanack/email-link.html" .url }}
+<article style="margin:24px 0;">
+{{ with .email_image }}<a href="{{ $href }}"><img src="{{ . }}" alt="{{ $essay.image_alt }}" width="632" style="display:block;max-width:100%;height:auto;"></a>{{ end }}
+<h3 style="font-size:26px;line-height:1.25;"><a style="color:#332a22;" href="{{ $href }}">{{ .title }}</a></h3>
+{{ if and (eq $i 0) .excerpt }}
+<p style="font-size:14px;">From the essay</p>
+{{ range split .excerpt "\n\n" }}<p>{{ . }}</p>{{ end }}
+<p><a style="color:#346782;" href="{{ $href }}">Read the full essay →</a></p>
+{{ else }}<p>{{ .capsule | default .description }}</p>{{ end }}
+</article>
+{{ end }}
+</section>
+<section style="border-top:1px solid #b0a087;padding-top:16px;"><h2 style="font-size:16px;">This Week's Virtue</h2><h3>{{ $m.virtue.name }}</h3><p>{{ $m.virtue.reflection }}</p></section>
+<blockquote style="margin:24px 0;"><p>{{ $m.issue.middle_quote }}</p><p style="font-size:14px;">~ {{ $m.issue.middle_quote_attribution }}{{ with $m.issue.middle_quote_source_url }} · <a style="color:#346782;" href="{{ . }}">Source</a>{{ end }}</p></blockquote>
+<section style="border-top:1px solid #b0a087;padding-top:16px;">
+<h2>In the Margins</h2>
+{{ with $m.margin.one_number }}<h3>One Number</h3><p><strong>{{ .figure }}</strong></p><p>{{ .note }} {{ with .source_url }}<a style="color:#346782;" href="{{ . }}">Source</a>{{ end }}</p>{{ end }}
+{{ with $m.margin.one_document }}<h3>One Document</h3><p><strong>{{ .title }}</strong></p><p>{{ .issued_by }}{{ with .date }}, {{ . }}{{ end }}</p><p>{{ .note }} {{ with .url }}<a style="color:#346782;" href="{{ . }}">Source</a>{{ end }}</p>{{ end }}
+{{ range slice (dict "key" "results" "label" "Results") (dict "key" "records" "label" "Records") (dict "key" "final_bows" "label" "Final Bows") (dict "key" "obituaries" "label" "Obituaries") }}
+{{ $label := .label }}{{ with index $m.margin .key }}<h3>{{ $label }}</h3><ul>{{ range . }}<li>{{ .text }} {{ with .url }}<a style="color:#346782;" href="{{ . }}">Source</a>{{ end }}</li>{{ end }}</ul>{{ end }}
+{{ end }}
+</section>
+<section style="border-top:1px solid #b0a087;padding-top:16px;">
+<h2 style="font-size:16px;">Worth Reprinting</h2><h3><a style="color:#332a22;" href="{{ partial "almanack/email-link.html" $m.worth.url }}">{{ $m.worth.title }}</a></h3>
+{{ with $m.worth.rationale }}<p>{{ . }}</p>{{ else }}<p>{{ $m.worth.description }}</p>{{ with $m.worth.blurb }}<p>{{ . }}</p>{{ end }}{{ end }}
+</section>
+<blockquote style="margin:24px 0;"><p>{{ $m.issue.closing_quote }}</p><p style="font-size:14px;">~ {{ $m.issue.closing_quote_attribution }}</p></blockquote>
+<footer style="border-top:1px solid #74624d;padding-top:12px;font-size:14px;"><p><a style="color:#346782;" href="https://outsideinprint.org/">Outside In Print</a></p><p>Color over the lines. Read beyond the feed. Think for yourself.</p></footer>
+</td></tr></table>
+</td></tr></table>
+</body></html>

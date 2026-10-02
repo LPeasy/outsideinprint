@@ -1,0 +1,2 @@
+{{- $m := partial "almanack/email-model.html" . -}}
+{{- dict "subject" $m.subject "preheader" $m.preheader "issue_date" $m.date_key "issue_number" $m.issue.issue_number "content" .Params | jsonify -}}

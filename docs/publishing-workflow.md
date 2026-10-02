@@ -60,6 +60,10 @@ The essay scaffold is the preferred path because it creates the expected metadat
 
 ## Newsletter subscriber handoff
 
+For Almanack issue assembly and web/email parity, use the concise
+[Almanack editorial checklist](almanack-editorial-checklist.md). It covers the
+shared issue source, local email artifacts, and provider-preview checks.
+
 Keep every public signup prompt plain: call the product the Outside In Print newsletter. Introduce the editorial name only after signup, in Buttondown's welcome email under **Settings > Subscribing > Welcome**.
 
 - Subject: `Welcome to Bob’s Almanack`

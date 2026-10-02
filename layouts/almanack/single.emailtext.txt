@@ -1,0 +1,63 @@
+{{ $m := partial "almanack/email-model.html" . -}}
+Bob's Almanack
+{{ $m.date }} · Issue {{ $m.issue.issue_number }}
+Outside In Print weekly sheet
+{{ with $m.issue.review_notice }}{{ . }}{{ end }}
+
+{{ if $m.issue.review_notice }}Original published issue{{ else }}View the web version{{ end }}: {{ partial "almanack/email-link.html" $m.issue.canonical_url }}
+
+{{ $m.issue.opening_quote }}
+~ {{ $m.issue.opening_quote_attribution }}
+{{ with $m.issue.campaign }}
+{{ .headline }}
+{{ .message }}
+{{ with .cta_url }}{{ $m.issue.campaign.cta_label }}: {{ partial "almanack/email-link.html" . }}{{ end }}
+{{ end }}
+Note from Bob
+{{ $m.issue.bob_note }}
+
+New from Outside In Print
+{{ range $i, $essay := $m.essays }}
+{{ .title }}
+{{ if and (eq $i 0) .excerpt }}From the essay
+{{ .excerpt }}
+
+Read the full essay: {{ partial "almanack/email-link.html" .url }}
+{{ else }}{{ .capsule | default .description }}
+{{ partial "almanack/email-link.html" .url }}
+{{ end }}{{ end }}
+This Week's Virtue
+{{ $m.virtue.name }}
+{{ $m.virtue.reflection }}
+
+{{ $m.issue.middle_quote }}
+~ {{ $m.issue.middle_quote_attribution }}
+{{ with $m.issue.middle_quote_source_url }}Source: {{ . }}{{ end }}
+
+In the Margins
+{{ with $m.margin.one_number }}
+One Number: {{ .figure }}
+{{ .note }}
+{{ with .source_url }}Source: {{ . }}{{ end }}
+{{ end }}{{ with $m.margin.one_document }}
+One Document: {{ .title }}
+{{ .issued_by }}{{ with .date }}, {{ . }}{{ end }}
+{{ .note }}
+{{ with .url }}Source: {{ . }}{{ end }}
+{{ end }}{{ range slice (dict "key" "results" "label" "Results") (dict "key" "records" "label" "Records") (dict "key" "final_bows" "label" "Final Bows") (dict "key" "obituaries" "label" "Obituaries") }}
+{{ $label := .label }}{{ with index $m.margin .key }}{{ $label }}
+{{ range . }}- {{ .text }}
+{{ with .url }}  Source: {{ . }}{{ end }}
+{{ end }}{{ end }}{{ end }}
+Worth Reprinting
+{{ $m.worth.title }}
+{{ with $m.worth.rationale }}{{ . }}{{ else }}{{ $m.worth.description }}
+{{ with $m.worth.blurb }}{{ . }}{{ end }}{{ end }}
+{{ partial "almanack/email-link.html" $m.worth.url }}
+
+{{ $m.issue.closing_quote }}
+~ {{ $m.issue.closing_quote_attribution }}
+
+Outside In Print
+https://outsideinprint.org/
+Color over the lines. Read beyond the feed. Think for yourself.
