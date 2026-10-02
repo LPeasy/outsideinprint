@@ -66,7 +66,7 @@ test("rendered stats open the homepage and the newsletter cell reaches its focus
   assert.ok(heading);
   assert.equal(attribute(heading, "tabindex"), "-1");
   assert.ok(html.indexOf(newsletterLinks[0][1]) < html.indexOf(heading));
-  assert.match(html, /Every Saturday: new writing, one revealing number, and a thought worth keeping\./);
+  assert.match(html, /The free Saturday letter from Outside In Print\./);
 });
 
 test("Dolphin correction retains the original publication date and renders a consistent new edition record", () => {
