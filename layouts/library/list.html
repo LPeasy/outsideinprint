@@ -252,7 +252,7 @@
         wrapper.setAttribute('data-library-surface', 'results');
         wrapper.setAttribute('data-entry-id', item.id || item.url || '');
         var article = document.createElement('article');
-        article.className = item.image ? 'item item--collection-artwork collection-section__record' : 'item';
+        article.className = item.image ? 'item reading-card item--collection-artwork collection-section__record' : 'item reading-card';
         var copy = item.image ? document.createElement('div') : article;
         if (item.image) copy.className = 'item__copy';
         var titleRow = document.createElement('div');
@@ -260,6 +260,7 @@
         var title = document.createElement('div');
         title.className = 't';
         var link = document.createElement('a');
+        link.className = 'reading-card__link';
         link.href = item.url;
         link.textContent = item.title;
         artworkTools.setArticleAnalytics(link, item);

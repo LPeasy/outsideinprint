@@ -300,7 +300,7 @@ test("collections index renders a ruled broadsheet directory", () => {
 test("collection-card partial owns a neutral broadsheet row branch", () => {
   for (const snippet of [
     '{{- if eq $variant "broadsheet" -}}',
-    '<article class="collection-record{{ with $class }} {{ . }}{{ end }}"',
+    '<article class="collection-record reading-card{{ with $class }} {{ . }}{{ end }}"',
     'class="collection-record__meta"',
     'class="collection-record__title"',
     'class="collection-record__description"',
@@ -313,7 +313,7 @@ test("collection-card partial owns a neutral broadsheet row branch", () => {
     assert.match(collectionCard, new RegExp(escapeRegex(snippet)));
   }
 
-  assert.match(collectionCard, /<article class="item\{\{ with \$class \}\} \{\{ \. \}\}\{\{ end \}\}">/);
+  assert.match(collectionCard, /<article class="item reading-card\{\{ with \$class \}\} \{\{ \. \}\}\{\{ end \}\}">/);
   assert.match(collectionCard, /<a class="card collection-card\{\{ with \$class \}\} \{\{ \. \}\}\{\{ end \}\}" href="\{\{ \$url \}\}"/);
 });
 

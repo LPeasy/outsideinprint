@@ -53,14 +53,14 @@
 {{- $metaLine := delimit $metaBits " &middot; " -}}
 
 {{- if eq $variant "broadsheet" -}}
-  <article class="collection-record{{ with $class }} {{ . }}{{ end }}"{{ with .identity }} data-collection-identity="{{ $entry.collection.slug }}" data-collection-type="{{ .type }}" style="{{ printf "--collection-ink-dark:%s;--collection-ink-light:%s" .ink .paper_ink | safeCSS }}"{{ end }}>
+  <article class="collection-record reading-card{{ with $class }} {{ . }}{{ end }}"{{ with .identity }} data-collection-identity="{{ $entry.collection.slug }}" data-collection-type="{{ .type }}" style="{{ printf "--collection-ink-dark:%s;--collection-ink-light:%s" .ink .paper_ink | safeCSS }}"{{ end }}>
     {{- with .identity }}{{ partial "collections/directory-mark.html" .mark }}{{ end -}}
     <div class="collection-record__meta">
       {{- with $eyebrow }}<span>{{ . }}</span>{{ end -}}
       <span>{{ $entry.state.count }} pieces</span>
       {{- with $lane }}<span>{{ . }}</span>{{ end -}}
     </div>
-    <h3 class="collection-record__title"><a href="{{ $url }}"
+    <h3 class="collection-record__title"><a class="reading-card__link" href="{{ $url }}"
       data-analytics-event="collection_click"
       data-analytics-source-slot="{{ $sourceSlot }}"
       data-analytics-collection="{{ $entry.collection.slug }}"
@@ -86,9 +86,9 @@
     {{ end }}
   </article>
 {{- else if eq $variant "item" -}}
-  <article class="item{{ with $class }} {{ . }}{{ end }}">
+  <article class="item reading-card{{ with $class }} {{ . }}{{ end }}">
     {{- with $eyebrow }}<div class="k collection-card__eyebrow">{{ . }}</div>{{ end -}}
-    <div class="t"><a href="{{ $url }}"
+    <div class="t"><a class="reading-card__link" href="{{ $url }}"
       data-analytics-event="collection_click"
       data-analytics-source-slot="{{ $sourceSlot }}"
       data-analytics-collection="{{ $entry.collection.slug }}"

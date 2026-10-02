@@ -1622,6 +1622,39 @@ html[data-theme="light"] .paper-route-toggle{
   letter-spacing:.14em;
   text-transform:uppercase;
 }
+/* Expand the native title link over each opted-in reading preview. */
+.reading-card{
+  position:relative;
+  isolation:isolate;
+}
+/* Collection list rows own the visible padding around their preview article. */
+.collection-section__item{
+  isolation:isolate;
+}
+.collection-section__item > .reading-card{
+  position:static;
+  isolation:auto;
+}
+.reading-card__link::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  border-radius:inherit;
+}
+/* Zero specificity preserves the magnifiers' existing absolute positioning. */
+:where(.reading-card a:not(.reading-card__link), .reading-card button){
+  position:relative;
+  z-index:2;
+}
+.reading-card a.reading-card__link:focus-visible{
+  outline:none;
+}
+.reading-card__link:focus-visible::after{
+  outline:3px solid var(--focus-ring);
+  outline-offset:3px;
+}
+
 .oip-picture{
   display:contents;
 }
