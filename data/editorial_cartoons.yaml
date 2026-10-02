@@ -1,4 +1,4 @@
-current: the-impossible-opening
+current: all-is-a-gift
 cartoons:
   - slug: the-simple-lunch
     title: "The Simple Lunch"
@@ -1075,5 +1075,13 @@ cartoons:
     image: "editorial/the-impossible-opening"
     essay: "/essays/choosing-up/"
     alt: "A small green shoot rises through a jagged crack in a massive stone slab, lit by a rose-gold dawn above violet mountains."
+    width: 1672
+    height: 941
+  - slug: all-is-a-gift
+    title: "All Is a Gift"
+    date: "2026-10-02"
+    image: "editorial/all-is-a-gift"
+    essay: "/essays/all-is-a-gift/"
+    alt: "In warm kitchen window light, a woman offers an earthenware bowl of pears to another person's open hands across a wooden table."
     width: 1672
     height: 941
