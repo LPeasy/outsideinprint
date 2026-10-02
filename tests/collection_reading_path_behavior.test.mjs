@@ -228,7 +228,7 @@ function directoryCounts(html) {
     assert.ok(meta, `${kind} directory totals must render`);
     return [kind, { collections: Number(meta[1]), pieces: Number(meta[2]) }];
   }));
-  const cards = Object.fromEntries([...html.matchAll(/<article class="collection-record">([\s\S]*?)<\/article>/g)].map(([, card]) => {
+  const cards = Object.fromEntries([...html.matchAll(/<article class="collection-record(?:\s+[^"]+)?">([\s\S]*?)<\/article>/g)].map(([, card]) => {
     const slug = card.match(/data-analytics-collection="([^"]+)"/)?.[1];
     const count = card.match(/<span>(\d+) pieces<\/span>/)?.[1];
     assert.ok(slug && count, "the actual collection card must retain its member count");
