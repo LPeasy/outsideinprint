@@ -1224,6 +1224,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/the-impossible-opening": {
+      "id": "editorial/the-impossible-opening",
+      "source": "images/originals/editorial/the-impossible-opening.png",
+      "sha256": "21001042254837b58f1868f762962d755500a1bb20eff6c1223b3de06977d24c",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/the-impression": {
       "id": "editorial/the-impression",
       "source": "images/originals/editorial/the-impression.png",
@@ -2013,6 +2027,20 @@
       "processing_hint": "drawing",
       "review_state": "approved",
       "usage_state": "retained_unreferenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
+    "essays/choosing-up/section-1": {
+      "id": "essays/choosing-up/section-1",
+      "source": "images/originals/essays/choosing-up/section-1.png",
+      "sha256": "d46b1eaf96ed8c8c92f547bfa3baff80e97d7603944b85e2f5ba8020fbda1e7e",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
@@ -7847,6 +7875,7 @@
     "/images/editorial/the-cup-makes-its-own-river.png": "editorial/the-cup-makes-its-own-river",
     "/images/editorial/the-empty-hooks.png": "editorial/the-empty-hooks",
     "/images/editorial/the-house-always-wins.png": "editorial/the-house-always-wins",
+    "/images/editorial/the-impossible-opening.png": "editorial/the-impossible-opening",
     "/images/editorial/the-impression.png": "editorial/the-impression",
     "/images/editorial/the-meter.png": "editorial/the-meter",
     "/images/editorial/the-minute-drawer.png": "editorial/the-minute-drawer",
@@ -7904,6 +7933,7 @@
     "/images/essays/canvas-fails-finals-week/section-1.png": "essays/canvas-fails-finals-week/section-1",
     "/images/essays/canvas-fails-finals-week/section-2.png": "essays/canvas-fails-finals-week/section-2",
     "/images/essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/hero.png": "essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/hero",
+    "/images/essays/choosing-up/section-1.png": "essays/choosing-up/section-1",
     "/images/essays/colored-glasses-the-lens-of-race/hero.png": "essays/colored-glasses-the-lens-of-race/hero",
     "/images/essays/consent-from-permission-to-sanctity/hero.png": "essays/consent-from-permission-to-sanctity/hero",
     "/images/essays/consent-from-permission-to-sanctity/section-1.png": "essays/consent-from-permission-to-sanctity/section-1",
