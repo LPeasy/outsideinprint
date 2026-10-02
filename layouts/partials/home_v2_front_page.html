@@ -34,10 +34,10 @@
             {{- $sectionLabel = "Case study" -}}
           {{- end -}}
           {{- if eq $index 0 }}
-            <article class="home-v2-featured__lead">
+            <article class="home-v2-featured__lead reading-card">
               <header class="home-v2-featured__lead-heading">
                 <p class="home-v2-featured__meta"><span>{{ $sectionLabel }}</span><span>{{ $page.ReadingTime }} min read</span>{{ with (index $readerMetrics $page.RelPermalink) }}{{ if ge .value $readerThreshold }}<span>{{ .display_label }}</span>{{ end }}{{ end }}</p>
-                <h3><a href="{{ $page.RelPermalink }}"
+                <h3><a class="reading-card__link" href="{{ $page.RelPermalink }}"
                   data-analytics-event="internal_promo_click"
                   data-analytics-source-slot="homepage_v2_featured_lead"
                   data-analytics-slug="{{ $slug }}"
@@ -88,10 +88,10 @@
             {{- end -}}
             {{- $supportImageSizes := "120px" -}}
             {{- if eq $index 1 }}{{ $supportImageSizes = "(min-width: 72rem) 24rem, (min-width: 48rem) 38vw, 100vw" }}{{ end -}}
-            <article class="home-v2-featured__item{{ if $imageModel }} home-v2-featured__item--illustrated{{ end }}{{ if eq $index 1 }} home-v2-featured__item--latest{{ end }}">
+            <article class="home-v2-featured__item reading-card{{ if $imageModel }} home-v2-featured__item--illustrated{{ end }}{{ if eq $index 1 }} home-v2-featured__item--latest{{ end }}">
               <header class="home-v2-featured__item-heading">
                 <p class="home-v2-featured__meta">{{ if eq $index 1 }}<span class="home-v2-featured__new-tag">{{ partial "home_feature_freshness.html" (dict "publishedAt" $page.PublishDate "buildTime" $buildTime) }}</span>{{ end }}<span>{{ $sectionLabel }}</span><span>{{ $page.ReadingTime }} min read</span>{{ with (index $readerMetrics $page.RelPermalink) }}{{ if ge .value $readerThreshold }}<span>{{ .display_label }}</span>{{ end }}{{ end }}{{ if eq $index 1 }}<span><time datetime="{{ $page.PublishDate.Format "2006-01-02" }}">{{ $page.PublishDate.Format "Jan 2, 2006" }}</time></span>{{ end }}</p>
-                <h3><a href="{{ $page.RelPermalink }}"
+                <h3><a class="reading-card__link" href="{{ $page.RelPermalink }}"
                   data-analytics-event="internal_promo_click"
                   data-analytics-source-slot="homepage_v2_featured_supporting"
                   data-analytics-slug="{{ $slug }}"

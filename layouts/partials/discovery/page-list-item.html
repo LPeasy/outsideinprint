@@ -8,7 +8,7 @@
 {{- $collectionPlacement := .collectionPlacement | default "below-meta" -}}
 {{- $class := .class | default "" -}}
 {{- $articleVariant := partial "article/variant-key.html" $page -}}
-{{- $itemClasses := slice "item" -}}
+{{- $itemClasses := slice "item" "reading-card" -}}
 {{- $slug := $page.Params.slug | default $page.File.BaseFileName -}}
 {{- $sectionLabel := $page.Params.section_label | default (humanize $page.Section) -}}
 {{- $summary := "" -}}
@@ -66,7 +66,7 @@
     </div>
   {{- end }}
   <div class="item__title-row">
-    <div class="t"><a href="{{ $page.RelPermalink }}"
+    <div class="t"><a class="reading-card__link" href="{{ $page.RelPermalink }}"
       {{- if $analyticsSourceSlot }}
         data-analytics-event="{{ $analyticsEvent }}"
         data-analytics-source-slot="{{ $analyticsSourceSlot }}"

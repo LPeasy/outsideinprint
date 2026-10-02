@@ -5938,7 +5938,7 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   if (($homeSupportingPaths -join '|') -cne ($expectedSupportingPaths -join '|')) {
     $uxIssues.Add("public/index.html => expected the four approved supporting pieces in order '$($expectedSupportingPaths -join ', ')', found '$($homeSupportingPaths -join ', ')'")
   }
-  $leadCardHtml = [regex]::Match($homeIndexHtml, '(?s)<article\b[^>]*class=(?:"home-v2-featured__lead"|home-v2-featured__lead)[^>]*>(?<body>.*?)</article>').Groups['body'].Value
+  $leadCardHtml = [regex]::Match($homeIndexHtml, '(?s)<article\b[^>]*class=(?:"home-v2-featured__lead reading-card"|home-v2-featured__lead)[^>]*>(?<body>.*?)</article>').Groups['body'].Value
   $leadHeading = [regex]::Match($leadCardHtml, '(?s)<header\b(?=[^>]*home-v2-featured__lead-heading)[^>]*>(?<body>.*?)</header>').Groups['body'].Value
   $leadCopy = [regex]::Match($leadCardHtml, '(?s)<div\b(?=[^>]*home-v2-featured__lead-copy)[^>]*>(?<body>.*?)</div>').Groups['body'].Value
   if (-not $leadHeading -or $leadHeading -notmatch '(?s)home-v2-featured__meta.*?<h3>' -or

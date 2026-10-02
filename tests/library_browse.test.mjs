@@ -152,8 +152,13 @@ test("Library gives grouped and filtered illustrated pieces matching read and zo
   await settle();
   const rows = page.nodes.get("library-results-list").children;
   const article = rows[0].children[0];
-  assert.equal(article.className, "item item--collection-artwork collection-section__record");
+  assert.equal(article.className, "item reading-card item--collection-artwork collection-section__record");
   assert.equal(article.children[0].className, "item__copy");
+  const primaryLink = article.children[0].children[0].children[0].children[0];
+  assert.equal(primaryLink.className, "reading-card__link");
+  assert.equal(primaryLink.href, illustrated.url);
+  assert.equal(primaryLink.textContent, illustrated.title);
+  assert.equal(primaryLink.getAttribute("data-analytics-source-slot"), "library_search");
   const media = article.children[1].children[0];
   const imageLink = media.children[0];
   const zoom = media.children[1];
@@ -165,7 +170,7 @@ test("Library gives grouped and filtered illustrated pieces matching read and zo
   assert.equal(zoom.getAttribute("data-image"), illustrated.image.lightboxSrc);
   assert.equal(zoom.getAttribute("data-analytics-event"), undefined);
   assert.equal(article.children[1].children[1].className, "image-credit");
-  assert.equal(rows[1].children[0].className, "item", "image-exempt pieces stay text-only");
+  assert.equal(rows[1].children[0].className, "item reading-card", "image-exempt pieces stay text-only");
 });
 
 test("Browse all presents a single 24-item cross-type newest-first list, with bounded page controls", async () => {
