@@ -1,14 +1,16 @@
 .subscriber-funnel { padding-top: 2.5rem; padding-bottom: 3rem; }
-.subscriber-funnel__opening { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; margin-bottom: 2.5rem; }
+.subscriber-funnel__opening { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 3rem; margin-bottom: 2.5rem; }
 .subscriber-funnel__eyebrow { font: 600 .75rem/1.5 var(--font-ui); letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
 .subscriber-funnel__header h1 { margin: .8rem 0 1.25rem; font: 600 clamp(2rem, 3.5vw, 3.15rem)/1.08 var(--font-display); }
 .subscriber-funnel__intro { font-size: 1.15rem; line-height: 1.65; }
 .subscriber-funnel__byline { font: .85rem/1.5 var(--font-ui); color: var(--text-muted); }
-.subscriber-funnel__jump { display: inline-block; margin-top: .5rem; font: 600 .9rem/1.5 var(--font-ui); }
+.subscriber-funnel__jump { display: inline-flex; align-items: center; min-height: 44px; font: 600 .9rem/1.5 var(--font-ui); }
+.subscriber-funnel__jump:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
 .subscriber-funnel__art { margin: 0; }
 .subscriber-funnel__art img { display: block; width: 100%; height: auto; }
 .subscriber-funnel__art figcaption { margin-top: .65rem; font: .8rem/1.5 var(--font-ui); color: var(--text-muted); }
-.subscriber-funnel__signup { scroll-margin-top: 1rem; }
+.subscriber-funnel__signup { margin-top: 1.25rem; scroll-margin-top: 1rem; }
+.subscriber-funnel__signup .newsletter-signup__inner { padding: 0; }
 .subscriber-funnel__samples { margin-top: 2.5rem; }
 .subscriber-funnel__samples h2 { font: 600 1.6rem/1.2 var(--font-display); }
 .subscriber-funnel__sample-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }

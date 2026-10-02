@@ -14,6 +14,7 @@
 {{ $privacyLabel := $newsletter.privacy_label }}
 {{ $class := .class }}
 {{ $anchorID := .anchorID | default "" }}
+{{ $focusTarget := .focusTarget | default false }}
 {{ $sampleSourceSlot := printf "%s_sample_issue" $sourceSlot }}
 {{ $samplePath := $sampleURL | relURL }}
 {{ $isSamplePage := eq $page.RelPermalink $samplePath }}
@@ -27,7 +28,7 @@
 
 {{ with $newsletter.buttondown_username }}
   {{ if eq $provider "buttondown" }}
-    <section{{ with $anchorID }} id="{{ . }}"{{ end }} class="newsletter-signup{{ with $class }} {{ . }}{{ end }}" aria-labelledby="{{ $titleID }}">
+    <section{{ with $anchorID }} id="{{ . }}"{{ end }}{{ if $focusTarget }} tabindex="-1"{{ end }} class="newsletter-signup{{ with $class }} {{ . }}{{ end }}" aria-labelledby="{{ $titleID }}">
       <div class="newsletter-signup__inner">
         <p class="newsletter-signup__eyebrow">{{ $cadence }}</p>
         <h2 id="{{ $titleID }}" class="newsletter-signup__title">{{ $title }}</h2>

@@ -37,6 +37,9 @@
         {{ partial "article/share.html" . }}
       </div>
       {{ with .Params.subtitle }}<p class="almanack-subtitle">{{ . }}</p>{{ end }}
+      {{ if and (eq (lower .Site.Params.newsletter.provider) "buttondown") .Site.Params.newsletter.buttondown_username }}
+        <p class="almanack-masthead__meta newsletter-prompt"><a href="#bobs-almanack-signup">Subscribe to Bob&rsquo;s Almanack</a></p>
+      {{ end }}
     </header>
 
     <figure class="almanack-quote almanack-quote--opening">
@@ -289,6 +292,8 @@
   {{ partial "newsletter_signup.html" (dict
     "page" .
     "class" "newsletter-signup--article-exit page-shell page-shell--wide"
+    "anchorID" "bobs-almanack-signup"
+    "focusTarget" true
     "sourceSlot" "almanack_issue_exit_newsletter"
   ) }}
 {{ end }}

@@ -1,0 +1,11 @@
+{{ define "main" }}
+  <article class="page-shell page-shell--reading" aria-labelledby="confirmation-title">
+    <header class="page-header">
+      <p class="newsletter-signup__eyebrow">Outside In Print newsletter</p>
+      <h1 id="confirmation-title">{{ .Title }}</h1>
+    </header>
+    <div class="piece-body">
+      {{ .Content }}
+    </div>
+  </article>
+{{ end }}
