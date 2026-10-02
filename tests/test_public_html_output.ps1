@@ -5166,9 +5166,9 @@ $articleCollectionBoundaryPages = @(
   @{ Path = 'public/essays/the-war-premium-at-the-auction/index.html'; Slug = 'risk-uncertainty'; Label = 'The War Premium at the Auction' },
   @{ Path = 'public/essays/the-map-that-priced-the-fire/index.html'; Slug = 'risk-uncertainty'; Label = 'The Map That Priced the Fire' },
   @{ Path = 'public/essays/the-bolt-beside-the-gas-tank/index.html'; Slug = 'risk-uncertainty'; Label = 'The Bolt Beside the Gas Tank' },
-  @{ Path = 'public/essays/in-the-image-of-god/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'the moral collection essay' },
+  @{ Path = 'public/essays/in-the-image-of-god/index.html'; Slug = 'the-restless-heart'; Label = 'the Restless Heart starting essay' },
   @{ Path = 'public/essays/the-hate-ledger/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'The Hate Ledger' },
-  @{ Path = 'public/essays/outside-the-garden/index.html'; Slug = 'moral-religious-philosophical-essays'; Label = 'Outside the Garden' },
+  @{ Path = 'public/essays/outside-the-garden/index.html'; Slug = 'the-restless-heart'; Label = 'Outside the Garden' },
   @{ Path = 'public/essays/what-happened-at-camp-mystic/index.html'; Slug = 'floods-water-built-environment'; Label = 'the Camp Mystic essay' },
   @{ Path = 'public/essays/save-some-air-for-the-fishies/index.html'; Slug = 'floods-water-built-environment'; Label = 'Save Some Air for the Fishies' },
   @{ Path = 'public/essays/the-easement-under-the-lake/index.html'; Slug = 'floods-water-built-environment'; Label = 'The Easement Under the Lake' },
@@ -6332,8 +6332,8 @@ if ($directoryCardSlugs.Count -ne $directoryDefinitions.Count) {
   $uxIssues.Add('Collections directory => visible cards must match the complete eligible public collection inventory')
 }
 $standardCollectionDefinitions = @($collectionInventory.collections | Where-Object { $_.public -and $_.slug -cne 'bobs-almanack' })
-if ($standardCollectionDefinitions.Count -ne 16) {
-  $uxIssues.Add("Collection organization => expected 16 public standard collection definitions, found $($standardCollectionDefinitions.Count)")
+if ($standardCollectionDefinitions.Count -ne 17) {
+  $uxIssues.Add("Collection organization => expected 17 public standard collection definitions, found $($standardCollectionDefinitions.Count)")
 }
 foreach ($definition in $standardCollectionDefinitions) {
   $slug = [string]$definition.slug

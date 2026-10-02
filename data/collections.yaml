@@ -441,6 +441,34 @@ collections:
         - alignment
       sections: []
 
+  - slug: the-restless-heart
+    title: The Restless Heart
+    kind: series
+    public: true
+    force_public: false
+    min_items: 2
+    explicit_only: true
+    featured: false
+    weight: 55
+    start_here: in-the-image-of-god
+    related_collections:
+      - moral-religious-philosophical-essays
+      - simple-logic
+      - syd-and-oliver-dialogues
+    description: Catholic teaching and Christian moral reflections on prayer, love, conscience, sacrifice, and the freedom to serve God.
+    metadata:
+      - label: Format
+        value: Essays and reflections
+      - label: Scope
+        value: Catholic teaching and Christian moral formation
+      - label: Lane
+        value: Essay series
+    fallback:
+      series: []
+      topics: []
+      tags: []
+      sections: []
+
   - slug: moral-religious-philosophical-essays
     title: Moral, Religious, and Philosophical Essays
     kind: topic
@@ -450,11 +478,11 @@ collections:
     explicit_only: true
     featured: false
     weight: 60
-    start_here: in-the-image-of-god
+    start_here: consent-from-permission-to-sanctity
     related_collections:
+      - the-restless-heart
       - syd-and-oliver-dialogues
       - simple-logic
-      - modern-bios
     description: Essays on moral formation, religion, conscience, and the philosophical habits needed to see clearly.
     room_theme: moral-chapel-library
     metadata:

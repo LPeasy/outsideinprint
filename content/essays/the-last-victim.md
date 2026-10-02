@@ -21,7 +21,7 @@ revision_history:
     note: "Updated May 29, 2026, after OIP back-archive review. No substantive body changes were required; source, metadata, and rendering were checked."
 featured: false
 collections:
-  - "moral-religious-philosophical-essays"
+  - "the-restless-heart"
 tags:
   - "Christianity"
   - "victimhood"

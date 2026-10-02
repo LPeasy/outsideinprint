@@ -15,7 +15,7 @@ edition: "First web edition"
 featured: false
 
 collections:
-  - "moral-religious-philosophical-essays"
+  - "the-restless-heart"
 tags:
   - "Catholicism"
   - "indifference"

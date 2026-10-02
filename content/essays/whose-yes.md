@@ -13,8 +13,8 @@ featured_image: "editorial/whose-yes"
 featured_image_alt: "Editorial cartoon showing a person holding a rose-gold YES card between a FOR THEM door with someone waiting at a table and a FOR ME door with a mirror, applause marks, and a spotlight."
 featured_image_caption: "A yes can serve love, or serve the self."
 collections:
+  - the-restless-heart
   - simple-logic
-  - moral-religious-philosophical-essays
 tags:
   - "Simple Logic"
   - "Christianity"

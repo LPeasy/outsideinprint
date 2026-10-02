@@ -20,7 +20,7 @@ featured_image: "essays/outside-the-garden/hero"
 featured_image_alt: "Editorial illustration of a closed garden gate, a narrow path, and a modern civic city beyond the wall."
 featured_image_caption: "The path outside the garden asks for discipline, memory, and sacrifice."
 collections:
-  - "moral-religious-philosophical-essays"
+  - "the-restless-heart"
 tags:
   - "religion"
   - "philosophy"

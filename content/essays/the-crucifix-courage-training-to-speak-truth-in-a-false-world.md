@@ -23,7 +23,7 @@ pdf: "/pdfs/the-crucifix-courage-training-to-speak-truth-in-a-false-world.pdf"
 featured: false
 
 collections:
-  - moral-religious-philosophical-essays
+  - the-restless-heart
 medium_source_url: "https://medium.com/@lawtonperret/the-crucifix-courage-training-to-speak-truth-in-a-false-world-b38c9294f3c9"
 ---
 

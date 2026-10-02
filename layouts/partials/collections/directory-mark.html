@@ -31,6 +31,9 @@
   {{- else if eq . "circuit" -}}
     <rect x="9" y="9" width="14" height="14"/><rect x="13" y="13" width="6" height="6"/>
     <path d="M12 3v6M20 3v6M12 23v6M20 23v6M3 12h6M3 20h6M23 12h6M23 20h6"/>
+  {{- else if eq . "heart" -}}
+    <path d="M16 27C12 23 4 18 4 11a7 7 0 0 1 12-4 7 7 0 0 1 12 4c0 7-8 12-12 16Z"/>
+    <path d="M8 15h5l2-4 3 8 2-4h4"/>
   {{- else if eq . "lantern" -}}
     <path d="M10 10h12l2 17H8ZM10 10l6-6 6 6M16 4V2M7 30h18M16 23c-5-2-3-6 0-9 3 3 5 7 0 9ZM3 11l-2-1M29 11l2-1M4 20H1M28 20h3"/>
   {{- else if eq . "columns" -}}

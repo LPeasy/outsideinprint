@@ -11,6 +11,7 @@
   "geopolitics-trade-global-power": { "mark": "globe", "ink": "#87BCAF", "paper_ink": "#28675B", "type": "serif", "page_enabled": true },
   "floods-water-built-environment": { "mark": "waves", "ink": "#89B7D3", "paper_ink": "#2E6383", "type": "serif", "page_enabled": true },
   "technology-ai-machine-future": { "mark": "circuit", "ink": "#85C0CC", "paper_ink": "#296671", "type": "sans", "page_enabled": true },
+  "the-restless-heart": { "mark": "heart", "ink": "#CCA99B", "paper_ink": "#805144", "type": "serif", "page_enabled": true },
   "moral-religious-philosophical-essays": { "mark": "lantern", "ink": "#B4AAD2", "paper_ink": "#625286", "type": "italic", "page_enabled": true },
   "civic-institutions-and-public-power": { "mark": "columns", "ink": "#CB9B92", "paper_ink": "#834B41", "type": "smallcaps", "page_enabled": true },
   "household-economy-work-and-cost": { "mark": "house", "ink": "#BDB48B", "paper_ink": "#695F2C", "type": "serif", "page_enabled": true },

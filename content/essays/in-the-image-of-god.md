@@ -27,7 +27,7 @@ pdf: "/pdfs/in-the-image-of-god.pdf"
 featured: false
 
 collections:
-  - moral-religious-philosophical-essays
+  - the-restless-heart
 medium_source_url: "https://medium.com/@lawtonperret/in-the-image-of-god-bd1806aee9d4"
 ---
 

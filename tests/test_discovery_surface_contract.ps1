@@ -1273,8 +1273,8 @@ foreach ($slug in $collectionIdentities.Keys) {
     }
   }
 }
-if ($publicCollectionSlugs.Count -ne 17 -or -not $pageEnabledCollectionSlugs.SetEquals($publicCollectionSlugs) -or $pageEnabledCollectionSlugs.Contains('the-ledger')) {
-  throw 'Expected all 17 public collections, excluding The Ledger, to opt into their page identities.'
+if ($publicCollectionSlugs.Count -ne 18 -or -not $pageEnabledCollectionSlugs.SetEquals($publicCollectionSlugs) -or $pageEnabledCollectionSlugs.Contains('the-ledger')) {
+  throw 'Expected all 18 public collections, excluding The Ledger, to opt into their page identities.'
 }
 $collectionAlmanackTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/collections/bobs-almanack.html') -Raw
 foreach ($collectionPageTemplate in @($collectionSingleTemplate, $collectionAlmanackTemplate)) {
