@@ -77,7 +77,7 @@ test("masthead proof sits between its controls and lead summaries keep supportin
   assert.doesNotMatch(homeV2, /home-v2__subjects|Independent writing on history, economics, culture, and public life\./);
   assert.match(leadSummary, /strings\.TrimSpace[\s\S]*\.Params\.description[\s\S]*plainify/);
   assert.match(leadSummary, /if not \$summary[\s\S]*partial "discovery\/page-summary\.html"/);
-  const lead = homeV2.slice(homeV2.indexOf('<article class="home-v2-featured__lead">'), homeV2.indexOf("{{- else }}", homeV2.indexOf('<article class="home-v2-featured__lead">')));
+  const lead = homeV2.slice(homeV2.indexOf('<article class="home-v2-featured__lead reading-card">'), homeV2.indexOf("{{- else }}", homeV2.indexOf('<article class="home-v2-featured__lead reading-card">')));
   assert.match(lead, /partial "home_lead_summary\.html" \$page/);
   assert.doesNotMatch(lead, /partial "discovery\/page-summary\.html"/);
   assert.equal((homeV2.match(/partial "home_lead_summary\.html"/g) || []).length, 1);
@@ -223,7 +223,7 @@ test("featured lead reuses a published image and responsive rendering", () => {
 });
 
 test("supporting cards retain semantic heading order, compact side-by-side copy, and separate mobile zoom controls", () => {
-  assert.match(homeV2, /home-v2-featured__item\{\{ if \$imageModel \}\} home-v2-featured__item--illustrated/);
+  assert.match(homeV2, /home-v2-featured__item reading-card\{\{ if \$imageModel \}\} home-v2-featured__item--illustrated/);
   assert.match(homeV2, /class="home-v2-featured__item-media" href="\{\{ \$page\.RelPermalink \}\}"/);
   assert.match(homeV2, /class="home-v2-featured__item-copy"/);
   assert.match(homeV2, /\$supportImageSizes := "120px"/);

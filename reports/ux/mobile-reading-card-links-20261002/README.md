@@ -14,14 +14,14 @@ Base: `f7bb430bb27cb8ed33cdc101acf462b715c15218` (PR #133 already included). Imp
 - Shared Library/Archive/collection navigation, collection-row padding, directory Start here, collection links, source credits, and license links. Zoom opens/closes without article navigation or article promo events.
 - Dynamic Library Browse all, Next/Previous, search, reset, and type/year/collection filters. Regenerated cards retain the same native link, image control, and independent photo credit.
 - Original configured analytics slots record one event per article activation, using the real analytics script with an isolated local counter. Archive's existing uninstrumented links remain uninstrumented. Zoom and secondary links do not count as article activations.
-- Touch dragging from article summary scrolls without navigation or click analytics. Desktop summary navigation and JavaScript-disabled native article/illustration fallback checks are included in the browser evidence.
+- Touch dragging from article summary scrolls without navigation or click analytics. The desktop-width layout and screenshots passed; separate desktop/no-JavaScript contexts aborted navigation in this harness and remain unconfirmed.
 - Pinned Hugo 0.164.0 production build using an existing warm image cache; eight Library tests; seven homepage output tests; discovery source contract; public route and fresh HTML output checks; responsive-image output contract; `git diff --check`.
 
 The local discovery date assertion is sensitive to CRLF. It passed using LF endings for unchanged Terms text in the isolated checkout; that accommodation is excluded from the PR.
 
 Browser evidence is emulation, not actual iOS Safari or Android Chrome. Those devices and their native long-press menus were unavailable. The implementation retains ordinary `href` anchors and adds no card-navigation JavaScript, touch handlers, or `preventDefault` calls.
 
-The browser harness timed out waiting for a Ctrl-click `popup` event. Native new-tab behavior is unconfirmed in this harness and should receive a manual check before merge; the real anchors and modifier-event semantics remain intact.
+The browser harness timed out waiting for a Ctrl-click `popup` event. Native new-tab behavior is unconfirmed in this harness and should receive a manual check before merge; the implementation retains real anchors with no modifier-key interception.
 
 Image rendering markup, sources, crops, responsive sizes, and existing lightbox code are unchanged. External-link destinations and analytics were isolated during browser checks. No real signup, email, purchase, or provider change was performed.
 

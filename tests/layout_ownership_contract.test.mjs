@@ -68,7 +68,7 @@ test("homepage V2 owns separate proof, featured-reading, library, newsletter, an
     'class="home-front-page__orientation"',
     'class="home-v2-featured page-shell page-shell--wide"',
     'class="home-v2-featured__grid"',
-    'class="home-v2-featured__lead"',
+    'class="home-v2-featured__lead reading-card"',
     'class="home-v2-featured__supporting"',
     'class="home-v2-library home-v2-next__links page-shell page-shell--wide"',
     'partial "home_reader_newsletter.html" .',
