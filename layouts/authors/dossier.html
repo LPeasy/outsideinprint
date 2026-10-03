@@ -78,6 +78,9 @@
             {{ with .Params.header_bio }}
               <p class="author-route__bio">{{ . }}</p>
             {{ end }}
+            {{ range .Params.bio_paragraphs }}
+              <p class="author-route__bio">{{ . }}</p>
+            {{ end }}
             {{ with .Params.reader_note }}
               <p class="author-route__invitation">{{ . }}</p>
             {{ end }}
@@ -96,7 +99,7 @@
     {{ if gt (len $selectedWorks) 0 }}
       <section class="author-route__work-section page-shell page-shell--reading" aria-labelledby="author-selected-title">
         <h2 id="author-selected-title" class="list-title">Selected Writing</h2>
-        <p class="author-route__section-intro">If you’re new here, these pieces are a few places to begin.</p>
+        <p class="author-route__section-intro">A few places to begin, across the different kinds of work I publish.</p>
         {{ range $selectedWorks }}
           {{ partial "discovery/page-list-item.html" (dict
             "page" .
@@ -134,7 +137,7 @@
     {{ if gt (len $publishedBooks) 0 }}
       <section class="author-route__work-section page-shell page-shell--reading" aria-labelledby="author-books-title">
         <h2 id="author-books-title" class="list-title">Books</h2>
-        <p class="author-route__section-intro">Longer works, when you want to stay with a question or a story.</p>
+        <p class="author-route__section-intro">Fiction and nonfiction, with room to follow a question or a story further.</p>
         {{ range $publishedBooks }}
           {{ $book := . }}
           {{ $product := partial "shop/product-data.html" (dict "key" $book.Params.book_key "page" $book) }}

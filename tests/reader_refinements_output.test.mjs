@@ -82,9 +82,9 @@ test("author selected writing uses Dialogue and does not duplicate it in Recent 
   const recent = links(html).filter((link) => attr(link[1], "data-analytics-source-slot") === "author_recent");
   assert.equal(selected.length, 6);
   assert.equal(recent.length, 6);
-  assert.equal(attr(selected[3][1], "href"), "/syd-and-oliver/what-i-had/");
+  assert.equal(attr(selected[2][1], "href"), "/syd-and-oliver/what-i-had/");
   assert.equal(new Set([...selected, ...recent].map((link) => attr(link[1], "href"))).size, 12);
-  assert.match(html, /these pieces are a few places to begin/);
+  assert.match(html, /A few places to begin, across the different kinds of work I publish\./);
   assert.match(html.slice(html.indexOf('author-selected-title'), html.indexOf('id=author-newsletter')), /Dialogue/);
 });
 

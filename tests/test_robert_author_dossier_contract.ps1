@@ -25,7 +25,7 @@ foreach ($requiredPattern in @(
   'portrait:\s*"?Bobviously_Portrait_v1\.png"?',
   'header_bio:\s*".+?"',
   'reader_note:\s*".+?"',
-  'role_line:\s*"Author, designer, developer, and publisher of Outside In Print\."'
+  'bio_paragraphs:[\s\S]*I also design and develop Outside In Print\.'
 )) {
   if ($authorPage -notmatch $requiredPattern) {
     throw "Expected content/authors/robert-v-ussley/index.md to match '$requiredPattern'."
@@ -56,7 +56,7 @@ foreach ($requiredSnippet in @(
   'author-route__role',
   'author-route__invitation',
   'author-route__actions',
-  'these pieces are a few places to begin.',
+  'A few places to begin, across the different kinds of work I publish.',
   'href="#author-selected-title"',
   'href="#author-newsletter"',
   'partial "newsletter_signup.html"',
@@ -106,7 +106,7 @@ try {
     'Browse collections',
     'Search the library',
     'About the imprint',
-    'Author, designer, developer, and publisher of Outside In Print.',
+    'I also design and develop Outside In Print.',
     'The American Nightmare: Keep Dreaming, Kid',
     'The Parable of the Sheep',
     'The Water Cycle: Risk, Infrastructure, and Public Memory',
@@ -155,8 +155,8 @@ try {
   if (@($workPaths | Select-Object -Unique).Count -ne 12) {
     throw 'Expected selected and recent writing destinations to remain duplicate-free.'
   }
-  if ($workPaths[3] -cne '/syd-and-oliver/what-i-had/') {
-    throw 'Expected What I Had in the fourth selected slot, using its canonical dialogue URL.'
+  if ($workPaths[2] -cne '/syd-and-oliver/what-i-had/') {
+    throw 'Expected What I Had in the third selected slot, using its canonical dialogue URL.'
   }
   $selectedSection = [regex]::Match($builtPage, '(?s)<section[^>]*aria-labelledby=(?:"author-selected-title"|author-selected-title)[^>]*>(.*?)</section>').Value
   if ($selectedSection -notmatch 'Dialogue' -or $selectedSection -match '/essays/synthetic-reasoning/') {

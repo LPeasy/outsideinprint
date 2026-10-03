@@ -1,6 +1,6 @@
 ---
 title: "About Outside In Print"
-description: "Independent writing on history, economics, culture, and public life. Follow a question, consider the evidence, and think for yourself."
+description: "Independent essays, stories, and reflections on public life, faith, and the choices we make every day."
 image: "/images/social/oip-about.png"
 image_alt: "Outside In Print social card for the About page."
 draft: false
@@ -8,26 +8,34 @@ show_citation: false
 section_label: "About the Imprint"
 ---
 
-However you arrived here, you do not have to hurry to the next thing. Outside In Print is for readers who want to stay with an idea, look beyond a headline, and follow a question a little farther.
+Outside In Print brings together writing about the world we share and the lives we lead in it. There are public records to examine, old stories to revisit, and ordinary moments worth a second look.
 
-## What You Will Find
+An essay might follow a warning that went unheeded. Syd and Oliver might argue over what it means to help a stranger. A walk around the block might become a reflection on the things we tell ourselves.
 
-Essays and reported analysis explore history, economics, culture, and public life: how institutions work, what people believe, and how decisions shape the world we share. Dialogues, fiction, and original illustrations approach experience from another direction. Some questions need an argument; others need a story or a conversation.
+Take your time. Start with whatever catches your eye.
 
-Read what catches your eye. The work stays here in an archive you can return to, whether you want to revisit a piece or follow a subject over time.
+## What you’ll find
 
-## Independent and Open to Questions
+Essays and reporting explore history, economics, culture, and the decisions that shape public life. Fiction follows people into the worlds they make and the choices they face.
 
-The aim is to understand, not to enlist you in a side. Public claims should earn your trust through evidence and clear reasoning, not party loyalty or borrowed certainty.
+[Syd and Oliver](/collections/syd-and-oliver-dialogues/) work through questions of friendship, obligation, money, and truth in conversation.
 
-That means looking at what a system rewards, what a choice costs, who holds power, and who lives with the consequences. When the evidence is mixed or the record is incomplete, the writing should say so. Independence does not mean refusing to judge; it means doing the work before reaching a judgment.
+[Musings](/collections/musings/) and [The Things We Say](/collections/the-things-we-say/) turn toward attention, daily habits, the words we live by, and the possibility of beginning again.
 
-You do not have to agree with a piece to belong here. Bring your own questions, test the reasoning, and make up your own mind.
+[The Restless Heart](/collections/the-restless-heart/) brings together Catholic teaching and Christian reflections on prayer, love, conscience, and service.
 
-## Author and Publisher
+Follow a [collection](/collections/), browse the [archive](/archive/), or settle in with a [book](/shop/).
 
-I’m Robert V. Ussley, the writer and publisher behind Outside In Print. I built this independent imprint for writing worth returning to. [Read more about me and explore my work](/authors/robert-v-ussley/).
+## An independent publication
 
-## Add Your Voice
+Outside In Print is written and published by Robert V. Ussley. Reported work should make its sources clear and acknowledge what remains uncertain. Across the publication, readers are invited to consider the work, bring their own questions, and reach their own conclusions.
 
-Have an original essay or reported article that belongs here? [Start with a pitch](/contribute/). We welcome clear, independent work that gives readers something worth their attention.
+[Meet the author](/authors/robert-v-ussley/)
+
+## Bob’s Almanack
+
+Every Saturday, Bob’s Almanack gathers new writing, illustrations, brief notices, and something worth reading again into a weekly sheet. [Subscribe for free](#about-newsletter), or [read an issue first](/almanack/2026-07-25/).
+
+## Contribute
+
+Have an original essay or reported article you think belongs here? [Start with a pitch](/contribute/).

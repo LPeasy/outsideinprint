@@ -1131,7 +1131,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/about/index.html' = @{
     Title = 'About Outside In Print'
-    Description = 'Independent writing on history, economics, culture, and public life. Follow a question, consider the evidence, and think for yourself.'
+    Description = 'Independent essays, stories, and reflections on public life, faith, and the choices we make every day.'
     Canonical = 'https://outsideinprint.org/about/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
@@ -1161,7 +1161,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/authors/robert-v-ussley/index.html' = @{
     Title = 'Robert V. Ussley'
-    Description = 'Independent essays and stories on history, economics, culture, and public life.'
+    Description = 'Essays, stories, and reflections on public life and everyday experience.'
     Canonical = 'https://outsideinprint.org/authors/robert-v-ussley/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
@@ -3986,7 +3986,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/about/index.html'
-    Pattern = '(?s)Behind Outside In Print.*?<h2\b[^>]*>A place to stay with an idea\.</h2>.*?Independent writing on history, economics, culture, and public life\.'
+    Pattern = '(?s)Behind Outside In Print.*?<h2\b[^>]*>A place to stay with an idea\.</h2>.*?Independent essays, stories, and reflections on public life, faith, and the choices we make every day\.'
     Message = 'expected About to introduce the reader-focused purpose and subject territory'
   },
   @{
@@ -3996,7 +3996,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/about/index.html'
-    Pattern = '(?s)Author and Publisher.*?<a\b[^>]*href="?(?:https://outsideinprint\.org)?/authors/robert-v-ussley/"?[^>]*>.*?</a>.*?Add Your Voice.*?<a\b[^>]*href="?(?:https://outsideinprint\.org)?/contribute/"?[^>]*>'
+    Pattern = '(?s)An independent publication.*?<a\b[^>]*href="?(?:https://outsideinprint\.org)?/authors/robert-v-ussley/"?[^>]*>.*?</a>.*?Contribute.*?<a\b[^>]*href="?(?:https://outsideinprint\.org)?/contribute/"?[^>]*>'
     Message = 'expected About to connect readers with the author and invite contributor pitches'
   },
   @{
@@ -4012,7 +4012,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/about/index.html'
-    Pattern = 'Author and Publisher'
+    Pattern = 'Outside In Print is written and published by Robert V\. Ussley\.'
     Message = 'expected the about page to explain the author and publisher relationship'
   },
   @{
@@ -4165,7 +4165,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
-    Pattern = 'Author, designer, developer, and publisher of Outside In Print\.'
+    Pattern = 'I also design and develop Outside In Print\.'
     Message = 'expected the author page to state Robert V. Ussley''s professional role'
   },
   @{

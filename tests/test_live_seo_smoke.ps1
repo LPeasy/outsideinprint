@@ -84,7 +84,7 @@ $about = Get-Page '/about/'
 Assert-Canonical -Content $about -ExpectedUrl 'https://outsideinprint.org/about/' -Message 'Expected the about page canonical URL to point to outsideinprint.org.'
 Assert-Robots -Content $about -ExpectedRobots 'index, follow, max-image-preview:large' -Message 'Expected the about page to allow indexation with large image previews.'
 Assert-Match -Content $about -Pattern '"@type":"AboutPage"' -Message 'Expected the about page to expose AboutPage JSON-LD.'
-Assert-Match -Content $about -Pattern 'Author and Publisher' -Message 'Expected the about page to explain the author/publisher relationship.'
+Assert-Match -Content $about -Pattern 'Outside In Print is written and published by Robert V\. Ussley\.' -Message 'Expected the about page to explain the author/publisher relationship.'
 Assert-Match -Content $about -Pattern '<meta\s+property=(?:"og:image"|og:image)\s+content=' -Message 'Expected the about page to emit og:image.'
 Assert-Match -Content $about -Pattern '<link\b[^>]*rel=(?:"alternate"|alternate)[^>]*type=(?:"application/rss\+xml"|application/rss\+xml)[^>]*href=(?:"https://outsideinprint\.org/index\.xml"|https://outsideinprint\.org/index\.xml)' -Message 'Expected the about page to expose site RSS autodiscovery.'
 

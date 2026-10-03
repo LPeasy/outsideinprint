@@ -18,20 +18,20 @@ test("gallery captions link to resolved published writing without changing the i
   assert.match(gallery, /window.location.href = activeEssay/);
 });
 
-test("author selection substitutes dialogue in place and preserves canonical routes", () => {
+test("author selection spans the accepted writing set and preserves canonical routes", () => {
   const data = read("data/authors.yaml");
   const selected = data.split("featured_work:")[1].split("latest_limit:")[0];
   const routes = [...selected.matchAll(/- (\/\S+)/g)].map((match) => match[1]);
   assert.deepEqual(routes, [
+    "/essays/default-owner/",
     "/essays/what-is-risk-a-four-part-framework/",
-    "/essays/the-world-is-back-at-the-poker-table/",
-    "/essays/what-happened-at-camp-mystic/",
     "/syd-and-oliver/what-i-had/",
-    "/essays/in-the-image-of-god/",
-    "/essays/jack-stratton-and-the-vulfpeck-model/",
+    "/essays/reverse-origami/",
+    "/essays/all-is-a-gift/",
+    "/shop/2045/sample/",
   ]);
   const author = read("layouts/authors/dossier.html");
-  assert.match(author, /these pieces are a few places to begin/);
+  assert.match(author, /A few places to begin, across the different kinds of work I publish\./);
   assert.match(author, /where site.RegularPages "RelPermalink"/);
   assert.match(author, /not \(isset \$selectedPaths \$candidate.RelPermalink\)/);
 });

@@ -402,8 +402,8 @@ test("about and author routes own distinct imprint-aligned shells", () => {
   assert.match(aboutSingle, /<h3[^>]*>At a glance<\/h3>/);
   assert.match(aboutSingle, /<dt class="about-route__record-label">Author<\/dt>/);
   assert.doesNotMatch(aboutSingle, />Imprint Record<|>Current File<|>Principal Byline</);
-  assert.match(aboutContent, /description: "Independent writing on history, economics, culture, and public life\./);
-  assert.match(aboutContent, /## Author and Publisher[\s\S]*?\]\(\/authors\/robert-v-ussley\/\)/);
+  assert.match(aboutContent, /description: "Independent essays, stories, and reflections on public life, faith, and the choices we make every day\./);
+  assert.match(aboutContent, /## An independent publication[\s\S]*?\]\(\/authors\/robert-v-ussley\/\)/);
   assert.match(aboutContent, /\]\(\/contribute\/\)/);
   assert.doesNotMatch(aboutContent, /principal authorial byline|essay corpus|without pretending to be a large editorial institution/);
   assert.match(authorList, /partial "authors\/directory\.html" \./);
