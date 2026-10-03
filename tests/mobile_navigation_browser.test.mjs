@@ -9,6 +9,14 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."
 const siteDir = path.resolve(process.env.OIP_SITE_DIR || path.join(repoRoot, "public"));
 const siteOrigin = "https://outsideinprint.org";
 const articlePath = "/essays/one-more-block/";
+const readDestinations = [
+  { label: "Archive", href: "/archive/" },
+  { label: "Collections", href: "/collections/" },
+  { label: "Library", href: "/library/" },
+  { label: "Bob\u2019s Almanack", href: "/collections/bobs-almanack/" },
+  { label: "Feeling curious?", href: "/random/" },
+  { label: "Bookstore", href: "/shop/" },
+];
 const contentTypes = new Map([
   [".css", "text/css; charset=utf-8"],
   [".html", "text/html; charset=utf-8"],
@@ -67,19 +75,30 @@ async function geometry(page) {
     const explore = nav.querySelector(".nav-mobile-disclosure--explore");
     const rect = (element) => {
       const box = element.getBoundingClientRect();
-      return { top: box.top, bottom: box.bottom, left: box.left, right: box.right, height: box.height };
+      return { top: box.top, bottom: box.bottom, left: box.left, right: box.right, width: box.width, height: box.height };
     };
     return {
       nav: rect(nav),
       heading: rect(heading),
       readOpen: read.open,
       exploreOpen: explore.open,
+      controls: {
+        Read: rect(read.querySelector("summary")),
+        Explore: rect(explore.querySelector("summary")),
+        About: rect(nav.querySelector(".nav__mobile-link--about")),
+      },
       panel: read.open ? rect(read.querySelector(".nav-mobile-disclosure__panel")) : null,
-      links: read.open ? Array.from(read.querySelectorAll(".nav-mobile-disclosure__panel a"), (link) => ({
-        ...rect(link),
-        text: link.textContent.trim(),
-        visible: link.checkVisibility(),
-      })) : [],
+      links: read.open ? Array.from(read.querySelectorAll(".nav-mobile-disclosure__panel a"), (link) => {
+        const label = link.querySelector(".nav-link__label");
+        return {
+          ...rect(link),
+          text: label.textContent.trim(),
+          href: new URL(link.href).pathname,
+          visible: link.checkVisibility(),
+          labelWidth: label.clientWidth,
+          labelScrollWidth: label.scrollWidth,
+        };
+      }) : [],
       viewportWidth: innerWidth,
       documentWidth: document.documentElement.scrollWidth,
       navWidth: nav.clientWidth,
@@ -95,6 +114,38 @@ function assertSamePlacement(actual, expected, state) {
   ]) {
     assert.ok(Math.abs(value - baseline) <= 1, `${state} ${name} moved: ${value} vs ${baseline}`);
   }
+}
+
+function assertSameControls(actual, expected, state) {
+  for (const name of ["Read", "Explore", "About"]) {
+    for (const dimension of ["height", "width", "left", "top"]) {
+      const value = actual.controls[name][dimension];
+      const baseline = expected.controls[name][dimension];
+      assert.ok(Math.abs(value - baseline) <= 1,
+        `${state} moved ${name} control ${dimension}: ${value} vs ${baseline}`);
+    }
+  }
+}
+
+async function waitForOpenMenu(page, menu) {
+  await page.waitForFunction((expected) => {
+    const nav = document.querySelector(".nav__mobile");
+    return nav.querySelector(".nav-mobile-disclosure--read").open === (expected === "read") &&
+      nav.querySelector(".nav-mobile-disclosure--explore").open === (expected === "explore");
+  }, menu);
+}
+
+async function assertBrandHome(page) {
+  const brand = page.locator(".masthead .brand-link");
+  assert.equal(await brand.isVisible(), true, "The masthead brand must remain visible.");
+  assert.equal(new URL(await brand.getAttribute("href"), siteOrigin).pathname, "/",
+    "The masthead brand must retain its home link.");
+}
+
+function assertReadDestinations(destinations) {
+  assert.deepEqual(destinations, readDestinations, "Read must contain the six requested destinations in order.");
+  assert.ok(destinations.every(({ label, href }) => label !== "Latest" && href !== "/"),
+    "Read must not repeat the masthead home destination.");
 }
 
 for (const width of [320, 390]) {
@@ -124,15 +175,19 @@ for (const width of [320, 390]) {
         const open = await geometry(page);
         assert.equal(open.readOpen, true);
         assert.equal(open.exploreOpen, false);
+        assertSameControls(open, closed, "Read open");
         assert.ok(open.panel.bottom <= open.nav.bottom + 1,
           `Read panel extends beyond reserved navigation space: ${open.panel.bottom} > ${open.nav.bottom}`);
         assert.ok(open.panel.bottom <= open.heading.top,
           `Read panel overlaps article heading: ${open.panel.bottom} > ${open.heading.top}`);
-        assert.equal(open.links.length, 7, "Read must retain all seven destinations, including Bookstore.");
+        assertReadDestinations(open.links.map(({ text: label, href }) => ({ label, href })));
+        await assertBrandHome(page);
         for (const link of open.links) {
           assert.equal(link.visible, true, `${link.text} must remain visible`);
           assert.ok(link.height >= 44, `${link.text} target is only ${link.height}px tall`);
           assert.ok(link.left >= -1 && link.right <= open.viewportWidth + 1, `${link.text} extends outside the viewport`);
+          assert.ok(link.labelWidth > 0 && link.labelScrollWidth <= link.labelWidth + 1,
+            `${link.text} label overflows its cell: ${link.labelScrollWidth} > ${link.labelWidth}`);
         }
         if (closed.documentWidth > closed.viewportWidth + 1) {
           t.diagnostic(`Existing page width at ${width}px/${fontPercent}%: closed=${closed.documentWidth}, Read-open=${open.documentWidth}, viewport=${open.viewportWidth}`);
@@ -141,13 +196,48 @@ for (const width of [320, 390]) {
           `Read must not increase horizontal page overflow: closed=${closed.documentWidth}, open=${open.documentWidth}, viewport=${open.viewportWidth}`);
         assert.ok(open.navScrollWidth <= open.navWidth + 1, "Read must not overflow its navigation width.");
 
-        await read.locator("summary").click();
-        assertSamePlacement(await geometry(page), closed, "Closed menu");
+        // Opening Explore must close Read without retaining its expanded layout.
         await explore.locator("summary").click();
+        await waitForOpenMenu(page, "explore");
         assertSamePlacement(await geometry(page), exploreBefore, "Explore menu");
+
+        await read.locator("summary").click();
+        await waitForOpenMenu(page, "read");
+        await read.locator(".nav-mobile-disclosure__panel a").first().focus();
+        await page.keyboard.press("Escape");
+        await waitForOpenMenu(page, "closed");
+        assert.equal(await read.locator("summary").evaluate((summary) => document.activeElement === summary), true,
+          "Escape from a Read link must return focus to its summary.");
+        const afterEscape = await geometry(page);
+        assertSamePlacement(afterEscape, closed, "Closed menu");
+        assertSameControls(afterEscape, closed, "Closed menu");
       } finally {
         await context.close();
       }
     });
   }
 }
+
+test("desktop Read keeps six destinations and the masthead home link", async () => {
+  const { context, page } = await createPage(1440);
+  try {
+    const response = await page.goto(`${siteOrigin}${articlePath}`, { waitUntil: "load" });
+    assert.equal(response.status(), 200);
+    const read = page.locator(".nav__desktop .nav-disclosure--read");
+    await read.locator("summary").click();
+    const links = read.locator(".nav-disclosure__panel a");
+    assertReadDestinations(await links.evaluateAll((anchors) => anchors.map((link) => ({
+      label: link.querySelector(".nav-link__label").textContent.trim(),
+      href: new URL(link.href).pathname,
+    }))));
+    for (const link of await links.all()) {
+      assert.equal(await link.isVisible(), true, "Every desktop Read destination must be visible.");
+    }
+    const directBookstore = page.locator('.nav__desktop > .nav__direct-link').filter({ hasText: "Bookstore" });
+    assert.equal(await directBookstore.count(), 1, "The existing direct desktop Bookstore link must remain.");
+    assert.equal(new URL(await directBookstore.getAttribute("href"), siteOrigin).pathname, "/shop/");
+    await assertBrandHome(page);
+  } finally {
+    await context.close();
+  }
+});

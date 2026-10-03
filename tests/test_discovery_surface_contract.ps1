@@ -1839,14 +1839,14 @@ if ($mastheadPartial -match '(?s)class="nav__mobile".*?<span>Menu</span>') {
 }
 
 foreach ($requiredNavigationSnippet in @(
-  '"label" "Latest"',
-  '"description" "Front page"',
   '"label" "Archive"',
   '"description" "By date"',
   '"label" "Collections"',
   '"description" "By topic"',
   '"label" "Library"',
   '"description" "Search all"',
+  '"key" "almanack"',
+  '"description" "Weekly newsletter"',
   '"label" "Feeling curious?"',
   '"description" "Surprise me"',
   '"label" "Gallery"',
@@ -1854,6 +1854,7 @@ foreach ($requiredNavigationSnippet in @(
   '"label" "Bookstore"',
   '"label" "About"',
   '"label" "Contribute"',
+  'class="brand-link" href="{{ "" | absURL }}"',
   'aria-label="Primary" data-primary-nav',
   'nav-mobile-disclosure--read',
   'nav-mobile-disclosure--explore'
@@ -1863,8 +1864,11 @@ foreach ($requiredNavigationSnippet in @(
   }
 }
 
-if ($mastheadPartial -notmatch '(?s)"label" "Latest".*?"label" "Archive".*?"label" "Collections".*?"label" "Library".*?"label" "Feeling curious\?"') {
-  throw 'Expected the Read destinations to remain ordered Latest, Archive, Collections, Library, Feeling curious?.'
+if ($mastheadPartial -notmatch '(?s)"label" "Archive".*?"label" "Collections".*?"label" "Library".*?"label" "Bob\u2019s Almanack".*?"label" "Feeling curious\?".*?"label" "Bookstore"') {
+  throw 'Expected the six Read destinations in order: Archive, Collections, Library, Almanack, Feeling curious?, Bookstore.'
+}
+if ($mastheadPartial -match '"key" "latest"|"label" "Latest"') {
+  throw 'Expected Read to omit Latest while the masthead brand retains the home link.'
 }
 
 if ($mastheadPartial -match '"label" "(?:Studio|Support)"|primary_nav_(?:studio|support)') {
@@ -1912,8 +1916,10 @@ if ($mastheadPartial -notmatch '(?s)"label" "Contribute".*?"group" "direct".*?"m
 if ($mastheadPartial -notmatch '(?s)nav-mobile-disclosure--read.*range \$mobileReadItems.*nav-mobile-disclosure--explore.*range \$mobileExploreItems') {
   throw 'Expected mobile Read and Explore disclosures to expose their dedicated destination lists.'
 }
-if ($mastheadPartial -notmatch '(?s)\$mobileReadItems := slice.*?range \$readItems.*?"key" "bookstore"') {
-  throw 'Expected Bookstore to remain accessible after the standard mobile Read destinations.'
+if ([regex]::Matches($mastheadPartial, '(?m)^\s+"group" "read"\s*$').Count -ne 5 -or
+    $mastheadPartial -notmatch '(?s)\$readItems := where \$navItems "group" "read".*?range where \$navItems "key" "bookstore".*?\$readItems = \$readItems \| append \.' -or
+    $mastheadPartial -notmatch [regex]::Escape('$mobileReadItems := $readItems')) {
+  throw 'Expected desktop and mobile Read to share five reading destinations followed by Bookstore.'
 }
 if ($mastheadPartial -notmatch '\$mobileReadCurrent := gt \(len \(where \$mobileReadItems "currentSection" true\)\) 0') {
   throw 'Expected the mobile Read disclosure to expose current-section state for Bookstore as well as reading destinations.'

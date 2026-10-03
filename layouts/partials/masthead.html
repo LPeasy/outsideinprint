@@ -33,16 +33,6 @@
 {{ $paperRouteEnabled := and $isHomeMasthead (ne ($paperRoute.enabled | default true) false) }}
 {{ $navItems := slice
   (dict
-    "key" "latest"
-    "label" "Latest"
-    "href" ("" | absURL)
-    "description" "Front page"
-    "group" "read"
-    "currentPage" $isHomeMasthead
-    "currentSection" $isHomeMasthead
-    "mobilePrimary" false
-  )
-  (dict
     "key" "archive"
     "label" "Archive"
     "href" ("archive/" | absURL)
@@ -163,6 +153,9 @@
   )
 }}
 {{ $readItems := where $navItems "group" "read" }}
+{{ range where $navItems "key" "bookstore" }}
+  {{ $readItems = $readItems | append . }}
+{{ end }}
 {{ $exploreItems := where $navItems "group" "explore" }}
 {{ $directItems := slice }}
 {{ range $directKey := slice "about" "bookstore" "contribute" }}
@@ -176,13 +169,7 @@
     {{ $mobilePrimaryItems = $mobilePrimaryItems | append . }}
   {{ end }}
 {{ end }}
-{{ $mobileReadItems := slice }}
-{{ range $readItems }}
-  {{ $mobileReadItems = $mobileReadItems | append . }}
-{{ end }}
-{{ range where $directItems "key" "bookstore" }}
-  {{ $mobileReadItems = $mobileReadItems | append . }}
-{{ end }}
+{{ $mobileReadItems := $readItems }}
 {{ $mobileExploreItems := slice }}
 {{ range $exploreItems }}
   {{ $mobileExploreItems = $mobileExploreItems | append . }}
