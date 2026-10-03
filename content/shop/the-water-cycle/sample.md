@@ -6,7 +6,7 @@ sample_of_book_key: "the_water_cycle"
 sample_source: "final_epub"
 sample_source_id: "B0H46WMGJQ"
 sample_source_checked: "2026-10-03"
-sample_epub_version: "Water Cycle Reader R2; corrected 2026-09-01; focused correction candidate 2026-10-03"
+sample_epub_version: "Water Cycle Reader R2; corrected 2026-10-03; focused text and figure-label correction"
 sample_boundary: "Complete published prologue, including figures V01-V03 and narrative note 1"
 sample_release_status: ready
 ---

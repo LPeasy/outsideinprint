@@ -1,10 +1,12 @@
 # The Water Cycle focused correction — October 3, 2026
 
-Status: review candidate. This revision requires owner approval before the sold
-EPUB is replaced or these website changes are merged and published.
+Status: approved release, pending production verification. The owner approved
+the finished revision for publication. Replace the sold EPUB and verify its
+authenticated readback first; then merge these matching website changes, wait
+for successful deployment, and verify the live sample and edition metadata.
 
 The source is **Reader R2, corrected September 1, 2026**, verified at **23,025
-words**. The October 3 correction candidate contains **23,026 words**, using the
+words**. The approved October 3 correction contains **23,026 words**, using the
 same whole-EPUB reading-content count. The catalog therefore displays **about
 23,000 words**. The superseded 21,988-word edition was not the correction source.
 The earlier bookstore edition-source audit remains an unchanged historical
@@ -30,7 +32,7 @@ and social schedules are unchanged.
 
 ## Validation
 
-- Whole-EPUB count reproduced the 23,025-word baseline and 23,026-word candidate.
+- Whole-EPUB count reproduced the 23,025-word baseline and 23,026-word revision.
 - Text and archive comparisons isolated the requested corrections, the two
   regenerated images, and correction-date metadata. All 239 internal links
   resolve; external destinations are unchanged.
@@ -45,6 +47,7 @@ and social schedules are unchanged.
   passed.
 
 Local validation used the repository's source-only PowerShell workflow. The
-public-site build and generated-output tests remain CI gates. No live replacement,
-merge, publication, purchase, or customer email was performed by this correction
-pass.
+public-site build and generated-output tests remain CI gates. This record does
+not establish live publication: the production-file readback, merge, successful
+deployment, and live parity checks must complete in that order. No purchase or
+customer email is part of this release.
