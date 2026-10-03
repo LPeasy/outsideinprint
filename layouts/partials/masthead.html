@@ -8,8 +8,10 @@
 {{ $archivePageNumber := int (.Scratch.Get "oip_archive_page_number" | default 1) }}
 {{ $isArchivePage := and (eq $currentPath "/archive/") (eq $archivePageNumber 1) }}
 {{ $inArchiveSection := or $isArchivePage (eq .Section "archive") (eq .Section "essays") (eq .Section "syd-and-oliver") }}
+{{ $isAlmanackPage := eq $currentPath "/collections/bobs-almanack/" }}
+{{ $inAlmanackSection := or $isAlmanackPage (eq .Section "almanack") }}
 {{ $isCollectionsPage := eq $currentPath "/collections/" }}
-{{ $inCollectionsSection := or $isCollectionsPage (eq .Section "collections") }}
+{{ $inCollectionsSection := and (not $isAlmanackPage) (or $isCollectionsPage (eq .Section "collections")) }}
 {{ $isLibraryPage := eq $currentPath "/library/" }}
 {{ $inLibrarySection := or $isLibraryPage (eq .Section "library") }}
 {{ $isBookstorePage := eq $currentPath "/shop/" }}
@@ -68,6 +70,16 @@
     "group" "read"
     "currentPage" $isLibraryPage
     "currentSection" $inLibrarySection
+    "mobilePrimary" false
+  )
+  (dict
+    "key" "almanack"
+    "label" "Bob’s Almanack"
+    "href" ("collections/bobs-almanack/" | absURL)
+    "description" "Weekly newsletter"
+    "group" "read"
+    "currentPage" $isAlmanackPage
+    "currentSection" $inAlmanackSection
     "mobilePrimary" false
   )
   (dict

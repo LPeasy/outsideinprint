@@ -7,7 +7,7 @@
 {{ $contents := .contents | default $newsletter.contents }}
 {{ $pricePromise := $newsletter.price_promise }}
 {{ $buttonLabel := .buttonLabel | default $newsletter.button_label }}
-{{ $sampleURL := $newsletter.sample_url }}
+{{ $sampleURL := partial "almanack/latest-issue-url.html" $page }}
 {{ $sampleLabel := $newsletter.sample_label }}
 {{ $privacyPromise := $newsletter.privacy_promise }}
 {{ $privacyURL := $newsletter.privacy_url }}
@@ -17,7 +17,7 @@
 {{ $focusTarget := .focusTarget | default false }}
 {{ $sampleSourceSlot := printf "%s_sample_issue" $sourceSlot }}
 {{ $samplePath := $sampleURL | relURL }}
-{{ $isSamplePage := eq $page.RelPermalink $samplePath }}
+{{ $isSamplePage := and (eq $page.Section "almanack") (eq $page.RelPermalink $samplePath) }}
 {{ $pageKey := replace (replace ($page.RelPermalink | default "newsletter") "/" "-") "--" "-" }}
 {{ $sourceKey := replaceRE "[^a-zA-Z0-9_-]+" "-" $sourceSlot }}
 {{ $inputID := printf "bd-email-%s-%s" $pageKey $sourceKey }}
@@ -66,7 +66,7 @@
           <p id="{{ $priceID }}" class="newsletter-signup__price">{{ $pricePromise }}</p>
           <p class="newsletter-signup__links">
             {{ if $isSamplePage }}
-              <span>You&rsquo;re reading the sample issue.</span>
+              <span>You&rsquo;re reading the latest issue.</span>
             {{ else }}
               <a
                 href="{{ $samplePath }}"

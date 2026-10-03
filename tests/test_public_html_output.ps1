@@ -4311,25 +4311,14 @@ $requiredUxChecks = @(
     ShouldNotMatch = $true
   },
   @{
-    Path = 'public/collections/bobs-almanack/index.html'
-    Pattern = '(?s)Latest Issue.*?No\. 21.*?/almanack/2026-09-26/.*?September 26, 2026.*?I am at peace\..*?Rain Before Breakfast'
-    Message = 'expected the Bob''s Almanack collection page to feature the September 26 issue and lead essay'
-  },
-  @{
     Path = 'public/almanack/2026-05-02/index.html'
     Pattern = '(?s)Bob(?:''|&#39;)s Almanack.*?May 2, 2026.*?Issue 1.*?A public cost does not disappear because someone learned to price it\.'
     Message = 'expected the May 2 Almanack issue page to render the dominant nameplate, date, issue number, and opening Robert quote'
   },
   @{
     Path = 'public/almanack/2026-07-25/index.html'
-    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Free\. No spam ever\. Unsubscribe anytime\..*?You(?:&rsquo;|&#8217;|\u2019)re reading the sample issue\..*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.'
-    Message = 'expected the sample Almanack issue to end with the plain-language weekly newsletter proposition and issue-exit analytics slot'
-  },
-  @{
-    Path = 'public/almanack/2026-07-25/index.html'
-    Pattern = '(?s)newsletter-signup--article-exit.*?<a[^>]*href=(?:"|'''')?(?:https://outsideinprint\.org)?/almanack/2026-07-25/(?:"|'''')?[^>]*>\s*Read a sample issue\s*</a>'
-    Message = 'expected the configured sample issue signup not to link back to itself'
-    ShouldNotMatch = $true
+    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Free\. No spam ever\. Unsubscribe anytime\..*?Read the latest issue.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.'
+    Message = 'expected an archived Almanack issue to end with the plain-language weekly newsletter proposition and issue-exit analytics slot'
   },
   @{
     Path = 'public/almanack/2026-08-29/index.html'
@@ -5003,7 +4992,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Join the newsletter.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/[^>]*>\s*Read a sample issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.'
+    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Join the newsletter.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/\d{4}-\d{2}-\d{2}/[^>]*>\s*Read the latest issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.'
     Message = 'expected article aftermatter to place the full weekly newsletter signup after the publication record'
   },
   @{
@@ -6253,7 +6242,7 @@ foreach ($articlePath in @(
     $uxIssues.Add("$articlePath => expected exactly one standard reading continuation, not the retired article-paths exit")
   }
 
-  if ($newsletterHtml -notmatch '(?s)newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?Join the newsletter.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.') {
+  if ($newsletterHtml -notmatch '(?s)newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?Join the newsletter.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/\d{4}-\d{2}-\d{2}/.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.') {
     $uxIssues.Add("$articlePath => expected the weekly newsletter cadence, contents, no-spam promise, sample, and privacy proposition")
   }
 
@@ -6266,6 +6255,7 @@ foreach ($articlePath in @(
 # Reuse Hugo's validated source inventory so expected membership and order come
 # from real front matter, publication rules, and the existing item resolver.
 $collectionInventory = & (Join-Path $PSScriptRoot 'test_collection_organization_contract.ps1') -PassThru -Clock $Clock
+& (Join-Path $PSScriptRoot 'test_newsletter_discovery_contract.ps1') -SiteDir $SiteDir -Clock $Clock -PublishedIssuePaths @($collectionInventory.members['bobs-almanack'] | Where-Object published | ForEach-Object url)
 $directoryHtml = [string]$targetPageHtml['public/collections/index.html']
 $directoryDefinitions = @($collectionInventory.collections | Where-Object { $collectionInventory.public_collection_slugs -ccontains $_.slug })
 $directoryAllPaths = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)

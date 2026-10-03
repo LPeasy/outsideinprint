@@ -1,0 +1,8 @@
+{{- $issueURL := site.Params.newsletter.sample_url | default "/collections/bobs-almanack/" -}}
+{{- with (partial "collections/lookup-definition.html" "bobs-almanack") -}}
+  {{- $issues := partial "collections/resolve-items.html" (dict "collection" . "publishedOnly" true) -}}
+  {{- with first 1 $issues -}}
+    {{- $issueURL = (index . 0).RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+{{- return $issueURL -}}

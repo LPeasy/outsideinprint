@@ -18,12 +18,17 @@ tags:
   - "walking"
   - "morning"
 subtitle: "The Things We Say"
+dek: "A morning walk brings a neighbor’s greeting, a short hill, and sunlight on the sidewalk."
 description: "A morning walk around the block follows the sound of a broom, the pace of a short hill, and the sun reaching the sidewalk."
 featured_image: "editorial/one-more-block"
 featured_image_alt: "An anonymous person walks up a shaded neighborhood sidewalk toward a sunlit crossing while a neighbor sweeps leaves beside a house."
 featured_image_caption: "The morning walk."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-10-03"
+    note: "Added a descriptive summary for Library and collection cards."
 featured: false
 ---
 

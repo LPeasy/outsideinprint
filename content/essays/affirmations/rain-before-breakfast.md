@@ -16,12 +16,17 @@ tags:
   - "peace"
   - "rain"
 subtitle: "The Things We Say"
+dek: "A morning shower leaves time to sit on the porch and watch a drop fall from a leaf."
 description: "A morning shower leaves me on the porch, shoes tied and keys in my pocket, with time to watch a drop gather at the tip of a leaf."
 featured_image: "editorial/rain-before-breakfast"
 featured_image_alt: "An anonymous person rests in a wooden porch chair beside a keyring while rain falls over the yard and a drop hangs from a potted plant's leaf."
 featured_image_caption: "I stay to watch it fall."
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-10-03"
+    note: "Added a descriptive summary for Library and collection cards."
 featured: false
 ---
 
