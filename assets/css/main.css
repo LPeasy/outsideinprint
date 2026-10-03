@@ -1010,8 +1010,20 @@ html[data-theme="light"] .paper-route-toggle{
   .nav-mobile-disclosure--explore{
     grid-column:2;
   }
-  .nav__mobile:has(.nav-mobile-disclosure--read[open]){
-    padding-bottom:10.9rem;
+  .nav-mobile-disclosure--read[open]{
+    grid-column:1 / -1;
+  }
+  .nav-mobile-disclosure--read[open] > .nav-mobile-disclosure__summary{
+    display:flex;
+    width:calc((100% - 2 * var(--nav-mobile-gap)) / 3);
+  }
+  .nav-mobile-disclosure--read[open] > .nav-mobile-disclosure__panel{
+    position:relative;
+    top:auto;
+  }
+  .nav-mobile-disclosure--read .nav-link__label{
+    min-width:0;
+    overflow-wrap:anywhere;
   }
   .nav__mobile:has(.nav-mobile-disclosure--explore[open]){
     padding-bottom:8.2rem;

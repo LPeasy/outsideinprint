@@ -3504,13 +3504,13 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?class=(?:"nav__desktop"|nav__desktop).*?nav-disclosure--read.*?<span>Read</span>.*?(?:https://outsideinprint\.org)?/[^>]*>\s*<span[^>]*>Latest</span>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*<span[^>]*>Library</span>.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*<span[^>]*>Feeling curious\?</span>.*?nav-disclosure--explore.*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*data-analytics-source-slot=(?:"primary_nav_bookstore"|primary_nav_bookstore)[^>]*>\s*<span[^>]*>Bookstore</span>.*?(?:https://outsideinprint\.org)?/contribute/[^>]*>\s*<span[^>]*>Contribute</span>'
-    Message = 'expected desktop navigation to place Archive in Read and expose direct About, Bookstore, and Contribute links'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?class=(?:"nav__desktop"|nav__desktop).*?nav-disclosure--read.*?<span>Read</span>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*<span[^>]*>Library</span>.*?(?:https://outsideinprint\.org)?/collections/bobs-almanack/[^>]*>\s*<span[^>]*>Bob.{1,8}s Almanack</span>.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*<span[^>]*>Feeling curious\?</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*>\s*<span[^>]*>Bookstore</span>.*?nav-disclosure--explore.*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*data-analytics-source-slot=(?:"primary_nav_bookstore"|primary_nav_bookstore)[^>]*>\s*<span[^>]*>Bookstore</span>.*?(?:https://outsideinprint\.org)?/contribute/[^>]*>\s*<span[^>]*>Contribute</span>'
+    Message = 'expected desktop Read to contain all six destinations and preserve direct About, Bookstore, and Contribute links'
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)class=(?:"nav__mobile"|nav__mobile).*?nav-mobile-disclosure--read.*?<span>Read</span>.*?(?:https://outsideinprint\.org)?/[^>]*>\s*<span[^>]*>Latest</span>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*<span[^>]*>Library</span>.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*<span[^>]*>Feeling curious\?</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*>\s*<span[^>]*>Bookstore</span>.*?nav-mobile-disclosure--explore.*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/contribute/[^>]*>\s*<span[^>]*>Contribute</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>'
-    Message = 'expected the mobile ribbon to be Read, Explore, About with Archive and Bookstore under Read and Contribute under Explore'
+    Pattern = '(?s)class=(?:"nav__mobile"|nav__mobile).*?nav-mobile-disclosure--read.*?<span>Read</span>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*<span[^>]*>Library</span>.*?(?:https://outsideinprint\.org)?/collections/bobs-almanack/[^>]*>\s*<span[^>]*>Bob.{1,8}s Almanack</span>.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*<span[^>]*>Feeling curious\?</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*>\s*<span[^>]*>Bookstore</span>.*?nav-mobile-disclosure--explore.*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/contribute/[^>]*>\s*<span[^>]*>Contribute</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>'
+    Message = 'expected the mobile ribbon to be Read, Explore, About with six Read destinations and Contribute under Explore'
   },
   @{
     Path = 'public/index.html'
@@ -5581,15 +5581,33 @@ foreach ($check in $requiredUxChecks) {
   }
 }
 
+$homePrimaryNavHtml = Get-PrimaryNavHtml -Html ([string]$targetPageHtml['public/index.html'])
+$homePrimaryNavAnchors = @(
+  Get-OpenTags -Html $homePrimaryNavHtml -TagName 'a' |
+    Where-Object { (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href')) -ceq '/' }
+)
+if ($homePrimaryNavAnchors.Count -ne 0 -or $homePrimaryNavHtml -match '<span[^>]*>Latest</span>') {
+  $uxIssues.Add('public/index.html => Read must omit Latest and homepage links; the masthead brand links home')
+}
+$homeCurrentGroups = @(
+  Get-OpenTags -Html $homePrimaryNavHtml -TagName 'details' |
+    Where-Object {
+      (Test-TagHasClass -Tag $_ -ClassName 'nav-disclosure--current') -or
+      (Test-TagHasClass -Tag $_ -ClassName 'nav-mobile-disclosure--current')
+    }
+)
+if ($homeCurrentGroups.Count -ne 0) {
+  $uxIssues.Add('public/index.html => homepage must not activate a Read or Explore disclosure')
+}
+
 $exactPrimaryNavExpectations = @(
-  @{ Path = 'public/index.html'; Destination = '/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
   @{ Path = 'public/archive/index.html'; Destination = '/archive/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
   @{ Path = 'public/collections/index.html'; Destination = '/collections/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
   @{ Path = 'public/library/index.html'; Destination = '/library/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
   @{ Path = 'public/gallery/index.html'; Destination = '/gallery/'; GroupClass = 'nav-disclosure--explore'; MobileGroupClass = 'nav-mobile-disclosure--explore' },
   @{ Path = 'public/apps/index.html'; Destination = '/apps/'; GroupClass = 'nav-disclosure--explore'; MobileGroupClass = 'nav-mobile-disclosure--explore' },
   @{ Path = 'public/games/index.html'; Destination = '/games/'; GroupClass = 'nav-disclosure--explore'; MobileGroupClass = 'nav-mobile-disclosure--explore' },
-  @{ Path = 'public/shop/index.html'; Destination = '/shop/'; GroupClass = $null; MobileGroupClass = 'nav-mobile-disclosure--read' },
+  @{ Path = 'public/shop/index.html'; Destination = '/shop/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
   @{ Path = 'public/about/index.html'; Destination = '/about/'; GroupClass = $null; MobileGroupClass = $null },
   @{ Path = 'public/contribute/index.html'; Destination = '/contribute/'; GroupClass = $null; MobileGroupClass = 'nav-mobile-disclosure--explore' },
   @{ Path = 'public/random/index.html'; Destination = '/random/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' }
@@ -5608,8 +5626,9 @@ foreach ($expectation in $exactPrimaryNavExpectations) {
     Get-OpenTags -Html $primaryNavHtml -TagName 'a' |
       Where-Object { (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href')) -ceq $destinationPath }
   )
-  if ($destinationAnchors.Count -ne 2) {
-    $uxIssues.Add("$relativePath => expected two responsive links for exact destination '$destinationPath', found $($destinationAnchors.Count)")
+  $expectedAnchorCount = if ($destinationPath -ceq '/shop/') { 3 } else { 2 }
+  if ($destinationAnchors.Count -ne $expectedAnchorCount) {
+    $uxIssues.Add("$relativePath => expected $expectedAnchorCount responsive links for exact destination '$destinationPath', found $($destinationAnchors.Count)")
     continue
   }
 
@@ -5660,7 +5679,7 @@ foreach ($expectation in $exactPrimaryNavExpectations) {
 $descendantPrimaryNavExpectations = @(
   @{ Path = 'public/essays/the-risk-management-buffet/index.html'; Destination = '/archive/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
   @{ Path = 'public/collections/the-ledger/index.html'; Destination = '/collections/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
-  @{ Path = 'public/shop/the-water-cycle/index.html'; Destination = '/shop/'; GroupClass = $null; MobileGroupClass = 'nav-mobile-disclosure--read' },
+  @{ Path = 'public/shop/the-water-cycle/index.html'; Destination = '/shop/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
   @{ Path = 'public/apps/bucks-machine/index.html'; Destination = '/apps/'; GroupClass = 'nav-disclosure--explore'; MobileGroupClass = 'nav-mobile-disclosure--explore' },
   @{ Path = 'public/games/idle-times/index.html'; Destination = '/games/'; GroupClass = 'nav-disclosure--explore'; MobileGroupClass = 'nav-mobile-disclosure--explore' }
 )
@@ -5678,8 +5697,9 @@ foreach ($expectation in $descendantPrimaryNavExpectations) {
     Get-OpenTags -Html $primaryNavHtml -TagName 'a' |
       Where-Object { (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href')) -ceq $destinationPath }
   )
-  if ($destinationAnchors.Count -ne 2) {
-    $uxIssues.Add("$relativePath => expected two responsive section links for '$destinationPath', found $($destinationAnchors.Count)")
+  $expectedAnchorCount = if ($destinationPath -ceq '/shop/') { 3 } else { 2 }
+  if ($destinationAnchors.Count -ne $expectedAnchorCount) {
+    $uxIssues.Add("$relativePath => expected $expectedAnchorCount responsive section links for '$destinationPath', found $($destinationAnchors.Count)")
   }
   foreach ($destinationAnchor in $destinationAnchors) {
     if (-not (Test-TagHasClass -Tag $destinationAnchor -ClassName 'nav-link--current-section')) {
@@ -6194,8 +6214,8 @@ foreach ($surface in @(
         Get-OpenTags -Html $primaryNavHtml -TagName 'a' |
           Where-Object { (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href')) -ceq '/shop/' }
       )
-      if ($bookstoreNavAnchors.Count -ne 2) {
-        $uxIssues.Add("$surfacePath => expected two responsive Bookstore navigation links, found $($bookstoreNavAnchors.Count)")
+      if ($bookstoreNavAnchors.Count -ne 3) {
+        $uxIssues.Add("$surfacePath => expected three responsive Bookstore navigation links, found $($bookstoreNavAnchors.Count)")
       }
       foreach ($bookstoreNavAnchor in $bookstoreNavAnchors) {
         if (-not (Test-TagHasClass -Tag $bookstoreNavAnchor -ClassName 'nav-link--current-section')) {
