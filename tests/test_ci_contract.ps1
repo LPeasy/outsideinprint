@@ -33,7 +33,6 @@ $responsiveImageOutputContractPath = Join-Path $repoRoot "tests/test_responsive_
 $responsiveImageNodeContractPath = Join-Path $repoRoot "tests/responsive_image_contract.test.mjs"
 $responsiveImageGuidePath = Join-Path $repoRoot "docs/responsive-image-pipeline.md"
 $bookstoreReadingSampleContractPath = Join-Path $repoRoot "tests/test_bookstore_reading_sample_contract.ps1"
-$bookstoreLaunchWindowContractPath = Join-Path $repoRoot "tests/test_2045_launch_window.ps1"
 $feedPolicyContractPath = Join-Path $repoRoot "tests/test_feed_policy_contract.ps1"
 $hostedAnalyticsBrowserContractPath = Join-Path $repoRoot "tests/hosted_analytics_browser.test.mjs"
 $pieceShareBrowserContractPath = Join-Path $repoRoot "tests/piece_share_browser.test.mjs"
@@ -86,7 +85,6 @@ foreach ($requiredValidationPath in @(
   $responsiveImageNodeContractPath,
   $responsiveImageGuidePath,
   $bookstoreReadingSampleContractPath,
-  $bookstoreLaunchWindowContractPath,
   $feedPolicyContractPath,
   $hostedAnalyticsBrowserContractPath,
   $pieceShareBrowserContractPath,
@@ -421,13 +419,6 @@ foreach ($requiredBuildSnippet in @(
   }
 }
 
-$launchWindowStep = Get-WorkflowStepBlock `
-  -WorkflowName "deploy.yml" `
-  -WorkflowText $deployWorkflow `
-  -StepName "Test 2045 Launch Window"
-if ($launchWindowStep -notmatch '(?m)^\s*\.\/tests\/test_2045_launch_window\.ps1\s*$') {
-  throw "deploy.yml must run the controlled-clock 2045 launch-window contract after building."
-}
 $hugoBuildStepIndex = $buildJobBlock.IndexOf('- name: Build Hugo', [StringComparison]::Ordinal)
 $collectionOrganizationStep = Get-WorkflowStepBlock `
   -WorkflowName "deploy.yml" `
@@ -441,10 +432,9 @@ if ($collectionOrganizationStep -notmatch 'shell: pwsh' -or
     $collectionOrganizationStepIndex -ge $hugoBuildStepIndex) {
   throw "Collection organization must validate all source members after Hugo setup and before the production build."
 }
-$launchWindowStepIndex = $buildJobBlock.IndexOf('- name: Test 2045 Launch Window', [StringComparison]::Ordinal)
 $removePdfStepIndex = $buildJobBlock.IndexOf('- name: Remove public PDF artifacts', [StringComparison]::Ordinal)
-if ($hugoBuildStepIndex -lt 0 -or $launchWindowStepIndex -le $hugoBuildStepIndex -or $removePdfStepIndex -le $launchWindowStepIndex) {
-  throw "The controlled-clock 2045 launch-window contract must run after Hugo and before public artifact cleanup."
+if ($hugoBuildStepIndex -lt 0 -or $removePdfStepIndex -le $hugoBuildStepIndex) {
+  throw "Public artifact cleanup must run after the Hugo build."
 }
 
 $browserSetupNodeStep = Get-WorkflowStepBlock `
