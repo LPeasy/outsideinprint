@@ -135,13 +135,14 @@ test("masthead defines the grouped desktop and mobile navigation from one destin
     ["Archive", '"archive/" | absURL', "read", "By date"],
     ["Collections", '"collections/" | absURL', "read", "By topic"],
     ["Library", '"library/" | absURL', "read", "Search all"],
+    ["Bob\u2019s Almanack", '"collections/bobs-almanack/" | absURL', "read", "Weekly newsletter"],
     ["Feeling curious?", '"random/" | absURL', "read", "Surprise me"],
     ["Gallery", '"gallery/" | absURL', "explore", "Editorial art"],
   ]) {
     assert.equal((masthead.match(new RegExp(`"label" "${escapeRegex(label)}"`, "g")) || []).length, 1, `${label} should be defined once`);
     assert.match(masthead, new RegExp(`"label" "${escapeRegex(label)}"[\\s\\S]*?"href" \\(${escapeRegex(route)}\\)[\\s\\S]*?"description" "${escapeRegex(description)}"[\\s\\S]*?"group" "${group}"`));
   }
-  const readOrder = ["Latest", "Archive", "Collections", "Library", "Feeling curious?"]
+  const readOrder = ["Latest", "Archive", "Collections", "Library", "Bob\u2019s Almanack", "Feeling curious?"]
     .map((label) => masthead.indexOf(`"label" "${label}"`));
   assert.ok(readOrder.every((position) => position >= 0), "every Read destination should exist");
   assert.ok(readOrder.every((position, index) => index === 0 || readOrder[index - 1] < position), "Read destinations should keep the requested order");
@@ -174,8 +175,8 @@ test("masthead defines the grouped desktop and mobile navigation from one destin
   assert.match(masthead, /\$inAboutSection := or \$isAboutPage \(eq \.Section "about"\)/);
   assert.match(masthead, /\$inContributeSection := or \$isContributePage \(eq \.Section "contribute"\)/);
   assert.match(masthead, /\$inRandomSection := or \$isRandomPage \(eq \.Section "random"\)/);
-  assert.equal((masthead.match(/"currentPage" \$[A-Za-z]/g) || []).length, 11);
-  assert.equal((masthead.match(/"currentSection" \$[A-Za-z]/g) || []).length, 11);
+  assert.equal((masthead.match(/"currentPage" \$[A-Za-z]/g) || []).length, 12);
+  assert.equal((masthead.match(/"currentSection" \$[A-Za-z]/g) || []).length, 12);
   assert.doesNotMatch(masthead, /"current"/);
   assert.match(masthead, /<nav class="nav nav--section-rail" aria-label="Primary" data-primary-nav>/);
   assert.equal((masthead.match(/aria-label="Primary"/g) || []).length, 1);
@@ -521,8 +522,8 @@ test("newsletter proposition is plain-language across signup and checkout surfac
     'button_label = "Join the newsletter"',
     'prompt_label = "Join the weekly Outside In Print newsletter."',
     'checkout_label = "Send me the weekly Outside In Print newsletter. Free. No spam ever."',
-    'sample_url = "/almanack/2026-07-25/"',
-    'sample_label = "Read a sample issue"',
+    'sample_url = "/collections/bobs-almanack/"',
+    'sample_label = "Read the latest issue"',
     'privacy_promise = "Your email goes to Buttondown to deliver and manage the Outside In Print newsletter. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime."',
     'privacy_url = "/privacy/"',
     'privacy_label = "Privacy details"'
@@ -538,7 +539,7 @@ test("newsletter proposition is plain-language across signup and checkout surfac
     '$newsletter.cadence',
     '$newsletter.contents',
     '$newsletter.price_promise',
-    '$newsletter.sample_url',
+    'partial "almanack/latest-issue-url.html" $page',
     '$newsletter.privacy_promise',
     'data-analytics-event="internal_promo_click"',
     'data-analytics-source-slot="{{ $sampleSourceSlot }}"'
@@ -547,9 +548,9 @@ test("newsletter proposition is plain-language across signup and checkout surfac
   }
   assert.match(newsletterSignup, /aria-describedby="\{\{ \$dekID \}\} \{\{ \$priceID \}\} \{\{ \$privacyID \}\}"/);
   assert.match(newsletterSignup, /\$anchorID := \.anchorID \| default ""/);
-  assert.match(newsletterSignup, /\$isSamplePage := eq \$page\.RelPermalink \$samplePath/);
-  assert.match(newsletterSignup, /You&rsquo;re reading the sample issue\./);
-  assert.match(newsletterSignup, /if \$isSamplePage[\s\S]*?<span>You&rsquo;re reading the sample issue\.<\/span>[\s\S]*?else[\s\S]*?data-analytics-source-slot="\{\{ \$sampleSourceSlot \}\}"/);
+  assert.match(newsletterSignup, /\$isSamplePage := and \(eq \$page\.Section "almanack"\) \(eq \$page\.RelPermalink \$samplePath\)/);
+  assert.match(newsletterSignup, /You&rsquo;re reading the latest issue\./);
+  assert.match(newsletterSignup, /if \$isSamplePage[\s\S]*?<span>You&rsquo;re reading the latest issue\.<\/span>[\s\S]*?else[\s\S]*?data-analytics-source-slot="\{\{ \$sampleSourceSlot \}\}"/);
   assert.match(newsletterPrompt, /href="#\{\{ \$targetID \}\}"/);
   assert.match(newsletterPrompt, /data-analytics-event="internal_promo_click"/);
   assert.match(newsletterPrompt, /data-analytics-source-slot="\{\{ \$sourceSlot \}\}"/);

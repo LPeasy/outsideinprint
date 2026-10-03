@@ -10,7 +10,7 @@ $paths = @{
 }
 foreach ($segment in $paths.Keys) {
   $html = Get-Content -LiteralPath (Join-Path $SiteDir "subscribe/$segment/index.html") -Raw
-  foreach ($required in @('Bob', 'Get Bob', 'Every Saturday', 'newsletter_submit', "funnel_$segment", 'https://buttondown.com/api/emails/embed-subscribe/OutsideInPrint', 'outside-in-print', '/privacy/', '/almanack/2026-07-25/', 'data-oip-image-id', 'funnel-samples-title')) {
+  foreach ($required in @('Bob', 'Get Bob', 'Every Saturday', 'newsletter_submit', "funnel_$segment", 'https://buttondown.com/api/emails/embed-subscribe/OutsideInPrint', 'outside-in-print', '/privacy/', 'Read the latest issue', 'data-oip-image-id', 'funnel-samples-title')) {
     if (-not $html.Contains($required)) { throw "$segment missing $required" }
   }
   if ([regex]::Matches($html, '<form\b').Count -ne 1) { throw "$segment must have one signup form" }

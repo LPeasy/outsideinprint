@@ -34,7 +34,7 @@ Outside In Print is written and published by Robert V. Ussley. Reported work sho
 
 ## Bob’s Almanack
 
-Every Saturday, Bob’s Almanack gathers new writing, illustrations, brief notices, and something worth reading again into a weekly sheet. [Subscribe for free](#about-newsletter), or [read an issue first](/almanack/2026-07-25/).
+Every Saturday, Bob’s Almanack gathers new writing, illustrations, brief notices, and something worth reading again into a weekly sheet. [Subscribe for free](#about-newsletter), or [read the latest issue]({{< almanack-latest-url >}}).
 
 ## Contribute
 

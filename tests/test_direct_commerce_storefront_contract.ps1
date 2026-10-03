@@ -221,8 +221,8 @@ foreach ($requiredConfig in @(
   'button_label = "Join the newsletter"',
   'prompt_label = "Join the weekly Outside In Print newsletter."',
   'checkout_label = "Send me the weekly Outside In Print newsletter. Free. No spam ever."',
-  'sample_url = "/almanack/2026-07-25/"',
-  'sample_label = "Read a sample issue"',
+  'sample_url = "/collections/bobs-almanack/"',
+  'sample_label = "Read the latest issue"',
   'privacy_promise = "Your email goes to Buttondown to deliver and manage the Outside In Print newsletter. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime."',
   'privacy_url = "/privacy/"',
   'privacy_label = "Privacy details"'
@@ -826,14 +826,14 @@ if ($shopOutput -match 'data-direct-offer-status=(?:"|'')?disabled(?:"|'')?') {
 foreach ($requiredNewsletterText in @(
   'Send me the weekly Outside In Print newsletter. Free. No spam ever.',
   'New essays, original visuals, and selected archive work from Outside In Print. One thoughtful email each week.',
-  'Read a sample issue',
+  'Read the latest issue',
   'Privacy details',
   'Your email goes to Buttondown to deliver and manage the Outside In Print newsletter. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime.',
   'Optional. Not required to buy.'
 )) {
   Assert-Contains -Text ([Net.WebUtility]::HtmlDecode($shopOutput)) -Expected $requiredNewsletterText -Context 'Built bookstore newsletter opt-in'
 }
-if ($shopOutput -notmatch '(?is)href=(?:"|'')?(?:https://outsideinprint\.org)?/almanack/2026-07-25/(?:"|'')?[^>]*data-analytics-event=(?:"|'')?internal_promo_click(?:"|'')?[^>]*data-analytics-source-slot=(?:"|'')?bookstore_detail_direct_sample_issue(?:"|'')?') {
+if ($shopOutput -notmatch '(?is)href=(?:"|'')?(?:https://outsideinprint\.org)?/almanack/\d{4}-\d{2}-\d{2}/(?:"|'')?[^>]*data-analytics-event=(?:"|'')?internal_promo_click(?:"|'')?[^>]*data-analytics-source-slot=(?:"|'')?bookstore_detail_direct_sample_issue(?:"|'')?') {
   throw 'Built bookstore sample links must use the existing internal-promotion event and derived direct-offer source slot.'
 }
 if ($shopOutput -notmatch '(?is)href=(?:"|'')?(?:https://outsideinprint\.org)?/privacy/(?:"|'')?[^>]*>\s*Privacy details\s*</a>') {

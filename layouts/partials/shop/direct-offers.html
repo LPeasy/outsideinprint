@@ -16,7 +16,7 @@
 {{- $publicationTag := index $newsletter "publication_tag" | default "new-publications" -}}
 {{- $newsletterCheckoutLabel := index $newsletter "checkout_label" -}}
 {{- $newsletterContents := index $newsletter "contents" -}}
-{{- $newsletterSampleURL := index $newsletter "sample_url" -}}
+{{- $newsletterSampleURL := partial "almanack/latest-issue-url.html" . -}}
 {{- $newsletterSampleLabel := index $newsletter "sample_label" -}}
 {{- $newsletterPrivacyPromise := index $newsletter "privacy_promise" -}}
 {{- $newsletterPrivacyURL := index $newsletter "privacy_url" -}}
