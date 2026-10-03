@@ -19,8 +19,11 @@ Historical files retain their original bodies and copy.
    `worth_reprinting.rationale` to explain why this archive piece belongs this
    week; it replaces the visible description/blurb pair. Preserve its title/link.
 4. Supply an issue-specific `email_preheader`. Use the canonical `issue_number`
-   for the rendered subject and body. A provider send sequence is separate; never
-   overwrite the issue number to match it.
+   for the rendered subject, body, and Buttondown Issue number. The exporter writes
+   it as the integer `secondary_id` in `email.json`. Set that field at the top level
+   of the draft creation/update payload; `metadata.canonical_issue_number` alone
+   does not control Buttondown's footer. Never derive it from provider send counts
+   or hardcode the next number.
 5. Render complete HTML and plaintext from that source:
 
    ```text
@@ -43,13 +46,46 @@ Historical files retain their original bodies and copy.
    this repository does not manage Buttondown templates or settings. Private
    review copies label a production link **Original published issue**.
 8. Preserve Buttondown's subscriber-specific unsubscribe/footer functionality.
-   Resolve the provider's plain-text “issue #” label explicitly: September 26 is
-   Almanack Issue 21; the observed provider footer said #17, possibly its own send
-   sequence. Verify before changing any sequence setting. Inspect the old footer
-   destinations `https://lpeasy.github.io/outsideinprint/` and
-   `https://medium.com/the-balanced-sheet`; the body uses the canonical
-   `https://outsideinprint.org/`. Provider footer changes remain a separate owner
-   review action. A local artifact cannot certify these provider fixes.
+   At draft creation in the supported editor, explicitly set **Issue number** to
+   the source `issue_number` (the API field is `secondary_id`). Read the saved
+   draft back and require that number and its subject to match the approved
+   export before any preview, scheduling, or subscriber send. Missing, different,
+   or unreadable values stop the handoff. Inspect the actual footer too; a private
+   draft preview may say `draft issue` and does not prove the final number.
+   Metadata, an exported payload, or a successful create response alone is not
+   readback evidence. If a historical review collides with an existing number,
+   stop for owner handling; do not renumber a sent email or silently omit the field.
+   Keep unsubscribe, preferences, legal text and existing footer destinations.
+
+## Installed Windows handoff
+
+The production package handoff is installed in the outer OIP workspace under
+`scripts/`, outside this website repository. It uses
+`render_almanack_distribution.py`, `almanack_buttondown_body.ps1`,
+`send_almanack_to_buttondown.ps1`, `run_almanack_buttondown_preview.ps1`, and
+`manage_buttondown_almanack_email.ps1`. The distribution wrapper retains its
+immutable shared-renderer snapshot and adds the canonical provider number.
+
+The repository's `scripts/install_almanack_numbering_fix.py` applies the bounded
+numbering changes to that existing installation and installs
+`scripts/almanack_buttondown_numbering.ps1`. It refuses unexpected source text,
+backs up changed files before replacement, and is safe to rerun. Use its `--help`
+for explicit workspace, skill and backup paths. This adapter records the actual
+local handoff changes without copying unrelated workspace scripts into the site.
+
+Create or update an unsent draft with its explicit number, read it back, then use
+the guarded lifecycle handoff with the approved package for any separately
+authorized scheduling or send. Do not use a combined create-and-schedule request:
+the provider number must be verified while the email is a draft. An uncertain
+result is a stop for inspection, never permission to retry delivery.
+
+This fix authorizes no provider action and changes no global counter, subscribers,
+sent/archive emails, credentials, or schedules. As of October 3, 2026, the next regular source issue is
+23; its provider number is unverified until that real draft exists and is read
+back. Subsequent issues use their own source number.
+
+Buttondown documents the writable field in [Creating an email](https://docs.buttondown.com/api-emails-create)
+and the footer variable `email.secondary_id` in [Templating](https://docs.buttondown.com/templating).
 
 The September 26 showcase is a private review copy, not a corrected publication,
 an October 3 edition, or a subscriber send. Owner review of both web and email

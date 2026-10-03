@@ -73,6 +73,7 @@ class RenderedEmailTests(unittest.TestCase):
         parsed = ParsedEmail(html)
         self.assertEqual(metadata["subject"], "Bob\u2019s Almanack ~ October 3, 2026 ~ Issue 22")
         self.assertEqual(metadata["issue_number"], 22)
+        self.assertEqual(metadata["secondary_id"], 22)
         self.assertEqual(len(metadata["content"]["essays"]), 5)
         self.assertEqual(len(parsed.images), 6)
         self.assertIn("https://outsideinprint.org/collections/the-restless-heart/", parsed.links)
@@ -83,11 +84,32 @@ class RenderedEmailTests(unittest.TestCase):
             self.assertIn(essay.get("excerpt", essay.get("capsule", "")), plain)
         self.assertIn("I\u2019m grateful for this day and its opportunities.", plain)
 
+    def test_future_numbers_are_explicit_and_not_a_fixed_next_counter(self):
+        for number in (23, 24):
+            with self.subTest(number=number):
+                source = self.source.replace("issue_number: 21", f"issue_number: {number}")
+                metadata, html, plain = self.render(source)
+                self.assertEqual(metadata["secondary_id"], number)
+                self.assertEqual(metadata["content"]["issue_number"], number)
+                self.assertIn(f"Issue {number}", metadata["subject"])
+                self.assertIn(f"Issue {number}", plain)
+                exported = json.loads((self.root / "rendered/email.json").read_text(encoding="utf-8"))
+                self.assertEqual(exported["secondary_id"], number)
+                self.assertIn(f"to {number}", (self.root / "rendered/REVIEW.txt").read_text(encoding="utf-8"))
+                self.assertFalse(exported["provider_preview_verified"])
+
+    def test_mismatched_approved_subject_stops_export(self):
+        source = self.source.replace('version: "1.0"', 'version: "1.0"\napproved_email_subject: "Bob Almanack ~ Issue 17"')
+        with self.assertRaisesRegex(ValueError, "subject"):
+            self.render(source)
+        self.assertFalse((self.root / "rendered/email.json").exists())
+
     def test_legacy_source_preserves_issue_facts_artwork_and_canonical_number(self):
         metadata, html, plain = self.render(self.source)
         parsed = ParsedEmail(html)
         visible = " ".join(parsed.text)
         self.assertEqual(metadata["issue_number"], 21)
+        self.assertEqual(metadata["secondary_id"], 21)
         self.assertIn("Issue 21", visible)
         self.assertIn("Issue 21", plain)
         self.assertEqual(parsed.headlines, 0, "The supplied image masthead must not acquire a duplicate heading.")
@@ -156,6 +178,25 @@ class RenderedEmailTests(unittest.TestCase):
         self.assertNotIn("View the web version", html + plain)
         with self.assertRaises(Exception):
             self.render(source.replace('  issue_number: 21', '  issue_number: 17'))
+
+
+class IssueNumberTests(unittest.TestCase):
+    def test_non_positive_or_non_integer_number_is_rejected(self):
+        for number in (None, 0, -1, True, "23", 23.5):
+            with self.subTest(number=number), self.assertRaisesRegex(ValueError, "positive integer"):
+                renderer.check_issue_number({"issue_number": number})
+
+    def test_manifest_source_and_masthead_must_agree(self):
+        metadata = {"issue_number": 23, "subject": "Bob's Almanack ~ Issue 23",
+                    "content": {"issue_number": 23}}
+        self.assertEqual(renderer.check_issue_number(metadata), 23)
+        metadata["content"]["issue_number"] = 22
+        with self.assertRaisesRegex(ValueError, "source"):
+            renderer.check_issue_number(metadata)
+        metadata["content"]["issue_number"] = 23
+        metadata["content"]["email_masthead"] = {"image_url": "https://example.invalid/art.png", "issue_number": 22}
+        with self.assertRaisesRegex(ValueError, "masthead"):
+            renderer.check_issue_number(metadata)
 
 
 if __name__ == "__main__":
