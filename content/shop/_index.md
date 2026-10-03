@@ -11,8 +11,4 @@ outputs:
   - RSS
 ---
 
-Independent fiction and nonfiction on the systems we build and the stories we tell ourselves. Read a free sample, then choose an Outside In Print e-book through secure Square checkout. Selected titles also have Kindle editions.
-
-Direct e-book checkout is currently available to U.S. customers only.
-
-[Reader support](/support/) uses a separate checkout.
+Independent fiction and nonfiction. Find your next book and read a sample.

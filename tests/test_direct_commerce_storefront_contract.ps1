@@ -82,8 +82,6 @@ function Get-MetaContent {
 $bookstoreData = Get-RequiredText -RelativePath 'data/bookstore.yaml'
 $bookstoreIndexContent = Get-RequiredText -RelativePath 'content/shop/_index.md'
 $usCheckoutRestriction = 'Direct e-book checkout is currently available to U.S. customers only.'
-Assert-Contains -Text $bookstoreIndexContent -Expected $usCheckoutRestriction -Context 'Bookstore geographic checkout notice'
-Assert-Ordered -Text $bookstoreIndexContent -First $usCheckoutRestriction -Second '[Reader support](/support/) uses a separate checkout.' -Context 'Bookstore geographic checkout notice'
 $americanNightmarePage = Get-RequiredText -RelativePath 'content/shop/the-american-nightmare-keep-dreaming-kid/index.md'
 if ([regex]::Matches($americanNightmarePage, '(?m)^date: 2026-08-21\s*$').Count -ne 1) {
   throw 'The American Nightmare site edition metadata must bind the owner-accepted 2026-08-21 publication date exactly once.'
@@ -240,7 +238,10 @@ foreach ($requiredTemplateText in @(
   'index $product "checkout_note" | default (index $product "direct_offers_note" | default "Secure checkout through Square. E-book delivered by email.")',
   '$headingLevel := .headingLevel | default 2',
   'if eq $headingLevel 3',
-  'index $product "checkout_label" | default "Buy e-book"',
+  '$continueLabel := printf "Continue to Square — %s" (index $offer "price_display")',
+  '<span class="bookstore-direct-offer__format">{{ $format }} e-book</span>',
+  'Delivery and refund terms',
+  'mailto:support@outsideinprint.org',
   'index $product "checkout_unavailable_label" | default "E-book coming soon"',
   'epub_checkout_api',
   'https://downloads.outsideinprint.org/api/books/epub',
@@ -312,21 +313,18 @@ if ($kindleButtonTemplate -match '(?i)data-analytics-event|<img|amazon[^<]*logo|
 
 $shopListTemplate = Get-RequiredText -RelativePath 'layouts/shop/list.html'
 foreach ($requiredDigitalFirstText in @(
-  'partial "shop/direct-offers.html"',
-  'partial "shop/kindle-button.html"',
-  '"sourceSlot" "bookstore_index_direct"',
-  '"collapseCheckout" true',
-  '"headingLevel" 3',
-  '"sourceSlot" "bookstore_index_kindle"',
-  'resources.Get "js/epub-checkout.js"'
+  'partial "shop/featured-book.html"',
+  'partial "shop/sample-link.html"',
+  'View book',
+  'EPUB e-book',
+  'Direct purchases are for U.S. customers.'
 )) {
-  Assert-Contains -Text $shopListTemplate -Expected $requiredDigitalFirstText -Context 'Digital-first shop list'
+  Assert-Contains -Text $shopListTemplate -Expected $requiredDigitalFirstText -Context 'Bookstore browse cards'
 }
-if ([regex]::Matches($shopListTemplate, 'partial\s+"shop/kindle-button\.html"').Count -ne 1) {
-  throw 'Bookstore index must render the shared compact Kindle partial exactly once per product loop.'
+if ($shopListTemplate -match 'shop/direct-offers\.html|shop/kindle-button\.html|data-epub-checkout|collapseCheckout|js/epub-checkout') {
+  throw 'Bookstore browsing cards must lead to the product page rather than render checkout forms or payment controls.'
 }
-Assert-Ordered -Text $shopListTemplate -First 'partial "shop/direct-offers.html"' -Second 'partial "shop/kindle-button.html"' -Context 'Bookstore index purchase order'
-Assert-Ordered -Text $shopListTemplate -First '{{ with .Content }}' -Second 'partial "shop/direct-offers.html"' -Context 'Bookstore geographic checkout notice placement'
+
 if ($shopListTemplate -match '(?i)paperback|physical-cart|physical-checkout|/api/books/physical|js/physical-checkout') {
   throw 'Shop list must not expose paperback, physical-cart, shipping, or physical-checkout UI.'
 }
@@ -413,7 +411,9 @@ if ($epubCheckoutScript -match '(?i)amazon|fallback_url|window\.location\.(?:ass
 
 foreach ($shopLayoutPath in @('layouts/shop/list.html', 'layouts/shop/single.html')) {
   $shopLayout = Get-RequiredText -RelativePath $shopLayoutPath
-  Assert-Contains -Text $shopLayout -Expected 'resources.Get "js/epub-checkout.js"' -Context $shopLayoutPath
+  if ($shopLayoutPath -eq 'layouts/shop/single.html') {
+    Assert-Contains -Text $shopLayout -Expected 'resources.Get "js/epub-checkout.js"' -Context $shopLayoutPath
+  }
   if ($shopLayout -match '(?i)resources\.Get "js/physical-checkout\.js"|data-physical-checkout|/api/books/physical') {
     throw "$shopLayoutPath must not load or render physical checkout during the digital-first launch."
   }
@@ -751,112 +751,77 @@ foreach ($expectation in $productSchemaExpectations) {
   }
 }
 
-$shopOutput = @(
-  $output['shop/index.html'],
-  $output['shop/the-american-nightmare-keep-dreaming-kid/index.html'],
-  $output['shop/the-parable-of-the-sheep/index.html'],
-  $output['shop/the-water-cycle/index.html']
-) -join "`n"
 $shopIndexOutput = [string]$output['shop/index.html']
-$shopDetailOutput = @(
-  $output['shop/the-american-nightmare-keep-dreaming-kid/index.html'],
-  $output['shop/the-parable-of-the-sheep/index.html'],
-  $output['shop/the-water-cycle/index.html']
-) -join "`n"
-$catalogDisclosures = @([regex]::Matches($shopIndexOutput, '<details\b[^>]*\bdata-bookstore-checkout-disclosure(?:=|\s|>)', 'IgnoreCase'))
-if ($catalogDisclosures.Count -ne 3) {
-  throw "Bookstore index must render exactly three direct-EPUB checkout disclosures; found $($catalogDisclosures.Count)."
-}
+$shopDetailOutput = @($productSchemaExpectations | ForEach-Object { $output[$_.Path] }) -join "`n"
+$shopOutput = $shopIndexOutput + "`n" + $shopDetailOutput
 $decodedShopIndexOutput = [Net.WebUtility]::HtmlDecode($shopIndexOutput)
-Assert-Contains -Text $decodedShopIndexOutput -Expected $usCheckoutRestriction -Context 'Built bookstore geographic checkout notice'
-$restrictionIndex = $decodedShopIndexOutput.IndexOf($usCheckoutRestriction, [StringComparison]::Ordinal)
-$firstDisclosureIndex = $decodedShopIndexOutput.IndexOf('data-bookstore-checkout-disclosure', [StringComparison]::Ordinal)
-if ($restrictionIndex -lt 0 -or $firstDisclosureIndex -lt 0 -or $restrictionIndex -ge $firstDisclosureIndex) {
-  throw 'Built bookstore must place the U.S.-only direct EPUB notice before the first checkout disclosure.'
+Assert-Contains -Text $decodedShopIndexOutput -Expected 'Direct purchases are for U.S. customers.' -Context 'Built bookstore geographic checkout notice'
+if ($shopIndexOutput -match '\bdata-epub-checkout(?:=|\s|>)|data-bookstore-checkout-disclosure|data-bookstore-kindle-button') {
+  throw 'Bookstore index must offer sample and product links without checkout forms or payment controls.'
 }
-if ($shopIndexOutput -match '(?is)<details\b[^>]*\bdata-bookstore-checkout-disclosure[^>]*\bopen(?:\s*=|\s|>)') {
-  throw 'Bookstore index direct-EPUB checkout disclosures must be closed by default.'
-}
-if ([regex]::Matches([Net.WebUtility]::HtmlDecode($shopIndexOutput), '<summary\b[^>]*\baria-label="Buy direct e-book — \$9\.99: [^"]+"[^>]*>\s*<span>Buy direct e-book — \$9\.99</span>\s*</summary>', 'IgnoreCase').Count -ne 3) {
-  throw 'Every bookstore index checkout disclosure must show the $9.99 direct-EPUB label and include the book title in its accessible name.'
-}
-if ([regex]::Matches($shopIndexOutput, '(?is)<details\b[^>]*\bdata-bookstore-checkout-disclosure(?:=|\s|>).*?<form\b[^>]*\bdata-epub-checkout(?:=|\s|>).*?</form>\s*</div>\s*</details>').Count -ne 3) {
-  throw 'Every bookstore index disclosure must contain its complete EPUB checkout form.'
-}
-$detailDisclosures = @([regex]::Matches($shopDetailOutput, '<details\b[^>]*\bdata-bookstore-checkout-disclosure(?:=|\s|>)', 'IgnoreCase'))
-if ($detailDisclosures.Count -ne 3) {
-  throw "Book detail pages must render exactly one collapsed post-sample checkout disclosure per title; found $($detailDisclosures.Count)."
-}
-if ($shopDetailOutput -match '(?is)<details\b[^>]*\bdata-bookstore-checkout-disclosure[^>]*\bopen(?:\s*=|\s|>)') {
-  throw 'Book detail post-sample checkout disclosures must be closed by default.'
-}
-foreach ($detailPath in @(
-  'shop/the-american-nightmare-keep-dreaming-kid/index.html',
-  'shop/the-parable-of-the-sheep/index.html',
-  'shop/the-water-cycle/index.html'
-)) {
-  $detailRawHtml = [string]$output[$detailPath]
+foreach ($expectation in $productSchemaExpectations) {
+  $detailRawHtml = [string]$output[$expectation.Path]
   $detailHtml = [Net.WebUtility]::HtmlDecode($detailRawHtml)
   if ([regex]::Matches($detailHtml, [regex]::Escape($usCheckoutRestriction), 'IgnoreCase').Count -ne 1) {
-    throw "Built bookstore detail $detailPath must expose the U.S.-only direct EPUB notice exactly once."
+    throw "Built bookstore detail $($expectation.Path) must expose the U.S.-only direct EPUB notice exactly once."
   }
-  $detailRestrictionIndex = $detailHtml.IndexOf($usCheckoutRestriction, [StringComparison]::Ordinal)
-  $detailCheckoutIndex = $detailHtml.IndexOf('data-direct-offer', [StringComparison]::Ordinal)
-  if ($detailRestrictionIndex -lt 0 -or $detailCheckoutIndex -lt 0 -or $detailRestrictionIndex -ge $detailCheckoutIndex) {
-    throw "Built bookstore detail $detailPath must place the U.S.-only notice before direct checkout."
+  Assert-Ordered -Text $detailHtml -First $usCheckoutRestriction -Second 'data-direct-offer' -Context "Built checkout restriction for $($expectation.Path)"
+  if ($detailRawHtml -match 'data-bookstore-checkout-disclosure|bookstore_sample_direct') {
+    throw "Built bookstore detail $($expectation.Path) must use one expanded purchase form and a post-sample return link."
   }
-  if ([regex]::Matches($detailRawHtml, 'data-analytics-source-slot=(?:"|'''')?bookstore_detail_direct(?:"|'''')?(?=\s|>)', 'IgnoreCase').Count -ne 1) {
-    throw "Built bookstore detail $detailPath must retain one expanded primary EPUB checkout."
+  $forms = @([regex]::Matches($detailRawHtml, '(?is)<form\b[^>]*\bdata-epub-checkout(?:=|\s|>).*?</form>'))
+  if ($forms.Count -ne 1) {
+    throw "Expected one complete checkout form for $($expectation.Path); found $($forms.Count)."
   }
-  if ([regex]::Matches($detailRawHtml, 'data-analytics-source-slot=(?:"|'''')?bookstore_sample_direct(?:"|'''')?(?=\s|>)', 'IgnoreCase').Count -ne 1) {
-    throw "Built bookstore detail $detailPath must contain one post-sample EPUB continuation checkout."
+  $checkoutHtml = [Net.WebUtility]::HtmlDecode($forms[0].Value)
+  $formTag = [regex]::Match($checkoutHtml, '(?is)^<form\b[^>]*>').Value
+  if ((Get-HtmlAttribute $formTag 'action') -cne 'https://downloads.outsideinprint.org/api/books/epub' -or
+      (Get-HtmlAttribute $formTag 'method') -cne 'post' -or
+      (Get-HtmlAttribute $formTag 'data-epub-sku') -cne $expectation.Sku -or
+      (Get-HtmlAttribute $formTag 'data-analytics-product') -cne $expectation.Sku -or
+      (Get-HtmlAttribute $formTag 'data-analytics-format') -cne 'EPUB' -or
+      (Get-HtmlAttribute $formTag 'data-analytics-source-slot') -cne 'bookstore_detail_direct') {
+    throw "Checkout endpoint, method, SKU, format, and attribution must remain intact for $($expectation.Path)."
   }
-  if ([regex]::Matches($detailRawHtml, '(?is)<details\b[^>]*\bdata-bookstore-checkout-disclosure(?:=|\s|>).*?<form\b[^>]*\bdata-epub-checkout(?:=|\s|>)[^>]*\bdata-analytics-source-slot=(?:"|'''')?bookstore_sample_direct(?:"|'''')?(?=\s|>).*?</form>\s*</div>\s*</details>').Count -ne 1) {
-    throw "Built bookstore detail $detailPath must keep the complete post-sample checkout inside its closed disclosure."
+  $emailInputs = @([regex]::Matches($checkoutHtml, '(?is)<input\b[^>]*>') | Where-Object { (Get-HtmlAttribute $_.Value 'name') -eq 'email' })
+  if ($emailInputs.Count -ne 1 -or (Get-HtmlAttribute $emailInputs[0].Value 'type') -ne 'email' -or $emailInputs[0].Value -notmatch '\brequired(?:\s*=|\s|>)') {
+    throw "Checkout for $($expectation.Path) must retain one required delivery email."
+  }
+  $submitButtons = @([regex]::Matches($checkoutHtml, '(?is)<button\b[^>]*>.*?</button>') | Where-Object { (Get-HtmlAttribute $_.Value 'type') -eq 'submit' })
+  $expectedLabel = 'Continue to Square — $' + $expectation.Price
+  if ($submitButtons.Count -ne 1 -or ([regex]::Replace($submitButtons[0].Value, '<[^>]+>', '')).Trim() -cne $expectedLabel) {
+    throw "Checkout for $($expectation.Path) must show the exact final action: $expectedLabel."
+  }
+  foreach ($name in @('weekly_email', 'publication_notifications')) {
+    $inputs = @([regex]::Matches($checkoutHtml, '(?is)<input\b[^>]*>') | Where-Object { (Get-HtmlAttribute $_.Value 'name') -eq $name })
+    if ($inputs.Count -ne 1 -or (Get-HtmlAttribute $inputs[0].Value 'type') -ne 'checkbox' -or $inputs[0].Value -match '\b(?:checked|required)(?:\s*=|\s|>)') {
+      throw "The $name consent choice on $($expectation.Path) must remain separate, optional, and unchecked."
+    }
+  }
+  Assert-Ordered -Text $checkoutHtml -First 'bookstore-epub-checkout__field' -Second 'bookstore-direct-offer__action' -Context 'Rendered direct EPUB checkout order'
+  Assert-Ordered -Text $checkoutHtml -First 'bookstore-direct-offer__action' -Second 'data-epub-checkout-status' -Context 'Rendered direct EPUB checkout order'
+  Assert-Ordered -Text $checkoutHtml -First 'data-epub-checkout-status' -Second 'bookstore-epub-checkout__preferences' -Context 'Rendered direct EPUB checkout order'
+  foreach ($requiredText in @('EPUB e-book', 'How to read it', 'Delivery and refund terms', 'Email support')) {
+    Assert-Contains -Text $detailHtml -Expected $requiredText -Context "Built purchase details for $($expectation.Path)"
+  }
+  if ([regex]::Matches($detailHtml, '<h2\b[^>]*>\s*Outside In Print e-book\s*</h2>', 'IgnoreCase').Count -ne 1) {
+    throw "Built bookstore detail $($expectation.Path) must retain one direct EPUB H2."
   }
 }
-foreach ($sku in $publicEpubSkus) {
-  if ($shopOutput -notmatch ('data-direct-offer-sku=(?:"|'''')?' + [regex]::Escape($sku) + '(?:"|'''')?')) {
-    throw "Built shop output does not expose the gated catalog record for $sku."
+foreach ($sku in $liveEpubSkus) {
+  if ([regex]::Matches($shopOutput, ('data-direct-offer-sku=(?:"|'')?' + [regex]::Escape($sku) + '(?:"|'')?(?=\s|>)')).Count -ne 1) {
+    throw "Built shop output must expose exactly one purchase offer for $sku."
   }
 }
 if ($shopOutput -match '(?is)<a\b[^>]*bookstore-direct-offer__action') {
   throw 'The API-based EPUB launch must not expose a hosted direct-offer checkout link.'
 }
-if ([regex]::Matches($shopOutput, 'data-direct-offer-status=(?:"|'''')?live(?:"|'''')?', 'IgnoreCase').Count -ne 9) {
-  throw 'Expected three catalog, three primary detail, and three post-sample live EPUB offers.'
+if ([regex]::Matches($shopOutput, 'data-direct-offer-status=(?:"|'')?live(?:"|'')?', 'IgnoreCase').Count -ne 4 -or
+    [regex]::Matches($shopOutput, '\bdata-epub-checkout(?:=|\s|>)', 'IgnoreCase').Count -ne 4) {
+  throw 'Expected four live EPUB offers and forms, one per product page.'
 }
-if ([regex]::Matches($shopOutput, 'data-direct-offer-status=(?:"|'''')?disabled(?:"|'''')?', 'IgnoreCase').Count -ne 0) {
+if ($shopOutput -match 'data-direct-offer-status=(?:"|'')?disabled(?:"|'')?') {
   throw 'No closed EPUB offer may remain on the storefront.'
-}
-if ([regex]::Matches($shopOutput, '\bdata-epub-checkout(?:=|\s|>)', 'IgnoreCase').Count -ne 9) {
-  throw 'Expected nine rendered checkout forms across catalog, primary detail, and post-sample offers.'
-}
-$renderedCheckoutForms = @([regex]::Matches($shopOutput, '(?is)<form\b[^>]*\bdata-epub-checkout(?:\s|>).*?</form>'))
-if ($renderedCheckoutForms.Count -ne 9) {
-  throw "Expected nine complete rendered checkout forms for order validation; found $($renderedCheckoutForms.Count)."
-}
-foreach ($renderedCheckoutForm in $renderedCheckoutForms) {
-  $checkoutHtml = $renderedCheckoutForm.Value
-  Assert-Ordered -Text $checkoutHtml -First 'bookstore-epub-checkout__field' -Second 'bookstore-direct-offer__action' -Context 'Rendered direct EPUB checkout order'
-  Assert-Ordered -Text $checkoutHtml -First 'bookstore-direct-offer__action' -Second 'data-epub-checkout-status' -Context 'Rendered direct EPUB checkout order'
-  Assert-Ordered -Text $checkoutHtml -First 'data-epub-checkout-status' -Second 'bookstore-epub-checkout__preferences' -Context 'Rendered direct EPUB checkout order'
-}
-if ([regex]::Matches($shopOutput, 'action=(?:"|'''')?https://downloads\.outsideinprint\.org/api/books/epub(?:"|'''')?', 'IgnoreCase').Count -ne 9) {
-  throw 'Expected the approved production endpoint on all catalog, detail, and post-sample EPUB forms.'
-}
-if ([regex]::Matches($shopOutput, 'type=(?:"|'''')?email(?:"|'''')?', 'IgnoreCase').Count -lt 9) {
-  throw 'Every live EPUB checkout must require a delivery email field.'
-}
-if ([regex]::Matches($shopOutput, 'name=(?:"|'''')?weekly_email(?:"|'''')?', 'IgnoreCase').Count -ne 9) {
-  throw 'Every live EPUB checkout must expose the optional weekly-email choice.'
-}
-if ([regex]::Matches($shopOutput, 'name=(?:"|'''')?publication_notifications(?:"|'''')?', 'IgnoreCase').Count -ne 9) {
-  throw 'Every live EPUB checkout must expose the optional new-publication choice.'
-}
-$marketingCheckboxes = @([regex]::Matches($shopOutput, '(?is)<input\b[^>]*\bname=(?:"|'''')?(?:weekly_email|publication_notifications)(?:"|'''')?[^>]*>'))
-if ($marketingCheckboxes.Count -ne 18 -or @($marketingCheckboxes | Where-Object { $_.Value -match '\bchecked(?:\s*=|\s|>)' }).Count -ne 0) {
-  throw 'All weekly-email and new-publication preferences must render unchecked and remain optional.'
 }
 foreach ($requiredNewsletterText in @(
   'Send me the weekly Outside In Print newsletter. Free. No spam ever.',
@@ -868,10 +833,10 @@ foreach ($requiredNewsletterText in @(
 )) {
   Assert-Contains -Text ([Net.WebUtility]::HtmlDecode($shopOutput)) -Expected $requiredNewsletterText -Context 'Built bookstore newsletter opt-in'
 }
-if ($shopOutput -notmatch '(?is)href=(?:"|'''')?(?:https://outsideinprint\.org)?/almanack/2026-07-25/(?:"|'''')?[^>]*data-analytics-event=(?:"|'''')?internal_promo_click(?:"|'''')?[^>]*data-analytics-source-slot=(?:"|'''')?(?:bookstore_index_direct|bookstore_detail_direct)_sample_issue(?:"|'''')?') {
+if ($shopOutput -notmatch '(?is)href=(?:"|'')?(?:https://outsideinprint\.org)?/almanack/2026-07-25/(?:"|'')?[^>]*data-analytics-event=(?:"|'')?internal_promo_click(?:"|'')?[^>]*data-analytics-source-slot=(?:"|'')?bookstore_detail_direct_sample_issue(?:"|'')?') {
   throw 'Built bookstore sample links must use the existing internal-promotion event and derived direct-offer source slot.'
 }
-if ($shopOutput -notmatch '(?is)href=(?:"|'''')?(?:https://outsideinprint\.org)?/privacy/(?:"|'''')?[^>]*>\s*Privacy details\s*</a>') {
+if ($shopOutput -notmatch '(?is)href=(?:"|'')?(?:https://outsideinprint\.org)?/privacy/(?:"|'')?[^>]*>\s*Privacy details\s*</a>') {
   throw 'Built bookstore newsletter opt-ins must link the privacy details.'
 }
 if ($shopOutput -match '(?i)Limited time|launch window|No ads|Easy to leave') {
@@ -883,22 +848,22 @@ if ($shopOutput -match '(?i)OIP-(?:AN|PS|WC)-PB|data-physical|bookstore-physical
 if ($shopOutput -match '(?i)Amazon handles purchase|fallback_(?:url|label)|purchase_url') {
   throw 'Built shop output retained an obsolete Amazon-primary or fallback field.'
 }
-if ([regex]::Matches($shopOutput, 'data-bookstore-kindle-button(?:=|\s|>)', 'IgnoreCase').Count -ne 6) {
-  throw 'Built bookstore must render exactly one compact Kindle button per title on the index and detail surfaces.'
+if ([regex]::Matches($shopOutput, 'data-bookstore-kindle-button(?:=|\s|>)', 'IgnoreCase').Count -ne 3) {
+  throw 'Built bookstore must render exactly one compact Kindle button on each of the three eligible product pages.'
 }
 $decodedShopOutput = [Net.WebUtility]::HtmlDecode($shopOutput)
-if ([regex]::Matches($decodedShopOutput, '>Kindle on Amazon · \$9\.99</a>', 'IgnoreCase').Count -ne 6) {
-  throw 'All three titles must show the exact $9.99 compact Kindle label on index and detail pages.'
+if ([regex]::Matches($decodedShopOutput, '>Kindle on Amazon · \$9\.99</a>', 'IgnoreCase').Count -ne 3) {
+  throw 'All three eligible titles must retain the exact $9.99 compact Kindle label on their product pages.'
 }
 if ($decodedShopOutput -match '>Kindle on Amazon · \$4\.99</a>') {
   throw 'Built bookstore retained the stale Parable $4.99 Kindle label.'
 }
-
 $shopSurfaceExpectations = @(
-  @{ Path = 'shop/index.html'; KindleCount = 3; Expected = @('Outside In Print e-book', 'Secure checkout through Square. E-book delivered by email.', 'Buy e-book — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print') },
-  @{ Path = 'shop/the-american-nightmare-keep-dreaming-kid/index.html'; KindleCount = 1; Expected = @('Outside In Print e-book', 'Secure checkout through Square. E-book delivered by email.', 'Buy e-book — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') },
-  @{ Path = 'shop/the-parable-of-the-sheep/index.html'; KindleCount = 1; Expected = @('Outside In Print e-book', 'Secure checkout through Square. E-book delivered by email.', 'Buy e-book — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') },
-  @{ Path = 'shop/the-water-cycle/index.html'; KindleCount = 1; Expected = @('Outside In Print e-book', 'Secure checkout through Square. E-book delivered by email.', 'Buy e-book — $9.99', '$9.99', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') }
+  @{ Path = 'shop/index.html'; KindleCount = 0; Expected = @('EPUB e-book', 'View book', '$9.99', '$19.99', 'Robert V. Ussley', 'Outside In Print') },
+  @{ Path = 'shop/2045/index.html'; KindleCount = 0; Expected = @('Outside In Print e-book', 'Continue to Square — $19.99', 'EPUB e-book', 'Robert V. Ussley', 'Outside In Print') },
+  @{ Path = 'shop/the-american-nightmare-keep-dreaming-kid/index.html'; KindleCount = 1; Expected = @('Outside In Print e-book', 'Secure checkout through Square. E-book delivered by email.', 'Continue to Square — $9.99', 'EPUB e-book', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') },
+  @{ Path = 'shop/the-parable-of-the-sheep/index.html'; KindleCount = 1; Expected = @('Outside In Print e-book', 'Secure checkout through Square. E-book delivered by email.', 'Continue to Square — $9.99', 'EPUB e-book', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') },
+  @{ Path = 'shop/the-water-cycle/index.html'; KindleCount = 1; Expected = @('Outside In Print e-book', 'Secure checkout through Square. E-book delivered by email.', 'Continue to Square — $9.99', 'EPUB e-book', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') }
 )
 foreach ($surface in $shopSurfaceExpectations) {
   $surfaceHtml = [Net.WebUtility]::HtmlDecode([string]$output[$surface.Path])
@@ -909,24 +874,6 @@ foreach ($surface in $shopSurfaceExpectations) {
   if ($kindleCount -ne $surface.KindleCount) {
     throw "Built storefront $($surface.Path) expected $($surface.KindleCount) compact Kindle button(s); found $kindleCount."
   }
-}
-
-$shopIndexHtml = [Net.WebUtility]::HtmlDecode([string]$output['shop/index.html'])
-if ([regex]::Matches($shopIndexHtml, '<h3\b[^>]*>\s*Outside In Print e-book\s*</h3>', 'IgnoreCase').Count -ne 3) {
-  throw 'Built bookstore index must nest each direct EPUB offer under its book H2 with an H3.'
-}
-foreach ($detailPath in @(
-  'shop/the-american-nightmare-keep-dreaming-kid/index.html',
-  'shop/the-parable-of-the-sheep/index.html',
-  'shop/the-water-cycle/index.html'
-)) {
-  $detailHtml = [Net.WebUtility]::HtmlDecode([string]$output[$detailPath])
-  if ([regex]::Matches($detailHtml, '<h2\b[^>]*>\s*Outside In Print e-book\s*</h2>', 'IgnoreCase').Count -ne 1) {
-    throw "Built bookstore detail $detailPath must retain one direct EPUB H2."
-  }
-}
-if ([regex]::Matches($shopOutput, 'Secure checkout through Square\. E-book delivered by email after payment is confirmed\.', 'IgnoreCase').Count -ne 0) {
-  throw 'Built bookstore must not repeat the live Square and delivery helper beneath each direct offer.'
 }
 
 $privacyOutput = ([Net.WebUtility]::HtmlDecode([string]$output['privacy/index.html'])).Replace([char]0x2019, [char]0x27)
@@ -947,9 +894,6 @@ if ($privacyOutput -match [regex]::Escape('This policy explains how Outside In P
 }
 
 $orderedOffers = @(
-  @{ Path = 'shop/index.html'; Sku = 'OIP-AN-EPUB'; Kindle = 'Kindle on Amazon · $9.99' },
-  @{ Path = 'shop/index.html'; Sku = 'OIP-PS-EPUB'; Kindle = 'Kindle on Amazon · $9.99' },
-  @{ Path = 'shop/index.html'; Sku = 'OIP-WC-EPUB'; Kindle = 'Kindle on Amazon · $9.99' },
   @{ Path = 'shop/the-american-nightmare-keep-dreaming-kid/index.html'; Sku = 'OIP-AN-EPUB'; Kindle = 'Kindle on Amazon · $9.99' },
   @{ Path = 'shop/the-parable-of-the-sheep/index.html'; Sku = 'OIP-PS-EPUB'; Kindle = 'Kindle on Amazon · $9.99' },
   @{ Path = 'shop/the-water-cycle/index.html'; Sku = 'OIP-WC-EPUB'; Kindle = 'Kindle on Amazon · $9.99' }

@@ -9,7 +9,6 @@
 {{- $productTitle := index $product "title" | default "Book" -}}
 {{- $offerHeading := index $product "direct_offers_heading" | default "Outside In Print e-book" -}}
 {{- $offerHelper := index $product "checkout_note" | default (index $product "direct_offers_note" | default "Secure checkout through Square. E-book delivered by email.") -}}
-{{- $buyLabel := index $product "checkout_label" | default "Buy e-book" -}}
 {{- $disabledLabel := index $product "checkout_unavailable_label" | default "E-book coming soon" -}}
 {{- $newsletter := site.Params.newsletter -}}
 {{- $buttondownUsername := index $newsletter "buttondown_username" | default "" -}}
@@ -83,9 +82,11 @@
         {{- $emailNoteID := printf "%s-email-note-%s" $sourceSlot $productSlug -}}
         {{- $preferencesID := printf "%s-email-preferences-%s" $sourceSlot $productSlug -}}
         {{- $checkoutSummaryLabel := printf "Buy direct e-book — %s" (index $offer "price_display") -}}
+        {{- $continueLabel := printf "Continue to Square — %s" (index $offer "price_display") -}}
         <article class="bookstore-direct-offer" data-direct-offer data-direct-offer-sku="{{ $sku }}" data-direct-offer-status="{{ $status }}">
           <p class="bookstore-direct-offer__price">
             {{- if eq $status "disabled" }}<span>Planned price</span>{{ end -}}
+            <span class="bookstore-direct-offer__format">{{ $format }} e-book</span>
             {{ index $offer "price_display" }}
           </p>
 
@@ -134,7 +135,7 @@
                   />
                   <p id="{{ $emailNoteID }}">Your secure e-book link will be sent here.</p>
                 </div>
-                <button class="shop-cta bookstore-direct-offer__action" type="submit" aria-describedby="{{ $helperID }} {{ $statusID }}">{{ $buyLabel }}</button>
+                <button class="shop-cta bookstore-direct-offer__action" type="submit" aria-describedby="{{ $helperID }} {{ $statusID }}">{{ $continueLabel }}</button>
                 <p id="{{ $statusID }}" class="bookstore-epub-checkout__status" data-epub-checkout-status role="status" aria-live="polite"></p>
                 <fieldset class="bookstore-epub-checkout__preferences" aria-describedby="{{ $preferencesID }}">
                   <legend>Email updates (optional)</legend>
@@ -177,7 +178,7 @@
                 data-analytics-title="{{ $productTitle }}"
                 data-analytics-section="Bookstore"
                 data-analytics-path="/shop/{{ $productSlug }}/{{ $format | urlize }}/checkout"
-              >{{ $buyLabel }}</a>
+              >{{ $continueLabel }}</a>
             {{- end -}}
           {{- else -}}
             <span class="shop-cta shop-cta--disabled bookstore-direct-offer__action" aria-disabled="true" aria-describedby="{{ $helperID }}">{{ $disabledLabel }}</span>
@@ -192,5 +193,6 @@
         </article>
       {{- end -}}
     </div>
+    <p class="bookstore-direct-offers__help">Personal-use edition. <a href="{{ "epub-license-refunds/" | relURL }}">Delivery and refund terms</a> <span aria-hidden="true">&middot;</span> <a href="mailto:support@outsideinprint.org">Email support</a></p>
   </section>
 {{- end -}}

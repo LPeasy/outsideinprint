@@ -11,6 +11,4 @@ weight: 20
 
 ## About the book
 
-*The Parable of the Sheep* is a compact allegorical fiction about comfort, forgetting, and the old dangers that return when a flock mistakes habit for safety.
-
-Purchase options, prices, and release status are listed from the bookstore catalog on this page.
+The flock mistakes habit for safety. As memory fades, the story asks what holds a community together when its protection has become invisible.

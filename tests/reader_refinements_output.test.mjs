@@ -93,9 +93,9 @@ test("bookstore sales use e-book while checkout formats and explanatory help rem
     const html = read(route);
     assert.doesNotMatch(html, /DRM-free EPUB|Buy(?: direct)? EPUB|Outside In Print EPUB/);
     assert.match(html, /[Ee]-book/);
-    assert.match(html, /How to read it/);
-    assert.match(html, /The download is an EPUB file/);
-    if (route !== "shop/2045/sample") {
+    if (route !== "shop") assert.match(html, /How to read it/);
+    if (route !== "shop") assert.match(html, /The download is an EPUB file/);
+    if (route !== "shop/2045/sample" && route !== "shop") {
       assert.match(html, /https:\/\/downloads.outsideinprint.org\/api\/books\/epub/);
       assert.match(html, /OIP-[A-Z]{2}-EPUB/);
     }

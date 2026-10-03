@@ -1017,7 +1017,7 @@ if ($kindleButtonTemplate -match 'data-analytics-event') {
   throw 'Expected Kindle Amazon exits to rely on automatic external_link_click tracking without data-analytics-event.'
 }
 
-foreach ($requiredSlot in @('bookstore_index_direct', 'bookstore_index_kindle')) {
+foreach ($requiredSlot in @('bookstore_index_sample')) {
   if ($shopListTemplate -notmatch [regex]::Escape($requiredSlot)) {
     throw "Expected layouts/shop/list.html to include analytics source slot: $requiredSlot"
   }

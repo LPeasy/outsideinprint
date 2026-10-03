@@ -22,6 +22,8 @@ defaults:
 
 products:
   "2045":
+    contents_summary: "Ten dark fables, each with an illustration."
+    edition_note: "Illustrated EPUB edition · English"
     title: "2045"
     display_title: "2045"
     metadata_title: "2045: Ten Dark Fables from the Machine Age"
@@ -76,6 +78,9 @@ products:
       - "artificial intelligence"
       - "short stories"
   american_nightmare:
+    word_count: 25553
+    contents_summary: "Four parts and 21 chapters, with a preface, prologue, epilogue, and source notes."
+    edition_note: "EPUB edition · English · Word count includes source notes."
     type_label: "Book"
     title: "The American Nightmare: Keep Dreaming, Kid"
     display_title: "The American Nightmare"
@@ -85,7 +90,7 @@ products:
     publisher: "Outside In Print"
     product_type: "Outside In Print e-book"
     release_date: "2026-08-21"
-    deck: "An OIP digital book about timing, symbolism, political economy, citizenship, and the difference between a door and a house."
+    deck: "The American Dream promised work, a home, and a place in public life. This book follows that domestic promise into a global story of opportunity, asking what happened to the foundations beneath it."
     price_display: "$9.99"
     price_label: "E-book price"
     availability_note: "Direct e-book release in preparation."
@@ -137,6 +142,9 @@ products:
       - "citizenship"
       - "housing crisis"
   parable_of_the_sheep:
+    word_count: 4697
+    contents_summary: "A short allegory in 13 chapters."
+    edition_note: "EPUB edition · English"
     type_label: "Book"
     title: "The Parable of the Sheep"
     display_title: "The Parable of the Sheep"
@@ -144,7 +152,7 @@ products:
     author: "Robert V. Ussley"
     publisher: "Outside In Print"
     product_type: "Outside In Print e-book"
-    deck: "A compact allegorical fiction about comfort, forgetting, and the old dangers that return when safety becomes a story."
+    deck: "When the shepherd vanishes, the flock keeps grazing. The land stays plentiful. The wolves keep their distance. A dark allegory of comfort, memory, and the protection a flock learns to take for granted."
     price_display: "$9.99"
     price_label: "E-book price"
     availability_note: "Direct e-book release in preparation."
@@ -196,6 +204,9 @@ products:
       - "authority"
       - "wolves"
   the_water_cycle:
+    word_count: 21988
+    contents_summary: "A prologue, three parts, and a conclusion, with 20 figures and source notes."
+    edition_note: "EPUB edition · English · Word count includes sources and figure notes."
     type_label: "Book"
     title: "The Water Cycle: Risk, Infrastructure, and Public Memory"
     display_title: "The Water Cycle"
@@ -203,7 +214,7 @@ products:
     author: "Robert V. Ussley"
     publisher: "Outside In Print"
     product_type: "Outside In Print e-book"
-    deck: "A compact book about the maps, pipes, insurance records, reservoirs, and public decisions that shape how communities remember water risk."
+    deck: "A tap can hide a river. A map can make risk look settled. The Water Cycle follows water through floodplains, pipes, insurance, and public decisions, asking what communities forget when infrastructure works."
     price_display: "$9.99"
     price_label: "E-book price"
     availability_note: "Direct e-book release in preparation."

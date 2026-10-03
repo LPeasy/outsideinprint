@@ -430,6 +430,10 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
   assert.match(directOffers, /direct_offers_heading" \| default "Outside In Print e-book"/);
   assert.match(directOffers, /checkout_unavailable_label" \| default "E-book coming soon"/);
   assert.match(directOffers, /data-analytics-event="checkout_start"/);
+  assert.ok(directOffers.includes('$continueLabel := printf "Continue to Square — %s" (index $offer "price_display")'));
+  assert.ok(directOffers.includes('<span class="bookstore-direct-offer__format">{{ $format }} e-book</span>'));
+  assert.match(directOffers, /Delivery and refund terms/);
+  assert.match(directOffers, /mailto:support@outsideinprint\.org/);
   assert.match(directOffers, /type="email"[\s\S]*name="email"[\s\S]*required/);
   assert.match(directOffers, /type="checkbox" name="weekly_email"/);
   assert.match(directOffers, /type="checkbox" name="publication_notifications"/);
@@ -461,14 +465,12 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
   assert.match(kindleButton, /data-analytics-source-slot="\{\{ \$sourceSlot \}\}"/);
   assert.doesNotMatch(kindleButton, /data-analytics-event|<img/i);
 
-  assert.equal((shopList.match(/partial "shop\/kindle-button\.html"/g) || []).length, 1);
   assert.equal((shopSingle.match(/partial "shop\/kindle-button\.html"/g) || []).length, 1);
-  assert.ok(shopList.indexOf('partial "shop/direct-offers.html"') < shopList.indexOf('partial "shop/kindle-button.html"'));
   assert.ok(shopSingle.indexOf('partial "shop/direct-offers.html"') < shopSingle.indexOf('partial "shop/kindle-button.html"'));
-  assert.match(shopList, /bookstore_index_direct/);
-  assert.match(shopList, /"collapseCheckout" true/);
-  assert.match(shopList, /"headingLevel" 3/);
-  assert.match(shopList, /bookstore_index_kindle/);
+  assert.doesNotMatch(shopList, /shop\/direct-offers\.html|shop\/kindle-button\.html|collapseCheckout|data-epub-checkout|js\/epub-checkout/);
+  assert.match(shopList, /View book/);
+  assert.match(shopList, /EPUB e-book/);
+
   assert.match(shopSingle, /bookstore_detail_direct/);
   assert.match(shopSingle, /bookstore_detail_kindle/);
   assert.doesNotMatch(shopSingle, /collapseCheckout/);
@@ -589,7 +591,8 @@ test("newsletter proposition is plain-language across signup and checkout surfac
 
 test("contact, bookstore, and Civic Institutions expose the repaired public copy", () => {
   assert.match(contactContent, /For factual corrections, editorial questions, rights inquiries, or reprint requests, email \[support@outsideinprint\.org\]/);
-  assert.match(shopContent, /choose an Outside In Print e-book through secure Square checkout\./);
+  assert.match(shopContent, /Independent fiction and nonfiction\. Find your next book and read a sample\./);
+  assert.match(shopList, /EPUB e-books arrive by email after secure Square checkout\./);
   assert.doesNotMatch(shopContent, /Buy all three directly/);
   assert.match(collectionsData, /description: Essays on courts, federalism, public institutions, and the exercise of public power\./);
   assert.match(civicCollectionContent, /description: "Essays on courts, federalism, public institutions, and the exercise of public power\."/);
