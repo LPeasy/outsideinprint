@@ -58,6 +58,23 @@ def check_editorial_content(content):
         raise ValueError("Worth Reprinting requires a why-this-week rationale.")
 
 
+def check_issue_number(metadata):
+    """Bind the provider's footer number to the approved source, never its counter."""
+    number = metadata.get("issue_number")
+    if type(number) is not int or number < 1:
+        raise ValueError("The canonical issue_number must be a positive integer.")
+    content = metadata["content"]
+    if content.get("issue_number") != number:
+        raise ValueError("Exported issue_number must match the source issue_number.")
+    match = re.search(r"\bIssue ([1-9][0-9]*)$", metadata.get("subject", ""))
+    if not match or int(match[1]) != number:
+        raise ValueError("The email subject must end with the canonical Issue number.")
+    masthead = content.get("email_masthead") or {}
+    if masthead.get("image_url") and masthead.get("issue_number") != number:
+        raise ValueError("The image masthead must match the canonical issue_number.")
+    return number
+
+
 def render(issue_path, output_dir, hugo):
     issue_path = Path(issue_path).resolve()
     output_dir = Path(output_dir).resolve()
@@ -90,6 +107,7 @@ def render(issue_path, output_dir, hugo):
             artifacts[suffix] = matches[0].read_text(encoding="utf-8")
         metadata = json.loads(artifacts["json"])
         check_editorial_content(metadata["content"])
+        metadata["secondary_id"] = check_issue_number(metadata)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     metadata.update({"source_file": str(issue_path), "source_sha256": hashlib.sha256(source).hexdigest(),
@@ -101,9 +119,12 @@ def render(issue_path, output_dir, hugo):
         "REVIEW ARTIFACT ~ NOT A SEND OR PROVIDER PREVIEW\n"
         f"{metadata['subject']}\nPreheader: {metadata['preheader']}\n\n"
         "This full HTML document and matching plaintext use the supplied issue front matter.\n"
-        "Provider wrappers, social links, sequence numbers, and subscriber-specific\n"
-        "unsubscribe/footer links are outside this renderer. Verify them in a Buttondown\n"
-        "test preview before sending. No provider configuration was changed.\n",
+        f"Set Buttondown's top-level secondary_id (Issue number) to {metadata['secondary_id']}\n"
+        "when creating the draft. Metadata alone does not set its footer number.\n"
+        "Read back secondary_id and subject before preview, scheduling, or sending;\n"
+        "stop on a missing or mismatched number. Inspect the actual provider footer.\n"
+        "Provider wrappers, social links, and subscriber-specific unsubscribe/footer\n"
+        "links require provider review. No provider configuration was changed.\n",
         encoding="utf-8")
     return metadata
 
