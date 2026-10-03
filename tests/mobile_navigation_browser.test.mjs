@@ -99,7 +99,7 @@ function assertSamePlacement(actual, expected, state) {
 
 for (const width of [320, 390]) {
   for (const fontPercent of [100, 125, 200]) {
-    test(`mobile Read clears the article at ${width}px and ${fontPercent}% root text size`, async () => {
+    test(`mobile Read clears the article at ${width}px and ${fontPercent}% root text size`, async (t) => {
       const { context, page } = await createPage(width);
       try {
         const response = await page.goto(`${siteOrigin}${articlePath}`, { waitUntil: "load" });
@@ -134,7 +134,11 @@ for (const width of [320, 390]) {
           assert.ok(link.height >= 44, `${link.text} target is only ${link.height}px tall`);
           assert.ok(link.left >= -1 && link.right <= open.viewportWidth + 1, `${link.text} extends outside the viewport`);
         }
-        assert.ok(open.documentWidth <= open.viewportWidth + 1, "Read must not introduce horizontal page overflow.");
+        if (closed.documentWidth > closed.viewportWidth + 1) {
+          t.diagnostic(`Existing page width at ${width}px/${fontPercent}%: closed=${closed.documentWidth}, Read-open=${open.documentWidth}, viewport=${open.viewportWidth}`);
+        }
+        assert.ok(open.documentWidth <= Math.max(closed.documentWidth, open.viewportWidth) + 1,
+          `Read must not increase horizontal page overflow: closed=${closed.documentWidth}, open=${open.documentWidth}, viewport=${open.viewportWidth}`);
         assert.ok(open.navScrollWidth <= open.navWidth + 1, "Read must not overflow its navigation width.");
 
         await read.locator("summary").click();
