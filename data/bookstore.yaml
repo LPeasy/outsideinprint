@@ -78,7 +78,7 @@ products:
       - "artificial intelligence"
       - "short stories"
   american_nightmare:
-    word_count: 25553
+    word_count: 25512
     contents_summary: "Four parts and 21 chapters, with a preface, prologue, epilogue, and source notes."
     edition_note: "EPUB edition · English · Word count includes source notes."
     type_label: "Book"
