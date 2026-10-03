@@ -1011,7 +1011,7 @@ html[data-theme="light"] .paper-route-toggle{
     grid-column:2;
   }
   .nav__mobile:has(.nav-mobile-disclosure--read[open]){
-    padding-bottom:10.9rem;
+    padding-bottom:14rem;
   }
   .nav__mobile:has(.nav-mobile-disclosure--explore[open]){
     padding-bottom:8.2rem;
