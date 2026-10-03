@@ -3417,7 +3417,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)home-reader-banner__signup.*?From the imprint.*?One thoughtful letter each week\..*?No spam ever\. Unsubscribe anytime\..*?data-analytics-event=(?:"newsletter_submit"|newsletter_submit).*?data-analytics-source-slot=(?:"homepage_reader_banner"|homepage_reader_banner).*?Join the newsletter'
+    Pattern = '(?s)home-reader-banner__signup.*?From the imprint.*?Bob(?:&rsquo;|&#8217;|\u2019|\x27)s Almanack.*?The free Saturday letter from Outside In Print\..*?No spam ever\. Unsubscribe anytime\..*?data-analytics-event=(?:"newsletter_submit"|newsletter_submit).*?data-analytics-source-slot=(?:"homepage_reader_banner"|homepage_reader_banner).*?Get Bob(?:&rsquo;|&#8217;|\u2019|\x27)s Almanack'
     Message = 'expected the homepage to retain the plain-language tracked newsletter signup below the reading surface'
   },
   @{
@@ -4322,12 +4322,12 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-07-25/index.html'
-    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Free\. No spam ever\. Unsubscribe anytime\..*?You(?:&rsquo;|&#8217;|\u2019)re reading the sample issue\..*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.'
+    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?Bob(?:&rsquo;|&#8217;|\u2019|\x27)s Almanack.*?The free Saturday letter from Outside In Print\..*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Free\. No spam ever\. Unsubscribe anytime\..*?You(?:&rsquo;|&#8217;|\u2019)re reading the sample issue\..*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.'
     Message = 'expected the sample Almanack issue to end with the plain-language weekly newsletter proposition and issue-exit analytics slot'
   },
   @{
     Path = 'public/almanack/2026-07-25/index.html'
-    Pattern = '(?s)newsletter-signup--article-exit.*?<a[^>]*href=(?:"|'''')?(?:https://outsideinprint\.org)?/almanack/2026-07-25/(?:"|'''')?[^>]*>\s*Read a sample issue\s*</a>'
+    Pattern = '(?s)newsletter-signup--article-exit.*?<a[^>]*href=(?:"|'''')?(?:https://outsideinprint\.org)?/almanack/2026-07-25/(?:"|'''')?[^>]*>\s*Read a sample Saturday letter\s*</a>'
     Message = 'expected the configured sample issue signup not to link back to itself'
     ShouldNotMatch = $true
   },
@@ -5003,7 +5003,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Join the newsletter.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/[^>]*>\s*Read a sample issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.'
+    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?Bob(?:&rsquo;|&#8217;|\u2019|\x27)s Almanack.*?The free Saturday letter from Outside In Print\..*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Get Bob(?:&rsquo;|&#8217;|\u2019|\x27)s Almanack.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/[^>]*>\s*Read a sample Saturday letter\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.'
     Message = 'expected article aftermatter to place the full weekly newsletter signup after the publication record'
   },
   @{
@@ -5771,8 +5771,8 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   if ($homeNewsletterSections.Count -eq 1 -and (Get-AttributeValue -Tag $homeNewsletterSections[0] -Name 'aria-labelledby') -cne 'home-reader-banner-title') {
     $uxIssues.Add('public/index.html => expected the separate newsletter region to retain its existing heading label')
   }
-  if (-not $homeIndexHtml.Contains('Every Saturday: new writing, one revealing number, and a thought worth keeping.', [System.StringComparison]::Ordinal)) {
-    $uxIssues.Add('public/index.html => expected the explicit Saturday newsletter promise')
+  if (-not $homeIndexHtml.Contains('The free Saturday letter from Outside In Print.', [System.StringComparison]::Ordinal)) {
+    $uxIssues.Add('public/index.html => expected the shared free Saturday letter identity')
   }
   if ($homeProofSections.Count -eq 1) {
     $proofStart = $homeIndexHtml.IndexOf($homeProofSections[0], [System.StringComparison]::Ordinal)
@@ -6253,7 +6253,7 @@ foreach ($articlePath in @(
     $uxIssues.Add("$articlePath => expected exactly one standard reading continuation, not the retired article-paths exit")
   }
 
-  if ($newsletterHtml -notmatch '(?s)newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?Join the newsletter.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.') {
+  if ($newsletterHtml -notmatch '(?s)newsletter-signup--article-exit.*?Every Saturday.*?Bob(?:&rsquo;|&#8217;|\u2019|\x27)s Almanack.*?The free Saturday letter from Outside In Print\..*?Get Bob(?:&rsquo;|&#8217;|\u2019|\x27)s Almanack.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/2026-07-25/.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.') {
     $uxIssues.Add("$articlePath => expected the weekly newsletter cadence, contents, no-spam promise, sample, and privacy proposition")
   }
 

@@ -1,7 +1,7 @@
 ---
 title: "Privacy Policy"
 description: "How Outside In Print handles information connected to site use, Studio inquiry emails, email subscriptions, Steam storefront visits, orders, EPUB delivery, and reader support."
-effective_date: "September 15, 2026"
+effective_date: "October 2, 2026"
 type: "commerce-policy"
 draft: false
 show_citation: false
@@ -28,6 +28,8 @@ Outside In Print uses GoatCounter to understand aggregate site use and events su
 Reading events use active time and scroll depth as an approximate engagement signal. A checkout-start event does not confirm a purchase, and a newsletter-submit event does not confirm a subscription.
 
 For Studio use, site analytics may receive the Studio page path, offer code, source slot, format, and a draft-prepare or direct-email event. They do not receive the inquiry name, reply email, website, project subject, or written answer. A draft-prepare or direct-email event does not prove that a message was sent or received.
+
+For approved Bob’s Almanack campaign links, the browser retains only validated platform, segment, and post or bio codes in this tab’s session storage for up to 30 minutes. If you submit a standalone newsletter form within that window while site analytics is enabled, those codes and the fixed campaign and medium codes go directly to Buttondown with the email address you voluntarily provide. GoatCounter may receive the validated codes, but never your email. Navigation and submission do not extend the browser window. The 30-minute expiry applies to the browser’s codes; it does not delete Buttondown’s subscription records or set their retention period.
 
 ## How information is used
 

@@ -59,6 +59,11 @@
           {{ with $newsletter.tag }}
             <input type="hidden" name="tag" value="{{ . }}" />
           {{ end }}
+          <input type="hidden" name="utm_campaign" value="" disabled />
+          <input type="hidden" name="utm_medium" value="" disabled />
+          <input type="hidden" name="utm_source" value="" disabled />
+          <input type="hidden" name="metadata__oip_segment" value="" disabled />
+          <input type="hidden" name="metadata__oip_post" value="" disabled />
           <button type="submit" class="newsletter-signup__button">{{ $buttonLabel }}</button>
         </form>
 

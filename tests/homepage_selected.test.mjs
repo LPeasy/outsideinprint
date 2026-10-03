@@ -46,10 +46,10 @@ test("reader banner contains only owner-provided proof and the newsletter offer 
   assert.match(readerNewsletter, /From the imprint/);
   assert.doesNotMatch(readerNewsletter, /Independent writing on history, economics, culture, and public life\./);
   assert.match(readerNewsletter, /<h2 id="home-reader-banner-title" tabindex="-1">/);
-  assert.match(readerNewsletter, /One thoughtful letter each week\./);
-  assert.match(readerNewsletter, /Every Saturday: new writing, one revealing number, and a thought worth keeping\./);
+  assert.match(readerNewsletter, /index \$newsletter "title"/);
+  assert.match(readerNewsletter, /index \$newsletter "contents"/);
   assert.match(readerNewsletter, /No spam ever\. Unsubscribe anytime\./);
-  assert.match(readerNewsletter, /Join the newsletter/);
+  assert.match(readerNewsletter, /index \$newsletter "button_label"/);
   assert.match(readerNewsletter, /eq \$provider "buttondown"/);
   assert.match(readerNewsletter, /data-analytics-event="newsletter_submit"/);
   assert.match(readerNewsletter, /data-analytics-source-slot="homepage_reader_banner"/);

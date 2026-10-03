@@ -9,6 +9,7 @@ const storageKey = "oip.almanack-acquisition.v1";
 const entryTime = Date.parse("2026-10-01T12:00:00Z");
 const retentionMs = 30 * 60 * 1000;
 const bioSegments = ["weekend", "everyday-history", "dialogue"];
+const fieldNames = ["utm_campaign", "utm_medium", "utm_source", "metadata__oip_segment", "metadata__oip_post"];
 const newEntries = [["pinterest", "weekend", "weekend-01"], ...bioSegments.map(segment => ["instagram", segment, `${segment}-bio`])];
 
 function campaign(platform, segment, post) {
@@ -24,6 +25,7 @@ function load({ url, storage = new Map(), clock = { now: entryTime }, enabled = 
   const location = new URL(url || `${origin}/subscribe/weekend/`);
   const counts = [];
   const listeners = new Map();
+  const fields = Object.fromEntries(fieldNames.map(name => [name, {type: "hidden", value: "", disabled: true}]));
   let storageAccesses = 0;
   const window = {
     location,
@@ -49,15 +51,15 @@ function load({ url, storage = new Map(), clock = { now: entryTime }, enabled = 
   };
   vm.runInNewContext(script, { window, document, URL, URLSearchParams, Date: { now: () => clock.now } });
   return {
-    window, counts, storage,
+    window, counts, storage, fields,
     get storageAccesses() { return storageAccesses; },
-    submit() {
+    submit(sourceSlot = `funnel_${location.pathname.split("/")[2]}`) {
       // Form values exist, but must never be read into analytics or storage.
       listeners.get("submit")?.({ target: {
         matches: selector => selector === "[data-analytics-event]",
-        dataset: { analyticsEvent: "newsletter_submit", analyticsSourceSlot: `funnel_${location.pathname.split("/")[2]}` },
-        elements: { email: { value: "SUBSCRIBER_PII_SENTINEL@example.com" } }
-      } });
+        dataset: { analyticsEvent: "newsletter_submit", analyticsSourceSlot: sourceSlot },
+        elements: { ...fields, email: { get value() { throw new Error("Email must never be read by analytics"); } } }
+      }, preventDefault() { throw new Error("Native submit must remain intact"); } });
     }
   };
 }
@@ -225,5 +227,102 @@ test("The Pinterest addition does not broaden the existing 2045-launch allowlist
     const expected = source === "buttondown" ? "newsletter-2045-launch" : source === "pinterest" ? "direct_unknown" : "social-2045-launch";
     assert.equal(view.window.goatcounter.referrer(), expected);
     assert.equal(view.storage.size, 0);
+  }
+});
+
+test("Every allowed platform and route-matched numbered or bio code reaches the five optional native fields", () => {
+  for (const platform of ["facebook", "instagram", "linkedin", "pinterest", "x"]) {
+    for (const segment of bioSegments) {
+      for (const suffix of ["01", "02", "03", "04", "bio"]) {
+        const post = `${segment}-${suffix}`;
+        const view = load({url: campaign(platform, segment, post)});
+        assert.ok(Object.values(view.fields).every(field => field.disabled && field.value === ""));
+        const original = view.storage.get(storageKey);
+        view.submit();
+        assert.deepEqual(Object.fromEntries(Object.entries(view.fields).map(([key, field]) => [key, field.value])), {
+          utm_campaign: "almanack-organic", utm_medium: "organic_social", utm_source: platform,
+          metadata__oip_segment: segment, metadata__oip_post: post
+        });
+        assert.ok(Object.values(view.fields).every(field => !field.disabled));
+        assert.equal(view.storage.get(storageKey), original);
+      }
+    }
+  }
+});
+
+test("A long visit to the original tagged URL cannot reset expiry on submit, including repeat attempts", () => {
+  const clock = {now: entryTime};
+  const view = load({url: campaign("linkedin", "dialogue", "dialogue-bio"), clock});
+  const original = view.storage.get(storageKey);
+  clock.now += 20 * 60 * 1000;
+  view.submit();
+  assert.equal(view.storage.get(storageKey), original);
+  assert.equal(view.fields.metadata__oip_post.value, "dialogue-bio");
+  clock.now = entryTime + retentionMs;
+  view.submit();
+  assert.ok(Object.values(view.fields).every(field => field.disabled && field.value === ""));
+  assert.equal(view.storage.size, 0);
+  assert.equal(view.counts.at(-1).referrer, "direct_unknown");
+});
+
+test("Absent, invalid, duplicate, mismatched, and expired state omits every optional field", () => {
+  const url = campaign("facebook", "weekend", "weekend-01");
+  const cases = [
+    {}, {url: url.replace("facebook", "unknown")}, {url: url.replace("weekend-01", "dialogue-01")},
+    ...["utm_source", "utm_medium", "utm_campaign", "utm_content"].map(name => ({url: `${url}&${name}=duplicate`})),
+    {storage: new Map([[storageKey, JSON.stringify({platform: "facebook", segment: "dialogue", post: "weekend-01", expires: entryTime + retentionMs})]])},
+    {storage: new Map([[storageKey, JSON.stringify({platform: "facebook", segment: "weekend", post: "weekend-01", expires: entryTime})]])}
+  ];
+  for (const options of cases) {
+    const view = load(options);
+    view.submit();
+    assert.ok(Object.values(view.fields).every(field => field.disabled && field.value === ""));
+  }
+});
+
+test("Sample and homepage navigation reuse state without extending expiry or guessing a source", () => {
+  const storage = new Map();
+  const clock = {now: entryTime};
+  load({url: campaign("pinterest", "everyday-history", "everyday-history-bio"), storage, clock});
+  const original = storage.get(storageKey);
+  clock.now += 10 * 60 * 1000;
+  for (const path of ["/almanack/2026-07-25/", "/"]) {
+    const view = load({url: origin + path, storage, clock});
+    view.submit(path === "/" ? "homepage_reader_banner" : "almanack_issue_exit_newsletter");
+    assert.equal(view.fields.utm_source.value, "pinterest");
+    assert.equal(storage.get(storageKey), original);
+  }
+  const unknown = load({referrer: "https://facebook.com/a-referral"});
+  unknown.submit();
+  assert.ok(Object.values(unknown.fields).every(field => field.disabled));
+});
+
+test("Analytics off and storage denial preserve native signup with the appropriate optional fields", () => {
+  const url = campaign("x", "weekend", "weekend-04");
+  const off = load({url, enabled: false});
+  off.submit();
+  assert.ok(Object.values(off.fields).every(field => field.disabled && field.value === ""));
+  assert.equal(off.storageAccesses, 0);
+  const denied = load({url, denyStorage: true});
+  denied.submit();
+  assert.equal(denied.fields.utm_source.value, "x");
+  assert.equal(denied.fields.metadata__oip_post.value, "weekend-04");
+});
+
+test("Both real form templates start with exactly five empty disabled acquisition fields for no-JS signup", () => {
+  for (const path of ["newsletter_signup.html", "home_reader_newsletter.html"]) {
+    const template = fs.readFileSync(new URL(`../layouts/partials/${path}`, import.meta.url), "utf8");
+    const controls = [...template.matchAll(/<input\b[^>]*name="(utm_[^"]+|metadata__[^"]+)"[^>]*>/g)];
+    assert.deepEqual(controls.map(match => match[1]), fieldNames);
+    for (const [markup] of controls) {
+      assert.match(markup, /type="hidden"/);
+      assert.match(markup, /value=""/);
+      assert.match(markup, /\bdisabled\b/);
+      assert.doesNotMatch(markup, /\brequired\b/);
+    }
+    assert.match(template, /method="post"/);
+    assert.match(template, /name="embed" value="1"/);
+    assert.match(template, /name="tag"/);
+    assert.match(template, /type="email"[\s\S]*?\brequired\b/);
   }
 });

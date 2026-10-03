@@ -515,14 +515,14 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
 test("newsletter proposition is plain-language across signup and checkout surfaces", () => {
   for (const expected of [
     'cadence = "Every Saturday"',
-    'title = "The weekly newsletter"',
-    'contents = "New essays, original visuals, and selected archive work from Outside In Print. One thoughtful email each week."',
+    'title = "Bob’s Almanack"',
+    'contents = "The free Saturday letter from Outside In Print."',
     'price_promise = "Free. No spam ever. Unsubscribe anytime."',
-    'button_label = "Join the newsletter"',
+    'button_label = "Get Bob’s Almanack"',
     'prompt_label = "Join the weekly Outside In Print newsletter."',
     'checkout_label = "Send me the weekly Outside In Print newsletter. Free. No spam ever."',
     'sample_url = "/almanack/2026-07-25/"',
-    'sample_label = "Read a sample issue"',
+    'sample_label = "Read a sample Saturday letter"',
     'privacy_promise = "Your email goes to Buttondown to deliver and manage the Outside In Print newsletter. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime."',
     'privacy_url = "/privacy/"',
     'privacy_label = "Privacy details"'
@@ -555,7 +555,7 @@ test("newsletter proposition is plain-language across signup and checkout surfac
   assert.match(newsletterPrompt, /data-analytics-source-slot="\{\{ \$sourceSlot \}\}"/);
   assert.match(newsletterPrompt, /data-analytics-slug="bobs-almanack-signup"/);
   assert.match(homeV2FrontPage, /partial "home_reader_newsletter\.html"/);
-  assert.match(homeReaderNewsletter, /One thoughtful letter each week\./);
+  assert.match(homeReaderNewsletter, /index \$newsletter "title"/);
   assert.match(homeReaderNewsletter, /No spam ever\. Unsubscribe anytime\./);
   assert.match(homeReaderNewsletter, /data-analytics-source-slot="homepage_reader_banner"/);
   assert.doesNotMatch(homeV2FrontPage, /Bob(?:'|’)s Almanack|home-almanack/);
@@ -578,7 +578,7 @@ test("newsletter proposition is plain-language across signup and checkout surfac
   assert.equal((almanackIssue.match(/partial "newsletter_signup\.html"/g) || []).length, 1);
   assert.ok(almanackIssue.lastIndexOf("</article>") < almanackIssue.indexOf('partial "newsletter_signup.html"'));
 
-  assert.match(privacyPolicy, /effective_date: "September 15, 2026"/);
+  assert.match(privacyPolicy, /effective_date: "October 2, 2026"/);
   assert.match(privacyPolicy, /standalone Bob's Almanack signup form/);
   assert.match(privacyPolicy, /IP address, browser or device information, and referring page/);
   assert.match(privacyPolicy, /email-client, browser, device, IP-address, or referrer metadata/);
@@ -723,7 +723,7 @@ test("homepage composition puts reading before newsletter and contribution", () 
   assert.ok(compositionOrder.every((index) => index >= 0));
   assert.deepEqual(compositionOrder, [...compositionOrder].sort((left, right) => left - right));
 
-  assert.match(homeReaderNewsletter, /Join the newsletter/);
+  assert.match(homeReaderNewsletter, /index \$newsletter "button_label"/);
   assert.doesNotMatch(homeReaderBanner, /<form\b|home-reader-banner__signup/);
   assert.match(homeReaderBanner, /hugo\.Data\.homepage_metrics/);
   assert.match(homeV2FrontPage, /hugo\.Data\.homepage_metrics/);

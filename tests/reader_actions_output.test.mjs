@@ -73,7 +73,7 @@ test("built newsletter archive has one correctly placed signup and a real native
   assert.equal(attr(forms[0], "method"), "post");
   assert.equal(attr(forms[0], "data-analytics-source-slot"), "almanack_collection_newsletter");
   assert.equal(attr(forms[0], "data-analytics-event"), "newsletter_submit");
-  for (const promise of ["Every Saturday", "The weekly newsletter", "Free. No spam ever. Unsubscribe anytime."]) assert.ok(text(html).includes(promise));
+  for (const promise of ["Every Saturday", "Bob’s Almanack", "Free. No spam ever. Unsubscribe anytime."]) assert.ok(text(html).includes(promise));
   assert.ok(links(html).some((link) => attr(link.tag, "href") === "/privacy/"));
   const ids = [...html.matchAll(/<[a-z][^>]*\bid=(?:"[^"]*"|'[^']*'|[^\s>]+)[^>]*>/g)].map((m) => attr(m[0], "id"));
   assert.equal(new Set(ids).size, ids.length, "signup IDs must remain unique");

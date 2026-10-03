@@ -215,14 +215,14 @@ foreach ($requiredConfig in @(
   'custom_monthly_enabled = false',
   'publication_tag = "new-publications"',
   'cadence = "Every Saturday"',
-  'title = "The weekly newsletter"',
-  'contents = "New essays, original visuals, and selected archive work from Outside In Print. One thoughtful email each week."',
+  "title = `"Bob’s Almanack`"",
+  'contents = "The free Saturday letter from Outside In Print."',
   'price_promise = "Free. No spam ever. Unsubscribe anytime."',
-  'button_label = "Join the newsletter"',
+  "button_label = `"Get Bob’s Almanack`"",
   'prompt_label = "Join the weekly Outside In Print newsletter."',
   'checkout_label = "Send me the weekly Outside In Print newsletter. Free. No spam ever."',
   'sample_url = "/almanack/2026-07-25/"',
-  'sample_label = "Read a sample issue"',
+  'sample_label = "Read a sample Saturday letter"',
   'privacy_promise = "Your email goes to Buttondown to deliver and manage the Outside In Print newsletter. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime."',
   'privacy_url = "/privacy/"',
   'privacy_label = "Privacy details"'
@@ -825,8 +825,8 @@ if ($shopOutput -match 'data-direct-offer-status=(?:"|'')?disabled(?:"|'')?') {
 }
 foreach ($requiredNewsletterText in @(
   'Send me the weekly Outside In Print newsletter. Free. No spam ever.',
-  'New essays, original visuals, and selected archive work from Outside In Print. One thoughtful email each week.',
-  'Read a sample issue',
+  'The free Saturday letter from Outside In Print.',
+  'Read a sample Saturday letter',
   'Privacy details',
   'Your email goes to Buttondown to deliver and manage the Outside In Print newsletter. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime.',
   'Optional. Not required to buy.'
@@ -878,7 +878,7 @@ foreach ($surface in $shopSurfaceExpectations) {
 
 $privacyOutput = ([Net.WebUtility]::HtmlDecode([string]$output['privacy/index.html'])).Replace([char]0x2019, [char]0x27)
 foreach ($requiredPrivacyText in @(
-  'Effective September 15, 2026',
+  'Effective October 2, 2026',
   'standalone Bob''s Almanack signup form',
   'IP address, browser or device information, and referring page',
   'selected preference tags',
