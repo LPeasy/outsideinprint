@@ -20,7 +20,7 @@ function collectionSlugs(source) {
 test("author hub resolves six unique selected works, six distinct recent works, and every book", () => {
   const authorData = read("data/authors.yaml");
   const dossier = read("layouts/authors/dossier.html");
-  const featured = [...authorData.matchAll(/^\s{6}- (\/(?:essays|syd-and-oliver)\/[^\s]+\/)$/gm)].map((match) => match[1]);
+  const featured = [...authorData.matchAll(/^\s{6}- (\/(?:essays|syd-and-oliver|shop)\/[^\s]+\/)$/gm)].map((match) => match[1]);
   assert.equal(featured.length, 6);
   assert.equal(new Set(featured).size, 6);
   assert.match(authorData, /^\s{4}latest_limit: 6$/m);
