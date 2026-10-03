@@ -31,7 +31,8 @@ These are qualitative examples, not evidence of prevalence, an increase over tim
 - PASS: EPUBCheck 5.3.0, with zero fatal errors, errors, warnings, or informational messages.
 - PASS: visual review of the cover, correction notice, Franklin passage, revised evidence passage, epilogue, source note 32, and its continuation; no clipping or overlap observed.
 - PASS: `tests/test_bookstore_reading_sample_contract.ps1 -SourceOnly`; all three titles retain their expected boundaries and source-note fixtures.
-- PASS: exact four-file change scope and whitespace check. A full website render was not needed for this text-only draft; production build and deployment remain outside this preparation step.
+- PASS: focused `tests/bookstore_ebook_labels.test.mjs` source checks. Only American Nightmare's expected sample hash was refreshed; the integrity assertion and every other title's fixture remain unchanged. The three rendered-output checks await the CI website build.
+- PASS: exact five-file change scope and whitespace check. A full website render was not needed for this text-only draft; production build and deployment remain outside this preparation step.
 
 ## Release boundary
 
