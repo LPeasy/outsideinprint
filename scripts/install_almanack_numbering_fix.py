@@ -71,7 +71,7 @@ def patch_script(name, text):
              '  [string] $CanonicalUrl = "",\n\n  [string] $PackagePath = "",\n\n  [switch] $DryRun,'),
             ("$ApiVersion = '2026-04-01'", "$ApiVersion = '2026-04-01'\n. (Join-Path $PSScriptRoot 'almanack_buttondown_body.ps1')"),
             ("  $request = New-ButtondownRequest `", """  $shared = $null
-  if ($Action -ne 'UnscheduleDraft') {
+  if (-not $DryRun -and $Action -ne 'UnscheduleDraft') {
     if ([string]::IsNullOrWhiteSpace($PackagePath)) {
       throw '-PackagePath is required to verify canonical numbering before preview, scheduling or sending.'
     }
@@ -85,7 +85,7 @@ def patch_script(name, text):
   }
 
   $request = New-ButtondownRequest `"""),
-            ("  $jsonBody = $request.Body | ConvertTo-Json -Depth 10", """  if ($Action -ne 'UnscheduleDraft') {
+            ("  $jsonBody = $request.Body | ConvertTo-Json -Depth 10", """  if (-not $DryRun -and $Action -ne 'UnscheduleDraft') {
     $readbackUrl = "$($Endpoint.TrimEnd('/'))/$([System.Uri]::EscapeDataString($EmailId.Trim()))"
     $readback = Invoke-ButtondownRequest -Method Get -Url $readbackUrl -ApiKey $apiKey
     Assert-AlmanackButtondownNumbering -Response $readback -ExpectedIssueNumber $shared.IssueNumber -ExpectedSubject $shared.Subject -ExpectedEmailId $EmailId.Trim()
@@ -129,6 +129,13 @@ def patch_script(name, text):
             "  try {\n    return Invoke-RestMethod -Method $Method -Uri $Url -Headers $headers -ContentType 'application/json' -Body $JsonBody -TimeoutSec 30",
             "  try {\n    if ($Method -eq 'Get') {\n      return Invoke-RestMethod -Method Get -Uri $Url -Headers $headers -TimeoutSec 30\n    }\n    return Invoke-RestMethod -Method $Method -Uri $Url -Headers $headers -ContentType 'application/json' -Body $JsonBody -TimeoutSec 30"))
     for index, (old, new) in enumerate(edits):
+        if name == "manage_buttondown_almanack_email.ps1":
+            # Upgrade the exact v1 installation as well as an original workflow.
+            # Its dry-run exit already preceded GET, but package validation did not.
+            previous = new.replace("if (-not $DryRun -and $Action -ne 'UnscheduleDraft') {",
+                                   "if ($Action -ne 'UnscheduleDraft') {")
+            if previous != new and previous in text:
+                text = replace_once(text, previous, new, f"{name} v1 upgrade {index + 1}")
         text = replace_once(text, old, new, f"{name} edit {index + 1}")
     return text
 

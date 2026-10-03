@@ -5,6 +5,8 @@ source fixtures. No original files or provider state are changed by these tests.
 """
 import importlib.util
 import copy
+import json
+from datetime import datetime, timedelta, timezone
 import os
 from pathlib import Path
 import shutil
@@ -216,6 +218,56 @@ class InstallerTests(unittest.TestCase):
         ], capture_output=True, text=True, timeout=30)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertIn("offline checks passed", result.stdout)
+
+
+    @unittest.skipUnless(shutil.which("powershell.exe") or shutil.which("pwsh"), "PowerShell is required.")
+    def test_lifecycle_dry_runs_need_no_package_credentials_or_network(self):
+        self.install()
+        shell = shutil.which("powershell.exe") or shutil.which("pwsh")
+        environment = dict(os.environ)
+        environment.pop("BUTTONDOWN_API_KEY", None)
+        environment["OIP_TEST_LIFECYCLE"] = str(self.workspace / "scripts/manage_buttondown_almanack_email.ps1")
+        future = (datetime.now(timezone.utc) + timedelta(days=2)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        cases = (
+            ("SendPreview", "-Recipients 'offline@example.invalid'", "POST"),
+            ("ScheduleDraft", f"-ScheduleAt '{future}' -CanonicalUrl 'https://example.invalid/almanack/'", "PATCH"),
+            ("SendNow", "", "PATCH"),
+        )
+        for action, arguments, method in cases:
+            for package in ("", "-PackagePath 'nonexistent-dry-run-package'"):
+                with self.subTest(action=action, package=package):
+                    command = (
+                        "function global:Invoke-RestMethod { throw 'NETWORK_CALL_FORBIDDEN' }; "
+                        "function global:Invoke-WebRequest { throw 'NETWORK_CALL_FORBIDDEN' }; "
+                        "& $env:OIP_TEST_LIFECYCLE -EmailId 'em_offline_test' "
+                        f"-Action {action} -DryRun {arguments} {package} "
+                        "-Endpoint 'https://example.invalid/v1/emails'"
+                    )
+                    result = subprocess.run([shell, "-NoProfile", "-Command", command],
+                                            env=environment, capture_output=True, text=True, timeout=30)
+                    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                    self.assertNotIn("NETWORK_CALL_FORBIDDEN", result.stdout + result.stderr)
+                    preview = json.loads(result.stdout)
+                    self.assertTrue(preview["dry_run"])
+                    self.assertEqual(preview["action"], action)
+                    self.assertEqual(preview["method"], method)
+                    self.assertEqual(preview["headers"]["Authorization"], "Token <redacted>")
+                    if action == "SendPreview":
+                        self.assertEqual(preview["body"]["recipients"], ["offline@example.invalid"])
+                    else:
+                        self.assertEqual(preview["body"]["status"],
+                                         "scheduled" if action == "ScheduleDraft" else "about_to_send")
+
+    def test_lifecycle_v1_upgrade_is_exact_and_idempotent(self):
+        self.install()
+        path = self.workspace / "scripts/manage_buttondown_almanack_email.ps1"
+        installed = path.read_text(encoding="utf-8")
+        guarded = "if (-not $DryRun -and $Action -ne 'UnscheduleDraft') {"
+        self.assertEqual(installed.count(guarded), 2)
+        v1 = installed.replace(guarded, "if ($Action -ne 'UnscheduleDraft') {")
+        upgraded = self.module.patch_script(path.name, v1)
+        self.assertEqual(upgraded, installed)
+        self.assertEqual(self.module.patch_script(path.name, upgraded), installed)
 
 
 if __name__ == "__main__":

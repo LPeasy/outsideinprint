@@ -171,6 +171,7 @@ if ($WorkspaceRoot) {
   $EmailId = 'em_offline_test'
   $apiKey = 'offline-placeholder'
   $idempotencyKey = 'offline-only'
+  $DryRun = $false
   foreach ($Action in @('SendPreview', 'ScheduleDraft', 'SendNow')) {
     $method = if ($Action -eq 'SendPreview') { 'Post' } else { 'Patch' }
     $request = [pscustomobject]@{ Method = $method; Url = "$Endpoint/$EmailId"; Body = @{} }

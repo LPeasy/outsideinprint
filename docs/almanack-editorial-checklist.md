@@ -77,7 +77,10 @@ Create or update an unsent draft with its explicit number, read it back, then us
 the guarded lifecycle handoff with the approved package for any separately
 authorized scheduling or send. Do not use a combined create-and-schedule request:
 the provider number must be verified while the email is a draft. An uncertain
-result is a stop for inspection, never permission to retry delivery.
+result is a stop for inspection, never permission to retry delivery. Lifecycle
+`-DryRun` only prints the planned request; it requires no package, credentials or
+network access and does not certify provider numbering. Real preview, schedule
+and send actions require `-PackagePath` and a fresh matching draft readback.
 
 This fix authorizes no provider action and changes no global counter, subscribers,
 sent/archive emails, credentials, or schedules. As of October 3, 2026, the next regular source issue is
