@@ -184,7 +184,7 @@ function Test-SampleLinkDirectionFixtures {
   }
 }
 
-$waterNoteDefinition = '[^1]: **Maya drought caution**. NASA Earth Observatory summarizes research indicating that deforestation may have amplified naturally occurring drought. The source does not support a single-cause explanation of Maya collapse. [NASA Earth Observatory, *Mayan Deforestation and Drought*, February 1, 2012](https://science.nasa.gov/earth/earth-observatory/mayan-deforestation-and-drought-77060/). Accessed 2026-05-29. Use as narrow historical caution, not as a direct analogy to modern U.S. settlement.'
+$waterNoteDefinition = '[^1]: **Maya drought caution**. NASA Earth Observatory summarizes research indicating that deforestation may have amplified naturally occurring drought. The source does not support a single-cause explanation of Maya collapse. [NASA Earth Observatory, *Mayan Deforestation and Drought*, February 1, 2012](https://science.nasa.gov/earth/earth-observatory/mayan-deforestation-and-drought-77060/). Accessed 2026-05-29. Caveat: This example offers a narrow historical caution, not a direct analogy to modern U.S. settlement.'
 
 $sampleSpecs = @(
   [pscustomobject]@{
@@ -251,10 +251,10 @@ $sampleSpecs = @(
     BookKey = 'the_water_cycle'
     Title = 'The Water Cycle: Risk, Infrastructure, and Public Memory'
     SourceId = 'B0H46WMGJQ'
-    SourceChecked = '2026-09-02'
-    EpubVersion = 'published Water Cycle reader edition R2'
+    SourceChecked = '2026-10-03'
+    EpubVersion = 'Water Cycle Reader R2; corrected 2026-09-01; focused correction candidate 2026-10-03'
     Boundary = 'Complete published prologue, including figures V01-V03 and narrative note 1'
-    BodySha256 = '6e11094ebfc8565d17c894138d1ab33cca64828256366fa3f75e2ac98afb8314'
+    BodySha256 = 'b83129726e67d91247edf197b7f33ea117e0c101bf09057b6038b14a46d433ed'
     WordMin = 1800
     WordMax = 2300
     ParagraphCount = 33

@@ -14,7 +14,7 @@ const products = [
   ["2045", "OIP-TD-EPUB", "19.99", "48a6967cb52c0641f6f264b1f0c34258011b58267798c50a982761d9103854b1"],
   ["the-american-nightmare-keep-dreaming-kid", "OIP-AN-EPUB", "9.99", "fb616baf03d97aac4ea96bfc3637c045e83018a0e4b603cca14601be98d5b8bd"],
   ["the-parable-of-the-sheep", "OIP-PS-EPUB", "9.99", "b32a5110ccbc1a3efa4a033f3b97be3be9fcbe3206edffe306da1744f5f10d60"],
-  ["the-water-cycle", "OIP-WC-EPUB", "9.99", "b417ae19664f2fa6cb66edd1675e4bfede0740b08ac17e42d0b78a7d300f368b"],
+  ["the-water-cycle", "OIP-WC-EPUB", "9.99", "271f25c260ede86db0363d3cfb551cf533485bcd2b2fd1d1f8512c74bfff001a"],
 ];
 
 test("e-book sales labels remain separate from the EPUB fulfillment format", () => {
