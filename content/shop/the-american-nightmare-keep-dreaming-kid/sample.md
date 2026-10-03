@@ -5,8 +5,8 @@ draft: false
 sample_of_book_key: "american_nightmare"
 sample_source: "final_epub"
 sample_source_id: "B0H37W2JK8"
-sample_source_checked: "2026-09-02"
-sample_epub_version: "published American Nightmare direct EPUB; 2026-08-21 edition metadata; post-assignment final QA"
+sample_source_checked: "2026-10-03"
+sample_epub_version: "American Nightmare direct EPUB; original publication 2026-08-21; combined edition v1.7 dated 2026-10-03; includes public source ledger and claims-evidence appendix"
 sample_boundary: "Preface; Prologue; Part I introduction; The Dream Was Not Immigration; first two paragraphs of Covenant, Household, and the Fear of Disorder; source notes 1-7"
 sample_release_status: ready
 ---
@@ -129,7 +129,7 @@ That is why the older dream must be preserved, not romanticized.
 
 It was not pure. It was not equal. It was not universal in practice. But it was concrete. It named the conditions under which a person might stand upright.
 
-This is why Franklin should remain near the front of the book. He lets the argument begin with evidence rather than mood. He is not a modern restrictionist. He is not writing a polemic against immigration. He is writing to people who might come. His welcome is conditional in the old republican sense: come if you can work, if you can be useful, if you can live without inherited rank, if you understand that America is not a pension.
+Franklin gives this older dream a concrete form. He lets the argument begin with evidence rather than mood. He is not a modern restrictionist. He is not writing a polemic against immigration. He is writing to people who might come. His welcome is conditional in the old republican sense: come if you can work, if you can be useful, if you can live without inherited rank, if you understand that America is not a pension.
 
 That attitude is different from later romantic openness, but it is also different from hostility. Franklin’s America needs people. It has room. It rewards skill. It is anti-aristocratic. It does not care much for pedigree. But it is not promising to dissolve the struggle of life. It offers law and room for labor, not exemption from necessity.
 

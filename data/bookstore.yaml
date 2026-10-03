@@ -78,9 +78,9 @@ products:
       - "artificial intelligence"
       - "short stories"
   american_nightmare:
-    word_count: 25553
-    contents_summary: "Four parts and 21 chapters, with a preface, prologue, epilogue, and source notes."
-    edition_note: "EPUB edition · English · Word count includes source notes."
+    word_count: 25514
+    contents_summary: "Four parts and 21 chapters, with a preface, prologue, epilogue, and source notes. Includes a public source ledger and claims-evidence appendix."
+    edition_note: "EPUB edition · English · Word count covers the main reading text and source notes; reference supplements are additional."
     type_label: "Book"
     title: "The American Nightmare: Keep Dreaming, Kid"
     display_title: "The American Nightmare"
