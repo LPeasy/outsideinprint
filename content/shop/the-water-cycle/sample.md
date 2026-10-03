@@ -5,8 +5,8 @@ draft: false
 sample_of_book_key: "the_water_cycle"
 sample_source: "final_epub"
 sample_source_id: "B0H46WMGJQ"
-sample_source_checked: "2026-09-02"
-sample_epub_version: "published Water Cycle reader edition R2"
+sample_source_checked: "2026-10-03"
+sample_epub_version: "Water Cycle Reader R2; corrected 2026-10-03; focused text and figure-label correction"
 sample_boundary: "Complete published prologue, including figures V01-V03 and narrative note 1"
 sample_release_status: ready
 ---
@@ -93,4 +93,4 @@ Water has memory only in a material sense. It follows pathways: geology, rainfal
 
 Water is good and dangerous at the same time. The river that feeds can flood. The harbor that enriches can expose. The aquifer that sustains can decline. The pipe that protects can overflow. The reservoir that secures a city can reveal absence. The same thing that made settlement possible keeps asking for public honesty.
 
-[^1]: **Maya drought caution**. NASA Earth Observatory summarizes research indicating that deforestation may have amplified naturally occurring drought. The source does not support a single-cause explanation of Maya collapse. [NASA Earth Observatory, *Mayan Deforestation and Drought*, February 1, 2012](https://science.nasa.gov/earth/earth-observatory/mayan-deforestation-and-drought-77060/). Accessed 2026-05-29. Use as narrow historical caution, not as a direct analogy to modern U.S. settlement.
+[^1]: **Maya drought caution**. NASA Earth Observatory summarizes research indicating that deforestation may have amplified naturally occurring drought. The source does not support a single-cause explanation of Maya collapse. [NASA Earth Observatory, *Mayan Deforestation and Drought*, February 1, 2012](https://science.nasa.gov/earth/earth-observatory/mayan-deforestation-and-drought-77060/). Accessed 2026-05-29. Caveat: This example offers a narrow historical caution, not a direct analogy to modern U.S. settlement.
