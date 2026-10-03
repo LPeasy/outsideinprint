@@ -6,7 +6,7 @@ sample_of_book_key: "american_nightmare"
 sample_source: "final_epub"
 sample_source_id: "B0H37W2JK8"
 sample_source_checked: "2026-10-03"
-sample_epub_version: "American Nightmare direct EPUB; original publication 2026-08-21; corrected text v1.7 dated 2026-10-03; review candidate"
+sample_epub_version: "American Nightmare direct EPUB; original publication 2026-08-21; combined edition v1.7 dated 2026-10-03; includes public source ledger and claims-evidence appendix"
 sample_boundary: "Preface; Prologue; Part I introduction; The Dream Was Not Immigration; first two paragraphs of Covenant, Household, and the Fear of Disorder; source notes 1-7"
 sample_release_status: ready
 ---

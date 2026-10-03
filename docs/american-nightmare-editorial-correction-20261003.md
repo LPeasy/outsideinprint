@@ -1,23 +1,33 @@
-# American Nightmare editorial correction ~ review candidate
+# American Nightmare combined edition v1.7 ~ correction record
 
-Prepared October 3, 2026. **Pending publication; draft PR only.** This change accompanies corrected text v1.7 of *The American Nightmare: Keep Dreaming, Kid*. The original publication date remains August 21, 2026. No corrected edition has been released by this PR.
+Approved for coordinated publication October 3, 2026. *The American Nightmare: Keep Dreaming, Kid* combines corrected text v1.7 with a public source ledger and claims-evidence appendix. The original publication date remains August 21, 2026.
 
-## Correction scope
+## Correction and supplement scope
 
-The companion EPUB candidate corrects 20 prose locations and source note 32: residual editorial instructions, references to arranging or expanding chapters, and a research TODO left in the sold edition. The revision retains the book's argument, structure, assets, navigation, spine, identifiers, and all 51 source-note numbers. The other 50 source notes are unchanged.
+The main text corrects 20 prose locations and source note 32: residual editorial instructions, references to arranging or expanding chapters, and a research TODO left in the sold edition. Its closing source-use statement now accurately identifies the included reference supplements. The book retains its argument and all 51 source-note numbers; the other 50 source notes are unchanged. The two reference supplements follow the existing reading sections and are included in the EPUB navigation.
 
-The website sample's only prose change is:
+The website sample's only prose change from the prior published edition is:
 
 - Before: “This is why Franklin should remain near the front of the book.”
 - After: “Franklin gives this older dream a concrete form.”
 
-The sample remains at its existing boundary, with 63 prose paragraphs and source notes 1–7. Its checked date and version now identify the corrected review candidate. `sample_release_status: ready` records verified technical parity with that candidate; it does not authorize publication or assert replacement of the currently sold file.
+The sample retains its original typography, existing boundary, 63 prose paragraphs, and source notes 1–7. Its checked date and edition metadata identify the combined edition. Both existing sample-body integrity checks retain the verified corrected body; the combined-edition metadata does not change either body digest.
 
-## Count and parity
+## Counts and parity
 
-The corrected EPUB contains **25,512 words**, replacing the prior edition's 25,553. The storefront's nearest-hundred display becomes **about 25,500 words**. This uses the unchanged [edition-source audit counting basis](bookstore-edition-source-audit.md#counting-basis): EPUB members `ch002.xhtml` through `ch031.xhtml`, including headings, preface, prologue, part introductions, chapters, epilogue, source/use notes, and source notes. Cover, title, copyright, and navigation are excluded. The historical audit remains unchanged.
+| Scope | Exact words |
+| --- | ---: |
+| Main reading text and source notes (`ch002.xhtml`–`ch031.xhtml`) | 25,514 |
+| Public source ledger | 2,193 |
+| Claims-evidence appendix | 499 |
+| Reference supplements subtotal | 2,692 |
+| Complete reading edition | 28,206 |
 
-All 63 sample prose paragraphs and notes 1–7 match the rebuilt EPUB candidate under the sample's existing typographic normalization. The reading-sample contract updates only this title's expected checked date, version, and normalized sample-body digest; boundaries, paragraph count, headings, note text, and the other books' expectations are preserved.
+The bookstore displays **about 25,500 words** for the main reading text and source notes and names the reference supplements separately. The original sold edition contained 25,553 words on this same main-reading basis; the corrected text before the two-word source-use clarification contained 25,512.
+
+The [historical edition-source audit](bookstore-edition-source-audit.md#counting-basis) remains unchanged. Its main-reading scope includes headings, preface, prologue, part introductions, chapters, epilogue, source/use notes, and source notes. Cover, title, copyright, and navigation are excluded. The same counting convention is applied separately to each new supplement; their words are not folded into the historical main-reading count.
+
+All 32 reading sections match the combined source, and all 51 source notes are retained. All 63 sample prose paragraphs and notes 1–7 match the combined EPUB under the established typographic normalization. The native table of contents, NCX, and landmarks resolve to the intended reading sections.
 
 ## Targeted evidence decision
 
@@ -25,15 +35,8 @@ In “Two Countries Under One Dream,” the unsupported institutional generaliza
 
 These are qualitative examples, not evidence of prevalence, an increase over time, a common school curriculum, or a uniform naturalization message. Source note 32 identifies the precise pages, specifies Robert F. Kennedy's introduction where relevant, and corrects the USCIS ceremony reference to [volume 12, part J, chapter 5](https://www.uscis.gov/policy-manual/volume-12-part-j-chapter-5). The USCIS correction used the preserved May 29, 2026 text; current direct retrieval returned 403. This was a targeted evidence check, not a whole-book factual audit.
 
-## Validation
+## Validation and release order
 
-- PASS: rebuilt EPUB source comparison across all 30 reading sections and all 51 notes, scoped edits, and sample parity.
-- PASS: EPUBCheck 5.3.0, with zero fatal errors, errors, warnings, or informational messages.
-- PASS: visual review of the cover, correction notice, Franklin passage, revised evidence passage, epilogue, source note 32, and its continuation; no clipping or overlap observed.
-- PASS: `tests/test_bookstore_reading_sample_contract.ps1 -SourceOnly`; all three titles retain their expected boundaries and source-note fixtures.
-- PASS: focused `tests/bookstore_ebook_labels.test.mjs` source checks. Only American Nightmare's expected sample hash was refreshed; the integrity assertion and every other title's fixture remain unchanged. The three rendered-output checks await the CI website build.
-- PASS: exact five-file change scope and whitespace check. A full website render was not needed for this text-only draft; production build and deployment remain outside this preparation step.
+Source-build validation passed for the combined edition: all 32 reading sections, 51 source notes, sample parity, counts, and navigation targets were checked. Website validation uses the three-title PowerShell sample contract, the focused Node e-book-label checks, the exact five-file diff, and whitespace checks. The sample-integrity assertions and every other title's fixtures remain intact.
 
-## Release boundary
-
-The corrected EPUB and matching sample require a coordinated, separately authorized release. This draft changes no download object or delivery pointer, checkout behavior, price, other book, storefront layout, or scheduled publication. Merge and deployment remain pending.
+EPUBCheck 5.3.0 passed with zero fatal errors, errors, or warnings. Visual review of the actual combined EPUB passed for the cover, combined-edition notice, Franklin passage, revised evidence passage, ledger opening and record 32, and appendix opening and added claim; layout and links were readable. The final website CI result is recorded in [PR #137](https://github.com/LPeasy/outsideinprint/pull/137) before release. The release order is to replace the sold combined EPUB, verify the remote readback, and then merge the matching website update. This repository change does not itself replace a download object or delivery pointer. Checkout behavior, prices, other books, storefront layout, and scheduled publications are preserved.
