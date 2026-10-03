@@ -11,8 +11,4 @@ weight: 30
 
 ## About the book
 
-*The Water Cycle* examines how maps, insurance, pipes, reservoirs, drought records, and public decisions translate water risk into ordinary life.
-
 The book follows a single civic problem across floodplains, drinking-water systems, desert infrastructure, and household expectations: engineering and finance can make water easier to use while making dependence easier to forget.
-
-Purchase options, prices, and release status are listed from the bookstore catalog on this page.

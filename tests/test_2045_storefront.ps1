@@ -77,7 +77,7 @@ Assert-True ($featureTemplate -match 'bookstore-feature' -and $featureTemplate -
 foreach ($field in @('images/picture.html', 'price_display', 'positioning_label', 'deck')) {
   Assert-True ($featureTemplate.Contains($field, [StringComparison]::Ordinal)) "Featured book must use canonical $field."
 }
-Assert-True ($featureTemplate -match '#bookstore-purchase' -and $featureTemplate -match '<button\b[^>]*\bdisabled\b') 'The feature must distinguish a product purchase link from a native disabled buy button.'
+Assert-True ($featureTemplate -match 'View book' -and $featureTemplate.Contains('partial "shop/sample-link.html"')) 'The feature must offer a book overview and sample without checkout controls.'
 Assert-True ($featureTemplate -notmatch '<form\b|data-epub-checkout|https://(?:square\.link|checkout\.square\.site|downloads\.outsideinprint\.org)') 'The feature must not submit or open provider checkout directly.'
 Assert-True ($detailTemplate -match '<section\b[^>]*id="bookstore-purchase"') 'The product purchase section needs the feature target anchor.'
 
@@ -123,11 +123,12 @@ Assert-True ($homeFrontTemplate -notmatch 'home_2045_launch|home_bookstore_spotl
 $subtitleIndex = $detailTemplate.IndexOf('bookstore-product__subtitle', [StringComparison]::Ordinal)
 $decisionIndex = $detailTemplate.IndexOf('data-bookstore-early-decision', [StringComparison]::Ordinal)
 $deckIndex = $detailTemplate.IndexOf('bookstore-product__deck', [StringComparison]::Ordinal)
-Assert-True ($subtitleIndex -ge 0 -and $decisionIndex -gt $subtitleIndex -and $deckIndex -gt $decisionIndex) 'The early 2045 decision module must sit after the subtitle and before the deck.'
+Assert-True ($subtitleIndex -ge 0 -and $deckIndex -gt $subtitleIndex -and $decisionIndex -gt $deckIndex) 'The early decision module must follow the subtitle and concrete blurb.'
 Assert-True ($detailTemplate.Contains('About {{ lang.FormatNumber 0 $roundedWordCount }} words', [StringComparison]::Ordinal) -and $detailTemplate.Contains('data-analytics-source-slot="bookstore_detail_early_buy"', [StringComparison]::Ordinal)) 'The early decision module must render rounded proof and a tracked internal buy anchor.'
-Assert-True ($detailTemplate.IndexOf('{{ $sampleLink }}', $decisionIndex, [StringComparison]::Ordinal) -lt $detailTemplate.IndexOf('class="shop-cta bookstore-product__early-buy"', $decisionIndex, [StringComparison]::Ordinal)) 'The early decision module must keep the sample before the buy anchor.'
+Assert-True ($detailTemplate.IndexOf('{{ $sampleLink }}', $decisionIndex, [StringComparison]::Ordinal) -gt $decisionIndex -and $detailTemplate.IndexOf('class="shop-cta bookstore-product__early-buy"', $decisionIndex, [StringComparison]::Ordinal) -gt $decisionIndex) 'The early decision module must contain both the sample and internal buy action.'
 Assert-True ($detailTemplate.Contains('data-bookstore-story-list', [StringComparison]::Ordinal) -and $detailTemplate.Contains('Inside 2045', [StringComparison]::Ordinal)) 'The product detail must render an Inside 2045 section from canonical story data.'
-Assert-True ($siteCss -match '(?s)@media \(max-width:720px\).*?\.bookstore-product__cover\{\s*max-width:9\.5rem;' -and $siteCss -match '(?s)\.bookstore-product__early-buy\{.*?min-height:44px;') 'The mobile 2045 cover and early CTA sizing contract is missing.'
+Assert-True ($siteCss -match '(?s)\.bookstore-product__early-buy[^}]*min-height:44px;') 'The early buy action must retain its accessible target size.'
+Assert-True ($siteCss -match '(?s)\.bookstore-product__cover\{[^}]*position:static') 'The product cover must not trap the reading sample beside a sticky column.'
 
 $legacyRelationship = [ordered]@{
   Label = 'Earlier web edition.'
@@ -204,7 +205,7 @@ if ($isDraft) {
   Assert-True ($product -match 'checkout_endpoint: ""' -and $product -match 'checkout_url: ""') 'Draft 2045 must not expose checkout destinations.'
 }
 
-$body = [regex]::Match($sampleSource, '(?s)\A---\r?\n.*?\r?\n---\r?\n(?<body>.*)\z').Groups['body'].Value.Trim()
+$body = [regex]::Match($sampleSource, '(?s)\A---\r?\n.*?\r?\n---\r?\n(?<body>.*)\z').Groups['body'].Value.Replace("`r`n", "`n").Trim()
 $paragraphs = @([regex]::Split($body, '\r?\n\s*\r?\n'))
 Assert-True ($paragraphs.Count -eq 32) 'The Cracked Pot must have exactly 32 prose paragraphs after the two approved opening breaks.'
 # Reverse only the owner's two exact opening breaks; preserve every other byte.
@@ -257,10 +258,10 @@ foreach ($copy in @($launchMessage, $launchNote, $launchLabel, $datedFed)) {
 Assert-True ($issueSource -match 'version: "0.3"' -and $issueSource -notmatch '/z1/current/|We can lose our footing') 'Issue revision or retired copy is wrong.'
 $campaignTemplate = Read-Source 'layouts/almanack/single.html'
 Assert-True ($campaignTemplate.Contains('.image_link_url | default $campaignHref')) 'Campaign cover must fall back to the primary CTA.'
-Assert-True ($detailTemplate.IndexOf('{{ $sampleLink }}') -gt 0 -and $detailTemplate.IndexOf('{{ $sampleLink }}') -lt $detailTemplate.IndexOf('index $product "tags"')) '2045 sample invitation must precede topics.'
-foreach ($template in @($featureTemplate, (Read-Source 'layouts/partials/shop/sample-link.html'))) {
-  Assert-True ($template.Contains('.Title') -and $template.Contains('.ReadingTime') -and $template.Contains('a complete story')) 'Sample invitation must derive title and reading time.'
-}
+Assert-True ($detailTemplate.IndexOf('{{ $sampleLink }}') -gt 0 -and $detailTemplate.IndexOf('{{ $sampleLink }}') -lt $detailTemplate.IndexOf('id="bookstore-purchase"')) 'The sample invitation must precede the detailed purchase panel.'
+$sampleLinkTemplate = Read-Source 'layouts/partials/shop/sample-link.html'
+Assert-True ($sampleLinkTemplate.Contains('.Title') -and $sampleLinkTemplate.Contains('.ReadingTime') -and $sampleLinkTemplate.Contains('a complete story')) 'Sample invitation must derive title and reading time.'
+Assert-True ($featureTemplate.Contains('.Title') -and $featureTemplate.Contains('a complete story')) 'The compact feature must retain the complete-story distinction.'
 
 if ($SourceOnly) {
   Write-Host '2045 storefront source contract passed.'
@@ -291,7 +292,7 @@ if ($isDraft -and -not $Preview) {
   Assert-True ($catalogRecords.Count -eq 3 -and $catalogImages.Count -eq 3) 'Dormant production must retain the three existing shelf books.'
   Assert-True ($catalogRecords[0].Value -match 'href="?/shop/the-american-nightmare-keep-dreaming-kid/') 'Without the feature, the previous first book must remain first.'
   Assert-True ((Html-Attribute $catalogImages[0].Value 'loading') -eq 'eager' -and (Html-Attribute $catalogImages[0].Value 'fetchpriority') -eq 'high') 'Without the feature, the first existing cover must retain eager/high loading.'
-  Assert-True ((Plain-Text $shopHtml) -match 'Catalog 3 titles') 'Dormant bookstore count must remain three titles.'
+  Assert-True (($features.Count + $catalogRecords.Count) -eq 3) 'Dormant bookstore count must remain three titles.'
   Write-Host '2045 storefront source and dormant production contract passed.'
   exit 0
 }
@@ -308,13 +309,16 @@ Assert-True ((Meta-Content $detailHtml 'twitter:title') -ceq '2045: Ten Dark Fab
 $decisionModule = [regex]::Match($detailHtml, '(?is)<aside\b[^>]*\bdata-bookstore-early-decision(?:=|\s|>).*?</aside>')
 Assert-True ($decisionModule.Success) '2045 must render the early decision module.'
 $decisionText = Plain-Text $decisionModule.Value
-foreach ($proof in @('10 stories', 'About 26,700 words', 'E-book', 'Available only from Outside In Print.')) {
+foreach ($proof in @('10 stories', 'About 26,700 words', 'EPUB e-book', 'Available only from Outside In Print.')) {
   Assert-True ($decisionText.Contains($proof, [StringComparison]::Ordinal)) "The early decision module is missing proof: $proof"
 }
 $decisionLinks = @([regex]::Matches($decisionModule.Value, '(?is)<a\b[^>]*>.*?</a>'))
-Assert-True ($decisionLinks.Count -eq 2) 'The early decision module must contain only its sample and internal buy links.'
-Assert-True ((Html-Attribute $decisionLinks[0].Value 'href') -eq '/shop/2045/sample/' -and (Html-Attribute $decisionLinks[0].Value 'data-analytics-source-slot') -eq 'bookstore_detail_early_sample') 'The early decision module must put the tracked complete-story sample first.'
-Assert-True ((Html-Attribute $decisionLinks[1].Value 'href') -eq '#bookstore-purchase' -and (Html-Attribute $decisionLinks[1].Value 'data-analytics-source-slot') -eq 'bookstore_detail_early_buy' -and (Plain-Text $decisionLinks[1].Value) -ceq 'Buy e-book — $19.99') 'The early buy control must be a tracked internal anchor to the existing form.'
+$sampleDecisionLinks = @($decisionLinks | Where-Object { (Html-Attribute $_.Value 'href') -eq '/shop/2045/sample/' })
+$buyDecisionLinks = @($decisionLinks | Where-Object { (Html-Attribute $_.Value 'href') -eq '#bookstore-purchase' })
+Assert-True ($sampleDecisionLinks.Count -eq 1 -and $buyDecisionLinks.Count -eq 1) 'The early decision module must contain one sample and one internal buy action.'
+Assert-True ((Html-Attribute $sampleDecisionLinks[0].Value 'data-analytics-source-slot') -eq 'bookstore_detail_early_sample' -and (Plain-Text $sampleDecisionLinks[0].Value) -ceq 'Read a sample' -and $decisionText -match 'complete story') 'The early decision module must retain its tracked sample and complete-story distinction.'
+Assert-True ((Html-Attribute $buyDecisionLinks[0].Value 'data-analytics-source-slot') -eq 'bookstore_detail_early_buy' -and (Plain-Text $buyDecisionLinks[0].Value) -match '^Buy e-book') 'The early buy control must be a tracked internal anchor to the existing form.'
+Assert-True ($decisionText -match '\$19\.99' -and $decisionText -match 'EPUB e-book') 'The early decision must expose the approved price and EPUB format.'
 Assert-True ($decisionModule.Value -notmatch '<form\b|downloads\.outsideinprint\.org|square\.link|checkout\.square\.site') 'The early decision module must not duplicate or invoke checkout.'
 $purchaseIndex = $detailHtml.IndexOf('id=bookstore-purchase', [StringComparison]::Ordinal)
 if ($purchaseIndex -lt 0) { $purchaseIndex = $detailHtml.IndexOf('id="bookstore-purchase"', [StringComparison]::Ordinal) }
@@ -347,7 +351,7 @@ foreach ($html in @($shopHtml, $authorHtml)) {
 Assert-True ($features.Count -eq 1) 'Published or preview 2045 must have exactly one bookstore feature.'
 $featureHtml = $features[0].Value
 $issueHtml = Read-Output 'almanack/2026-09-12/index.html'
-foreach ($html in @($featureHtml, $detailHtml, $issueHtml)) {
+foreach ($html in @($issueHtml)) {
   $invitations = @([regex]::Matches($html, '(?is)<a\b[^>]*>.*?</a>') | Where-Object { (Html-Attribute $_.Value 'href') -eq '/shop/2045/sample/' })
   Assert-True ($invitations.Count -eq 1 -and (Plain-Text $invitations[0].Value) -ceq $launchLabel) 'Each launch surface needs one complete-story invitation.'
 }
@@ -364,7 +368,7 @@ Assert-True ($catalogRecords.Count -eq 3 -and $catalogHtml -notmatch '/shop/2045
 foreach ($slug in @('the-american-nightmare-keep-dreaming-kid', 'the-parable-of-the-sheep', 'the-water-cycle')) {
   Assert-True ($catalogHtml -match ('href="?/shop/' + $slug + '/')) "Existing shelf book $slug is missing."
 }
-Assert-True ((Plain-Text $shopHtml) -match 'Catalog 4 titles') 'The total catalog count must include the featured book.'
+Assert-True (($features.Count + $catalogRecords.Count) -eq 4) 'The total catalog count must include the featured book.'
 $featureImages = @([regex]::Matches($featureHtml, '(?is)<img\b[^>]*>'))
 Assert-True ($featureImages.Count -eq 1 -and $featureHtml -match 'image/avif' -and $featureHtml -match 'image/webp') 'The feature must render one managed responsive cover.'
 Assert-True ((Html-Attribute $featureImages[0].Value 'src') -match '/images/rendered/books/2045/cover/' -and (Html-Attribute $featureImages[0].Value 'alt') -ceq $approvedAlt) 'The feature must preserve the approved cover and alt text.'
@@ -374,7 +378,7 @@ foreach ($image in $catalogImages) {
   Assert-True ((Html-Attribute $image.Value 'loading') -eq 'lazy' -and (Html-Attribute $image.Value 'fetchpriority') -ne 'high') 'Remaining shelf covers must be lazy when the feature exists.'
 }
 $featureText = Plain-Text $featureHtml
-foreach ($field in @('title', 'subtitle', 'author', 'deck', 'positioning_label', 'price_display')) {
+foreach ($field in @('title', 'subtitle', 'deck', 'price_display')) {
   $expected = [regex]::Match($product, ('(?m)^\s+' + $field + ': "(?<value>[^"]+)"\r?$')).Groups['value'].Value
   Assert-True ($expected.Length -gt 0 -and $featureText.Contains($expected, [StringComparison]::Ordinal)) "The feature must display canonical $field."
 }
@@ -383,8 +387,8 @@ $sampleLinks = @($featureLinks | Where-Object { (Html-Attribute $_.Value 'href')
 Assert-True ($sampleLinks.Count -eq 1 -and (Html-Attribute $sampleLinks[0].Value 'data-analytics-event') -eq 'book_sample_open') 'The feature needs one free sample link with normal sample analytics.'
 Assert-True ($featureHtml -notmatch '<form\b|data-epub-checkout|https://(?:square\.link|checkout\.square\.site|downloads\.outsideinprint\.org)') 'The feature must not activate provider checkout itself.'
 if ($isLiveOffer) {
-  $buyLinks = @($featureLinks | Where-Object { (Html-Attribute $_.Value 'href') -eq '/shop/2045/#bookstore-purchase' })
-  Assert-True ($buyLinks.Count -eq 1 -and $featureHtml -notmatch '<button\b[^>]*\bdisabled\b') 'The live feature must link to the product purchase section, not a provider.'
+  $buyLinks = @([regex]::Matches($featureHtml, '(?is)<a\b[^>]*>.*?</a>') | Where-Object { (Html-Attribute $_.Value 'href') -eq '/shop/2045/' -and (Plain-Text $_.Value) -match '^View book\b' })
+  Assert-True ($buyLinks.Count -eq 1 -and $featureHtml -match '>View book\b' -and $featureHtml -notmatch '<button\b[^>]*\bdisabled\b') 'The live feature must link to the book overview with a View book action.'
   $checkoutForms = @([regex]::Matches($detailHtml, '(?is)<form\b[^>]*\bdata-epub-checkout(?:\s|>).*?</form>'))
   Assert-True ($checkoutForms.Count -eq 1) 'Live 2045 requires one primary checkout form; its free sample is on a separate page.'
   foreach ($form in $checkoutForms) {
@@ -395,14 +399,8 @@ if ($isLiveOffer) {
     Assert-True ($emailInputs.Count -eq 1 -and $emailInputs[0].Value -match '\brequired(?:\s|=|>)') 'Each 2045 checkout must require a delivery email.'
   }
 } else {
-  $disabledBuy = [regex]::Match($featureHtml, '(?is)<button\b(?=[^>]*\sdisabled(?:\s|=|>))[^>]*>.*?</button>').Value
-  $describedBy = Html-Attribute ([regex]::Match($disabledBuy, '(?is)<button\b[^>]*>').Value) 'aria-describedby'
-  Assert-True ($disabledBuy -match 'Buy e-book' -and $describedBy.Length -gt 0) 'An unavailable feature needs a native disabled Buy e-book button and release-status description.'
-  foreach ($statusID in ($describedBy -split '\s+')) {
-    Assert-True ($featureHtml -match ('\bid="?' + [regex]::Escape($statusID) + '"?(?:\s|>)')) 'The disabled buy button must reference a real release-status description.'
-  }
-  Assert-True ($featureText -match 'September 12|Coming|coming|preparation|prepared') 'The unavailable feature must explain its release status.'
-  Assert-True ($featureHtml -notmatch 'href="?[^\s">]*#bookstore-purchase') 'The unavailable feature must not expose a live purchase link.'
+  Assert-True ($featureHtml -match 'href="?/shop/2045/' -and $featureText -match 'View book') 'An unavailable feature must preserve book discovery.'
+  Assert-True ($featureHtml -notmatch 'href="?[^\s">]*#bookstore-purchase|<form\b|data-epub-checkout') 'An unavailable feature must not expose a live purchase action.'
 }
 Assert-True ($detailHtml -match 'books/2045/cover' -and $detailHtml -match 'image/avif' -and $detailHtml -match 'OIP Exclusive') '2045 product is missing managed artwork or exclusive positioning.'
 Assert-True ($detailHtml -match 'href="?/shop/2045/sample/' -and $sampleHtml -match 'href="?/shop/2045/') 'Product and standalone sample do not link to one another.'

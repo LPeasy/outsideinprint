@@ -170,11 +170,12 @@ function Test-SampleLinkDirectionFixtures {
       )) {
         Assert-Contains -Text $region -Expected $attribute -Context "Sample-link fixture $($case.Name)"
       }
-      if ($case.Arrow) {
-        Assert-Contains -Text ([Net.WebUtility]::HtmlDecode($region)) -Expected ('<span aria-hidden="true">' + $case.Arrow + '</span>') -Context "Sample-link fixture $($case.Name)"
+      $label = [regex]::Match($region, '(?s)<a\b[^>]*>(?<text>.*?)</a>').Groups['text'].Value
+      if ((Get-NormalizedHtmlText -Html $label) -cne 'Read a sample') {
+        throw "Sample-link fixture $($case.Name) must use the concise sample action."
       }
-      elseif ((Get-NormalizedHtmlText -Html $region) -cne 'Read “Fixture story” — a complete story · 1 minutes' -or $region -match 'aria-hidden') {
-        throw 'The 2045 sample override must retain its existing complete-story wording without adding an arrow.'
+      if ($case.Name -eq '2045-unchanged' -and (Get-NormalizedHtmlText -Html $region) -notmatch 'Fixture story.*complete story') {
+        throw 'The 2045 sample must retain its complete-story distinction beside the action.'
       }
     }
   }
@@ -605,12 +606,10 @@ foreach ($required in @(
   '#reading-sample',
   'data-analytics-event="book_sample_open"',
   'data-analytics-source-slot="{{ $sourceSlot }}"',
-  'Read a free sample',
-  '<span aria-hidden="true">{{ if hasPrefix $sampleURL "#" }}&darr;{{ else }}&rarr;{{ end }}</span>'
+  'Read a sample'
 )) {
   Assert-Contains -Text $sampleLink -Expected $required -Context 'Reading-sample link'
 }
-Assert-Ordered -Text $sampleLink -First '$sampleURL = .RelPermalink' -Second 'if hasPrefix $sampleURL "#"' -Context 'Sample-link direction after standalone destination override'
 if ($sampleLink -match '(?i)sample\.RelPermalink|href\s*=\s*["''][^"'']*/sample(?:/|\.|["''])') {
   throw 'Reading-sample links must target the product-page fragment, never a sample route.'
 }
@@ -622,16 +621,16 @@ foreach ($required in @(
   '{{ .Content }}',
   'End of sample',
   'where $epubOffers "availability_status" "live"',
-  'partial "shop/direct-offers.html"',
-  '"sourceSlot" "bookstore_sample_direct"',
-  '"collapseCheckout" true',
-  '"headingLevel" 3',
+  'href="#bookstore-purchase"',
+  'data-analytics-source-slot="bookstore_sample_buy"',
+  'href="#page-title"',
+  'Return to the book',
   'partial "shop/kindle-button.html"',
   '"sourceSlot" "bookstore_sample_kindle"'
 )) {
   Assert-Contains -Text $renderer -Expected $required -Context 'Expanded reading-sample renderer'
 }
-if ($renderer -match '(?i)<details\b|<dialog\b|modal|download=|sample\.RelPermalink') {
+if ($renderer -match '(?i)<details\b|<dialog\b|<form\b|data-epub-checkout|shop/direct-offers\.html|modal|download=|sample\.RelPermalink') {
   throw 'Reading sample must stay expanded on the product page without modal, download, or separate-route behavior.'
 }
 
@@ -640,16 +639,19 @@ $shopSingle = Get-RequiredText -RelativePath 'layouts/shop/single.html'
 foreach ($slot in @(
   @{ Text = $shopList; Value = 'bookstore_index_sample'; Context = 'Shop catalog' },
   @{ Text = $shopSingle; Value = 'bookstore_detail_sample'; Context = 'Shop detail' },
-  @{ Text = $renderer; Value = 'bookstore_sample_direct'; Context = 'Post-sample direct offer' },
+  @{ Text = $renderer; Value = 'bookstore_sample_buy'; Context = 'Post-sample direct offer' },
   @{ Text = $renderer; Value = 'bookstore_sample_kindle'; Context = 'Post-sample Kindle offer' }
 )) {
   if ([regex]::Matches($slot.Text, [regex]::Escape($slot.Value)).Count -ne 1) {
     throw "$($slot.Context) must use $($slot.Value) exactly once."
   }
 }
-Assert-Ordered -Text $shopList -First 'partial "shop/kindle-button.html"' -Second 'partial "shop/sample-link.html"' -Context 'Catalog purchase/sample-link order'
+if ($shopList -match 'shop/(?:direct-offers|kindle-button)\.html|data-epub-checkout') {
+  throw 'Catalog discovery cards must send purchase decisions to the product page.'
+}
+Assert-Contains -Text $shopList -Expected 'View book' -Context 'Catalog product-page action'
 Assert-Ordered -Text $shopSingle -First '{{ .Content }}' -Second 'partial "shop/reading-sample.html"' -Context 'Product About/sample order'
-Assert-Ordered -Text $shopSingle -First 'partial "shop/reading-sample.html"' -Second 'bookstore-format-ledger' -Context 'Product sample/formats order'
+Assert-Contains -Text $shopSingle -Expected 'id="page-title"' -Context 'Sample return target'
 
 $figureTemplate = Get-RequiredText -RelativePath 'layouts/shortcodes/sample-figure.html'
 foreach ($required in @(
@@ -751,7 +753,7 @@ if ([regex]::Matches($combinedDetails, 'data-analytics-source-slot="?bookstore_d
 if ([regex]::Matches($combinedDetails, '\bid="?reading-sample"?(?:\s|>)', 'IgnoreCase').Count -ne 3) {
   throw 'Built bookstore details must expose exactly three expanded reading-sample sections.'
 }
-if ([regex]::Matches($combinedDetails, 'data-analytics-source-slot="?bookstore_sample_direct"?(?=\s|>)', 'IgnoreCase').Count -ne 3) {
+if ([regex]::Matches($combinedDetails, 'data-analytics-source-slot="?bookstore_sample_buy"?(?=\s|>)', 'IgnoreCase').Count -ne 3) {
   throw 'Built bookstore details must expose exactly three post-sample direct-EPUB continuation offers.'
 }
 if ($combinedDetails -match 'data-analytics-source-slot="?bookstore_sample_kindle"?') {
@@ -765,8 +767,8 @@ foreach ($spec in $sampleSpecs) {
     throw "Built catalog sample link is missing or duplicated for $($spec.Slug)."
   }
   $catalogAnchor = [regex]::Match($catalogHtml, $catalogAnchorPattern + '.*?</a>').Value
-  if ([Net.WebUtility]::HtmlDecode($catalogAnchor) -notmatch '<span\b[^>]*aria-hidden="?true"?[^>]*>→</span>') {
-    throw "Built catalog sample link for $($spec.Slug) must use an aria-hidden right arrow for navigation to another page."
+  if ((Get-NormalizedHtmlText -Html $catalogAnchor) -cne 'Read a sample') {
+    throw "Built catalog sample action must read Read a sample for $($spec.Slug)."
   }
 
   $detailHtml = [string]$output[$spec.OutputPath]
@@ -775,29 +777,37 @@ foreach ($spec in $sampleSpecs) {
     throw "Built detail sample link is missing or duplicated for $($spec.Slug)."
   }
   $detailAnchor = [regex]::Match($detailHtml, $detailAnchorPattern + '.*?</a>').Value
-  if ([Net.WebUtility]::HtmlDecode($detailAnchor) -notmatch '<span\b[^>]*aria-hidden="?true"?[^>]*>↓</span>') {
-    throw "Built detail sample link for $($spec.Slug) must retain an aria-hidden down arrow for its same-page fragment."
+  if ((Get-NormalizedHtmlText -Html $detailAnchor) -cne 'Read a sample') {
+    throw "Built detail sample action must read Read a sample for $($spec.Slug)."
   }
   if ([regex]::Matches($detailHtml, '\bid="?reading-sample"?(?:\s|>)', 'IgnoreCase').Count -ne 1) {
     throw "Built detail must contain one expanded reading sample for $($spec.Slug)."
   }
-  if ([regex]::Matches($detailHtml, 'data-analytics-source-slot="?bookstore_sample_direct"?(?=\s|>)', 'IgnoreCase').Count -ne 1) {
+  if ([regex]::Matches($detailHtml, 'data-analytics-source-slot="?bookstore_sample_buy"?(?=\s|>)', 'IgnoreCase').Count -ne 1) {
     throw "Built detail must contain one direct continuation offer for $($spec.Slug)."
   }
 
   $sampleStart = [regex]::Match($detailHtml, '\bid="?reading-sample"?(?:\s|>)', 'IgnoreCase')
-  $formatStart = $detailHtml.IndexOf('bookstore-format-ledger', $sampleStart.Index, [StringComparison]::OrdinalIgnoreCase)
-  if (-not $sampleStart.Success -or $formatStart -lt 0 -or $formatStart -le $sampleStart.Index) {
-    throw "Built detail $($spec.Slug) must place the expanded sample before the format ledger."
+  $sampleEnd = $detailHtml.IndexOf('</section>', $sampleStart.Index, [StringComparison]::OrdinalIgnoreCase)
+  if (-not $sampleStart.Success -or $sampleEnd -lt 0) {
+    throw "Built detail $($spec.Slug) must expose the complete reading section."
   }
-  $sampleRegion = $detailHtml.Substring($sampleStart.Index, $formatStart - $sampleStart.Index)
-  if ([regex]::Matches($sampleRegion, 'data-analytics-source-slot="?bookstore_sample_direct"?(?=\s|>)', 'IgnoreCase').Count -ne 1) {
+  $sampleRegion = $detailHtml.Substring($sampleStart.Index, $sampleEnd - $sampleStart.Index)
+  if ([regex]::Matches($sampleRegion, 'data-analytics-source-slot="?bookstore_sample_buy"?(?=\s|>)', 'IgnoreCase').Count -ne 1) {
     throw "Built detail $($spec.Slug) must place one direct continuation offer inside the sample section."
   }
-  Assert-Contains -Text $sampleRegion -Expected ([string]$spec.ExpectedDirectSku) -Context "Built post-sample offer $($spec.Slug)"
+  if ($sampleRegion -match '<form\b|data-epub-checkout|bookstore-checkout-disclosure') {
+    throw "Built sample $($spec.Slug) must return to the single product checkout, without a duplicate form."
+  }
+  if ($sampleRegion -notmatch '<a\b(?=[^>]*href="?#bookstore-purchase"?)(?=[^>]*data-analytics-source-slot="?bookstore_sample_buy"?)[^>]*>') {
+    throw "Built sample $($spec.Slug) must link to its product purchase anchor."
+  }
+  if ($sampleRegion -notmatch '<a\b[^>]*href="?#page-title"?[^>]*>\s*Return to the book\b.*?</a>') {
+    throw "Built sample $($spec.Slug) must provide a return-to-book link."
+  }
   Assert-Contains -Text $sampleRegion -Expected 'End of sample' -Context "Built detail $($spec.Slug)"
   $sampleEndIndex = $sampleRegion.IndexOf('End of sample', [StringComparison]::Ordinal)
-  $sampleDirectMatch = [regex]::Match($sampleRegion, 'data-analytics-source-slot="?bookstore_sample_direct"?(?=\s|>)', 'IgnoreCase')
+  $sampleDirectMatch = [regex]::Match($sampleRegion, 'data-analytics-source-slot="?bookstore_sample_buy"?(?=\s|>)', 'IgnoreCase')
   if ($sampleEndIndex -lt 0 -or -not $sampleDirectMatch.Success -or $sampleEndIndex -ge $sampleDirectMatch.Index) {
     throw "Built detail $($spec.Slug) must place the direct EPUB continuation after the excerpt end marker."
   }

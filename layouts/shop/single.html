@@ -26,128 +26,61 @@
     "class" $sampleClass
   ) }}
 
+
   <article class="page-shell page-shell--wide bookstore-product" aria-labelledby="page-title">
     <div class="bookstore-product__layout">
+      <header class="bookstore-product__header">
+        <p class="bookstore-product__eyebrow">{{ index $product "positioning_label" | default "An Outside In Print book" }}</p>
+        <h1 id="page-title" class="shop-title" tabindex="-1">{{ index $product "display_title" | default .Title }}</h1>
+        {{ with index $product "short_subtitle" | default (index $product "subtitle") }}<p class="bookstore-product__subtitle">{{ . }}</p>{{ end }}
+        <p class="bookstore-record__meta">{{ with index $product "author" }}<span>By <a href="{{ "authors/robert-v-ussley/" | relURL }}">{{ . }}</a></span>{{ end }}</p>
+      </header>
       <figure class="bookstore-product__cover">
-        {{ partial "images/picture.html" (dict
-          "page" .
-          "ref" $cover
-          "alt" $coverAlt
-          "loading" "eager"
-          "fetchpriority" "high"
-          "sizes" "(min-width: 60rem) 21rem, (min-width: 45rem) 16rem, 13rem"
-        ) }}
+        {{ partial "images/picture.html" (dict "page" . "ref" $cover "alt" $coverAlt "loading" "eager" "fetchpriority" "high" "sizes" "(min-width: 45rem) 15rem, 9.5rem") }}
       </figure>
-
-      <div class="bookstore-product__content">
-        <header class="bookstore-product__header">
-          <p class="bookstore-product__eyebrow">{{ index $product "positioning_label" | default "An Outside In Print book" }}</p>
-          <h1 id="page-title" class="shop-title">{{ .Title }}</h1>
-          <p class="bookstore-record__meta">
-            {{ with index $product "author" }}<span>By <a href="{{ "authors/robert-v-ussley/" | relURL }}">{{ . }}</a></span>{{ end }}
-            {{ with index $product "publisher" }}<span>{{ . }}</span>{{ end }}
-          </p>
-          {{ with index $product "subtitle" }}<p class="bookstore-product__subtitle">{{ . }}</p>{{ end }}
-          {{ if and (eq $productKey "2045") (eq $storyCount 10) (gt $wordCount 0) (gt (len $liveEpubOffers) 0) }}
+      <div class="bookstore-product__opening">
+        {{ with index $product "deck" }}<p class="bookstore-product__deck">{{ . }}</p>{{ end }}
+        <aside class="bookstore-product__decision" aria-label="Edition and purchase details" data-bookstore-early-decision>
+          {{ if gt $wordCount 0 }}
             {{ $roundedWordCount := mul (div (add $wordCount 50) 100) 100 }}
-            <aside class="bookstore-product__decision" aria-label="2045 edition and purchase details" data-bookstore-early-decision>
-              <p class="bookstore-product__proof">{{ $storyCount }} stories <span aria-hidden="true">&middot;</span> About {{ lang.FormatNumber 0 $roundedWordCount }} words <span aria-hidden="true">&middot;</span> E-book</p>
-              {{ with index $product "exclusive_note" }}<p class="bookstore-product__exclusive-note">{{ . }}</p>{{ end }}
-              <div class="bookstore-product__decision-actions">
-                {{ $sampleLink }}
-                <a
-                  class="shop-cta bookstore-product__early-buy"
-                  href="#bookstore-purchase"
-                  data-analytics-event="internal_promo_click"
-                  data-analytics-source-slot="bookstore_detail_early_buy"
-                  data-analytics-slug="2045"
-                  data-analytics-title="2045"
-                  data-analytics-section="Bookstore"
-                  data-analytics-path="{{ .RelPermalink }}"
-                >{{ index $product "checkout_label" }}</a>
-              </div>
-              {{ partial "shop/ebook-help.html" . }}
-            </aside>
+            <p class="bookstore-product__proof">{{ if gt $storyCount 0 }}{{ $storyCount }} stories <span aria-hidden="true">&middot;</span> {{ end }}About {{ lang.FormatNumber 0 $roundedWordCount }} words</p>
           {{ end }}
-          {{ with index $product "deck" }}<p class="bookstore-product__deck">{{ . }}</p>{{ end }}
-          {{ with index $product "tags" }}
-            <ul class="bookstore-record__topics bookstore-record__topics--detail" aria-label="Book topics">
-              {{ range . }}<li>{{ . }}</li>{{ end }}
-            </ul>
-          {{ end }}
-        </header>
-
-        <section id="bookstore-purchase" class="bookstore-product__purchase" aria-labelledby="bookstore-purchase-title">
-          <p id="bookstore-purchase-title" class="bookstore-product__purchase-title">Choose an edition</p>
-          {{ if gt (len $liveEpubOffers) 0 }}
-            <p class="bookstore-product__checkout-restriction">Direct e-book checkout is currently available to U.S. customers only.</p>
-          {{ end }}
-
-          {{ partial "shop/direct-offers.html" (dict
-            "product" $product
-            "sourceSlot" "bookstore_detail_direct"
-            "compact" (eq (len $liveEpubOffers) 0)
-            "omitReadingHelp" (and (eq $productKey "2045") (eq $storyCount 10) (gt $wordCount 0) (gt (len $liveEpubOffers) 0))
-          ) }}
-
-          <div class="bookstore-product__kindle">
-            {{ partial "shop/kindle-button.html" (dict
-              "product" $product
-              "sourceSlot" "bookstore_detail_kindle"
-            ) }}
-          </div>
-
-          {{ if ne $productKey "2045" }}
+          {{ with index $product "contents_summary" }}<p class="bookstore-product__edition-facts">{{ . }}</p>{{ end }}
+          {{ with index $product "edition_note" }}<p class="bookstore-product__edition-facts">{{ . }}</p>{{ end }}
+          <p class="bookstore-card-price"><strong>{{ index $product "price_display" }}</strong> <span>EPUB e-book</span></p>
+          <div class="bookstore-product__decision-actions">
+            {{ if gt (len $liveEpubOffers) 0 }}
+              <a class="shop-cta bookstore-product__early-buy" href="#bookstore-purchase" data-analytics-event="internal_promo_click" data-analytics-source-slot="bookstore_detail_early_buy" data-analytics-slug="{{ $productKey }}" data-analytics-title="{{ index $product "title" }}" data-analytics-section="Bookstore" data-analytics-path="{{ .RelPermalink }}">Buy e-book</a>
+            {{ end }}
             {{ $sampleLink }}
-          {{ end }}
-
-          <p class="bookstore-product__purchase-help"><a href="{{ "epub-license-refunds/" | relURL }}">Read the direct EPUB delivery and refund terms</a></p>
-        </section>
-
-        {{ if and (eq $productKey "2045") (eq $storyCount 10) }}
-          <section class="bookstore-product__inside" aria-labelledby="bookstore-inside-title" data-bookstore-story-list>
-            <p class="bookstore-product__inside-eyebrow">Complete contents</p>
-            <h2 id="bookstore-inside-title">Inside 2045</h2>
-            <ol>
-              {{ range $storyTitles }}<li>{{ . }}</li>{{ end }}
-            </ol>
-          </section>
-        {{ end }}
-
-        <div class="bookstore-product__copy">
-          {{ .Content }}
-        </div>
-
-        {{ partial "shop/reading-sample.html" (dict
-          "page" .
-          "product" $product
-        ) }}
-
-        {{ with index $product "formats" }}
-          <section class="bookstore-format-ledger" aria-labelledby="bookstore-format-title">
-            <h2 id="bookstore-format-title">{{ index $product "formats_heading" | default "Direct formats" }}</h2>
-            <ul class="bookstore-formats">
-              {{ range . }}<li>{{ if in (lower .) "epub" }}E-book{{ else }}{{ . }}{{ end }}</li>{{ end }}
-            </ul>
-          </section>
-        {{ end }}
-
-        <aside class="bookstore-product__author-note" aria-label="About the author">
-          <p><strong>Robert V. Ussley</strong> writes fiction and nonfiction for Outside In Print.</p>
-          <a href="{{ "authors/robert-v-ussley/" | relURL }}">Meet the author <span aria-hidden="true">&rarr;</span></a>
+          </div>
+          {{ with index $product "exclusive_note" }}<p class="bookstore-product__exclusive-note">{{ . }}</p>{{ end }}
         </aside>
-
-        {{ partial "journey_links.html" (dict
-          "class" "journey-links--page"
-          "eyebrow" "Browse next"
-          "links" (slice
-            (dict "href" ("shop/" | absURL) "label" "Back to Bookstore")
-            (dict "href" ("library/" | absURL) "label" "Library")
-            (dict "href" ("" | absURL) "label" "Home")
-          )
-        ) }}
       </div>
-
+    </div>
+    <div class="bookstore-product__details">
+      <section id="bookstore-purchase" class="bookstore-product__purchase" aria-labelledby="bookstore-purchase-title" tabindex="-1">
+        <h2 id="bookstore-purchase-title" class="bookstore-product__purchase-title">Get the e-book</h2>
+        {{ if gt (len $liveEpubOffers) 0 }}<p class="bookstore-product__checkout-restriction">Direct e-book checkout is currently available to U.S. customers only.</p>{{ end }}
+        {{ partial "shop/direct-offers.html" (dict "product" $product "sourceSlot" "bookstore_detail_direct" "compact" (eq (len $liveEpubOffers) 0)) }}
+        <div class="bookstore-product__kindle">{{ partial "shop/kindle-button.html" (dict "product" $product "sourceSlot" "bookstore_detail_kindle") }}</div>
+      </section>
+      <div class="bookstore-product__copy">{{ .Content }}</div>
+      {{ if and (eq $productKey "2045") (eq $storyCount 10) }}
+        <section class="bookstore-product__inside" aria-labelledby="bookstore-inside-title" data-bookstore-story-list>
+          <p class="bookstore-product__inside-eyebrow">Complete contents</p>
+          <h2 id="bookstore-inside-title">Inside 2045</h2>
+          <ol>{{ range $storyTitles }}<li>{{ . }}</li>{{ end }}</ol>
+        </section>
+      {{ end }}
+    </div>
+    {{ partial "shop/reading-sample.html" (dict "page" . "product" $product) }}
+    <div class="bookstore-product__details">
+      <aside class="bookstore-product__author-note" aria-label="About the author">
+        <p><strong>Robert V. Ussley</strong> writes fiction and nonfiction for Outside In Print.</p>
+        <a href="{{ "authors/robert-v-ussley/" | relURL }}">Meet the author <span aria-hidden="true">&rarr;</span></a>
+      </aside>
+      {{ partial "journey_links.html" (dict "class" "journey-links--page" "eyebrow" "Browse next" "links" (slice (dict "href" ("shop/" | absURL) "label" "Back to Bookstore") (dict "href" ("library/" | absURL) "label" "Library") (dict "href" ("" | absURL) "label" "Home"))) }}
     </div>
   </article>
   {{- $epubCheckoutScript := resources.Get "js/epub-checkout.js" | resources.Minify | resources.Fingerprint -}}

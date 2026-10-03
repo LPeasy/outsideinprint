@@ -12,8 +12,4 @@ weight: 10
 
 ## About the book
 
-*The American Nightmare: Keep Dreaming, Kid* follows the American Dream from its older domestic form into a newer global form that treated America as a platform for anyone from anywhere to rise.
-
 The book is not an argument that immigrants caused the nightmare. It is an argument about timing, symbolism, political economy, citizenship, and the difference between a door and a house.
-
-Purchase options, prices, and release status are listed from the bookstore catalog on this page.
