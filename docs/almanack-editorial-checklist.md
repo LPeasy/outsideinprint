@@ -139,3 +139,14 @@ No installer or local check authorizes a draft, preview send, subscriber send,
 provider settings change, merge or deployment.
 
 Provider reference: [Designing your email](https://docs.buttondown.com/designing-your-email).
+
+## Issue-launch social preparation
+
+For future manually authorized Almanack issue-launch assets, use the
+[sample-card standard](almanack-social-standard.md) and
+`config/almanack-social/standard.json`: compact masthead, canonical issue date
+and number, actual article artwork/title, a short verified excerpt, and full-issue
+CTA. Preserve complete artwork and require phone-size review. This separate
+handoff does not alter the weekly email automation, generic site share cards,
+other campaigns, existing posts, or schedules. Reference pixel inspection is
+pending; do not claim the approved design has been visually matched yet.
