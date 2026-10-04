@@ -70,6 +70,8 @@
             {{ range .pages }}
               {{ partial "discovery/page-list-item.html" (dict
                 "page" .
+                "collectionArtwork" true
+                "class" "collection-section__record"
                 "showCollections" true
                 "showSectionLabel" false
                 "collectionPlacement" "kicker"
