@@ -82,6 +82,18 @@ result is a stop for inspection, never permission to retry delivery. Lifecycle
 network access and does not certify provider numbering. Real preview, schedule
 and send actions require `-PackagePath` and a fresh matching draft readback.
 
+The installed request helpers omit blank `X-Idempotency-Key` headers and preserve
+nonblank mutation keys. Each real invocation creates a unique
+`buttondown-requests-*.jsonl` file in its package (unscheduling without a package
+uses the workspace's `output/buttondown_requests`). It records method, URL,
+request-body hash, key and stage before each JSON request, then completion or failure.
+Authentication headers and message bodies are excluded. A journal-write failure
+before a request blocks it; a logging failure after HTTP success explicitly warns
+that the request succeeded. Dry runs create no journal and make no requests.
+An unfinished request or HTTP 500 is an uncertain outcome. Preserve its evidence
+and original key; do not rerun a lifecycle command with a new key as an automatic
+retry. A `completed` API request does not by itself verify mailbox delivery.
+
 This fix authorizes no provider action and changes no global counter, subscribers,
 sent/archive emails, credentials, or schedules. As of October 3, 2026, the next regular source issue is
 23; its provider number is unverified until that real draft exists and is read
