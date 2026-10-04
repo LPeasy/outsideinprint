@@ -143,7 +143,7 @@ try {
 
   $workPaths = @()
   foreach ($slot in @('author_selected', 'author_recent')) {
-    $links = [regex]::Matches($builtPage, ('<a\b[^>]*data-analytics-source-slot=(?:"' + $slot + '"|' + $slot + '(?=[\s>]))[^>]*>'))
+    $links = [regex]::Matches($builtPage, ('<a\b(?=[^>]*\bclass=(?:"[^"]*\breading-card__link\b[^"]*"|[^\s>]*\breading-card__link\b[^\s>]*))[^>]*data-analytics-source-slot=(?:"' + $slot + '"|' + $slot + '(?=[\s>]))[^>]*>'))
     if ($links.Count -ne 6) {
       throw "Expected six rendered $slot writing links; found $($links.Count)."
     }

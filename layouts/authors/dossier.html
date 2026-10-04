@@ -103,6 +103,8 @@
         {{ range $selectedWorks }}
           {{ partial "discovery/page-list-item.html" (dict
             "page" .
+            "collectionArtwork" true
+            "class" "collection-section__record"
             "showCollections" true
             "showSectionLabel" true
             "analyticsSourceSlot" "author_selected"
@@ -126,6 +128,8 @@
         {{ range $recentWorks }}
           {{ partial "discovery/page-list-item.html" (dict
             "page" .
+            "collectionArtwork" true
+            "class" "collection-section__record"
             "showCollections" true
             "showSectionLabel" true
             "analyticsSourceSlot" "author_recent"

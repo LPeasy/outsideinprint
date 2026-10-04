@@ -6272,6 +6272,98 @@ foreach ($articlePath in @(
 
 }
 
+# Archive and author writing cards share Library's artwork eligibility, including
+# image exemptions and pieces without usable artwork. Check each real page rather
+# than a fixed pagination count; /archive/page/1/ is only a redirect.
+$expandedArtworkSurfaces = [System.Collections.Generic.List[object]]::new()
+foreach ($file in $htmlFiles) {
+  $sitePath = Get-RepoRelativePath -RepoRoot $SiteDir -Path $file.FullName
+  $archivePage = [regex]::Match($sitePath, '^archive/(?:index\.html|page/(?<number>[1-9]\d*)/index\.html)$')
+  if (-not $archivePage.Success -or $archivePage.Groups['number'].Value -ceq '1') { continue }
+  $expandedArtworkSurfaces.Add(@{
+    label = "public/$sitePath"
+    html = Get-Content -LiteralPath $file.FullName -Raw -Encoding utf8
+  })
+}
+$authorArtworkPath = 'public/authors/robert-v-ussley/index.html'
+$authorArtworkHtml = [string]$targetPageHtml[$authorArtworkPath]
+foreach ($sectionID in @('author-selected-title', 'author-recent-title')) {
+  $sections = @([regex]::Matches($authorArtworkHtml, '(?is)(?<tag><section\b[^>]*>)(?<body>.*?)</section>') |
+    Where-Object { (Get-AttributeValue -Tag $_.Groups['tag'].Value -Name 'aria-labelledby') -ceq $sectionID })
+  if ($sections.Count -ne 1) {
+    $uxIssues.Add("$authorArtworkPath => expected one #$sectionID writing section for artwork coverage")
+    continue
+  }
+  $expandedArtworkSurfaces.Add(@{ label = "$authorArtworkPath#$sectionID"; html = $sections[0].Groups['body'].Value })
+}
+$libraryArtworkByPath = @{}
+foreach ($entry in $polishLibraryItems) {
+  $libraryArtworkByPath[[string]$entry.url] = [bool]$entry.image
+}
+foreach ($surface in $expandedArtworkSurfaces) {
+  $cards = @([regex]::Matches($surface.html, '(?is)(?<tag><article\b(?=[^>]*\breading-card\b)[^>]*>)(?<body>.*?)</article>'))
+  if ($cards.Count -eq 0) {
+    $uxIssues.Add("$($surface.label) => expected published reading cards for expanded-artwork coverage")
+    continue
+  }
+  foreach ($card in $cards) {
+    $titleLinks = @(Get-OpenTags -Html $card.Value -TagName 'a' | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'reading-card__link' })
+    if ($titleLinks.Count -ne 1) {
+      $uxIssues.Add("$($surface.label) => each writing card must retain one article title link")
+      continue
+    }
+    $articlePath = Get-SitePathFromHref -Href (Get-AttributeValue -Tag $titleLinks[0] -Name 'href')
+    $cardLabel = "$($surface.label) => $articlePath"
+    if (-not $articlePath) {
+      $uxIssues.Add("$cardLabel must retain a canonical article destination")
+      continue
+    }
+    $wrappers = @(Get-OpenTags -Html $card.Value -TagName 'span' | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'essay-cartoon-thumb-wrap' })
+    # Selected Writing can also include book samples outside the Library index.
+    # Validate their artwork when present without requiring an invented image.
+    $hasArtwork = if ($libraryArtworkByPath.ContainsKey($articlePath)) { $libraryArtworkByPath[$articlePath] } else { $wrappers.Count -gt 0 }
+    if (-not (Test-TagHasClass -Tag $card.Groups['tag'].Value -ClassName 'collection-section__record')) {
+      $uxIssues.Add("$cardLabel must use the shared expanded reading-card layout")
+    }
+    if ((Test-TagHasClass -Tag $card.Groups['tag'].Value -ClassName 'item--collection-artwork') -ne $hasArtwork) {
+      $uxIssues.Add("$cardLabel artwork modifier must match Library artwork eligibility")
+    }
+    $artworkLinks = @([regex]::Matches($card.Value, '(?is)(?<tag><a\b[^>]*>)(?<body>.*?)</a>') |
+      Where-Object { Test-TagHasClass -Tag $_.Groups['tag'].Value -ClassName 'essay-cartoon-thumb' })
+    $zoomButtons = @([regex]::Matches($card.Value, '(?is)(?<tag><button\b[^>]*>)(?<body>.*?)</button>') |
+      Where-Object { Test-TagHasClass -Tag $_.Groups['tag'].Value -ClassName 'essay-cartoon-zoom' })
+    $expectedArtworkCount = [int]$hasArtwork
+    if ($wrappers.Count -ne $expectedArtworkCount -or $artworkLinks.Count -ne $expectedArtworkCount -or $zoomButtons.Count -ne $expectedArtworkCount) {
+      $uxIssues.Add("$cardLabel must render one artwork link and zoom control only when Library has eligible artwork")
+    }
+    foreach ($wrapper in $wrappers) {
+      if (-not (Test-TagHasClass -Tag $wrapper -ClassName 'essay-cartoon-thumb-wrap--collection-artwork')) {
+        $uxIssues.Add("$cardLabel must not retain the compact editorial thumbnail wrapper")
+      }
+    }
+    foreach ($artworkLink in $artworkLinks) {
+      $artworkPath = Get-SitePathFromHref -Href (Get-AttributeValue -Tag $artworkLink.Groups['tag'].Value -Name 'href')
+      if ($artworkPath -cne $articlePath) {
+        $uxIssues.Add("$cardLabel artwork link must open the same article as its title")
+      }
+      if (@(Get-OpenTags -Html $artworkLink.Groups['body'].Value -TagName 'img').Count -ne 1) {
+        $uxIssues.Add("$cardLabel eligible artwork link must contain its image")
+      }
+      if ((Convert-HtmlFragmentToText -Html $artworkLink.Groups['body'].Value) -match '(?i)\bRead\b') {
+        $uxIssues.Add("$cardLabel expanded image anchor must omit the compact Read label")
+      }
+    }
+    foreach ($zoom in $zoomButtons) {
+      $icons = @(Get-OpenTags -Html $zoom.Groups['body'].Value -TagName 'svg')
+      if ($icons.Count -ne 1 -or (Get-AttributeValue -Tag $icons[0] -Name 'aria-hidden') -cne 'true' -or
+          [string]::IsNullOrWhiteSpace((Get-AttributeValue -Tag $zoom.Groups['tag'].Value -Name 'aria-label')) -or
+          $zoom.Groups['tag'].Value -notmatch '\bdata-essay-cartoon-lightbox-trigger(?:\s|=|>)') {
+        $uxIssues.Add("$cardLabel must retain an accessible SVG zoom control wired to the artwork lightbox")
+      }
+    }
+  }
+}
+
 # Reuse Hugo's validated source inventory so expected membership and order come
 # from real front matter, publication rules, and the existing item resolver.
 $collectionInventory = & (Join-Path $PSScriptRoot 'test_collection_organization_contract.ps1') -PassThru -Clock $Clock
