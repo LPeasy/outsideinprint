@@ -1,7 +1,7 @@
 ---
 title: "Idle Times"
 slug: "idle-times"
-description: "Idle Times is a quiet single-player Windows desktop companion, available now on Steam."
+description: "Keep Bob company in an animated pixel newsroom with 114 illustrated cartoon rewards and eight original lo-fi tracks. Available now on Steam for Windows."
 section_label: "Games"
 game_key: "idle_times"
 draft: false
@@ -9,8 +9,8 @@ noindex: false
 show_citation: false
 weight: 10
 images:
-  - "idle-times-packaged-desk-1920x1080.png"
-image_alt: "Idle Times Full Desk mode with Bob at the typewriter, filing progress, Comic Shelf, and Pressroom Radio controls."
+  - "idle-times-0.2.5-01-full-desk.png"
+image_alt: "Idle Times Full Desk with Bob reading in his newsroom, edition progress, Comic Shelf and Pressroom Radio."
 build:
   publishResources: false
 ---

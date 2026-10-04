@@ -307,14 +307,15 @@
     {{- errorf "Games product games.%s fact %q must equal %q" $key $label $expectedValue -}}
   {{- end -}}
 {{- end -}}
-{{- if ne (len (index $game "features" | default (slice))) 3 -}}
-  {{- errorf "Games product games.%s must define exactly three benefit sections" $key -}}
+{{- if ne (len (index $game "features" | default (slice))) 5 -}}
+  {{- errorf "Games product games.%s must define the five newsroom, music, reading, view and local-play benefits" $key -}}
 {{- end -}}
 {{- $disclosureCopy := lower ($game | jsonify) -}}
 {{- range slice
-  "progress occurs only while a desk view is open"
+  "progress occurs only while a desk view is visible"
   "there is no offline progression"
   "fixed and pre-generated"
+  "original in-game music was created with suno"
   "no runtime generative-ai service or api calls"
 -}}
   {{- if not (strings.Contains $disclosureCopy .) -}}

@@ -30,6 +30,13 @@ const requiredCommonPaths = [
   "content/games/idle-times/idle-times-main-capsule.png",
   "content/games/idle-times/idle-times-packaged-desk-1920x1080.png",
   "content/games/idle-times/idle-times-packaged-library-1920x1080.png",
+  "content/games/idle-times/idle-times-0.2.5-main-capsule.png",
+  "content/games/idle-times/idle-times-0.2.5-01-full-desk.png",
+  "content/games/idle-times/idle-times-0.2.5-02-printing.png",
+  "content/games/idle-times/idle-times-0.2.5-03-pressroom-radio.png",
+  "content/games/idle-times/idle-times-0.2.5-04-comic-collections.png",
+  "content/games/idle-times/idle-times-0.2.5-05-comic-reader.png",
+  "docs/games-idle-times-0.2.5-media.json",
   "data/games.yaml",
   "layouts/games/list.html",
   "layouts/games/single.html",
@@ -116,14 +123,18 @@ test("Games catalog uses the controlled LLC identity, route states, and asset se
   assert.match(idle, /^\s+privacy_route:\s*"\/privacy\/"\s*$/m);
   assert.doesNotMatch(idle.match(/^\s+action_url:.*$/m)?.[0] || "", /[?#]/);
   assert.match(idle, /Full Desk, Mini Companion, and Pet Desk/);
-  assert.match(idle, /78 illustrated rewards/);
-  assert.match(idle, /Progress occurs only while a desk view is open\. There is no offline progression\./);
+  assert.match(idle, /114 illustrated cartoon rewards/);
+  assert.match(idle, /Eight original lo-fi tracks/);
+  assert.match(idle, /Robby V and the Paper Boys/);
+  assert.match(idle, /The Fine Print, Vol\. 1/);
+  assert.match(idle, /Progress occurs only while a desk view is visible\. Hidden and offline time do not advance the queue\. There is no offline progression\./);
   assert.match(idle, /All AI-assisted visual artwork is fixed and pre-generated before release\./);
+  assert.match(idle, /Original in-game music was created with Suno and bundled with the game\./);
   assert.match(idle, /no runtime generative-AI service or API calls/);
   assert.match(idle, /^\s+- label:\s*"Platform"\s*\r?\n\s+value:\s*"Windows"\s*$/m);
   assert.match(idle, /^\s+- label:\s*"Language"\s*\r?\n\s+value:\s*"English"\s*$/m);
   assert.match(idle, /^\s+- label:\s*"Play style"\s*\r?\n\s+value:\s*"Single-player"\s*$/m);
-  assert.equal((idle.match(/^\s+- title:/gm) || []).length, 3, "Idle Times must define exactly three benefit sections");
+  assert.equal((idle.match(/^\s+- title:/gm) || []).length, 5, "Idle Times must define its five newsroom, music, reading, view and local-play benefits");
   assert.match(idle, /^\s+- id:\s*"full-desk"\s*\r?\n\s+role:\s*"hero"\s*$/m);
   assert.doesNotMatch(idle, /seller|payee|tax party|bank identity/i);
   assert.doesNotMatch(`${gamesIndex}\n${idlePage}\n${idle}`, /coming soon|coming to steam|wishlist|not yet available|before steam unlocks/i);
@@ -133,6 +144,12 @@ test("Games catalog uses the controlled LLC identity, route states, and asset se
     ["content/games/idle-times/idle-times-main-capsule.png", "5797e830c285688a3e5f6840fd189d8281ad31320af2388074fb3016ee853109"],
     ["content/games/idle-times/idle-times-packaged-desk-1920x1080.png", "0d5c4e1d01f10f4e8d070db2ce555c55d66655f1ecfd66df4adbfd38eef7b339"],
     ["content/games/idle-times/idle-times-packaged-library-1920x1080.png", "0eac2dd310f4a6365666f1662b814ad28d6b8ee3e3558ddf3947fd1658a7b954"],
+    ["content/games/idle-times/idle-times-0.2.5-main-capsule.png", "c9b267381be2dfcb1024773c38e99f8fe62d4f60bb4553b057edac331d12ef6e"],
+    ["content/games/idle-times/idle-times-0.2.5-01-full-desk.png", "8484dfc29dd454f03b072fd55cb09fb1330b0320ccfef1917ee27d935d419856"],
+    ["content/games/idle-times/idle-times-0.2.5-02-printing.png", "d33f054beedc798626ae644bc4a936d287c5e2815365618d98ff53edccbc4abc"],
+    ["content/games/idle-times/idle-times-0.2.5-03-pressroom-radio.png", "df7b59d4e9dccf281afb8c5e146632f636022c7ce0a4d24a58555a05a9c8e7ef"],
+    ["content/games/idle-times/idle-times-0.2.5-04-comic-collections.png", "60499e3c579a2b3e72126be8bdcf31a319dde9b4ce21161df637f7b9c998d75e"],
+    ["content/games/idle-times/idle-times-0.2.5-05-comic-reader.png", "e641a796ae89eaad3751b833436d22e8f6b1122e5d283d2888815eb2fbcc5d8e"],
   ]);
   for (const [relativePath, expectedHash] of expectedHashes) {
     assert.equal(sha256(relativePath), expectedHash, `unexpected approved asset bytes: ${relativePath}`);

@@ -113,10 +113,15 @@ foreach ($required in @(
   'Available now on Steam.',
   'Buy Idle Times on Steam',
   'Full Desk, Mini Companion, and Pet Desk',
-  '78 illustrated rewards',
-  'Progress occurs only while a desk view is open.',
+  '114 illustrated cartoon rewards',
+  'Eight original lo-fi tracks',
+  'Robby V and the Paper Boys',
+  'The Fine Print, Vol. 1',
+  'Progress occurs only while a desk view is visible.',
+  'Hidden and offline time do not advance the queue.',
   'There is no offline progression.',
   'fixed and pre-generated',
+  'Original in-game music was created with Suno',
   'no runtime generative-AI service or API calls',
   'support@outsideinprint.org',
   '/privacy/'
@@ -160,7 +165,7 @@ foreach ($url in $allSteamUrls) {
 
 foreach ($entry in @(
   @{ Html = $gamesHtml; Route = 'games/index.html'; PictureCount = 1; Slot = 'games_index_widget' },
-  @{ Html = $idleHtml; Route = 'games/idle-times/index.html'; PictureCount = 3; Slot = 'idle_times_detail_widget' }
+  @{ Html = $idleHtml; Route = 'games/idle-times/index.html'; PictureCount = 6; Slot = 'idle_times_detail_widget' }
 )) {
   if ([regex]::Matches($entry.Html, '<picture\b', 'IgnoreCase').Count -ne $entry.PictureCount) {
     throw "Expected $($entry.PictureCount) responsive pictures at $($entry.Route)."
