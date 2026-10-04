@@ -31,7 +31,78 @@ def replace_once(text, old, new, label):
     return text.replace(old, new, 1)
 
 
+def request_evidence_edits(name):
+    """Exact, reversible v3 adapter for the three existing HTTP helpers."""
+    if name not in ("send_almanack_to_buttondown.ps1", "manage_buttondown_almanack_email.ps1",
+                    "run_almanack_buttondown_preview.ps1"):
+        return []
+    body_import = ". (Join-Path $PSScriptRoot 'almanack_buttondown_body.ps1')"
+    edits = [(body_import, body_import + "\n. (Join-Path $PSScriptRoot 'almanack_buttondown_request_log.ps1')\n$script:AlmanackRequestLogPath = $null")]
+    if name != "run_almanack_buttondown_preview.ps1":
+        edits.append(("    'X-API-Version' = $ApiVersion\n    'X-Idempotency-Key' = $IdempotencyKey\n  }",
+                      "    'X-API-Version' = $ApiVersion\n  }\n  if (-not [string]::IsNullOrWhiteSpace($IdempotencyKey)) {\n    $headers['X-Idempotency-Key'] = $IdempotencyKey\n  }"))
+    old = """  try {
+    if ($Method -eq 'Get') {
+      return Invoke-RestMethod -Method Get -Uri $Url -Headers $headers -TimeoutSec 30
+    }
+    return Invoke-RestMethod -Method $Method -Uri $Url -Headers $headers -ContentType 'application/json' -Body $JsonBody -TimeoutSec 30
+  } catch {
+    $errorInfo = Get-ButtondownErrorInfo -ErrorRecord $_
+    $status = $errorInfo.Status
+    $detail = $errorInfo.Detail"""
+    new = """  $event = @{
+    Path = $script:AlmanackRequestLogPath
+    Method = $Method
+    Url = $Url
+    IdempotencyKey = $IdempotencyKey
+    JsonBody = $(if ($Method -eq 'Get') { $null } else { $JsonBody })
+  }
+  # Persist evidence before network access; failure here prevents the request.
+  Write-AlmanackRequestEvent @event -Stage started
+  try {
+    if ($Method -eq 'Get') {
+      $response = Invoke-RestMethod -Method Get -Uri $Url -Headers $headers -TimeoutSec 30
+    } else {
+      $response = Invoke-RestMethod -Method $Method -Uri $Url -Headers $headers -ContentType 'application/json' -Body $JsonBody -TimeoutSec 30
+    }
+  } catch {
+    $errorInfo = Get-ButtondownErrorInfo -ErrorRecord $_
+    $status = $errorInfo.Status
+    $detail = $errorInfo.Detail
+    Write-AlmanackRequestEvent @event -Stage failed -HttpStatus $status"""
+    edits.append((old, new))
+    labels = {
+        "send_almanack_to_buttondown.ps1": "Buttondown API request failed.",
+        "manage_buttondown_almanack_email.ps1": "Buttondown lifecycle request failed.",
+        "run_almanack_buttondown_preview.ps1": "Buttondown preview request failed.",
+    }
+    closing = '    throw "' + labels[name] + ' $(Redact-SecretText -Value $_.Exception.Message -Secret $ApiKey)"\n  }\n}'
+    completed = """  try {
+    Write-AlmanackRequestEvent @event -Stage completed
+  } catch {
+    throw "Buttondown $Method request succeeded, but its completion could not be recorded. Do not retry."
+  }
+  return $response
+}"""
+    edits.append((closing, closing[:-1] + completed))
+    key_read = "  $apiKey = [Environment]::GetEnvironmentVariable('BUTTONDOWN_API_KEY', 'Process')"
+    if name == "manage_buttondown_almanack_email.ps1":
+        directory = "$(if ($Action -eq 'UnscheduleDraft') { Join-Path (Split-Path -Parent $PSScriptRoot) 'output/buttondown_requests' } else { $packageDir })"
+    else:
+        directory = "$packageDir"
+    edits.append((key_read, "  $script:AlmanackRequestLogPath = New-AlmanackRequestLog -Directory " + directory + "\n  Write-Host \"Buttondown request log: $script:AlmanackRequestLogPath\"\n" + key_read))
+    return edits
+
+
 def patch_script(name, text):
+    # Normalize only exact v3 snippets in memory, so older numbering adapters
+    # can retain their exact-match validation before v3 is applied again.
+    request_edits = request_evidence_edits(name)
+    for index, (old, new) in reversed(list(enumerate(request_edits))):
+        if new in text:
+            if text.count(new) != 1 or old in text.replace(new, "", 1):
+                raise ValueError(f"{name} request adapter {index + 1}: mixed or ambiguous snippets")
+            text = text.replace(new, old, 1)
     edits = []
     if name == "almanack_buttondown_body.ps1":
         edits = [
@@ -137,6 +208,8 @@ def patch_script(name, text):
             if previous != new and previous in text:
                 text = replace_once(text, previous, new, f"{name} v1 upgrade {index + 1}")
         text = replace_once(text, old, new, f"{name} edit {index + 1}")
+    for index, (old, new) in enumerate(request_edits):
+        text = replace_once(text, old, new, f"{name} request adapter {index + 1}")
     return text
 
 
@@ -144,6 +217,7 @@ def plan_changes(workspace_root, skill_path, helper_source):
     root = Path(workspace_root).resolve()
     skill = Path(skill_path).resolve()
     helper = Path(helper_source).read_bytes()
+    request_helper = Path(__file__).with_name("almanack_buttondown_request_log.ps1").read_bytes().replace(b"\r\n", b"\n")
     changes = []
 
     def update(path, transform):
@@ -181,6 +255,12 @@ def plan_changes(workspace_root, skill_path, helper_source):
             raise ValueError("Existing numbering helper differs; no files changed")
     else:
         changes.append((destination, None, helper))
+    request_destination = root / "scripts/almanack_buttondown_request_log.ps1"
+    if request_destination.exists():
+        if request_destination.read_bytes().replace(b"\r\n", b"\n") != request_helper:
+            raise ValueError("Existing request evidence helper differs; no files changed")
+    else:
+        changes.append((request_destination, None, request_helper))
     return changes
 
 

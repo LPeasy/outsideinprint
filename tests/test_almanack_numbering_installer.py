@@ -21,7 +21,8 @@ SCRIPT_ROOT = HERE.parent / "scripts"
 if not (SCRIPT_ROOT / "install_almanack_numbering_fix.py").is_file():
     SCRIPT_ROOT = HERE
 INSTALLER = SCRIPT_ROOT / "install_almanack_numbering_fix.py"
-HELPER = SCRIPT_ROOT / "almanack_buttondown_numbering.ps1"
+HELPER = Path(os.environ.get("OIP_NUMBERING_HELPER", SCRIPT_ROOT / "almanack_buttondown_numbering.ps1"))
+REQUEST_HELPER = SCRIPT_ROOT / "almanack_buttondown_request_log.ps1"
 SOURCE_WORKSPACE = os.environ.get("OIP_NUMBERING_WORKSPACE")
 SOURCE_SKILL = os.environ.get("OIP_NUMBERING_SKILL")
 HANDOFF_FILES = (
@@ -135,6 +136,9 @@ class InstallerTests(unittest.TestCase):
         contrast_helper = Path(SOURCE_WORKSPACE) / "scripts/almanack_email_contrast.py"
         if contrast_helper.is_file():
             shutil.copyfile(contrast_helper, self.workspace / "scripts/almanack_email_contrast.py")
+        request_helper = Path(SOURCE_WORKSPACE) / "scripts/almanack_buttondown_request_log.ps1"
+        if request_helper.is_file():
+            shutil.copyfile(request_helper, self.workspace / "scripts/almanack_buttondown_request_log.ps1")
         self.sentinel = self.workspace / "output/sent-issue/buttondown-response.json"
         self.sentinel.parent.mkdir(parents=True)
         self.sentinel.write_text('{"id":"sent-issue","status":"sent","secondary_id":18}', encoding="utf-8")
@@ -155,6 +159,8 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(installed["output/sent-issue/buttondown-response.json"],
                          original["output/sent-issue/buttondown-response.json"])
         self.assertEqual(installed["scripts/almanack_buttondown_numbering.ps1"], HELPER.read_bytes())
+        self.assertEqual(installed["scripts/almanack_buttondown_request_log.ps1"].replace(b"\r\n", b"\n"),
+                         REQUEST_HELPER.read_bytes().replace(b"\r\n", b"\n"))
         self.install()
         self.assertEqual(installed, self.snapshot())
         self.assertFalse(self.module.plan_changes(self.workspace, self.skill, HELPER))
@@ -184,6 +190,23 @@ class InstallerTests(unittest.TestCase):
         with self.assertRaises((ValueError, RuntimeError)):
             self.install()
         self.assertEqual(original, self.snapshot())
+
+    def test_unrecognized_request_helper_fails_before_any_change(self):
+        (self.workspace / "scripts/almanack_buttondown_request_log.ps1").write_text(
+            "# Unknown locally modified request logger.\n", encoding="utf-8")
+        original = self.snapshot()
+        with self.assertRaises(ValueError):
+            self.install()
+        self.assertEqual(original, self.snapshot())
+        self.assertFalse(self.backup.exists())
+
+    def test_request_helper_accepts_equivalent_windows_newlines(self):
+        self.install()
+        path = self.workspace / "scripts/almanack_buttondown_request_log.ps1"
+        crlf = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")
+        path.write_bytes(crlf)
+        self.assertFalse(self.module.plan_changes(self.workspace, self.skill, HELPER))
+        self.assertEqual(path.read_bytes(), crlf)
 
     def test_installed_distribution_wrapper_exports_issue_23(self):
         self.install()
@@ -250,6 +273,7 @@ class InstallerTests(unittest.TestCase):
                                             env=environment, capture_output=True, text=True, timeout=30)
                     self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
                     self.assertNotIn("NETWORK_CALL_FORBIDDEN", result.stdout + result.stderr)
+                    self.assertFalse(list(self.workspace.rglob("buttondown-requests-*.jsonl")))
                     preview = json.loads(result.stdout)
                     self.assertTrue(preview["dry_run"])
                     self.assertEqual(preview["action"], action)
