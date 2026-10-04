@@ -1,9 +1,9 @@
 ---
 title: "Games"
-description: "Games operated and supported by Outside In Print LLC, beginning with Idle Times."
+description: "Meet Idle Times: an animated desktop newsroom, illustrated cartoon rewards and an original lo-fi soundtrack. Available on Steam from Outside In Print."
 draft: false
 noindex: false
 show_citation: false
 ---
 
-Games from Outside In Print begin with Idle Times, a quiet desktop companion available now on Steam.
+Games from Outside In Print begin with Idle Times, an animated desktop newsroom with illustrated cartoon rewards and an original lo-fi soundtrack. Available now on Steam for Windows.

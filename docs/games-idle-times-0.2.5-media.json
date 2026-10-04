@@ -1,0 +1,77 @@
+{
+  "schema": "idle-times-owned-sales-media/v1",
+  "version": "0.2.5",
+  "status": "local-prepared-not-published",
+  "reviewedAtUtc": "2026-10-04T16:06:20.3962157Z",
+  "sourceCommit": "96ad190f21acfa359bb76eedb16f859f4987ebed",
+  "appAsarSha256": "caa995ca2d576f04db0c4e771b7f69a5f675d21f98ebf253ee1585ec145f3057",
+  "review": "Original five captures and capsule inspected directly; artwork, current menu/shelf design, music credit and uncropped framing reviewed. Owner approval relayed by root. Existing historical image bytes are preserved.",
+  "assets": [
+    {
+      "id": "01-full-desk",
+      "path": "content/games/idle-times/idle-times-0.2.5-01-full-desk.png",
+      "source": "out/steam-media-0.2.5/2026-10-04/upload/idle-times-0.2.5-01-full-desk.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 1133775,
+      "sha256": "8484dfc29dd454f03b072fd55cb09fb1330b0320ccfef1917ee27d935d419856",
+      "sourceKind": "packaged-electron-compositor-capture",
+      "visualReview": "passed"
+    },
+    {
+      "id": "03-pressroom-radio",
+      "path": "content/games/idle-times/idle-times-0.2.5-03-pressroom-radio.png",
+      "source": "out/steam-media-0.2.5/2026-10-04/upload/idle-times-0.2.5-03-pressroom-radio.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 1049154,
+      "sha256": "df7b59d4e9dccf281afb8c5e146632f636022c7ce0a4d24a58555a05a9c8e7ef",
+      "sourceKind": "packaged-electron-compositor-capture",
+      "visualReview": "passed"
+    },
+    {
+      "id": "04-comic-collections",
+      "path": "content/games/idle-times/idle-times-0.2.5-04-comic-collections.png",
+      "source": "out/steam-media-0.2.5/2026-10-04/upload/idle-times-0.2.5-04-comic-collections.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 567924,
+      "sha256": "60499e3c579a2b3e72126be8bdcf31a319dde9b4ce21161df637f7b9c998d75e",
+      "sourceKind": "packaged-electron-compositor-capture",
+      "visualReview": "passed"
+    },
+    {
+      "id": "05-comic-reader",
+      "path": "content/games/idle-times/idle-times-0.2.5-05-comic-reader.png",
+      "source": "out/steam-media-0.2.5/2026-10-04/upload/idle-times-0.2.5-05-comic-reader.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 1985682,
+      "sha256": "e641a796ae89eaad3751b833436d22e8f6b1122e5d283d2888815eb2fbcc5d8e",
+      "sourceKind": "packaged-electron-compositor-capture",
+      "visualReview": "passed"
+    },
+    {
+      "id": "main-capsule",
+      "path": "content/games/idle-times/idle-times-0.2.5-main-capsule.png",
+      "source": "steam/assets/0.2.5/idle-times-main-capsule.png",
+      "width": 1232,
+      "height": 706,
+      "bytes": 1056079,
+      "sha256": "c9b267381be2dfcb1024773c38e99f8fe62d4f60bb4553b057edac331d12ef6e",
+      "sourceKind": "authored-scene-branding",
+      "visualReview": "passed"
+    },
+    {
+      "id": "02-printing",
+      "path": "content/games/idle-times/idle-times-0.2.5-02-printing.png",
+      "source": "out/steam-media-0.2.5/2026-10-04/upload/idle-times-0.2.5-02-printing.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 1131277,
+      "sha256": "d33f054beedc798626ae644bc4a936d287c5e2815365618d98ff53edccbc4abc",
+      "sourceKind": "packaged-electron-compositor-capture",
+      "visualReview": "passed"
+    }
+  ]
+}

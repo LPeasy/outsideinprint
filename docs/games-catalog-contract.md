@@ -22,7 +22,20 @@ Each record must use `Outside In Print LLC` as the operator and `support@outside
 
 ## Media allowlist
 
-Only these Idle Times page resources are approved for the bounded candidate:
+The October 4, 2026 refresh uses six reviewed 0.2.5 resources. Original package captures and the title capsule were inspected directly; their package/source identities, dimensions and SHA-256 values are recorded in [games-idle-times-0.2.5-media.json](games-idle-times-0.2.5-media.json). The exact candidate remains local until the tested Steam build is live and the website publication is completed.
+
+| Resource | Role | SHA-256 |
+|---|---|---|
+| `idle-times-0.2.5-main-capsule.png` | title capsule | `c9b267381be2dfcb1024773c38e99f8fe62d4f60bb4553b057edac331d12ef6e` |
+| `idle-times-0.2.5-01-full-desk.png` | Full Desk hero | `8484dfc29dd454f03b072fd55cb09fb1330b0320ccfef1917ee27d935d419856` |
+| `idle-times-0.2.5-02-printing.png` | Bob working the press | `d33f054beedc798626ae644bc4a936d287c5e2815365618d98ff53edccbc4abc` |
+| `idle-times-0.2.5-03-pressroom-radio.png` | original soundtrack playlist | `df7b59d4e9dccf281afb8c5e146632f636022c7ce0a4d24a58555a05a9c8e7ef` |
+| `idle-times-0.2.5-04-comic-collections.png` | collection shelf | `60499e3c579a2b3e72126be8bdcf31a319dde9b4ce21161df637f7b9c998d75e` |
+| `idle-times-0.2.5-05-comic-reader.png` | comic reader | `e641a796ae89eaad3751b833436d22e8f6b1122e5d283d2888815eb2fbcc5d8e` |
+
+The shared product data contains five benefits: newsroom activity, original music, the collection shelf, desk views and local play. The compact catalog page shows the first three; the detail page shows all five. Current facts are 114 illustrated cartoon rewards and eight existing original lo-fi tracks. No new tracks, cartoon additions, storefronts or soundtrack entitlements are introduced by this refresh.
+
+These historical sources remain byte-identical to their original approved set and are no longer selected by the current catalog. Preserve them for the frozen responsive-image migration contract:
 
 | Resource | Role | SHA-256 |
 |---|---|---|
