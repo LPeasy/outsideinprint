@@ -132,6 +132,9 @@ class InstallerTests(unittest.TestCase):
         source_helper = Path(SOURCE_WORKSPACE) / "scripts/almanack_buttondown_numbering.ps1"
         if source_helper.is_file():
             shutil.copyfile(source_helper, self.workspace / "scripts/almanack_buttondown_numbering.ps1")
+        contrast_helper = Path(SOURCE_WORKSPACE) / "scripts/almanack_email_contrast.py"
+        if contrast_helper.is_file():
+            shutil.copyfile(contrast_helper, self.workspace / "scripts/almanack_email_contrast.py")
         self.sentinel = self.workspace / "output/sent-issue/buttondown-response.json"
         self.sentinel.parent.mkdir(parents=True)
         self.sentinel.write_text('{"id":"sent-issue","status":"sent","secondary_id":18}', encoding="utf-8")
@@ -195,7 +198,7 @@ class InstallerTests(unittest.TestCase):
         def fake_exporter(issue, output_dir, hugo):
             directory = Path(output_dir)
             (directory / "email.html").write_text(
-                '<a style="color:#346782;" href="https://outsideinprint.org/">Outside In Print</a>', encoding="utf-8")
+                '<html><body><a style="color:#346782;" href="https://outsideinprint.org/">Outside In Print</a></body></html>', encoding="utf-8")
             (directory / "email.txt").write_text("https://outsideinprint.org/\nColor over the lines.", encoding="utf-8")
             (directory / "REVIEW.txt").write_text("Existing review.\n", encoding="utf-8")
             return PatchTests.metadata(23)

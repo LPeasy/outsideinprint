@@ -74,6 +74,8 @@ class RenderedEmailTests(unittest.TestCase):
         self.assertEqual(metadata["subject"], "Bob\u2019s Almanack ~ October 3, 2026 ~ Issue 22")
         self.assertEqual(metadata["issue_number"], 22)
         self.assertEqual(metadata["secondary_id"], 22)
+        self.assertEqual(metadata["email_contrast_contract"], "parchment-paired-v1")
+        self.assertIn('data-oip-contrast="parchment-paired-v1"', html)
         self.assertEqual(len(metadata["content"]["essays"]), 5)
         self.assertEqual(len(parsed.images), 6)
         self.assertIn("https://outsideinprint.org/collections/the-restless-heart/", parsed.links)
