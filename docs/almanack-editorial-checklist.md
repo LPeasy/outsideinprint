@@ -93,3 +93,37 @@ and the footer variable `email.secondary_id` in [Templating](https://docs.button
 The September 26 showcase is a private review copy, not a corrected publication,
 an October 3 edition, or a subscriber send. Owner review of both web and email
 previews precedes publication. Push/merge to `main` is the site's publish action.
+
+## Email contrast
+
+The exporter applies `parchment-paired-v1` after rendering the email. Each retained
+content cell and live text element carries its own foreground/background pair:
+ink `#332a22` or secondary text `#554d42` on paper `#f4eddf`. Links and emphasized
+text inside them stay blue `#346782` and underlined. These pairs remain fixed in
+normal and dark CSS modes. Artwork, copy, destinations and the website are unchanged.
+
+This addresses the observed Classic handoff: the provider removed the submitted
+body attributes while retaining the paper table, and its dark quote rule changed
+text to pale gray. Body-only color inheritance and color-scheme metadata cannot
+protect that retained content. The adapter applies only to generated email HTML;
+it does not style provider legal/unsubscribe content or change global settings.
+
+On the existing Windows workflow, install `scripts/install_almanack_contrast_fix.py`
+after the numbering fix. Pass `--workspace-root`, `--skill-path` and `--backup-dir`
+as with the numbering installer; use `--check` to inspect pending files. It copies
+the same helper beside the active distribution wrapper, applies it after the Medium
+footer addition and before hashing, and extends export parity validation. The
+immutable PR131 snapshot and all numbering/readback guards remain in place.
+Regenerate future packages; do not hand-edit exports or rewrite sent issues.
+
+Check the complete body in light and dark provider-wrapper simulations, including
+headings, quotes, attributions, lists and both footer links. All normal-size text
+must reach at least 4.5:1 contrast. Inspect desktop and mobile layouts and verify
+text, URLs and artwork are unchanged. These browser checks reproduce observed
+provider CSS and removed body styles; they do not reproduce every mail client's
+automatic color changes. A separately authorized received-email review in the
+affected client remains necessary before claiming actual-client verification.
+No installer or local check authorizes a draft, preview send, subscriber send,
+provider settings change, merge or deployment.
+
+Provider reference: [Designing your email](https://docs.buttondown.com/designing-your-email).

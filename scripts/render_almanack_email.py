@@ -9,12 +9,14 @@ import argparse
 import hashlib
 import json
 import re
+import runpy
 import shutil
 import subprocess
 import tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
+CONTRAST = runpy.run_path(str(Path(__file__).with_name("almanack_email_contrast.py")))
 CONFIG = """baseURL = "https://outsideinprint.org/"
 timeZone = "America/New_York"
 disableKinds = ["home", "section", "taxonomy", "term", "rss", "sitemap"]
@@ -105,7 +107,9 @@ def render(issue_path, output_dir, hugo):
             if len(matches) != 1:
                 raise ValueError(f"Expected exactly one email.{suffix} artifact.")
             artifacts[suffix] = matches[0].read_text(encoding="utf-8")
+        artifacts["html"] = CONTRAST["apply_contrast"](artifacts["html"])
         metadata = json.loads(artifacts["json"])
+        metadata["email_contrast_contract"] = CONTRAST["CONTRAST_CONTRACT"]
         check_editorial_content(metadata["content"])
         metadata["secondary_id"] = check_issue_number(metadata)
 
@@ -119,6 +123,8 @@ def render(issue_path, output_dir, hugo):
         "REVIEW ARTIFACT ~ NOT A SEND OR PROVIDER PREVIEW\n"
         f"{metadata['subject']}\nPreheader: {metadata['preheader']}\n\n"
         "This full HTML document and matching plaintext use the supplied issue front matter.\n"
+        "HTML uses explicit parchment/ink pairs on retained content elements and blue underlined links.\n"
+        "Light/dark browser simulations do not certify an actual email client.\n"
         f"Set Buttondown's top-level secondary_id (Issue number) to {metadata['secondary_id']}\n"
         "when creating the draft. Metadata alone does not set its footer number.\n"
         "Read back secondary_id and subject before preview, scheduling, or sending;\n"
