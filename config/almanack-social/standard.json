@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "standard_id": "almanack-issue-launch-sample-v1",
+  "scope": {
+    "publication": "Bob's Almanack",
+    "campaign_type": "issue_launch",
+    "applies_to": "future manually authorized social preparation and handoff",
+    "changes_weekly_automation": false,
+    "authorizes_posting_or_scheduling": false,
+    "changes_other_campaigns": false,
+    "changes_email_controls": false
+  },
+  "references": [
+    {
+      "library_file_id": "libfile_d57c65df3b4481918a8d0cbc2f04139a",
+      "native_file_id": "file_00000000799081f68a7adee72781b65b",
+      "file_name": "Bobs-Almanack-Issue-22-Instagram-Facebook-1080x1350.png",
+      "platforms": ["facebook", "instagram"],
+      "role": "owner-approved visual reference",
+      "pixel_inspection": "pending"
+    },
+    {
+      "library_file_id": "libfile_23228fcc3ed08191ba899ec0988f3ce1",
+      "native_file_id": "file_0000000047e881f6b4ec61fee103686e",
+      "file_name": "Bobs-Almanack-Issue-22-Pinterest-1080x1620.png",
+      "platforms": ["pinterest"],
+      "role": "owner-approved visual reference",
+      "pixel_inspection": "pending"
+    }
+  ],
+  "reference_use": "Use the references for visual direction only. Their historical issue number, date, article and quotation are not defaults for future issues. Pixel inspection remains pending; no exact font or additional layout measurement has been inferred.",
+  "approved_example": {
+    "use": "Historical source evidence only; never default future issue content to this example.",
+    "issue_url": "https://outsideinprint.org/almanack/2026-10-03/",
+    "issue_date": "2026-10-03",
+    "issue_number": 22,
+    "article_title": "The Noise of the Crowd",
+    "article_url": "https://outsideinprint.org/essays/the-noise-of-the-crowd/",
+    "artwork_asset_id": "editorial/words-rising-from-silence",
+    "artwork_sha256": "dd33a0872b09f1077af38543e92a95a872a06694d2f42848065877d5b165141f",
+    "verbatim_excerpt": "We can spend a whole day taking in words without hearing what we want to say."
+  },
+  "composition": {
+    "background": "warm cream",
+    "reading_order": [
+      "compact Bob's Almanack masthead",
+      "canonical issue date and number",
+      "selected article's actual artwork",
+      "selected article's exact title",
+      "short verbatim excerpt from the selected article",
+      "clear call to action for the platform destination"
+    ],
+    "legibility": "Keep the sample readable at phone viewing size. Do not shrink the excerpt until it becomes unreadable; choose a shorter verified passage instead."
+  },
+  "artwork": {
+    "source": "actual selected article artwork from the approved issue",
+    "preserve_whole_artwork": true,
+    "allow_crop": false,
+    "allow_stretch": false,
+    "allow_substitution_or_regeneration": false
+  },
+  "source_verification": {
+    "issue_date": "Read from the actual approved issue source and verify against the card.",
+    "issue_number": "Read the canonical issue_number from the actual approved issue source and verify against the card; never use a provider counter or a fixed next number.",
+    "article": "Select an article actually included in that issue. Verify its exact title, article URL and artwork against the approved issue and article.",
+    "excerpt": "Use a short contiguous verbatim passage from the selected article. Verify the exact words against the article body; do not paraphrase, invent or reuse an unrelated quotation.",
+    "destination": "Verify each platform's destination before handoff. The article supplies the sample; Facebook and Pinterest still lead to the full issue."
+  },
+  "platforms": {
+    "facebook": {
+      "width": 1080,
+      "height": 1350,
+      "destination": "direct_canonical_issue_url"
+    },
+    "instagram": {
+      "width": 1080,
+      "height": 1350,
+      "destination": "existing_almanack_link_in_bio"
+    },
+    "pinterest": {
+      "width": 1080,
+      "height": 1620,
+      "destination": "direct_canonical_issue_url"
+    }
+  },
+  "review": {
+    "required_before_handoff": [
+      "source issue path or URL, canonical date and issue number",
+      "selected article URL, exact title and artwork source",
+      "exact excerpt and source passage, with verbatim verification result",
+      "asset paths and measured pixel dimensions for each platform",
+      "date and number agreement between source and assets",
+      "complete artwork visible without cropping or stretching",
+      "verified platform destinations and CTA agreement",
+      "phone-size visual review of masthead, title, excerpt and CTA",
+      "reference inspection status and any unresolved limitations"
+    ],
+    "report": "Save a source-verification and visual-review report beside the social assets. Missing source verification, wrong dimensions or destination, unreadable text, or cropped artwork blocks handoff.",
+    "before_publication": "Require a passing phone-size visual review of the exact final assets before any separately authorized publication. A policy file or local artifact does not authorize posting or scheduling."
+  }
+}
