@@ -78,8 +78,9 @@ test("Gallery exposes titled reading links outside the lightbox, including a dif
 
 test("author selected writing uses Dialogue and does not duplicate it in Recent Writing", () => {
   const html = read("authors/robert-v-ussley");
-  const selected = links(html).filter((link) => attr(link[1], "data-analytics-source-slot") === "author_selected");
-  const recent = links(html).filter((link) => attr(link[1], "data-analytics-source-slot") === "author_recent");
+  const titleLinks = links(html).filter((link) => attr(link[1], "class").split(/\s+/).includes("reading-card__link"));
+  const selected = titleLinks.filter((link) => attr(link[1], "data-analytics-source-slot") === "author_selected");
+  const recent = titleLinks.filter((link) => attr(link[1], "data-analytics-source-slot") === "author_recent");
   assert.equal(selected.length, 6);
   assert.equal(recent.length, 6);
   assert.equal(attr(selected[2][1], "href"), "/syd-and-oliver/what-i-had/");
