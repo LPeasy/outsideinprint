@@ -1,4 +1,4 @@
-current: precious-and-honored
+current: with-ice-cream
 cartoons:
   - slug: precious-and-honored
     title: "Precious and Honored"
@@ -1103,5 +1103,14 @@ cartoons:
     image: "editorial/all-is-a-gift"
     essay: "/essays/all-is-a-gift/"
     alt: "In warm kitchen window light, a woman offers an earthenware bowl of pears to another person's open hands across a wooden table."
+    width: 1672
+    height: 941
+  - slug: with-ice-cream
+    title: "With Ice Cream"
+    date: "2026-10-06"
+    publishDate: "2026-10-06T18:23:33.0000000+00:00"
+    image: "essays/dialogues/with-ice-cream/hero"
+    essay: "/syd-and-oliver/with-ice-cream/"
+    alt: "Two men seen from behind eat pie beneath a county-fair tent while a woman in a blue dress and white apron serves them; a cut apple pie, plain blue prize ribbon, and open ice-cream cooler fill the foreground, with a Ferris wheel beyond."
     width: 1672
     height: 941
