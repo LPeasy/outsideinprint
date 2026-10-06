@@ -1,3 +1,37 @@
+# Current approved timeline reconciliation — October 6, 2026
+
+File: `content/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.md`
+Version: `3.0 / Fifth web edition`
+Final content SHA-256 (repository LF): `5be1b3a29f1ee19707b305b5e3b1f14c46924adec74992d54ddeef904c979bd9`
+
+Source baseline: `f4d535a0199d4e0ef9983b2d798040e46a532323`
+
+Current disposition: **PASS — bounded source and editorial review**. The owner approved the exact discovery copy and a narrow reconciliation with the newer legislative evidence. This record covers that reconciliation; it does not authorize deployment or recertify the whole essay.
+
+The subtitle and description use the approved wording. The body identifies the early spokesperson estimates as historical reporting and adds the later legislative reconstruction. It separates the decision, notification, and photographed movement, and updates the adjacent comparison and open-question framing. The original publication date, title, heading text and anchors, image references and captions, existing links, numerical observations, illustrative assumptions, and hydraulic limits remain intact. The separate Camp Mystic primer was read for consistency and remains unchanged.
+
+## Primary evidence and limits
+
+The [Texas Legislature's June 2026 report, pp. 81–83](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=81) supplies the new chronology and distinguishes the first mission's cabins, office transfer, and Rec Hall destination. These pages support the attributed reconstruction, not a precise departure time for every cabin or a complete safe-clearance time. The report's account is kept separate from Carr's earlier estimates, downstream gauge measurements, and the author's scenarios.
+
+The September 27 corrections remain controlling for the gauge and analytical graphics. This revision restores no gauge-to-cabin threshold, measured whole-camp clearance time, unsupported causation, or allegation about what reporters knew. Existing scenario graphics now have explicit historical context in adjacent prose.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+- Evidence: PASS — The added chronology is attributed and linked to the primary legislative report; early estimates remain identified as spokesperson accounts.
+- Logic: PASS — An evacuation decision, counselor notification, and observed movement are distinct events. None is substituted for every camper's departure or arrival.
+- Incentives: PASS — The institutional preparedness discussion is preserved; the revision adds no motive claim.
+- Tradeoffs: PASS — The existing planning discussion and qualified author scenarios remain, without promising a safe outcome.
+- Consequences: PASS — No mortality inference or cabin-flooding threshold is derived from the added times or Hunt gauge.
+- Uncertainty: PASS — Approximate times remain approximate, group-specific timing limits are explicit, and the gauge's downstream limits remain intact.
+- Institutional Behavior: PASS — Spokesperson reporting, later legislative reconstruction, official observations, and author interpretation retain distinct evidentiary roles.
+
+Source preservation checks confirm unchanged headings, images, original date, slug, and all body content outside the listed reconciliation passages. Required production and guardrail results are tracked on the combined draft PR. This is scoped editorial clearance, not an engineering certification or a numerical grade.
+
+## Historical checkpoints — superseded only within the approved scope above
+
 # Current approved bounded correction — September 27, 2026
 
 File: `content/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025.md`  

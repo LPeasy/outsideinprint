@@ -77,7 +77,7 @@ const essayMetadata = {
     description: "A critical guide to Natural Asset Companies: how the model values ecosystems, who controls the assets, and the risks for conservation and public accountability."
   },
   "standard-of-living-vs-quality-of-life-what-the-numbers-miss": {
-    metadataTitle: "Standard of Living vs. Quality of Life: What GDP Misses",
+    metadataTitle: "Standard of Living vs. Quality of Life: Key Differences",
     description: "Standard of living measures income and material conditions; quality of life also includes health, time, security, community, and meaning. Here is what GDP misses."
   },
   "explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go": {
@@ -85,9 +85,9 @@ const essayMetadata = {
     description: "A practical guide to mutually exclusive and collectively exhaustive thinking, using a household budget to show how categories prevent overlap and omission."
   },
   "public-vs-private-pay-who-really-earns-more": {
-    metadataTitle: "",
-    contentTitle: "Public vs Private Pay: Who Really Earns More?",
-    description: "Public-sector compensation combines wages, benefits, pensions, and job security differently across occupations. This guide explains why simple averages mislead."
+    metadataTitle: "Public vs. Private Sector Pay: Salary and Benefits Compared",
+    contentTitle: "Public vs. Private Sector Pay: Who Really Earns More?",
+    description: "Compare U.S. public and private sector pay, benefits, and pensions ~ with 2025 data and a look at job security and occupational differences."
   }
 };
 

@@ -4,14 +4,17 @@ date: 2025-09-07
 draft: false
 slug: "camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025"
 section_label: "Essay"
-subtitle: "Why 30 Minutes Matters ~ Testing the Official Accounts Against the USGS Hunt Gauge"
+subtitle: "Why 30 Minutes Matters ~ Reported Evacuation Times and the Limits of the USGS Hunt Gauge"
 featured_image: "/images/medium/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/0ec9afa4944908a9366a77d95721184f1d306becf44ceecac10de15fda3917be.jpg"
 featured_image_caption: "Map of the Guadalupe River with Camp Mystic on the South Fork"
 featured_image_alt: "Map of the Guadalupe River"
-description: "When reporters began reconstructing the events at Camp Mystic on the night of July 4, 2025, the story turned on a timeline"
-version: "2.0"
-edition: "Fourth web edition"
+description: "Compare reported Camp Mystic evacuation times with USGS Hunt gauge records from July 4, 2025, with clear limits on what the data can establish."
+version: "3.0"
+edition: "Fifth web edition"
 revision_history:
+  - version: "3.0"
+    date: "2026-10-06"
+    note: "Reconciled the early spokesperson estimates with the June 2026 legislative reconstruction, distinguishing the evacuation decision, counselor notification, and documented movement. Retained the early-account comparisons as historical illustrations and preserved the limits of the Hunt gauge and author estimates. Updated subtitle and description; original publication date, headings, and artwork retained."
   - version: "2.0"
     date: "2026-09-27"
     note: "Attributed the reported 5:10 a.m., 37.52-foot crest to Commerce OIG; distinguished illustrative evacuation assumptions from observations and removed unsupported gauge-to-cabin thresholds and dependent timing conclusions. Corrected analytical graphics, distinguished the separate campuses, removed unsupported same-day reporting precision, and acknowledged ABC’s preliminary-estimate caveat; surrounding argument retained. Applied minimal house-style cleanup without changing facts or sources."
@@ -45,6 +48,10 @@ alert to phones.
 **Both of Carr's timelines** ~ 2:30 and revised 2:00 a.m. ~ were
 reported in ***The Washington Post*** and ***ABC News***, respectively.
 
+These early estimates are the reporting this essay originally examined. The [Texas Legislature's June 2026 report, pages 81-83](https://www.house.texas.gov/pdfs/committees/355/Report-on-the-Camp-Mystic-Flood-Disaster-of-July-4-2025.pdf?d=06182026#page=81), gives a later reconstruction: around **3:00 a.m.**, Eastland decided to evacuate the cabins closest to the river, beginning with Bug House. Around **3:11 a.m.**, three senior counselors in Kozy Korner were told to prepare to help campers move from the office to Rec Hall. A **3:23 a.m. photograph** documents campers walking from the Flats toward the office.
+
+The report describes the first mission involving Bug House, Look Inn, and Hang Out. Most of that group rode to the office before walking to Rec Hall; some walked directly from their cabins to Rec Hall. A decision, a notification, and recorded movement mark different stages. The report's around-3:00 decision does not establish a single start or completion time for every cabin. Times here are local Central Daylight Time.
+
 #### **On the surface, the difference may seem trivial.**
 
 > **In the context of a flash flood, *it is not.***
@@ -52,10 +59,12 @@ reported in ***The Washington Post*** and ***ABC News***, respectively.
 > ***Thirty minutes can be the difference between*** *movement and chaos
 > ~* ***life and death.***
 
-Neither version explains the outcome ~ twenty-seven children and
-counselors lost their lives.
+Neither early estimate, by itself, explains the outcome ~ twenty-seven
+children and counselors lost their lives.
 
-> If the evacuation began at 2:00, why did so many perish in the flood?
+> The later reconstruction changes the chronology this essay must test.
+> The Hunt gauge alone cannot settle when each cabin flooded or why
+> particular evacuation efforts failed.
 
 ### Camp Mystic on the Guadalupe River ~ Location, Elevation, Floodplain (Kerr County, Texas)
 
@@ -220,6 +229,8 @@ The [corresponding USGS entry](https://api.waterdata.usgs.gov/ogcapi/v1/collecti
 
 #### Comparing the estimates with the reported starts ~
 
+The following scenarios retain the comparison of Carr's early estimates. They do not reconstruct the later legislative report's evacuation sequence.
+
 If counselors began mobilizing at **2:00 a.m.**, the illustrative
 **30-70-minute** range begins at that point.
 
@@ -244,11 +255,13 @@ had seen "***dozens of times before***."
 > He also said staff spent time assessing the rising waters before
 > acting.
 
-On paper, that narrative sounds plausible.
+This was an early account, given before the legislative reconstruction.
 
 [ABC described Carr's account as a preliminary estimate and noted its difference from his earlier Washington Post account.](https://abc11.com/post/camp-mystic-began-evacuating-45-minutes-flash-flooding-alert-spokesperson/17129239/)
 
 ### Compared Against the Hunt Gauge, the Spokesperson Timeline Needs Testing
+
+These graphics preserve the historical comparison of the two spokesperson estimates. Read them alongside the later reconstruction above; their scenarios do not establish the actual evacuation sequence.
 
 ![Illustrative 30-70-minute timing, including mobilization: a 2:00 a.m. start gives 2:30-3:10; a 2:30 a.m. start gives 3:00-3:40. These are not observed clearance or flood-arrival times.](oip-image:essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/illustrative-timing-corrected-20260927)
 
@@ -282,12 +295,13 @@ On paper, that narrative sounds plausible.
 
 ### Open Questions After the Camp Mystic Flood ~ Timing, Preparedness, Coverage
 
-> After reviewing the hydrograph and the reported timeline, three
-> unresolved questions remain:
+> The later report adds evidence to the original questions. They now
+> require a distinction between the early coverage and the reconstructed
+> sequence:
 
 #### **1. When did evacuations actually begin at Camp Mystic?**
 
-Was movement underway before the first cabins flooded, or only after water was already inside?
+The report narrows this question by distinguishing the decision from documented movement. The remaining timing questions concern particular cabins and groups: when they received instructions, when they left, and what conditions they encountered. The downstream Hunt gauge cannot supply those answers by itself.
 
 #### **2. How can organizations like Mystic prepare for rapid-onset disasters?**
 
@@ -295,7 +309,7 @@ If mobilization and movement take an illustrative 30 ~ 70 minutes, **what system
 
 #### **3. How thoroughly did ABC test the camp spokesman's statements?**
 
-What evidence could have tested the timeline more firmly?
+This is a question about the early coverage, which acknowledged Carr's preliminary estimate and the differing accounts. The later report provides evidence for reassessment; it does not establish what reporters knew at the time.
 
 In the aftermath of tragedy, **repeating untested narratives risks
 reshaping public memory** at the expense of truth.

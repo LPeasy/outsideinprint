@@ -1,14 +1,15 @@
 ---
 title: "The Economics of the Mongol Empire"
+metadata_title: "Mongol Empire Economy: Trade, Money and the Silk Road"
 date: 2025-02-17
 draft: false
 slug: "the-economics-of-the-mongol-empire"
 section_label: "Essay"
-subtitle: "How Genghis Khan Expanded a Global Trade Network"
+subtitle: "How Genghis Khan and His Successors Expanded Eurasian Trade"
 featured_image: "/images/medium/the-economics-of-the-mongol-empire/60342f090c96aae087a5ed7917af61424689ccc02035e6e48d930d3f394b2fb7.jpeg"
 featured_image_caption: "Photo by Ryan Brooklyn on Unsplash"
 featured_image_alt: "The Economics of the Mongol Empire"
-description: "History often remembers Genghis Khan as a ruthless conqueror, but his most lasting impact was also economic: a protected trade network across much of Eurasia."
+description: "How the Mongol Empire reshaped Silk Road trade through protected routes, paper money, and a vast postal network ~ and what its economic legacy reveals."
 version: "2.0"
 edition: "Fourth web edition"
 revision_history:

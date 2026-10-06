@@ -136,7 +136,9 @@ test("rendered targeted descriptions and titles match their source records", () 
     "natural-asset-companies",
     "standard-of-living-vs-quality-of-life-what-the-numbers-miss",
     "explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go",
-    "public-vs-private-pay-who-really-earns-more"
+    "public-vs-private-pay-who-really-earns-more",
+    "the-economics-of-the-mongol-empire",
+    "camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025"
   ];
   for (const slug of essaySlugs) {
     const expectedDescription = frontMatterScalar(`content/essays/${slug}.md`, "description");
@@ -144,7 +146,11 @@ test("rendered targeted descriptions and titles match their source records", () 
     const html = readOutput(`essays/${slug}/index.html`);
     assert.equal(title(html), expectedTitle);
     assert.equal(attribute(html, "meta", "property", "og:title"), expectedTitle);
+    assert.equal(attribute(html, "meta", "name", "twitter:title"), expectedTitle);
     assert.equal(attribute(html, "meta", "name", "description"), expectedDescription);
+    assert.equal(attribute(html, "meta", "property", "og:description"), expectedDescription);
+    assert.equal(attribute(html, "meta", "name", "twitter:description"), expectedDescription);
+    assert.equal(attribute(html, "link", "rel", "canonical", "href"), `https://outsideinprint.org/essays/${slug}/`);
   }
 });
 
