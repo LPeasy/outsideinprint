@@ -1,3 +1,16 @@
+# Contextual-link source note - October 6, 2026
+
+Revision: `1.4 / Fifth web edition`
+Content SHA-256: `413e7cec8173537ece4e4fe0988b439543775a61f558a636b921fbab0f15aca2`
+
+| Claim / link | Current source | Source role | Source quality | Risk level | Primary source status | Action taken | Remaining verification need |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Public vs. Private Sector Pay: Who Really Earns More? | `content/essays/public-vs-private-pay-who-really-earns-more.md` | Internal companion reading | Existing published OIP essay | Low for navigation | No new primary-source claim | Add one contextual link; preserve existing reporting, source links, and qualifications | Verify live destination and rendered anchor at release |
+
+Original publication metadata, reporting, source evidence, artwork, and prior records are unchanged. No new whole-essay verification is claimed. This record supersedes the prior release hash for this link-only revision; earlier evidence provenance and limitations remain applicable.
+
+## Preserved prior source records
+
 # Current link-only review — September 27, 2026
 
 File: `content/essays/standard-of-living-vs-quality-of-life-what-the-numbers-miss.md`  
