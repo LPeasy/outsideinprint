@@ -5210,13 +5210,13 @@ $requiredUxChecks += @(
   },
   @{
     Path = 'public/essays/what-happened-at-camp-mystic/index.html'
-    Pattern = "(?s)Ninth web edition.*?July 4: Warning, Rising Water, and Evacuation.*?Further Reading.*?The Water(?:&rsquo;|&#39;|'|’)s\s+Rising:\s+What\s+the\s+Data\s+Really\s+Says\s+About\s+Extreme\s+Weather"
+    Pattern = "(?s)Tenth web edition.*?July 4: Warning, Rising Water, and Evacuation.*?Further Reading.*?The Water(?:&rsquo;|&#39;|'|’)s\s+Rising:\s+What\s+the\s+Data\s+Really\s+Says\s+About\s+Extreme\s+Weather"
     Message = 'expected the Camp Mystic essay to render its revised edition, consolidated timeline heading, and finished further-reading close'
   },
   @{
     Path = 'public/essays/what-happened-at-camp-mystic/index.html'
-    Pattern = '(?s)article-publication-record.*?Version 3\.0'
-    Message = 'expected the Camp Mystic publication record to render version 3.0'
+    Pattern = '(?s)article-publication-record.*?Version 3\.1'
+    Message = 'expected the Camp Mystic publication record to render version 3.1'
   },
   @{
     Path = 'public/essays/what-happened-at-camp-mystic/index.html'
