@@ -2294,7 +2294,7 @@
       "review_state": "approved",
       "usage_state": "referenced",
       "processing_state": "derivative_capable",
-      "processing_note": "",
+      "processing_note": null,
       "quality_override": null
     },
     "essays/dick-cheney-how-a-master-of-government-turned-the-vice-presidency-into-a-power-center/hero": {
