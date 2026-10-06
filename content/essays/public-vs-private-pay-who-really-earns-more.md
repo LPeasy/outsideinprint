@@ -1,14 +1,15 @@
 ---
-title: "Public vs Private Pay: Who Really Earns More?"
+title: "Public vs. Private Sector Pay: Who Really Earns More?"
+metadata_title: "Public vs. Private Sector Pay: Salary and Benefits Compared"
 date: 2025-08-19
 draft: false
 slug: "public-vs-private-pay-who-really-earns-more"
 section_label: "Essay"
 collections: ["household-economy-work-and-cost"]
-subtitle: "Jobs, Benefits, and Work-Life Trade-Offs Across Sectors"
+subtitle: "Salaries, Benefits, and Work-Life Trade-Offs Across Sectors"
 featured_image: "medium/e08e2d9e594e88fe577e132b4ab69e9bf449fe573bd5abd1e3db0ccdb88311ce"
 featured_image_alt: "Public vs Private Pay: Who Really Earns More?"
-description: "Public-sector compensation combines wages, benefits, pensions, and job security differently across occupations. This guide explains why simple averages mislead."
+description: "Compare U.S. public and private sector pay, benefits, and pensions ~ with 2025 data and a look at job security and occupational differences."
 version: "2.0"
 edition: "Fourth web edition"
 revision_history:
