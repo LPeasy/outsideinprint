@@ -1,17 +1,17 @@
 ---
-title: "How Jack Stratton Hacked the Music Industry with Funk, Friends, and Irresistible Groove"
-metadata_title: "Jack Stratton and Vulfpeck’s Independent Music Model"
+title: "Jack Stratton: Vulfpeck Founder, Producer, and Bandleader"
+metadata_title: "Jack Stratton: Vulfpeck Founder, Producer, and Bandleader"
 date: 2025-05-28
 draft: false
 slug: "jack-stratton-and-the-vulfpeck-model"
 section_label: "Modern Bio"
 series: ["ModernBios"]
 collections: ["modern-bios"]
-subtitle: "The Man Behind Vulfpeck, the Funk Collective That Outsmarted the System"
+subtitle: "His musical roots, minimalist funk, and independent path from Sleepify to Madison Square Garden."
 featured_image: "/images/medium/jack-stratton-and-the-vulfpeck-model/52bb101b41234f692c761a11f33e202a31bb366b4c2c8e31b07a3ac2b8856187.jpeg"
 featured_image_caption: "Jack Stratton on stage | Source: Michelle Shiers"
 featured_image_alt: "Jack Stratton on stage"
-description: "A profile of Jack Stratton and Vulfpeck’s independent model, from Sleepify and Madison Square Garden to fan-first releases and creative control."
+description: "Explore Jack Stratton’s musical roots, production style, and role as Vulfpeck’s founder, from Sleepify to Madison Square Garden and independent artist control."
 version: "2.0"
 edition: "Seventh web edition"
 revision_history:

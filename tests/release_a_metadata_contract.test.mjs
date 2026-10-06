@@ -69,8 +69,8 @@ const dialogueDescriptions = {
 
 const essayMetadata = {
   "jack-stratton-and-the-vulfpeck-model": {
-    metadataTitle: "Jack Stratton and Vulfpeck’s Independent Music Model",
-    description: "A profile of Jack Stratton and Vulfpeck’s independent model, from Sleepify and Madison Square Garden to fan-first releases and creative control."
+    metadataTitle: "Jack Stratton: Vulfpeck Founder, Producer, and Bandleader",
+    description: "Explore Jack Stratton’s musical roots, production style, and role as Vulfpeck’s founder, from Sleepify to Madison Square Garden and independent artist control."
   },
   "natural-asset-companies": {
     metadataTitle: "What Is a Natural Asset Company? A Critical Guide",
