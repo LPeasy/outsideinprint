@@ -10,9 +10,12 @@ subtitle: "Salaries, Benefits, and Work-Life Trade-Offs Across Sectors"
 featured_image: "medium/e08e2d9e594e88fe577e132b4ab69e9bf449fe573bd5abd1e3db0ccdb88311ce"
 featured_image_alt: "Public vs Private Pay: Who Really Earns More?"
 description: "Compare U.S. public and private sector pay, benefits, and pensions ~ with 2025 data and a look at job security and occupational differences."
-version: "2.0"
-edition: "Fourth web edition"
+version: "2.1"
+edition: "Fifth web edition"
 revision_history:
+  - version: "2.1"
+    date: "2026-10-06"
+    note: "Added a contextual link on standard of living; existing wording, reporting, sources, and artwork unchanged."
   - version: "2.0"
     date: "2026-09-27"
     note: "Corrected March 2025 compensation shares and identified the state/local government comparison. Added or retained claim-level source links; original reporting frame retained. Corrected flagged graphics and captions without changing surrounding prose in this graphics pass. Applied minimal house-style cleanup without changing facts or sources."
@@ -48,8 +51,8 @@ The other has \$2 and some change in their pocket.
 **We talk about getting paid like it's just money in the bank ~**\
 but the deal you strike with your employer is bigger than your paycheck.
 
-> *Wages, benefits, expectations, and culture all shape your standard of
-> living.*
+> *Wages, benefits, expectations, and culture all shape your [standard of
+> living](/essays/standard-of-living-vs-quality-of-life-what-the-numbers-miss/).*
 
 That's why **comparing public and private sector pay is tricky.**
 

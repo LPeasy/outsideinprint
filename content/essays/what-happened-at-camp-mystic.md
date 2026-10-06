@@ -9,9 +9,12 @@ featured_image: "medium/f9aa0d94b11672a7a6478a1488592d3b612bd493c11cc5ca238cfe5d
 featured_image_caption: "Inundation Map | Source: CNN"
 featured_image_alt: "Inundation Map"
 description: "A primer on the July 4, 2025 Camp Mystic flood tragedy, the Guadalupe River warning timeline, and the risk-planning failures it exposed."
-version: "3.0"
-edition: "Ninth web edition"
+version: "3.1"
+edition: "Tenth web edition"
 revision_history:
+  - version: "3.1"
+    date: "2026-10-06"
+    note: "Added a contextual link to the Camp Mystic evacuation timeline; existing reporting, sources, timeline entries, and artwork unchanged."
   - version: "3.0"
     date: "2026-09-27"
     note: "Corrected the named Hunt-gauge observation, 1987 Guadalupe flood account, rainfall, cabin and planning details; attributed the first-responder account and removed the unverified opening quotation. Added or retained claim-level source links and corrected flagged graphics and captions. Original reporting frame and surrounding prose retained. Normalized legacy body punctuation without changing wording. Applied minimal style cleanup without changing claims or verified quotations."
@@ -108,6 +111,8 @@ reconstructs the critical sequence this way (pp. 76-83):
 
 6. **3:23 a.m. · Campers move uphill.** A camp photograph showed campers walking from the Flats toward the office and Rec Hall in heavy rain as water pooled around them.
 {{< /article-timeline >}}
+
+For reported evacuation times and the limits of the Hunt gauge, read the [Camp Mystic evacuation timeline](/essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/).
 
 > The [Commerce Department's April 2026 review](https://www.oig.doc.gov/wp-content/OIGPublications/OIG-26-017-I-SECURED.pdf#page=14) places the Hunt gauge's crest at 37.52 feet at 5:10 a.m., about five miles downstream from Camp Mystic.
 

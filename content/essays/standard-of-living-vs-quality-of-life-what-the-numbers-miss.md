@@ -11,9 +11,12 @@ featured_image: "/images/medium/standard-of-living-vs-quality-of-life-what-the-n
 featured_image_caption: "Photo by Mathieu Stern on Unsplash"
 featured_image_alt: "Standard of Living vs. Quality of Life: What the Numbers Miss"
 description: "Standard of living measures income and material conditions; quality of life also includes health, time, security, community, and meaning. Here is what GDP misses."
-version: "1.3"
-edition: "Fourth web edition"
+version: "1.4"
+edition: "Fifth web edition"
 revision_history:
+  - version: "1.4"
+    date: "2026-10-06"
+    note: "Added a contextual link to the public and private sector pay essay; existing reporting, sources, and artwork unchanged."
   - version: "1.3"
     date: "2026-09-27"
     note: "Added supporting source hyperlinks or repaired source destinations; reporting frame and artwork unchanged. Applied minimal style cleanup without changing claims or verified quotations."
@@ -109,6 +112,8 @@ It includes the material side of living, but also looks at things like:
 - Time for family and leisure
 - Community and social support
 - Personal autonomy and life satisfaction
+
+For the workplace side of these trade-offs, see [Public vs. Private Sector Pay: Who Really Earns More?](/essays/public-vs-private-pay-who-really-earns-more/).
 
 > The U.S. ranks near the top in GDP per person, but lower on many happiness and well-being measures.
 

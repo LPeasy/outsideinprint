@@ -1,3 +1,16 @@
+# Contextual-link source note - October 6, 2026
+
+Revision: `2.1 / Fifth web edition`
+Content SHA-256: `7bd3ccad7527bd71594f6713d3b700873b60345db76323323e9763ef3077f47c`
+
+| Claim / link | Current source | Source role | Source quality | Risk level | Primary source status | Action taken | Remaining verification need |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| standard of living | `content/essays/standard-of-living-vs-quality-of-life-what-the-numbers-miss.md` | Internal companion reading | Existing published OIP essay | Low for navigation | No new primary-source claim | Add one contextual link; preserve existing reporting, source links, and qualifications | Verify live destination and rendered anchor at release |
+
+Original publication metadata, reporting, source evidence, artwork, and prior records are unchanged. No new whole-essay verification is claimed. This record supersedes the prior release hash for this link-only revision; earlier evidence provenance and limitations remain applicable.
+
+## Preserved prior source records
+
 # Current graphics/captions correction record — September 27, 2026
 
 File: `content/essays/public-vs-private-pay-who-really-earns-more.md`  
