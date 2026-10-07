@@ -92,20 +92,33 @@
                     {{- else if $visible -}}
                       {{- $headingID := printf "contextual-book-%s-the-water-cycle" $placement -}}
                       <aside class="contextual-book{{ if eq $placement "collection" }} page-shell page-shell--grid{{ end }}" aria-labelledby="{{ $headingID }}">
-                        <h2 class="contextual-book__title" id="{{ $headingID }}">{{ index $promo "heading" }}</h2>
-                        <p class="contextual-book__connection">{{ index $promo "connection" }}</p>
-                        <p class="contextual-book__offer">{{ index $product "product_type" }} · {{ index $offer "price_display" }} {{ index $offer "currency" }} · {{ index $offer "permitted_geography" }} · Download format: {{ index $offer "format" }}</p>
-                        <div class="contextual-book__actions">
-                          {{ partial "shop/sample-link.html" (dict "page" $book "product" $product "sourceSlot" (printf "%s_book_sample" $placement)) }}
-                          <a class="bookstore-detail-link" href="{{ $book.RelPermalink }}"
-                            data-analytics-event="internal_promo_click"
-                            data-analytics-source-slot="{{ printf "%s_book_detail" $placement }}"
-                            data-analytics-slug="{{ index $product "suggested_slug" }}"
-                            data-analytics-title="{{ index $product "title" }}"
-                            data-analytics-section="Bookstore"
-                            data-analytics-path="{{ $book.RelPermalink }}"
-                          >View book and buying options</a>
+                        <div class="contextual-book__copy">
+                          <h2 class="contextual-book__title" id="{{ $headingID }}">{{ index $promo "heading" }}</h2>
+                          <p class="contextual-book__connection">{{ index $promo "connection" }}</p>
+                          <p class="contextual-book__offer">{{ index $product "product_type" }} · {{ index $offer "price_display" }} {{ index $offer "currency" }} · {{ index $offer "permitted_geography" }} · Download format: {{ index $offer "format" }}</p>
+                          <div class="contextual-book__actions">
+                            {{ partial "shop/sample-link.html" (dict "page" $book "product" $product "sourceSlot" (printf "%s_book_sample" $placement)) }}
+                            <a class="bookstore-detail-link" href="{{ $book.RelPermalink }}"
+                              data-analytics-event="internal_promo_click"
+                              data-analytics-source-slot="{{ printf "%s_book_detail" $placement }}"
+                              data-analytics-slug="{{ index $product "suggested_slug" }}"
+                              data-analytics-title="{{ index $product "title" }}"
+                              data-analytics-section="Bookstore"
+                              data-analytics-path="{{ $book.RelPermalink }}"
+                            >View book and buying options</a>
+                          </div>
                         </div>
+                        <a class="contextual-book__cover" href="{{ $book.RelPermalink }}"
+                          aria-label="View {{ index $product "title" }} and buying options"
+                          data-analytics-event="internal_promo_click"
+                          data-analytics-source-slot="{{ printf "%s_book_cover" $placement }}"
+                          data-analytics-slug="{{ index $product "suggested_slug" }}"
+                          data-analytics-title="{{ index $product "title" }}"
+                          data-analytics-section="Bookstore"
+                          data-analytics-path="{{ $book.RelPermalink }}"
+                        >
+                          {{ partial "images/picture.html" (dict "page" $book "ref" (index $product "cover_image") "alt" (index $product "cover_alt") "loading" "lazy" "sizes" "(max-width: 30rem) 4.5rem, 6.5rem") }}
+                        </a>
                       </aside>
                     {{- end -}}
                   {{- end -}}

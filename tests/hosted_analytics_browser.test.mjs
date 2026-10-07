@@ -162,7 +162,8 @@ async function installRoutes(page, options = {}) {
       return;
     }
 
-    if (["font", "image", "media"].includes(request.resourceType()) ||
+    if (["font", "media"].includes(request.resourceType()) ||
+        (request.resourceType() === "image" && !options.allowImagePaths?.has(url.pathname)) ||
         (request.resourceType() === "stylesheet" && !options.allowStyles)) {
       await route.abort("blockedbyclient");
       return;
@@ -235,6 +236,18 @@ test.after(async () => {
   await browser?.close();
 });
 
+const contextualCatalog = fs.readFileSync(path.join(repoRoot, "data/bookstore.yaml"), "utf8")
+  .match(/^  the_water_cycle:\r?\n([\s\S]*?)(?=^  [^\s]|(?![\s\S]))/m)?.[1];
+assert.ok(contextualCatalog, "The Water Cycle catalog entry is required.");
+const contextualCatalogValue = (key) => {
+  const value = contextualCatalog.match(new RegExp(`^    ${key}: "([^"\\r\\n]*)"`, "m"))?.[1];
+  assert.ok(value, `The Water Cycle catalog ${key} is required.`);
+  return value;
+};
+const contextualCoverPath = contextualCatalogValue("cover_image");
+const contextualCoverAlt = contextualCatalogValue("cover_alt");
+const contextualCoverName = `View ${contextualCatalogValue("title")} and buying options`;
+
 const contextualBookEntries = [
   { path: "/collections/floods-water-built-environment/", slot: "collection" },
   { path: "/essays/the-100-year-flood-is-not-what-you-think/", slot: "article" },
@@ -242,10 +255,10 @@ const contextualBookEntries = [
 
 test("contextual book native navigation emits one bounded event per activation across back and refresh", async () => {
   const sentinels = ["BOOK_QUERY_SENTINEL", "BOOK_FRAGMENT_SENTINEL", "BOOK_EMAIL_SENTINEL", "BOOK_ORDER_SENTINEL", "BOOK_TOKEN_SENTINEL"];
-  for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }]) {
+  for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }, { width: 320, height: 720 }]) {
     for (const entry of contextualBookEntries) {
-      const { context, counts, page } = await newInstrumentedPage({ allowStyles: true, contextOptions: { viewport } });
-      const promoEvents = () => counts.filter((record) => /^(collection|article)_book_(sample|detail)$/.test(eventParts(record).fields.source_slot || ""));
+      const { context, counts, page } = await newInstrumentedPage({ allowStyles: true, allowImagePaths: new Set([contextualCoverPath]), contextOptions: { viewport } });
+      const promoEvents = () => counts.filter((record) => /^(collection|article)_book_(sample|detail|cover)$/.test(eventParts(record).fields.source_slot || ""));
       try {
         await page.goto(`${canonicalOrigin}${entry.path}?private=BOOK_QUERY_SENTINEL&email=BOOK_EMAIL_SENTINEL%40example.com&order_id=BOOK_ORDER_SENTINEL&download_token=BOOK_TOKEN_SENTINEL#BOOK_FRAGMENT_SENTINEL`, { waitUntil: "load" });
         await waitFor(() => counts.some((record) => !countData(record).event), "Contextual entry pageview was not intercepted.");
@@ -256,9 +269,37 @@ test("contextual book native navigation emits one bounded event per activation a
         assert.equal(await page.locator(`[id="${headingId}"]`).count(), 1);
         assert.equal(await module.locator("h2").textContent(), "Continue with The Water Cycle");
         assert.equal(await module.locator(".contextual-book__connection").textContent(), "Follow water risk beyond the flood map. The Water Cycle connects floodplains, infrastructure, insurance and public decisions in one illustrated book.");
-        assert.equal(await module.locator("a").count(), 2);
-        assert.equal(await module.locator("form, img, input, button, script").count(), 0);
+        assert.equal(await module.locator("a").count(), 3);
+        assert.equal(await module.locator("img").count(), 1);
+        assert.equal(await module.locator("form, input, button, script").count(), 0);
         await module.scrollIntoViewIfNeeded();
+        const cover = module.locator("a.contextual-book__cover");
+        const image = cover.locator("img");
+        assert.equal(await cover.count(), 1);
+        assert.equal(await cover.getAttribute("aria-label"), contextualCoverName);
+        assert.equal(await image.getAttribute("alt"), contextualCoverAlt);
+        assert.equal(await image.getAttribute("src"), contextualCoverPath);
+        assert.equal(await image.getAttribute("loading"), "lazy");
+        // A lazy request can start after the module scroll and invalidate an early decode.
+        await image.scrollIntoViewIfNeeded();
+        await page.waitForFunction((node) => node.complete && node.naturalWidth > 0,
+          await image.elementHandle(), { timeout: 4000 });
+        await image.evaluate((node) => node.decode());
+        assert.equal(await image.evaluate((node) => {
+          const rect = node.getBoundingClientRect();
+          const anchor = node.closest("a").getBoundingClientRect();
+          return node.naturalWidth > 0 && Number(node.getAttribute("width")) === node.naturalWidth &&
+            Number(node.getAttribute("height")) === node.naturalHeight &&
+            Math.abs(rect.width / rect.height - node.naturalWidth / node.naturalHeight) < 0.01 &&
+            rect.width <= 112 && anchor.width >= 44 && anchor.height >= 44;
+        }), true, "The existing cover needs its full aspect ratio, small size, and a sensible tap target.");
+        if (viewport.width >= 390) {
+          assert.equal(await module.evaluate((node) => {
+            const copy = node.querySelector(".contextual-book__copy").getBoundingClientRect();
+            const cover = node.querySelector(".contextual-book__cover").getBoundingClientRect();
+            return cover.left >= copy.right - 1;
+          }), true, "The cover must remain to the right of the invitation copy.");
+        }
         assert.equal(await module.evaluate((node) => {
           const rect = node.getBoundingClientRect();
           return rect.left >= 0 && rect.right <= window.innerWidth + 1 && node.scrollWidth <= node.clientWidth + 1;
@@ -270,13 +311,14 @@ test("contextual book native navigation emits one bounded event per activation a
           return Boolean(before && after && (before.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING) && (node.compareDocumentPosition(after) & Node.DOCUMENT_POSITION_FOLLOWING));
         }, entry.slot), true, "The module must preserve the existing reading order.");
 
-        for (const [index, action] of ["sample", "detail", "sample"].entries()) {
+        for (const [index, action] of ["sample", "detail", "cover", "cover", "sample"].entries()) {
           const anchor = page.locator(`.contextual-book [data-analytics-source-slot="${entry.slot}_book_${action}"]`);
           const expectedHref = `/shop/the-water-cycle/${action === "sample" ? "#reading-sample" : ""}`;
           assert.equal(await anchor.getAttribute("href"), expectedHref);
           assert.equal(await anchor.getAttribute("target"), null);
           assert.equal(await anchor.getAttribute("onclick"), null);
-          assert.equal(await anchor.textContent(), action === "sample" ? "Read a sample" : "View book and buying options");
+          if (action === "cover") assert.equal(await anchor.getAttribute("aria-label"), contextualCoverName);
+          else assert.equal(await anchor.textContent(), action === "sample" ? "Read a sample" : "View book and buying options");
           assert.deepEqual(await anchor.evaluate((node) => ({
             event: node.dataset.analyticsEvent, slug: node.dataset.analyticsSlug,
             section: node.dataset.analyticsSection, path: node.dataset.analyticsPath,
@@ -289,7 +331,7 @@ test("contextual book native navigation emits one bounded event per activation a
           }), true, "Native links need a visible keyboard focus indicator.");
           await Promise.all([
             page.waitForURL(`${canonicalOrigin}${expectedHref}`),
-            index === 1 ? anchor.click() : page.keyboard.press("Enter"),
+            index === 2 ? anchor.locator("img").click() : index === 1 ? anchor.click() : page.keyboard.press("Enter"),
           ]);
           await waitFor(() => promoEvents().length >= index + 1, "Contextual link event was not intercepted.");
           assert.equal(await page.locator(".contextual-book").count(), 0, "Product/sample destination must not repeat the module.");
@@ -320,7 +362,7 @@ test("contextual links retain native destinations without JavaScript and respect
         initScript: disabledJavaScript ? undefined : () => { try { localStorage.setItem("skipgc", "t"); } catch {} },
       });
       try {
-        for (const action of ["sample", "detail"]) {
+        for (const action of ["sample", "detail", "cover"]) {
           await page.goto(`${canonicalOrigin}${entry.path}`, { waitUntil: "load" });
           const target = `${canonicalOrigin}/shop/the-water-cycle/${action === "sample" ? "#reading-sample" : ""}`;
           await Promise.all([

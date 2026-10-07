@@ -213,11 +213,15 @@ test("contextual book stays after collection continuation and before publication
   assert.match(collectionSingle, /partial "shop\/contextual-book\.html"[^\n]*\$state\.public/);
   assert.doesNotMatch(contextualBook, /safeHTML|<form\b|<img\b|<script\b|onclick|localStorage|sessionStorage|featured-book\.html|featured-continuation\.html/);
   for (const snippet of [
-    'shop/product-data.html', 'shop/sample-link.html', 'aria-labelledby=',
-    'printf "%s_book_sample" $placement', 'printf "%s_book_detail" $placement',
+    'shop/product-data.html', 'shop/sample-link.html', 'images/picture.html', 'aria-labelledby=',
+    'contextual-book__copy', 'contextual-book__cover', 'cover_image', 'cover_alt', '"loading" "lazy"',
+    'printf "%s_book_sample" $placement', 'printf "%s_book_detail" $placement', 'printf "%s_book_cover" $placement',
     'data-analytics-event="internal_promo_click"', 'data-analytics-section="Bookstore"',
     'View book and buying options',
   ]) assert.ok(contextualBook.includes(snippet), `Missing contextual-book contract: ${snippet}`);
   assert.match(css, /\.contextual-book\{/);
   assert.match(css, /\.contextual-book[^{}]*:focus-visible/);
+  assert.match(css, /\.contextual-book__cover\{/);
+  assert.match(css, /\.contextual-book__cover img\s*\{[^}]*height:\s*auto/);
+  assert.doesNotMatch(css.match(/\.contextual-book__cover[^{}]*\{[^}]*\}/g)?.join("\n") || "", /object-fit:\s*cover|overflow:\s*hidden/);
 });
