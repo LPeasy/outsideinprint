@@ -6,9 +6,12 @@ slug: "1929-2029-americas-century-of-humiliation"
 collections: ["household-economy-work-and-cost"]
 section_label: "Essay"
 description: "A short essay arguing that the United States became world-historically successful while leaving millions of citizens to experience that success as humiliation, attrition, and spectatorship."
-version: "1.3"
-edition: "Third web edition"
+version: "1.4"
+edition: "Fourth web edition"
 revision_history:
+  - version: "1.4"
+    date: "2026-10-07"
+    note: "Added an optional reading sample and book invitation for The American Nightmare after the collection continuation; article text and sources are unchanged."
   - version: "1.3"
     date: "2026-09-27"
     note: "Added supporting source hyperlinks or repaired source destinations; original prose, reporting frame, and artwork unchanged."
@@ -18,6 +21,10 @@ revision_history:
 featured: false
 featured_image: "essays/1929-2029-americas-century-of-humiliation/hero"
 featured_image_alt: "A scoreboard celebrates GDP, markets, military power, and tech wealth while people labeled rent, debt, insurance, and childcare sit exhausted below it."
+book_promo:
+  book_path: "/shop/the-american-nightmare-keep-dreaming-kid"
+  heading: "Continue with The American Nightmare"
+  connection: "This essay traces a country’s success alongside the strain felt at home. The American Nightmare extends that inquiry into work, housing, citizenship, and the changing promise of the American Dream."
 ---
 
 The United States spent the better part of a century becoming the richest and most powerful country on earth.

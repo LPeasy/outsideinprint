@@ -18,6 +18,7 @@ const testHosts = new Set([
 ]);
 
 const contentTypes = new Map([
+  [".avif", "image/avif"],
   [".css", "text/css; charset=utf-8"],
   [".gif", "image/gif"],
   [".html", "text/html; charset=utf-8"],
@@ -236,28 +237,151 @@ test.after(async () => {
   await browser?.close();
 });
 
-const contextualCatalog = fs.readFileSync(path.join(repoRoot, "data/bookstore.yaml"), "utf8")
-  .match(/^  the_water_cycle:\r?\n([\s\S]*?)(?=^  [^\s]|(?![\s\S]))/m)?.[1];
-assert.ok(contextualCatalog, "The Water Cycle catalog entry is required.");
-const contextualCatalogValue = (key) => {
-  const value = contextualCatalog.match(new RegExp(`^    ${key}: "([^"\\r\\n]*)"`, "m"))?.[1];
-  assert.ok(value, `The Water Cycle catalog ${key} is required.`);
-  return value;
-};
-const contextualCoverPath = contextualCatalogValue("cover_image");
-const contextualCoverAlt = contextualCatalogValue("cover_alt");
-const contextualCoverName = `View ${contextualCatalogValue("title")} and buying options`;
-
+const contextualCatalogSource = fs.readFileSync(path.join(repoRoot, "data/bookstore.yaml"), "utf8");
+const contextualImageManifest = JSON.parse(fs.readFileSync(path.join(repoRoot, "data/image-assets.json"), "utf8"));
 const contextualBookEntries = [
-  { path: "/collections/floods-water-built-environment/", slot: "collection" },
-  { path: "/essays/the-100-year-flood-is-not-what-you-think/", slot: "article" },
-];
+  {
+    "path": "/collections/technology-ai-machine-future/",
+    "slot": "collection",
+    "key": "2045",
+    "bookPath": "/shop/2045",
+    "heading": "Continue with 2045",
+    "connection": "Follow these questions about AI into fiction. 2045 brings together ten dark fables about machine intelligence, grief, ambition, faith, and the search for meaning."
+  },
+  {
+    "path": "/essays/the-new-meta-economy/",
+    "slot": "article",
+    "key": "2045",
+    "bookPath": "/shop/2045",
+    "heading": "Continue with 2045",
+    "connection": "This essay asks what happens when AI reshapes work, attention, and everyday life. 2045 explores those pressures through dark fables, beginning with a man surrounded by helpful machines and searching for a purpose."
+  },
+  {
+    "path": "/collections/household-economy-work-and-cost/",
+    "slot": "collection",
+    "key": "american_nightmare",
+    "bookPath": "/shop/the-american-nightmare-keep-dreaming-kid",
+    "heading": "Continue with The American Nightmare",
+    "connection": "The pressures on a household are also questions about the American promise. The American Nightmare follows work, home, and citizenship through the gap between national opportunity and ordinary security."
+  },
+  {
+    "path": "/essays/1929-2029-americas-century-of-humiliation/",
+    "slot": "article",
+    "key": "american_nightmare",
+    "bookPath": "/shop/the-american-nightmare-keep-dreaming-kid",
+    "heading": "Continue with The American Nightmare",
+    "connection": "This essay traces a country’s success alongside the strain felt at home. The American Nightmare extends that inquiry into work, housing, citizenship, and the changing promise of the American Dream."
+  },
+  {
+    "path": "/collections/syd-and-oliver-dialogues/",
+    "slot": "collection",
+    "key": "parable_of_the_sheep",
+    "bookPath": "/shop/the-parable-of-the-sheep",
+    "heading": "Continue with The Parable of the Sheep",
+    "connection": "Questions of truth, obligation, and shared life can take the form of a fable, too. The Parable of the Sheep follows a flock whose comfort outlasts its memory of what kept it safe."
+  },
+  {
+    "path": "/syd-and-oliver/infrastructure/",
+    "slot": "article",
+    "key": "parable_of_the_sheep",
+    "bookPath": "/shop/the-parable-of-the-sheep",
+    "heading": "Continue with The Parable of the Sheep",
+    "connection": "When care works, it can become easy to take the person behind it for granted. The Parable of the Sheep carries that question into a short allegory about a flock that forgets its shepherd."
+  },
+  {
+    "path": "/collections/floods-water-built-environment/",
+    "slot": "collection",
+    "key": "the_water_cycle",
+    "bookPath": "/shop/the-water-cycle",
+    "heading": "Continue with The Water Cycle",
+    "connection": "Follow water risk beyond the flood map. The Water Cycle connects floodplains, infrastructure, insurance and public decisions in one illustrated book."
+  },
+  {
+    "path": "/essays/the-100-year-flood-is-not-what-you-think/",
+    "slot": "article",
+    "key": "the_water_cycle",
+    "bookPath": "/shop/the-water-cycle",
+    "heading": "Continue with The Water Cycle",
+    "connection": "Follow water risk beyond the flood map. The Water Cycle connects floodplains, infrastructure, insurance and public decisions in one illustrated book."
+  }
+].map((entry) => {
+  const catalog = contextualCatalogSource.match(new RegExp(`^  "?${entry.key}"?:\\r?\\n([\\s\\S]*?)(?=^  [^\\s]|(?![\\s\\S]))`, "m"))?.[1];
+  assert.ok(catalog, `Missing catalog entry ${entry.key}.`);
+  const value = (key) => {
+    const field = catalog.match(new RegExp(`^    ${key}: "([^"\\r\\n]*)"`, "m"))?.[1];
+    assert.ok(field, `Missing catalog ${entry.key}.${key}.`);
+    return field;
+  };
+  const slug = entry.bookPath.split("/").at(-1);
+  assert.equal(value("suggested_slug"), slug);
+  const productPath = `${entry.bookPath}/`;
+  return { ...entry, slug, productPath,
+    sampleHref: entry.key === "2045" ? `${productPath}sample/` : `${productPath}#reading-sample`,
+    samplePath: entry.key === "2045" ? `${productPath}sample/` : productPath,
+    coverRef: value("cover_image"), coverAlt: value("cover_alt"),
+    coverName: `View ${value("title")} and buying options`,
+  };
+});
+const contextualCovers = new Map();
 
+async function contextualCover(entry) {
+  if (contextualCovers.has(entry.key)) return contextualCovers.get(entry.key);
+  const page = await browser.newPage();
+  // Parse only the existing product cover in an inert document. No resource request is allowed.
+  await page.route("**/*", (route) => route.abort("blockedbyclient"));
+  let rendered;
+  try {
+    rendered = await page.evaluate((html) => {
+      const cover = new DOMParser().parseFromString(html, "text/html").querySelector(".bookstore-product__cover");
+      const image = cover?.querySelector("img");
+      if (!image) return null;
+      return {
+        src: image.getAttribute("src"), srcset: image.getAttribute("srcset"),
+        width: Number(image.getAttribute("width")), height: Number(image.getAttribute("height")),
+        alt: image.getAttribute("alt"), assetId: cover.querySelector("picture")?.getAttribute("data-oip-image-id") || null,
+        sources: Array.from(cover.querySelectorAll("source"), (source) => ({ type: source.getAttribute("type"), srcset: source.getAttribute("srcset") })),
+      };
+    }, readBuilt(`${entry.productPath.slice(1)}index.html`));
+  } finally {
+    await page.close();
+  }
+  assert.ok(rendered, `Missing product cover for ${entry.key}.`);
+  assert.equal(rendered.alt, entry.coverAlt);
+  assert.ok(rendered.width > 0 && rendered.height > 0, "Product cover must have intrinsic dimensions.");
+  const assetId = contextualImageManifest.assets[entry.coverRef] ? entry.coverRef : contextualImageManifest.aliases[entry.coverRef];
+  const asset = assetId && contextualImageManifest.assets[assetId];
+  if (asset) {
+    assert.equal(rendered.assetId, assetId);
+    if (entry.key === "2045") assert.equal(assetId, "books/2045/cover");
+    assert.ok(Math.abs(rendered.width / rendered.height - asset.width / asset.height) < 0.01, "Managed cover must preserve its manifest aspect ratio.");
+    assert.deepEqual(rendered.sources.map((source) => source.type).sort(), ["image/avif", "image/webp"]);
+    assert.ok(rendered.srcset, "Managed cover must preserve its responsive candidates.");
+  } else {
+    assert.equal(rendered.src, entry.coverRef);
+    assert.equal(rendered.assetId, null);
+    assert.deepEqual(rendered.sources, []);
+  }
+  const paths = [rendered.src, ...[rendered.srcset, ...rendered.sources.map((source) => source.srcset)]
+    .filter(Boolean).flatMap((srcset) => srcset.split(",").map((candidate) => candidate.trim().split(/\s+/)[0]))];
+  const allowImagePaths = new Set(paths.map((imagePath) => {
+    const url = new URL(imagePath, canonicalOrigin);
+    assert.equal(url.origin, canonicalOrigin);
+    assert.equal(url.search, "");
+    assert.equal(url.hash, "");
+    if (asset) assert.ok(url.pathname.startsWith(`/images/rendered/${assetId}/`), "Only the managed product cover derivatives may load.");
+    else assert.equal(url.pathname, entry.coverRef);
+    return url.pathname;
+  }));
+  const result = { ...rendered, allowImagePaths, ratio: asset ? asset.width / asset.height : rendered.width / rendered.height };
+  contextualCovers.set(entry.key, result);
+  return result;
+}
 test("contextual book native navigation emits one bounded event per activation across back and refresh", async () => {
   const sentinels = ["BOOK_QUERY_SENTINEL", "BOOK_FRAGMENT_SENTINEL", "BOOK_EMAIL_SENTINEL", "BOOK_ORDER_SENTINEL", "BOOK_TOKEN_SENTINEL"];
   for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }, { width: 320, height: 720 }]) {
     for (const entry of contextualBookEntries) {
-      const { context, counts, page } = await newInstrumentedPage({ allowStyles: true, allowImagePaths: new Set([contextualCoverPath]), contextOptions: { viewport } });
+      const expectedCover = await contextualCover(entry);
+      const { context, counts, page } = await newInstrumentedPage({ allowStyles: true, allowImagePaths: expectedCover.allowImagePaths, contextOptions: { viewport } });
       const promoEvents = () => counts.filter((record) => /^(collection|article)_book_(sample|detail|cover)$/.test(eventParts(record).fields.source_slot || ""));
       try {
         await page.goto(`${canonicalOrigin}${entry.path}?private=BOOK_QUERY_SENTINEL&email=BOOK_EMAIL_SENTINEL%40example.com&order_id=BOOK_ORDER_SENTINEL&download_token=BOOK_TOKEN_SENTINEL#BOOK_FRAGMENT_SENTINEL`, { waitUntil: "load" });
@@ -267,8 +391,8 @@ test("contextual book native navigation emits one bounded event per activation a
         const headingId = await module.getAttribute("aria-labelledby");
         assert.ok(headingId);
         assert.equal(await page.locator(`[id="${headingId}"]`).count(), 1);
-        assert.equal(await module.locator("h2").textContent(), "Continue with The Water Cycle");
-        assert.equal(await module.locator(".contextual-book__connection").textContent(), "Follow water risk beyond the flood map. The Water Cycle connects floodplains, infrastructure, insurance and public decisions in one illustrated book.");
+        assert.equal(await module.locator("h2").textContent(), entry.heading);
+        assert.equal(await module.locator(".contextual-book__connection").textContent(), entry.connection);
         assert.equal(await module.locator("a").count(), 3);
         assert.equal(await module.locator("img").count(), 1);
         assert.equal(await module.locator("form, input, button, script").count(), 0);
@@ -276,23 +400,32 @@ test("contextual book native navigation emits one bounded event per activation a
         const cover = module.locator("a.contextual-book__cover");
         const image = cover.locator("img");
         assert.equal(await cover.count(), 1);
-        assert.equal(await cover.getAttribute("aria-label"), contextualCoverName);
-        assert.equal(await image.getAttribute("alt"), contextualCoverAlt);
-        assert.equal(await image.getAttribute("src"), contextualCoverPath);
+        assert.equal(await cover.getAttribute("aria-label"), entry.coverName);
+        assert.equal(await image.getAttribute("alt"), entry.coverAlt);
+        assert.equal(await image.getAttribute("src"), expectedCover.src);
+        assert.equal(await image.getAttribute("srcset"), expectedCover.srcset);
+        assert.equal(await cover.locator("picture").count(), expectedCover.assetId ? 1 : 0);
+        if (expectedCover.assetId) assert.equal(await cover.locator("picture").getAttribute("data-oip-image-id"), expectedCover.assetId);
+        assert.deepEqual(await cover.locator("source").evaluateAll((sources) => sources.map((source) => ({ type: source.getAttribute("type"), srcset: source.getAttribute("srcset") }))), expectedCover.sources);
         assert.equal(await image.getAttribute("loading"), "lazy");
         // A lazy request can start after the module scroll and invalidate an early decode.
         await image.scrollIntoViewIfNeeded();
         await page.waitForFunction((node) => node.complete && node.naturalWidth > 0,
           await image.elementHandle(), { timeout: 4000 });
         await image.evaluate((node) => node.decode());
-        assert.equal(await image.evaluate((node) => {
+        const currentSource = new URL(await image.evaluate((node) => node.currentSrc));
+        assert.equal(currentSource.origin, canonicalOrigin);
+        assert.ok(expectedCover.allowImagePaths.has(currentSource.pathname), "Decoded image must be an exact rendered product-cover candidate.");
+        assert.equal(await image.evaluate((node, expected) => {
           const rect = node.getBoundingClientRect();
           const anchor = node.closest("a").getBoundingClientRect();
-          return node.naturalWidth > 0 && Number(node.getAttribute("width")) === node.naturalWidth &&
-            Number(node.getAttribute("height")) === node.naturalHeight &&
-            Math.abs(rect.width / rect.height - node.naturalWidth / node.naturalHeight) < 0.01 &&
+          return node.naturalWidth > 0 && node.naturalHeight > 0 &&
+            Number(node.getAttribute("width")) === expected.width && Number(node.getAttribute("height")) === expected.height &&
+            Math.abs(node.naturalWidth / node.naturalHeight - expected.ratio) < 0.01 &&
+            Math.abs(rect.width / rect.height - expected.ratio) < 0.01 &&
             rect.width <= 112 && anchor.width >= 44 && anchor.height >= 44;
-        }), true, "The existing cover needs its full aspect ratio, small size, and a sensible tap target.");
+        }, { width: expectedCover.width, height: expectedCover.height, ratio: expectedCover.ratio }), true,
+        "The selected cover derivative needs the correct aspect ratio, small size, and a sensible tap target.");
         if (viewport.width >= 390) {
           assert.equal(await module.evaluate((node) => {
             const copy = node.querySelector(".contextual-book__copy").getBoundingClientRect();
@@ -305,24 +438,31 @@ test("contextual book native navigation emits one bounded event per activation a
           return rect.left >= 0 && rect.right <= window.innerWidth + 1 && node.scrollWidth <= node.clientWidth + 1;
         }), true, `Contextual module overflows at ${viewport.width}px.`);
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, "Entry page must not overflow horizontally.");
-        assert.equal(await module.evaluate((node, kind) => {
-          const before = document.querySelector(kind === "article" ? ".reading-path" : ".collection-section__lead");
+        const collectionWithoutStartHere = entry.path === "/collections/syd-and-oliver-dialogues/";
+        if (entry.slot === "collection") {
+          assert.equal(await page.locator(".collection-section__lead").count(), collectionWithoutStartHere ? 0 : 1,
+            "Only the Syd and Oliver collection has no existing Start Here lead.");
+        }
+        assert.equal(await module.evaluate((node, { kind, withoutStartHere }) => {
+          const before = document.querySelector(kind === "article" ? ".reading-path" :
+            withoutStartHere ? ".collection-section__header" : ".collection-section__lead");
           const after = document.querySelector(kind === "article" ? ".article-publication-record" : ".collection-section__contents");
           return Boolean(before && after && (before.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING) && (node.compareDocumentPosition(after) & Node.DOCUMENT_POSITION_FOLLOWING));
-        }, entry.slot), true, "The module must preserve the existing reading order.");
+        }, { kind: entry.slot, withoutStartHere: collectionWithoutStartHere }), true, "The module must preserve the existing reading order.");
 
         for (const [index, action] of ["sample", "detail", "cover", "cover", "sample"].entries()) {
           const anchor = page.locator(`.contextual-book [data-analytics-source-slot="${entry.slot}_book_${action}"]`);
-          const expectedHref = `/shop/the-water-cycle/${action === "sample" ? "#reading-sample" : ""}`;
+          const expectedHref = action === "sample" ? entry.sampleHref : entry.productPath;
+          const expectedPath = action === "sample" ? entry.samplePath : entry.productPath;
           assert.equal(await anchor.getAttribute("href"), expectedHref);
           assert.equal(await anchor.getAttribute("target"), null);
           assert.equal(await anchor.getAttribute("onclick"), null);
-          if (action === "cover") assert.equal(await anchor.getAttribute("aria-label"), contextualCoverName);
+          if (action === "cover") assert.equal(await anchor.getAttribute("aria-label"), entry.coverName);
           else assert.equal(await anchor.textContent(), action === "sample" ? "Read a sample" : "View book and buying options");
           assert.deepEqual(await anchor.evaluate((node) => ({
             event: node.dataset.analyticsEvent, slug: node.dataset.analyticsSlug,
             section: node.dataset.analyticsSection, path: node.dataset.analyticsPath,
-          })), { event: action === "sample" ? "book_sample_open" : "internal_promo_click", slug: "the-water-cycle", section: "Bookstore", path: "/shop/the-water-cycle/" });
+          })), { event: action === "sample" ? "book_sample_open" : "internal_promo_click", slug: entry.slug, section: "Bookstore", path: expectedPath });
           await page.keyboard.press("Tab");
           await anchor.focus();
           assert.equal(await anchor.evaluate((node) => {
@@ -335,10 +475,13 @@ test("contextual book native navigation emits one bounded event per activation a
           ]);
           await waitFor(() => promoEvents().length >= index + 1, "Contextual link event was not intercepted.");
           assert.equal(await page.locator(".contextual-book").count(), 0, "Product/sample destination must not repeat the module.");
-          if (action === "sample") assert.equal(await page.locator("#reading-sample").count(), 1);
+          if (action === "sample") {
+            assert.equal(await page.locator(entry.key === "2045" ? ".bookstore-reading-sample--standalone" : "#reading-sample").count(), 1);
+            if (entry.key === "2045") assert.equal(await page.locator("#page-title").textContent(), "The Cracked Pot");
+          }
           assert.deepEqual(eventParts(promoEvents()[index]), {
             name: action === "sample" ? "book_sample_open" : "internal_promo_click",
-            fields: { path: "/shop/the-water-cycle/", slug: "the-water-cycle", section: "Bookstore", source_slot: `${entry.slot}_book_${action}` },
+            fields: { path: expectedPath, slug: entry.slug, section: "Bookstore", source_slot: `${entry.slot}_book_${action}` },
           });
           await page.goBack({ waitUntil: "load" });
           await page.reload({ waitUntil: "load" });
@@ -364,7 +507,7 @@ test("contextual links retain native destinations without JavaScript and respect
       try {
         for (const action of ["sample", "detail", "cover"]) {
           await page.goto(`${canonicalOrigin}${entry.path}`, { waitUntil: "load" });
-          const target = `${canonicalOrigin}/shop/the-water-cycle/${action === "sample" ? "#reading-sample" : ""}`;
+          const target = canonicalOrigin + (action === "sample" ? entry.sampleHref : entry.productPath);
           await Promise.all([
             page.waitForURL(target),
             page.locator(`.contextual-book [data-analytics-source-slot="${entry.slot}_book_${action}"]`).click(),

@@ -10,9 +10,12 @@ featured_image: "/images/medium/the-new-meta-economy/bcb3e2d1414e3aa992a7e91e09e
 featured_image_caption: "Photo by Dima Solomin on Unsplash"
 featured_image_alt: "The New Meta Economy"
 description: "Glasses that see what you see. Bots that sell what you want. Welcome to The New Meta Economy"
-version: "2.0"
-edition: "Fourth web edition"
+version: "2.1"
+edition: "Fifth web edition"
 revision_history:
+  - version: "2.1"
+    date: "2026-10-07"
+    note: "Added an optional reading sample and book invitation for 2045 after the collection continuation; article text and sources are unchanged."
   - version: "2.0"
     date: "2026-09-27"
     note: "Corrected verified quotation/paraphrase treatment and replaced unsupported market and screen-time figures with nonnumeric wording. Added or retained claim-level source links; original reporting frame and artwork retained. Applied minimal style cleanup without changing claims or verified quotations."
@@ -25,6 +28,10 @@ revision_history:
 pdf: "/pdfs/the-new-meta-economy.pdf"
 featured: false
 medium_source_url: "https://medium.com/@lawtonperret/the-new-meta-economy-587359ef25db"
+book_promo:
+  book_path: "/shop/2045"
+  heading: "Continue with 2045"
+  connection: "This essay asks what happens when AI reshapes work, attention, and everyday life. 2045 explores those pressures through dark fables, beginning with a man surrounded by helpful machines and searching for a purpose."
 ---
 
 Glasses that see what you see. Bots that sell what you want.
