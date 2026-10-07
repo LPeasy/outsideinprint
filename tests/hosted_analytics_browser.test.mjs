@@ -191,7 +191,7 @@ async function installRoutes(page, options = {}) {
 }
 
 async function newInstrumentedPage(options = {}) {
-  const context = await browser.newContext();
+  const context = await browser.newContext(options.contextOptions || {});
   if (options.initScript) {
     await context.addInitScript(options.initScript);
   }
@@ -233,6 +233,108 @@ test.before(async () => {
 
 test.after(async () => {
   await browser?.close();
+});
+
+const contextualBookEntries = [
+  { path: "/collections/floods-water-built-environment/", slot: "collection" },
+  { path: "/essays/the-100-year-flood-is-not-what-you-think/", slot: "article" },
+];
+
+test("contextual book native navigation emits one bounded event per activation across back and refresh", async () => {
+  const sentinels = ["BOOK_QUERY_SENTINEL", "BOOK_FRAGMENT_SENTINEL", "BOOK_EMAIL_SENTINEL", "BOOK_ORDER_SENTINEL", "BOOK_TOKEN_SENTINEL"];
+  for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }]) {
+    for (const entry of contextualBookEntries) {
+      const { context, counts, page } = await newInstrumentedPage({ allowStyles: true, contextOptions: { viewport } });
+      const promoEvents = () => counts.filter((record) => /^(collection|article)_book_(sample|detail)$/.test(eventParts(record).fields.source_slot || ""));
+      try {
+        await page.goto(`${canonicalOrigin}${entry.path}?private=BOOK_QUERY_SENTINEL&email=BOOK_EMAIL_SENTINEL%40example.com&order_id=BOOK_ORDER_SENTINEL&download_token=BOOK_TOKEN_SENTINEL#BOOK_FRAGMENT_SENTINEL`, { waitUntil: "load" });
+        await waitFor(() => counts.some((record) => !countData(record).event), "Contextual entry pageview was not intercepted.");
+        const module = page.locator("aside.contextual-book");
+        assert.equal(await module.count(), 1);
+        const headingId = await module.getAttribute("aria-labelledby");
+        assert.ok(headingId);
+        assert.equal(await page.locator(`[id="${headingId}"]`).count(), 1);
+        assert.equal(await module.locator("h2").textContent(), "Continue with The Water Cycle");
+        assert.equal(await module.locator(".contextual-book__connection").textContent(), "Follow water risk beyond the flood map. The Water Cycle connects floodplains, infrastructure, insurance and public decisions in one illustrated book.");
+        assert.equal(await module.locator("a").count(), 2);
+        assert.equal(await module.locator("form, img, input, button, script").count(), 0);
+        await module.scrollIntoViewIfNeeded();
+        assert.equal(await module.evaluate((node) => {
+          const rect = node.getBoundingClientRect();
+          return rect.left >= 0 && rect.right <= window.innerWidth + 1 && node.scrollWidth <= node.clientWidth + 1;
+        }), true, `Contextual module overflows at ${viewport.width}px.`);
+        assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, "Entry page must not overflow horizontally.");
+        assert.equal(await module.evaluate((node, kind) => {
+          const before = document.querySelector(kind === "article" ? ".reading-path" : ".collection-section__lead");
+          const after = document.querySelector(kind === "article" ? ".article-publication-record" : ".collection-section__contents");
+          return Boolean(before && after && (before.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING) && (node.compareDocumentPosition(after) & Node.DOCUMENT_POSITION_FOLLOWING));
+        }, entry.slot), true, "The module must preserve the existing reading order.");
+
+        for (const [index, action] of ["sample", "detail", "sample"].entries()) {
+          const anchor = page.locator(`.contextual-book [data-analytics-source-slot="${entry.slot}_book_${action}"]`);
+          const expectedHref = `/shop/the-water-cycle/${action === "sample" ? "#reading-sample" : ""}`;
+          assert.equal(await anchor.getAttribute("href"), expectedHref);
+          assert.equal(await anchor.getAttribute("target"), null);
+          assert.equal(await anchor.getAttribute("onclick"), null);
+          assert.equal(await anchor.textContent(), action === "sample" ? "Read a sample" : "View book and buying options");
+          assert.deepEqual(await anchor.evaluate((node) => ({
+            event: node.dataset.analyticsEvent, slug: node.dataset.analyticsSlug,
+            section: node.dataset.analyticsSection, path: node.dataset.analyticsPath,
+          })), { event: action === "sample" ? "book_sample_open" : "internal_promo_click", slug: "the-water-cycle", section: "Bookstore", path: "/shop/the-water-cycle/" });
+          await page.keyboard.press("Tab");
+          await anchor.focus();
+          assert.equal(await anchor.evaluate((node) => {
+            const style = getComputedStyle(node);
+            return document.activeElement === node && node.matches(":focus-visible") && style.outlineStyle !== "none" && parseFloat(style.outlineWidth) > 0;
+          }), true, "Native links need a visible keyboard focus indicator.");
+          await Promise.all([
+            page.waitForURL(`${canonicalOrigin}${expectedHref}`),
+            index === 1 ? anchor.click() : page.keyboard.press("Enter"),
+          ]);
+          await waitFor(() => promoEvents().length >= index + 1, "Contextual link event was not intercepted.");
+          assert.equal(await page.locator(".contextual-book").count(), 0, "Product/sample destination must not repeat the module.");
+          if (action === "sample") assert.equal(await page.locator("#reading-sample").count(), 1);
+          assert.deepEqual(eventParts(promoEvents()[index]), {
+            name: action === "sample" ? "book_sample_open" : "internal_promo_click",
+            fields: { path: "/shop/the-water-cycle/", slug: "the-water-cycle", section: "Bookstore", source_slot: `${entry.slot}_book_${action}` },
+          });
+          await page.goBack({ waitUntil: "load" });
+          await page.reload({ waitUntil: "load" });
+          assert.equal(await page.locator(".contextual-book").count(), 1);
+          assert.equal(promoEvents().length, index + 1, "Back and refresh must not add activation events.");
+        }
+        assert.equal(counts.some((record) => eventParts(record).name === "checkout_start"), false, "Book discovery is not a checkout attempt or sale.");
+        for (const record of counts) assertPrivacyBoundary(record, sentinels);
+      } finally {
+        await context.close();
+      }
+    }
+  }
+});
+
+test("contextual links retain native destinations without JavaScript and respect the existing analytics opt-out", async () => {
+  for (const entry of contextualBookEntries) {
+    for (const disabledJavaScript of [true, false]) {
+      const { context, counts, page } = await newInstrumentedPage({
+        contextOptions: { javaScriptEnabled: !disabledJavaScript },
+        initScript: disabledJavaScript ? undefined : () => { try { localStorage.setItem("skipgc", "t"); } catch {} },
+      });
+      try {
+        for (const action of ["sample", "detail"]) {
+          await page.goto(`${canonicalOrigin}${entry.path}`, { waitUntil: "load" });
+          const target = `${canonicalOrigin}/shop/the-water-cycle/${action === "sample" ? "#reading-sample" : ""}`;
+          await Promise.all([
+            page.waitForURL(target),
+            page.locator(`.contextual-book [data-analytics-source-slot="${entry.slot}_book_${action}"]`).click(),
+          ]);
+          assert.equal(page.url(), target);
+        }
+        assert.equal(counts.length, 0, "Disabled JavaScript or owner opt-out must suppress every analytics request.");
+      } finally {
+        await context.close();
+      }
+    }
+  }
 });
 
 test("Almanack attribution survives sample navigation and tracks attempts without subscriber data", async () => {

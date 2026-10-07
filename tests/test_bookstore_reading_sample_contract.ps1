@@ -121,6 +121,105 @@ function Get-SampleDocument {
   }
 }
 
+function Test-ContextualBookFixtures {
+  # Render only the real contextual/helper chain and tiny text fixtures: no site assets.
+  $hugoPath = $env:OIP_HUGO_BIN
+  if (-not $hugoPath) {
+    $localHugo = Join-Path $repoRoot '.tools/hugo-0.164.0/hugo'
+    $hugoPath = if (Test-Path -LiteralPath $localHugo -PathType Leaf) { $localHugo } else { 'hugo' }
+  }
+  $fixture = Join-Path ([IO.Path]::GetTempPath()) ('oip-contextual-book-' + [guid]::NewGuid().ToString('N'))
+  [void](New-Item -ItemType Directory -Path $fixture)
+  try {
+    foreach ($directory in @('layouts/partials/shop', 'layouts/_default', 'content/collections', 'content/essays', 'content/shop/the-water-cycle', 'data')) {
+      [void](New-Item -ItemType Directory -Path (Join-Path $fixture $directory) -Force)
+    }
+    foreach ($partial in @('contextual-book', 'product-data', 'sample-link', 'resolve-reading-sample')) {
+      Copy-Item -LiteralPath (Join-Path $repoRoot "layouts/partials/shop/$partial.html") -Destination (Join-Path $fixture "layouts/partials/shop/$partial.html")
+    }
+    [IO.File]::WriteAllText((Join-Path $fixture 'layouts/_default/single.html'), '{{ .Title }}')
+    [IO.File]::WriteAllText((Join-Path $fixture 'layouts/_default/list.html'), '{{ .Title }}')
+    $promo = "book_promo:`n  book_path: /shop/the-water-cycle`n  heading: 'Continue with The Water Cycle'`n  connection: 'Fixture <strong>plain text</strong> & connection.'`n"
+    $sourcePaths = @('collections/floods-water-built-environment.md', 'essays/the-100-year-flood-is-not-what-you-think.md')
+    foreach ($case in @('valid', 'absent', 'inherited', 'unrelated', 'hidden', 'bad-target', 'missing-target', 'wrong-key', 'missing-catalog', 'draft-target', 'future-target', 'expired-target', 'missing-sample', 'unready-sample', 'draft-sample', 'wrong-sample-key', 'missing-sku', 'sample-override', 'extra-field')) {
+      [IO.File]::WriteAllText((Join-Path $fixture 'hugo.toml'), 'baseURL = "https://fixture.invalid/"' + "`n" + 'disableKinds = ["taxonomy", "term", "RSS", "sitemap"]')
+      $declaration = switch ($case) {
+        { $_ -in 'absent', 'inherited', 'unrelated' } { ''; break }
+        'bad-target' { $promo.Replace('/shop/the-water-cycle', '/shop/2045'); break }
+        'extra-field' { $promo + "  source_slot: arbitrary`n"; break }
+        default { $promo }
+      }
+      foreach ($sourcePath in $sourcePaths) {
+        [IO.File]::WriteAllText((Join-Path $fixture "content/$sourcePath"), "---`ntitle: Fixture entry`ndate: 2020-01-01`n$declaration---`nExisting body.")
+      }
+      [IO.File]::WriteAllText((Join-Path $fixture 'content/essays/unrelated.md'), "---`ntitle: Unrelated`n$promo---`nUnrelated body.")
+      $inherited = if ($case -eq 'inherited') { "cascade:`n" + (($promo.TrimEnd() -split "`n" | ForEach-Object { '  ' + $_ }) -join "`n") } else { '' }
+      [IO.File]::WriteAllText((Join-Path $fixture 'content/_index.md'), "---`ntitle: Fixture`n$inherited`n---`n")
+      $productFields = switch ($case) {
+        'wrong-key' { 'book_key: unrelated'; break }
+        'draft-target' { "book_key: the_water_cycle`ndraft: true"; break }
+        'future-target' { "book_key: the_water_cycle`npublishDate: 2099-01-01"; break }
+        'expired-target' { "book_key: the_water_cycle`nexpiryDate: 2000-01-01"; break }
+        'sample-override' { "book_key: the_water_cycle`nsample_page: /essays/unrelated"; break }
+        default { 'book_key: the_water_cycle' }
+      }
+      [IO.File]::WriteAllText((Join-Path $fixture 'content/shop/the-water-cycle/index.md'), "---`ntitle: The Water Cycle`nslug: the-water-cycle`ndate: 2020-01-01`n$productFields`n---`n")
+      $sampleFields = switch ($case) {
+        'unready-sample' { "sample_release_status: local_draft`ndraft: true"; break }
+        'draft-sample' { "sample_release_status: ready`ndraft: true"; break }
+        default { "sample_release_status: ready`ndraft: false" }
+      }
+      [IO.File]::WriteAllText((Join-Path $fixture 'content/shop/the-water-cycle/sample.md'), "---`ntitle: Reading sample`nsample_of_book_key: the_water_cycle`n$sampleFields`n---`nA brief sample.")
+      if ($case -in @('missing-target', 'missing-sample')) {
+        Remove-Item -LiteralPath (Join-Path $fixture 'content/shop/the-water-cycle/sample.md')
+      }
+      if ($case -eq 'missing-target') {
+        Remove-Item -LiteralPath (Join-Path $fixture 'content/shop/the-water-cycle/index.md')
+      }
+      if ($case -eq 'wrong-sample-key') {
+        [IO.File]::WriteAllText((Join-Path $fixture 'content/shop/the-water-cycle/sample.md'), "---`ntitle: Reading sample`nsample_of_book_key: unrelated`n$sampleFields`n---`nA brief sample.")
+      }
+      $offer = @{ sku = 'OIP-WC-EPUB'; format = 'EPUB'; availability_status = 'live'; price_display = '$12.34'; price_cents = 1234; currency = 'USD'; permitted_geography = 'Fixture customers' }
+      if ($case -eq 'missing-sku') { $offer.sku = 'OIP-OTHER-EPUB' }
+      $product = @{ title = 'The Water Cycle'; product_type = 'Fixture e-book'; suggested_slug = 'the-water-cycle'; direct_offers = @($offer) }
+      # Defaults deliberately look valid: missing catalog membership must not use them.
+      $products = if ($case -eq 'missing-catalog') { @{} } else { @{ the_water_cycle = $product; unrelated = $product } }
+      [IO.File]::WriteAllText((Join-Path $fixture 'data/bookstore.json'), (@{ defaults = $product; products = $products } | ConvertTo-Json -Depth 8))
+      $visible = if ($case -eq 'hidden') { 'false' } else { 'true' }
+      $articlePath = if ($case -eq 'unrelated') { '/essays/unrelated' } else { '/essays/the-100-year-flood-is-not-what-you-think' }
+      $template = '{{ partial "shop/contextual-book.html" (dict "page" (site.GetPage "/collections/floods-water-built-environment") "placement" "collection" "visible" ' + $visible + ') }}' + "`n" + '{{ partial "shop/contextual-book.html" (dict "page" (site.GetPage "' + $articlePath + '") "placement" "article" "visible" ' + $visible + ') }}'
+      [IO.File]::WriteAllText((Join-Path $fixture 'layouts/index.html'), $template)
+      $buildOutput = & $hugoPath --source $fixture --clock '2026-10-07T12:00:00Z' --buildDrafts --buildFuture --buildExpired --panicOnWarning 2>&1
+      $exitCode = $LASTEXITCODE
+      if ($case -notin @('valid', 'absent', 'inherited', 'unrelated', 'hidden')) {
+        if ($exitCode -eq 0 -or ($buildOutput -join "`n") -notmatch '(?i)Contextual book|Ready reading sample') {
+          throw "Contextual-book invalid fixture $case must fail with a specific validation error:`n$($buildOutput -join "`n")"
+        }
+        continue
+      }
+      if ($exitCode -ne 0) { throw "Contextual-book fixture $case failed:`n$($buildOutput -join "`n")" }
+      $html = Get-Content -LiteralPath (Join-Path $fixture 'public/index.html') -Raw -Encoding utf8
+      $modules = @([regex]::Matches($html, '(?s)<aside\b[^>]*class="[^"]*\bcontextual-book\b[^>]*>.*?</aside>'))
+      if ($case -ne 'valid') {
+        if ($modules.Count -ne 0) { throw "Contextual-book fixture $case must render no module." }
+        continue
+      }
+      if ($modules.Count -ne 2) { throw 'Contextual-book valid fixture must render the two explicitly allowed modules.' }
+      foreach ($module in $modules) {
+        $plain = Get-NormalizedHtmlText -Html $module.Value
+        foreach ($probe in @('Fixture e-book', '$12.34', 'EPUB', 'USD', 'Fixture customers', '1 min read')) {
+          Assert-Contains -Text $plain -Expected $probe -Context 'Contextual-book catalog and sample derivation'
+        }
+        Assert-Contains -Text $module.Value -Expected '&lt;strong&gt;plain text&lt;/strong&gt;' -Context 'Escaped contextual connection'
+        if ($module.Value -match '<strong>|<form\b|<img\b|<script\b|onclick=') { throw 'Contextual-book fixture must remain escaped, native text links.' }
+      }
+    }
+  }
+  finally {
+    if (Test-Path -LiteralPath $fixture -PathType Container) { Remove-Item -LiteralPath $fixture -Recurse -Force }
+  }
+}
+
 function Test-SampleLinkDirectionFixtures {
   # This small Hugo fixture runs only with output checks, after CI installs Hugo.
   # It renders the real link partial without processing production assets.
@@ -700,6 +799,69 @@ if ($homepageSampleMatches.Count -gt 0) {
   throw 'The compact homepage shelf must not include reading-sample links.'
 }
 
+$contextualSources = @(
+  'content/collections/floods-water-built-environment.md',
+  'content/essays/the-100-year-flood-is-not-what-you-think.md'
+)
+$contextualHeading = 'Continue with The Water Cycle'
+$contextualConnection = 'Follow water risk beyond the flood map. The Water Cycle connects floodplains, infrastructure, insurance and public decisions in one illustrated book.'
+$declaredPromos = @()
+foreach ($file in Get-ChildItem -LiteralPath (Join-Path $repoRoot 'content') -Recurse -File -Filter '*.md') {
+  $source = Get-Content -LiteralPath $file.FullName -Raw -Encoding utf8
+  $frontMatter = [regex]::Match($source, '(?s)\A---\r?\n(?<frontMatter>.*?)\r?\n---(?:\r?\n|$)').Groups['frontMatter'].Value
+  if ($source -notmatch '(?i)book_promo') { continue }
+  $relativePath = [IO.Path]::GetRelativePath($repoRoot, $file.FullName).Replace('\', '/')
+  if ($relativePath -cnotin $contextualSources -or [regex]::Matches($source, '(?i)book_promo').Count -ne 1) {
+    throw "Only the two approved source front matters may declare book_promo; found $relativePath."
+  }
+  $promo = [regex]::Match($frontMatter, '(?m)^book_promo:\s*\r?\n(?<fields>(?:[ \t]+[^\r\n]*\r?\n?)+)')
+  if (-not $promo.Success -or $frontMatter -match '(?im)^\s*cascade\s*:') {
+    throw "$relativePath must use an explicit top-level book_promo without cascade."
+  }
+  $fields = $promo.Groups['fields'].Value
+  $keys = @([regex]::Matches($fields, '(?m)^  ([a-z_]+):') | ForEach-Object { $_.Groups[1].Value } | Sort-Object)
+  if (($keys -join '|') -cne 'book_path|connection|heading' -or [regex]::Matches($fields, '(?m)^\s*\S').Count -ne 3) {
+    throw "$relativePath book_promo may only contain book_path, heading and connection."
+  }
+  foreach ($expected in @{
+    book_path = '/shop/the-water-cycle'; heading = $contextualHeading; connection = $contextualConnection
+  }.GetEnumerator()) {
+    $unindented = $fields -replace '(?m)^  ', ''
+    if ((Get-FrontMatterValue -FrontMatter $unindented -Key $expected.Key -Context $relativePath) -cne $expected.Value) {
+      throw "$relativePath book_promo $($expected.Key) differs from the approved scope."
+    }
+  }
+  $declaredPromos += $relativePath
+}
+if ((($declaredPromos | Sort-Object) -join '|') -cne (($contextualSources | Sort-Object) -join '|')) {
+  throw 'Exactly the two approved Markdown front matters must opt in to contextual books.'
+}
+foreach ($file in @(
+  Get-ChildItem -LiteralPath $repoRoot -File | Where-Object { $_.Name -match '^(?:hugo|config)\.(?:toml|ya?ml|json)$' }
+  foreach ($directory in @('config', 'data')) {
+    if (Test-Path -LiteralPath (Join-Path $repoRoot $directory)) {
+      Get-ChildItem -LiteralPath (Join-Path $repoRoot $directory) -Recurse -File
+    }
+  }
+)) {
+  if ((Get-Content -LiteralPath $file.FullName -Raw -Encoding utf8) -match '(?i)book_promo') {
+    throw "Global, catalog and collection defaults must not declare book_promo: $($file.FullName)"
+  }
+}
+$contextualPartial = Get-RequiredText -RelativePath 'layouts/partials/shop/contextual-book.html'
+foreach ($required in @(
+  'collections/floods-water-built-environment.md', 'essays/the-100-year-flood-is-not-what-you-think.md',
+  '/collections/floods-water-built-environment/', '/essays/the-100-year-flood-is-not-what-you-think/',
+  'readFile', 'transform.Unmarshal', 'isset $sourceParams "book_promo"',
+  'shop/product-data.html', 'shop/sample-link.html', 'OIP-WC-EPUB', 'the_water_cycle',
+  'price_display', 'permitted_geography', 'data-analytics-event="internal_promo_click"',
+  'data-analytics-section="Bookstore"', 'View book and buying options'
+)) { Assert-Contains -Text $contextualPartial -Expected $required -Context 'Contextual-book source contract' }
+Assert-Ordered -Text $contextualPartial -First 'isset $catalog "the_water_cycle"' -Second 'partial "shop/product-data.html"' -Context 'Exact product membership before helper defaults'
+if ($contextualPartial -match '(?i)safeHTML|<form\b|<img\b|<script\b|onclick|localStorage|sessionStorage|utm_|checkout_start|\$9\.99|U\.S\. customers|featured-book\.html|featured-continuation\.html') {
+  throw 'Contextual books must use plain native links and catalog facts without adding commerce, storage or promotion defaults.'
+}
+
 if ($SourceOnly) {
   Write-Host 'Three-title bookstore reading-sample source contract passed.'
   exit 0
@@ -708,6 +870,60 @@ if (-not (Test-Path -LiteralPath $SiteDir -PathType Container)) {
   throw "Reading-sample output validation requires a built site at $SiteDir."
 }
 Test-SampleLinkDirectionFixtures
+Test-ContextualBookFixtures
+
+$contextualOutput = @(
+  @{ Path = 'collections/floods-water-built-environment/index.html'; Slot = 'collection'; Before = 'collection-section__lead'; After = 'collection-section__contents' },
+  @{ Path = 'essays/the-100-year-flood-is-not-what-you-think/index.html'; Slot = 'article'; Before = 'reading-path'; After = 'article-publication-record' }
+)
+$catalogSource = Get-RequiredText -RelativePath 'data/bookstore.yaml'
+$waterCatalog = [regex]::Match($catalogSource, '(?ms)^  the_water_cycle:\r?\n(?<fields>.*?)(?=^  [^\s]|\z)').Groups['fields'].Value
+$waterOffer = [regex]::Match($waterCatalog, '(?ms)^      - sku: "OIP-WC-EPUB"\r?\n(?<fields>.*?)(?=^      - sku:|\z)').Groups['fields'].Value -replace '(?m)^        ', ''
+$expectedOfferFacts = @('format', 'price_display', 'currency', 'permitted_geography') | ForEach-Object {
+  Get-FrontMatterValue -FrontMatter $waterOffer -Key $_ -Context 'Water Cycle catalog EPUB offer'
+}
+foreach ($entry in $contextualOutput) {
+  $html = Get-Content -LiteralPath (Join-Path $SiteDir $entry.Path) -Raw -Encoding utf8
+  $modules = @([regex]::Matches($html, '(?is)<aside\b[^>]*\bclass=(?:"[^"]*\bcontextual-book\b[^"]*"|contextual-book(?:\s|>))[^>]*>.*?</aside>'))
+  if ($modules.Count -ne 1) { throw "$($entry.Path) must contain exactly one contextual book aside." }
+  $module = $modules[0].Value
+  $headingId = 'contextual-book-' + $entry.Slot + '-the-water-cycle'
+  if ([regex]::Matches($html, '\bid="?' + $headingId + '"?(?=\s|>)').Count -ne 1 -or $module -notmatch ('aria-labelledby="?' + $headingId + '"?(?=\s|>)')) {
+    throw "$($entry.Path) must have one unique, labelled contextual-book heading."
+  }
+  $plain = Get-NormalizedHtmlText -Html $module
+  foreach ($text in @($contextualHeading, $contextualConnection) + $expectedOfferFacts) {
+    Assert-Contains -Text $plain -Expected $text -Context $entry.Path
+  }
+  if ([regex]::Matches($module, '<a\b').Count -ne 2 -or $module -match '(?i)<form\b|<img\b|<script\b|onclick=|target=|utm_|order_id|payment_id|download_token|email=|checkout_start') {
+    throw "$($entry.Path) must contain only two native, same-tab book discovery links without private fields."
+  }
+  foreach ($action in @('sample', 'detail')) {
+    $slot = $entry.Slot + '_book_' + $action
+    $event = if ($action -eq 'sample') { 'book_sample_open' } else { 'internal_promo_click' }
+    $href = '/shop/the-water-cycle/' + $(if ($action -eq 'sample') { '#reading-sample' } else { '' })
+    $anchor = [regex]::Match($module, '(?is)<a\b(?=[^>]*data-analytics-source-slot="?' + $slot + '"?(?=\s|>))[^>]*>.*?</a>').Value
+    foreach ($attribute in @(
+      ('href=' + [regex]::Escape($href)), ('data-analytics-event=' + $event),
+      'data-analytics-slug=the-water-cycle', 'data-analytics-section=Bookstore', 'data-analytics-path=/shop/the-water-cycle/'
+    )) {
+      $parts = $attribute.Split('=', 2)
+      if ($anchor -notmatch ($parts[0] + '="?' + $parts[1] + '"?(?=\s|>)')) { throw "$($entry.Path) $slot has a missing or wrong $($parts[0])." }
+    }
+    $label = if ($action -eq 'sample') { 'Read a sample' } else { 'View book and buying options' }
+    if ((Get-NormalizedHtmlText -Html $anchor) -cne $label) { throw "$($entry.Path) $slot uses the wrong action label." }
+  }
+  if ($module -notmatch '\d+ min read') { throw "$($entry.Path) must retain calculated sample reading time." }
+  Assert-Ordered -Text $html -First $entry.Before -Second $module -Context "$($entry.Path) primary reading path"
+  Assert-Ordered -Text $html -First $module -Second $entry.After -Context "$($entry.Path) continuation placement"
+}
+foreach ($file in Get-ChildItem -LiteralPath $SiteDir -Recurse -File -Filter '*.html') {
+  $relativePath = [IO.Path]::GetRelativePath($SiteDir, $file.FullName).Replace('\', '/')
+  if ($relativePath -cin $contextualOutput.Path) { continue }
+  if ((Get-Content -LiteralPath $file.FullName -Raw -Encoding utf8) -match '(?i)<aside\b[^>]*\bcontextual-book\b|data-analytics-source-slot="?(?:article|collection)_book_(?:sample|detail)') {
+    throw "Contextual-book module leaked outside its two approved pages: $relativePath"
+  }
+}
 
 $outputPaths = @('index.html', 'shop/index.html') + @($sampleSpecs | ForEach-Object { $_.OutputPath })
 $output = [ordered]@{}

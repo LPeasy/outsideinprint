@@ -1,0 +1,120 @@
+{{- $page := .page -}}
+{{- $placement := .placement -}}
+{{- $visible := eq .visible true -}}
+{{- $allowed := dict
+  "collections/floods-water-built-environment.md" (dict "path" "/collections/floods-water-built-environment/" "placement" "collection")
+  "essays/the-100-year-flood-is-not-what-you-think.md" (dict "path" "/essays/the-100-year-flood-is-not-what-you-think/" "placement" "article")
+-}}
+{{- with $page.File -}}
+  {{- $sourcePath := replace .Path `\` "/" -}}
+  {{- with index $allowed $sourcePath -}}
+    {{- $scope := . -}}
+    {{/* Read the source declaration: Hugo Params can contain inherited cascade data. */}}
+    {{- $source := readFile (printf "content/%s" $sourcePath) -}}
+    {{- $frontMatter := findRESubmatch `(?s)^---\r?\n(.*?)\r?\n---(?:\r?\n|$)` $source 1 -}}
+    {{- if ne (len $frontMatter) 1 -}}
+      {{- errorf "Contextual book source %s must use YAML front matter" $sourcePath -}}
+    {{- else -}}
+      {{- $sourceParams := transform.Unmarshal (dict "format" "yaml") (index (index $frontMatter 0) 1) -}}
+      {{- if isset $sourceParams "book_promo" -}}
+        {{- $promo := index $sourceParams "book_promo" -}}
+        {{- if not (reflect.IsMap $promo) -}}
+          {{- errorf "Contextual book source %s requires a book_promo mapping" $sourcePath -}}
+        {{- else -}}
+          {{- $valid := true -}}
+          {{- if or (ne $page.RelPermalink $scope.path) (ne $placement $scope.placement) -}}
+            {{- errorf "Contextual book source %s must retain its allowed route and placement" $sourcePath -}}
+            {{- $valid = false -}}
+          {{- end -}}
+          {{- range $key, $value := $promo -}}
+            {{- if not (in (slice "book_path" "heading" "connection") $key) -}}
+              {{- errorf "Contextual book source %s has unsupported field %s" $sourcePath $key -}}
+              {{- $valid = false -}}
+            {{- end -}}
+          {{- end -}}
+          {{- range (slice "book_path" "heading" "connection") -}}
+            {{- $value := index $promo . -}}
+            {{- if or (ne (printf "%T" $value) "string") (not (strings.TrimSpace (printf "%v" ($value | default "")))) -}}
+              {{- errorf "Contextual book source %s requires plain-text %s" $sourcePath . -}}
+              {{- $valid = false -}}
+            {{- end -}}
+          {{- end -}}
+          {{- if ne (index $promo "book_path") "/shop/the-water-cycle" -}}
+            {{- errorf "Contextual book source %s must target /shop/the-water-cycle" $sourcePath -}}
+            {{- $valid = false -}}
+          {{- end -}}
+          {{- if $valid -}}
+            {{- $book := site.GetPage (index $promo "book_path") -}}
+            {{- if not $book -}}
+              {{- errorf "Contextual book target for %s does not exist" $sourcePath -}}
+            {{- else -}}
+              {{- $published := and (not $book.Draft) (le $book.Date now) (le $book.PublishDate now) (or $book.ExpiryDate.IsZero (gt $book.ExpiryDate now)) -}}
+              {{- $key := $book.Params.book_key -}}
+              {{- $catalog := index (hugo.Data.bookstore | default dict) "products" | default dict -}}
+              {{- if or (not $published) (ne $book.RelPermalink "/shop/the-water-cycle/") -}}
+                {{- errorf "Contextual book target for %s must be published at /shop/the-water-cycle/" $sourcePath -}}
+                {{- $valid = false -}}
+              {{- end -}}
+              {{- if or (ne $key "the_water_cycle") (not (isset $catalog "the_water_cycle")) -}}
+                {{- errorf "Contextual book target for %s requires exact catalog key the_water_cycle" $sourcePath -}}
+                {{- $valid = false -}}
+              {{- end -}}
+              {{- if $valid -}}
+                {{/* Validate exact catalog membership before product-data can apply defaults. */}}
+                {{- $catalogProduct := index $catalog $key -}}
+                {{- $offers := where (index $catalogProduct "direct_offers" | default (slice)) "sku" "OIP-WC-EPUB" -}}
+                {{- $sample := partial "shop/resolve-reading-sample.html" (dict "page" $book) -}}
+                {{- if or $book.Params.sample_page (not $sample) -}}
+                  {{- errorf "Contextual book target for %s requires its ready bundled reading sample" $sourcePath -}}
+                  {{- $valid = false -}}
+                {{- else if or $sample.Draft (ne $sample.Params.sample_release_status "ready") (ne $sample.Params.sample_of_book_key $key) -}}
+                  {{- errorf "Contextual book target for %s requires a ready non-draft sample for the_water_cycle" $sourcePath -}}
+                  {{- $valid = false -}}
+                {{- end -}}
+                {{- if ne (len $offers) 1 -}}
+                  {{- errorf "Contextual book target for %s requires exactly one OIP-WC-EPUB offer" $sourcePath -}}
+                {{- else -}}
+                  {{- $offer := index $offers 0 -}}
+                  {{- if or (ne (index $offer "format") "EPUB") (ne (index $offer "availability_status") "live") -}}
+                    {{- errorf "Contextual book target for %s requires a live EPUB OIP-WC-EPUB offer" $sourcePath -}}
+                    {{- $valid = false -}}
+                  {{- end -}}
+                  {{- range (slice "price_display" "currency" "permitted_geography") -}}
+                    {{- if not (strings.TrimSpace (printf "%v" (index $offer . | default ""))) -}}
+                      {{- errorf "Contextual book offer for %s is missing %s" $sourcePath . -}}
+                      {{- $valid = false -}}
+                    {{- end -}}
+                  {{- end -}}
+                  {{- if $valid -}}
+                    {{- $product := partial "shop/product-data.html" (dict "key" $key "page" $book) -}}
+                    {{- if ne (index $product "suggested_slug") "the-water-cycle" -}}
+                      {{- errorf "Contextual book target for %s requires catalog slug the-water-cycle" $sourcePath -}}
+                    {{- else if $visible -}}
+                      {{- $headingID := printf "contextual-book-%s-the-water-cycle" $placement -}}
+                      <aside class="contextual-book{{ if eq $placement "collection" }} page-shell page-shell--grid{{ end }}" aria-labelledby="{{ $headingID }}">
+                        <h2 class="contextual-book__title" id="{{ $headingID }}">{{ index $promo "heading" }}</h2>
+                        <p class="contextual-book__connection">{{ index $promo "connection" }}</p>
+                        <p class="contextual-book__offer">{{ index $product "product_type" }} · {{ index $offer "price_display" }} {{ index $offer "currency" }} · {{ index $offer "permitted_geography" }} · Download format: {{ index $offer "format" }}</p>
+                        <div class="contextual-book__actions">
+                          {{ partial "shop/sample-link.html" (dict "page" $book "product" $product "sourceSlot" (printf "%s_book_sample" $placement)) }}
+                          <a class="bookstore-detail-link" href="{{ $book.RelPermalink }}"
+                            data-analytics-event="internal_promo_click"
+                            data-analytics-source-slot="{{ printf "%s_book_detail" $placement }}"
+                            data-analytics-slug="{{ index $product "suggested_slug" }}"
+                            data-analytics-title="{{ index $product "title" }}"
+                            data-analytics-section="Bookstore"
+                            data-analytics-path="{{ $book.RelPermalink }}"
+                          >View book and buying options</a>
+                        </div>
+                      </aside>
+                    {{- end -}}
+                  {{- end -}}
+                {{- end -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

@@ -23,6 +23,7 @@ function renderPath(t, { entries = {}, startHere = "b", current = "a", collectio
   fs.cpSync("layouts/partials/collections", path.join(fixture, "layouts/partials/collections"), { recursive: true });
   for (const partial of [
     "discovery/page-summary.html", "metadata_description.html", "metadata/route.html",
+    "shop/contextual-book.html",
   ]) {
     write(`layouts/partials/${partial}`, fs.readFileSync(`layouts/partials/${partial}`, "utf8"));
   }

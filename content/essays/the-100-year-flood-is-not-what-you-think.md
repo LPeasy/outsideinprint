@@ -8,9 +8,12 @@ subtitle: "Why the 100-year flood can happen more than once in a century"
 description: "A 100-year flood is a 1% annual chance, not a once-per-century promise. Over a 30-year mortgage, repeated exposure adds up to about a 26% chance."
 featured_image: "/images/medium/the-100-year-flood-is-not-what-you-think/96718dd1ce6457c535506421a4afbbb633458940478ba3165a382cfaa93d70aa.jpeg"
 featured_image_alt: "The 100-Year Flood Is Not What You Think"
-version: "2.0"
-edition: "Fifth web edition"
+version: "2.1"
+edition: "Sixth web edition"
 revision_history:
+  - version: "2.1"
+    date: "2026-10-07"
+    note: "Added an optional reading sample and bookstore link for The Water Cycle after the collection continuation. Article text, sources, and illustrations are unchanged."
   - version: "2.0"
     date: "2026-09-27"
     note: "Identified independence and constant probability as calculation assumptions, not universal flood-map properties. Added or retained claim-level source links; original reporting frame retained. Corrected flagged graphics and captions without changing surrounding prose in this graphics pass. Applied minimal style cleanup without changing claims or verified quotations."
@@ -28,6 +31,10 @@ featured: true
 
 collections:
   - floods-water-built-environment
+book_promo:
+  book_path: "/shop/the-water-cycle"
+  heading: "Continue with The Water Cycle"
+  connection: "Follow water risk beyond the flood map. The Water Cycle connects floodplains, infrastructure, insurance and public decisions in one illustrated book."
 medium_source_url: "https://medium.com/@lawtonperret/the-100-year-flood-is-not-what-you-think-bcdadc6c395c"
 ---
 

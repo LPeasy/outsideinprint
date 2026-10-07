@@ -9,6 +9,7 @@ function read(relativePath) {
 
 const articleSingle = read("layouts/_default/single.html");
 const collectionSingle = read("layouts/collections/single.html");
+const contextualBook = read("layouts/partials/shop/contextual-book.html");
 const readingPath = read("layouts/partials/collections/reading-path.html");
 const collectionProgress = read("layouts/partials/collections/collection-progress.html");
 const progressScript = read("layouts/partials/collections/reading-progress-script.html");
@@ -198,4 +199,25 @@ test("reading-path partial uses the fixed continuation analytics source slots", 
     assert.match(readingPath, new RegExp(escapeRegex(snippet)));
   }
   assert.doesNotMatch(readingPath, /article_continuation_(?:previous|restart|archive|secondary)/);
+});
+
+test("contextual book stays after collection continuation and before publication or collection contents", () => {
+  const call = 'partial "shop/contextual-book.html"';
+  assert.equal(articleSingle.split(call).length - 1, 1);
+  assert.equal(collectionSingle.split(call).length - 1, 1);
+  assert.ok(articleSingle.indexOf('partial "collections/reading-path.html"') < articleSingle.indexOf(call));
+  assert.ok(articleSingle.indexOf(call) < articleSingle.indexOf('class="article-publication-record"'));
+  assert.match(articleSingle, /if \$isStandardReadingPage[\s\S]*?partial "collections\/reading-path\.html"[^\n]*\n[^\n]*partial "shop\/contextual-book\.html"/);
+  assert.ok(collectionSingle.indexOf('id="collection-start-here-title"') < collectionSingle.indexOf(call));
+  assert.ok(collectionSingle.indexOf(call) < collectionSingle.indexOf('collection-section__contents'));
+  assert.match(collectionSingle, /partial "shop\/contextual-book\.html"[^\n]*\$state\.public/);
+  assert.doesNotMatch(contextualBook, /safeHTML|<form\b|<img\b|<script\b|onclick|localStorage|sessionStorage|featured-book\.html|featured-continuation\.html/);
+  for (const snippet of [
+    'shop/product-data.html', 'shop/sample-link.html', 'aria-labelledby=',
+    'printf "%s_book_sample" $placement', 'printf "%s_book_detail" $placement',
+    'data-analytics-event="internal_promo_click"', 'data-analytics-section="Bookstore"',
+    'View book and buying options',
+  ]) assert.ok(contextualBook.includes(snippet), `Missing contextual-book contract: ${snippet}`);
+  assert.match(css, /\.contextual-book\{/);
+  assert.match(css, /\.contextual-book[^{}]*:focus-visible/);
 });
