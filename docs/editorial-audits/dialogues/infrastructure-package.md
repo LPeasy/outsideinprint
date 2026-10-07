@@ -48,3 +48,11 @@ Completed source checks:
 - Staged whitespace check: PASS.
 
 Detailed source and live evidence is saved under the task scratch directory. All local source gates completed before the release commit. Current live formatting was compared against the collection and With Ice Cream; the prepared live verifier also checks the complete manuscript after deployment.
+
+## Live review and Gallery correction
+
+Initial publication commit `8e5c44453a2c01e41fb23f4ffb187a4d32956fd9` deployed successfully in workflow run `37651074994`. Live verification confirmed every supplied paragraph and punctuation mark, 130 labels, the responsive hero, Gallery/current link, homepage latest placement, collection membership, and the 21-item dialogue feed. Article screenshots at 1440 × 1000 and 390 × 844 show a loaded, uncropped hero and no horizontal overflow.
+
+Visual review found that the Gallery spotlight's desktop headline size let the single word Infrastructure overflow its narrow text column and overlap the image. A follow-up CSS correction limits that heading's desktop size and permits long words to wrap. Mobile sizing, the grid, artwork, and manuscript are unchanged.
+
+The correction passed all 28 existing site-chrome and layout-ownership source tests. A local browser preview used captured production Gallery HTML, its production stylesheet, and the exact changed worktree Gallery rules. At 390, 900, 901, 1024, and 1440 pixels, the heading stays inside its column, clears the image, and produces no horizontal page overflow. This is a targeted layout preview, not a full local image-library rebuild. Preview evidence is in `gallery-preview-geometry.json`; final deployed checks accompany the layout release receipt.
