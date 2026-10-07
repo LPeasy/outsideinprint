@@ -2241,6 +2241,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/dialogues/infrastructure/hero": {
+      "id": "essays/dialogues/infrastructure/hero",
+      "source": "images/originals/essays/dialogues/infrastructure/hero.jpg",
+      "sha256": "c2d6bfa741ed11de807fe7fa8c6c282a9e02d4d4bedfe9c30b436e27e267645c",
+      "width": 1280,
+      "height": 853,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "essays/dialogues/pressure-makes-pearls/hero": {
       "id": "essays/dialogues/pressure-makes-pearls/hero",
       "source": "images/originals/essays/dialogues/pressure-makes-pearls/hero.png",
@@ -8498,6 +8512,7 @@
     "/images/syd-and-oliver/broke-rich/hero.png": "essays/dialogues/broke-rich/hero",
     "/images/syd-and-oliver/everyone-knows-the-words/hero.png": "essays/dialogues/everyone-knows-the-words/hero",
     "/images/syd-and-oliver/infinite-incontent/hero.png": "essays/dialogues/infinite-incontent/hero",
+    "/images/syd-and-oliver/infrastructure/hero.jpg": "essays/dialogues/infrastructure/hero",
     "/images/syd-and-oliver/pressure-makes-pearls/hero.png": "essays/dialogues/pressure-makes-pearls/hero",
     "/images/syd-and-oliver/the-morning-after/hero.jpg": "essays/dialogues/the-morning-after/hero",
     "/images/syd-and-oliver/what-i-had/hero.png": "essays/dialogues/what-i-had/hero",

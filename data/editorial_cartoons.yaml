@@ -1,4 +1,4 @@
-current: with-ice-cream
+current: infrastructure
 cartoons:
   - slug: precious-and-honored
     title: "Precious and Honored"
@@ -1114,3 +1114,12 @@ cartoons:
     alt: "Two men seen from behind eat pie beneath a county-fair tent while a woman in a blue dress and white apron serves them; a cut apple pie, plain blue prize ribbon, and open ice-cream cooler fill the foreground, with a Ferris wheel beyond."
     width: 1672
     height: 941
+  - slug: infrastructure
+    title: "Infrastructure"
+    date: "2026-10-07"
+    publishDate: "2026-10-07T16:15:18.0000000+00:00"
+    image: "essays/dialogues/infrastructure/hero"
+    essay: "/syd-and-oliver/infrastructure/"
+    alt: "Two men fold a table in a warmly lit parish hall as an older man hands a ring of keys to a woman by the open doorway; diners and serving tables remain behind them."
+    width: 1280
+    height: 853

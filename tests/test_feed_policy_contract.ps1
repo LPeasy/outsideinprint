@@ -233,7 +233,7 @@ function Read-Feed {
 $rootFeed = Read-Feed 'index.xml' 'https://outsideinprint.org/index.xml' 'https://outsideinprint.org/' 50
 $archiveFeed = Read-Feed 'archive/index.xml' 'https://outsideinprint.org/archive/index.xml' 'https://outsideinprint.org/archive/' 50
 $essaysFeed = Read-Feed 'essays/index.xml' 'https://outsideinprint.org/essays/index.xml' 'https://outsideinprint.org/archive/' 50
-$dialogueFeed = Read-Feed 'syd-and-oliver/index.xml' 'https://outsideinprint.org/syd-and-oliver/index.xml' 'https://outsideinprint.org/collections/syd-and-oliver-dialogues/' 20
+$dialogueFeed = Read-Feed 'syd-and-oliver/index.xml' 'https://outsideinprint.org/syd-and-oliver/index.xml' 'https://outsideinprint.org/collections/syd-and-oliver-dialogues/' 21
 [xml]$sitemap = Get-Content -LiteralPath (Join-Path $siteRoot 'sitemap.xml') -Raw -Encoding utf8
 $expectedAlmanackLinks = @(
   $sitemap.urlset.url | ForEach-Object { [string]$_.loc } |
