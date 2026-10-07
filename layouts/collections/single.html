@@ -100,6 +100,7 @@
         </section>
       {{ end }}
 
+      {{ partial "shop/contextual-book.html" (dict "page" . "placement" "collection" "visible" (and $state.public $state.visible)) }}
       {{ if $hasSections }}
         {{ if gt (len $sections) 0 }}
           <nav class="page-shell page-shell--grid collection-section__jump-links" aria-label="On this page">

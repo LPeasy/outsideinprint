@@ -169,6 +169,7 @@
       {{ end }}
       {{ if $isStandardReadingPage }}
         {{ partial "collections/reading-path.html" . }}
+        {{ partial "shop/contextual-book.html" (dict "page" . "placement" "article" "visible" true) }}
       {{ end }}
       {{ if eq $articleVariant "modernbio" }}
         {{ partial "article/modernbio-record.html" . }}

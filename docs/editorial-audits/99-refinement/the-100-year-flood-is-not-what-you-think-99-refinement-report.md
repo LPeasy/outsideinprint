@@ -1,3 +1,37 @@
+# Supplemental bookstore link review - October 7, 2026
+
+File: `content/essays/the-100-year-flood-is-not-what-you-think.md`
+Version: `2.1 / Sixth web edition`
+Original publication date: `2026-02-11`
+
+Current disposition: **BOUNDED EDITORIAL PASS** for the owner-approved supplemental reading invitation. This review covers only the new front-matter opt-in, the exact approved heading and connection copy, the two native bookstore links, and the minor-edition disclosure. It does not claim a fresh full article review, new numerical grade, source verification, or resolution of other concerns in the historical record below.
+
+Baseline: `621f4831c9fec021b34200d2652cb0e21ebff74f`. The body, title, description, source links, illustrations, collection membership, and original date are preserved. The collection continuation remains the first step after the article; the compact book invitation follows it and precedes the publication record. The same invitation is explicitly enabled only on the Floods, Water, and the Built Environment collection after Start Here.
+
+The approved copy is: "Continue with The Water Cycle" and "Follow water risk beyond the flood map. The Water Cycle connects floodplains, infrastructure, insurance and public decisions in one illustrated book." The existing catalog description, contents summary, published product page, and ready reading sample support that limited subject-and-format description. Offer facts and reading time come from the existing catalog/sample helpers. No promise of financial return, risk reduction, or purchase conversion is added.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+Scope: the supplemental module and edition disclosure only, preserving the prior bounded article decision and its recorded limits.
+
+- Evidence: PASS - The invitation describes the existing water-risk book, its illustrated contents, and available sample; it introduces no new flood-risk factual claim.
+- Logic: PASS - The book's floodplains, infrastructure, insurance, and public-decisions subjects support the connection to this article and collection.
+- Incentives: PASS - The invitation is visibly a book offer, with a free sample choice and a separate buying-options link; no purchase is implied by reading.
+- Tradeoffs: PASS - The compact placement preserves collection-first continuation and leaves the reader free to continue through the archive.
+- Consequences: PASS - Both actions are ordinary local navigation. Neither starts checkout, submits a form, or changes the article's conclusions.
+- Uncertainty: PASS - Improved navigation is the intended benefit. Sales, paid fulfillment, and conversion impact are unverified; analytics attempts are not completed purchases.
+- Institutional Behavior: PASS - The publisher's commercial interest is visible. Prices and eligibility remain controlled by the existing offer record and storefront.
+
+## Media Framing Audit
+
+Decision: PASS for the bounded addition. The connection is based on the existing article and book catalog, not new reporting or an inherited media claim. Historical article-source qualifications remain below.
+
+Release validation and production evidence are recorded separately in the phase-one release record and pull request. Publication authority comes from the owner's October 7 approval to carry the agreed scope through publication once checks pass.
+
+## Historical records - preserved
+
 # Current graphics/captions correction record — September 27, 2026
 
 File: `content/essays/the-100-year-flood-is-not-what-you-think.md`  
