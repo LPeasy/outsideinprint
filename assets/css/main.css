@@ -6044,8 +6044,8 @@ html[data-theme="light"] .paper-route-toggle{
 .cartoon-gallery-spotlight{
   position:relative;
   display:grid;
-  grid-template-columns:minmax(12rem, .38fr) minmax(0, 1fr);
-  gap:1.6rem 2rem;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:1.6rem 1.85rem;
   align-items:end;
   margin-top:.35rem;
   padding-top:1rem;
@@ -6067,11 +6067,6 @@ html[data-theme="light"] .paper-route-toggle{
   font-weight:600;
   line-height:1.05;
   overflow-wrap:anywhere;
-}
-@media (min-width:901px){
-  .cartoon-gallery-spotlight__meta h2{
-    font-size:clamp(1.5rem, 1.8vw, 1.65rem);
-  }
 }
 .cartoon-gallery-spotlight__meta .m{
   margin-top:.85rem;
@@ -7521,10 +7516,6 @@ body.cartoon-lightbox-open{
   }
   .home-2045-launch__actions{
     justify-content:flex-start;
-  }
-  .cartoon-gallery-spotlight{
-    grid-template-columns:1fr;
-    align-items:start;
   }
   .home-recent-work__list{
     grid-template-columns:1fr;
@@ -10659,6 +10650,10 @@ html[data-theme="light"] .collection-section[data-collection-identity]{
   .cartoon-gallery__item figcaption{
     flex-direction:column;
     gap:.35rem;
+  }
+  .cartoon-gallery-spotlight{
+    grid-template-columns:1fr;
+    align-items:start;
   }
   .cartoon-gallery__grid{
     grid-template-columns:1fr;
