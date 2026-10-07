@@ -280,6 +280,10 @@ test("contextual book native navigation emits one bounded event per activation a
         assert.equal(await image.getAttribute("alt"), contextualCoverAlt);
         assert.equal(await image.getAttribute("src"), contextualCoverPath);
         assert.equal(await image.getAttribute("loading"), "lazy");
+        // A lazy request can start after the module scroll and invalidate an early decode.
+        await image.scrollIntoViewIfNeeded();
+        await page.waitForFunction((node) => node.complete && node.naturalWidth > 0,
+          await image.elementHandle(), { timeout: 4000 });
         await image.evaluate((node) => node.decode());
         assert.equal(await image.evaluate((node) => {
           const rect = node.getBoundingClientRect();
