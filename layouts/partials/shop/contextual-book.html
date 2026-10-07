@@ -1,14 +1,27 @@
 {{- $page := .page -}}
 {{- $placement := .placement -}}
 {{- $visible := eq .visible true -}}
+{{- $books := dict
+  "the_water_cycle" (dict "path" "/shop/the-water-cycle" "slug" "the-water-cycle" "sku" "OIP-WC-EPUB")
+  "2045" (dict "path" "/shop/2045" "slug" "2045" "sku" "OIP-TD-EPUB" "sample_path" "/shop/2045/sample")
+  "american_nightmare" (dict "path" "/shop/the-american-nightmare-keep-dreaming-kid" "slug" "the-american-nightmare-keep-dreaming-kid" "sku" "OIP-AN-EPUB")
+  "parable_of_the_sheep" (dict "path" "/shop/the-parable-of-the-sheep" "slug" "the-parable-of-the-sheep" "sku" "OIP-PS-EPUB")
+-}}
 {{- $allowed := dict
-  "collections/floods-water-built-environment.md" (dict "path" "/collections/floods-water-built-environment/" "placement" "collection")
-  "essays/the-100-year-flood-is-not-what-you-think.md" (dict "path" "/essays/the-100-year-flood-is-not-what-you-think/" "placement" "article")
+  "collections/technology-ai-machine-future.md" (dict "path" "/collections/technology-ai-machine-future/" "placement" "collection" "book_key" "2045")
+  "essays/the-new-meta-economy.md" (dict "path" "/essays/the-new-meta-economy/" "placement" "article" "book_key" "2045")
+  "collections/household-economy-work-and-cost.md" (dict "path" "/collections/household-economy-work-and-cost/" "placement" "collection" "book_key" "american_nightmare")
+  "essays/1929-2029-americas-century-of-humiliation.md" (dict "path" "/essays/1929-2029-americas-century-of-humiliation/" "placement" "article" "book_key" "american_nightmare")
+  "collections/syd-and-oliver-dialogues.md" (dict "path" "/collections/syd-and-oliver-dialogues/" "placement" "collection" "book_key" "parable_of_the_sheep")
+  "essays/dialogues/infrastructure.md" (dict "path" "/syd-and-oliver/infrastructure/" "placement" "article" "book_key" "parable_of_the_sheep")
+  "collections/floods-water-built-environment.md" (dict "path" "/collections/floods-water-built-environment/" "placement" "collection" "book_key" "the_water_cycle")
+  "essays/the-100-year-flood-is-not-what-you-think.md" (dict "path" "/essays/the-100-year-flood-is-not-what-you-think/" "placement" "article" "book_key" "the_water_cycle")
 -}}
 {{- with $page.File -}}
   {{- $sourcePath := replace .Path `\` "/" -}}
   {{- with index $allowed $sourcePath -}}
     {{- $scope := . -}}
+    {{- $bookDefinition := index $books $scope.book_key -}}
     {{/* Read the source declaration: Hugo Params can contain inherited cascade data. */}}
     {{- $source := readFile (printf "content/%s" $sourcePath) -}}
     {{- $frontMatter := findRESubmatch `(?s)^---\r?\n(.*?)\r?\n---(?:\r?\n|$)` $source 1 -}}
@@ -39,8 +52,8 @@
               {{- $valid = false -}}
             {{- end -}}
           {{- end -}}
-          {{- if ne (index $promo "book_path") "/shop/the-water-cycle" -}}
-            {{- errorf "Contextual book source %s must target /shop/the-water-cycle" $sourcePath -}}
+          {{- if ne (index $promo "book_path") $bookDefinition.path -}}
+            {{- errorf "Contextual book source %s must target its assigned book %s" $sourcePath $bookDefinition.path -}}
             {{- $valid = false -}}
           {{- end -}}
           {{- if $valid -}}
@@ -51,32 +64,52 @@
               {{- $published := and (not $book.Draft) (le $book.Date now) (le $book.PublishDate now) (or $book.ExpiryDate.IsZero (gt $book.ExpiryDate now)) -}}
               {{- $key := $book.Params.book_key -}}
               {{- $catalog := index (hugo.Data.bookstore | default dict) "products" | default dict -}}
-              {{- if or (not $published) (ne $book.RelPermalink "/shop/the-water-cycle/") -}}
-                {{- errorf "Contextual book target for %s must be published at /shop/the-water-cycle/" $sourcePath -}}
+              {{- if or (not $published) (ne $book.RelPermalink (printf "%s/" $bookDefinition.path)) -}}
+                {{- errorf "Contextual book target for %s must be published at %s/" $sourcePath $bookDefinition.path -}}
                 {{- $valid = false -}}
               {{- end -}}
-              {{- if or (ne $key "the_water_cycle") (not (isset $catalog "the_water_cycle")) -}}
-                {{- errorf "Contextual book target for %s requires exact catalog key the_water_cycle" $sourcePath -}}
+              {{- if or (ne $key $scope.book_key) (not (isset $catalog $scope.book_key)) -}}
+                {{- errorf "Contextual book target for %s requires exact catalog key %s" $sourcePath $scope.book_key -}}
                 {{- $valid = false -}}
               {{- end -}}
               {{- if $valid -}}
                 {{/* Validate exact catalog membership before product-data can apply defaults. */}}
                 {{- $catalogProduct := index $catalog $key -}}
-                {{- $offers := where (index $catalogProduct "direct_offers" | default (slice)) "sku" "OIP-WC-EPUB" -}}
-                {{- $sample := partial "shop/resolve-reading-sample.html" (dict "page" $book) -}}
-                {{- if or $book.Params.sample_page (not $sample) -}}
-                  {{- errorf "Contextual book target for %s requires its ready bundled reading sample" $sourcePath -}}
-                  {{- $valid = false -}}
-                {{- else if or $sample.Draft (ne $sample.Params.sample_release_status "ready") (ne $sample.Params.sample_of_book_key $key) -}}
-                  {{- errorf "Contextual book target for %s requires a ready non-draft sample for the_water_cycle" $sourcePath -}}
-                  {{- $valid = false -}}
+                {{- $offers := where (index $catalogProduct "direct_offers" | default (slice)) "sku" $bookDefinition.sku -}}
+                {{- if isset $bookDefinition "sample_path" -}}
+                  {{/* 2045 keeps its existing standalone published story; other books require bundled samples. */}}
+                  {{- if ne $book.Params.sample_page $bookDefinition.sample_path -}}
+                    {{- errorf "Contextual book target for %s requires its exact standalone sample %s" $sourcePath $bookDefinition.sample_path -}}
+                    {{- $valid = false -}}
+                  {{- else -}}
+                    {{- $sample := site.GetPage $bookDefinition.sample_path -}}
+                    {{- if not $sample -}}
+                      {{- errorf "Contextual book standalone sample for %s does not exist" $sourcePath -}}
+                      {{- $valid = false -}}
+                    {{- else -}}
+                      {{- $samplePublished := and (not $sample.Draft) (le $sample.Date now) (le $sample.PublishDate now) (or $sample.ExpiryDate.IsZero (gt $sample.ExpiryDate now)) -}}
+                      {{- if or (not $samplePublished) (ne $sample.RelPermalink (printf "%s/" $bookDefinition.sample_path)) (ne $sample.Params.sample_release_status "published") (ne $sample.Params.sample_of_book_key $key) -}}
+                        {{- errorf "Contextual book target for %s requires its published standalone sample for %s" $sourcePath $key -}}
+                        {{- $valid = false -}}
+                      {{- end -}}
+                    {{- end -}}
+                  {{- end -}}
+                {{- else -}}
+                  {{- $sample := partial "shop/resolve-reading-sample.html" (dict "page" $book) -}}
+                  {{- if or $book.Params.sample_page (not $sample) -}}
+                    {{- errorf "Contextual book target for %s requires its ready bundled reading sample" $sourcePath -}}
+                    {{- $valid = false -}}
+                  {{- else if or $sample.Draft (ne $sample.Params.sample_release_status "ready") (ne $sample.Params.sample_of_book_key $key) -}}
+                    {{- errorf "Contextual book target for %s requires a ready non-draft sample for %s" $sourcePath $key -}}
+                    {{- $valid = false -}}
+                  {{- end -}}
                 {{- end -}}
                 {{- if ne (len $offers) 1 -}}
-                  {{- errorf "Contextual book target for %s requires exactly one OIP-WC-EPUB offer" $sourcePath -}}
+                  {{- errorf "Contextual book target for %s requires exactly one %s offer" $sourcePath $bookDefinition.sku -}}
                 {{- else -}}
                   {{- $offer := index $offers 0 -}}
                   {{- if or (ne (index $offer "format") "EPUB") (ne (index $offer "availability_status") "live") -}}
-                    {{- errorf "Contextual book target for %s requires a live EPUB OIP-WC-EPUB offer" $sourcePath -}}
+                    {{- errorf "Contextual book target for %s requires a live EPUB %s offer" $sourcePath $bookDefinition.sku -}}
                     {{- $valid = false -}}
                   {{- end -}}
                   {{- range (slice "price_display" "currency" "permitted_geography") -}}
@@ -87,10 +120,10 @@
                   {{- end -}}
                   {{- if $valid -}}
                     {{- $product := partial "shop/product-data.html" (dict "key" $key "page" $book) -}}
-                    {{- if ne (index $product "suggested_slug") "the-water-cycle" -}}
-                      {{- errorf "Contextual book target for %s requires catalog slug the-water-cycle" $sourcePath -}}
+                    {{- if ne (index $product "suggested_slug") $bookDefinition.slug -}}
+                      {{- errorf "Contextual book target for %s requires catalog slug %s" $sourcePath $bookDefinition.slug -}}
                     {{- else if $visible -}}
-                      {{- $headingID := printf "contextual-book-%s-the-water-cycle" $placement -}}
+                      {{- $headingID := printf "contextual-book-%s-%s" $placement $bookDefinition.slug -}}
                       <aside class="contextual-book{{ if eq $placement "collection" }} page-shell page-shell--grid{{ end }}" aria-labelledby="{{ $headingID }}">
                         <div class="contextual-book__copy">
                           <h2 class="contextual-book__title" id="{{ $headingID }}">{{ index $promo "heading" }}</h2>

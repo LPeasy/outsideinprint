@@ -1,3 +1,62 @@
+# Supplemental bookstore invitation draft review - October 7, 2026
+
+File: `content/essays/the-new-meta-economy.md`
+Prepared edition: `2.1 / Fifth web edition`
+Original publication date: `2025-05-01`
+Baseline: `4b64383ff5e3e4932ac88f8918adfa7f43b2655d`
+
+Current disposition: **BOUNDED EDITORIAL PASS** for the approved supplemental invitation and minor-edition disclosure. Authority is draft PR preparation only: no merge, auto-merge, deployment, or live checkout. The draft revision date is `2026-10-07`; reconcile it to the actual release day before any later authorized publication, without advancing a second unpublished edition.
+
+This pass read the complete article and reviewed only the new `book_promo` declaration, its exact approved copy, the paired Technology, AI, and the Machine Future collection invitation, and the edition disclosure. It does not claim a fresh full article audit, numerical score, new source verification, or clearance of historical concerns beyond the prior bounded decision preserved below.
+
+## Approved addition and evidence
+
+- Article heading: "Continue with 2045"
+- Article connection: "This essay asks what happens when AI reshapes work, attention, and everyday life. 2045 explores those pressures through dark fables, beginning with a man surrounded by helpful machines and searching for a purpose."
+- Collection heading: "Continue with 2045"
+- Collection connection: "Follow these questions about AI into fiction. 2045 brings together ten dark fables about machine intelligence, grief, ambition, faith, and the search for meaning."
+
+`data/bookstore.yaml` identifies ten stories, their titles, and the book's AI, grief, ambition, faith, and meaning themes. `content/shop/2045/_index.md` describes the collection as fiction rather than predictions. The published standalone opening story, `content/shop/2045/sample.md`, opens with a man surrounded by helpful machines and develops his search for an ordinary purpose. The article's existing labor, attention, and interface discussion supports the limited reading connection. These records support descriptions of the book; they do not independently establish the article's broader claims about AI.
+
+The two actions remain optional native navigation: the existing standalone sample at `/shop/2045/sample/`, and book/buying options at `/shop/2045/`. Catalog data and existing helpers supply offer facts and reading time. No price, format, geography, or purchase outcome is asserted in the front matter.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+Scope: the supplemental invitation and edition disclosure only, preserving the prior article decision and its recorded limits.
+
+- Evidence: PASS - The book description and opening-story connection match the existing catalog, product copy, and sample; no new factual AI claim is added.
+- Logic: PASS - The existing essay's questions about work, attention, and everyday interfaces provide a clear connection to the identified fictional themes.
+- Incentives: PASS - The publisher's book offer is visible, with a sample choice before a separate buying-options link; reading does not imply purchase.
+- Tradeoffs: PASS - The compact addition preserves collection-first continuation and the original article, leaving archive reading available.
+- Consequences: PASS - The two actions navigate locally; the invitation does not initiate payment, submit a form, or change the article's argument.
+- Uncertainty: PASS - The book is described as fiction. Sales, paid fulfillment, and conversion impact remain unverified, and analytics attempts are not completed purchases.
+- Institutional Behavior: PASS - The commercial interest belongs visibly to the publisher; the existing catalog and storefront retain control of offer conditions.
+
+## Media Framing Audit
+
+Decision: PASS for the bounded addition.
+
+- Media Frame Identified: PASS - The new copy offers related fiction; it introduces no outside reporting frame as evidence.
+- Primary Source Rebuild: PASS - Description of the book rests on the publisher's existing catalog and the book's own product page and sample.
+- Assumption Quarantine: PASS - The link does not turn the fiction into a prediction or evidence for the essay's institutional claims.
+- Source Hierarchy: PASS - Catalog and sample establish book content only; the preserved historical article-source record retains its own limits.
+- Ideological Burden: PASS - The addition assigns no new partisan position, motive, or moral burden.
+
+## Bounded change and preservation record
+
+| Location | Change | Review and disposition |
+| --- | --- | --- |
+| Article and collection `book_promo` | Add only `book_path`, `heading`, and `connection` | Exact approved wording; explicit source opt-in only. |
+| Article edition and history | `2.0 / Fourth` to `2.1 / Fifth`, with one new revision entry | Minor visible supplemental-link revision; original date and historical entries preserved. |
+| Article body and metadata | No change | Body, quotations, source links, title, description, images, alt text, captions, route, and membership preserved. |
+| Images | KEEP | No image or prompt change is part of this request. |
+
+This article uses the existing standard reading path; it has no `studio_sample` opt-out and no entry in `data/featured_continuations.json`. The collection invitation follows Start Here; the article invitation follows collection continuation and precedes the publication record. Generated output and technical checks belong to the parent draft-review record. No technical-release or publication clearance is implied by this editorial note.
+
+## Historical records - preserved
+
 # Current owner-approved ten-essay correction record — September 27, 2026
 
 File: `content/essays/the-new-meta-economy.md`  

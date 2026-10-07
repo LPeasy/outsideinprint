@@ -7,10 +7,18 @@ section_label: 'Dialogue'
 library_type: 'dialogue'
 collections: ['syd-and-oliver-dialogues']
 description: 'At a parish supper, Syd and Oliver watch the man with the keys and debate the difference between being needed and being taken for granted.'
-version: '1.0'
-edition: 'First web edition'
+version: '1.1'
+edition: 'Second web edition'
 featured_image: 'essays/dialogues/infrastructure/hero'
 featured_image_alt: 'Two men fold a table in a warmly lit parish hall as an older man hands a ring of keys to a woman by the open doorway; diners and serving tables remain behind them.'
+revision_history:
+  - version: "1.1"
+    date: "2026-10-07T22:28:55Z"
+    note: "Added an optional reading sample and book invitation for The Parable of the Sheep after the collection continuation; dialogue text and artwork are unchanged."
+book_promo:
+  book_path: "/shop/the-parable-of-the-sheep"
+  heading: "Continue with The Parable of the Sheep"
+  connection: "When care works, it can become easy to take the person behind it for granted. The Parable of the Sheep carries that question into a short allegory about a flock that forgets its shepherd."
 ---
 
 The man with the keys had almost finished sitting down when somebody called his name.
