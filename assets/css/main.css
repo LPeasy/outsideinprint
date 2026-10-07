@@ -15382,10 +15382,33 @@ section.games-facts dd,
 
 /* Explicit water-reading invitations; all offer facts come from the catalog. */
 .contextual-book{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 6.5rem;
+  column-gap:1.25rem;
   min-width:0;
   margin-block:1.2rem;
   padding-block:1rem;
   border-block:1px solid var(--oip-rule-standard);
+}
+.contextual-book__copy{
+  min-width:0;
+}
+.contextual-book__cover{
+  display:block;
+  align-self:start;
+  justify-self:end;
+  width:100%;
+  min-height:44px;
+  border:0;
+  line-height:0;
+}
+.contextual-book__cover img{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  aspect-ratio:auto;
+  object-fit:contain;
 }
 .contextual-book__title{
   margin:0;
@@ -15437,4 +15460,11 @@ section.games-facts dd,
 .contextual-book a:focus-visible{
   outline:3px solid var(--focus-ring);
   outline-offset:3px;
+}
+
+@media (max-width:30rem){
+  .contextual-book{
+    grid-template-columns:minmax(0,1fr) 4.5rem;
+    column-gap:.85rem;
+  }
 }
