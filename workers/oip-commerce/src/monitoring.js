@@ -4,6 +4,7 @@ import {
   createOperationalCanary,
   finishOperationalHeartbeat,
   getOperationalHealthSnapshot,
+  getUnresolvedOperationalCanaries,
   listPendingOperationalAlerts,
   markOperationalAlertFailed,
   markOperationalAlertSent,
@@ -198,6 +199,7 @@ export async function runOperationalSchedule(env, now = nowSeconds()) {
   const issueCodes = [];
   let delivery = { examined: 0, sent: 0, failed: 0 };
   let staleCanaries = 0;
+  let unresolvedStaleCanaries = 0;
   let fulfillmentIssues = null;
   let maintenance = null;
   try {
@@ -212,6 +214,8 @@ export async function runOperationalSchedule(env, now = nowSeconds()) {
       issueCodes.push("QUEUE_CANARY_STALE");
       await noteIssue(env, config, "QUEUE_CANARY_STALE", now, staleCanaries);
     }
+    // Keep historical losses visible without re-alerting or calling them a new outage.
+    unresolvedStaleCanaries = (await getUnresolvedOperationalCanaries(env.DB)).count;
 
     fulfillmentIssues = await countFulfillmentDeliveryIssues(
       env.DB,
@@ -290,6 +294,7 @@ export async function runOperationalSchedule(env, now = nowSeconds()) {
     state: issueCodes.length > 0 ? "DEGRADED" : "OK",
     issueCodes,
     staleCanaries,
+    unresolvedStaleCanaries,
     fulfillmentIssues,
     maintenance,
     alertsSent: delivery.sent,
@@ -373,5 +378,7 @@ export async function operationalHealthFields(db) {
     operational_monitor_status: snapshot.heartbeat?.status || "PENDING",
     operational_monitor_last_completed_at: snapshot.heartbeat?.last_completed_at || null,
     pending_operational_alerts: snapshot.pendingAlerts,
+    unresolved_stale_queue_canaries: snapshot.unresolvedCanaries.count,
+    oldest_unresolved_queue_canary_queued_at: snapshot.unresolvedCanaries.oldestQueuedAt,
   };
 }

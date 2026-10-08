@@ -899,9 +899,28 @@ export async function getOperationalHealthSnapshot(db, monitorKey) {
        FROM operational_alerts WHERE status = 'PENDING'`,
     )
     .first();
+  const unresolvedCanaries = await getUnresolvedOperationalCanaries(db);
   return {
     heartbeat,
     pendingAlerts: Number(pending?.pending_count || 0),
+    unresolvedCanaries,
+  };
+}
+
+export async function getUnresolvedOperationalCanaries(db) {
+  const row = await db
+    .prepare(
+      `SELECT COUNT(*) AS unresolved_stale_count,
+              MIN(queued_at) AS oldest_unresolved_queued_at
+       FROM operational_queue_canaries
+       WHERE status = 'STALE' AND received_at IS NULL`,
+    )
+    .first();
+  return {
+    count: Number(row?.unresolved_stale_count || 0),
+    oldestQueuedAt: row?.oldest_unresolved_queued_at == null
+      ? null
+      : Number(row.oldest_unresolved_queued_at),
   };
 }
 
