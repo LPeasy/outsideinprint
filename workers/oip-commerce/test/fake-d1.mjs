@@ -642,6 +642,16 @@ class FakeStatement {
         last_completed_at: row.last_completed_at ?? null,
       };
     }
+    if (sql.startsWith("SELECT COUNT(*) AS unresolved_stale_count, MIN(queued_at) AS oldest_unresolved_queued_at FROM operational_queue_canaries WHERE status = 'STALE' AND received_at IS NULL")) {
+      const unresolved = [...db.operationalCanaries.values()]
+        .filter((row) => row.status === "STALE" && row.received_at == null);
+      return {
+        unresolved_stale_count: unresolved.length,
+        oldest_unresolved_queued_at: unresolved.length > 0
+          ? Math.min(...unresolved.map((row) => row.queued_at))
+          : null,
+      };
+    }
     if (sql.startsWith("SELECT COUNT(*) AS pending_count FROM operational_alerts")) {
       return {
         pending_count: [...db.operationalAlerts.values()]

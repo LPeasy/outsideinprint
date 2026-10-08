@@ -5,6 +5,7 @@ import { handleRequest } from "../src/index.js";
 import {
   flushPendingOperationalAlerts,
   OPERATIONAL_MONITOR_KEY,
+  processOperationalCanaryMessage,
   runOperationalSchedule,
 } from "../src/monitoring.js";
 import { handleConsumerQueueBatch } from "../src/queue.js";
@@ -67,6 +68,8 @@ test("Task 2 health proves closed gates and absent webhook-signature binding", a
   const payload = await response.json();
   assert.equal(payload.task2_safe, true);
   assert.equal(payload.operational_monitor_status, "PENDING");
+  assert.equal(payload.unresolved_stale_queue_canaries, 0);
+  assert.equal(payload.oldest_unresolved_queue_canary_queued_at, null);
 
   const unsafe = await handleRequest(
     new Request("https://downloads.outsideinprint.org/health"),
@@ -274,6 +277,119 @@ test("an overdue primary Queue canary becomes stale and raises an aggregate aler
   assert.equal(result.staleCanaries, 1);
   assert.equal(env.DB.operationalCanaries.get("stale-canary").status, "STALE");
   assert.match(outbound[0].subject, /QUEUE_CANARY_STALE/u);
+  assert.equal(result.unresolvedStaleCanaries, 1);
+
+  await processOperationalCanaryMessage(queueMessage(env.OPERATIONAL_CANARY_QUEUE.sent.at(-1)), env, now + 1);
+  for (const nextRun of [now + 300, now + 21_600]) {
+    const next = await runOperationalSchedule(env, nextRun);
+    assert.equal(next.state, "OK");
+    assert.equal(next.staleCanaries, 0);
+    assert.equal(next.unresolvedStaleCanaries, 1);
+    await processOperationalCanaryMessage(queueMessage(env.OPERATIONAL_CANARY_QUEUE.sent.at(-1)), env, nextRun + 1);
+  }
+  assert.equal(outbound.length, 1, "retained stale rows must not create repeat-window alerts");
+  assert.equal(env.DB.operationalAlerts.size, 1);
+  assert.equal([...env.DB.operationalAlerts.values()][0].occurrence_count, 1);
+});
+
+test("old unresolved canaries remain visible alongside healthy current receipts without changing old state", async () => {
+  const now = 1_800_000_000;
+  const env = monitoringEnv({
+    PUBLIC_HOST: "downloads.outsideinprint.org",
+    __testFetch: async () => { throw new Error("old stale rows must not send new email"); },
+  });
+  const canaryId = crypto.randomUUID();
+  const old = {
+    canary_id: canaryId,
+    status: "STALE",
+    queued_at: now - (29 * 24 * 60 * 60),
+    received_at: null,
+    updated_at: now - (29 * 24 * 60 * 60) + 600,
+  };
+  const original = { ...old };
+  env.DB.operationalCanaries.set(canaryId, old);
+  env.DB.operationalCanaries.set("healthy-receipt", {
+    canary_id: "healthy-receipt",
+    status: "RECEIVED",
+    queued_at: now - 60,
+    received_at: now - 59,
+    updated_at: now - 59,
+  });
+
+  const result = await runOperationalSchedule(env, now);
+  assert.equal(result.state, "OK");
+  assert.equal(result.staleCanaries, 0);
+  assert.equal(result.unresolvedStaleCanaries, 1);
+  assert.equal(result.alertsSent, 0);
+  assert.deepEqual(env.DB.operationalCanaries.get(canaryId), original);
+  assert.equal(env.DB.operationalAlerts.size, 0);
+
+  const response = await handleRequest(new Request("https://downloads.outsideinprint.org/health"), env);
+  assert.equal(response.status, 200);
+  const payload = await response.json();
+  assert.equal(payload.operational_monitor_status, "OK");
+  assert.equal(payload.pending_operational_alerts, 0);
+  assert.equal(payload.unresolved_stale_queue_canaries, 1);
+  assert.equal(payload.oldest_unresolved_queue_canary_queued_at, original.queued_at);
+  assert.doesNotMatch(JSON.stringify(payload), new RegExp(canaryId, "u"));
+});
+
+test("healthy and pending canaries do not become an unresolved historical issue", async () => {
+  const now = 1_800_000_000;
+  const env = monitoringEnv({ PUBLIC_HOST: "downloads.outsideinprint.org" });
+  env.DB.operationalCanaries.set("received", {
+    canary_id: "received",
+    status: "RECEIVED",
+    queued_at: now - 900,
+    received_at: now - 899,
+    updated_at: now - 899,
+  });
+  env.DB.operationalCanaries.set("recent-queued", {
+    canary_id: "recent-queued",
+    status: "QUEUED",
+    queued_at: now - 1,
+    received_at: null,
+    updated_at: now - 1,
+  });
+  const result = await runOperationalSchedule(env, now);
+  assert.equal(result.state, "OK");
+  assert.equal(result.unresolvedStaleCanaries, 0);
+  const response = await handleRequest(new Request("https://downloads.outsideinprint.org/health"), env);
+  const payload = await response.json();
+  assert.equal(payload.operational_monitor_status, "OK");
+  assert.equal(payload.unresolved_stale_queue_canaries, 0);
+  assert.equal(payload.oldest_unresolved_queue_canary_queued_at, null);
+});
+
+test("a matching delayed receipt clears only its canary from unresolved health reporting", async () => {
+  const now = 1_800_000_000;
+  const env = monitoringEnv({ PUBLIC_HOST: "downloads.outsideinprint.org" });
+  const oldQueuedAt = now - 2_000;
+  const receivedId = crypto.randomUUID();
+  const remainingId = crypto.randomUUID();
+  for (const canaryId of [receivedId, remainingId]) {
+    env.DB.operationalCanaries.set(canaryId, {
+      canary_id: canaryId,
+      status: "STALE",
+      queued_at: oldQueuedAt,
+      received_at: null,
+      updated_at: oldQueuedAt + 600,
+    });
+  }
+  const message = queueMessage({
+    kind: "OIP_OPERATIONAL_CANARY_V1",
+    canaryId: receivedId,
+    queuedAt: oldQueuedAt,
+  });
+  assert.equal((await processOperationalCanaryMessage(message, env, now)).state, "CANARY_RECEIVED");
+  assert.equal(message.acked, true);
+  assert.equal(env.DB.operationalCanaries.get(receivedId).status, "RECEIVED");
+  assert.equal(env.DB.operationalCanaries.get(remainingId).status, "STALE");
+  const response = await handleRequest(new Request("https://downloads.outsideinprint.org/health"), env);
+  const payload = await response.json();
+  assert.equal(payload.unresolved_stale_queue_canaries, 1);
+  assert.equal(payload.oldest_unresolved_queue_canary_queued_at, oldQueuedAt);
+  assert.equal(env.DB.operationalAlerts.size, 0);
 });
 
 test("invalid and unmatched canaries are acknowledged without persisting their payload identifiers", async () => {
