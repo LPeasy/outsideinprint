@@ -22,7 +22,15 @@ Each record must use `Outside In Print LLC` as the operator and `support@outside
 
 ## Media allowlist
 
-The October 4, 2026 refresh uses six reviewed 0.2.5 resources. Original package captures and the title capsule were inspected directly; their package/source identities, dimensions and SHA-256 values are recorded in [games-idle-times-0.2.5-media.json](games-idle-times-0.2.5-media.json). The exact candidate remains local until the tested Steam build is live and the website publication is completed.
+The October 8, 2026 refresh uses the seven owner-approved desktop-author screenshots already published in Steam Store revision 10, plus the cursor Bob/newsprint Main Capsule published in revision 12. The game represented is 1.0.1. Source identities, dimensions and SHA-256 values are recorded in [games-idle-times-1.0.1-media.json](games-idle-times-1.0.1-media.json). The website change is prepared for review; this document does not establish its deployment.
+
+The approved Pet-on-desktop screenshot is the hero on both Games routes. The other six screenshots and personality capsule form the detail gallery. Sharing metadata uses the personality capsule. The existing responsive image renderer creates bounded AVIF/WebP variants and a processed JPEG sharing image; full-size source PNGs remain unpublished.
+
+Current copy presents Full Desk, Mini Companion and Pet Bob, playful cursor interactions, JUKE-BOB, 114 illustrated rewards, eight original tracks, the draggable gallery and Robert V. Ussley's connection to Outside In Print. The compact catalog shows the first three benefits; the detail page shows all five. Removed claims include resizable Pet Desk, the retired search/unread gallery controls and a guaranteed weekly free-editions schedule. Purchase links and their four approved UTM source slots, LLC/support identity, system requirements, local-play statement, AI/music and mature-content disclosures remain intact.
+
+## Historical media
+
+The October 4, 2026 refresh used six reviewed 0.2.5 resources. Their original receipt remains in [games-idle-times-0.2.5-media.json](games-idle-times-0.2.5-media.json). These sources are preserved but are no longer selected by the current catalog:
 
 | Resource | Role | SHA-256 |
 |---|---|---|
@@ -33,7 +41,7 @@ The October 4, 2026 refresh uses six reviewed 0.2.5 resources. Original package 
 | `idle-times-0.2.5-04-comic-collections.png` | collection shelf | `60499e3c579a2b3e72126be8bdcf31a319dde9b4ce21161df637f7b9c998d75e` |
 | `idle-times-0.2.5-05-comic-reader.png` | comic reader | `e641a796ae89eaad3751b833436d22e8f6b1122e5d283d2888815eb2fbcc5d8e` |
 
-The shared product data contains five benefits: newsroom activity, original music, the collection shelf, desk views and local play. The compact catalog page shows the first three; the detail page shows all five. Current facts are 114 illustrated cartoon rewards and eight existing original lo-fi tracks. No new tracks, cartoon additions, storefronts or soundtrack entitlements are introduced by this refresh.
+No new tracks, illustration additions, storefronts or soundtrack entitlements are introduced by the website refresh.
 
 These historical sources remain byte-identical to their original approved set and are no longer selected by the current catalog. Preserve them for the frozen responsive-image migration contract:
 

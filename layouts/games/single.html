@@ -3,15 +3,8 @@
   {{ $game := partial "games/product-data.html" (dict "key" $gameKey "page" .) }}
   {{ $media := index $game "media" | default (slice) }}
   {{ $heroAsset := false }}
-  {{ range $media }}
-    {{ if or (eq (index . "id") "full-desk") (eq (index . "source") "idle-times-packaged-desk-1920x1080.png") }}
-      {{ $heroAsset = . }}
-    {{ end }}
-  {{ end }}
-  {{ if not $heroAsset }}
-    {{ range where $media "role" "hero" }}
-      {{ if not $heroAsset }}{{ $heroAsset = . }}{{ end }}
-    {{ end }}
+  {{ range where $media "role" "hero" }}
+    {{ if not $heroAsset }}{{ $heroAsset = . }}{{ end }}
   {{ end }}
   {{ if not $heroAsset }}{{ errorf "Games product %s requires approved hero media" (index $game "title") }}{{ end }}
   {{ $hero := partial "games/resolve-media.html" (dict "page" . "asset" $heroAsset "game_title" (index $game "title")) }}
@@ -58,7 +51,7 @@
           <p class="games-kicker">Screenshots</p>
           <h2 id="games-gallery-title">See {{ index $game "title" }} at work</h2>
         </div>
-        <p>A closer look at the newsroom, Pressroom Radio, the collection shelf and the comic reader.</p>
+        <p>Meet Pet Bob, keep Mini Companion beside your work, choose a track on JUKE-BOB, and explore your illustrated rewards.</p>
       </header>
       <div class="games-gallery__grid">
         {{ range $media }}

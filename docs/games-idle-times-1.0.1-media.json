@@ -1,0 +1,77 @@
+{
+  "schema": "idle-times-owned-sales-media/v1",
+  "version": "1.0.1",
+  "preparedAtUtc": "2026-10-08T17:38:56.2343495Z",
+  "status": "prepared-for-reviewed-website-publication",
+  "sourceSteamRevisions": {
+    "capsule": 12,
+    "screenshots": 10
+  },
+  "review": "Byte-identical copies of the owner-approved, published Steam media. Source receipts remain in the Idle Times repository under docs/media-evidence/desktop-author/2026-10-08/publication.json and docs/media-evidence/personality-capsules/2026-10-08/publication.json. Historical OIP media remains unchanged.",
+  "assets": [
+    {
+      "path": "content/games/idle-times/idle-times-20261008-01-pet-on-desktop.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 1384697,
+      "sha256": "ff2dc230cfbc6dcb0e397685fa90eef9e802f85627ac5345b21df6ce350b7bec",
+      "sourceKind": "approved-game-capture-on-staged-desktop"
+    },
+    {
+      "path": "content/games/idle-times/idle-times-20261008-02-mini-companion.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 1568268,
+      "sha256": "669cfc246e4b00ee285aac4d05c51f0bd709387d3de41eeb00cc37c8c39daaa5",
+      "sourceKind": "approved-game-capture-on-staged-desktop"
+    },
+    {
+      "path": "content/games/idle-times/idle-times-20261008-03-playful-pickup.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 2466533,
+      "sha256": "3f86fcb74c6009a0d4b06b35937d22f80f612d56695281749376f700a73c9fe6",
+      "sourceKind": "approved-game-capture-on-staged-desktop"
+    },
+    {
+      "path": "content/games/idle-times/idle-times-20261008-04-juke-bob.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 1927435,
+      "sha256": "63f8b00d1192c55478b424e001a8bc38217b9c457ad8748a4a98c2f28ccdde09",
+      "sourceKind": "approved-game-capture-on-staged-desktop"
+    },
+    {
+      "path": "content/games/idle-times/idle-times-20261008-05-collected-print.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 1862976,
+      "sha256": "4d4d285df04d81b48c67b9f3300db7d576cac368b726dfcf5d2c96aa3fc1c8e7",
+      "sourceKind": "approved-game-capture-on-staged-desktop"
+    },
+    {
+      "path": "content/games/idle-times/idle-times-20261008-06-gallery-collections.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 970277,
+      "sha256": "bfe3465989dc37db239f15ad72bb705a1370adb81b858bbaeba89ed81938943f",
+      "sourceKind": "approved-game-capture-on-staged-desktop"
+    },
+    {
+      "path": "content/games/idle-times/idle-times-20261008-07-full-desk.png",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 1796821,
+      "sha256": "f931e2bc699b33e4d7d165000d14dc545fad8a9ec6c912743aeef5aa9ad2e075",
+      "sourceKind": "approved-game-capture-on-staged-desktop"
+    },
+    {
+      "path": "content/games/idle-times/idle-times-20261008-main-capsule.png",
+      "width": 1232,
+      "height": 706,
+      "bytes": 1756952,
+      "sha256": "24e2855c6c674f2556c0f230c696137061ec676db68218558473ca847714f758",
+      "sourceKind": "approved-newsprint-cursor-capsule"
+    }
+  ]
+}

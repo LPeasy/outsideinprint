@@ -285,8 +285,8 @@
 {{- if ne (len $heroMedia) 1 -}}
   {{- errorf "Games product games.%s must define exactly one hero image" $key -}}
 {{- end -}}
-{{- if and (eq $key "idle_times") (ne (index (index $heroMedia 0) "id") "full-desk") -}}
-  {{- errorf "Games product games.%s must use the full gameplay capture as its hero" $key -}}
+{{- if and (eq $key "idle_times") (ne (index (index $heroMedia 0) "id") "pet-on-desktop") -}}
+  {{- errorf "Games product games.%s must use the approved desktop companion capture as its hero" $key -}}
 {{- end -}}
 
 {{- $facts := index $game "facts" | default (slice) -}}
@@ -308,7 +308,7 @@
   {{- end -}}
 {{- end -}}
 {{- if ne (len (index $game "features" | default (slice))) 5 -}}
-  {{- errorf "Games product games.%s must define the five newsroom, music, reading, view and local-play benefits" $key -}}
+  {{- errorf "Games product games.%s must define the five view, interaction, music, gallery and author benefits" $key -}}
 {{- end -}}
 {{- $disclosureCopy := lower ($game | jsonify) -}}
 {{- range slice

@@ -37,6 +37,7 @@ const requiredCommonPaths = [
   "content/games/idle-times/idle-times-0.2.5-04-comic-collections.png",
   "content/games/idle-times/idle-times-0.2.5-05-comic-reader.png",
   "docs/games-idle-times-0.2.5-media.json",
+  "docs/games-idle-times-1.0.1-media.json",
   "data/games.yaml",
   "layouts/games/list.html",
   "layouts/games/single.html",
@@ -122,8 +123,8 @@ test("Games catalog uses the controlled LLC identity, route states, and asset se
   assert.match(idle, /^\s+privacy_route_state:\s*"public"\s*$/m);
   assert.match(idle, /^\s+privacy_route:\s*"\/privacy\/"\s*$/m);
   assert.doesNotMatch(idle.match(/^\s+action_url:.*$/m)?.[0] || "", /[?#]/);
-  assert.match(idle, /Full Desk, Mini Companion, and Pet Desk/);
-  assert.match(idle, /114 illustrated cartoon rewards/);
+  assert.match(idle, /Full Desk, Mini Companion, and Pet Bob/);
+  assert.match(idle, /114 illustrated rewards/);
   assert.match(idle, /Eight original lo-fi tracks/);
   assert.match(idle, /Robby V and the Paper Boys/);
   assert.match(idle, /The Fine Print, Vol\. 1/);
@@ -134,8 +135,12 @@ test("Games catalog uses the controlled LLC identity, route states, and asset se
   assert.match(idle, /^\s+- label:\s*"Platform"\s*\r?\n\s+value:\s*"Windows"\s*$/m);
   assert.match(idle, /^\s+- label:\s*"Language"\s*\r?\n\s+value:\s*"English"\s*$/m);
   assert.match(idle, /^\s+- label:\s*"Play style"\s*\r?\n\s+value:\s*"Single-player"\s*$/m);
-  assert.equal((idle.match(/^\s+- title:/gm) || []).length, 5, "Idle Times must define its five newsroom, music, reading, view and local-play benefits");
-  assert.match(idle, /^\s+- id:\s*"full-desk"\s*\r?\n\s+role:\s*"hero"\s*$/m);
+  assert.equal((idle.match(/^\s+- title:/gm) || []).length, 5, "Idle Times must define its five view, interaction, music, gallery and author benefits");
+  assert.match(idle, /^\s+- id:\s*"pet-on-desktop"\s*\r?\n\s+role:\s*"hero"\s*$/m);
+  assert.match(idle, /JUKE-BOB/);
+  assert.match(idle, /Robert V\. Ussley/);
+  assert.match(idle, /Click and drag through framed prints/);
+  assert.doesNotMatch(idle, /Pet Desk|resizable|New free editions are added every week|filter unread|search titles/);
   assert.doesNotMatch(idle, /seller|payee|tax party|bank identity/i);
   assert.doesNotMatch(`${gamesIndex}\n${idlePage}\n${idle}`, /coming soon|coming to steam|wishlist|not yet available|before steam unlocks/i);
   assert.doesNotMatch(idle, /seven original tracks|[$€£]\s*\d|\$\d/i);
@@ -154,6 +159,18 @@ test("Games catalog uses the controlled LLC identity, route states, and asset se
   for (const [relativePath, expectedHash] of expectedHashes) {
     assert.equal(sha256(relativePath), expectedHash, `unexpected approved asset bytes: ${relativePath}`);
   }
+
+  const currentMedia = JSON.parse(read("docs/games-idle-times-1.0.1-media.json"));
+  assert.equal(currentMedia.version, "1.0.1");
+  assert.equal(currentMedia.assets.length, 8);
+  const selectedSources = [...idle.matchAll(/^\s+source:\s*"([^"]+)"\s*$/gm)].map((match) => match[1]);
+  assert.equal(selectedSources.length, currentMedia.assets.length);
+  for (const asset of currentMedia.assets) {
+    assert.equal(sha256(asset.path), asset.sha256, `unexpected current media bytes: ${asset.path}`);
+    assert.ok(selectedSources.includes(path.basename(asset.path)), `current media must be selected: ${asset.path}`);
+  }
+  assert.match(idlePage, /idle-times-20261008-main-capsule\.png/);
+  assert.ok(selectedSources.every((source) => source.startsWith("idle-times-20261008-")), "current media must not select historical screenshots");
 
   const gamesContent = fs.readdirSync(path.resolve("content/games"), { recursive: true, withFileTypes: true })
     .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))

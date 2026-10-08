@@ -12,15 +12,8 @@
   {{ $game := partial "games/product-data.html" (dict "key" $gameKey "page" $gamePage) }}
   {{ $media := index $game "media" | default (slice) }}
   {{ $heroAsset := false }}
-  {{ range $media }}
-    {{ if or (eq (index . "id") "full-desk") (eq (index . "source") "idle-times-packaged-desk-1920x1080.png") }}
-      {{ $heroAsset = . }}
-    {{ end }}
-  {{ end }}
-  {{ if not $heroAsset }}
-    {{ range where $media "role" "hero" }}
-      {{ if not $heroAsset }}{{ $heroAsset = . }}{{ end }}
-    {{ end }}
+  {{ range where $media "role" "hero" }}
+    {{ if not $heroAsset }}{{ $heroAsset = . }}{{ end }}
   {{ end }}
   {{ if not $heroAsset }}{{ errorf "Games storefront requires approved hero media for %s" (index $game "title") }}{{ end }}
   {{ $hero := partial "games/resolve-media.html" (dict "page" $gamePage "asset" $heroAsset "game_title" (index $game "title")) }}
