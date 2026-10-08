@@ -1,4 +1,4 @@
-current: infrastructure
+current: the-ant-problem
 cartoons:
   - slug: precious-and-honored
     title: "Precious and Honored"
@@ -1123,3 +1123,12 @@ cartoons:
     alt: "Two men fold a table in a warmly lit parish hall as an older man hands a ring of keys to a woman by the open doorway; diners and serving tables remain behind them."
     width: 1280
     height: 853
+  - slug: the-ant-problem
+    title: "The Ant Problem"
+    date: "2026-10-08"
+    publishDate: "2026-10-08T17:16:06Z"
+    image: "essays/dialogues/the-ant-problem/hero"
+    essay: "/syd-and-oliver/the-ant-problem/"
+    alt: "An ant stands beside a torn piece of bread on a weathered picnic table, framed by two men seen from behind as dark, blurred foreground silhouettes, with a river and trees beyond."
+    width: 1672
+    height: 941

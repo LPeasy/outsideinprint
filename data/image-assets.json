@@ -2269,6 +2269,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/dialogues/the-ant-problem/hero": {
+      "id": "essays/dialogues/the-ant-problem/hero",
+      "source": "images/originals/essays/dialogues/the-ant-problem/hero.png",
+      "sha256": "3cedea7a84ce1bf2c2bc2be5de23e2a2baa9e3f220d5a9870f8b7b92800d68e2",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "essays/dialogues/the-morning-after/hero": {
       "id": "essays/dialogues/the-morning-after/hero",
       "source": "images/originals/essays/dialogues/the-morning-after/hero.jpg",
@@ -8514,6 +8528,7 @@
     "/images/syd-and-oliver/infinite-incontent/hero.png": "essays/dialogues/infinite-incontent/hero",
     "/images/syd-and-oliver/infrastructure/hero.jpg": "essays/dialogues/infrastructure/hero",
     "/images/syd-and-oliver/pressure-makes-pearls/hero.png": "essays/dialogues/pressure-makes-pearls/hero",
+    "/images/syd-and-oliver/the-ant-problem/hero.png": "essays/dialogues/the-ant-problem/hero",
     "/images/syd-and-oliver/the-morning-after/hero.jpg": "essays/dialogues/the-morning-after/hero",
     "/images/syd-and-oliver/what-i-had/hero.png": "essays/dialogues/what-i-had/hero",
     "/images/syd-and-oliver/with-ice-cream/hero.png": "essays/dialogues/with-ice-cream/hero"

@@ -119,14 +119,14 @@ test("the old Syd hub is a noindex compatibility route while its children and fe
   assert.match(base, /type="application\/rss\+xml"/);
 
   const dialogueFiles = fs.readdirSync(path.resolve("content/essays/dialogues")).filter((name) => name.endsWith(".md"));
-  assert.equal(dialogueFiles.length, 21);
+  assert.equal(dialogueFiles.length, 22);
   const urls = dialogueFiles.map((name) => {
     const source = read(path.join("content/essays/dialogues", name));
     const match = source.match(/^url:\s*["'](\/syd-and-oliver\/[^"']+\/)["']$/m);
     assert.ok(match, `${name} must retain its public Syd and Oliver child URL`);
     return match[1];
   });
-  assert.equal(new Set(urls).size, 21);
+  assert.equal(new Set(urls).size, 22);
 
   const allTi = read("content/essays/dialogues/all-ti.md");
   assert.match(allTi, /^aliases:\s*\[["']\/syd-and-oliver\/all-time-highs\/["']\]$/m);
