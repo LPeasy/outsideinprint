@@ -112,8 +112,11 @@ if ($idleCardLinks -lt 1) { throw 'Public catalog must link Idle Times.' }
 foreach ($required in @(
   'Available now on Steam.',
   'Buy Idle Times on Steam',
-  'Full Desk, Mini Companion, and Pet Desk',
-  '114 illustrated cartoon rewards',
+  'Full Desk, Mini Companion, and Pet Bob',
+  '114 illustrated rewards',
+  'JUKE-BOB',
+  'Robert V. Ussley',
+  'Click and drag through framed prints',
   'Eight original lo-fi tracks',
   'Robby V and the Paper Boys',
   'The Fine Print, Vol. 1',
@@ -165,7 +168,7 @@ foreach ($url in $allSteamUrls) {
 
 foreach ($entry in @(
   @{ Html = $gamesHtml; Route = 'games/index.html'; PictureCount = 1; Slot = 'games_index_widget' },
-  @{ Html = $idleHtml; Route = 'games/idle-times/index.html'; PictureCount = 6; Slot = 'idle_times_detail_widget' }
+  @{ Html = $idleHtml; Route = 'games/idle-times/index.html'; PictureCount = 8; Slot = 'idle_times_detail_widget' }
 )) {
   if ([regex]::Matches($entry.Html, '<picture\b', 'IgnoreCase').Count -ne $entry.PictureCount) {
     throw "Expected $($entry.PictureCount) responsive pictures at $($entry.Route)."
@@ -186,6 +189,9 @@ foreach ($entry in @(
 }
 
 foreach ($html in @($gamesHtml, $idleHtml)) {
+  if ($html -match '(?i)Pet Desk|resizable|New free editions are added every week|filter unread|search titles') {
+    throw 'Public Games output contains retired presentation or feature claims.'
+  }
   if ($html -match '(?i)<(?:form|input|select|textarea)\b|stripe|checkout|waitlist|[$€£]\s*\d|<video\b|\.(?:webm|mp4)') {
     throw 'Public Games output exposed onsite commerce, intake, price claims, or trailer media.'
   }
