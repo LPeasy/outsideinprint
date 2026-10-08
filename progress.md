@@ -1,3 +1,15 @@
+Original prompt: Build the pet-only browser entry in a transparent iframe served by OIP, then run an unpublished demo of the site with Idle Bob directly below the main featured article in the left column beside the supporting articles. On phones, show interactive Bob immediately below all featured articles.
+
+2026-10-08: Created isolated OIP worktree from ab55251a and game worktree from the live 1.0.1 runtime source 4b8451ab. Reusing the Canvas/React Pet renderer with a browser-only adapter. No remote writes or publication. Exported demo is served from static/demos/idle-times-pet; homepage loads it near the viewport and sends visibility/theme messages. Initial sound effects are muted, music waits for Play. Game adapters live in the separate Idle Times worktree and will be documented with the preview handoff.
+
+2026-10-08 owner review: Removed hover tooltips and corrected mouse/touch grip anchoring. Bob hangs directly from the pointer; his stage expands below a stable top without changing his size, then he lands near release. Re-exported the local demo. All 118 standalone, 112 homepage and 13 touch checks, 50 focused unit tests and the browser TypeScript check pass; hanging/landing and standard-client screenshots inspected. See docs/idle-bob-browser-demo.md. Preview remains unpublished and running on localhost:1315.
+
+2026-10-08 purchase/audio review: Replaced the small Steam link with a brass purchase card using the owner's complete JUKE-BOB capsule and “Get Idle Times / on Steam.” Bounded WebP thumbnails preserve the full artwork; the whole card links to Steam. 112 responsive homepage checks pass; desktop/phone and light/dark screenshots reviewed. Pet effects now default on (55%), with a one-time migration of the old forced mute that preserves volume and later mute choices. The stable Steam whistle recording/timing already existed and is now audible after the first genuine demo click/tap. 94 sound/lean units, 139 standalone browser checks and TypeScript pass; no native controller changes or publishing.
+
+---
+
+2026-10-08 release preparation: Added rounded, pressable Calm motion and Sound credits controls with hover/focus feedback and 44px phone targets. All 31 focused footer checks pass. Browser adapter source is preserved at game commit 25dea76b3737c204ae17c05f55104b1f728ac1a6; final export records that commit. Owner authorized publication after the concurrent website build finishes. Production output validation and a fresh main integration are required before the API release.
+
 Original prompt: Continue work on the Outside In Print Paper-Bob arcade easter egg.
 
 2026-05-07:

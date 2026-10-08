@@ -1,0 +1,23 @@
+<aside class="home-idle-bob" aria-labelledby="home-idle-bob-title" data-idle-bob>
+  <header class="home-idle-bob__heading">
+    <div>
+      <h3 id="home-idle-bob-title" class="home-idle-bob__title">Idle Times</h3>
+      <p>Meet Idle Bob. A little company for your reading.</p>
+    </div>
+    {{- $capsule := resources.Get "games/idle-times/juke-bob-steam-capsule.png" -}}
+    {{- $capsuleSmall := $capsule.Resize "160x webp q84 lanczos drawing" -}}
+    {{- $capsuleLarge := $capsule.Resize "320x webp q84 lanczos drawing" -}}
+    <a class="home-idle-bob__steam-card" href="https://store.steampowered.com/app/4978200/Idle_Times/" target="_blank" rel="noopener noreferrer">
+      <img class="home-idle-bob__steam-art" src="{{ $capsuleSmall.RelPermalink }}" srcset="{{ $capsuleSmall.RelPermalink }} 160w, {{ $capsuleLarge.RelPermalink }} 320w" sizes="128px" width="{{ $capsuleSmall.Width }}" height="{{ $capsuleSmall.Height }}" alt="" loading="lazy" decoding="async">
+      <span class="home-idle-bob__steam-copy">
+        <strong>Get Idle Times</strong>
+        <span>on Steam <span aria-hidden="true">↗</span></span>
+      </span>
+    </a>
+  </header>
+  <div class="home-idle-bob__demo">
+    <p class="home-idle-bob__status" role="status">Bob is getting ready…</p>
+    <iframe data-idle-bob-frame data-src="{{ "demos/idle-times-pet/" | relURL }}" aria-label="Interactive Idle Bob — Idle Times Pet demo" width="600" height="240" loading="lazy" allow="autoplay" referrerpolicy="same-origin"></iframe>
+  </div>
+  <noscript><p>Meet Bob and see Idle Times on Steam using the link above.</p></noscript>
+</aside>

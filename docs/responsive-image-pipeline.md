@@ -81,7 +81,7 @@ GitHub Actions caches `resources/_gen` with one exact key derived from Hugo `0.1
 
 - Cold image build: no more than 15 minutes.
 - Exact restored-cache build: no more than five minutes.
-- Image-generating job timeout: 20 minutes.
+- Image-generating job timeout: 30 minutes, allowing time for output checks and the Pages artifact upload after the image build.
 
 ## Output budgets
 

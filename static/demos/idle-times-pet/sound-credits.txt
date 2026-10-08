@@ -1,0 +1,26 @@
+# Pet Bob recorded sound credits
+
+All selected recordings are CC0. Original recordists are credited below. Runtime files are trimmed mono PCM excerpts from public HQ previews and an original WAV; see manifest.json for exact source, cuts and processing. Playback applies a150Hz low cut. No synthetic noise, saturation, compression or pitch shifting is used.
+
+- **Clothing rustles** — trettfilms. [Source](https://freesound.org/people/trettfilms/sounds/128233/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Boot Footsteps on wooden surface** — jb_stems. [Source](https://freesound.org/people/jb_stems/sounds/614291/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Sipping coffee** — aldenroth2. [Source](https://freesound.org/people/aldenroth2/sounds/272037/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Writing with Fountain Pen Nib** — black_trillium. [Source](https://freesound.org/people/black_trillium/sounds/397282/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Stamp** — kermite607. [Source](https://freesound.org/people/kermite607/sounds/362624/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Various short blows/puffs of air from male mouth** — rykenn. [Source](https://freesound.org/people/rykenn/sounds/432170/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Mouth pop** — fleurescence. [Source](https://freesound.org/people/fleurescence/sounds/573153/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **hand slaps.aif** — jasonLON. [Source](https://freesound.org/people/jasonLON/sounds/125406/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Rubber Gloves.wav** — dannydandanshababaloo. [Source](https://freesound.org/people/dannydandanshababaloo/sounds/593196/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Paper Flutter .wav** — mickdow. [Source](https://freesound.org/people/mickdow/sounds/320913/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Paper stacks.wav** — gembok1. [Source](https://freesound.org/people/gembok1/sounds/368739/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Dropping Paperstack** — Sheyvan / Philipp Grzemba. [Source](https://freesound.org/people/Sheyvan/sounds/524752/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Book Close - 15** — SpaceJoe. [Source](https://freesound.org/people/SpaceJoe/sounds/484895/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Soft Cover Book Open 1.wav** — yossirafa100. [Source](https://freesound.org/people/yossirafa100/sounds/638382/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Freesound - Metallic latch release.wav by Crinkem** — Crinkem. [Source](https://freesound.org/people/Crinkem/sounds/481789/) · [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Freesound - Metal Latch Latching 3 by deleted_user_7146007** — deleted_user_7146007. [Source](https://freesound.org/people/deleted_user_7146007/sounds/383801/) · [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Freesound - paper flip 2.wav by gynation** — gynation. [Source](https://freesound.org/people/gynation/sounds/82378/) · [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Freesound - elevator-button.wav by Eirikr** — Eirikr. [Source](https://freesound.org/people/Eirikr/sounds/185880/) · [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Turned Page** — DavidGreck. [Source](https://bigsoundbank.com/page-qui-tourne-s0164.html) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Ceramic_Mug_Cup.wav** — Jamitch2. [Source](https://freesound.org/people/Jamitch2/sounds/344704/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Chair creaking back and forth 01.wav** — unkleceeg. [Source](https://freesound.org/people/unkleceeg/sounds/276473/) · [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Human Happy Whistle** — schinew.de. [Source](https://freesound.org/people/schinew.de/sounds/532754/) · [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).

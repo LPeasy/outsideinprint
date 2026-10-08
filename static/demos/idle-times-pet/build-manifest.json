@@ -1,0 +1,280 @@
+{
+  "version": 1,
+  "gameVersion": "1.0.1",
+  "gameSourceCommit": "25dea76b3737c204ae17c05f55104b1f728ac1a6",
+  "adapterSources": [
+    {
+      "path": "browser/pet/index.html",
+      "sha256": "c55ff54eb0b7c426e0d22f3a6f8f14056f326fdafbed0dd98ef32e3c23551120"
+    },
+    {
+      "path": "browser/pet/entry.tsx",
+      "sha256": "6d7e53f9bb0ad71c788b901df4f7e951011dad7f02426e08f081f9d20d63e752"
+    },
+    {
+      "path": "browser/pet/style.css",
+      "sha256": "b7a673f2509d126ec24fe2a9a5b36084a39d00a78a3668ca368d6169a7f55e9e"
+    },
+    {
+      "path": "src/components/BobPet.tsx",
+      "sha256": "97181d8e7aa5e97e6e8d6ff1c0d54fd8fbebbf71ff0664cf8994514904aca9e9"
+    },
+    {
+      "path": "src/desktopBridge.ts",
+      "sha256": "ef75aa5da7e9906232019b1957cbf467a2da432d3a21aa49750c4c1db1119f9a"
+    },
+    {
+      "path": "src/music/MusicPlayerProvider.tsx",
+      "sha256": "ed2a6ba1a88373c9ce1bef14a6696b42715466ba984d260c559dc4b0277040f3"
+    },
+    {
+      "path": "src/pet/petGrabDrawing.ts",
+      "sha256": "0fff0c87f161397c933a6767f347cc98e034d8177127039721eb41fb93168163"
+    },
+    {
+      "path": "vite.pet-browser.config.ts",
+      "sha256": "3d8e3a0347c7fb4521191da45f24f82419e6fdf8a8bbdb7de9609f0df60b8849"
+    },
+    {
+      "path": "tools/build-pet-browser.mjs",
+      "sha256": "fdba15ed6915583ff0786c5702f3ae0cea5793f768ce0f479cb8ed00d8f668b1"
+    }
+  ],
+  "entry": "browser/pet/index.html",
+  "browserAdapter": "Local Pet-only entry; contained drag, scoped settings, lazy audio and responsive dock.",
+  "fullGameIncluded": false,
+  "musicEncoding": "MP3 128 kbps (web copies of original eight tracks)",
+  "totalBytes": 26905182,
+  "files": [
+    {
+      "path": "assets/bob-armrest-BAi3CKpz.webp",
+      "bytes": 131124,
+      "sha256": "7c69b7392bfa042cb46b7fbffe6f3f6b9244db5d85d6ae8f7bafa695eb3984eb"
+    },
+    {
+      "path": "assets/bob-attention-CbYvjWgO.webp",
+      "bytes": 381520,
+      "sha256": "8a5ddd73672beac51a6118e45fec2adbf503b35841ce2a6c869dd66ed645378f"
+    },
+    {
+      "path": "assets/bob-breaks-ozgKqN-N.webp",
+      "bytes": 154100,
+      "sha256": "1badde2eab62efe7cff216dffe7ef89a8bb221987923bf8899c2713bd9a2c5ce"
+    },
+    {
+      "path": "assets/bob-celebration-Ct-XzhwY.webp",
+      "bytes": 126942,
+      "sha256": "d17c5ef3560e83e3b22a2b4753ab5853b86c3abd85d5fc99863398d917954b58"
+    },
+    {
+      "path": "assets/bob-chair-Buu4ZinV.webp",
+      "bytes": 120236,
+      "sha256": "c2a9806d06579c7fa6c72e35f36f0231df88f70bd31325a673f1d1cdc2e41348"
+    },
+    {
+      "path": "assets/bob-cigar-rPS0j9mt.png",
+      "bytes": 210803,
+      "sha256": "f3f097ee408ab4837e1686f2854a0395203ae984791ba757051ac3e97da34fab"
+    },
+    {
+      "path": "assets/bob-delivery-D4a4DYc9.webp",
+      "bytes": 138520,
+      "sha256": "7eb57d186df683b737015e36e378644ab6ea2d425d1b22e34ef1079aa9cb758b"
+    },
+    {
+      "path": "assets/bob-drawer-B4YfEYRC.webp",
+      "bytes": 71216,
+      "sha256": "cb86af83cf97eca07a8ea7905a9f8536ad7f7ac3396a68bde0335035ff6d429f"
+    },
+    {
+      "path": "assets/bob-float-DKJjxLdJ.webp",
+      "bytes": 122484,
+      "sha256": "69301b71af098efec7f5fd87481eeb2d042d7b3bec2e9c707cbcd96f359e6055"
+    },
+    {
+      "path": "assets/bob-foley-CsviZ-79.wav",
+      "bytes": 1866450,
+      "sha256": "b27adfc1ac82b22ee1795ba58a0940773506b0f22dca7817309ebb9b5833d672"
+    },
+    {
+      "path": "assets/bob-interview-paper-CLNqN0vs.webp",
+      "bytes": 66218,
+      "sha256": "ffe6d559c45189508ea1eb12ec5f3f566746dac675258b024718840e75ede406"
+    },
+    {
+      "path": "assets/bob-interview-replies-CEh08ysx.webp",
+      "bytes": 201568,
+      "sha256": "85d3dcb55bf5e14b76712129d3b8940d5444bd64415e8eac343e5f8f786ae713"
+    },
+    {
+      "path": "assets/bob-jukebox-lean-BtwUnMsd.webp",
+      "bytes": 71076,
+      "sha256": "c784bf56f4e2f6f61e3f0f3ca05fe7870931bf0287445d38251d1973f13a138c"
+    },
+    {
+      "path": "assets/bob-moment-BHeFar-J.webp",
+      "bytes": 156298,
+      "sha256": "6d724b631ee8e2330f43c159ca049791345ad0cad2434df277703b8a614c0fd2"
+    },
+    {
+      "path": "assets/bob-moment-BfVEij4N.webp",
+      "bytes": 154612,
+      "sha256": "b02667c7db7b6c61a85b7767e9ce2bc66b2f780d7e49a0120533c455bcaf2a53"
+    },
+    {
+      "path": "assets/bob-moment-Bo4oVL0D.webp",
+      "bytes": 154894,
+      "sha256": "f5647069a684222f401f16e94abae12fa10793c1626473f632c806a53fddd12c"
+    },
+    {
+      "path": "assets/bob-moment-C67JYtV7.webp",
+      "bytes": 35610,
+      "sha256": "0b83eb8666475af162758be66820e6ed5b7e96b5f7853b8f77447dc9c9a74012"
+    },
+    {
+      "path": "assets/bob-moment-FIG_HHNG.webp",
+      "bytes": 159366,
+      "sha256": "bab94bce752122eec0f44e3cbff215377e374e6f853565a60cfebe11da51dd31"
+    },
+    {
+      "path": "assets/bob-moment-N1ZgJx2c.webp",
+      "bytes": 155786,
+      "sha256": "385219a4e7789b85a7054f6ab186ff36262cba80c91f8c6a8c367b4c229d33ec"
+    },
+    {
+      "path": "assets/bob-moment-oFuoOS0L.webp",
+      "bytes": 152408,
+      "sha256": "0cfff85ca81ffdd2038b11267a75dd8ca4f12f03b66be49d88dc1e68ef8295f9"
+    },
+    {
+      "path": "assets/bob-moonwalk-v00xr0Uz.webp",
+      "bytes": 65314,
+      "sha256": "979ddbe222bf6b707388cf6584b6e460ff224475a60fcccad677f42a68a9ba08"
+    },
+    {
+      "path": "assets/bob-paper-storm-BdKel7Xc.webp",
+      "bytes": 108636,
+      "sha256": "51556a47ee8e24cc3d13ce3a5e23b238e6c94c7c7987ea1479ed27d6d1004181"
+    },
+    {
+      "path": "assets/bob-pen-XIeL6aUw.webp",
+      "bytes": 210564,
+      "sha256": "954acdd6cea346cc2d9e83c4a9909d10dc9fd74733a0dfad736ef44f53bf5d99"
+    },
+    {
+      "path": "assets/bob-press-BaeTcxWk.webp",
+      "bytes": 63926,
+      "sha256": "5ab308e797fa711a68e631713fca3f203e9802856642d2e72795648088a5e2ea"
+    },
+    {
+      "path": "assets/bob-rare-CCBsr7Dr.webp",
+      "bytes": 141980,
+      "sha256": "4629dd79c30ca78e73177be697d8c54d2e0414fe5b2c34217844d68017ef1a61"
+    },
+    {
+      "path": "assets/bob-shadow-dance-B-8g1DF3.webp",
+      "bytes": 337462,
+      "sha256": "8404372d18fb145c9db6537b1b6dcfaa222a7597eb4ad1c82de914f2f4087788"
+    },
+    {
+      "path": "assets/bob-smoke-play-XWVK-1OQ.webp",
+      "bytes": 98690,
+      "sha256": "3ab9a3fa0ea4a9686938379378d35cce03e36b84a877b5ade1ed1503df9be356"
+    },
+    {
+      "path": "assets/bob-spin-CJ6nIXW3.webp",
+      "bytes": 169886,
+      "sha256": "d2366f7b73333c9a37a0c5979899dd7210d80f2f53db9e241e7d14fd95e5115c"
+    },
+    {
+      "path": "assets/bob-transition-b7FH8Yc9.webp",
+      "bytes": 65090,
+      "sha256": "d68854abe15e101fa2510fae8b9a9a2674280e6152cad0d3884710ae0f1d0e2e"
+    },
+    {
+      "path": "assets/bob-walk-CJrhUJe5.webp",
+      "bytes": 129548,
+      "sha256": "0ee955c105d272faf5441a4b72f666129549995980710ba45d24a4b4c900fe46"
+    },
+    {
+      "path": "assets/bob-whole-EXpAjrH8.webp",
+      "bytes": 145058,
+      "sha256": "a2a5e4fc597972eccb5ae0d8d7ff8de6dce7aad4f5c6a29d5b486a81a2f55458"
+    },
+    {
+      "path": "assets/bob-work-Bm_3MBLz.webp",
+      "bytes": 151700,
+      "sha256": "5c9d2e9e11bdf8900bf8a2a248afa744ea39b3149d81ad12461dc14e61881329"
+    },
+    {
+      "path": "assets/chair-turn-Ci-Lykhy.webp",
+      "bytes": 7156,
+      "sha256": "8b894077d8a817901350044cfa1ca86ab67ca23863d7d3f1b50dfe26d59524c7"
+    },
+    {
+      "path": "assets/index-CeLkTa2i.js",
+      "bytes": 513083,
+      "sha256": "ca5aeea691fcb57209eb570bb5541d3552c94e32bf1b0af67b2d5b1237a66849"
+    },
+    {
+      "path": "assets/index-CrcxIOnA.css",
+      "bytes": 68253,
+      "sha256": "949fc4609339f133396f79ef9890eecc20b7e48a99869503b8791035e0208cd3"
+    },
+    {
+      "path": "index.html",
+      "bytes": 492,
+      "sha256": "d03559e52fc77414a38e2950747ffb75d98cff0801c897567645348b6431bffa"
+    },
+    {
+      "path": "music/playlist.json",
+      "bytes": 1772,
+      "sha256": "b8c1202c3b0e84c85f11347d645e5781d24621f4586e2d3b6aae71aa95a3e749"
+    },
+    {
+      "path": "music/tracks/city-awakens.mp3",
+      "bytes": 1873580,
+      "sha256": "287990aa6052767f34766dc7afc6d2cc7f7723c1979b98c3e8b2cc6f529a8332"
+    },
+    {
+      "path": "music/tracks/confidential-sources.mp3",
+      "bytes": 2123948,
+      "sha256": "ceed33bf470b81cead07d90af2968c139e329668143cdeaac1709ccf1a1bad92"
+    },
+    {
+      "path": "music/tracks/editorial-meeting.mp3",
+      "bytes": 2477612,
+      "sha256": "9ac35fb041a84bd066a6f8e58720f79783c309cb7cd35e6b8a0a770b08006705"
+    },
+    {
+      "path": "music/tracks/first-edition.mp3",
+      "bytes": 2239532,
+      "sha256": "25a9d1bbb26490b69e0ad945c52d9db50be51c294b77ef3d90b97b0d17317452"
+    },
+    {
+      "path": "music/tracks/fresh-black.mp3",
+      "bytes": 2473772,
+      "sha256": "01b178c277f9667f30e162f3dda732491ad429dee7261bb238042bdbeffc9c39"
+    },
+    {
+      "path": "music/tracks/hot-off-the-press.mp3",
+      "bytes": 3917612,
+      "sha256": "80527d2465eea69c4034bb9919c88f7b768fd1204647ddf3539f3db3f9ee2987"
+    },
+    {
+      "path": "music/tracks/sunrise-headlines.mp3",
+      "bytes": 2435372,
+      "sha256": "ab01c5c8097b91ed3125a1098da7fe66186eb25cd0d4b0b49a07743321060e44"
+    },
+    {
+      "path": "music/tracks/wire-service.mp3",
+      "bytes": 2449580,
+      "sha256": "bcd830a48a41e92b3a13110e4e005091961299190ac3c727d1a4a0337f3f78e1"
+    },
+    {
+      "path": "sound-credits.txt",
+      "bytes": 4333,
+      "sha256": "55c8b6f586ee625b729beb02ca0f17de21ec28deceea73095883a3ccd69ec3d4"
+    }
+  ]
+}

@@ -4,3 +4,4 @@
 /reports/responsive-image-build-evidence.json text eol=lf
 /reports/legacy-image-focused-cleanup-inventory.json text eol=lf
 /reports/focused-image-visual-review.json text eol=lf
+/static/demos/idle-times-pet/** -text

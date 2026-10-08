@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "station": "Pressroom Radio",
+  "tracks": [
+    {
+      "id": "first-edition",
+      "title": "First Edition",
+      "artist": "Robby V and the Paper Boys",
+      "album": "The Fine Print, Vol. 1",
+      "src": "music/tracks/first-edition.mp3"
+    },
+    {
+      "id": "fresh-black",
+      "title": "Fresh Black",
+      "artist": "Robby V and the Paper Boys",
+      "album": "The Fine Print, Vol. 1",
+      "src": "music/tracks/fresh-black.mp3"
+    },
+    {
+      "id": "wire-service",
+      "title": "Wire Service",
+      "artist": "Robby V and the Paper Boys",
+      "album": "The Fine Print, Vol. 1",
+      "src": "music/tracks/wire-service.mp3"
+    },
+    {
+      "id": "sunrise-headlines",
+      "title": "Sunrise Headlines",
+      "artist": "Robby V and the Paper Boys",
+      "album": "The Fine Print, Vol. 1",
+      "src": "music/tracks/sunrise-headlines.mp3"
+    },
+    {
+      "id": "city-awakens",
+      "title": "City Awakens",
+      "artist": "Robby V and the Paper Boys",
+      "album": "The Fine Print, Vol. 1",
+      "src": "music/tracks/city-awakens.mp3"
+    },
+    {
+      "id": "confidential-sources",
+      "title": "Confidential Sources",
+      "artist": "Robby V and the Paper Boys",
+      "album": "The Fine Print, Vol. 1",
+      "src": "music/tracks/confidential-sources.mp3"
+    },
+    {
+      "id": "editorial-meeting",
+      "title": "Editorial Meeting",
+      "artist": "Robby V and the Paper Boys",
+      "album": "The Fine Print, Vol. 1",
+      "src": "music/tracks/editorial-meeting.mp3"
+    },
+    {
+      "id": "hot-off-the-press",
+      "title": "Hot Off The (Press)",
+      "artist": "Robby V and the Paper Boys",
+      "album": "The Fine Print, Vol. 1",
+      "src": "music/tracks/hot-off-the-press.mp3"
+    }
+  ]
+}
