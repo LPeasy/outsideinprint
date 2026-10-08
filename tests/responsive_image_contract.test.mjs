@@ -412,7 +412,7 @@ test("CI caches generated resources and runs both responsive image gates", () =>
   assert.match(workflow, /hashFiles\([^)]*data\/image-assets\.json/);
   assert.match(workflow, /hashFiles\([^)]*assets\/images\/originals\/\*\*/);
   assert.match(workflow, /layouts\/partials\/images\/\*\*/);
-  assert.match(workflow, /timeout-minutes:\s*20/);
+  assert.match(workflow, /timeout-minutes:\s*30/);
   assert.match(workflow, /test_responsive_image_source_contract\.ps1/);
   assert.match(workflow, /test_focused_legacy_image_migration\.ps1/);
   assert.doesNotMatch(

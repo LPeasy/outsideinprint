@@ -400,8 +400,8 @@ if ($cacheStep -match '(?m)^\s*restore-keys:') {
   throw "Hugo image resources must use an exact content key; broad restore keys can restore stale derivatives."
 }
 
-if ($deployWorkflow -notmatch '(?ms)^\s{2}build:\s*\r?\n.*?^\s{4}timeout-minutes:\s*20\s*$') {
-  throw "The image-generating Hugo build job must have a 20-minute timeout."
+if ($deployWorkflow -notmatch '(?ms)^\s{2}build:\s*\r?\n.*?^\s{4}timeout-minutes:\s*30\s*$') {
+  throw "The image-generating Hugo build job must have a 30-minute timeout."
 }
 
 $hugoBuildStep = Get-WorkflowStepBlock `
