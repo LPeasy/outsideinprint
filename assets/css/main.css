@@ -2170,7 +2170,6 @@ html[data-theme="light"] .paper-route-toggle{
   padding:.9rem 1.5rem 1.1rem 0;
   border-right:1px solid var(--oip-rule-standard);
 }
-.home-v2-featured__supporting{grid-area:supporting;}
 .home-idle-bob{
   grid-area:bob;
   min-width:0;
@@ -2331,6 +2330,7 @@ html[data-theme="light"] .paper-route-toggle{
   text-underline-offset:.18em;
 }
 .home-v2-featured__supporting{
+  grid-area:supporting;
   min-width:0;
   padding:1.25rem 0 1.1rem 1.5rem;
 }
