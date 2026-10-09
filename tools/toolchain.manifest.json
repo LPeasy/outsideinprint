@@ -6,81 +6,86 @@
     {
       "name": "node",
       "kind": "portable-download",
-      "version": "20.20.2",
+      "version": "24.21.0",
       "required": true,
-      "install_path": "tools/vendor/node-toolchain-20.20.2",
-      "launch_path": "node-v20.20.2-win-x64/node.exe",
+      "install_path": "tools/vendor/node-toolchain-24.21.0",
+      "launch_path": "node-v24.21.0-win-x64/node.exe",
       "source_candidates": [
-        "tools/_downloads/bootstrap/node-v20.20.2-win-x64.zip",
-        "https://nodejs.org/dist/v20.20.2/node-v20.20.2-win-x64.zip"
+        "tools/_downloads/bootstrap/node-v24.21.0-win-x64.zip",
+        "https://nodejs.org/dist/v24.21.0/node-v24.21.0-win-x64.zip"
       ],
-      "asset_name": "node-v20.20.2-win-x64.zip",
+      "asset_name": "node-v24.21.0-win-x64.zip",
       "validate": {
         "arguments": [
           "--version"
         ],
-        "match_regex": "^v20\\.20\\.2"
+        "match_regex": "^v24\\.21\\.0"
       },
-      "notes": "Pinned Node toolchain for the repo's 20.x contract. Bootstrap from tools/_downloads/bootstrap first."
+      "notes": "Pinned Node 24 LTS with bundled npm 11.19.0. Verified official Windows archive.",
+      "sha256": "158f7685b44de51f6c0df1d153526cbcd3e1bc739a8dfc607721cef75de9e541"
     },
     {
       "name": "npm",
       "kind": "portable-download",
-      "version": "20.20.2",
+      "version": "11.19.0",
       "required": false,
-      "install_path": "tools/vendor/node-toolchain-20.20.2",
-      "launch_path": "node-v20.20.2-win-x64/npm.cmd",
+      "install_path": "tools/vendor/node-toolchain-24.21.0",
+      "launch_path": "node-v24.21.0-win-x64/npm.cmd",
       "source_candidates": [
-        "tools/_downloads/bootstrap/node-v20.20.2-win-x64.zip",
-        "https://nodejs.org/dist/v20.20.2/node-v20.20.2-win-x64.zip"
+        "tools/_downloads/bootstrap/node-v24.21.0-win-x64.zip",
+        "https://nodejs.org/dist/v24.21.0/node-v24.21.0-win-x64.zip"
       ],
-      "asset_name": "node-v20.20.2-win-x64.zip",
+      "asset_name": "node-v24.21.0-win-x64.zip",
       "validate": {
         "arguments": [
           "--version"
         ],
-        "match_regex": "^10\\.8\\.2"
+        "match_regex": "^11\\.19\\.0"
       },
-      "notes": "Shares the repo-local Node payload."
+      "notes": "Shares the repo-local Node payload.",
+      "sha256": "158f7685b44de51f6c0df1d153526cbcd3e1bc739a8dfc607721cef75de9e541"
     },
     {
       "name": "npx",
       "kind": "portable-download",
-      "version": "20.20.2",
+      "version": "11.19.0",
       "required": false,
-      "install_path": "tools/vendor/node-toolchain-20.20.2",
-      "launch_path": "node-v20.20.2-win-x64/npx.cmd",
+      "install_path": "tools/vendor/node-toolchain-24.21.0",
+      "launch_path": "node-v24.21.0-win-x64/npx.cmd",
       "source_candidates": [
-        "tools/_downloads/bootstrap/node-v20.20.2-win-x64.zip",
-        "https://nodejs.org/dist/v20.20.2/node-v20.20.2-win-x64.zip"
+        "tools/_downloads/bootstrap/node-v24.21.0-win-x64.zip",
+        "https://nodejs.org/dist/v24.21.0/node-v24.21.0-win-x64.zip"
       ],
-      "asset_name": "node-v20.20.2-win-x64.zip",
+      "asset_name": "node-v24.21.0-win-x64.zip",
       "validate": {
         "arguments": [
           "--version"
         ],
-        "match_regex": "^10\\.8\\.2"
+        "match_regex": "^11\\.19\\.0"
       },
-      "notes": "Shares the repo-local Node payload."
+      "notes": "Shares the repo-local Node payload.",
+      "sha256": "158f7685b44de51f6c0df1d153526cbcd3e1bc739a8dfc607721cef75de9e541"
     },
     {
       "name": "corepack",
       "kind": "portable-download",
-      "version": "20.20.2",
+      "version": "0.36.0",
       "required": false,
-      "install_path": "tools/vendor/node-toolchain-20.20.2",
-      "launch_path": "node-v20.20.2-win-x64/corepack.cmd",
+      "install_path": "tools/vendor/node-toolchain-24.21.0",
+      "launch_path": "node-v24.21.0-win-x64/corepack.cmd",
       "source_candidates": [
-        "tools/_downloads/bootstrap/node-v20.20.2-win-x64.zip",
-        "https://nodejs.org/dist/v20.20.2/node-v20.20.2-win-x64.zip"
+        "tools/_downloads/bootstrap/node-v24.21.0-win-x64.zip",
+        "https://nodejs.org/dist/v24.21.0/node-v24.21.0-win-x64.zip"
       ],
-      "asset_name": "node-v20.20.2-win-x64.zip",
+      "asset_name": "node-v24.21.0-win-x64.zip",
       "validate": {
         "arguments": [
           "--version"
-        ]
+        ],
+        "match_regex": "^0\\.36\\.0$"
       },
-      "notes": "Shares the repo-local Node payload."
+      "notes": "Shares the repo-local Node payload.",
+      "sha256": "158f7685b44de51f6c0df1d153526cbcd3e1bc739a8dfc607721cef75de9e541"
     },
     {
       "name": "hugo",

@@ -112,9 +112,10 @@ $bootstrapAssets = @(
     Sha256 = "59109d4e05d0cc9e1743688166e5323a71bd8b67a6e928db07c61720cc49a7cc"
   },
   @{
-    AssetName = "node-v20.20.2-win-x64.zip"
+    AssetName = "node-v24.21.0-win-x64.zip"
     LocalSource = $null
-    Url = "https://nodejs.org/dist/v20.20.2/node-v20.20.2-win-x64.zip"
+    Url = "https://nodejs.org/dist/v24.21.0/node-v24.21.0-win-x64.zip"
+    Sha256 = "158f7685b44de51f6c0df1d153526cbcd3e1bc739a8dfc607721cef75de9e541"
   },
   @{
     AssetName = "python-3.12.9-embed-amd64.zip"

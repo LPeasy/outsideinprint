@@ -36,7 +36,7 @@ Use the generated wrappers under `tools\bin\generated\` after provisioning. Do n
 
 Current pinned contract:
 
-- Node `20.20.2`
+- Node `24.21.0`
 - Hugo Extended `0.164.0`
 - PowerShell `7.5.0`
 - Python `3.12.9`

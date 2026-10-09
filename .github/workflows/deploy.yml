@@ -45,12 +45,13 @@ jobs:
             .github
             scripts/ci
             tests
+            tools
           persist-credentials: false
           fetch-depth: 0
       - name: Setup Node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
-          node-version: 20.20.2
+          node-version: 24.21.0
           package-manager-cache: false
       - name: Install workflow parser
         run: npm ci --ignore-scripts --no-audit --no-fund
@@ -115,7 +116,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
-          node-version: 20.20.2
+          node-version: 24.21.0
           package-manager-cache: false
       - name: Worker behavior, monitoring and tax fixtures
         run: npm --prefix workers/oip-commerce test
@@ -148,7 +149,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
-          node-version: 20.20.2
+          node-version: 24.21.0
           package-manager-cache: false
       - name: Setup Hugo (extended)
         shell: bash
@@ -430,7 +431,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
-          node-version: 20.20.2
+          node-version: 24.21.0
           package-manager-cache: false
       - name: Require every selected prerequisite
         env:
@@ -464,7 +465,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
-          node-version: 20.20.2
+          node-version: 24.21.0
           package-manager-cache: false
       - name: Configure Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
