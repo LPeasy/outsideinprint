@@ -11,7 +11,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPORTER = ROOT / "config/almanack-email/exporter/scripts/render_almanack_email.py"
-HUGO = Path(os.environ.get("OIP_HUGO_BIN") or shutil.which("hugo") or (Path.home() / "Documents/30_Resources/toolchains/hugo/0.167.0/hugo.exe"))
+PINNED_HUGO = Path.home() / "Documents/30_Resources/toolchains/hugo/0.167.0/hugo.exe"
+HUGO = Path(os.environ.get("OIP_HUGO_BIN") or (str(PINNED_HUGO) if PINNED_HUGO.is_file() else shutil.which("hugo")) or PINNED_HUGO)
 CONTRACT = "classic-shared-v1"
 MEDIUM = "https://medium.com/the-balanced-sheet"
 CONTRAST = runpy.run_path(str(Path(__file__).with_name("almanack_email_contrast.py")))
