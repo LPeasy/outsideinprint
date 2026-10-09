@@ -1,0 +1,4 @@
+{{- $href := printf "%v" . -}}
+{{- if hasPrefix $href "/" }}{{ $href = printf "https://outsideinprint.org%s" $href }}{{ end -}}
+{{- if not (hasPrefix $href "https://") }}{{ errorf "Almanack email link must use HTTPS: %s" $href }}{{ end -}}
+{{- return $href -}}
