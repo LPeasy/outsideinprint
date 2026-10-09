@@ -490,6 +490,9 @@ function Assert-OipImageAssetManifest {
     elseif ([string]$entry.review_state -eq 'rejected_corrupt_source') {
       throw "Rejected corrupt image asset '$id' must be source_only_unprocessable."
     }
+    elseif (-not [string]::IsNullOrEmpty([string]$entry['processing_note'])) {
+      throw "Derivative-capable image asset '$id' must have a null processing_note."
+    }
 
     if ($null -ne $entry.quality_override) {
       foreach ($qualityKey in @('webp_quality', 'avif_quality')) {
@@ -562,7 +565,7 @@ function Write-OipImageAssetManifest {
       review_state = [string]$entry.review_state
       usage_state = [string]$entry.usage_state
       processing_state = [string]$entry.processing_state
-      processing_note = if ($null -eq $entry.processing_note) { $null } else { [string]$entry.processing_note }
+      processing_note = if ([string]::IsNullOrEmpty([string]$entry['processing_note'])) { $null } else { [string]$entry['processing_note'] }
       quality_override = $qualityOverride
     }
   }
@@ -668,7 +671,7 @@ function Register-OipImageAsset {
     review_state = $ReviewState
     usage_state = $UsageState
     processing_state = $ProcessingState
-    processing_note = $ProcessingNote
+    processing_note = if ([string]::IsNullOrEmpty($ProcessingNote)) { $null } else { $ProcessingNote }
     quality_override = $normalizedOverride
   }
 

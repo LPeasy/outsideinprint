@@ -552,7 +552,7 @@ foreach ($budgetContract in @(
   @{ Pattern = '(?m)^\$maxArtifactBytes\s*=\s*900MB\s*$'; Name = '900 MiB Pages artifact' },
   @{ Pattern = '(?m)^\$maxPublicImageBytes\s*=\s*800MB\s*$'; Name = '800 MiB public/images' },
   @{ Pattern = '(?m)^\$maxDerivativeBytes\s*=\s*1MB\s*$'; Name = '1 MiB derivative' },
-  @{ Pattern = '(?m)^\$maxGeneratedImages\s*=\s*5100\s*$'; Name = '5,100 generated images' },
+  @{ Pattern = '(?m)^\$maxGeneratedImages\s*=\s*\$allowedDerivativePaths\.Count\s*$'; Name = 'approved derivative recipe' },
   @{ Pattern = '(?m)^\$maxPublicFiles\s*=\s*6500\s*$'; Name = '6,500 public files' }
 )) {
   if ($responsiveImageOutputContract -notmatch $budgetContract.Pattern) {
@@ -564,8 +564,8 @@ Assert-WorkflowActionReferences `
   -WorkflowName "deploy.yml" `
   -WorkflowText $deployWorkflow `
   -ExpectedReferences @{
-    'actions/checkout@v7' = 4
-    'actions/setup-node@v6' = 2
+    'actions/checkout@v7' = 5
+    'actions/setup-node@v6' = 3
     'actions/cache@v5' = 1
     'actions/configure-pages@v6' = 1
     'actions/deploy-pages@v5' = 1
