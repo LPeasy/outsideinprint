@@ -1,6 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { imageCacheIdentity } from "../scripts/ci/image_cache.mjs";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { imageCacheIdentity, collectOtherImageInputs } from "../scripts/ci/image_cache.mjs";
 const fixture = () => ({
   os: "Linux", hugoVersion: "0.164.0", imaging: { resampleFilter: "Lanczos" }, implementation: { model: "resize" },
   manifest: { defaults: { widths: [320, 640], max_render_width: 1600 }, assets: {
@@ -30,5 +33,26 @@ test("Hugo, OS, width defaults, processing configuration and code define compati
   for (const mutate of [f => { f.hugoVersion = "0.167.0"; }, f => { f.os = "Windows"; }, f => { f.manifest.defaults.widths.push(960); }, f => { f.imaging.resampleFilter = "Box"; }, f => { f.implementation.model = "fit"; }]) {
     const before = fixture(), after = fixture(); mutate(after);
     assert.notEqual(imageCacheIdentity(before).prefix, imageCacheIdentity(after).prefix);
+  }
+});
+
+test("asset and page-bundle image changes invalidate exact identity without hashing prose", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "oip-image-inputs-"));
+  const write = (file, value) => { const target = path.join(root, file); fs.mkdirSync(path.dirname(target), { recursive: true }); fs.writeFileSync(target, value); };
+  const identity = () => imageCacheIdentity({ ...fixture(), otherInputs: collectOtherImageInputs(root) });
+  try {
+    for (const file of ["assets/images/logo.png", "assets/games/idle-times/capsule.png", "content/games/example/hero.webp", "assets/images/originals/approved.png"]) write(file, "original");
+    const before = identity();
+    write("content/games/example/index.md", "editorial text");
+    write("assets/images/originals/approved.png", "manifest owns this source identity");
+    assert.deepEqual(identity(), before);
+    for (const file of ["assets/games/idle-times/capsule.png", "content/games/example/hero.webp"]) {
+      const previous = identity(); write(file, "replacement");
+      assert.equal(identity().prefix, previous.prefix);
+      assert.notEqual(identity().key, previous.key);
+    }
+  } finally {
+    assert.ok(path.resolve(root).startsWith(path.resolve(os.tmpdir()) + path.sep));
+    fs.rmSync(root, { recursive: true, force: true });
   }
 });

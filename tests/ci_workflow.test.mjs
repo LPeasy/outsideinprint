@@ -27,6 +27,11 @@ test("Pages and OIDC permissions belong only to production deployment", () => {
   assert.equal(jobs.deploy.environment.name, "github-pages");
   assert.match(jobs.deploy.if, /github.ref == 'refs\/heads\/main'/);
   assert.match(jobs.deploy.if, /github.event_name != 'pull_request'/);
+  assert.match(jobs.deploy.if, /always\(\)/);
+  for (const dependency of ["classify", "site", "release-ready"]) {
+    assert.ok(dependencies("deploy").includes(dependency));
+    assert.ok(jobs.deploy.if.includes("needs." + dependency + ".result == 'success'"));
+  }
   assert.match(action("site", "actions/upload-pages-artifact").if, /refs\/heads\/main/);
   assert.equal(action("site", "actions/upload-pages-artifact").with.path, "./public");
   assert.match(commands("site"), /rm -rf \.\/public\/pdfs/);
@@ -95,4 +100,36 @@ test("deployment verifies exact generation before canonical route checks", () =>
 test("disabled analytics workflow remains manual-only", () => {
   const analytics = YAML.parse(fs.readFileSync(".github/workflows/refresh-analytics.yml", "utf8"), { version: "1.2" });
   assert.deepEqual(Object.keys(analytics.on), ["workflow_dispatch"]);
+});
+
+test("supported runtimes, lockfiles and CI pins agree", () => {
+  const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
+  const lock = JSON.parse(fs.readFileSync("package-lock.json", "utf8"));
+  const toolchain = JSON.parse(fs.readFileSync("tools/toolchain.manifest.json", "utf8"));
+  const node = toolchain.tools.find(tool => tool.name === "node");
+  const npm = toolchain.tools.find(tool => tool.name === "npm");
+  assert.equal(fs.readFileSync(".nvmrc", "utf8").trim(), node.version);
+  assert.equal(pkg.engines.node, node.version.split(".")[0] + ".x");
+  assert.equal(pkg.engines.npm, npm.version.split(".")[0] + ".x");
+  assert.equal(pkg.packageManager, "npm@" + npm.version);
+  assert.deepEqual(lock.packages[""].engines, pkg.engines);
+  for (const dependency of ["playwright", "yaml"]) {
+    assert.match(pkg.devDependencies[dependency], /^\d+\.\d+\.\d+$/);
+    assert.equal(lock.packages["node_modules/" + dependency].version, pkg.devDependencies[dependency]);
+  }
+  assert.equal(pkg.devDependencies.yaml, "2.9.1");
+  assert.match(node.sha256, /^[a-f0-9]{64}$/);
+  for (const name of Object.keys(jobs)) {
+    const setup = action(name, "actions/setup-node");
+    if (setup) assert.equal(setup.with["node-version"], node.version);
+  }
+});
+
+test("Dependabot maintains grouped weekly npm dependencies without auto-merge policy", () => {
+  const config = YAML.parse(fs.readFileSync(".github/dependabot.yml", "utf8"));
+  const npm = config.updates.find(update => update["package-ecosystem"] === "npm");
+  assert.equal(npm.directory, "/");
+  assert.equal(npm.schedule.interval, "weekly");
+  assert.equal(npm.schedule.timezone, "America/New_York");
+  assert.deepEqual(npm.groups["npm-minor-patch"]["update-types"], ["minor", "patch"]);
 });

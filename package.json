@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": "20.x",
-    "npm": "10.x"
+    "node": "24.x",
+    "npm": "11.x"
   },
   "scripts": {
     "test": "node --test tests/all.test.mjs",
@@ -13,7 +13,8 @@
     "check:essays:publish": ".\\tools\\bin\\generated\\pwsh.cmd -NoLogo -NoProfile -File ./scripts/check_essay_guardrails.ps1 -RequireEditorialPhilosophyAudit"
   },
   "devDependencies": {
-    "playwright": "1.53.1",
+    "playwright": "1.64.0",
     "yaml": "2.9.1"
-  }
+  },
+  "packageManager": "npm@11.19.0"
 }

@@ -22,7 +22,7 @@ For a conditional local preview/build, provision Hugo alone as shown in [the pub
 
 The current toolchain contract is pinned to:
 
-- Node `20.20.2`
+- Node `24.21.0`
 - Hugo Extended `0.164.0`
 - PowerShell `7.5.0`
 - Python `3.12.9`
