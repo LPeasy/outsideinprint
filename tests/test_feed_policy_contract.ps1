@@ -2,7 +2,8 @@
 [CmdletBinding()]
 param(
   [string]$SiteDir = (Join-Path (Split-Path -Parent $PSScriptRoot) 'public'),
-  [switch]$SourceOnly
+  [switch]$SourceOnly,
+  [string]$Clock = $env:OIP_BUILD_CLOCK_UTC
 )
 
 Set-StrictMode -Version Latest
@@ -213,7 +214,8 @@ function Read-Feed {
     catch {
       throw "$RelativePath contains an invalid pubDate '$dateText'."
     }
-    Assert-True ($date.Year -gt 2000 -and $date.UtcDateTime -le [DateTime]::UtcNow.AddMinutes(5)) "$RelativePath contains an invalid or future pubDate: $dateText"
+    $feedClock = if ($Clock) { ([datetimeoffset]::Parse($Clock)).UtcDateTime } else { [DateTime]::UtcNow }
+    Assert-True ($date.Year -gt 2000 -and $date.UtcDateTime -le $feedClock.AddMinutes(5)) "$RelativePath contains an invalid or future pubDate: $dateText"
     if ($dates.Count -gt 0) {
       Assert-True ($dates[$dates.Count - 1] -ge $date) "$RelativePath items are not sorted newest first."
     }

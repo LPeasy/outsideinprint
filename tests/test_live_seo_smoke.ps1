@@ -43,7 +43,7 @@ function Get-Page {
   param([string]$Path)
 
   $uri = ([System.Uri]::new([System.Uri]$BaseUrl, $Path)).AbsoluteUri
-  return (Invoke-WebRequest -Uri $uri -MaximumRedirection 5).Content
+  return (Invoke-WebRequest -Uri $uri -MaximumRedirection 5 -TimeoutSec 20).Content
 }
 
 $homePage = Get-Page '/'

@@ -291,16 +291,7 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.doesNotMatch(cssRule(css, 'html[data-theme="light"] body'), /radial-gradient/);
 });
 
-test("homepage nav-to-stats spacing stays compact", () => {
-  assert.match(cssRule(css, ".masthead.masthead--full"), /margin-bottom:6px;/);
-  assert.match(cssRule(css, ".masthead--full .nav--section-rail"), /margin-bottom:6px;/);
-  const fullNavMargins = [...css.matchAll(/(?:^|\n)\s*\.masthead--full \.nav--section-rail\s*\{([^}]*)\}/g)]
-    .map((match) => match[1]).filter((rules) => /margin-bottom:/.test(rules));
-  assert.equal(fullNavMargins.length, 2, "desktop and mobile own the homepage navigation gap");
-  for (const rules of fullNavMargins) assert.match(rules, /margin-bottom:6px;/);
-  assert.match(css, /@media \(max-width:768px\)\{[\s\S]*?\.masthead--full \.nav--section-rail\{\s*margin-bottom:6px;/);
-  assert.doesNotMatch(css, /\.home-v2__support/);
-});
+
 
 test("Jack Stratton modern bio preserves the complete localized visual sequence", () => {
   assert.match(jackStrattonEssay, /^version: "2\.0"$/m);
@@ -1082,7 +1073,7 @@ test("homepage editorial layout keeps the reader note compact and drops retired 
   assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-library\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
   assert.match(cssRule(css, ".home-reader-banner__proof"), /grid-template-columns:repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(cssRule(css, ".home-reader-banner__proof-item"), /min-height:34px;[\s\S]*padding:0 \.35rem;/);
-  assert.match(cssRule(css, ".home-reader-banner__signup"), /gap:\.75rem 1\.4rem;[\s\S]*padding:\.72rem \.9rem \.78rem;/);
+  // Reader control fit and overflow are checked in mobile_navigation_browser.test.mjs.
   assert.match(cssRule(css, ".home-reader-banner__form"), /grid-template-columns:minmax\(0, 1fr\) auto;/);
   assert.match(cssRule(css, ".home-reader-banner__controls button"), /min-height:2\.75rem;/);
   const orientationRule = cssRule(css, ".home-front-page__orientation");

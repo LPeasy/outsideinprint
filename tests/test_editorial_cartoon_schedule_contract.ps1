@@ -1,5 +1,7 @@
 #requires -Version 7.0
 
+param([string]$Clock = '', [switch]$SourceOnly)
+
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
@@ -513,7 +515,8 @@ if ([string]::IsNullOrWhiteSpace($cartoonData.Current)) {
 
 $slugSet = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
 $currentExists = $false
-$nowEastern = [System.TimeZoneInfo]::ConvertTime([datetimeoffset]::UtcNow, (Get-OipEasternTimeZone))
+$instant = if ($Clock) { [datetimeoffset]::Parse($Clock) } else { [datetimeoffset]::UtcNow }
+$nowEastern = [System.TimeZoneInfo]::ConvertTime($instant, (Get-OipEasternTimeZone))
 
 foreach ($cartoon in @($cartoonData.Entries)) {
   foreach ($required in @('slug', 'title', 'date', 'image', 'alt', 'width', 'height')) {
@@ -577,9 +580,11 @@ if (-not $currentExists) {
   throw "Current editorial cartoon '$($cartoonData.Current)' does not match any cartoon entry."
 }
 
-Test-AssociationOnlyUpdate
-Test-ExplicitPublishSlug
-& (Join-Path $PSScriptRoot 'test_dialogue_gallery_publish.ps1')
+if (-not $SourceOnly) {
+  Test-AssociationOnlyUpdate
+  Test-ExplicitPublishSlug
+  & (Join-Path $PSScriptRoot 'test_dialogue_gallery_publish.ps1')
+}
 
 Write-Host "Editorial cartoon schedule contract passed."
 $global:LASTEXITCODE = 0

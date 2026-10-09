@@ -1,209 +1,155 @@
 name: Build Hugo, Deploy to GitHub Pages
-
 on:
   push:
-    branches: ["main"]
-  pull_request:
+    branches:
+      - main
+  pull_request: null
   workflow_dispatch:
+    inputs:
+      full_checks:
+        description: Run all active fixture, browser, Windows and worker suites
+        type: boolean
+        default: true
   schedule:
-    - cron: "17 0 * * *"
-      timezone: "America/New_York"
-
+    - cron: 17 0 * * 1
+      timezone: America/New_York
+    - cron: 17 0 * * 0,2-6
+      timezone: America/New_York
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
 concurrency:
-  # Serialize production runs together without letting PR checks replace them.
-  group: pages-${{ github.ref }}
-  cancel-in-progress: false
-
+  group: pages-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
-  contracts:
+  classify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      site: ${{ steps.selection.outputs.site }}
+      browser: ${{ steps.selection.outputs.browser }}
+      images: ${{ steps.selection.outputs.images }}
+      publishing: ${{ steps.selection.outputs.publishing }}
+      rendering: ${{ steps.selection.outputs.rendering }}
+      windows: ${{ steps.selection.outputs.windows }}
+      worker: ${{ steps.selection.outputs.worker }}
+      seo: ${{ steps.selection.outputs.seo }}
+      full: ${{ steps.selection.outputs.full }}
+      clock: ${{ steps.selection.outputs.clock }}
+      base: ${{ steps.selection.outputs.base }}
+      selection: ${{ steps.selection.outputs.selection }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          sparse-checkout: |-
+            .github
+            scripts/ci
+            tests
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 20.20.2
+          package-manager-cache: false
+      - name: Install workflow parser
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Check workflow safety and selectors
+        run: node --test tests/ci_workflow.test.mjs tests/classify_changes.test.mjs tests/image_cache.test.mjs tests/release_gate.test.mjs tests/verify_deployment.test.mjs
+      - name: Select checks and publication clock
+        id: selection
+        env:
+          OIP_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          OIP_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          OIP_FULL_CHECKS: ${{ inputs.full_checks }}
+          OIP_PROTECTED_MAIN: ${{ github.ref_protected && vars.CI_BRANCH_PROTECTION_ACTIVE == 'true' }}
+          OIP_SCHEDULE: ${{ github.event.schedule }}
+        run: node scripts/ci/classify_changes.mjs
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    needs:
+      - classify
+    if: ${{ needs.classify.outputs.windows == 'true' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          sparse-checkout: |-
+            scripts
+            tests
+            tools
+            data
+            reports
+            assets/images/originals
+            static/images
+            content/essays/affirmations
+            editorial
+          persist-credentials: false
+      - name: Image tooling on Windows
+        if: ${{ needs.classify.outputs.images == 'true' }}
+        shell: pwsh
+        run: |-
+          ./tests/test_managed_image_registration.ps1
+          ./tests/test_focused_image_review_promotion.ps1
+      - name: Publishing tooling on Windows
+        if: ${{ needs.classify.outputs.publishing == 'true' }}
+        shell: pwsh
+        run: |-
+          ./tests/test_essay_guardrails.ps1
+          ./tests/test_essay_image_audit.ps1
+          ./tests/test_affirmation_contract.ps1
+          ./tests/test_almanack_buttondown_numbering.ps1
+  worker:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-
+    needs:
+      - classify
+    if: ${{ needs.classify.outputs.worker == 'true' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          fetch-depth: 0
-
-      - name: Setup Node for contract tests
-        uses: actions/setup-node@v6
+          sparse-checkout: workers/oip-commerce
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
-          node-version: "20.20.2"
+          node-version: 20.20.2
           package-manager-cache: false
-
-      - name: Test Node Contracts
-        run: node --test tests/all.test.mjs
-
-      - name: Test CI Contract
-        shell: pwsh
-        run: |
-          ./tests/test_ci_contract.ps1
-
-      - name: Test Responsive Image Source Contract
-        shell: pwsh
-        run: |
-          ./tests/test_responsive_image_source_contract.ps1
-
-      - name: Test Managed Image Registration
-        shell: pwsh
-        run: ./tests/test_managed_image_registration.ps1
-
-      - name: Test Release Gate
-        run: node --test tests/release_gate.test.mjs
-
-      - name: Test Bookstore Reading Sample Source Contract
-        shell: pwsh
-        run: |
-          ./tests/test_bookstore_reading_sample_contract.ps1 -SourceOnly
-          ./tests/test_2045_storefront.ps1 -SourceOnly
-
-      - name: Test Focused Legacy Image Migration Contract
-        shell: pwsh
-        run: |
-          ./tests/test_focused_legacy_image_migration.ps1
-
-      - name: Test Focused Image Review Promotion Contract
-        shell: pwsh
-        run: |
-          ./tests/test_focused_image_review_promotion.ps1
-
-      - name: Test Hugo Upgrade Contract
-        shell: pwsh
-        run: |
-          ./tests/test_hugo_upgrade_contract.ps1
-
-      - name: Test Essay Guardrails
-        shell: pwsh
-        run: |
-          ./tests/test_essay_guardrails.ps1
-
-      - name: Test Affirmation Publication Contract
-        shell: pwsh
-        run: |
-          ./tests/test_affirmation_contract.ps1
-
-      - name: Test Essay Image Audit
-        shell: pwsh
-        run: |
-          ./tests/test_essay_image_audit.ps1
-
-      - name: Test Schema Template Contract
-        shell: pwsh
-        run: |
-          ./tests/test_schema_template_contract.ps1
-
-      - name: Test Author Directory Contract
-        shell: pwsh
-        run: |
-          ./tests/test_author_directory_contract.ps1
-
-      - name: Test Apps & Tools Contract
-        shell: pwsh
-        run: |
-          ./tests/test_apps_tools_contract.ps1
-
-      - name: Test Indexation Policy Contract
-        shell: pwsh
-        run: |
-          ./tests/test_indexation_policy_contract.ps1
-
-      - name: Test Discovery Surface Contract
-        shell: pwsh
-        run: |
-          ./tests/test_discovery_surface_contract.ps1
-          ./tests/test_feed_policy_contract.ps1 -SourceOnly
-
-      - name: Test Almanack Module Data Contract
-        shell: pwsh
-        run: |
-          ./tests/test_almanack_module_data.ps1
-
-      - name: Test Editorial Cartoon Schedule Contract
-        shell: pwsh
-        run: |
-          ./tests/test_editorial_cartoon_schedule_contract.ps1
-
-      - name: Test SEO Rollout Contract
-        shell: pwsh
-        run: |
-          ./tests/test_seo_rollout_contract.ps1
-
-      - name: Test Legacy Render Contract
-        shell: pwsh
-        run: |
-          ./tests/test_legacy_render_contract.ps1
-          ./tests/test_imported_content_media.ps1
-
-      - name: Audit Essay Images
-        shell: pwsh
-        run: |
-          ./scripts/audit_essay_images.ps1 -FailOnIssues
-
-      - name: Check Essay Guardrails
-        shell: pwsh
-        run: |
-          $eventName = "${{ github.event_name }}"
-          if ($eventName -eq 'pull_request') {
-            $base = "${{ github.event.pull_request.base.sha }}"
-          }
-          else {
-            $base = "${{ github.event.before }}"
-          }
-          if ([string]::IsNullOrWhiteSpace($base) -or ($base -match '^0+$')) {
-            $base = (git rev-parse HEAD^ 2>$null)
-          }
-
-          # One-release recovery: ec9c932 merged the 110-essay batch but never deployed.
-          # Recheck that complete batch plus its remedy when this exact commit is the
-          # PR/push base. Later bases and manual/scheduled fallback are unchanged.
-          if ($eventName -in @('pull_request', 'push') -and
-              $base -eq 'ec9c93265c10d3a88e25bd4ad46c99decdbc4c07') {
-            $base = '5e21e40efd5e4bcfda8bac2284edb9bb36b341d6'
-          }
-
-          if ([string]::IsNullOrWhiteSpace($base)) {
-            ./scripts/check_essay_guardrails.ps1 -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit
-          }
-          else {
-            ./scripts/check_essay_guardrails.ps1 -BaseRef $base -HeadRef "${{ github.sha }}" -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit
-          }
-
-  focused-image-review-windows:
-    runs-on: windows-latest
-    timeout-minutes: 5
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Test Focused Image Review Promotion Contract on Windows
-        shell: pwsh
-        run: |
-          ./tests/test_focused_image_review_promotion.ps1
-          ./tests/test_managed_image_registration.ps1
-
-  build:
+      - name: Worker behavior, monitoring and tax fixtures
+        run: npm --prefix workers/oip-commerce test
+      - name: Worker provisioning fixtures
+        run: python3 -m unittest discover -s workers/oip-commerce/test -p 'test_*.py'
+  site:
     runs-on: ubuntu-latest
-    needs: [contracts, focused-image-review-windows]
-    timeout-minutes: 30
+    timeout-minutes: 35
+    needs:
+      - classify
+      - windows
+      - worker
+    if: ${{ always() && needs.classify.result == 'success' && needs.classify.outputs.site == 'true' && (needs.windows.result == 'success' || (needs.classify.outputs.windows == 'false' && needs.windows.result == 'skipped')) && (needs.worker.result == 'success' || (needs.classify.outputs.worker == 'false' && needs.worker.result == 'skipped')) }}
+    outputs:
+      generated_at: ${{ steps.manifest.outputs.generated_at }}
     env:
       HUGO_ENVIRONMENT: production
       TZ: America/New_York
       ANALYTICS_ENABLED: ${{ vars.ANALYTICS_ENABLED }}
       ANALYTICS_ALLOW_LOCAL: ${{ vars.ANALYTICS_ALLOW_LOCAL }}
-
+      OIP_BUILD_CLOCK_UTC: ${{ needs.classify.outputs.clock }}
+      OIP_HUGO_BIN: hugo
+      OIP_HUGO_CONFIG: hugo.toml
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v6
-
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 20.20.2
+          package-manager-cache: false
       - name: Setup Hugo (extended)
         shell: bash
         run: |
@@ -222,140 +168,229 @@ jobs:
           installed_version="$("${tools_dir}/hugo" version)"
           echo "${installed_version}"
           [[ "${installed_version}" == hugo\ v${version}*+extended* ]]
-
-      - name: Cache Hugo image resources
-        id: hugo-image-cache
-        uses: actions/cache@v5
-        with:
-          path: resources/_gen
-          key: >-
-            ${{ runner.os }}-hugo-resources-0.164.0-${{ hashFiles('tools/toolchain.manifest.json', 'hugo.toml', 'data/image-assets.json', 'assets/images/originals/**', 'content/games/**', 'layouts/games/**', 'layouts/partials/games/**', 'layouts/partials/images/**', 'layouts/_default/_markup/render-image.html', 'layouts/partials/metadata_image.html', 'layouts/partials/opengraph.html', 'layouts/partials/twitter_cards.html', 'layouts/partials/schema/image.html') }}
-
-      - name: Verify Toolchain
-        shell: bash
+      - name: Test Node source contracts
+        run: node --test tests/all.test.mjs
+      - name: Test Responsive Image Source Contract
+        shell: pwsh
         run: |
-          set -euo pipefail
-          hugo version
-
+          ./tests/test_responsive_image_source_contract.ps1
+      - name: Test Bookstore Reading Sample Source Contract
+        shell: pwsh
+        run: |
+          ./tests/test_bookstore_reading_sample_contract.ps1 -SourceOnly
+          ./tests/test_2045_storefront.ps1 -SourceOnly
+      - name: Test Schema Template Contract
+        shell: pwsh
+        run: |
+          ./tests/test_schema_template_contract.ps1
+      - name: Test Author Directory Contract
+        shell: pwsh
+        run: |
+          ./tests/test_author_directory_contract.ps1
+      - name: Test Apps & Tools Contract
+        shell: pwsh
+        run: |
+          ./tests/test_apps_tools_contract.ps1
+      - name: Test Indexation Policy Contract
+        shell: pwsh
+        run: |
+          ./tests/test_indexation_policy_contract.ps1
+      - name: Test Discovery Surface Contract
+        shell: pwsh
+        run: |
+          ./tests/test_discovery_surface_contract.ps1
+          ./tests/test_feed_policy_contract.ps1 -SourceOnly
+      - name: Test Almanack Module Data Contract
+        shell: pwsh
+        run: |
+          ./tests/test_almanack_module_data.ps1
+      - name: Test Editorial Cartoon Schedule Contract
+        shell: pwsh
+        run: |-
+          ./tests/test_editorial_cartoon_schedule_contract.ps1 -SourceOnly -Clock $env:OIP_BUILD_CLOCK_UTC
+      - name: Test Legacy Render Contract
+        shell: pwsh
+        run: |
+          ./tests/test_legacy_render_contract.ps1
+          ./tests/test_imported_content_media.ps1
+      - name: Audit Essay Images
+        shell: pwsh
+        run: |
+          ./scripts/audit_essay_images.ps1 -FailOnIssues
+      - name: Test Collection Organization Source Contract
+        shell: pwsh
+        run: ./tests/test_collection_organization_contract.ps1 -Clock $env:OIP_BUILD_CLOCK_UTC
+      - name: Check changed publication prose
+        shell: pwsh
+        run: |-
+          $base = $env:OIP_BASE_SHA
+          if ($base) {
+            ./scripts/check_essay_guardrails.ps1 -BaseRef $base -HeadRef HEAD -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit
+          } else {
+            ./scripts/check_essay_guardrails.ps1 -AllEssays -RequireDescription -RequireFeaturedImage -RequireEditorialPhilosophyAudit
+          }
+        env:
+          OIP_BASE_SHA: ${{ needs.classify.outputs.base }}
+      - name: Test Focused Legacy Image Migration Contract
+        shell: pwsh
+        run: |
+          ./tests/test_focused_legacy_image_migration.ps1
+        if: ${{ needs.classify.outputs.images == 'true' }}
+      - name: Test Focused Image Review Promotion Contract
+        shell: pwsh
+        run: |
+          ./tests/test_focused_image_review_promotion.ps1
+        if: ${{ needs.classify.outputs.images == 'true' }}
+      - name: Test Managed Image Registration
+        shell: pwsh
+        run: ./tests/test_managed_image_registration.ps1
+        if: ${{ needs.classify.outputs.images == 'true' }}
+      - name: Test cartoon publishing fixtures
+        if: ${{ needs.classify.outputs.publishing == 'true' }}
+        shell: pwsh
+        run: ./tests/test_editorial_cartoon_schedule_contract.ps1 -Clock $env:OIP_BUILD_CLOCK_UTC
+      - name: Test Essay Guardrails
+        shell: pwsh
+        run: |
+          ./tests/test_essay_guardrails.ps1
+        if: ${{ needs.classify.outputs.publishing == 'true' }}
+      - name: Test Affirmation Publication Contract
+        shell: pwsh
+        run: |
+          ./tests/test_affirmation_contract.ps1
+      - name: Test Essay Image Audit
+        shell: pwsh
+        run: |
+          ./tests/test_essay_image_audit.ps1
+        if: ${{ needs.classify.outputs.publishing == 'true' }}
       - name: Test Almanack Email Review Renderer and Numbering Installer
         run: python3 -m unittest discover -s tests -p 'test_almanack*.py'
-
+        if: ${{ needs.classify.outputs.publishing == 'true' }}
       - name: Test Buttondown Canonical Number Readback
         shell: pwsh
         run: ./tests/test_almanack_buttondown_numbering.ps1
-
-      - name: Test Collection Organization Source Contract
+        if: ${{ needs.classify.outputs.publishing == 'true' }}
+      - name: Test Hugo Upgrade Contract
         shell: pwsh
-        run: ./tests/test_collection_organization_contract.ps1
-
+        run: |
+          ./tests/test_hugo_upgrade_contract.ps1
+        if: ${{ needs.classify.outputs.rendering == 'true' }}
+      - name: Test SEO Rollout Contract
+        shell: pwsh
+        run: |
+          ./tests/test_seo_rollout_contract.ps1
+        if: ${{ needs.classify.outputs.seo == 'true' && (github.event_name == 'pull_request' || needs.classify.outputs.full == 'true') }}
+      - name: Test image resource reuse
+        if: ${{ needs.classify.outputs.images == 'true' }}
+        run: node --test tests/responsive_image_cache_behavior.test.mjs
+      - name: Fingerprint image resources
+        id: image-key
+        run: |-
+          hugo config --format json > "$RUNNER_TEMP/hugo-config.json"
+          node scripts/ci/image_cache.mjs "$RUNNER_TEMP/hugo-config.json"
+      - name: Restore compatible Hugo image resources
+        id: image-cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: resources/_gen
+          key: ${{ steps.image-key.outputs.key }}
+          restore-keys: ${{ steps.image-key.outputs.prefix }}
       - name: Build Hugo
         shell: bash
         run: |
           set -euo pipefail
           start_epoch="$(date +%s)"
-          hugo --gc --minify --panicOnWarning
+          hugo --gc --minify --panicOnWarning --clock "$OIP_BUILD_CLOCK_UTC"
           elapsed_seconds="$(( $(date +%s) - start_epoch ))"
           limit_seconds=900
           build_lane="cold"
-          if [[ "${{ steps.hugo-image-cache.outputs.cache-hit }}" == "true" ]]; then
+          if [[ "${{ steps.image-cache.outputs.cache-hit }}" == "true" ]]; then
             limit_seconds=300
-            build_lane="restored-cache"
+            build_lane="exact-cache"
           fi
           echo "Hugo image build lane=${build_lane} elapsed_seconds=${elapsed_seconds} limit_seconds=${limit_seconds}"
           if (( elapsed_seconds > limit_seconds )); then
             echo "Hugo ${build_lane} image build exceeded ${limit_seconds} seconds." >&2
             exit 1
           fi
-
-      - name: Setup Node for browser tests
-        uses: actions/setup-node@v6
-        with:
-          node-version: "20.20.2"
-          package-manager-cache: false
-
       - name: Test Homepage Output and Selection
         env:
           OIP_HUGO_CONFIG: hugo.toml
           OIP_SITE_DIR: public
           OIP_HUGO_BIN: hugo
-        run: node --test tests/homepage_output.test.mjs tests/homepage_selection_behavior.test.mjs tests/point7_ux_output.test.mjs
-
+        run: |
+          node --test tests/homepage_output.test.mjs tests/point7_ux_output.test.mjs
       - name: Test Reader Refinements
         env:
           OIP_SITE_DIR: public
           OIP_HUGO_BIN: hugo
-        run: node --test tests/reader_refinements_output.test.mjs tests/gallery_reading_behavior.test.mjs tests/bookstore_ebook_labels.test.mjs tests/collection_reading_path_behavior.test.mjs tests/article_contents.test.mjs tests/article_mobile_layout.test.mjs tests/reader_actions_output.test.mjs tests/contributor_pitch.test.mjs
-
+        run: node --test tests/reader_refinements_output.test.mjs tests/bookstore_ebook_labels.test.mjs tests/article_contents.test.mjs tests/article_mobile_layout.test.mjs tests/reader_actions_output.test.mjs tests/contributor_pitch.test.mjs
+      - name: Test rendering behavior fixtures
+        if: ${{ needs.classify.outputs.rendering == 'true' }}
+        run: node --test tests/homepage_selection_behavior.test.mjs tests/gallery_reading_behavior.test.mjs tests/collection_reading_path_behavior.test.mjs
       - name: Install browser test dependencies
         run: |
           npm ci --ignore-scripts --no-audit --no-fund
           npx playwright install --with-deps chromium
-
+        if: ${{ needs.classify.outputs.browser == 'true' }}
       - name: Test Mobile Navigation
         run: node --test --test-concurrency=1 tests/mobile_navigation_browser.test.mjs
-
+        if: ${{ needs.classify.outputs.browser == 'true' }}
       - name: Test Hosted Analytics Network Privacy
-        if: env.ANALYTICS_ENABLED == 'true'
+        if: ${{ needs.classify.outputs.browser == 'true' && env.ANALYTICS_ENABLED == 'true' }}
         run: node --test --test-concurrency=1 tests/hosted_analytics_browser.test.mjs
-
       - name: Test Piece Sharing
         run: node --test --test-concurrency=1 tests/piece_share_browser.test.mjs
-
+        if: ${{ needs.classify.outputs.browser == 'true' }}
       - name: Remove public PDF artifacts
         shell: bash
         run: |
           set -euo pipefail
           rm -rf ./public/pdfs
-
       - name: Write Public Build Manifest
         shell: pwsh
         run: |
-          ./tests/write_public_build_manifest.ps1
-
+          ./tests/write_public_build_manifest.ps1 -Clock $env:OIP_BUILD_CLOCK_UTC
+          $manifest = Get-Content public/.oip-build-manifest.json -Raw | ConvertFrom-Json
+          "generated_at=$($manifest.generatedAtUtc)" >> $env:GITHUB_OUTPUT
+        id: manifest
       - name: Test Public Route Smoke
         shell: pwsh
         run: |
           ./tests/test_public_route_smoke.ps1
-
       - name: Test Bookstore Reading Sample Output Contract
         shell: pwsh
         run: |
           ./tests/test_bookstore_reading_sample_contract.ps1 -SiteDir public
           ./tests/test_2045_storefront.ps1 -SiteDir public
-
       - name: Test Public HTML Output
         shell: pwsh
         run: |
           ./tests/test_feed_policy_contract.ps1 -SiteDir public
-          ./tests/test_public_html_output.ps1 -RequireFreshBuild
-
+          ./tests/test_public_html_output.ps1 -RequireFreshBuild -Clock $env:OIP_BUILD_CLOCK_UTC
       - name: Test Release A Metadata Output
         run: node --test tests/release_a_metadata_output.test.mjs
-
       - name: Test Games Catalog Output
         shell: pwsh
         run: |
           ./tests/test_games_catalog_contract.ps1 -SiteDir public -Mode Production
-
       - name: Test Responsive Image Output Contract
         shell: pwsh
         run: |
           ./tests/test_responsive_image_output_contract.ps1 -SiteDir public
-
       - name: Show Public Route Debug
         if: failure()
         shell: pwsh
         run: |
           ./tests/show_public_route_debug.ps1
-
       - name: Upload Public Route Debug Artifact
         if: failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: public-route-debug
           if-no-files-found: warn
           include-hidden-files: true
-          path: |
+          path: |-
             public/authors/**
             public/about/**
             public/random/**
@@ -363,94 +398,96 @@ jobs:
             public/games/**
             public/.oip-build-manifest.json
 
+            .deploy-reports/**
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
           path: ./public
           include-hidden-files: true
-
+        if: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+      - name: Save validated production image resources
+        if: ${{ success() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && steps.image-cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: resources/_gen
+          key: ${{ steps.image-key.outputs.key }}
   release-ready:
     name: release-ready
     if: always()
     runs-on: ubuntu-latest
-    needs: [contracts, focused-image-review-windows, build]
+    needs:
+      - classify
+      - site
+      - windows
+      - worker
     timeout-minutes: 5
     steps:
-      - name: Checkout release gate
-        uses: actions/checkout@v7
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           sparse-checkout: scripts/ci
-      - name: Setup Node for release gate
-        uses: actions/setup-node@v6
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
-          node-version: "20.20.2"
+          node-version: 20.20.2
           package-manager-cache: false
-      - name: Require successful prerequisites
+      - name: Require every selected prerequisite
         env:
           OIP_NEEDS_JSON: ${{ toJSON(needs) }}
+          OIP_SELECTED_JSON: ${{ needs.classify.outputs.selection }}
         run: node scripts/ci/release_gate.mjs
-
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [build, release-ready]
-    timeout-minutes: 10
-
+    needs:
+      - classify
+      - site
+      - release-ready
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
-
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          sparse-checkout: |-
+            scripts/ci
+            tests
+            reports/seo-rollout
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 20.20.2
+          package-manager-cache: false
+      - name: Configure Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v5
-
-      - name: Wait for Pages propagation
-        shell: bash
-        run: sleep 20
-
-      - name: Live SEO Smoke Test
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
+      - name: Verify canonical publication manifest
+        env:
+          OIP_EXPECTED_SHA: ${{ github.sha }}
+          OIP_EXPECTED_GENERATED_AT: ${{ needs.site.outputs.generated_at }}
+        run: node scripts/ci/verify_deployment.mjs
+      - name: Verify canonical routes and SEO
         shell: pwsh
-        run: |
-          ./tests/test_live_seo_smoke.ps1 -BaseUrl "${{ steps.deployment.outputs.page_url }}"
-
-      - name: Canonical Host SEO Smoke Test
-        shell: pwsh
-        run: |
-          $attempts = 6
-          $delaySeconds = 20
-          $lastError = $null
-
-          for ($attempt = 1; $attempt -le $attempts; $attempt++) {
-            try {
-              ./tests/test_live_seo_smoke.ps1 -BaseUrl "https://outsideinprint.org"
-              $lastError = $null
-              break
-            }
-            catch {
-              $lastError = $_
-              if ($attempt -lt $attempts) {
-                Start-Sleep -Seconds $delaySeconds
-              }
-            }
-          }
-
-          if ($null -ne $lastError) {
-            throw $lastError
-          }
-
+        run: ./tests/test_live_seo_smoke.ps1 -BaseUrl "https://outsideinprint.org"
       - name: SEO Rollout Probe
-        if: always()
+        if: ${{ always() && needs.classify.outputs.seo == 'true' }}
         shell: pwsh
         run: |
           ./scripts/probe_seo_rollout.ps1 -OutputDir ./.deploy-reports/seo-rollout -UpdateWorksheet:$false
-
-      - name: Upload SEO Rollout Probe Artifact
+      - name: Upload deployment diagnostics
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
-          name: seo-rollout-probe
+          name: deployment-diagnostics
           if-no-files-found: warn
-          path: ./.deploy-reports/seo-rollout/**
+          path: .deploy-reports/**

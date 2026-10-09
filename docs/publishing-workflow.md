@@ -267,6 +267,15 @@ Publishing happens through `main`.
 
 Merging is the publish action. Failed PR checks leave `main` untouched; correct the PR before merging. If the subsequent production build or deployment fails, diagnose it and merge a checked repair PR before another publication. Verify the deployed build manifest and live routes after expected completion or accept owner-supplied live evidence; avoid repeated status polling.
 
+CI selects work from complete Git changed-path sets. Routine essay/artwork PRs
+run the actual source, editorial and image gates, one Hugo build, and generated
+output checks. Browser and implementation fixture suites run for their relevant
+changes, full manual dispatches, and Monday's daily sweep. Documentation-only
+and worker-only PRs skip Hugo. Every production publication and daily run builds
+afresh at one UTC clock; production artifacts are never restored from cache.
+See [Publishing optimization](publishing-optimization.md) for selection,
+cache compatibility, release identity, maintenance and rollout details.
+
 ## Future-dated publishing
 
 Future-dated essays can be committed to `main` before release. Keep `draft: false`, set `date` to the public article date, set `publishDate` to the intended release time, and leave the production Hugo build as `hugo --gc --minify --panicOnWarning` without `--buildFuture`. Hugo excludes future-dated content from the public build until the release time has passed.

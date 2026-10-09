@@ -1,7 +1,8 @@
 #requires -Version 7.0
 
 param(
-  [string]$SiteDir = (Join-Path (Split-Path -Parent $PSScriptRoot) 'public')
+  [string]$SiteDir = (Join-Path (Split-Path -Parent $PSScriptRoot) 'public'),
+  [string]$Clock = ''
 )
 
 Set-StrictMode -Version Latest
@@ -11,7 +12,7 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $hugo = Resolve-PinnedHugo -RepoRoot $repoRoot
-$manifestPath = Write-PublicBuildManifest -RepoRoot $repoRoot -SiteDir $SiteDir -HugoVersion $hugo.Version
+$manifestPath = Write-PublicBuildManifest -RepoRoot $repoRoot -SiteDir $SiteDir -HugoVersion $hugo.Version -Clock $Clock
 
 Write-Host ("Public build manifest written to {0}" -f $manifestPath)
 $global:LASTEXITCODE = 0

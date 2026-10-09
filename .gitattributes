@@ -1,4 +1,7 @@
 /data/image-assets.json text eol=lf
+/data/bookstore.yaml text eol=lf
+/data/collections.yaml text eol=lf
+/static/data/rcp85-bibliometrics/*.csv text eol=lf
 /reports/image-review-candidates.json text eol=lf
 /reports/image-visual-review.json text eol=lf
 /reports/responsive-image-build-evidence.json text eol=lf

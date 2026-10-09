@@ -402,17 +402,11 @@ test("draft image review previews contain tall assets without changing productio
   assert.doesNotMatch(reviewImageRule, /(?:^|\n)\s*height:\s*100%/);
 });
 
-test("CI caches generated resources and runs both responsive image gates", () => {
+test("publishing guides preserve responsive budgets and migration history", () => {
   const workflow = read(".github/workflows/deploy.yml");
   const publishing = read("docs/publishing-workflow.md");
   const imageGuide = read("docs/responsive-image-pipeline.md");
 
-  assert.match(workflow, /uses:\s*actions\/cache@v5/);
-  assert.match(workflow, /path:\s*resources\/_gen/);
-  assert.match(workflow, /hashFiles\([^)]*data\/image-assets\.json/);
-  assert.match(workflow, /hashFiles\([^)]*assets\/images\/originals\/\*\*/);
-  assert.match(workflow, /layouts\/partials\/images\/\*\*/);
-  assert.match(workflow, /timeout-minutes:\s*30/);
   assert.match(workflow, /test_responsive_image_source_contract\.ps1/);
   assert.match(workflow, /test_focused_legacy_image_migration\.ps1/);
   assert.doesNotMatch(

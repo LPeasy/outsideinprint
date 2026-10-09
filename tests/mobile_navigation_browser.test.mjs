@@ -67,6 +67,24 @@ async function createPage(width) {
   return { context, page };
 }
 
+test("homepage masthead and reader controls stay visible without overflow", async () => {
+  for (const width of [360, 390, 768, 1280]) {
+    const { context, page } = await createPage(width);
+    try {
+      await page.goto(siteOrigin + "/", { waitUntil: "networkidle" });
+      const state = await page.evaluate(() => {
+        const title = document.querySelector(".masthead--full .title");
+        const newsletter = document.querySelector(".home-reader-banner__newsletter-link");
+        const box = title.getBoundingClientRect();
+        return { width: innerWidth, documentWidth: document.documentElement.scrollWidth, title: { left: box.left, right: box.right, height: box.height }, newsletter: newsletter?.getAttribute("href") };
+      });
+      assert.ok(state.documentWidth <= state.width + 1, "homepage must not overflow at " + width);
+      assert.ok(state.title.height > 0 && state.title.left >= -1 && state.title.right <= state.width + 1, "wordmark must fit at " + width);
+      assert.equal(state.newsletter, "#home-reader-banner-title");
+    } finally { await context.close(); }
+  }
+});
+
 async function geometry(page) {
   return page.evaluate(() => {
     const nav = document.querySelector(".nav__mobile");

@@ -1,4 +1,6 @@
 /public/
+/node_modules/
+/.deploy-reports/
 /resources/_gen/
 /resources/typst_build/
 /.hugo_build.lock
