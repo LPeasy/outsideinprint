@@ -308,6 +308,8 @@ jobs:
           if [[ "${{ steps.image-cache.outputs.cache-hit }}" == "true" ]]; then
             limit_seconds=300
             build_lane="exact-cache"
+          elif [[ -n "${{ steps.image-cache.outputs.cache-matched-key }}" ]]; then
+            build_lane="compatible-cache"
           fi
           echo "Hugo image build lane=${build_lane} elapsed_seconds=${elapsed_seconds} limit_seconds=${limit_seconds}"
           if (( elapsed_seconds > limit_seconds )); then
@@ -352,8 +354,7 @@ jobs:
         shell: pwsh
         run: |
           ./tests/write_public_build_manifest.ps1 -Clock $env:OIP_BUILD_CLOCK_UTC
-          $manifest = Get-Content public/.oip-build-manifest.json -Raw | ConvertFrom-Json
-          "generated_at=$($manifest.generatedAtUtc)" >> $env:GITHUB_OUTPUT
+          node scripts/ci/write_publication_identity.mjs public/.oip-build-manifest.json
         id: manifest
       - name: Test Public Route Smoke
         shell: pwsh
@@ -491,4 +492,5 @@ jobs:
         with:
           name: deployment-diagnostics
           if-no-files-found: warn
+          include-hidden-files: true
           path: .deploy-reports/**
