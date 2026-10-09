@@ -19,21 +19,20 @@
             <p class="bookstore-reading-sample__eyebrow">Free reading sample</p>
             <h1 id="page-title"><a href="{{ $book.RelPermalink }}">{{ $book.Title }}</a></h1>
             <p class="bookstore-sample-book-header__subtitle">{{ index $product "subtitle" }}</p>
-            <div class="piece-byline-row">
-              <p class="bookstore-reading-sample__meta">By {{ index $product "author" }}</p>
-              {{ partial "article/share.html" . }}
-            </div>
-            <h2 class="bookstore-sample-book-header__scope">{{ .Title }}</h2>
-            <p class="bookstore-reading-sample__meta">About {{ .ReadingTime }} min read</p>
-          </div>
         {{ else }}
         <p class="bookstore-reading-sample__eyebrow">{{ if eq .Params.sample_work_type "short-story" }}A complete story from{{ else }}An excerpt from{{ end }} <a href="{{ $book.RelPermalink }}">{{ $book.Title }}</a>{{ with index $product "positioning_label" }} · {{ . }}{{ end }}</p>
         <h1 id="page-title">{{ .Title }}</h1>
+        {{ end }}
         <div class="piece-byline-row">
           <p class="bookstore-reading-sample__meta">By {{ index $product "author" }}</p>
           {{ partial "article/share.html" . }}
         </div>
+        {{ if eq $book.Params.book_key "pending" }}
+          <h2 class="bookstore-sample-book-header__scope">{{ .Title }}</h2>
+        {{ end }}
         <p class="bookstore-reading-sample__meta">About {{ .ReadingTime }} min read</p>
+        {{ if eq $book.Params.book_key "pending" }}
+          </div>
         {{ end }}
       </header>
       {{ with .Params.sample_illustration }}
