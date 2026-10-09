@@ -15,6 +15,21 @@ export function imageCacheIdentity({ os, hugoVersion, imaging, implementation, m
     .map(([id, asset]) => ({ id, source: asset.source, sha256: asset.sha256, width: asset.width, height: asset.height, image_class: asset.image_class, processing_hint: asset.processing_hint, quality_override: asset.quality_override ?? null }));
   return { prefix, key: prefix + hash({ assets, otherInputs }) };
 }
+export function collectOtherImageInputs(root = ".") {
+  const inputs = {};
+  for (const directory of ["assets", "content"]) {
+    const absoluteDirectory = path.join(root, directory);
+    if (!fs.existsSync(absoluteDirectory)) continue;
+    for (const file of fs.readdirSync(absoluteDirectory, { recursive: true, withFileTypes: true })) {
+      if (!file.isFile() || !/\.(avif|bmp|gif|jpe?g|png|tiff?|webp)$/i.test(file.name)) continue;
+      const absolute = path.join(file.parentPath ?? file.path, file.name);
+      const relative = path.relative(root, absolute).replaceAll("\\", "/");
+      if (relative.startsWith("assets/images/originals/")) continue;
+      inputs[relative] = crypto.createHash("sha256").update(fs.readFileSync(absolute)).digest("hex");
+    }
+  }
+  return inputs;
+}
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const manifest = JSON.parse(fs.readFileSync("data/image-assets.json", "utf8"));
   const imaging = JSON.parse(fs.readFileSync(process.argv[2], "utf8")).imaging;
@@ -27,12 +42,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     "layouts/partials/games/picture.html", "layouts/partials/home_idle_bob.html",
   ]) implementation[file] = fs.readFileSync(file, "utf8").replaceAll("\r\n", "\n");
   implementation.mastheadImages = fs.readFileSync("layouts/partials/masthead.html", "utf8").split(/\r?\n/).filter(line => /paperBobIcon.*(?::=|=)|\.Resize /.test(line));
-  const otherInputs = {};
-  for (const file of fs.readdirSync("assets/images", { recursive: true, withFileTypes: true })) {
-    const absolute = path.join(file.parentPath ?? file.path, file.name);
-    const relative = path.relative("assets/images", absolute).replaceAll("\\", "/");
-    if (file.isFile() && !relative.startsWith("originals/")) otherInputs[relative] = crypto.createHash("sha256").update(fs.readFileSync(absolute)).digest("hex");
-  }
+  const otherInputs = collectOtherImageInputs();
   const tools = JSON.parse(fs.readFileSync("tools/toolchain.manifest.json", "utf8"));
   const identity = imageCacheIdentity({ os: process.env.RUNNER_OS, hugoVersion: tools.tools.find(tool => tool.name === "hugo").version, imaging, implementation, manifest, otherInputs });
   fs.appendFileSync(process.env.GITHUB_OUTPUT, "key=" + identity.key + "\nprefix=" + identity.prefix + "\n");

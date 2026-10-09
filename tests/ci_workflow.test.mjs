@@ -27,6 +27,11 @@ test("Pages and OIDC permissions belong only to production deployment", () => {
   assert.equal(jobs.deploy.environment.name, "github-pages");
   assert.match(jobs.deploy.if, /github.ref == 'refs\/heads\/main'/);
   assert.match(jobs.deploy.if, /github.event_name != 'pull_request'/);
+  assert.match(jobs.deploy.if, /always\(\)/);
+  for (const dependency of ["classify", "site", "release-ready"]) {
+    assert.ok(dependencies("deploy").includes(dependency));
+    assert.ok(jobs.deploy.if.includes("needs." + dependency + ".result == 'success'"));
+  }
   assert.match(action("site", "actions/upload-pages-artifact").if, /refs\/heads\/main/);
   assert.equal(action("site", "actions/upload-pages-artifact").with.path, "./public");
   assert.match(commands("site"), /rm -rf \.\/public\/pdfs/);

@@ -13,16 +13,21 @@ export function classifyPaths(paths, { renderingDefaultsChanged = false } = {}) 
     if (path === "data/image-assets.json" || path.startsWith("assets/images/originals/")) continue;
     if (path.startsWith("content/")) {
       if (/^content\/(apps|games|shop|studio)\//.test(path)) selected.browser = true;
+      if (/^content\/(about|authors)\//.test(path)) selected.seo = true;
       continue;
     }
     if (path.startsWith("docs/editorial-audits/")) continue;
     if (path.startsWith("editorial/")) { selected.publishing = true; continue; }
-    if (path.startsWith("data/")) { selected.browser = true; continue; }
+    if (path.startsWith("data/")) {
+      selected.browser = true;
+      if (/^data\/(authors|organization|collections)\.yaml$/.test(path)) selected.seo = true;
+      continue;
+    }
     if (/^(layouts\/|assets\/(?!images\/)|static\/)/.test(path)) {
       selected.browser = true;
       selected.rendering = true;
       if (/images|render-image|metadata_image/.test(path)) selected.images = true;
-      if (/schema|opengraph|twitter|robots|sitemap|head|feed|rss|metadata/.test(path)) selected.seo = true;
+      if (/schema|opengraph|twitter|robots|sitemap|head|feed|rss|metadata|partials\/(authors|collections)\//.test(path)) selected.seo = true;
       continue;
     }
     if (/^scripts\/(lib\/image_asset|.*(?:image|png|jpeg|webp|avif))/.test(path)) {
@@ -35,17 +40,19 @@ export function classifyPaths(paths, { renderingDefaultsChanged = false } = {}) 
       continue;
     }
     if (path.startsWith("tests/")) {
-      if (/^tests\/(ci_|release_gate|image_cache|verify_deployment|classify_changes)/.test(path)) return { ...full(), full: false };
+      if (/^tests\/(ci_|release_gate|image_cache|verify_deployment|classify_changes)/.test(path)) { Object.assign(selected, full(), { full: false }); continue; }
       if (/responsive_image|managed_image|focused.*image|helpers\/.*image/.test(path)) {
         selected.images = selected.windows = true; continue;
       }
       if (/browser|helpers\//.test(path)) selected.browser = true;
+      if (/^tests\/test_(essay_guardrails|essay_image_audit|affirmation_contract|almanack_buttondown_numbering)\.ps1$/.test(path)) selected.windows = true;
+      if (/seo|search_console|indexnow|metadata/.test(path)) selected.seo = true;
       selected.publishing = selected.rendering = true;
       continue;
     }
     // Known system dependencies get full PR validation without repeating it
     // after the protected merge. Unknown paths remain full on every event.
-    if (/^(\.github\/|tools\/|package(?:-lock)?\.json$|hugo.*\.toml$|\.gitattributes$|\.gitignore$)/.test(path)) return { ...full(), full: false };
+    if (/^(\.github\/|scripts\/ci\/|tools\/|package(?:-lock)?\.json$|hugo.*\.toml$|\.gitattributes$|\.gitignore$|\.nvmrc$)/.test(path)) { Object.assign(selected, full(), { full: false }); continue; }
     return full();
   }
   if (renderingDefaultsChanged) {

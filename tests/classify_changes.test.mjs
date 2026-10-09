@@ -22,6 +22,11 @@ test("browser selection follows rendering, applications, storefronts and helpers
   }
   assert.equal(classifyPaths(["scripts/lib/image_asset_manifest.ps1"]).windows, true);
   assert.equal(classifyPaths(["scripts/check_essay_guardrails.ps1"]).publishing, true);
+  assert.equal(classifyPaths(["tests/test_essay_guardrails.ps1"]).windows, true);
+  assert.equal(classifyPaths(["tests/test_seo_rollout_contract.ps1"]).windows, false);
+  for (const path of ["data/authors.yaml", "data/organization.yaml", "data/collections.yaml", "content/authors/lawton/index.md", "content/about/index.md", "layouts/partials/collections/resolve-page-collections.html", "tests/test_seo_rollout_contract.ps1"]) {
+    assert.equal(selectChecks({ event: "push", paths: [path], protectedMain: true }).seo, true, path);
+  }
 });
 test("workers and documentation do not need Hugo; mixed changes preserve all selected work", () => {
   assert.equal(classifyPaths(["workers/oip-commerce/src/index.mjs"]).site, false);
@@ -46,6 +51,17 @@ test("production always rebuilds; full/manual and Monday cover every active suit
   }
   assert.equal(selectChecks({ event: "workflow_dispatch", fullChecks: false }).site, true);
   assert.equal(selectChecks({ event: "schedule" }).browser, false);
+});
+
+test("unknown dependencies remain full when mixed with known system changes in either order", () => {
+  for (const known of [".github/workflows/deploy.yml", "tests/ci_workflow.test.mjs", "scripts/ci/classify_changes.mjs", ".nvmrc"]) {
+    assert.equal(selectChecks({ event: "push", paths: [known], protectedMain: true }).browser, false, known);
+    for (const paths of [[known, "unexpected-dependency.config"], ["unexpected-dependency.config", known]]) {
+      for (const event of ["push", "pull_request"]) {
+        assert.ok(Object.values(selectChecks({ event, paths, protectedMain: true })).every(Boolean), paths.join(","));
+      }
+    }
+  }
 });
 
 test("Git classification includes deletions and missing bases select every check", () => {
