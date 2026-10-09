@@ -147,7 +147,8 @@ function Write-PublicBuildManifest {
   param(
     [string]$RepoRoot,
     [string]$SiteDir,
-    [string]$HugoVersion
+    [string]$HugoVersion,
+    [string]$Clock = ''
   )
 
   if (-not (Test-Path -LiteralPath $SiteDir -PathType Container)) {
@@ -171,6 +172,7 @@ function Write-PublicBuildManifest {
     sourceFingerprint = Get-SourceFingerprint -RepoRoot $RepoRoot
     commitSha = $commitSha
     hugoVersion = $HugoVersion
+    buildClockUtc = if ($Clock) { ([datetimeoffset]::Parse($Clock)).ToUniversalTime().ToString('o') } else { [DateTime]::UtcNow.ToString('o') }
   }
 
   $manifest | ConvertTo-Json -Depth 5 | Set-Content -Path $manifestPath

@@ -10,7 +10,7 @@ This is intentional. The local Windows/Codex environment has repeatedly produced
 
 ## Default Fast Gate
 
-Before updating `main`, work from current `origin/main` and inspect `git status --short --untracked-files=all`, the exact diff, and `git diff --check`. Run the package and staged-payload validators when the content type provides them. Run target-file guardrails for changed published prose, including `-RequireEditorialPhilosophyAudit` where required. For routine artwork, inspect the original and its alt text; use the image registrar and staged-payload validator where available to check source bytes, dimensions, hashes, and manifest registration. CI runs the exhaustive responsive-image source contract on every publish. Run it locally only for structural or bulk manifest/alias changes, image-pipeline changes, or to diagnose a CI failure:
+Before creating the publication PR, work from current `origin/main` and inspect `git status --short --untracked-files=all`, the exact diff, and `git diff --check`. Run the package and staged-payload validators when the content type provides them. Run target-file guardrails for changed published prose, including `-RequireEditorialPhilosophyAudit` where required. For routine artwork, inspect the original and its alt text; use the image registrar and staged-payload validator where available to check source bytes, dimensions, hashes, and manifest registration. CI runs the exhaustive responsive-image source contract on every publish. Run it locally only for structural or bulk manifest/alias changes, image-pipeline changes, or to diagnose a CI failure:
 
 ```powershell
 .\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_responsive_image_source_contract.ps1

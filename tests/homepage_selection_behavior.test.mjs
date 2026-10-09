@@ -12,10 +12,13 @@ const dialogue = "/syd-and-oliver/what-i-had/";
 const owner = "/essays/default-owner/";
 const origami = "/essays/reverse-origami/";
 
-function renderSelection(t, overrides = {}, summaries = false) {
+function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-01T12:00:00Z") {
   assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.164\.0/);
   const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "oip-home-selection-"));
-  t.after(() => fs.rmSync(fixture, { recursive: true, force: true }));
+  t.after(() => {
+    assert.ok(path.resolve(fixture).startsWith(path.resolve(os.tmpdir()) + path.sep));
+    fs.rmSync(fixture, { recursive: true, force: true });
+  });
   const write = (file, content) => {
     fs.mkdirSync(path.dirname(path.join(fixture, file)), { recursive: true });
     fs.writeFileSync(path.join(fixture, file), content);
@@ -50,7 +53,7 @@ function renderSelection(t, overrides = {}, summaries = false) {
   }
   write("content/essays/_index.md", '---\ntitle: "Landing"\ndate: 2020-08-01\n---\n');
   write("content/shop/book.md", '---\ntitle: "Book"\ndate: 2020-08-01\n---\n');
-  execFileSync(hugo, ["--source", fixture, "--clock", "2020-09-01T12:00:00Z", "--buildDrafts", "--buildFuture", "--buildExpired", "--panicOnWarning"], { encoding: "utf8" });
+  execFileSync(hugo, ["--source", fixture, "--clock", clock, "--buildDrafts", "--buildFuture", "--buildExpired", "--panicOnWarning"], { encoding: "utf8" });
   return JSON.parse(fs.readFileSync(path.join(fixture, "public/index.html"), "utf8"));
 }
 
@@ -94,4 +97,16 @@ test("lead descriptions are trimmed and plain text while blank descriptions reta
     assert.deepEqual(summaries[slug], { lead: "Existing subtitle.", discovery: "Existing subtitle." }, slug);
   }
   assert.deepEqual(summaries.bodyFallback, { lead: "Fixture.", discovery: "Fixture." });
+});
+
+test("publication selection respects Eastern midnight and both DST offsets", (t) => {
+  for (const [release, before, after] of [
+    ["2026-03-08T00:00:00-05:00", "2026-03-08T04:59:59Z", "2026-03-08T05:00:01Z"],
+    ["2026-03-08T03:00:00-04:00", "2026-03-08T06:59:59Z", "2026-03-08T07:00:01Z"],
+    ["2026-11-01T01:30:00-05:00", "2026-11-01T06:29:59Z", "2026-11-01T06:30:01Z"],
+  ]) {
+    const page = { title: "Timed release", date: "2020-01-01", publishDate: release };
+    assert.ok(!renderSelection(t, { timed: page }, false, before).includes("/essays/timed/"), release);
+    assert.ok(renderSelection(t, { timed: page }, false, after).includes("/essays/timed/"), release);
+  }
 });

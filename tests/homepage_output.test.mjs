@@ -27,12 +27,13 @@ const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.164.0/hug
 assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.164\.0/);
 const config = process.env.OIP_HUGO_CONFIG || "hugo.toml,hugo.v2.toml";
 // Hugo owns publication dates. CSV parsing handles quoted titles and embedded commas.
-const csv = execFileSync(hugo, ["list", "published", "--config", config], { encoding: "utf8" });
+const clockArgs = process.env.OIP_BUILD_CLOCK_UTC ? ["--clock", process.env.OIP_BUILD_CLOCK_UTC] : [];
+const csv = execFileSync(hugo, ["list", "published", "--config", config, ...clockArgs], { encoding: "utf8" });
 const rows = csv.trim().split(/\r?\n/).map((line) =>
   [...line.matchAll(/(?:^|,)("(?:[^"]|"")*"|[^,]*)/g)]
     .map((match) => match[1].replace(/^"|"$/g, "").replace(/""/g, '"')));
 const columns = rows.shift();
-const observationTime = Date.now();
+const observationTime = process.env.OIP_BUILD_CLOCK_UTC ? Date.parse(process.env.OIP_BUILD_CLOCK_UTC) : Date.now();
 const publishedPages = rows.map((row) => Object.fromEntries(columns.map((column, index) => [column, row[index]])))
   .map((row) => ({ ...row, route: new URL(row.permalink).pathname }))
   .filter((row) => row.kind === "page" && archiveRoutes.has(row.route)

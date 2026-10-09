@@ -13,6 +13,7 @@
     "check:essays:publish": ".\\tools\\bin\\generated\\pwsh.cmd -NoLogo -NoProfile -File ./scripts/check_essay_guardrails.ps1 -RequireEditorialPhilosophyAudit"
   },
   "devDependencies": {
-    "playwright": "1.53.1"
+    "playwright": "1.53.1",
+    "yaml": "2.9.1"
   }
 }
