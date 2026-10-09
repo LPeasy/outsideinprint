@@ -126,6 +126,9 @@ Assert-True ($renderer -notmatch '\|\s*html(?:\s|\}\})') 'RSS renderer must not 
 $catalog = Read-RequiredText 'data/bookstore.yaml'
 $americanProduct = [regex]::Match($catalog, '(?ms)^  american_nightmare:\s*\r?\n(?<value>.*?)(?=^  [a-z0-9_"]+:|\z)').Groups['value'].Value
 Assert-True ($americanProduct -match '(?m)^\s+release_date:\s*"2026-08-21"\s*$') 'American Nightmare must declare its feed release date in bookstore data.'
+$pendingProduct = [regex]::Match($catalog, '(?ms)^  pending:\s*\r?\n(?<value>.*?)(?=^  [a-z0-9_"]+:|\z)').Groups['value'].Value
+Assert-True ($pendingProduct -match '(?m)^\s+release_date:\s*"2026-10-09"\s*$') 'PENDING must declare its approved October 9 feed release date in bookstore data.'
+Assert-True ($pendingProduct -match '(?m)^\s+availability_status:\s*"live"\s*$' -and $pendingProduct -match '(?m)^\s+price_cents:\s*999\s*$' -and $pendingProduct -match '(?m)^\s+currency:\s*"USD"\s*$') 'PENDING must retain its live numeric $9.99 USD offer for feed eligibility.'
 
 $almanackList = Read-RequiredText 'layouts/almanack/list.html'
 Assert-True ($almanackList.Contains('site.Home.OutputFormats.Get "RSS"', [StringComparison]::Ordinal)) 'Almanack redirect page must advertise the root feed.'
@@ -245,7 +248,7 @@ $expectedAlmanackLinks = @(
 Assert-True ($expectedAlmanackLinks.Count -gt 0) 'Production sitemap must contain published Almanack issues.'
 $almanackFeed = Read-Feed 'almanack/index.xml' 'https://outsideinprint.org/almanack/index.xml' 'https://outsideinprint.org/collections/bobs-almanack/' $expectedAlmanackLinks.Count
 Assert-True ((@($almanackFeed.Links | Sort-Object) -join "`n") -ceq ($expectedAlmanackLinks -join "`n")) 'Almanack feed must contain every published issue in the production sitemap exactly once.'
-$shopFeed = Read-Feed 'shop/index.xml' 'https://outsideinprint.org/shop/index.xml' 'https://outsideinprint.org/shop/' 2
+$shopFeed = Read-Feed 'shop/index.xml' 'https://outsideinprint.org/shop/index.xml' 'https://outsideinprint.org/shop/' 3
 
 $archiveHtml = Get-Content -LiteralPath (Join-Path $siteRoot 'archive/index.html') -Raw -Encoding utf8
 Assert-True (-not $archiveHtml.Contains('https://outsideinprint.org/essays/index.xml', [StringComparison]::Ordinal)) 'Rendered Archive page must not advertise the Essays compatibility feed.'
@@ -268,12 +271,16 @@ Assert-True ((@($rootAlmanackTitles | Where-Object { $_ -notmatch '^Bob''s Alman
 
 $expectedShopLinks = @(
   'https://outsideinprint.org/shop/2045/',
+  'https://outsideinprint.org/shop/pending/',
   'https://outsideinprint.org/shop/the-american-nightmare-keep-dreaming-kid/'
 ) | Sort-Object
-Assert-True ((@($shopFeed.Links | Sort-Object) -join "`n") -ceq ($expectedShopLinks -join "`n")) 'Shop feed must contain exactly the two release-dated products with live numeric offers.'
+Assert-True ((@($shopFeed.Links | Sort-Object) -join "`n") -ceq ($expectedShopLinks -join "`n")) 'Shop feed must contain exactly the three release-dated products with live numeric offers.'
+$pendingFeedIndex = [array]::IndexOf($shopFeed.Links, 'https://outsideinprint.org/shop/pending/')
+Assert-True ($shopFeed.Titles[$pendingFeedIndex] -ceq 'PENDING: A Novel' -and $shopFeed.Dates[$pendingFeedIndex] -eq [DateTimeOffset]'2026-10-09T00:00:00-04:00') 'PENDING feed metadata must retain its full title and approved release date.'
 
 foreach ($requiredRootLink in @(
   'https://outsideinprint.org/shop/2045/',
+  'https://outsideinprint.org/shop/pending/',
   'https://outsideinprint.org/shop/the-american-nightmare-keep-dreaming-kid/',
   'https://outsideinprint.org/almanack/2026-09-12/'
 )) {
