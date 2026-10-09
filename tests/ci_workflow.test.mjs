@@ -49,7 +49,7 @@ test("classification uses complete Git history and sparse files", () => {
   assert.match(selection.env.OIP_BASE_SHA, /pull_request.base.sha/);
   assert.match(selection.env.OIP_HEAD_SHA, /pull_request.head.sha/);
   for (const name of ["windows", "worker"]) assert.match(jobs[name].if, new RegExp("outputs." + name));
-  assert.match(jobs.site.if, /always\(\)/);
+  assert.match(jobs.site.if, /!cancelled\(\)/);
   assert.match(jobs.site.if, /needs.windows.result/);
   assert.match(jobs.site.if, /needs.worker.result/);
 });

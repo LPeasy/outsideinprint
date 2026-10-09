@@ -129,7 +129,7 @@ jobs:
       - classify
       - windows
       - worker
-    if: ${{ always() && needs.classify.result == 'success' && needs.classify.outputs.site == 'true' && (needs.windows.result == 'success' || (needs.classify.outputs.windows == 'false' && needs.windows.result == 'skipped')) && (needs.worker.result == 'success' || (needs.classify.outputs.worker == 'false' && needs.worker.result == 'skipped')) }}
+    if: ${{ !cancelled() && needs.classify.result == 'success' && needs.classify.outputs.site == 'true' && (needs.windows.result == 'success' || (needs.classify.outputs.windows == 'false' && needs.windows.result == 'skipped')) && (needs.worker.result == 'success' || (needs.classify.outputs.worker == 'false' && needs.worker.result == 'skipped')) }}
     outputs:
       generated_at: ${{ steps.manifest.outputs.generated_at }}
     env:
