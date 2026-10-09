@@ -155,8 +155,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          version="0.164.0"
-          archive_sha256="fea17b8c076f950bb2e9f9486667bdaa29422883888d509d63931c73e8a9b3a4"
+          version="0.167.0"
+          archive_sha256="0163f5c3deddac1f494a1629ddc40c65d18de9d5794facd98f7f96ac2c7d8957"
           tools_dir="${RUNNER_TEMP}/hugo-${version}"
           archive_path="${RUNNER_TEMP}/hugo_extended_${version}_linux-amd64.tar.gz"
           download_url="https://github.com/gohugoio/hugo/releases/download/v${version}/hugo_extended_${version}_linux-amd64.tar.gz"

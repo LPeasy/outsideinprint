@@ -5,7 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 
-const hugo = process.env.OIP_HUGO_BIN || path.resolve(".tools/hugo-0.164.0/hugo");
+const hugo = process.env.OIP_HUGO_BIN || path.resolve(".tools/hugo-0.167.0/hugo");
 
 test("gallery resolves canonical dialogue URLs and omits unavailable associations even in previews", (t) => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "oip-gallery-links-"));

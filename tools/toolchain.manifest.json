@@ -90,22 +90,22 @@
     {
       "name": "hugo",
       "kind": "portable-download",
-      "version": "0.164.0",
+      "version": "0.167.0",
       "required": true,
-      "install_path": "tools/vendor/hugo-0.164.0",
+      "install_path": "tools/vendor/hugo-0.167.0",
       "launch_path": "hugo.exe",
       "source_candidates": [
-        "tools/_downloads/bootstrap/hugo_extended_0.164.0_windows-amd64.zip",
-        "https://github.com/gohugoio/hugo/releases/download/v0.164.0/hugo_extended_0.164.0_windows-amd64.zip"
+        "tools/_downloads/bootstrap/hugo_extended_0.167.0_windows-amd64.zip",
+        "https://github.com/gohugoio/hugo/releases/download/v0.167.0/hugo_extended_0.167.0_windows-amd64.zip"
       ],
-      "asset_name": "hugo_extended_0.164.0_windows-amd64.zip",
-      "sha256": "59109d4e05d0cc9e1743688166e5323a71bd8b67a6e928db07c61720cc49a7cc",
-      "installed_sha256": "d6253c7438dec3959b3a63336b46ff4160285018bbe1d4e855bf5fb4384dc930",
+      "asset_name": "hugo_extended_0.167.0_windows-amd64.zip",
+      "sha256": "b04cdf0ae9098fe093ea90e1bd778d21649d71f55914d267aa60aa80b59074e0",
+      "installed_sha256": "9f8525e6b6a90e5bdf8a03132cbb54f491055feb7b9a5af6bbf7f27c75b1de1b",
       "validate": {
         "arguments": [
           "version"
         ],
-        "match_regex": "^hugo v0\\.164\\.0.*\\+extended"
+        "match_regex": "^hugo v0\\.167\\.0.*\\+extended"
       },
       "notes": "Pinned Extended build for the public site and native AVIF/WebP image processing."
     },

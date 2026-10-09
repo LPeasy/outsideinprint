@@ -2,10 +2,10 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
-$expectedVersion = '0.164.0'
-$windowsSha256 = '59109d4e05d0cc9e1743688166e5323a71bd8b67a6e928db07c61720cc49a7cc'
-$windowsInstalledSha256 = 'd6253c7438dec3959b3a63336b46ff4160285018bbe1d4e855bf5fb4384dc930'
-$linuxSha256 = 'fea17b8c076f950bb2e9f9486667bdaa29422883888d509d63931c73e8a9b3a4'
+$expectedVersion = '0.167.0'
+$windowsSha256 = 'b04cdf0ae9098fe093ea90e1bd778d21649d71f55914d267aa60aa80b59074e0'
+$windowsInstalledSha256 = '9f8525e6b6a90e5bdf8a03132cbb54f491055feb7b9a5af6bbf7f27c75b1de1b'
+$linuxSha256 = '0163f5c3deddac1f494a1629ddc40c65d18de9d5794facd98f7f96ac2c7d8957'
 
 $manifestPath = Join-Path $repoRoot 'tools\toolchain.manifest.json'
 $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
@@ -32,6 +32,9 @@ if ($hugoTool.asset_name -ne "hugo_extended_${expectedVersion}_windows-amd64.zip
 }
 if ($hugoTool.validate.match_regex -notmatch '\\\+extended') {
   throw 'Hugo validation must require the Extended build.'
+}
+if ("hugo v$expectedVersion+extended fixture" -notmatch $hugoTool.validate.match_regex) {
+  throw 'Portable Hugo validation regex must match the selected Extended release.'
 }
 
 $workflow = Get-Content -LiteralPath (Join-Path $repoRoot '.github\workflows\deploy.yml') -Raw
@@ -200,7 +203,7 @@ $publicOutputHelper = Get-Content -LiteralPath (Join-Path $repoRoot 'tests\helpe
 if (-not $manifestWriter.Contains('Resolve-PinnedHugo') -or -not $manifestWriter.Contains('-HugoVersion $hugo.Version')) {
   throw 'Public build manifest writer must record the version resolved through the pinned Hugo contract.'
 }
-foreach ($resolverSnippet in @('tools\bin\generated\hugo.cmd', "ExpectedVersion = '0.164.0'", 'Expected Hugo Extended')) {
+foreach ($resolverSnippet in @('tools\bin\generated\hugo.cmd', "ExpectedVersion = '0.167.0'", 'Expected Hugo Extended')) {
   if (-not $publicOutputHelper.Contains($resolverSnippet)) {
     throw "Public output helper is missing pinned Hugo resolver text: $resolverSnippet"
   }
@@ -222,7 +225,7 @@ try {
   [System.IO.File]::WriteAllText($generatorIndex, '<!doctype html><meta name=generator content="Hugo 0.157.0">')
   $oldGeneratorRejected = $false
   try {
-    Assert-GeneratedSiteHugoVersion -SiteDir $generatorFixtureRoot -HugoVersion 'hugo v0.164.0+extended fixture'
+    Assert-GeneratedSiteHugoVersion -SiteDir $generatorFixtureRoot -HugoVersion 'hugo v0.167.0+extended fixture'
   }
   catch {
     $oldGeneratorRejected = $true
@@ -231,8 +234,8 @@ try {
     throw 'Public build manifest binding must reject output rendered by an older Hugo version.'
   }
 
-  [System.IO.File]::WriteAllText($generatorIndex, '<!doctype html><meta name=generator content="Hugo 0.164.0">')
-  Assert-GeneratedSiteHugoVersion -SiteDir $generatorFixtureRoot -HugoVersion 'hugo v0.164.0+extended fixture'
+  [System.IO.File]::WriteAllText($generatorIndex, '<!doctype html><meta name=generator content="Hugo 0.167.0">')
+  Assert-GeneratedSiteHugoVersion -SiteDir $generatorFixtureRoot -HugoVersion 'hugo v0.167.0+extended fixture'
 }
 finally {
   if (Test-Path -LiteralPath $generatorFixtureRoot) {
@@ -246,7 +249,7 @@ foreach ($pdfResolverSnippet in @(
   'tools\bin\generated\hugo.cmd',
   "DirectorySeparatorChar -eq '\'",
   'Get-Command hugo -CommandType Application',
-  "ExpectedVersion = '0.164.0'",
+  "ExpectedVersion = '0.167.0'",
   'path-non-windows',
   'expected Hugo Extended'
 )) {
@@ -277,4 +280,4 @@ foreach ($pdfCheckPath in @('scripts\verify_pdf_pipeline.ps1', 'scripts\audit_pd
   }
 }
 
-Write-Host 'Hugo 0.164.0 upgrade contract passed.'
+Write-Host 'Hugo 0.167.0 upgrade contract passed.'

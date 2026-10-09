@@ -31,7 +31,7 @@ Historical files retain their original bodies and copy.
    ```
 
    On Windows, use the repo-local Python and Hugo wrappers. On other hosts, use
-   pinned Hugo Extended 0.164.0 from PATH or the explicit `--hugo` argument.
+   pinned Hugo Extended 0.167.0 from PATH or the explicit `--hugo` argument.
    The renderer only writes local review artifacts. It calls no provider/API and
    reads no credentials, subscriber data, or settings. Custom email outputs are
    enabled only in its temporary mini-site, never in production `hugo.toml`.

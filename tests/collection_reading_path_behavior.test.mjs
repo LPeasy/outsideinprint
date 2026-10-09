@@ -6,13 +6,13 @@ import path from "node:path";
 import vm from "node:vm";
 import { execFileSync, spawnSync } from "node:child_process";
 
-const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.164.0/hugo")
-  ? path.resolve(".tools/hugo-0.164.0/hugo") : "hugo");
+const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.167.0/hugo")
+  ? path.resolve(".tools/hugo-0.167.0/hugo") : "hugo");
 const progressScript = fs.readFileSync("layouts/partials/collections/reading-progress-script.html", "utf8")
   .replace(/^\s*<script>\s*/, "").replace(/\s*<\/script>\s*$/, "");
 
 function renderPath(t, { entries = {}, startHere = "b", current = "a", collections, articleShell = false, featured = false, landings = {}, collectionShell = false, collectionDirectory = false, outputRoute, indexTemplate, section = "essays" } = {}) {
-  assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.164\.0/);
+  assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.167\.0/);
   const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "oip-reading-path-"));
   t.after(() => fs.rmSync(fixture, { recursive: true, force: true }));
   const write = (file, content) => {

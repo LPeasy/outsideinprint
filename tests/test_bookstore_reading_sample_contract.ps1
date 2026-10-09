@@ -132,7 +132,7 @@ function Test-ContextualBookFixtures {
   # Exercise the real helper chain with one static fixture cover, without managed derivatives.
   $hugoPath = $env:OIP_HUGO_BIN
   if (-not $hugoPath) {
-    $localHugo = Join-Path $repoRoot '.tools/hugo-0.164.0/hugo'
+    $localHugo = Join-Path $repoRoot '.tools/hugo-0.167.0/hugo'
     $hugoPath = if (Test-Path -LiteralPath $localHugo -PathType Leaf) { $localHugo } else { 'hugo' }
   }
   $tempRoot = [IO.Path]::GetFullPath([IO.Path]::GetTempPath())
@@ -288,7 +288,7 @@ function Test-SampleLinkDirectionFixtures {
   # It renders the real link partial without processing production assets.
   $hugoPath = $env:OIP_HUGO_BIN
   if (-not $hugoPath) {
-    $localHugo = Join-Path $repoRoot '.tools/hugo-0.164.0/hugo'
+    $localHugo = Join-Path $repoRoot '.tools/hugo-0.167.0/hugo'
     $hugoPath = if (Test-Path -LiteralPath $localHugo -PathType Leaf) { $localHugo } else { 'hugo' }
   }
   $fixture = Join-Path ([IO.Path]::GetTempPath()) ('oip-sample-directions-' + [guid]::NewGuid().ToString('N'))

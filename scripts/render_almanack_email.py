@@ -86,8 +86,8 @@ def render(issue_path, output_dir, hugo):
         if output_dir.is_relative_to(REPO / forbidden):
             raise ValueError("Email review artifacts must stay outside content/static/public.")
     version = subprocess.run([hugo, "version"], check=True, capture_output=True, text=True).stdout
-    if not re.match(r"hugo v0\.164\.0.*\+extended", version):
-        raise ValueError("Use the repository's pinned Hugo Extended 0.164.0.")
+    if not re.match(r"hugo v0\.167\.0.*\+extended", version):
+        raise ValueError("Use the repository's pinned Hugo Extended 0.167.0.")
 
     source = issue_path.read_bytes()
     with tempfile.TemporaryDirectory(prefix="oip-almanack-email-") as directory:

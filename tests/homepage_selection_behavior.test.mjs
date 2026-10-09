@@ -5,15 +5,15 @@ import os from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 
-const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.164.0/hugo")
-  ? path.resolve(".tools/hugo-0.164.0/hugo") : "hugo");
+const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.167.0/hugo")
+  ? path.resolve(".tools/hugo-0.167.0/hugo") : "hugo");
 const fineChina = "/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/";
 const dialogue = "/syd-and-oliver/what-i-had/";
 const owner = "/essays/default-owner/";
 const origami = "/essays/reverse-origami/";
 
 function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-01T12:00:00Z") {
-  assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.164\.0/);
+  assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.167\.0/);
   const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "oip-home-selection-"));
   t.after(() => {
     assert.ok(path.resolve(fixture).startsWith(path.resolve(os.tmpdir()) + path.sep));

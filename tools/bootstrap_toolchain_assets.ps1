@@ -106,10 +106,10 @@ $bootstrapAssets = @(
     Url = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.0/PowerShell-7.5.0-win-x64.zip"
   },
   @{
-    AssetName = "hugo_extended_0.164.0_windows-amd64.zip"
-    LocalSource = (Join-Path $repoRoot ".tools\hugo_extended_0.164.0_windows-amd64.zip")
-    Url = "https://github.com/gohugoio/hugo/releases/download/v0.164.0/hugo_extended_0.164.0_windows-amd64.zip"
-    Sha256 = "59109d4e05d0cc9e1743688166e5323a71bd8b67a6e928db07c61720cc49a7cc"
+    AssetName = "hugo_extended_0.167.0_windows-amd64.zip"
+    LocalSource = (Join-Path $repoRoot ".tools\hugo_extended_0.167.0_windows-amd64.zip")
+    Url = "https://github.com/gohugoio/hugo/releases/download/v0.167.0/hugo_extended_0.167.0_windows-amd64.zip"
+    Sha256 = "b04cdf0ae9098fe093ea90e1bd778d21649d71f55914d267aa60aa80b59074e0"
   },
   @{
     AssetName = "node-v24.21.0-win-x64.zip"
