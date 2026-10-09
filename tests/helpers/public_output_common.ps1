@@ -81,7 +81,7 @@ function Get-PublicBuildManifestPath {
 function Resolve-PinnedHugo {
   param(
     [string]$RepoRoot,
-    [string]$ExpectedVersion = '0.164.0'
+    [string]$ExpectedVersion = '0.167.0'
   )
 
   $generatedHugo = Join-Path $RepoRoot 'tools\bin\generated\hugo.cmd'

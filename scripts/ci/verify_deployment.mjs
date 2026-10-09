@@ -1,12 +1,16 @@
 import fs from "node:fs";
 import { pathToFileURL } from "node:url";
 
+export function assertExpectedPublicationIdentity(expectedSha, expectedGeneratedAt) {
+  if (!/^[a-f0-9]{40}$/.test(expectedSha ?? "") || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,7})?(?:Z|\+00:00)$/.test(expectedGeneratedAt ?? "") || !Number.isFinite(Date.parse(expectedGeneratedAt))) throw new Error("Expected publication identity must contain a commit SHA and the original UTC generation timestamp.");
+}
 export function assertPublishedManifest(manifest, expectedSha, expectedGeneratedAt) {
-  if (!/^[a-f0-9]{40}$/.test(expectedSha ?? "") || !Number.isFinite(Date.parse(expectedGeneratedAt))) throw new Error("Expected publication identity is missing.");
+  assertExpectedPublicationIdentity(expectedSha, expectedGeneratedAt);
   if (manifest?.commitSha !== expectedSha) throw new Error("Canonical host serves a different commit.");
   if (manifest?.generatedAtUtc !== expectedGeneratedAt) throw new Error("Canonical host serves a different build of this commit.");
 }
 export async function pollPublishedManifest({ expectedSha, expectedGeneratedAt, fetchManifest, delay, attempts = 6 }) {
+  assertExpectedPublicationIdentity(expectedSha, expectedGeneratedAt);
   let observed, lastError;
   for (let attempt = 1; attempt <= attempts; attempt++) {
     try {

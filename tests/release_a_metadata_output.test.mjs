@@ -67,7 +67,7 @@ function jsonLdNodes(html) {
 test("rendered Almanack metadata is unique and agrees across consumers", () => {
   // Hugo owns draft and publication eligibility; missing published output remains an error.
   const hugo = process.env.OIP_HUGO_BIN || "hugo";
-  assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.164\.0/);
+  assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.167\.0/);
   const inventoryArgs = ["list", "published", "--config", process.env.OIP_HUGO_CONFIG || "hugo.toml"];
   const manifestPath = path.join(siteDir, ".oip-build-manifest.json");
   const clock = process.env.OIP_HUGO_CLOCK || (fs.existsSync(manifestPath)

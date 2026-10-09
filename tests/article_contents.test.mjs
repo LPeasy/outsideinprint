@@ -7,7 +7,7 @@ import { execFileSync } from "node:child_process";
 
 const read = (file) => fs.readFileSync(file, "utf8");
 const partial = read("layouts/partials/article/contents.html");
-const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.164.0/hugo") ? path.resolve(".tools/hugo-0.164.0/hugo") : "hugo");
+const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.167.0/hugo") ? path.resolve(".tools/hugo-0.167.0/hugo") : "hugo");
 
 test("contents is native, initially closed, and uses the unchanged rendered article body", () => {
   assert.match(partial, /<details class="piece-contents">/);
@@ -20,8 +20,8 @@ test("contents is native, initially closed, and uses the unchanged rendered arti
   assert.match(single, /<div class="piece-body">\s*{{ \$articleBody }}/);
 });
 
-test("contents eligibility and heading selection run through pinned Hugo", {skip:!process.env.OIP_HUGO_BIN && !fs.existsSync(".tools/hugo-0.164.0/hugo")}, (t) => {
-  assert.match(execFileSync(hugo, ["version"], {encoding:"utf8"}), /^hugo v0\.164\.0/);
+test("contents eligibility and heading selection run through pinned Hugo", {skip:!process.env.OIP_HUGO_BIN && !fs.existsSync(".tools/hugo-0.167.0/hugo")}, (t) => {
+  assert.match(execFileSync(hugo, ["version"], {encoding:"utf8"}), /^hugo v0\.167\.0/);
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "oip-contents-test-"));
   t.after(() => fs.rmSync(root, {recursive:true, force:true}));
   const write = (file, value) => {

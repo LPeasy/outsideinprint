@@ -1702,7 +1702,7 @@ function Invoke-HtmlPdfBatchRender {
     }
   }
   if ([string]::IsNullOrWhiteSpace($script:HugoCommand)) {
-    throw "Hugo Extended 0.164.0 could not be resolved through the platform-specific pinned path."
+    throw "Hugo Extended 0.167.0 could not be resolved through the platform-specific pinned path."
   }
 
   if (Test-Path -Path $HtmlSiteDir -PathType Container) {

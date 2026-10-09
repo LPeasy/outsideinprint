@@ -22,9 +22,9 @@ if (fs.existsSync(archivePages)) {
 const archiveRoutes = new Set(archiveFiles.flatMap((file) =>
   [...fs.readFileSync(file, "utf8").matchAll(/<div\b[^>]*class=(?:"t"|t)[^>]*>\s*(<a\b[^>]*>)/g)]
     .map((match) => attribute(match[1], "href"))));
-const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.164.0/hugo")
-  ? path.resolve(".tools/hugo-0.164.0/hugo") : "hugo");
-assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.164\.0/);
+const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.167.0/hugo")
+  ? path.resolve(".tools/hugo-0.167.0/hugo") : "hugo");
+assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.167\.0/);
 const config = process.env.OIP_HUGO_CONFIG || "hugo.toml,hugo.v2.toml";
 // Hugo owns publication dates. CSV parsing handles quoted titles and embedded commas.
 const clockArgs = process.env.OIP_BUILD_CLOCK_UTC ? ["--clock", process.env.OIP_BUILD_CLOCK_UTC] : [];

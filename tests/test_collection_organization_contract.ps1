@@ -12,7 +12,7 @@ $Root = (Resolve-Path -LiteralPath $Root).Path
 $implementationRoot = Split-Path -Parent $PSScriptRoot
 
 if (-not $HugoPath) {
-  $localHugo = Join-Path $implementationRoot '.tools/hugo-0.164.0/hugo'
+  $localHugo = Join-Path $implementationRoot '.tools/hugo-0.167.0/hugo'
   $HugoPath = if (Test-Path -LiteralPath $localHugo -PathType Leaf) { $localHugo } else { 'hugo' }
 }
 

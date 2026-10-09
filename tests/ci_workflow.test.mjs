@@ -49,7 +49,7 @@ test("classification uses complete Git history and sparse files", () => {
   assert.match(selection.env.OIP_BASE_SHA, /pull_request.base.sha/);
   assert.match(selection.env.OIP_HEAD_SHA, /pull_request.head.sha/);
   for (const name of ["windows", "worker"]) assert.match(jobs[name].if, new RegExp("outputs." + name));
-  assert.match(jobs.site.if, /always\(\)/);
+  assert.match(jobs.site.if, /!cancelled\(\)/);
   assert.match(jobs.site.if, /needs.windows.result/);
   assert.match(jobs.site.if, /needs.worker.result/);
 });
@@ -94,6 +94,10 @@ test("deployment verifies exact generation before canonical route checks", () =>
   const smoke = steps("deploy").findIndex(step => step.run?.includes("test_live_seo_smoke.ps1"));
   assert.ok(manifest >= 0 && smoke > manifest);
   assert.match(steps("deploy")[manifest].env.OIP_EXPECTED_GENERATED_AT, /needs.site.outputs.generated_at/);
+  assert.match(steps("site").find(step => step.id === "manifest").run, /node scripts\/ci\/write_publication_identity.mjs/);
+  const diagnostics = steps("deploy").find(step => step.with?.name === "deployment-diagnostics");
+  assert.equal(diagnostics.with["include-hidden-files"], true);
+  assert.match(diagnostics.if, /always\(\)/);
   assert.equal(steps("deploy").filter(step => step.run?.includes("test_live_seo_smoke")).length, 1);
   assert.match(steps("deploy").find(step => step.run?.includes("probe_seo_rollout")).if, /outputs.seo/);
 });

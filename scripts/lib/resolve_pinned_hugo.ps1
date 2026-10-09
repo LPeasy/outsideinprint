@@ -4,7 +4,7 @@ function Resolve-OipPinnedHugo {
   param(
     [Parameter(Mandatory = $true)]
     [string]$RepoRoot,
-    [string]$ExpectedVersion = '0.164.0'
+    [string]$ExpectedVersion = '0.167.0'
   )
 
   $isWindowsHost = [System.IO.Path]::DirectorySeparatorChar -eq '\'
