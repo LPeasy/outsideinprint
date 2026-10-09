@@ -7,6 +7,10 @@ This is the canonical process for publishing new public content on Outside In Pr
 - The governing OIP editorial philosophy lives at `editorial/oip_editorial_philosophy.md`.
 - The goal of this workflow is a clean web-first publish path that uses repo-local tooling, catches content residue early, and deploys through `main`.
 
+## Checked publication
+
+Publish through a PR to protected `main`, using the GitHub connector/API for remote branches, commits, PRs, and merges. The stable `release-ready` check must pass on the current PR and the branch must be up to date. When the owner authorizes publication, enable automatic merging after checks. An authorized system or dependency change still needs a reviewed diff before merging. Do not fast-forward `main` directly or bypass failed checks. Merging triggers a fresh production build and verified Pages deployment; a green PR alone is not proof that the release is live.
+
 ## Toolchain bootstrap
 
 For routine source-only validation in a new Windows worktree, provision only the pinned PowerShell runtime:
@@ -257,11 +261,11 @@ GitHub Actions catches broken public routes, generated HTML/image regressions, a
 
 Publishing happens through `main`.
 
-1. Commit only the validated content changes.
-2. Update `main`, preferably through the GitHub connector/API.
-3. `.github/workflows/deploy.yml` runs the contract tests, changed-essay guardrails, Hugo build, generated-output checks, and GitHub Pages deploy.
+1. Commit only the validated content changes to a publication branch from current verified `main`, using the GitHub connector/API.
+2. Create a PR and review its exact diff. Enable auto-merge only after the owner authorizes publication. Require an up-to-date branch and the `release-ready` check.
+3. PR checks run the actual source and output gates before merging. The merge triggers a fresh production build and GitHub Pages deployment.
 
-There is no separate manual publish step after `main` is updated. `main` is the publish action, but a CI failure leaves that commit on `main` without a new Pages deployment. Repair failed CI before another publish. Check deployment once after its expected completion or accept an owner's live confirmation; avoid repeated status polling.
+Merging is the publish action. Failed PR checks leave `main` untouched; correct the PR before merging. If the subsequent production build or deployment fails, diagnose it and merge a checked repair PR before another publication. Verify the deployed build manifest and live routes after expected completion or accept owner-supplied live evidence; avoid repeated status polling.
 
 ## Future-dated publishing
 

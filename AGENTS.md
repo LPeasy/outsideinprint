@@ -22,7 +22,7 @@ Merch order automation is not implemented yet. Before proposing or building orde
 - Preview or run a full local Hugo build only for visual, template, responsive, image-pipeline, or complex scheduling changes that need rendered evidence. Do not build the full image library for routine copy or artwork publication; GitHub Actions owns the production build and generated-output tests.
 - Do not run local npm or npx commands as a required OIP publishing gate. GitHub Actions owns public-site contracts and analytics snapshot coverage.
 - At each new Syd & Oliver publication, register its existing hero in the Gallery and promote it as the front-page illustration using `scripts/update_front_page_cartoon.ps1 -DialoguePath '/syd-and-oliver/<slug>/'`; include the Gallery data change in that release. See `docs/publishing-workflow.md` for draft and scheduling behavior.
-- Treat `main` as the publish action. The site goes live through `.github/workflows/deploy.yml` after push or merge to `main`.
+- Treat a checked PR merge to `main` as the publish action. Create the publication branch and PR through the GitHub connector/API. Enable auto-merge only after the owner authorizes publication; require the current `release-ready` check before merge. The merged release receives a fresh production build and Pages verification through `.github/workflows/deploy.yml`.
 
 ## Important exceptions
 

@@ -64,6 +64,6 @@ When a full local build is justified, use the existing sequence after provisioni
 
 ## CI Boundary
 
-`.github/workflows/deploy.yml` runs the complete Hugo image build, generated-output contracts, route/HTML checks, browser tests, and Pages deployment. It is the authoritative release gate. A failed CI build blocks a new deployment but leaves the failed commit on `main`; repair it before another publish. Check CI once after its expected run time or use owner-supplied live confirmation, rather than polling continuously. Dashboard publishing is paused; do not reintroduce local npm or npx checks as a substitute.
+`.github/workflows/deploy.yml` is the authoritative release gate. Publish through a branch and PR created with the GitHub connector/API. Require the stable `release-ready` check and an up-to-date branch before merging to protected `main`. The owner's publication request authorizes enabling auto-merge for that publication PR; dependency and system changes still need review. A failing PR stays off `main`. After merge, CI builds the merged release and verifies Pages. A production failure requires diagnosis before another publication. Check CI after its expected run time or accept owner-supplied live confirmation, rather than polling continuously. Dashboard publishing is paused; do not reintroduce local npm or npx checks as a substitute.
 
 If a local OIP skill or workflow asks for npm or npx during public-site publishing, treat the instruction as stale and update the workflow instead of forcing the command through.

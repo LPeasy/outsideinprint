@@ -9,11 +9,11 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 . (Join-Path $PSScriptRoot 'helpers/responsive_image_common.ps1')
+. (Join-Path $PSScriptRoot 'helpers/responsive_image_recipe.ps1')
 
 $maxArtifactBytes = 900MB
 $maxPublicImageBytes = 800MB
 $maxDerivativeBytes = 1MB
-$maxGeneratedImages = 5100
 $maxPublicFiles = 6500
 
 function Get-HtmlAttribute {
@@ -171,6 +171,8 @@ if (-not (Test-Path -LiteralPath $siteRoot -PathType Container)) {
 }
 
 $manifest = Get-OipImageManifest -Path $ManifestPath
+$allowedDerivativePaths = Get-OipAllowedDerivativePaths -Manifest $manifest
+$maxGeneratedImages = $allowedDerivativePaths.Count
 $allowedWidths = @($manifest.defaults.widths | ForEach-Object { [int]$_ })
 $maxRenderWidth = [int]$manifest.defaults.max_render_width
 $maxSocialWidth = [int]$manifest.defaults.social_max_width
@@ -222,12 +224,15 @@ if ($renderedFiles.Count -eq 0) {
   throw 'Production output contains no generated responsive images.'
 }
 if ($renderedFiles.Count -gt $maxGeneratedImages) {
-  throw "Generated image count exceeds 5,100: $($renderedFiles.Count)"
+  throw "Generated image count exceeds the approved recipe allowance of ${maxGeneratedImages}: $($renderedFiles.Count)"
 }
 
 $renderedModelsByRelativePath = @{}
 foreach ($renderedFile in $renderedFiles) {
   $relativePath = $renderedFile.FullName.Substring($siteRoot.Length + 1).Replace('\','/')
+  if (-not $allowedDerivativePaths.Contains($relativePath)) {
+    throw "Generated image is outside the approved asset/hash/variant recipe: $relativePath"
+  }
   $model = Get-RenderedUrlModel -Url ('/' + $relativePath) -Manifest $manifest -SiteRoot $siteRoot
   if ($sourceOnlyAssetIds -ccontains $model.Id) {
     throw "Quarantined source-only asset produced a public derivative: $relativePath"
@@ -556,5 +561,6 @@ if ($managedSocialPageCount -eq 0) {
 }
 
 Write-Host "Responsive-image output contract passed: $($renderedFiles.Count) derivatives, $managedPictureCount managed pictures, $publicImageBytes public image bytes, $publicBytes total public bytes."
+Write-Host "Headroom: $($maxArtifactBytes - $publicBytes) payload bytes; $($maxPublicImageBytes - $publicImageBytes) image bytes; $($maxPublicFiles - $publicFiles.Count) public files; $($maxGeneratedImages - $renderedFiles.Count) allowed derivatives."
 $global:LASTEXITCODE = 0
 exit 0
