@@ -3,14 +3,38 @@
   {{ $product := partial "shop/product-data.html" (dict "key" $book.Params.book_key "page" $book) }}
   <article class="page-shell bookstore-sample-page" aria-labelledby="page-title">
     <section class="bookstore-reading-sample bookstore-reading-sample--standalone" aria-labelledby="page-title">
-      <header class="bookstore-reading-sample__header">
-        <p class="bookstore-reading-sample__eyebrow">A complete story from <a href="{{ $book.RelPermalink }}">{{ $book.Title }}</a> · OIP Exclusive</p>
+      <header class="bookstore-reading-sample__header{{ if eq $book.Params.book_key "pending" }} bookstore-sample-book-header{{ end }}">
+        {{ if eq $book.Params.book_key "pending" }}
+          <a class="bookstore-sample-book-header__cover" href="{{ $book.RelPermalink }}" aria-label="About {{ $book.Title }}">
+            {{ partial "images/picture.html" (dict
+              "page" .
+              "ref" (index $product "cover_image")
+              "alt" (index $product "cover_alt")
+              "sizes" "(max-width: 24rem) 5rem, (max-width: 36rem) 6rem, 10rem"
+              "loading" "eager"
+              "fetchpriority" "high"
+            ) }}
+          </a>
+          <div class="bookstore-sample-book-header__details">
+            <p class="bookstore-reading-sample__eyebrow">Free reading sample</p>
+            <h1 id="page-title"><a href="{{ $book.RelPermalink }}">{{ $book.Title }}</a></h1>
+            <p class="bookstore-sample-book-header__subtitle">{{ index $product "subtitle" }}</p>
+            <div class="piece-byline-row">
+              <p class="bookstore-reading-sample__meta">By {{ index $product "author" }}</p>
+              {{ partial "article/share.html" . }}
+            </div>
+            <h2 class="bookstore-sample-book-header__scope">{{ .Title }}</h2>
+            <p class="bookstore-reading-sample__meta">About {{ .ReadingTime }} min read</p>
+          </div>
+        {{ else }}
+        <p class="bookstore-reading-sample__eyebrow">{{ if eq .Params.sample_work_type "short-story" }}A complete story from{{ else }}An excerpt from{{ end }} <a href="{{ $book.RelPermalink }}">{{ $book.Title }}</a>{{ with index $product "positioning_label" }} · {{ . }}{{ end }}</p>
         <h1 id="page-title">{{ .Title }}</h1>
         <div class="piece-byline-row">
           <p class="bookstore-reading-sample__meta">By {{ index $product "author" }}</p>
           {{ partial "article/share.html" . }}
         </div>
         <p class="bookstore-reading-sample__meta">About {{ .ReadingTime }} min read</p>
+        {{ end }}
       </header>
       {{ with .Params.sample_illustration }}
         {{ $illustrationAlt := $.Params.sample_illustration_alt | default "" }}
@@ -38,11 +62,11 @@
       <footer class="bookstore-reading-sample__footer">
         <p class="bookstore-reading-sample__end"><span>End of sample</span></p>
         <div class="bookstore-reading-sample__continue">
-          <h2>Ten dark fables. One machine age.</h2>
-          <p>Continue with <em>2045: Ten Dark Fables from the Machine Age</em>, an e-book from Outside In Print.</p>
+          <h2>{{ if eq $book.Params.book_key "2045" }}Ten dark fables. One machine age.{{ else }}Continue reading{{ end }}</h2>
+          <p>Continue with <em>{{ index $product "metadata_title" | default $book.Title }}</em>, an e-book from Outside In Print.</p>
           <div class="bookstore-sample-actions">
-            <a class="shop-cta bookstore-sample-buy" href="{{ $book.RelPermalink }}#bookstore-purchase" data-analytics-event="internal_promo_click" data-analytics-source-slot="bookstore_sample_buy" data-analytics-slug="2045" data-analytics-title="2045" data-analytics-section="Bookstore" data-analytics-path="{{ $book.RelPermalink }}">Get the full e-book — {{ index $product "price_display" }}</a>
-            <a class="bookstore-detail-link" href="{{ $book.RelPermalink }}" data-analytics-event="internal_promo_click" data-analytics-source-slot="bookstore_sample_continue" data-analytics-slug="2045" data-analytics-title="2045" data-analytics-section="Bookstore" data-analytics-path="{{ $book.RelPermalink }}">About the book <span aria-hidden="true">&rarr;</span></a>
+            <a class="shop-cta bookstore-sample-buy" href="{{ $book.RelPermalink }}#bookstore-purchase" data-analytics-event="internal_promo_click" data-analytics-source-slot="bookstore_sample_buy" data-analytics-slug="{{ $book.Params.book_key }}" data-analytics-title="{{ $book.Title }}" data-analytics-section="Bookstore" data-analytics-path="{{ $book.RelPermalink }}">Get the full e-book — {{ index $product "price_display" }}</a>
+            <a class="bookstore-detail-link" href="{{ $book.RelPermalink }}" data-analytics-event="internal_promo_click" data-analytics-source-slot="bookstore_sample_continue" data-analytics-slug="{{ $book.Params.book_key }}" data-analytics-title="{{ $book.Title }}" data-analytics-section="Bookstore" data-analytics-path="{{ $book.RelPermalink }}">About the book <span aria-hidden="true">&rarr;</span></a>
           </div>
           {{ partial "shop/ebook-help.html" . }}
         </div>

@@ -15,6 +15,7 @@ const products = [
   ["the-american-nightmare-keep-dreaming-kid", "OIP-AN-EPUB", "9.99", "fb616baf03d97aac4ea96bfc3637c045e83018a0e4b603cca14601be98d5b8bd"],
   ["the-parable-of-the-sheep", "OIP-PS-EPUB", "9.99", "b32a5110ccbc1a3efa4a033f3b97be3be9fcbe3206edffe306da1744f5f10d60"],
   ["the-water-cycle", "OIP-WC-EPUB", "9.99", "271f25c260ede86db0363d3cfb551cf533485bcd2b2fd1d1f8512c74bfff001a"],
+  ["pending", "OIP-PENDING-EPUB", "9.99", "9325642f96f0ebc56f73d65cefe6f73ed2e7fdb3487b90f84246846856cbd8a6"],
 ];
 
 test("e-book sales labels remain separate from the EPUB fulfillment format", () => {
@@ -22,10 +23,10 @@ test("e-book sales labels remain separate from the EPUB fulfillment format", () 
     assert.ok(catalog.includes(label), label);
   }
   assert.doesNotMatch(catalog, /^\s*(?:product_type|price_label|availability_note|checkout_label|checkout_unavailable_label|checkout_note|direct_offers_heading|direct_offers_note|gate_note):.*\bEPUB\b/m);
-  assert.equal((catalog.match(/^\s+format: "EPUB"$/gm) || []).length, 4);
-  assert.equal((catalog.match(/^\s+fulfillment_type: "secure_epub_download"$/gm) || []).length, 4);
-  assert.equal((catalog.match(/^\s+checkout_action: "epub_checkout_api"$/gm) || []).length, 4);
-  assert.equal((catalog.match(/^\s+checkout_endpoint: "https:\/\/downloads\.outsideinprint\.org\/api\/books\/epub"$/gm) || []).length, 4);
+  assert.equal((catalog.match(/^\s+format: "EPUB"$/gm) || []).length, products.length);
+  assert.equal((catalog.match(/^\s+fulfillment_type: "secure_epub_download"$/gm) || []).length, products.length);
+  assert.equal((catalog.match(/^\s+checkout_action: "epub_checkout_api"$/gm) || []).length, products.length);
+  assert.equal((catalog.match(/^\s+checkout_endpoint: "https:\/\/downloads\.outsideinprint\.org\/api\/books\/epub"$/gm) || []).length, products.length);
   for (const [, sku, price] of products) {
     const block = catalog.match(new RegExp(`- sku: "${sku}"([\\s\\S]*?)(?=\\n\\s+- sku:|\\n    tags:)`))?.[1];
     assert.ok(block, sku);
@@ -73,7 +74,7 @@ const plain = (html) => html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "").r
 const output = (file) => fs.readFileSync(path.join(siteDir, file), "utf8");
 
 test("rendered sales surfaces use e-book labels and retain technical/legal EPUB references", { skip: !siteDir }, () => {
-  for (const file of ["shop/index.html", "shop/thanks/index.html", "shop/2045/sample/index.html", ...products.map(([slug]) => `shop/${slug}/index.html`)]) {
+  for (const file of ["shop/index.html", "shop/thanks/index.html", "shop/2045/sample/index.html", "shop/pending/sample/index.html", ...products.map(([slug]) => `shop/${slug}/index.html`)]) {
     const html = output(file);
     const visible = plain(html);
     assert.doesNotMatch(visible, /Buy (?:direct )?EPUB|DRM-free EPUB|Outside In Print EPUB|EPUB price|Your secure EPUB link|EPUB temporarily unavailable/, file);
@@ -110,7 +111,7 @@ test("shop cards expose book decisions without checkout or external retail exits
   assert.doesNotMatch(html, /data-epub-checkout|bookstore-checkout-disclosure|bookstore_index_kindle|epub-checkout\.[a-f0-9]+\.js/);
   assert.doesNotMatch(html, /<form\b[^>]*action=["']?https:\/\/downloads\.outsideinprint\.org|href=["']?https:\/\/(?:www\.amazon\.com|square\.link|checkout\.square\.site)/);
   const cards = [...html.matchAll(/<article\b[^>]*class=(?:"bookstore-record"|bookstore-record)[^>]*>[\s\S]*?<\/article>/g)].map(match => match[0]);
-  assert.equal(cards.length, 3);
+  assert.equal(cards.length, 4);
   for (const [slug, , price] of products.slice(1)) {
     const card = cards.find(card => card.includes(`/shop/${slug}/`));
     assert.ok(card, slug);
@@ -119,7 +120,8 @@ test("shop cards expose book decisions without checkout or external retail exits
     assert.match(plain(card), /EPUB e-book/);
     assert.ok(plain(card).includes(`$${price}`));
     const anchors = [...card.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/g)].map(match => match[0]);
-    const sample = anchors.filter(anchor => attr(anchor, "href") === `/shop/${slug}/#reading-sample`);
+    const sampleHref = slug === "pending" ? "/shop/pending/sample/" : `/shop/${slug}/#reading-sample`;
+    const sample = anchors.filter(anchor => attr(anchor, "href") === sampleHref);
     const detail = anchors.filter(anchor => attr(anchor, "href") === `/shop/${slug}/` && /^View book\b/.test(plain(anchor).trim()));
     assert.equal(sample.length, 1, `${slug} sample destination`);
     assert.match(plain(sample[0]), /Read a sample/);
@@ -136,7 +138,7 @@ test("every product opens with format, price, sample and a buy anchor, preservin
     assert.ok(plain(decision).includes(`$${price}`));
     assert.doesNotMatch(decision, /<form\b|https:\/\/(?:downloads\.outsideinprint\.org|square\.link|checkout\.square\.site)/);
     const links = [...decision.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/g)].map(match => match[0]);
-    const sampleHref = slug === "2045" ? "/shop/2045/sample/" : "#reading-sample";
+    const sampleHref = ["2045", "pending"].includes(slug) ? `/shop/${slug}/sample/` : "#reading-sample";
     assert.equal(links.filter(link => attr(link, "href") === sampleHref).length, 1);
     const buy = links.filter(link => attr(link, "href") === "#bookstore-purchase");
     assert.equal(buy.length, 1);

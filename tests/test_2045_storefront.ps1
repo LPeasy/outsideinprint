@@ -289,10 +289,10 @@ if ($isDraft -and -not $Preview) {
   Assert-True ($homeHtml -notmatch 'data-analytics-slug="?2045"?' -and $shopHtml -notmatch 'data-direct-offer-sku="?OIP-TD-EPUB"?') 'Draft 2045 promotion or offer leaked into production.'
   Assert-True ($authorHtml -notmatch 'href="?/shop/2045/') 'Draft 2045 leaked into the author bibliography.'
   Assert-True ($features.Count -eq 0 -and $shopHtml -notmatch 'id="?bookstore-feature-title"?') 'Draft 2045 must not render the bookstore feature.'
-  Assert-True ($catalogRecords.Count -eq 3 -and $catalogImages.Count -eq 3) 'Dormant production must retain the three existing shelf books.'
+  Assert-True ($catalogRecords.Count -eq 4 -and $catalogImages.Count -eq 4) 'Dormant production must retain the four other shelf books.'
   Assert-True ($catalogRecords[0].Value -match 'href="?/shop/the-american-nightmare-keep-dreaming-kid/') 'Without the feature, the previous first book must remain first.'
   Assert-True ((Html-Attribute $catalogImages[0].Value 'loading') -eq 'eager' -and (Html-Attribute $catalogImages[0].Value 'fetchpriority') -eq 'high') 'Without the feature, the first existing cover must retain eager/high loading.'
-  Assert-True (($features.Count + $catalogRecords.Count) -eq 3) 'Dormant bookstore count must remain three titles.'
+  Assert-True (($features.Count + $catalogRecords.Count) -eq 4) 'Dormant bookstore count must retain the four other titles.'
   Write-Host '2045 storefront source and dormant production contract passed.'
   exit 0
 }
@@ -344,7 +344,7 @@ foreach ($metadataCase in $editionMetadataCases) {
   Assert-True ((Meta-Content $metadataCase.Html 'twitter:title') -ceq $metadataCase.Title) "Edition Twitter title must be '$($metadataCase.Title)'."
 }
 foreach ($html in @($shopHtml, $authorHtml)) {
-  foreach ($slug in @('2045', 'the-american-nightmare-keep-dreaming-kid', 'the-parable-of-the-sheep', 'the-water-cycle')) {
+  foreach ($slug in @('2045', 'the-american-nightmare-keep-dreaming-kid', 'the-parable-of-the-sheep', 'the-water-cycle', 'pending')) {
     Assert-True ($html -match ('href="?(?:https://outsideinprint\.org)?/shop/' + $slug + '/')) "Book $slug is missing from a discovery surface."
   }
 }
@@ -364,16 +364,17 @@ $campaignCover = @([regex]::Matches($issueHtml, '(?is)<a\b[^>]*>') | Where-Objec
 Assert-True ($campaignCover.Count -eq 1 -and (Html-Attribute $campaignCover[0].Value 'href') -eq '/shop/2045/') 'Campaign cover must lead to the book overview.'
 Assert-True ($issueHtml.Contains('/shop/2045/#bookstore-purchase') -and $issueHtml.Contains($datedFed) -and $issueHtml -notmatch '/z1/current/') 'Issue must use the purchase anchor and dated citation.'
 Assert-True ($features[0].Index -lt $catalogMatch.Index -and $featureHtml -match 'id="?bookstore-feature-title"?') 'The named 2045 feature must precede the ordinary catalog.'
-Assert-True ($catalogRecords.Count -eq 3 -and $catalogHtml -notmatch '/shop/2045/|OIP-TD-EPUB') '2045 must not be duplicated among the three remaining shelf books.'
-foreach ($slug in @('the-american-nightmare-keep-dreaming-kid', 'the-parable-of-the-sheep', 'the-water-cycle')) {
+Assert-True ($catalogRecords.Count -eq 4 -and $catalogHtml -notmatch '/shop/2045/|OIP-TD-EPUB') '2045 must not be duplicated among the four remaining shelf books.'
+Assert-True ($featureHtml -notmatch '/shop/pending/|OIP-PENDING-EPUB') 'PENDING must remain a shelf title without replacing the 2045 feature.'
+foreach ($slug in @('the-american-nightmare-keep-dreaming-kid', 'the-parable-of-the-sheep', 'the-water-cycle', 'pending')) {
   Assert-True ($catalogHtml -match ('href="?/shop/' + $slug + '/')) "Existing shelf book $slug is missing."
 }
-Assert-True (($features.Count + $catalogRecords.Count) -eq 4) 'The total catalog count must include the featured book.'
+Assert-True (($features.Count + $catalogRecords.Count) -eq 5) 'The total catalog count must include the featured book and PENDING.'
 $featureImages = @([regex]::Matches($featureHtml, '(?is)<img\b[^>]*>'))
 Assert-True ($featureImages.Count -eq 1 -and $featureHtml -match 'image/avif' -and $featureHtml -match 'image/webp') 'The feature must render one managed responsive cover.'
 Assert-True ((Html-Attribute $featureImages[0].Value 'src') -match '/images/rendered/books/2045/cover/' -and (Html-Attribute $featureImages[0].Value 'alt') -ceq $approvedAlt) 'The feature must preserve the approved cover and alt text.'
 Assert-True ((Html-Attribute $featureImages[0].Value 'loading') -eq 'eager' -and (Html-Attribute $featureImages[0].Value 'fetchpriority') -eq 'high') 'The featured cover must own eager/high loading.'
-Assert-True ($catalogImages.Count -eq 3) 'The remaining shelf must retain exactly three cover images.'
+Assert-True ($catalogImages.Count -eq 4) 'The remaining shelf must retain exactly four cover images.'
 foreach ($image in $catalogImages) {
   Assert-True ((Html-Attribute $image.Value 'loading') -eq 'lazy' -and (Html-Attribute $image.Value 'fetchpriority') -ne 'high') 'Remaining shelf covers must be lazy when the feature exists.'
 }
