@@ -1,4 +1,4 @@
-current: the-ant-problem
+current: the-other-side-of-the-mountain
 cartoons:
   - slug: precious-and-honored
     title: "Precious and Honored"
@@ -1130,5 +1130,14 @@ cartoons:
     image: "essays/dialogues/the-ant-problem/hero"
     essay: "/syd-and-oliver/the-ant-problem/"
     alt: "An ant stands beside a torn piece of bread on a weathered picnic table, framed by two men seen from behind as dark, blurred foreground silhouettes, with a river and trees beyond."
+    width: 1672
+    height: 941
+  - slug: the-other-side-of-the-mountain
+    title: "The Other Side of the Mountain"
+    date: "2026-10-09"
+    publishDate: "2026-10-09T11:28:45-04:00"
+    image: "editorial/the-other-side-of-the-mountain"
+    essay: "/essays/the-other-side-of-the-mountain/"
+    alt: "A walker carrying a blue water bottle follows a sunlit trail toward a mountain ridge above a lake, leaving an open hatchback and cooler at an overlook."
     width: 1672
     height: 941

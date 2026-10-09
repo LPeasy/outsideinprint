@@ -1350,6 +1350,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/the-other-side-of-the-mountain": {
+      "id": "editorial/the-other-side-of-the-mountain",
+      "source": "images/originals/editorial/the-other-side-of-the-mountain.png",
+      "sha256": "b2024e8ef9a59526808bc681d8e88bb1aabe5f879d5d77d9c8e0d603f929fb42",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": "",
+      "quality_override": null
+    },
     "editorial/the-plunge": {
       "id": "editorial/the-plunge",
       "source": "images/originals/editorial/the-plunge.png",
@@ -5527,6 +5541,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/the-other-side-of-the-mountain/section-1": {
+      "id": "essays/the-other-side-of-the-mountain/section-1",
+      "source": "images/originals/essays/the-other-side-of-the-mountain/section-1.png",
+      "sha256": "ac503703c654c56f2a058958f4195d5a92330bb9ed2b4a68b91e93f150fbc39a",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": "",
+      "quality_override": null
+    },
     "essays/the-part-that-is-mine/section-1": {
       "id": "essays/the-part-that-is-mine/section-1",
       "source": "images/originals/essays/the-part-that-is-mine/section-1.png",
@@ -8024,6 +8052,7 @@
     "/images/editorial/the-next-stone.png": "editorial/the-next-stone",
     "/images/editorial/the-open-hand.png": "editorial/the-open-hand",
     "/images/editorial/the-open-morning.png": "editorial/the-open-morning",
+    "/images/editorial/the-other-side-of-the-mountain.png": "editorial/the-other-side-of-the-mountain",
     "/images/editorial/the-plunge.png": "editorial/the-plunge",
     "/images/editorial/the-quiet-shield.png": "editorial/the-quiet-shield",
     "/images/editorial/the-quiet-street-ahead.png": "editorial/the-quiet-street-ahead",
@@ -8336,6 +8365,7 @@
     "/images/essays/the-model-that-could-not-leave/section-2.png": "essays/the-model-that-could-not-leave/section-2",
     "/images/essays/the-noise-of-the-crowd/section-1.png": "essays/the-noise-of-the-crowd/section-1",
     "/images/essays/the-other-end/section-1.png": "essays/the-other-end/section-1",
+    "/images/essays/the-other-side-of-the-mountain/section-1.png": "essays/the-other-side-of-the-mountain/section-1",
     "/images/essays/the-part-that-is-mine/section-1.png": "essays/the-part-that-is-mine/section-1",
     "/images/essays/the-repair/hero.png": "editorial/mending-table",
     "/images/essays/the-repair/section-1.png": "essays/the-repair/section-1",
