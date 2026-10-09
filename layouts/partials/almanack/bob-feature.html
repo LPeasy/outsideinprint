@@ -1,0 +1,9 @@
+{{ $issue := . }}{{ with .bob_feature }}
+<article class="bob-feature feature" aria-labelledby="bob-feature-title">
+{{ with .label }}<p class="bob-kicker">{{ . }}</p>{{ end }}
+<h3 id="bob-feature-title">{{ .title }}</h3>
+{{ range .paragraphs }}<p>{{ . }}</p>{{ end }}
+<table role="presentation" class="bob-actions action-row" cellspacing="0" cellpadding="0"><tr><td class="bob-invitation"><a class="bob-demo button" href="{{ .cta_url }}">{{ .cta_label }}</a>{{ with .secondary_cta_url }}<p class="bob-secondary"><a href="{{ . }}">{{ $issue.bob_feature.secondary_cta_label }} &rarr;</a></p>{{ end }}</td>{{ with $issue.bob_ornaments.feature }}<td class="bob-hanging-cell">{{ partial "almanack/bob-ornament.html" (dict "issue" $issue "slot" "feature") }}</td>{{ end }}</tr></table>
+{{ with .facts }}<p class="bob-facts">{{ range split . "\n" }}{{ . }}<br>{{ end }}</p>{{ end }}
+</article>
+{{ end }}

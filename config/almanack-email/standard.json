@@ -1,0 +1,57 @@
+{
+  "standard": "classic-shared-v1",
+  "approved_on": "2026-10-01",
+  "template": "classic",
+  "distribution_instructions": "approved-buttondown-standard.md",
+  "approval_reference": "https://chatgpt.com/s/cx_6abf11284e3c8191ad8e62c5c88da4e0",
+  "approved_review_draft": "https://buttondown.com/emails/em_6gtzktfpf394jvjsepg46q3jw8",
+  "shared_exporter_commit": "248757a3bef9406435c9472728985597d53ecb7e",
+  "masthead_art_approved_on": "2026-09-12",
+  "reference_image": "paper-masthead-approved-reference.png",
+  "reference_sha256": "5d61fef6c0c3e7ba8ec1e60695e8369e7cdc293632403d772f7cb893ca5d3364",
+  "reference_issue_date": "2026-09-12",
+  "reference_issue_number": 19,
+  "issue_specific_fields": {
+    "left_label": "MMMM d, yyyy; year may wrap",
+    "right_label": "Vol. <issue_number as Roman numeral>"
+  },
+  "fixed_text": [
+    "OUTSIDE IN PRINT",
+    "Bob\u2019s Almanack",
+    "Read the full issue \u2192"
+  ],
+  "style": {
+    "paper": "#EADBC1",
+    "paper_light": "#F7EED8",
+    "ink": "#1A1712",
+    "rule": "#6B543C",
+    "link": "#2E5363",
+    "email_tint": "#346782",
+    "aspect_ratio": "3:1"
+  },
+  "generation": "Reuse the approved image as the edit target; change only date and Roman volume per issue using built-in image generation. No art regeneration for unchanged issues.",
+  "email": "Use the shared HTML/plain-text exporter with the approved masthead and complete alt text. Retain the baked-in artwork. Follow it with one modest View the web version link (Original published issue for a private historical revision). No extra subject/date wrapper, generic deck, or live H1 full-issue CTA.",
+  "preheader": "A specific sentence about the actual issue, supplied as email_preheader and Buttondown Description.",
+  "body_contract": "almanack-v1: actual lead excerpt of 60\u2013100 words, supporting capsules, specific Bob note of at most 50 words, one Worth Reprinting rationale; preserve recurring sections, exact quotations, artwork and source facts.",
+  "footer_links": [
+    "https://outsideinprint.org/",
+    "https://medium.com/the-balanced-sheet"
+  ],
+  "email_contrast_contract": "parchment-paired-v1",
+  "body_contrast": "Pair dark ink #332a22 with cream #f4eddf directly on retained content cells and reader-facing elements, including quote paragraphs, so removing the outer body does not lose text color. Keep blue #346782 links underlined. Retain these fixed pairs in normal and dark provider-wrapper simulations. Local simulations do not verify an actual email client: inspect the approved provider and received preview in light and dark modes before claiming client verification. Keep custom provider CSS disabled and preserve sent emails.",
+  "provider_numbering": "For each future issue, set Buttondown's per-email Issue number (API secondary_id) to the source canonical issue_number. Metadata alone does not set the footer. Read back the saved draft and require its secondary_id and subject to match the validated export and masthead before preview, scheduling or sending. Stop on a missing number or mismatch. Keep sent emails unchanged; do not rely on a global next counter.",
+  "authority": "Template approval is not standing authorization to send to subscribers. Weekly workflow remains owner-preview-only until explicit send approval.",
+  "sending": "Prefer bounded reuse of unchanged editorial checks. Never retry an uncertain subscriber send; inspect status.",
+  "local_opt_in_extension": {
+    "identifier": "almanack-bob-bookshelf-v1",
+    "owner_requested_on": "2026-10-09",
+    "fields": [
+      "bob_feature",
+      "bob_ornaments",
+      "bookshelf"
+    ],
+    "historical_outputs": "Fields absent: retain baseline HTML/plaintext and metadata",
+    "distribution": "Classic with the existing contrast, numbering, Medium footer and reproducible parity/hash gates",
+    "authority": "Local template preparation only; no production asset upload, publication, provider preview, scheduling or subscriber send"
+  }
+}

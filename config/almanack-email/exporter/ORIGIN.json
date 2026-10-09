@@ -1,0 +1,93 @@
+{
+  "repository": "https://github.com/LPeasy/outsideinprint",
+  "commit": "248757a3bef9406435c9472728985597d53ecb7e",
+  "files": [
+    {
+      "path": "scripts/render_almanack_email.py",
+      "git_blob_sha": "ce4b9359bae47e11f1366e3f780438f3bb4e9d3a"
+    },
+    {
+      "path": "layouts/almanack/single.email.html",
+      "git_blob_sha": "9339c0278f3899eba477c274728414d3619ef291"
+    },
+    {
+      "path": "layouts/almanack/single.emailtext.txt",
+      "git_blob_sha": "cbb8c1a4f57970f04c9c09dc4bf63e3cff75323b"
+    },
+    {
+      "path": "layouts/almanack/single.emaildata.json",
+      "git_blob_sha": "ecc65a649c2c061e763703a0b2343e4545d15a11"
+    },
+    {
+      "path": "layouts/partials/almanack/email-model.html",
+      "git_blob_sha": "d9724aa51cfd87c1b00ac117d88bf9b111f1a765"
+    },
+    {
+      "path": "layouts/partials/almanack/email-link.html",
+      "git_blob_sha": "c27b6fb932a0713576831b32c564054494ec9075"
+    }
+  ],
+  "purpose": "Shared PR #131 baseline with owner-requested local opt-in Bob and Bookshelf extension; no production or provider activation.",
+  "local_extension": {
+    "identifier": "almanack-bob-bookshelf-v1",
+    "requested_on": "2026-10-09",
+    "state": "owner-approved-release",
+    "original_snapshot_preserved_at": "C:\\Users\\lawto\\Documents\\Codex\\2026-10-09\\task\\40_Scratch\\2026-10\\almanack-issue23-review\\edition\\canonical-baseline-workspace\\config\\almanack-email\\exporter",
+    "fields": [
+      "bob_feature",
+      "bob_ornaments",
+      "bookshelf"
+    ],
+    "files": [
+      {
+        "path": "layouts/almanack/single.email.html",
+        "sha256": "cd12858ecf3f31058c6e97cd55a10dcddbe8b78317a191e1a6a1a6a36b33a7da"
+      },
+      {
+        "path": "layouts/almanack/single.emaildata.json",
+        "sha256": "79ffe0838c0783cb260eda8c8f16428625ef0b8b34de0971f502b66914ee4a8d"
+      },
+      {
+        "path": "layouts/almanack/single.emailtext.txt",
+        "sha256": "546bc2e90fca3f4cf1fcb45547fa8253c4c91747e55c4eb8547b441cab3e2e51"
+      },
+      {
+        "path": "layouts/partials/almanack/bob-divider.html",
+        "sha256": "4f92bc3e6b219d5ab662cac3e493066116801456f59bfc4220b4cea844c860ae"
+      },
+      {
+        "path": "layouts/partials/almanack/bob-feature.html",
+        "sha256": "28a11b15e336f82f43b340993e50305f97efeeae5d42cfd2bbcc676b0395466e"
+      },
+      {
+        "path": "layouts/partials/almanack/bob-masthead.html",
+        "sha256": "992214f1e27777da1672a8bee6aea659a3843ccea577fd8609fc59a924cdd897"
+      },
+      {
+        "path": "layouts/partials/almanack/bob-ornament.html",
+        "sha256": "0a5211b49042b1d2933a14793c2bc71a11c2dd5dd8c96ad7aa61dc3eae7fe403"
+      },
+      {
+        "path": "layouts/partials/almanack/bob-style.html",
+        "sha256": "3d1e8a87fa497a5825e20440ae46f633f3067a7eef04eea4a56b6ecf790437fc"
+      },
+      {
+        "path": "layouts/partials/almanack/bookshelf-email.html",
+        "sha256": "181c6ce28e5f7315fe615da23453c5cd38f095d3aded85f53f2672957af61dba"
+      },
+      {
+        "path": "layouts/partials/almanack/email-link.html",
+        "sha256": "e0a06b44fcaa4fd8cf80861abb045d6ada9a28188ee9aea5fc637f0565818bca"
+      },
+      {
+        "path": "layouts/partials/almanack/email-model.html",
+        "sha256": "16bb8f254c33008eaad02fbb7e6c4994c618f8553877a3c7431dc22ccaa6b369"
+      },
+      {
+        "path": "scripts/render_almanack_email.py",
+        "sha256": "81c8c9aa734ea79fc2c0d3f8d8d94ee5957a44bc8e9124de4a3f99f2f5c504f8"
+      }
+    ],
+    "runtime": "Current main pinned Hugo Extended 0.167.0; original snapshot remains historical provenance"
+  }
+}

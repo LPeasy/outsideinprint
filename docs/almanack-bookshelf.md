@@ -1,0 +1,13 @@
+# From the Bookshelf
+
+Starting with Issue 23 (October 10, 2026), include one existing published book in each new Almanack. Place this short department immediately after the current new-work items and before This Week's Virtue. Preserve the virtue, Poor Richard, Margins, archive item, and closing quote order. Keep the book subordinate to the issue's main feature.
+
+The canonical web, email HTML, and email plaintext templates now render the issue's `bookshelf` mapping. Historical issues without the field retain their existing content. The web cover uses the registered responsive-image model; email uses its existing uncropped JPEG derivative. All covers and titles link to the product page, and one plain store link follows the excerpts. The email department uses static images and native anchors, without active content.
+
+Choose one live book from `data/bookstore.yaml`. Begin this review with 2045, then rotate through The American Nightmare, The Parable of the Sheep, and The Water Cycle before repeating a title. Recheck publication and store availability for every issue. Unpublished books are excluded. A draft does not consume a rotation entry; record the issue and book only after publication.
+
+Use a small uncropped cover, exact title/subtitle/author, one introduction of at most 35 words, and two or three short exact excerpts totalling at most 50 words. For a public sample, also respect its applicable quotation limits. Verify every excerpt in an authorized current manuscript/EPUB or the public sample; preserve its wording and punctuation. Record the file/member and line, paragraph, or element locator plus source hash in the package. Do not invent a quote or use a superseded edition. Put no unsupported claims, checkout form, delivery promises, or new price assertions in this department.
+
+The Issue 23 front-matter example is in `docs/almanack-bookshelf-example.yaml`. The source checklist must require `bookshelf` for each new issue, its verified excerpts, a live product URL, and cover provenance. Review desktop, 390px, and 320px pixels, readable copy, native links, cover proportions, and section order.
+
+The isolated branch implements both the canonical repository templates and an owner-requested opt-in extension to the separately pinned Classic exporter. The normal strict source, fresh-render parity, metadata, contrast, numbering, and body-hash gates pass. All 22 prior issues retain byte-identical HTML/plaintext and identical metadata. These local checks authorize no production activation, asset upload, provider action, publication, or send. A separately authorized release still requires normal code review and promotion, approved hosted raster staging, CI and deployment verification, and actual provider/received-preview checks.

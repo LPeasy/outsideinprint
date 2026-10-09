@@ -27,7 +27,7 @@
 {{ with .cta_url }}<p><a style="color:#346782;" href="{{ partial "almanack/email-link.html" . }}">{{ $m.issue.campaign.cta_label }}</a></p>{{ end }}
 </section>
 {{ end }}
-{{ with $m.issue.bob_note }}<section><h2 style="font-size:16px;">Note from Bob</h2><p>{{ if eq $m.issue.editorial_contract "almanack-v1" }}{{ . | markdownify }}{{ else }}{{ . }}{{ end }}</p></section>{{ end }}
+{{ with $m.issue.bob_note }}<section><h2 style="font-size:16px;">Note from Bob</h2><p>{{ . }}</p></section>{{ end }}
 <section style="border-top:1px solid #b0a087;padding-top:16px;">
 <h2 style="font-size:16px;">New from Outside In Print</h2>{{ partial "almanack/bob-feature.html" $m.issue }}
 {{ range $i, $essay := $m.essays }}

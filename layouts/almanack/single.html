@@ -26,7 +26,7 @@
   {{ end }}
 
   <article class="almanack-issue page-shell page-shell--wide" aria-labelledby="almanack-title">
-    <header class="almanack-masthead">
+    {{ partial "almanack/bob-style.html" .Params }}{{ partial "almanack/bob-masthead.html" .Params }}<header class="almanack-masthead">
       <p class="almanack-kicker">Outside In Print weekly sheet</p>
       <h1 id="almanack-title"><a href="{{ "collections/bobs-almanack/" | relURL }}">{{ if eq .Params.editorial_contract "almanack-v1" }}{{ .Title }}{{ else }}Bob's Almanack{{ end }}</a></h1>
       <div class="piece-byline-row">
@@ -99,7 +99,7 @@
     <div class="almanack-columns">
       <div class="almanack-main">
         <section class="almanack-new" aria-labelledby="almanack-new-title">
-          <p class="almanack-section-label" id="almanack-new-title">New from Outside In Print</p>
+          <p class="almanack-section-label" id="almanack-new-title">New from Outside In Print</p>{{ partial "almanack/bob-feature.html" .Params }}
           {{ with $lead }}
             {{ $leadURL := .url | default "#" }}
             {{ $leadHref := $leadURL }}
@@ -194,11 +194,11 @@
           {{ end }}
         </section>
 
-        <section class="almanack-virtue" aria-labelledby="almanack-virtue-title">
+        {{ with .Params.bookshelf }}{{ partial "almanack/bookshelf-web.html" (dict "page" $ "book" .) }}{{ end }}<section class="almanack-virtue" aria-labelledby="almanack-virtue-title">
           <p class="almanack-section-label" id="almanack-virtue-title">This Week's Virtue</p>
           <h2>{{ $virtue.name }}</h2>
           <p>{{ $virtue.reflection }}</p>
-        </section>
+        </section>{{ partial "almanack/bob-divider.html" .Params }}
       </div>
 
       <aside class="almanack-margin" aria-labelledby="almanack-margin-title">
@@ -278,10 +278,13 @@
       {{ end }}
     </section>
 
-    <figure class="almanack-quote almanack-quote--closing">
+    {{ if .Params.bob_ornaments.signoff }}<table role="presentation" class="bob-signoff"><tr><td><figure class="almanack-quote almanack-quote--closing">
       <blockquote>{{ .Params.closing_quote }}</blockquote>
       <figcaption>~ {{ .Params.closing_quote_attribution }}</figcaption>
-    </figure>
+    </figure></td><td class="bob-signoff-cell">{{ partial "almanack/bob-ornament.html" (dict "issue" $.Params "slot" "signoff") }}</td></tr></table>{{ else }}<figure class="almanack-quote almanack-quote--closing">
+      <blockquote>{{ .Params.closing_quote }}</blockquote>
+      <figcaption>~ {{ .Params.closing_quote_attribution }}</figcaption>
+    </figure>{{ end }}
 
     <footer class="almanack-footer">
       <p>{{ if eq .Params.editorial_contract "almanack-v1" }}<a href="{{ "" | absURL }}">Outside In Print</a>{{ else }}Outside In Print{{ end }}</p>

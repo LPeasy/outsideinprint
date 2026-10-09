@@ -150,3 +150,13 @@ CTA. Preserve complete artwork and require phone-size review. This separate
 handoff does not alter the weekly email automation, generic site share cards,
 other campaigns, existing posts, or schedules. Reference pixel inspection is
 pending; do not claim the approved design has been visually matched yet.
+
+
+## Bob ornaments
+
+The recurring linked-sprite treatment is documented in [Bob ornaments in Bob's Almanack](almanack-bob-ornaments.md). Issue 23 demonstrates four authentic static poses, each linked to Steam in both review formats. The main playable-demo invitation remains linked to the homepage. Keep the treatment on this review branch until the owner approves production integration.
+
+
+## From the Bookshelf
+
+For every new issue from Issue 23 onward, include one existing published book using the canonical `bookshelf` mapping. Follow [From the Bookshelf](almanack-bookshelf.md) for catalog rotation, exact excerpt verification, the small linked cover, store link, and placement before This Week's Virtue. Record source locators and check all three render formats. Drafts do not consume the rotation.

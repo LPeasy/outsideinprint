@@ -1,0 +1,22 @@
+{{- $issue := .Params -}}
+{{- $essays := $issue.essays | default (slice) -}}
+{{- if not $issue.issue_number }}{{ errorf "Almanack email requires the canonical issue_number" }}{{ end -}}
+{{- with $issue.email_masthead -}}
+  {{- if .image_url -}}
+    {{- if or (ne (printf "%v" .issue_date) ($.Date.Format "2006-01-02")) (ne (printf "%v" .issue_number) (printf "%v" $issue.issue_number)) -}}
+      {{- errorf "Almanack image masthead date/number must match the issue" -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $preheader := $issue.email_preheader | default $issue.description -}}
+{{- $model := dict
+  "issue" $issue
+  "date" (.Date.Format "January 2, 2006")
+  "date_key" (.Date.Format "2006-01-02")
+  "subject" (printf "Bob's Almanack ~ %s ~ Issue %v" (.Date.Format "January 2, 2006") $issue.issue_number)
+  "preheader" $preheader
+  "essays" $essays
+  "margin" ($issue.margin | default (dict))
+  "worth" ($issue.worth_reprinting | default (dict))
+  "virtue" ($issue.virtue | default (dict)) -}}
+{{- return $model -}}
