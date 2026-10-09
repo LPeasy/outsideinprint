@@ -1361,7 +1361,7 @@
       "review_state": "approved",
       "usage_state": "referenced",
       "processing_state": "derivative_capable",
-      "processing_note": "",
+      "processing_note": null,
       "quality_override": null
     },
     "editorial/the-plunge": {
@@ -5552,7 +5552,7 @@
       "review_state": "approved",
       "usage_state": "referenced",
       "processing_state": "derivative_capable",
-      "processing_note": "",
+      "processing_note": null,
       "quality_override": null
     },
     "essays/the-part-that-is-mine/section-1": {
