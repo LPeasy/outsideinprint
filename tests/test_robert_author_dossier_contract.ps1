@@ -165,8 +165,11 @@ try {
 
   $booksSection = [regex]::Match($builtPage, '(?s)<section[^>]*aria-labelledby=(?:"author-books-title"|author-books-title)[^>]*>(.*?)</section>').Value
   $bookLinks = [regex]::Matches($booksSection, '<a\b[^>]*href=(?:"(?:https://outsideinprint\.org)?/shop/[^"]+/"|(?:https://outsideinprint\.org)?/shop/[^\s>]+/)[^>]*>')
-  if ($bookLinks.Count -ne 4) {
-    throw "Expected all four books in the author page; found $($bookLinks.Count)."
+  if ($bookLinks.Count -ne 5) {
+    throw "Expected all five books in the author page; found $($bookLinks.Count)."
+  }
+  if ($booksSection -notmatch 'href=(?:"(?:https://outsideinprint\.org)?/shop/pending/"|(?:https://outsideinprint\.org)?/shop/pending/)(?=\s|>)') {
+    throw 'Expected PENDING among the author page book destinations.'
   }
 
   foreach ($forbiddenSnippet in @(

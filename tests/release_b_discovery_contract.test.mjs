@@ -30,7 +30,9 @@ test("author hub resolves six unique selected works, six distinct recent works, 
   assert.match(dossier, />Books</);
   assert.match(dossier, />Selected Writing</);
   assert.match(dossier, />Recent Writing</);
-  assert.equal(walk("content/shop").filter((file) => /(?:index|_index)\.md$/.test(file) && /^book_key:/m.test(read(file))).length, 4);
+  const books = walk("content/shop").filter((file) => /(?:index|_index)\.md$/.test(file) && /^book_key:/m.test(read(file)));
+  assert.equal(books.length, 5);
+  assert.ok(books.some((file) => /^book_key: "pending"$/m.test(read(file))), "PENDING must be included in the author book inventory");
 
   const sectionPositions = [
     'id="author-selected-title"',

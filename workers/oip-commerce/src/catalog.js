@@ -29,6 +29,13 @@ export const EPUB_PRODUCTS = Object.freeze({
     r2Key: "epubs/oip-wc.epub",
     downloadFilename: "the-water-cycle.epub",
   }),
+  "OIP-PENDING-EPUB": Object.freeze({
+    sku: "OIP-PENDING-EPUB",
+    title: "PENDING",
+    priceCents: 999,
+    r2Key: "epubs/pending/v1.2/pending.epub",
+    downloadFilename: "pending.epub",
+  }),
 });
 
 export const PAPERBACK_PRODUCTS = Object.freeze({

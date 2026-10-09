@@ -472,7 +472,7 @@ $expectedSamplePaths = @(
 $samplePaths = @(
   Get-ChildItem -LiteralPath (Join-Path $repoRoot 'content/shop') -Recurse -File -Filter 'sample.md' |
     ForEach-Object { [IO.Path]::GetRelativePath($repoRoot, $_.FullName).Replace('\', '/') } |
-    Where-Object { $_ -ne 'content/shop/2045/sample.md' } |
+    Where-Object { $_ -notin @('content/shop/2045/sample.md', 'content/shop/pending/sample.md') } |
     Sort-Object
 )
 if (($samplePaths -join '|') -cne ($expectedSamplePaths -join '|')) {
@@ -1031,8 +1031,24 @@ if ($contextualPartial -match '(?i)safeHTML|<form\b|<img\b|<script\b|onclick|loc
   throw 'Contextual books must use plain native links and catalog facts without adding commerce, storage or promotion defaults.'
 }
 
+$pendingSample = Get-SampleDocument -RelativePath 'content/shop/pending/sample.md' -RequiredKeys @('draft', 'date', 'publishDate', 'sample_of_book_key', 'sample_work_type', 'sample_source_id', 'sample_release_status')
+$pendingProduct = Get-RequiredText -RelativePath 'content/shop/pending/_index.md'
+foreach ($entry in @{
+  draft = 'false'; date = '2026-10-09'; publishDate = '2026-10-09T00:00:00-04:00';
+  sample_of_book_key = 'pending'; sample_work_type = 'novel-excerpt';
+  sample_source_id = 'pending-v1.2-v33.5'; sample_release_status = 'published'
+}.GetEnumerator()) {
+  if ($pendingSample.Fields[$entry.Key] -cne $entry.Value) { throw "PENDING sample has incorrect $($entry.Key)." }
+}
+foreach ($required in @('book_key: "pending"', 'sample_page: "/shop/pending/sample"', 'draft: false', 'date: 2026-10-09', 'publishDate: 2026-10-09T00:00:00-04:00')) {
+  Assert-Contains -Text $pendingProduct -Expected $required -Context 'Published PENDING product'
+}
+if ((Get-NormalizedBodyDigest -Body $pendingSample.Body) -cne 'b4af090c59cc0ca3a65eb749edc7a52aac42ddd190c69dfd9f5efe7acee27bd5') {
+  throw 'PENDING must preserve the approved complete Prologue, Part I date bridge and Chapter 1 without Chapter 2.'
+}
+
 if ($SourceOnly) {
-  Write-Host 'Three-title bookstore reading-sample source contract passed.'
+  Write-Host 'Bookstore reading-sample source contract passed, including the frozen PENDING excerpt.'
   exit 0
 }
 if (-not (Test-Path -LiteralPath $SiteDir -PathType Container)) {
@@ -1151,6 +1167,26 @@ $catalogHtml = [string]$output['shop/index.html']
 $detailHtmlValues = @($sampleSpecs | ForEach-Object { [string]$output[$_.OutputPath] })
 $combinedDetails = $detailHtmlValues -join [Environment]::NewLine
 
+$pendingSampleHtml = Get-Content -LiteralPath (Join-Path $SiteDir 'shop/pending/sample/index.html') -Raw -Encoding utf8
+$pendingDetailHtml = Get-Content -LiteralPath (Join-Path $SiteDir 'shop/pending/index.html') -Raw -Encoding utf8
+$pendingHeader = [regex]::Match($pendingSampleHtml, '(?is)<header\b[^>]*class="[^"]*bookstore-sample-book-header[^"]*"[^>]*>.*?</header>').Value
+foreach ($text in @('Free reading sample', 'PENDING', 'A Novel', 'Robert V. Ussley', 'Prologue and Chapter 1')) {
+  Assert-Contains -Text (Get-NormalizedHtmlText -Html $pendingHeader) -Expected $text -Context 'PENDING sample header'
+}
+if ($pendingHeader -notmatch '/books/pending/cover/' -or $pendingSampleHtml -match 'OIP Exclusive|Ten dark fables|A complete story from') {
+  throw 'PENDING sample must show its cover without 2045-specific or exclusivity copy.'
+}
+if ($pendingSampleHtml -notmatch 'href="?/shop/pending/#bookstore-purchase"?' -or $pendingSampleHtml -match '<form\b|data-epub-checkout') {
+  throw 'PENDING sample must return to the product purchase anchor without a checkout form.'
+}
+foreach ($html in @($catalogHtml, $pendingDetailHtml)) {
+  if ($html -notmatch 'href="?/shop/pending/sample/"?') { throw 'PENDING catalog and product must link to the published standalone excerpt.' }
+}
+$pendingBody = [regex]::Match($pendingSampleHtml, '(?is)<div\b[^>]*class="?bookstore-reading-sample__body"?[^>]*>(?<body>.*?)</div>').Groups['body'].Value
+if ((Get-NormalizedHtmlText -Html $pendingBody) -cne (Get-NormalizedHtmlText -Html $pendingSample.Body)) {
+  throw 'Rendered PENDING excerpt differs from its frozen reading text.'
+}
+
 $homeLaunchStrips = @([regex]::Matches($homeHtml, '(?is)<section\b[^>]*\bdata-home-2045-launch(?:=|\s|>).*?</section>'))
 if ($homeLaunchStrips.Count -gt 1) {
   throw 'The homepage rendered more than one 2045 launch strip.'
@@ -1168,8 +1204,8 @@ if ($homeWithoutLaunchStrip -match '(?i)book_sample_open|#reading-sample|booksto
 }
 
 $standalone2045 = Test-Path -LiteralPath (Join-Path $SiteDir 'shop/2045/sample/index.html') -PathType Leaf
-if ([regex]::Matches($catalogHtml, 'data-analytics-source-slot="?bookstore_index_sample"?', 'IgnoreCase').Count -ne 3) {
-  throw 'Built bookstore catalog must expose exactly three shelf reading-sample links.'
+if ([regex]::Matches($catalogHtml, 'data-analytics-source-slot="?bookstore_index_sample"?', 'IgnoreCase').Count -ne 4) {
+  throw 'Built bookstore catalog must expose exactly four shelf reading-sample links.'
 }
 if ([regex]::Matches($catalogHtml, 'data-analytics-source-slot="?bookstore_feature_sample"?', 'IgnoreCase').Count -ne [int]$standalone2045) {
   throw 'Built bookstore catalog must expose exactly one featured reading-sample link when the 2045 sample is published, otherwise none.'
@@ -1276,7 +1312,7 @@ foreach ($spec in $sampleSpecs) {
 $sampleArtifacts = @(
   Get-ChildItem -LiteralPath (Join-Path $SiteDir 'shop') -Recurse -File |
     Where-Object { $_.Name -match '^sample(?:\.|$)' -or $_.DirectoryName -match '[\\/]sample$' } |
-    Where-Object { [IO.Path]::GetRelativePath($SiteDir, $_.FullName).Replace('\', '/') -ne 'shop/2045/sample/index.html' }
+    Where-Object { [IO.Path]::GetRelativePath($SiteDir, $_.FullName).Replace('\', '/') -notin @('shop/2045/sample/index.html', 'shop/pending/sample/index.html') }
 )
 if ($sampleArtifacts.Count -gt 0) {
   throw "Standalone sample artifacts were generated: $($sampleArtifacts.FullName -join ', ')"
@@ -1285,11 +1321,11 @@ foreach ($routeIndex in @('sitemap.xml', 'index.xml', 'shop/index.xml')) {
   $path = Join-Path $SiteDir $routeIndex
   if (Test-Path -LiteralPath $path -PathType Leaf) {
     $text = Get-Content -LiteralPath $path -Raw -Encoding utf8
-    if ($text -match '(?i)/shop/(?!2045/sample/)[^<"'']+/sample(?:/|\.|<|"|''|$)') {
+    if ($text -match '(?i)/shop/(?!(?:2045|pending)/sample/)[^<"'']+/sample(?:/|\.|<|"|''|$)') {
       throw "Standalone reading-sample route leaked into public/$routeIndex."
     }
   }
 }
 
-Write-Host 'Three-title bookstore reading-sample source and production-output contract passed.'
+Write-Host 'Bookstore reading-sample source and production-output contract passed, including PENDING.'
 exit 0

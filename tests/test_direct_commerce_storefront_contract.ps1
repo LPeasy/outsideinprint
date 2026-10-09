@@ -87,6 +87,7 @@ if ([regex]::Matches($americanNightmarePage, '(?m)^date: 2026-08-21\s*$').Count 
   throw 'The American Nightmare site edition metadata must bind the owner-accepted 2026-08-21 publication date exactly once.'
 }
 $catalogSkus = @(
+  'OIP-PENDING-EPUB',
   'OIP-TD-EPUB',
   'OIP-AN-EPUB',
   'OIP-AN-PB',
@@ -95,8 +96,8 @@ $catalogSkus = @(
   'OIP-WC-EPUB',
   'OIP-WC-PB'
 )
-$publicEpubSkus = @('OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB')
-$liveEpubSkus = @('OIP-TD-EPUB', 'OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB')
+$publicEpubSkus = @('OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB', 'OIP-PENDING-EPUB')
+$liveEpubSkus = @('OIP-TD-EPUB', 'OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB', 'OIP-PENDING-EPUB')
 $disabledOfferSkus = @('OIP-AN-PB', 'OIP-PS-PB', 'OIP-WC-PB')
 
 foreach ($requiredCatalogText in @(
@@ -146,7 +147,12 @@ foreach ($sku in $catalogSkus) {
   if ($liveEpubSkus -contains $sku) {
     Assert-Contains -Text $offerBlock -Expected 'availability_status: "live"' -Context "Live catalog offer $sku"
     Assert-Contains -Text $offerBlock -Expected 'availability_label: "Available now"' -Context "Live catalog offer $sku"
-    Assert-Contains -Text $offerBlock -Expected 'isbn_status: "Assigned"' -Context "Live catalog offer $sku"
+    if ($sku -eq 'OIP-PENDING-EPUB') {
+      Assert-Contains -Text $offerBlock -Expected 'isbn_status: "Pending Bowker processing"' -Context 'PENDING saved ISBN submission status'
+    }
+    else {
+      Assert-Contains -Text $offerBlock -Expected 'isbn_status: "Assigned"' -Context "Live catalog offer $sku"
+    }
     Assert-Contains -Text $offerBlock -Expected 'checkout_url: ""' -Context "Live catalog offer $sku"
     Assert-Contains -Text $offerBlock -Expected 'checkout_endpoint: "https://downloads.outsideinprint.org/api/books/epub"' -Context "Live catalog offer $sku"
   }
@@ -191,8 +197,8 @@ if ($bookstoreData -match '(?im)^\s+checkout_note:\s+"[^"]*Amazon') {
   throw 'Bookstore data must not retain an Amazon checkout note.'
 }
 
-if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "live"\s*$').Count -ne 4) {
-  throw 'All four direct EPUB offers must be live.'
+if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "live"\s*$').Count -ne 5) {
+  throw 'All five direct EPUB offers must be live.'
 }
 if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "disabled"\s*$').Count -ne 3) {
   throw 'The three paperback offers must remain disabled.'
@@ -200,8 +206,8 @@ if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "disabled"\s*
 if ($bookstoreData -match '(?im)^\s+checkout_url:\s+"https?://') {
   throw 'The API-based direct EPUB launch must not expose a hosted checkout URL.'
 }
-if ([regex]::Matches($bookstoreData, '(?m)^\s+checkout_endpoint: "https://downloads\.outsideinprint\.org/api/books/epub"\s*$').Count -ne 4) {
-  throw 'All four direct EPUB offers must expose the approved production endpoint.'
+if ([regex]::Matches($bookstoreData, '(?m)^\s+checkout_endpoint: "https://downloads\.outsideinprint\.org/api/books/epub"\s*$').Count -ne 5) {
+  throw 'All five direct EPUB offers must expose the approved production endpoint.'
 }
 if ($bookstoreData -match '(?i)stripe') {
   throw 'The Square-only catalog must not contain Stripe configuration.'
@@ -653,6 +659,7 @@ if ($SourceOnly) {
 }
 
 $requiredOutputFiles = @(
+  'shop/pending/index.html',
   'shop/index.html',
   'shop/2045/index.html',
   'shop/the-american-nightmare-keep-dreaming-kid/index.html',
@@ -677,6 +684,7 @@ foreach ($relativePath in $requiredOutputFiles) {
 }
 
 $productSchemaExpectations = @(
+  @{ Path = 'shop/pending/index.html'; Url = 'https://outsideinprint.org/shop/pending/'; Sku = 'OIP-PENDING-EPUB'; Price = '9.99'; ReleaseDate = '2026-10-09' },
   @{ Path = 'shop/2045/index.html'; Url = 'https://outsideinprint.org/shop/2045/'; Sku = 'OIP-TD-EPUB'; Price = '19.99'; ReleaseDate = '2026-09-12' },
   @{ Path = 'shop/the-american-nightmare-keep-dreaming-kid/index.html'; Url = 'https://outsideinprint.org/shop/the-american-nightmare-keep-dreaming-kid/'; Sku = 'OIP-AN-EPUB'; Price = '9.99' },
   @{ Path = 'shop/the-parable-of-the-sheep/index.html'; Url = 'https://outsideinprint.org/shop/the-parable-of-the-sheep/'; Sku = 'OIP-PS-EPUB'; Price = '9.99' },
@@ -816,9 +824,9 @@ foreach ($sku in $liveEpubSkus) {
 if ($shopOutput -match '(?is)<a\b[^>]*bookstore-direct-offer__action') {
   throw 'The API-based EPUB launch must not expose a hosted direct-offer checkout link.'
 }
-if ([regex]::Matches($shopOutput, 'data-direct-offer-status=(?:"|'')?live(?:"|'')?', 'IgnoreCase').Count -ne 4 -or
-    [regex]::Matches($shopOutput, '\bdata-epub-checkout(?:=|\s|>)', 'IgnoreCase').Count -ne 4) {
-  throw 'Expected four live EPUB offers and forms, one per product page.'
+if ([regex]::Matches($shopOutput, 'data-direct-offer-status=(?:"|'')?live(?:"|'')?', 'IgnoreCase').Count -ne 5 -or
+    [regex]::Matches($shopOutput, '\bdata-epub-checkout(?:=|\s|>)', 'IgnoreCase').Count -ne 5) {
+  throw 'Expected five live EPUB offers and forms, one per product page.'
 }
 if ($shopOutput -match 'data-direct-offer-status=(?:"|'')?disabled(?:"|'')?') {
   throw 'No closed EPUB offer may remain on the storefront.'

@@ -106,7 +106,7 @@
     event.preventDefault();
     button = form.querySelector("button[type='submit']");
     sku = form.dataset.epubSku || "";
-    if (!button || button.disabled || !/^OIP-[A-Z]{2}-EPUB$/.test(sku)) return;
+    if (!button || button.disabled || !/^OIP-(?:[A-Z]{2}|PENDING)-EPUB$/.test(sku)) return;
     emailInput = form.querySelector("input[name='email']");
     if (!emailInput || !emailInput.checkValidity()) {
       if (emailInput) emailInput.reportValidity();
