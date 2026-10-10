@@ -5932,16 +5932,16 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     [DateTimeOffset]::Parse($_.publishDate) -le $selectionObservationTime
   } | Sort-Object @{ Expression = { [DateTimeOffset]::Parse($_.publishDate) }; Descending = $true }, title)
   $publishedReadingPaths = @($publishedReadingRecords | ForEach-Object { Get-SitePathFromHref -Href $_.permalink })
-  $flagshipPath = '/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/'
+  $flagshipPath = '/essays/jack-stratton-and-the-vulfpeck-model/'
   $expectedLeadPaths = @($publishedReadingPaths | Select-Object -First 1)
   if ($flagshipPath -in $publishedReadingPaths) {
     $expectedLeadPaths = @($flagshipPath)
   }
   $latestRemainingPaths = @($publishedReadingPaths | Where-Object { $_ -notin $expectedLeadPaths } | Select-Object -First 1)
   $preferredSupportingPaths = @(
-    '/syd-and-oliver/what-i-had/',
-    '/essays/default-owner/',
-    '/essays/reverse-origami/'
+    '/essays/the-noise-of-the-crowd/',
+    '/essays/the-coin-slot-on-the-corner/',
+    '/essays/togetherness/'
   )
   $expectedSupportingPaths = @(@($latestRemainingPaths + $preferredSupportingPaths + $publishedReadingPaths) | Where-Object {
     $_ -notin $expectedLeadPaths -and $_ -in $publishedReadingPaths
@@ -5994,9 +5994,10 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
 
   $featuredLabelOverrides = @{
     '/essays/the-dolphin-company/' = 'Case study'
-    '/syd-and-oliver/what-i-had/' = 'Dialogue'
-    '/essays/default-owner/' = 'Essay'
-    '/essays/reverse-origami/' = 'Musing'
+    '/essays/jack-stratton-and-the-vulfpeck-model/' = 'Modern Bio'
+    '/essays/the-noise-of-the-crowd/' = 'Musing'
+    '/essays/the-coin-slot-on-the-corner/' = 'Essay'
+    '/essays/togetherness/' = 'Musing'
   }
   foreach ($promo in @($homeAnchors | Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -in @('homepage_v2_featured_lead', 'homepage_v2_featured_supporting') })) {
     $promoPath = Get-SitePathFromHref -Href (Get-AttributeValue -Tag $promo -Name 'href')
