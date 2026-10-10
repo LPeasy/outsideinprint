@@ -7,10 +7,10 @@ import { execFileSync } from "node:child_process";
 
 const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.167.0/hugo")
   ? path.resolve(".tools/hugo-0.167.0/hugo") : "hugo");
-const fineChina = "/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/";
-const dialogue = "/syd-and-oliver/what-i-had/";
-const owner = "/essays/default-owner/";
-const origami = "/essays/reverse-origami/";
+const stratton = "/essays/jack-stratton-and-the-vulfpeck-model/";
+const noise = "/essays/the-noise-of-the-crowd/";
+const coinSlot = "/essays/the-coin-slot-on-the-corner/";
+const togetherness = "/essays/togetherness/";
 
 function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-01T12:00:00Z") {
   assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.167\.0/);
@@ -33,10 +33,10 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   write("layouts/_default/single.html", "{{ .Title }}");
   write("layouts/_default/list.html", "{{ .Title }}");
   const entries = {
-    fineChina: { title: "Fine China", url: fineChina, date: "2020-01-01", section_label: "Essay" },
-    dialogue: { title: "What I Had", url: dialogue, date: "2020-01-01", library_type: "dialogue" },
-    owner: { title: "Default Owner", url: owner, date: "2020-01-01", section_label: "Essay" },
-    origami: { title: "Reverse Origami", url: origami, date: "2020-01-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
+    stratton: { title: "Jack Stratton", url: stratton, date: "2020-01-01", section_label: "Modern Bio" },
+    noise: { title: "The Noise of the Crowd", url: noise, date: "2020-01-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
+    coinSlot: { title: "The Coin Slot on the Corner", url: coinSlot, date: "2020-01-01", section_label: "Essay" },
+    togetherness: { title: "Togetherness", url: togetherness, date: "2020-01-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
     earlier: { title: "A earlier release", date: "2020-06-01", publishDate: "2020-06-01T09:00:00Z" },
     latest: { title: "Z later release", date: "2020-06-01", publishDate: "2020-06-01T12:00:00Z" },
     draft: { title: "Draft", date: "2020-07-01", draft: true },
@@ -57,29 +57,29 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   return JSON.parse(fs.readFileSync(path.join(fixture, "public/index.html"), "utf8"));
 }
 
-test("Fine China leads, followed by the latest release, while preview-only work stays excluded", (t) => {
-  assert.deepEqual(renderSelection(t), [fineChina, "/essays/latest/", dialogue, owner, origami]);
+test("Jack Stratton leads, followed by the latest release, while preview-only work stays excluded", (t) => {
+  assert.deepEqual(renderSelection(t), [stratton, "/essays/latest/", noise, coinSlot, togetherness]);
 });
 
 test("a newer flagship stays first and missing curated work receives newest eligible fallback", (t) => {
   const selection = renderSelection(t, {
-    fineChina: { title: "Fine China", url: fineChina, date: "2020-06-01", publishDate: "2020-07-01" },
-    dialogue: null,
+    stratton: { title: "Jack Stratton", url: stratton, date: "2020-06-01", publishDate: "2020-07-01" },
+    noise: null,
   });
-  assert.deepEqual(selection, [fineChina, "/essays/latest/", owner, origami, "/essays/earlier/"]);
+  assert.deepEqual(selection, [stratton, "/essays/latest/", coinSlot, togetherness, "/essays/earlier/"]);
   assert.equal(new Set(selection).size, 5);
 });
 
 test("when the flagship is unavailable, the two newest releases lead", (t) => {
-  assert.deepEqual(renderSelection(t, { fineChina: null }), [
-    "/essays/latest/", "/essays/earlier/", dialogue, owner, origami,
+  assert.deepEqual(renderSelection(t, { stratton: null }), [
+    "/essays/latest/", "/essays/earlier/", noise, coinSlot, togetherness,
   ]);
 });
 
 test("a newly released curated piece occupies the latest slot only once", (t) => {
   assert.deepEqual(renderSelection(t, {
-    dialogue: { title: "What I Had", url: dialogue, date: "2020-07-01" },
-  }), [fineChina, dialogue, owner, origami, "/essays/latest/"]);
+    noise: { title: "The Noise of the Crowd", url: noise, date: "2020-07-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
+  }), [stratton, noise, coinSlot, togetherness, "/essays/latest/"]);
 });
 
 test("lead descriptions are trimmed and plain text while blank descriptions retain shared fallbacks", (t) => {

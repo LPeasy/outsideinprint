@@ -84,19 +84,19 @@ test("masthead proof sits between its controls and lead summaries keep supportin
   assert.equal((homeV2.match(/partial "discovery\/page-summary\.html"/g) || []).length, 1);
 });
 
-test("featured reading leads with Fine China, then the latest publication and curated supports", () => {
+test("featured reading leads with Jack Stratton, then the latest publication and curated supports", () => {
   const routes = [
-    "/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/",
-    "/syd-and-oliver/what-i-had/",
-    "/essays/default-owner/",
-    "/essays/reverse-origami/",
+    "/essays/jack-stratton-and-the-vulfpeck-model/",
+    "/essays/the-noise-of-the-crowd/",
+    "/essays/the-coin-slot-on-the-corner/",
+    "/essays/togetherness/",
   ];
   const indexes = routes.map((route) => selected.indexOf(`"${route}"`));
   assert.ok(indexes.every((index) => index >= 0));
   assert.deepEqual(indexes, [...indexes].sort((left, right) => left - right));
   assert.doesNotMatch(selected, /what-happened-at-camp-mystic|why-a-return-to-the-gold-standard|the-little-prince|russias-slow-surrender/);
   assert.match(selected, /\$eligible = sort \(sort \$eligible "Title" "asc"\) "PublishDate" "desc"/);
-  assert.match(selected, /\$flagshipRoute := "\/essays\/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet\/"/);
+  assert.match(selected, /\$flagshipRoute := "\/essays\/jack-stratton-and-the-vulfpeck-model\/"/);
   assert.match(selected, /range where \$eligible "RelPermalink" \$flagshipRoute/);
   assert.match(selected, /range first 1 \$eligible/);
   assert.ok(selected.indexOf('range where $eligible "RelPermalink" $flagshipRoute') < selected.indexOf("range first 1 $eligible"));

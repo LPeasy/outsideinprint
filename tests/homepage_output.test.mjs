@@ -41,10 +41,10 @@ const publishedPages = rows.map((row) => Object.fromEntries(columns.map((column,
   .sort((a, b) => Date.parse(b.publishDate) - Date.parse(a.publishDate) || a.title.localeCompare(b.title));
 const publishedRoutes = publishedPages.map((row) => row.route);
 const pinnedRoutes = [
-  "/essays/fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet/",
-  "/syd-and-oliver/what-i-had/",
-  "/essays/default-owner/",
-  "/essays/reverse-origami/",
+  "/essays/jack-stratton-and-the-vulfpeck-model/",
+  "/essays/the-noise-of-the-crowd/",
+  "/essays/the-coin-slot-on-the-corner/",
+  "/essays/togetherness/",
 ];
 const metricsSource = fs.readFileSync(path.resolve("data/homepage_metrics.yaml"), "utf8");
 const threshold = Number(metricsSource.match(/^reader_threshold: (\d+)$/m)?.[1]);
@@ -90,7 +90,7 @@ test("Dolphin correction retains the original publication date and renders a con
     || text(dolphinHtml).includes(currentRevision[2]), "the complete correction note must render");
 });
 
-test("rendered homepage leads with Fine China, then the newest remaining publication", () => {
+test("rendered homepage leads with Jack Stratton, then the newest remaining publication", () => {
   const cards = [...html.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/g)]
     .filter((match) => /\bhome-v2-featured__(?:lead|item)\b/.test(attribute(`<article ${match[1]}>`, "class")));
   assert.ok(publishedRoutes.length >= 5, "the production archive must supply published reading pages");
@@ -108,7 +108,9 @@ test("rendered homepage leads with Fine China, then the newest remaining publica
     assert.ok(canonicalKind, `${route} must have a canonical form label`);
     const kind = route === "/essays/the-dolphin-company/" ? "Case study" : canonicalKind;
     if (route === "/essays/the-dolphin-company/") assert.equal(canonicalKind, "Essay", "Dolphin's homepage label must not reclassify its destination");
-    if (route === "/essays/reverse-origami/") assert.equal(canonicalKind, "Musing");
+    if (route === pinnedRoutes[0]) assert.equal(canonicalKind, "Modern Bio");
+    if (route === pinnedRoutes[1] || route === pinnedRoutes[3]) assert.equal(canonicalKind, "Musing");
+    if (route === pinnedRoutes[2]) assert.equal(canonicalKind, "Essay");
     const metric = metricRecords.get(route);
     const badge = metric?.value >= threshold ? metric.label : "";
     const anchors = [...card[2].matchAll(/<a\b[^>]*>/g)].map((match) => match[0]);
