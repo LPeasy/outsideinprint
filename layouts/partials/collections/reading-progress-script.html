@@ -1,4 +1,4 @@
-<script>
+<script data-oip-route-script="reading-progress">
   (function () {
     if (window.__oipReadingProgressInitialized) {
       return;
@@ -225,7 +225,14 @@
       });
     }
 
-    updateArticleModules();
-    updateCollectionModules();
+    function updateProgress() {
+      updateArticleModules();
+      updateCollectionModules();
+    }
+    document.addEventListener("oip:route", updateProgress);
+    window.addEventListener("storage", function (event) {
+      if (event.key && event.key.indexOf("oip-reading-progress:v1:") === 0) updateProgress();
+    });
+    updateProgress();
   }());
 </script>

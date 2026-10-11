@@ -67,7 +67,18 @@ function transformAnalyticsConfig(html, overrides) {
     assert.match(replacement, valuePattern, `Rendered analytics config is missing ${key}.`);
     replacement = replacement.replace(valuePattern, `$1${value ? "!0" : "!1"}`);
   }
-  return html.replace(bootstrapPattern, replacement);
+  const transformed = html.replace(bootstrapPattern, replacement);
+  // Soft navigation reads the per-route JSON instead of rerunning the bootstrap.
+  const routeConfigPattern = /(<script\b(?=[^>]*\bdata-oip-route-config=(?:"analytics"|'analytics'|analytics)(?=\s|>))[^>]*>)([\s\S]*?)(<\/script>)/i;
+  assert.match(transformed, routeConfigPattern, "Rendered page is missing the analytics route configuration.");
+  return transformed.replace(routeConfigPattern, (tag, open, json, close) => {
+    const config = JSON.parse(json);
+    for (const [key, value] of Object.entries(overrides)) {
+      assert.equal(typeof config[key], "boolean", `Rendered analytics route config is missing ${key}.`);
+      config[key] = value;
+    }
+    return open + JSON.stringify(config) + close;
+  });
 }
 
 function deferred() {
@@ -88,6 +99,15 @@ async function waitFor(predicate, message, timeoutMs = 4000) {
     await new Promise((resolve) => setTimeout(resolve, 20));
   }
   assert.fail(message);
+}
+
+async function waitForSettledRoute(page, url, javaScriptEnabled = true) {
+  await page.waitForURL(url);
+  if (javaScriptEnabled) {
+    await page.waitForFunction(expected => window.__oipTestSettledUrl === expected, url);
+  } else {
+    await page.waitForLoadState("load");
+  }
 }
 
 function countData(record) {
@@ -136,6 +156,13 @@ function assertPrivacyBoundary(record, sentinels, expectedPageOrigin = canonical
 async function installRoutes(page, options = {}) {
   const counts = options.counts || [];
 
+  await page.addInitScript(() => {
+    const settled = () => { window.__oipTestSettledUrl = location.href; };
+    document.addEventListener("DOMContentLoaded", settled, { once: true });
+    document.addEventListener("oip:before-route", () => { window.__oipTestSettledUrl = null; });
+    document.addEventListener("oip:after-route", settled);
+  });
+
   await page.route("**/*", async (route) => {
     const request = route.request();
     const url = new URL(request.url());
@@ -180,7 +207,7 @@ async function installRoutes(page, options = {}) {
     }
 
     const contentType = contentTypes.get(path.extname(filePath).toLowerCase()) || "application/octet-stream";
-    if (request.resourceType() === "document" && options.transformHtml) {
+    if (request.resourceType() === "document" && request.frame() === page.mainFrame() && options.transformHtml) {
       const html = options.transformHtml(fs.readFileSync(filePath, "utf8"));
       await route.fulfill({ status: 200, contentType, body: html });
       return;
@@ -383,8 +410,9 @@ test("contextual book native navigation emits one bounded event per activation a
       const expectedCover = await contextualCover(entry);
       const { context, counts, page } = await newInstrumentedPage({ allowStyles: true, allowImagePaths: expectedCover.allowImagePaths, contextOptions: { viewport } });
       const promoEvents = () => counts.filter((record) => /^(collection|article)_book_(sample|detail|cover)$/.test(eventParts(record).fields.source_slot || ""));
+      const entryUrl = `${canonicalOrigin}${entry.path}?private=BOOK_QUERY_SENTINEL&email=BOOK_EMAIL_SENTINEL%40example.com&order_id=BOOK_ORDER_SENTINEL&download_token=BOOK_TOKEN_SENTINEL#BOOK_FRAGMENT_SENTINEL`;
       try {
-        await page.goto(`${canonicalOrigin}${entry.path}?private=BOOK_QUERY_SENTINEL&email=BOOK_EMAIL_SENTINEL%40example.com&order_id=BOOK_ORDER_SENTINEL&download_token=BOOK_TOKEN_SENTINEL#BOOK_FRAGMENT_SENTINEL`, { waitUntil: "load" });
+        await page.goto(entryUrl, { waitUntil: "load" });
         await waitFor(() => counts.some((record) => !countData(record).event), "Contextual entry pageview was not intercepted.");
         const module = page.locator("aside.contextual-book");
         assert.equal(await module.count(), 1);
@@ -470,7 +498,7 @@ test("contextual book native navigation emits one bounded event per activation a
             return document.activeElement === node && node.matches(":focus-visible") && style.outlineStyle !== "none" && parseFloat(style.outlineWidth) > 0;
           }), true, "Native links need a visible keyboard focus indicator.");
           await Promise.all([
-            page.waitForURL(`${canonicalOrigin}${expectedHref}`),
+            waitForSettledRoute(page, `${canonicalOrigin}${expectedHref}`),
             index === 2 ? anchor.locator("img").click() : index === 1 ? anchor.click() : page.keyboard.press("Enter"),
           ]);
           await waitFor(() => promoEvents().length >= index + 1, "Contextual link event was not intercepted.");
@@ -484,6 +512,7 @@ test("contextual book native navigation emits one bounded event per activation a
             fields: { path: expectedPath, slug: entry.slug, section: "Bookstore", source_slot: `${entry.slot}_book_${action}` },
           });
           await page.goBack({ waitUntil: "load" });
+          await waitForSettledRoute(page, entryUrl);
           await page.reload({ waitUntil: "load" });
           assert.equal(await page.locator(".contextual-book").count(), 1);
           assert.equal(promoEvents().length, index + 1, "Back and refresh must not add activation events.");
@@ -509,7 +538,7 @@ test("contextual links retain native destinations without JavaScript and respect
           await page.goto(`${canonicalOrigin}${entry.path}`, { waitUntil: "load" });
           const target = canonicalOrigin + (action === "sample" ? entry.sampleHref : entry.productPath);
           await Promise.all([
-            page.waitForURL(target),
+            waitForSettledRoute(page, target, !disabledJavaScript),
             page.locator(`.contextual-book [data-analytics-source-slot="${entry.slot}_book_${action}"]`).click(),
           ]);
           assert.equal(page.url(), target);
@@ -543,8 +572,9 @@ test("Almanack attribution survives sample navigation and tracks attempts withou
       const form = page.locator("form[data-analytics-event='newsletter_submit']");
       await form.evaluate(node => node.requestSubmit());
       assert.equal(counts.filter(record => countData(record).path.startsWith("oip:newsletter_submit")).length, 0, "Invalid email must not count as an attempt.");
-      await page.locator(".subscriber-funnel__sample h3 a").nth(1).click();
-      await page.waitForLoadState("load");
+      const sample = page.locator(".subscriber-funnel__sample h3 a").nth(1);
+      const sampleUrl = await sample.evaluate(anchor => anchor.href);
+      await Promise.all([waitForSettledRoute(page, sampleUrl), sample.click()]);
       assert.equal(await page.evaluate(() => window.oipAnalyticsEventReferrer()), label);
       await page.goto(`${canonicalOrigin}/subscribe/${segment}/`, { referer: page.url(), waitUntil: "load" });
       await form.locator("input[type=email]").fill("funnel-email-sentinel@example.com");
@@ -656,6 +686,10 @@ test("hosted pageview and form/link events send only sanitized GoatCounter data"
     const sample = page.locator('[data-analytics-event="book_sample_open"][data-analytics-path="/shop/2045/sample/"]').first();
     assert.equal(await sample.count(), 1, "The 2045 sample CTA must name the sample route as its analytics target.");
     await sample.evaluate((anchor) => {
+      // Analytics-only activations stay on this fixture. Swup requires its
+      // explicit opt-out in addition to cancelling native navigation below.
+      // The contextual-book scenarios above retain real navigation coverage.
+      anchor.setAttribute("data-no-swup", "");
       anchor.addEventListener("click", (event) => event.preventDefault(), { once: true });
       anchor.click();
     });
@@ -741,6 +775,7 @@ test("homepage article links emit one surface-specific click each while newslett
       }
       for (let index = 0; index < anchorCount; index += 1) {
         const target = await anchors.nth(index).evaluate((node) => {
+          node.setAttribute("data-no-swup", "");
           node.addEventListener("click", (event) => event.preventDefault(), { once: true });
           node.click();
           return {
@@ -773,6 +808,7 @@ test("homepage article links emit one surface-specific click each while newslett
         const fallback = zoom.closest("article")?.querySelector("[data-home-featured-image-fallback]");
         const dialog = document.querySelector("[data-home-featured-dialog]");
         if (!fallback || !dialog) throw new Error("Missing homepage illustration fallback or dialog.");
+        fallback.setAttribute("data-no-swup", "");
         fallback.addEventListener("click", (event) => event.preventDefault(), { once: true });
         fallback.click();
         zoom.click();
@@ -878,6 +914,7 @@ test("collection title and artwork clicks share one event each while magnifiers 
 
       for (const anchor of entry.textOnly ? [title] : [title, illustration]) {
         await anchor.evaluate((node) => {
+          node.setAttribute("data-no-swup", "");
           node.addEventListener("click", (event) => event.preventDefault(), { once: true });
           node.click();
         });
@@ -981,6 +1018,7 @@ test("filtered Library artwork opens a readable viewer in both themes without tr
 
     const title = record.locator(".t a");
     const target = await title.evaluate((anchor) => {
+      anchor.setAttribute("data-no-swup", "");
       anchor.addEventListener("click", (event) => event.preventDefault(), { once: true });
       return { path: new URL(anchor.href).pathname, slug: anchor.dataset.analyticsSlug, section: anchor.dataset.analyticsSection };
     });
@@ -1074,6 +1112,7 @@ test("image fallback keeps internal paths and drops off-site paths without leaki
         anchor.dataset.analyticsEvent = "internal_promo_click";
         anchor.dataset.analyticsSourceSlot = slot;
         anchor.dataset.analyticsPath = analyticsPath;
+        anchor.setAttribute("data-no-swup", "");
         document.body.appendChild(anchor);
         anchor.addEventListener("click", (event) => event.preventDefault(), { once: true });
         anchor.click();

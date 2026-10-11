@@ -104,7 +104,7 @@ async function createPage(options = {}) {
     }
 
     const contentType = contentTypes.get(path.extname(filePath).toLowerCase()) || "application/octet-stream";
-    if (request.resourceType() === "document" && options.transformHtml) {
+    if (request.resourceType() === "document" && request.frame() === page.mainFrame() && options.transformHtml) {
       await route.fulfill({
         status: 200,
         contentType,

@@ -93,10 +93,18 @@
   </section>
 
   {{ $artworkScript := resources.Get "js/library-artwork.js" | resources.Minify | resources.Fingerprint }}
-  <script src="{{ $artworkScript.RelPermalink }}" integrity="{{ $artworkScript.Data.Integrity }}"></script>
-  <script>
+  <script data-oip-route-script="library-artwork" src="{{ $artworkScript.RelPermalink }}" integrity="{{ $artworkScript.Data.Integrity }}"></script>
+  <script data-oip-route-script="library-browse">
     (function () {
+      if (window.__oipLibraryBrowseInitialized) return;
+      window.__oipLibraryBrowseInitialized = true;
+      var dispose = function () {};
+      var mountedControls = null;
+      function mount() {
       var controls = document.querySelector('[data-library-controls]');
+      if (controls && controls === mountedControls) return;
+      dispose();
+      dispose = function () {};
       var searchInput = document.getElementById('library-search');
       var typeSelect = document.getElementById('library-type');
       var yearSelect = document.getElementById('library-year');
@@ -127,6 +135,20 @@
       var supportsUrl = typeof URL === 'function' && typeof window.history.replaceState === 'function' && typeof window.history.pushState === 'function';
 
       if (!controls || !searchInput || !typeSelect || !yearSelect || !collectionSelect || !sortSelect || !resetButton || !browseButton || !summary || !empty || !error || !groupedRoot || !flatSection || !flatList || !resultsTitle || !pagination || !previousButton || !nextButton || !pageStatus || !artworkTools || typeof fetch !== 'function') return;
+      var lifetime = new AbortController();
+      var disposed = false;
+      var mountedPath = window.location.pathname;
+      mountedControls = controls;
+      dispose = function () {
+        disposed = true;
+        if (mountedControls === controls) mountedControls = null;
+        activeRequest += 1;
+        window.clearTimeout(inputTimer);
+        lifetime.abort();
+      };
+      function listen(node, event, callback) {
+        node.addEventListener(event, callback, { signal: lifetime.signal });
+      }
       controls.hidden = false;
 
       function defaultState() {
@@ -185,7 +207,7 @@
       }
 
       function syncUrl(state, replace) {
-        if (!supportsUrl) return;
+        if (!supportsUrl || disposed || window.location.pathname !== mountedPath) return;
         try {
           var url = new URL(window.location.href);
           [['q', state.q], ['type', state.type], ['year', state.year], ['collection', state.collection]].forEach(function (pair) {
@@ -201,15 +223,20 @@
             url.searchParams.delete('page');
           }
           if (url.toString() !== window.location.href) {
-            if (replace) window.history.replaceState({}, '', url.toString());
-            else window.history.pushState({}, '', url.toString());
+            if (window.oipNavigation && typeof window.oipNavigation.updateQuery === 'function') {
+              window.oipNavigation.updateQuery(url.toString(), { replace: !!replace, state: { oipLibrary: { path: mountedPath } } });
+            } else {
+              var historyState = Object.assign({}, window.history.state || {}, { oipLibrary: { path: mountedPath } });
+              if (replace) window.history.replaceState(historyState, '', url.toString());
+              else window.history.pushState(historyState, '', url.toString());
+            }
           }
         } catch (ignored) {}
       }
 
       function loadCatalog() {
         if (!catalogPromise) {
-          catalogPromise = fetch(indexUrl, { credentials: 'same-origin' }).then(function (response) {
+          catalogPromise = fetch(indexUrl, { credentials: 'same-origin', signal: lifetime.signal }).then(function (response) {
             if (!response.ok) throw new Error('Library index request failed');
             return response.json();
           }).then(function (payload) {
@@ -326,6 +353,7 @@
       }
 
       function applyState(state, options) {
+        if (disposed || !controls.isConnected) return;
         var config = options || {};
         window.clearTimeout(inputTimer);
         currentState = state;
@@ -342,7 +370,7 @@
         summary.textContent = 'Loading the complete catalog…';
 
         loadCatalog().then(function (items) {
-          if (requestId !== activeRequest) return;
+          if (disposed || requestId !== activeRequest || !controls.isConnected) return;
           var results = items.filter(function (item) { return matches(item, state); });
           results.sort(function (a, b) { return compare(a, b, state.sort); });
           var pageCount = Math.max(1, Math.ceil(results.length / pageSize));
@@ -363,7 +391,7 @@
           empty.hidden = results.length !== 0;
           if (config.focusResults && results.length) resultsTitle.focus();
         }).catch(function () {
-          if (requestId !== activeRequest) return;
+          if (disposed || requestId !== activeRequest || !controls.isConnected) return;
           clearResults();
           attachGroupedResults();
           flatSection.hidden = true;
@@ -375,21 +403,21 @@
       }
 
       function handleChange() { applyState(stateFromControls()); }
-      searchInput.addEventListener('input', function () {
+      listen(searchInput, 'input', function () {
         window.clearTimeout(inputTimer);
         activeRequest += 1;
         inputTimer = window.setTimeout(handleChange, 120);
       });
-      typeSelect.addEventListener('change', handleChange);
-      yearSelect.addEventListener('change', handleChange);
-      collectionSelect.addEventListener('change', handleChange);
-      sortSelect.addEventListener('change', handleChange);
-      resetButton.addEventListener('click', function () {
+      listen(typeSelect, 'change', handleChange);
+      listen(yearSelect, 'change', handleChange);
+      listen(collectionSelect, 'change', handleChange);
+      listen(sortSelect, 'change', handleChange);
+      listen(resetButton, 'click', function () {
         var state = defaultState();
         setControls(state);
         applyState(state);
       });
-      browseButton.addEventListener('click', function () {
+      listen(browseButton, 'click', function () {
         var state = defaultState();
         state.view = 'all';
         setControls(state);
@@ -402,17 +430,24 @@
         state.page = currentState.page + delta;
         applyState(state, { focusResults: true });
       }
-      previousButton.addEventListener('click', function () { turnPage(-1); });
-      nextButton.addEventListener('click', function () { turnPage(1); });
-      window.addEventListener('popstate', function () {
+      listen(previousButton, 'click', function () { turnPage(-1); });
+      listen(nextButton, 'click', function () { turnPage(1); });
+      function restoreUrlState() {
+        if (disposed || !controls.isConnected || window.location.pathname !== mountedPath) return;
         var state = stateFromUrl();
         setControls(state);
         applyState(state, { replaceUrl: true });
-      });
+      }
+      listen(window, 'popstate', restoreUrlState);
+      listen(document, 'oip:query', restoreUrlState);
 
       var initialState = stateFromUrl();
       setControls(initialState);
       applyState(initialState, { replaceUrl: true });
+      }
+      document.addEventListener('oip:before-route', function () { dispose(); });
+      document.addEventListener('oip:route', mount);
+      mount();
     }());
   </script>
 {{ end }}

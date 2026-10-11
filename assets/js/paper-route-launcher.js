@@ -1,4 +1,5 @@
 (function () {
+  function mount(scope) {
   var overlay = document.querySelector("[data-paper-route-overlay]");
   var launcher = document.querySelector("[data-paper-route-launch]");
 
@@ -115,12 +116,12 @@
       script.addEventListener("load", function () {
         script.setAttribute("data-loaded", "true");
         resolve();
-      });
+      }, { once: true });
 
       script.addEventListener("error", function (error) {
         script.remove();
         reject(error);
-      });
+      }, { once: true });
       document.head.appendChild(script);
     });
   }
@@ -210,9 +211,11 @@
     setText(status, "Loading the morning edition...");
 
     loadRuntime().then(function () {
+      if (!scope.active()) return;
       setLoading(false);
       mountGame();
     }).catch(function () {
+      if (!scope.active()) return;
       runtimePromise = null;
       setLoading(false);
       setFailure(true);
@@ -239,7 +242,7 @@
     }
   }
 
-  function closeOverlay() {
+  function closeOverlay(restoreFocus) {
     if (gameInstance && typeof gameInstance.destroy === "function") {
       gameInstance.destroy();
       gameInstance = null;
@@ -252,26 +255,26 @@
     overlay.setAttribute("aria-hidden", "true");
     document.body.classList.remove("paper-route-open");
 
-    if (activeTrigger && typeof activeTrigger.focus === "function") {
+    if (restoreFocus !== false && activeTrigger && typeof activeTrigger.focus === "function") {
       activeTrigger.focus({ preventScroll: true });
-    } else {
+    } else if (restoreFocus !== false) {
       launcher.focus({ preventScroll: true });
     }
 
     activeTrigger = null;
   }
 
-  launcher.addEventListener("click", openOverlay);
+  scope.on(launcher, "click", openOverlay);
 
   if (retryButton) {
-    retryButton.addEventListener("click", ensureGame);
+    scope.on(retryButton, "click", ensureGame);
   }
 
   closeControls.forEach(function (control) {
-    control.addEventListener("click", closeOverlay);
+    scope.on(control, "click", closeOverlay);
   });
 
-  document.addEventListener("keydown", function (event) {
+  scope.on(document, "keydown", function (event) {
     var focusable;
     var first;
     var last;
@@ -309,4 +312,12 @@
       first.focus();
     }
   });
+
+  scope.cleanup(function () { activeTrigger = null; closeOverlay(false); });
+  }
+  if (window.oipRegisterRouteWidget) {
+    window.oipRegisterRouteWidget("paper-route-launcher", mount);
+  } else {
+    mount({ on: function (target, type, callback, options) { target.addEventListener(type, callback, options); }, cleanup: function () {}, active: function () { return true; } });
+  }
 }());

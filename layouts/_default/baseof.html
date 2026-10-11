@@ -43,7 +43,9 @@
     {{ partial "theme_bootstrap.html" . }}
 
     {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
-    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+    <link data-oip-persistent="main-css" rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+    {{ partial "companion_bob_assets.html" (dict "kind" "styles") }}
+    {{ partial "site_navigation_assets.html" (dict "kind" "head") }}
   </head>
   {{- $bodyClasses := slice -}}
   {{- if .IsPage -}}
@@ -67,7 +69,7 @@
   <body{{ if gt (len $bodyClasses) 0 }} class="{{ delimit $bodyClasses " " }}"{{ end }}>
     {{ partial "v2_preview_guard.html" . }}
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <div class="wrap">
+    <div class="wrap" id="site-page" data-site-page>
       {{ partial "masthead.html" . }}
       <main id="main-content">
         {{ block "main" . }}{{ end }}
@@ -76,12 +78,17 @@
       {{- if $readerBridge }}{{ partial "reader_bridge.html" . }}{{ end -}}
       {{ partial "footer.html" . }}
     </div>
-    {{ partial "editorial/cartoon-thumbnail-lightbox.html" . }}
-    {{ partial "paper_route.html" . }}
+    <div id="site-overlays" data-site-overlays>
+      {{ partial "editorial/cartoon-thumbnail-lightbox.html" . }}
+      {{ partial "paper_route.html" . }}
+    </div>
+    {{ partial "companion_bob.html" . }}
+    {{ partial "companion_bob_assets.html" (dict "kind" "script") }}
     {{ partial "theme_toggle_script.html" . }}
     {{ partial "masthead_navigation_script.html" . }}
     {{ partial "article/share-script.html" . }}
     {{ partial "analytics.html" . }}
+    {{ partial "site_navigation_assets.html" (dict "kind" "script") }}
   </body>
 </html>
 

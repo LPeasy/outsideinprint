@@ -1,0 +1,12 @@
+{{- if eq .kind "head" -}}
+  {{- $lifecycle := resources.Get "js/route-widget-lifecycle.js" | resources.Minify | resources.Fingerprint "sha384" -}}
+  <script data-oip-persistent="route-lifecycle" src="{{ $lifecycle.RelPermalink }}" integrity="{{ $lifecycle.Data.Integrity }}"></script>
+  {{- $css := resources.Get "css/site-navigation.css" | resources.Minify | resources.Fingerprint "sha384" -}}
+  <link data-oip-persistent="navigation-css" rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{- else -}}
+  <div class="site-navigation-announcement" data-route-announcement role="status" aria-live="polite" aria-atomic="true"></div>
+  {{- $swup := resources.Get "js/vendor/swup.4.10.0.js" | resources.Fingerprint "sha384" -}}
+  <script data-oip-persistent="swup" defer src="{{ $swup.RelPermalink }}" integrity="{{ $swup.Data.Integrity }}"></script>
+  {{- $navigation := resources.Get "js/site-navigation.js" | resources.Minify | resources.Fingerprint "sha384" -}}
+  <script data-oip-persistent="navigation" defer src="{{ $navigation.RelPermalink }}" integrity="{{ $navigation.Data.Integrity }}"></script>
+{{- end -}}

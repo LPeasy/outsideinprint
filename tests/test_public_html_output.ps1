@@ -3923,13 +3923,13 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/random/index.html'
-    Pattern = '(?s)random-route.*?lpeasy\.github\.io.*?/outsideinprint.*?https://outsideinprint\.org.*?window\.location\.hostname===\w+.*?window\.location\.replace\(\w+\+\w+\+window\.location\.search\+window\.location\.hash\).*?Math\.floor'
-    Message = 'expected the random route script to preserve legacy-host canonical redirects before selecting a random piece'
+    Pattern = '(?s)<head>.*?lpeasy\.github\.io.*?/outsideinprint.*?https://outsideinprint\.org.*?window\.location\.replace\([^)]*window\.location\.search\s*\+\s*window\.location\.hash\).*?</head>.*?data-oip-random'
+    Message = 'expected the shared head to preserve legacy-host canonical redirects before the Random route data is read'
   },
   @{
     Path = 'public/random/index.html'
-    Pattern = '(?s)"/library/".*?if\(!\w+\.length\)\{window\.location\.replace\(\w+\);return\}.*?Math\.floor\(Math\.random\(\)\*\w+\.length\).*?window\.location\.replace\(\w+\)'
-    Message = 'expected the random route to keep the automatic redirect and library fallback behavior'
+    Pattern = '(?s)<script\b(?=[^>]*type=(?:"application/json"|application/json))(?=[^>]*data-oip-random)[^>]*>\s*\{(?=[^<]*"fallback"\s*:\s*"/library/")(?=[^<]*"urls"\s*:\s*\[).*?</script>.*?<script\b(?=[^>]*data-oip-persistent=(?:"navigation"|navigation))(?=[^>]*site-navigation)[^>]*>'
+    Message = 'expected Random to supply its URL choices and Library fallback to the persistent navigation controller'
   },
   @{
     Path = 'public/random/index.html'
@@ -5579,6 +5579,39 @@ foreach ($check in $requiredUxChecks) {
       $uxIssues.Add("$relativePath => $($check.Message)")
     }
   }
+}
+
+# Random now keeps the document alive. Validate the generated choices and the
+# actual fingerprinted controller instead of requiring its old inline redirect.
+$randomOutputHtml = [string]$targetPageHtml['public/random/index.html']
+$randomDataMatch = [regex]::Match($randomOutputHtml, '(?is)<script\b[^>]*\bdata-oip-random(?=\s|=|>)[^>]*>(.*?)</script>')
+try {
+  if (-not $randomDataMatch.Success) { throw 'Missing Random JSON data.' }
+  $randomConfig = $randomDataMatch.Groups[1].Value | ConvertFrom-Json -AsHashtable
+  if ($randomConfig.fallback -cne '/library/' -or $randomConfig.urls -isnot [array] -or $randomConfig.urls.Count -eq 0) {
+    throw 'Expected nonempty URL choices and /library/ fallback.'
+  }
+  foreach ($randomChoice in $randomConfig.urls) {
+    if ($randomChoice -isnot [string] -or $randomChoice -notmatch '^/(?!/)[^?#]+/$' -or $randomChoice -match '(?:^|/)\.\.?(/|$)' -or
+        -not (Test-Path -LiteralPath (Join-Path $SiteDir ($randomChoice.TrimStart('/') + 'index.html')) -PathType Leaf)) {
+      throw "Random choice does not identify a built reading page: $randomChoice"
+    }
+  }
+  $randomControllerTag = @(Get-OpenTags -Html $randomOutputHtml -TagName 'script' | Where-Object {
+    (Get-AttributeValue -Tag $_ -Name 'data-oip-persistent') -ceq 'navigation'
+  })
+  if ($randomControllerTag.Count -ne 1) { throw 'Expected one shared navigation controller.' }
+  $randomControllerUrl = Get-SitePathFromHref -Href (Get-AttributeValue -Tag $randomControllerTag[0] -Name 'src')
+  if ($randomControllerUrl -notmatch '^/js/site-navigation[^/]+\.js$') { throw 'Unexpected navigation controller path.' }
+  $randomController = Get-Content -LiteralPath (Join-Path $SiteDir $randomControllerUrl.TrimStart('/')) -Raw
+  if ($randomController -notmatch 'script\[data-oip-random\]' -or
+      $randomController -notmatch 'Math\.floor\(Math\.random\(\)\s*\*\s*\w+\.length\)' -or
+      $randomController -notmatch '\.fallback' -or
+      $randomController -notmatch 'history\s*:\s*["'']replace["'']') {
+    throw 'Navigation controller must consume Random choices, choose a random index, retain its fallback, and replace the initial Random history entry.'
+  }
+} catch {
+  $uxIssues.Add("public/random/index.html => invalid persistent Random behavior: $($_.Exception.Message)")
 }
 
 $homePrimaryNavHtml = Get-PrimaryNavHtml -Html ([string]$targetPageHtml['public/index.html'])

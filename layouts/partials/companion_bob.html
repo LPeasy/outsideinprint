@@ -1,0 +1,11 @@
+<div id="companion-bob" class="companion-bob{{ if not .IsHome }} companion-bob--compact{{ end }}" data-bob-companion data-docked="false" data-greeting="hidden" hidden>
+  <iframe class="companion-bob__frame" data-bob-frame data-src="{{ "companion-bob/runtime/" | relURL }}" title="Interactive Bob" allow="autoplay" referrerpolicy="same-origin" inert></iframe>
+  <p class="companion-bob__greeting" data-bob-greeting role="status" aria-live="polite" aria-atomic="true"></p>
+  <div class="companion-bob__fallback" data-bob-fallback>
+    <button class="companion-bob__open" data-bob-open type="button" aria-label="Open Bob controls">
+      <img src="{{ "companion-bob/idle.webp" | relURL }}" width="160" height="160" alt="" aria-hidden="true" decoding="async">
+    </button>
+    <p class="companion-bob__status" data-bob-status role="status" hidden>Bob is loading…</p>
+  </div>
+</div>
+<button class="companion-bob-restore" data-bob-restore type="button" hidden>Show Bob</button>

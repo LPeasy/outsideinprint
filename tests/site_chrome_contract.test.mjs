@@ -240,7 +240,7 @@ test("shared masthead exposes the public light and dark theme selector", () => {
   assert.match(mastheadNavigationScript, /data-primary-nav-disclosure/);
   assert.match(mastheadNavigationScript, /event\.key === "Escape" && disclosure\.open/);
   assert.match(mastheadNavigationScript, /disclosure\.querySelector\("summary"\)[\s\S]*?summary\.focus\(\)/);
-  assert.match(mastheadNavigationScript, /document\.addEventListener\("pointerdown"/);
+  assert.match(mastheadNavigationScript, /scope\.on\(document, "pointerdown"/);
   assert.match(mastheadNavigationScript, /matchMedia\("\(max-width: 768px\)"\)/);
   assert.match(css, /html\[data-theme="light"\]\{[\s\S]*--bg-page:var\(--oip-paper\);[\s\S]*--accent:var\(--oip-link\);/);
   assert.match(css, /html\{\s*font-size:100%;\s*scroll-behavior:smooth;\s*\}/);
@@ -629,13 +629,11 @@ test("footer and random route now point readers home instead of Welcome", () => 
   assert.match(randomTemplate, /"label" "Home"/);
   assert.match(randomTemplate, /class="item random-route__status"/);
   assert.match(randomTemplate, /Finding a piece from the archive\.\.\./);
-  assert.match(randomTemplate, /legacyHost = "lpeasy\.github\.io"/);
-  assert.match(randomTemplate, /legacyPrefix = "\/outsideinprint"/);
-  assert.match(randomTemplate, /canonicalHost = "https:\/\/outsideinprint\.org"/);
-  assert.match(randomTemplate, /window\.location\.hostname === legacyHost/);
-  assert.match(randomTemplate, /window\.location\.replace\(canonicalHost \+ canonicalPath \+ window\.location\.search \+ window\.location\.hash\)/);
-  assert.match(randomTemplate, /window\.location\.replace\(randomUrl\)/);
-  assert.match(randomTemplate, /window\.location\.replace\(fallback\)/);
+  // The shared head handles legacy hosts; Random now supplies choices to the
+  // persistent router instead of replacing the document and its audio player.
+  assert.match(baseLayout, /partial "legacy_host_redirect\.html"/);
+  assert.match(randomTemplate, /type="application\/json" data-oip-random/);
+  assert.match(randomTemplate, /dict "urls" \$urls "fallback" \("library\/" \| relURL\)/);
   assert.match(randomTemplate, /\.RelPermalink/);
   assert.doesNotMatch(randomTemplate, /data-random-route-choices/);
   assert.doesNotMatch(randomTemplate, /data-random-route-refresh/);
@@ -756,7 +754,7 @@ test("homepage composition puts reading before newsletter and contribution", () 
   assert.doesNotMatch(cartoonThumbnailLightbox, /<h2 id="essay-cartoon-lightbox-title"/);
   assert.match(cartoonThumbnailLightbox, /data-essay-cartoon-lightbox-gallery/);
   assert.match(cartoonThumbnailLightbox, /View in gallery/);
-  assert.match(cartoonThumbnailLightbox, /imageButton\.addEventListener\("click", closeLightbox\)/);
+  assert.match(cartoonThumbnailLightbox, /scope\.on\(imageButton, "click", closeLightbox\)/);
   assert.doesNotMatch(cartoonThumbnailLightbox, /window\.location\.href/);
   assert.match(pageListItem, /editorial\/cartoon-gallery-link\.html/);
   assert.match(cartoonData, /slug: think-outside-the-box/);
@@ -895,7 +893,7 @@ test("Studio funnel keeps pricing, scope, inquiry configuration, and mail compos
   assert.match(studioTemplate, /href="\/privacy\/">Privacy Policy<\/a>/);
   assert.doesNotMatch(studioTemplate, /type="file"/);
   assert.match(studioTemplate, /\{\{-?\s*if \$composerEnabled\s*-?\}\}(?:(?!\{\{-?\s*end)[\s\S])*?<form[\s\S]*?data-studio-email-form[\s\S]*?<\/form>\s*\{\{-?\s*end\s*-?\}\}\s*<p id="studio-inquiry-direct-email" class="studio-form__fallback">/);
-  assert.match(studioTemplate, /\{\{-?\s*if \$composerEnabled\s*-?\}\}(?:(?!\{\{-?\s*end)[\s\S])*?resources\.Get "js\/studio-inquiry\.js"[\s\S]*?<script defer[\s\S]*?<\/script>\s*\{\{-?\s*end\s*-?\}\}/);
+  assert.match(studioTemplate, /\{\{-?\s*if \$composerEnabled\s*-?\}\}(?:(?!\{\{-?\s*end)[\s\S])*?resources\.Get "js\/studio-inquiry\.js"[\s\S]*?<script data-oip-route-script="studio-inquiry" defer[\s\S]*?<\/script>\s*\{\{-?\s*end\s*-?\}\}/);
 
   assert.match(studioScript, /new FormData\(form\)/);
   assert.match(studioScript, /"mailto:" \+ recipient/);
@@ -919,7 +917,8 @@ test("Studio funnel keeps pricing, scope, inquiry configuration, and mail compos
   assert.deepEqual(guidedBodyOrder, [...guidedBodyOrder].sort((left, right) => left - right));
   assert.doesNotMatch(studioScript, /"(?:Offer code|Source page): "/);
   assert.match(studioScript, /I will receive your inquiry only if you send the email and it reaches me\./);
-  assert.ok(studioScript.indexOf('form.addEventListener("submit", prepareInquiry)') < studioScript.indexOf("submitButton.disabled = false"));
+  assert.ok(studioScript.indexOf('scope.on(form, "submit", prepareInquiry)') >= 0);
+  assert.ok(studioScript.indexOf('scope.on(form, "submit", prepareInquiry)') < studioScript.indexOf("submitButton.disabled = false"));
   assert.doesNotMatch(studioScript, /fetch\s*\(|XMLHttpRequest|navigator\.sendBeacon|document\.cookie|localStorage|sessionStorage|navigator\.clipboard/);
   assert.doesNotMatch(studioScript, /delivery confirmed|successfully sent|inquiry received/i);
 

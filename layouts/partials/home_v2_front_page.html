@@ -6,6 +6,8 @@
 <section class="home-v2" aria-labelledby="home-front-page-title">
   <h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>
 
+  {{ partial "home_idle_bob.html" . }}
+
   <section class="home-front-page__orientation" aria-labelledby="home-reader-note-title">
     <h2 id="home-reader-note-title" class="home-front-page__welcome-label">A note to the reader</h2>
     <div class="home-front-page__welcome-body">
@@ -127,7 +129,6 @@
             {{- if eq $index (sub (len $featured) 1) }}</div>{{ end }}
           {{- end }}
         {{- end }}
-        {{ partial "home_idle_bob.html" . }}
       </div>
     </section>
   {{- end }}
@@ -145,8 +146,5 @@
 </section>
 {{ partial "home_featured_image_dialog.html" . }}
 {{- with resources.Get "js/home-featured-image.js" | minify | fingerprint "sha384" }}
-  <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
-{{- end }}
-{{- with resources.Get "js/home-idle-bob.js" | minify | fingerprint "sha384" }}
-  <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+  <script data-oip-route-script="home-featured-image" src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
 {{- end }}

@@ -999,24 +999,53 @@ if ([string]$migrationReport.baseline_commit -cnotmatch '^[0-9a-f]{40}$') {
 if ($LASTEXITCODE -ne 0) {
   throw "Focused-cleanup baseline commit is unavailable: $($migrationReport.baseline_commit)"
 }
-$excludedLaneChanges = @(
-  & git -C $rootPath diff --name-only ([string]$migrationReport.baseline_commit) -- `
-    'assets/images/paper-route' `
-    'assets/js/paper-route-launcher.js' `
-    'assets/js/paper-route-rules.js' `
-    'assets/js/paper-route.js' `
-    'content/games/idle-times/idle-times-main-capsule.png' `
-    'content/games/idle-times/idle-times-packaged-desk-1920x1080.png' `
-    'content/games/idle-times/idle-times-packaged-library-1920x1080.png' `
-    'static/images/books' `
-    'static/images/social' `
-    'content/authors/robert-v-ussley/Bobviously_Portrait_v1.png'
+# Bind the migration's exclusion proof to its completed R2 history, not every
+# future application revision. Controllers may evolve under their behavior
+# contracts; excluded artwork/binaries still retain the current-checkout guard.
+$focusedCleanupCompletionCommit = '9769164e78df4d80fc1219ce429b408516222510'
+& git -C $rootPath cat-file -e ($focusedCleanupCompletionCommit + '^{commit}') 2>$null
+if ($LASTEXITCODE -ne 0) {
+  throw "Focused-cleanup completion commit is unavailable: $focusedCleanupCompletionCommit"
+}
+& git -C $rootPath merge-base --is-ancestor ([string]$migrationReport.baseline_commit) $focusedCleanupCompletionCommit
+if ($LASTEXITCODE -ne 0) {
+  throw 'Focused-cleanup completion must descend from the bound migration baseline.'
+}
+& git -C $rootPath merge-base --is-ancestor $focusedCleanupCompletionCommit HEAD
+if ($LASTEXITCODE -ne 0) {
+  throw 'Current source must retain the completed focused-cleanup history.'
+}
+$excludedBinaryPaths = @(
+  'assets/images/paper-route'
+  'content/games/idle-times/idle-times-main-capsule.png'
+  'content/games/idle-times/idle-times-packaged-desk-1920x1080.png'
+  'content/games/idle-times/idle-times-packaged-library-1920x1080.png'
+  'static/images/books'
+  'static/images/social'
+  'content/authors/robert-v-ussley/Bobviously_Portrait_v1.png'
+)
+$excludedControllerPaths = @(
+  'assets/js/paper-route-launcher.js'
+  'assets/js/paper-route-rules.js'
+  'assets/js/paper-route.js'
+)
+$historicalExcludedChanges = @(
+  & git -C $rootPath diff --name-only ([string]$migrationReport.baseline_commit) $focusedCleanupCompletionCommit -- @excludedBinaryPaths @excludedControllerPaths
 )
 if ($LASTEXITCODE -ne 0) {
-  throw 'Unable to compare excluded image/game lanes with the focused-cleanup baseline.'
+  throw 'Unable to compare historical excluded image/game lanes with the completed focused cleanup.'
+}
+if ($historicalExcludedChanges.Count -gt 0) {
+  throw "Focused cleanup changed excluded image/game lanes: $($historicalExcludedChanges -join ', ')"
+}
+$excludedLaneChanges = @(
+  & git -C $rootPath diff --name-only ([string]$migrationReport.baseline_commit) -- @excludedBinaryPaths
+)
+if ($LASTEXITCODE -ne 0) {
+  throw 'Unable to compare current excluded image/game binaries with the focused-cleanup baseline.'
 }
 if ($excludedLaneChanges.Count -gt 0) {
-  throw "Focused cleanup changed excluded Paper-Bob, Idle Times binary, book, social-card, or author-portrait assets: $($excludedLaneChanges -join ', ')"
+  throw "Excluded Paper-Bob, Idle Times binary, book, social-card, or author-portrait assets changed after focused cleanup: $($excludedLaneChanges -join ', ')"
 }
 
 function Get-OipBaselineBlobMap {

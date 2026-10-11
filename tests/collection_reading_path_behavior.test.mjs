@@ -9,7 +9,7 @@ import { execFileSync, spawnSync } from "node:child_process";
 const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.167.0/hugo")
   ? path.resolve(".tools/hugo-0.167.0/hugo") : "hugo");
 const progressScript = fs.readFileSync("layouts/partials/collections/reading-progress-script.html", "utf8")
-  .replace(/^\s*<script>\s*/, "").replace(/\s*<\/script>\s*$/, "");
+  .replace(/^\s*<script data-oip-route-script="reading-progress">\s*/, "").replace(/\s*<\/script>\s*$/, "");
 
 function renderPath(t, { entries = {}, startHere = "b", current = "a", collections, articleShell = false, featured = false, landings = {}, collectionShell = false, collectionDirectory = false, outputRoute, indexTemplate, section = "essays" } = {}) {
   assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.167\.0/);
@@ -499,11 +499,11 @@ function runProgress({ saved, article = true, collection = false, unavailable = 
   const storage = new Map(saved === undefined ? [] : [["oip-reading-progress:v1:alpha", saved]]);
   let writes = 0;
   const context = {
-    window: { localStorage: {
+    window: { addEventListener() {}, localStorage: {
       getItem: (key) => { if (unavailable) throw new Error("Unavailable"); return storage.get(key) ?? null; },
       setItem: (key, value) => { if (writeFailure) throw new Error("Quota"); writes += 1; storage.set(key, value); },
     } },
-    document: { querySelectorAll: (selector) => ({
+    document: { addEventListener() {}, querySelectorAll: (selector) => ({
       "[data-reading-path-root]": article ? [node(attributes)] : [],
       "[data-collection-progress-root]": collection ? [node(attributes, {
         "[data-collection-progress-summary]": summary, "[data-collection-progress-resume]": resume,

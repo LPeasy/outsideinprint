@@ -1,5 +1,7 @@
 # Idle Bob local homepage demo
 
+Current host: the 2026-10-11 companion uses a separate Pet-only runtime directly over the site, with free dragging and native controls. See [Sitewide Bob companion](companion-bob.md) for current placement, greetings, preview, and validation. The standalone demo and older inline homepage release evidence below document the original export.
+
 Preview: <http://127.0.0.1:1315/#home-idle-bob-title>. Production entry: <https://outsideinprint.org/#home-idle-bob-title>.
 
 The homepage renders a separate transparent, same-origin iframe below the lead article in the left column, beside supporting reading. At the existing 900px stacking breakpoint it follows all featured articles. The small heading borrows the serif title and brass rules from the owner's supplied Idle Times capsule artwork. The Steam purchase card pairs the full JUKE-BOB capsule thumbnail with “Get Idle Times / on Steam”; the entire brass card is one link and wraps below the heading on phones.

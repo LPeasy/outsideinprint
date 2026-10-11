@@ -13,12 +13,14 @@
     {{ partial "head_fonts.html" . }}
     {{ partial "theme_bootstrap.html" . }}
     {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
-    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+    <link data-oip-persistent="main-css" rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+    {{ partial "companion_bob_assets.html" (dict "kind" "styles") }}
+    {{ partial "site_navigation_assets.html" (dict "kind" "head") }}
   </head>
   <body>
     {{ partial "v2_preview_guard.html" . }}
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <div class="wrap">
+    <div class="wrap" id="site-page" data-site-page>
       {{ partial "masthead.html" . }}
       <main id="main-content" class="page-shell">
         <h1 class="list-title">Page not found</h1>
@@ -31,7 +33,12 @@
       </main>
       {{ partial "footer.html" . }}
     </div>
+    <div id="site-overlays" data-site-overlays></div>
+    {{ partial "companion_bob.html" . }}
+    {{ partial "companion_bob_assets.html" (dict "kind" "script") }}
     {{ partial "theme_toggle_script.html" . }}
     {{ partial "masthead_navigation_script.html" . }}
+    {{ partial "analytics.html" . }}
+    {{ partial "site_navigation_assets.html" (dict "kind" "script") }}
   </body>
 </html>

@@ -1,4 +1,6 @@
 (function () {
+  if (window.__oipAnalyticsInitialized) return;
+  window.__oipAnalyticsInitialized = true;
   var config = window.oipAnalytics || {};
   var pageContext = config.page || {};
   var pendingCounts = [];
@@ -24,10 +26,6 @@
     return config.enabled ? internalPath(pageContext.path) || null : null;
   };
   window.goatcounter.referrer = window.oipAnalyticsEventReferrer;
-
-  if (!config.enabled) {
-    return;
-  }
 
   // Only fixed campaign codes are retained. Never store or send arbitrary URL data.
   function validAcquisition(value) {
@@ -200,6 +198,12 @@
       return;
     }
 
+    queueCount(payload);
+  }
+
+  function queueCount(payload) {
+    if (!config.enabled || !payload) return;
+
     if (isGoatCounterReady()) {
       flushPendingCounts();
       window.goatcounter.count(payload);
@@ -367,9 +371,11 @@
     var started = false;
     var completed = false;
     var intervalId;
+    var stopped = false;
+    var readProps = currentPageProps();
 
-    if (!target || !pageContext.eligibleRead) {
-      return;
+    if (!config.enabled || !target || !pageContext.eligibleRead) {
+      return function () {};
     }
 
     function flushActiveTime(now) {
@@ -395,7 +401,7 @@
 
     function maybeTrack() {
       var activeSeconds = activeMs / 1000;
-      var props = currentPageProps();
+      var props = readProps;
 
       if (!started && activeSeconds >= 15) {
         started = true;
@@ -418,28 +424,33 @@
       maybeTrack();
     }, 1000);
 
-    document.addEventListener("visibilitychange", function () {
+    function onVisibilityChange() {
       var now = Date.now();
 
       flushActiveTime(now);
       lastActiveAt = document.hidden ? 0 : now;
       maybeTrack();
-    });
+    }
 
-    window.addEventListener(
-      "scroll",
-      function () {
-        updateScrollDepth();
-        maybeTrack();
-      },
-      { passive: true }
-    );
-
-    window.addEventListener("pagehide", function () {
+    function onScroll() {
+      updateScrollDepth();
+      maybeTrack();
+    }
+    function stop() {
+      if (stopped) return;
+      stopped = true;
       flushActiveTime(Date.now());
+      updateScrollDepth();
       maybeTrack();
       window.clearInterval(intervalId);
-    });
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("pagehide", stop);
+    }
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("pagehide", stop);
+    return stop;
   }
 
   document.addEventListener(
@@ -492,10 +503,41 @@
     true
   );
 
-  if (/^\/subscribe\/(weekend|everyday-history|dialogue)\/$/.test(pageContext.path || "")) {
-    track("funnel_view", currentPageProps());
+  function trackFunnelView() {
+    if (/^\/subscribe\/(weekend|everyday-history|dialogue)\/$/.test(pageContext.path || "")) {
+      track("funnel_view", currentPageProps());
+    }
   }
-  trackReadProgress();
+  var stopReading = trackReadProgress();
+  document.addEventListener("oip:before-route", function () {
+    stopReading();
+    stopReading = function () {};
+  });
+  document.addEventListener("oip:route", function () {
+    var node = document.querySelector('script[data-oip-route-config="analytics"]');
+    var next;
+    try { next = node && JSON.parse(node.textContent); } catch (error) { next = null; }
+    if (!next || !next.page) return;
+    stopReading();
+    config = next;
+    pageContext = config.page;
+    config.enabled = config.enabled === true && ((hostname === "outsideinprint.org" && window.location.protocol === "https:") ||
+      (config.allowLocal === true && localHost && /^https?:$/.test(window.location.protocol)));
+    window.oipAnalytics = config;
+    acquisition = config.enabled ? funnelAcquisition() : null;
+    sourceLabel = acquisition ? "almanack-organic|platform=" + acquisition.platform + "|segment=" + acquisition.segment + "|post=" + acquisition.post : "internal";
+    window.goatcounter.allow_local = config.allowLocal === true;
+    var routePath = internalPath(pageContext.path);
+    if (routePath) queueCount({ path: routePath, title: pageContext.title || document.title, referrer: getReferrer(), event: false });
+    trackFunnelView();
+  });
+  // Reading depth belongs to the destination after its scroll has settled.
+  // During the DOM swap the browser may still be at the previous page's end.
+  document.addEventListener("oip:after-route", function () {
+    stopReading();
+    stopReading = trackReadProgress();
+  });
+  trackFunnelView();
   flushPendingCounts();
   window.addEventListener("load", flushPendingCounts);
 }());

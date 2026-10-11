@@ -5,8 +5,9 @@
   <strong>{{ $label }}</strong>
   <span>Production submissions and checkout links are disabled.</span>
 </div>
-<script>
+<script data-oip-route-script="v2-preview-guard">
 (function () {
+  function mount(scope) {
   "use strict";
 
   var notice = document.querySelector("[data-v2-preview-notice]");
@@ -37,7 +38,7 @@
     }
   }
 
-  document.addEventListener("submit", function (event) {
+  scope.on(document, "submit", function (event) {
     var form = event.target;
     if (!(form instanceof HTMLFormElement) || !isBlockedUrl(form.getAttribute("action"))) {
       return;
@@ -48,7 +49,7 @@
     showBlockedMessage();
   }, true);
 
-  document.addEventListener("click", function (event) {
+  scope.on(document, "click", function (event) {
     var link = event.target.closest("a[href]");
     if (!link || !isBlockedUrl(link.getAttribute("href"))) {
       return;
@@ -58,6 +59,14 @@
     event.stopImmediatePropagation();
     showBlockedMessage();
   }, true);
+
+
+  }
+  if (window.oipRegisterRouteWidget) {
+    window.oipRegisterRouteWidget("v2-preview-guard", mount);
+  } else {
+    mount({ on: function (target, type, callback, options) { target.addEventListener(type, callback, options); }, cleanup: function () {}, active: function () { return true; } });
+  }
 }());
 </script>
 {{- end -}}

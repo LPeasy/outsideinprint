@@ -159,8 +159,9 @@
     </section>
   </div>
 
-  <script>
-    (function () {
+  <script data-oip-route-script="gallery-lightbox">
+(function () {
+  function mount(scope) {
       var lightbox = document.querySelector("[data-cartoon-lightbox]");
       if (!lightbox) return;
 
@@ -241,25 +242,26 @@
       }
 
       triggers.forEach(function (trigger) {
-        trigger.addEventListener("click", function () {
+        scope.on(trigger, "click", function () {
           openLightbox(trigger);
         });
       });
 
       closeControls.forEach(function (control) {
-        control.addEventListener("click", closeLightbox);
+        scope.on(control, "click", closeLightbox);
       });
 
-      imageButton.addEventListener("click", function () {
+      scope.on(imageButton, "click", function () {
         if (activeEssay) {
-          window.location.href = activeEssay;
+          if (window.oipNavigate) window.oipNavigate(activeEssay);
+          else window.location.href = activeEssay;
           return;
         }
 
         closeLightbox();
       });
 
-      document.addEventListener("keydown", function (event) {
+      scope.on(document, "keydown", function (event) {
         var focusable;
         var first;
         var last;
@@ -299,7 +301,15 @@
           openLightbox(requestedTrigger);
         }
       }
-    })();
-  </script>
-  {{ with resources.Get "js/gallery-load-more.js" | minify | fingerprint "sha384" }}<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>{{ end }}
+
+  scope.cleanup(function () { activeTrigger = null; closeLightbox(); });
+  }
+  if (window.oipRegisterRouteWidget) {
+    window.oipRegisterRouteWidget("gallery-lightbox", mount);
+  } else {
+    mount({ on: function (target, type, callback, options) { target.addEventListener(type, callback, options); }, cleanup: function () {}, active: function () { return true; } });
+  }
+}());
+</script>
+  {{ with resources.Get "js/gallery-load-more.js" | minify | fingerprint "sha384" }}<script data-oip-route-script="gallery-load-more" src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>{{ end }}
 {{ end }}

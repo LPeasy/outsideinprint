@@ -31,8 +31,9 @@
   </section>
 </div>
 
-<script>
-  (function () {
+<script data-oip-route-script="article-plate-lightbox">
+(function () {
+  function mount(scope) {
     var lightbox = document.querySelector("[data-article-plate-lightbox]");
     if (!lightbox) return;
 
@@ -218,7 +219,7 @@
 
     Array.prototype.slice.call(document.querySelectorAll(bodyImageSelector)).forEach(enhanceBodyImage);
 
-    document.addEventListener("click", function (event) {
+    scope.on(document, "click", function (event) {
       if (!event.target.closest) return;
 
       var trigger = event.target.closest("[data-article-plate-lightbox-trigger]");
@@ -238,12 +239,12 @@
     });
 
     closeControls.forEach(function (control) {
-      control.addEventListener("click", closeLightbox);
+      scope.on(control, "click", closeLightbox);
     });
 
-    imageButton.addEventListener("click", closeLightbox);
+    scope.on(imageButton, "click", closeLightbox);
 
-    document.addEventListener("keydown", function (event) {
+    scope.on(document, "keydown", function (event) {
       var bodyImage = event.target.closest ? event.target.closest(bodyImageSelector) : null;
       var focusable;
       var first;
@@ -279,5 +280,13 @@
         first.focus();
       }
     });
-  })();
+
+  scope.cleanup(function () { activeTrigger = null; closeLightbox(); });
+  }
+  if (window.oipRegisterRouteWidget) {
+    window.oipRegisterRouteWidget("article-plate-lightbox", mount);
+  } else {
+    mount({ on: function (target, type, callback, options) { target.addEventListener(type, callback, options); }, cleanup: function () {}, active: function () { return true; } });
+  }
+}());
 </script>

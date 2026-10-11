@@ -1,4 +1,5 @@
 (function () {
+  function mount(scope) {
   "use strict";
 
   var form = document.querySelector("[data-studio-email-form]");
@@ -100,6 +101,14 @@
     return;
   }
 
-  form.addEventListener("submit", prepareInquiry);
+  scope.on(form, "submit", prepareInquiry);
   submitButton.disabled = false;
+
+
+  }
+  if (window.oipRegisterRouteWidget) {
+    window.oipRegisterRouteWidget("studio-inquiry", mount);
+  } else {
+    mount({ on: function (target, type, callback, options) { target.addEventListener(type, callback, options); }, cleanup: function () {}, active: function () { return true; } });
+  }
 }());

@@ -181,7 +181,7 @@
 {{ $exploreCurrent := gt (len (where $exploreItems "currentSection" true)) 0 }}
 {{ $mobileReadCurrent := gt (len (where $mobileReadItems "currentSection" true)) 0 }}
 {{ $mobileExploreCurrent := gt (len (where $mobileExploreItems "currentSection" true)) 0 }}
-<header class="masthead site-header masthead--editorial {{ $mastheadVariant }}{{ if $stickyMasthead }} masthead--sticky{{ end }}">
+<header class="masthead site-header masthead--editorial{{ if not $isHomeMasthead }} masthead--with-bob{{ end }} {{ $mastheadVariant }}{{ if $stickyMasthead }} masthead--sticky{{ end }}">
   <div class="masthead-nameplate">
     <div class="masthead-nameplate__top-rule" aria-hidden="true"></div>
     <div class="masthead-nameplate__top-ornament" aria-hidden="true"></div>
@@ -239,6 +239,11 @@
         </div>
         <div class="subtitle">A Digital Imprint</div>
       </a>
+      {{ if not $isHomeMasthead }}
+      <div class="companion-bob-slot" data-bob-slot>
+        <noscript><img src="{{ "companion-bob/idle.webp" | relURL }}" width="160" height="160" alt="Bob, the Outside In Print companion."></noscript>
+      </div>
+      {{ end }}
       {{ if $isHomeMasthead }}
         <div class="masthead-side-deck masthead-side-deck--right" aria-hidden="true">
           <span>CURATED</span>

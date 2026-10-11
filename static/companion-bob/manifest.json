@@ -1,0 +1,102 @@
+{
+  "schema": "oip-companion-bob-art/v1",
+  "sourceCommit": "25dea76b3737c204ae17c05f55104b1f728ac1a6",
+  "sharpVersion": "0.34.5",
+  "processing": "Existing transparent whole-body drawings, nearest-neighbor common family scale, shared boot registration, lossless WebP. Wave is one authored held pose, not a synthesized multi-frame wave.",
+  "cell": [
+    160,
+    160
+  ],
+  "columns": 5,
+  "footAnchor": [
+    80,
+    148
+  ],
+  "sources": [
+    {
+      "path": "prototypes/hd2d-newsroom/assets/pet-attention/bob-attention.webp",
+      "sha256": "8a5ddd73672beac51a6118e45fec2adbf503b35841ce2a6c869dd66ed645378f",
+      "metadataPath": "prototypes/hd2d-newsroom/assets/pet-attention/manifest.json",
+      "metadataSha256": "eddad84f52f96828a1ba77802b8a53ef38d1f4a4209d5866db641c7c82e92d5b"
+    },
+    {
+      "path": "prototypes/hd2d-newsroom/assets/pet-pen/bob-pen.webp",
+      "sha256": "954acdd6cea346cc2d9e83c4a9909d10dc9fd74733a0dfad736ef44f53bf5d99",
+      "metadataPath": "prototypes/hd2d-newsroom/assets/pet-pen/manifest.json",
+      "metadataSha256": "a4e8c6e84e000aa7811d282be862548ba7a0bc2eac1410466c50ab78725adb0e"
+    }
+  ],
+  "frames": [
+    {
+      "index": 0,
+      "name": "neutral",
+      "sourcePath": "prototypes/hd2d-newsroom/assets/pet-attention/bob-attention.webp",
+      "sourceFrame": 0,
+      "scale": 0.93125,
+      "offset": [
+        5,
+        8
+      ]
+    },
+    {
+      "index": 1,
+      "name": "blink-closed",
+      "sourcePath": "prototypes/hd2d-newsroom/assets/pet-attention/bob-attention.webp",
+      "sourceFrame": 1,
+      "scale": 0.93125,
+      "offset": [
+        5,
+        8
+      ]
+    },
+    {
+      "index": 2,
+      "name": "blink-half",
+      "sourcePath": "prototypes/hd2d-newsroom/assets/pet-attention/bob-attention.webp",
+      "sourceFrame": 2,
+      "scale": 0.93125,
+      "offset": [
+        5,
+        8
+      ]
+    },
+    {
+      "index": 3,
+      "name": "friendly-settle",
+      "sourcePath": "prototypes/hd2d-newsroom/assets/pet-attention/bob-attention.webp",
+      "sourceFrame": 3,
+      "scale": 0.93125,
+      "offset": [
+        5,
+        8
+      ]
+    },
+    {
+      "index": 4,
+      "name": "wave",
+      "sourcePath": "prototypes/hd2d-newsroom/assets/pet-pen/bob-pen.webp",
+      "sourceFrame": 11,
+      "scale": 1,
+      "offset": [
+        0,
+        0
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "path": "atlas.webp",
+      "bytes": 46230,
+      "sha256": "0ba7971710955ca9c85b8df92e0f2d35d443b88ad48b3c53324ffac335bfde19",
+      "width": 800,
+      "height": 160
+    },
+    {
+      "path": "idle.webp",
+      "bytes": 9204,
+      "sha256": "9da87de3e05e6b6bfd53ae14b0ce2fa8790750cc69adee6774a42c738b93a6e9",
+      "width": 160,
+      "height": 160
+    }
+  ]
+}

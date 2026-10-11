@@ -1,4 +1,5 @@
 (function () {
+  function mount(scope) {
   "use strict";
 
   var fallbackSequence = 0;
@@ -93,7 +94,7 @@
     });
   }
 
-  document.addEventListener("submit", function (event) {
+  scope.on(document, "submit", function (event) {
     var form = event.target;
     var button;
     var sku;
@@ -137,15 +138,25 @@
       if (!response.ok) throw new Error("checkout_request_failed");
       return response.json();
     }).then(function (payload) {
+      if (!scope.active() || form.isConnected === false) return;
       var checkoutUrl = secureSquareUrl(payload);
       if (!checkoutUrl) throw new Error("checkout_url_missing");
       submitButtondownPreferences(form, email);
       window.location.assign(checkoutUrl);
     }).catch(function () {
+      if (!scope.active() || form.isConnected === false) return;
       button.disabled = false;
       button.removeAttribute("aria-busy");
       button.textContent = originalLabel;
       setStatus(form, "Secure checkout could not be opened. Please try again or email support@outsideinprint.org.");
     });
   });
+
+
+  }
+  if (window.oipRegisterRouteWidget) {
+    window.oipRegisterRouteWidget("epub-checkout", mount);
+  } else {
+    mount({ on: function (target, type, callback, options) { target.addEventListener(type, callback, options); }, cleanup: function () {}, active: function () { return true; } });
+  }
 }());

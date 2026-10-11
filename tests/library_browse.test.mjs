@@ -5,7 +5,7 @@ import vm from "node:vm";
 
 const template = fs.readFileSync("layouts/library/list.html", "utf8");
 const artworkScript = fs.readFileSync("assets/js/library-artwork.js", "utf8");
-const script = template.match(/<script>([\s\S]*?)<\/script>/)[1]
+const script = template.match(/<script data-oip-route-script="library-browse">([\s\S]*?)<\/script>/)[1]
   .replace("{{ $indexURL | jsonify | safeJS }}", JSON.stringify("/library/index.json"))
   .replace("{{ $initialCount }}", "36")
   .replace("{{ len $catalog.entries }}", "50");
@@ -36,6 +36,7 @@ class Element {
     this.disabled = false;
     this.value = "";
     this.textContent = "";
+    this.isConnected = true;
   }
   addEventListener(event, listener) { this.listeners.set(event, listener); }
   setAttribute(name, value) { this.attributes.set(name, String(value)); }
@@ -74,7 +75,7 @@ function setup({ query = "", fetchImpl = async () => response(), noFetch = false
   const history = [`https://outsideinprint.org/library/${query}`];
   let historyIndex = 0;
   const window = {
-    location: { href: history[0] },
+    location: { href: history[0], get pathname() { return new URL(this.href).pathname; } },
     history: {
       replaceState(state, title, url) { history[historyIndex] = url; window.location.href = url; },
       pushState(state, title, url) { history.splice(historyIndex + 1); history.push(url); historyIndex += 1; window.location.href = url; },
@@ -84,6 +85,7 @@ function setup({ query = "", fetchImpl = async () => response(), noFetch = false
     clearTimeout: (id) => timers.delete(id),
   };
   const document = {
+    addEventListener: (event, listener) => listeners.set(event, listener),
     querySelector: () => controls,
     getElementById: (id) => nodes.get(id),
     createElement: (tag) => new Element(tag),
@@ -91,7 +93,7 @@ function setup({ query = "", fetchImpl = async () => response(), noFetch = false
     createTextNode: (value) => Object.assign(new Element("text"), { textContent: value }),
   };
   const context = {
-    document, window, URL: noUrl ? undefined : URL,
+    document, window, AbortController, URL: noUrl ? undefined : URL,
     fetch: noFetch ? undefined : (...args) => { fetchCalls += 1; assert.equal(args[0], "/library/index.json"); return fetchImpl(...args); },
   };
   vm.runInNewContext(artworkScript, context);
@@ -135,7 +137,7 @@ test("Library gives grouped and filtered illustrated pieces matching read and zo
   const index = fs.readFileSync("layouts/library/list.libraryindex.json", "utf8");
   assert.match(index, /"image" \(partial "library\/artwork-for-entry\.html" \.page\)/);
   const viewer = fs.readFileSync("layouts/partials/editorial/cartoon-thumbnail-lightbox.html", "utf8");
-  assert.match(viewer, /document\.addEventListener\("click"[\s\S]*?closest\("\[data-essay-cartoon-lightbox-trigger\]"\)/);
+  assert.match(viewer, /scope\.on\(document, "click"[\s\S]*?closest\("\[data-essay-cartoon-lightbox-trigger\]"\)/);
 
   const illustrated = {
     ...items[0], date: "2026-02-01", slug: "piece-1", image: {
