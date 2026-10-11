@@ -800,7 +800,7 @@ if ($studioTemplate -match '(?i)publication is guaranteed|guarantee(?:d|s)? publ
 }
 
 $requiredStudioTermsText = "After full payment, the client owns the finished deliverable exclusively. Pre-existing client materials and identified third-party materials are not included in that transfer. Outside In Print may publish the finished work only with the client’s written permission."
-if ($studioTerms -notmatch '(?m)^effective_date: "September 3, 2026"$') {
+if ($studioTerms -notmatch '(?m)^effective_date: "September 3, 2026"\r?$') {
   throw 'Expected the Studio Terms effective date to match the September 3, 2026 ownership revision.'
 }
 if ($studioTerms.IndexOf($requiredStudioTermsText, [System.StringComparison]::Ordinal) -lt 0) {
@@ -903,7 +903,7 @@ if ($studioTemplate -notmatch '(?s)\{\{-?\s*if \$composerEnabled\s*-?\}\}(?:(?!\
   throw 'Expected inquiry.enabled=false to omit the guided form while preserving the direct-email fallback.'
 }
 
-if ($studioTemplate -notmatch '(?s)\{\{-?\s*if \$composerEnabled\s*-?\}\}(?:(?!\{\{-?\s*end).)*?resources\.Get "js/studio-inquiry\.js".*?<script defer.*?</script>\s*\{\{-?\s*end\s*-?\}\}') {
+if ($studioTemplate -notmatch '(?s)\{\{-?\s*if \$composerEnabled\s*-?\}\}(?:(?!\{\{-?\s*end).)*?resources\.Get "js/studio-inquiry\.js".*?<script\b(?=[^>]*\bdefer\b)(?=[^>]*\bdata-oip-route-script="studio-inquiry")[^>]*>.*?</script>\s*\{\{-?\s*end\s*-?\}\}') {
   throw 'Expected inquiry.enabled=false to omit the Studio composer script.'
 }
 
@@ -914,6 +914,7 @@ foreach ($requiredSnippet in @(
   'encodeURIComponent(subject)',
   'encodeURIComponent(body)',
   'event.preventDefault()',
+  'window.oipRegisterRouteWidget("studio-inquiry", mount)',
   'window.location.href = mailtoUri',
   '.join("\n").replace(/\n/g, "\r\n")',
   '\u007F-\u009F',
@@ -947,7 +948,7 @@ if ($studioScript -match '"(?:Offer code|Source page): "') {
   throw 'Expected the guided email not to expose removed internal offer-code or source-page fields.'
 }
 
-$listenerIndex = $studioScript.IndexOf('form.addEventListener("submit", prepareInquiry)', [System.StringComparison]::Ordinal)
+$listenerIndex = $studioScript.IndexOf('scope.on(form, "submit", prepareInquiry)', [System.StringComparison]::Ordinal)
 $enableIndex = $studioScript.IndexOf('submitButton.disabled = false', [System.StringComparison]::Ordinal)
 if ($listenerIndex -lt 0 -or $enableIndex -le $listenerIndex) {
   throw 'Expected the Studio script to attach its submit listener before enabling the submit button.'

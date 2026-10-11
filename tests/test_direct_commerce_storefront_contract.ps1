@@ -547,7 +547,7 @@ foreach ($requiredAdapterPrivacyText in @(
 
 $analyticsTemplate = Get-RequiredText -RelativePath 'layouts/partials/analytics.html'
 foreach ($requiredAnalyticsPrivacyText in @(
-  'window.goatcounter = {',
+  'window.goatcounter = window.goatcounter || {',
   'path: function () { return null; },',
   'referrer: "",',
   'no_events: true,',
