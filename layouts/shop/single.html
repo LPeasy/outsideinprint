@@ -84,5 +84,5 @@
     </div>
   </article>
   {{- $epubCheckoutScript := resources.Get "js/epub-checkout.js" | resources.Minify | resources.Fingerprint -}}
-  <script defer src="{{ $epubCheckoutScript.RelPermalink }}" integrity="{{ $epubCheckoutScript.Data.Integrity }}"></script>
+  <script data-oip-route-script="epub-checkout" defer src="{{ $epubCheckoutScript.RelPermalink }}" integrity="{{ $epubCheckoutScript.Data.Integrity }}"></script>
 {{ end }}

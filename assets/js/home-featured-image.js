@@ -1,4 +1,5 @@
-(() => {
+(function () {
+  function mount(scope) {
   "use strict";
 
   const dialog = document.querySelector("[data-home-featured-dialog]");
@@ -19,27 +20,27 @@
     if (dialog.open) dialog.close();
   };
 
-  dialog.addEventListener("close", () => {
+  scope.on(dialog, "close", () => {
     document.body.classList.remove("home-featured-image-open");
     clearImage();
     const target = opener;
     opener = null;
     if (target) target.focus();
   });
-  dialog.addEventListener("cancel", (event) => {
+  scope.on(dialog, "cancel", (event) => {
     event.preventDefault();
     close();
   });
-  dialog.addEventListener("click", (event) => {
+  scope.on(dialog, "click", (event) => {
     if (event.target === dialog) close();
   });
-  closeButton.addEventListener("click", close);
-  imageButton.addEventListener("click", close);
+  scope.on(closeButton, "click", close);
+  scope.on(imageButton, "click", close);
 
   for (const trigger of document.querySelectorAll("[data-home-featured-image-trigger]")) {
     const source = trigger.getAttribute("data-image");
     if (!source) continue;
-    trigger.addEventListener("click", () => {
+    scope.on(trigger, "click", () => {
       if (dialog.open) return;
       image.setAttribute("src", source);
       image.setAttribute("alt", trigger.getAttribute("data-alt") || "");
@@ -58,4 +59,12 @@
     if (fallback) fallback.hidden = true;
   }
 
-})();
+
+  scope.cleanup(function () { opener = null; close(); document.body.classList.remove("home-featured-image-open"); });
+  }
+  if (window.oipRegisterRouteWidget) {
+    window.oipRegisterRouteWidget("home-featured-image", mount);
+  } else {
+    mount({ on: function (target, type, callback, options) { target.addEventListener(type, callback, options); }, cleanup: function () {}, active: function () { return true; } });
+  }
+}());

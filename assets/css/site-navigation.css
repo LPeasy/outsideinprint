@@ -1,0 +1,19 @@
+.site-navigation-announcement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+html[data-route-loading] { cursor: progress; }
+html[data-route-loading]::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: 2px;
+  z-index: 10000;
+  background: var(--accent, #ae573c);
+  pointer-events: none;
+}

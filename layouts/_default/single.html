@@ -164,7 +164,7 @@
           ) }}
         </template>
         {{ with resources.Get "js/article-inline-signup.js" | minify | fingerprint "sha384" }}
-          <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+          <script data-oip-route-script="article-inline-signup" src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
         {{ end }}
       {{ end }}
       {{ if $isStandardReadingPage }}

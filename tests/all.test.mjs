@@ -9,6 +9,8 @@ import "./entry_threads_contract.test.mjs";
 import "./featured_continuation_contract.test.mjs";
 import "./games_catalog_contract.test.mjs";
 import "./homepage_selected.test.mjs";
+import "./companion_bob_visit.test.mjs";
+import "./route_widget_lifecycle.test.mjs";
 import "./home_featured_image.test.mjs";
 import "./layout_ownership_contract.test.mjs";
 import "./oip_commerce_provisioning_order.test.mjs";

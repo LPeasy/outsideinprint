@@ -105,6 +105,6 @@
 
   {{- if $supportCheckoutEnabled -}}
     {{- $supportScript := resources.Get "js/support-checkout.js" | resources.Minify | resources.Fingerprint -}}
-    <script defer src="{{ $supportScript.RelPermalink }}" integrity="{{ $supportScript.Data.Integrity }}"></script>
+    <script data-oip-route-script="support-checkout" defer src="{{ $supportScript.RelPermalink }}" integrity="{{ $supportScript.Data.Integrity }}"></script>
   {{- end -}}
 {{ end }}

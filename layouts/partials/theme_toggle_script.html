@@ -1,5 +1,6 @@
-<script>
-  (function () {
+<script data-oip-route-script="theme-toggle">
+(function () {
+  function mount(scope) {
     var storageKey = "oip-theme";
     var root = document.documentElement;
     var toggles = Array.prototype.slice.call(document.querySelectorAll("[data-theme-toggle]"));
@@ -36,11 +37,19 @@
     }
 
     toggles.forEach(function (toggle) {
-      toggle.addEventListener("click", function () {
+      scope.on(toggle, "click", function () {
         setTheme(currentTheme() === "dark" ? "light" : "dark");
       });
     });
 
     syncToggle();
-  })();
+
+
+  }
+  if (window.oipRegisterRouteWidget) {
+    window.oipRegisterRouteWidget("theme-toggle", mount);
+  } else {
+    mount({ on: function (target, type, callback, options) { target.addEventListener(type, callback, options); }, cleanup: function () {}, active: function () { return true; } });
+  }
+}());
 </script>

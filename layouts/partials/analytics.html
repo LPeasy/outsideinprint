@@ -41,21 +41,26 @@
   )
 }}
 
-<script>
+<script type="application/json" data-oip-route-config="analytics">{{ $config | jsonify | safeJS }}</script>
+<script data-oip-route-script="analytics-bootstrap">
+  if (!window.__oipAnalyticsBootstrap) {
+  window.__oipAnalyticsBootstrap = true;
   window.oipAnalytics={{ $config | jsonify | safeJS }};
-  window.goatcounter = {
+  window.goatcounter = window.goatcounter || {
     path: function () { return null; },
     referrer: "",
     no_events: true,
     allow_local: false
   };
+  }
 </script>
 {{ $analyticsScript := resources.Get "js/analytics.js" | resources.Minify | resources.Fingerprint }}
-<script defer src="{{ $analyticsScript.RelPermalink }}" integrity="{{ $analyticsScript.Data.Integrity }}"></script>
+<script defer data-oip-route-script="analytics-adapter" src="{{ $analyticsScript.RelPermalink }}" integrity="{{ $analyticsScript.Data.Integrity }}"></script>
 {{ if $active }}
   {{ $goatcounterScript := resources.Get "js/vendor/goatcounter.v5.js" | resources.Minify | resources.Fingerprint }}
   <script
     defer
+    data-oip-route-script="goatcounter"
     data-goatcounter="https://outsideinprint.goatcounter.com/count"
     src="{{ $goatcounterScript.RelPermalink }}"
     integrity="{{ $goatcounterScript.Data.Integrity }}"

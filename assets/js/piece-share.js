@@ -1,4 +1,5 @@
 (function () {
+  function mount(scope) {
   "use strict";
 
   function cleanShareUrl(value) {
@@ -45,6 +46,7 @@
     wrapper.hidden = false;
 
     function showPanel() {
+      if (!scope.active() || wrapper.isConnected === false) return;
       panelGeneration += 1;
       status.textContent = "";
       panel.hidden = false;
@@ -70,7 +72,7 @@
       input.select();
     }
 
-    trigger.addEventListener("click", async function () {
+    scope.on(trigger, "click", async function () {
       if (sharing) {
         return;
       }
@@ -92,13 +94,13 @@
       } finally {
         sharing = false;
         trigger.disabled = false;
-        if (panel.hidden) {
+        if (scope.active() && wrapper.isConnected !== false && panel.hidden) {
           trigger.focus();
         }
       }
     });
 
-    copyButton.addEventListener("click", async function () {
+    scope.on(copyButton, "click", async function () {
       var requestGeneration = ++panelGeneration;
 
       status.textContent = "";
@@ -111,20 +113,20 @@
 
       try {
         await navigator.clipboard.writeText(shareUrl);
-        if (requestGeneration !== panelGeneration) {
+        if (!scope.active() || requestGeneration !== panelGeneration) {
           return;
         }
         status.textContent = "Link copied.";
       } catch (error) {
-        if (requestGeneration !== panelGeneration) {
+        if (!scope.active() || requestGeneration !== panelGeneration) {
           return;
         }
         showManualCopy();
       }
     });
 
-    closeButton.addEventListener("click", closePanel);
-    wrapper.addEventListener("keydown", function (event) {
+    scope.on(closeButton, "click", closePanel);
+    scope.on(wrapper, "keydown", function (event) {
       if (event.key === "Escape" && !panel.hidden) {
         event.preventDefault();
         closePanel();
@@ -137,8 +139,16 @@
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setupAllShares, { once: true });
+    scope.on(document, "DOMContentLoaded", setupAllShares, { once: true });
   } else {
     setupAllShares();
+  }
+
+
+  }
+  if (window.oipRegisterRouteWidget) {
+    window.oipRegisterRouteWidget("piece-share", mount);
+  } else {
+    mount({ on: function (target, type, callback, options) { target.addEventListener(type, callback, options); }, cleanup: function () {}, active: function () { return true; } });
   }
 }());

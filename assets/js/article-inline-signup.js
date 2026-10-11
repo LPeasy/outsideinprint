@@ -1,4 +1,5 @@
-(() => {
+(function () {
+  function mount(scope) {
   "use strict";
 
   const template = document.querySelector("[data-article-inline-signup]");
@@ -24,4 +25,12 @@
     }
   }
   if (placement) placement.after(template.content.firstElementChild);
-})();
+
+
+  }
+  if (window.oipRegisterRouteWidget) {
+    window.oipRegisterRouteWidget("article-inline-signup", mount);
+  } else {
+    mount({ on: function (target, type, callback, options) { target.addEventListener(type, callback, options); }, cleanup: function () {}, active: function () { return true; } });
+  }
+}());

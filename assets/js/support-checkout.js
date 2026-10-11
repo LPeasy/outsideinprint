@@ -1,4 +1,5 @@
 (function () {
+  function mount(scope) {
   "use strict";
 
   var fallbackSequence = 0;
@@ -84,7 +85,7 @@
     }
   }
 
-  document.addEventListener("submit", function (event) {
+  scope.on(document, "submit", function (event) {
     var form = event.target;
     var submitButton;
     var amountCents;
@@ -137,6 +138,7 @@
 
       return response.json();
     }).then(function (payload) {
+      if (!scope.active() || form.isConnected === false) return;
       var checkoutUrl = getCheckoutUrl(payload);
 
       if (!checkoutUrl) {
@@ -145,10 +147,19 @@
 
       window.location.assign(checkoutUrl);
     }).catch(function () {
+      if (!scope.active() || form.isConnected === false) return;
       submitButton.disabled = false;
       submitButton.removeAttribute("aria-busy");
       submitButton.textContent = originalLabel;
       setStatus(form, "Secure checkout could not be opened. Please try again or email support@outsideinprint.org.");
     });
   });
+
+
+  }
+  if (window.oipRegisterRouteWidget) {
+    window.oipRegisterRouteWidget("support-checkout", mount);
+  } else {
+    mount({ on: function (target, type, callback, options) { target.addEventListener(type, callback, options); }, cleanup: function () {}, active: function () { return true; } });
+  }
 }());

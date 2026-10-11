@@ -1,4 +1,5 @@
-(() => {
+(function () {
+  function mount(scope) {
   "use strict";
   const items = Array.from(document.querySelectorAll("[data-gallery-item]"));
   const button = document.querySelector("[data-gallery-load-more]");
@@ -16,7 +17,7 @@
     items.forEach((item, index) => { item.hidden = index >= visible; });
     button.hidden = visible >= items.length;
   }
-  button.addEventListener("click", () => {
+  scope.on(button, "click", () => {
     const previous = visible;
     visible += 24;
     render();
@@ -24,4 +25,12 @@
     next?.querySelector("a, button")?.focus({ preventScroll: true });
   });
   render();
-})();
+
+
+  }
+  if (window.oipRegisterRouteWidget) {
+    window.oipRegisterRouteWidget("gallery-load-more", mount);
+  } else {
+    mount({ on: function (target, type, callback, options) { target.addEventListener(type, callback, options); }, cleanup: function () {}, active: function () { return true; } });
+  }
+}());

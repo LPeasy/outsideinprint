@@ -135,7 +135,7 @@ test("Paper-Bob partial lazy-loads pinned same-origin Phaser and runtime assets"
   assert.match(paperRoutePartial, /Toss left: Q\/J/);
   assert.doesNotMatch(paperRoutePartial, /Paper\s+Route/);
   assert.doesNotMatch(paperRoutePartial, /Pedal the two-column route|Press hold|Run it again|Warming the presses/);
-  assert.match(paperRoutePartial, /<script defer src="\{\{ \$launcher\.RelPermalink \}\}"/);
+  assert.match(paperRoutePartial, /<script data-oip-route-script="paper-route-launcher" defer src="\{\{ \$launcher\.RelPermalink \}\}"/);
   assert.doesNotMatch(paperRoutePartial, /<script[^>]+phaser-3\.90\.0-arcade-physics/);
   assert.match(vendorReadme, /Phaser 3\.90\.0 Arcade Physics/);
   assert.match(vendorReadme, /MIT License/);

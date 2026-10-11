@@ -325,6 +325,6 @@
 
   {{- if $composerEnabled -}}
     {{- $studioScript := resources.Get "js/studio-inquiry.js" | resources.Minify | resources.Fingerprint -}}
-    <script defer src="{{ $studioScript.RelPermalink }}" integrity="{{ $studioScript.Data.Integrity }}"></script>
+    <script data-oip-route-script="studio-inquiry" defer src="{{ $studioScript.RelPermalink }}" integrity="{{ $studioScript.Data.Integrity }}"></script>
   {{- end -}}
 {{ end }}

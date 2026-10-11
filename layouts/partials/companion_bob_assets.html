@@ -1,0 +1,7 @@
+{{- if eq .kind "styles" -}}
+  {{- $css := resources.Get "css/companion-bob.css" | resources.Minify | resources.Fingerprint "sha384" -}}
+  <link data-oip-persistent="bob-css" rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{- else -}}
+  {{- $script := resources.Get "js/companion-bob.js" | js.Build (dict "targetPath" "js/companion-bob.js" "target" "es2020" "minify" true) | resources.Fingerprint "sha384" -}}
+  <script data-oip-persistent="bob-script" type="module" src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+{{- end -}}

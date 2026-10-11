@@ -124,8 +124,9 @@
     </ol>
   </article>
 
-  <script>
-    (() => {
+  <script data-oip-route-script="image-review">
+(function () {
+  function mount(scope) {
       const query = document.querySelector('#image-review-query');
       const imageClass = document.querySelector('#image-review-class');
       const count = document.querySelector('#image-review-count');
@@ -143,8 +144,16 @@
         }
         count.value = `${visible} ${visible === 1 ? 'asset' : 'assets'} shown`;
       };
-      query.addEventListener('input', apply);
-      imageClass.addEventListener('change', apply);
-    })();
-  </script>
+      scope.on(query, 'input', apply);
+      scope.on(imageClass, 'change', apply);
+
+
+  }
+  if (window.oipRegisterRouteWidget) {
+    window.oipRegisterRouteWidget("image-review", mount);
+  } else {
+    mount({ on: function (target, type, callback, options) { target.addEventListener(type, callback, options); }, cleanup: function () {}, active: function () { return true; } });
+  }
+}());
+</script>
 {{ end }}

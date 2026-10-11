@@ -89,7 +89,7 @@ test("article header follows the calm title-led form grammar", () => {
   assert.match(articlePlateLightbox, /<p id="article-plate-lightbox-title" class="cartoon-lightbox__title" data-article-plate-lightbox-title><\/p>/);
   assert.doesNotMatch(articlePlateLightbox, /<h2 id="article-plate-lightbox-title"/);
   assert.match(articlePlateLightbox, /aria-labelledby="article-plate-lightbox-title"/);
-  assert.match(articlePlateLightbox, /document\.addEventListener\("click"/);
+  assert.match(articlePlateLightbox, /scope\.on\(document, "click"/);
   assert.match(articlePlateLightbox, /closest\("\[data-article-plate-lightbox-trigger\]"\)/);
   assert.match(articlePlateLightbox, /bodyImageSelector = "\.piece-body img"/);
   assert.match(articlePlateLightbox, /article-lightbox-image/);
@@ -113,7 +113,7 @@ test("article header follows the calm title-led form grammar", () => {
   assert.match(articlePlateLightbox, /event\.key === "Enter" \|\| event\.key === " "/);
   assert.match(articlePlateLightbox, /event\.key === "Spacebar"/);
   assert.match(articlePlateLightbox, /document\.body\.classList\.add\("cartoon-lightbox-open"\)/);
-  assert.match(articlePlateLightbox, /imageButton\.addEventListener\("click", closeLightbox\)/);
+  assert.match(articlePlateLightbox, /scope\.on\(imageButton, "click", closeLightbox\)/);
   assert.match(css, /\.piece-body img\.article-lightbox-image\{/);
   assert.match(css, /\.piece-body img\.article-lightbox-image:focus-visible\{/);
 });

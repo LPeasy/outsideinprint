@@ -48,7 +48,7 @@ test("all three reading templates share canonical resolved metadata and one elig
   assert.doesNotMatch(share, /\.RelPermalink|\.Permalink|\.Params\.title/);
   assert.equal((read("layouts/_default/baseof.html").match(/partial "article\/share-script\.html" \./g) || []).length, 1);
   assert.match(shareScript, /resources\.Get "js\/piece-share\.js" \| resources\.Minify \| resources\.Fingerprint/);
-  assert.match(shareScript, /<script defer src="\{\{ \$script\.RelPermalink \}\}" integrity="\{\{ \$script\.Data\.Integrity \}\}"><\/script>/);
+  assert.match(shareScript, /<script data-oip-route-script="piece-share" defer src="\{\{ \$script\.RelPermalink \}\}" integrity="\{\{ \$script\.Data\.Integrity \}\}"><\/script>/);
 });
 
 test("piece sharing adds no analytics events or remote sharing dependencies", () => {
