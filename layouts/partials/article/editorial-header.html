@@ -1,0 +1,18 @@
+{{- $editorName := strings.TrimSpace (.Params.editor_name | default "") -}}
+{{- $editorURL := strings.TrimSpace (.Params.editor_url | default "") -}}
+{{- $editorNote := strings.TrimSpace (.Params.editor_note | default "") -}}
+{{- with $editorName -}}
+  <p class="piece-editor-credit">Edited by
+    {{- if findRE `(?i)^https?://[^/@?#\s]+(?:[/?#][^\s]*)?$` $editorURL }}
+      <a href="{{ $editorURL }}">{{ . }}</a>
+    {{- else }}
+      <span>{{ . }}</span>
+    {{- end }}
+  </p>
+{{- end -}}
+{{- with $editorNote -}}
+  <aside class="piece-editor-note" aria-labelledby="piece-editor-note-heading">
+    <h2 id="piece-editor-note-heading" class="piece-editor-note__label">Editor's note</h2>
+    <p>{{ . }}</p>
+  </aside>
+{{- end -}}

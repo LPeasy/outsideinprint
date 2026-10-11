@@ -3,6 +3,8 @@
   "page" $page
   "fallbackDefault" true
 )) -}}
+{{- $role := lower (strings.TrimSpace ($page.Params.contributor_role | default "")) -}}
+{{- $roleLabel := index (dict "guest" "Guest contributor" "contributing" "Contributing writer") $role | default "" -}}
 {{- with $author.primary -}}
   <p class="piece-byline">
     <span class="piece-byline__label">By</span>
@@ -13,5 +15,6 @@
     {{- else -}}
       <span>{{ .name }}</span>
     {{- end -}}
+    {{- with $roleLabel }}<span class="piece-byline__role">{{ . }}</span>{{ end -}}
   </p>
 {{- end -}}

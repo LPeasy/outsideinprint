@@ -27,7 +27,7 @@
 
 {{- range $authorKey := $authorKeys -}}
   {{- $lookupKey := lower $authorKey -}}
-  {{- $entry := false -}}
+  {{- $entry := dict -}}
   {{- if isset $authorsData $lookupKey -}}
     {{- $entry = index $authorsData $lookupKey -}}
   {{- end -}}

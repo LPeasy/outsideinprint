@@ -1,5 +1,15 @@
 current: the-other-side-of-the-mountain
 cartoons:
+  - slug: a-public-record-must-outlast-the-feed
+    title: "A Public Record Must Outlast the Feed"
+    date: "2026-10-12"
+    publishDate: "2026-10-12T09:00:00-04:00"
+    image: "essays/a-public-record-must-outlast-the-feed/hero"
+    essay: "/essays/a-public-record-must-outlast-the-feed/"
+    alt: "A paper notice remains pinned to a civic notice board while message cards drift off a phone screen."
+    caption: "A lasting record needs a clear source and a path back to it."
+    width: 1672
+    height: 941
   - slug: precious-and-honored
     title: "Precious and Honored"
     date: "2026-10-04"

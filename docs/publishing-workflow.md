@@ -88,6 +88,24 @@ For non-draft public pieces, complete the core publication metadata:
 - `draft`
 - `description` for published essays
 
+Guest essays must explicitly name their author; otherwise the site's normal author fallback applies. The standard article header supports the Contributor Desk fields below:
+
+```yaml
+author: "Douglas B. Vandergraph"
+contributor_role: "guest"
+editor_name: "Robert V. Ussley"
+editor_url: "https://outsideinprint.org/authors/robert-v-ussley/"
+editor_note: "This guest essay considers how public institutions can keep their records accessible after an announcement leaves the feed."
+```
+
+`contributor_role` accepts `guest` (Guest contributor) or `contributing` (Contributing writer). Omit it for an ordinary byline. The optional editor credit links only to an absolute HTTP(S) URL without credentials; without a valid URL, the name remains plain text. `editor_name` and `editor_note` are plain text. A note is always open below the credit. These fields do not replace the author or add the editor to citation or Article author metadata. For this opt-in header, the subtitle comes between the title and byline; ordinary article openings keep their existing order. Preserve these fields when importing a Contributor Desk export.
+
+After changing contributor-header rendering, run the isolated Hugo fixture through the pinned wrappers; it renders only its small test site:
+
+```powershell
+.\tools\bin\generated\pwsh.cmd -NoLogo -NoProfile -File .\tests\test_contributor_header_contract.ps1
+```
+
 Use these discovery controls deliberately:
 
 - Homepage cards with full-width artwork (the lead and newest supporting piece) place the title and reading-time metadata above the illustration. Compact supporting cards keep the title, reading time, and summary beside their small square artwork. All cards retain a single heading before the artwork in document order. Preserve these size-specific layouts for future selected pieces as well as the flagship.

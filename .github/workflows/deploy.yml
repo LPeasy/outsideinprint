@@ -188,6 +188,9 @@ jobs:
         shell: pwsh
         run: |
           ./tests/test_author_directory_contract.ps1
+      - name: Test Contributor Header Contract
+        shell: pwsh
+        run: ./tests/test_contributor_header_contract.ps1
       - name: Test Apps & Tools Contract
         shell: pwsh
         run: |
