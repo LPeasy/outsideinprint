@@ -73,6 +73,11 @@
     {{ $plateImageHeight = $plateImageModel.lightbox_height }}
   {{ end }}
   {{ $isImageLed := and .Params.image_led (eq $plateKind "hero") $plateImageModel }}
+  {{ $editorialHeader := "" }}
+  {{ if or .Params.editor_name .Params.editor_note }}
+    {{ $editorialHeader = partial "article/editorial-header.html" . }}
+  {{ end }}
+  {{ $hasContributorHeader := or $editorialHeader (in (slice "guest" "contributing") (lower (strings.TrimSpace (.Params.contributor_role | default "")))) }}
   {{ $headerClasses := slice "piece-header" "piece-header--calm" }}
   {{ if $plateImage }}
     {{ $headerClasses = $headerClasses | append "piece-header--side-plate" }}
@@ -100,10 +105,16 @@
         {{ if $isImageLed }}
           {{ partial "article/media-plate.html" (dict "page" . "classes" $plateClasses "model" $plateImageModel "alt" $plateImageAlt "caption" $plateImageCaption "width" $plateImageWidth "height" $plateImageHeight "imageLed" $isImageLed) }}
         {{ end }}
-        <div class="piece-title-block">
+        <div class="piece-title-block"{{ if $hasContributorHeader }} data-contributor-header="true"{{ end }}>
           <h1>{{ .Title }}</h1>
+          {{ if $hasContributorHeader }}
+            {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+          {{ end }}
           {{ partial "authors/byline.html" (dict "page" . "author" $meta.author) }}
-          {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+          {{ $editorialHeader }}
+          {{ if not $hasContributorHeader }}
+            {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+          {{ end }}
           {{ if eq $articleVariant "modernbio" }}
             {{ with partial "article/record-line.html" . }}<p class="piece-record-line">{{ . }}</p>{{ end }}
             {{ with .Params.primary_sources_note }}<p class="piece-primary-note">{{ . }}</p>{{ end }}
