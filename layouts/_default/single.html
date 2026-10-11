@@ -111,6 +111,7 @@
             {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
           {{ end }}
           {{ partial "authors/byline.html" (dict "page" . "author" $meta.author) }}
+          {{ partial "article/guest-links.html" . }}
           {{ $editorialHeader }}
           {{ if not $hasContributorHeader }}
             {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}

@@ -93,12 +93,19 @@ Guest essays must explicitly name their author; otherwise the site's normal auth
 ```yaml
 author: "Douglas B. Vandergraph"
 contributor_role: "guest"
+guest_links:
+  - label: "YouTube"
+    url: "https://www.youtube.com/@douglasvandergraph"
+  - label: "Website"
+    url: "https://douglasvandergraph.com/"
 editor_name: "Robert V. Ussley"
 editor_url: "https://outsideinprint.org/authors/robert-v-ussley/"
 editor_note: "This guest essay considers how public institutions can keep their records accessible after an announcement leaves the feed."
 ```
 
 `contributor_role` accepts `guest` (Guest contributor) or `contributing` (Contributing writer). Omit it for an ordinary byline. The optional editor credit links only to an absolute HTTP(S) URL without credentials; without a valid URL, the name remains plain text. `editor_name` and `editor_note` are plain text. A note is always open below the credit. These fields do not replace the author or add the editor to citation or Article author metadata. For this opt-in header, the subtitle comes between the title and byline; ordinary article openings keep their existing order. Preserve these fields when importing a Contributor Desk export.
+
+`guest_links` is an optional ordered list of `{label, url}` pairs, displayed between the author byline and editor credit. Labels are escaped plain text (nonempty, up to 160 characters); URLs must be absolute HTTP(S), have a host, contain no credentials or unsafe characters, and be at most 2,000 characters. Invalid entries are omitted by the renderer. Absent, empty or entirely invalid lists render no row or extra gap. Links use ordinary same-tab navigation, wrap on narrow screens, and have visible keyboard focus. They do not register an author profile or add schema affiliation. Preserve this field separately from the byline through Contributor Desk import/export and candidate conversion; private correspondence notes stay outside all publication packages.
 
 After changing contributor-header rendering, run the isolated Hugo fixture through the pinned wrappers; it renders only its small test site:
 
