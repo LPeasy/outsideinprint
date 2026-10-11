@@ -686,6 +686,10 @@ test("hosted pageview and form/link events send only sanitized GoatCounter data"
     const sample = page.locator('[data-analytics-event="book_sample_open"][data-analytics-path="/shop/2045/sample/"]').first();
     assert.equal(await sample.count(), 1, "The 2045 sample CTA must name the sample route as its analytics target.");
     await sample.evaluate((anchor) => {
+      // Analytics-only activations stay on this fixture. Swup requires its
+      // explicit opt-out in addition to cancelling native navigation below.
+      // The contextual-book scenarios above retain real navigation coverage.
+      anchor.setAttribute("data-no-swup", "");
       anchor.addEventListener("click", (event) => event.preventDefault(), { once: true });
       anchor.click();
     });
@@ -771,6 +775,7 @@ test("homepage article links emit one surface-specific click each while newslett
       }
       for (let index = 0; index < anchorCount; index += 1) {
         const target = await anchors.nth(index).evaluate((node) => {
+          node.setAttribute("data-no-swup", "");
           node.addEventListener("click", (event) => event.preventDefault(), { once: true });
           node.click();
           return {
@@ -803,6 +808,7 @@ test("homepage article links emit one surface-specific click each while newslett
         const fallback = zoom.closest("article")?.querySelector("[data-home-featured-image-fallback]");
         const dialog = document.querySelector("[data-home-featured-dialog]");
         if (!fallback || !dialog) throw new Error("Missing homepage illustration fallback or dialog.");
+        fallback.setAttribute("data-no-swup", "");
         fallback.addEventListener("click", (event) => event.preventDefault(), { once: true });
         fallback.click();
         zoom.click();
@@ -908,6 +914,7 @@ test("collection title and artwork clicks share one event each while magnifiers 
 
       for (const anchor of entry.textOnly ? [title] : [title, illustration]) {
         await anchor.evaluate((node) => {
+          node.setAttribute("data-no-swup", "");
           node.addEventListener("click", (event) => event.preventDefault(), { once: true });
           node.click();
         });
@@ -1011,6 +1018,7 @@ test("filtered Library artwork opens a readable viewer in both themes without tr
 
     const title = record.locator(".t a");
     const target = await title.evaluate((anchor) => {
+      anchor.setAttribute("data-no-swup", "");
       anchor.addEventListener("click", (event) => event.preventDefault(), { once: true });
       return { path: new URL(anchor.href).pathname, slug: anchor.dataset.analyticsSlug, section: anchor.dataset.analyticsSection };
     });
@@ -1104,6 +1112,7 @@ test("image fallback keeps internal paths and drops off-site paths without leaki
         anchor.dataset.analyticsEvent = "internal_promo_click";
         anchor.dataset.analyticsSourceSlot = slot;
         anchor.dataset.analyticsPath = analyticsPath;
+        anchor.setAttribute("data-no-swup", "");
         document.body.appendChild(anchor);
         anchor.addEventListener("click", (event) => event.preventDefault(), { once: true });
         anchor.click();
