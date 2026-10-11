@@ -3775,11 +3775,6 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/archive/index.html'
-    Pattern = '(?s)September 2026.*?August 2026.*?July 2026'
-    Message = 'expected the archive to group entries by descending month-year bands'
-  },
-  @{
-    Path = 'public/archive/index.html'
     Pattern = '(?s)/syd-and-oliver/what-i-had/.*?/syd-and-oliver/the-morning-after/.*?/essays/already-mine/'
     Message = 'expected the archive landing page to keep the newest stories in descending chronological order'
   },
@@ -6670,6 +6665,36 @@ elseif ([string]$targetPageHtml[$nonAffirmationCollectionPath] -match 'id=(?:"th
 
 if ($targetPageHtml.ContainsKey('public/archive/index.html')) {
   $archiveIndexHtml = [string]$targetPageHtml['public/archive/index.html']
+  $archiveMonthHeadings = @(
+    [regex]::Matches($archiveIndexHtml, '(?is)<h2\b(?<attributes>[^>]*)>(?<title>.*?)</h2>') |
+      Where-Object { ((Get-AttributeValue -Tag $_.Groups['attributes'].Value -Name 'class') -split '\s+') -contains 'essays-front__month-title' }
+  )
+  if ($archiveMonthHeadings.Count -eq 0) {
+    $uxIssues.Add('public/archive/index.html => expected at least one archive month heading')
+  }
+  $archiveMonthIds = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+  $previousArchiveMonth = $null
+  foreach ($heading in $archiveMonthHeadings) {
+    $monthId = Get-AttributeValue -Tag $heading.Groups['attributes'].Value -Name 'id'
+    $monthMatch = [regex]::Match([string]$monthId, '^archive-month-(?<month>\d{4}-(?:0[1-9]|1[0-2]))$')
+    $archiveMonth = [datetime]::MinValue
+    if (-not $monthMatch.Success -or -not [datetime]::TryParseExact(($monthMatch.Groups['month'].Value + '-01'), 'yyyy-MM-dd', [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::None, [ref]$archiveMonth)) {
+      $uxIssues.Add("public/archive/index.html => invalid archive month heading anchor '$monthId'")
+      continue
+    }
+    if (-not $archiveMonthIds.Add($monthId)) {
+      $uxIssues.Add("public/archive/index.html => duplicate archive month heading anchor '$monthId'")
+    }
+    if ($null -ne $previousArchiveMonth -and $archiveMonth -gt $previousArchiveMonth) {
+      $uxIssues.Add("public/archive/index.html => archive month heading '$monthId' is out of descending chronological order")
+    }
+    $expectedMonthTitle = $archiveMonth.ToString('MMMM yyyy', [System.Globalization.CultureInfo]::InvariantCulture)
+    if ((Convert-HtmlFragmentToText -Html $heading.Groups['title'].Value) -cne $expectedMonthTitle) {
+      $uxIssues.Add("public/archive/index.html => expected heading '$monthId' to read '$expectedMonthTitle'")
+    }
+    $previousArchiveMonth = $archiveMonth
+  }
+
   $archiveDeskTagCount = [regex]::Matches($archiveIndexHtml, 'class=(?:"[^"]*\bitem-kicker--collection\b[^"]*"|''[^'']*\bitem-kicker--collection\b[^'']*''|[^\s>]*\bitem-kicker--collection\b[^\s>]*)', 'IgnoreCase').Count
   if ($archiveDeskTagCount -eq 0) {
     $uxIssues.Add('public/archive/index.html => expected archive collection labels to render in the muted desk-tag kicker position')
