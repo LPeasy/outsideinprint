@@ -32,7 +32,8 @@ test("article, navigation, and sharing expose their new reader paths", { skip: !
 });
 
 test("non-editorial destinations and Paper-Bob results return to reading", { skip: !siteDir }, () => {
-  for (const route of ["apps", "games", "shop", "studio", "support", "gallery"]) {
+  assert.equal(fs.existsSync(path.join(siteDir, "apps", "index.html")), false);
+  for (const route of ["games", "shop", "studio", "support", "gallery"]) {
     const html = page(route);
     assert.match(html, /class="reader-bridge/);
     assert.match(html, /href=\/essays\/the-clock-by-the-door\//);

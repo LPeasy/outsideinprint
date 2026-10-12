@@ -1,8 +1,6 @@
 {{ $stickyMasthead := and .IsPage (not (in (slice "collections" "random") .Section)) }}
 {{ $isHomeMasthead := .IsHome }}
 {{ $currentPath := .RelPermalink }}
-{{ $appsPage := site.GetPage "/apps" }}
-{{ $showApps := and $appsPage (not $appsPage.Draft) }}
 {{ $gamesPage := site.GetPage "/games" }}
 {{ $showGames := and $gamesPage (or (not $gamesPage.Draft) hugo.IsServer) }}
 {{ $archivePageNumber := int (.Scratch.Get "oip_archive_page_number" | default 1) }}
@@ -20,8 +18,6 @@
 {{ $inAboutSection := or $isAboutPage (eq .Section "about") }}
 {{ $isContributePage := eq $currentPath "/contribute/" }}
 {{ $inContributeSection := or $isContributePage (eq .Section "contribute") }}
-{{ $isAppsPage := and $appsPage (eq $currentPath $appsPage.RelPermalink) }}
-{{ $inAppsSection := or $isAppsPage (eq .Section "apps") }}
 {{ $isGamesPage := and $gamesPage (eq $currentPath $gamesPage.RelPermalink) }}
 {{ $inGamesSection := or $isGamesPage (eq .Section "games") }}
 {{ $isGalleryPage := eq $currentPath "/gallery/" }}
@@ -93,18 +89,6 @@
     "mobilePrimary" false
   )
 }}
-{{ if $showApps }}
-  {{ $navItems = $navItems | append (dict
-    "key" "apps"
-    "label" "Apps & Tools"
-    "href" $appsPage.RelPermalink
-    "description" "Digital experiments"
-    "group" "explore"
-    "currentPage" $isAppsPage
-    "currentSection" $inAppsSection
-    "mobilePrimary" false
-  ) }}
-{{ end }}
 {{ if $showGames }}
   {{ $navItems = $navItems | append (dict
     "key" "games"
@@ -181,7 +165,7 @@
 {{ $exploreCurrent := gt (len (where $exploreItems "currentSection" true)) 0 }}
 {{ $mobileReadCurrent := gt (len (where $mobileReadItems "currentSection" true)) 0 }}
 {{ $mobileExploreCurrent := gt (len (where $mobileExploreItems "currentSection" true)) 0 }}
-<header class="masthead site-header masthead--editorial{{ if not $isHomeMasthead }} masthead--with-bob{{ end }} {{ $mastheadVariant }}{{ if $stickyMasthead }} masthead--sticky{{ end }}">
+<header class="masthead site-header masthead--editorial masthead--with-bob {{ $mastheadVariant }}{{ if $stickyMasthead }} masthead--sticky{{ end }}">
   <div class="masthead-nameplate">
     <div class="masthead-nameplate__top-rule" aria-hidden="true"></div>
     <div class="masthead-nameplate__top-ornament" aria-hidden="true"></div>
@@ -239,11 +223,9 @@
         </div>
         <div class="subtitle">A Digital Imprint</div>
       </a>
-      {{ if not $isHomeMasthead }}
       <div class="companion-bob-slot" data-bob-slot>
         <noscript><img src="{{ "companion-bob/idle.webp" | relURL }}" width="160" height="160" alt="Bob, the Outside In Print companion."></noscript>
       </div>
-      {{ end }}
       {{ if $isHomeMasthead }}
         <div class="masthead-side-deck masthead-side-deck--right" aria-hidden="true">
           <span>CURATED</span>

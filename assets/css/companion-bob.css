@@ -71,8 +71,7 @@
 }
 .companion-bob[hidden],
 .companion-bob [hidden],
-.companion-bob-restore[hidden],
-.home-idle-bob [hidden]{
+.companion-bob-restore[hidden]{
   display:none !important;
 }
 .companion-bob--compact{
@@ -269,6 +268,9 @@
   .masthead--with-bob,
   .masthead--with-bob.masthead--compressed{
     --bob-slot-size:64px;
+  }
+  .masthead--with-bob.masthead--full .masthead-nameplate__body{
+    margin-top:40px;
   }
   .masthead--with-bob.masthead--full .title{
     font-size:clamp(1.15rem, 6.1vw, 1.35rem);

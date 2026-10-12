@@ -39,7 +39,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     ...fs.readdirSync("layouts/partials/images").map(name => path.posix.join("layouts/partials/images", name)),
     "layouts/_default/_markup/render-image.html", "layouts/partials/metadata_image.html",
     "layouts/partials/opengraph.html", "layouts/partials/twitter_cards.html", "layouts/partials/schema/image.html",
-    "layouts/partials/games/picture.html", "layouts/partials/home_idle_bob.html",
+    "layouts/partials/games/picture.html",
   ]) implementation[file] = fs.readFileSync(file, "utf8").replaceAll("\r\n", "\n");
   implementation.mastheadImages = fs.readFileSync("layouts/partials/masthead.html", "utf8").split(/\r?\n/).filter(line => /paperBobIcon.*(?::=|=)|\.Resize /.test(line));
   const otherInputs = collectOtherImageInputs();

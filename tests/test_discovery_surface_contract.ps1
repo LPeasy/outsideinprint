@@ -1876,23 +1876,8 @@ if ($mastheadPartial -match '"label" "(?:Studio|Support)"|primary_nav_(?:studio|
   throw 'Expected Studio and Support to remain footer destinations rather than primary-navigation items.'
 }
 
-foreach ($requiredAppsNavigationSnippet in @(
-  'site.GetPage "/apps"',
-  'not $appsPage.Draft',
-  '"label" "Apps & Tools"',
-  '"description" "Digital experiments"'
-)) {
-  if ($mastheadPartial -notmatch [regex]::Escape($requiredAppsNavigationSnippet)) {
-    throw "Expected the public Apps & Tools navigation contract to contain: $requiredAppsNavigationSnippet"
-  }
-}
-
-if ($mastheadPartial -notmatch '\$showApps\s*:=\s*and\s+\$appsPage\s+\(not\s+\$appsPage\.Draft\)') {
-  throw 'Expected the published Apps & Tools navigation link to retain its public section gate.'
-}
-
-if ($mastheadPartial -match '\$showApps\s*:=[^\r\n]*hugo\.IsServer') {
-  throw 'Expected the published Apps & Tools navigation link not to acquire a server-only draft alternative.'
+if ($mastheadPartial -match '\$appsPage|\$showApps|"label" "Apps & Tools"') {
+  throw 'Expected the hidden Apps & Tools section to be absent from primary navigation.'
 }
 
 if ($mastheadPartial -notmatch '"analyticsSourceSlot" "primary_nav_bookstore"') {

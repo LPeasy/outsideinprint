@@ -54,7 +54,17 @@ const metricRecords = new Map([...metricsSource.matchAll(/^ {2}"([^"]+)":\n([\s\
     label: match[2].match(/^ {4}display_label: "([^"]+)"$/m)?.[1],
   }]));
 
-test("rendered stats open the homepage and the newsletter cell reaches its focusable heading", () => {
+test("the rendered homepage keeps Bob in the masthead and opens its reading content with the reader note", () => {
+  const masthead = html.match(/<header\b[^>]*class=(?:"[^"]*\bmasthead\b[^"]*"|'[^']*\bmasthead\b[^']*'|masthead)[^>]*>[\s\S]*?<\/header>/)?.[0];
+  assert.ok(masthead, "The homepage must render its shared masthead.");
+  assert.match(masthead, /\bdata-bob-slot\b/);
+  assert.equal((html.match(/\bdata-bob-slot\b/g) || []).length, 1, "Bob must have one starting slot.");
+  assert.doesNotMatch(html, /home-idle-bob|Meet Idle Bob/);
+  assert.match(html, /<section\b[^>]*class=(?:"home-v2"|home-v2)[^>]*>\s*<h1\b[^>]*>[\s\S]*?<\/h1>\s*<section\b[^>]*class=(?:"home-front-page__orientation"|home-front-page__orientation)[^>]*>/,
+    "The reader note must be the first content section beneath the masthead and navigation.");
+});
+
+test("rendered masthead stats retain the newsletter cell and its focusable heading", () => {
   assert.doesNotMatch(html, /home-v2__support|Support Independent Media/);
   const newsletterLinks = [...html.matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/g)]
     .filter((match) => attribute(match[1], "class").split(/\s+/).includes("home-reader-banner__newsletter-link"));

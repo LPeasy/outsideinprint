@@ -1,6 +1,4 @@
 <footer class="footer site-footer">
-  {{ $appsPage := site.GetPage "/apps" }}
-  {{ $showApps := and $appsPage (not $appsPage.Draft) }}
   {{ $gamesPage := site.GetPage "/games" }}
   {{ $showGames := and $gamesPage (or (not $gamesPage.Draft) hugo.IsServer) }}
   <div class="site-footer__inner page-shell page-shell--wide">
@@ -17,7 +15,6 @@
       <a href="{{ "collections/" | absURL }}">Collections</a>
       <a href="{{ "library/" | absURL }}">Library</a>
       {{ with site.Home.OutputFormats.Get "RSS" }}<a href="{{ .RelPermalink }}">RSS</a>{{ end }}
-      {{ if $showApps }}<a href="{{ $appsPage.RelPermalink }}"{{ if eq .RelPermalink $appsPage.RelPermalink }} aria-current="page"{{ end }}>Apps &amp; Tools</a>{{ end }}
       {{ if $showGames }}<a href="{{ $gamesPage.RelPermalink }}"{{ if eq .RelPermalink $gamesPage.RelPermalink }} aria-current="page"{{ end }}>Games</a>{{ end }}
       <a
         href="{{ "studio/" | absURL }}"

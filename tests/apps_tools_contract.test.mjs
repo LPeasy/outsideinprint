@@ -52,16 +52,16 @@ test("Apps data contract preserves Bucks and defines the static Baseball preview
 
   for (const source of [appsIndex, bucksPage]) {
     assert.equal(frontMatterBoolean(source, "draft"), false);
-    assert.equal(frontMatterBoolean(source, "noindex"), false);
+    assert.equal(frontMatterBoolean(source, "noindex"), true);
   }
   const baseballDraft = frontMatterBoolean(baseballPage, "draft");
   const baseballNoindex = frontMatterBoolean(baseballPage, "noindex");
   assert.equal(baseballDraft, false, "The frozen Baseball publication candidate must be non-draft");
-  assert.equal(baseballNoindex, false, "The frozen Baseball publication candidate must be indexable");
+  assert.equal(baseballNoindex, true, "The retained Baseball source must remain hidden");
   assert.match(bucksPage, /^weight:\s*10\s*$/m);
   assert.match(baseballPage, /^weight:\s*20\s*$/m);
-  for (const source of [bucksPage, baseballPage]) {
-    assert.match(source, /^build:\s*\r?\n\s+publishResources:\s*false\s*$/ms);
+  for (const source of [appsIndex, bucksPage, baseballPage]) {
+    assert.match(source, /^build:\s*\r?\n  render: never\r?\n  list: never\r?\n  publishResources: false\s*$/m);
   }
 
   const requiredStrings = [
@@ -198,7 +198,7 @@ test("Apps templates keep presentation data-driven and release controls inert", 
   assert.doesNotMatch(templates, /SoftwareApplication|"@type"\s*:\s*"(?:Product|Offer)"/i);
 });
 
-test("Apps navigation, styling, and route ownership cover both products", () => {
+test("Apps stay off public navigation while retained styling and route ownership cover both products", () => {
   const masthead = read("layouts/partials/masthead.html");
   const footer = read("layouts/partials/footer.html");
   const listTemplate = read("layouts/apps/list.html");
@@ -212,16 +212,10 @@ test("Apps navigation, styling, and route ownership cover both products", () => 
   const appsCssMatch = css.match(/\/\* Apps & Tools public development preview \*\/([\s\S]*?)(?=\r?\n\/\* Games storefront and product \*\/|\r?\n@media print)/);
 
   for (const chrome of [masthead, footer]) {
-    assert.match(chrome, /site\.GetPage\s+"\/apps"/);
-    assert.match(chrome, /\$showApps\s*:=\s*and\s+\$appsPage\s+\(not\s+\$appsPage\.Draft\)/);
-    assert.doesNotMatch(chrome, /\$showApps\s*:=[^\r\n]*hugo\.IsServer/);
+    assert.doesNotMatch(chrome, /\$appsPage|\$showApps|Apps (?:&|&amp;) Tools/);
   }
-  assert.match(masthead, /"label" "Apps & Tools"[\s\S]*?"group" "explore"/);
-  assert.match(footer, />Apps\s*&amp;\s*Tools</);
-  assert.match(masthead, /\$isAppsPage\s*:=\s*and\s+\$appsPage\s+\(eq\s+\$currentPath\s+\$appsPage\.RelPermalink\)/);
-  assert.match(masthead, /\$inAppsSection\s*:=\s*or\s+\$isAppsPage\s+\(eq\s+\.Section\s+"apps"\)/);
-  assert.match(masthead, /"currentPage" \$isAppsPage/);
-  assert.match(masthead, /"currentSection" \$inAppsSection/);
+  const appsIndex = read("content/apps/_index.md");
+  assert.match(appsIndex, /^cascade:\s*\r?\n  build:\s*\r?\n    render: never\r?\n    list: never\r?\n    publishResources: false\s*$/m);
   assert.ok(appsCssMatch, "expected a bounded Apps & Tools CSS section");
   assert.match(appsCssMatch[1], /@media\s*\(max-width:640px\)/);
   assert.match(appsCssMatch[1], /:focus-visible/);

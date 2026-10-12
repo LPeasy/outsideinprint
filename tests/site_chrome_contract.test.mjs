@@ -148,12 +148,7 @@ test("masthead defines the grouped desktop and mobile navigation from one destin
   assert.doesNotMatch(masthead, /"key" "latest"|"label" "Latest"/);
   assert.match(masthead, /class="brand-link"[^>]*href="\{\{ "" \| absURL \}\}"/);
 
-  assert.match(masthead, /\$appsPage := site\.GetPage "\/apps"/);
-  assert.match(masthead, /\$showApps := and \$appsPage \(not \$appsPage\.Draft\)/);
-  assert.doesNotMatch(masthead, /\$showApps\s*:=[^\r\n]*hugo\.IsServer/);
-  assert.match(masthead, /"label" "Apps & Tools"[\s\S]*?"href" \$appsPage\.RelPermalink[\s\S]*?"description" "Digital experiments"[\s\S]*?"group" "explore"/);
-  assert.match(masthead, /\$isAppsPage := and \$appsPage \(eq \$currentPath \$appsPage\.RelPermalink\)/);
-  assert.match(masthead, /\$inAppsSection := or \$isAppsPage \(eq \.Section "apps"\)/);
+  assert.doesNotMatch(masthead, /\$appsPage|\$showApps|"label" "Apps & Tools"/);
   assert.match(masthead, /\$gamesPage := site\.GetPage "\/games"/);
   assert.match(masthead, /\$showGames := and \$gamesPage \(or \(not \$gamesPage\.Draft\) hugo\.IsServer\)/);
   assert.match(masthead, /"label" "Games"[\s\S]*?"href" \$gamesPage\.RelPermalink[\s\S]*?"description" "Playable work"[\s\S]*?"group" "explore"/);
@@ -176,8 +171,8 @@ test("masthead defines the grouped desktop and mobile navigation from one destin
   assert.match(masthead, /\$inAboutSection := or \$isAboutPage \(eq \.Section "about"\)/);
   assert.match(masthead, /\$inContributeSection := or \$isContributePage \(eq \.Section "contribute"\)/);
   assert.match(masthead, /\$inRandomSection := or \$isRandomPage \(eq \.Section "random"\)/);
-  assert.equal((masthead.match(/"currentPage" \$[A-Za-z]/g) || []).length, 11);
-  assert.equal((masthead.match(/"currentSection" \$[A-Za-z]/g) || []).length, 11);
+  assert.equal((masthead.match(/"currentPage" \$[A-Za-z]/g) || []).length, 10);
+  assert.equal((masthead.match(/"currentSection" \$[A-Za-z]/g) || []).length, 10);
   assert.doesNotMatch(masthead, /"current"/);
   assert.match(masthead, /<nav class="nav nav--section-rail" aria-label="Primary" data-primary-nav>/);
   assert.equal((masthead.match(/aria-label="Primary"/g) || []).length, 1);
@@ -606,17 +601,13 @@ test("footer and random route now point readers home instead of Welcome", () => 
   assert.match(footer, /href="\{\{ "about\/" \| absURL \}\}">About</);
   assert.match(footer, /href="\{\{ "authors\/robert-v-ussley\/" \| absURL \}\}">Author</);
   assert.match(footer, /href="\{\{ "library\/" \| absURL \}\}">Library</);
-  assert.match(footer, /\$appsPage := site\.GetPage "\/apps"/);
-  assert.match(footer, /\$showApps := and \$appsPage \(not \$appsPage\.Draft\)/);
-  assert.doesNotMatch(footer, /\$showApps\s*:=[^\r\n]*hugo\.IsServer/);
-  assert.match(footer, /href="\{\{ \$appsPage\.RelPermalink \}\}"[\s\S]*?>Apps &amp; Tools</);
-  assert.match(footer, /href="\{\{ \$appsPage\.RelPermalink \}\}"\{\{ if eq \.RelPermalink \$appsPage\.RelPermalink \}\} aria-current="page"\{\{ end \}\}>Apps &amp; Tools/);
+  assert.doesNotMatch(footer, /\$appsPage|\$showApps|>Apps &amp; Tools</);
+  assert.match(footer, />Library<[\s\S]*?>Games<[\s\S]*?>Studio<[\s\S]*?>Bookstore</);
   assert.match(footer, /\$gamesPage := site\.GetPage "\/games"/);
   assert.match(footer, /\$showGames := and \$gamesPage \(or \(not \$gamesPage\.Draft\) hugo\.IsServer\)/);
   assert.match(footer, /href="\{\{ \$gamesPage\.RelPermalink \}\}"[\s\S]*?>Games</);
   assert.match(footer, /href="\{\{ \$gamesPage\.RelPermalink \}\}"\{\{ if eq \.RelPermalink \$gamesPage\.RelPermalink \}\} aria-current="page"\{\{ end \}\}>Games/);
   assert.doesNotMatch(footer, /if eq \.Section "(?:apps|games)"/);
-  assert.match(footer, />Library<[\s\S]*?>Apps &amp; Tools<[\s\S]*?>Games<[\s\S]*?>Studio<[\s\S]*?>Bookstore</);
   assert.match(footer, /href="\{\{ "studio\/" \| absURL \}\}"[\s\S]*?data-analytics-source-slot="footer_studio"[\s\S]*?>Studio</);
   assert.match(footer, /href="\{\{ "shop\/" \| absURL \}\}"[\s\S]*?data-analytics-source-slot="footer_bookstore"[\s\S]*?>Bookstore</);
   assert.doesNotMatch(footer, /href="\{\{ "start-here\/" \| absURL \}\}">Welcome</);
