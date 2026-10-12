@@ -131,6 +131,30 @@ async function assertSpriteInViewport(page, frame) {
     `Sprite must fit the viewport: ${JSON.stringify({ sprite, viewport })}`);
   return sprite;
 }
+async function assertMastheadHome(page, frame) {
+  await waitForMode(page, "masthead");
+  assert.equal(await page.locator("[data-bob-slot]").count(), 1, "Each page must reserve one Bob home.");
+  const slot = await page.locator(".masthead [data-bob-slot]").boundingBox();
+  const masthead = await page.locator(".masthead").boundingBox();
+  assert.ok(slot && masthead, "Bob's starting spot must belong to the masthead.");
+  const sprite = await assertSpriteInViewport(page, frame);
+  assert.ok(sprite.left >= slot.x - 1 && sprite.right <= slot.x + slot.width + 1,
+    "Real Bob must fit the reserved masthead slot.");
+  assert.ok(sprite.top >= masthead.y - 1 && sprite.bottom <= masthead.y + masthead.height + 1,
+    "Stowed Bob must remain within the masthead, above the reading content.");
+}
+async function assertReaderNoteFirst(page) {
+  assert.equal(await page.locator(".home-idle-bob").count(), 0, "The homepage must omit the Meet Idle Bob promotion.");
+  assert.equal(await page.locator(".home-v2").evaluate((home) => {
+    const first = [...home.children].find((element) => !element.classList.contains("visually-hidden")
+      && getComputedStyle(element).display !== "none" && getComputedStyle(element).visibility !== "hidden");
+    return first?.classList.contains("home-front-page__orientation");
+  }), true, "The reader note must be the first visible homepage content.");
+  const note = await page.locator(".home-front-page__orientation").boundingBox();
+  const masthead = await page.locator(".masthead").boundingBox();
+  assert.ok(note && masthead && note.y >= masthead.y + masthead.height - 1,
+    "The reader note must sit below the masthead and navigation ribbon.");
+}
 async function dragBob(page, frame, target, touch = false) {
   const start = (await spritePixels(frame)).point;
   if (touch) {
@@ -161,6 +185,78 @@ async function openSettings(page, frame) {
   assert.equal(await page.locator("dialog[open]").count(), 0, "Native Bob controls must not open a site modal.");
   assert.notEqual(await page.locator("body").evaluate((body) => getComputedStyle(body).overflow), "hidden", "Native controls must not lock site scrolling.");
 }
+async function assertHiddenBob(page) {
+  await waitForMode(page, "hidden");
+  await page.waitForFunction(() => {
+    const state = JSON.parse(window.render_bob_to_text());
+    return !state.active && !state.audioActive && state.interactiveRegions === 0;
+  });
+  assert.equal(await page.locator("[data-bob-companion]").isVisible(), false, "Hide must remove Bob from view.");
+  assert.equal(await page.locator("[data-bob-frame]").evaluate((frame) => frame.inert), true,
+    "Hidden Bob must not capture keyboard or pointer input.");
+  assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem("oip-bob-preferences:v1"))?.hidden), true,
+    "Hide must remember the reader's existing preference.");
+  const restore = page.getByRole("button", { name: "Show Bob", exact: true });
+  await restore.waitFor({ state: "visible" });
+  assert.equal(await restore.isEnabled(), true, "Show Bob must remain an accessible native button.");
+  await assertInViewport(restore, "Show Bob");
+  const box = await restore.boundingBox(), viewport = page.viewportSize();
+  assert.ok(box.x > viewport.width / 2 && box.y > viewport.height / 2
+    && viewport.width - box.x - box.width <= 32 && viewport.height - box.y - box.height <= 32,
+  `Show Bob must remain discreetly in the bottom-right corner: ${JSON.stringify({ box, viewport })}`);
+  assert.ok(box.height >= 44, "Show Bob must retain a usable touch target.");
+  return restore;
+}
+async function exerciseHideRestore(page, frame, screenshotName) {
+  if (!await frame.locator("#pet-settings-dock").isVisible()) await openSettings(page, frame);
+  await frame.getByRole("button", { name: "Play music", exact: true }).click();
+  await frame.getByRole("button", { name: "Pause music", exact: true }).waitFor();
+  const hide = frame.getByRole("button", { name: "Hide Bob", exact: true });
+  await assertInViewport(hide, "Hide Bob");
+  if (page.viewportSize().width <= 768) {
+    const hideBox = await hide.boundingBox();
+    assert.ok(hideBox.width >= 44 && hideBox.height >= 44, "Mobile Hide Bob must retain a 44px touch target.");
+  }
+  await hide.click();
+  const restore = await assertHiddenBob(page);
+  assert.equal(await restore.evaluate((button) => button === document.activeElement), true,
+    "Hide must transfer keyboard focus to Show Bob.");
+  // Pet debug is a last-paint snapshot; a hidden iframe may never repaint it.
+  await frame.waitForFunction(() => window.__idleTimesMusicDebug?.isPlaying !== true);
+  const pausedElapsed = await frame.evaluate(() => window.__idleTimesPetDebug.idle.elapsedMs);
+  await page.waitForTimeout(250);
+  assert.equal(await frame.evaluate(() => window.__idleTimesPetDebug.idle.elapsedMs), pausedElapsed,
+    "Bob's animation progress must stop while hidden.");
+  await screenshot(page, `${screenshotName}-hidden`);
+
+  const nav = page.locator(page.viewportSize().width <= 768 ? ".nav__mobile" : ".nav__desktop");
+  await nav.locator("[data-primary-nav-disclosure]").first().locator("summary").click();
+  await nav.locator("a[href$='/archive/']").click();
+  await page.waitForURL(new URL("/archive/", baseURL).href);
+  await assertHiddenBob(page);
+  await page.reload({ waitUntil: "domcontentloaded" });
+  const restoredControl = await assertHiddenBob(page);
+  await restoredControl.focus();
+  await page.keyboard.press("Enter");
+  frame = await runtime(page);
+  await page.waitForFunction(() => {
+    const state = JSON.parse(window.render_bob_to_text());
+    return state.active && state.interactiveRegions > 0;
+  });
+  assert.equal(await restoredControl.isVisible(), false, "Show Bob must disappear once Bob returns.");
+  assert.equal(await frame.locator("#pet-settings-dock").isVisible(), false,
+    "Show Bob must restore the companion with his controls collapsed.");
+  assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem("oip-bob-preferences:v1"))?.hidden), false);
+  await frame.waitForFunction(() => document.activeElement === document.querySelector("canvas"));
+  const restoredAnchor = (await bobState(page)).anchor;
+  await page.keyboard.press("ArrowLeft"); await waitForMode(page, "free");
+  assert.ok((await bobState(page)).anchor.x < restoredAnchor.x, "Restored Bob must respond to keyboard movement.");
+  await frame.locator("[data-pet-settings-button]").focus();
+  await page.keyboard.press("Enter");
+  await frame.locator("#pet-settings-dock").waitFor({ state: "visible" });
+  await frame.getByRole("button", { name: "Hide Bob", exact: true }).waitFor({ state: "visible" });
+  await screenshot(page, `${screenshotName}-restored`);
+}
 function assertNear(actual, expected, label, tolerance = 3) {
   assert.ok(Math.abs(actual.x - expected.x) <= tolerance && Math.abs(actual.y - expected.y) <= tolerance,
     `${label}: ${JSON.stringify(actual)} vs ${JSON.stringify(expected)}`);
@@ -178,18 +274,14 @@ async function assertTalkPaperFits(frame) {
   return layout;
 }
 
-test("the real pet loads in the center of the homepage promo, greets once, and stays silent before interaction", async () => {
+test("the real pet starts in the masthead above the reader note, greets once, and stays silent before interaction", async () => {
   const { context, page, requests, errors } = await createPage();
   try {
     await visit(page);
     const frame = await runtime(page);
     await waitForGreeting(page, "Hi!");
-    await waitForMode(page, "masthead");
-    const sprite = await assertSpriteInViewport(page, frame);
-    const slot = await page.locator(".home-idle-bob__pet-slot").boundingBox();
-    assert.ok(slot, "The homepage promo must reserve Bob's starting spot.");
-    assert.ok(sprite.left >= slot.x - 1 && sprite.right <= slot.x + slot.width + 1,
-      "Real Bob must fit the reserved slot in the center of the homepage promo.");
+    await assertMastheadHome(page, frame);
+    await assertReaderNoteFirst(page);
     assert.match(await page.locator("[data-bob-frame]").getAttribute("src"), /\/companion-bob\/runtime\//);
     assert.ok(requests.some((url) => url.startsWith("/companion-bob/runtime/")), "Full Pet Bob must load automatically.");
     assert.deepEqual(requests.filter((url) => /\.(?:mp3|ogg|m4a|aac)$/i.test(url)), [], "Arrival must not load music tracks.");
@@ -237,7 +329,8 @@ test("homepage Bob docks on scroll and transparent iframe space passes website c
     await waitForMode(page, "docked"); await assertSpriteInViewport(page, frame); await screenshot(page, "desktop-docked");
     await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
     await waitForMode(page, "masthead");
-    assertNear((await bobState(page)).anchor, original, "Scrolling back must restore the homepage promo anchor");
+    assertNear((await bobState(page)).anchor, original, "Scrolling back must restore the masthead anchor");
+    await assertMastheadHome(page, frame);
     await page.locator(".masthead .brand-link").click();
     await page.waitForURL(new URL("/", baseURL).href);
     assert.deepEqual(errors, []);
@@ -266,7 +359,12 @@ test("trusted mouse drag persists through scrolling, reload, article navigation 
 test("native Help, Talk, Activity, Sound and music work without a modal", async (t) => {
   const { context, page, errors } = await createPage();
   try {
-    await visit(page); const frame = await runtime(page); await openSettings(page, frame);
+    await visit(page); const frame = await runtime(page);
+    await frame.locator("[data-pet-settings-button]").focus();
+    await page.keyboard.press("Enter");
+    await frame.locator("#pet-settings-dock").waitFor({ state: "visible" });
+    assert.equal(await page.locator("dialog[open]").count(), 0, "Keyboard access to native controls must not open a site modal.");
+    assert.notEqual(await page.locator("body").evaluate((body) => getComputedStyle(body).overflow), "hidden", "Native controls must not lock site scrolling.");
     await frame.locator("[data-pet-help-button]").click(); await frame.locator(".pet-help-panel").waitFor(); await screenshot(page, "desktop-native-help");
     await frame.getByRole("button", { name: "Close how to play", exact: true }).click();
     await frame.locator("[data-pet-talk-button]").click(); await frame.locator("[data-pet-interview-paper]").waitFor({ state: "visible" }); await screenshot(page, "desktop-native-talk");
@@ -286,7 +384,7 @@ test("native Help, Talk, Activity, Sound and music work without a modal", async 
   } finally { await context.close(); }
 });
 
-test("native Home restores Bob's starting spot and legacy hidden preferences remain recoverable", async () => {
+test("native Home stows Bob, Hide persists, and Show Bob restores a usable companion", async () => {
   const { context, page, errors } = await createPage({ storageState: { cookies: [], origins: [{
     origin: baseURL.origin,
     localStorage: [{ name: "oip-bob-preferences:v1", value: JSON.stringify({ version: 1, hidden: true }) }],
@@ -303,12 +401,14 @@ test("native Home restores Bob's starting spot and legacy hidden preferences rem
     assert.ok(keyboardAnchor.x < restoredAnchor.x, "Restored focus must let the reader reposition Bob with ArrowLeft.");
     await visit(page, "/archive/"); await waitForMode(page, "free");
     assertNear((await bobState(page)).anchor, keyboardAnchor, "Keyboard position must persist after reload");
+    await visit(page); await waitForMode(page, "free");
     frame = await runtime(page);
     await dragBob(page, frame, { x: 380, y: 520 }); await openSettings(page, frame);
-    assert.equal(await frame.locator("[data-pet-dismiss-button]").count(), 0, "Website controls must omit Hide.");
+    assert.equal(await frame.getByRole("button", { name: "Hide Bob", exact: true }).count(), 1, "Native controls must expose Hide Bob.");
     await frame.getByRole("button", { name: "Return Bob to his starting spot", exact: true }).click(); await waitForMode(page, "masthead");
     await frame.locator("#pet-settings-dock").waitFor({ state: "hidden" });
-    await assertSpriteInViewport(page, frame); assert.deepEqual(errors, []);
+    await assertMastheadHome(page, frame); await assertReaderNoteFirst(page);
+    await exerciseHideRestore(page, frame, "desktop"); assert.deepEqual(errors, []);
   } finally { await context.close(); }
 });
 
@@ -339,7 +439,13 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 320, height: 740 }
     const { context, page, errors } = await createPage({ viewport, touch: true });
     try {
       await visit(page); const frame = await runtime(page); await waitForGreeting(page, "Hi!");
-      await assertSpriteInViewport(page, frame); await assertNoPageOverflow(page);
+      await assertMastheadHome(page, frame); await assertReaderNoteFirst(page); await assertNoPageOverflow(page);
+      const settingsBox = await frame.locator("[data-pet-settings-button]").boundingBox();
+      const themeBox = await page.locator(".masthead [data-theme-toggle]").boundingBox();
+      assert.ok(settingsBox && themeBox, "Mobile Bob settings and theme controls must have visible bounds.");
+      assert.ok(settingsBox.x + settingsBox.width <= themeBox.x || themeBox.x + themeBox.width <= settingsBox.x
+        || settingsBox.y + settingsBox.height <= themeBox.y || themeBox.y + themeBox.height <= settingsBox.y,
+      `Bob settings and theme controls must not overlap: ${JSON.stringify({ settingsBox, themeBox, viewport })}`);
       await assertInViewport(page.locator(".masthead .brand-link"), "Mobile wordmark"); await screenshot(page, `mobile-${viewport.width}-masthead`);
       const scrollBefore = await page.evaluate(() => scrollY);
       await dragBob(page, frame, { x: viewport.width * .42, y: viewport.height * .55 }, true);
@@ -355,6 +461,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 320, height: 740 }
       await screenshot(page, `mobile-${viewport.width}-native-talk`);
       await frame.locator("[data-pet-interview-paper]").getByRole("button", { name: "Yes", exact: true }).click();
       await frame.waitForFunction(() => window.__idleTimesPetDebug?.play?.answer === "yes");
+      await exerciseHideRestore(page, frame, `mobile-${viewport.width}`);
       assert.deepEqual(errors, []);
     } finally { await context.close(); }
   });

@@ -5,9 +5,11 @@ description: "An educational cohort-level preview of the zero-heavy gross-earnin
 section_label: "Apps & Tools"
 product_key: "baseball_upside_risk"
 draft: false
-noindex: false
+noindex: true
 show_citation: false
 weight: 20
 build:
+  render: never
+  list: never
   publishResources: false
 ---

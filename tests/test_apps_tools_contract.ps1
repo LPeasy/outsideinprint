@@ -80,17 +80,17 @@ $layoutMatrix = Get-Source 'docs/layout-ownership-matrix.md'
 $hugoConfig = Get-Source 'hugo.toml'
 
 foreach ($source in @($appsIndex, $bucksPage)) {
-  if (Get-FrontMatterBoolean -Source $source -Key 'draft') { throw 'The Apps index and Bucks page must remain published.' }
-  if (Get-FrontMatterBoolean -Source $source -Key 'noindex') { throw 'The Apps index and Bucks page must remain indexable.' }
+  if (Get-FrontMatterBoolean -Source $source -Key 'draft') { throw 'The Apps index and Bucks source must preserve their non-draft lifecycle metadata.' }
+  if (-not (Get-FrontMatterBoolean -Source $source -Key 'noindex')) { throw 'Retained Apps pages must remain hidden.' }
 }
 $baseballDraft = Get-FrontMatterBoolean -Source $baseballPage -Key 'draft'
 $baseballNoindex = Get-FrontMatterBoolean -Source $baseballPage -Key 'noindex'
 if ($baseballDraft) { throw 'The frozen Baseball publication candidate must be non-draft.' }
-if ($baseballNoindex) { throw 'The frozen Baseball publication candidate must be indexable.' }
+if (-not $baseballNoindex) { throw 'The retained Baseball source must remain hidden.' }
 Assert-Matches $bucksPage '(?m)^weight:\s*10\s*$' 'Bucks Machine must remain first at weight 10.'
 Assert-Matches $baseballPage '(?m)^weight:\s*20\s*$' 'Baseball Upside Risk must remain second at weight 20.'
-foreach ($source in @($bucksPage, $baseballPage)) {
-  Assert-Matches $source '(?ms)^build:\s*\r?\n\s+publishResources:\s*false\s*$' 'Each Apps leaf bundle must disable automatic resource publication.'
+foreach ($source in @($appsIndex, $bucksPage, $baseballPage)) {
+  Assert-Matches $source '(?m)^build:\s*\r?\n  render: never\r?\n  list: never\r?\n  publishResources: false\s*$' 'Every retained Apps page must suppress rendering, discovery, and resources.'
 }
 Assert-Matches $hugoConfig '(?m)^apps\s*=\s*"/apps/:slug/"\s*$' 'hugo.toml must retain the Apps permalink family.'
 
@@ -172,16 +172,9 @@ Assert-Omits $actions '(?i)<a\b|<form\b|mailto:|stripe|checkout|price|waitlist' 
 Assert-Omits $companion '(?i)<a\b|href=|Robert V\. Ussley|\bbyline\b|\bcover\b|\bprice\b|\bpre-?order\b' 'The public companion panel must remain non-clickable and omit release data and byline.'
 
 foreach ($chrome in @($masthead, $footer)) {
-  Assert-Matches $chrome 'site\.GetPage\s+"/apps"' 'Site chrome must resolve the published Apps section.'
-  Assert-Matches $chrome '\$showApps\s*:=\s*and\s+\$appsPage\s+\(not\s+\$appsPage\.Draft\)' 'Site chrome must gate Apps on the published section.'
-  Assert-Omits $chrome '\$showApps\s*:=[^\r\n]*hugo\.IsServer' 'Apps navigation must not acquire a server-only draft alternative.'
+  Assert-Omits $chrome '\$appsPage|\$showApps|Apps (?:&|&amp;) Tools' 'Site navigation must omit the hidden Apps section.'
 }
-Assert-Matches $masthead '"label"\s+"Apps & Tools"' 'The masthead destination model must retain the Apps & Tools label.'
-Assert-Matches $footer '>Apps\s*&amp;\s*Tools<' 'Footer navigation must retain the Apps & Tools label.'
-Assert-Matches $masthead '\$isAppsPage\s*:=\s*and\s+\$appsPage\s+\(eq\s+\$currentPath\s+\$appsPage\.RelPermalink\)' 'The masthead must identify the exact Apps landing page.'
-Assert-Matches $masthead '\$inAppsSection\s*:=\s*or\s+\$isAppsPage\s+\(eq\s+\.Section\s+"apps"\)' 'The masthead must combine exact Apps landing-page and descendant state.'
-Assert-Matches $masthead '"currentPage"\s+\$isAppsPage' 'The masthead destination model must bind Apps & Tools to its exact-page state.'
-Assert-Matches $masthead '"currentSection"\s+\$inAppsSection' 'The masthead destination model must bind Apps & Tools to its section state.'
+Assert-Matches $appsIndex '(?m)^cascade:\s*\r?\n  build:\s*\r?\n    render: never\r?\n    list: never\r?\n    publishResources: false\s*$' 'The Apps section must also suppress future descendants.'
 
 $appsMarkup = $appsList + "`n" + $appsSingle + "`n" + $sampleDownloads + "`n" + $companion
 foreach ($family in @(

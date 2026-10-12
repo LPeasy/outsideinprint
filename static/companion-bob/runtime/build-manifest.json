@@ -1,25 +1,25 @@
 {
   "version": 1,
-  "gameSourceCommit": "25dea76b3737c204ae17c05f55104b1f728ac1a6",
+  "gameSourceCommit": "62c74b460b06a99cbdfc6132966daefbfe948c35",
   "adapter": "Full-viewport site Pet, native-style drag and alpha hit regions; no desk, economy or unlocks.",
   "protocol": "oip-site-bob-v1",
   "sourceWorkingTree": true,
   "sources": [
     {
       "path": "browser/site-pet/entry.tsx",
-      "sha256": "34a86260c70d125f1777d4f4411b77c8f51b9a788e17958622cb5c40e5139f76"
+      "sha256": "3f7c4c4325778160bdecc9075b696096c9e1b069f6f05db646079bd5945ce550"
     },
     {
       "path": "browser/site-pet/style.css",
-      "sha256": "5248c098429193ea56c51e1755188b966814f7d8d98d72b9f3fea4858e167a45"
+      "sha256": "1067ac41f090d9c610f137b7c58ead3ffecf7d8ea6834e852c06b24d09ac579e"
     },
     {
       "path": "browser/site-pet/index.html",
-      "sha256": "7509789e9765da7bffc201d211b2334eaa776cb8e577fc349ae9173afea1539b"
+      "sha256": "e6fc62475265d54f629fd5f937bce96e254a03780e23c56e8b1ec95c3ba51d8a"
     },
     {
       "path": "src/components/BobPet.tsx",
-      "sha256": "91374f8ee14016bafa2d850aa237a98c43445d08a4fdb2f671ca67388a29d712"
+      "sha256": "7c530a4d88e61d94171c232d292ea99bf98edc77fd9d81d93ac3b1a8952b7670"
     },
     {
       "path": "src/components/PetActivityControls.tsx",
@@ -31,15 +31,15 @@
     },
     {
       "path": "vite.site-pet.config.ts",
-      "sha256": "cc545d76cb965a85cdfa1073afe3baceba6bcdb4a5f63c884fb8e6852c48fbd7"
+      "sha256": "74d6f75fab812a1a2449828b0ae2944a98950305449b51a506c661e17870386f"
     },
     {
       "path": "tools/build-site-pet.mjs",
-      "sha256": "86269785a7cfeec349a5361063bfd81e153e37dac0f7725d3e5bd73857179a69"
+      "sha256": "7bc77937cebaeddeaad0a9477b7492e53a5efba839615b9d71735324fb8d7746"
     }
   ],
   "fullGameIncluded": false,
-  "totalBytes": 26909799,
+  "totalBytes": 26909958,
   "files": [
     {
       "path": "assets/bob-armrest-BAi3CKpz.webp",
@@ -212,14 +212,14 @@
       "sha256": "b8db33ed991073a0111b507b9668479a0e8a84335e160668bfe1870bef9b00f6"
     },
     {
-      "path": "assets/index-CkrrZB10.js",
-      "bytes": 519596,
-      "sha256": "e95b6f0819a1156b83f0f3ead02a71c9f2b1ddb33d2353b172a62755f0a1cdae"
+      "path": "assets/index-CKXQXCa2.js",
+      "bytes": 519745,
+      "sha256": "742664077a9b48c5982bd1f0254d34cae760c17f8b72b8e5a2f4cc7bb394919b"
     },
     {
       "path": "index.html",
-      "bytes": 491,
-      "sha256": "7e88a1a5d4c0bee834138b7cfbaef2457b4f25eb14344b8b9bee11968df9dbe7"
+      "bytes": 501,
+      "sha256": "e26b0c03eaa9e1e171a51ce59eec8fb68c670445e4235d3174599f573442ffd5"
     },
     {
       "path": "music/playlist.json",
