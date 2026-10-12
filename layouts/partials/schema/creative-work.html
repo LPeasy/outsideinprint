@@ -123,6 +123,17 @@
     {{- end -}}
   {{- end -}}
 
+  {{- /* Match the explicit visible editing credit; do not infer an author or affiliation. */ -}}
+  {{- $editorName := strings.TrimSpace ($page.Params.editor_name | default "") -}}
+  {{- $editorURL := strings.TrimSpace ($page.Params.editor_url | default "") -}}
+  {{- with $editorName -}}
+    {{- $editor := dict "@type" "Person" "name" . -}}
+    {{- if partial "authors/is-public-url.html" $editorURL -}}
+      {{- $editor = merge $editor (dict "url" $editorURL) -}}
+    {{- end -}}
+    {{- $node = merge $node (dict "editor" $editor) -}}
+  {{- end -}}
+
   {{- $authorRefs := $author.refs | default (slice) -}}
   {{- if eq (len $authorRefs) 1 -}}
     {{- $node = merge $node (dict "author" (index $authorRefs 0)) -}}

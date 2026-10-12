@@ -3,7 +3,7 @@
 {{- $editorNote := strings.TrimSpace (.Params.editor_note | default "") -}}
 {{- with $editorName -}}
   <p class="piece-editor-credit">Edited by
-    {{- if findRE `(?i)^https?://[^/@?#\s]+(?:[/?#][^\s]*)?$` $editorURL }}
+    {{- if partial "authors/is-public-url.html" $editorURL }}
       <a href="{{ $editorURL }}">{{ . }}</a>
     {{- else }}
       <span>{{ . }}</span>

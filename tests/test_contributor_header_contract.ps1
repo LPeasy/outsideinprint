@@ -36,9 +36,14 @@ Assert-Contract ($LASTEXITCODE -eq 0 -and "$version" -match '^hugo v0\.167\.0') 
 foreach ($relativePath in @(
   'layouts/partials/authors/byline.html',
   'layouts/partials/authors/resolve.html',
+  'layouts/partials/authors/is-public-url.html',
   'layouts/partials/article/editorial-header.html',
   'layouts/partials/article/guest-links.html',
   'layouts/partials/schema/resolve-author.html',
+  'layouts/partials/schema/creative-work.html',
+  'layouts/partials/schema/organization.html',
+  'layouts/partials/collections/resolve-page-collections.html',
+  'layouts/partials/collections/normalize-values.html',
   'data/authors.yaml',
   'data/organization.yaml'
 )) {
@@ -47,6 +52,28 @@ foreach ($relativePath in @(
 
 # Render the real production title block, without its unrelated image/library pipeline.
 $single = [IO.File]::ReadAllText((Join-Path $repoRoot 'layouts/_default/single.html'))
+# Registered guests remain independent unless affiliation is explicitly declared.
+$fixtureAuthors = Join-Path $FixtureRoot 'data/authors.yaml'
+[IO.File]::AppendAllText($fixtureAuthors, @'
+
+  fixture-registered:
+    type: Person
+    name: Registered Fixture Writer
+    url: https://independent.example.test/author/
+  fixture-local:
+    type: Person
+    name: Local Profile Guest
+    path: /authors/local-profile-guest/
+  fixture-affiliated:
+    type: Person
+    name: Declared Affiliated Writer
+    affiliation: publisher
+  fixture-other-affiliation:
+    type: Person
+    name: Other Affiliation Writer
+    affiliation: another-organization
+'@, [Text.UTF8Encoding]::new($false))
+
 $setup = [regex]::Match($single, '(?s)\{\{ \$editorialHeader := "" \}\}.*?(?=\s*\{\{ \$headerClasses :=)')
 $titleBlock = [regex]::Match($single, '(?s)<div class="piece-title-block".*?</div>')
 Assert-Contract ($setup.Success -and $titleBlock.Success) 'Cannot isolate the production contributor header.'
@@ -58,10 +85,15 @@ $fixtureTemplate = @'
 '@ + "`n" + $setup.Value + "`n" + $titleBlock.Value + @'
 
 </div></header></article></main></div>
-{{ $schema := partial "schema/resolve-author.html" (dict "page" . "organization" (dict "@id" "https://example.test/#organization")) }}
+{{ $organization := partial "schema/organization.html" (dict "page" .) }}
+{{ $schema := partial "schema/resolve-author.html" (dict "page" . "organization" $organization) }}
+{{ $workMeta := dict "canonical" .Permalink "title" .Title "description" "Fixture description" "dates" dict "route" (dict "is_article_like" true "name" "article" "section_label" "Essays") }}
+{{ $work := partial "schema/creative-work.html" (dict "page" . "meta" $workMeta "organization" $organization "image" false "author" $schema) }}
 <script id="author-schema" type="application/json">{{ $schema.nodes | jsonify | safeJS }}</script>
+<script id="work-schema" type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" (slice $organization $work.node) | jsonify | safeJS }}</script>
 </body></html>
 '@
+Write-Fixture 'data/collections.yaml' 'collections: []'
 Write-Fixture 'layouts/_default/single.html' $fixtureTemplate
 Write-Fixture 'static/fixture-main.css' ([IO.File]::ReadAllText((Join-Path $repoRoot 'assets/css/main.css')))
 Write-Fixture 'layouts/_default/list.html' '<!doctype html><title>Fixture index</title>'
@@ -122,10 +154,22 @@ $cases = [ordered]@{
   contributing = @{ author = 'Fixture Writer'; contributor_role = 'contributing' }
   ordinary = @{}
   registered = @{ author_id = 'robert-v-ussley' }
+  registered_case = @{ author_id = 'ROBERT-V-USSLEY' }
+  registered_external = @{ author_id = 'fixture-registered'; contributor_role = 'guest' }
+  registered_local = @{ author_id = 'fixture-local'; contributor_role = 'guest' }
+  declared_affiliation = @{ author_id = 'fixture-affiliated' }
+  other_affiliation = @{ author_id = 'fixture-other-affiliation' }
+  editorial_organization = @{ author_id = 'editorial' }
+  unknown_id = @{ author_id = 'unregistered-independent-guest'; contributor_role = 'guest' }
   plain_editor = @{ author = 'Fixture Writer'; editor_name = 'Robert V. Ussley' }
   unsafe_url = @{ author = 'Fixture Writer'; editor_name = 'Robert V. Ussley'; editor_url = 'javascript:alert(1)' }
   credential_url = @{ author = 'Fixture Writer'; editor_name = 'Robert V. Ussley'; editor_url = 'https://user:pass@example.test/' }
   relative_url = @{ author = 'Fixture Writer'; editor_name = 'Robert V. Ussley'; editor_url = '/authors/robert-v-ussley/' }
+  editor_port_only = @{ author = 'Fixture Writer'; editor_name = 'Robert V. Ussley'; editor_url = 'https://:80/' }
+  editor_bad_port = @{ author = 'Fixture Writer'; editor_name = 'Robert V. Ussley'; editor_url = 'https://example.test:bad/' }
+  editor_bad_host = @{ author = 'Fixture Writer'; editor_name = 'Robert V. Ussley'; editor_url = 'https://[bad/' }
+  editor_overflow_port = @{ author = 'Fixture Writer'; editor_name = 'Robert V. Ussley'; editor_url = 'https://example.test:65536/' }
+  editor_external = @{ author = 'Fixture Writer'; editor_name = 'External Editor'; editor_url = 'https://independent.example.test/editor/' }
   empty_host = @{ author = 'Fixture Writer'; editor_name = 'Robert V. Ussley'; editor_url = 'https://?q' }
   escaped = @{ author = 'Fixture Writer'; editor_name = '<b>Editor</b>'; editor_note = '<script>alert(1)</script> & a note' }
   blank = @{ contributor_role = 'unknown'; editor_name = ' '; editor_url = 'https://example.test/'; editor_note = ' ' }
@@ -151,8 +195,51 @@ foreach ($entry in $cases.GetEnumerator()) {
   $html[$entry.Key] = $rendered
   $schemaText = [regex]::Match($rendered, '(?s)<script id="author-schema" type="application/json">(.*?)</script>').Groups[1].Value
   $authors = @($schemaText | ConvertFrom-Json)
-  $expectedAuthor = if ($entry.Value.ContainsKey('author')) { $entry.Value.author } else { 'Robert V. Ussley' }
+  $expectedAuthor = switch ($entry.Key) {
+    'registered_external' { 'Registered Fixture Writer' }
+    'registered_local' { 'Local Profile Guest' }
+    'declared_affiliation' { 'Declared Affiliated Writer' }
+    'other_affiliation' { 'Other Affiliation Writer' }
+    'editorial_organization' { 'Outside In Print Editorial' }
+    'unknown_id' { 'unregistered-independent-guest' }
+    default { if ($entry.Value.ContainsKey('author')) { $entry.Value.author } else { 'Robert V. Ussley' } }
+  }
   Assert-Contract ($authors.Count -eq 1 -and $authors[0].name -eq $expectedAuthor) "Author/schema attribution changed for $($entry.Key)."
+  $hasAffiliation = $authors[0].PSObject.Properties.Name -contains 'affiliation'
+  $hasParent = $authors[0].PSObject.Properties.Name -contains 'parentOrganization'
+  if ($entry.Key -eq 'editorial_organization') {
+    Assert-Contract ($authors[0].'@type' -eq 'Organization' -and -not $hasAffiliation -and $hasParent -and $authors[0].parentOrganization.'@id' -eq 'https://example.test#organization') 'Editorial organization parent relationship changed.'
+  } elseif ($expectedAuthor -in @('Robert V. Ussley', 'Declared Affiliated Writer')) {
+    Assert-Contract ($hasAffiliation -and $authors[0].affiliation.'@id' -eq 'https://example.test#organization') "Explicit publisher affiliation was lost for $($entry.Key)."
+  } else {
+    Assert-Contract (-not $hasAffiliation -and -not $hasParent) "Independent guest acquired publisher affiliation for $($entry.Key)."
+  }
+  if ($entry.Key -eq 'registered_external') {
+    Assert-Contract ($authors[0].url -eq 'https://independent.example.test/author/') 'Registered author external URL changed.'
+  }
+  Assert-Contract ($authors[0].PSObject.Properties.Name -notcontains 'worksFor') "Employment was inferred for $($entry.Key)."
+  $workText = [regex]::Match($rendered, '(?s)<script id="work-schema" type="application/ld\+json">(.*?)</script>').Groups[1].Value
+  $graph = ($workText | ConvertFrom-Json).'@graph'
+  $organization = @($graph | Where-Object { $_.'@type' -eq 'Organization' })[0]
+  $article = @($graph | Where-Object { $_.'@type' -eq 'Article' })[0]
+  Assert-Contract ($organization.name -eq 'Outside In Print' -and $article.publisher.'@id' -eq $organization.'@id') "Article publisher changed for $($entry.Key)."
+  Assert-Contract ($article.author.'@id' -eq $authors[0].'@id') "Article author reference changed for $($entry.Key)."
+  $expectedEditor = if ($entry.Value.ContainsKey('editor_name')) { $entry.Value.editor_name.Trim() } else { '' }
+  $hasEditor = $article.PSObject.Properties.Name -contains 'editor'
+  if ($expectedEditor) {
+    Assert-Contract ($hasEditor -and $article.editor.'@type' -eq 'Person' -and $article.editor.name -eq $expectedEditor) "Article editor credit changed for $($entry.Key)."
+    Assert-Contract ($article.editor.PSObject.Properties.Name -notcontains 'affiliation' -and $article.editor.PSObject.Properties.Name -notcontains 'worksFor') "Editor relationship was inferred for $($entry.Key)."
+    if ($entry.Key -in @('guest', 'guest_links')) {
+      Assert-Contract ($article.editor.url -eq 'https://outsideinprint.org/authors/robert-v-ussley/') 'Robert editor profile URL changed.'
+      Assert-Contract ($article.editor.name -ne $authors[0].name) 'Guest author and editor were conflated.'
+    } elseif ($entry.Key -eq 'editor_external') {
+      Assert-Contract ($article.editor.url -eq 'https://independent.example.test/editor/') 'Valid external editor URL changed.'
+    } else {
+      Assert-Contract ($article.editor.PSObject.Properties.Name -notcontains 'url') "Unsafe or absent editor URL leaked for $($entry.Key)."
+    }
+  } else {
+    Assert-Contract (-not $hasEditor) "An editor was invented for $($entry.Key)."
+  }
   Assert-Contract ($rendered -match '(?s)<div class="piece-title-block"[^>]*>\s*<h1>.*?</h1>\s*(?:<p class="subtitle">.*?</p>\s*)?<p class="piece-byline">') "Byline is no longer a direct title-block child for $($entry.Key)."
 }
 
@@ -175,10 +262,11 @@ foreach ($name in @('ordinary', 'blank', 'empty_links', 'invalid_links', 'malfor
 foreach ($name in @('ordinary', 'registered')) {
   Assert-Contract ($html[$name] -match '<a href="/authors/robert-v-ussley/">Robert V\. Ussley</a>') "Existing Robert profile link changed for $name."
 }
-foreach ($name in @('plain_editor', 'unsafe_url', 'credential_url', 'relative_url', 'empty_host')) {
+foreach ($name in @('plain_editor', 'unsafe_url', 'credential_url', 'relative_url', 'empty_host', 'editor_port_only', 'editor_bad_port', 'editor_bad_host', 'editor_overflow_port')) {
   $credit = [regex]::Match($html[$name], '(?s)<p class="piece-editor-credit">.*?</p>').Value
   Assert-Contract ($credit -match '<span>Robert V\. Ussley</span>' -and $credit -notmatch '<a\b') "Editor URL fallback failed for $name."
 }
+Assert-Contract ($html.editor_external -match '<a href="https://independent.example.test/editor/">External Editor</a>') 'Valid external editor credit link changed.'
 Assert-Contract ($html.escaped -match '&lt;b&gt;Editor&lt;/b&gt;') 'Editor name must be escaped plain text.'
 Assert-Contract ($html.escaped -match '&lt;script&gt;alert\(1\)&lt;/script&gt; &amp; a note') 'Editor note must be escaped plain text.'
 

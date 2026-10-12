@@ -1,5 +1,6 @@
 {{- $page := .page -}}
 {{- $organization := .organization -}}
+{{- $authorsData := hugo.Data.authors.authors | default dict -}}
 {{- $resolved := partial "authors/resolve.html" (dict
   "page" $page
   "fallbackDefault" true
@@ -36,7 +37,9 @@
       {{- $node = merge $node (dict "knowsAbout" .) -}}
     {{- end -}}
   {{- end -}}
-  {{- if eq $entry.type "Person" -}}
+  {{- /* Affiliation requires a factual declaration, never identity or contributor role. */ -}}
+  {{- $authorData := index $authorsData $entry.key | default dict -}}
+  {{- if and (eq $entry.type "Person") (eq ($authorData.affiliation | default "") "publisher") -}}
     {{- $node = merge $node (dict "affiliation" (dict "@id" (index $organization "@id"))) -}}
   {{- end -}}
   {{- if and (eq $entry.type "Organization") $entry.parent_organization -}}

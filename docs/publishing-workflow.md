@@ -88,6 +88,8 @@ For non-draft public pieces, complete the core publication metadata:
 - `draft`
 - `description` for published essays
 
+Keep authorship, editing, publishing and affiliation distinct. `author` identifies the actual writer. Credit the person who performed the editorial work through `editor_name` and the verified, approved `editor_url`; these existing fields supply the article JSON-LD `editor` separately from its `author`. For Douglas B. Vandergraph's essay, Douglas is the author and Robert V. Ussley is the editor. Outside In Print remains the article's `publisher`; publishing an article does not establish an affiliation between its author and the publisher.
+
 Guest essays must explicitly name their author; otherwise the site's normal author fallback applies. The standard article header supports the Contributor Desk fields below:
 
 ```yaml
@@ -103,9 +105,19 @@ editor_url: "https://outsideinprint.org/authors/robert-v-ussley/"
 editor_note: "This guest essay considers how public institutions can keep their records accessible after an announcement leaves the feed."
 ```
 
-`contributor_role` accepts `guest` (Guest contributor) or `contributing` (Contributing writer). Omit it for an ordinary byline. The optional editor credit links only to an absolute HTTP(S) URL without credentials; without a valid URL, the name remains plain text. `editor_name` and `editor_note` are plain text. A note is always open below the credit. These fields do not replace the author or add the editor to citation or Article author metadata. For this opt-in header, the subtitle comes between the title and byline; ordinary article openings keep their existing order. Preserve these fields when importing a Contributor Desk export.
+`contributor_role` accepts `guest` (Guest contributor) or `contributing` (Contributing writer). Omit it for an ordinary byline. These are display designations, not declarations of affiliation or employment. The optional editor credit links only to an absolute HTTP(S) URL without credentials; without a valid URL, the name remains plain text. `editor_name` and `editor_note` are plain text. A note is always open below the credit. These fields do not replace the author or add the editor to citation or Article author metadata. For this opt-in header, the subtitle comes between the title and byline; ordinary article openings keep their existing order. Preserve these fields when importing a Contributor Desk export.
 
-`guest_links` is an optional ordered list of `{label, url}` pairs, displayed between the author byline and editor credit. Labels are escaped plain text (nonempty, up to 160 characters); URLs must be absolute HTTP(S), have a host, contain no credentials or unsafe characters, and be at most 2,000 characters. Invalid entries are omitted by the renderer. Absent, empty or entirely invalid lists render no row or extra gap. Links use ordinary same-tab navigation, wrap on narrow screens, and have visible keyboard focus. They do not register an author profile or add schema affiliation. Preserve this field separately from the byline through Contributor Desk import/export and candidate conversion; private correspondence notes stay outside all publication packages.
+`guest_links` is an optional ordered list of `{label, url}` pairs, displayed between the author byline and editor credit. Labels are escaped plain text (nonempty, up to 160 characters); URLs must be absolute HTTP(S), have a host, contain no credentials or unsafe characters, and be at most 2,000 characters. Invalid entries are omitted by the renderer. Absent, empty or entirely invalid lists render no row or extra gap. Links use ordinary same-tab navigation, wrap on narrow screens, and have visible keyboard focus. These are separately approved article links; they do not create an author identity relationship, register a public author profile, or establish employment or schema affiliation. Preserve this field separately from the byline through Contributor Desk import/export and candidate conversion; private correspondence notes stay outside all publication packages.
+
+Author affiliation is an explicit factual declaration in `data/authors.yaml`: `authors.<id>.affiliation` supports the exact value `publisher`, which identifies Outside In Print. Omit `Person.affiliation` when that declaration is absent. Do not infer it from an author-registry entry, name resolution, a public or private profile, `contributor_role`, or a Contributor Desk status such as Owner. Preserve Robert V. Ussley's established writer/publisher relationship through an explicit declaration on his existing author record:
+
+```yaml
+authors:
+  robert-v-ussley:
+    affiliation: publisher
+```
+
+Omit affiliation for independent guest Douglas B. Vandergraph. The author remains the actual writer regardless of whether an affiliation is declared. This standard does not create public guest pages, publish guest biographies or portraits, or expose private Contributor Desk data.
 
 After changing contributor-header rendering, run the isolated Hugo fixture through the pinned wrappers; it renders only its small test site:
 
