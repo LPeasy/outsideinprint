@@ -1,4 +1,4 @@
-current: the-other-side-of-the-mountain
+current: dogged
 cartoons:
   - slug: a-public-record-must-outlast-the-feed
     title: "A Public Record Must Outlast the Feed"
@@ -1149,5 +1149,14 @@ cartoons:
     image: "editorial/the-other-side-of-the-mountain"
     essay: "/essays/the-other-side-of-the-mountain/"
     alt: "A walker carrying a blue water bottle follows a sunlit trail toward a mountain ridge above a lake, leaving an open hatchback and cooler at an overlook."
+    width: 1672
+    height: 941
+  - slug: dogged
+    title: "Dogged"
+    date: "2026-10-13"
+    publishDate: "2026-10-13T07:00:00-04:00"
+    image: "editorial/dogged"
+    essay: "/essays/dogged/"
+    alt: "A man writes at a sunlit kitchen table while a brown dog rests by his bare feet, with a tennis ball nearby."
     width: 1672
     height: 941

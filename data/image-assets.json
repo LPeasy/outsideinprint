@@ -384,6 +384,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/dogged": {
+      "id": "editorial/dogged",
+      "source": "images/originals/editorial/dogged.png",
+      "sha256": "ded2708ab7acc373455e943e9e11a8baabe5f694fac6210abecf333bad29821e",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/energy-in-motion": {
       "id": "editorial/energy-in-motion",
       "source": "images/originals/editorial/energy-in-motion.png",
@@ -8039,6 +8053,7 @@
     "/images/editorial/delivering-the-goods.png": "editorial/delivering-the-goods",
     "/images/editorial/did-you-really-mean-what-you-said.png": "editorial/did-you-really-mean-what-you-said",
     "/images/editorial/diverse-consensus.png": "editorial/diverse-consensus",
+    "/images/editorial/dogged.png": "editorial/dogged",
     "/images/editorial/energy-in-motion.png": "editorial/energy-in-motion",
     "/images/editorial/escape-clause.png": "editorial/escape-clause",
     "/images/editorial/excellent-work.png": "editorial/excellent-work",
