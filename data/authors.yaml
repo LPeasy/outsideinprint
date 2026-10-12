@@ -2,6 +2,8 @@ authors:
   robert-v-ussley:
     type: Person
     name: Robert V. Ussley
+    # OIP's writer and publisher; this declares affiliation, not employment.
+    affiliation: publisher
     path: /authors/robert-v-ussley/
     description: Robert V. Ussley writes independent essays, reported analysis, dialogue, and fiction for Outside In Print.
     focus: History, economics, culture, technology, and public life, with an interest in how institutions and individual choices shape everyday experience.

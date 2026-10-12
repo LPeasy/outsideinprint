@@ -7141,6 +7141,36 @@ body.cartoon-lightbox-open{
   content:"·";
   margin-right:.6rem;
 }
+.piece-guest-links{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:.25rem .6rem;
+  margin:0 0 .25rem;
+  padding:0;
+  list-style:none;
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:.75rem;
+  line-height:1.7;
+}
+.piece-guest-links li{
+  display:flex;
+  align-items:baseline;
+  gap:.6rem;
+  min-width:0;
+}
+.piece-guest-links a{
+  color:var(--text-primary);
+  overflow-wrap:anywhere;
+  text-decoration:underline;
+  text-underline-offset:.18em;
+}
+.piece-guest-links a:focus-visible{
+  outline:2px solid var(--focus-ring);
+  outline-offset:3px;
+  border-radius:2px;
+}
 .piece-editor-credit{
   margin:0 0 1.1rem;
   color:var(--text-muted);

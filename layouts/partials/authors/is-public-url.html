@@ -1,0 +1,18 @@
+{{- /* Public identity/credit URLs must be absolute HTTP(S), without credentials. */ -}}
+{{- $valid := false -}}
+{{- if eq (printf "%T" .) "string" -}}
+  {{- $url := . -}}
+  {{- $unsafe := or (findRE `[\s\p{Z}\x00-\x1f\x7f-\x9f<>"\\]` $url) (strings.Contains $url "`") -}}
+  {{- if and (le (strings.RuneCount $url) 2000) (not $unsafe) -}}
+    {{- with try (urls.Parse $url) -}}
+      {{- if not .Err -}}
+        {{- with .Value -}}
+          {{- $port := .Port -}}
+          {{- $validPort := or (not $port) (and (le (len $port) 5) (le (int $port) 65535)) -}}
+          {{- $valid = and (in (slice "http" "https") (lower .Scheme)) (ne .Hostname "") (not .User) $validPort -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{ return $valid }}

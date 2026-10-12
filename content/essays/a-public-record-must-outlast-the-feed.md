@@ -4,6 +4,11 @@ subtitle: "People need a way to find what was said, who said it, and what change
 description: "Public notices need stable links, dated versions, and assigned upkeep so people can find what was said and see what changed."
 author: "Douglas B. Vandergraph"
 contributor_role: "guest"
+guest_links:
+  - label: "YouTube"
+    url: "https://www.youtube.com/@douglasvandergraph"
+  - label: "Website"
+    url: "https://douglasvandergraph.com/"
 editor_name: "Robert V. Ussley"
 editor_url: "https://outsideinprint.org/authors/robert-v-ussley/"
 editor_note: "This guest essay considers how public institutions can keep their records accessible after an announcement leaves the feed."
