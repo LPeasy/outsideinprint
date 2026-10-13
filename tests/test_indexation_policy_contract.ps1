@@ -88,15 +88,25 @@ foreach ($requiredLine in @(
   }
 }
 
-foreach ($allowedAgent in @('GPTBot', 'ClaudeBot', 'Google-Extended')) {
-  $allowPattern = "(?m)User-agent:\s+$([regex]::Escape($allowedAgent))\s*\r?\nAllow:\s+/"
-  if ($robotsTemplate -notmatch $allowPattern) {
-    throw "Expected layouts/robots.txt to allow $allowedAgent."
-  }
-
-  $disallowPattern = "(?m)User-agent:\s+$([regex]::Escape($allowedAgent))\s*\r?\nDisallow:\s+/"
-  if ($robotsTemplate -match $disallowPattern) {
-    throw "Expected layouts/robots.txt not to disallow $allowedAgent."
+$crawlerRules = [ordered]@{
+  'OAI-SearchBot' = 'Allow: /'
+  'Claude-SearchBot' = 'Allow: /'
+  'Claude-User' = 'Allow: /'
+  'PerplexityBot' = 'Allow: /'
+  'GPTBot' = 'Disallow: /'
+  'ClaudeBot' = 'Disallow: /'
+  'Google-Extended' = 'Allow: /'
+  '*' = 'Allow: /'
+}
+foreach ($agent in $crawlerRules.Keys) {
+  # Check the whole group so a conflicting Allow cannot undo a training disallow.
+  $groupPattern = "(?ims)^User-agent:[ \t]*$([regex]::Escape($agent))[ \t]*\r?\n(?<rules>.*?)(?=^User-agent:|\z)"
+  $groups = [regex]::Matches($robotsTemplate, $groupPattern)
+  $rules = @($groups | ForEach-Object {
+    $_.Groups['rules'].Value -split '\r?\n' | Where-Object { $_ -match '^\s*(Allow|Disallow):' } | ForEach-Object { $_.Trim() }
+  })
+  if ($groups.Count -ne 1 -or $rules.Count -ne 1 -or $rules[0] -cne $crawlerRules[$agent]) {
+    throw "Expected layouts/robots.txt to have one $agent group with only $($crawlerRules[$agent])."
   }
 }
 

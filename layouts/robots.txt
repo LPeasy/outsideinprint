@@ -11,10 +11,10 @@ User-agent: PerplexityBot
 Allow: /
 
 User-agent: GPTBot
-Allow: /
+Disallow: /
 
 User-agent: ClaudeBot
-Allow: /
+Disallow: /
 
 User-agent: Google-Extended
 Allow: /
