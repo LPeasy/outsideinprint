@@ -1,4 +1,4 @@
-current: dogged
+current: the-last-cheese
 cartoons:
   - slug: a-public-record-must-outlast-the-feed
     title: "A Public Record Must Outlast the Feed"
@@ -1158,5 +1158,14 @@ cartoons:
     image: "editorial/dogged"
     essay: "/essays/dogged/"
     alt: "A man writes at a sunlit kitchen table while a brown dog rests by his bare feet, with a tennis ball nearby."
+    width: 1672
+    height: 941
+  - slug: the-last-cheese
+    title: "The Last Cheese"
+    date: "2026-10-13"
+    publishDate: "2026-10-13T15:26:00.0000000+00:00"
+    image: "essays/dialogues/the-last-cheese/hero"
+    essay: "/syd-and-oliver/the-last-cheese/"
+    alt: "Two silhouetted men sit with menus and bread at a restaurant table as a waiter carries plates of fish and mango past them."
     width: 1672
     height: 941

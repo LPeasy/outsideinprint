@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "title": "The Last Cheese",
+  "reviewed_at_utc": "2026-10-13T15:42:07.647Z",
+  "status": "owner_authorized_ready_for_checked_pr",
+  "authorization": "Owner: 'ok i edited the copy. lets publish this piece!'",
+  "base_commit": "fe761b2340370f9fd1657892cb4a13dddff80c2c",
+  "source": "content/essays/dialogues/the-last-cheese.md",
+  "source_sha256": "54a73fa108bea3bcca47cb728106fd09dd021715e6550c9e1de9e88e4a8dc890",
+  "canonical_route": "/syd-and-oliver/the-last-cheese/",
+  "owner_copy_review": "PASS: exact owner-edited file preserved except draft: false, removal of trailing whitespace, and LF/final-newline normalization. The owner's ending is 'She collected the menus.'",
+  "artwork": {
+    "asset_id": "essays/dialogues/the-last-cheese/hero",
+    "sha256": "2291bda1f3cc52d4c22a702f2981ffd501d0d1354fda3d7e74acfe007f8e1063",
+    "review_record": "docs/editorial-audits/image-revisions/the-last-cheese-20261013.json",
+    "reused_without_pixel_changes": true
+  },
+  "gallery": {
+    "current": "the-last-cheese",
+    "title": "The Last Cheese",
+    "essay": "/syd-and-oliver/the-last-cheese/",
+    "release_at_utc": "2026-10-13T15:26:00Z",
+    "same_managed_hero": true
+  },
+  "checks": {
+    "owner_copy_preservation": "PASS",
+    "image_source_bytes_dimensions_and_approved_manifest": "PASS",
+    "collection_source_audit": "PASS: no explicit membership violations",
+    "feed_source_contract": "PASS; expected published dialogue feed count advances from 22 to 23",
+    "gallery_schedule_source_contract": "PASS",
+    "target_guardrail": "Repository check excludes dialogue paths and reports no target files; no essay philosophy audit required for this character dialogue.",
+    "whitespace": "PASS"
+  },
+  "ci_required": [
+    "Current release-ready on an up-to-date PR",
+    "Automatic merge under protected-main checks",
+    "Fresh production build and successful Pages deployment",
+    "Canonical receipt matching exact commitSha and generatedAtUtc"
+  ],
+  "historical_record_note": "The earlier draft package report is preserved as history; this record applies to the owner's later edited publication copy."
+}
