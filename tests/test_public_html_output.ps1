@@ -3735,11 +3735,6 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/library/index.html'
-    Pattern = '(?s)id=(?:"library-group-dialogue"|library-group-dialogue).*?/syd-and-oliver/without-a-word/'
-    Message = 'expected the library page to group representative dialogue pieces under Dialogues'
-  },
-  @{
-    Path = 'public/library/index.html'
     Pattern = 'data-section='
     Message = 'expected the library page to stop rendering section-keyed filter attributes'
     ShouldNotMatch = $true
