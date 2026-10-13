@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "title": "The Last Cheese",
+  "prepared_at_utc": "2026-10-13T15:31:18.576Z",
+  "status": "draft_packaged_not_published",
+  "base_commit": "fe761b2340370f9fd1657892cb4a13dddff80c2c",
+  "content": {
+    "path": "content/essays/dialogues/the-last-cheese.md",
+    "canonical_route": "/syd-and-oliver/the-last-cheese/",
+    "collection": "syd-and-oliver-dialogues",
+    "draft": true,
+    "sha256": "68428861e5fa4e0acec048a198e13a9e6a9204036dc477c13747f2fe1db78398",
+    "speaker_turns": 60,
+    "source": "Owner-supplied manuscript in this chat",
+    "changes": [
+      "Normalized speaker labels to **Syd:** and **Oliver:** for the existing dialogue renderer.",
+      "Moved title into front matter.",
+      "Removed the owner-requested sentence: I’ve been trying to keep it alive for ten minutes.",
+      "Kept the preceding sentence: I like it a lot."
+    ],
+    "preservation_review": "Independent paragraph-by-paragraph comparison passed before the owner-requested single-sentence removal; no other prose edits."
+  },
+  "artwork": {
+    "id": "essays/dialogues/the-last-cheese/hero",
+    "source": "assets/images/originals/essays/dialogues/the-last-cheese/hero.png",
+    "alias": "/images/syd-and-oliver/the-last-cheese/hero.png",
+    "sha256": "2291bda1f3cc52d4c22a702f2981ffd501d0d1354fda3d7e74acfe007f8e1063",
+    "width": 1672,
+    "height": 941,
+    "generation_mode": "Built-in image_gen tool",
+    "generation_prompt": "Use case: photorealistic-natural\nAsset type: landscape hero for the Outside In Print Syd and Oliver dialogue 'The Last Cheese'.\nPrimary request: A quiet, gently comic restaurant lunch scene, photographed candidly with two anonymous adult male friends seated opposite one another, absorbed in conversation while choosing lunch. They are seen as natural backlit silhouettes, three-quarter rear views, faces completely in shadow and unidentifiable.\nScene/backdrop: An intimate, sunlit restaurant at lunchtime. On their small wooden table are two unmarked open menus, a modest bread basket with a few torn pieces, a shallow dish of olive oil, and two water glasses. A female waiter passes in the middle distance carrying two white plates of grilled fish with rice and small golden mango portions. A few softly blurred diners in the background keep the room alive. No cheese platter: the friends are only discussing cheese.\nStyle/medium: Photorealistic editorial photography, natural material textures, soft daylight and restrained warm colors, believable everyday gestures. Thoughtful but lighthearted, not dramatic or sentimental.\nComposition/framing: Wide 16:9 landscape. Clear simple arrangement that reads well both as a narrow desktop article side plate and at mobile width. Keep the two seated silhouettes and the tabletop together as the dominant central group; the passing waiter is a secondary detail. Medium-wide framing at seated eye level. Realistic proportions, hands, plates, furniture and lighting.\nConstraints: No identifiable faces, no readable text or lettering anywhere, no logos, no watermarks, no captions or title, no collage or symbolic cheese objects. Opaque image.",
+    "review_state": "approved",
+    "reviewer": "Codex",
+    "review_scope": "Original and proportional 320 px desktop side-plate / 390 px mobile image comparisons; this is artwork review, not owner publication authorization.",
+    "findings": [
+      "The two principal figures appear from behind with unidentifiable shadowed faces.",
+      "The restaurant, menus, bread, oil, water and passing fish plates match the story scene.",
+      "The silhouettes and table remain clear at both review widths.",
+      "Menus contain indistinct print texture but no legible wording; no logo or watermark observed.",
+      "Alt text accurately describes the scene.",
+      "Only the reviewed source was approved; original bytes remain unchanged."
+    ],
+    "size_review_file": "C:/Users/lawto/Documents/40_Scratch/2026-10/the-last-cheese/artwork-size-review.png"
+  },
+  "validation": {
+    "targeted_package_source_checks": "PASS",
+    "image_registration_hash_dimensions_and_alias": "PASS",
+    "existing_manifest_assets_and_aliases_unchanged": "PASS",
+    "collection_audit": "PASS: no explicit membership violations",
+    "essay_guardrail": "Not applicable: repository command returned 'no target files to check' for this dialogue draft; targeted package source assertions were run separately.",
+    "whitespace_check": "PASS",
+    "full_hugo_build": "Not run; routine draft packaging uses source checks and original-art review.",
+    "gallery": "Unchanged while draft."
+  },
+  "publication_handoff": {
+    "authorization": "Packaging only; no publication requested.",
+    "instructions": "For authorized publication, refresh from current main, set final release metadata and draft: false, run scripts/update_front_page_cartoon.ps1 -DialoguePath '/syd-and-oliver/the-last-cheese/' to reuse the approved hero in Gallery and as current front-page art, then follow the checked PR and verified production deployment workflow."
+  }
+}
