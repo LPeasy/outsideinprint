@@ -5834,6 +5834,13 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     [DateTimeOffset]::Parse($_.publishDate) -le $selectionObservationTime
   } | Sort-Object @{ Expression = { [DateTimeOffset]::Parse($_.publishDate) }; Descending = $true }, title)
   $publishedReadingPaths = @($publishedReadingRecords | ForEach-Object { Get-SitePathFromHref -Href $_.permalink })
+  $guestPath = '/essays/a-public-record-must-outlast-the-feed/'
+  $guestSourcePath = Join-Path $repoRoot 'content/essays/a-public-record-must-outlast-the-feed.md'
+  $guestAuthor = (Get-FrontMatterScalarFromMarkdownFile -Path $guestSourcePath -Key 'author').Trim()
+  $guestRole = Get-FrontMatterScalarFromMarkdownFile -Path $guestSourcePath -Key 'contributor_role'
+  $expectedGuestPaths = @($publishedReadingPaths | Where-Object { $_ -ceq $guestPath -and $guestRole -ceq 'guest' -and $guestAuthor })
+  # An eligible guest has its own placement and cannot also consume a regular featured slot.
+  $publishedReadingPaths = @($publishedReadingPaths | Where-Object { $_ -notin $expectedGuestPaths })
   $flagshipPath = '/essays/jack-stratton-and-the-vulfpeck-model/'
   $expectedLeadPaths = @($publishedReadingPaths | Select-Object -First 1)
   if ($flagshipPath -in $publishedReadingPaths) {
@@ -5853,6 +5860,59 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   }
   if (($homeSupportingPaths -join '|') -cne ($expectedSupportingPaths -join '|')) {
     $uxIssues.Add("public/index.html => expected the four approved supporting pieces in order '$($expectedSupportingPaths -join ', ')', found '$($homeSupportingPaths -join ', ')'")
+  }
+  $homeGuestCards = @([regex]::Matches($homeIndexHtml, '(?s)(?<tag><article\b[^>]*>)(?<body>.*?)</article>') | Where-Object {
+    Test-TagHasClass -Tag $_.Groups['tag'].Value -ClassName 'home-v2-guest'
+  })
+  $homeGuestPaths = @($homeAnchors | Where-Object {
+    (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'homepage_guest_feature'
+  } | ForEach-Object { Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href') })
+  if ($homeGuestCards.Count -ne $expectedGuestPaths.Count -or ($homeGuestPaths -join '|') -cne ($expectedGuestPaths -join '|')) {
+    $uxIssues.Add('public/index.html => expected exactly one eligible, credited guest in its reserved placement, or no guest placement when unavailable')
+  }
+  if (@($homeGuestPaths | Where-Object { $_ -in @($homeLeadPaths + $homeSupportingPaths) }).Count -ne 0) {
+    $uxIssues.Add('public/index.html => the Guest Feature must not duplicate the lead or a supporting story')
+  }
+  if ($expectedGuestPaths.Count -eq 1 -and $homeGuestCards.Count -eq 1) {
+    $guestCard = $homeGuestCards[0]
+    $guestHtml = $guestCard.Groups['body'].Value
+    $guestByline = [regex]::Match($guestHtml, '(?s)<p\b(?=[^>]*home-v2-guest__byline)[^>]*>(?<body>.*?)</p>').Groups['body'].Value
+    $guestTitle = Get-FrontMatterScalarFromMarkdownFile -Path $guestSourcePath -Key 'title'
+    $guestText = [System.Net.WebUtility]::HtmlDecode([regex]::Replace($guestHtml, '<[^>]+>', '') )
+    $guestHeadings = @([regex]::Matches($guestHtml, '(?s)<h3\b[^>]*>(?<body>.*?)</h3>'))
+    if ((Get-AttributeValue -Tag $guestCard.Groups['tag'].Value -Name 'aria-labelledby') -cne 'home-guest-feature-title' -or
+        $guestHeadings.Count -ne 1 -or $guestHeadings[0].Value -notmatch 'id=(?:"home-guest-feature-title"|home-guest-feature-title)' -or
+        [System.Net.WebUtility]::HtmlDecode([regex]::Replace($guestHeadings[0].Groups['body'].Value, '<[^>]+>', '')).Trim() -cne $guestTitle -or
+        [System.Net.WebUtility]::HtmlDecode([regex]::Replace($guestByline, '<[^>]+>', '')).Trim() -cne "By $guestAuthor" -or
+        -not $guestText.Contains('Guest Feature', [System.StringComparison]::Ordinal)) {
+      $uxIssues.Add('public/index.html => the Guest Feature must retain its label, unique heading, and actual writer')
+    }
+    $guestAnchors = @(Get-OpenTags -Html $guestHtml -TagName 'a')
+    if ($guestAnchors.Count -ne 2) {
+      $uxIssues.Add('public/index.html => the thin Guest Feature must offer only its article title and artwork links')
+    }
+    foreach ($slot in @('homepage_guest_feature', 'homepage_guest_feature_image')) {
+      $guestLinks = @($guestAnchors | Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq $slot })
+      if ($guestLinks.Count -ne 1 -or (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $guestLinks[0] -Name 'href')) -cne $guestPath -or
+          (Get-AttributeValue -Tag $guestLinks[0] -Name 'data-analytics-event') -cne 'internal_promo_click' -or
+          (Get-AttributeValue -Tag $guestLinks[0] -Name 'data-analytics-title') -cne $guestTitle -or
+          (Get-AttributeValue -Tag $guestLinks[0] -Name 'data-analytics-section') -cne 'Essay' -or
+          (Get-AttributeValue -Tag $guestLinks[0] -Name 'data-analytics-path') -cne $guestPath) {
+        $uxIssues.Add("public/index.html => the guest $slot link must retain the canonical article destination and distinct promotion metadata")
+      }
+    }
+    $guestImages = @(Get-OpenTags -Html $guestHtml -TagName 'img')
+    $guestImageAlt = Get-FrontMatterScalarFromMarkdownFile -Path $guestSourcePath -Key 'featured_image_alt'
+    if ($guestImages.Count -ne 1 -or (Get-AttributeValue -Tag $guestImages[0] -Name 'data-oip-image-id') -cne 'essays/a-public-record-must-outlast-the-feed/hero' -or
+        (Get-AttributeValue -Tag $guestImages[0] -Name 'alt') -cne $guestImageAlt -or
+        (Get-AttributeValue -Tag $guestImages[0] -Name 'loading') -cne 'lazy' -or
+        (Get-AttributeValue -Tag $guestImages[0] -Name 'sizes') -cne '160px' -or
+        $guestHtml -match 'home-v2-guest__copy|homepage_guest_feature_cta|data-home-featured-image-(?:trigger|fallback)|home-v2-featured__new-tag') {
+      $uxIssues.Add('public/index.html => the compact guest artwork must reuse its managed hero and alt text with lazy 160px sizing')
+    }
+    if ($homeIndexHtml -notmatch '(?s)home-v2-featured__primary[^>]*>.*?home-v2-featured__lead.*?</article>\s*<article\b[^>]*home-v2-guest.*?</article>\s*</div>\s*<div\b[^>]*home-v2-featured__supporting') {
+      $uxIssues.Add('public/index.html => the guest must follow the lead inside the primary column before supporting stories in document order')
+    }
   }
   $leadCardHtml = [regex]::Match($homeIndexHtml, '(?s)<article\b[^>]*class=(?:"home-v2-featured__lead reading-card"|home-v2-featured__lead)[^>]*>(?<body>.*?)</article>').Groups['body'].Value
   $leadHeading = [regex]::Match($leadCardHtml, '(?s)<header\b(?=[^>]*home-v2-featured__lead-heading)[^>]*>(?<body>.*?)</header>').Groups['body'].Value

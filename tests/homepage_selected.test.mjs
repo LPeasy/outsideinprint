@@ -10,6 +10,8 @@ const homeFrontPage = read("layouts/partials/home_front_page.html");
 const homeV2 = read("layouts/partials/home_v2_front_page.html");
 const masthead = read("layouts/partials/masthead.html");
 const selected = read("layouts/partials/home_v2_selected.html");
+const guestSelected = read("layouts/partials/home_guest_selected.html");
+const guestFeature = read("layouts/partials/home_guest_feature.html");
 const readerBanner = read("layouts/partials/home_reader_banner.html");
 const readerNewsletter = read("layouts/partials/home_reader_newsletter.html");
 const leadSummary = read("layouts/partials/home_lead_summary.html");
@@ -154,6 +156,39 @@ test("featured eligibility excludes drafts, future and expired work before choos
   assert.match(read("content/essays/dialogues/what-i-had.md"), /^section_label: 'Dialogue'\r?$/m);
 });
 
+test("the Guest Feature reserves its eligible route and keeps credited reading beneath the lead", () => {
+  assert.match(guestSelected, /\/essays\/a-public-record-must-outlast-the-feed\//);
+  for (const source of [selected, guestSelected]) {
+    assert.match(source, /not \.Draft/);
+    assert.match(source, /le \.Date\.Unix \$now\.Unix/);
+    assert.match(source, /le \.PublishDate\.Unix \$now\.Unix/);
+    assert.match(source, /or \.ExpiryDate\.IsZero \(gt \.ExpiryDate\.Unix \$now\.Unix\)/);
+  }
+  assert.match(guestSelected, /eq \.Params\.contributor_role "guest"/);
+  assert.match(guestSelected, /strings\.TrimSpace[\s\S]*\.Params\.author/);
+  assert.match(guestSelected, /archive\/longform-kind\.html" \.\) "essay"/);
+  assert.match(selected, /partial "home_guest_selected\.html"/);
+  assert.match(selected, /ne \.RelPermalink \$guestRoute/);
+  const primary = homeV2.indexOf('class="home-v2-featured__primary"');
+  const lead = homeV2.indexOf('<article class="home-v2-featured__lead reading-card">');
+  const guest = homeV2.indexOf('partial "home_guest_feature.html"');
+  const supporting = homeV2.indexOf('class="home-v2-featured__supporting"');
+  assert.ok(primary >= 0 && primary < lead && lead < guest && guest < supporting);
+  assert.equal((homeV2.match(/partial "home_guest_feature\.html"/g) || []).length, 1);
+  assert.match(guestFeature, /class="home-v2-guest reading-card" aria-labelledby="home-guest-feature-title"/);
+  assert.match(guestFeature, /<h3 id="home-guest-feature-title">/);
+  assert.match(guestFeature, /Guest Feature/);
+  assert.match(guestFeature, /class="home-v2-guest__byline">By \{\{ \$page\.Params\.author \}\}/);
+  assert.match(guestFeature, /"loading" "lazy" "sizes" "160px"/);
+  assert.doesNotMatch(guestFeature, /home_lead_summary|home-v2-guest__copy|homepage_guest_feature_cta|home_featured_image_button|data-home-featured-image-trigger/);
+  for (const slot of ["homepage_guest_feature", "homepage_guest_feature_image"]) {
+    assert.match(guestFeature, new RegExp(`data-analytics-source-slot="${slot}"`));
+  }
+  assert.match(css, /\.home-v2-featured__primary\{[^}]*display:flex;[^}]*flex-direction:column;[^}]*grid-area:lead;/);
+  assert.match(css, /\.home-v2-guest\{/);
+  assert.match(css, /\.home-v2-guest h3 a\{[^}]*display:inline-block;[^}]*min-height:44px(?:;|\})/);
+});
+
 test("homepage follows the proof, note, featured reading, library, newsletter, contributor sequence", () => {
   assert.equal((homeV2.match(/<h1\b/g) || []).length, 1);
   assert.match(homeV2, /<h1 id="home-front-page-title" class="title visually-hidden">/);
@@ -294,6 +329,7 @@ test("new homepage system has responsive, keyboard-visible editorial styling", (
     ".home-reader-banner",
     ".home-v2-featured",
     ".home-v2-featured__grid",
+    ".home-v2-featured__primary",
     ".home-v2-featured__lead",
     ".home-v2-featured__supporting",
     ".home-v2-library.home-v2-next__links",

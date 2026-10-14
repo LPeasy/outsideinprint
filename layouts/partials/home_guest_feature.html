@@ -1,0 +1,29 @@
+{{- $page := . -}}
+{{- $slug := $page.Params.slug | default $page.File.BaseFileName -}}
+{{- $sectionLabel := $page.Params.section_label | default "Essay" -}}
+<article class="home-v2-guest reading-card" aria-labelledby="home-guest-feature-title">
+  <header class="home-v2-guest__heading">
+    <p class="home-v2-guest__label">Guest Feature</p>
+    <h3 id="home-guest-feature-title"><a class="reading-card__link" href="{{ $page.RelPermalink }}"
+      data-analytics-event="internal_promo_click"
+      data-analytics-source-slot="homepage_guest_feature"
+      data-analytics-slug="{{ $slug }}"
+      data-analytics-title="{{ $page.Title }}"
+      data-analytics-section="{{ $sectionLabel }}"
+      data-analytics-path="{{ $page.RelPermalink }}"
+    >{{ $page.Title }}</a></h3>
+    <p class="home-v2-guest__byline">By {{ $page.Params.author }}</p>
+    <p class="home-v2-featured__meta"><span>{{ $sectionLabel }}</span><span>{{ $page.ReadingTime }} min read</span></p>
+  </header>
+  {{- with $page.Params.featured_image }}
+    {{- $imageModel := partial "images/model.html" (dict "page" $page "ref" . "display" true) -}}
+    <a class="home-v2-guest__media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}"
+      data-analytics-event="internal_promo_click"
+      data-analytics-source-slot="homepage_guest_feature_image"
+      data-analytics-slug="{{ $slug }}"
+      data-analytics-title="{{ $page.Title }}"
+      data-analytics-section="{{ $sectionLabel }}"
+      data-analytics-path="{{ $page.RelPermalink }}"
+    >{{ partial "images/picture.html" (dict "model" $imageModel "alt" ($page.Params.featured_image_alt | default "") "loading" "lazy" "sizes" "160px") }}</a>
+  {{- end }}
+</article>

@@ -42,6 +42,8 @@ $requiredFiles = @(
   'layouts/partials/home_front_page.html',
   'layouts/partials/home_v2_front_page.html',
   'layouts/partials/home_v2_selected.html',
+  'layouts/partials/home_guest_selected.html',
+  'layouts/partials/home_guest_feature.html',
   'layouts/partials/home_reader_banner.html',
   'layouts/partials/home_reader_newsletter.html',
   'layouts/partials/home_lead_summary.html',
@@ -155,6 +157,43 @@ foreach ($requiredSnippet in @(
 }
 
 $homeV2Template = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_v2_front_page.html') -Raw -Encoding utf8
+$homeGuestSelection = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_guest_selected.html') -Raw -Encoding utf8
+$homeGuestFeature = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_guest_feature.html') -Raw -Encoding utf8
+if ($homeGuestSelection -notmatch '/essays/a-public-record-must-outlast-the-feed/' -or
+    $homeGuestSelection -notmatch 'eq \.Params\.contributor_role "guest"' -or
+    $homeGuestSelection -notmatch 'strings\.TrimSpace.*?\.Params\.author' -or
+    $homeGuestSelection -notmatch 'not \.Draft' -or
+    $homeGuestSelection -notmatch 'le \.Date\.Unix \$now\.Unix' -or
+    $homeGuestSelection -notmatch 'le \.PublishDate\.Unix \$now\.Unix' -or
+    $homeGuestSelection -notmatch 'or \.ExpiryDate\.IsZero \(gt \.ExpiryDate\.Unix \$now\.Unix\)' -or
+    $homeSelectionTemplate -notmatch 'partial "home_guest_selected\.html"' -or
+    $homeSelectionTemplate -notmatch 'ne \.RelPermalink \$guestRoute') {
+  throw 'Expected the guest placement to reserve only the named eligible guest essay with an explicit writer.'
+}
+foreach ($requiredSnippet in @(
+  'class="home-v2-guest reading-card"',
+  'aria-labelledby="home-guest-feature-title"',
+  '<h3 id="home-guest-feature-title">',
+  'Guest Feature',
+  'class="home-v2-guest__byline">By {{ $page.Params.author }}',
+  'class="home-v2-guest__media"',
+  '"loading" "lazy" "sizes" "160px"',
+  'homepage_guest_feature',
+  'homepage_guest_feature_image'
+)) {
+  if (-not $homeGuestFeature.Contains($requiredSnippet, [System.StringComparison]::Ordinal)) {
+    throw "Expected the credited compact guest feature to contain: $requiredSnippet"
+  }
+}
+$primaryIndex = $homeV2Template.IndexOf('class="home-v2-featured__primary"', [System.StringComparison]::Ordinal)
+$guestIndex = $homeV2Template.IndexOf('partial "home_guest_feature.html"', [System.StringComparison]::Ordinal)
+$supportingIndex = $homeV2Template.IndexOf('class="home-v2-featured__supporting"', [System.StringComparison]::Ordinal)
+if ($primaryIndex -lt 0 -or $guestIndex -le $primaryIndex -or $guestIndex -ge $supportingIndex -or
+    [regex]::Matches($homeV2Template, 'partial "home_guest_feature\.html"').Count -ne 1 -or
+    $homeGuestFeature -match 'home-v2-guest__copy|homepage_guest_feature_cta|home_featured_image_button|data-home-featured-image-trigger' -or
+    $mainCss -notmatch '(?s)\.home-v2-featured__primary\{[^}]*grid-area:lead;') {
+  throw 'Expected one compact guest beneath the lead in its primary column before supporting stories.'
+}
 $homeReaderBanner = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_reader_banner.html') -Raw -Encoding utf8
 $homeReaderNewsletter = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_reader_newsletter.html') -Raw -Encoding utf8
 $homeImageButton = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_featured_image_button.html') -Raw -Encoding utf8

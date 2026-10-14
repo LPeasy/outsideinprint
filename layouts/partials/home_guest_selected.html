@@ -1,0 +1,11 @@
+{{- $guest := false -}}
+{{- $now := now -}}
+{{- range where site.RegularPages "RelPermalink" "/essays/a-public-record-must-outlast-the-feed/" -}}
+  {{- $published := and (not .Draft) (le .Date.Unix $now.Unix) (le .PublishDate.Unix $now.Unix) -}}
+  {{- $unexpired := or .ExpiryDate.IsZero (gt .ExpiryDate.Unix $now.Unix) -}}
+  {{- $author := strings.TrimSpace (printf "%v" (.Params.author | default "")) -}}
+  {{- if and $published $unexpired (eq (partial "archive/longform-kind.html" .) "essay") (eq .Params.contributor_role "guest") $author -}}
+    {{- $guest = . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $guest -}}

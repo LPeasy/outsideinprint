@@ -85,6 +85,62 @@ test("homepage masthead and reader controls stay visible without overflow", asyn
   }
 });
 
+test("Guest Feature fits below the lead beside supporting stories and stacks safely across breakpoints", async () => {
+  const guestRoute = "/essays/a-public-record-must-outlast-the-feed/";
+  for (const width of [360, 768, 769, 900, 901, 1280]) {
+    const { context, page } = await createPage(width);
+    try {
+      await page.goto(siteOrigin + "/", { waitUntil: "networkidle" });
+      await page.evaluate(() => document.fonts.ready);
+      const state = await page.evaluate(() => {
+        const rect = (selector) => {
+          const element = document.querySelector(selector);
+          if (!element) return null;
+          const box = element.getBoundingClientRect();
+          return { top: box.top, bottom: box.bottom, left: box.left, right: box.right, width: box.width, height: box.height };
+        };
+        const titles = [...document.querySelectorAll('[data-analytics-source-slot="homepage_v2_featured_lead"], [data-analytics-source-slot="homepage_v2_featured_supporting"], [data-analytics-source-slot="homepage_guest_feature"]')];
+        return {
+          width: innerWidth, documentWidth: document.documentElement.scrollWidth,
+          primary: rect(".home-v2-featured__primary"), lead: rect(".home-v2-featured__lead"),
+          guest: rect(".home-v2-guest"), supporting: rect(".home-v2-featured__supporting"),
+          media: rect(".home-v2-guest__media"), title: rect('[data-analytics-source-slot="homepage_guest_feature"]'),
+          routes: titles.map((link) => new URL(link.href).pathname),
+          guestCards: document.querySelectorAll(".home-v2-guest").length,
+          byline: document.querySelector(".home-v2-guest__byline")?.textContent.trim(),
+        };
+      });
+      assert.ok(state.documentWidth <= state.width + 1, `no homepage overflow at ${width}px`);
+      assert.equal(state.guestCards, 1);
+      assert.equal(state.byline, "By Douglas B. Vandergraph");
+      assert.equal(state.routes.length, 6);
+      assert.equal(new Set(state.routes).size, 6, "the guest must be promoted once");
+      assert.ok(state.routes.includes(guestRoute));
+      for (const name of ["primary", "lead", "guest", "supporting", "media", "title"]) {
+        assert.ok(state[name]?.height > 0 && state[name].width > 0, `${name} visible at ${width}px`);
+        assert.ok(state[name].left >= -1 && state[name].right <= state.width + 1, `${name} fits at ${width}px`);
+      }
+      assert.ok(state.guest.top >= state.lead.bottom - 1, `guest follows lead at ${width}px`);
+      assert.ok(state.guest.left >= state.primary.left - 1 && state.guest.right <= state.primary.right + 1);
+      assert.ok(state.title.height >= 44, "the guest title retains a 44px target");
+      if (width > 900) {
+        assert.ok(state.guest.right <= state.supporting.left + 1, "guest stays in the left column");
+        assert.ok(state.supporting.top < state.guest.top, "supporting stories remain beside the primary stack");
+        assert.ok(state.primary.bottom - state.guest.bottom <= 24, "guest fills the remaining primary column with only its bottom inset");
+      } else {
+        assert.ok(state.supporting.top >= state.primary.bottom - 1, "supporting stories follow the complete primary stack");
+      }
+      const guestTitle = page.locator('[data-analytics-source-slot="homepage_guest_feature"]');
+      await guestTitle.focus();
+      const focus = await guestTitle.evaluate((link) => {
+        const style = getComputedStyle(link, "::after");
+        return { active: document.activeElement === link, style: style.outlineStyle, width: parseFloat(style.outlineWidth) };
+      });
+      assert.ok(focus.active && focus.style !== "none" && focus.width >= 2, "the guest title has visible keyboard focus");
+    } finally { await context.close(); }
+  }
+});
+
 async function geometry(page) {
   return page.evaluate(() => {
     const nav = document.querySelector(".nav__mobile");

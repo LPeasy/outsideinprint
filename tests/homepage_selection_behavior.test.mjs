@@ -11,6 +11,13 @@ const stratton = "/essays/jack-stratton-and-the-vulfpeck-model/";
 const noise = "/essays/the-noise-of-the-crowd/";
 const coinSlot = "/essays/the-coin-slot-on-the-corner/";
 const togetherness = "/essays/togetherness/";
+const guestRoute = "/essays/a-public-record-must-outlast-the-feed/";
+const guestMetadata = {
+  title: "A Public Record Must Outlast the Feed", url: guestRoute,
+  date: "2020-07-01", publishDate: "2020-07-01T09:00:00Z",
+  section_label: "Essay", contributor_role: "guest", author: "Douglas B. Vandergraph",
+  description: "Keep a lasting public record.",
+};
 
 function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-01T12:00:00Z") {
   assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.167\.0/);
@@ -24,10 +31,12 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
     fs.writeFileSync(path.join(fixture, file), content);
   };
   write("hugo.toml", 'baseURL = "https://example.test/"\ndisableKinds = ["taxonomy", "term", "RSS", "sitemap"]\n');
-  for (const partial of ["home_v2_selected.html", "archive/longform-kind.html", "collections/normalize-values.html", "home_lead_summary.html", "discovery/page-summary.html", "metadata_description.html", "metadata/route.html", "collections/lookup-definition.html"]) {
+  for (const partial of ["home_v2_selected.html", "home_guest_selected.html", "home_guest_feature.html", "archive/longform-kind.html", "collections/normalize-values.html", "home_lead_summary.html", "discovery/page-summary.html", "metadata_description.html", "metadata/route.html", "collections/lookup-definition.html"]) {
     write(`layouts/partials/${partial}`, fs.readFileSync(`layouts/partials/${partial}`, "utf8"));
   }
-  write("layouts/index.html", summaries
+  write("layouts/index.html", summaries === "guest"
+    ? '{{ $paths := slice }}{{ range partial "home_v2_selected.html" . }}{{ $paths = $paths | append .RelPermalink }}{{ end }}{{ $guestPath := false }}{{ $guestHtml := "" }}{{ with partial "home_guest_selected.html" . }}{{ $guestPath = .RelPermalink }}{{ $guestHtml = partial "home_guest_feature.html" . }}{{ end }}{{ dict "featured" $paths "guest" $guestPath "html" $guestHtml | jsonify | safeHTML }}'
+    : summaries
     ? '{{ $results := dict }}{{ range site.RegularPages }}{{ $results = merge $results (dict .File.BaseFileName (dict "lead" (partial "home_lead_summary.html" .) "discovery" (partial "discovery/page-summary.html" .))) }}{{ end }}{{ $results | jsonify | safeHTML }}'
     : '{{ $paths := slice }}{{ range partial "home_v2_selected.html" . }}{{ $paths = $paths | append .RelPermalink }}{{ end }}{{ $paths | jsonify | safeHTML }}');
   write("layouts/_default/single.html", "{{ .Title }}");
@@ -80,6 +89,64 @@ test("a newly released curated piece occupies the latest slot only once", (t) =>
   assert.deepEqual(renderSelection(t, {
     noise: { title: "The Noise of the Crowd", url: noise, date: "2020-07-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
   }), [stratton, noise, coinSlot, togetherness, "/essays/latest/"]);
+});
+
+test("the eligible guest renders once below the flagship without consuming the latest supporting slot", (t) => {
+  const result = renderSelection(t, { guest: guestMetadata }, "guest");
+  assert.deepEqual(result.featured, [stratton, "/essays/latest/", noise, coinSlot, togetherness]);
+  assert.equal(result.guest, guestRoute);
+  assert.equal(new Set([...result.featured, result.guest]).size, 6);
+  assert.equal((result.html.match(/<article\b/g) || []).length, 1);
+  assert.match(result.html, /Guest Feature/);
+  assert.match(result.html, /<h3\b[^>]*>[\s\S]*?href="\/essays\/a-public-record-must-outlast-the-feed\/"/);
+  assert.match(result.html, /By Douglas B\. Vandergraph/);
+  assert.doesNotMatch(result.html, /Keep a lasting public record\.|Read the guest essay/);
+  assert.equal((result.html.match(/<a\b/g) || []).length, 1, "the image-free fixture has only its title link");
+});
+
+test("the reserved guest cannot become the lead or fill a missing curated slot", (t) => {
+  const result = renderSelection(t, {
+    guest: guestMetadata, stratton: null, noise: null,
+    replacement: { title: "Older replacement", date: "2020-05-01" },
+  }, "guest");
+  assert.equal(result.guest, guestRoute);
+  assert.equal(result.featured[0], "/essays/latest/");
+  assert.ok(!result.featured.includes(guestRoute));
+  assert.equal(new Set(result.featured).size, 5);
+});
+
+test("absent, draft, future, expired, or uncredited guest work leaves no Guest Feature card in previews", (t) => {
+  const cases = {
+    absent: null,
+    draft: { ...guestMetadata, draft: true },
+    futureDate: { ...guestMetadata, date: "2030-01-01" },
+    futureRelease: { ...guestMetadata, publishDate: "2030-01-01" },
+    expired: { ...guestMetadata, expiryDate: "2020-08-01" },
+    anonymous: { ...guestMetadata, author: " \t " },
+    ordinary: { ...guestMetadata, contributor_role: "contributing" },
+    nonEssay: { ...guestMetadata, library_type: "dialogue", section_label: "Dialogue" },
+  };
+  for (const [name, metadata] of Object.entries(cases)) {
+    const result = renderSelection(t, { guest: metadata }, "guest");
+    assert.equal(result.guest, false, name);
+    assert.equal(result.html, "", name);
+    assert.equal(new Set(result.featured).size, 5, name);
+    if (["absent", "draft", "futureDate", "futureRelease", "expired"].includes(name)) {
+      assert.ok(!result.featured.includes(guestRoute), name);
+    } else {
+      assert.equal(result.featured[1], guestRoute, `${name}: unreserved published reading remains eligible normally`);
+    }
+  }
+});
+
+test("the guest is reserved only from its exact release clock onward", (t) => {
+  const metadata = { ...guestMetadata, publishDate: "2026-10-12T09:00:00-04:00" };
+  const before = renderSelection(t, { guest: metadata }, "guest", "2026-10-12T12:59:59Z");
+  const after = renderSelection(t, { guest: metadata }, "guest", "2026-10-12T13:00:00Z");
+  assert.equal(before.guest, false);
+  assert.equal(before.html, "");
+  assert.equal(after.guest, guestRoute);
+  assert.ok(!after.featured.includes(guestRoute));
 });
 
 test("lead descriptions are trimmed and plain text while blank descriptions retain shared fallbacks", (t) => {

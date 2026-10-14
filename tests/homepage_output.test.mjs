@@ -40,6 +40,12 @@ const publishedPages = rows.map((row) => Object.fromEntries(columns.map((column,
     && Date.parse(row.date) <= observationTime && Date.parse(row.publishDate) <= observationTime)
   .sort((a, b) => Date.parse(b.publishDate) - Date.parse(a.publishDate) || a.title.localeCompare(b.title));
 const publishedRoutes = publishedPages.map((row) => row.route);
+const guestRoute = "/essays/a-public-record-must-outlast-the-feed/";
+const guestSource = fs.readFileSync(path.resolve("content/essays/a-public-record-must-outlast-the-feed.md"), "utf8");
+const guestAuthor = guestSource.match(/^author: "([^"]+)"\r?$/m)?.[1]?.trim() || "";
+const guestEligible = publishedRoutes.includes(guestRoute)
+  && /^contributor_role: "guest"\r?$/m.test(guestSource) && Boolean(guestAuthor);
+const regularPublishedRoutes = publishedRoutes.filter((route) => !guestEligible || route !== guestRoute);
 const pinnedRoutes = [
   "/essays/jack-stratton-and-the-vulfpeck-model/",
   "/essays/the-noise-of-the-crowd/",
@@ -103,11 +109,11 @@ test("Dolphin correction retains the original publication date and renders a con
 test("rendered homepage leads with Jack Stratton, then the newest remaining publication", () => {
   const cards = [...html.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/g)]
     .filter((match) => /\bhome-v2-featured__(?:lead|item)\b/.test(attribute(`<article ${match[1]}>`, "class")));
-  assert.ok(publishedRoutes.length >= 5, "the production archive must supply published reading pages");
-  const flagship = publishedRoutes.includes(pinnedRoutes[0]) ? pinnedRoutes[0] : publishedRoutes[0];
-  const latest = publishedRoutes.find((route) => route !== flagship);
+  assert.ok(regularPublishedRoutes.length >= 5, "the production archive must supply five regular published reading pages");
+  const flagship = regularPublishedRoutes.includes(pinnedRoutes[0]) ? pinnedRoutes[0] : regularPublishedRoutes[0];
+  const latest = regularPublishedRoutes.find((route) => route !== flagship);
   const expected = [...new Set([flagship, latest, ...pinnedRoutes.slice(1).filter((route) =>
-    publishedRoutes.includes(route)), ...publishedRoutes])].slice(0, 5);
+    regularPublishedRoutes.includes(route)), ...regularPublishedRoutes])].slice(0, 5);
   assert.equal(cards.length, 5);
   for (const [index, card] of cards.entries()) {
     const route = expected[index];
@@ -247,6 +253,47 @@ test("rendered homepage leads with Jack Stratton, then the newest remaining publ
   assert.match(html, /A featured essay, the latest publication, and selected work\./);
   assert.match(html, /Read the piece/);
   assert.doesNotMatch(html, /25 reads|Medium reads|(?:3\.4K|1\.95K|1\.8K) readers/);
+});
+
+test("the compact Guest Feature credits its writer and shares the lead column without duplicate promotion", () => {
+  const guestCards = [...html.matchAll(/(<article\b[^>]*>)([\s\S]*?)<\/article>/g)]
+    .filter((match) => attribute(match[1], "class").split(/\s+/).includes("home-v2-guest"));
+  assert.equal(guestCards.length, guestEligible ? 1 : 0);
+  if (!guestEligible) return;
+  const guest = guestCards[0];
+  const anchors = [...guest[2].matchAll(/<a\b[^>]*>/g)].map((match) => match[0]);
+  const title = publishedPages.find((page) => page.route === guestRoute).title;
+  assert.equal(anchors.length, 2, "the thin guest card offers title and artwork links");
+  for (const slot of ["homepage_guest_feature", "homepage_guest_feature_image"]) {
+    const tracked = anchors.filter((tag) => attribute(tag, "data-analytics-source-slot") === slot);
+    assert.equal(tracked.length, 1, `one ${slot} link`);
+    for (const [name, value] of Object.entries({
+      "href": guestRoute, "data-analytics-event": "internal_promo_click",
+      "data-analytics-title": title, "data-analytics-section": "Essay",
+      "data-analytics-path": guestRoute, "data-analytics-slug": "a-public-record-must-outlast-the-feed",
+    })) assert.equal(attribute(tracked[0], name), value, `${slot} ${name}`);
+  }
+  assert.equal((guest[2].match(/<h3\b/g) || []).length, 1);
+  const heading = guest[2].match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/)?.[1];
+  assert.equal(text(heading), title);
+  assert.ok(heading.includes('homepage_guest_feature'));
+  assert.match(text(guest[2]), /Guest Feature/);
+  const byline = guest[2].match(/<p\b[^>]*class=(?:"home-v2-guest__byline"|home-v2-guest__byline)[^>]*>([\s\S]*?)<\/p>/)?.[1];
+  assert.equal(text(byline), `By ${guestAuthor}`);
+  const media = [...guest[2].matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/g)]
+    .find((match) => attribute(match[1], "class") === "home-v2-guest__media");
+  assert.ok(media);
+  const image = media[2].match(/<img\b[^>]*>/)?.[0];
+  assert.ok(image);
+  assert.equal(attribute(image, "loading"), "lazy");
+  assert.equal(attribute(image, "sizes"), "160px");
+  assert.equal(attribute(image, "data-oip-image-id"), "essays/a-public-record-must-outlast-the-feed/hero");
+  assert.equal(attribute(image, "alt"), guestSource.match(/^featured_image_alt: "([^"]+)"\r?$/m)?.[1]);
+  assert.doesNotMatch(guest[2], /homepage_guest_feature_cta|home-v2-guest__copy|data-home-featured-image-(?:trigger|fallback)|home-v2-featured__new-tag/);
+  const normalTitleLinks = [...html.matchAll(/<a\b[^>]*>/g)]
+    .filter((match) => ["homepage_v2_featured_lead", "homepage_v2_featured_supporting"].includes(attribute(match[0], "data-analytics-source-slot")));
+  assert.ok(normalTitleLinks.every((match) => attribute(match[0], "href") !== guestRoute));
+  assert.match(html, /home-v2-featured__primary[^>]*>[\s\S]*?home-v2-featured__lead[\s\S]*?<\/article>\s*<article\b[^>]*home-v2-guest[\s\S]*?<\/article>\s*<\/div>\s*<div\b[^>]*home-v2-featured__supporting/);
 });
 
 test("supporting image enhancement has one native dialog and is loaded only on the homepage", () => {
