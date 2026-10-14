@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "title": "He’ll Have Some Words",
+  "reviewed_at_utc": "2026-10-14T19:48:42Z",
+  "status": "owner_authorized_ready_for_checked_pr",
+  "authorization": "Owner: publish this on the live site now!",
+  "base_commit": "e5461387f3fb504dbe046e1926cffdcfead0c33f",
+  "source": "content/essays/dialogues/hell-have-some-words.md",
+  "source_sha256": "a00e39ac74c51acb66aaaa0d712afa75aa6bd992466d9f297192f88a994a530c",
+  "canonical_route": "/syd-and-oliver/hell-have-some-words/",
+  "owner_copy_review": "PASS: exact owner-supplied story preserved; title moved into metadata, speaker colons and line endings normalized. Publication changes only draft:true to false.",
+  "artwork": {
+    "asset_id": "essays/dialogues/hell-have-some-words/hero",
+    "sha256": "1cc14c4a9969cc9497668d997fb8eff80b114a0682b930d292ca0a712e6f9b1d",
+    "review_record": "docs/editorial-audits/image-revisions/hell-have-some-words-20261014.json",
+    "reused_without_pixel_changes": true
+  },
+  "gallery": {
+    "current": "hell-have-some-words",
+    "essay": "/syd-and-oliver/hell-have-some-words/",
+    "release_at_utc": "2026-10-14T19:00:00Z",
+    "same_managed_hero": true
+  },
+  "checks": {
+    "owner_copy_preservation": "PASS",
+    "image_source_hash_dimensions_and_approved_manifest": "PASS",
+    "collection_source_audit": "PASS",
+    "feed_source_contract": "PASS; 24 published dialogue entries",
+    "gallery_schedule_source_contract": "PASS",
+    "count_dependent_test_review": "PASS; three expected-count values advance from 23 to 24; no other assertions require changes",
+    "target_guardrail": "Repository check excludes dialogue paths and reports no target files; no philosophy audit required.",
+    "whitespace": "PASS"
+  },
+  "ci_required": [
+    "Current release-ready on an up-to-date PR",
+    "Automatic merge under protected-main checks",
+    "Fresh production build and Pages deployment",
+    "Canonical receipt matching exact commitSha and generatedAtUtc"
+  ],
+  "historical_record_note": "Draft review record remains unchanged as history."
+}
