@@ -2,6 +2,11 @@
 export const API_URL = 'https://api.openai.com/v1/responses';
 export const MAX_RESPONSE_BYTES = 1_048_576;
 export const REQUEST_DEADLINE_MS = 15_000;
+const QUOTA_CODES = new Set([
+  'insufficient_quota', 'billing_hard_limit_reached', 'usage_limit_reached',
+  'project_spend_limit_exceeded', 'organization_spend_limit_exceeded',
+  'organization_usage_limit_exceeded', 'credit_balance_exhausted',
+]);
 
 export class BobError extends Error {
   constructor(status, message, code = 'service_error', retryable = true, requestId = null) {
@@ -60,7 +65,7 @@ async function boundedText(response, maximum, requestId) {
 
 function httpError(status, body, requestId) {
   const code = body && typeof body === 'object' && !Array.isArray(body) && body.error && typeof body.error === 'object' ? body.error.code : '';
-  if (status === 429 && ['insufficient_quota', 'billing_hard_limit_reached', 'usage_limit_reached'].includes(code)) return new BobError(503, 'Bob’s reading service has reached its usage limit. Please try later.', 'quota_exceeded', false, requestId);
+  if (status === 429 && QUOTA_CODES.has(code)) return new BobError(503, 'Bob’s reading service has reached its usage limit. Please try later.', 'quota_exceeded', false, requestId);
   if (status === 429) return new BobError(503, 'Bob’s reading service is busy. Please try again shortly.', 'upstream_rate_limit', true, requestId);
   if (status === 401) return new BobError(503, 'Bob’s API connection needs attention. Please try later.', 'authentication', false, requestId);
   if ([403, 404].includes(status)) return new BobError(503, 'Bob’s reading service needs attention. Please try later.', 'model_access', false, requestId);

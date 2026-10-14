@@ -17,7 +17,8 @@ test('single-attempt transport uses fixed HTTPS endpoint, bearer secret, no redi
   assert.deepEqual(result.usage, { input_tokens: 10, output_tokens: 2, total_tokens: 12 });
 });
 
-for (const [status, providerCode, code, retryable] of [[429, 'insufficient_quota', 'quota_exceeded', false], [429, 'rate_limit_exceeded', 'upstream_rate_limit', true], [401, '', 'authentication', false], [403, '', 'model_access', false], [404, '', 'model_access', false], [500, '', 'upstream_unavailable', true], [400, '', 'upstream_request', false], [302, '', 'upstream_request', false]]) {
+const quotaCodes = ['insufficient_quota', 'billing_hard_limit_reached', 'usage_limit_reached', 'project_spend_limit_exceeded', 'organization_spend_limit_exceeded', 'organization_usage_limit_exceeded', 'credit_balance_exhausted'];
+for (const [status, providerCode, code, retryable] of [...quotaCodes.map(code => [429, code, 'quota_exceeded', false]), [429, 'rate_limit_exceeded', 'upstream_rate_limit', true], [401, '', 'authentication', false], [403, '', 'model_access', false], [404, '', 'model_access', false], [500, '', 'upstream_unavailable', true], [400, '', 'upstream_request', false], [302, '', 'upstream_request', false]]) {
   test(`HTTP ${status} ${providerCode} is classified without leaking provider detail or retrying`, async () => {
     let calls = 0;
     await assert.rejects(callOpenAI(payload, { apiKey: 'offline-placeholder', fetchImpl: async () => { calls++; return Response.json({ error: { code: providerCode, message: 'private provider detail offline-placeholder' } }, { status, headers: { 'x-request-id': 'req-error' } }); } }), error => error.code === code && error.retryable === retryable && error.requestId === 'req-error' && !error.message.includes('private provider detail'));

@@ -95,6 +95,20 @@ test('temporary provider failures expose safe retry while quota exhaustion offer
     } finally { await f.mf.dispose(); }
   }
 });
+test('OpenAI project hard cap becomes non-retryable collection fallback in the Workers runtime', async () => {
+  const f = await fixture({}, () => Response.json({ error: { code: 'project_spend_limit_exceeded', message: 'private billing detail' } }, { status: 429, headers: { 'x-request-id': 'req_project_cap' } }));
+  try {
+    const response = await f.request();
+    const body = await response.json();
+    assert.equal(response.status, 503);
+    assert.equal(body.code, 'budget_exhausted');
+    assert.equal(body.retryable, false);
+    assert.match(body.error, /Pick a collection/);
+    assert.equal(body.requestId, 'req_project_cap');
+    assert.ok(!JSON.stringify(body).includes('private billing detail'));
+    assert.equal(f.calls(), 1);
+  } finally { await f.mf.dispose(); }
+});
 test('model-generated unknown links cannot escape canonical catalog validation', async () => {
   const f = await fixture({}, () => Response.json({ status: 'completed', output: [{ type: 'message', role: 'assistant', content: [{ type: 'output_text', text: JSON.stringify({ clarification: '', recommendation_ids: ['https://evil.test/'] }) }] }] }));
   try {

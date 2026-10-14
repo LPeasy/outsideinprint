@@ -219,6 +219,10 @@
   }
 }
 @media (max-width:768px){
+  /* Navigation must remain clickable when the open jukebox crosses its row. */
+  .masthead--with-bob .nav__mobile{
+    z-index:21;
+  }
   .masthead--with-bob,
   .masthead--with-bob.masthead--compressed{
     --bob-slot-size:80px;

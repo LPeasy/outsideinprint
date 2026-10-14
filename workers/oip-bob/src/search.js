@@ -42,28 +42,67 @@ export function readingMinutes(item) { const n = item.readingTime; return typeof
 const collections = item => [...(item.collectionSlugs || []), ...(item.collectionTitles || [])];
 export function itemWords(item) { return new Set(tokens([item.title, item.summary || '', item.type || '', ...(item.topics || []), ...(item.tags || []), ...collections(item)].join(' '))); }
 const counter = words => { const result = new Map(); for (const word of words) result.set(word, (result.get(word) || 0) + 1); return result; };
+const catalogIndexes = new WeakMap();
+const characterCounts = word => {
+  const counts = new Uint16Array(123);
+  for (let i = 0; i < word.length; i++) counts[word.charCodeAt(i)]++;
+  return counts;
+};
+function catalogIndex(catalog) {
+  let cached = catalogIndexes.get(catalog);
+  if (cached) return cached;
+  // loadCatalog retains this immutable items array until its next refresh.
+  // A new array builds a new index; WeakMap does not retain expired catalogs.
+  const rows = catalog.map((item, index) => {
+    const title = tokens(item.title), summary = tokens(item.summary || ''), type = tokens(item.type || '');
+    const topics = tokens((item.topics || []).join(' ')), tags = tokens((item.tags || []).join(' ')), groups = tokens(collections(item).join(' '));
+    return {
+      item, index, words: new Set([...title, ...summary, ...type, ...topics, ...tags, ...groups]),
+      title: counter(title), metadata: counter([...topics, ...tags, ...groups, ...type]), summary: counter(summary),
+      anchorTerms: new Set([...title, ...summary, ...tags, ...topics, ...groups].filter(word => !FILLER.has(word) && word.length > 2)),
+    };
+  });
+  const df = counter(rows.flatMap(row => [...row.words]));
+  const vocabularyByLength = new Map();
+  for (const word of df.keys()) {
+    if (!vocabularyByLength.has(word.length)) vocabularyByLength.set(word.length, []);
+    vocabularyByLength.get(word.length).push({ word, counts: characterCounts(word) });
+  }
+  cached = { rows, byId: new Map(rows.map(row => [row.item.id, row])), df, vocabularyByLength };
+  catalogIndexes.set(catalog, cached);
+  return cached;
+}
+
+function positionsOf(word) {
+  const positions = new Map();
+  for (let j = 0; j < word.length; j++) { if (!positions.has(word[j])) positions.set(word[j], []); positions.get(word[j]).push(j); }
+  return positions;
+}
 
 // Matching-block ratio, equivalent to difflib.SequenceMatcher for these short
 // ASCII words (no junk/autojunk). Tie-breaking matches get_close_matches.
 export function similarity(a, b) {
+  return matchingRatio(a, b, positionsOf(b));
+}
+function matchingRatio(a, b, positions) {
   if (!a.length && !b.length) return 1;
-  const positions = new Map();
-  for (let j = 0; j < b.length; j++) { if (!positions.has(b[j])) positions.set(b[j], []); positions.get(b[j]).push(j); }
   const ranges = [[0, a.length, 0, b.length]];
+  let previous = new Uint16Array(b.length + 1), current = new Uint16Array(b.length + 1);
   let matched = 0;
   while (ranges.length) {
     const [alo, ahi, blo, bhi] = ranges.pop();
-    let bestI = alo, bestJ = blo, bestSize = 0, previous = new Map();
+    let bestI = alo, bestJ = blo, bestSize = 0;
+    previous.fill(0);
     for (let i = alo; i < ahi; i++) {
-      const current = new Map();
+      current.fill(0);
       for (const j of positions.get(a[i]) || []) {
         if (j < blo) continue;
         if (j >= bhi) break;
-        const size = (previous.get(j - 1) || 0) + 1;
-        current.set(j, size);
+        const size = previous[j] + 1;
+        current[j + 1] = size;
         if (size > bestSize) { bestI = i - size + 1; bestJ = j - size + 1; bestSize = size; }
       }
-      previous = current;
+      [previous, current] = [current, previous];
     }
     if (!bestSize) continue;
     matched += bestSize;
@@ -73,59 +112,72 @@ export function similarity(a, b) {
   return 2 * matched / (a.length + b.length);
 }
 
-export function matchesHardFilters(item, prefs) {
+export function matchesHardFilters(item, prefs, words = itemWords(item), excludedWords = exclusionWords(prefs)) {
   const minutes = readingMinutes(item);
   if (prefs.formats.length && !prefs.formats.includes(item.type)) return false;
   if (prefs.minMinutes !== null && (minutes === null || minutes < prefs.minMinutes)) return false;
   if (prefs.maxMinutes !== null && (minutes === null || minutes > prefs.maxMinutes)) return false;
-  const words = itemWords(item);
-  for (const excluded of prefs.excludedTopics) {
-    const excludedWords = new Set(tokens(excluded));
-    for (const key of [excluded, ...tokens(excluded)]) for (const word of EXCLUSIONS[key] || []) excludedWords.add(stem(word));
-    if ([...excludedWords].some(word => words.has(word))) return false;
-  }
+  for (const word of excludedWords) if (words.has(word)) return false;
   return true;
+}
+function exclusionWords(prefs) {
+  const result = new Set();
+  for (const excluded of prefs.excludedTopics) {
+    const words = tokens(excluded);
+    for (const word of words) result.add(word);
+    for (const key of [excluded, ...words]) for (const word of EXCLUSIONS[key] || []) result.add(stem(word));
+  }
+  return result;
 }
 
 export function shortlist(catalog, request, limit = 40) {
   const [prefs, intent] = resolvePreferences(request, catalog);
   const constraints = { preferences: prefs, intent, refinement: intent.refinement, more: intent.action === 'more', minimumMinutes: prefs.minMinutes, maximumMinutes: prefs.maxMinutes, topic: prefs.topic };
   if (intent.clarification) return [[], constraints];
-  const byId = new Map(catalog.map(item => [item.id, item]));
+  const { rows, byId, df, vocabularyByLength } = catalogIndex(catalog);
   const anchor = byId.get(prefs.anchorId);
-  const documents = new Map(catalog.map(item => [item.id, itemWords(item)]));
-  const vocabulary = new Set([...documents.values()].flatMap(words => [...words]));
   const query = tokens(prefs.topic).filter(word => !FILLER.has(word) && !/^\d+$/.test(word));
+  const corrections = new Map();
   const corrected = query.map(word => {
-    if (vocabulary.has(word) || SYNONYMS[word] || word.length < 5) return word;
+    if (df.has(word) || SYNONYMS[word] || word.length < 5) return word;
+    if (corrections.has(word)) return corrections.get(word);
+    const counts = characterCounts(word), codes = [...new Set([...word].map(char => char.charCodeAt(0)))];
+    const positions = positionsOf(word);
     let closest = word, best = 0.84;
-    for (const candidate of vocabulary) {
-      // difflib compares candidate to query, which matters for matching-block ties.
-      const score = similarity(candidate, word);
-      if (score > best || (score === best && (closest === word || candidate > closest))) { best = score; closest = candidate; }
+    for (const [length, candidates] of vocabularyByLength) {
+      const total = length + word.length;
+      if (2 * Math.min(length, word.length) / total < best) continue;
+      for (const candidate of candidates) {
+        let shared = 0;
+        for (const code of codes) shared += Math.min(counts[code], candidate.counts[code]);
+        // Both upper bounds are >= the matching-block ratio. Only strictly
+        // lower values are skipped, preserving the cutoff and lexical ties.
+        if (2 * shared / total < best) continue;
+        // difflib compares candidate to query; preserve that asymmetric order.
+        const score = matchingRatio(candidate.word, word, positions);
+        if (score > best || (score === best && (closest === word || candidate.word > closest))) { best = score; closest = candidate.word; }
+      }
     }
+    corrections.set(word, closest);
     return closest;
   });
   const expanded = counter(corrected);
   for (const word of corrected) for (const related of SYNONYMS[word] || []) { const token = stem(related); expanded.set(token, (expanded.get(token) || 0) + 0.4); }
   if (anchor) {
-    const anchorTerms = new Set(tokens([anchor.title, anchor.summary || '', ...(anchor.tags || []), ...(anchor.topics || []), ...collections(anchor)].join(' ')).filter(word => !FILLER.has(word) && word.length > 2));
-    for (const word of anchorTerms) expanded.set(word, (expanded.get(word) || 0) + 0.6);
+    for (const word of anchor.anchorTerms) expanded.set(word, (expanded.get(word) || 0) + 0.6);
   }
   const moodTerms = new Set((MOODS[prefs.mood] || tokens(prefs.mood)).map(stem));
-  const df = counter([...documents.values()].flatMap(words => [...words]));
+  const excludedWords = exclusionWords(prefs);
+  const weightedTerms = [...expanded].map(([word, weight]) => [word, weight * (Math.log((catalog.length + 1) / ((df.get(word) || 0) + 1)) + 1)]);
   const excludedIds = intent.action === 'more' ? new Set([...(request.seenIds || []), ...(request.currentIds || []), ...(prefs.anchorId ? [prefs.anchorId] : [])]) : new Set();
   let ranked = [];
-  for (const [index, item] of catalog.entries()) {
-    if (excludedIds.has(item.id) || !matchesHardFilters(item, prefs)) continue;
-    const title = counter(tokens(item.title));
-    const metadata = counter(tokens([...(item.topics || []), ...(item.tags || []), ...collections(item), item.type || ''].join(' ')));
-    const summary = counter(tokens(item.summary || ''));
+  for (const { index, item, words, title, metadata, summary } of rows) {
+    if (excludedIds.has(item.id) || !matchesHardFilters(item, prefs, words, excludedWords)) continue;
     let score = 0;
-    for (const [word, weight] of expanded) score += weight * (Math.log((catalog.length + 1) / ((df.get(word) || 0) + 1)) + 1) * (Math.min(title.get(word) || 0, 2) * 5 + Math.min(metadata.get(word) || 0, 2) * 4 + Math.min(summary.get(word) || 0, 2));
+    for (const [word, weight] of weightedTerms) score += weight * (Math.min(title.get(word) || 0, 2) * 5 + Math.min(metadata.get(word) || 0, 2) * 4 + Math.min(summary.get(word) || 0, 2));
     if (expanded.size && score === 0) continue;
     let moodScore = 0;
-    for (const word of moodTerms) if (documents.get(item.id).has(word)) moodScore += title.has(word) || metadata.has(word) ? 3 : 1;
+    for (const word of moodTerms) if (words.has(word)) moodScore += title.has(word) || metadata.has(word) ? 3 : 1;
     ranked.push([score + moodScore * 2, index, item]);
   }
   ranked.sort((a, b) => b[0] - a[0] || a[1] - b[1]);

@@ -21,6 +21,29 @@ The toolchain review patched scoped Miniflare dependencies to `sharp@0.35.5`
 and `undici@7.29.1`, with weekly Dependabot coverage. Ten affected runtime tests,
 the dependency contract, bundle dry-run and fresh advisory check passed.
 
+The signed-in Cloudflare dashboard confirms the existing **Workers Free** plan.
+A final CPU screen found repeated typo correction rebuilding metadata and
+rescanning the vocabulary. The reviewed fix caches each immutable catalog's
+search index, memoizes repeated corrections, and skips impossible matches using
+safe length/character bounds. It retains the original ranking, typo cutoff,
+filters and query weights. All 121 Worker tests pass, including 69 preview parity
+fixtures and new cache/matching regressions. Differential checks against the
+previous code also pass. Local warm pathological queries fell from roughly
+53–62 ms to 0.25–1.45 ms; cold parse/validation/index/payload medians were
+4.2–5.6 ms in warmed V8. A fresh local Node process can still take 20–23 ms on
+its first difficult request. These are local timing screens, not deployed CPU
+measurements. Verify hosted cold/warm CPU before declaring Free-plan readiness.
+
+GitHub's first site check exposed the open jukebox intercepting mobile Explore
+clicks. Mobile navigation now layers above Bob; open menus retain the existing
+Bob suspension. All six 320/390px navigation cases pass at 100/125/200% text size,
+with center hit-testing, unchanged geometry, no unwanted scrolling and working
+Bob controls outside the navigation row. No test hides Bob to avoid the defect.
+Current OpenAI project/organization spending and credit-exhaustion codes also
+map to the non-retryable collection fallback; 27 affected transport/runtime tests
+pass, including a real workerd project-limit response. Final bundle dry-run
+passed after these fixes: 64.88 KiB (19.34 KiB gzip).
+
 The following records the local review completed before publication authorization.
 
 Prepared 2026-10-14 from verified `origin/main` at
@@ -41,9 +64,9 @@ Try a specific interest with a reading-time preference, then a follow-up such
 as “more like the second one.” No exact matches offers three random collections.
 The same free browsing remains available when chat is disabled or out of budget.
 
-This is a local review only. There is no Cloudflare deployment, secret upload,
-account budget change, paid subscription, GitHub PR or publication. Tracked
-defaults keep chat disabled, endpoint unset, and Worker routes/preview URLs off.
+At the original local review, nothing had been deployed or published. The
+authorized release section above supersedes that earlier preview-only status.
+No hosting subscription or organization-wide spending setting was changed.
 
 ## Prepared implementation
 

@@ -2,8 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { chromium } from "playwright";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteDir = path.resolve(process.env.OIP_SITE_DIR || path.join(repoRoot, "public"));
@@ -33,6 +32,8 @@ let browser;
 
 test.before(async () => {
   assert.ok(fs.existsSync(path.join(siteDir, articlePath, "index.html")), `Missing Hugo article output: ${siteDir}`);
+  const modulePath = process.env.OIP_PLAYWRIGHT_MODULE;
+  const { chromium } = await import(modulePath ? pathToFileURL(path.resolve(modulePath)).href : "playwright");
   browser = await chromium.launch({ headless: true, executablePath: process.env.OIP_BROWSER_EXECUTABLE || undefined });
 });
 
@@ -152,6 +153,7 @@ async function geometry(page) {
       return { top: box.top, bottom: box.bottom, left: box.left, right: box.right, width: box.width, height: box.height };
     };
     return {
+      scroll: { x: scrollX, y: scrollY },
       nav: rect(nav),
       heading: rect(heading),
       readOpen: read.open,
@@ -191,6 +193,7 @@ function assertSamePlacement(actual, expected, state) {
 }
 
 function assertSameControls(actual, expected, state) {
+  assert.deepEqual(actual.scroll, expected.scroll, `${state} must not scroll to evade Bob's controls.`);
   for (const name of ["Read", "Explore", "About"]) {
     for (const dimension of ["height", "width", "left", "top"]) {
       const value = actual.controls[name][dimension];
@@ -199,6 +202,33 @@ function assertSameControls(actual, expected, state) {
         `${state} moved ${name} control ${dimension}: ${value} vs ${baseline}`);
     }
   }
+}
+
+async function assertNavigationReceivesPointer(page) {
+  const controls = page.locator('.nav__mobile summary, .nav__mobile-link--about');
+  for (const control of await controls.all()) {
+    const state = await control.evaluate((element) => {
+      const box = element.getBoundingClientRect();
+      const hit = document.elementFromPoint(box.left + box.width / 2, box.top + box.height / 2);
+      return { label: element.textContent.trim(), receivesPointer: Boolean(hit && element.contains(hit)) };
+    });
+    assert.ok(state.receivesPointer, `${state.label} must receive pointer input above the open jukebox.`);
+  }
+}
+
+async function waitForOpenBob(page) {
+  await page.waitForFunction(() => {
+    const bob = window.render_bob_to_text && JSON.parse(window.render_bob_to_text());
+    const reading = window.render_bob_reading_to_text && JSON.parse(window.render_bob_reading_to_text());
+    return bob?.active && bob.interactiveRegions > 0 && reading?.composer?.visible;
+  });
+}
+
+async function assertMenuHidesBob(page) {
+  await page.waitForFunction(() => {
+    const host = document.querySelector('[data-bob-companion]');
+    return host?.hidden && host.querySelector('[data-bob-frame]').inert;
+  });
 }
 
 async function waitForOpenMenu(page, menu) {
@@ -233,19 +263,26 @@ for (const width of [320, 390]) {
           document.documentElement.style.fontSize = `${size}%`;
           await document.fonts.ready;
         }, fontPercent);
+        // The approved first view opens JUKE-BOB. Exercise the navigation
+        // with those real controls present; stowing would mask interception.
+        await waitForOpenBob(page);
         const read = page.locator(".nav__mobile .nav-mobile-disclosure--read");
         const explore = page.locator(".nav__mobile .nav-mobile-disclosure--explore");
         const closed = await geometry(page);
         assert.equal(closed.readOpen, false);
         assert.equal(closed.exploreOpen, false);
+        await assertNavigationReceivesPointer(page);
 
         // Capture Explore before exercising Read, without changing its layout contract.
         await explore.locator("summary").click();
+        await assertMenuHidesBob(page);
         const exploreBefore = await geometry(page);
         assert.equal(exploreBefore.exploreOpen, true);
+        assertSameControls(exploreBefore, closed, "Explore open");
         await explore.locator("summary").click();
 
         await read.locator("summary").click();
+        await assertMenuHidesBob(page);
         const open = await geometry(page);
         assert.equal(open.readOpen, true);
         assert.equal(open.exploreOpen, false);
@@ -285,6 +322,16 @@ for (const width of [320, 390]) {
         const afterEscape = await geometry(page);
         assertSamePlacement(afterEscape, closed, "Closed menu");
         assertSameControls(afterEscape, closed, "Closed menu");
+
+        // Raising only navigation must leave Bob's controls outside it usable.
+        await waitForOpenBob(page);
+        const collapse = page.frameLocator('[data-bob-frame]').getByRole("button", { name: "Collapse music and settings", exact: true });
+        const collapseBox = await collapse.boundingBox();
+        assert.ok(collapseBox && (collapseBox.y + collapseBox.height <= afterEscape.nav.top || collapseBox.y >= afterEscape.nav.bottom),
+          "Bob's tested control must be outside the navigation row.");
+        await collapse.click();
+        await page.waitForFunction(() => !JSON.parse(window.render_bob_reading_to_text()).composer?.visible);
+        assertSameControls(await geometry(page), closed, "Bob controls collapsed");
       } finally {
         await context.close();
       }
