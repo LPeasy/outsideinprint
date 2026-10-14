@@ -2163,11 +2163,72 @@ html[data-theme="light"] .paper-route-toggle{
   grid-template-areas:"lead supporting";
   gap:0;
 }
-.home-v2-featured__lead{
+.home-v2-featured__primary{
+  display:flex;
+  flex-direction:column;
   grid-area:lead;
   min-width:0;
-  padding:.9rem 1.5rem 1.1rem 0;
+  padding-right:1.5rem;
   border-right:1px solid var(--oip-rule-standard);
+}
+.home-v2-featured__lead{
+  min-width:0;
+  padding:.9rem 0 1.1rem;
+}
+.home-v2-guest{
+  display:grid;
+  grid-template-columns:clamp(6rem, 10vw, 8rem) minmax(0, 1fr);
+  grid-template-rows:auto;
+  column-gap:1.1rem;
+  flex:1;
+  align-content:center;
+  min-width:0;
+  margin:0 0 1.1rem;
+  padding:1rem 0 0;
+  border-top:4px double var(--oip-rule-engraved-strong);
+}
+.home-v2-guest__heading{
+  grid-column:2;
+  grid-row:1;
+  min-width:0;
+}
+.home-v2-guest__label{
+  margin:0 0 .5rem;
+  color:var(--accent-hover);
+  font:750 .8125rem/1.35 var(--font-ui);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.home-v2-guest h3{
+  font-size:clamp(1.3rem, 2vw, 1.7rem);
+}
+.home-v2-guest h3 a{display:inline-block;min-height:44px}
+.home-v2-guest__byline{
+  margin:.5rem 0 .35rem;
+  color:var(--text-secondary);
+  font:700 .875rem/1.45 var(--font-ui);
+}
+.home-v2-guest__media{
+  display:block;
+  grid-column:1;
+  grid-row:1;
+  align-self:start;
+  aspect-ratio:1;
+  overflow:hidden;
+  border:1px solid var(--oip-rule-standard);
+  background:var(--bg-raised);
+  box-shadow:var(--paper-shadow);
+}
+.home-v2-guest__media picture,
+.home-v2-guest__media img{
+  display:block;
+  width:100%;
+  height:100%;
+}
+.home-v2-guest__media img{object-fit:cover}
+.home-v2-guest__media:focus-visible{
+  outline:3px solid var(--focus-ring);
+  outline-offset:3px;
 }
 .home-v2-featured__lead-heading{
   margin-bottom:.7rem;
@@ -2581,7 +2642,8 @@ html[data-theme="light"] .paper-route-toggle{
     grid-template-areas:"lead" "supporting";
     grid-template-rows:auto;
   }
-  .home-v2-featured__lead{
+  .home-v2-featured__primary{
+    display:block;
     padding-right:0;
     border-right:0;
     border-bottom:1px solid var(--oip-rule-standard);
@@ -2622,6 +2684,10 @@ html[data-theme="light"] .paper-route-toggle{
   }
 }
 @media (max-width:520px){
+  .home-v2-guest{
+    grid-template-columns:5.5rem minmax(0, 1fr);
+    column-gap:.8rem;
+  }
   .masthead--full .masthead-controls{
     width:calc(100% + 24px);
     margin-left:-12px;

@@ -1081,7 +1081,7 @@ test("homepage editorial layout keeps the reader note compact and drops retired 
   assert.match(cssRule(css, ".home-front-page__welcome-links a"), /min-height:44px;/);
   assert.match(cssRule(css, ".home-front-page__welcome-links a:focus-visible"), /outline:3px solid var\(--focus-ring\);/);
   assert.match(cssRule(css, ".home-v2-featured__grid"), /grid-template-columns:minmax\(0, 1\.45fr\) minmax\(18rem, \.8fr\);/);
-  assert.match(cssRule(css, ".home-v2-featured__lead"), /border-right:1px solid var\(--oip-rule-standard\);/);
+  assert.match(cssRule(css, ".home-v2-featured__primary"), /border-right:1px solid var\(--oip-rule-standard\);/);
   assert.match(cssRule(css, ".home-v2-featured__lead-media img"), /aspect-ratio:16 \/ 9;/);
   assert.match(cssRule(css, ".home-v2-featured__supporting"), /padding:1\.25rem 0 1\.1rem 1\.5rem;/);
   assert.match(cssRule(css, ".home-v2-next"), /display:flex;[\s\S]*justify-content:center;/);
