@@ -1,0 +1,2992 @@
+{
+  "source": "Approved local Python preview; offline, synthetic catalog",
+  "catalog": [
+    {
+      "id": "/essays/river/",
+      "title": "River",
+      "url": "https://outsideinprint.org/essays/river/",
+      "summary": "Water, rivers and floods.",
+      "readingTime": 8,
+      "type": "essay",
+      "tags": [],
+      "topics": []
+    },
+    {
+      "id": "/essays/flood/",
+      "title": "Flood",
+      "url": "https://outsideinprint.org/essays/flood/",
+      "summary": "Water, rivers and floods.",
+      "readingTime": 4,
+      "type": "essay",
+      "tags": [],
+      "topics": []
+    },
+    {
+      "id": "/essays/rain/",
+      "title": "Rain",
+      "url": "https://outsideinprint.org/essays/rain/",
+      "summary": "Water, rivers and floods.",
+      "readingTime": 3,
+      "type": "essay",
+      "tags": [],
+      "topics": []
+    },
+    {
+      "id": "/essays/water/",
+      "title": "Water",
+      "url": "https://outsideinprint.org/essays/water/",
+      "summary": "Water, rivers and floods.",
+      "readingTime": 2,
+      "type": "essay",
+      "tags": [],
+      "topics": []
+    },
+    {
+      "id": "/essays/electricity/",
+      "title": "Electricity",
+      "url": "https://outsideinprint.org/essays/electricity/",
+      "summary": "Electricity, the power grid and everyday energy.",
+      "readingTime": 6,
+      "type": "essay",
+      "tags": [],
+      "topics": []
+    },
+    {
+      "id": "/essays/gratitude/",
+      "title": "Gratitude",
+      "url": "https://outsideinprint.org/essays/gratitude/",
+      "summary": "Gratitude, comfort and kindness in ordinary life.",
+      "readingTime": 2,
+      "type": "affirmation",
+      "tags": [],
+      "topics": []
+    },
+    {
+      "id": "/essays/conversation/",
+      "title": "Conversation",
+      "url": "https://outsideinprint.org/essays/conversation/",
+      "summary": "Water and flooding.",
+      "readingTime": 4,
+      "type": "dialogue",
+      "tags": [],
+      "topics": []
+    },
+    {
+      "id": "/essays/hope/",
+      "title": "Hope",
+      "url": "https://outsideinprint.org/essays/hope/",
+      "summary": "Hope, optimism and water resilience.",
+      "readingTime": 3,
+      "type": "dialogue",
+      "tags": [],
+      "topics": []
+    },
+    {
+      "id": "/essays/water-vote/",
+      "title": "Water Vote",
+      "url": "https://outsideinprint.org/essays/water-vote/",
+      "summary": "The president and Congress voted on water policy.",
+      "readingTime": 3,
+      "type": "essay",
+      "tags": [],
+      "topics": []
+    },
+    {
+      "id": "/essays/faith/",
+      "title": "Faith",
+      "url": "https://outsideinprint.org/essays/faith/",
+      "summary": "Water, religious faith and Christian prayer.",
+      "readingTime": 2,
+      "type": "essay",
+      "tags": [],
+      "topics": []
+    },
+    {
+      "id": "/essays/privacy/",
+      "title": "Privacy",
+      "url": "https://outsideinprint.org/essays/privacy/",
+      "summary": "Password security, privacy and digital identity.",
+      "readingTime": 5,
+      "type": "essay",
+      "tags": [],
+      "topics": []
+    },
+    {
+      "id": "/essays/invention/",
+      "title": "Invention",
+      "url": "https://outsideinprint.org/essays/invention/",
+      "summary": "Historical everyday objects, tools and technology.",
+      "readingTime": 9,
+      "type": "essay",
+      "tags": [],
+      "topics": []
+    },
+    {
+      "id": "/essays/literature/",
+      "title": "Literature",
+      "url": "https://outsideinprint.org/essays/literature/",
+      "summary": "Books, reading and the library.",
+      "readingTime": 4,
+      "type": "essay",
+      "tags": [],
+      "topics": []
+    },
+    {
+      "id": "/essays/unknown-duration/",
+      "title": "Unknown Duration",
+      "url": "https://outsideinprint.org/essays/unknown-duration/",
+      "summary": "Water, rivers and floods.",
+      "readingTime": null,
+      "type": "essay",
+      "tags": [],
+      "topics": []
+    }
+  ],
+  "cases": [
+    {
+      "name": "duration: under five minutes",
+      "request": {
+        "message": "under five minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 4.999,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "duration: up to five minutes",
+      "request": {
+        "message": "up to five minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 5.0,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "duration: five minutes or less",
+      "request": {
+        "message": "five minutes or less",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 5.0,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "duration: no more than five minutes",
+      "request": {
+        "message": "no more than five minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 5.0,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "duration: not more than five minutes",
+      "request": {
+        "message": "not more than five minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 5.0,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "duration: not longer than five minutes",
+      "request": {
+        "message": "not longer than five minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 5.0,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "duration: not under five minutes",
+      "request": {
+        "message": "not under five minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": 5.0,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/river/"
+        ]
+      }
+    },
+    {
+      "name": "duration: not over five minutes",
+      "request": {
+        "message": "not over five minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 5.0,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "duration: no less than five minutes",
+      "request": {
+        "message": "no less than five minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": 5.0,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/river/"
+        ]
+      }
+    },
+    {
+      "name": "duration: between three and five minutes",
+      "request": {
+        "message": "between three and five minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": 3.0,
+          "maxMinutes": 5.0,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water-vote/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/"
+        ]
+      }
+    },
+    {
+      "name": "duration: at least five minutes",
+      "request": {
+        "message": "at least five minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": 5.0,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/river/"
+        ]
+      }
+    },
+    {
+      "name": "duration: more than five minutes",
+      "request": {
+        "message": "more than five minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": 5.001,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/river/"
+        ]
+      }
+    },
+    {
+      "name": "duration: I only have ten minutes",
+      "request": {
+        "message": "I only have ten minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10.0,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/river/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "duration: a five-minute read",
+      "request": {
+        "message": "a five-minute read",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 5.0,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "duration: half an hour",
+      "request": {
+        "message": "half an hour",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 30.0,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/river/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "duration: a quarter of an hour",
+      "request": {
+        "message": "a quarter of an hour",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 15.0,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/river/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "duration: twenty-five minutes",
+      "request": {
+        "message": "twenty-five minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 25.0,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/river/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "duration: under 0.5 hours",
+      "request": {
+        "message": "under 0.5 hours",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 29.999,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/river/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "duration: under five minutes and over ten minutes",
+      "request": {
+        "message": "under five minutes and over ten minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "Those reading-time limits conflict. What is the longest piece you would like?",
+        "ids": []
+      }
+    },
+    {
+      "name": "duration: -5 minutes",
+      "request": {
+        "message": "-5 minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "Please use a positive reading time, such as five minutes.",
+        "ids": []
+      }
+    },
+    {
+      "name": "duration: minus five minutes",
+      "request": {
+        "message": "minus five minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "Please use a positive reading time, such as five minutes.",
+        "ids": []
+      }
+    },
+    {
+      "name": "duration: over 300 minutes",
+      "request": {
+        "message": "over 300 minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "Those reading-time limits conflict. What is the longest piece you would like?",
+        "ids": []
+      }
+    },
+    {
+      "name": "refinement: something shorter",
+      "request": {
+        "message": "something shorter",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 7.999,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "shorter",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: those are too long",
+      "request": {
+        "message": "those are too long",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 7.999,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "shorter",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: Something longer",
+      "request": {
+        "message": "Something longer",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": 4.001,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "longer",
+        "clarification": "",
+        "ids": [
+          "/essays/river/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: those are too short",
+      "request": {
+        "message": "those are too short",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": 4.001,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "longer",
+        "clarification": "",
+        "ids": [
+          "/essays/river/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: More like these",
+      "request": {
+        "message": "More like these",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "more",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: less technical",
+      "request": {
+        "message": "less technical",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "accessible",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/river/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: easier to read",
+      "request": {
+        "message": "easier to read",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "accessible",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/river/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: same topic but lighter",
+      "request": {
+        "message": "same topic but lighter",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "light",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/river/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: something more hopeful",
+      "request": {
+        "message": "something more hopeful",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "hopeful",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "more",
+        "clarification": "",
+        "ids": [
+          "/essays/hope/",
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: only dialogues",
+      "request": {
+        "message": "only dialogues",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [
+            "dialogue"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/conversation/",
+          "/essays/hope/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: nothing political",
+      "request": {
+        "message": "nothing political",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/river/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: nothing religious",
+      "request": {
+        "message": "nothing religious",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "religion"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/river/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: more about history",
+      "request": {
+        "message": "more about history",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "history",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/invention/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: electricity",
+      "request": {
+        "message": "electricity",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/electricity/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: More like the second one",
+      "request": {
+        "message": "More like the second one",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": "/essays/flood/"
+        },
+        "action": "more",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: why the second one?",
+      "request": {
+        "message": "why the second one?",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": "/essays/flood/"
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/flood/",
+          "/essays/river/",
+          "/essays/water-vote/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: Why that one?",
+      "request": {
+        "message": "Why that one?",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": "/essays/river/"
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/flood/",
+          "/essays/river/",
+          "/essays/water-vote/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: why the third one?",
+      "request": {
+        "message": "why the third one?",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "Which reading choice did you mean? Choose one of the titles currently shown.",
+        "ids": []
+      }
+    },
+    {
+      "name": "refinement: surprise me",
+      "request": {
+        "message": "surprise me",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": true,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/river/",
+          "/essays/gratitude/",
+          "/essays/conversation/",
+          "/essays/flood/",
+          "/essays/hope/",
+          "/essays/rain/",
+          "/essays/water/",
+          "/essays/electricity/",
+          "/essays/water-vote/",
+          "/essays/faith/",
+          "/essays/privacy/",
+          "/essays/invention/",
+          "/essays/literature/"
+        ]
+      }
+    },
+    {
+      "name": "refinement: help me choose",
+      "request": {
+        "message": "help me choose",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": true,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/river/",
+          "/essays/gratitude/",
+          "/essays/conversation/",
+          "/essays/flood/",
+          "/essays/hope/",
+          "/essays/rain/",
+          "/essays/water/",
+          "/essays/electricity/",
+          "/essays/water-vote/",
+          "/essays/faith/",
+          "/essays/privacy/",
+          "/essays/invention/",
+          "/essays/literature/"
+        ]
+      }
+    },
+    {
+      "name": "search: a dialogue",
+      "request": {
+        "message": "a dialogue"
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "",
+          "mood": "",
+          "formats": [
+            "dialogue"
+          ],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": true,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/conversation/",
+          "/essays/hope/"
+        ]
+      }
+    },
+    {
+      "name": "search: Syd & Oliver",
+      "request": {
+        "message": "Syd & Oliver"
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "",
+          "mood": "",
+          "formats": [
+            "dialogue"
+          ],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": true,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/conversation/",
+          "/essays/hope/"
+        ]
+      }
+    },
+    {
+      "name": "search: The Things We Say",
+      "request": {
+        "message": "The Things We Say"
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "",
+          "mood": "",
+          "formats": [
+            "affirmation"
+          ],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": true,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/gratitude/"
+        ]
+      }
+    },
+    {
+      "name": "search: Musings",
+      "request": {
+        "message": "Musings"
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "",
+          "mood": "thoughtful",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": true,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/gratitude/",
+          "/essays/river/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/water/",
+          "/essays/electricity/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/water-vote/",
+          "/essays/faith/",
+          "/essays/privacy/",
+          "/essays/invention/",
+          "/essays/literature/",
+          "/essays/unknown-duration/"
+        ]
+      }
+    },
+    {
+      "name": "search: only essays",
+      "request": {
+        "message": "only essays"
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "",
+          "mood": "",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": true,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/river/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/water/",
+          "/essays/electricity/",
+          "/essays/water-vote/",
+          "/essays/faith/",
+          "/essays/privacy/",
+          "/essays/invention/",
+          "/essays/literature/",
+          "/essays/unknown-duration/"
+        ]
+      }
+    },
+    {
+      "name": "search: electrcity",
+      "request": {
+        "message": "electrcity"
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "electrcity",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/electricity/"
+        ]
+      }
+    },
+    {
+      "name": "search: water, nothing political",
+      "request": {
+        "message": "water, nothing political"
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/river/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/unknown-duration/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "search: water, avoid religion",
+      "request": {
+        "message": "water, avoid religion"
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [
+            "religion"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/river/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/unknown-duration/",
+          "/essays/conversation/",
+          "/essays/hope/"
+        ]
+      }
+    },
+    {
+      "name": "search: passwords",
+      "request": {
+        "message": "passwords"
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "passwords",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/privacy/"
+        ]
+      }
+    },
+    {
+      "name": "search: book recommendations",
+      "request": {
+        "message": "book recommendations"
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "book",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/literature/"
+        ]
+      }
+    },
+    {
+      "name": "search: everyday objects",
+      "request": {
+        "message": "everyday objects"
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "everyday objects",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/invention/",
+          "/essays/electricity/",
+          "/essays/gratitude/"
+        ]
+      }
+    },
+    {
+      "name": "search: underwater basketweaving",
+      "request": {
+        "message": "underwater basketweaving"
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "underwater basketweaving",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": []
+      }
+    },
+    {
+      "name": "search: surprise me",
+      "request": {
+        "message": "surprise me"
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": true,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/river/",
+          "/essays/gratitude/",
+          "/essays/conversation/",
+          "/essays/flood/",
+          "/essays/hope/",
+          "/essays/rain/",
+          "/essays/water/",
+          "/essays/electricity/",
+          "/essays/water-vote/",
+          "/essays/faith/",
+          "/essays/privacy/",
+          "/essays/invention/",
+          "/essays/literature/",
+          "/essays/unknown-duration/"
+        ]
+      }
+    },
+    {
+      "name": "legacy more after longer",
+      "request": {
+        "message": "More like these",
+        "history": [
+          {
+            "role": "user",
+            "content": "water under five minutes"
+          },
+          {
+            "role": "assistant",
+            "content": "Water [/essays/water/]; Rain [/essays/rain/]"
+          },
+          {
+            "role": "user",
+            "content": "Something longer"
+          },
+          {
+            "role": "assistant",
+            "content": "Flood [/essays/flood/]"
+          }
+        ],
+        "currentIds": [
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/water/",
+          "/essays/rain/",
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": 2.001,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "more",
+        "clarification": "",
+        "ids": [
+          "/essays/water-vote/",
+          "/essays/river/",
+          "/essays/conversation/",
+          "/essays/hope/"
+        ]
+      }
+    },
+    {
+      "name": "legacy shorter reverses longer",
+      "request": {
+        "message": "something shorter",
+        "history": [
+          {
+            "role": "user",
+            "content": "water under five minutes"
+          },
+          {
+            "role": "assistant",
+            "content": "Water [/essays/water/]; Rain [/essays/rain/]"
+          },
+          {
+            "role": "user",
+            "content": "Something longer"
+          },
+          {
+            "role": "assistant",
+            "content": "Flood [/essays/flood/]"
+          }
+        ],
+        "currentIds": [
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 3.999,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "shorter",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/rain/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "legacy new subject clears duration",
+      "request": {
+        "message": "electricity",
+        "history": [
+          {
+            "role": "user",
+            "content": "water under five minutes"
+          },
+          {
+            "role": "assistant",
+            "content": "Water [/essays/water/]; Rain [/essays/rain/]"
+          },
+          {
+            "role": "user",
+            "content": "Something longer"
+          },
+          {
+            "role": "assistant",
+            "content": "Flood [/essays/flood/]"
+          }
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/electricity/"
+        ]
+      }
+    },
+    {
+      "name": "shorter may retain qualifying previous result",
+      "request": {
+        "message": "Something shorter, under five minutes",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "currentIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ],
+        "seenIds": [
+          "/essays/river/",
+          "/essays/flood/"
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": 4.999,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "shorter",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "relax_time",
+      "request": {
+        "action": "relax_time",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "hopeful",
+          "formats": [
+            "dialogue"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "hopeful",
+          "formats": [
+            "dialogue"
+          ],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "relax_time",
+        "clarification": "",
+        "ids": [
+          "/essays/hope/",
+          "/essays/conversation/"
+        ]
+      }
+    },
+    {
+      "name": "clear_filters",
+      "request": {
+        "action": "clear_filters",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "hopeful",
+          "formats": [
+            "dialogue"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "",
+          "formats": [],
+          "minMinutes": null,
+          "maxMinutes": null,
+          "excludedTopics": [],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "clear_filters",
+        "clarification": "",
+        "ids": [
+          "/essays/water/",
+          "/essays/water-vote/",
+          "/essays/river/",
+          "/essays/flood/",
+          "/essays/rain/",
+          "/essays/unknown-duration/",
+          "/essays/conversation/",
+          "/essays/hope/",
+          "/essays/faith/"
+        ]
+      }
+    },
+    {
+      "name": "explicit new subject",
+      "request": {
+        "message": "electricity",
+        "preferences": {
+          "version": 1,
+          "topic": "water",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        }
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "search",
+        "clarification": "",
+        "ids": [
+          "/essays/electricity/"
+        ]
+      }
+    },
+    {
+      "name": "explicit more 1 retains new subject",
+      "request": {
+        "message": "More like these",
+        "action": "more",
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "history": [
+          {
+            "role": "user",
+            "content": "water under three minutes"
+          }
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "more",
+        "clarification": "",
+        "ids": [
+          "/essays/electricity/"
+        ]
+      }
+    },
+    {
+      "name": "explicit more 2 retains new subject",
+      "request": {
+        "message": "More like these",
+        "action": "more",
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "history": [
+          {
+            "role": "user",
+            "content": "water under three minutes"
+          }
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "more",
+        "clarification": "",
+        "ids": [
+          "/essays/electricity/"
+        ]
+      }
+    },
+    {
+      "name": "explicit more 3 retains new subject",
+      "request": {
+        "message": "More like these",
+        "action": "more",
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "history": [
+          {
+            "role": "user",
+            "content": "water under three minutes"
+          }
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "more",
+        "clarification": "",
+        "ids": [
+          "/essays/electricity/"
+        ]
+      }
+    },
+    {
+      "name": "explicit more 4 retains new subject",
+      "request": {
+        "message": "More like these",
+        "action": "more",
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "history": [
+          {
+            "role": "user",
+            "content": "water under three minutes"
+          }
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "more",
+        "clarification": "",
+        "ids": [
+          "/essays/electricity/"
+        ]
+      }
+    },
+    {
+      "name": "explicit more 5 retains new subject",
+      "request": {
+        "message": "More like these",
+        "action": "more",
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "history": [
+          {
+            "role": "user",
+            "content": "water under three minutes"
+          }
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "more",
+        "clarification": "",
+        "ids": [
+          "/essays/electricity/"
+        ]
+      }
+    },
+    {
+      "name": "explicit more 6 retains new subject",
+      "request": {
+        "message": "More like these",
+        "action": "more",
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "history": [
+          {
+            "role": "user",
+            "content": "water under three minutes"
+          }
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "more",
+        "clarification": "",
+        "ids": [
+          "/essays/electricity/"
+        ]
+      }
+    },
+    {
+      "name": "explicit more 7 retains new subject",
+      "request": {
+        "message": "More like these",
+        "action": "more",
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "history": [
+          {
+            "role": "user",
+            "content": "water under three minutes"
+          }
+        ]
+      },
+      "expected": {
+        "preferences": {
+          "version": 1,
+          "topic": "electricity",
+          "mood": "hopeful",
+          "formats": [
+            "essay"
+          ],
+          "minMinutes": null,
+          "maxMinutes": 10,
+          "excludedTopics": [
+            "politics"
+          ],
+          "discovery": false,
+          "anchorId": null
+        },
+        "action": "more",
+        "clarification": "",
+        "ids": [
+          "/essays/electricity/"
+        ]
+      }
+    }
+  ]
+}

@@ -87,6 +87,8 @@ test("browser binaries are conditional and actual publication gates remain activ
   for (const gate of ["test_responsive_image_source_contract", "audit_essay_images", "check_essay_guardrails", "test_public_route_smoke", "test_public_html_output", "test_responsive_image_output_contract", "test_games_catalog_contract", "test_feed_policy_contract"]) assert.ok(commands("site").includes(gate), gate);
   assert.match(commands("worker"), /npm --prefix workers\/oip-commerce test/);
   assert.match(commands("worker"), /python3 -m unittest discover/);
+  assert.match(commands("worker"), /npm --prefix workers\/oip-bob test/);
+  assert.ok(action("worker", "actions/checkout").with["sparse-checkout"].includes("workers/oip-bob"));
   assert.doesNotMatch(commands("worker"), /wrangler.*deploy|cloudflare.*deploy/i);
 });
 test("deployment verifies exact generation before canonical route checks", () => {
@@ -136,4 +138,9 @@ test("Dependabot maintains grouped weekly npm dependencies without auto-merge po
   assert.equal(npm.schedule.interval, "weekly");
   assert.equal(npm.schedule.timezone, "America/New_York");
   assert.deepEqual(npm.groups["npm-minor-patch"]["update-types"], ["minor", "patch"]);
+  const bob = config.updates.find(update => update["package-ecosystem"] === "npm" && update.directory === "/workers/oip-bob");
+  assert.ok(bob, "Bob's separate lockfile must receive dependency updates");
+  assert.equal(bob.schedule.interval, "weekly");
+  assert.equal(bob.schedule.timezone, "America/New_York");
+  assert.deepEqual(bob.groups["bob-worker-minor-patch"]["update-types"], ["minor", "patch"]);
 });

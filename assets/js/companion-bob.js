@@ -1,4 +1,5 @@
 import { createBobStorage, claimVisit, PREFERENCES_KEY, VISITOR_KEY } from './companion-bob-visit.js';
+import { initializeBobReading } from './companion-bob-reading.js';
 
 const POSITION_KEY = 'oip-bob-position:v1';
 const CHANNEL = 'oip-site-bob-v1';
@@ -227,7 +228,7 @@ function initialize() {
     pendingOpen = true;
     syncVisibility();
     if (host.dataset.failed === 'true') load();
-    if (ready && painted) { send({ type: 'open-settings' }); pendingOpen = false; }
+    if (ready && painted) { send({ type: 'open-reading' }); pendingOpen = false; }
   }
   function home() {
     dragging = false;
@@ -277,7 +278,7 @@ function initialize() {
       focusRuntime();
       clearTimeout(loadTimer);
       startVisit();
-      if (pendingOpen && active) { send({ type: 'open-settings' }); pendingOpen = false; }
+      if (pendingOpen && active) { send({ type: 'open-reading' }); pendingOpen = false; }
     } else if (data.type === 'hit-regions') {
       applyRegions(data.rects);
     } else if (data.type === 'position' && Number.isFinite(data.x) && Number.isFinite(data.y)) {
@@ -349,4 +350,5 @@ function initialize() {
   });
   if (!window.render_game_to_text) window.render_game_to_text = window.render_bob_to_text;
   if (!window.advanceTime) window.advanceTime = ms => new Promise(resolve => setTimeout(resolve, Math.max(0, ms)));
+  initializeBobReading(host);
 }

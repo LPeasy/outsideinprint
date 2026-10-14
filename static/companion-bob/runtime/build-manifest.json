@@ -7,11 +7,11 @@
   "sources": [
     {
       "path": "browser/site-pet/entry.tsx",
-      "sha256": "3f7c4c4325778160bdecc9075b696096c9e1b069f6f05db646079bd5945ce550"
+      "sha256": "46764e2eeba3858eab243a8bd1cf9fd20a2e855c01f1fbbbae7f3a1f407059d9"
     },
     {
       "path": "browser/site-pet/style.css",
-      "sha256": "1067ac41f090d9c610f137b7c58ead3ffecf7d8ea6834e852c06b24d09ac579e"
+      "sha256": "3df4378f31cf09d0d7743279cae0bdeedfed41a8352cfa28084f0297fa81c176"
     },
     {
       "path": "browser/site-pet/index.html",
@@ -19,7 +19,7 @@
     },
     {
       "path": "src/components/BobPet.tsx",
-      "sha256": "7c530a4d88e61d94171c232d292ea99bf98edc77fd9d81d93ac3b1a8952b7670"
+      "sha256": "4dea365abcf6b84aaf4581951018e9b3f496a153529655eb72a1ab43979790dd"
     },
     {
       "path": "src/components/PetActivityControls.tsx",
@@ -39,7 +39,7 @@
     }
   ],
   "fullGameIncluded": false,
-  "totalBytes": 26909958,
+  "totalBytes": 26917409,
   "files": [
     {
       "path": "assets/bob-armrest-BAi3CKpz.webp",
@@ -207,19 +207,19 @@
       "sha256": "8b894077d8a817901350044cfa1ca86ab67ca23863d7d3f1b50dfe26d59524c7"
     },
     {
-      "path": "assets/index-A-mK5uQI.css",
-      "bytes": 66358,
-      "sha256": "b8db33ed991073a0111b507b9668479a0e8a84335e160668bfe1870bef9b00f6"
+      "path": "assets/index-BYXARHwK.css",
+      "bytes": 69118,
+      "sha256": "d719e4b0e7a6041d7c5a7cc91f5f37d6aee12df2f647082ae00c2dd3e7de2dd2"
     },
     {
-      "path": "assets/index-CKXQXCa2.js",
-      "bytes": 519745,
-      "sha256": "742664077a9b48c5982bd1f0254d34cae760c17f8b72b8e5a2f4cc7bb394919b"
+      "path": "assets/index-BsGMajPx.js",
+      "bytes": 524436,
+      "sha256": "3e70cb71a5cd8db8d4f58dbbd2506e63a0e3f103d42968f354134fff6a5958ec"
     },
     {
       "path": "index.html",
       "bytes": 501,
-      "sha256": "e26b0c03eaa9e1e171a51ce59eec8fb68c670445e4235d3174599f573442ffd5"
+      "sha256": "d8e26437cdab5dd1f2cf73289a3b4092c095de2cd0c0a5fa88443b10c23fc3c5"
     },
     {
       "path": "music/playlist.json",

@@ -15,6 +15,12 @@ baseName = "index"
 isPlainText = true
 notAlternative = true
 
+[outputFormats.BobCatalog]
+mediaType = "application/json"
+baseName = "catalog"
+isPlainText = true
+notAlternative = true
+
 [outputs]
 home = ["HTML", "RSS"]
 page = ["HTML"]
@@ -73,3 +79,9 @@ custom_monthly_enabled = false
 
 [params.paper_route]
 enabled = true
+
+# Owner-approved production endpoint. Free discovery uses the same-build public
+# catalog and remains available when the Worker is disabled or out of allowance.
+[params.bob_reading]
+enabled = true
+api_base = "https://oip-bob-reading.red-snow-678d.workers.dev"

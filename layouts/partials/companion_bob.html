@@ -1,4 +1,4 @@
-<div id="companion-bob" class="companion-bob{{ if not .IsHome }} companion-bob--compact{{ end }}" data-bob-companion data-docked="false" data-greeting="hidden" hidden>
+<div id="companion-bob" class="companion-bob{{ if not .IsHome }} companion-bob--compact{{ end }}" data-bob-companion data-bob-reading-enabled="{{ eq site.Params.bob_reading.enabled true }}" data-bob-api-base="{{ site.Params.bob_reading.api_base | default "" }}" data-bob-catalog="{{ "companion-bob/catalog.json" | relURL }}" data-docked="false" data-greeting="hidden" hidden>
   <iframe class="companion-bob__frame" data-bob-frame data-src="{{ "companion-bob/runtime/" | relURL }}" title="Interactive Bob" allow="autoplay" referrerpolicy="same-origin" inert></iframe>
   <p class="companion-bob__greeting" data-bob-greeting role="status" aria-live="polite" aria-atomic="true"></p>
   <div class="companion-bob__fallback" data-bob-fallback>
