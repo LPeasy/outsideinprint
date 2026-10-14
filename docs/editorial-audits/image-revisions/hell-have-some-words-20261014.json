@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "title": "He’ll Have Some Words",
+  "prepared_at_utc": "2026-10-14 19:45:07 UTC",
+  "status": "draft_packaged_not_published",
+  "base_commit": "e5461387f3fb504dbe046e1926cffdcfead0c33f",
+  "content": {
+    "path": "content/essays/dialogues/hell-have-some-words.md",
+    "canonical_route": "/syd-and-oliver/hell-have-some-words/",
+    "collection": "syd-and-oliver-dialogues",
+    "draft": true,
+    "sha256": "224fdd04333591b65c4e8da1feb74658041318fe422f41c7231ad67c2ed1bea2",
+    "speaker_turns": 47,
+    "paragraphs": 90,
+    "source": "Owner-supplied manuscript attached in this chat",
+    "changes": [
+      "Title moved into front matter.",
+      "Speaker labels normalized to **Syd:** and **Oliver:**.",
+      "Line endings and final newline normalized."
+    ],
+    "preservation_review": "Exact normalized body comparison and independent review passed. No prose rewritten."
+  },
+  "artwork": {
+    "id": "essays/dialogues/hell-have-some-words/hero",
+    "source": "assets/images/originals/essays/dialogues/hell-have-some-words/hero.png",
+    "alias": "/images/syd-and-oliver/hell-have-some-words/hero.png",
+    "sha256": "1cc14c4a9969cc9497668d997fb8eff80b114a0682b930d292ca0a712e6f9b1d",
+    "width": 1672,
+    "height": 941,
+    "generation_mode": "Built-in image_gen tool",
+    "reference_images": "Owner-supplied Boudan photographs 1, 2, 3 and 7 guided the initial composition. Reference photographs were not copied into the public repository.",
+    "initial_prompt": "Use case: photorealistic-natural.\nAsset type: 16:9 landscape editorial hero illustration for the Syd and Oliver dialogue \"He'll Have Some Words\".\nReference images: These are reference photos of ONE cat, Boudan. Use them only to preserve the cat's likeness, coat, face, proportions, and white markings. Ignore all people, bedrooms, toys and other objects in the reference photographs.\nPrimary request: A warm, intimate living-room homecoming. Two adult male friends are seen from behind, both facing AWAY from the camera toward an open suitcase. Syd is seated on the rug on the floor next to the suitcase. Oliver is seated on the couch. Centered between their positions, inside the suitcase, Boudan lounges contentedly on the packed clothes. One white hind foot hangs lazily and clearly over the near rim of the suitcase, dangling outside the bag.\nBoudan likeness: sturdy adult shorthaired brown-and-charcoal classic tabby, broad black marbled/bullseye swirls on his flanks, striped forelegs, ringed dark tail, pale golden yellow-green eyes, warm brown nose, white chin and muzzle edges, a large white chest bib and white belly, short white front socks and long white hind socks. Match the reference cat closely. Relaxed half-lidded eyes, comfortably reclined on his side, with his face and white bib visible. He is the visual center of the image.\nComposition: medium-wide landscape view from slightly above and behind the two seated men, looking through the opening between them toward the cat and suitcase. Place the floor-seated man on one side and the couch-seated man on the other; their backs frame the central suitcase without obscuring it. Angle the couch so the seated man's back is to the camera, not his face. The open lid folds away from the cat. Clearly show the central cat resting in the suitcase and the distinctive dangling white foot. Men wear ordinary casual shirts and trousers. Anonymous rear views only, no faces or recognizable profiles. Believable natural scale and anatomy; exactly two men and one cat. Crop enough foreground to keep the cat readable in a small article illustration.\nStyle and mood: photorealistic editorial photography, softly backlit human figures, warm natural window light illuminating the cat, cozy everyday home, quiet affectionate humor, restrained colors, realistic fabric and fur texture. Simple room and rug, no distracting clutter.\nConstraints: No titles, lettering, logos, watermarks, or collage. Do not reproduce or identify any person from the reference photos. No cartoon distortion, no extra limbs or paws. Opaque background.",
+    "revision_prompt": "Edit the provided living-room suitcase scene into a clearly HAND-PAINTED EDITORIAL ILLUSTRATION, not a photograph. Preserve the exact composition and scene: man at left seated on floor, man at right seated on couch, both seen from behind, and Boudan centered resting on clothes in the open suitcase with his white hind foot dangling over the front rim.\n\nStyle change is essential: expressive watercolor and gouache on textured paper, visible loose brushstrokes, simplified planes of color, softly lost edges, warm washes, gently stylized shapes, painterly shadows. Use broad painted masses for the men's clothing, furniture, plants and room. Paint Boudan's fur as deliberate patterned brushwork, not individual photorealistic hairs. No photographic lens effects, no microtextures, no glossy 3D rendering. The result should unmistakably look drawn and painted by hand at a glance, with an affectionate, lightly humorous literary-storybook quality.\n\nRetain Boudan's particular likeness and anatomy: brown/charcoal classic-tabby swirls, white chest bib and belly, short white front socks, long white hind socks, yellow-green eyes, warm brown nose. Keep his recognizable face, relaxed expression, and lazily dangling white foot distinct and legible. Keep exactly two men and one cat; no added paws or limbs. Preserve their rear-facing orientation and all essential object placement. Warm ochre light, subdued olive and deep blue clothing, gentle blue-gray shadows. Landscape 16:9. No text, lettering, logo, watermark, or border. Opaque image.",
+    "owner_direction": "Owner rejected photorealism; this replacement uses visible watercolor/gouache brushwork.",
+    "review_state": "approved",
+    "reviewer": "Codex",
+    "independent_review": "PASS",
+    "review_scope": "Original and proportional 320 px / 390 px image reviews; this is artwork review, not owner publication authorization.",
+    "findings": [
+      "Painted texture, visible brushwork and simplified color planes satisfy the requested move away from photorealism.",
+      "Two rear-facing men frame the open suitcase; one is seated on the floor and the other on the couch.",
+      "Boudan is centered, with classic tabby swirls, white bib and socks, and one dangling white hind foot.",
+      "No obvious anatomy defects, readable text, logo or watermark observed.",
+      "Cat and dangling foot remain legible at both tested widths.",
+      "Only the painterly replacement was registered; the photorealistic candidate remains outside the repository."
+    ]
+  },
+  "validation": {
+    "source_package": "PASS",
+    "copy_preservation": "PASS",
+    "image_hash_dimensions_and_alias": "PASS",
+    "existing_manifest_assets_and_aliases_unchanged": "PASS",
+    "collection_audit": "PASS; source inventory includes this draft",
+    "whitespace_check": "PASS: exact staged diff check",
+    "full_hugo_build": "Not run; routine draft packaging uses source checks and original-art review.",
+    "gallery": "Unchanged while draft."
+  },
+  "publication_handoff": {
+    "authorization": "Packaging only; no publication requested for this piece.",
+    "instructions": "At owner-authorized publication, refresh from current main, finalize release metadata and draft:false, add Gallery/current illustration using scripts/update_front_page_cartoon.ps1 -DialoguePath '/syd-and-oliver/hell-have-some-words/', then use the checked PR and verified production flow.",
+    "draft_test_note": "If making a draft-only remote release, review tests/release_a_metadata_contract.test.mjs: it skips draft descriptions but compares description count against all dialogue files."
+  }
+}

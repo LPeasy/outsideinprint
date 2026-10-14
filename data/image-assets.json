@@ -2311,6 +2311,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/dialogues/hell-have-some-words/hero": {
+      "id": "essays/dialogues/hell-have-some-words/hero",
+      "source": "images/originals/essays/dialogues/hell-have-some-words/hero.png",
+      "sha256": "1cc14c4a9969cc9497668d997fb8eff80b114a0682b930d292ca0a712e6f9b1d",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "essays/dialogues/infinite-incontent/hero": {
       "id": "essays/dialogues/infinite-incontent/hero",
       "source": "images/originals/essays/dialogues/infinite-incontent/hero.png",
@@ -8644,6 +8658,7 @@
     "/images/syd-and-oliver/bobanonymous/hero.png": "essays/dialogues/bobanonymous/hero",
     "/images/syd-and-oliver/broke-rich/hero.png": "essays/dialogues/broke-rich/hero",
     "/images/syd-and-oliver/everyone-knows-the-words/hero.png": "essays/dialogues/everyone-knows-the-words/hero",
+    "/images/syd-and-oliver/hell-have-some-words/hero.png": "essays/dialogues/hell-have-some-words/hero",
     "/images/syd-and-oliver/infinite-incontent/hero.png": "essays/dialogues/infinite-incontent/hero",
     "/images/syd-and-oliver/infrastructure/hero.jpg": "essays/dialogues/infrastructure/hero",
     "/images/syd-and-oliver/pressure-makes-pearls/hero.png": "essays/dialogues/pressure-makes-pearls/hero",
