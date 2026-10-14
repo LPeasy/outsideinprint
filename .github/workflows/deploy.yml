@@ -111,7 +111,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          sparse-checkout: workers/oip-commerce
+          sparse-checkout: |-
+            workers/oip-commerce
+            workers/oip-bob
           persist-credentials: false
       - name: Setup Node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
@@ -122,6 +124,10 @@ jobs:
         run: npm --prefix workers/oip-commerce test
       - name: Worker provisioning fixtures
         run: python3 -m unittest discover -s workers/oip-commerce/test -p 'test_*.py'
+      - name: Install Bob local runtime test dependencies
+        run: npm --prefix workers/oip-bob ci --ignore-scripts --no-audit --no-fund
+      - name: Bob recommendations, budgets and local Workers runtime
+        run: npm --prefix workers/oip-bob test
   site:
     runs-on: ubuntu-latest
     timeout-minutes: 35
@@ -224,6 +230,10 @@ jobs:
       - name: Test Collection Organization Source Contract
         shell: pwsh
         run: ./tests/test_collection_organization_contract.ps1 -Clock $env:OIP_BUILD_CLOCK_UTC
+      - name: Test Bob generated reading catalog
+        if: ${{ needs.classify.outputs.rendering == 'true' }}
+        shell: pwsh
+        run: ./tests/test_bob_catalog_contract.ps1
       - name: Check changed publication prose
         shell: pwsh
         run: |-
@@ -341,6 +351,9 @@ jobs:
         if: ${{ needs.classify.outputs.browser == 'true' }}
       - name: Test Mobile Navigation
         run: node --test --test-concurrency=1 tests/mobile_navigation_browser.test.mjs
+        if: ${{ needs.classify.outputs.browser == 'true' }}
+      - name: Test Bob reading and collection browsing
+        run: node --test --test-concurrency=1 tests/bob_reading_browser.test.mjs
         if: ${{ needs.classify.outputs.browser == 'true' }}
       - name: Test Hosted Analytics Network Privacy
         if: ${{ needs.classify.outputs.browser == 'true' && env.ANALYTICS_ENABLED == 'true' }}

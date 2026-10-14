@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "oip-bob-reading",
+  "account_id": "2ca1eb7fa751f89602fd324e26dc16c7",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-30",
+  "workers_dev": true,
+  "preview_urls": false,
+  "vars": {
+    "ENVIRONMENT": "production",
+    "CHAT_ENABLED": "true",
+    "ALLOWED_ORIGINS": "https://outsideinprint.org,https://www.outsideinprint.org",
+    "CATALOG_URL": "https://outsideinprint.org/companion-bob/catalog.json",
+    "DAILY_BUDGET_MICROUSD": "500000",
+    "MONTHLY_BUDGET_MICROUSD": "5000000"
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "BOB_BUDGET", "class_name": "BobBudget" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["BobBudget"] }],
+  "observability": { "enabled": false }
+}

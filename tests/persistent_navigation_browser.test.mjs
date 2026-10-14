@@ -50,16 +50,20 @@ async function createPage({ analytics = false } = {}) {
   }, { enableAnalytics: analytics });
   const page = await context.newPage();
   page.setDefaultTimeout(20000);
-  const errors = [], requests = [];
+  const errors = [], requests = [], recommendationRequests = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("console", (message) => { if (message.type() === "warning") console.error("Preview warning:", message.text()); });
   await context.route("**/*", (route) => {
     const url = new URL(route.request().url());
+    if (url.pathname === "/api/bob/recommend") {
+      recommendationRequests.push(url.pathname);
+      return route.abort("blockedbyclient");
+    }
     if (url.origin !== origin.origin) return route.abort("blockedbyclient");
     requests.push({ url: url.pathname, type: route.request().resourceType() });
     return route.continue();
   });
-  return { context, page, errors, requests };
+  return { context, page, errors, requests, recommendationRequests };
 }
 
 async function start(page, pathname = "/") {
@@ -97,9 +101,10 @@ async function footerLink(page, name, pathname) {
   await routeTo(page, () => page.locator("[data-site-page] footer").getByRole("link", { name, exact: true }).click(), pathname);
 }
 async function settings(frame) {
+  if (await frame.locator("[data-pet-settings-panel]").isVisible()) return;
   const button = frame.locator("[data-pet-settings-button]");
   await button.focus(); await button.press("Enter");
-  await frame.locator("#pet-settings-dock").waitFor({ state: "visible" });
+  await frame.locator("[data-pet-settings-panel]").waitFor({ state: "visible" });
 }
 async function saveIdentity(page, includeAudio = false) {
   await page.evaluate((includeAudio) => {
@@ -134,21 +139,33 @@ async function capture(page, filename) {
 }
 
 test("one native Bob document and audio object survive Home, article, Library, filters, Back and menus", async () => {
-  const { context, page, errors, requests } = await createPage();
+  const { context, page, errors, requests, recommendationRequests } = await createPage();
   try {
     const frame = await start(page); await settings(frame);
     await frame.getByRole("button", { name: "Play music", exact: true }).click();
     await frame.waitForFunction(() => window.__qaAudioElements.some((audio) => !audio.paused && audio.currentTime > .08));
     await saveIdentity(page, true);
-    await frame.locator("[data-pet-talk-button]").click();
-    await frame.locator("[data-pet-interview-paper]").waitFor({ state: "visible" });
-    const question = await frame.locator("[data-pet-interview-paper]").textContent();
+    assert.equal(await frame.locator("[data-pet-talk-button]").count(), 0, "The site adapter must remove the scripted Talk button.");
+    await frame.locator("[data-pet-settings-button]").click();
+    await frame.locator("[data-pet-settings-panel]").waitFor({ state: "hidden" });
+    await frame.locator("[data-pet-reading-composer]").waitFor({ state: "visible" });
+    const localLauncher = frame.getByRole("button", { name: "Explore collections", exact: false });
+    if (await localLauncher.isVisible()) await localLauncher.click();
+    else await page.locator(".bob-reading-launch").click();
+    const chooser = page.locator(".bob-reading[data-state='collections']");
+    await chooser.waitFor({ state: "visible" });
+    assert.equal(await chooser.locator(".bob-reading__collection").count(), 3);
+    await chooser.locator(".bob-reading__collection").first().click();
+    const choices = page.locator(".bob-reading[data-state='collection'] a.bob-reading__title");
+    await choices.first().waitFor({ state: "visible" });
+    assert.equal(await choices.count(), 3);
+    const readingChoices = await choices.allTextContents();
     await page.locator(".nav__desktop .nav-disclosure--read > summary").click();
     await page.waitForTimeout(200); await assertIdentity(page, true);
     await page.locator(".nav__desktop .nav-disclosure--read > summary").click();
-    await frame.locator("[data-pet-interview-paper]").waitFor({ state: "visible" });
-    assert.equal(await frame.locator("[data-pet-interview-paper]").textContent(), question, "Menu concealment must preserve Talk's current question.");
-    await frame.locator("[data-pet-talk-button]").click();
+    await choices.first().waitFor({ state: "visible" });
+    assert.deepEqual(await choices.allTextContents(), readingChoices, "Menu concealment must preserve the current reading choices.");
+    await page.getByRole("button", { name: "Dismiss reading suggestions", exact: true }).click();
     await frame.getByRole("button", { name: "Collapse music and settings", exact: true }).click();
     await firstArticle(page); await assertIdentity(page, true);
     await footerLink(page, "Library", "/library/"); await assertIdentity(page, true);
@@ -183,6 +200,7 @@ test("one native Bob document and audio object survive Home, article, Library, f
     assert.ok(final.currentTime > final.initialTime + .5, "Music time must advance through the entire route sequence.");
     assert.equal(requests.filter((request) => request.type === "document" && request.url === "/companion-bob/runtime/").length, 1,
       "The runtime document must load only once.");
+    assert.deepEqual(recommendationRequests, [], "Collection discovery and navigation must not call the recommendation endpoint.");
     assert.deepEqual(errors, []);
   } finally { await context.close(); }
 });

@@ -29,17 +29,21 @@ async function createPage(options = {}) {
     ...(options.storageState ? { storageState: options.storageState } : {}),
   });
   if (options.initScript) await context.addInitScript(options.initScript);
-  const errors = [], requests = [];
+  const errors = [], requests = [], recommendationRequests = [];
   const page = await context.newPage();
   page.setDefaultTimeout(12000);
   page.on("pageerror", (error) => errors.push(error.message));
   await context.route("**/*", async (route) => {
     const url = new URL(route.request().url());
+    if (url.pathname === "/api/bob/recommend") {
+      recommendationRequests.push(url.pathname);
+      return route.abort("blockedbyclient");
+    }
     if (url.origin !== baseURL.origin) return route.abort("blockedbyclient");
     requests.push(url.pathname);
     return route.continue();
   });
-  return { context, page, requests, errors };
+  return { context, page, requests, errors, recommendationRequests };
 }
 
 function savedVisitor(value) {
@@ -178,12 +182,23 @@ async function dragBob(page, frame, target, touch = false) {
   return bobState(page);
 }
 async function openSettings(page, frame) {
+  if (await frame.locator("[data-pet-settings-panel]").isVisible()) return;
   const point = (await spritePixels(frame)).point;
   await page.mouse.move(point.x, point.y);
   await frame.locator("[data-pet-settings-button]").click();
-  await frame.locator("#pet-settings-dock").waitFor({ state: "visible" });
+  await frame.locator("[data-pet-settings-panel]").waitFor({ state: "visible" });
   assert.equal(await page.locator("dialog[open]").count(), 0, "Native Bob controls must not open a site modal.");
   assert.notEqual(await page.locator("body").evaluate((body) => getComputedStyle(body).overflow), "hidden", "Native controls must not lock site scrolling.");
+}
+async function collapseControls(frame) {
+  // Reading now opens with JUKE-BOB. Stowed-position and transparent-space
+  // checks must first close its actual opaque controls; open layout has its
+  // own reading/browser coverage.
+  if (await frame.locator("#pet-settings-dock").isVisible()) {
+    await frame.getByRole("button", { name: "Collapse music and settings", exact: true }).click();
+    await frame.locator("#pet-settings-dock").waitFor({ state: "hidden" });
+    await frame.waitForTimeout(80);
+  }
 }
 async function assertHiddenBob(page) {
   await waitForMode(page, "hidden");
@@ -208,7 +223,7 @@ async function assertHiddenBob(page) {
   return restore;
 }
 async function exerciseHideRestore(page, frame, screenshotName) {
-  if (!await frame.locator("#pet-settings-dock").isVisible()) await openSettings(page, frame);
+  if (!await frame.locator("[data-pet-settings-panel]").isVisible()) await openSettings(page, frame);
   await frame.getByRole("button", { name: "Play music", exact: true }).click();
   await frame.getByRole("button", { name: "Pause music", exact: true }).waitFor();
   const hide = frame.getByRole("button", { name: "Hide Bob", exact: true });
@@ -250,6 +265,9 @@ async function exerciseHideRestore(page, frame, screenshotName) {
   await frame.waitForFunction(() => document.activeElement === document.querySelector("canvas"));
   const restoredAnchor = (await bobState(page)).anchor;
   await page.keyboard.press("ArrowLeft"); await waitForMode(page, "free");
+  // A restored free-position pet is already in free mode. Wait for the
+  // cross-frame position message, not merely the unchanged mode flag.
+  await page.waitForFunction((previous) => JSON.parse(window.render_bob_to_text()).anchor.x < previous.x, restoredAnchor);
   assert.ok((await bobState(page)).anchor.x < restoredAnchor.x, "Restored Bob must respond to keyboard movement.");
   await frame.locator("[data-pet-settings-button]").focus();
   await page.keyboard.press("Enter");
@@ -261,17 +279,41 @@ function assertNear(actual, expected, label, tolerance = 3) {
   assert.ok(Math.abs(actual.x - expected.x) <= tolerance && Math.abs(actual.y - expected.y) <= tolerance,
     `${label}: ${JSON.stringify(actual)} vs ${JSON.stringify(expected)}`);
 }
-async function assertTalkPaperFits(frame) {
-  const layout = await frame.locator("[data-pet-interview-paper]").evaluate((paper) => {
-    const rect = (element) => { const box = element.getBoundingClientRect(); return { x: box.x, y: box.y, width: box.width, height: box.height }; };
-    return { paper: rect(paper), text: paper.textContent, question: rect(paper.querySelector(".pet-interview-paper__question")), answers: rect(paper.querySelector(".pet-interview-paper__answers")) };
-  });
-  for (const name of ["question", "answers"]) {
-    const box = layout[name], paper = layout.paper;
-    assert.ok(box.y >= paper.y - 1 && box.y + box.height <= paper.y + paper.height + 1,
-      `Talk ${name} must fit its visible paper and clipping island: ${JSON.stringify(layout)}`);
+async function assertReadingComposerFits(frame) {
+  const composer = frame.locator("[data-pet-reading-composer]");
+  await composer.waitFor({ state: "visible" });
+  assert.equal(await frame.locator("[data-pet-talk-button]").count(), 0, "The site adapter must replace Talk with the reading composer.");
+  assert.equal(await frame.locator("[data-pet-interview-paper]").count(), 0, "Reading discovery must not open the old scripted interview.");
+  await assertInViewport(composer, "Bob reading composer");
+  const input = composer.getByRole("textbox", { name: "What would you like to read about?", exact: true });
+  if (await input.count()) {
+    assert.equal(await input.getAttribute("placeholder"), "What would you like to read about?");
+    await assertInViewport(input, "Bob reading input");
+  } else {
+    await composer.getByRole("button", { name: "Explore collections", exact: false }).waitFor({ state: "visible" });
   }
-  return layout;
+  return composer.boundingBox();
+}
+async function exerciseReadingDiscovery(page, frame) {
+  await assertReadingComposerFits(frame);
+  if (await frame.locator("[data-pet-settings-panel]").isVisible()) {
+    await frame.locator("[data-pet-settings-button]").click();
+    await frame.locator("[data-pet-settings-panel]").waitFor({ state: "hidden" });
+  }
+  const localLauncher = frame.getByRole("button", { name: "Explore collections", exact: false });
+  if (await localLauncher.isVisible()) await localLauncher.click();
+  else await page.locator(".bob-reading-launch").click();
+  const chooser = page.locator(".bob-reading[data-state='collections']");
+  await chooser.waitFor({ state: "visible" });
+  const collections = chooser.locator(".bob-reading__collection");
+  assert.equal(await collections.count(), 3, "Discovery must offer three real collection choices.");
+  assert.equal(new Set(await collections.allTextContents()).size, 3, "Collection choices must be distinct.");
+  await assertInViewport(chooser, "Bob collection choices");
+  await collections.first().click();
+  const picks = page.locator(".bob-reading[data-state='collection']");
+  await picks.waitFor({ state: "visible" });
+  assert.equal(await picks.locator("a.bob-reading__title").count(), 3, "A newly chosen eligible collection must offer three pieces.");
+  await assertInViewport(picks, "Bob reading suggestions");
 }
 
 test("the real pet starts in the masthead above the reader note, greets once, and stays silent before interaction", async () => {
@@ -322,6 +364,7 @@ test("homepage Bob docks on scroll and transparent iframe space passes website c
   try {
     await visit(page);
     const frame = await runtime(page), original = (await bobState(page)).anchor;
+    await collapseControls(frame);
     const themeBefore = await page.locator("html").getAttribute("data-theme");
     await page.locator("[data-theme-toggle]").click();
     assert.notEqual(await page.locator("html").getAttribute("data-theme"), themeBefore, "Website controls beneath transparent overlay space must receive clicks.");
@@ -356,23 +399,25 @@ test("trusted mouse drag persists through scrolling, reload, article navigation 
   } finally { await context.close(); }
 });
 
-test("native Help, Talk, Activity, Sound and music work without a modal", async (t) => {
-  const { context, page, errors } = await createPage();
+test("native Help, reading discovery, Activity, Sound and music work without a modal", async (t) => {
+  const { context, page, errors, recommendationRequests } = await createPage();
   try {
     await visit(page); const frame = await runtime(page);
     await frame.locator("[data-pet-settings-button]").focus();
     await page.keyboard.press("Enter");
-    await frame.locator("#pet-settings-dock").waitFor({ state: "visible" });
+    await frame.locator("[data-pet-settings-panel]").waitFor({ state: "visible" });
     assert.equal(await page.locator("dialog[open]").count(), 0, "Keyboard access to native controls must not open a site modal.");
     assert.notEqual(await page.locator("body").evaluate((body) => getComputedStyle(body).overflow), "hidden", "Native controls must not lock site scrolling.");
-    await frame.locator("[data-pet-help-button]").click(); await frame.locator(".pet-help-panel").waitFor(); await screenshot(page, "desktop-native-help");
+    await frame.locator("[data-pet-help-button]").click(); await frame.locator(".pet-help-panel").waitFor();
+    await page.waitForTimeout(350);
+    assert.equal(await frame.locator(".pet-help-panel").isVisible(), true,
+      "Initial reading presentation must not close Help after the reader opens it.");
+    await screenshot(page, "desktop-native-help");
     await frame.getByRole("button", { name: "Close how to play", exact: true }).click();
-    await frame.locator("[data-pet-talk-button]").click(); await frame.locator("[data-pet-interview-paper]").waitFor({ state: "visible" }); await screenshot(page, "desktop-native-talk");
-    const paperLayout = await assertTalkPaperFits(frame);
-    t.diagnostic(`Talk layout: ${JSON.stringify(paperLayout)}`);
-    await frame.locator("[data-pet-interview-paper]").getByRole("button", { name: "Yes", exact: true }).click();
-    await frame.waitForFunction(() => window.__idleTimesPetDebug?.play?.answer === "yes");
-    await frame.locator("[data-pet-interview-paper]").waitFor({ state: "hidden" });
+    await exerciseReadingDiscovery(page, frame); await screenshot(page, "desktop-reading-discovery");
+    t.diagnostic(`Reading composer layout: ${JSON.stringify(await assertReadingComposerFits(frame))}`);
+    await page.getByRole("button", { name: "Dismiss reading suggestions", exact: true }).click();
+    await openSettings(page, frame);
     await frame.getByRole("button", { name: "Pet activity settings", exact: true }).click(); await frame.locator("[data-pet-activity-panel]").waitFor();
     await frame.getByRole("button", { name: "Close activity settings", exact: true }).click();
     await frame.getByRole("button", { name: "Pet sound settings", exact: true }).click(); await frame.getByRole("switch", { name: "Pet sounds", exact: true }).waitFor();
@@ -380,6 +425,7 @@ test("native Help, Talk, Activity, Sound and music work without a modal", async 
     await frame.getByRole("button", { name: "Play music", exact: true }).click(); await frame.getByRole("button", { name: "Pause music", exact: true }).waitFor();
     await frame.getByRole("button", { name: "Pause music", exact: true }).click(); await frame.getByRole("button", { name: "Play music", exact: true }).waitFor();
     await frame.getByRole("button", { name: "Collapse music and settings", exact: true }).click(); await frame.locator("#pet-settings-dock").waitFor({ state: "hidden" });
+    assert.deepEqual(recommendationRequests, [], "Collection discovery must not call the recommendation endpoint.");
     assert.deepEqual(errors, []);
   } finally { await context.close(); }
 });
@@ -436,9 +482,10 @@ test("reduced motion reaches native Bob while retaining the greeting", async () 
 
 for (const viewport of [{ width: 390, height: 844 }, { width: 320, height: 740 }]) {
   test(`trusted touch dragging and native controls fit a ${viewport.width}px mobile viewport`, async () => {
-    const { context, page, errors } = await createPage({ viewport, touch: true });
+    const { context, page, errors, recommendationRequests } = await createPage({ viewport, touch: true });
     try {
       await visit(page); const frame = await runtime(page); await waitForGreeting(page, "Hi!");
+      await collapseControls(frame);
       await assertMastheadHome(page, frame); await assertReaderNoteFirst(page); await assertNoPageOverflow(page);
       const settingsBox = await frame.locator("[data-pet-settings-button]").boundingBox();
       const themeBox = await page.locator(".masthead [data-theme-toggle]").boundingBox();
@@ -456,12 +503,11 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 320, height: 740 }
       await assertInViewport(frame.locator("[data-pet-settings-panel]"), "Mobile native settings");
       await assertNoPageOverflow(page); await screenshot(page, `mobile-${viewport.width}-native-help`);
       await frame.getByRole("button", { name: "Close how to play", exact: true }).click();
-      await frame.locator("[data-pet-talk-button]").click(); await frame.locator("[data-pet-interview-paper]").waitFor({ state: "visible" });
-      await assertTalkPaperFits(frame); await assertInViewport(frame.locator("[data-pet-interview-paper]"), "Mobile Talk paper");
-      await screenshot(page, `mobile-${viewport.width}-native-talk`);
-      await frame.locator("[data-pet-interview-paper]").getByRole("button", { name: "Yes", exact: true }).click();
-      await frame.waitForFunction(() => window.__idleTimesPetDebug?.play?.answer === "yes");
+      await exerciseReadingDiscovery(page, frame);
+      await screenshot(page, `mobile-${viewport.width}-reading-discovery`);
+      await page.getByRole("button", { name: "Dismiss reading suggestions", exact: true }).click();
       await exerciseHideRestore(page, frame, `mobile-${viewport.width}`);
+      assert.deepEqual(recommendationRequests, [], "Mobile collection browsing must not call the recommendation endpoint.");
       assert.deepEqual(errors, []);
     } finally { await context.close(); }
   });
@@ -497,6 +543,7 @@ test("dark theme reaches native Bob, who follows article and custom 404 navigati
   const { context, page, errors } = await createPage();
   try {
     await visit(page); let frame = await runtime(page);
+    await collapseControls(frame);
     if (await page.locator("html").getAttribute("data-theme") !== "dark") await page.locator("[data-theme-toggle]").click();
     await frame.waitForFunction(() => document.documentElement.dataset.theme === "dark"); await screenshot(page, "desktop-dark");
     await visit(page, "/essays/one-more-block/"); await waitForNoGreeting(page); frame = await runtime(page);

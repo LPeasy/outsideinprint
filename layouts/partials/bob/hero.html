@@ -1,0 +1,18 @@
+{{- /* Match the article's hero/portrait selection, never a related Gallery image. */ -}}
+{{- $page := . -}}
+{{- $ref := $page.Params.featured_image | default "" -}}
+{{- $alt := $page.Params.featured_image_alt | default $page.Title -}}
+{{- if eq (partial "article/variant-key.html" $page) "modernbio" -}}
+  {{- with $page.Params.portrait_image -}}
+    {{- $ref = . -}}
+    {{- $alt = $page.Params.portrait_image_alt | default $page.Params.featured_image_alt | default $page.Title -}}
+  {{- end -}}
+{{- end -}}
+{{- $image := dict "src" "" "alt" "" "width" 0 "height" 0 -}}
+{{- with $ref -}}
+  {{- $model := partial "images/model.html" (dict "page" $page "ref" . "display" true) -}}
+  {{- /* The catalog describes the canonical release even in a loopback preview. */ -}}
+  {{- $url := urls.Parse ($model.fallback_url | absURL) -}}
+  {{- $image = dict "src" (printf "https://outsideinprint.org%s" $url.Path) "alt" $alt "width" $model.intrinsic_width "height" $model.intrinsic_height -}}
+{{- end -}}
+{{- return $image -}}

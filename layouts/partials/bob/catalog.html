@@ -1,0 +1,36 @@
+{{- $library := partial "library/resolve-entries.html" . -}}
+{{- $items := slice -}}
+{{- $ids := slice -}}
+{{- range sort $library.entries "id" -}}
+  {{- if partial "collections/is-published.html" .page -}}
+    {{- $ids = $ids | append .id -}}
+    {{- $items = $items | append (dict
+      "id" .id "url" (printf "https://outsideinprint.org%s" .page.RelPermalink) "title" .title
+      "type" .type_key "readingTime" .reading_time "summary" .summary
+      "topics" .topics "tags" .tags "collectionSlugs" .collection_slugs
+      "image" (partial "bob/hero.html" .page)
+    ) -}}
+  {{- end -}}
+{{- end -}}
+{{- $collections := slice -}}
+{{- range partial "collections/get-public-entries.html" . -}}
+  {{- if .state.public -}}
+    {{- $memberIds := slice -}}
+    {{- range .items -}}
+      {{- if in $ids .RelPermalink -}}
+        {{- $memberIds = $memberIds | append .RelPermalink -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $memberIds = sort (uniq $memberIds) -}}
+    {{- if ge (len $memberIds) 3 -}}
+      {{- $collections = $collections | append (dict
+        "id" .collection.slug "title" .collection.title "url" (printf "https://outsideinprint.org%s" .page.RelPermalink)
+        "description" (.collection.description | default "")
+        "itemIds" $memberIds "itemCount" (len $memberIds)
+      ) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $collections = sort $collections "id" -}}
+{{- $version := crypto.SHA256 (dict "items" $items "collections" $collections | jsonify) -}}
+{{- return (dict "version" 1 "catalogVersion" $version "generatedAt" (now.UTC.Format "2006-01-02T15:04:05Z") "count" (len $items) "items" $items "collections" $collections) -}}

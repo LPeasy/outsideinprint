@@ -31,6 +31,8 @@ test("browser selection follows rendering, applications, storefronts and helpers
 test("workers and documentation do not need Hugo; mixed changes preserve all selected work", () => {
   assert.equal(classifyPaths(["workers/oip-commerce/src/index.mjs"]).site, false);
   assert.equal(classifyPaths(["workers/oip-commerce/test/commerce.test.mjs"]).worker, true);
+  assert.equal(classifyPaths(["workers/oip-bob/src/index.js"]).site, false);
+  assert.equal(classifyPaths(["workers/oip-bob/test/budget.test.mjs"]).worker, true);
   assert.equal(classifyPaths(["docs/publishing-workflow.md", "README.md"]).site, false);
   const mixed = classifyPaths(["workers/oip-commerce/src/index.mjs", "content/essays/new.md"]);
   assert.equal(mixed.site && mixed.worker, true);

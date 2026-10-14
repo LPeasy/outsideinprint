@@ -1,5 +1,6 @@
 /public/
 /node_modules/
+/.wrangler/
 /.deploy-reports/
 /resources/_gen/
 /resources/typst_build/
