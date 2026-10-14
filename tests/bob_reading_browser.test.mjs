@@ -11,6 +11,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 let base=process.env.OIP_BASE_URL?new URL(process.env.OIP_BASE_URL):null;
 if(base)assert.ok(['localhost','127.0.0.1','[::1]'].includes(base.hostname));
 const output=process.env.OIP_BOB_OUTPUT||path.join(root,'output/playwright/bob-reading');
+const mockApiOrigin='http://127.0.0.1:8787';
 let browser,catalog,server;
 const defaults={version:1,topic:'',mood:'',formats:[],minMinutes:null,maxMinutes:null,excludedTopics:[],discovery:false,anchorId:null};
 test.before(async()=>{
@@ -33,6 +34,15 @@ test.before(async()=>{
   const response=await fetch(new URL('/companion-bob/catalog.json',base));assert.equal(response.status,200);catalog=await response.json();
 });
 test.after(async()=>{await browser?.close();if(server)await new Promise(resolve=>server.close(resolve));});
+function setFixtureAttribute(html,name,value){
+  // Hugo --minify removes optional attribute quotes in production. Configure
+  // both forms explicitly, and fail here if the host contract ever changes.
+  const pattern=new RegExp('(\\s'+name+'\\s*=\\s*)(?:"[^"]*"|\'[^\']*\'|[^\\s"\'=<>`]+)','g');
+  let count=0;
+  const updated=html.replace(pattern,(_match,prefix)=>{count++;return `${prefix}"${value}"`;});
+  assert.equal(count,1,`Expected exactly one ${name} fixture attribute.`);
+  return updated;
+}
 async function setup(width=1440,disabled=false){
   const context=await browser.newContext({viewport:{width,height:width===1440?900:844},isMobile:width<600,hasTouch:width<600});
   const page=await context.newPage(),requests=[],errors=[],plans=[];
@@ -40,6 +50,7 @@ async function setup(width=1440,disabled=false){
   await context.route('**/*',async route=>{
     const url=new URL(route.request().url());
     if(url.pathname.startsWith('/api/bob/')){
+      assert.equal(url.origin,mockApiOrigin,'Bob API requests must use the explicit local fixture origin.');
       requests.push({path:url.pathname,body:route.request().postDataJSON()});
       if(url.pathname.endsWith('/status'))return route.fulfill({json:{configured:true,model:'gpt-6-luna',catalogCount:catalog.count,catalogVersion:catalog.catalogVersion}});
       const plan=plans.shift();assert.ok(plan,'Every recommendation call must have an explicit mocked response');
@@ -47,7 +58,10 @@ async function setup(width=1440,disabled=false){
     }
     if(url.origin!==base.origin)return route.abort('blockedbyclient');
     if(route.request().isNavigationRequest()&&route.request().frame()===page.mainFrame()){
-      const response=await route.fetch();const html=(await response.text()).replace(/data-bob-reading-enabled="[^"]*"/,`data-bob-reading-enabled="${!disabled}"`).replace(/data-bob-api-base="[^"]*"/,'data-bob-api-base="http://127.0.0.1:8787"');return route.fulfill({response,body:html});
+      const response=await route.fetch();
+      let html=setFixtureAttribute(await response.text(),'data-bob-reading-enabled',String(!disabled));
+      html=setFixtureAttribute(html,'data-bob-api-base',disabled?'':mockApiOrigin);
+      return route.fulfill({response,body:html});
     }
     return route.continue();
   });
@@ -56,6 +70,9 @@ async function setup(width=1440,disabled=false){
   await frame.locator('[data-pet-reading-composer]').waitFor({state:'visible'});
   await page.waitForFunction(()=>window.render_bob_reading_to_text);
   const state=()=>page.evaluate(()=>JSON.parse(window.render_bob_reading_to_text()));
+  assert.equal(await page.locator('[data-bob-companion]').getAttribute('data-bob-reading-enabled'),String(!disabled));
+  assert.equal(await page.locator('[data-bob-companion]').getAttribute('data-bob-api-base'),disabled?'':mockApiOrigin);
+  assert.equal((await state()).apiEnabled,!disabled,'The fixture must control effective API enablement.');
   const postCount=()=>requests.filter(request=>request.path.endsWith('/recommend')).length;
   const plan=(data,status=200)=>{let release;plans.push({data,status,wait:new Promise(resolve=>{release=resolve;})});return release;};
   const data=(extra={})=>({items:catalog.items.slice(0,3),preferences:defaults,message:'',outcome:'results',recoveryActions:[],model:'gpt-6-luna',catalogCount:catalog.count,catalogVersion:catalog.catalogVersion,...extra});
