@@ -44,7 +44,7 @@ try {
     [void](New-Item -ItemType Directory -Path (Join-Path $fixture $directory) -Force)
   }
   Copy-Item -LiteralPath (Join-Path $repoRoot 'layouts/partials/collections') -Destination (Join-Path $fixture 'layouts/partials/collections') -Recurse
-  foreach ($partial in @('newsletter_signup.html', 'almanack/latest-issue-url.html')) {
+  foreach ($partial in @('newsletter_signup.html', 'newsletter_attribution_fields.html', 'almanack/latest-issue-url.html')) {
     Copy-Item -LiteralPath (Join-Path $repoRoot "layouts/partials/$partial") -Destination (Join-Path $fixture "layouts/partials/$partial")
   }
   $configOutput = & $HugoPath config --source $repoRoot --format json 2>&1

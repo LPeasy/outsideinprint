@@ -21,6 +21,10 @@ The next CI run reached the public-route checks and exposed a stale September 15
 privacy-date assertion. It now expects the approved October 15 date. The focused
 storefront source contract, newsletter proposition test and all eight privacy-text
 comparisons passed; the complete CI suite must confirm the updated PR head.
+CI then passed the public-route check and exposed a separate isolated discovery
+fixture that omitted `newsletter_attribution_fields.html`. Its partial-copy list
+now includes that dependency, and both existing `-FixtureOnly` clock scenarios
+passed. The remaining fixture-copy sites were audited for the same dependency.
 `git diff --check` passed.
 The aggregate baseline and weekly-report commands ran against the actual private
 read-only baseline capture; the output correctly marks missing CSV metrics,
