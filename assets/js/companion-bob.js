@@ -336,5 +336,10 @@ function initialize() {
   });
   if (!window.render_game_to_text) window.render_game_to_text = window.render_bob_to_text;
   if (!window.advanceTime) window.advanceTime = ms => new Promise(resolve => setTimeout(resolve, Math.max(0, ms)));
-  initializeBobReading(host);
+  initializeBobReading(host, { onNavigate() {
+    pendingOpen = false;
+    pendingFocus = false;
+    home();
+    send({ type: 'home' });
+  } });
 }

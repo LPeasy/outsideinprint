@@ -1,5 +1,5 @@
 // Catalog-backed reading and free collection discovery. No provider key belongs here.
-export function initializeBobReading(host) {
+export function initializeBobReading(host, { onNavigate } = {}) {
 if (!host || host.dataset.readingInitialized === 'true') return;
 host.dataset.readingInitialized = 'true';
 const CHANNEL = 'oip-site-bob-v1';
@@ -520,6 +520,13 @@ async function recommend(raw, options={}) {
     }
   }
 }
+function followReadingLink(event) {
+  if (event.defaultPrevented || event.altKey || ![0,1].includes(event.button)) return;
+  dismissed = true; focusIntent = null; bubble.hidden = true;
+  host.dataset.readingActive = 'false'; hideCard(); reserveTop(0);
+  // Clear placement before native navigation too, including a new tab or reload fallback.
+  onNavigate?.();
+}
 function renderResults() {
   body.replaceChildren();
   bubble.dataset.mode=discoveryMode;
@@ -534,6 +541,8 @@ function renderResults() {
     const li = node('li','bob-reading__item');
     const main = node('div');
     const link = node('a','bob-reading__title',item.title); link.href=safePath(item);
+    link.addEventListener('click',followReadingLink);
+    link.addEventListener('auxclick',followReadingLink);
     link.title=item.title;
     link.addEventListener('pointermove',event=> {if(event.pointerType!=='touch'&&matchMedia('(hover:hover)').matches&&!busy) scheduleCard(item,link);});
     link.addEventListener('pointerleave',scheduleClose);
@@ -585,6 +594,8 @@ function showCard(item,trigger){
   const dismiss=node('button','bob-card__close','×');dismiss.type='button';dismiss.setAttribute('aria-label','Close article preview');
   dismiss.addEventListener('click',()=>{const previous=currentTrigger;hideCard();restoreTriggerFocus(previous);});
   const content=node('div','bob-card__body');const read=node('a','bob-card__read','Read this piece →');read.href=safePath(item);
+  read.addEventListener('click',followReadingLink);
+  read.addEventListener('auxclick',followReadingLink);
   content.append(node('p','bob-card__meta',meta(item)),node('h2','bob-card__title',item.title),node('p','bob-card__summary',item.summary),read);
   if(image)card.append(image);
   card.append(dismiss,content);card.hidden=false;placeCard(trigger);
