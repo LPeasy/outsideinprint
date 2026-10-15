@@ -86,9 +86,9 @@ test("masthead proof sits between its controls and lead summaries keep supportin
   assert.equal((homeV2.match(/partial "discovery\/page-summary\.html"/g) || []).length, 1);
 });
 
-test("featured reading leads with Jack Stratton, then the latest publication and curated supports", () => {
+test("featured reading leads with Benjamin Franklin, then the latest publication and curated supports", () => {
   const routes = [
-    "/essays/jack-stratton-and-the-vulfpeck-model/",
+    "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/",
     "/essays/the-noise-of-the-crowd/",
     "/essays/the-coin-slot-on-the-corner/",
     "/essays/togetherness/",
@@ -98,7 +98,7 @@ test("featured reading leads with Jack Stratton, then the latest publication and
   assert.deepEqual(indexes, [...indexes].sort((left, right) => left - right));
   assert.doesNotMatch(selected, /what-happened-at-camp-mystic|why-a-return-to-the-gold-standard|the-little-prince|russias-slow-surrender/);
   assert.match(selected, /\$eligible = sort \(sort \$eligible "Title" "asc"\) "PublishDate" "desc"/);
-  assert.match(selected, /\$flagshipRoute := "\/essays\/jack-stratton-and-the-vulfpeck-model\/"/);
+  assert.match(selected, /\$flagshipRoute := "\/essays\/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible\/"/);
   assert.match(selected, /range where \$eligible "RelPermalink" \$flagshipRoute/);
   assert.match(selected, /range first 1 \$eligible/);
   assert.ok(selected.indexOf('range where $eligible "RelPermalink" $flagshipRoute') < selected.indexOf("range first 1 $eligible"));
@@ -233,7 +233,7 @@ test("homepage follows the proof, note, featured reading, library, newsletter, c
   assert.doesNotMatch(homeV2, /home-bookstore|home-almanack|home-selected-collections|home_2045_launch|Bob(?:'|’)s Almanack/);
 });
 
-test("featured lead reuses a published image and responsive rendering", () => {
+test("featured lead prefers its published Gallery illustration while retaining responsive rendering", () => {
   assert.match(homeV2, /with \$page\.Params\.featured_image/);
   assert.match(homeV2, /partial "images\/model\.html"/);
   assert.match(homeV2, /<div class="home-v2-featured__art">[\s\S]*?<a class="home-v2-featured__lead-media" href="\{\{ \$page\.RelPermalink \}\}"/);
@@ -286,7 +286,10 @@ test("supporting cards retain semantic heading order, compact side-by-side copy,
   assert.match(homeV2, /resources\.Get "js\/home-featured-image\.js" \| minify \| fingerprint "sha384"/);
   assert.match(featuredImageButton, /<button\b[^>]*type="button"[^>]*data-home-featured-image-trigger[^>]*aria-haspopup="dialog"[^>]*aria-controls="home-featured-image-dialog" hidden>/);
   assert.match(featuredImageButton, /data-image="\{\{ \$model\.lightbox_url \}\}"/);
-  assert.match(featuredImageButton, /data-alt="\{\{ \$page\.Params\.featured_image_alt/);
+  assert.match(homeV2, /partial "editorial\/cartoon-for-page\.html" \$page/);
+  assert.match(featuredImageButton, /\$alt := \$page\.Params\.featured_image_alt/);
+  assert.match(featuredImageButton, /if isset \. "alt"[\s\S]*\$alt = \.alt/);
+  assert.match(featuredImageButton, /data-alt="\{\{ \$alt \}\}"/);
   assert.match(featuredImageButton, /<a\b[^>]*data-home-featured-image-fallback[^>]*href="\{\{ \$model\.lightbox_url \}\}"/);
   for (const tag of ["button", "a"]) {
     const artwork = featuredImageButton.match(new RegExp(`<${tag}\\b[^>]*>([\\s\\S]*?)<\\/${tag}>`))?.[1];

@@ -128,7 +128,7 @@ if ($homeFrontPageTemplate -notmatch [regex]::Escape('partial "home_v2_front_pag
 
 $homeSelectionTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_v2_selected.html') -Raw -Encoding utf8
 $featuredRoutes = @(
-  '"/essays/jack-stratton-and-the-vulfpeck-model/"',
+  '"/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/"',
   '"/essays/the-noise-of-the-crowd/"',
   '"/essays/the-coin-slot-on-the-corner/"',
   '"/essays/togetherness/"'
@@ -144,7 +144,7 @@ foreach ($route in $featuredRoutes) {
 foreach ($requiredSnippet in @(
   'partial "archive/longform-kind.html"',
   '$eligible = sort (sort $eligible "Title" "asc") "PublishDate" "desc"',
-  '$flagshipRoute := "/essays/jack-stratton-and-the-vulfpeck-model/"',
+  '$flagshipRoute := "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/"',
   'range where $eligible "RelPermalink" $flagshipRoute',
   'range first 1 $eligible',
   'not (in $selectedPaths .RelPermalink)',
