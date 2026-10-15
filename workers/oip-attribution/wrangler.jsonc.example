@@ -8,7 +8,9 @@
   "observability": { "enabled": false },
   "vars": {
     "SIGNUPS_ENABLED": "false",
+    "TEST_ONLY_MODE": "true",
     "RECONCILIATION_ENABLED": "false",
+    "RETENTION_ENABLED": "false",
     "ALLOWED_ORIGINS": "https://outsideinprint.org,https://www.outsideinprint.org",
     "NEWSLETTER_ID": "",
     "WEBHOOK_ID": "",
@@ -21,7 +23,7 @@
   },
   "d1_databases": [{
     "binding": "DB", "database_name": "oip-attribution",
-    "database_id": "REPLACE_AFTER_APPROVAL", "migrations_dir": "migrations"
+    "database_id": "REPLACE_WITH_PROVISIONED_DATABASE_ID", "migrations_dir": "migrations"
   }],
   "triggers": { "crons": ["0 10 * * *", "0 0-9,11-23 * * *"] }
 }

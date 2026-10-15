@@ -31,7 +31,8 @@ foreach ($relativePath in @(
   'layouts/partials/newsletter_attribution_script.html',
   'layouts/partials/analytics.html',
   'assets/js/newsletter-attribution.js',
-  'assets/js/analytics.js'
+  'assets/js/analytics.js',
+  'assets/js/vendor/goatcounter.v5.js'
 )) { Write-Fixture $relativePath ([IO.File]::ReadAllText((Join-Path $repoRoot $relativePath))) }
 
 Write-Fixture 'layouts/partials/almanack/latest-issue-url.html' '{{ return "/collections/bobs-almanack/" }}'

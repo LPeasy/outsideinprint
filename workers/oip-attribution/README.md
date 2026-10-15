@@ -1,10 +1,11 @@
 # OIP newsletter attribution
 
 Isolated Worker + D1 service for standalone newsletter signup attribution.
-Frontend and reconciliation switches ship **disabled**. This change creates no
-Cloudflare resources, secrets, webhook, subscriber, scheduled social post, or
-production deployment. Bob, commerce, and optional EPUB newsletter preferences
-remain separate. Commerce-origin signups are an explicitly unattributed gap.
+Frontend and reconciliation switches ship **disabled**. The owner approved the
+isolated Cloudflare resources, persistent secrets, privacy notice and retention
+policy on October 15, 2026. Actual staged deployment evidence belongs in the
+rollout record. Bob, commerce, and optional EPUB newsletter preferences remain
+separate. Commerce-origin signups are an explicitly unattributed gap.
 
 ## Components
 
@@ -50,8 +51,9 @@ unknown. A canonical subscriber re-fetch determines current lifecycle state, so
 an old confirmation cannot resurrect an unsubscribe. First acquisition is unique
 per subscriber. Documented `ext_evt_` identities are retained when present and
 deduplicated. Without an event ID, undated repeated lifecycle events collapse
-rather than inventing multiple occurrences; a later dated unsubscribe may resolve
-earlier uncertainty. Real payload inspection remains a rollout requirement.
+rather than inventing multiple occurrences. An unrelated later dated unsubscribe
+does not resolve an earlier unknown-time event; those groups can overlap and must
+not be added together. Real payload inspection remains a rollout requirement.
 
 ## Local checks
 
@@ -87,6 +89,7 @@ After applying migrations, the protected endpoints use
 | `POST /admin/reconcile` | Complete paginated state reconciliation and campaign seed |
 | `POST /admin/webhook-health` | Check configured webhook status and delivery attempts |
 | `GET /admin/snapshot` | Private v1 reporting snapshot; write only to restricted storage |
+| `GET /admin/provider-status` | Protected upstream status/shape diagnostic; no response body or subscriber identities |
 | `GET /health` | Aggregate readiness only; 503 when reconciliation >36h old, health check >2h old, or webhook unhealthy |
 | `POST /webhooks/buttondown` | Signed lifecycle notification; persistence failure returns 503 |
 | `POST /signup` | Enabled forms only; accepts the client UUID and registered campaign tuple |
@@ -118,18 +121,19 @@ raising limits or switching paths automatically.
 
 ## Retention and deletion
 
-The proposal is 90 days for detailed attempts/events, followed by aggregates;
-retain only the minimal subscriber lifecycle while its Buttondown record exists.
-**The retention policy is awaiting owner approval. No automated cleanup is
-enabled in this release.** A dated 90-day review and a reviewed aggregation/purge
-implementation are required before operating beyond that window. Do not claim
-that a 90-day deletion guarantee is already enforced.
+The owner approved 90 days for detailed attempts/events on October 15, 2026.
+Apply all migrations and set `RETENTION_ENABLED=true` after validation. Cleanup
+runs only after a complete successful reconciliation. Historical acquisition
+timestamps and compact weekly unsubscribe summaries remain in the minimal
+subscriber lifecycle while its Buttondown record exists; detailed requests,
+landing paths and event identities expire. The reporting snapshot combines
+remaining details, compact summaries and anonymous historical counts.
 
 Reconciliation marks records absent from a complete list as `deleted`; failed
-fetches never imply deletion. Until the retention policy is approved, retain these
-records privately for reconciliation review. For an approved deletion request,
-confirm the provider deletion, preserve only approved aggregate counts, and remove
-the subscriber's lifecycle, signup, and event rows in one D1 transaction. Delete
-the same IDs from private exports and account for provider backup retention.
-Never retain email hashes as a deletion workaround. Existing deduplication history
-cannot survive erasure of all subscriber identifiers; document that limitation.
+fetches never imply deletion. Enabled cleanup atomically preserves eligible
+anonymous campaign/week totals and removes the subscriber's lifecycle, signup,
+event and compact-summary rows. Unknown owner/test classifications stay excluded
+from verified non-test totals and cannot be reclassified after anonymization.
+Delete the same IDs from private exports and account for provider backup retention.
+Never retain email hashes as a deletion workaround. A subscriber restored after
+complete identifier erasure cannot be linked to the erased acquisition.

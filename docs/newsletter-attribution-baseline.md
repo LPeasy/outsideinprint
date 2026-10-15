@@ -25,9 +25,11 @@ subscribers are not yet established**. Five `regular` records must not be report
 as five active non-test readers. Plus-address patterns were not used to classify
 tests.
 
-The baseline capture is available for private import/reconciliation but does not
-prove deployment, double-opt-in behavior through the new Worker, a signed
-confirmation webhook, a healthy webhook, or a successful scheduled reconciliation.
-Verify those separately before enabling the form integration. Complete the private
-owner/test review before interpreting non-test audience totals. Retain unknown
-historical sources and unknown first-confirmation timestamps as unknown.
+The deployed fresh baseline completed at **2026-10-15T16:13:59.222Z**, with the
+same nine records and classification counts. A complete deployed reconciliation
+succeeded, and the configured webhook was enabled with zero failed attempts.
+The Worker-origin signup test was blocked by Buttondown's firewall before creating
+a subscriber; confirmation delivery and the full end-to-end check remain
+unverified. Public forms retain their working Buttondown path. Complete the
+private owner/test review before interpreting non-test audience totals. Retain
+unknown historical sources and unknown first-confirmation timestamps as unknown.

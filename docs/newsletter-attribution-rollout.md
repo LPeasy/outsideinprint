@@ -1,16 +1,17 @@
 # Newsletter attribution rollout record
 
 Prepared October 15, 2026 against `origin/main` at
-`7fbf5d0af9a246afddcb15ff076bcb603f381381`. Implementation is a reviewable,
-disabled draft. Production signup still uses the existing Buttondown form.
+`7fbf5d0af9a246afddcb15ff076bcb603f381381`. The approved isolated backend is
+provisioned. Frontend activation is blocked by the provider firewall; production
+signup still uses the existing Buttondown form. The site PR remains a draft.
 
 ## Approval scope
 
-Before configuration, obtain owner approval for the isolated `oip-attribution`
-Worker and D1 database in the existing OIP Cloudflare account, persistent secret
-bindings/access, and the privacy/retention proposal below. No paid upgrade,
-firewall bypass, or forwarding of visitor IP addresses is included. Existing
-credential availability is not approval to install it as a persistent secret.
+On October 15, 2026 the owner explicitly approved provisioning the isolated
+`oip-attribution` Worker and D1 database, persistent secrets, and the proposed
+privacy and retention policy. That approval covers configuration in the existing
+OIP Cloudflare account and implementation of the 90-day detail limit. No paid
+upgrade, firewall bypass, or forwarding of visitor IP addresses is included.
 System changes require reviewed PR approval before merging under the shared OIP
 publication policy. This draft does not authorize merge or frontend activation.
 
@@ -22,15 +23,16 @@ publication policy. This draft does not authorize merge or frontend activation.
 - [x] Identify one owner and one earlier test subscriber from explicit receipts.
 - [x] Prepare register, client, service, migration, importer/report, and focused tests.
 - [ ] Review the seven unclassified baseline records privately.
-- [ ] Approve resource/access/secret configuration and privacy/retention scope.
+- [x] Approve resource/access/secret configuration and privacy/retention scope.
 - [ ] Verify the effective subscriber-creation allowance for this account.
-- [ ] Provision only the approved isolated service/database; apply the migration.
-- [ ] Install approved secrets and exact newsletter/webhook settings. Keep
-  `SIGNUPS_ENABLED`, `RECONCILIATION_ENABLED`, and the Hugo frontend switch false.
+- [x] Provision only the approved isolated service/database; apply migrations.
+- [x] Install approved secrets and exact newsletter/webhook settings. Keep
+  public signup disabled while operating reconciliation and health checks.
 - [ ] Review/publish the privacy notice with the actual activated behavior.
-- [ ] Seed campaigns and run a fresh protected baseline before accepting signups.
-- [ ] Configure one signed webhook for created, confirmed, unsubscribed,
-  type-changed, deleted, and complained events. Inspect the real test payload's
+- [x] Seed campaigns and run a fresh protected baseline before accepting signups.
+- [x] Configure one signed webhook for created, confirmed, unsubscribed,
+  type-changed, deleted, and complained events.
+- [ ] Inspect the real test payload's
   field names privately; record a redacted shape and signature-verification
   result. Do not rely on sample fields that were not actually received.
 - [ ] Enable backend signup for the controlled test while the public frontend
@@ -45,16 +47,55 @@ publication policy. This draft does not authorize merge or frontend activation.
   campaign mapping, unsubscribe, and verify current state plus test exclusion.
   Record actual event identity/time fields. If time remains unavailable, retain
   unknown confirmation time and use the separately labeled observation count.
-- [ ] Run one successful deployed reconciliation and webhook health check.
-- [ ] Enable scheduled reconciliation/health and configure failure monitoring.
+- [x] Run one successful deployed reconciliation and webhook health check.
+- [x] Enable scheduled reconciliation/health; failed checks raise Cloudflare
+  scheduled-invocation errors and `/health` reports unhealthy ledger operations.
+- [ ] Verify operator notification delivery before public activation; Cloudflare
+  metrics and the health endpoint alone do not prove an alert reaches a person.
 - [ ] Review/merge the checked site PR; activate the frontend endpoint/switch only
   after the above checks pass. Enable tab storage only after its privacy approval.
 - [ ] Verify the fresh Pages workflow receipt for exact `commitSha` and
   `generatedAtUtc`, then run one production form smoke check.
 - [ ] Produce the first report from the private snapshot and supplied provider
   CSV exports. Missing exports stay unavailable, never zero.
-- [ ] Record the approved retention review date; keep cleanup disabled until its
-  aggregation/purge implementation is reviewed and enabled explicitly.
+- [x] Record privacy/retention approval: October 15, 2026.
+- [x] Validate and enable approved aggregation/purge after complete reconciliation.
+
+## Staged backend evidence
+
+The isolated Worker is `oip-attribution`, at
+`https://oip-attribution.red-snow-678d.workers.dev`; its only database binding is
+the new `oip-attribution` D1 database. Migrations 0001–0003 applied successfully.
+API, admin and webhook-signing credentials plus private identity lists are
+Cloudflare secret bindings. Restricted local recovery files are outside Git.
+Observability logging is disabled. No paid upgrade or unrelated service changed.
+
+The deployed baseline completed at **2026-10-15T16:13:59.222Z**, with nine records,
+two known owner/test records and seven unreviewed records. A full deployed
+reconciliation with enabled retention succeeded at **16:15:21.378Z**. The webhook
+configuration was enabled with zero failed attempts; this is configuration
+evidence, not proof of a delivered confirmation.
+
+The controlled signup at **16:18:25 UTC** returned a definitive provider HTTP 400
+`subscriber_blocked`: “This subscriber was blocked by your firewall.” Exact
+lookup found no created subscriber and no confirmation email arrived. Its single
+reserved test attempt is recorded as rejected, with zero accepted acquisitions.
+No second submission path, firewall bypass or visitor-IP forwarding was used.
+See [the prepared provider follow-up](newsletter-attribution-provider-follow-up.md).
+Resolve the supported provider configuration before retrying or switching forms.
+
+Final staged settings are `SIGNUPS_ENABLED=false`, `TEST_ONLY_MODE=true`,
+`RECONCILIATION_ENABLED=true`, and `RETENTION_ENABLED=true`. Scheduled reconciliation
+runs at 10:00 UTC; the other hourly trigger checks webhook health. The Hugo
+attribution and storage switches remain false. `/health` describes ledger and
+webhook operations; a healthy response does not establish signup readiness.
+
+The runtime rejected Fetch `redirect: "error"` even though current documentation
+lists it. The service now uses `manual` and explicitly rejects every 3xx response;
+credentials never follow redirects. A regression test covers that behavior.
+Buttondown's stored headers for successful Worker GETs showed no visitor IP:
+the observed source and forwarding chain were Cloudflare addresses. Comparisons
+were made in memory; no raw IPs or header maps entered the ledger or logs.
 
 The baseline and local suite do not establish production readiness. Completion
 requires the live confirmation/campaign join, duplicate/test exclusion, successful
@@ -76,11 +117,10 @@ site rollback deploy completes, users with already-loaded enhanced forms receive
 the retry message. Record this deployment latency in incident handling; no
 automatic dual-path fallback is implemented because it can duplicate requests.
 
-## Proposed privacy notice text for review
+## Approved privacy scope
 
-This is proposed operational disclosure, not a claim about currently active
-behavior or legal certification. Replace the standalone-signup paragraph and add
-the relevant analytics/provider/retention details only as part of activation:
+The reviewed notice is prepared in `content/privacy/index.md` for the checked
+site release. It describes the service conditionally while forms remain disabled:
 
 > When you use a standalone newsletter signup form, Outside In Print's Cloudflare
 > service passes your email address to Buttondown, which sends the confirmation
@@ -103,7 +143,9 @@ the relevant analytics/provider/retention details only as part of activation:
 > Buttondown. The provider may see the service's network address. Access to the
 > ledger and private reports is restricted.
 
-The proposed 90-day detailed-record limit and subscriber-lifecycle deletion
-wording must match an approved, implemented retention procedure before becoming
-a public promise. Until then, keep this attribution integration disabled.
+The approved 90-day detailed-record limit is enforced after complete successful
+reconciliation when `RETENTION_ENABLED=true`. Compact acquisition and weekly
+lifecycle summaries remain only while the provider subscriber exists. Verified
+provider deletion replaces eligible historical counts with anonymous totals and
+removes linked private records. Private exports require the same deletion review.
 Optional commerce newsletter preferences retain their existing separate behavior.

@@ -1,5 +1,5 @@
 import register from '../../../data/newsletter_campaigns.json' with { type: 'json' };
-import { ProviderError, createSubscription, getSubscriber, subscriberId, list } from './provider.js';
+import { ProviderError, createSubscription, getSubscriber, subscriberId, list, request as providerRequest } from './provider.js';
 import { control, putControl, seedCampaigns, reserve, accept, subscriberStatements, eventStatement, reconcile, snapshot, stmt, utc, uuid } from './ledger.js';
 
 const encoder = new TextEncoder();
@@ -65,8 +65,23 @@ export async function webhook(request,env,fetcher) {
   const current=await getSubscriber(env,payload.data.subscriber,fetcher);
   const changes=current ? await subscriberStatements(env,current,observed,{confirmation:payload.event_type==='subscriber.confirmed',source:'signed_webhook',recordUnsubscribe:payload.event_type!=='subscriber.unsubscribed'}) : [stmt(env,
     "UPDATE subscribers SET status='deleted',state_observed_at=? WHERE subscriber_id=? AND state_observed_at<=?",observed,payload.data.subscriber,observed)];
+  if(!current && payload.event_type==='subscriber.confirmed') changes.push(stmt(env,
+    `UPDATE subscribers SET first_confirmation_observed_at=COALESCE(first_confirmation_observed_at,?),
+      confirmation_evidence=COALESCE(confirmation_evidence,'signed_confirmation_webhook') WHERE subscriber_id=?`,observed,payload.data.subscriber));
   if(payload.event_type==='subscriber.confirmed') changes.push(eventStatement(env,payload.data.subscriber,'confirmed',null,observed,'signed_webhook',eventId));
   if(payload.event_type==='subscriber.unsubscribed') changes.push(eventStatement(env,payload.data.subscriber,'unsubscribed',utc(current?.unsubscription_date),observed,'signed_webhook',eventId));
+  // Keep a value-free envelope receipt for designated tests. This verifies the
+  // live contract without retaining raw bodies, emails, metadata or identifiers.
+  const configured = name => { try { const values=JSON.parse(env[name] || '[]'); return Array.isArray(values)?values:[]; } catch { return []; } };
+  if(configured('TEST_SUBSCRIBER_IDS').includes(payload.data.subscriber) || configured('TEST_SIGNUP_REFS').includes(current?.metadata?.oip_signup_ref)) {
+    const shape=(value,allowed) => ({fields:Object.fromEntries(allowed.filter(key=>Object.hasOwn(value,key)).map(key=>[key,value[key]===null?'null':Array.isArray(value[key])?'array':typeof value[key]])),unknown_field_count:Object.keys(value).filter(key=>!allowed.includes(key)).length});
+    const receipt={observed_at:observed,signature_verified:true,valid_event_id:eventId!==null,
+      envelope:shape(payload,['id','event_type','data','created_at','creation_date','timestamp','date']),
+      data:shape(payload.data,['subscriber','newsletter','type','previous_type','created_at','creation_date','timestamp','date'])};
+    changes.push(stmt(env,`INSERT INTO controls(key,value) VALUES('webhook_contract',?)
+      ON CONFLICT(key) DO UPDATE SET value=json_set(controls.value,?,json(?))`,
+      JSON.stringify({[payload.event_type]:receipt}),'$."'+payload.event_type+'"',JSON.stringify(receipt)));
+  }
   changes.push(putControl(env,'last_webhook_received_at',observed));
   // D1 batch commits outcome and receipt together; any failure returns 503.
   await env.DB.batch(changes);
@@ -104,6 +119,10 @@ export async function handle(request,env,fetcher=fetch) {
     if(url.pathname.startsWith('/admin/')) {
       if(!await adminAuthorized(request,env)) return reply(401,{ok:false});
       if(request.method==='GET' && url.pathname==='/admin/snapshot') return reply(200,await snapshot(env));
+      if(request.method==='GET' && url.pathname==='/admin/provider-status') {
+        const result=await providerRequest(env,'subscribers',{},fetcher);
+        return reply(200,{provider_status:result.status,paginated_response:Array.isArray(result.body.results)});
+      }
       if(request.method==='POST' && ['/admin/baseline','/admin/reconcile'].includes(url.pathname)) {
         await seedCampaigns(env,register.campaigns);
         return reply(200,await reconcile(env,fetcher,{baseline:url.pathname==='/admin/baseline'}));
@@ -120,6 +139,10 @@ export async function handle(request,env,fetcher=fetch) {
     if(env.SIGNUPS_ENABLED!=='true' || !env.BUTTONDOWN_API_KEY || !env.NEWSLETTER_ID || !await control(env,'baseline')) return reply(503,{ok:false,code:'signup_unavailable'},origin);
     if(!(request.headers.get('Content-Type') || '').toLowerCase().startsWith('application/json')) return reply(415,{ok:false},origin);
     const {input,campaign}=validateSignup(parse(await bytes(request,4096)));
+    if(env.TEST_ONLY_MODE==='true') {
+      let refs=[]; try { refs=JSON.parse(env.TEST_SIGNUP_REFS || '[]'); } catch {}
+      if(!Array.isArray(refs) || !refs.includes(input.signup_ref)) return reply(503,{ok:false,code:'signup_unavailable'},origin);
+    }
     if(request.headers.has('Idempotency-Key') && request.headers.get('Idempotency-Key')!==input.signup_ref) throw new ProviderError('invalid_request',400);
     const now=new Date().toISOString();
     const admitted=await stmt(env,`INSERT INTO controls(key,value) VALUES(?, '1')
@@ -132,7 +155,15 @@ export async function handle(request,env,fetcher=fetch) {
       if(current?.email_address?.toLowerCase()!==input.email.toLowerCase()) throw new ProviderError('reference_conflict',409);
       return success(origin);
     }
-    const result=await createSubscription(env,input,campaign,fetcher);
+    let result;
+    try { result=await createSubscription(env,input,campaign,fetcher); }
+    catch(error) {
+      if(error instanceof ProviderError && error.code==='provider_rejected' && error.status>=400 && error.status<500 && error.status!==429) {
+        await stmt(env,"UPDATE signups SET outcome='rejected' WHERE signup_ref=? AND outcome!='accepted'",input.signup_ref).run();
+        return reply(503,{ok:false,code:'signup_unavailable'},origin);
+      }
+      throw error;
+    }
     try { await accept(env,input,result,now); }
     catch {
       // Buttondown owns the successful signup. The reserved UUID + provider
@@ -142,6 +173,7 @@ export async function handle(request,env,fetcher=fetch) {
     return success(origin);
   } catch(error) {
     const code=error instanceof ProviderError ? error.code : 'storage_unavailable';
+    if(url.pathname.startsWith('/admin/') && await adminAuthorized(request,env)) return reply(503,{ok:false,code,...(error instanceof ProviderError ? {upstream_status:error.status} : {})});
     const status=['request_too_large','invalid_json','invalid_request','invalid_campaign','reference_conflict','signup_capacity'].includes(code) ? error.status : 503;
     return reply(status,{ok:false,code:status===503?'retry_same_submission':code},origin);
   }

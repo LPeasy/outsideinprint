@@ -252,6 +252,17 @@ def validate_snapshot(snapshot):
             timestamp(item["accepted_at"])
         elif item["is_new"]:
             raise ValueError("Accepted new signup requires a provider acceptance timestamp")
+    aggregates = snapshot.get("aggregates")
+    if aggregates is not None:
+        if aggregates.get("schema_version") != 1 or not isinstance(aggregates.get("subscriber_weeks"), list) or not isinstance(aggregates.get("historical"), list):
+            raise ValueError("Unsupported retention aggregate contract")
+        aggregate_keys = set()
+        for row in aggregates["historical"]:
+            key = (row.get("week_start"), row.get("campaign_code"), row.get("metric"))
+            if key in aggregate_keys or type(row.get("value")) is not int or row["value"] < 0:
+                raise ValueError("Invalid or duplicate historical aggregate")
+            week_bounds(row["week_start"])
+            aggregate_keys.add(key)
     return {name: list(items.values()) for name, items in unique.items()}
 
 
@@ -296,6 +307,7 @@ def weekly_report(snapshot, register, week_start, db=None, now=None):
     start, end = week_bounds(week_start)
     in_week = lambda value: bool(value) and start <= timestamp(value) < end
     subscribers = {s["subscriber_id"]: s for s in data["subscribers"]}
+    aggregates = snapshot.get("aggregates") or {"subscriber_weeks": [], "historical": []}
     campaigns = {}
     def group(code):
         key = code if code in register else "unknown"
@@ -308,11 +320,21 @@ def weekly_report(snapshot, register, week_start, db=None, now=None):
                               "eventual_confirmations_from_week_signups": 0,
                               "pending_from_week_signups": 0,
                               "pending_at_snapshot": 0,
+                              "deleted_unconfirmed_from_week_signups": 0,
                               "cohort_confirmation_rate": None, "metrics": []}
         return campaigns[key]
     cohort = set()
-    for signup in sorted((s for s in data["signups"] if s.get("accepted_at")), key=lambda s: timestamp(s["accepted_at"])):
+    attempts = [s for s in data["signups"] if s.get("accepted_at")]
+    accepted_refs = {s["signup_ref"] for s in attempts if s["is_new"]}
+    for sub in subscribers.values():
+        if sub.get("acquisition_accepted_at") and sub.get("acquisition_signup_ref") not in accepted_refs:
+            attempts.append({"signup_ref": sub.get("acquisition_signup_ref") or sub["subscriber_id"],
+                             "subscriber_id": sub["subscriber_id"], "campaign_code": sub.get("campaign_code"),
+                             "accepted_at": sub["acquisition_accepted_at"], "is_new": True, "is_test": sub["is_test"]})
+    for signup in sorted(attempts, key=lambda s: timestamp(s["accepted_at"])):
         sub = subscribers.get(signup.get("subscriber_id"))
+        if sub and sub.get("acquisition_accepted_at") and sub.get("acquisition_signup_ref") == signup["signup_ref"]:
+            signup = {**signup, "accepted_at": sub["acquisition_accepted_at"]}
         identity = signup.get("subscriber_id") or signup["signup_ref"]
         if (not signup["is_new"] or signup["is_test"] is not False or (sub and (sub["is_test"] is not False or sub["is_baseline"])) or
                 not in_week(signup["accepted_at"]) or identity in cohort):
@@ -371,6 +393,16 @@ def weekly_report(snapshot, register, week_start, db=None, now=None):
             provenance.append({k: item[k] for k in ("source", "file_sha256", "date_start", "date_end", "timezone", "imported_at")})
     else:
         warnings.append("No provider CSV store supplied; traffic metrics are unavailable, not zero.")
+    historical_audience = {"unsubscribers_this_week": 0, "unsubscribers_observed_time_unknown": 0}
+    historical_metrics = {"accepted_new_signups", "confirmed_this_week", "confirmations_observed_this_week_time_unknown",
+                          "eventual_confirmations_from_week_signups", "deleted_unconfirmed_from_week_signups"}
+    for row in aggregates["historical"]:
+        if row["week_start"] != week_start:
+            continue
+        if row["metric"] in historical_audience:
+            historical_audience[row["metric"]] += row["value"]
+        elif row["metric"] in historical_metrics:
+            group(row["campaign_code"])[row["metric"]] += row["value"]
     for item in campaigns.values():
         count = item["accepted_new_signups"]
         if count:
@@ -378,15 +410,15 @@ def weekly_report(snapshot, register, week_start, db=None, now=None):
     eligible_events = [e for e in data["events"] if e.get("type") == "unsubscribed" and
                        e.get("subscriber_id") in subscribers and subscribers[e["subscriber_id"]]["is_test"] is False]
     unsubs = {e["subscriber_id"] for e in eligible_events if e.get("event_time_known") is True and in_week(e.get("occurred_at"))}
-    dated_observations = {}
-    for event in eligible_events:
-        if event.get("event_time_known") is True and event.get("occurred_at") and event.get("observed_at"):
-            observed = timestamp(event["observed_at"])
-            identity = event["subscriber_id"]
-            dated_observations[identity] = max(observed, dated_observations.get(identity, observed))
-    unknown_unsubs = {e["subscriber_id"] for e in eligible_events if e.get("event_time_known") is False and
-                      in_week(e.get("observed_at")) and
-                      (e["subscriber_id"] not in dated_observations or dated_observations[e["subscriber_id"]] < timestamp(e["observed_at"]))}
+    eligible_facts = [row for row in aggregates["subscriber_weeks"] if
+                      row.get("subscriber_id") in subscribers and subscribers[row["subscriber_id"]]["is_test"] is False]
+    for fact in eligible_facts:
+        if fact["week_start"] == week_start and fact.get("unsubscribed"):
+            unsubs.add(fact["subscriber_id"])
+    unknown_unsubs = {e["subscriber_id"] for e in eligible_events if e.get("event_time_known") is False and in_week(e.get("observed_at"))}
+    for fact in eligible_facts:
+        if fact["week_start"] == week_start and fact.get("unsubscribe_unknown"):
+            unknown_unsubs.add(fact["subscriber_id"])
     health = health_report(snapshot, now)
     if any(s["is_test"] is None for s in subscribers.values()):
         warnings.append("Unreviewed test classifications are excluded from non-test acquisition and audience counts; those totals are incomplete.")
@@ -399,17 +431,20 @@ def weekly_report(snapshot, register, week_start, db=None, now=None):
     return {"schema_version": 1, "generated_at": iso(now), "snapshot_exported_at": snapshot["exported_at"],
             "week_start": week_start, "timezone": EASTERN, "start_inclusive_utc": iso(start),
             "end_exclusive_utc": iso(end), "health": health,
-            "unresolved_signup_outcomes_at_snapshot": sum(s.get("accepted_at") is None for s in data["signups"]),
+            "unresolved_signup_outcomes_at_snapshot": sum(s.get("accepted_at") is None and s.get("outcome") != "rejected" for s in data["signups"]),
+            "rejected_signup_attempts_at_snapshot": sum(s.get("outcome") == "rejected" for s in data["signups"]),
             "audience": {"active_non_test_at_snapshot": sum(s["is_test"] is False and s.get("status") in {"regular", "active", "premium", "gifted", "trialed", "churning", "churned", "paused", "past_due"} for s in subscribers.values()),
                          "test_classification_unknown_at_snapshot": sum(s["is_test"] is None for s in subscribers.values()),
                          "unsubscribed_non_test_at_snapshot": sum(s["is_test"] is False and s.get("status") == "unsubscribed" for s in subscribers.values()),
-                         "unsubscribers_this_week": len(unsubs), "unsubscribers_observed_time_unknown": len(unknown_unsubs)},
+                         "unsubscribers_this_week": len(unsubs) + historical_audience["unsubscribers_this_week"],
+                         "unsubscribers_observed_time_unknown": len(unknown_unsubs) + historical_audience["unsubscribers_observed_time_unknown"]},
             "campaigns": [campaigns[k] for k in sorted(campaigns)], "imports": provenance,
             "warnings": warnings, "definitions": {
                 "confirmed_this_week": "First confirmed non-test, non-baseline acquisitions with a known confirmation timestamp in the week.",
                 "cohort_confirmation_rate": "Eventual confirmed acquisitions from this week's accepted new signups divided by accepted new signups, as of the snapshot.",
                 "unknown": "No verified campaign mapping; historical sources are not guessed.",
                 "page_visits": "Provider campaign page visits; not unique people. Never add to platform clicks.",
+                "unsubscribe_groups": "Known-time unsubscribe and unknown-time observation groups can overlap. A later dated event does not prove the same cycle. Do not add these groups.",
                 "missing_metrics": "An absent provider/metric is unavailable, not zero."}}
 
 

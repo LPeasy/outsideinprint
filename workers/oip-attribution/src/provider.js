@@ -20,8 +20,18 @@ export async function request(env, path, options = {}, fetcher = fetch) {
       if(!admission) throw new ProviderError('provider_daily_budget');
     }
     let response;
-    try { response = await fetcher(url.href, { ...options, headers, redirect: 'error', signal: AbortSignal.timeout(10000) }); }
-    catch { if (attempt === 2) throw new ProviderError('provider_outcome_unknown'); continue; }
+    try { response = await fetcher(url.href, { ...options, headers, redirect: 'manual', signal: AbortSignal.timeout(10000) }); }
+    catch(error) {
+      const message=typeof error?.message==='string'?error.message:'';
+      const reason=/illegal invocation/i.test(message)?'provider_fetch_invocation':
+        /invalid.*header|header.*invalid/i.test(message)?'provider_fetch_header':
+        /AbortSignal.*not a function/i.test(message)?'provider_fetch_abort_support':'provider_outcome_unknown';
+      if(reason!=='provider_outcome_unknown' || attempt===2) throw new ProviderError(reason);
+      continue;
+    }
+    // The deployed Workers runtime accepts manual/follow only. Reject redirects
+    // ourselves so authorization can never follow an untrusted Location header.
+    if(response.status>=300 && response.status<400) throw new ProviderError('provider_redirect_rejected',response.status);
     if (response.status === 429 || response.status >= 500) {
       // Long retry delays are left to the same-key client retry or next scheduled run.
       const seconds = Number(response.headers.get('Retry-After') || 1);
@@ -30,7 +40,7 @@ export async function request(env, path, options = {}, fetcher = fetch) {
       continue;
     }
     let body;
-    try { body = await response.json(); } catch { throw new ProviderError('provider_invalid_response'); }
+    try { body = await response.json(); } catch { throw new ProviderError('provider_invalid_response',response.status); }
     return { status: response.status, ok: response.ok, body };
   }
 }
@@ -51,7 +61,7 @@ export async function list(env, resource, fetcher) {
     if (seen.has(canonical)) throw new ProviderError('pagination_loop');
     seen.add(canonical);
     const result = await request(env, path, {}, fetcher);
-    if (!result.ok || !Array.isArray(result.body.results)) throw new ProviderError('provider_list_unavailable');
+    if (!result.ok || !Array.isArray(result.body.results)) throw new ProviderError('provider_list_unavailable',result.status);
     rows.push(...result.body.results);
     if (rows.length > 5000) throw new ProviderError('list_limit');
     path = result.body.next;

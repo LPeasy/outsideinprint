@@ -74,6 +74,12 @@ complete matching register tuple. Only import campaign **page visits** as
 `page_visits`; exclude events such as `newsletter_submit` and `funnel_view` from
 that metric. A browser form attempt is not an accepted provider signup.
 
+For new non-legacy campaigns, the enabled attribution integration labels the
+exactly tagged landing-page view `oip-campaign|code=<registered-code>`. Import
+only `event=false` visits with that exact label. Later untagged navigation and
+events are outside this new-campaign metric. Legacy `almanack-organic` labels
+retain their existing scope; do not compare the two definitions as identical.
+
 When both analytics and the new attribution switch are enabled, a new non-legacy
 registered tuple produces `oip-campaign|code=<code>` in GoatCounter. Import only
 ordinary `event=false` page views carrying that label as tagged landing-page
@@ -213,11 +219,11 @@ the earlier week's confirmed-this-week count. Unsubscribes do not erase acquisit
 Audience totals describe the snapshot time, including current active non-test
 subscribers, current unsubscribed non-test subscribers, and unique non-test
 subscribers with an unsubscribe event during the week. Unknown unsubscribe times
-are reported separately by observation date unless dated evidence for that
-subscriber was observed at the same time or later. Older dated evidence cannot
-hide a later unknown observation after resubscription. This is a conservative
-evidence reconciliation rule, not proof of a lifecycle-cycle match; a payload
-without a reliable event identity cannot distinguish every repeated undated cycle.
+are reported separately by observation date. A later dated event does not prove
+that an earlier unknown observation belonged to the same unsubscribe cycle, so
+neither group erases the other. These groups can overlap and must not be added.
+A payload without a reliable event identity cannot distinguish every repeated
+undated cycle.
 Active means still subscribed under the provider lifecycle:
 `regular`, `premium`, `gifted`, `trialed`, `churning`, `churned`, `paused`, or
 `past_due`; it does not promise that paused readers currently receive deliveries.
@@ -230,8 +236,45 @@ at two hours, matching the Worker's health endpoint. Recent failed deliveries ar
 reported even when the hook remains enabled. A failed fetch leaves prior counts intact with a warning. A snapshot before
 the week ending boundary is marked incomplete. Reports contain the underlying
 provider observations and import receipts so timezone/coverage gaps remain visible.
-No automatic social APIs, dashboard application, cleanup, or email delivery is
-introduced. Retention approval and rollout gates belong to the deployment guide.
+No automatic social APIs, dashboard application, or email delivery is introduced.
+The approved retention job runs only after a complete successful reconciliation
+and only with `RETENTION_ENABLED=true`; migrations 0001–0003 must be applied first.
+
+Detailed signup attempts and lifecycle events expire after 90 days. The job keeps
+the original acquisition acceptance timestamp and first-confirmation evidence in
+the minimal subscriber lifecycle. Compact per-subscriber weekly unsubscribe
+membership preserves unique weekly counts without event IDs or payloads.
+Membership flags merge monotonically so overlapping cleanup runs cannot erase
+each other's observations. The now-unused ordering-watermark columns introduced
+by migration 0003 are cleared during cleanup; timestamps alone cannot prove a
+cycle match. These summaries exist
+only while the provider subscriber record exists. A pruned signup reference still
+resolves through its retained acquisition, preventing a later retry from moving
+the signup into a new reporting week.
+
+All reporting tables and controls are read in one transactional D1 batch so an
+export cannot mix a subscriber's private lifecycle with its anonymous replacement
+while cleanup runs. Snapshot `aggregates` is an optional version-1 object with `subscriber_weeks` and
+`historical` arrays. The reporter unions compact memberships with recent event
+identities and reconstructs old signup cohorts from `acquisition_accepted_at`.
+`historical` rows contain only `week_start`, `campaign_code`, `metric`, and `value`.
+Provider-deleted subscribers contribute eligible anonymous historical acquisition
+and unsubscribe counts before their lifecycle, signup references, events, and
+weekly memberships are removed atomically. `deleted_unconfirmed_from_week_signups`
+keeps an accepted but unconfirmed deleted record separate from current pending
+subscribers. Diagnostic `expired_attempts_*` counters aggregate removed attempts
+without treating them as new acquisitions.
+
+Known tests and unreviewed identities cannot enter non-test conversion aggregates.
+Review classifications before deleting provider records: anonymous historical
+totals cannot later be reclassified or reconnected to a restored record. Repeated
+undated unsubscribe cycles without an observed intermediate subscription state
+cannot reliably be distinguished after event IDs expire. Minimal lifecycle cycle
+watermarks conservatively suppress repeats so replay cannot inflate counts.
+Failed fetches never trigger deletion, and transactional aggregation prevents a
+cleanup retry from adding the same removed subscriber twice. CSV import storage
+is local and remains outside this Worker cleanup. Operational approval and release
+gates are documented in the deployment guide.
 
 Focused verification:
 

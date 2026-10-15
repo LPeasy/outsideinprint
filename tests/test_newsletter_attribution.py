@@ -192,7 +192,15 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual([], result["campaigns"])
         self.assertFalse(any("Webhook health" in warning for warning in result["warnings"]))
 
-    def test_recovered_unsubscribe_timestamp_replaces_unknown_category(self):
+    def test_definitive_rejection_is_separate_from_unknown_outcome(self):
+        value = snapshot()
+        value["signups"] = [signup("rejected", accepted_at=None, is_new=False, outcome="rejected")]
+        result = self.report(value)
+        self.assertEqual(0, result["unresolved_signup_outcomes_at_snapshot"])
+        self.assertEqual(1, result["rejected_signup_attempts_at_snapshot"])
+        self.assertEqual([], result["campaigns"])
+
+    def test_dated_unsubscribe_does_not_erase_unlinked_unknown_observation(self):
         value = snapshot()
         value["subscribers"] = [subscriber("recovered", status="unsubscribed")]
         event = {"event_id": "unknown-evidence", "subscriber_id": "recovered", "type": "unsubscribed",
@@ -200,7 +208,7 @@ class ReportingTests(unittest.TestCase):
         value["events"] = [event, {**event, "event_id": "dated-evidence", "occurred_at": "2026-10-11T12:00:00Z", "event_time_known": True}]
         audience = self.report(value)["audience"]
         self.assertEqual(1, audience["unsubscribers_this_week"])
-        self.assertEqual(0, audience["unsubscribers_observed_time_unknown"])
+        self.assertEqual(1, audience["unsubscribers_observed_time_unknown"])
 
     def test_subscribed_billing_states_are_active_and_unknown_states_are_not(self):
         value = snapshot()
@@ -219,6 +227,64 @@ class ReportingTests(unittest.TestCase):
         audience = self.report(value)["audience"]
         self.assertEqual(0, audience["unsubscribers_this_week"])
         self.assertEqual(1, audience["unsubscribers_observed_time_unknown"])
+
+    def test_retention_keeps_signup_cohort_and_unsubscribe_memberships_without_details(self):
+        value = snapshot()
+        value["subscribers"] = [subscriber("retained", status="unsubscribed", acquisition_accepted_at="2026-10-10T05:00:00Z")]
+        value["signups"] = [signup("retained")]
+        value["events"] = [{"event_id": "known", "subscriber_id": "retained", "type": "unsubscribed",
+                            "occurred_at": "2026-10-11T12:00:00Z", "observed_at": "2026-10-12T12:00:00Z", "event_time_known": True},
+                           {"event_id": "later-unknown", "subscriber_id": "retained", "type": "unsubscribed",
+                            "occurred_at": None, "observed_at": "2026-10-13T12:00:00Z", "event_time_known": False}]
+        before = self.report(value)
+        value["signups"], value["events"] = [], []
+        value["aggregates"] = {"schema_version": 1, "historical": [], "subscriber_weeks": [{
+            "subscriber_id": "retained", "week_start": "2026-10-10", "unsubscribed": 1, "unsubscribe_unknown": 1,
+            "last_dated_observed_at": "2026-10-12T12:00:00Z", "last_unknown_observed_at": "2026-10-13T12:00:00Z"}]}
+        after = self.report(value)
+        self.assertEqual(before["campaigns"], after["campaigns"])
+        self.assertEqual(before["audience"], after["audience"])
+        self.assertNotIn("retained", json.dumps(after))
+        value["events"] = [{"event_id": "repair", "subscriber_id": "retained", "type": "unsubscribed",
+                            "occurred_at": "2026-10-13T10:00:00Z", "observed_at": "2026-10-14T12:00:00Z", "event_time_known": True}]
+        self.assertEqual(1, self.report(value)["audience"]["unsubscribers_observed_time_unknown"])
+
+    def test_later_dated_cycle_cannot_erase_earlier_unknown_week(self):
+        value = snapshot()
+        value["subscribers"] = [subscriber("cycled", status="unsubscribed")]
+        value["events"] = [
+            {"event_id": "first-cycle", "subscriber_id": "cycled", "type": "unsubscribed",
+             "occurred_at": None, "observed_at": "2026-06-05T12:00:00Z", "event_time_known": False},
+            {"event_id": "second-cycle", "subscriber_id": "cycled", "type": "unsubscribed",
+             "occurred_at": "2026-06-20T12:00:00Z", "observed_at": "2026-06-20T12:00:01Z", "event_time_known": True}]
+        result = app.weekly_report(value, self.register, "2026-05-30", self.db, NOW)
+        self.assertEqual(1, result["audience"]["unsubscribers_observed_time_unknown"])
+        self.assertEqual(0, result["audience"]["unsubscribers_this_week"])
+
+    def test_deleted_subscriber_anonymous_aggregates_preserve_historical_conversion(self):
+        value = snapshot()
+        value["aggregates"] = {"schema_version": 1, "subscriber_weeks": [], "historical": [
+            {"week_start": "2026-10-10", "campaign_code": CODE, "metric": "accepted_new_signups", "value": 2},
+            {"week_start": "2026-10-10", "campaign_code": CODE, "metric": "eventual_confirmations_from_week_signups", "value": 1},
+            {"week_start": "2026-10-10", "campaign_code": CODE, "metric": "deleted_unconfirmed_from_week_signups", "value": 1},
+            {"week_start": "2026-10-10", "campaign_code": CODE, "metric": "confirmed_this_week", "value": 1},
+            {"week_start": "2026-10-10", "campaign_code": "", "metric": "unsubscribers_this_week", "value": 1}]}
+        result = self.report(value)
+        campaign = result["campaigns"][0]
+        self.assertEqual(2, campaign["accepted_new_signups"])
+        self.assertEqual(0.5, campaign["cohort_confirmation_rate"])
+        self.assertEqual(1, campaign["deleted_unconfirmed_from_week_signups"])
+        self.assertEqual(1, campaign["confirmed_this_week"])
+        self.assertEqual(1, result["audience"]["unsubscribers_this_week"])
+        self.assertEqual(0, result["audience"]["active_non_test_at_snapshot"])
+
+    def test_retained_acquisition_timestamp_wins_over_a_later_retry_timestamp(self):
+        value = snapshot()
+        value["subscribers"] = [subscriber("old", acquisition_accepted_at="2026-10-01T05:00:00Z")]
+        value["signups"] = [signup("old")]
+        row = self.report(value)["campaigns"][0]
+        self.assertEqual(0, row["accepted_new_signups"])
+        self.assertIsNone(row["cohort_confirmation_rate"])
 
 
 if __name__ == "__main__":

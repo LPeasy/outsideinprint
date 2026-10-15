@@ -62,13 +62,21 @@ Delivery is at least once and unordered. Buttondown retries failures, treats onl
 
 `GET /v1/webhooks` exposes enabled/disabled status. `GET /v1/webhooks/{id}/attempts` exposes statuses and attempt/completion information; its error text may contain private values and must not enter public logs. [Webhook list](https://docs.buttondown.com/api-webhooks-list), [delivery attempts](https://docs.buttondown.com/api-webhooks-attempts-list)
 
+For setup, `POST /v1/webhooks` requires `event_types` as a flat string array and `url` as a string. Optional fields are `status` (`enabled` or `disabled`, default enabled), `description`, and `signing_key` (at most 255 characters). Supply a strong random signing key; an empty default does not provide signature verification. The generated request example incorrectly adds arrays around scalar fields and nests `event_types`; use the declared schema types. The retrieval schema includes `signing_key`, so setup verification must inspect it in memory and redact response bodies. Successful webhook-list access alone does not prove creation permission. [Webhook creation](https://docs.buttondown.com/api-webhooks-create), [webhook retrieval](https://docs.buttondown.com/api-webhooks-retrieve), [OpenAPI schema](https://docs.buttondown.com/openapi.json)
+
+The account and newsletter GET responses inspected for the deployment preflight expose no subscriber-creation quota field. The public schema exposes no separate quota-discovery endpoint. The general GET limit is not evidence of an account-specific daily POST allowance; retain the conservative documented daily budget until supported account evidence establishes otherwise.
+
 The events endpoint does not list confirmations among supported filters. If the confirmation time cannot be established, store observation time separately with confirmation time unknown. Never substitute signup time. [Events API](https://docs.buttondown.com/api-events-list)
 
 Use D1 transactional batches for related writes and unique constraints for duplicate safety. Daily reconciliation at `0 10 * * *` runs at 10:00 UTC; weekly report boundaries must independently use America/New_York. [D1 batches](https://developers.cloudflare.com/d1/worker-api/d1-database/#batch), [Workers cron](https://developers.cloudflare.com/workers/configuration/cron-triggers/)
 
 ## Remaining rollout evidence
 
-- Review and authorize new persistent credentials, D1/Worker provisioning, restricted operational access, and any paid change.
+Later deployment preflight found a runtime/documentation mismatch: the deployed Worker rejected `redirect: "error"`; the request helper now uses `manual` and rejects every 3xx response before parsing. Current Cloudflare documentation still lists `error`. Recipient-side inspection of two successful Worker list requests found no visitor-IP headers: the observed source and forwarded chain were Cloudflare addresses, distinct from the direct client. Comparisons were performed in memory; no raw IPs or header maps were retained. Signup POSTs use the same explicit header constructor. [Workers Request](https://developers.cloudflare.com/workers/runtime-apis/request/), [Cloudflare header behavior](https://developers.cloudflare.com/fundamentals/reference/http-headers/), [API request retrieval](https://docs.buttondown.com/api-api-requests-retrieve)
+
+The authorized controlled Worker signup at 16:18:25 UTC returned HTTP 400 with `subscriber_blocked`: the provider identified its firewall as the reason. This is a concrete rollout blocker until supported signup acceptance is established. No bypass or visitor-IP forwarding was added by the audit; the request must not be retried through another signup path.
+
+- The owner approved the isolated Worker/D1 and persistent secrets; the backend is provisioned and its complete nine-record baseline fetch succeeded. Public form activation remains disabled. Any paid change still requires its own approval.
 - Verify the real signed webhook shape, current creation allowance, and legitimate Worker-origin signup behavior before switching forms. Do not silently forward visitor IPs or bypass the provider firewall.
 - Complete an owner-controlled new-address acquisition/confirmation/unsubscribe test plus test exclusion, and a successful deployed reconciliation.
 - Review the revised privacy notice and retention/deletion policy. Automated cleanup remains disabled until approved.
