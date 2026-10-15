@@ -13,7 +13,8 @@ const fakeFetch = body => async () => Response.json(body, { headers: { 'x-reques
 for (const entry of fixture.cases) {
   test(`Python parity: ${entry.name}`, () => {
     const [candidates, constraints] = shortlist(catalog, validateRequest(entry.request));
-    assert.deepEqual({ preferences: constraints.preferences, action: constraints.intent.action, clarification: constraints.intent.clarification, ids: candidates.map(item => item.id) }, entry.expected);
+    const expected = { ...entry.expected, preferences: { collectionId: null, ...entry.expected.preferences } };
+    assert.deepEqual({ preferences: constraints.preferences, action: constraints.intent.action, clarification: constraints.intent.clarification, ids: candidates.map(item => item.id) }, expected);
   });
 }
 
@@ -95,6 +96,143 @@ test('collection slugs and titles participate in retrieval and authoritative exc
   const [candidates] = shortlist([piece, catalog[4]], validateRequest({ message: 'ordinary marvels' }));
   assert.equal(candidates[0].id, piece.id);
   assert.equal(matchesHardFilters(piece, { ...defaults(), excludedTopics: ['marvels'] }), false);
+});
+
+const collectionCatalog = catalog.map((item, index) => ({ ...item, collectionSlugs: [index < 4 ? 'water-world' : 'other-reading'] }));
+const collectionDirectory = ['water-world', 'other-reading'].map(id => ({ id, itemIds: collectionCatalog.filter(item => item.collectionSlugs.includes(id)).map(item => item.id) }));
+const collectionManifest = { items: collectionCatalog, collections: collectionDirectory };
+const listWithCollections = body => shortlist(collectionCatalog, validateRequest(body), 40, collectionDirectory);
+
+test('v1 clients may omit collectionId and all normalized responses include it', async () => {
+  const oldPreferences = { ...defaults(), topic: 'water' }; delete oldPreferences.collectionId;
+  assert.equal(validatePreferences(oldPreferences).collectionId, null);
+  const outcome = await recommend({ message: 'hello', preferences: oldPreferences }, catalog, { apiKey: 'offline-placeholder', fetchImpl: fakeFetch(response([catalog[0].id])) });
+  assert.equal(outcome.preferences.collectionId, null);
+  for (const collectionId of [true, '', '/collections/water-world/', 'Water World', 'missing space']) assert.throws(() => validatePreferences({ ...defaults(), collectionId }), { code: 'invalid_preferences' });
+});
+
+test('article context is strictly shaped and canonical IDs are checked before any provider call', async () => {
+  for (const context of [null, [], {}, { articleId: 'https://outsideinprint.org/essays/river/' }, { articleId: '/essays/river/', url: 'ignored' }, { articleId: '//outsideinprint.org/' }, { articleId: '/essays/river/?key=x' }]) assert.throws(() => validateRequest({ message: 'water', context }), { code: 'invalid_context' });
+  const noCall = { fetchImpl: () => assert.fail('provider must not be called'), beforeUpstream: () => assert.fail('budget must not be reserved') };
+  await assert.rejects(recommend({ message: 'water', context: { articleId: '/essays/missing/' } }, catalog, noCall), { code: 'invalid_context', status: 400 });
+  await assert.rejects(recommend({ message: 'delete a file', context: { articleId: '/essays/missing/' } }, catalog, noCall), { code: 'invalid_context' });
+});
+
+test('page context remains inert for ordinary searches and explicit article references replace stale topics', () => {
+  const context = { articleId: catalog[0].id };
+  const ordinary = { message: 'electricity', context };
+  assert.deepEqual(shortlist(catalog, validateRequest(ordinary)), shortlist(catalog, validateRequest({ message: 'electricity' })));
+  const request = validateRequest({ message: 'Like this article', context, preferences: { ...defaults(), topic: 'electricity', anchorId: catalog[4].id, mood: 'hopeful', maxMinutes: 5, formats: ['essay'], excludedTopics: ['politics'] } });
+  const [candidates, state] = shortlist(catalog, request);
+  assert.equal(state.preferences.topic, '');
+  assert.equal(state.preferences.anchorId, catalog[0].id);
+  assert.equal(state.preferences.mood, 'hopeful');
+  assert.equal(state.preferences.maxMinutes, 5);
+  assert.deepEqual(state.preferences.formats, ['essay']);
+  assert.deepEqual(state.preferences.excludedTopics, ['politics']);
+  assert.ok(candidates.length);
+  assert.ok(candidates.every(item => item.id !== catalog[0].id && item.id !== catalog[4].id && item.readingTime <= 5));
+  assert.equal(JSON.parse(buildPayload(request, candidates, state, catalog).input).reference_piece.id, catalog[0].id);
+});
+
+test('ordinal references override the current page and missing ordinals do not silently use page context', () => {
+  const currentIds = [catalog[1].id, catalog[2].id], context = { articleId: catalog[0].id };
+  const [, state] = shortlist(catalog, validateRequest({ message: 'More like the second one and this article', context, currentIds }));
+  assert.equal(state.preferences.anchorId, currentIds[1]);
+  const [items, missing] = shortlist(catalog, validateRequest({ message: 'More like the third one and this article', context, currentIds }));
+  assert.equal(items.length, 0);
+  assert.match(missing.intent.clarification, /Which reading choice/);
+});
+
+test('shorter related reading uses the explicitly referenced article and never suggests the anchor', () => {
+  const request = validateRequest({ message: 'Something shorter than this article', context: { articleId: catalog[0].id }, currentIds: [catalog[3].id] });
+  const [items, state] = shortlist(catalog, request);
+  assert.equal(state.intent.action, 'shorter');
+  assert.equal(state.preferences.maxMinutes, 7.999);
+  assert.ok(items.some(item => item.id === catalog[1].id));
+  assert.ok(items.every(item => item.id !== catalog[0].id && item.readingTime < 8));
+  const [refined] = shortlist(catalog, validateRequest({ action: 'shorter', message: 'Something shorter', currentIds: [catalog[0].id], preferences: { ...defaults(), anchorId: catalog[2].id } }));
+  assert.ok(!refined.some(item => item.id === catalog[2].id));
+});
+
+test('article explanations and missing page references stay local with no budget reservation', async () => {
+  const noCall = { fetchImpl: () => assert.fail('provider must not be called'), beforeUpstream: () => assert.fail('budget must not be reserved') };
+  const explanation = await recommend({ message: 'Why this article?', context: { articleId: catalog[0].id } }, catalog, noCall);
+  assert.equal(explanation.outcome, 'explanation');
+  assert.deepEqual(explanation.items, [catalog[0]]);
+  assert.ok(explanation.message.includes(catalog[0].summary));
+  const missing = await recommend({ message: 'Like this article', currentIds: [catalog[1].id] }, catalog, noCall);
+  assert.equal(missing.outcome, 'clarify');
+  assert.equal(missing.preferences.anchorId, null);
+});
+
+test('collection hard filters survive typed subjects, deictic followups and repeated More', () => {
+  const preferences = { ...defaults(), collectionId: 'water-world', discovery: true };
+  for (const message of ['Something thoughtful from this collection', 'Something thoughtful within this collection', 'Something thoughtful in the same collection']) {
+    const [items, state] = listWithCollections({ message, preferences });
+    assert.equal(state.preferences.topic, '');
+    assert.equal(state.preferences.mood, 'thoughtful');
+    assert.equal(state.preferences.collectionId, 'water-world');
+    assert.ok(items.length && items.every(item => item.collectionSlugs.includes('water-world')));
+  }
+  const [, first] = listWithCollections({ message: 'water', preferences });
+  let prefs = first.preferences;
+  for (let turn = 0; turn < 7; turn++) {
+    const [items, state] = listWithCollections({ message: 'More like these', action: 'more', preferences: prefs });
+    assert.ok(items.length && items.every(item => item.collectionSlugs.includes('water-world')));
+    assert.equal(state.preferences.topic, 'water');
+    prefs = state.preferences;
+  }
+  const [unrelated, state] = listWithCollections({ message: 'electricity', preferences: prefs });
+  assert.equal(state.preferences.collectionId, 'water-world');
+  assert.equal(state.preferences.topic, 'electricity');
+  assert.deepEqual(unrelated, []);
+});
+
+test('unknown collections and inconsistent directory memberships fail closed before model selection', async () => {
+  assert.equal(validateCatalog(collectionManifest), collectionCatalog);
+  const noCall = { fetchImpl: () => assert.fail('provider must not be called'), beforeUpstream: () => assert.fail('budget must not be reserved') };
+  await assert.rejects(recommend({ message: 'water', preferences: { ...defaults(), collectionId: 'invented' } }, collectionManifest, noCall), { code: 'invalid_preferences' });
+  await assert.rejects(recommend({ message: 'water', preferences: { ...defaults(), collectionId: 'water-world' } }, { items: collectionCatalog, collections: [] }, noCall), { code: 'invalid_preferences' });
+  for (const collections of [[{ ...collectionDirectory[0], itemIds: [] }], [collectionDirectory[0], collectionDirectory[0]], [{ ...collectionDirectory[0], itemIds: ['/invented/'] }]]) assert.throws(() => validateCatalog({ items: collectionCatalog, collections }), { code: 'catalog_unavailable' });
+});
+
+test('empty collection searches retain their filters and offer recovery without provider calls', async () => {
+  const outcome = await recommend({ message: 'electricity', preferences: { ...defaults(), collectionId: 'water-world' } }, collectionManifest, { fetchImpl: () => assert.fail('provider must not be called') });
+  assert.equal(outcome.outcome, 'empty');
+  assert.equal(outcome.preferences.collectionId, 'water-world');
+  assert.equal(outcome.preferences.topic, 'electricity');
+  assert.ok(outcome.recoveryActions.includes('clear_filters'));
+  assert.match(outcome.message, /adjust the filters/);
+});
+
+test('apply_filters uses exactly the edited preferences and never restores removed fields from history or message', async () => {
+  const edited = { ...defaults(), topic: 'electricity' };
+  const body = { action: 'apply_filters', message: 'water under 3 minutes only dialogues, nothing political', history: [{ role: 'user', content: 'Like this article' }, { role: 'user', content: 'water under 3 minutes only dialogues, nothing political' }], context: { articleId: catalog[0].id }, preferences: edited };
+  const request = validateRequest(body), [items, state] = listWithCollections(body);
+  assert.deepEqual(state.preferences, edited);
+  assert.ok(items.some(item => item.id === catalog[4].id));
+  const data = JSON.parse(buildPayload(request, items, state, collectionCatalog).input);
+  assert.equal(data.request, '');
+  assert.deepEqual(data.conversation, []);
+  assert.equal(data.reference_piece, null);
+  const outcome = await recommend(body, collectionManifest, { apiKey: 'offline-placeholder', fetchImpl: fakeFetch(response([catalog[4].id])) });
+  assert.deepEqual(outcome.preferences, edited);
+  assert.equal(outcome.items[0].id, catalog[4].id);
+  const restored = listWithCollections({ action: 'apply_filters', preferences: { ...defaults(), topic: 'water' }, history: body.history, context: body.context })[0];
+  assert.ok(restored.some(item => item.id === catalog[0].id), 'removing the anchor permits the former anchor again');
+  assert.ok(restored.some(item => item.id === catalog[8].id), 'removing exclusion and collection permits outside political reading again');
+  assert.throws(() => validateRequest({ action: 'apply_filters' }), { code: 'invalid_request' });
+});
+
+test('apply_filters still enforces retained restrictions and clear_filters removes the collection explicitly', () => {
+  const preferences = { ...defaults(), discovery: true, collectionId: 'water-world', maxMinutes: 4 };
+  const [items, state] = listWithCollections({ action: 'apply_filters', preferences });
+  assert.deepEqual(state.preferences, preferences);
+  assert.ok(items.length && items.every(item => item.collectionSlugs.includes('water-world') && item.readingTime <= 4));
+  const [, cleared] = listWithCollections({ action: 'clear_filters', preferences });
+  assert.equal(cleared.preferences.collectionId, null);
+  assert.equal(cleared.preferences.maxMinutes, null);
 });
 
 test('strict output only selects distinct eligible canonical IDs', () => {

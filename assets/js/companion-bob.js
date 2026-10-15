@@ -15,7 +15,6 @@ function initialize() {
   const restore = document.querySelector('[data-bob-restore]');
   const storage = createBobStorage();
   const media = matchMedia('(prefers-reduced-motion: reduce)');
-  const mobileDisclosure = matchMedia('(max-width: 768px), (pointer: coarse)');
   let minimized = storage.read(PREFERENCES_KEY)?.hidden === true;
   let savedPosition = validPosition(storage.read(POSITION_KEY));
   let anchor = { x: 0, y: 0 };
@@ -29,11 +28,10 @@ function initialize() {
   let visitReady = false;
   let visiting = false;
   let lastTouch = 0;
-  let pendingGreeting = null;
   let pendingOpen = false;
   let pendingOpenKeyboard = false;
   let pendingFocus = false;
-  let greetingTimer, clearTimer, loadTimer;
+  let loadTimer;
   let positioning = 0;
   let lastPlacement = '';
   let regionCount = 0;
@@ -99,31 +97,15 @@ function initialize() {
     if (!positioning) positioning = requestAnimationFrame(position);
   }
   function dismissGreeting() {
-    clearTimeout(greetingTimer);
-    clearTimeout(clearTimer);
     host.dataset.greeting = 'hidden';
     bubble.textContent = '';
-  }
-  function greet(text) {
-    if (minimized) return;
-    // Phone arrivals stay sprite-only; visit recognition still runs normally.
-    if (mobileDisclosure.matches) { pendingGreeting = null; return; }
-    if (!active) { pendingGreeting = text; return; }
-    pendingGreeting = null;
-    dismissGreeting();
-    bubble.textContent = text;
-    host.dataset.greeting = 'visible';
-    send({ type: 'greeting', text });
-    greetingTimer = setTimeout(() => {
-      host.dataset.greeting = 'fading';
-      clearTimer = setTimeout(dismissGreeting, media.matches ? 0 : 600);
-    }, 3800);
   }
   async function visit(force = false) {
     if (!visitReady || !visible() || visiting || (!force && Date.now() - lastTouch < 15000)) return;
     visiting = true;
     lastTouch = Date.now();
-    const claim = () => { const text = claimVisit(storage); if (text) greet(text); };
+    // Every viewport arrives sprite-only; retain visit bookkeeping silently.
+    const claim = () => { claimVisit(storage); };
     try {
       if (navigator.locks?.request) await navigator.locks.request('oip-bob-visit', claim);
       else claim();
@@ -211,13 +193,11 @@ function initialize() {
       }
       send({ type: 'visibility', active, audioActive });
       if (active && !frame.hasAttribute('src')) load();
-      if (active && pendingGreeting) greet(pendingGreeting);
     }
     schedulePosition();
   }
   function setHidden(hidden) {
     minimized = hidden;
-    pendingGreeting = null;
     pendingOpen = false;
     pendingFocus = !hidden;
     storage.write(PREFERENCES_KEY, { version: 1, hidden });
@@ -234,7 +214,7 @@ function initialize() {
     pendingFocus = false;
     syncVisibility();
     if (host.dataset.failed === 'true') load();
-    if (ready && painted) { send({ type: mobileDisclosure.matches ? 'reveal-controls' : 'open-reading', keyboard: pendingOpenKeyboard }); pendingOpen = false; }
+    if (ready && painted) { send({ type: 'reveal-controls', keyboard: pendingOpenKeyboard }); pendingOpen = false; }
   }
   function home() {
     dragging = false;
@@ -284,7 +264,7 @@ function initialize() {
       focusRuntime();
       clearTimeout(loadTimer);
       startVisit();
-      if (pendingOpen && active) { send({ type: mobileDisclosure.matches ? 'reveal-controls' : 'open-reading', keyboard: pendingOpenKeyboard }); pendingOpen = false; }
+      if (pendingOpen && active) { send({ type: 'reveal-controls', keyboard: pendingOpenKeyboard }); pendingOpen = false; }
     } else if (data.type === 'hit-regions') {
       applyRegions(data.rects);
     } else if (data.type === 'position' && Number.isFinite(data.x) && Number.isFinite(data.y)) {
