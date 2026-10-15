@@ -1,4 +1,4 @@
-current: hell-have-some-words
+current: an-extra-cup
 cartoons:
   - slug: a-public-record-must-outlast-the-feed
     title: "A Public Record Must Outlast the Feed"
@@ -1176,5 +1176,14 @@ cartoons:
     image: "essays/dialogues/hell-have-some-words/hero"
     essay: "/syd-and-oliver/hell-have-some-words/"
     alt: "A painted tabby cat rests in an open suitcase with one white hind foot dangling over the edge, between two men seen from behind, one on the rug and one on the couch."
+    width: 1672
+    height: 941
+  - slug: an-extra-cup
+    title: "An Extra Cup"
+    date: "2026-10-15"
+    publishDate: "2026-10-15T15:53:45-04:00"
+    image: "editorial/an-extra-cup"
+    essay: "/essays/an-extra-cup/"
+    alt: "A man pours coffee into a neighbor’s cup on a sunlit porch, with a split cinnamon roll, a paper bag, and a closed book on the table."
     width: 1672
     height: 941
