@@ -1,10 +1,10 @@
 // Explicit, bounded reading preferences. Conversation text cannot override the schema.
 import { BobError } from './transport.js';
 
-export const ACTIONS = new Set(['search', 'shorter', 'longer', 'more', 'relax_time', 'clear_filters']);
+export const ACTIONS = new Set(['search', 'shorter', 'longer', 'more', 'relax_time', 'clear_filters', 'apply_filters']);
 export const FORMATS = new Set(['essay', 'dialogue', 'affirmation']);
 export function defaults() {
-  return { version: 1, topic: '', mood: '', formats: [], minMinutes: null, maxMinutes: null, excludedTopics: [], discovery: false, anchorId: null };
+  return { version: 1, topic: '', mood: '', formats: [], minMinutes: null, maxMinutes: null, excludedTopics: [], discovery: false, anchorId: null, collectionId: null };
 }
 const numberWords = Object.fromEntries('zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty'.split(' ').map((word, i) => [word, i <= 20 ? i : (i - 18) * 10]));
 const formatPatterns = {
@@ -28,7 +28,8 @@ const invalid = message => new BobError(400, message, 'invalid_preferences', fal
 
 export function validatePreferences(value) {
   const clean = defaults();
-  if (!object(value) || Object.keys(value).sort().join('|') !== Object.keys(clean).sort().join('|') || value.version !== 1) {
+  const required = Object.keys(clean).filter(key => key !== 'collectionId');
+  if (!object(value) || Object.keys(value).some(key => !Object.hasOwn(clean, key)) || required.some(key => !Object.hasOwn(value, key)) || value.version !== 1) {
     throw invalid('Please start a new reading subject.');
   }
   for (const [name, maximum] of [['topic', 300], ['mood', 80]]) {
@@ -50,6 +51,10 @@ export function validatePreferences(value) {
   if (typeof value.discovery !== 'boolean' || (value.anchorId !== null && (typeof value.anchorId !== 'string' || value.anchorId.length > 300))) throw invalid('These reading preferences could not be read.');
   clean.discovery = value.discovery;
   clean.anchorId = value.anchorId;
+  if (Object.hasOwn(value, 'collectionId')) {
+    if (value.collectionId !== null && (typeof value.collectionId !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.collectionId) || value.collectionId.length > 200)) throw invalid('That reading collection is unavailable.');
+    clean.collectionId = value.collectionId;
+  }
   return clean;
 }
 
@@ -94,6 +99,11 @@ export function timeBounds(text) { const { minimum, maximum } = duration(text); 
 export function parseIntent(message) {
   const original = normalize(message);
   let { minimum, maximum, text } = duration(original);
+  const articleReference = /\bthis\s+(?:article|piece|essay|dialogue)\b/.test(original);
+  // A reference to this dialogue is not a request to filter every result to dialogues.
+  text = text.replace(/\bthis\s+(?:article|piece|essay|dialogue)\b/g, ' ');
+  text = text.replace(/\b(?:(?:within|from|in)\s+)?(?:this|the same|same)\s+collection\b/g, ' ');
+  if (articleReference) text = text.replace(/\b(?:similar|related)(?:\s+to)?\b/g, ' ');
   let action = 'search';
   if (/\b(?:shorter|briefer|quicker|shortest|too long)\b/.test(text)) action = 'shorter';
   else if (/\b(?:longer|too short)\b/.test(text)) action = 'longer';
@@ -114,23 +124,24 @@ export function parseIntent(message) {
   });
   const ordinalMatch = original.match(/\b(first|1st|second|2nd|third|3rd)\b/);
   const ordinal = ordinalMatch ? { first: 0, '1st': 0, second: 1, '2nd': 1, third: 2, '3rd': 2 }[ordinalMatch[1]] : null;
-  const explanation = /\b(?:why|explain|what is|what's|tell me about|summari[sz]e|summary of)\b/.test(original) && (ordinal !== null || /\b(?:that (?:one|1)|this (?:one|1)|this piece|that piece)\b/.test(original));
+  const explanation = /\b(?:why|explain|what is|what's|tell me about|summari[sz]e|summary of)\b/.test(original) && (articleReference || ordinal !== null || /\b(?:that (?:one|1)|this (?:one|1)|that piece)\b/.test(original));
   text = text.replace(/\b(?:first|1st|second|2nd|third|3rd|why|explain)\b/g, ' ');
   const discovery = original.search(discoveryPattern) >= 0;
   if (discovery) text = text.replace(discoveryPattern, ' ');
   let topic = (text.match(/[a-z0-9]+/g) || []).filter(word => !FILLER.has(word) && !/^\d+$/.test(word)).join(' ');
   if (ordinal !== null || explanation) topic = '';
   if (topic) action = 'search';
-  return { topic, mood, formats, excluded, minimum, maximum, action, refinement: !topic && !discovery, discovery, ordinal, explanation,
+  return { topic, mood, formats, excluded, minimum, maximum, action, refinement: !topic && !discovery, discovery, ordinal, explanation, articleReference,
     invalidTime: /(?<!\w)(?:-\s*|minus\s+)\d+(?:\.\d+)?\s*(?:minutes?|mins?|hours?|hrs?)\b/.test(original) };
 }
 export function isRefinement(message) { return parseIntent(message).refinement; }
 
-export function applyIntent(preferences, message, action, current, { legacy = false } = {}) {
+export function applyIntent(preferences, message, action, current, { legacy = false, article = null } = {}) {
   const old = validatePreferences(preferences);
   let prefs = { ...old, formats: [...old.formats], excludedTopics: [...old.excludedTopics] };
   const intent = parseIntent(message);
   let effective = action !== 'search' ? action : intent.action;
+  const reference = intent.ordinal !== null ? current[intent.ordinal] : intent.articleReference ? article : null;
   if (action === 'search' && intent.topic) {
     if (legacy) prefs = defaults();
     Object.assign(prefs, { topic: intent.topic.slice(0, 300), discovery: false, anchorId: null });
@@ -139,12 +150,12 @@ export function applyIntent(preferences, message, action, current, { legacy = fa
   if (intent.mood) prefs.mood = intent.mood;
   if (intent.formats.length) prefs.formats = intent.formats;
   prefs.excludedTopics = [...new Set([...prefs.excludedTopics, ...intent.excluded])].slice(0, 12);
-  if (action === 'clear_filters') Object.assign(prefs, { mood: '', formats: [], minMinutes: null, maxMinutes: null, excludedTopics: [] });
+  if (action === 'clear_filters') Object.assign(prefs, { mood: '', formats: [], minMinutes: null, maxMinutes: null, excludedTopics: [], collectionId: null });
   else if (action === 'relax_time') Object.assign(prefs, { minMinutes: null, maxMinutes: null });
   else {
     if (intent.minimum !== null) prefs.minMinutes = intent.minimum;
     if (intent.maximum !== null) prefs.maxMinutes = intent.maximum;
-    const times = current.map(item => item.readingTime).filter(n => typeof n === 'number' && Number.isFinite(n) && n > 0);
+    const times = (reference ? [reference] : current).map(item => item.readingTime).filter(n => typeof n === 'number' && Number.isFinite(n) && n > 0);
     if (effective === 'shorter') {
       prefs.minMinutes = intent.minimum;
       if (times.length) prefs.maxMinutes = Math.min(prefs.maxMinutes ?? 240, Math.max(...times) - 0.001);
@@ -157,7 +168,15 @@ export function applyIntent(preferences, message, action, current, { legacy = fa
   if (intent.invalidTime) return [old, { ...intent, action: effective, clarification: 'Please use a positive reading time, such as five minutes.' }];
   if (intent.ordinal !== null) {
     if (intent.ordinal >= current.length) clarification = 'Which reading choice did you mean? Choose one of the titles currently shown.';
-    else { prefs.anchorId = current[intent.ordinal].id; if (!intent.explanation) effective = 'more'; }
+    else { prefs.anchorId = current[intent.ordinal].id; if (!intent.explanation && !['shorter', 'longer'].includes(effective)) effective = 'more'; }
+  } else if (intent.articleReference) {
+    if (!article) clarification = 'Open a catalog piece to use “this article,” or choose one of the reading titles shown.';
+    else {
+      prefs.anchorId = article.id;
+      if (!intent.topic) prefs.topic = '';
+      prefs.discovery = false;
+      if (!intent.explanation && !['shorter', 'longer'].includes(effective)) effective = 'more';
+    }
   } else if (intent.explanation && current.length) prefs.anchorId = current[0].id;
   if (prefs.minMinutes !== null && prefs.maxMinutes !== null && prefs.minMinutes > prefs.maxMinutes) {
     clarification = 'Those reading-time limits conflict. What is the longest piece you would like?'; prefs = old;
@@ -165,13 +184,29 @@ export function applyIntent(preferences, message, action, current, { legacy = fa
   if ([prefs.minMinutes, prefs.maxMinutes].some(n => n !== null && n > 240)) {
     clarification = 'Please choose a reading time of 240 minutes or less.'; prefs = old;
   }
-  if (!prefs.topic && !prefs.anchorId && (prefs.formats.length || prefs.mood || prefs.excludedTopics.length)) prefs.discovery = true;
+  if (!prefs.topic && !prefs.anchorId && (prefs.formats.length || prefs.mood || prefs.excludedTopics.length || prefs.collectionId)) prefs.discovery = true;
   return [prefs, { ...intent, action: effective, clarification }];
 }
 
-export function resolvePreferences(request, catalog) {
+export function validateReferences(request, catalog, collectionDirectory) {
+  const ids = new Set(catalog.map(item => item.id));
+  if (request.context?.articleId && !ids.has(request.context.articleId)) throw new BobError(400, 'That page is not in the current reading catalog.', 'invalid_context', false);
+  if (request.preferences?.anchorId && !ids.has(request.preferences.anchorId)) throw invalid('That reading choice is no longer in the catalog. Start a new subject.');
+  const collectionId = request.preferences?.collectionId;
+  if (collectionId && !(Array.isArray(collectionDirectory) ? collectionDirectory.some(group => group.id === collectionId) : catalog.some(item => item.collectionSlugs?.includes(collectionId)))) throw invalid('That reading collection is unavailable.');
+}
+
+export function resolvePreferences(request, catalog, collectionDirectory) {
+  validateReferences(request, catalog, collectionDirectory);
   const byId = new Map(catalog.map(item => [item.id, item]));
   let prefs = request.preferences;
+  if (request.action === 'apply_filters') {
+    if (prefs == null) throw invalid('Please supply the edited reading preferences.');
+    // Filter edits are authoritative; neither old conversation nor button text
+    // may reintroduce a field the reader removed.
+    prefs = validatePreferences(prefs);
+    return [prefs, { action: 'apply_filters', refinement: true, explanation: false, clarification: '' }];
+  }
   if (prefs != null) {
     if (prefs.anchorId && !byId.has(prefs.anchorId)) throw invalid('That reading choice is no longer in the catalog. Start a new subject.');
   } else {
@@ -183,5 +218,5 @@ export function resolvePreferences(request, catalog) {
     }
   }
   const current = (request.currentIds || []).map(id => byId.get(id)).filter(Boolean);
-  return applyIntent(prefs, request.message, request.action || 'search', current, { legacy: request.preferences == null });
+  return applyIntent(prefs, request.message, request.action || 'search', current, { legacy: request.preferences == null, article: byId.get(request.context?.articleId) || null });
 }

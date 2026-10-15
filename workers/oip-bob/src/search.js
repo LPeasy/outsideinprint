@@ -114,6 +114,7 @@ function matchingRatio(a, b, positions) {
 
 export function matchesHardFilters(item, prefs, words = itemWords(item), excludedWords = exclusionWords(prefs)) {
   const minutes = readingMinutes(item);
+  if (prefs.collectionId && !item.collectionSlugs?.includes(prefs.collectionId)) return false;
   if (prefs.formats.length && !prefs.formats.includes(item.type)) return false;
   if (prefs.minMinutes !== null && (minutes === null || minutes < prefs.minMinutes)) return false;
   if (prefs.maxMinutes !== null && (minutes === null || minutes > prefs.maxMinutes)) return false;
@@ -130,8 +131,8 @@ function exclusionWords(prefs) {
   return result;
 }
 
-export function shortlist(catalog, request, limit = 40) {
-  const [prefs, intent] = resolvePreferences(request, catalog);
+export function shortlist(catalog, request, limit = 40, collectionDirectory) {
+  const [prefs, intent] = resolvePreferences(request, catalog, collectionDirectory);
   const constraints = { preferences: prefs, intent, refinement: intent.refinement, more: intent.action === 'more', minimumMinutes: prefs.minMinutes, maximumMinutes: prefs.maxMinutes, topic: prefs.topic };
   if (intent.clarification) return [[], constraints];
   const { rows, byId, df, vocabularyByLength } = catalogIndex(catalog);
@@ -169,7 +170,8 @@ export function shortlist(catalog, request, limit = 40) {
   const moodTerms = new Set((MOODS[prefs.mood] || tokens(prefs.mood)).map(stem));
   const excludedWords = exclusionWords(prefs);
   const weightedTerms = [...expanded].map(([word, weight]) => [word, weight * (Math.log((catalog.length + 1) / ((df.get(word) || 0) + 1)) + 1)]);
-  const excludedIds = intent.action === 'more' ? new Set([...(request.seenIds || []), ...(request.currentIds || []), ...(prefs.anchorId ? [prefs.anchorId] : [])]) : new Set();
+  const excludedIds = new Set(prefs.anchorId && !intent.explanation ? [prefs.anchorId] : []);
+  if (intent.action === 'more') for (const id of [...(request.seenIds || []), ...(request.currentIds || [])]) excludedIds.add(id);
   let ranked = [];
   for (const { index, item, words, title, metadata, summary } of rows) {
     if (excludedIds.has(item.id) || !matchesHardFilters(item, prefs, words, excludedWords)) continue;

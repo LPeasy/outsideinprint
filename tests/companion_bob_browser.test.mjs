@@ -70,13 +70,6 @@ async function runtime(page) {
   await frame.waitForFunction(() => window.__idleTimesPetDebug?.media?.status === "ready");
   return frame;
 }
-async function waitForGreeting(page, text) {
-  await page.waitForFunction((expected) => {
-    const state = window.render_bob_to_text && JSON.parse(window.render_bob_to_text());
-    return state?.greetingState === "visible" && state.greeting === expected;
-  }, text);
-  await page.locator("[data-bob-greeting]").waitFor({ state: "visible" });
-}
 async function waitForNoGreeting(page) {
   await page.waitForFunction(() => {
     const state = window.render_bob_to_text && JSON.parse(window.render_bob_to_text());
@@ -84,6 +77,21 @@ async function waitForNoGreeting(page) {
   });
   await page.waitForTimeout(100);
   assert.equal((await bobState(page)).greetingState, "hidden");
+  assert.equal((await bobState(page)).greeting, "", "Quiet arrival must not queue greeting text.");
+}
+async function assertSpriteOnly(page, frame) {
+  await waitForNoGreeting(page);
+  assert.equal(await frame.locator("[data-pet-settings-button]").isVisible(), false, "Arrival must show only Bob's sprite, without the wheel.");
+  assert.equal(await frame.locator("#pet-settings-dock").isVisible(), false, "Arrival must keep Jukebob closed.");
+  assert.equal(await frame.locator("[data-pet-reading-composer]").isVisible(), false, "Arrival must keep the reading input closed.");
+  assert.equal(await page.locator(".bob-reading").isVisible(), false, "Arrival must not open reading suggestions.");
+}
+async function visitorRecord(page) {
+  await page.waitForFunction((key) => {
+    const value = JSON.parse(localStorage.getItem(key));
+    return value?.version === 1 && value.seen === true && Number.isFinite(value.lastActiveAt);
+  }, visitorKey);
+  return page.evaluate((key) => JSON.parse(localStorage.getItem(key)), visitorKey);
 }
 async function screenshot(page, name) {
   await page.screenshot({ path: path.join(outputDir, `overlay-${name}.png`), fullPage: false, animations: "disabled" });
@@ -183,25 +191,24 @@ async function dragBob(page, frame, target, touch = false) {
 }
 async function openSettings(page, frame) {
   if (await frame.locator("[data-pet-settings-panel]").isVisible()) return;
-  const point = (await spritePixels(frame)).point;
-  if (await page.evaluate(() => matchMedia('(max-width: 768px), (pointer: coarse)').matches)) {
-    if (await page.evaluate(() => matchMedia('(pointer: coarse)').matches)) {
-      await page.touchscreen.tap(point.x, point.y);
-      await frame.locator("[data-pet-settings-button]").tap();
-    } else {
-      await page.mouse.click(point.x, point.y);
-      await frame.locator("[data-pet-settings-button]").click();
-    }
-  } else {
-    await page.mouse.move(point.x, point.y);
-    await frame.locator("[data-pet-settings-button]").click();
+  const wheel = frame.locator("[data-pet-settings-button]");
+  const touch = await page.evaluate(() => matchMedia('(pointer: coarse)').matches);
+  if (!await wheel.isVisible()) {
+    const point = (await spritePixels(frame)).point;
+    if (touch) await page.touchscreen.tap(point.x, point.y);
+    else await page.mouse.click(point.x, point.y);
+    await wheel.waitFor({ state: "visible" });
+    assert.equal(await frame.locator("#pet-settings-dock").isVisible(), false, "First activation must reveal only the wheel.");
+    assert.equal(await frame.locator("[data-pet-reading-composer]").isVisible(), false, "The first activation must keep reading closed.");
   }
+  if (touch) await wheel.tap();
+  else await wheel.click();
   await frame.locator("[data-pet-settings-panel]").waitFor({ state: "visible" });
   assert.equal(await page.locator("dialog[open]").count(), 0, "Native Bob controls must not open a site modal.");
   assert.notEqual(await page.locator("body").evaluate((body) => getComputedStyle(body).overflow), "hidden", "Native controls must not lock site scrolling.");
 }
 async function collapseControls(frame) {
-  // Reading now opens with JUKE-BOB. Stowed-position and transparent-space
+  // Reading opens only after JUKE-BOB is explicitly opened. Stowed-position and transparent-space
   // checks must first close its actual opaque controls; open layout has its
   // own reading/browser coverage.
   if (await frame.locator("#pet-settings-dock").isVisible()) {
@@ -271,6 +278,8 @@ async function exerciseHideRestore(page, frame, screenshotName) {
   assert.equal(await restoredControl.isVisible(), false, "Show Bob must disappear once Bob returns.");
   assert.equal(await frame.locator("#pet-settings-dock").isVisible(), false,
     "Show Bob must restore the companion with his controls collapsed.");
+  assert.equal(await frame.locator("[data-pet-settings-button]").isVisible(), false,
+    "Show Bob must restore the sprite without revealing the wheel.");
   assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem("oip-bob-preferences:v1"))?.hidden), false);
   await frame.waitForFunction(() => document.activeElement === document.querySelector("canvas"));
   const restoredAnchor = (await bobState(page)).anchor;
@@ -279,15 +288,13 @@ async function exerciseHideRestore(page, frame, screenshotName) {
   // cross-frame position message, not merely the unchanged mode flag.
   await page.waitForFunction((previous) => JSON.parse(window.render_bob_to_text()).anchor.x < previous.x, restoredAnchor);
   assert.ok((await bobState(page)).anchor.x < restoredAnchor.x, "Restored Bob must respond to keyboard movement.");
-  // The canvas is the accessible entry point even when mobile hides the gear.
+  // The canvas is the accessible entry point on every screen size.
   await frame.locator("canvas").first().focus();
   await page.keyboard.press("Enter");
-  if (await page.evaluate(() => matchMedia('(max-width: 768px), (pointer: coarse)').matches)) {
-    await frame.locator('[data-pet-settings-button]').waitFor({ state: 'visible' });
-    assert.equal(await frame.locator('#pet-settings-dock').isVisible(), false, 'Keyboard activation first reveals the mobile wheel.');
-    await frame.waitForFunction(() => document.activeElement === document.querySelector('[data-pet-settings-button]'));
-    await page.keyboard.press('Enter');
-  }
+  await frame.locator('[data-pet-settings-button]').waitFor({ state: 'visible' });
+  assert.equal(await frame.locator('#pet-settings-dock').isVisible(), false, 'Keyboard activation first reveals only the wheel.');
+  await frame.waitForFunction(() => document.activeElement === document.querySelector('[data-pet-settings-button]'));
+  await page.keyboard.press('Enter');
   await frame.locator("#pet-settings-dock").waitFor({ state: "visible" });
   await frame.getByRole("button", { name: "Hide Bob", exact: true }).waitFor({ state: "visible" });
   await screenshot(page, `${screenshotName}-restored`);
@@ -333,14 +340,19 @@ async function exerciseReadingDiscovery(page, frame) {
   await assertInViewport(picks, "Bob reading suggestions");
 }
 
-test("the real pet starts in the masthead above the reader note, greets once, and stays silent before interaction", async () => {
+test("first visits, reloads and internal navigation arrive with a silent sprite and retain visit bookkeeping", async () => {
   const { context, page, requests, errors } = await createPage();
   try {
+    const startedAt = Date.now();
     await visit(page);
-    const frame = await runtime(page);
-    await waitForGreeting(page, "Hi!");
+    let frame = await runtime(page);
+    await assertSpriteOnly(page, frame);
     await assertMastheadHome(page, frame);
     await assertReaderNoteFirst(page);
+    const firstVisit = await visitorRecord(page);
+    assert.ok(firstVisit.lastActiveAt >= startedAt, "A quiet first visit must still record activity.");
+    assert.ok(firstVisit.lastGreetingAt >= startedAt && firstVisit.lastGreetingAt <= firstVisit.lastActiveAt,
+      "Legacy visit/session bookkeeping must remain recorded without displaying its greeting.");
     assert.match(await page.locator("[data-bob-frame]").getAttribute("src"), /\/companion-bob\/runtime\//);
     assert.ok(requests.some((url) => url.startsWith("/companion-bob/runtime/")), "Full Pet Bob must load automatically.");
     assert.deepEqual(requests.filter((url) => /\.(?:mp3|ogg|m4a|aac)$/i.test(url)), [], "Arrival must not load music tracks.");
@@ -349,29 +361,41 @@ test("the real pet starts in the masthead above the reader note, greets once, an
     assert.deepEqual(await frame.evaluate(() => {
       const { contextState, voices, played } = window.__idleTimesPetDebug.sounds;
       return { contextState, voices, played };
-    }), { contextState: "absent", voices: 0, played: 0 }, "The greeting must not create an audio device or play foley.");
+    }), { contextState: "absent", voices: 0, played: 0 }, "Arrival must not create an audio device or play foley.");
     assert.notEqual(await frame.evaluate(() => window.__idleTimesMusicDebug?.isPlaying), true);
-    await screenshot(page, "desktop-first-hi");
-    await waitForNoGreeting(page);
+    await screenshot(page, "desktop-first-sprite");
+    const point = (await spritePixels(frame)).point;
+    await page.mouse.move(point.x, point.y);
+    await assertSpriteOnly(page, frame);
     assert.deepEqual(await frame.evaluate(() => {
       const { contextState, voices, played } = window.__idleTimesPetDebug.sounds;
       return { contextState, voices, played };
-    }), { contextState: "absent", voices: 0, played: 0 }, "Bob must stay silent throughout the unprompted greeting.");
-    await visit(page);
-    await waitForNoGreeting(page);
+    }), { contextState: "absent", voices: 0, played: 0 }, "Hovering Bob must not start sound or disclose controls.");
+    await page.reload({ waitUntil: "domcontentloaded" });
+    frame = await runtime(page); await assertSpriteOnly(page, frame);
+    const reloaded = await visitorRecord(page);
+    assert.ok(reloaded.lastActiveAt >= firstVisit.lastActiveAt, "Reload must retain the activity record.");
+    assert.equal(reloaded.lastGreetingAt, firstVisit.lastGreetingAt, "Reload within a visit must preserve its session timestamp.");
     await visit(page, "/archive/");
-    await waitForNoGreeting(page);
-    await runtime(page);
+    frame = await runtime(page); await assertSpriteOnly(page, frame);
+    assert.equal((await visitorRecord(page)).lastGreetingAt, firstVisit.lastGreetingAt, "Internal navigation must not start another visit.");
+    await openSettings(page, frame);
+    await screenshot(page, "desktop-clicked-jukebob");
+    await page.reload({ waitUntil: "domcontentloaded" });
+    frame = await runtime(page); await assertSpriteOnly(page, frame);
     assert.deepEqual(errors, []);
   } finally { await context.close(); }
 });
 
-test("returning readers get Welcome back without repeat greetings on internal pages", async () => {
+test("returning readers arrive sprite-only while visit recognition updates quietly", async () => {
   const old = Date.now() - 31 * 60 * 1000;
   const { context, page, errors } = await createPage({ storageState: savedVisitor({ version: 1, seen: true, lastActiveAt: old, lastGreetingAt: old }) });
   try {
-    await visit(page); await waitForGreeting(page, "Welcome back!"); await screenshot(page, "desktop-welcome-back");
-    await visit(page, "/essays/one-more-block/"); await waitForNoGreeting(page); await runtime(page);
+    await visit(page); await assertSpriteOnly(page, await runtime(page)); await screenshot(page, "desktop-returning-sprite");
+    const returning = await visitorRecord(page);
+    assert.ok(returning.lastActiveAt > old && returning.lastGreetingAt > old, "A new visit must still update the existing local record.");
+    await visit(page, "/essays/one-more-block/"); await assertSpriteOnly(page, await runtime(page));
+    assert.equal((await visitorRecord(page)).lastGreetingAt, returning.lastGreetingAt, "Article navigation must remain within the same recognized visit.");
     assert.deepEqual(errors, []);
   } finally { await context.close(); }
 });
@@ -420,7 +444,12 @@ test("native Help, reading discovery, Activity, Sound and music work without a m
   const { context, page, errors, recommendationRequests } = await createPage();
   try {
     await visit(page); const frame = await runtime(page);
-    await frame.locator("[data-pet-settings-button]").focus();
+    await assertSpriteOnly(page, frame);
+    await frame.locator("canvas").first().focus();
+    await page.keyboard.press("Enter");
+    await frame.locator("[data-pet-settings-button]").waitFor({ state: "visible" });
+    assert.equal(await frame.locator("#pet-settings-dock").isVisible(), false, "The first keyboard activation must reveal only the wheel.");
+    await frame.waitForFunction(() => document.activeElement === document.querySelector('[data-pet-settings-button]'));
     await page.keyboard.press("Enter");
     await frame.locator("[data-pet-settings-panel]").waitFor({ state: "visible" });
     assert.equal(await page.locator("dialog[open]").count(), 0, "Keyboard access to native controls must not open a site modal.");
@@ -443,6 +472,44 @@ test("native Help, reading discovery, Activity, Sound and music work without a m
     await frame.getByRole("button", { name: "Pause music", exact: true }).click(); await frame.getByRole("button", { name: "Play music", exact: true }).waitFor();
     await frame.getByRole("button", { name: "Collapse music and settings", exact: true }).click(); await frame.locator("#pet-settings-dock").waitFor({ state: "hidden" });
     assert.deepEqual(recommendationRequests, [], "Collection discovery must not call the recommendation endpoint.");
+    assert.deepEqual(errors, []);
+  } finally { await context.close(); }
+});
+
+for (const reducedMotion of ["no-preference", "reduce"]) test(`right-click toggles Jukebob and settings directly with ${reducedMotion} motion`, async () => {
+  const { context, page, errors, recommendationRequests } = await createPage({ reducedMotion });
+  try {
+    await visit(page); const frame = await runtime(page);
+    await assertSpriteOnly(page, frame);
+    const toggle = async (open) => {
+      const point = (await spritePixels(frame)).point;
+      await page.mouse.click(point.x, point.y, { button: "right" });
+      await frame.locator("#pet-settings-dock").waitFor({ state: open ? "visible" : "hidden" });
+      assert.equal(await frame.locator("[data-pet-settings-panel]").isVisible(), open, "Right-click must toggle settings along with Jukebob.");
+      assert.equal(await frame.locator("[data-pet-reading-composer]").isVisible(), open, "Reading follows Jukebob visibility.");
+    };
+    await toggle(true);
+    await frame.getByRole("button", { name: "Play music", exact: true }).click();
+    await frame.waitForFunction(() => window.__idleTimesMusicDebug?.isPlaying === true);
+    await frame.locator("[data-pet-help-button]").click();
+    await frame.locator(".pet-help-panel").waitFor({ state: "visible" });
+    await toggle(false);
+    assert.equal(await frame.locator(".pet-help-panel").isVisible(), false, "Collapsing closes nested settings panels.");
+    assert.equal(await frame.locator("[data-pet-settings-button]").isVisible(), false, "Collapse returns to the sprite alone.");
+    assert.equal(await frame.evaluate(() => window.__idleTimesMusicDebug.isPlaying), true, "Collapsing must preserve music playback.");
+    await screenshot(page, `right-click-${reducedMotion}-closed`);
+    await toggle(true);
+    assert.equal(await frame.locator(".pet-help-panel").isVisible(), false, "Reopening shows the main settings, not stale Help.");
+    await frame.getByRole("button", { name: "Pause music", exact: true }).waitFor({ state: "visible" });
+    await screenshot(page, `right-click-${reducedMotion}-open`);
+    await toggle(false);
+    // The shortcut must not replace the quiet left-click sequence.
+    const point = (await spritePixels(frame)).point;
+    await page.mouse.click(point.x, point.y);
+    await frame.locator("[data-pet-settings-button]").waitFor({ state: "visible" });
+    assert.equal(await frame.locator("#pet-settings-dock").isVisible(), false);
+    await toggle(true);
+    assert.deepEqual(recommendationRequests, [], "Opening and closing Bob must not call the recommendation endpoint.");
     assert.deepEqual(errors, []);
   } finally { await context.close(); }
 });
@@ -483,15 +550,15 @@ test("malformed or denied storage cannot prevent the real pet from loading", asy
       }); },
     };
     const { context, page, errors } = await createPage(options);
-    try { await visit(page); await waitForGreeting(page, "Hi!"); await runtime(page); assert.deepEqual(errors, [], `${mode} storage must not cause an uncaught error.`); }
+    try { await visit(page); await assertSpriteOnly(page, await runtime(page)); assert.deepEqual(errors, [], `${mode} storage must not cause an uncaught error.`); }
     finally { await context.close(); }
   }
 });
 
-test("reduced motion reaches native Bob while retaining the greeting", async () => {
+test("reduced motion reaches native Bob while retaining quiet sprite-only arrival", async () => {
   const { context, page, errors } = await createPage({ reducedMotion: "reduce" });
   try {
-    await visit(page); const frame = await runtime(page); await waitForGreeting(page, "Hi!");
+    await visit(page); const frame = await runtime(page); await assertSpriteOnly(page, frame);
     await frame.waitForFunction(() => window.__idleTimesPetDebug?.reducedMotion === true);
     await screenshot(page, "desktop-reduced-motion"); assert.deepEqual(errors, []);
   } finally { await context.close(); }
@@ -501,9 +568,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 320, height: 740 }
   test(`trusted touch dragging and native controls fit a ${viewport.width}px mobile viewport`, async () => {
     const { context, page, errors, recommendationRequests } = await createPage({ viewport, touch: true });
     try {
-      await visit(page); const frame = await runtime(page); await waitForNoGreeting(page);
-      assert.equal(await frame.locator('#pet-settings-dock').isVisible(), false, 'Mobile must arrive with Jukebob closed.');
-      assert.equal(await frame.locator('[data-pet-settings-button]').isVisible(), false, 'Mobile must arrive with only the sprite.');
+      await visit(page); const frame = await runtime(page); await assertSpriteOnly(page, frame);
       await assertMastheadHome(page, frame); await assertReaderNoteFirst(page); await assertNoPageOverflow(page);
       const tapPoint = (await spritePixels(frame)).point;
       await page.touchscreen.tap(tapPoint.x, tapPoint.y);

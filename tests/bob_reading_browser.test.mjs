@@ -57,28 +57,31 @@ async function tapBob(page,frame){
     return best;
   });
   assert.ok(point,'The actual Bob sprite must be painted before tapping.');
-  await page.touchscreen.tap(bounds.x+point.x*bounds.width,bounds.y+point.y*bounds.height);
+  const x=bounds.x+point.x*bounds.width,y=bounds.y+point.y*bounds.height;
+  if(await page.evaluate(()=>matchMedia('(pointer: coarse)').matches))await page.touchscreen.tap(x,y);
+  else await page.mouse.click(x,y);
 }
-async function openMobileBob(page,frame,width){
+async function openBob(page,frame,width){
   await page.waitForFunction(()=>window.render_bob_to_text&&JSON.parse(window.render_bob_to_text()).ready);
   await page.waitForTimeout(150);
   const gear=frame.locator('[data-pet-settings-button]');
-  assert.equal(await gear.isVisible(),false,'Mobile arrival must hide the settings wheel.');
-  assert.equal(await frame.locator('#pet-settings-dock').isVisible(),false,'Mobile arrival must hide Jukebob.');
-  assert.equal(await frame.locator('[data-pet-reading-composer]').isVisible(),false,'Mobile arrival must hide the composer.');
-  assert.equal(await page.locator('[data-bob-greeting]').isVisible(),false,'Mobile arrival must be sprite-only.');
-  await page.screenshot({path:path.join(output,`mobile-${width}-sprite.png`)});
+  assert.equal(await gear.isVisible(),false,'Arrival must hide the settings wheel.');
+  assert.equal(await frame.locator('#pet-settings-dock').isVisible(),false,'Arrival must hide Jukebob.');
+  assert.equal(await frame.locator('[data-pet-reading-composer]').isVisible(),false,'Arrival must hide the composer.');
+  assert.equal(await page.locator('[data-bob-greeting]').isVisible(),false,'Arrival must be sprite-only.');
+  const label=width<600?'mobile':'desktop';
+  await page.screenshot({path:path.join(output,`${label}-${width}-sprite.png`)});
   await tapBob(page,frame);
   await gear.waitFor({state:'visible'});
   await page.waitForTimeout(250);
   assert.equal(await frame.locator('#pet-settings-dock').isVisible(),false,'Tapping Bob reveals only the wheel.');
   assert.equal(await frame.locator('[data-pet-reading-composer]').isVisible(),false);
-  await page.screenshot({path:path.join(output,`mobile-${width}-wheel.png`)});
-  await gear.tap();
+  await page.screenshot({path:path.join(output,`${label}-${width}-wheel.png`)});
+  if(width<600)await gear.tap();else await gear.click();
   await frame.locator('#pet-settings-dock').waitFor({state:'visible'});
   await frame.locator('[data-pet-reading-composer]').waitFor({state:'visible'});
   await page.waitForTimeout(300);
-  await page.screenshot({path:path.join(output,`mobile-${width}-jukebob.png`)});
+  await page.screenshot({path:path.join(output,`${label}-${width}-jukebob.png`)});
 }
 async function setup(width=1440,disabled=false){
   const context=await browser.newContext({viewport:{width,height:width===1440?900:844},isMobile:width<600,hasTouch:width<600});
@@ -104,7 +107,7 @@ async function setup(width=1440,disabled=false){
   });
   await page.goto(base.href,{waitUntil:'domcontentloaded'});
   const frame=page.frameLocator('[data-bob-frame]');
-  if(width<600)await openMobileBob(page,frame,width);
+  await openBob(page,frame,width);
   await frame.locator('[data-pet-reading-composer]').waitFor({state:'visible'});
   await page.waitForFunction(()=>window.render_bob_reading_to_text);
   const state=()=>page.evaluate(()=>JSON.parse(window.render_bob_reading_to_text()));
@@ -161,10 +164,10 @@ for(const width of [1440,390,320])test(`free discovery, canonical previews, AI f
     const route=(await t.state()).results[0].id,frameBefore=await t.page.locator('[data-bob-frame]').getAttribute('src');
     await t.page.locator('.bob-reading__title').first().click();await t.page.waitForURL(new URL(route,base).href);
     assert.equal(await t.page.locator('[data-bob-frame]').getAttribute('src'),frameBefore);assert.equal(await t.page.locator('.bob-reading').count(),1);assert.deepEqual(t.errors,[]);
-    if(width<600){
+    {
       const posts=t.postCount();
       await t.page.reload({waitUntil:'domcontentloaded'});
-      await openMobileBob(t.page,t.frame,width);
+      await openBob(t.page,t.frame,width);
       assert.equal(t.postCount(),posts,'Reloading and opening controls must never issue a recommendation request.');
     }
   }finally{await t.context.close();}
@@ -180,5 +183,147 @@ test('spending/disabled errors offer free discovery; stale catalog and transport
     await submit({status:409,data:{code:'catalog_changed',message:'The reading catalog changed. Please retry.',retryable:true}},'error');assert.equal((await t.state()).catalogVersion,'');
     let release=t.plan(t.data());await t.page.getByRole('button',{name:'Retry',exact:true}).click();await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).busy);assert.equal(t.requests.at(-1).body.catalogVersion,undefined);release();await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).state==='results');
     await submit({status:503,data:{code:'upstream_error',message:'Bob could not reply.',retryable:true}},'error');assert.ok(await t.page.getByRole('button',{name:'Retry',exact:true}).isVisible());assert.equal((await t.state()).mode,'ai');assert.deepEqual(t.errors,[]);
+  }finally{await t.context.close();}
+});
+
+for(const width of [1440,390,320])test(`article context and removable filters remain quiet and usable at ${width}px`,async()=>{
+  const t=await setup(width);
+  try{
+    const article=catalog.items.find(item=>item.readingTime>=5);
+    await t.page.goto(new URL(article.id,base).href,{waitUntil:'domcontentloaded'});
+    await openBob(t.page,t.frame,width);
+    const action=t.page.getByRole('button',{name:'Like this article',exact:true});
+    await action.waitFor({state:'visible'});
+    assert.equal(t.postCount(),0,'Opening an article or Bob must never request model recommendations.');
+    assert.equal((await t.state()).article.id,article.id);
+    const prefs={...defaults,collectionId:null,anchorId:article.id,mood:'hopeful',maxMinutes:5};
+    const items=catalog.items.filter(item=>item.id!==article.id&&item.readingTime<=5).slice(0,3);
+    let release=t.plan(t.data({items,preferences:prefs}));
+    await action.click();await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).busy);
+    assert.equal(t.requests.at(-1).body.context.articleId,article.id);
+    release();await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).state==='results');
+    assert.ok(await t.page.locator('[data-filter-key="anchor"]').isVisible());
+    assert.ok(await t.page.locator('[data-filter-key="time"]').isVisible());
+    assert.ok(await t.page.locator('[data-filter-key="mood"]').isVisible());
+    await t.page.waitForTimeout(250);
+    const bubble=await t.page.locator('.bob-reading').boundingBox();
+    assert.ok(bubble.x>=-1&&bubble.x+bubble.width<=width+1,'Filter row must stay within the viewport.');
+    assert.ok(bubble.y>=-1,'Filter row must not push suggestions above the viewport.');
+    await t.page.screenshot({path:path.join(output,`context-${width}-filters.png`)});
+    release=t.plan(t.data({items,preferences:{...prefs,mood:''}}));
+    const mood=t.page.locator('[data-filter-key="mood"]');await mood.focus();await mood.press('Enter');
+    await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).busy);
+    const edited=t.requests.at(-1).body;
+    assert.equal(edited.action,'apply_filters');assert.equal(edited.preferences.mood,'');
+    assert.equal(edited.preferences.maxMinutes,5);assert.equal(edited.preferences.anchorId,article.id);
+    assert.equal(await t.page.locator('[data-filter-key="time"]').isEnabled(),false,'Filters must not submit a second request while busy.');
+    release();await t.page.waitForFunction(()=>!JSON.parse(window.render_bob_reading_to_text()).busy);
+    assert.equal(await t.page.locator('[data-filter-key="mood"]').count(),0);
+    assert.equal(t.postCount(),2);
+    const target=items[0];
+    await t.page.locator('.bob-reading__title').first().click();
+    await t.page.waitForURL(new URL(target.id,base).href);
+    await t.page.waitForFunction(id=>JSON.parse(window.render_bob_reading_to_text()).article?.id===id,target.id);
+    assert.equal(t.postCount(),2,'Persistent page navigation must not issue model requests.');
+    release=t.plan(t.data({items,preferences:{...prefs,anchorId:target.id,mood:''}}));
+    await t.page.getByRole('button',{name:'Like this article',exact:true}).click();
+    await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).busy);
+    assert.equal(t.requests.at(-1).body.context.articleId,target.id,'Navigation must update the explicit article reference.');
+    release();await t.page.waitForFunction(()=>!JSON.parse(window.render_bob_reading_to_text()).busy);
+    assert.deepEqual(t.errors,[]);
+  }finally{await t.context.close();}
+});
+
+test('collection follow-ups retain their scope and removal explicitly broadens it',async()=>{
+  const t=await setup();
+  try{
+    await t.page.locator('.bob-reading-launch').click();
+    await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).state==='collections');
+    const choice=(await t.state()).collections[0];
+    await t.page.locator('.bob-reading__collection').first().click();
+    assert.equal(t.postCount(),0);
+    assert.equal((await t.state()).preferences.collectionId,choice.id);
+    const collection=catalog.collections.find(item=>item.id===choice.id);
+    const items=catalog.items.filter(item=>collection.itemIds.includes(item.id)).slice(0,3);
+    let release=t.plan(t.data({items,preferences:{...defaults,collectionId:choice.id,discovery:true}}));
+    const input=t.frame.getByRole('textbox',{name:'What would you like to read about?',exact:true});
+    await input.fill('Something thoughtful from this collection');await input.press('Enter');
+    await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).busy);
+    assert.equal(t.requests.at(-1).body.preferences.collectionId,choice.id);
+    release();await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).state==='results');
+    assert.ok(await t.page.locator('[data-filter-key="collection"]').isVisible());
+    release=t.plan(t.data({preferences:{...defaults,collectionId:null,discovery:true}}));
+    await t.page.locator('[data-filter-key="collection"]').click();
+    await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).busy);
+    assert.equal(t.requests.at(-1).body.action,'apply_filters');
+    assert.equal(t.requests.at(-1).body.preferences.collectionId,null);
+    release();await t.page.waitForFunction(()=>!JSON.parse(window.render_bob_reading_to_text()).busy);
+    assert.equal(await t.page.locator('[data-filter-key="collection"]').count(),0);
+    await t.page.getByRole('button',{name:'New subject',exact:true}).last().click();
+    await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).state==='collections');
+    assert.equal((await t.state()).collections.length,3);assert.equal(t.postCount(),2);
+    assert.deepEqual(t.errors,[]);
+  }finally{await t.context.close();}
+});
+
+test('removing a local collection filter remains free',async()=>{
+  const t=await setup(390);
+  try{
+    await t.page.locator('.bob-reading-launch').click();
+    await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).state==='collections');
+    await t.page.locator('.bob-reading__collection').first().click();
+    assert.ok((await t.state()).preferences.collectionId);
+    await t.page.locator('[data-filter-key="collection"]').tap();
+    const state=await t.state();
+    assert.equal(state.preferences.collectionId,null);assert.equal(state.results.length,3);
+    assert.equal(t.postCount(),0);assert.deepEqual(t.errors,[]);
+  }finally{await t.context.close();}
+});
+
+test('an empty-message filter edit retries only on request and preserves the edited preferences',async()=>{
+  const t=await setup();
+  try{
+    const prefs={...defaults,collectionId:null,topic:'water',maxMinutes:5,mood:'thoughtful'};
+    let release=t.plan(t.data({preferences:prefs}));
+    const input=t.frame.getByRole('textbox',{name:'What would you like to read about?',exact:true});
+    await input.fill('Thoughtful water essays under five minutes');await input.press('Enter');
+    await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).busy);release();
+    await t.page.waitForFunction(()=>!JSON.parse(window.render_bob_reading_to_text()).busy);
+    release=t.plan({code:'upstream_error',message:'Please retry.',retryable:true},503);
+    await t.page.locator('[data-filter-key="time"]').click();
+    await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).busy);
+    const payload=t.requests.at(-1).body;
+    assert.equal(payload.message,'');assert.equal(payload.action,'apply_filters');assert.equal(payload.preferences.maxMinutes,null);
+    release();await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).state==='error');
+    assert.equal(t.postCount(),2,'Failure must not automatically retry.');
+    release=t.plan(t.data({preferences:{...prefs,maxMinutes:null}}));
+    await t.page.getByRole('button',{name:'Retry',exact:true}).click();
+    await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).busy);
+    assert.deepEqual(t.requests.at(-1).body,payload,'Retry must retain the exact edited filter payload.');
+    release();await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).state==='results');
+    assert.equal(await t.page.locator('[data-filter-key="time"]').count(),0);
+    assert.equal((await t.state()).preferences.mood,'thoughtful');assert.deepEqual(t.errors,[]);
+  }finally{await t.context.close();}
+});
+
+test('page navigation cancels pending article context and hides the action on a collection page',async()=>{
+  const t=await setup();
+  try{
+    const article=catalog.items[0],destination=catalog.collections.find(item=>article.collectionSlugs.includes(item.id)).url;
+    await t.page.goto(new URL(article.id,base).href,{waitUntil:'domcontentloaded'});
+    await openBob(t.page,t.frame,1440);
+    const action=t.page.getByRole('button',{name:'Like this article',exact:true});await action.waitFor({state:'visible'});
+    const release=t.plan(t.data({preferences:{...defaults,collectionId:null,anchorId:article.id}}));
+    await action.click();await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).busy);
+    // Follow a real internal site link through the persistent navigation layer.
+    const targetPath=new URL(destination).pathname;
+    const link=t.page.locator(`a[href="${targetPath}"],a[href="${base.origin}${targetPath}"]`).first();
+    await link.click();await t.page.waitForURL(new URL(targetPath,base).href);
+    await t.page.waitForFunction(()=>!JSON.parse(window.render_bob_reading_to_text()).busy);
+    release();await t.page.waitForTimeout(100);
+    const state=await t.state();
+    assert.equal(state.article,null);assert.equal(state.preferences.anchorId,null);
+    assert.equal(await action.isVisible(),false);assert.equal(t.postCount(),1);
+    assert.deepEqual(t.errors,[]);
   }finally{await t.context.close();}
 });
