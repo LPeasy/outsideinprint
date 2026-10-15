@@ -27,9 +27,20 @@
 {{ end }}
 
 {{ $active := and $enabled (or (eq hugo.Environment "production") $allowLocal) }}
+{{ $campaignAttributionEnabled := eq site.Params.newsletter.attribution.enabled true }}
+{{ $registeredCampaigns := slice }}
+{{ if $campaignAttributionEnabled }}
+  {{ range hugo.Data.newsletter_campaigns.campaigns }}
+    {{ if not .legacy }}
+      {{ $registeredCampaigns = $registeredCampaigns | append (dict "code" .code "utm_campaign" .utm_campaign "utm_source" .utm_source "utm_medium" .utm_medium "utm_content" (.utm_content | default "")) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
 {{ $config := dict
   "enabled" $active
   "allowLocal" $allowLocal
+  "campaignAttributionEnabled" $campaignAttributionEnabled
+  "registeredCampaigns" $registeredCampaigns
   "page" (dict
     "kind" .Kind
     "isPage" .IsPage

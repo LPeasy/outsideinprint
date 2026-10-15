@@ -1,0 +1,7 @@
+wrangler.jsonc
+.dev.vars
+.env*
+.wrangler/
+node_modules/
+private/
+*.snapshot.json

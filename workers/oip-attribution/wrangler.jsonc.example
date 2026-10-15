@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "oip-attribution",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-15",
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": { "enabled": false },
+  "vars": {
+    "SIGNUPS_ENABLED": "false",
+    "RECONCILIATION_ENABLED": "false",
+    "ALLOWED_ORIGINS": "https://outsideinprint.org,https://www.outsideinprint.org",
+    "NEWSLETTER_ID": "",
+    "WEBHOOK_ID": "",
+    "WEBHOOK_URL": "",
+    "MAX_SIGNUPS_PER_DAY": "80",
+    "MAX_SIGNUPS_PER_MINUTE": "6",
+    "TEST_SUBSCRIBER_IDS": "[]",
+    "NON_TEST_SUBSCRIBER_IDS": "[]",
+    "TEST_SIGNUP_REFS": "[]"
+  },
+  "d1_databases": [{
+    "binding": "DB", "database_name": "oip-attribution",
+    "database_id": "REPLACE_AFTER_APPROVAL", "migrations_dir": "migrations"
+  }],
+  "triggers": { "crons": ["0 10 * * *", "0 0-9,11-23 * * *"] }
+}

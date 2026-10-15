@@ -13,9 +13,9 @@
     (config.allowLocal === true && localHost && /^https?:$/.test(window.location.protocol));
   config.enabled = config.enabled === true && allowedHost;
   var acquisition = config.enabled ? funnelAcquisition() : null;
-  var sourceLabel = acquisition
+  var sourceLabel = registeredCampaignSource() || (acquisition
     ? "almanack-organic|platform=" + acquisition.platform + "|segment=" + acquisition.segment + "|post=" + acquisition.post
-    : classifySource();
+    : classifySource());
   window.oipAnalyticsEventReferrer = function () {
     return sourceLabel;
   };
@@ -28,6 +28,22 @@
   window.goatcounter.referrer = window.oipAnalyticsEventReferrer;
 
   // Only fixed campaign codes are retained. Never store or send arbitrary URL data.
+  function registeredCampaignSource() {
+    if (!config.enabled || config.campaignAttributionEnabled !== true || !Array.isArray(config.registeredCampaigns)) return "";
+    var params = new URLSearchParams(window.location.search);
+    var names = ["utm_campaign", "utm_source", "utm_medium", "utm_content"];
+    if (names.some(function (name) { return params.getAll(name).length > 1; })) return "";
+    var matches = config.registeredCampaigns.filter(function (campaign) {
+      return campaign.legacy !== true && /^[a-z0-9][a-z0-9-]{0,119}$/.test(campaign.code) &&
+        campaign.utm_campaign === campaign.code && campaign.utm_campaign === params.get("utm_campaign") &&
+        campaign.utm_source === params.get("utm_source") && campaign.utm_medium === params.get("utm_medium") &&
+        (campaign.utm_content || "") === (params.get("utm_content") || "");
+    });
+    // This labels tagged landing-page views only. Do not carry the new label to
+    // untagged navigation or reuse the legacy campaign's storage semantics.
+    return matches.length === 1 ? "oip-campaign|code=" + matches[0].code : "";
+  }
+
   function validAcquisition(value) {
     var segments = ["weekend", "everyday-history", "dialogue"];
     return value && Object.keys(value).sort().join(",") === "expires,platform,post,segment" &&
@@ -525,7 +541,7 @@
       (config.allowLocal === true && localHost && /^https?:$/.test(window.location.protocol)));
     window.oipAnalytics = config;
     acquisition = config.enabled ? funnelAcquisition() : null;
-    sourceLabel = acquisition ? "almanack-organic|platform=" + acquisition.platform + "|segment=" + acquisition.segment + "|post=" + acquisition.post : "internal";
+    sourceLabel = registeredCampaignSource() || (acquisition ? "almanack-organic|platform=" + acquisition.platform + "|segment=" + acquisition.segment + "|post=" + acquisition.post : "internal");
     window.goatcounter.allow_local = config.allowLocal === true;
     var routePath = internalPath(pageContext.path);
     if (routePath) queueCount({ path: routePath, title: pageContext.title || document.title, referrer: getReferrer(), event: false });
