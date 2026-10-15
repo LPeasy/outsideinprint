@@ -8,6 +8,7 @@ const REQUEST_TIMEOUT_MS = 25000;
 const NO_EXACT_MATCHES = 'No exact matches…';
 const frame = host?.querySelector('[data-bob-frame]');
 const openOnArrival = !host.hidden;
+const mobileDisclosure = matchMedia('(max-width: 768px), (pointer: coarse)');
 const catalogUrl = host.dataset.bobCatalog || '/companion-bob/catalog.json';
 const apiBase = host.dataset.bobReadingEnabled === 'true' ? validApiBase(host.dataset.bobApiBase) : '';
 function validApiBase(raw) {
@@ -490,10 +491,10 @@ window.addEventListener('message',event=>{
     Object.assign(discoveryButton.style,{left:`${data.rect.x+5}px`,top:`${Math.min(innerHeight-30,data.rect.y+data.rect.height+2)}px`});
     positionBubble();if(!data.visible)hideCard();
   }
-  // Open during initial readiness, before a reader can choose Help/settings.
+  // Desktop opens during initial readiness. Mobile waits for Bob, then gear.
   // A delayed open would close that first interaction. Restoring hidden Bob
   // retains his existing collapsed-controls behavior.
-  if(data.type==='painted'&&!booted){booted=true;send({type:'reading-config',enabled:Boolean(apiBase)});if(openOnArrival)send({type:'open-reading'});}
+  if(data.type==='painted'&&!booted){booted=true;send({type:'reading-config',enabled:Boolean(apiBase)});if(openOnArrival&&!mobileDisclosure.matches)send({type:'open-reading'});}
   if(data.type==='reading-discover')startDiscovery();
   if(data.type==='hide'){bubble.hidden=true;hideCard();reserveTop(0);focusIntent=null;}
   if(data.type==='reading-dismiss'){
