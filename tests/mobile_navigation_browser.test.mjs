@@ -216,6 +216,33 @@ async function assertNavigationReceivesPointer(page) {
   }
 }
 
+async function openBobFromArrival(page) {
+  await page.waitForFunction(() => window.render_bob_to_text && JSON.parse(window.render_bob_to_text()).ready);
+  if (await page.evaluate(() => matchMedia('(max-width: 768px), (pointer: coarse)').matches)) {
+    const frame = page.frameLocator('[data-bob-frame]');
+    const canvas = frame.locator('canvas').first(), bounds = await canvas.boundingBox();
+    assert.ok(bounds, 'Bob must be painted before opening his controls.');
+    const point = await canvas.evaluate(element => {
+      const { width, height } = element, pixels = element.getContext('2d').getImageData(0, 0, width, height).data;
+      let nearest = null, distance = Infinity;
+      for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+        if (pixels[(y * width + x) * 4 + 3] < 220) continue;
+        const next = (x - width / 2) ** 2 + (y - height * .58) ** 2;
+        if (next < distance) { distance = next; nearest = { x: x / width, y: y / height }; }
+      }
+      return nearest;
+    });
+    assert.ok(point, 'Bob must have an opaque sprite target.');
+    const gear = frame.locator('[data-pet-settings-button]');
+    assert.equal(await gear.isVisible(), false, 'Mobile arrival shows only the sprite.');
+    await page.mouse.click(bounds.x + point.x * bounds.width, bounds.y + point.y * bounds.height);
+    await gear.waitFor({ state: 'visible' });
+    assert.equal(await frame.locator('#pet-settings-dock').isVisible(), false, 'The first activation reveals only the wheel.');
+    await gear.click();
+  }
+  await waitForOpenBob(page);
+}
+
 async function waitForOpenBob(page) {
   await page.waitForFunction(() => {
     const bob = window.render_bob_to_text && JSON.parse(window.render_bob_to_text());
@@ -263,9 +290,9 @@ for (const width of [320, 390]) {
           document.documentElement.style.fontSize = `${size}%`;
           await document.fonts.ready;
         }, fontPercent);
-        // The approved first view opens JUKE-BOB. Exercise the navigation
-        // with those real controls present; stowing would mask interception.
-        await waitForOpenBob(page);
+        // Open JUKE-BOB through the sprite and wheel before checking navigation;
+        // leaving his controls stowed would mask pointer interception.
+        await openBobFromArrival(page);
         const read = page.locator(".nav__mobile .nav-mobile-disclosure--read");
         const explore = page.locator(".nav__mobile .nav-mobile-disclosure--explore");
         const closed = await geometry(page);
