@@ -17,6 +17,10 @@ analytics, and CI-selector/workflow checks remain recorded below.
 The isolated pinned-Hugo fixture passed with the integration disabled and enabled,
 including `ANALYTICS_ENABLED=true`. PR CI exposed a missing vendored GoatCounter
 file in the small fixture; adding it fixed that environment-specific failure.
+The next CI run reached the public-route checks and exposed a stale September 15
+privacy-date assertion. It now expects the approved October 15 date. The focused
+storefront source contract, newsletter proposition test and all eight privacy-text
+comparisons passed; the complete CI suite must confirm the updated PR head.
 `git diff --check` passed.
 The aggregate baseline and weekly-report commands ran against the actual private
 read-only baseline capture; the output correctly marks missing CSV metrics,

@@ -94,9 +94,11 @@ After applying migrations, the protected endpoints use
 | `POST /webhooks/buttondown` | Signed lifecycle notification; persistence failure returns 503 |
 | `POST /signup` | Enabled forms only; accepts the client UUID and registered campaign tuple |
 
-Import the captured baseline for audit comparison, but run a **fresh** baseline
-before enabling the new forms so intervening subscribers are not credited to new
-campaigns. Configure explicitly verified owner/test IDs from the private evidence
+Import the captured baseline for audit comparison and run the **initial** protected
+baseline before accepting attributed signups. The endpoint intentionally refuses
+a second baseline. Once it exists, run a complete reconciliation before enabling
+the new forms so intervening subscribers are not credited to new campaigns.
+Configure explicitly verified owner/test IDs from the private evidence
 in `TEST_SUBSCRIBER_IDS`; reviewed reader IDs can enter `NON_TEST_SUBSCRIBER_IDS`.
 Unreviewed baseline records remain null classification and are excluded from
 verified non-test totals. For a new test address, preassign its UUID through the

@@ -79,5 +79,5 @@ The authorized controlled Worker signup at 16:18:25 UTC returned HTTP 400 with `
 - The owner approved the isolated Worker/D1 and persistent secrets; the backend is provisioned and its complete nine-record baseline fetch succeeded. Public form activation remains disabled. Any paid change still requires its own approval.
 - Verify the real signed webhook shape, current creation allowance, and legitimate Worker-origin signup behavior before switching forms. Do not silently forward visitor IPs or bypass the provider firewall.
 - Complete an owner-controlled new-address acquisition/confirmation/unsubscribe test plus test exclusion, and a successful deployed reconciliation.
-- Review the revised privacy notice and retention/deletion policy. Automated cleanup remains disabled until approved.
+- Privacy and retention were subsequently approved, and validated cleanup is enabled. The revised public notice remains staged for the checked site release; see the rollout record for current settings.
 - After backend checks pass, activate forms, perform the single production smoke check, and retain deployment/rollback evidence. Current audit evidence does not establish that rollout is complete.
