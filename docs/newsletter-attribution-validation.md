@@ -1,12 +1,12 @@
 # Newsletter attribution validation — October 15, 2026
 
-Focused checks passed, including **38 Worker tests and 22 reporting tests** on
+Focused checks passed, including **40 Worker tests and 22 reporting tests** on
 the final backend/reporting changes. Previously passing unaffected client,
 analytics, and CI-selector/workflow checks remain recorded below.
 
 | Coverage | Passing cases |
 | --- | ---: |
-| Worker, real SQLite migration/transactions, provider fixtures | 38 |
+| Worker, real SQLite migration/transactions, provider fixtures | 40 |
 | Browser attribution and submission | 13 |
 | Existing/new GoatCounter campaign mapping | 13 |
 | CI changed-path selection | 7 |
@@ -37,7 +37,7 @@ no subscriber or confirmation email was created. It remains one rejected test
 attempt, not an accepted signup or uncertain provider outcome. The provider
 firewall was not bypassed. The public integration remains disabled.
 
-The final backend version is `3f6ece6d-a11f-4b8b-9d23-e5fff6490cf7`. Daily
+The final backend version is `16a38055-0e26-4455-bf03-0b1290bd4b62`. Daily
 reconciliation, hourly webhook checks and approved retention are enabled; public
 signup is disabled and test-only restriction remains configured. A real signed
 confirmation, end-to-end unsubscribe, operator alert delivery, actual provider
@@ -50,3 +50,5 @@ expiry, deleted-subscriber anonymization, late signed confirmation after provide
 deletion, retained-reference retries, independent unknown unsubscribe cycles,
 monotonic summary merging and transactionally consistent reporting snapshots.
 Schema-only test webhook receipts use atomic JSON updates without raw payloads.
+Late webhooks cannot recreate erased subscriber identifiers; their value-free
+outcome receipt must commit before acknowledgment.

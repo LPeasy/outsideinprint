@@ -63,6 +63,13 @@ export async function webhook(request,env,fetcher) {
   // Minimal documented payload has no timestamp. Even an unfamiliar extra field
   // is not treated as event time until the real signed payload contract is reviewed.
   const current=await getSubscriber(env,payload.data.subscriber,fetcher);
+  if(!current && !await stmt(env,'SELECT subscriber_id FROM subscribers WHERE subscriber_id=?',payload.data.subscriber).first()) {
+    // A late delivery must not recreate erased subscriber identifiers. Persist
+    // only a value-free outcome receipt when neither provider nor ledger has it.
+    await env.DB.batch([putControl(env,'last_webhook_received_at',observed),
+      putControl(env,'last_ignored_missing_subscriber_event',{event_type:payload.event_type,observed_at:observed})]);
+    return reply(200,{ok:true});
+  }
   const changes=current ? await subscriberStatements(env,current,observed,{confirmation:payload.event_type==='subscriber.confirmed',source:'signed_webhook',recordUnsubscribe:payload.event_type!=='subscriber.unsubscribed'}) : [stmt(env,
     "UPDATE subscribers SET status='deleted',state_observed_at=? WHERE subscriber_id=? AND state_observed_at<=?",observed,payload.data.subscriber,observed)];
   if(!current && payload.event_type==='subscriber.confirmed') changes.push(stmt(env,

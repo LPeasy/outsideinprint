@@ -296,6 +296,33 @@ test('signed confirmation survives provider deletion without restoring active st
   assert.equal(env.DB.rows('lifecycle_events').filter(row=>row.type==='confirmed').length,1);
 });
 
+test('late webhook for a provider-deleted and ledger-absent identity persists only a value-free receipt', async t => {
+  const env=await fixture(t);
+  const missing=async()=>Response.json({code:'not_found'},{status:404});
+  const eventId='ext_evt_'+'p'.repeat(24);
+  assert.equal((await handle(webhookRequest(env,'subscriber.confirmed',ID,{extra:{id:eventId}}),env,missing)).status,200);
+  assert.equal(env.DB.rows('subscribers').length,0);
+  assert.equal(env.DB.rows('lifecycle_events').length,0);
+  const receipt=await control(env,'last_ignored_missing_subscriber_event');
+  assert.deepEqual(Object.keys(receipt).sort(),['event_type','observed_at']);
+  assert.equal(receipt.event_type,'subscriber.confirmed');
+  assert.equal(await control(env,'last_webhook_received_at'),receipt.observed_at);
+  assert.ok(!JSON.stringify(env.DB.rows('controls')).includes(ID));
+  assert.ok(!JSON.stringify(env.DB.rows('controls')).includes(eventId));
+});
+
+test('late missing-subscriber webhook is not acknowledged when its value-free receipt cannot commit', async t => {
+  const env=await fixture(t);
+  env.DB.failNextBatch=true;
+  const response=await handle(webhookRequest(env,'subscriber.unsubscribed'),env,
+    async()=>Response.json({code:'not_found'},{status:404}));
+  assert.equal(response.status,503);
+  assert.equal(await control(env,'last_webhook_received_at'),null);
+  assert.equal(await control(env,'last_ignored_missing_subscriber_event'),null);
+  assert.equal(env.DB.rows('subscribers').length,0);
+  assert.equal(env.DB.rows('lifecycle_events').length,0);
+});
+
 test('validated webhook event IDs deduplicate retries and preserve distinct undated unsubscribe cycles', async t => {
   const env = await fixture(t), value = input();
   await handle(signupRequest(value), env, providerCreate(value));
