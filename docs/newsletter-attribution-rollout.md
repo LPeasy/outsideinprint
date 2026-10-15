@@ -83,6 +83,15 @@ reserved test attempt is recorded as rejected, with zero accepted acquisitions.
 No second submission path, firewall bypass or visitor-IP forwarding was used.
 See [the prepared provider follow-up](newsletter-attribution-provider-follow-up.md).
 Resolve the supported provider configuration before retrying or switching forms.
+The owner authorized that request, and it was sent to Buttondown support on
+October 15. Its questions cover the exact firewall reason, cached
+rejection/retry behavior and actual creation allowance. A response is pending.
+
+A later read-only monitoring check refreshed the existing Cloudflare session and
+successfully read Worker settings. Notification-policy access returned HTTP 403;
+no new access was granted. Operator alert configuration and delivery remain
+unverified and must be checked through authorized notification access before
+public activation.
 
 Final staged settings are `SIGNUPS_ENABLED=false`, `TEST_ONLY_MODE=true`,
 `RECONCILIATION_ENABLED=true`, and `RETENTION_ENABLED=true`. Scheduled reconciliation

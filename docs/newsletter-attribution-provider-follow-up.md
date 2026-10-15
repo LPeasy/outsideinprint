@@ -1,6 +1,6 @@
 # Buttondown follow-up: Worker signup blocked by firewall
 
-Prepared October 15, 2026. This text is ready for owner review and forwarding; it has not been sent.
+Sent to Buttondown support on October 15, 2026 after explicit owner authorization. The private delivery receipt remains outside Git. A provider diagnosis is pending; no signup retry or firewall change followed the send.
 
 We are testing an isolated Cloudflare Worker for Outside In Print newsletter signups. New requests explicitly use `type: "unactivated"`, a stable idempotency key, the existing newsletter tag, native UTM fields, and a random reference in metadata. Our first controlled Worker signup at **2026-10-15 16:18:25 UTC** returned **HTTP 400**, code **`subscriber_blocked`**, with this detail:
 
