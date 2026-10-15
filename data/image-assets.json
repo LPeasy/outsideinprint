@@ -118,6 +118,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/an-extra-cup": {
+      "id": "editorial/an-extra-cup",
+      "source": "images/originals/editorial/an-extra-cup.png",
+      "sha256": "cc603cc2168deff8908375b0a3785fa77b3cfe184149932a9227366e35e9f0da",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/at-the-worktable": {
       "id": "editorial/at-the-worktable",
       "source": "images/originals/editorial/at-the-worktable.png",
@@ -8062,6 +8076,7 @@
     "/images/editorial/algae-fueled-fever-dreams.png": "editorial/algae-fueled-fever-dreams",
     "/images/editorial/all-is-a-gift.png": "editorial/all-is-a-gift",
     "/images/editorial/already-mine-morning-walk.png": "editorial/already-mine-morning-walk",
+    "/images/editorial/an-extra-cup.png": "editorial/an-extra-cup",
     "/images/editorial/at-the-worktable.png": "editorial/at-the-worktable",
     "/images/editorial/beneficial-use.png": "editorial/beneficial-use",
     "/images/editorial/beyond-the-bend.png": "editorial/beyond-the-bend",
