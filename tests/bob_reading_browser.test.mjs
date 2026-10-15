@@ -162,7 +162,18 @@ for(const width of [1440,390,320])test(`free discovery, canonical previews, AI f
     await t.page.waitForTimeout(250);await t.page.screenshot({path:path.join(output,`reading-${width}-no-matches.png`)});
     await t.page.locator('.bob-reading__collection').first().click();
     const route=(await t.state()).results[0].id,frameBefore=await t.page.locator('[data-bob-frame]').getAttribute('src');
-    await t.page.locator('.bob-reading__title').first().click();await t.page.waitForURL(new URL(route,base).href);
+    if(width<600){
+      await t.page.locator('.bob-reading__peek').first().tap();
+      await t.page.locator('.bob-card__read').click();
+    }else await t.page.locator('.bob-reading__title').first().click();
+    await t.page.waitForURL(new URL(route,base).href);
+    await t.page.waitForFunction(()=>{
+      const bob=JSON.parse(window.render_bob_to_text()),reading=JSON.parse(window.render_bob_reading_to_text());
+      return bob.mode==='masthead'&&!bob.routing&&!reading.composer?.visible&&!reading.visible;
+    });
+    assert.equal(await t.frame.locator('[data-pet-settings-button]').isVisible(),false);
+    assert.equal(await t.frame.locator('#pet-settings-dock').isVisible(),false);
+    assert.equal(await t.page.evaluate(()=>JSON.parse(localStorage.getItem('oip-bob-position:v1'))),null);
     assert.equal(await t.page.locator('[data-bob-frame]').getAttribute('src'),frameBefore);assert.equal(await t.page.locator('.bob-reading').count(),1);assert.deepEqual(t.errors,[]);
     {
       const posts=t.postCount();
@@ -225,6 +236,7 @@ for(const width of [1440,390,320])test(`article context and removable filters re
     await t.page.waitForURL(new URL(target.id,base).href);
     await t.page.waitForFunction(id=>JSON.parse(window.render_bob_reading_to_text()).article?.id===id,target.id);
     assert.equal(t.postCount(),2,'Persistent page navigation must not issue model requests.');
+    await openBob(t.page,t.frame,width);
     release=t.plan(t.data({items,preferences:{...prefs,anchorId:target.id,mood:''}}));
     await t.page.getByRole('button',{name:'Like this article',exact:true}).click();
     await t.page.waitForFunction(()=>JSON.parse(window.render_bob_reading_to_text()).busy);
