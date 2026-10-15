@@ -19,21 +19,28 @@ const values = Object.fromEntries(fs.readFileSync(envPath, 'utf8').split(/\r?\n/
 }));
 if (!values.OPENAI_API_KEY) throw new Error('The approved env file has no API key.');
 const root = fileURLToPath(new URL('..', import.meta.url));
+const port = args.includes('--port') ? Number(get('--port')) : 8787;
+if (!Number.isInteger(port) || port < 1024 || port > 65535) throw new Error('Expected a loopback port between 1024 and 65535.');
+const site = new URL(args.includes('--site-origin') ? get('--site-origin') : 'http://127.0.0.1:8769');
+if (site.protocol !== 'http:' || !['127.0.0.1', 'localhost'].includes(site.hostname) || site.username || site.password || site.pathname !== '/' || site.search || site.hash) throw new Error('Expected a loopback HTTP site origin.');
+// Reuse an existing local ledger when reviewing another source worktree. Never
+// reset the approved allowance by silently creating a new ledger per restart.
+const persist = args.includes('--persist-dir') ? path.resolve(get('--persist-dir')) : path.join(root, '.wrangler/local-review');
 const mf = new Miniflare({
-  host: '127.0.0.1', port: 8787, log: new Log(LogLevel.WARN),
+  host: '127.0.0.1', port, log: new Log(LogLevel.WARN),
   modules: true, modulesRules: [{ type: 'ESModule', include: ['**/*.js'] }],
   scriptPath: path.join(root, 'src/index.js'), compatibilityDate: '2026-07-30',
   durableObjects: { BOB_BUDGET: { className: 'BobBudget', useSQLite: true } },
-  durableObjectsPersist: path.join(root, '.wrangler/local-review'),
+  durableObjectsPersist: persist,
   bindings: {
     ENVIRONMENT: 'local', CHAT_ENABLED: 'true',
-    ALLOWED_ORIGINS: 'http://127.0.0.1:8769,http://localhost:8769',
-    CATALOG_URL: 'http://127.0.0.1:8769/companion-bob/catalog.json',
+    ALLOWED_ORIGINS: site.origin,
+    CATALOG_URL: new URL('/companion-bob/catalog.json', site).href,
     OPENAI_API_KEY: values.OPENAI_API_KEY,
     IP_HASH_SECRET: 'local-review-only-no-production-identity',
     DAILY_BUDGET_MICROUSD: '500000', MONTHLY_BUDGET_MICROUSD: '5000000',
   },
 });
 await mf.ready;
-console.log('Bob Worker review API listening at http://127.0.0.1:8787 (live OpenAI calls; local deployment only).');
+console.log(`Bob Worker review API listening at http://127.0.0.1:${port} (live OpenAI calls; local deployment only).`);
 for (const signal of ['SIGINT', 'SIGTERM']) process.once(signal, async () => { await mf.dispose(); process.exit(0); });

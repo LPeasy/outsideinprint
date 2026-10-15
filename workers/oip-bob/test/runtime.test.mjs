@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Miniflare } from 'miniflare';
 import { fileURLToPath } from 'node:url';
+import { defaults } from '../src/preferences.js';
 
 const origin = 'https://outsideinprint.org';
 const catalog = {
@@ -53,6 +54,45 @@ test('real Workers runtime returns catalog links and version through durable adm
     assert.equal(f.calls(), 1);
     const status = await f.mf.dispatchFetch('https://bob.test/api/bob/status', { headers: { origin } });
     assert.equal((await status.json()).configured, true);
+  } finally { await f.mf.dispose(); }
+});
+test('real Workers runtime preserves article and collection filters and applies explicit removals', async () => {
+  const inputs = [];
+  const f = await fixture({}, payload => {
+    inputs.push(JSON.parse(payload.input));
+    return Response.json({ status: 'completed', usage: { input_tokens: 500, output_tokens: 50 }, output: [{ type: 'message', phase: 'final_answer', content: [{ type: 'output_text', text: JSON.stringify({ clarification: '', recommendation_ids: payload.text.format.schema.properties.recommendation_ids.items.enum.slice(0, 3) }) }] }] });
+  });
+  try {
+    const context = { articleId: catalog.items[2].id };
+    const first = await f.request({ message: 'Like this article', context, preferences: { ...defaults(), topic: 'electricity', collectionId: 'our-changing-world', maxMinutes: 4 } });
+    const related = await first.json();
+    assert.equal(first.status, 200, JSON.stringify(related));
+    assert.equal(related.preferences.topic, '');
+    assert.equal(related.preferences.anchorId, context.articleId);
+    assert.equal(related.preferences.collectionId, 'our-changing-world');
+    assert.equal(inputs[0].reference_piece.id, context.articleId);
+    assert.equal(related.items.length, 2);
+    assert.ok(related.items.every(item => item.readingTime <= 4 && item.id !== context.articleId));
+
+    const edited = { ...defaults(), topic: 'water' };
+    const second = await f.request({ action: 'apply_filters', context, preferences: edited, message: 'Like this article under 4 minutes', history: [{ role: 'user', content: 'electricity under 4 minutes' }] });
+    const broadened = await second.json();
+    assert.equal(second.status, 200, JSON.stringify(broadened));
+    assert.deepEqual(broadened.preferences, edited);
+    assert.equal(broadened.items.length, 3);
+    assert.equal(inputs[1].request, '');
+    assert.deepEqual(inputs[1].conversation, []);
+    assert.equal(inputs[1].reference_piece, null);
+
+    const invalid = await f.request({ message: 'water', context: { articleId: '/essays/not-in-catalog/' } });
+    assert.equal(invalid.status, 400);
+    assert.equal((await invalid.json()).retryable, false);
+    const empty = await f.request({ action: 'apply_filters', preferences: { ...defaults(), discovery: true, collectionId: 'our-changing-world', maxMinutes: 1 } });
+    const noMatch = await empty.json();
+    assert.equal(empty.status, 200);
+    assert.equal(noMatch.outcome, 'empty');
+    assert.equal(noMatch.preferences.collectionId, 'our-changing-world');
+    assert.equal(f.calls(), 2, 'invalid and impossible searches must not call the provider');
   } finally { await f.mf.dispose(); }
 });
 test('disabled and zero-budget services never dispatch an OpenAI request', async () => {

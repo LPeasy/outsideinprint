@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "gameSourceCommit": "4b891cc252666e638e5860246f307c301e344eff",
+  "gameSourceCommit": "4f7873301fa208a72b12e704e29530a5857dd7a7",
   "adapter": "Full-viewport site Pet, native-style drag and alpha hit regions; no desk, economy or unlocks.",
   "protocol": "oip-site-bob-v1",
   "sourceWorkingTree": true,
   "sources": [
     {
       "path": "browser/site-pet/entry.tsx",
-      "sha256": "3bbf99dfe7a037b5f87beb6849623ad051c1dde4a89ff5573cc89a3e39104ef1"
+      "sha256": "f0a30bb0ad2689214bdd049ba4e1eedce8f62291102e77fb90a7bf2bb4a81b75"
     },
     {
       "path": "browser/site-pet/style.css",
@@ -19,7 +19,7 @@
     },
     {
       "path": "src/components/BobPet.tsx",
-      "sha256": "69bdea89a68450312cdff37e39fe3fa8a6c21ee40883fcd787f9b43e4bfcd2a5"
+      "sha256": "847c55769aa30f8f8aa95c24195cf07bcb1581db219aaed221ac5820811fe29c"
     },
     {
       "path": "src/components/PetActivityControls.tsx",
@@ -39,7 +39,7 @@
     }
   ],
   "fullGameIncluded": false,
-  "totalBytes": 26919227,
+  "totalBytes": 26919164,
   "files": [
     {
       "path": "assets/bob-armrest-BAi3CKpz.webp",
@@ -212,14 +212,14 @@
       "sha256": "d719e4b0e7a6041d7c5a7cc91f5f37d6aee12df2f647082ae00c2dd3e7de2dd2"
     },
     {
-      "path": "assets/index-fbgMS6m9.js",
-      "bytes": 526254,
-      "sha256": "920ef9fe9989e82bb5becae7f2ce504e477e16bc2771d15c3d76652341fe1adf"
+      "path": "assets/index-CfZEBzVr.js",
+      "bytes": 526191,
+      "sha256": "9e9ad303b3a8270f65f26e8e00a61cde8b7fe948207dd335d2fda96ad1fc0877"
     },
     {
       "path": "index.html",
       "bytes": 501,
-      "sha256": "43ce584d4aa311a00b76f66a495367d555543158885b5a8ae1f651827347bb75"
+      "sha256": "142ea55a6a62abcbddbbaa516b526fcf5bf94ecca5b3f8ab69f2ee0398fde75f"
     },
     {
       "path": "music/playlist.json",
