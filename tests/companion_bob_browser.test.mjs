@@ -184,8 +184,18 @@ async function dragBob(page, frame, target, touch = false) {
 async function openSettings(page, frame) {
   if (await frame.locator("[data-pet-settings-panel]").isVisible()) return;
   const point = (await spritePixels(frame)).point;
-  await page.mouse.move(point.x, point.y);
-  await frame.locator("[data-pet-settings-button]").click();
+  if (await page.evaluate(() => matchMedia('(max-width: 768px), (pointer: coarse)').matches)) {
+    if (await page.evaluate(() => matchMedia('(pointer: coarse)').matches)) {
+      await page.touchscreen.tap(point.x, point.y);
+      await frame.locator("[data-pet-settings-button]").tap();
+    } else {
+      await page.mouse.click(point.x, point.y);
+      await frame.locator("[data-pet-settings-button]").click();
+    }
+  } else {
+    await page.mouse.move(point.x, point.y);
+    await frame.locator("[data-pet-settings-button]").click();
+  }
   await frame.locator("[data-pet-settings-panel]").waitFor({ state: "visible" });
   assert.equal(await page.locator("dialog[open]").count(), 0, "Native Bob controls must not open a site modal.");
   assert.notEqual(await page.locator("body").evaluate((body) => getComputedStyle(body).overflow), "hidden", "Native controls must not lock site scrolling.");
@@ -269,8 +279,15 @@ async function exerciseHideRestore(page, frame, screenshotName) {
   // cross-frame position message, not merely the unchanged mode flag.
   await page.waitForFunction((previous) => JSON.parse(window.render_bob_to_text()).anchor.x < previous.x, restoredAnchor);
   assert.ok((await bobState(page)).anchor.x < restoredAnchor.x, "Restored Bob must respond to keyboard movement.");
-  await frame.locator("[data-pet-settings-button]").focus();
+  // The canvas is the accessible entry point even when mobile hides the gear.
+  await frame.locator("canvas").first().focus();
   await page.keyboard.press("Enter");
+  if (await page.evaluate(() => matchMedia('(max-width: 768px), (pointer: coarse)').matches)) {
+    await frame.locator('[data-pet-settings-button]').waitFor({ state: 'visible' });
+    assert.equal(await frame.locator('#pet-settings-dock').isVisible(), false, 'Keyboard activation first reveals the mobile wheel.');
+    await frame.waitForFunction(() => document.activeElement === document.querySelector('[data-pet-settings-button]'));
+    await page.keyboard.press('Enter');
+  }
   await frame.locator("#pet-settings-dock").waitFor({ state: "visible" });
   await frame.getByRole("button", { name: "Hide Bob", exact: true }).waitFor({ state: "visible" });
   await screenshot(page, `${screenshotName}-restored`);
@@ -484,9 +501,14 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 320, height: 740 }
   test(`trusted touch dragging and native controls fit a ${viewport.width}px mobile viewport`, async () => {
     const { context, page, errors, recommendationRequests } = await createPage({ viewport, touch: true });
     try {
-      await visit(page); const frame = await runtime(page); await waitForGreeting(page, "Hi!");
-      await collapseControls(frame);
+      await visit(page); const frame = await runtime(page); await waitForNoGreeting(page);
+      assert.equal(await frame.locator('#pet-settings-dock').isVisible(), false, 'Mobile must arrive with Jukebob closed.');
+      assert.equal(await frame.locator('[data-pet-settings-button]').isVisible(), false, 'Mobile must arrive with only the sprite.');
       await assertMastheadHome(page, frame); await assertReaderNoteFirst(page); await assertNoPageOverflow(page);
+      const tapPoint = (await spritePixels(frame)).point;
+      await page.touchscreen.tap(tapPoint.x, tapPoint.y);
+      await frame.locator('[data-pet-settings-button]').waitFor({ state: 'visible' });
+      assert.equal(await frame.locator('#pet-settings-dock').isVisible(), false, 'First tap must reveal only the wheel.');
       const settingsBox = await frame.locator("[data-pet-settings-button]").boundingBox();
       const themeBox = await page.locator(".masthead [data-theme-toggle]").boundingBox();
       assert.ok(settingsBox && themeBox, "Mobile Bob settings and theme controls must have visible bounds.");

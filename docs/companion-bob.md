@@ -4,6 +4,8 @@ Website implementation prepared in `codex/pet-bob-live-20261011` from the approv
 
 ## Reader behavior
 
+Mobile disclosure: at widths of 768px or less, or with a coarse primary pointer, a fresh load starts with only Bob's sprite. The automatic greeting bubble, wheel, jukebox and reading field stay hidden. Tapping Bob reveals the wheel; tapping the wheel opens JUKE-BOB and its controls. Reloads and returning visits start collapsed too. Keyboard users can activate the focused canvas with Enter. Internal soft navigation preserves controls the reader has explicitly opened. Desktop retains the automatic jukebox opening and visit greetings described below.
+
 Bob uses the actual Idle Times Pet renderer and interaction controllers. His default home is the masthead on the homepage and inner pages, with reserved space beside the wordmark on desktop and phones. The homepage starts with A note to the reader beneath the masthead and navigation; the Meet Idle Bob promotion and Steam card are removed. The first visit shows a silent raised-hand greeting and `Hi!`; a return after at least 30 minutes of inactivity shows `Welcome back!`. The speech bubble fades. Page navigation during the same visit does not repeat it.
 
 Bob docks in the lower-right corner when his starting slot scrolls away. Pick him up and drag him to choose a free position over the page. He uses the desktop pet's hanging, swing and landing behavior, then stays where placed while the reader scrolls. His position is saved as viewport proportions and restored across reloads and internal navigation, clamped to the available screen after resizing.

@@ -15,6 +15,7 @@ function initialize() {
   const restore = document.querySelector('[data-bob-restore]');
   const storage = createBobStorage();
   const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const mobileDisclosure = matchMedia('(max-width: 768px), (pointer: coarse)');
   let minimized = storage.read(PREFERENCES_KEY)?.hidden === true;
   let savedPosition = validPosition(storage.read(POSITION_KEY));
   let anchor = { x: 0, y: 0 };
@@ -30,6 +31,7 @@ function initialize() {
   let lastTouch = 0;
   let pendingGreeting = null;
   let pendingOpen = false;
+  let pendingOpenKeyboard = false;
   let pendingFocus = false;
   let greetingTimer, clearTimer, loadTimer;
   let positioning = 0;
@@ -104,6 +106,8 @@ function initialize() {
   }
   function greet(text) {
     if (minimized) return;
+    // Phone arrivals stay sprite-only; visit recognition still runs normally.
+    if (mobileDisclosure.matches) { pendingGreeting = null; return; }
     if (!active) { pendingGreeting = text; return; }
     pendingGreeting = null;
     dismissGreeting();
@@ -222,13 +226,15 @@ function initialize() {
     if (hidden) restore.focus({ preventScroll: true });
     else if (!fallback.hidden) fallback.querySelector('button')?.focus({ preventScroll: true });
   }
-  function openControls() {
+  function openControls(event) {
     minimized = false;
     storage.write(PREFERENCES_KEY, { version: 1, hidden: false });
     pendingOpen = true;
+    pendingOpenKeyboard = event?.detail === 0;
+    pendingFocus = false;
     syncVisibility();
     if (host.dataset.failed === 'true') load();
-    if (ready && painted) { send({ type: 'open-reading' }); pendingOpen = false; }
+    if (ready && painted) { send({ type: mobileDisclosure.matches ? 'reveal-controls' : 'open-reading', keyboard: pendingOpenKeyboard }); pendingOpen = false; }
   }
   function home() {
     dragging = false;
@@ -278,7 +284,7 @@ function initialize() {
       focusRuntime();
       clearTimeout(loadTimer);
       startVisit();
-      if (pendingOpen && active) { send({ type: 'open-reading' }); pendingOpen = false; }
+      if (pendingOpen && active) { send({ type: mobileDisclosure.matches ? 'reveal-controls' : 'open-reading', keyboard: pendingOpenKeyboard }); pendingOpen = false; }
     } else if (data.type === 'hit-regions') {
       applyRegions(data.rects);
     } else if (data.type === 'position' && Number.isFinite(data.x) && Number.isFinite(data.y)) {

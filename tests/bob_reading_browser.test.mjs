@@ -43,6 +43,43 @@ function setFixtureAttribute(html,name,value){
   assert.equal(count,1,`Expected exactly one ${name} fixture attribute.`);
   return updated;
 }
+async function tapBob(page,frame){
+  const canvas=frame.locator('canvas').first();
+  const bounds=await canvas.boundingBox();assert.ok(bounds);
+  const point=await canvas.evaluate(element=>{
+    const {width,height}=element,data=element.getContext('2d').getImageData(0,0,width,height).data;
+    let best=null,distance=Infinity;
+    for(let y=0;y<height;y++)for(let x=0;x<width;x++){
+      if(data[(y*width+x)*4+3]<220)continue;
+      const next=(x-width/2)**2+(y-height*.58)**2;
+      if(next<distance){distance=next;best={x:x/width,y:y/height};}
+    }
+    return best;
+  });
+  assert.ok(point,'The actual Bob sprite must be painted before tapping.');
+  await page.touchscreen.tap(bounds.x+point.x*bounds.width,bounds.y+point.y*bounds.height);
+}
+async function openMobileBob(page,frame,width){
+  await page.waitForFunction(()=>window.render_bob_to_text&&JSON.parse(window.render_bob_to_text()).ready);
+  await page.waitForTimeout(150);
+  const gear=frame.locator('[data-pet-settings-button]');
+  assert.equal(await gear.isVisible(),false,'Mobile arrival must hide the settings wheel.');
+  assert.equal(await frame.locator('#pet-settings-dock').isVisible(),false,'Mobile arrival must hide Jukebob.');
+  assert.equal(await frame.locator('[data-pet-reading-composer]').isVisible(),false,'Mobile arrival must hide the composer.');
+  assert.equal(await page.locator('[data-bob-greeting]').isVisible(),false,'Mobile arrival must be sprite-only.');
+  await page.screenshot({path:path.join(output,`mobile-${width}-sprite.png`)});
+  await tapBob(page,frame);
+  await gear.waitFor({state:'visible'});
+  await page.waitForTimeout(250);
+  assert.equal(await frame.locator('#pet-settings-dock').isVisible(),false,'Tapping Bob reveals only the wheel.');
+  assert.equal(await frame.locator('[data-pet-reading-composer]').isVisible(),false);
+  await page.screenshot({path:path.join(output,`mobile-${width}-wheel.png`)});
+  await gear.tap();
+  await frame.locator('#pet-settings-dock').waitFor({state:'visible'});
+  await frame.locator('[data-pet-reading-composer]').waitFor({state:'visible'});
+  await page.waitForTimeout(300);
+  await page.screenshot({path:path.join(output,`mobile-${width}-jukebob.png`)});
+}
 async function setup(width=1440,disabled=false){
   const context=await browser.newContext({viewport:{width,height:width===1440?900:844},isMobile:width<600,hasTouch:width<600});
   const page=await context.newPage(),requests=[],errors=[],plans=[];
@@ -67,6 +104,7 @@ async function setup(width=1440,disabled=false){
   });
   await page.goto(base.href,{waitUntil:'domcontentloaded'});
   const frame=page.frameLocator('[data-bob-frame]');
+  if(width<600)await openMobileBob(page,frame,width);
   await frame.locator('[data-pet-reading-composer]').waitFor({state:'visible'});
   await page.waitForFunction(()=>window.render_bob_reading_to_text);
   const state=()=>page.evaluate(()=>JSON.parse(window.render_bob_reading_to_text()));
@@ -123,6 +161,12 @@ for(const width of [1440,390,320])test(`free discovery, canonical previews, AI f
     const route=(await t.state()).results[0].id,frameBefore=await t.page.locator('[data-bob-frame]').getAttribute('src');
     await t.page.locator('.bob-reading__title').first().click();await t.page.waitForURL(new URL(route,base).href);
     assert.equal(await t.page.locator('[data-bob-frame]').getAttribute('src'),frameBefore);assert.equal(await t.page.locator('.bob-reading').count(),1);assert.deepEqual(t.errors,[]);
+    if(width<600){
+      const posts=t.postCount();
+      await t.page.reload({waitUntil:'domcontentloaded'});
+      await openMobileBob(t.page,t.frame,width);
+      assert.equal(t.postCount(),posts,'Reloading and opening controls must never issue a recommendation request.');
+    }
   }finally{await t.context.close();}
 });
 test('spending/disabled errors offer free discovery; stale catalog and transport errors keep explicit Retry',async()=>{
