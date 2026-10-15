@@ -48,7 +48,13 @@
                   data-analytics-path="{{ $page.RelPermalink }}"
                 >{{ $page.Title }}</a></h3>
               </header>
-              {{- with $page.Params.featured_image }}
+              {{- $leadImage := $page.Params.featured_image -}}
+              {{- $leadImageAlt := $page.Params.featured_image_alt | default "" -}}
+              {{- with (partial "editorial/cartoon-for-page.html" $page) -}}
+                {{- $leadImage = .image -}}
+                {{- $leadImageAlt = .alt | default "" -}}
+              {{- end -}}
+              {{- with $leadImage }}
                 {{- $imageModel := partial "images/model.html" (dict "page" $page "ref" . "display" true) -}}
                 <div class="home-v2-featured__art">
                   <a class="home-v2-featured__lead-media" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}"
@@ -61,13 +67,13 @@
                   >
                     {{- partial "images/picture.html" (dict
                       "model" $imageModel
-                      "alt" ($page.Params.featured_image_alt | default "")
+                      "alt" $leadImageAlt
                       "loading" "eager"
                       "fetchpriority" "high"
                       "sizes" "(min-width: 72rem) 42rem, (min-width: 48rem) 58vw, 100vw"
                     ) -}}
                   </a>
-                  {{ partial "home_featured_image_button.html" (dict "page" $page "model" $imageModel) }}
+                  {{ partial "home_featured_image_button.html" (dict "page" $page "model" $imageModel "alt" $leadImageAlt) }}
                 </div>
               {{- end }}
               <div class="home-v2-featured__lead-copy">

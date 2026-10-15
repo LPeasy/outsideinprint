@@ -47,7 +47,7 @@ const guestEligible = publishedRoutes.includes(guestRoute)
   && /^contributor_role: "guest"\r?$/m.test(guestSource) && Boolean(guestAuthor);
 const regularPublishedRoutes = publishedRoutes.filter((route) => !guestEligible || route !== guestRoute);
 const pinnedRoutes = [
-  "/essays/jack-stratton-and-the-vulfpeck-model/",
+  "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/",
   "/essays/the-noise-of-the-crowd/",
   "/essays/the-coin-slot-on-the-corner/",
   "/essays/togetherness/",
@@ -106,7 +106,7 @@ test("Dolphin correction retains the original publication date and renders a con
     || text(dolphinHtml).includes(currentRevision[2]), "the complete correction note must render");
 });
 
-test("rendered homepage leads with Jack Stratton, then the newest remaining publication", () => {
+test("rendered homepage leads with Benjamin Franklin, then the newest remaining publication", () => {
   const cards = [...html.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/g)]
     .filter((match) => /\bhome-v2-featured__(?:lead|item)\b/.test(attribute(`<article ${match[1]}>`, "class")));
   assert.ok(regularPublishedRoutes.length >= 5, "the production archive must supply five regular published reading pages");
@@ -253,6 +253,36 @@ test("rendered homepage leads with Jack Stratton, then the newest remaining publ
   assert.match(html, /A featured essay, the latest publication, and selected work\./);
   assert.match(html, /Read the piece/);
   assert.doesNotMatch(html, /25 reads|Medium reads|(?:3\.4K|1\.95K|1\.8K) readers/);
+});
+
+test("Franklin's homepage lead and zoom share the Gallery illustration while the biography keeps its portrait and social image", () => {
+  const franklinRoute = pinnedRoutes[0];
+  if (!regularPublishedRoutes.includes(franklinRoute)) return;
+  const gallerySource = fs.readFileSync(path.resolve("data/editorial_cartoons.yaml"), "utf8");
+  const galleryEntry = gallerySource.match(/^  - slug: the-american-at-versailles\r?\n([\s\S]*?)(?=^  - slug:|(?![\s\S]))/m)?.[1];
+  assert.ok(galleryEntry, "the approved artwork must have one Gallery entry");
+  const scalar = (source, key) => JSON.parse(source.match(new RegExp(`^\\s*${key}: (".*")\\r?$`, "m"))?.[1] || '""');
+  const releasedAt = scalar(galleryEntry, "publishDate") || `${scalar(galleryEntry, "date")}T00:00:00-04:00`;
+  if (Date.parse(releasedAt) > observationTime) return;
+  assert.equal(scalar(galleryEntry, "essay"), franklinRoute);
+  assert.equal(scalar(galleryEntry, "image"), "editorial/the-american-at-versailles");
+  const lead = html.match(/<article\b[^>]*home-v2-featured__lead[^>]*>([\s\S]*?)<\/article>/)?.[1];
+  const image = lead?.match(/<img\b[^>]*>/)?.[0];
+  const zoom = lead?.match(/<button\b[^>]*data-home-featured-image-trigger[^>]*>/)?.[0];
+  assert.equal(attribute(image, "data-oip-image-id"), scalar(galleryEntry, "image"));
+  assert.equal(attribute(image, "alt"), scalar(galleryEntry, "alt"));
+  assert.equal(attribute(zoom, "data-alt"), scalar(galleryEntry, "alt"));
+  assert.ok(attribute(zoom, "data-image").includes("/editorial/the-american-at-versailles/"));
+  const biographySource = fs.readFileSync(path.resolve(`content${franklinRoute.slice(0, -1)}.md`), "utf8");
+  const legacyPortrait = "/images/medium/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/60260729069245aec2c2513ff114e881be68451fae1ca363432ab40d1bdaab17.jpeg";
+  assert.equal(scalar(biographySource, "featured_image"), legacyPortrait);
+  assert.equal(scalar(biographySource, "featured_image_caption"), "Source: Picryl");
+  const biography = fs.readFileSync(path.join(siteDir, franklinRoute, "index.html"), "utf8");
+  const portrait = biography.match(/<figure\b[^>]*piece-portrait-plate[^>]*>[\s\S]*?(<img\b[^>]*>)/)?.[1];
+  assert.equal(new URL(attribute(portrait, "src"), "https://outsideinprint.org").pathname, legacyPortrait);
+  const social = [...biography.matchAll(/<meta\b[^>]*>/g)]
+    .find((match) => attribute(match[0], "property") === "og:image")?.[0];
+  assert.equal(new URL(attribute(social, "content"), "https://outsideinprint.org").pathname, legacyPortrait);
 });
 
 test("the compact Guest Feature credits its writer and shares the lead column without duplicate promotion", () => {

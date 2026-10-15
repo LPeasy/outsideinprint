@@ -1,4 +1,4 @@
-current: an-extra-cup
+current: the-american-at-versailles
 cartoons:
   - slug: a-public-record-must-outlast-the-feed
     title: "A Public Record Must Outlast the Feed"
@@ -1185,5 +1185,13 @@ cartoons:
     image: "editorial/an-extra-cup"
     essay: "/essays/an-extra-cup/"
     alt: "A man pours coffee into a neighbor’s cup on a sunlit porch, with a split cinnamon roll, a paper bag, and a closed book on the table."
+    width: 1672
+    height: 941
+  - slug: the-american-at-versailles
+    title: "The American at Versailles"
+    date: "2026-10-15"
+    image: "editorial/the-american-at-versailles"
+    essay: "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/"
+    alt: "Benjamin Franklin, wearing a brown fur cap and plain brown coat, speaks with a French court official in blue silk inside a gilded room at Versailles."
     width: 1672
     height: 941

@@ -1154,6 +1154,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/the-american-at-versailles": {
+      "id": "editorial/the-american-at-versailles",
+      "source": "images/originals/editorial/the-american-at-versailles.png",
+      "sha256": "db95041f310296a1b8999bfc000042542b61c3e436ab05a2b78adc6493042d09",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/the-bridge-makes-room": {
       "id": "editorial/the-bridge-makes-room",
       "source": "images/originals/editorial/the-bridge-makes-room.png",
@@ -8150,6 +8164,7 @@
     "/images/editorial/strait-to-voicemail.png": "editorial/strait-to-voicemail",
     "/images/editorial/sunset-powerplant.png": "editorial/sunset-powerplant",
     "/images/editorial/the-altar-of-consent.png": "editorial/the-altar-of-consent",
+    "/images/editorial/the-american-at-versailles.png": "editorial/the-american-at-versailles",
     "/images/editorial/the-bridge-makes-room.png": "editorial/the-bridge-makes-room",
     "/images/editorial/the-cavalry-breaks-the-hill.png": "editorial/the-cavalry-breaks-the-hill",
     "/images/editorial/the-closed-window.png": "editorial/the-closed-window",

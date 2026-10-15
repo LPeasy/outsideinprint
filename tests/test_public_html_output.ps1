@@ -5841,7 +5841,7 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   $expectedGuestPaths = @($publishedReadingPaths | Where-Object { $_ -ceq $guestPath -and $guestRole -ceq 'guest' -and $guestAuthor })
   # An eligible guest has its own placement and cannot also consume a regular featured slot.
   $publishedReadingPaths = @($publishedReadingPaths | Where-Object { $_ -notin $expectedGuestPaths })
-  $flagshipPath = '/essays/jack-stratton-and-the-vulfpeck-model/'
+  $flagshipPath = '/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/'
   $expectedLeadPaths = @($publishedReadingPaths | Select-Object -First 1)
   if ($flagshipPath -in $publishedReadingPaths) {
     $expectedLeadPaths = @($flagshipPath)
@@ -5923,6 +5923,21 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
       $leadCopy -notmatch 'home-v2-featured__dek' -or $leadCopy -notmatch 'home-v2-featured__action') {
     $uxIssues.Add('public/index.html => expected the flagship title and metadata above artwork, with summary and CTA below')
   }
+  $leadGalleryEntries = @(Get-CartoonEntries -RepoRoot $repoRoot | Where-Object {
+    ($_.PSObject.Properties.Name -contains 'essay') -and [string]$_.essay -cin $homeLeadPaths -and (Test-CartoonEntryPublished -Entry $_)
+  } | Select-Object -First 1)
+  if ($leadGalleryEntries.Count -eq 1) {
+    $leadGallery = $leadGalleryEntries[0]
+    $leadImages = @(Get-OpenTags -Html $leadCardHtml -TagName 'img')
+    $leadZooms = @(Get-OpenTags -Html $leadCardHtml -TagName 'button' | Where-Object { $_ -match '\bdata-home-featured-image-trigger\b' })
+    if ($leadImages.Count -ne 1 -or $leadZooms.Count -ne 1 -or
+        (Get-AttributeValue -Tag $leadImages[0] -Name 'data-oip-image-id') -cne [string]$leadGallery.image -or
+        (Get-AttributeValue -Tag $leadImages[0] -Name 'alt') -cne [string]$leadGallery.alt -or
+        (Get-AttributeValue -Tag $leadZooms[0] -Name 'data-alt') -cne [string]$leadGallery.alt -or
+        (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $leadZooms[0] -Name 'data-image')) -cne (Get-ManagedVisibleImagePath -Manifest $imageManifest -AssetId ([string]$leadGallery.image))) {
+      $uxIssues.Add('public/index.html => the flagship must use its eligible linked Gallery artwork and carry its descriptive alt text into zoom')
+    }
+  }
   foreach ($supportCard in [regex]::Matches($homeIndexHtml, '(?s)(?<tag><article\b[^>]*>)(?<body>.*?)</article>')) {
     if (-not (Test-TagHasClass -Tag $supportCard.Groups['tag'].Value -ClassName 'home-v2-featured__item')) { continue }
     $supportCardHtml = $supportCard.Groups['body'].Value
@@ -5956,7 +5971,7 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
 
   $featuredLabelOverrides = @{
     '/essays/the-dolphin-company/' = 'Case study'
-    '/essays/jack-stratton-and-the-vulfpeck-model/' = 'Modern Bio'
+    '/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/' = 'Modern Bio'
     '/essays/the-noise-of-the-crowd/' = 'Musing'
     '/essays/the-coin-slot-on-the-corner/' = 'Essay'
     '/essays/togetherness/' = 'Musing'

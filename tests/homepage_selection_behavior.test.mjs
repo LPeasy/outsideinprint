@@ -7,7 +7,7 @@ import { execFileSync } from "node:child_process";
 
 const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.167.0/hugo")
   ? path.resolve(".tools/hugo-0.167.0/hugo") : "hugo");
-const stratton = "/essays/jack-stratton-and-the-vulfpeck-model/";
+const franklin = "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/";
 const noise = "/essays/the-noise-of-the-crowd/";
 const coinSlot = "/essays/the-coin-slot-on-the-corner/";
 const togetherness = "/essays/togetherness/";
@@ -19,7 +19,7 @@ const guestMetadata = {
   description: "Keep a lasting public record.",
 };
 
-function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-01T12:00:00Z") {
+function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-01T12:00:00Z", cartoons = []) {
   assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.167\.0/);
   const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "oip-home-selection-"));
   t.after(() => {
@@ -34,15 +34,29 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   for (const partial of ["home_v2_selected.html", "home_guest_selected.html", "home_guest_feature.html", "archive/longform-kind.html", "collections/normalize-values.html", "home_lead_summary.html", "discovery/page-summary.html", "metadata_description.html", "metadata/route.html", "collections/lookup-definition.html"]) {
     write(`layouts/partials/${partial}`, fs.readFileSync(`layouts/partials/${partial}`, "utf8"));
   }
-  write("layouts/index.html", summaries === "guest"
+  if (summaries === "frontpage") {
+    for (const partial of ["home_v2_front_page.html", "home_feature_freshness.html", "home_featured_image_button.html", "home_featured_image_dialog.html", "editorial/cartoon-for-page.html", "editorial/published-cartoons.html", "editorial/cartoon-is-published.html"]) {
+      write(`layouts/partials/${partial}`, fs.readFileSync(`layouts/partials/${partial}`, "utf8"));
+    }
+    // Isolate selection and the real homepage/zoom markup from derivative generation and signup content.
+    write("layouts/partials/images/model.html", '{{ return dict "id" .ref "lightbox_url" (printf "/fixture/%s/large.webp" .ref) "lightbox_width" 1600 "lightbox_height" 900 }}');
+    write("layouts/partials/images/picture.html", '<img src="/fixture/{{ .model.id }}.webp" data-oip-image-id="{{ .model.id }}" alt="{{ .alt }}" loading="{{ .loading }}">');
+    write("layouts/partials/home_reader_newsletter.html", "");
+    write("assets/js/home-featured-image.js", "/* Homepage composition fixture. */");
+    write("data/homepage_metrics.json", JSON.stringify({ reader_threshold: 1000, articles: {} }));
+    write("data/editorial_cartoons.json", JSON.stringify({ cartoons }));
+  }
+  write("layouts/index.html", summaries === "frontpage"
+    ? '{{ partial "home_v2_front_page.html" . }}'
+    : summaries === "guest"
     ? '{{ $paths := slice }}{{ range partial "home_v2_selected.html" . }}{{ $paths = $paths | append .RelPermalink }}{{ end }}{{ $guestPath := false }}{{ $guestHtml := "" }}{{ with partial "home_guest_selected.html" . }}{{ $guestPath = .RelPermalink }}{{ $guestHtml = partial "home_guest_feature.html" . }}{{ end }}{{ dict "featured" $paths "guest" $guestPath "html" $guestHtml | jsonify | safeHTML }}'
     : summaries
     ? '{{ $results := dict }}{{ range site.RegularPages }}{{ $results = merge $results (dict .File.BaseFileName (dict "lead" (partial "home_lead_summary.html" .) "discovery" (partial "discovery/page-summary.html" .))) }}{{ end }}{{ $results | jsonify | safeHTML }}'
     : '{{ $paths := slice }}{{ range partial "home_v2_selected.html" . }}{{ $paths = $paths | append .RelPermalink }}{{ end }}{{ $paths | jsonify | safeHTML }}');
-  write("layouts/_default/single.html", "{{ .Title }}");
+  write("layouts/_default/single.html", '{{ .Title }}<img src="{{ .Params.featured_image }}" alt="{{ .Params.featured_image_alt }}">');
   write("layouts/_default/list.html", "{{ .Title }}");
   const entries = {
-    stratton: { title: "Jack Stratton", url: stratton, date: "2020-01-01", section_label: "Modern Bio" },
+    franklin: { title: "Benjamin Franklin", url: franklin, date: "2020-01-01", section_label: "Modern Bio" },
     noise: { title: "The Noise of the Crowd", url: noise, date: "2020-01-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
     coinSlot: { title: "The Coin Slot on the Corner", url: coinSlot, date: "2020-01-01", section_label: "Essay" },
     togetherness: { title: "Togetherness", url: togetherness, date: "2020-01-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
@@ -63,24 +77,28 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   write("content/essays/_index.md", '---\ntitle: "Landing"\ndate: 2020-08-01\n---\n');
   write("content/shop/book.md", '---\ntitle: "Book"\ndate: 2020-08-01\n---\n');
   execFileSync(hugo, ["--source", fixture, "--clock", clock, "--buildDrafts", "--buildFuture", "--buildExpired", "--panicOnWarning"], { encoding: "utf8" });
-  return JSON.parse(fs.readFileSync(path.join(fixture, "public/index.html"), "utf8"));
+  const output = fs.readFileSync(path.join(fixture, "public/index.html"), "utf8");
+  if (summaries === "frontpage") {
+    return { html: output, article: fs.readFileSync(path.join(fixture, "public", franklin, "index.html"), "utf8") };
+  }
+  return JSON.parse(output);
 }
 
-test("Jack Stratton leads, followed by the latest release, while preview-only work stays excluded", (t) => {
-  assert.deepEqual(renderSelection(t), [stratton, "/essays/latest/", noise, coinSlot, togetherness]);
+test("Benjamin Franklin leads, followed by the latest release, while preview-only work stays excluded", (t) => {
+  assert.deepEqual(renderSelection(t), [franklin, "/essays/latest/", noise, coinSlot, togetherness]);
 });
 
 test("a newer flagship stays first and missing curated work receives newest eligible fallback", (t) => {
   const selection = renderSelection(t, {
-    stratton: { title: "Jack Stratton", url: stratton, date: "2020-06-01", publishDate: "2020-07-01" },
+    franklin: { title: "Benjamin Franklin", url: franklin, date: "2020-06-01", publishDate: "2020-07-01" },
     noise: null,
   });
-  assert.deepEqual(selection, [stratton, "/essays/latest/", coinSlot, togetherness, "/essays/earlier/"]);
+  assert.deepEqual(selection, [franklin, "/essays/latest/", coinSlot, togetherness, "/essays/earlier/"]);
   assert.equal(new Set(selection).size, 5);
 });
 
 test("when the flagship is unavailable, the two newest releases lead", (t) => {
-  assert.deepEqual(renderSelection(t, { stratton: null }), [
+  assert.deepEqual(renderSelection(t, { franklin: null }), [
     "/essays/latest/", "/essays/earlier/", noise, coinSlot, togetherness,
   ]);
 });
@@ -88,12 +106,59 @@ test("when the flagship is unavailable, the two newest releases lead", (t) => {
 test("a newly released curated piece occupies the latest slot only once", (t) => {
   assert.deepEqual(renderSelection(t, {
     noise: { title: "The Noise of the Crowd", url: noise, date: "2020-07-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
-  }), [stratton, noise, coinSlot, togetherness, "/essays/latest/"]);
+  }), [franklin, noise, coinSlot, togetherness, "/essays/latest/"]);
+});
+
+test("the lead uses eligible associated Gallery art and matching zoom alt, with hero fallback and unchanged supporting art", (t) => {
+  const leadMetadata = {
+    title: "Benjamin Franklin", url: franklin, date: "2020-01-01", section_label: "Modern Bio",
+    featured_image: "legacy/franklin-portrait", featured_image_alt: "The existing Franklin portrait.",
+  };
+  const galleryArt = {
+    slug: "the-american-at-versailles", essay: franklin, date: "2020-07-01",
+    image: "editorial/the-american-at-versailles", alt: "Franklin in a fur cap speaks with a French minister.",
+  };
+  const supportingArt = {
+    slug: "supporting-gallery", essay: "/essays/latest/", date: "2020-07-01",
+    image: "editorial/supporting-alternative", alt: "A separate Gallery illustration.",
+  };
+  const attr = (tag, name) => tag.match(new RegExp(`\\b${name}="([^"]*)"`))?.[1] || "";
+  for (const [label, leadArt, expectedImage, expectedAlt] of [
+    ["published", galleryArt, galleryArt.image, galleryArt.alt],
+    ["missing", null, leadMetadata.featured_image, leadMetadata.featured_image_alt],
+    ["unrelated", { ...galleryArt, essay: "/essays/someone-else/" }, leadMetadata.featured_image, leadMetadata.featured_image_alt],
+    ["future", { ...galleryArt, publishDate: "2030-01-01T00:00:00Z" }, leadMetadata.featured_image, leadMetadata.featured_image_alt],
+  ]) {
+    const result = renderSelection(t, {
+      franklin: leadMetadata,
+      latest: { title: "Latest piece", date: "2020-06-01", publishDate: "2020-06-01T12:00:00Z", featured_image: "essays/latest/hero", featured_image_alt: "The supporting article hero." },
+      guest: guestMetadata,
+    }, "frontpage", "2020-09-01T12:00:00Z", [...(leadArt ? [leadArt] : []), supportingArt]);
+    const lead = result.html.match(/<article\b[^>]*class="home-v2-featured__lead reading-card"[^>]*>([\s\S]*?)<\/article>/)?.[1];
+    assert.ok(lead, label);
+    const image = lead.match(/<img\b[^>]*>/)?.[0];
+    const zoom = lead.match(/<button\b[^>]*data-home-featured-image-trigger[^>]*>/)?.[0];
+    const fallback = lead.match(/<a\b[^>]*data-home-featured-image-fallback[^>]*>/)?.[0];
+    assert.equal(attr(image, "data-oip-image-id"), expectedImage, label);
+    assert.equal(attr(image, "alt"), expectedAlt, label);
+    assert.equal(attr(zoom, "data-image"), `/fixture/${expectedImage}/large.webp`, label);
+    assert.equal(attr(zoom, "data-alt"), expectedAlt, label);
+    assert.equal(attr(fallback, "href"), attr(zoom, "data-image"), label);
+    assert.match(result.article, /src="legacy\/franklin-portrait" alt="The existing Franklin portrait\."/, label);
+    const support = result.html.match(/<article\b[^>]*home-v2-featured__item--latest[^>]*>([\s\S]*?)<\/article>/)?.[1];
+    const supportImage = support?.match(/<img\b[^>]*>/)?.[0];
+    const supportZoom = support?.match(/<button\b[^>]*data-home-featured-image-trigger[^>]*>/)?.[0];
+    assert.equal(attr(supportImage, "data-oip-image-id"), "essays/latest/hero", label);
+    assert.equal(attr(supportZoom, "data-alt"), "The supporting article hero.", label);
+    assert.doesNotMatch(result.html, /editorial\/supporting-alternative/, label);
+    assert.equal((result.html.match(/<article\b/g) || []).length, 6, label);
+    assert.match(result.html, /Guest Feature[\s\S]*By Douglas B\. Vandergraph/, label);
+  }
 });
 
 test("the eligible guest renders once below the flagship without consuming the latest supporting slot", (t) => {
   const result = renderSelection(t, { guest: guestMetadata }, "guest");
-  assert.deepEqual(result.featured, [stratton, "/essays/latest/", noise, coinSlot, togetherness]);
+  assert.deepEqual(result.featured, [franklin, "/essays/latest/", noise, coinSlot, togetherness]);
   assert.equal(result.guest, guestRoute);
   assert.equal(new Set([...result.featured, result.guest]).size, 6);
   assert.equal((result.html.match(/<article\b/g) || []).length, 1);
@@ -106,7 +171,7 @@ test("the eligible guest renders once below the flagship without consuming the l
 
 test("the reserved guest cannot become the lead or fill a missing curated slot", (t) => {
   const result = renderSelection(t, {
-    guest: guestMetadata, stratton: null, noise: null,
+    guest: guestMetadata, franklin: null, noise: null,
     replacement: { title: "Older replacement", date: "2020-05-01" },
   }, "guest");
   assert.equal(result.guest, guestRoute);

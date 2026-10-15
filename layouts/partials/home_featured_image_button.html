@@ -1,9 +1,11 @@
 {{- $page := .page -}}
 {{- $model := .model -}}
+{{- $alt := $page.Params.featured_image_alt | default "" -}}
+{{- if isset . "alt" }}{{ $alt = .alt }}{{ end -}}
 <button class="home-v2-featured__image-toggle" type="button"
   data-home-featured-image-trigger
   data-image="{{ $model.lightbox_url }}"
-  data-alt="{{ $page.Params.featured_image_alt | default "" }}"
+  data-alt="{{ $alt }}"
   data-title="{{ $page.Title }}"
   data-width="{{ $model.lightbox_width }}"
   data-height="{{ $model.lightbox_height }}"
