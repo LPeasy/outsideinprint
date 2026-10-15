@@ -205,6 +205,11 @@ function assertSameControls(actual, expected, state) {
 }
 
 async function assertNavigationReceivesPointer(page) {
+  // Collapsing also updates the iframe's pointer mask asynchronously.
+  await page.waitForFunction(() => [...document.querySelectorAll('.nav__mobile summary, .nav__mobile-link--about')].every(element => {
+    const box = element.getBoundingClientRect();
+    return element.contains(document.elementFromPoint(box.left + box.width / 2, box.top + box.height / 2));
+  }), undefined, { timeout: 5000 });
   const controls = page.locator('.nav__mobile summary, .nav__mobile-link--about');
   for (const control of await controls.all()) {
     const state = await control.evaluate((element) => {
@@ -212,12 +217,49 @@ async function assertNavigationReceivesPointer(page) {
       const hit = document.elementFromPoint(box.left + box.width / 2, box.top + box.height / 2);
       return { label: element.textContent.trim(), receivesPointer: Boolean(hit && element.contains(hit)) };
     });
-    assert.ok(state.receivesPointer, `${state.label} must receive pointer input above the open jukebox.`);
+    assert.ok(state.receivesPointer, `${state.label} must receive pointer input with Bob's controls collapsed.`);
   }
 }
 
+async function assertBobAboveNavigation(page) {
+  const result = await page.waitForFunction(() => {
+    const nav = document.querySelector('.nav__mobile').getBoundingClientRect();
+    const frame = document.querySelector('[data-bob-frame]');
+    const bounds = frame.getBoundingClientRect();
+    const doc = frame.contentDocument;
+    const overlapping = [];
+    for (const control of doc.querySelectorAll('button')) {
+      if (!control.checkVisibility()) continue;
+      const box = control.getBoundingClientRect();
+      const left = Math.max(0, nav.left, bounds.left + box.left);
+      const right = Math.min(innerWidth, nav.right, bounds.left + box.right);
+      const top = Math.max(0, nav.top, bounds.top + box.top);
+      const bottom = Math.min(innerHeight, nav.bottom, bounds.top + box.bottom);
+      if (right - left < 4 || bottom - top < 4) continue;
+      const x = (left + right) / 2, y = (top + bottom) / 2;
+      // Only test painted controls, not transparent space in the iframe.
+      if (!control.contains(doc.elementFromPoint(x - bounds.left, y - bounds.top))) continue;
+      const hit = document.elementFromPoint(x, y);
+      overlapping.push({ label: control.getAttribute('aria-label') || control.textContent.trim(), above: hit === frame, hit: hit?.outerHTML.slice(0, 180), x, y });
+    }
+    // Runtime hit masks arrive asynchronously after controls finish laying out.
+    return overlapping.length && overlapping.every(hit => hit.above) ? overlapping : false;
+  }, undefined, { timeout: 5000 });
+  const hits = await result.jsonValue();
+  assert.ok(hits.length > 0, 'The open jukebox must exercise a real control/navigation overlap.');
+  for (const hit of hits) assert.ok(hit.above, `${hit.label} must receive pointer input above the navigation banner: ${JSON.stringify(hit)}`);
+}
+
+async function collapseBob(page) {
+  await page.frameLocator('[data-bob-frame]').getByRole('button', { name: 'Collapse music and settings', exact: true }).click();
+  await page.waitForFunction(() => !JSON.parse(window.render_bob_reading_to_text()).composer?.visible);
+}
+
 async function openBobFromArrival(page) {
-  await page.waitForFunction(() => window.render_bob_to_text && JSON.parse(window.render_bob_to_text()).ready);
+  await page.waitForFunction(() => {
+    const bob = window.render_bob_to_text && JSON.parse(window.render_bob_to_text());
+    return bob?.ready && bob.active && bob.interactiveRegions > 0;
+  });
   if (await page.evaluate(() => matchMedia('(max-width: 768px), (pointer: coarse)').matches)) {
     const frame = page.frameLocator('[data-bob-frame]');
     const canvas = frame.locator('canvas').first(), bounds = await canvas.boundingBox();
@@ -235,7 +277,9 @@ async function openBobFromArrival(page) {
     assert.ok(point, 'Bob must have an opaque sprite target.');
     const gear = frame.locator('[data-pet-settings-button]');
     assert.equal(await gear.isVisible(), false, 'Mobile arrival shows only the sprite.');
-    await page.mouse.click(bounds.x + point.x * bounds.width, bounds.y + point.y * bounds.height);
+    const target = { x: bounds.x + point.x * bounds.width, y: bounds.y + point.y * bounds.height };
+    await page.waitForFunction(({ x, y }) => document.elementFromPoint(x, y)?.matches('[data-bob-frame]'), target, { timeout: 5000 });
+    await page.mouse.click(target.x, target.y);
     await gear.waitFor({ state: 'visible' });
     assert.equal(await frame.locator('#pet-settings-dock').isVisible(), false, 'The first activation reveals only the wheel.');
     await gear.click();
@@ -290,14 +334,17 @@ for (const width of [320, 390]) {
           document.documentElement.style.fontSize = `${size}%`;
           await document.fonts.ready;
         }, fontPercent);
-        // Open JUKE-BOB through the sprite and wheel before checking navigation;
-        // leaving his controls stowed would mask pointer interception.
+        // Bob's painted controls intentionally float above the navigation rail.
+        // Collapse them through the real UI before testing all navigation targets.
         await openBobFromArrival(page);
         const read = page.locator(".nav__mobile .nav-mobile-disclosure--read");
         const explore = page.locator(".nav__mobile .nav-mobile-disclosure--explore");
         const closed = await geometry(page);
         assert.equal(closed.readOpen, false);
         assert.equal(closed.exploreOpen, false);
+        await assertBobAboveNavigation(page);
+        await collapseBob(page);
+        assertSameControls(await geometry(page), closed, "Bob controls collapsed");
         await assertNavigationReceivesPointer(page);
 
         // Capture Explore before exercising Read, without changing its layout contract.
@@ -350,14 +397,9 @@ for (const width of [320, 390]) {
         assertSamePlacement(afterEscape, closed, "Closed menu");
         assertSameControls(afterEscape, closed, "Closed menu");
 
-        // Raising only navigation must leave Bob's controls outside it usable.
-        await waitForOpenBob(page);
-        const collapse = page.frameLocator('[data-bob-frame]').getByRole("button", { name: "Collapse music and settings", exact: true });
-        const collapseBox = await collapse.boundingBox();
-        assert.ok(collapseBox && (collapseBox.y + collapseBox.height <= afterEscape.nav.top || collapseBox.y >= afterEscape.nav.bottom),
-          "Bob's tested control must be outside the navigation row.");
-        await collapse.click();
-        await page.waitForFunction(() => !JSON.parse(window.render_bob_reading_to_text()).composer?.visible);
+        // Controls remain usable after navigation closes, including at enlarged text sizes.
+        await openBobFromArrival(page);
+        await collapseBob(page);
         assertSameControls(await geometry(page), closed, "Bob controls collapsed");
       } finally {
         await context.close();

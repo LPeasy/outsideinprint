@@ -20,6 +20,11 @@ open navigation menus and other overlays retain the existing suspension rules.
   filters, explicit Retry, free collection discovery and navigation cancellation.
 - Eight disclosure cases plus a post-open reload check passed. Four navigation
   cases and five right-click/keyboard/touch cases passed after later UI changes.
+- The nine mobile-navigation/browser cases passed against the existing rendered
+  fixture with the release sources and runtime. Their old nav-above-jukebox
+  expectation now checks the approved Bob-above-nav ordering, real collapse and
+  restored navigation access at 320/390px and 100/125/200% root text sizes.
+  Pointer checks wait for runtime hit masks; layout and accessibility checks remain.
 - Three real local GPT-6 Luna requests returned three catalog pieces each;
   measured usage was 7,099 input / 267 output tokens, estimated $0.001020875.
   Local preview and production budget ledgers remain separate.
