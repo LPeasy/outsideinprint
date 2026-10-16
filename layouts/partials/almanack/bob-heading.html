@@ -1,0 +1,12 @@
+{{- $issue := .issue -}}{{- $slot := .slot -}}{{- $pose := index $issue.bob_ornaments $slot -}}{{- $align := $pose.align | default "right" -}}
+{{- if not $pose -}}
+{{ if eq .level 2 }}<h2 style="font-size:26px;line-height:1.25;"><a style="color:#332a22;" href="{{ .url }}">{{ .title }}</a></h2>{{ else }}<h3 style="font-size:26px;line-height:1.25;"><a style="color:#332a22;" href="{{ .url }}">{{ .title }}</a></h3>{{ end }}
+{{- else if and (eq $slot "lead") (eq $pose.placement "after-title") -}}
+{{ if eq .level 2 }}<h2 class="bob-heading bob-heading--lead bob-heading--inline" style="font-size:26px;line-height:1.25;margin:18px 0 14px;"><a style="color:#332a22;" href="{{ .url }}">{{ .title }}</a><span style="display:inline-block;vertical-align:middle;margin-left:12px;">{{ partial "almanack/bob-ornament.html" (dict "issue" $issue "slot" $slot) }}</span></h2>{{ else }}<h3 class="bob-heading bob-heading--lead bob-heading--inline" style="font-size:26px;line-height:1.25;margin:18px 0 14px;"><a style="color:#332a22;" href="{{ .url }}">{{ .title }}</a><span style="display:inline-block;vertical-align:middle;margin-left:12px;">{{ partial "almanack/bob-ornament.html" (dict "issue" $issue "slot" $slot) }}</span></h3>{{ end }}
+{{- else -}}
+<table role="presentation" class="bob-heading bob-heading--{{ $slot }}" width="100%" cellspacing="0" cellpadding="0" style="width:100%;table-layout:fixed;border-collapse:collapse;margin:18px 0 14px;"><tr>
+{{- if eq $align "left" }}<td width="{{ add $pose.width 12 }}" style="width:{{ add $pose.width 12 }}px;vertical-align:bottom;padding:0 12px 0 0;">{{ partial "almanack/bob-ornament.html" (dict "issue" $issue "slot" $slot) }}</td>{{ end -}}
+<td style="vertical-align:middle;padding:0;">{{ if eq .level 2 }}<h2 style="font-size:26px;line-height:1.25;margin:0;"><a style="color:#332a22;" href="{{ .url }}">{{ .title }}</a></h2>{{ else }}<h3 style="font-size:26px;line-height:1.25;margin:0;"><a style="color:#332a22;" href="{{ .url }}">{{ .title }}</a></h3>{{ end }}</td>
+{{- if ne $align "left" }}<td width="{{ add $pose.width 12 }}" style="width:{{ add $pose.width 12 }}px;vertical-align:bottom;padding:0 0 0 12px;text-align:right;">{{ partial "almanack/bob-ornament.html" (dict "issue" $issue "slot" $slot) }}</td>{{ end -}}
+</tr></table>
+{{- end -}}

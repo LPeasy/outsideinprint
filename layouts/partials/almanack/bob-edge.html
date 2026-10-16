@@ -1,0 +1,12 @@
+{{- $issue := .issue -}}{{- $slot := .slot -}}{{- if eq $issue.bob_layout "scattered-v1" -}}{{- with index $issue.bob_ornaments $slot -}}
+{{- $align := .align | default ($.align | default "right") -}}
+<table role="presentation" class="bob-edge bob-edge--{{ $slot }}" width="100%" cellspacing="0" cellpadding="0" style="width:100%;table-layout:fixed;border-collapse:collapse;margin:12px 0;{{ if eq $slot "masthead" }}border-top:1px solid #b0a087;{{ else }}border-bottom:1px solid #b0a087;{{ end }}"><tr>
+{{- if and (eq $slot "masthead") (isset . "offset_pct") -}}
+<td width="{{ .offset_pct }}%" style="width:{{ .offset_pct }}%;padding:0;"></td><td align="left" style="padding:0;line-height:0;">{{ partial "almanack/bob-ornament.html" (dict "issue" $issue "slot" $slot) }}</td>
+{{- else if and (eq $slot "divider") .trail -}}
+<td width="{{ add .width 12 }}" style="width:{{ add .width 12 }}px;vertical-align:bottom;padding:0 12px 0 0;line-height:0;">{{ partial "almanack/bob-ornament.html" (dict "issue" $issue "slot" $slot) }}</td><td style="vertical-align:middle;padding:0;line-height:0;"><a class="bob-trail" data-bob-trail="{{ $slot }}" href="{{ .url }}" aria-label="{{ .trail.image_alt }}" style="display:block;max-width:{{ .trail.width }}px;text-decoration:none;"><img src="{{ .trail.image_url }}" alt="{{ .trail.image_alt }}" width="{{ .trail.width }}" height="{{ .trail.height }}" style="display:block;width:100%;max-width:{{ .trail.width }}px;height:auto;image-rendering:pixelated;"></a></td>
+{{- else -}}
+<td align="{{ $align }}" style="padding:0;line-height:0;{{ if eq $slot "note" }}border-right:1px solid #b0a087;{{ end }}">{{ partial "almanack/bob-ornament.html" (dict "issue" $issue "slot" $slot) }}</td>
+{{- end -}}
+</tr></table>
+{{- end -}}{{- end -}}

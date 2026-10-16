@@ -27,13 +27,19 @@ New from Outside In Print
 {{ .facts }}
 {{ end }}{{ range $i, $essay := $m.essays }}
 {{ .title }}
-{{ if and (eq $i 0) .excerpt }}From the essay
+{{ if and (eq $i 0) .excerpt }}{{ .excerpt_label | default "From the essay" }}
 {{ .excerpt }}
 
-Read the full essay: {{ partial "almanack/email-link.html" .url }}
+{{ .read_label | default "Read the full essay" }}: {{ partial "almanack/email-link.html" .url }}
 {{ else }}{{ .capsule | default .description }}
 {{ partial "almanack/email-link.html" .url }}
-{{ end }}{{ end }}
+{{ end }}{{ if eq $i 0 }}{{ with $m.guest }}
+{{ .label }}
+{{ .title }}
+By {{ .author }}
+{{ .capsule }}
+{{ .url }}
+{{ end }}{{ end }}{{ end }}
 {{ with $m.issue.bookshelf }}From the Bookshelf
 {{ .title }}: {{ .subtitle }}
 By {{ .author }}

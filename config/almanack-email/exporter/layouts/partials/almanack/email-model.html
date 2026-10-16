@@ -1,5 +1,15 @@
 {{- $issue := .Params -}}
 {{- $essays := $issue.essays | default (slice) -}}
+{{- if $essays -}}
+  {{- $lead := index $essays 0 -}}
+  {{- range slice "excerpt_label" "read_label" -}}
+    {{- if isset $lead . -}}
+      {{- $label := index $lead . -}}
+      {{- if ne (printf "%T" $label) "string" -}}{{- errorf "Almanack lead %s must be text" . -}}
+      {{- else if or (eq (strings.TrimSpace $label) "") (gt (len $label) 80) -}}{{- errorf "Almanack lead %s must contain 1–80 characters" . -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 {{- if not $issue.issue_number }}{{ errorf "Almanack email requires the canonical issue_number" }}{{ end -}}
 {{- with $issue.email_masthead -}}
   {{- if .image_url -}}
@@ -15,6 +25,7 @@
   "date_key" (.Date.Format "2006-01-02")
   "subject" (printf "Bob's Almanack ~ %s ~ Issue %v" (.Date.Format "January 2, 2006") $issue.issue_number)
   "preheader" $preheader
+  "guest" (partial "almanack/guest-feature-model.html" (dict "page" . "checkSource" false))
   "essays" $essays
   "margin" ($issue.margin | default (dict))
   "worth" ($issue.worth_reprinting | default (dict))

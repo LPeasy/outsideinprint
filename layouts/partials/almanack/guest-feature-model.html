@@ -1,0 +1,47 @@
+{{- $page := .page -}}
+{{- $guest := dict -}}
+{{- if isset $page.Params "guest_feature" -}}
+  {{- $guest = $page.Params.guest_feature -}}
+  {{- if not (reflect.IsMap $guest) -}}
+    {{- errorf "Almanack guest_feature must be a mapping" -}}
+  {{- else -}}
+    {{- $limits := dict "label" 80 "title" 240 "author" 160 "url" 200 "capsule" 600 -}}
+    {{- if ne (len $guest) (len $limits) -}}{{- errorf "Almanack guest_feature requires exactly label, title, author, url and capsule" -}}{{- end -}}
+    {{- range $key, $limit := $limits -}}
+      {{- $value := index $guest $key -}}
+      {{- if ne (printf "%T" $value) "string" -}}
+        {{- errorf "Almanack guest_feature.%s must be text" $key -}}
+      {{- else if or (eq (strings.TrimSpace $value) "") (gt (len $value) $limit) -}}
+        {{- errorf "Almanack guest_feature.%s must contain 1–%d characters" $key $limit -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $url := printf "%v" $guest.url -}}
+    {{- if hasPrefix $url "/essays/" -}}{{- $guest = merge $guest (dict "url" (printf "https://outsideinprint.org%s" $url)) -}}{{- end -}}
+    {{- if not (findRE `^https://outsideinprint[.]org/essays/[a-z0-9-]+/$` (printf "%v" $guest.url)) -}}
+      {{- errorf "Almanack guest_feature.url must be a canonical Outside In Print essay URL" -}}
+    {{- end -}}
+    {{- if gt (len (findRE `\S+` (printf "%v" $guest.capsule))) 60 -}}
+      {{- errorf "Almanack guest_feature.capsule must be at most 60 words" -}}
+    {{- end -}}
+    {{- if not $page.Params.essays -}}{{- errorf "Almanack guest_feature requires a lead essay" -}}{{- end -}}
+    {{- range $page.Params.essays -}}
+      {{- $url := printf "%v" .url -}}
+      {{- if hasPrefix $url "/" -}}{{- $url = printf "https://outsideinprint.org%s" $url -}}{{- end -}}
+      {{- if eq $url $guest.url -}}{{- errorf "Almanack guest_feature must not duplicate an essay card" -}}{{- end -}}
+    {{- end -}}
+    {{- if .checkSource -}}
+      {{- $source := $page.Site.GetPage (strings.TrimPrefix "https://outsideinprint.org" (printf "%v" $guest.url)) -}}
+      {{- if not $source -}}
+        {{- errorf "Almanack guest_feature must link to an existing essay" -}}
+      {{- else -}}
+        {{- if or (ne $source.Title $guest.title) (ne $source.Params.author $guest.author) (ne $source.Params.contributor_role "guest") -}}
+          {{- errorf "Almanack guest_feature title, author and guest designation must match its source essay" -}}
+        {{- end -}}
+        {{- if or $source.Draft ($source.PublishDate.After $page.Date) (and (not $source.ExpiryDate.IsZero) (not ($source.ExpiryDate.After $page.Date))) -}}
+          {{- errorf "Almanack guest_feature source must be published and unexpired by the issue date" -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $guest -}}

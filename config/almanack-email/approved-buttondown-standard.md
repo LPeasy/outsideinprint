@@ -2,6 +2,14 @@
 
 Approved by the owner on October 1, 2026 after the private September 26, Issue 21 test. Applies to the October 3 edition and later issues when approved for distribution. The [review conversation](https://chatgpt.com/s/cx_6abf11284e3c8191ad8e62c5c88da4e0) and [saved private draft](https://buttondown.com/emails/em_6gtzktfpf394jvjsepg46q3jw8) record the approval. This supersedes the September 12 Modern/Markdown/H1 distribution instructions. Masthead artwork approval remains in force.
 
+## Writing standard
+
+On October 16, 2026, the owner made the revised October 17 issue the writing standard for every future Almanack: plain, concrete prose at about a sixth-grade reading level. Apply the Franklin conversational method with a Flesch–Kincaid target of **5.0–6.9**, superseding the former general grades 6–8 target for Almanack copy. Use familiar words, concrete nouns, active verbs, and natural full sentences. Name who acts, what they do, and the result. Cut vague filler and abstract connective phrases such as “that same care can reach.” Do not replace them with another vague bridge.
+
+Apply this standard to all newly written reader-facing prose, including the preheader, Bob note, capsules, guest and bookshelf introductions, virtue reflection, margin notices, and Worth Reprinting rationale. Preserve exact quotations, dialogue and other source excerpts, titles, names, facts, dates, numbers, caveats, links, technical terms, alt text, and machine-readable fields. Keep the writing adult and natural; do not flatten meaning, drop needed context, or chop sentences merely to lower a score.
+
+Use `franklin-conversational-grade7` as the method with `--target-min 5.0 --target-max 6.9`. Analyze the final rendered `email.txt` and a recorded extraction of editable prose, then check fidelity against the saved source. Treat reading-level scores as estimates. If protected language raises the full-export estimate, report that separately and judge the editable prose on its own; preserve necessary exact language and explain any unresolved exception. Record before/after scores, the manual concrete-language review, and fidelity results. The October 17 package's `franklin-grade6-review.md` is the approved example. Historical issues and sent emails remain unchanged.
+
 ## Presentation
 
 - Buttondown Classic, existing blue accent `#346782`, Robert V. Ussley, America/New_York. Custom provider header, footer, CSS and inline variables remain disabled. No paid upgrade.
@@ -35,3 +43,9 @@ Evidence and rollback values: `C:\Users\lawto\Documents\40_Scratch\2026-10\alman
 The owner requested canonical rendering of `bob_feature`, `bob_ornaments`, and `bookshelf` on October 9, 2026. The isolated `almanack-bob-bookshelf-v1` extension adds these components only when their fields are present. Original snapshot provenance remains in ORIGIN.json; extended exports also record their baseline commit and a reproducible SHA-256 of the actual renderer/template code. Historical issues without the fields produce the same HTML, plaintext, and metadata. The existing Classic, contrast, footer, numbering, source-validation, fresh-render parity, and body-hash checks remain mandatory. No hand-edited exports or disabled gates are permitted. Local opt-in preparation does not activate production or authorize provider previews, schedules, publication, or sends.
 
 The local opt-in engine follows current main's pinned Hugo 0.167.0 requirement. The renderer honors OIP_HUGO_BIN first, then uses the installed pinned Windows resource when present, with PATH as the portable fallback. Every selected binary must pass the pinned Extended-version check. This keeps an older general Windows PATH installation from displacing the workflow's pinned runtime. Historical parity is rechecked against the original 0.164.0 baseline during release preparation.
+
+## Weekly Bob artwork direction
+
+On October 16, 2026, the owner requested about eight small appearances of Bob, with a different mix and arrangement each week. Use authentic existing Idle Times / Pet Bob artwork and vary the poses, sizes, alignment, and supported page edges to suit the issue. Preserve the text and give each pose clear space. Every Bob remains an accessible link to Idle Times on Steam. This direction supersedes the earlier three-or-four-pose default; it does not change historical issues.
+
+The October 17 issue uses the owner's selected Playful margins set, replacing the paper airplane with the paper crane and the knowing smile with hugging the manuscript. Its source opts into `bob_layout: "scattered-v1"` with eight named slots and explicit image dimensions. Record each later issue's selections and source artwork in its package. This design preference does not authorize publication or email delivery.
