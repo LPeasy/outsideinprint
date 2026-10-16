@@ -6,6 +6,7 @@ slug: "who-is-pascal-siakam"
 section_label: "Modern Bio"
 series: ["ModernBios"]
 collections: ["modern-bios"]
+collection_weight: 50
 subtitle: "How “Spicy P” Went from Douala Dreamer to Pacers Playoff Powerhouse"
 featured_image: "/images/medium/who-is-pascal-siakam/fc07487bf85147720fa1d0b703e5376e41a87a5c9317981a0237e4a15b0f8a68.jpeg"
 featured_image_caption: "Pascal Siakam | Source: Basketball Wiki"

@@ -7,6 +7,7 @@ slug: "jack-stratton-and-the-vulfpeck-model"
 section_label: "Modern Bio"
 series: ["ModernBios"]
 collections: ["modern-bios"]
+collection_weight: 10
 subtitle: "His musical roots, minimalist funk, and independent path from Sleepify to Madison Square Garden."
 featured_image: "/images/medium/jack-stratton-and-the-vulfpeck-model/52bb101b41234f692c761a11f33e202a31bb366b4c2c8e31b07a3ac2b8856187.jpeg"
 featured_image_caption: "Jack Stratton on stage | Source: Michelle Shiers"

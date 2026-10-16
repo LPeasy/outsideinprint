@@ -6,6 +6,7 @@ slug: "benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possi
 section_label: "Modern Bio"
 series: ["ModernBios"]
 collections: ["modern-bios"]
+collection_weight: 30
 subtitle: "A scrappy biography of the runaway apprentice who became a statesman, scientist, and master of self-improvement."
 description: "This biography is based on The Autobiography of Benjamin Franklin and other public-domain records, including Franklin’s letters, essays, and inventions"
 featured_image: "/images/medium/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/60260729069245aec2c2513ff114e881be68451fae1ca363432ab40d1bdaab17.jpeg"
