@@ -72,9 +72,24 @@ def check_optional_components(content):
         if feature.get("cta_url") != "https://outsideinprint.org/" or feature.get("secondary_cta_url") != steam or not feature.get("secondary_cta_label"):
             raise ValueError("The Bob demo invitation must point to the homepage and its secondary link to Steam.")
     ornaments = content.get("bob_ornaments")
+    layout = content.get("bob_layout")
+    if layout is not None and layout != "scattered-v1":
+        raise ValueError("Unsupported bob_layout; use scattered-v1 or omit it for the historical layout.")
+    if layout == "scattered-v1":
+        allowed = {"masthead", "note", "lead", "guest", "divider", "bookshelf", "stories", "signoff"}
+        if not isinstance(ornaments, dict) or not 1 <= len(ornaments) <= 8 or not set(ornaments).issubset(allowed):
+            raise ValueError("scattered-v1 requires one to eight supported static pose slots.")
+        dependencies = {"note": bool(content.get("bob_note")),
+                        "lead": bool(content.get("essays")),
+                        "guest": bool(content.get("guest_feature")),
+                        "bookshelf": bool(content.get("bookshelf")),
+                        "stories": len(content.get("essays", [])) >= 3,
+                        "signoff": bool(content.get("closing_quote"))}
+        if any(slot in ornaments and not present for slot, present in dependencies.items()):
+            raise ValueError("Each selected scattered-v1 pose requires its corresponding editorial section.")
     if ornaments:
         allowed = {"masthead", "feature", "divider", "signoff"}
-        if not isinstance(ornaments, dict) or not 3 <= len(ornaments) <= 4 or not set(ornaments).issubset(allowed):
+        if layout != "scattered-v1" and (not isinstance(ornaments, dict) or not 3 <= len(ornaments) <= 4 or not set(ornaments).issubset(allowed)):
             raise ValueError("bob_ornaments requires three or four supported static pose slots.")
         if "feature" in ornaments and not feature:
             raise ValueError("The hanging pose requires a Bob feature invitation.")
@@ -85,6 +100,23 @@ def check_optional_components(content):
                 raise ValueError("Bob ornaments require hosted HTTPS raster images on Outside In Print.")
             if type(pose.get("width")) is not int or not 1 <= pose["width"] <= 320:
                 raise ValueError("Bob ornament width must be an integer from 1 to 320 pixels.")
+            if layout == "scattered-v1":
+                if pose["width"] > 160 or type(pose.get("height")) is not int or not 1 <= pose["height"] <= 240:
+                    raise ValueError("scattered-v1 poses require width at most 160 and explicit height from 1 to 240 pixels.")
+                if pose.get("align", "right") not in ("left", "center", "right"):
+                    raise ValueError("Bob ornament align must be left, center or right.")
+            if "offset_pct" in pose and (layout != "scattered-v1" or slot != "masthead" or type(pose["offset_pct"]) is not int or not 0 <= pose["offset_pct"] <= 80):
+                raise ValueError("Only the scattered masthead may use an integer offset_pct from 0 to 80.")
+            if "placement" in pose and (layout != "scattered-v1" or slot != "lead" or pose["placement"] != "after-title"):
+                raise ValueError("Only the scattered lead may use placement: after-title.")
+            if "trail" in pose:
+                trail = pose["trail"]
+                if layout != "scattered-v1" or slot != "divider" or not isinstance(trail, dict) or set(trail) != {"image_url", "image_alt", "width", "height"}:
+                    raise ValueError("Only the scattered divider may include a static raster trail with image_url, image_alt, width and height.")
+                if not re.fullmatch(r"https://outsideinprint[.]org/.+[.]png", trail.get("image_url", ""), re.I) or not isinstance(trail.get("image_alt"), str) or not trail["image_alt"].strip():
+                    raise ValueError("The divider trail requires a hosted Outside In Print HTTPS PNG and accessible description.")
+                if type(trail.get("width")) is not int or not 1 <= trail["width"] <= 600 or type(trail.get("height")) is not int or not 1 <= trail["height"] <= 240:
+                    raise ValueError("The divider trail requires integer width from 1 to 600 and height from 1 to 240 pixels.")
     book = content.get("bookshelf")
     if book:
         required = ("book_key", "title", "subtitle", "author", "url", "introduction", "image", "email_image", "image_alt", "excerpt_source_title", "excerpt_source_url", "cta_label")

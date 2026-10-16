@@ -1,0 +1,8 @@
+{{- $issue := .issue -}}{{- with .guest -}}
+<section class="almanack-guest-feature" aria-labelledby="almanack-guest-label" style="border-top:1px solid #b0a087;border-bottom:1px solid #b0a087;padding:16px 0;margin:24px 0;">
+<h2 id="almanack-guest-label" style="font-size:16px;margin:0 0 12px;">{{ .label }}</h2>
+{{ partial "almanack/bob-heading.html" (dict "issue" $issue "slot" "guest" "title" .title "url" .url) }}
+<p style="font-size:14px;margin:0 0 12px;">By {{ .author }}</p>
+<p style="margin:0;">{{ .capsule }}</p>
+</section>
+{{- end -}}

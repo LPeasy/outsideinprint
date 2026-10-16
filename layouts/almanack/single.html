@@ -92,7 +92,7 @@
     {{ with .Params.bob_note }}
       <section class="almanack-note" aria-labelledby="almanack-note-title">
         <p class="almanack-section-label" id="almanack-note-title">Note from Bob</p>
-        <p>{{ if eq $.Params.editorial_contract "almanack-v1" }}{{ . | markdownify }}{{ else }}{{ . }}{{ end }}</p>
+        <p>{{ if eq $.Params.editorial_contract "almanack-v1" }}{{ . | markdownify }}{{ else }}{{ . }}{{ end }}</p>{{ partial "almanack/bob-edge.html" (dict "issue" $.Params "slot" "note" "align" "right") }}
       </section>
     {{ end }}
 
@@ -141,11 +141,11 @@
                 </figure>
               {{ end }}
               <div class="almanack-lead__body">
-                <h2><a href="{{ $leadHref }}">{{ .title }}</a></h2>
+                {{ if eq $.Params.bob_layout "scattered-v1" }}{{ partial "almanack/bob-heading.html" (dict "issue" $.Params "slot" "lead" "title" .title "url" $leadHref "level" 2) }}{{ else }}<h2><a href="{{ $leadHref }}">{{ .title }}</a></h2>{{ end }}
                 {{ with .excerpt }}
-                  <p class="almanack-section-label">From the essay</p>
+                  <p class="almanack-section-label">{{ $lead.excerpt_label | default "From the essay" }}</p>
                   {{ range split . "\n\n" }}<p>{{ . }}</p>{{ end }}
-                  <p><a href="{{ $leadHref }}">Read the full essay &rarr;</a></p>
+                  <p><a href="{{ $leadHref }}">{{ $lead.read_label | default "Read the full essay" }} &rarr;</a></p>
                 {{ else }}
                   <p>{{ .description }}</p>
                 {{ end }}
@@ -153,9 +153,9 @@
             </article>
           {{ end }}
 
-          {{ if gt (len $secondary) 0 }}
+          {{ partial "almanack/guest-feature-web.html" . }}{{ if gt (len $secondary) 0 }}
             <div class="almanack-secondary-grid" aria-label="Secondary essays">
-              {{ range $secondary }}
+              {{ range $i, $item := $secondary }}{{ if eq $i 1 }}{{ partial "almanack/bob-edge.html" (dict "issue" $.Params "slot" "stories" "align" "center") }}{{ end }}
                 {{ $itemURL := .url | default "#" }}
                 {{ $itemHref := $itemURL }}
                 {{ if and $itemURL (not (hasPrefix $itemURL "http")) }}
@@ -194,7 +194,7 @@
           {{ end }}
         </section>
 
-        {{ with .Params.bookshelf }}{{ partial "almanack/bookshelf-web.html" (dict "page" $ "book" .) }}{{ end }}<section class="almanack-virtue" aria-labelledby="almanack-virtue-title">
+        {{ partial "almanack/bob-edge.html" (dict "issue" .Params "slot" "bookshelf" "align" "left") }}{{ with .Params.bookshelf }}{{ partial "almanack/bookshelf-web.html" (dict "page" $ "book" .) }}{{ end }}<section class="almanack-virtue" aria-labelledby="almanack-virtue-title">
           <p class="almanack-section-label" id="almanack-virtue-title">This Week's Virtue</p>
           <h2>{{ $virtue.name }}</h2>
           <p>{{ $virtue.reflection }}</p>
@@ -278,13 +278,13 @@
       {{ end }}
     </section>
 
-    {{ if .Params.bob_ornaments.signoff }}<table role="presentation" class="bob-signoff"><tr><td><figure class="almanack-quote almanack-quote--closing">
+    {{ if eq .Params.bob_layout "scattered-v1" }}<figure class="almanack-quote almanack-quote--closing"><blockquote>{{ .Params.closing_quote }}</blockquote><figcaption>~ {{ .Params.closing_quote_attribution }}</figcaption></figure>{{ partial "almanack/bob-edge.html" (dict "issue" .Params "slot" "signoff" "align" "right") }}{{ else }}{{ if .Params.bob_ornaments.signoff }}<table role="presentation" class="bob-signoff"><tr><td><figure class="almanack-quote almanack-quote--closing">
       <blockquote>{{ .Params.closing_quote }}</blockquote>
       <figcaption>~ {{ .Params.closing_quote_attribution }}</figcaption>
     </figure></td><td class="bob-signoff-cell">{{ partial "almanack/bob-ornament.html" (dict "issue" $.Params "slot" "signoff") }}</td></tr></table>{{ else }}<figure class="almanack-quote almanack-quote--closing">
       <blockquote>{{ .Params.closing_quote }}</blockquote>
       <figcaption>~ {{ .Params.closing_quote_attribution }}</figcaption>
-    </figure>{{ end }}
+    </figure>{{ end }}{{ end }}
 
     <footer class="almanack-footer">
       <p>{{ if eq .Params.editorial_contract "almanack-v1" }}<a href="{{ "" | absURL }}">Outside In Print</a>{{ else }}Outside In Print{{ end }}</p>

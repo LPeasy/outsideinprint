@@ -33,6 +33,20 @@
   "email": "Use the shared HTML/plain-text exporter with the approved masthead and complete alt text. Retain the baked-in artwork. Follow it with one modest View the web version link (Original published issue for a private historical revision). No extra subject/date wrapper, generic deck, or live H1 full-issue CTA.",
   "preheader": "A specific sentence about the actual issue, supplied as email_preheader and Buttondown Description.",
   "body_contract": "almanack-v1: actual lead excerpt of 60\u2013100 words, supporting capsules, specific Bob note of at most 50 words, one Worth Reprinting rationale; preserve recurring sections, exact quotations, artwork and source facts.",
+  "writing_standard": {
+    "owner_approved_on": "2026-10-16",
+    "scope": "All newly written reader-facing copy in every future Bob's Almanack; preserve historical issues and sent emails",
+    "voice": "Plain, concrete, adult prose with familiar words, active verbs and natural full sentences; name the actor, action and result; remove vague filler such as that same care can reach",
+    "method": "franklin-conversational-grade7 with the Almanack sixth-grade target",
+    "flesch_kincaid_target": {
+      "min": 5.0,
+      "max": 6.9
+    },
+    "analysis_args": "--target-min 5.0 --target-max 6.9",
+    "protected_content": "Exact quotations, dialogue and source excerpts, titles, names, facts, dates, numbers, caveats, links, technical terms, alt text and machine-readable fields",
+    "review": "Analyze the final rendered email and a recorded extraction of editable prose; preserve necessary exact language, report its score effect separately, and record before/after estimates plus manual concrete-language and fidelity reviews. Never damage meaning or natural rhythm to lower a score.",
+    "approved_example": "output/almanack_packages/almanack-package-2026-10-17/franklin-grade6-review.md"
+  },
   "footer_links": [
     "https://outsideinprint.org/",
     "https://medium.com/the-balanced-sheet"

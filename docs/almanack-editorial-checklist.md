@@ -57,6 +57,20 @@ Historical files retain their original bodies and copy.
    stop for owner handling; do not renumber a sent email or silently omit the field.
    Keep unsubscribe, preferences, legal text and existing footer destinations.
 
+## Scheduled website release
+
+For an owner-approved future release, follow the dedicated
+[scheduled Almanack publication contract](almanack-scheduled-publication.md)
+(`almanack-scheduled-publication-v1`) and the scheduling skill. Keep the approved
+package source at `draft: true`, without `publishDate`, and preserve all copy/art
+locks, exports and editorial evidence. Only `scripts/stage_almanack_publication.py`
+may create the staged conversion: `draft: false` plus the exact authorized
+`America/New_York` release timestamp, with every other source byte unchanged.
+Use the contract's bounded artwork receipt, dormancy tests, checked PR, queue
+verification and release-heartbeat evidence. Website scheduling does not schedule
+or send Buttondown email; separate email authorization and provider checks remain
+required.
+
 ## Installed Windows handoff
 
 The production package handoff is installed in the outer OIP workspace under
@@ -160,3 +174,30 @@ The recurring linked-sprite treatment is documented in [Bob ornaments in Bob's A
 ## From the Bookshelf
 
 For every new issue from Issue 23 onward, include one existing published book using the canonical `bookshelf` mapping. Follow [From the Bookshelf](almanack-bookshelf.md) for catalog rotation, exact excerpt verification, the small linked cover, store link, and placement before This Week's Virtue. Record source locators and check all three render formats. Drafts do not consume the rotation.
+
+## Optional guest feature and lead labels
+
+An issue may add one short `guest_feature` directly after the lead and before the
+supporting cards. It uses exactly `label`, `title`, `author`, `url`, and `capsule`.
+Keep the capsule to 60 words and 600 characters; label, title and author limits
+are 80, 240 and 160 characters. The URL must be the canonical Outside In Print
+essay route, as HTTPS or `/essays/<slug>/`, at most 200 characters. The shared
+model expands a relative route to HTTPS. No artwork is required. The guest
+cannot also appear among the essay cards. Verify the public source; web rendering
+requires its title, named author and guest designation to agree, and requires it
+to be published and unexpired by the issue date. Email's isolated renderer checks
+the field contract and duplicates; it does not independently fetch the article.
+
+For a dialogue lead, set `essays[0].excerpt_label: "From the dialogue"` and
+`essays[0].read_label: "Read the full dialogue"`. Both optional labels must be
+nonempty text of at most 80 characters. Omitted fields retain the existing essay
+labels. Preserve the source's exact visible wording and paragraph breaks in the
+excerpt. All three formats use the same fields.
+
+The local distribution metadata records `almanack-guest-feature-v1` and
+`almanack-lead-labels-v1` when used, joined to the existing Bob/Bookshelf extension
+when present. The reproducible signature describes the actual renderer. Issues
+without the new fields retain their HTML and plaintext; rerendered extension
+metadata records the current code signature. Historical artifacts remain intact.
+Run `tests/test_almanack_guest_feature.py` for bounded source/render checks and
+the existing distribution validator for fresh-render parity.

@@ -20,6 +20,8 @@ CONTRAST = runpy.run_path(str(Path(__file__).with_name("almanack_email_contrast.
 
 
 EXTENSION = "almanack-bob-bookshelf-v1"
+GUEST_EXTENSION = "almanack-guest-feature-v1"
+LEAD_LABELS_EXTENSION = "almanack-lead-labels-v1"
 
 def exporter_signature():
     root = EXPORTER.parents[1]
@@ -65,9 +67,19 @@ def render(issue, output_dir, hugo=HUGO):
                     exporter_commit="248757a3bef9406435c9472728985597d53ecb7e",
                     html_sha256=hashlib.sha256(html_path.read_bytes()).hexdigest(),
                     text_sha256=hashlib.sha256(text_path.read_bytes()).hexdigest())
+    extensions = []
     if any(content.get(key) for key in ("bob_feature", "bob_ornaments", "bookshelf")):
+        extensions.append(EXTENSION)
+    if content.get("bob_layout") == "scattered-v1":
+        extensions.append("almanack-scattered-bob-v1")
+    if content.get("guest_feature"):
+        extensions.append(GUEST_EXTENSION)
+    lead = (content.get("essays") or [{}])[0]
+    if lead.get("excerpt_label") or lead.get("read_label"):
+        extensions.append(LEAD_LABELS_EXTENSION)
+    if extensions:
         metadata.update(exporter_base_commit=metadata["exporter_commit"],
-                        exporter_extension=EXTENSION,
+                        exporter_extension="+".join(extensions),
                         exporter_extension_sha256=exporter_signature())
     (directory / "email.json").write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     review_path = directory / "REVIEW.txt"

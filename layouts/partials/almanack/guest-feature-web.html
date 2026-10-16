@@ -1,0 +1,9 @@
+{{- $guest := partial "almanack/guest-feature-model.html" (dict "page" . "checkSource" true) -}}
+{{- $issue := .Params -}}{{- with $guest -}}
+<section class="almanack-guest-feature almanack-secondary-card" aria-labelledby="almanack-guest-label" style="margin:1.5rem 0;">
+  <p class="almanack-section-label" id="almanack-guest-label">{{ .label }}</p>
+  {{ if eq $issue.bob_layout "scattered-v1" }}{{ partial "almanack/bob-heading.html" (dict "issue" $issue "slot" "guest" "title" .title "url" .url) }}{{ else }}<h3><a href="{{ .url }}">{{ .title }}</a></h3>{{ end }}
+  <p>By {{ .author }}</p>
+  <p>{{ .capsule }}</p>
+</section>
+{{- end -}}

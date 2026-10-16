@@ -27,7 +27,7 @@
       "git_blob_sha": "c27b6fb932a0713576831b32c564054494ec9075"
     }
   ],
-  "purpose": "Shared PR #131 baseline with owner-requested local opt-in Bob and Bookshelf extension; no production or provider activation.",
+  "purpose": "Shared PR #131 baseline with opt-in Bob/Bookshelf and owner-requested guest-feature extensions; local preparation does not activate production or provider delivery.",
   "local_extension": {
     "identifier": "almanack-bob-bookshelf-v1",
     "requested_on": "2026-10-09",
@@ -89,5 +89,137 @@
       }
     ],
     "runtime": "Current main pinned Hugo Extended 0.167.0; original snapshot remains historical provenance"
+  },
+  "guest_feature_extension": {
+    "identifier": "almanack-guest-feature-v1",
+    "requested_on": "2026-10-16",
+    "state": "prepared-for-owner-review",
+    "fields": [
+      "guest_feature"
+    ],
+    "prior_local_extension": "The local_extension object above preserves the prior Bob/Bookshelf snapshot hashes; the guest extension below records the changed and added files.",
+    "original_snapshot_preserved_at": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\output\\almanack_packages\\almanack-package-2026-10-17\\template-before\\exporter",
+    "files": [
+      {
+        "path": "layouts/almanack/single.email.html",
+        "sha256": "31cc124661bb198c3fa9193dd763fc6f2dbaa4cbf4025fb730d80286a1be2a8e"
+      },
+      {
+        "path": "layouts/almanack/single.emailtext.txt",
+        "sha256": "8021399d4c53b705c6e7de8b13991d300bef0bb6c840d486d6ab47a012fec1dd"
+      },
+      {
+        "path": "layouts/partials/almanack/email-model.html",
+        "sha256": "8bdebd10c4ac26df33194a3dafc9f49b17d1ccd9e284773fc4b210d0dce89442"
+      },
+      {
+        "path": "layouts/partials/almanack/guest-feature-model.html",
+        "sha256": "2f097c308d83ad2d9b3aedf95bc9e0f09c41ac22e2ffb0d37141a6d054298a6a"
+      },
+      {
+        "path": "layouts/partials/almanack/guest-feature.html",
+        "sha256": "0f5c4058bbd585d2d8bc316f058a3c6b871ef3af7d955016c2447973988f07c2"
+      }
+    ],
+    "related_extension": {
+      "identifier": "almanack-lead-labels-v1",
+      "fields": [
+        "essays[0].excerpt_label",
+        "essays[0].read_label"
+      ],
+      "purpose": "Optional source-form labels; existing essay labels remain the default."
+    }
+  },
+  "scattered_bob_extension": {
+    "identifier": "almanack-scattered-bob-v1",
+    "requested_on": "2026-10-16",
+    "state": "local-preparation-owner-selected-poses",
+    "fields": [
+      "bob_layout",
+      "bob_ornaments"
+    ],
+    "purpose": "Eight authentic small appearances with owner-selected poses and issue-specific scale/alignment; no publication or provider delivery authorization.",
+    "historical_outputs": "October 3 and October 10 HTML and plaintext remain byte-identical without bob_layout.",
+    "original_snapshot_preserved_at": "C:\\Users\\lawto\\Documents\\40_Scratch\\2026-10\\bob-pose-selection\\scattered-outer-before",
+    "files": [
+      {
+        "path": "layouts/almanack/single.email.html",
+        "sha256": "4c6fe5414a1ddea8b7336492cd04a1e068031769d105cad30504fa6f8cf57f82"
+      },
+      {
+        "path": "scripts/render_almanack_email.py",
+        "sha256": "fb6bd5805ba87c28de876d3085073f63cf0720d099c9267453ce1d6b443b864d"
+      },
+      {
+        "path": "layouts/partials/almanack/bob-edge.html",
+        "sha256": "3ae433554ddae3bf934ad5f4ce4d381f502ac5e32e395e06101b7861cac00b2d"
+      },
+      {
+        "path": "layouts/partials/almanack/bob-heading.html",
+        "sha256": "c6264779dae04efe16986c858acb710d46caf034f60eb708b439b2175bfe7fc9"
+      },
+      {
+        "path": "layouts/partials/almanack/guest-feature-scattered.html",
+        "sha256": "a5186db96692d8be7580db282319d5354cb52784acaea03b80cc87e0f6d81774"
+      },
+      {
+        "path": "layouts/partials/almanack/bob-ornament.html",
+        "sha256": "f20bce5dc35f4213c4ef53d54e0a22745cb984253e28bfc3d731dac9d0397a12"
+      },
+      {
+        "path": "layouts/partials/almanack/bob-masthead.html",
+        "sha256": "e922de19a7de16d2f5dc9815c449e9087d15ba16db3436051c5aa1ab9628372d"
+      },
+      {
+        "path": "layouts/partials/almanack/bob-divider.html",
+        "sha256": "48e4cebdbbd62e421ad7d280156a75b3e96533b835de78e6f294fc38b34bcd47"
+      },
+      {
+        "path": "layouts/partials/almanack/bob-style.html",
+        "sha256": "bf1724cfa7e3b0830d3dcfa4c32095edcfb9760de6e11d4e469c586af3993821"
+      }
+    ]
+  },
+  "scattered_bob_refinement": {
+    "requested_on": "2026-10-16",
+    "state": "local-preparation-owner-requested-layout-revision",
+    "purpose": "Allow one to eight selected poses; six in October 17. Add optional masthead percentage offset, inline after-title lead pose, and adjacent static crane trail. Existing unsupplied controls retain their behavior.",
+    "original_snapshot_preserved_at": "C:\\Users\\lawto\\Documents\\OutsideInPrint\\output\\almanack_packages\\almanack-package-2026-10-17\\layout-refinement-before",
+    "files": [
+      {
+        "path": "scripts/render_almanack_email.py",
+        "sha256": "e6230a81ff11a49a0053523b505a4b9b3a96cd157596b295bafe3157e08f39eb"
+      },
+      {
+        "path": "layouts/partials/almanack/bob-edge.html",
+        "sha256": "121d77bca8dfdfdea6a2ae89e7273f1eba4163fe601e95d55f103d8f12a3f1fe"
+      },
+      {
+        "path": "layouts/partials/almanack/bob-heading.html",
+        "sha256": "99e9c7c8af6b26f79bdf33cafc6b68766fe52622c98f6a3667a9718c24428861"
+      },
+      {
+        "path": "layouts/partials/almanack/bob-style.html",
+        "sha256": "952942ef539ee22aa478911c3e4a9fe43e2576fcba7b65af6874488abb09d7a6"
+      }
+    ]
+  },
+  "hanging_grip_refinement": {
+    "requested_on": "2026-10-16",
+    "state": "owner-approved-issue24-locked",
+    "purpose": "Raise only the scattered masthead bob-hanging.png by six display pixels so its hand overlaps the rule; preserve all other layout and pixels.",
+    "files": [
+      {
+        "path": "layouts/partials/almanack/bob-ornament.html",
+        "sha256": "ea39aff3cb52ef36387556b7305c2dba8e8c8d021d6c8b4f2a94cc968567767c"
+      }
+    ]
+  },
+  "historical_whitespace_parity_refinement": {
+    "recorded_on": "2026-10-16",
+    "purpose": "Independent review removed an emitted newline from historical editions while preserving Issue 24 HTML, plaintext, web rendering, source and artwork bytes. Fresh renderer metadata records the reviewed code signature only.",
+    "file": "layouts/partials/almanack/bob-style.html",
+    "sha256": "ce360e163195b7674a6f234b8c179d389b2c8b0be31f0b4866b07f5062c810cb",
+    "exporter_signature": "6007ce2c91f5f47827be7d2c1f362a0587a88390c35f0b82ec2149dba03b2c4d"
   }
 }

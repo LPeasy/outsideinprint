@@ -1,1 +1,1 @@
-{{ with .bob_ornaments.masthead }}<div class="bob-stage"><span class="bob-masthead-frame">{{ partial "almanack/bob-ornament.html" (dict "issue" $ "slot" "masthead") }}</span></div>{{ end }}
+{{ if eq .bob_layout "scattered-v1" }}{{ partial "almanack/bob-edge.html" (dict "issue" . "slot" "masthead" "align" "right") }}{{ else }}{{ with .bob_ornaments.masthead }}<div class="bob-stage"><span class="bob-masthead-frame">{{ partial "almanack/bob-ornament.html" (dict "issue" $ "slot" "masthead") }}</span></div>{{ end }}{{ end }}

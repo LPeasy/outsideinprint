@@ -3,4 +3,9 @@
 .almanack-issue .almanack-bookshelf .oip-picture{display:block;max-width:104px}.almanack-issue .almanack-bookshelf img{display:block;width:100%;max-width:104px;height:auto}.almanack-issue .almanack-secondary-card p,.almanack-issue .almanack-margin section p,.almanack-issue .almanack-margin li{font-size:16px}
 @media(max-width:700px){.almanack-inner{padding:16px!important}.bob-feature h3,.bob-feature h2{font-size:32px}.bob-actions .bob-hanging-cell{width:87px}.bob-actions [data-bob="feature"] img{width:75px!important}.bob-stage{height:98px}.bob-masthead-frame{height:97px;width:76px}.bob-stage img{width:60px!important}.bob-paper-masthead{margin-top:-28px!important}}
 @media(max-width:350px){.bob-feature h3,.bob-feature h2{font-size:29px}.bob-actions .bob-hanging-cell{width:77px}.bob-actions [data-bob="feature"] img{width:68px!important}.bob-demo{padding:10px 12px;font-size:16px}}
-</style>{{ end }}
+</style>{{ end }}{{ if eq .bob_layout "scattered-v1" }}<style>
+.bob-heading td,.bob-edge td{border:none}.bob-heading h2,.bob-heading h3{overflow-wrap:anywhere}.almanack-secondary-grid>.bob-edge{grid-column:1/-1}.bob-edge .bob-ornament{vertical-align:bottom}.bob-edge--masthead .bob-ornament{vertical-align:top}.bob-heading .bob-ornament{vertical-align:bottom}.bob-heading .bob-ornament img,.bob-edge .bob-ornament img{object-fit:contain}.almanack-issue .bob-heading{margin:18px 0 14px}.almanack-issue .bob-heading h2,.almanack-issue .bob-heading h3{margin:0}.almanack-issue .bob-heading a{color:inherit!important}
+.bob-heading--inline{overflow-wrap:anywhere}.bob-trail:focus-visible{outline:2px solid #346782;outline-offset:4px}
+@media(max-width:350px){.bob-heading h2,.bob-heading h3,.bob-heading--inline{font-size:23px!important}}
+</style>
+{{ end }}
