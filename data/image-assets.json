@@ -888,6 +888,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/one-for-my-sister": {
+      "id": "editorial/one-for-my-sister",
+      "source": "images/originals/editorial/one-for-my-sister.png",
+      "sha256": "28fa9325cacb58404b76c3f9af7a933a735ef9fb5aed75bcc6a0dbdcd62826b1",
+      "width": 1672,
+      "height": 941,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/one-more-block": {
       "id": "editorial/one-more-block",
       "source": "images/originals/editorial/one-more-block.png",
@@ -8145,6 +8159,7 @@
     "/images/editorial/not-mine-to-carry.png": "editorial/not-mine-to-carry",
     "/images/editorial/not-my-river-not-my-problem.png": "editorial/not-my-river-not-my-problem",
     "/images/editorial/on-the-fence.png": "editorial/on-the-fence",
+    "/images/editorial/one-for-my-sister.png": "editorial/one-for-my-sister",
     "/images/editorial/one-more-block.png": "editorial/one-more-block",
     "/images/editorial/orchard-grip.png": "editorial/orchard-grip",
     "/images/editorial/papers-please.png": "editorial/papers-please",

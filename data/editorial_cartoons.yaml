@@ -1,4 +1,4 @@
-current: the-american-at-versailles
+current: one-for-my-sister
 cartoons:
   - slug: a-public-record-must-outlast-the-feed
     title: "A Public Record Must Outlast the Feed"
@@ -1193,5 +1193,14 @@ cartoons:
     image: "editorial/the-american-at-versailles"
     essay: "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/"
     alt: "Benjamin Franklin, wearing a brown fur cap and plain brown coat, speaks with a French court official in blue silk inside a gilded room at Versailles."
+    width: 1672
+    height: 941
+  - slug: one-for-my-sister
+    title: "One for My Sister"
+    date: "2026-10-16"
+    publishDate: "2026-10-16T11:49:12-04:00"
+    image: "editorial/one-for-my-sister"
+    essay: "/essays/one-for-my-sister/"
+    alt: "Outside an open bookshop, a seated author signs a book while a woman rests her hand on a second copy; stacks of books and a coffee cup sit on the sunlit table."
     width: 1672
     height: 941
