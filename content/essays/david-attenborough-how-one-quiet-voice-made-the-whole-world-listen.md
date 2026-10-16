@@ -6,6 +6,7 @@ slug: "david-attenborough-how-one-quiet-voice-made-the-whole-world-listen"
 section_label: "Modern Bio"
 series: ["ModernBios"]
 collections: ["modern-bios"]
+collection_weight: 40
 subtitle: "From black-and-white BBC to the edge of extinction and back"
 featured_image: "/images/medium/david-attenborough-how-one-quiet-voice-made-the-whole-world-listen/e9cc168657d174fbcaa39903485390e4c012d6aee82477adf48f67f3d94d5a10.jpeg"
 featured_image_alt: "David Attenborough: How One Quiet Voice Made the Whole World Listen"

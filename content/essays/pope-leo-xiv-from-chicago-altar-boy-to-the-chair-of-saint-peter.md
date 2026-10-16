@@ -6,6 +6,7 @@ slug: "pope-leo-xiv-from-chicago-altar-boy-to-the-chair-of-saint-peter"
 section_label: "Modern Bio"
 series: ["ModernBios"]
 collections: ["modern-bios"]
+collection_weight: 20
 subtitle: "Inside the life of Robert Prevost, the Augustinian priest who made history"
 featured_image: "medium/64a77b457874a4f350bf43b17cd5195fe10c5fc41af5ff7e2a1ca4e2d9c0b55c"
 featured_image_caption: "Pope Leo Waving to the Vatican | Source: Wikimedia Commons"
