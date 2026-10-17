@@ -278,14 +278,20 @@ Assert-True ((@($shopFeed.Links | Sort-Object) -join "`n") -ceq ($expectedShopLi
 $pendingFeedIndex = [array]::IndexOf($shopFeed.Links, 'https://outsideinprint.org/shop/pending/')
 Assert-True ($shopFeed.Titles[$pendingFeedIndex] -ceq 'PENDING: A Novel' -and $shopFeed.Dates[$pendingFeedIndex] -eq [DateTimeOffset]'2026-10-09T00:00:00-04:00') 'PENDING feed metadata must retain its full title and approved release date.'
 
-foreach ($requiredRootLink in @(
-  'https://outsideinprint.org/shop/2045/',
-  'https://outsideinprint.org/shop/pending/',
-  'https://outsideinprint.org/shop/the-american-nightmare-keep-dreaming-kid/',
-  'https://outsideinprint.org/almanack/2026-09-12/'
-)) {
-  Assert-True ($rootFeed.Links -ccontains $requiredRootLink) "Root feed is missing eligible current item: $requiredRootLink"
+$rootCandidates = foreach ($feed in @($archiveFeed, $almanackFeed, $shopFeed)) {
+  for ($index = 0; $index -lt $feed.Links.Count; $index++) {
+    [pscustomobject]@{
+      Link = $feed.Links[$index]
+      Date = $feed.Dates[$index]
+    }
+  }
 }
+$expectedRootLinks = @(
+  $rootCandidates |
+    Sort-Object @{ Expression = 'Date'; Descending = $true }, @{ Expression = 'Link'; Descending = $false } |
+    Select-Object -First 50 -ExpandProperty Link
+)
+Assert-True (($rootFeed.Links -join "`n") -ceq ($expectedRootLinks -join "`n")) 'Root feed must contain the newest 50 eligible longform, Almanack, and shop entries in canonical order.'
 
 foreach ($rootLink in $rootFeed.Links) {
   Assert-True ($rootLink -match '^https://outsideinprint\.org/(?:essays|syd-and-oliver|almanack|shop)/') "Root feed contains an ineligible route: $rootLink"
