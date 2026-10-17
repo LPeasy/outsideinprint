@@ -114,6 +114,10 @@ jobs:
           sparse-checkout: |-
             workers/oip-commerce
             workers/oip-bob
+            workers/oip-attribution
+            data
+            scripts
+            tests
           persist-credentials: false
       - name: Setup Node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
@@ -128,6 +132,10 @@ jobs:
         run: npm --prefix workers/oip-bob ci --ignore-scripts --no-audit --no-fund
       - name: Bob recommendations, budgets and local Workers runtime
         run: npm --prefix workers/oip-bob test
+      - name: Newsletter attribution and weekly reconciliation
+        run: |-
+          node --test workers/oip-attribution/test/*.test.mjs
+          python3 -m unittest discover -s tests -p 'test_newsletter_attribution.py'
   site:
     runs-on: ubuntu-latest
     timeout-minutes: 35
@@ -197,6 +205,9 @@ jobs:
       - name: Test Contributor Header Contract
         shell: pwsh
         run: ./tests/test_contributor_header_contract.ps1
+      - name: Test Newsletter Attribution Form Contract
+        shell: pwsh
+        run: ./tests/test_newsletter_attribution_render.ps1
       - name: Test Apps & Tools Contract
         shell: pwsh
         run: |

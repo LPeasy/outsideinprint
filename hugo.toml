@@ -68,6 +68,13 @@ privacy_promise = "Your email goes to Buttondown to deliver and manage the Outsi
 privacy_url = "/privacy/"
 privacy_label = "Privacy details"
 
+[params.newsletter.attribution]
+# Enable only after the backend, test confirmation, privacy review, and rollback check pass.
+enabled = false
+endpoint = ""
+# Per-tab attribution storage needs the separate privacy-policy review before activation.
+storage_enabled = false
+
 [params.analytics]
 enabled = false
 allow_local = false

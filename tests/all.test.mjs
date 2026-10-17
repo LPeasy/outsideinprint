@@ -1,5 +1,6 @@
 import "./article_form_grammar_contract.test.mjs";
 import "./almanack_attribution.test.mjs";
+import "./newsletter_attribution_client.test.mjs";
 import "./article_mobile_layout.test.mjs";
 import "./affirmation_bank_surface.test.mjs";
 import "./apps_tools_contract.test.mjs";

@@ -1,0 +1,4 @@
+{{- if eq site.Params.newsletter.attribution.enabled true -}}
+  <div hidden aria-hidden="true"><label>Leave this field empty<input type="text" name="website" autocomplete="off" tabindex="-1"></label></div>
+  <p hidden role="status" aria-live="polite" aria-atomic="true" data-newsletter-attribution-status></p>
+{{- end -}}

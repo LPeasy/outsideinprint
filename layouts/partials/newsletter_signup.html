@@ -40,6 +40,7 @@
           class="newsletter-signup__form"
           data-analytics-event="newsletter_submit"
           data-analytics-source-slot="{{ $sourceSlot }}"
+          {{ if eq $newsletter.attribution.enabled true }}data-newsletter-attribution{{ end }}
         >
           <label for="{{ $inputID }}" class="newsletter-signup__label">Email address</label>
           <input
@@ -60,6 +61,7 @@
             <input type="hidden" name="tag" value="{{ . }}" />
           {{ end }}
           <button type="submit" class="newsletter-signup__button">{{ $buttonLabel }}</button>
+          {{ partial "newsletter_attribution_fields.html" $page }}
         </form>
 
         <div class="newsletter-signup__details">
