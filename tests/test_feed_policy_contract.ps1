@@ -316,4 +316,3 @@ foreach ($excludedFragment in @(
 }
 
 Write-Host 'Rendered feed policy contract passed.'
-
