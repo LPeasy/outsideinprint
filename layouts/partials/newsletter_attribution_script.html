@@ -1,0 +1,15 @@
+{{- $settings := site.Params.newsletter.attribution | default dict -}}
+{{- if eq $settings.enabled true -}}
+  {{- $endpoint := $settings.endpoint | default "" -}}
+  {{- if not (findRE `^https://[a-zA-Z0-9.-]+(?::[0-9]+)?/signup$` $endpoint) -}}
+    {{- errorf "Enabled newsletter attribution requires an HTTPS /signup endpoint" -}}
+  {{- end -}}
+  {{- $campaigns := slice -}}
+  {{- range hugo.Data.newsletter_campaigns.campaigns -}}
+    {{- $campaigns = $campaigns | append (dict "code" .code "utm_campaign" .utm_campaign "utm_source" .utm_source "utm_medium" .utm_medium "utm_content" (.utm_content | default "")) -}}
+  {{- end -}}
+  {{- $config := dict "enabled" true "endpoint" $endpoint "storageEnabled" (eq $settings.storage_enabled true) "pagePath" .RelPermalink "campaigns" $campaigns -}}
+  <script type="application/json" data-oip-route-config="newsletter-attribution">{{ $config | jsonify | safeJS }}</script>
+  {{- $script := resources.Get "js/newsletter-attribution.js" | resources.Minify | resources.Fingerprint "sha384" -}}
+  <script defer data-oip-route-script="newsletter-attribution" src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+{{- end -}}

@@ -29,6 +29,10 @@ test("browser selection follows rendering, applications, storefronts and helpers
   }
 });
 test("workers and documentation do not need Hugo; mixed changes preserve all selected work", () => {
+  assert.equal(classifyPaths(["workers/oip-attribution/src/index.js"]).site, false);
+  assert.equal(classifyPaths(["workers/oip-attribution/src/index.js"]).worker, true);
+  assert.equal(classifyPaths(["scripts/newsletter_attribution.py"]).worker, true);
+  assert.equal(classifyPaths(["data/newsletter_campaigns.json"]).worker, true);
   assert.equal(classifyPaths(["workers/oip-commerce/src/index.mjs"]).site, false);
   assert.equal(classifyPaths(["workers/oip-commerce/test/commerce.test.mjs"]).worker, true);
   assert.equal(classifyPaths(["workers/oip-bob/src/index.js"]).site, false);

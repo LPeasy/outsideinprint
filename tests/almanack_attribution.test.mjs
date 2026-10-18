@@ -20,14 +20,14 @@ function label(platform, segment, post) {
 }
 
 // Execute the production adapter without network access, a provider form, or timers.
-function load({ url, storage = new Map(), clock = { now: entryTime }, enabled = true, referrer = "", denyStorage = false } = {}) {
+function load({ url, storage = new Map(), clock = { now: entryTime }, enabled = true, referrer = "", denyStorage = false, extraConfig = {} } = {}) {
   const location = new URL(url || `${origin}/subscribe/weekend/`);
   const counts = [];
   const listeners = new Map();
   let storageAccesses = 0;
   const window = {
     location,
-    oipAnalytics: { enabled, page: { path: location.pathname, title: "Bob's Almanack", eligibleRead: false } },
+    oipAnalytics: { enabled, ...extraConfig, page: { path: location.pathname, title: "Bob's Almanack", eligibleRead: false } },
     goatcounter: { count: payload => counts.push(JSON.parse(JSON.stringify(payload))) },
     setInterval: () => 1,
     clearInterval() {},
@@ -42,15 +42,21 @@ function load({ url, storage = new Map(), clock = { now: entryTime }, enabled = 
       removeItem: key => storage.delete(key)
     };
   } });
+  let nextConfig = null;
   const document = {
     referrer,
-    querySelector: () => null,
+    querySelector: selector => selector === 'script[data-oip-route-config="analytics"]' && nextConfig ? { textContent: JSON.stringify(nextConfig) } : null,
     addEventListener: (name, handler) => listeners.set(name, handler)
   };
   vm.runInNewContext(script, { window, document, URL, URLSearchParams, Date: { now: () => clock.now } });
   return {
     window, counts, storage,
     get storageAccesses() { return storageAccesses; },
+    navigate(url) {
+      window.location = new URL(url);
+      nextConfig = { ...window.oipAnalytics, page: { path: window.location.pathname, title: "Next page", eligibleRead: false } };
+      listeners.get("oip:route")();
+    },
     submit() {
       // Form values exist, but must never be read into analytics or storage.
       listeners.get("submit")?.({ target: {
@@ -226,4 +232,45 @@ test("The Pinterest addition does not broaden the existing 2045-launch allowlist
     assert.equal(view.window.goatcounter.referrer(), expected);
     assert.equal(view.storage.size, 0);
   }
+});
+
+const registeredPost = { code: "october-new-post", utm_campaign: "october-new-post", utm_source: "facebook", utm_medium: "organic_social", utm_content: "" };
+const registeredConfig = { campaignAttributionEnabled: true, registeredCampaigns: [registeredPost] };
+const registeredUrl = `${origin}/essays/new-reading/?utm_campaign=october-new-post&utm_source=facebook&utm_medium=organic_social`;
+
+test("enabled register mapping labels only explicitly tagged landing-page views", () => {
+  const view = load({ url: registeredUrl + "&email=QUERY_PII_SENTINEL", extraConfig: registeredConfig });
+  assert.equal(view.window.goatcounter.referrer(), "oip-campaign|code=october-new-post");
+  assert.equal(view.storage.size, 0, "New campaign mapping adds no stored attribution");
+  view.navigate(`${origin}/essays/another-reading/`);
+  assert.equal(view.window.goatcounter.referrer(), "internal");
+  assert.equal(view.counts.at(-1).event, false);
+  assert.equal(view.counts.at(-1).referrer, "internal");
+  view.navigate(registeredUrl);
+  assert.equal(view.counts.at(-1).event, false);
+  assert.equal(view.counts.at(-1).referrer, "oip-campaign|code=october-new-post");
+  assert.doesNotMatch(JSON.stringify(view.counts), /QUERY_PII_SENTINEL|utm_/);
+});
+
+test("new campaign mapping is gated and rejects unknown, ambiguous, and duplicate tuples", () => {
+  for (const options of [
+    { extraConfig: { ...registeredConfig, campaignAttributionEnabled: false } },
+    { extraConfig: { ...registeredConfig, registeredCampaigns: [] } },
+    { extraConfig: { ...registeredConfig, registeredCampaigns: [registeredPost, registeredPost] } },
+    { url: registeredUrl + "&utm_source=facebook", extraConfig: registeredConfig },
+    { url: registeredUrl.replace("facebook", "QUERY_PII_SENTINEL"), extraConfig: registeredConfig },
+    { enabled: false, extraConfig: registeredConfig }
+  ]) {
+    const view = load({ url: registeredUrl, ...options });
+    assert.notEqual(view.window.goatcounter.referrer(), "oip-campaign|code=october-new-post");
+    assert.doesNotMatch(JSON.stringify(view.counts), /QUERY_PII_SENTINEL|utm_/);
+  }
+});
+
+test("register mapping preserves legacy labels and needs no available storage", () => {
+  const legacy = load({ url: campaign("instagram", "weekend", "weekend-bio"), extraConfig: registeredConfig });
+  assert.equal(legacy.window.goatcounter.referrer(), label("instagram", "weekend", "weekend-bio"));
+  const current = load({ url: registeredUrl, extraConfig: registeredConfig, denyStorage: true });
+  assert.equal(current.window.goatcounter.referrer(), "oip-campaign|code=october-new-post");
+  assert.equal(current.storage.size, 0);
 });

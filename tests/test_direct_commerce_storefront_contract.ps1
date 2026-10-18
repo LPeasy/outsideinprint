@@ -886,7 +886,7 @@ foreach ($surface in $shopSurfaceExpectations) {
 
 $privacyOutput = ([Net.WebUtility]::HtmlDecode([string]$output['privacy/index.html'])).Replace([char]0x2019, [char]0x27)
 foreach ($requiredPrivacyText in @(
-  'Effective September 15, 2026',
+  'Effective October 15, 2026',
   'standalone Bob''s Almanack signup form',
   'IP address, browser or device information, and referring page',
   'selected preference tags',

@@ -7,7 +7,9 @@ const full = () => Object.fromEntries(Object.keys(empty()).map(key => [key, true
 export function classifyPaths(paths, { renderingDefaultsChanged = false } = {}) {
   const selected = empty();
   for (const path of paths) {
-    if (/^workers\/oip-(commerce|bob)\//.test(path)) { selected.worker = true; continue; }
+    if (/^workers\/oip-(commerce|bob|attribution)\//.test(path)) { selected.worker = true; continue; }
+    if (/^(scripts\/newsletter_attribution\.py|tests\/test_newsletter_attribution\.py)$/.test(path)) { selected.worker = true; continue; }
+    if (path === "data/newsletter_campaigns.json") selected.worker = true;
     if (/^(docs\/(?!editorial-audits\/)|README\.md$|AGENTS\.md$|CODEX_WORKFLOW\.md$|LICENSE)/.test(path)) continue;
     selected.site = true;
     if (path === "data/image-assets.json" || path.startsWith("assets/images/originals/")) continue;
