@@ -1,0 +1,189 @@
+{
+  "reviewed_on": "2026-10-20",
+  "scope": "One original conceptual editorial hero plus eight period images with documented U.S. reuse grounds. Planning documents remain linked without reproducing their restricted illustrations. No blanket worldwide or trademark clearance is asserted.",
+  "figures": [
+    {
+      "id": "hero",
+      "file": "hero-castle-and-plans.png",
+      "after": "*Walt Disney World opened on October 1, 1971",
+      "alt": "Cinderella Castle rises beyond resort plans spread across a drafting table, with blue lines connecting the drawings to the castle.",
+      "caption": "From drawings to a destination.",
+      "date": "2026-10-20",
+      "creator": "AI-assisted original editorial illustration prepared for Outside In Print",
+      "rights": "Newly generated editorial image; not an archival source or claim of Disney endorsement. No determination of exclusive copyright in generated output is asserted.",
+      "treatment": "Original built-in image-generation output, copied unaltered to the draft workspace.",
+      "provenance": "hero-provenance.md",
+      "sha256": "658836766521d5bbe63944bcefc63756813d4146942a7a4722d4f06c28f6fdeb"
+    },
+    {
+      "id": "oswald",
+      "file": "1927-oswald-universal-dec-ad.jpg",
+      "after": "In 1927, Walt Disney",
+      "alt": "A 1927 Universal advertisement shows Oswald holding a bag marked with a dollar sign beside theater-owner testimonials.",
+      "caption": "Oswald advertised to theater owners in Universal Weekly, December 10, 1927, page 1. The published drawing and sales copy link Walt Disney, Winkler Productions, and Universal. [Original issue](https://archive.org/details/universalweekly100movi_4/page/n476/mode/1up); [scan and reuse record](https://commons.wikimedia.org/wiki/File:Oswald_the_Lucky_Rabbit_-_Dec_1927_UW.jpg).",
+      "source": "https://archive.org/details/universalweekly100movi_4/page/n476/mode/1up",
+      "date": "1927-12-10",
+      "creator": "Universal Pictures / Winkler Productions (advertisement)",
+      "rights": "Published in the United States in 1927; Commons identifies this as PD-US-expired and PD-scan. This documented publication replaces unpublished production art and the auction-house image with no verified reuse license. Scope: United States copyright; no claim of trademark license or worldwide clearance.",
+      "rights_url": "https://commons.wikimedia.org/wiki/File:Oswald_the_Lucky_Rabbit_-_Dec_1927_UW.jpg#Licensing",
+      "treatment": "Original published page; existing local mechanical scan reused without alteration.",
+      "sha256": "09f21bebefb93be436be908b4fa3acd5a741f085b161d14c4a8f4026ea610a57"
+    },
+    {
+      "id": "mickey",
+      "file": "1928-mickey-plane-crazy-story-drawings.jpg",
+      "after": "Mickey reached New York's Colony Theatre",
+      "alt": "Six pencil story panels for Plane Crazy show Mickey studying a flying manual, an airplane, and a Charles Lindbergh book.",
+      "caption": "Story drawings for *Plane Crazy* (1928), credited to Ub Iwerks. Graphite and colored pencil, sheet 1 of 6. [Library of Congress, LC-DIG-ppmsca-57586](https://www.loc.gov/item/2018662265/).",
+      "source": "https://www.loc.gov/item/2018662265/",
+      "direct_asset": "https://tile.loc.gov/storage-services/service/pnp/ppmsca/57500/57586v.jpg",
+      "date": "1928",
+      "creator": "Ub Iwerks, according to the Library of Congress",
+      "rights": "Current LoC item advisory: No known restrictions on publication. Disney trademark considerations still apply. Official LoC Disney rights statement, last revised January 2024, explicitly uses a 1928 Mickey drawing as its example of expired copyright. Credit: Library of Congress, Prints & Photographs Division, LC-DIG-ppmsca-57586. This is an institutional advisory, not an individualized permission grant.",
+      "treatment": "Original digital image copied without alteration.",
+      "purpose": "Shows the story-development process and gives Iwerks a visible role.",
+      "rights_url": "https://hdl.loc.gov/loc.pnp/res.419.disn",
+      "sha256": "d871f0f9d198d412cd13ab9bec8622e5cd3640f61c4ceb3fa412235efe91a926"
+    },
+    {
+      "id": "land-before-disney",
+      "file": "1954-future-resort-aerial-nara.jpg",
+      "after": "Disney representatives began assembling property",
+      "alt": "A 1954 aerial photograph shows lakes, vegetation and cleared areas in the future Walt Disney World resort area.",
+      "caption": "The future resort area southwest of Orlando in a Soil Conservation Service aerial photograph, March 1, 1954, before Disney's land purchases. [National Archives, 595120](https://docsteach.org/document/aerial-disney-world/). Public domain.",
+      "source": "https://docsteach.org/document/aerial-disney-world/",
+      "catalog": "https://catalog.archives.gov/id/595120",
+      "direct_asset": "https://i0.wp.com/docsteach.org/wp-content/uploads/documents/595120/md_595120_3146.jpg?fit=692%2C693&ssl=1",
+      "date": "1954-03-01",
+      "creator": "Soil Conservation Service; National Archives Record Group 114",
+      "rights": "The repository's item-specific rights statement explicitly identifies this original photograph as Public Domain, Free of Known Copyright Restrictions. The website's separate general CC BY-NC-SA license does not override the item-specific original-document statement.",
+      "rights_url": "https://docsteach.org/document/aerial-disney-world/",
+      "treatment": "Repository image downloaded without alteration.",
+      "sha256": "04a4a1d612aa0417353ba8551749938719acd8a47ecc91dc0d961e6e33779b32"
+    },
+    {
+      "id": "announcement",
+      "file": "1965-florida-announcement.jpg",
+      "after": "When Walt and Roy publicly discussed Florida",
+      "alt": "Walt Disney, Governor Haydon Burns and Roy Disney sit behind microphones at the Florida announcement.",
+      "caption": "Walt Disney, Governor Haydon Burns, and Roy Disney, left to right, at the Florida announcement on November 15, 1965. Florida Development Commission photograph, [State Archives of Florida / Library of Congress](https://www.loc.gov/item/2021669931/).",
+      "source": "https://www.loc.gov/item/2021669931/",
+      "asset_record": "https://commons.wikimedia.org/wiki/File:Walt_Disney_with_Company_at_Press_Conference.jpg",
+      "direct_asset": "https://upload.wikimedia.org/wikipedia/commons/7/79/Walt_Disney_with_Company_at_Press_Conference.jpg",
+      "date": "1965-11-15",
+      "creator": "Florida Development Commission",
+      "rights": "Commons marks this Florida government-created photograph public domain in the United States.",
+      "treatment": "Original downloaded JPEG; no crop or retouching.",
+      "purpose": "Shows Roy participating alongside Walt before Walt's death.",
+      "sha256": "b401f9083a44885df55a9adbce5022a937cd1cefc312ef8342cf9c27a7942980"
+    },
+    {
+      "id": "roy-and-legislation",
+      "file": "1967-signing-c069089de.jpg",
+      "after": "Government arrangements also took shape.",
+      "alt": "Governor Claude Kirk signs Disney-related legislation at a desk while Roy Disney and other officials stand behind him.",
+      "caption": "Governor Claude Kirk signs Disney-related legislation with Roy Disney among those behind him, May 12, 1967. Photograph by Karl E. Holland. [State Archives of Florida, C069089DE](https://floridamemory.com/items/show/80377). Public domain.",
+      "source": "https://floridamemory.com/items/show/80377",
+      "direct_asset": "https://floridamemory.com/fpc/commerce/c069089de.jpg",
+      "date": "1967-05-12",
+      "creator": "Karl E. Holland; Florida Department of Commerce collection",
+      "rights": "Florida Memory item page explicitly displays Public Domain Mark. Item and image visually inspected in the browser.",
+      "rights_url": "https://floridamemory.com/items/show/80377",
+      "treatment": "Original repository JPEG downloaded through the browser without alteration.",
+      "sha256": "2e72470dff2edcd67154c20327e405e7981f2de59c84d55f56bc4430010a0ad2"
+    },
+    {
+      "id": "financing",
+      "file": "1969-sec-disney-financing-notice.png",
+      "after": "Disney was raising money",
+      "alt": "A contemporary SEC notice names Lehman Brothers and Kidder, Peabody as lead underwriters of a proposed fifty-million-dollar Disney debenture sale for the Florida complex.",
+      "caption": "The SEC recorded Disney's proposed $50 million convertible-debenture sale and its intended use for the Florida complex. Detail from [SEC News Digest, February 17, 1969, page 1](https://www.sec.gov/news/digest/1969/dig021769.pdf#page=1).",
+      "source": "https://www.sec.gov/news/digest/1969/dig021769.pdf#page=1",
+      "date": "1969-02-17",
+      "creator": "U.S. Securities and Exchange Commission",
+      "rights": "Official SEC Website Dissemination policy says SEC.gov public information may be copied or redistributed without SEC permission, with appropriate citation. This extract contains only the agency-authored text notice; SEC seal, logos, and artwork have been excluded, following the policy.",
+      "rights_url": "https://www.sec.gov/about/privacy-information#website-dissemination",
+      "treatment": "Facsimile extract from page 1, PDF coordinates (10,330,542,474), rendered at 3x with PyMuPDF. No retyping or substantive alteration.",
+      "sha256": "0370e4c30990b156a2a1d10d126f8422477130a66d042a8e51e70dd11683ad70"
+    },
+    {
+      "id": "construction",
+      "file": "1971-september-construction-aerial-c678614.jpg",
+      "after": "Disney also expanded its own construction organization.",
+      "alt": "An aerial photograph shows the Magic Kingdom, surrounding water and the Contemporary Hotel during construction in September 1971.",
+      "caption": "The resort taking shape in September 1971, shortly before its public opening. The Magic Kingdom, lakes, and Contemporary Hotel appear in one view. [State Archives of Florida, C678614](https://floridamemory.com/items/show/86540). Public domain.",
+      "source": "https://floridamemory.com/items/show/86540",
+      "direct_asset": "https://floridamemory.com/fpc/commerce/c678614.jpg",
+      "date": "1971-09",
+      "creator": "Florida Department of Commerce collection; individual photographer not identified",
+      "rights": "Florida Memory item page explicitly displays Public Domain Mark. Item and image visually inspected in the browser.",
+      "rights_url": "https://floridamemory.com/items/show/86540",
+      "treatment": "Original repository JPEG downloaded through the browser without alteration.",
+      "sha256": "f3eb201a5893fe00062451fb2e79a75bdba179cb013bdd2a502bed354de39e30"
+    },
+    {
+      "id": "visitor-transport",
+      "file": "1971-october-monorail-c678601.jpg",
+      "after": "For a visitor, the completed facilities",
+      "alt": "Visitors walk along a ramp beneath the elevated Walt Disney World monorail in October 1971.",
+      "caption": "Visitors and the monorail in October 1971: transportation had become part of the resort experience. [State Archives of Florida, C678601](https://floridamemory.com/items/show/86529). Public domain.",
+      "source": "https://floridamemory.com/items/show/86529",
+      "direct_asset": "https://floridamemory.com/fpc/commerce/c678601.jpg",
+      "date": "1971-10",
+      "creator": "Florida Department of Commerce collection; individual photographer not identified",
+      "rights": "Florida Memory item page explicitly displays Public Domain Mark. Item and image visually inspected in the browser.",
+      "rights_url": "https://floridamemory.com/items/show/86529",
+      "treatment": "Original repository JPEG downloaded through the browser without alteration.",
+      "sha256": "55e93ee7651ccb82b1bcd7c2371455c389d0347b0da575784e77f7d97e507a9e"
+    }
+  ],
+  "film": {
+    "title": "Steamboat Willie",
+    "date": "1928",
+    "viewer": "https://commons.wikimedia.org/wiki/File:Steamboat_Willie_(1928)_by_Walt_Disney.webm",
+    "remote_media": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Steamboat_Willie_%281928%29_by_Walt_Disney.webm",
+    "source_credit": "Commons identifies Disney's video as the source of this digital copy.",
+    "rights": "Commons marks the film public domain in the United States; no worldwide claim made.",
+    "treatment": "Remote player and source link only; no local video download, new soundtrack, GIF creation or alteration.",
+    "verification": "2026-10-20: the local reading copy's remote player rendered the title card and moving animation in the in-app browser. Player paused after inspection. The complete film was not watched end to end."
+  },
+  "text_source": "story-revised-text.md",
+  "revision": "2026-10-20: image-use resolution, full 1959 original inspection, and direct annual-report construction citations.",
+  "retired_figures": [
+    {
+      "id": "oswald",
+      "file": "1928-oswald-rival-romeos-drawings.jpg",
+      "reason": "No adequate public-reproduction basis established. Removed from current draft; preserved in earlier drafts and source evidence."
+    },
+    {
+      "id": "epcot",
+      "file": "1967-epcot-radial-plan-detail.png",
+      "reason": "No adequate public-reproduction basis established. Removed from current draft; preserved in earlier drafts and source evidence."
+    },
+    {
+      "id": "financing",
+      "file": "1969-financing-offering-notice.png",
+      "reason": "No adequate public-reproduction basis established. Removed from current draft; preserved in earlier drafts and source evidence."
+    },
+    {
+      "id": "resort-plan",
+      "file": "1969-resort-master-plan.png",
+      "reason": "No adequate public-reproduction basis established. Removed from current draft; preserved in earlier drafts and source evidence."
+    },
+    {
+      "id": "construction",
+      "file": "1970-main-street-construction.png",
+      "reason": "No adequate public-reproduction basis established. Removed from current draft; preserved in earlier drafts and source evidence."
+    },
+    {
+      "id": "roy",
+      "file": "1971-roy-disney-and-mickey.png",
+      "reason": "No adequate public-reproduction basis established. Removed from current draft; preserved in earlier drafts and source evidence."
+    },
+    {
+      "id": "ticket",
+      "file": "1971-adult-ticket-book.jpg",
+      "reason": "No adequate public-reproduction basis established. Removed from current draft; preserved in earlier drafts and source evidence."
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+# Current editorial audit: The Florida Project
+
+Reviewed: October 20, 2026.
+
+Source: `C:/Users/lawto/Documents/OutsideInPrint/output/evergreen_candidates/2026-10-20-the-florida-project/story.md`
+
+Source story SHA256: `be6471f6f87724665dbcfac31479e3f886664a530bf48f4cc009703cbded936d`
+
+Headline: **How Walt Disney World Opened in 1971: Walt’s Plans, Roy’s Role**
+
+Collection: **Brands, Business, and Consumer Choice**
+
+Series and short title: **Disney World Development, Part One: The Florida Project**
+
+## Scope and decision
+
+Decision: **PASS for the current revision and publication preparation review.**
+
+The owner authorized all three final reader-review changes, verification of additions against period records, comparisons with Hershey, Bournville and Ford's worker settlements, and refreshed Markdown/package files. The complete revised story was read. The opening inventory, Phase One sequence, cost measures and community comparisons were checked against the newly inspected period evidence listed in `source-checklist.md`. Unchanged earlier claims retain the existing documented source review; this is not a new independent verification of every historical claim or every live link.
+
+No fresh numerical OIP-99 grade is claimed. The prior 90/100 reader assessment describes the version before these changes. No publication is authorized or performed by this preparation review.
+
+## Editorial Philosophy Audit
+
+Decision: PASS
+
+| Test | Result | Finding |
+| --- | --- | --- |
+| Evidence | PASS | New claims cite original 1906 and 1926 accounts, period Ford photographs identified by archive records, Disney's 1967 booklet, 1968 and 1971 reports, the September 30, 1971 employee bulletin, and the first-season 1972 guide. Company descriptions are attributed; dates and scope are identified. |
+| Logic | PASS | The structural comparison follows the documented integration of housing, employment and services. It does not depend on direct personal influence. Phase One is separated from the larger working-city proposal. The $400 million project description, $282 million completed-facilities subtotal, capital raised, and available credit are distinct measures. |
+| Incentives | PASS | The narrative connects a longer stay, visitor budgets, control of development surroundings, industry participation, and staged financial capacity with the proposed and completed facilities. |
+| Tradeoffs | PASS | Developing the resort required land, money, infrastructure and organization. Wider city plans remained later development. Corporate financing, hotel ownership arrangements and public infrastructure authority carry distinct obligations and forms of control. |
+| Consequences | PASS | The text now specifies the first-season resort, separates its park from the larger vacation complex, and connects Roy's delegation and financial planning to a defined first operating phase. |
+| Uncertainty | PASS | It does not claim that phasing originated after Walt's death, every first-season feature opened on October 1, all hotel costs were excluded from the $282 million subtotal, or financing announcements sum to the entire project cost. Unnamed banks, unidentified ultimate investors and the uncorroborated Louisiana alternative remain open limits. |
+| Institutional Behavior | PASS | The brothers, wider executive and construction organization, banks, securities intermediaries, U.S. Steel, district, state and court have concrete roles. The three industrial-community analogues differ in ownership and residential arrangements; company oversight is described without an assigned moral conclusion. |
+
+## Media Framing Audit
+
+Decision: PASS
+
+| Test | Result | Finding |
+| --- | --- | --- |
+| Media Frame Identified | PASS | Quarantines lone-visionary/rescuing-brother stories, a tax-holiday-only location explanation, an assumed private-financier narrative, company promotional self-description, and a company-town analogy treated automatically as praise or indictment. |
+| Primary Source Rebuild | PASS | New historical statements rely on period originals and artifact metadata, rather than modern narrative retellings or major news accounts. Modern hosts provide access and source identification. |
+| Assumption Quarantine | PASS | Matching design features support the stated industrial-community interpretation. No undocumented claim says Walt copied Ford, Hershey or Cadbury, and no failure history is transferred between projects. |
+| Source Hierarchy | PASS | Planning publications establish proposals; reports and notes identify corporate accounting and stated intentions; the bulletin establishes the company's opening-eve description; photographs and catalog metadata identify Ford facilities; the first-season guide establishes the advertised period resort inventory. |
+| Ideological Burden | PASS | No institution, entrepreneur, town model or form of development receives an automatic favorable or adverse judgment. The comparison explains the proposed design. |
+
+## Reader changes completed
+
+1. The deck states the opening date and Roy's role while the narrative still begins with Oswald. The opening section distinguishes the park from the resort and describes first-season facilities; camping is anchored to Roy's December 9 letter.
+2. The working-city section now provides the employee-housing detail and the Hershey, Bournville and Fordlândia comparisons. The 1968 report documents development sequencing; the prose avoids claiming that sequence was invented after Walt died.
+3. The financing section synthesizes the funding channels and gives two distinctly labeled period cost measures. It makes no unsupported arithmetic reconciliation or unverified allocation of hotel expenditures.
+
+The vague animation transition was removed, six informative section headings were added, and the closing is unchanged: “The audience could now walk into the picture.”
+
+## Preservation and image review carry-forward
+
+All nine original image files, all nine captions and every original source-link occurrence remain. The revised source has 67 external-link occurrences, including all 53 from the earlier draft. Only text placement-anchor metadata changes in the illustration manifest; image bytes, rights records, alt text and captions are unchanged. The prior direct original/derivative reviews and recorded image approvals therefore remain applicable to the image files. No new image review, replacement, rendering-pipeline change, or blanket rights determination is claimed.
+
+The existing nine-image manual-scaffold exception remains. Conversion is checked against this revised source, rather than treating an old source hash or the prior reader grade as current evidence.
+
+## Source limits
+
+Ford's period artifacts were identified through their catalog records. Their cataloged dates, subjects and school creator support only the limited housing/school claim; the modern overview is excluded from the historical narrative. Direct JPEG retrieval failed, so no fresh independent visual inspection of those photographs is asserted. The photographs are linked, not added as new article images.
+
+The first-season guide is Winter/Spring 1972 and is labeled accordingly. No exact opening date is supplied for Fort Wilderness. The newly quoted cost measures are company records with different scopes; the hotel accounting overlap is not reconstructed. The annual report's statement of continuing EPCOT plans is presented as company intention.
+
+Source-only guardrails are run after conversion. No full-site build, new media-generation run, commit, PR, merge, deployment, schedule or email is part of this task.
