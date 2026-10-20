@@ -392,7 +392,9 @@ foreach ($requiredScriptText in @(
   'form.matches("[data-epub-checkout]")',
   'form.dataset.epubSku',
   '"Idempotency-Key": idempotencyKey',
-  'JSON.stringify({ sku: sku, country_code: "US", email: email })',
+  'var body = { sku: sku, country_code: "US", email: email };',
+  'if (measurement) body.measurement = measurement;',
+  'body: JSON.stringify(body)',
   'emailInput.checkValidity()',
   'body.append("tag", tag)',
   'keepalive: true',
@@ -593,6 +595,17 @@ foreach ($relativePath in $requiredPolicySources) {
   Assert-Contains -Text $policy -Expected 'type: "commerce-policy"' -Context $relativePath
   Assert-Contains -Text $policy -Expected 'draft: false' -Context $relativePath
   Assert-Contains -Text $policy -Expected 'support@outsideinprint.org' -Context $relativePath
+}
+$privacyPolicySource = Get-RequiredText -RelativePath 'content/privacy/index.md'
+$privacyFrontMatter = [regex]::Match($privacyPolicySource, '\A---\r?\n(?<body>[\s\S]*?)\r?\n---(?:\r?\n|$)')
+$privacyEffectiveDates = [regex]::Matches($privacyFrontMatter.Groups['body'].Value, '(?m)^effective_date: "(?<value>[^"\r\n]+)"\s*$')
+if (-not $privacyFrontMatter.Success -or $privacyEffectiveDates.Count -ne 1) {
+  throw 'Privacy policy must declare one effective_date in its source front matter.'
+}
+$privacyEffectiveDate = $privacyEffectiveDates[0].Groups['value'].Value
+$parsedPrivacyDate = [datetime]::MinValue
+if (-not [datetime]::TryParseExact($privacyEffectiveDate, 'MMMM d, yyyy', [Globalization.CultureInfo]::GetCultureInfo('en-US'), [Globalization.DateTimeStyles]::None, [ref]$parsedPrivacyDate)) {
+  throw 'Privacy policy effective_date must be a valid date in Month day, year format.'
 }
 $supportTermsSource = Get-RequiredText -RelativePath 'content/support/cancellation-refunds.md'
 foreach ($requiredSupportTermsText in @(
@@ -886,7 +899,7 @@ foreach ($surface in $shopSurfaceExpectations) {
 
 $privacyOutput = ([Net.WebUtility]::HtmlDecode([string]$output['privacy/index.html'])).Replace([char]0x2019, [char]0x27)
 foreach ($requiredPrivacyText in @(
-  'Effective September 15, 2026',
+  "Effective $privacyEffectiveDate",
   'standalone Bob''s Almanack signup form',
   'IP address, browser or device information, and referring page',
   'selected preference tags',
