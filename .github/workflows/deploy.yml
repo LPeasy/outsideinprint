@@ -143,6 +143,8 @@ jobs:
       TZ: America/New_York
       ANALYTICS_ENABLED: ${{ vars.ANALYTICS_ENABLED }}
       ANALYTICS_ALLOW_LOCAL: ${{ vars.ANALYTICS_ALLOW_LOCAL }}
+      ANALYTICS_PURCHASE_ENABLED: ${{ vars.ANALYTICS_PURCHASE_ENABLED }}
+      ANALYTICS_PURCHASE_MEASUREMENT_ID: ${{ vars.ANALYTICS_PURCHASE_MEASUREMENT_ID }}
       OIP_BUILD_CLOCK_UTC: ${{ needs.classify.outputs.clock }}
       OIP_HUGO_BIN: hugo
       OIP_HUGO_CONFIG: hugo.toml

@@ -1,0 +1,30 @@
+{{- $settings := site.Params.purchase_analytics | default (dict) -}}
+{{- $enabled := eq (index $settings "enabled") true -}}
+{{- $measurementId := index $settings "measurement_id" | default "" -}}
+{{- $envEnabled := lower (trim (getenv "ANALYTICS_PURCHASE_ENABLED") " ") -}}
+{{- if eq $envEnabled "true" -}}{{- $enabled = true -}}{{- else if eq $envEnabled "false" -}}{{- $enabled = false -}}{{- end -}}
+{{- with getenv "ANALYTICS_PURCHASE_MEASUREMENT_ID" -}}{{- $measurementId = trim . " " -}}{{- end -}}
+{{- $active := and $enabled (eq hugo.Environment "production") (eq site.BaseURL "https://outsideinprint.org/") (gt (len (findRE `^G-[A-Z0-9]{6,20}$` $measurementId)) 0) -}}
+{{- if $active -}}
+  {{- if eq .kind "styles" -}}
+    {{- $css := resources.Get "css/purchase-consent.css" | resources.Minify | resources.Fingerprint "sha384" -}}
+    <link data-oip-persistent="purchase-consent-css" rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+  {{- else -}}
+    {{- $config := dict "enabled" true "measurementId" $measurementId "page" (dict "path" .page.RelPermalink "title" .page.Title) -}}
+    <script type="application/json" data-oip-route-config="purchase-analytics">{{ $config | jsonify | safeJS }}</script>
+    <section class="purchase-consent" id="purchase-consent" data-purchase-consent aria-labelledby="purchase-consent-title" hidden>
+      <h2 id="purchase-consent-title">Optional purchase measurement</h2>
+      <p>Allow Google Analytics cookies to help us understand which visits lead to EPUB purchases? If you allow, we share browsing identifiers and verified purchase details with Google. Your choice does not affect checkout or email preferences.</p>
+      <p data-purchase-consent-status>Purchase measurement is off unless you allow it.</p>
+      <p>Turning it off stops future collection from this browser. A checkout already started can still produce a purchase report.</p>
+      <div class="purchase-consent__choices">
+        <button type="button" data-purchase-choice="granted">Allow measurement</button>
+        <button type="button" data-purchase-choice="denied">Decline / turn off</button>
+      </div>
+      <p><a href="/privacy/#optional-purchase-measurement">Privacy details</a>. You can change your choice at any time using “Measurement preferences.”</p>
+    </section>
+    <button class="purchase-preferences" type="button" data-purchase-preferences aria-controls="purchase-consent" aria-expanded="false" hidden>Measurement preferences</button>
+    {{- $script := resources.Get "js/ga4-purchase-context.js" | resources.Minify | resources.Fingerprint "sha384" -}}
+    <script defer data-oip-persistent="purchase-analytics" data-oip-route-script="purchase-analytics" src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+  {{- end -}}
+{{- end -}}

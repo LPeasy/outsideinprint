@@ -329,10 +329,14 @@ The EPUB bucket keeps only the currently approved deliverable at each configured
 
 ## Local tests
 
+Optional purchase measurement and its separate activation gates are documented in
+[docs/purchase-measurement.md](docs/purchase-measurement.md). It remains OFF in
+both tracked configuration examples.
+
 The service has no third-party package dependency. From the website repository root:
 
 ```powershell
-.\tools\bin\generated\node.cmd --test .\workers\oip-commerce\test\commerce.test.mjs .\workers\oip-commerce\test\monitoring.test.mjs .\workers\oip-commerce\test\florida-tax-importer.test.mjs .\workers\oip-commerce\test\pointmatch-source-preparer.test.mjs
+.\tools\bin\generated\node.cmd --test .\workers\oip-commerce\test\commerce.test.mjs .\workers\oip-commerce\test\monitoring.test.mjs .\workers\oip-commerce\test\purchase-measurement.test.mjs .\workers\oip-commerce\test\florida-tax-importer.test.mjs .\workers\oip-commerce\test\pointmatch-source-preparer.test.mjs
 ```
 
 Tests cover EPUB required-email normalization, unknown/disabled/non-U.S. rejection, authoritative Cloudflare country proof and spoofed-header rejection, signed-reference fallback when Square omits country, final Order-recipient email fallback, exact catalog binding/price/order validation, zero-tax checkout, route/CORS behavior, D1 and provider idempotency, checkout claim fencing, support amount constraints, bounded retention cleanup, strict host behavior, configured payment methods, fast Queue-based webhook intake, Queue replay/leases/fencing, deterministic token/email/resend idempotency, monthly override/static lookup and the disabled custom gate, exact post-payment location/variation/price/tax/geography/gate eligibility, refund/dispute ordering, monotonic subscription state, atomic download counts, and cryptographic Cloudflare Access validation.

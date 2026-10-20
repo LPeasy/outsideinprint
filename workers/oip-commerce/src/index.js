@@ -52,6 +52,7 @@ import {
 } from "./http.js";
 import { preparePhysicalCheckout, serializedPhysicalItems } from "./physical.js";
 import { operationalHealthFields } from "./monitoring.js";
+import { bindPurchaseMeasurement, preparePurchaseMeasurement } from "./purchase-measurement.js";
 import {
   SquareApiError,
   createEpubPaymentLink,
@@ -262,6 +263,9 @@ async function handleEpubCheckout(request, env) {
   if (state.row.request_hash !== requestHash || state.row.request_kind !== "EPUB") {
     throw new HttpError(409, "IDEMPOTENCY_CONFLICT", "Idempotency-Key was already used for another request.");
   }
+  await preparePurchaseMeasurement(env, {
+    requestKey, created: state.created, sku: selection.sku, measurement: selection.measurement, now,
+  });
   if (state.row.status === "COMPLETED" && state.row.checkout_url) {
     return jsonResponse(
       { checkout_url: state.row.checkout_url, url: state.row.checkout_url },
@@ -285,6 +289,7 @@ async function handleEpubCheckout(request, env) {
       buyerEmail: selection.email,
       checkoutCreatedAt: Number(state.row.created_at),
     });
+    await bindPurchaseMeasurement(env, requestKey, link.orderId);
     const completed = await completeCheckoutRequest(env.DB, requestKey, claimToken, link, now);
     if (!completed) throw new HttpError(503, "CHECKOUT_CLAIM_LOST");
     return jsonResponse({ checkout_url: link.url, url: link.url }, 201, cors);

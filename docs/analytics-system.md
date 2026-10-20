@@ -1,5 +1,9 @@
 # Analytics System
 
+## Prepared purchase measurement
+
+An optional GA4 browser-context and verified server-purchase implementation is prepared with collection disabled by default. It has not yet been deployed or linked to Merchant Center. See [Optional purchase measurement](purchase-measurement.md) for duplicate prevention, test exclusion, consent, rollout controls, and reporting acceptance. The GoatCounter event definitions below remain unchanged.
+
 ## Bob's Almanack organic landing pages
 
 Three separate entry pages (`/subscribe/weekend/`, `/subscribe/everyday-history/`, and `/subscribe/dialogue/`) use the same existing Buttondown newsletter account and tag. Their visible signup names Bob's Almanack; existing signup copy elsewhere is unchanged.

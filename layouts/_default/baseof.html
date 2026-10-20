@@ -46,6 +46,7 @@
     <link data-oip-persistent="main-css" rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
     {{ partial "companion_bob_assets.html" (dict "kind" "styles") }}
     {{ partial "site_navigation_assets.html" (dict "kind" "head") }}
+    {{ partial "ga4-purchase-context.html" (dict "kind" "styles" "page" .) }}
   </head>
   {{- $bodyClasses := slice -}}
   {{- if .IsPage -}}
@@ -88,6 +89,7 @@
     {{ partial "masthead_navigation_script.html" . }}
     {{ partial "article/share-script.html" . }}
     {{ partial "analytics.html" . }}
+    {{ partial "ga4-purchase-context.html" (dict "kind" "script" "page" .) }}
     {{ partial "site_navigation_assets.html" (dict "kind" "script") }}
   </body>
 </html>
