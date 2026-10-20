@@ -28,6 +28,7 @@ import "./contributor_pitch.test.mjs";
 import "./library_browse.test.mjs";
 import "./bookstore_ebook_labels.test.mjs";
 import "./epub_checkout_client.test.mjs";
+import "./ga4_purchase_context.test.mjs";
 import "./collection_reading_path_contract.test.mjs";
 import "./collection_continuation_assignments.test.mjs";
 import "./seo_route_schema_contract.test.mjs";

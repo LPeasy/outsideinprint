@@ -70,9 +70,9 @@ export function validateSupportAmount(payload) {
 }
 
 export function validateEpubCheckoutRequest(payload) {
-  const allowedFields = new Set(["sku", "country_code", "email"]);
+  const allowedFields = new Set(["sku", "country_code", "email", "measurement"]);
   if (Object.keys(payload).some((key) => !allowedFields.has(key))) {
-    throw new HttpError(400, "UNEXPECTED_FIELD", "Only sku, country_code, and email are accepted.");
+    throw new HttpError(400, "UNEXPECTED_FIELD", "Only sku, country_code, email, and optional measurement are accepted.");
   }
   if (typeof payload.sku !== "string" || !/^[A-Z0-9-]{1,64}$/u.test(payload.sku)) {
     throw new HttpError(400, "INVALID_EPUB_SKU", "Choose an available EPUB edition.");
@@ -84,7 +84,8 @@ export function validateEpubCheckoutRequest(payload) {
   if (!email) {
     throw new HttpError(400, "INVALID_BUYER_EMAIL", "Enter the email address that should receive the EPUB.");
   }
-  return { sku: payload.sku, countryCode: payload.country_code, email };
+  return { sku: payload.sku, countryCode: payload.country_code, email,
+    ...(Object.hasOwn(payload, "measurement") ? { measurement: payload.measurement } : {}) };
 }
 
 export function normalizeEmailAddress(value) {

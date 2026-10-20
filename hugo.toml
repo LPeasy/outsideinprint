@@ -72,6 +72,10 @@ privacy_label = "Privacy details"
 enabled = false
 allow_local = false
 
+[params.purchase_analytics]
+enabled = false
+measurement_id = ""
+
 [params.commerce]
 api_base = "https://downloads.outsideinprint.org"
 support_checkout_enabled = true

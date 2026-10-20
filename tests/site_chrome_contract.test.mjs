@@ -484,7 +484,9 @@ test("Square-first bookstore requires delivery email and keeps marketing consent
   assert.doesNotMatch(privacyPolicy, /This policy explains how Outside In Print handles information connected to this website/);
 
   assert.match(epubCheckoutScript, /"Idempotency-Key": idempotencyKey/);
-  assert.match(epubCheckoutScript, /JSON\.stringify\(\{ sku: sku, country_code: "US", email: email \}\)/);
+  assert.match(epubCheckoutScript, /var body = \{ sku: sku, country_code: "US", email: email \};/);
+  assert.match(epubCheckoutScript, /if \(measurement\) body\.measurement = measurement;/);
+  assert.match(epubCheckoutScript, /body: JSON\.stringify\(body\)/);
   assert.match(epubCheckoutScript, /emailInput\.checkValidity\(\)/);
   assert.match(epubCheckoutScript, /body\.append\("tag", tag\)/);
   assert.match(epubCheckoutScript, /keepalive: true/);
@@ -566,7 +568,7 @@ test("newsletter proposition is plain-language across signup and checkout surfac
   assert.equal((almanackIssue.match(/partial "newsletter_signup\.html"/g) || []).length, 1);
   assert.ok(almanackIssue.lastIndexOf("</article>") < almanackIssue.indexOf('partial "newsletter_signup.html"'));
 
-  assert.match(privacyPolicy, /effective_date: "September 15, 2026"/);
+  assert.match(frontMatter(privacyPolicy, "privacy policy"), /^effective_date: "October 20, 2026"$/m);
   assert.match(privacyPolicy, /standalone Bob's Almanack signup form/);
   assert.match(privacyPolicy, /IP address, browser or device information, and referring page/);
   assert.match(privacyPolicy, /email-client, browser, device, IP-address, or referrer metadata/);

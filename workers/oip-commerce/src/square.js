@@ -253,7 +253,8 @@ export async function createEpubPaymentLink(
     referenceId,
     buyerEmail,
   });
-  return { id: payload.payment_link.id || null, url: payload.payment_link.url };
+  return { id: payload.payment_link.id || null, url: payload.payment_link.url,
+    orderId: payload.payment_link.order_id };
 }
 
 export async function verifyPaperbackCatalogVariation(env, configured) {

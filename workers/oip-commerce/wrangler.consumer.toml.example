@@ -10,6 +10,10 @@ enabled = true
 head_sampling_rate = 1
 
 [vars]
+GA4_PURCHASE_MODE = "off"
+GA4_MEASUREMENT_ID = ""
+GA4_MERCHANT_ITEM_IDS = "{}"
+GA4_PURCHASE_LIVE_AFTER = ""
 SQUARE_API_BASE_URL = "https://connect.squareup.com"
 SQUARE_API_VERSION = "SET_DURING_PROVISIONING"
 DOWNLOAD_BASE_URL = "https://downloads.outsideinprint.org"
@@ -75,6 +79,7 @@ max_retries = 10
 max_concurrency = 1
 
 # Set with Cloudflare secret bindings, never in this file:
+# GA4_API_SECRET (consumer only, separately approved)
 # SQUARE_ACCESS_TOKEN
 # SQUARE_LOCATION_ID
 # RESEND_API_KEY

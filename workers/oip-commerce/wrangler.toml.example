@@ -3,6 +3,10 @@ compatibility_date = "2026-08-01"
 pages_build_output_dir = "public"
 
 [vars]
+GA4_PURCHASE_MODE = "off"
+GA4_MEASUREMENT_ID = ""
+GA4_MERCHANT_ITEM_IDS = "{}"
+GA4_PURCHASE_LIVE_AFTER = ""
 ALLOWED_ORIGINS = "https://outsideinprint.org"
 ALLOW_LOCAL_ORIGINS = "false"
 PUBLIC_HOST = "downloads.outsideinprint.org"

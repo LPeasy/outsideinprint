@@ -1,3 +1,4 @@
+import { maybeEmitVerifiedPurchase } from "./purchase-measurement.js";
 import {
   configuredEpubCatalogVariationId,
   enabledEpubSkus,
@@ -398,6 +399,7 @@ async function fulfillCompletedPayment(env, event, now, assertClaim) {
       });
     }
   }
+  await maybeEmitVerifiedPurchase(env, { payment, order, evaluation, now });
   if (emailDeliveryFailed) throw new Error("EPUB_EMAIL_DELIVERY_FAILED");
 }
 

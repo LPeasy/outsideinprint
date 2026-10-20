@@ -7,7 +7,8 @@
     "node": "24.x"
   },
   "scripts": {
-    "test": "node --test test/commerce.test.mjs test/monitoring.test.mjs test/florida-tax-importer.test.mjs test/pointmatch-source-preparer.test.mjs",
+    "test": "node --test test/commerce.test.mjs test/monitoring.test.mjs test/purchase-measurement.test.mjs test/florida-tax-importer.test.mjs test/pointmatch-source-preparer.test.mjs",
+    "test:purchase-measurement": "node --test test/purchase-measurement.test.mjs",
     "test:commerce": "node --test test/commerce.test.mjs",
     "test:monitoring": "node --test test/monitoring.test.mjs",
     "test:florida-importer": "node --test test/florida-tax-importer.test.mjs",

@@ -49,6 +49,34 @@
     return String(input && input.value || "").trim().toLowerCase();
   }
 
+  function optionalMeasurement() {
+    var analytics = window.oipPurchaseAnalytics;
+    if (!analytics || typeof analytics.captureCheckoutContext !== "function") return Promise.resolve(null);
+    return new Promise(function (resolve) {
+      var finished = false;
+      var timer = window.setTimeout(function () { finish(null); }, 300);
+      function finish(value) {
+        if (finished) return;
+        finished = true;
+        window.clearTimeout(timer);
+        var measurement = null;
+        try {
+          if (value && Object.keys(value).sort().join(",") === "captured_at,client_id,consent,session_id,version" &&
+            value.version === 1 && value.consent === "granted" &&
+            typeof value.client_id === "string" && /^[0-9]{1,20}\.[0-9]{1,20}$/.test(value.client_id) &&
+            typeof value.session_id === "string" && /^[0-9]{1,20}$/.test(value.session_id) &&
+            Number.isSafeInteger(value.captured_at) && value.captured_at > 0) {
+            measurement = { version: 1, consent: "granted", client_id: value.client_id, session_id: value.session_id, captured_at: value.captured_at };
+          }
+        } catch (error) { /* A broken optional adapter must not strand the checkout. */ }
+        resolve(measurement);
+      }
+      try {
+        Promise.resolve(analytics.captureCheckoutContext()).then(finish, function () { finish(null); });
+      } catch (error) { finish(null); }
+    });
+  }
+
   function submitButtondownPreferences(form, email) {
     var endpoint = form.dataset.buttondownEndpoint || "";
     var weekly = form.querySelector("input[name='weekly_email']");
@@ -122,7 +150,11 @@
     setStatus(form, "Connecting to Square…");
     idempotencyKey = createIdempotencyKey();
 
-    fetch(form.action, {
+    optionalMeasurement().then(function (measurement) {
+      if (!scope.active() || form.isConnected === false) return null;
+      var body = { sku: sku, country_code: "US", email: email };
+      if (measurement) body.measurement = measurement;
+      return fetch(form.action, {
       method: "POST",
       mode: "cors",
       credentials: "omit",
@@ -133,8 +165,10 @@
         "Content-Type": "application/json",
         "Idempotency-Key": idempotencyKey
       },
-      body: JSON.stringify({ sku: sku, country_code: "US", email: email })
+      body: JSON.stringify(body)
+      });
     }).then(function (response) {
+      if (!response) return null;
       if (!response.ok) throw new Error("checkout_request_failed");
       return response.json();
     }).then(function (payload) {
