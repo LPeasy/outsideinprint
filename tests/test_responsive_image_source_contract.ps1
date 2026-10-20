@@ -216,7 +216,15 @@ $modernBioPortraits = @(
   @{ id = 'essays/modern-bios/ozzy-osbourne/portrait'; slug = 'ozzy-osbourne-how-heavy-metals-most-unruly-star-became-a-cultural-fixture'; person = 'Ozzy Osbourne' },
   @{ id = 'essays/modern-bios/pope-francis/portrait'; slug = 'pope-francis-how-a-plainspoken-pope-reframed-moral-authority'; person = 'Pope Francis' }
 )
-$routinePhotoIds = @($modernBioPortraits | ForEach-Object { $_.id })
+# This archival cohort is body photography, separate from the Modern Bios heroes.
+$disneyOpeningPhotoIds = @(
+  'essays/walt-disney-world-opening-1971/land-before-disney',
+  'essays/walt-disney-world-opening-1971/announcement',
+  'essays/walt-disney-world-opening-1971/roy-and-legislation',
+  'essays/walt-disney-world-opening-1971/construction',
+  'essays/walt-disney-world-opening-1971/visitor-transport'
+)
+$routinePhotoIds = @($modernBioPortraits | ForEach-Object { $_.id }) + $disneyOpeningPhotoIds
 $intentionallyRetiredManagedAssetIds = @(
   'essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts',
   'essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/hero',
@@ -426,22 +434,35 @@ foreach ($assetId in $assetIds) {
 }
 
 Assert-Equal -Actual ([int]($classCounts['medium_import'] ?? 0)) -Expected 112 -Message 'Managed Medium canonical count changed.'
-Assert-Equal -Actual ([int]($classCounts['essay_photo'] ?? 0)) -Expected (13 + $routinePhotoIds.Count) -Message 'The 13 legacy essay photos plus the explicit Modern Bios portrait set must remain intact.'
+Assert-Equal -Actual ([int]($classCounts['essay_photo'] ?? 0)) -Expected (13 + $routinePhotoIds.Count) -Message 'The 13 legacy essay photos plus the explicit Modern Bios and Disney opening photo sets must remain intact.'
 foreach ($photoId in $routinePhotoIds) {
   if ($assetIds -cnotcontains $photoId) {
-    throw "Missing managed Modern Bios portrait: $photoId"
+    throw "Missing explicitly registered essay photograph: $photoId"
   }
   $photo = $manifest.assets.$photoId
-  Assert-Equal -Actual ([string]$photo.image_class) -Expected 'essay_photo' -Message "Modern Bios portrait must remain a photograph: $photoId"
-  Assert-Equal -Actual ([string]$photo.processing_hint) -Expected 'photo' -Message "Modern Bios portrait must use photographic processing: $photoId"
-  Assert-Equal -Actual ([string]$photo.usage_state) -Expected 'referenced' -Message "Modern Bios portrait must remain in use: $photoId"
-  Assert-Equal -Actual ([string]$photo.processing_state) -Expected 'derivative_capable' -Message "Modern Bios portrait must support bounded derivatives: $photoId"
+  Assert-Equal -Actual ([string]$photo.image_class) -Expected 'essay_photo' -Message "Registered essay photograph must remain a photograph: $photoId"
+  Assert-Equal -Actual ([string]$photo.processing_hint) -Expected 'photo' -Message "Registered essay photograph must use photographic processing: $photoId"
+  Assert-Equal -Actual ([string]$photo.usage_state) -Expected 'referenced' -Message "Registered essay photograph must remain in use: $photoId"
+  Assert-Equal -Actual ([string]$photo.processing_state) -Expected 'derivative_capable' -Message "Registered essay photograph must support bounded derivatives: $photoId"
   if ([string]$photo.review_state -cne 'approved' -and -not ($AllowPendingReview -and [string]$photo.review_state -ceq 'pending_review')) {
-    throw "Modern Bios portrait must be visually approved before publication: $photoId"
+    throw "Registered essay photograph must be visually approved before publication: $photoId"
+  }
+}
+$disneyOpeningEssayPath = Join-Path $rootPath 'content/essays/walt-disney-world-opening-1971.md'
+$disneyOpeningEssay = [System.IO.File]::ReadAllText($disneyOpeningEssayPath, [System.Text.Encoding]::UTF8)
+$disneyOpeningBody = [regex]::Replace($disneyOpeningEssay, '\A---\r?\n[\s\S]*?\r?\n---', '')
+foreach ($photoId in $disneyOpeningPhotoIds) {
+  $referencePattern = '!\[[^\]\r\n]*\]\(oip-image:' + [regex]::Escape($photoId) + '\)'
+  Assert-Equal -Actual ([regex]::Matches($disneyOpeningBody, $referencePattern).Count) -Expected 1 -Message "Disney opening archival photograph must appear exactly once in the body: $photoId"
+  $figurePattern = '(?m)^!\[(?<alt>[^\]\r\n]+)\]\(oip-image:' + [regex]::Escape($photoId) + '\)[ \t]*\r?\n(?:[ \t]*\r?\n)+(?<caption>\*[^\r\n]+\*)[ \t]*\r?$'
+  $figures = [regex]::Matches($disneyOpeningBody, $figurePattern)
+  Assert-Equal -Actual $figures.Count -Expected 1 -Message "Disney opening archival photograph must have alt text and caption: $photoId"
+  if ($figures[0].Groups['caption'].Value -notmatch '\[[^\]]+\]\(https://[^)]+\)') {
+    throw "Disney opening archival photograph caption must retain its source link: $photoId"
   }
 }
 $coreIllustrationCount = [int]($classCounts['editorial_cartoon'] ?? 0) + [int]($classCounts['essay_illustration'] ?? 0) + [int]($classCounts['medium_import'] ?? 0)
-Assert-Equal -Actual $coreIllustrationCount -Expected ($focusedCleanupBaselineCoreReviewCount + $routineManagedAssetCount - $routinePhotoIds.Count) -Message 'Core responsive-image review cohort changed outside routine managed-art growth and explicit portrait additions.'
+Assert-Equal -Actual $coreIllustrationCount -Expected ($focusedCleanupBaselineCoreReviewCount + $routineManagedAssetCount - $routinePhotoIds.Count) -Message 'Core responsive-image review cohort changed outside routine managed-art growth and explicit photo additions.'
 Assert-Equal -Actual ([int]($usageCounts['retained_unreferenced'] ?? 0)) -Expected (5 + $intentionallyRetiredManagedAssetIds.Count) -Message 'The explicit retained-but-unreferenced source count changed.'
 Assert-Equal -Actual ([int]($usageCounts['referenced'] ?? 0)) -Expected ($focusedCleanupBaselineReferencedCount + $routineManagedAssetCount - $intentionallyRetiredManagedAssetIds.Count) -Message 'Referenced managed-source count changed outside routine managed-art growth and intentional retirement.'
 foreach ($retiredAssetId in $intentionallyRetiredManagedAssetIds) {

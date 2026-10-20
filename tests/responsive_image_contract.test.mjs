@@ -31,7 +31,18 @@ test("responsive image manifest keeps the frozen baseline and processing default
     { id: "essays/modern-bios/ozzy-osbourne/portrait", slug: "ozzy-osbourne-how-heavy-metals-most-unruly-star-became-a-cultural-fixture", person: "Ozzy Osbourne" },
     { id: "essays/modern-bios/pope-francis/portrait", slug: "pope-francis-how-a-plainspoken-pope-reframed-moral-authority", person: "Pope Francis" },
   ];
-  const routinePhotoIds = modernBioPortraits.map(({ id }) => id);
+  // This archival cohort is body photography, separate from the Modern Bios heroes.
+  const disneyOpeningPhotoIds = [
+    "essays/walt-disney-world-opening-1971/land-before-disney",
+    "essays/walt-disney-world-opening-1971/announcement",
+    "essays/walt-disney-world-opening-1971/roy-and-legislation",
+    "essays/walt-disney-world-opening-1971/construction",
+    "essays/walt-disney-world-opening-1971/visitor-transport",
+  ];
+  const routinePhotoIds = [
+    ...modernBioPortraits.map(({ id }) => id),
+    ...disneyOpeningPhotoIds,
+  ];
   const intentionallyRetiredManagedAssetIds = [
     "essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts",
     "essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/hero",
@@ -120,6 +131,27 @@ test("responsive image manifest keeps the frozen baseline and processing default
     assert.ok(caption.replace(/^["' ]+|["' ]+$/g, ""));
     assert.doesNotMatch(caption, /replacement hero|placeholder/i);
     assert.equal(essay.replace(/^---\r?\n[\s\S]*?\r?\n---/, "").includes(id), false, `duplicate body portrait: ${slug}`);
+  }
+  const disneyOpeningEssay = read("content/essays/walt-disney-world-opening-1971.md");
+  const disneyOpeningBody = disneyOpeningEssay.replace(/^---\r?\n[\s\S]*?\r?\n---/, "");
+  for (const id of disneyOpeningPhotoIds) {
+    const photo = manifest.assets[id];
+    assert.ok(photo, `missing Disney opening archival photograph: ${id}`);
+    assert.equal(photo.image_class, "essay_photo");
+    assert.equal(photo.processing_hint, "photo");
+    assert.equal(photo.processing_state, "derivative_capable");
+    assert.equal(photo.usage_state, "referenced");
+    assert.equal(photo.review_state, "approved");
+    const escapedId = id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const references = [...disneyOpeningBody.matchAll(new RegExp(`!\\[[^\\]\\r\\n]*\\]\\(oip-image:${escapedId}\\)`, "g"))];
+    assert.equal(references.length, 1, `archival photo must appear exactly once in the body: ${id}`);
+    const figurePattern = new RegExp(
+      `^!\\[([^\\]\\r\\n]+)\\]\\(oip-image:${escapedId}\\)[ \\t]*\\r?\\n(?:[ \\t]*\\r?\\n)+(\\*[^\\r\\n]+\\*)[ \\t]*\\r?$`,
+      "gm",
+    );
+    const figures = [...disneyOpeningBody.matchAll(figurePattern)];
+    assert.equal(figures.length, 1, `archival photo must have alt text and caption: ${id}`);
+    assert.match(figures[0][2], /\[[^\]]+\]\(https:\/\/[^)]+\)/, `archival photo caption must retain its source link: ${id}`);
   }
   const sourceOnlyEntries = entries.filter(
     ([, asset]) => asset.processing_state === "source_only_unprocessable",
