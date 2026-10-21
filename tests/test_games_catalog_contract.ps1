@@ -38,6 +38,25 @@ function Assert-GenericWebPage {
   }
 }
 
+function Assert-NoGamesCommerce {
+  param([Parameter(Mandatory)][string]$Html, [Parameter(Mandatory)][string]$Route)
+  # Shared consent copy can mention EPUB checkout; controls, links, prices and
+  # trailer media remain forbidden throughout the Games document.
+  if ($Html -match '(?i)<(?:form|input|select|textarea)\b|stripe|waitlist|[$€£]\s*\d|<video\b|\.(?:webm|mp4)' -or
+      $Html -match '(?i)\b(?:href|action|formaction|src)\s*=\s*(?:"[^"]*checkout[^"]*"|''[^'']*checkout[^'']*''|[^\s"''<>]*checkout[^\s"''<>]*)') {
+    throw "Public Games output exposed onsite commerce, intake, price claims, or trailer media: $Route"
+  }
+  $main = [regex]::Matches($Html, '(?is)<main\b[^>]*>.*?</main\s*>')
+  if ($main.Count -ne 1 -or [regex]::Matches($Html, '(?i)<main\b').Count -ne 1 -or
+      [regex]::Matches($Html, '(?i)</main\s*>').Count -ne 1 -or
+      $main[0].Value -notmatch '^<main\b[^>]*\sid\s*=\s*(?:"main-content"|''main-content''|main-content(?=\s|>))') {
+    throw "Expected exactly one main#main-content Games content boundary: $Route"
+  }
+  if ($main[0].Value -match '(?i)checkout') {
+    throw "Public Games content exposed onsite checkout: $Route"
+  }
+}
+
 $gamesIndexSource = Get-Source 'content/games/_index.md'
 $idleSource = Get-Source 'content/games/idle-times/index.md'
 foreach ($source in @($gamesIndexSource, $idleSource)) {
@@ -188,13 +207,12 @@ foreach ($entry in @(
   }
 }
 
-foreach ($html in @($gamesHtml, $idleHtml)) {
+foreach ($entry in $publicRouteRecords) {
+  $html = $entry.Html
   if ($html -match '(?i)Pet Desk|resizable|New free editions are added every week|filter unread|search titles') {
     throw 'Public Games output contains retired presentation or feature claims.'
   }
-  if ($html -match '(?i)<(?:form|input|select|textarea)\b|stripe|checkout|waitlist|[$€£]\s*\d|<video\b|\.(?:webm|mp4)') {
-    throw 'Public Games output exposed onsite commerce, intake, price claims, or trailer media.'
-  }
+  Assert-NoGamesCommerce -Html $html -Route $entry.Route
   if ($html -match '(?i)Steam (?:seller|payee|tax|bank)') {
     throw 'Public Games output makes an unverified Steam account-identity claim.'
   }
