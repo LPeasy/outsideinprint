@@ -39,9 +39,16 @@ test("responsive image manifest keeps the frozen baseline and processing default
     "essays/walt-disney-world-opening-1971/construction",
     "essays/walt-disney-world-opening-1971/visitor-transport",
   ];
+  const epcotOpeningPhotoIds = [
+    "essays/epcot-center-opening-1982/world-showcase-model",
+    "essays/epcot-center-opening-1982/the-land-1982",
+    "essays/epcot-center-opening-1982/spaceship-earth-1982",
+    "essays/epcot-center-opening-1982/united-kingdom-1982",
+  ];
   const routinePhotoIds = [
     ...modernBioPortraits.map(({ id }) => id),
     ...disneyOpeningPhotoIds,
+    ...epcotOpeningPhotoIds,
   ];
   const intentionallyRetiredManagedAssetIds = [
     "essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts",

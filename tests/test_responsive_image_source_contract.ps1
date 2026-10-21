@@ -224,7 +224,13 @@ $disneyOpeningPhotoIds = @(
   'essays/walt-disney-world-opening-1971/construction',
   'essays/walt-disney-world-opening-1971/visitor-transport'
 )
-$routinePhotoIds = @($modernBioPortraits | ForEach-Object { $_.id }) + $disneyOpeningPhotoIds
+$epcotOpeningPhotoIds = @(
+  'essays/epcot-center-opening-1982/world-showcase-model',
+  'essays/epcot-center-opening-1982/the-land-1982',
+  'essays/epcot-center-opening-1982/spaceship-earth-1982',
+  'essays/epcot-center-opening-1982/united-kingdom-1982'
+)
+$routinePhotoIds = @($modernBioPortraits | ForEach-Object { $_.id }) + $disneyOpeningPhotoIds + $epcotOpeningPhotoIds
 $intentionallyRetiredManagedAssetIds = @(
   'essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts',
   'essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/hero',
@@ -434,7 +440,7 @@ foreach ($assetId in $assetIds) {
 }
 
 Assert-Equal -Actual ([int]($classCounts['medium_import'] ?? 0)) -Expected 112 -Message 'Managed Medium canonical count changed.'
-Assert-Equal -Actual ([int]($classCounts['essay_photo'] ?? 0)) -Expected (13 + $routinePhotoIds.Count) -Message 'The 13 legacy essay photos plus the explicit Modern Bios and Disney opening photo sets must remain intact.'
+Assert-Equal -Actual ([int]($classCounts['essay_photo'] ?? 0)) -Expected (13 + $routinePhotoIds.Count) -Message 'The 13 legacy essay photos plus the explicit Modern Bios and Disney park opening photo sets must remain intact.'
 foreach ($photoId in $routinePhotoIds) {
   if ($assetIds -cnotcontains $photoId) {
     throw "Missing explicitly registered essay photograph: $photoId"
