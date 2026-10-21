@@ -40,20 +40,39 @@ function Assert-GenericWebPage {
 
 function Assert-NoGamesCommerce {
   param([Parameter(Mandatory)][string]$Html, [Parameter(Mandatory)][string]$Route)
-  # Shared consent copy can mention EPUB checkout; controls, links, prices and
-  # trailer media remain forbidden throughout the Games document.
+  # Exempt only the two known disclosure paragraphs in the shared consent panel.
+  # Every other element, attribute and text node keeps the whole-document guard.
   if ($Html -match '(?i)<(?:form|input|select|textarea)\b|stripe|waitlist|[$€£]\s*\d|<video\b|\.(?:webm|mp4)' -or
       $Html -match '(?i)\b(?:href|action|formaction|src)\s*=\s*(?:"[^"]*checkout[^"]*"|''[^'']*checkout[^'']*''|[^\s"''<>]*checkout[^\s"''<>]*)') {
     throw "Public Games output exposed onsite commerce, intake, price claims, or trailer media: $Route"
   }
-  $main = [regex]::Matches($Html, '(?is)<main\b[^>]*>.*?</main\s*>')
-  if ($main.Count -ne 1 -or [regex]::Matches($Html, '(?i)<main\b').Count -ne 1 -or
-      [regex]::Matches($Html, '(?i)</main\s*>').Count -ne 1 -or
-      $main[0].Value -notmatch '^<main\b[^>]*\sid\s*=\s*(?:"main-content"|''main-content''|main-content(?=\s|>))') {
-    throw "Expected exactly one main#main-content Games content boundary: $Route"
+  $checkedHtml = $Html
+  $idPattern = '\sid\s*=\s*(?:"purchase-consent"|''purchase-consent''|purchase-consent(?=\s|>|$))'
+  $markerPattern = '\sdata-purchase-consent(?=\s|>|$)'
+  $idCount = [regex]::Matches($Html, $idPattern, 'IgnoreCase').Count
+  $markerCount = [regex]::Matches($Html, $markerPattern, 'IgnoreCase').Count
+  if ($idCount -gt 0 -or $markerCount -gt 0) {
+    $sections = @([regex]::Matches($Html, '(?is)<section\b(?<attributes>[^>]*)>.*?</section\s*>') | Where-Object {
+      $_.Groups['attributes'].Value -match $idPattern -and $_.Groups['attributes'].Value -match $markerPattern
+    })
+    if ($idCount -ne 1 -or $markerCount -ne 1 -or $sections.Count -ne 1) {
+      throw "Expected one correctly marked purchase-consent section: $Route"
+    }
+    $section = $sections[0]
+    $checkedSection = $section.Value
+    foreach ($paragraph in @(
+      '<p>Allow Google Analytics cookies to help us understand which visits lead to EPUB purchases? If you allow, we share browsing identifiers and verified purchase details with Google. Your choice does not affect checkout or email preferences.</p>',
+      '<p>Turning it off stops future collection from this browser. A checkout already started can still produce a purchase report.</p>'
+    )) {
+      if ([regex]::Matches($section.Value, [regex]::Escape($paragraph)).Count -ne 1) {
+        throw "Expected the exact purchase-consent disclosure once: $Route"
+      }
+      $checkedSection = $checkedSection.Replace($paragraph, '')
+    }
+    $checkedHtml = $Html.Substring(0, $section.Index) + $checkedSection + $Html.Substring($section.Index + $section.Length)
   }
-  if ($main[0].Value -match '(?i)checkout') {
-    throw "Public Games content exposed onsite checkout: $Route"
+  if ($checkedHtml -match '(?i)<(?:form|input|select|textarea)\b|stripe|checkout|waitlist|[$€£]\s*\d|<video\b|\.(?:webm|mp4)') {
+    throw "Public Games output exposed onsite commerce, intake, price claims, or trailer media: $Route"
   }
 }
 
