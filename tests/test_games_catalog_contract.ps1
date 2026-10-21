@@ -38,6 +38,44 @@ function Assert-GenericWebPage {
   }
 }
 
+function Assert-NoGamesCommerce {
+  param([Parameter(Mandatory)][string]$Html, [Parameter(Mandatory)][string]$Route)
+  # Exempt only the two known disclosure paragraphs in the shared consent panel.
+  # Every other element, attribute and text node keeps the whole-document guard.
+  if ($Html -match '(?i)<(?:form|input|select|textarea)\b|stripe|waitlist|[$€£]\s*\d|<video\b|\.(?:webm|mp4)' -or
+      $Html -match '(?i)\b(?:href|action|formaction|src)\s*=\s*(?:"[^"]*checkout[^"]*"|''[^'']*checkout[^'']*''|[^\s"''<>]*checkout[^\s"''<>]*)') {
+    throw "Public Games output exposed onsite commerce, intake, price claims, or trailer media: $Route"
+  }
+  $checkedHtml = $Html
+  $idPattern = '\sid\s*=\s*(?:"purchase-consent"|''purchase-consent''|purchase-consent(?=\s|>|$))'
+  $markerPattern = '\sdata-purchase-consent(?=\s|>|$)'
+  $idCount = [regex]::Matches($Html, $idPattern, 'IgnoreCase').Count
+  $markerCount = [regex]::Matches($Html, $markerPattern, 'IgnoreCase').Count
+  if ($idCount -gt 0 -or $markerCount -gt 0) {
+    $sections = @([regex]::Matches($Html, '(?is)<section\b(?<attributes>[^>]*)>.*?</section\s*>') | Where-Object {
+      $_.Groups['attributes'].Value -match $idPattern -and $_.Groups['attributes'].Value -match $markerPattern
+    })
+    if ($idCount -ne 1 -or $markerCount -ne 1 -or $sections.Count -ne 1) {
+      throw "Expected one correctly marked purchase-consent section: $Route"
+    }
+    $section = $sections[0]
+    $checkedSection = $section.Value
+    foreach ($paragraph in @(
+      '<p>Allow Google Analytics cookies to help us understand which visits lead to EPUB purchases? If you allow, we share browsing identifiers and verified purchase details with Google. Your choice does not affect checkout or email preferences.</p>',
+      '<p>Turning it off stops future collection from this browser. A checkout already started can still produce a purchase report.</p>'
+    )) {
+      if ([regex]::Matches($section.Value, [regex]::Escape($paragraph)).Count -ne 1) {
+        throw "Expected the exact purchase-consent disclosure once: $Route"
+      }
+      $checkedSection = $checkedSection.Replace($paragraph, '')
+    }
+    $checkedHtml = $Html.Substring(0, $section.Index) + $checkedSection + $Html.Substring($section.Index + $section.Length)
+  }
+  if ($checkedHtml -match '(?i)<(?:form|input|select|textarea)\b|stripe|checkout|waitlist|[$€£]\s*\d|<video\b|\.(?:webm|mp4)') {
+    throw "Public Games output exposed onsite commerce, intake, price claims, or trailer media: $Route"
+  }
+}
+
 $gamesIndexSource = Get-Source 'content/games/_index.md'
 $idleSource = Get-Source 'content/games/idle-times/index.md'
 foreach ($source in @($gamesIndexSource, $idleSource)) {
@@ -188,13 +226,12 @@ foreach ($entry in @(
   }
 }
 
-foreach ($html in @($gamesHtml, $idleHtml)) {
+foreach ($entry in $publicRouteRecords) {
+  $html = $entry.Html
   if ($html -match '(?i)Pet Desk|resizable|New free editions are added every week|filter unread|search titles') {
     throw 'Public Games output contains retired presentation or feature claims.'
   }
-  if ($html -match '(?i)<(?:form|input|select|textarea)\b|stripe|checkout|waitlist|[$€£]\s*\d|<video\b|\.(?:webm|mp4)') {
-    throw 'Public Games output exposed onsite commerce, intake, price claims, or trailer media.'
-  }
+  Assert-NoGamesCommerce -Html $html -Route $entry.Route
   if ($html -match '(?i)Steam (?:seller|payee|tax|bank)') {
     throw 'Public Games output makes an unverified Steam account-identity claim.'
   }
