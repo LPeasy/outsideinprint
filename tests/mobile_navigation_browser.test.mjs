@@ -262,49 +262,23 @@ async function openBobFromArrival(page) {
   });
   if (await page.evaluate(() => matchMedia('(max-width: 768px), (pointer: coarse)').matches)) {
     const frame = page.frameLocator('[data-bob-frame]');
+    const canvas = frame.locator('canvas').first(), bounds = await canvas.boundingBox();
+    assert.ok(bounds, 'Bob must be painted before opening his controls.');
+    const point = await canvas.evaluate(element => {
+      const { width, height } = element, pixels = element.getContext('2d').getImageData(0, 0, width, height).data;
+      let nearest = null, distance = Infinity;
+      for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+        if (pixels[(y * width + x) * 4 + 3] < 220) continue;
+        const next = (x - width / 2) ** 2 + (y - height * .58) ** 2;
+        if (next < distance) { distance = next; nearest = { x: x / width, y: y / height }; }
+      }
+      return nearest;
+    });
+    assert.ok(point, 'Bob must have an opaque sprite target.');
     const gear = frame.locator('[data-pet-settings-button]');
     assert.equal(await gear.isVisible(), false, 'Mobile arrival shows only the sprite.');
-    let target;
-    try {
-      // Enlarged text can reposition Bob after arrival. Poll his current pixels,
-      // bounds and asynchronous hit mask together instead of keeping an old point.
-      const liveTarget = await page.waitForFunction(() => {
-        const iframe = document.querySelector('[data-bob-frame]');
-        const doc = iframe?.contentDocument;
-        const canvas = doc?.querySelector('canvas');
-        if (!canvas?.width || !canvas.height) return false;
-        const { width, height } = canvas;
-        const pixels = canvas.getContext('2d').getImageData(0, 0, width, height).data;
-        let nearest = null, distance = Infinity;
-        for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
-          if (pixels[(y * width + x) * 4 + 3] < 220) continue;
-          const next = (x - width / 2) ** 2 + (y - height * .58) ** 2;
-          if (next < distance) { distance = next; nearest = { x: x / width, y: y / height }; }
-        }
-        if (!nearest) return false;
-        const bounds = canvas.getBoundingClientRect(), frameBounds = iframe.getBoundingClientRect();
-        const local = { x: bounds.left + nearest.x * bounds.width, y: bounds.top + nearest.y * bounds.height };
-        const current = { x: frameBounds.left + local.x, y: frameBounds.top + local.y };
-        return doc.elementFromPoint(local.x, local.y) === canvas &&
-          document.elementFromPoint(current.x, current.y) === iframe ? current : false;
-      }, undefined, { timeout: 5000 });
-      target = await liveTarget.jsonValue();
-      await liveTarget.dispose();
-    } catch (error) {
-      const diagnostic = await page.evaluate(() => {
-        const iframe = document.querySelector('[data-bob-frame]');
-        const canvas = iframe?.contentDocument?.querySelector('canvas');
-        return {
-          bob: window.render_bob_to_text?.(),
-          rootFontSize: getComputedStyle(document.documentElement).fontSize,
-          frame: iframe?.getBoundingClientRect().toJSON(),
-          canvas: canvas?.getBoundingClientRect().toJSON(),
-          hitMask: iframe?.style.clipPath.slice(0, 500),
-        };
-      });
-      error.message += `\nBob's current opaque sprite did not receive pointer input within 5s: ${JSON.stringify(diagnostic)}`;
-      throw error;
-    }
+    const target = { x: bounds.x + point.x * bounds.width, y: bounds.y + point.y * bounds.height };
+    await page.waitForFunction(({ x, y }) => document.elementFromPoint(x, y)?.matches('[data-bob-frame]'), target, { timeout: 5000 });
     await page.mouse.click(target.x, target.y);
     await gear.waitFor({ state: 'visible' });
     assert.equal(await frame.locator('#pet-settings-dock').isVisible(), false, 'The first activation reveals only the wheel.');
@@ -356,6 +330,14 @@ for (const width of [320, 390]) {
       try {
         const response = await page.goto(`${siteOrigin}${articlePath}`, { waitUntil: "load" });
         assert.equal(response.status(), 200);
+        // Production can show the first-visit consent panel above the masthead.
+        // Resolve it through the real UI before exercising navigation beneath it.
+        const consent = page.locator('[data-purchase-consent]');
+        if (await consent.count()) {
+          await consent.locator('[data-purchase-choice="denied"]').click();
+          await consent.waitFor({ state: 'hidden' });
+          await page.evaluate(() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' }));
+        }
         await page.evaluate(async (size) => {
           document.documentElement.style.fontSize = `${size}%`;
           await document.fonts.ready;
