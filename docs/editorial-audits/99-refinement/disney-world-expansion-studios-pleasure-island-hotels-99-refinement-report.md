@@ -89,3 +89,28 @@ All four historical-image byte hashes match the manifest and selected export. Th
 The record does not establish exact Pleasure Island opening phases/day, MGM license fee/term, every opening-day attraction, a complete Florida construction-loan ledger, hotel equity percentages or lenders, Disney's precise economic interest in the Swan/Dolphin partnership, or each property's lifetime return. These points are omitted or qualified in the current article and do not undermine its argument.
 
 The Aoki nationality citation relies on the previously inspected/indexed original Commerce table; direct FRASER PDF retrieval was in maintenance during that check. The official Congressional Record PDF was captured and its pages inspected for the construction-business identification. This pass does not claim a fresh successful FRASER retrieval. No guarantee of perpetual external-link availability is implied.
+
+
+## Navigation-only revision addendum: October 22, 2026
+
+Decision: PASS for this bounded metadata and series-navigation revision.
+
+Rechecked UTC: 2026-10-22T18:24:34.416540+00:00
+
+Current public source: `content/essays/disney-world-expansion-studios-pleasure-island-hotels.md`
+
+Current public source SHA256: `42110d8eeeb37d2f1a80e50c9ac8ec7d3cf1a5e236f159808b7a20d9914d7ebc`
+
+Current Git-blob public source SHA256: `6118a64949f7c217268b3571deacc7b8932bcbc4e4970f2bd97b4613cbbc3dcf` (computed from the staged Git index blob; canonical release bytes).
+
+Original checked-out public source SHA256 at `37546d0a247a59126080556d3a81dc8cfb917a3b`: `48afce39b89db8f1b2a2635d390be79cf312d9b4fe4b42cf87421b5189bc26a7`
+
+Original Git-blob SHA256: `837e4c2613546872daffa396eaac3ba1f8a98067ddae4d71e0b0fb11b1a95150`. The checkout uses its existing line endings; body-byte preservation compares the actual checked-out files before and after this revision.
+
+Unchanged article-body SHA256: `9343cff79a2f0e381459d9a108d2255a50d0dbbe7565be7d906357e797f55366` (17,677 exact bytes after the closing front-matter delimiter).
+
+Revision classification: minor metadata/navigation revision under `docs/existing-essay-revision-sop.md`, version 1.0 to 1.1, Second web edition. The revision-history entry is dated October 22, 2026 and states: “Added automatic links to other installments in the series.” Original publication date and any publishDate are unchanged.
+
+The only essay changes are `article_series: disney-world-development`, `series_part: 3`, version/edition and this revision-history entry. The article body is byte-identical to the recorded baseline, including all 42 existing hyperlink occurrences, 4 inline image references, captions, headings and ending. Hero IDs, alt text, captions, collections and all other existing metadata are unchanged. No source URL, historical claim, artwork byte, source interpretation or narrative framing was revised.
+
+This addendum is the current binding for the metadata revision. Earlier source/export/publication hashes and historical findings above remain the record of their named review stages. Their period-source support, attribution, uncertainty, image-use decisions and earned Editorial Philosophy/Media Framing PASS findings carry forward because the factual prose and illustrations are unchanged. This is not a new full historical/source audit, image-rights clearance, numerical grade, browser/rendered verification, or production-deployment receipt. Tests and site-level series behavior are reviewed separately by the implementing publisher.

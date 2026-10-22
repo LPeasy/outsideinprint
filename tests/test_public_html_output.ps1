@@ -493,56 +493,6 @@ function ConvertTo-CanonicalImageUrl {
   return "https://outsideinprint.org$Value"
 }
 
-function Get-CurrentCartoonValue {
-  param(
-    [string]$RepoRoot,
-    [string]$Key
-  )
-
-  $dataPath = Join-Path $RepoRoot 'data\editorial_cartoons.yaml'
-  if (-not (Test-Path -LiteralPath $dataPath -PathType Leaf)) {
-    throw "Editorial cartoon data file not found: $dataPath"
-  }
-
-  $currentSlug = $null
-  $inCurrentEntry = $false
-  foreach ($line in Get-Content -Path $dataPath) {
-    if ($line -match '^current:\s*(.+)\s*$') {
-      $currentSlug = Convert-YamlScalarToString -Value $Matches[1]
-      continue
-    }
-
-    if ($line -match '^\s*-\s+slug:\s*(.+)\s*$') {
-      $slug = Convert-YamlScalarToString -Value $Matches[1]
-      $inCurrentEntry = ($null -ne $currentSlug -and $slug -eq $currentSlug)
-      continue
-    }
-
-    if ($inCurrentEntry -and $line -match ('^\s+' + [regex]::Escape($Key) + ':\s*(.+)\s*$')) {
-      return (Convert-YamlScalarToString -Value $Matches[1])
-    }
-  }
-
-  return ''
-}
-
-function Get-CurrentCartoonSlug {
-  param([string]$RepoRoot)
-
-  $dataPath = Join-Path $RepoRoot 'data\editorial_cartoons.yaml'
-  if (-not (Test-Path -LiteralPath $dataPath -PathType Leaf)) {
-    throw "Editorial cartoon data file not found: $dataPath"
-  }
-
-  foreach ($line in Get-Content -Path $dataPath) {
-    if ($line -match '^current:\s*(.+)\s*$') {
-      return (Convert-YamlScalarToString -Value $Matches[1])
-    }
-  }
-
-  return ''
-}
-
 function Get-CartoonEntries {
   param([string]$RepoRoot)
 
@@ -625,23 +575,19 @@ function Get-PublishedCartoonEntries {
 function Get-PublicCurrentCartoonEntry {
   param([string]$RepoRoot)
 
-  $rawCurrentSlug = Get-CurrentCartoonSlug -RepoRoot $RepoRoot
-  $publishedCartoons = @(Get-PublishedCartoonEntries -RepoRoot $RepoRoot)
-  $current = @($publishedCartoons | Where-Object { $_.slug -eq $rawCurrentSlug } | Select-Object -First 1)
-  if ($current.Count -gt 0) {
-    return $current[0]
+  $latest = $null
+  $latestRelease = [datetimeoffset]::MinValue
+  foreach ($cartoon in @(Get-PublishedCartoonEntries -RepoRoot $RepoRoot)) {
+    $releaseValue = if ($cartoon.PSObject.Properties.Name -contains 'publishDate') { [string]$cartoon.publishDate } else { [string]$cartoon.date }
+    $release = ConvertTo-OipDateTimeOffset -Value $releaseValue
+    if ($null -eq $latest -or $release -gt $latestRelease -or
+      ($release -eq $latestRelease -and [StringComparer]::Ordinal.Compare([string]$cartoon.slug, [string]$latest.slug) -lt 0)) {
+      $latest = $cartoon
+      $latestRelease = $release
+    }
   }
 
-  $latest = @(
-    $publishedCartoons |
-      Sort-Object @{ Expression = { $_.date }; Descending = $true }, @{ Expression = { $_.slug }; Ascending = $true } |
-      Select-Object -First 1
-  )
-  if ($latest.Count -gt 0) {
-    return $latest[0]
-  }
-
-  return $null
+  return $latest
 }
 function Get-SemanticPageIssues {
   param(

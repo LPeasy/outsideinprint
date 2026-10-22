@@ -87,3 +87,28 @@ See `editorial-integrity-current.json` for current source/report hashes and all 
 | LakeBuenaVista scope | Disney1971 report p12 | Northeastern-property residential development presented as real-estate experience and ideas toward future EPCOT; distinct from vacationcomplex and futureEPCOT. |
 
 The full new-source locators and research capture are in the supplemental ResearchLibrary entry and `revision-notes.md`. All original image captions and53 original link occurrences are retained. All new substantive claims have nearby links in the revised article. No modern narrative source or major news article was added.
+
+
+## Navigation-only revision addendum: October 22, 2026
+
+Decision: PASS for this bounded metadata and series-navigation revision.
+
+Rechecked UTC: 2026-10-22T18:24:34.416540+00:00
+
+Current public source: `content/essays/walt-disney-world-opening-1971.md`
+
+Current public source SHA256: `77897bff149ed015d16786d51fa8555b72b811e79e61bd1a4ac192a04a981b3c`
+
+Current Git-blob public source SHA256: `2646fbe0eb2952f6adf4eedc43204937bd8e8cad9186016f65ce985ad3baccf2` (computed from the staged Git index blob; canonical release bytes).
+
+Original checked-out public source SHA256 at `37546d0a247a59126080556d3a81dc8cfb917a3b`: `ff29a5d932af3ea01a06c856b6a3d3055c41f215832992b4e30cf7a5d3d116b5`
+
+Original Git-blob SHA256: `4859c0df4b6f7d58421da7d3e9952c91554b3088dcdc3b7e6a08a7bd137a8dfd`. The checkout uses its existing line endings; body-byte preservation compares the actual checked-out files before and after this revision.
+
+Unchanged article-body SHA256: `41d9b3b57c80515c29854f55da7344a236b579463b789bc3b491e4064539a7bb` (25,204 exact bytes after the closing front-matter delimiter).
+
+Revision classification: minor metadata/navigation revision under `docs/existing-essay-revision-sop.md`, version 1.0 to 1.1, Second web edition. The revision-history entry is dated October 22, 2026 and states: “Added automatic links to other installments in the series.” Original publication date and any publishDate are unchanged.
+
+The only essay changes are `article_series: disney-world-development`, `series_part: 1`, version/edition and this revision-history entry. The article body is byte-identical to the recorded baseline, including all 67 existing hyperlink occurrences, 8 inline image references, captions, headings and ending. Hero IDs, alt text, captions, collections and all other existing metadata are unchanged. No source URL, historical claim, artwork byte, source interpretation or narrative framing was revised.
+
+This addendum is the current binding for the metadata revision. Earlier source/export/publication hashes and historical findings above remain the record of their named review stages. Their period-source support, attribution, uncertainty, image-use decisions and earned Editorial Philosophy/Media Framing PASS findings carry forward because the factual prose and illustrations are unchanged. This is not a new full historical/source audit, image-rights clearance, numerical grade, browser/rendered verification, or production-deployment receipt. Tests and site-level series behavior are reviewed separately by the implementing publisher.

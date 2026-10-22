@@ -11,7 +11,7 @@ const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.167.0/hug
 const progressScript = fs.readFileSync("layouts/partials/collections/reading-progress-script.html", "utf8")
   .replace(/^\s*<script data-oip-route-script="reading-progress">\s*/, "").replace(/\s*<\/script>\s*$/, "");
 
-function renderPath(t, { entries = {}, startHere = "b", current = "a", collections, articleShell = false, featured = false, landings = {}, collectionShell = false, collectionDirectory = false, outputRoute, indexTemplate, section = "essays" } = {}) {
+function renderPath(t, { entries = {}, startHere = "b", current = "a", collections, articleShell = false, featured = false, landings = {}, collectionShell = false, collectionDirectory = false, outputRoute, outputRoutes, indexTemplate, section = "essays", clock = "2020-09-01T12:00:00Z" } = {}) {
   assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.167\.0/);
   const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "oip-reading-path-"));
   t.after(() => fs.rmSync(fixture, { recursive: true, force: true }));
@@ -22,8 +22,8 @@ function renderPath(t, { entries = {}, startHere = "b", current = "a", collectio
   write("hugo.toml", 'baseURL = "https://example.test/"\ndisableKinds = ["taxonomy", "term", "RSS", "sitemap"]\n');
   fs.cpSync("layouts/partials/collections", path.join(fixture, "layouts/partials/collections"), { recursive: true });
   for (const partial of [
-    "discovery/page-summary.html", "metadata_description.html", "metadata/route.html",
-    "shop/contextual-book.html", "article/guest-links.html",
+    "discovery/page-summary.html", "metadata_description.html", "metadata/route.html", "metadata/policy.html",
+    "shop/contextual-book.html", "article/guest-links.html", "article/series-links.html",
   ]) {
     write(`layouts/partials/${partial}`, fs.readFileSync(`layouts/partials/${partial}`, "utf8"));
   }
@@ -82,7 +82,10 @@ function renderPath(t, { entries = {}, startHere = "b", current = "a", collectio
     const frontMatter = Object.entries(metadata).map(([key, value]) => `${key}: ${JSON.stringify(value)}`).join("\n");
     write(`content/${slug === current ? section : "essays"}/${slug}.md`, `---\n${frontMatter}\n---\nExisting article body.\n`);
   }
-  execFileSync(hugo, ["--source", fixture, "--clock", "2020-09-01T12:00:00Z", "--buildDrafts", "--buildFuture", "--buildExpired", "--panicOnWarning"], { encoding: "utf8" });
+  execFileSync(hugo, ["--source", fixture, "--clock", clock, "--buildDrafts", "--buildFuture", "--buildExpired", "--panicOnWarning"], { encoding: "utf8" });
+  if (outputRoutes) {
+    return Object.fromEntries(outputRoutes.map((route) => [route, fs.readFileSync(path.join(fixture, "public", route, "index.html"), "utf8")]));
+  }
   return fs.readFileSync(path.join(fixture, "public", outputRoute || (articleShell ? `${section}/${current}` : ""), "index.html"), "utf8");
 }
 
@@ -450,6 +453,125 @@ test("standard reading exit retains body, then one continuation, record, and new
   assert.equal((html.match(/<aside class="reading-path"/g) || []).length, 1);
   assert.equal((html.match(/<form class="newsletter-signup--article-exit"/g) || []).length, 1);
   assert.doesNotMatch(html, /newsletter-prompt--article-exit|journey-links--article-exit|Article paths/);
+});
+
+function seriesNavigation(html) {
+  const blocks = [...html.matchAll(/<nav\b[^>]*\bdata-article-series(?:="[^"]*")?[^>]*>[\s\S]*?<\/nav>/g)];
+  assert.ok(blocks.length <= 1, "Each reading page must have at most one series navigation block.");
+  return blocks[0]?.[0] || "";
+}
+
+function seriesLinks(html) {
+  return [...seriesNavigation(html).matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)]
+    .map(([, href, label]) => ({ href, label: label.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim() }));
+}
+
+function seriesMember(title, part, extra = {}) {
+  return { title, date: "2020-01-01", collections: ["alpha"], article_series: "disney-world-development", series_part: part, ...extra };
+}
+
+test("article series supplies reciprocal ordered links after all three narratives while filtering preview-only members", (t) => {
+  const entries = {
+    a: seriesMember("First installment", 1),
+    b: seriesMember("Second installment", 2),
+    c: seriesMember("Third installment", 3),
+    tenth: seriesMember("Tenth installment", 10),
+    other: seriesMember("Another series", 1, { article_series: "another-series" }),
+    queued: seriesMember("Fourth installment", 4, { publishDate: "2020-10-01" }),
+    future: seriesMember("Future article", 0, { date: "2030-01-01" }),
+    draft: seriesMember("Draft article", 0, { draft: true }),
+    expired: seriesMember("Expired article", 0, { expiryDate: "2020-08-01" }),
+    private: seriesMember("Private article", 0, { noindex: true }),
+    redirect: seriesMember("Retired article", 0, { redirect_to: "/essays/a/" }),
+    singleton: seriesMember("Only member", 1, { article_series: "one-member-series" }),
+    untagged: { title: "No series", date: "2020-01-01", series_part: 1 },
+  };
+  const routes = ["a", "b", "c", "other", "queued", "future", "draft", "expired", "private", "redirect", "singleton", "untagged"]
+    .map((slug) => `essays/${slug}`);
+  const pages = renderPath(t, { entries, articleShell: true, outputRoutes: routes });
+  const published = [
+    { slug: "a", part: 1, title: "First installment" },
+    { slug: "b", part: 2, title: "Second installment" },
+    { slug: "c", part: 3, title: "Third installment" },
+    { slug: "tenth", part: 10, title: "Tenth installment" },
+  ];
+  for (const current of published.slice(0, 3)) {
+    const html = pages[`essays/${current.slug}`];
+    const nav = seriesNavigation(html);
+    assert.match(nav, /data-article-series="disney-world-development"/);
+    assert.match(nav, /aria-labelledby="article-series-title"/);
+    assert.match(nav, /<h2\b[^>]*id="article-series-title"[^>]*>More in this series<\/h2>/);
+    assert.deepEqual(seriesLinks(html), published.filter(({ slug }) => slug !== current.slug)
+      .map(({ slug, part, title }) => ({ href: `/essays/${slug}/`, label: `Part ${part}: ${title}` })));
+    assert.equal(new Set(seriesLinks(html).map(({ href }) => href)).size, 3);
+    assert.doesNotMatch(nav, /<script|onclick=|href="javascript:/i);
+    const bodyEnd = html.indexOf("</div>", html.indexOf('class="piece-body"'));
+    const navStart = html.indexOf(nav);
+    const collectionStart = html.indexOf('<aside class="reading-path"');
+    assert.ok(bodyEnd >= 0 && bodyEnd < navStart && navStart < collectionStart,
+      "Series links belong after the narrative and before the unchanged collection continuation.");
+    assert.equal(primaryDestination(html), "/collections/alpha/");
+    assert.equal((html.match(/<aside class="reading-path"/g) || []).length, 1);
+  }
+  for (const slug of ["other", "queued", "future", "draft", "expired", "private", "redirect", "singleton", "untagged"]) {
+    assert.equal(seriesNavigation(pages[`essays/${slug}`]), "", `${slug} must not mount a public series block`);
+  }
+});
+
+test("article series automatically adds a fourth published installment without editing earlier members", (t) => {
+  const entries = {
+    a: seriesMember("First installment", 1),
+    b: seriesMember("Second installment", 2),
+    c: seriesMember("Third installment", 3),
+    fourth: seriesMember("Fourth installment", 4, { publishDate: "2020-10-01" }),
+  };
+  const routes = ["a", "b", "c", "fourth"].map((slug) => `essays/${slug}`);
+  const pages = renderPath(t, { entries, articleShell: true, clock: "2020-10-02T12:00:00Z", outputRoutes: routes });
+  for (const slug of ["a", "b", "c"]) {
+    assert.deepEqual(seriesLinks(pages[`essays/${slug}`]).at(-1), {
+      href: "/essays/fourth/", label: "Part 4: Fourth installment",
+    });
+    assert.equal(seriesLinks(pages[`essays/${slug}`]).length, 3);
+  }
+  assert.deepEqual(seriesLinks(pages["essays/fourth"]).map(({ href }) => href),
+    ["/essays/a/", "/essays/b/", "/essays/c/"]);
+});
+
+test("article series supports standard reading sections without changing custom or Studio endings", (t) => {
+  const entries = { a: seriesMember("Current installment", 1), b: seriesMember("Next installment", 2), c: null };
+  for (const section of ["reports", "working-papers", "syd-and-oliver"]) {
+    const html = renderPath(t, { entries, articleShell: true, section });
+    assert.deepEqual(seriesLinks(html), [{ href: "/essays/b/", label: "Part 2: Next installment" }]);
+  }
+  for (const options of [
+    { section: "about" },
+    { featured: true },
+    { entries: { ...entries, a: { ...entries.a, studio_sample: { purpose: "Existing sample" } } } },
+  ]) {
+    const html = renderPath(t, { entries, articleShell: true, ...options });
+    assert.equal(seriesNavigation(html), "");
+  }
+});
+
+test("article series rejects invalid eligible installment numbers and duplicate published positions", (t) => {
+  const rejects = (entries, expected, message) => assert.throws(() => renderPath(t, {
+    articleShell: true, entries,
+  }), (error) => {
+    assert.match([error.message, error.stdout, error.stderr].filter(Boolean).join("\n"), expected, message);
+    return true;
+  }, message);
+  for (const [label, part] of [["zero", 0], ["negative", -1], ["fraction", 1.5], ["quoted integer", "2"], ["boolean", true], ["null", null]]) {
+    rejects({ a: seriesMember("First", 1), b: seriesMember("Invalid", part), c: null },
+      /series_part/, `${label} must fail closed`);
+  }
+  const missingPart = seriesMember("Missing part", 2);
+  delete missingPart.series_part;
+  rejects({ a: seriesMember("First", 1), b: missingPart, c: null },
+    /series_part/, "A published member without its installment number must fail closed.");
+  rejects({ a: seriesMember("First", 1), b: seriesMember("Duplicate", 1), c: null },
+    /duplicate/i, "Published installment numbers cannot collide with the current article.");
+  rejects({ a: seriesMember("Malformed series", 1, { article_series: "Disney World" }), b: null, c: null },
+    /article_series/, "Malformed series identifiers must fail closed.");
 });
 
 test("no-collection reading pages get a Library fallback while custom and Studio exits are unchanged", (t) => {

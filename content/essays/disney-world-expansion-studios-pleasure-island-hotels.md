@@ -10,8 +10,8 @@ draft: false
 slug: "disney-world-expansion-studios-pleasure-island-hotels"
 section_label: "Essay"
 collections: ["brands-business-consumer-choice"]
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
 featured: false
 featured_image: "essays/disney-world-expansion-studios-pleasure-island-hotels/hero"
 featured_image_alt: "Staging the Resort: an ink-and-watercolor scene of a film camera inside an open soundstage, looking toward a golden waterfront, a bandstand, palms, and resort hotels at twilight."
@@ -22,6 +22,12 @@ editor_name: ""
 editor_url: ""
 editor_note: ""
 guest_links: []
+article_series: "disney-world-development"
+series_part: 3
+revision_history:
+  - version: "1.1"
+    date: "2026-10-22"
+    note: "Added automatic links to other installments in the series."
 ---
 
 *Brands, Business, and Consumer Choice · Disney World Development, Part Three: A Longer Stay*
