@@ -89,9 +89,9 @@ test("masthead proof sits between its controls and lead summaries keep supportin
 test("featured reading leads with Benjamin Franklin, then the latest publication and curated supports", () => {
   const routes = [
     "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/",
+    "/essays/walt-disney-world-opening-1971/",
     "/essays/the-noise-of-the-crowd/",
     "/essays/the-coin-slot-on-the-corner/",
-    "/essays/togetherness/",
   ];
   const indexes = routes.map((route) => selected.indexOf(`"${route}"`));
   assert.ok(indexes.every((index) => index >= 0));

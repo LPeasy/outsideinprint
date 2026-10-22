@@ -48,9 +48,9 @@ const guestEligible = publishedRoutes.includes(guestRoute)
 const regularPublishedRoutes = publishedRoutes.filter((route) => !guestEligible || route !== guestRoute);
 const pinnedRoutes = [
   "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/",
+  "/essays/walt-disney-world-opening-1971/",
   "/essays/the-noise-of-the-crowd/",
   "/essays/the-coin-slot-on-the-corner/",
-  "/essays/togetherness/",
 ];
 const metricsSource = fs.readFileSync(path.resolve("data/homepage_metrics.yaml"), "utf8");
 const threshold = Number(metricsSource.match(/^reader_threshold: (\d+)$/m)?.[1]);
@@ -125,8 +125,8 @@ test("rendered homepage leads with Benjamin Franklin, then the newest remaining 
     const kind = route === "/essays/the-dolphin-company/" ? "Case study" : canonicalKind;
     if (route === "/essays/the-dolphin-company/") assert.equal(canonicalKind, "Essay", "Dolphin's homepage label must not reclassify its destination");
     if (route === pinnedRoutes[0]) assert.equal(canonicalKind, "Modern Bio");
-    if (route === pinnedRoutes[1] || route === pinnedRoutes[3]) assert.equal(canonicalKind, "Musing");
-    if (route === pinnedRoutes[2]) assert.equal(canonicalKind, "Essay");
+    if (route === pinnedRoutes[2]) assert.equal(canonicalKind, "Musing");
+    if (route === pinnedRoutes[1] || route === pinnedRoutes[3]) assert.equal(canonicalKind, "Essay");
     const metric = metricRecords.get(route);
     const badge = metric?.value >= threshold ? metric.label : "";
     const anchors = [...card[2].matchAll(/<a\b[^>]*>/g)].map((match) => match[0]);

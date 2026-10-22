@@ -8,9 +8,9 @@ import { execFileSync } from "node:child_process";
 const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.167.0/hugo")
   ? path.resolve(".tools/hugo-0.167.0/hugo") : "hugo");
 const franklin = "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/";
+const disneyOpening = "/essays/walt-disney-world-opening-1971/";
 const noise = "/essays/the-noise-of-the-crowd/";
 const coinSlot = "/essays/the-coin-slot-on-the-corner/";
-const togetherness = "/essays/togetherness/";
 const guestRoute = "/essays/a-public-record-must-outlast-the-feed/";
 const guestMetadata = {
   title: "A Public Record Must Outlast the Feed", url: guestRoute,
@@ -57,9 +57,9 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   write("layouts/_default/list.html", "{{ .Title }}");
   const entries = {
     franklin: { title: "Benjamin Franklin", url: franklin, date: "2020-01-01", section_label: "Modern Bio" },
+    disneyOpening: { title: "How Walt Disney World Opened in 1971: Walt’s Plans, Roy’s Role", url: disneyOpening, date: "2020-01-01", section_label: "Essay" },
     noise: { title: "The Noise of the Crowd", url: noise, date: "2020-01-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
     coinSlot: { title: "The Coin Slot on the Corner", url: coinSlot, date: "2020-01-01", section_label: "Essay" },
-    togetherness: { title: "Togetherness", url: togetherness, date: "2020-01-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
     earlier: { title: "A earlier release", date: "2020-06-01", publishDate: "2020-06-01T09:00:00Z" },
     latest: { title: "Z later release", date: "2020-06-01", publishDate: "2020-06-01T12:00:00Z" },
     draft: { title: "Draft", date: "2020-07-01", draft: true },
@@ -85,7 +85,7 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
 }
 
 test("Benjamin Franklin leads, followed by the latest release, while preview-only work stays excluded", (t) => {
-  assert.deepEqual(renderSelection(t), [franklin, "/essays/latest/", noise, coinSlot, togetherness]);
+  assert.deepEqual(renderSelection(t), [franklin, "/essays/latest/", disneyOpening, noise, coinSlot]);
 });
 
 test("a newer flagship stays first and missing curated work receives newest eligible fallback", (t) => {
@@ -93,20 +93,20 @@ test("a newer flagship stays first and missing curated work receives newest elig
     franklin: { title: "Benjamin Franklin", url: franklin, date: "2020-06-01", publishDate: "2020-07-01" },
     noise: null,
   });
-  assert.deepEqual(selection, [franklin, "/essays/latest/", coinSlot, togetherness, "/essays/earlier/"]);
+  assert.deepEqual(selection, [franklin, "/essays/latest/", disneyOpening, coinSlot, "/essays/earlier/"]);
   assert.equal(new Set(selection).size, 5);
 });
 
 test("when the flagship is unavailable, the two newest releases lead", (t) => {
   assert.deepEqual(renderSelection(t, { franklin: null }), [
-    "/essays/latest/", "/essays/earlier/", noise, coinSlot, togetherness,
+    "/essays/latest/", "/essays/earlier/", disneyOpening, noise, coinSlot,
   ]);
 });
 
 test("a newly released curated piece occupies the latest slot only once", (t) => {
   assert.deepEqual(renderSelection(t, {
     noise: { title: "The Noise of the Crowd", url: noise, date: "2020-07-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
-  }), [franklin, noise, coinSlot, togetherness, "/essays/latest/"]);
+  }), [franklin, noise, disneyOpening, coinSlot, "/essays/latest/"]);
 });
 
 test("the lead uses eligible associated Gallery art and matching zoom alt, with hero fallback and unchanged supporting art", (t) => {
@@ -158,7 +158,7 @@ test("the lead uses eligible associated Gallery art and matching zoom alt, with 
 
 test("the eligible guest renders once below the flagship without consuming the latest supporting slot", (t) => {
   const result = renderSelection(t, { guest: guestMetadata }, "guest");
-  assert.deepEqual(result.featured, [franklin, "/essays/latest/", noise, coinSlot, togetherness]);
+  assert.deepEqual(result.featured, [franklin, "/essays/latest/", disneyOpening, noise, coinSlot]);
   assert.equal(result.guest, guestRoute);
   assert.equal(new Set([...result.featured, result.guest]).size, 6);
   assert.equal((result.html.match(/<article\b/g) || []).length, 1);

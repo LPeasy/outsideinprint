@@ -330,6 +330,14 @@ for (const width of [320, 390]) {
       try {
         const response = await page.goto(`${siteOrigin}${articlePath}`, { waitUntil: "load" });
         assert.equal(response.status(), 200);
+        // Production can show the first-visit consent panel above the masthead.
+        // Resolve it through the real UI before exercising navigation beneath it.
+        const consent = page.locator('[data-purchase-consent]');
+        if (await consent.count()) {
+          await consent.locator('[data-purchase-choice="denied"]').click();
+          await consent.waitFor({ state: 'hidden' });
+          await page.evaluate(() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' }));
+        }
         await page.evaluate(async (size) => {
           document.documentElement.style.fontSize = `${size}%`;
           await document.fonts.ready;

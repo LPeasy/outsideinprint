@@ -5848,9 +5848,9 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   }
   $latestRemainingPaths = @($publishedReadingPaths | Where-Object { $_ -notin $expectedLeadPaths } | Select-Object -First 1)
   $preferredSupportingPaths = @(
+    '/essays/walt-disney-world-opening-1971/',
     '/essays/the-noise-of-the-crowd/',
-    '/essays/the-coin-slot-on-the-corner/',
-    '/essays/togetherness/'
+    '/essays/the-coin-slot-on-the-corner/'
   )
   $expectedSupportingPaths = @(@($latestRemainingPaths + $preferredSupportingPaths + $publishedReadingPaths) | Where-Object {
     $_ -notin $expectedLeadPaths -and $_ -in $publishedReadingPaths
@@ -5972,9 +5972,9 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   $featuredLabelOverrides = @{
     '/essays/the-dolphin-company/' = 'Case study'
     '/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/' = 'Modern Bio'
+    '/essays/walt-disney-world-opening-1971/' = 'Essay'
     '/essays/the-noise-of-the-crowd/' = 'Musing'
     '/essays/the-coin-slot-on-the-corner/' = 'Essay'
-    '/essays/togetherness/' = 'Musing'
   }
   foreach ($promo in @($homeAnchors | Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -in @('homepage_v2_featured_lead', 'homepage_v2_featured_supporting') })) {
     $promoPath = Get-SitePathFromHref -Href (Get-AttributeValue -Tag $promo -Name 'href')
