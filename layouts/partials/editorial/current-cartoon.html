@@ -1,15 +1,17 @@
 {{- $cartoonData := hugo.Data.editorial_cartoons | default dict -}}
 {{- $cartoons := partial "editorial/published-cartoons.html" ($cartoonData.cartoons | default (slice)) -}}
-{{- $currentSlug := $cartoonData.current | default "" -}}
+{{- /* Effective release time selects the newest published art; equal instants use slug order. */ -}}
 {{- $current := false -}}
+{{- $currentRelease := 0 -}}
 {{- range $cartoons -}}
-  {{- if eq .slug $currentSlug -}}
-    {{- $current = . -}}
+  {{- $release := (time.AsTime (.publishDate | default .date)).UnixNano -}}
+  {{- $newest := not $current -}}
+  {{- if $current -}}
+    {{- $newest = or (gt $release $currentRelease) (and (eq $release $currentRelease) (lt .slug $current.slug)) -}}
   {{- end -}}
-{{- end -}}
-{{- if not $current -}}
-  {{- with first 1 (sort $cartoons "date" "desc") -}}
-    {{- $current = index . 0 -}}
+  {{- if $newest -}}
+    {{- $current = . -}}
+    {{- $currentRelease = $release -}}
   {{- end -}}
 {{- end -}}
 {{- return $current -}}

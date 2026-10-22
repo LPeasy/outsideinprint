@@ -1,4 +1,4 @@
-current: one-for-my-sister
+current: the-epcot-project
 cartoons:
   - slug: staging-the-resort
     title: "Staging the Resort"
@@ -1212,5 +1212,21 @@ cartoons:
     image: "editorial/one-for-my-sister"
     essay: "/essays/one-for-my-sister/"
     alt: "Outside an open bookshop, a seated author signs a book while a woman rests her hand on a second copy; stacks of books and a coffee cup sit on the sunlit table."
+    width: 1672
+    height: 941
+  - slug: the-florida-project
+    title: "The Florida Project"
+    date: "2026-10-20"
+    image: "essays/walt-disney-world-opening-1971/hero"
+    essay: "/essays/walt-disney-world-opening-1971/"
+    alt: "Cinderella Castle rises beyond resort plans spread across a drafting table, with blue lines connecting the drawings to the castle."
+    width: 1672
+    height: 941
+  - slug: the-epcot-project
+    title: "The EPCOT Project"
+    date: "2026-10-21"
+    image: "essays/epcot-center-opening-1982/hero"
+    essay: "/essays/epcot-center-opening-1982/"
+    alt: "An ink illustration shows a proposed radial city on a drafting table, with Spaceship Earth rising beyond it."
     width: 1672
     height: 941

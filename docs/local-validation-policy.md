@@ -28,7 +28,7 @@ The guardrail blocks forbidden `that matters` phrasing and adverbial `still` con
 
 Formulaic `not X, but Y` reframing and equivalent adjacent-sentence constructions also block authored public-judgment prose under [Publishing Policy](../PUBLISHING_POLICY.md#house-style-publication-blockers). Preserve factual qualifications when making minimal corrections. URL destinations are not prose; visible authored link labels remain checked. No source-link-release style exceptions or warning-only downgrade apply.
 
-The front-page image workflow validates source-free Musings and source-free Affirmations through separate exact predicates. Association-only repairs must use `scripts/update_front_page_cartoon.ps1 -LinkExistingSlug <image-slug> -EssayPath "/essays/<piece-slug>/"`; this mode preserves the existing `current` pointer and does not copy or replace artwork.
+The front-page image workflow validates source-free Musings and source-free Affirmations through separate exact predicates. Association-only repairs must use `scripts/update_front_page_cartoon.ps1 -LinkExistingSlug <image-slug> -EssayPath "/essays/<piece-slug>/"`; this mode preserves the legacy `current` field and does not copy or replace artwork. Public Current Illustration selection follows the newest eligible Gallery release automatically. To add an existing approved essay illustration, use `-ManagedImageId <asset-id>` with explicit title, alt text, slug, date, and essay route; the publisher verifies the original hash and dimensions and reuses the asset without a second file or manifest entry.
 
 For changed non-draft essays, reports, and working papers, require Editorial Philosophy Audit evidence before publishing:
 
