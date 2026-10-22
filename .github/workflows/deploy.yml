@@ -18,4 +18,4 @@ jobs:
           package-manager-cache: false
       - run: npm install --ignore-scripts --no-audit --no-fund playwright@1.64.0
       - run: npx playwright install chromium --only-shell
-      - run: node .diagnostics/bob-arrival.mjs
+      - run: node --test --test-concurrency=1 --test-name-pattern="mobile Read" .diagnostics/mobile_navigation_browser.test.mjs
