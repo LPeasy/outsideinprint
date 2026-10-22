@@ -23,3 +23,28 @@ Current source: Contributor Desk revision69, October21,2026;49external link occu
 -Three Florida Memory photo records independently checked for dates, attribution and Public Domain Mark: COM03860November1982; COM03857andCOM03926circa1982.
 
 Complete public source URLs remain embedded beside the claims in the article. Modern repositories are access hosts. Unidentified ultimate noteholders, any EPCOT-only allocation of all corporate borrowing, and a definitive private cancellation meeting remain outside the claims. No major-news retelling controls the story.
+
+
+## Navigation-only revision addendum: October 22, 2026
+
+Decision: PASS for this bounded metadata and series-navigation revision.
+
+Rechecked UTC: 2026-10-22T18:24:34.416540+00:00
+
+Current public source: `content/essays/epcot-center-opening-1982.md`
+
+Current public source SHA256: `737a0df955677ac8299d3ee7c55bb5eb72a7ecd30ef1f11c2e7d2a7767cafbc3`
+
+Current Git-blob public source SHA256: `442d4295fd19e3b68ef2c174f61b0f0154f05a3d8cb45299a5598338efcecff8` (computed from the staged Git index blob; canonical release bytes).
+
+Original checked-out public source SHA256 at `37546d0a247a59126080556d3a81dc8cfb917a3b`: `1858997db1f2da6953fae3ca96b6e3bf669540dd6bc24ccbbaf8e9f66aa7ddcf`
+
+Original Git-blob SHA256: `3c80f6ff63a904bb69a312b6d069544fdf37640eda701ac49eac767a92a5018e`. The checkout uses its existing line endings; body-byte preservation compares the actual checked-out files before and after this revision.
+
+Unchanged article-body SHA256: `bdf70fd3fab5d40ac00311e332c0072a108296ba3c0e3f8fab98741daf741044` (21,119 exact bytes after the closing front-matter delimiter).
+
+Revision classification: minor metadata/navigation revision under `docs/existing-essay-revision-sop.md`, version 1.0 to 1.1, Second web edition. The revision-history entry is dated October 22, 2026 and states: “Added automatic links to other installments in the series.” Original publication date and any publishDate are unchanged.
+
+The only essay changes are `article_series: disney-world-development`, `series_part: 2`, version/edition and this revision-history entry. The article body is byte-identical to the recorded baseline, including all 49 existing hyperlink occurrences, 5 inline image references, captions, headings and ending. Hero IDs, alt text, captions, collections and all other existing metadata are unchanged. No source URL, historical claim, artwork byte, source interpretation or narrative framing was revised.
+
+This addendum is the current binding for the metadata revision. Earlier source/export/publication hashes and historical findings above remain the record of their named review stages. Their period-source support, attribution, uncertainty, image-use decisions and earned Editorial Philosophy/Media Framing PASS findings carry forward because the factual prose and illustrations are unchanged. This is not a new full historical/source audit, image-rights clearance, numerical grade, browser/rendered verification, or production-deployment receipt. Tests and site-level series behavior are reviewed separately by the implementing publisher.

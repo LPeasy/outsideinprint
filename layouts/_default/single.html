@@ -180,6 +180,7 @@
         {{ end }}
       {{ end }}
       {{ if $isStandardReadingPage }}
+        {{ partial "article/series-links.html" . }}
         {{ partial "collections/reading-path.html" . }}
         {{ partial "shop/contextual-book.html" (dict "page" . "placement" "article" "visible" true) }}
       {{ end }}

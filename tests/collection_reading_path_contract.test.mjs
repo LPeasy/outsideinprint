@@ -39,10 +39,12 @@ test("article single includes the reading-path partial and shared progress scrip
   assert.match(articleSingle, /"label" "Newsletter"/);
   assert.doesNotMatch(articleSingle, /"class" "journey-links--article"/);
   assert.match(articleSingle, /\$isStandardReadingPage :=/);
-  assert.match(articleSingle, /\{\{ if \$isStandardReadingPage \}\}\s*\{\{ partial "collections\/reading-path\.html" \./);
+  assert.match(articleSingle, /\{\{ if \$isStandardReadingPage \}\}\s*\{\{ partial "article\/series-links\.html" \. \}\}\s*\{\{ partial "collections\/reading-path\.html" \./);
   assert.match(articleSingle, /\{\{ if not \$isStandardReadingPage \}\}\s*\{\{ partial "journey_links\.html"/);
   assert.doesNotMatch(articleSingle, /partial "collections\/page-membership-block\.html" \./);
   assert.ok(articleSingle.indexOf('class="piece-aftermatter"') < articleSingle.indexOf('partial "collections/reading-path.html" .'));
+  assert.ok(articleSingle.indexOf('class="piece-aftermatter"') < articleSingle.indexOf('partial "article/series-links.html" .'));
+  assert.ok(articleSingle.indexOf('partial "article/series-links.html" .') < articleSingle.indexOf('partial "collections/reading-path.html" .'));
   assert.ok(articleSingle.indexOf('partial "collections/reading-path.html" .') < articleSingle.indexOf('class="article-publication-record"'));
   assert.ok(articleSingle.indexOf('partial "collections/reading-path.html" .') < articleSingle.indexOf('"class" "newsletter-signup--article-exit"'));
   assert.ok(articleSingle.indexOf('"class" "newsletter-signup--article-exit"') < articleSingle.indexOf('"class" "journey-links--article-exit"'));
