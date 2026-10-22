@@ -581,6 +581,8 @@ if (-not $currentExists) {
 }
 
 if (-not $SourceOnly) {
+  & (Join-Path $PSScriptRoot 'test_editorial_current_cartoon_contract.ps1')
+  & (Join-Path $PSScriptRoot 'test_managed_gallery_publish.ps1')
   Test-AssociationOnlyUpdate
   Test-ExplicitPublishSlug
   & (Join-Path $PSScriptRoot 'test_dialogue_gallery_publish.ps1')

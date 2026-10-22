@@ -3,17 +3,24 @@ param(
   [Parameter(Mandatory = $true, ParameterSetName = 'Publish')]
   [string]$ImagePath,
 
+  [Parameter(Mandatory = $true, ParameterSetName = 'ManagedImage')]
+  [string]$ManagedImageId,
+
   [Parameter(Mandatory = $true, ParameterSetName = 'Publish')]
+  [Parameter(Mandatory = $true, ParameterSetName = 'ManagedImage')]
   [string]$Title,
 
   [Parameter(Mandatory = $true, ParameterSetName = 'Publish')]
+  [Parameter(Mandatory = $true, ParameterSetName = 'ManagedImage')]
   [string]$Alt,
 
   [Parameter(ParameterSetName = 'Publish')]
+  [Parameter(ParameterSetName = 'ManagedImage')]
   [ValidatePattern('^[a-z0-9]+(?:-[a-z0-9]+)*$')]
   [string]$Slug,
 
   [Parameter(ParameterSetName = 'Publish')]
+  [Parameter(Mandatory = $true, ParameterSetName = 'ManagedImage')]
   [Parameter(Mandatory = $true, ParameterSetName = 'LinkExisting')]
   [string]$EssayPath,
 
@@ -29,10 +36,12 @@ param(
   [switch]$NoEssayLink,
 
   [Parameter(ParameterSetName = 'Publish')]
+  [Parameter(ParameterSetName = 'ManagedImage')]
   [Parameter(ParameterSetName = 'Dialogue')]
   [string]$Date = (Get-Date -Format 'yyyy-MM-dd'),
 
   [Parameter(ParameterSetName = 'Publish')]
+  [Parameter(ParameterSetName = 'ManagedImage')]
   [Parameter(ParameterSetName = 'Dialogue')]
   [string]$PublishDate,
 
@@ -817,6 +826,86 @@ if ($PSCmdlet.ParameterSetName -eq 'LinkExisting') {
   Write-Host "Associated cartoon: $LinkExistingSlug"
   Write-Host "Essay: $resolvedEssayPath"
   Write-Host "Current front page cartoon preserved: $($data.current)"
+  return
+}
+
+if ($PSCmdlet.ParameterSetName -eq 'ManagedImage') {
+  # Register a Gallery reference to already approved artwork. Do every source,
+  # association, and release check before writing data; never rewrite the
+  # manifest or create a second original for an existing managed asset.
+  if ([string]::IsNullOrWhiteSpace($Title) -or [string]::IsNullOrWhiteSpace($Alt)) {
+    throw 'Managed Gallery artwork requires a nonempty Title and Alt.'
+  }
+  $manifest = Read-OipImageAssetManifest -Root $resolvedRoot
+  if (-not (Test-OipImageAssetId -Id $ManagedImageId) -or -not $manifest.assets.Contains($ManagedImageId)) {
+    throw "ManagedImageId must be a registered bare managed asset ID: $ManagedImageId"
+  }
+  $asset = $manifest.assets[$ManagedImageId]
+  if ([string]$asset.review_state -cne 'approved' -or
+      [string]$asset.processing_state -cne 'derivative_capable' -or
+      [string]$asset.usage_state -cne 'referenced') {
+    throw "Managed Gallery artwork must be approved, referenced, and derivative_capable: $ManagedImageId"
+  }
+  $resolvedAsset = Resolve-OipImageAsset -Root $resolvedRoot -Reference $ManagedImageId -Manifest $manifest
+  Assert-OipManagedImageFile -Path $resolvedAsset.Path -ExpectedExtension ([IO.Path]::GetExtension($resolvedAsset.Path)) -Label 'Managed Gallery artwork' | Out-Null
+  $dimensions = Get-OipImageNativeDimensions -Path $resolvedAsset.Path
+  $sourceHash = (Get-FileHash -LiteralPath $resolvedAsset.Path -Algorithm SHA256).Hash.ToLowerInvariant()
+  if ($sourceHash -cne [string]$asset.sha256 -or $dimensions.Width -ne [int]$asset.width -or $dimensions.Height -ne [int]$asset.height) {
+    throw "Managed Gallery artwork source hash or dimensions differ from its manifest: $ManagedImageId"
+  }
+
+  $resolvedEssayPath = Normalize-EssayPath -Value $EssayPath
+  Assert-LinkedEssayPhilosophyAudit -Root $resolvedRoot -SiteEssayPath $resolvedEssayPath
+  $resolvedSlug = if ([string]::IsNullOrWhiteSpace($Slug)) { ConvertTo-Slug $Title } else { $Slug }
+  $dataPath = Join-Path $resolvedRoot 'data/editorial_cartoons.yaml'
+  $data = Read-CartoonData -Path $dataPath
+  $existing = @($data.cartoons | Where-Object { $_.slug -ceq $resolvedSlug })
+  if ($existing.Count -gt 1) { throw "Duplicate Gallery slug: $resolvedSlug" }
+  foreach ($cartoon in @($data.cartoons)) {
+    if ($cartoon.slug -ceq $resolvedSlug) {
+      if ([string]$cartoon.image -cne $ManagedImageId -or ($cartoon.Contains('essay') -and [string]$cartoon.essay -cne $resolvedEssayPath)) {
+        throw "Gallery slug already belongs to different artwork or a different piece: $resolvedSlug"
+      }
+    }
+    elseif ([string]$cartoon.image -ceq $ManagedImageId) {
+      throw "Managed artwork already has a different Gallery entry: $($cartoon.slug)"
+    }
+  }
+
+  # Preserve an existing release on repeated invocations without date overrides.
+  $galleryDate = if ($PSBoundParameters.ContainsKey('Date') -or $existing.Count -eq 0) { $Date } else { [string]$existing[0].date }
+  if ($galleryDate -notmatch '^\d{4}-\d{2}-\d{2}$') { throw "Date must use yyyy-MM-dd format. Received: $galleryDate" }
+  $galleryPublishDate = if ($PSBoundParameters.ContainsKey('PublishDate')) { $PublishDate }
+    elseif ($PSBoundParameters.ContainsKey('Date')) { '' }
+    elseif ($existing.Count -eq 1 -and $existing[0].Contains('publishDate')) { [string]$existing[0].publishDate }
+    else { '' }
+  $galleryReleaseValue = if ([string]::IsNullOrWhiteSpace($galleryPublishDate)) { $galleryDate } else { $galleryPublishDate }
+  $galleryReleaseAt = ConvertTo-OipDateTimeOffset -Value $galleryReleaseValue -Label 'Managed Gallery release'
+  Assert-LinkedEssayScheduleCompatibility -Root $resolvedRoot -SiteEssayPath $resolvedEssayPath -CartoonReleaseAt $galleryReleaseAt
+
+  $entry = [ordered]@{}
+  if ($existing.Count -eq 1) {
+    foreach ($property in $existing[0].GetEnumerator()) { $entry[$property.Key] = $property.Value }
+  }
+  $entry.slug = $resolvedSlug
+  $entry.title = $Title
+  $entry.date = $galleryDate
+  if (-not [string]::IsNullOrWhiteSpace($galleryPublishDate)) { $entry.publishDate = $galleryPublishDate }
+  elseif ($entry.Contains('publishDate')) { $entry.Remove('publishDate') }
+  $entry.image = $ManagedImageId
+  $entry.essay = $resolvedEssayPath
+  $entry.alt = $Alt
+  $entry.width = $dimensions.Width
+  $entry.height = $dimensions.Height
+  $cartoons = @(foreach ($cartoon in @($data.cartoons)) {
+    if ($cartoon.slug -ceq $resolvedSlug) { $entry } else { $cartoon }
+  })
+  if ($existing.Count -eq 0) { $cartoons += $entry }
+  Write-CartoonData -Path $dataPath -Current $resolvedSlug -Cartoons $cartoons
+  Write-Host "Updated managed Gallery illustration: $Title"
+  Write-Host "Reused managed image: $ManagedImageId"
+  Write-Host "Essay: $resolvedEssayPath"
+  Write-Host "Data: data/editorial_cartoons.yaml"
   return
 }
 
