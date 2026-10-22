@@ -45,10 +45,17 @@ test("responsive image manifest keeps the frozen baseline and processing default
     "essays/epcot-center-opening-1982/spaceship-earth-1982",
     "essays/epcot-center-opening-1982/united-kingdom-1982",
   ];
+  const disneyExpansionPhotoIds = [
+    "essays/disney-world-expansion-studios-pleasure-island-hotels/studios-construction-1988",
+    "essays/disney-world-expansion-studios-pleasure-island-hotels/grand-floridian-1988",
+    "essays/disney-world-expansion-studios-pleasure-island-hotels/pleasure-island-1989",
+    "essays/disney-world-expansion-studios-pleasure-island-hotels/swan-dolphin-model-1988",
+  ];
   const routinePhotoIds = [
     ...modernBioPortraits.map(({ id }) => id),
     ...disneyOpeningPhotoIds,
     ...epcotOpeningPhotoIds,
+    ...disneyExpansionPhotoIds,
   ];
   const intentionallyRetiredManagedAssetIds = [
     "essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts",

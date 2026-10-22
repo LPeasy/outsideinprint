@@ -1,5 +1,15 @@
 current: one-for-my-sister
 cartoons:
+  - slug: staging-the-resort
+    title: "Staging the Resort"
+    date: "2026-10-22"
+    publishDate: "2026-10-22T14:56:57+00:00"
+    image: "essays/disney-world-expansion-studios-pleasure-island-hotels/hero"
+    essay: "/essays/disney-world-expansion-studios-pleasure-island-hotels/"
+    alt: "Staging the Resort: an ink-and-watercolor scene of a film camera inside an open soundstage, looking toward a golden waterfront, a bandstand, palms, and resort hotels at twilight."
+    caption: "A studio, a night out, and one more reason to stay."
+    width: 1672
+    height: 941
   - slug: a-public-record-must-outlast-the-feed
     title: "A Public Record Must Outlast the Feed"
     date: "2026-10-12"
