@@ -38,6 +38,7 @@ function Assert-Rejected([scriptblock]$Action, [string]$MessagePattern) {
 
 $baseData = @'
 current: older-art
+automatic_articles_since: "2026-10-22T00:00:00-04:00"
 cartoons:
   - slug: older-art
     title: "An older \"quoted\" illustration"
@@ -81,6 +82,7 @@ try {
 
   & $publisher -Root $fixtureRoot -DialoguePath $route | Out-Null
   $published = [IO.File]::ReadAllText($dataPath)
+  Assert-True ($published -match '(?m)^automatic_articles_since: "2026-10-22T00:00:00-04:00"\r?$') 'Dialogue publication removed or changed the automatic Gallery cutoff.'
   Assert-True ($published -match '(?m)^current: gallery-dialogue\r?$') 'Immediate dialogue publication did not select current.'
   Assert-True ($published -match 'image: "essays/dialogues/gallery-dialogue/hero"') 'Gallery failed to reuse the dialogue hero ID.'
   Assert-True ($published -match 'essay: "/syd-and-oliver/gallery-dialogue/"') 'Gallery failed to link the dialogue canonical URL.'

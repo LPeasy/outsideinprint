@@ -37,8 +37,13 @@ Assert-Contract ($LASTEXITCODE -eq 0 -and "$version" -match '^hugo v0\.167\.0') 
 
 foreach ($relativePath in @(
   'layouts/partials/editorial/current-cartoon.html',
+  'layouts/partials/editorial/registered-cartoons.html',
   'layouts/partials/editorial/published-cartoons.html',
-  'layouts/partials/editorial/cartoon-is-published.html'
+  'layouts/partials/editorial/cartoon-is-published.html',
+  'layouts/partials/collections/is-published.html',
+  'layouts/partials/metadata/policy.html',
+  'layouts/partials/metadata/route.html',
+  'layouts/partials/images/resolve.html'
 )) {
   Write-Fixture $relativePath ([IO.File]::ReadAllText((Join-Path $repoRoot $relativePath)))
 }

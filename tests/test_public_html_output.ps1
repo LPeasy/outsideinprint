@@ -564,20 +564,20 @@ function Test-CartoonEntryPublished {
 }
 
 function Get-PublishedCartoonEntries {
-  param([string]$RepoRoot)
+  param([string]$RepoRoot, [object[]]$AutomaticEntries = @())
 
   return @(
-    Get-CartoonEntries -RepoRoot $RepoRoot |
+    (@(Get-CartoonEntries -RepoRoot $RepoRoot) + @($AutomaticEntries)) |
       Where-Object { Test-CartoonEntryPublished -Entry $_ }
   )
 }
 
 function Get-PublicCurrentCartoonEntry {
-  param([string]$RepoRoot)
+  param([string]$RepoRoot, [object[]]$AutomaticEntries = @())
 
   $latest = $null
   $latestRelease = [datetimeoffset]::MinValue
-  foreach ($cartoon in @(Get-PublishedCartoonEntries -RepoRoot $RepoRoot)) {
+  foreach ($cartoon in @(Get-PublishedCartoonEntries -RepoRoot $RepoRoot -AutomaticEntries $AutomaticEntries)) {
     $releaseValue = if ($cartoon.PSObject.Properties.Name -contains 'publishDate') { [string]$cartoon.publishDate } else { [string]$cartoon.date }
     $release = ConvertTo-OipDateTimeOffset -Value $releaseValue
     if ($null -eq $latest -or $release -gt $latestRelease -or
@@ -588,6 +588,110 @@ function Get-PublicCurrentCartoonEntry {
   }
 
   return $latest
+}
+
+function Resolve-GalleryManagedImageId {
+  param([string]$Reference, [hashtable]$Manifest)
+
+  $referenceValue = $Reference.Trim() -creplace '^oip-image:', ''
+  $keys = @($referenceValue, $referenceValue.TrimStart('/'))
+  if ($referenceValue.StartsWith('images/', [StringComparison]::Ordinal)) { $keys += '/' + $referenceValue }
+  foreach ($key in $keys) {
+    if ($Manifest.assets.ContainsKey($key)) { return $key }
+    if ($Manifest.aliases.ContainsKey($key)) { return [string]$Manifest.aliases[$key] }
+  }
+  return ''
+}
+
+function Get-AutomaticArticleCartoonEntries {
+  param([string]$RepoRoot, [hashtable]$Manifest, [object[]]$PublishedInventory)
+
+  $dataSource = Get-Content -LiteralPath (Join-Path $RepoRoot 'data/editorial_cartoons.yaml') -Raw
+  $cutoffMatch = [regex]::Match($dataSource, '(?m)^automatic_articles_since:\s*(.+?)\s*$')
+  if (-not $cutoffMatch.Success) { return @() }
+  $cutoffValue = Convert-YamlScalarToString -Value $cutoffMatch.Groups[1].Value
+  if (-not $cutoffValue) { return @() }
+  $cutoff = ConvertTo-OipDateTimeOffset -Value $cutoffValue
+  $explicitRoutes = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+  $explicitImages = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+  # Every explicit registration reserves its route and artwork, including queued entries.
+  foreach ($entry in @(Get-CartoonEntries -RepoRoot $RepoRoot)) {
+    if ($entry.PSObject.Properties.Name -contains 'essay' -and $entry.essay) {
+      [void]$explicitRoutes.Add('/' + ([string]$entry.essay).Trim('/'))
+    }
+    $imageId = Resolve-GalleryManagedImageId -Reference ([string]$entry.image) -Manifest $Manifest
+    if ($imageId) { [void]$explicitImages.Add($imageId) }
+  }
+  $automatic = [Collections.Generic.List[object]]::new()
+  $reservedRoutes = [Collections.Generic.HashSet[string]]::new($explicitRoutes, [StringComparer]::Ordinal)
+  $reservedImages = [Collections.Generic.HashSet[string]]::new($explicitImages, [StringComparer]::Ordinal)
+  $orderedInventory = [Collections.Generic.List[object]]::new()
+  foreach ($record in $PublishedInventory) {
+    $articleDate = ConvertTo-OipDateTimeOffset -Value $record.date
+    $articlePublishDate = ConvertTo-OipDateTimeOffset -Value $record.publishDate
+    $release = if ($articleDate -gt $articlePublishDate) { $articleDate } else { $articlePublishDate }
+    $orderedInventory.Add([pscustomobject]@{ Record = $record; Release = $release })
+  }
+  $orderedInventory.Sort([Comparison[object]]{
+    param($left, $right)
+    $releaseOrder = $right.Release.CompareTo($left.Release)
+    if ($releaseOrder -ne 0) { return $releaseOrder }
+    return [StringComparer]::Ordinal.Compare([string]$left.Record.permalink, [string]$right.Record.permalink)
+  })
+  foreach ($candidate in $orderedInventory) {
+    $record = $candidate.Record
+    if ($record.kind -cne 'page' -or $record.section -cnotin @('essays', 'syd-and-oliver', 'reports', 'working-papers') -or $record.draft -eq 'true') { continue }
+    $date = ConvertTo-OipDateTimeOffset -Value $record.date
+    $publishDate = ConvertTo-OipDateTimeOffset -Value $record.publishDate
+    $release = if ($date -gt $publishDate) { $date } else { $publishDate }
+    $expiry = ConvertTo-OipDateTimeOffset -Value $record.expiryDate
+    if ($release -lt $cutoff -or $release -gt $validationNow -or ($expiry.Year -gt 1 -and $expiry -le $validationNow)) { continue }
+    $sourcePath = Join-Path $RepoRoot $record.path
+    $excluded = $false
+    foreach ($flag in @('noindex', 'private', 'redirect_to')) {
+      $value = Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key $flag
+      if ($value -and $value -cne 'false') { $excluded = $true }
+    }
+    if ($excluded) { continue }
+    # Keep Hugo's escaped canonical path intact; it also supplies the stable hash.
+    $route = ([uri]$record.permalink).AbsolutePath
+    if (-not $route) { throw "Unable to resolve an automatic Gallery article's canonical route: $($record.permalink)" }
+    $normalizedRoute = '/' + $route.Trim('/')
+    $imageId = Resolve-GalleryManagedImageId -Reference (Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key 'featured_image') -Manifest $Manifest
+    if (-not $imageId -or $reservedRoutes.Contains($normalizedRoute) -or $reservedImages.Contains($imageId)) { continue }
+    $asset = $Manifest.assets[$imageId]
+    if ($asset.image_class -cnotin @('editorial_cartoon', 'essay_illustration') -or $asset.review_state -cne 'approved' -or
+      $asset.usage_state -cne 'referenced' -or $asset.processing_state -cne 'derivative_capable') { continue }
+    $alt = (Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key 'featured_image_alt').Trim()
+    if ([string]::IsNullOrWhiteSpace($alt)) { throw "Automatic Gallery article is missing illustration alt text: $route" }
+    $title = (Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key 'short_title').Trim()
+    if (-not $title) { $title = $record.title }
+    $slug = 'article-' + (Get-StringSha256 -Value $route).Substring(0, 16)
+    $automatic.Add([pscustomobject]@{ slug = $slug; title = $title; date = $date.ToString('yyyy-MM-dd'); publishDate = $release.ToString('o');
+      image = $imageId; essay = $route; alt = $alt; width = $asset.width; height = $asset.height })
+    [void]$reservedRoutes.Add($normalizedRoute)
+    [void]$reservedImages.Add($imageId)
+  }
+  return $automatic.ToArray()
+}
+
+function Get-AutomaticGalleryOutputIssues {
+  param([string]$Html, [object[]]$Entries)
+
+  foreach ($entry in $Entries) {
+    $figures = @([regex]::Matches($Html, '(?is)<figure\b[^>]*>.*?</figure>') | Where-Object {
+      @(Get-OpenTags -Html $_.Value -TagName 'button' | Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-cartoon-slug') -ceq $entry.slug }).Count -gt 0
+    })
+    if ($figures.Count -ne 1) { "public/gallery/index.html => expected one automatic illustration '$($entry.slug)', found $($figures.Count)"; continue }
+    $trigger = @(Get-OpenTags -Html $figures[0].Value -TagName 'button' | Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-cartoon-slug') -ceq $entry.slug })
+    $image = @(Get-OpenTags -Html $figures[0].Value -TagName 'img' | Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-oip-image-id') -ceq $entry.image })
+    if ($trigger.Count -ne 1 -or $image.Count -ne 1 -or
+      [Net.WebUtility]::HtmlDecode((Get-AttributeValue -Tag $trigger[0] -Name 'data-essay')) -cne $entry.essay -or
+      [Net.WebUtility]::HtmlDecode((Get-AttributeValue -Tag $trigger[0] -Name 'data-title')) -cne $entry.title -or
+      [Net.WebUtility]::HtmlDecode((Get-AttributeValue -Tag $trigger[0] -Name 'data-alt')) -cne $entry.alt) {
+      "public/gallery/index.html => automatic illustration '$($entry.slug)' must preserve its canonical artwork, article, title, and alt text"
+    }
+  }
 }
 function Get-SemanticPageIssues {
   param(
@@ -671,13 +775,6 @@ if (-not (Test-Path -LiteralPath $imageManifestPath -PathType Leaf)) {
 }
 $imageManifest = Get-Content -LiteralPath $imageManifestPath -Raw | ConvertFrom-Json -AsHashtable -Depth 20
 $canonicalAffirmations = @(Get-CanonicalAffirmations -Path (Join-Path $repoRoot 'editorial\affirmations-bank.md'))
-$currentCartoon = Get-PublicCurrentCartoonEntry -RepoRoot $repoRoot
-$currentCartoonSlug = if ($null -ne $currentCartoon) { [string]$currentCartoon.slug } else { '' }
-$currentCartoonImagePath = if ($null -ne $currentCartoon -and ($currentCartoon.PSObject.Properties.Name -contains 'image')) { [string]$currentCartoon.image } else { '' }
-$currentCartoonImagePattern = [regex]::Escape($currentCartoonImagePath)
-$currentCartoonEssayPath = if ($null -ne $currentCartoon -and ($currentCartoon.PSObject.Properties.Name -contains 'essay')) { [string]$currentCartoon.essay } else { '' }
-$currentCartoonEssayPattern = 'data-essay=(?:"' + [regex]::Escape($currentCartoonEssayPath) + '"|' + [regex]::Escape($currentCartoonEssayPath) + ')'
-$currentCartoonCaption = if ($null -ne $currentCartoon -and ($currentCartoon.PSObject.Properties.Name -contains 'caption')) { [string]$currentCartoon.caption } else { '' }
 $freshness = Test-PublicBuildFreshness -RepoRoot $repoRoot -SiteDir $SiteDir
 if (-not $freshness.IsFresh) {
   $message = "Generated-output regression test requires a fresh Hugo build. $($freshness.Reason)"
@@ -690,6 +787,23 @@ if (-not $freshness.IsFresh) {
   $global:LASTEXITCODE = 0
   exit 0
 }
+
+# Hugo supplies canonical routes and publication metadata; expected artwork is
+# independently resolved from source front matter and the approved manifest.
+$selectionHugo = Resolve-PinnedHugo -RepoRoot $repoRoot
+$selectionConfig = if ($env:OIP_HUGO_CONFIG) { $env:OIP_HUGO_CONFIG } else { 'hugo.toml' }
+$selectionInventoryArgs = @('list', 'published', '--source', $repoRoot, '--config', $selectionConfig)
+if ($Clock) { $selectionInventoryArgs += @('--clock', $Clock) }
+$publishedInventory = & $selectionHugo.Command @selectionInventoryArgs
+if ($LASTEXITCODE -ne 0) { throw 'Hugo published inventory failed during Gallery and homepage selection validation.' }
+$automaticGalleryEntries = @(Get-AutomaticArticleCartoonEntries -RepoRoot $repoRoot -Manifest $imageManifest -PublishedInventory @($publishedInventory | ConvertFrom-Csv))
+$currentCartoon = Get-PublicCurrentCartoonEntry -RepoRoot $repoRoot -AutomaticEntries $automaticGalleryEntries
+$currentCartoonSlug = if ($null -ne $currentCartoon) { [string]$currentCartoon.slug } else { '' }
+$currentCartoonImagePath = if ($null -ne $currentCartoon -and ($currentCartoon.PSObject.Properties.Name -contains 'image')) { [string]$currentCartoon.image } else { '' }
+$currentCartoonImagePattern = [regex]::Escape($currentCartoonImagePath)
+$currentCartoonEssayPath = if ($null -ne $currentCartoon -and ($currentCartoon.PSObject.Properties.Name -contains 'essay')) { [string]$currentCartoon.essay } else { '' }
+$currentCartoonEssayPattern = 'data-essay=(?:"' + [regex]::Escape($currentCartoonEssayPath) + '"|' + [regex]::Escape($currentCartoonEssayPath) + ')'
+$currentCartoonCaption = if ($null -ne $currentCartoon -and ($currentCartoon.PSObject.Properties.Name -contains 'caption')) { [string]$currentCartoon.caption } else { '' }
 
 $htmlFiles = @(Get-ChildItem -Path $SiteDir -Recurse -File -Filter "*.html")
 if ($htmlFiles.Count -eq 0) {
@@ -5734,7 +5848,6 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
       [void]$archiveReadingPaths.Add((Get-SitePathFromHref -Href (Get-AttributeValue -Tag $match.Groups['anchor'].Value -Name 'href')))
     }
   }
-  $selectionHugo = Resolve-PinnedHugo -RepoRoot $repoRoot
   $freshnessFixture = Join-Path ([IO.Path]::GetTempPath()) ('oip-feature-freshness-' + [guid]::NewGuid().ToString('N'))
   [void](New-Item -ItemType Directory -Path $freshnessFixture)
   try {
@@ -5768,11 +5881,6 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   finally {
     if (Test-Path -LiteralPath $freshnessFixture -PathType Container) { Remove-Item -LiteralPath $freshnessFixture -Recurse -Force }
   }
-  $selectionConfig = if ($env:OIP_HUGO_CONFIG) { $env:OIP_HUGO_CONFIG } else { 'hugo.toml' }
-  $selectionInventoryArgs = @('list', 'published', '--source', $repoRoot, '--config', $selectionConfig)
-  if ($Clock) { $selectionInventoryArgs += @('--clock', $Clock) }
-  $publishedInventory = & $selectionHugo.Command @selectionInventoryArgs
-  if ($LASTEXITCODE -ne 0) { throw 'Hugo published inventory failed during homepage selection validation.' }
   $selectionObservationTime = $validationNow
   $publishedReadingRecords = @($publishedInventory | ConvertFrom-Csv | Where-Object {
     $_.kind -ceq 'page' -and $archiveReadingPaths.Contains((Get-SitePathFromHref -Href $_.permalink)) -and
@@ -6286,6 +6394,10 @@ foreach ($surface in $expandedArtworkSurfaces) {
       }
     }
   }
+}
+
+foreach ($issue in @(Get-AutomaticGalleryOutputIssues -Html ([string]$targetPageHtml['public/gallery/index.html']) -Entries $automaticGalleryEntries)) {
+  $uxIssues.Add($issue)
 }
 
 # Reuse Hugo's validated source inventory so expected membership and order come

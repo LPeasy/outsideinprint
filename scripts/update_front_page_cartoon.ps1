@@ -557,6 +557,7 @@ function Read-CartoonData {
 
   $result = [ordered]@{
     current = ''
+    automatic_articles_since = $null
     cartoons = @()
   }
 
@@ -570,6 +571,11 @@ function Read-CartoonData {
   foreach ($line in [System.IO.File]::ReadLines($Path)) {
     if ($line -match '^current:\s*(.+)\s*$') {
       $result.current = Unquote-YamlValue $Matches[1]
+      continue
+    }
+
+    if ($line -match '^automatic_articles_since:\s*(.*?)\s*$') {
+      $result.automatic_articles_since = Unquote-YamlValue $Matches[1]
       continue
     }
 
@@ -611,6 +617,11 @@ function Write-CartoonData {
 
   $lines = @()
   $lines += "current: $Current"
+  # Preserve the automatic Gallery policy in every publication mode.
+  $automaticArticlesSince = (Read-CartoonData -Path $Path).automatic_articles_since
+  if ($null -ne $automaticArticlesSince) {
+    $lines += "automatic_articles_since: $(Quote-YamlValue ([string]$automaticArticlesSince))"
+  }
   $lines += 'cartoons:'
 
   foreach ($cartoon in $Cartoons) {

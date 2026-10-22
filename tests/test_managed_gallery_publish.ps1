@@ -43,6 +43,7 @@ function Assert-Rejected([scriptblock]$Action, [string]$MessagePattern) {
 
 $baseData = @'
 current: older-art
+automatic_articles_since: "2026-10-22T00:00:00-04:00"
 cartoons:
   - slug: older-art
     title: "Older illustration"
@@ -89,6 +90,7 @@ try {
 
   Invoke-Publish
   $published = [IO.File]::ReadAllText($dataPath)
+  Assert-True ($published -match '(?m)^automatic_articles_since: "2026-10-22T00:00:00-04:00"\r?$') 'Managed publication removed or changed the automatic Gallery cutoff.'
   Assert-True ($published -match 'image: "essays/gallery-essay/hero"') 'Gallery did not reuse the managed ID.'
   Assert-True ($published -match 'essay: "/essays/gallery-essay/"') 'Gallery did not preserve the explicit essay association.'
   Assert-True ($published -match 'publishDate: "2000-01-01T15:00:00Z"') 'Gallery lost the exact essay release timestamp.'

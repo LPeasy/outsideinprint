@@ -103,6 +103,33 @@ test("deployment verifies exact generation before canonical route checks", () =>
   assert.equal(steps("deploy").filter(step => step.run?.includes("test_live_seo_smoke")).length, 1);
   assert.match(steps("deploy").find(step => step.run?.includes("probe_seo_rollout")).if, /outputs.seo/);
 });
+
+test("only a fresh authenticated main-head match can deploy and run live checks", () => {
+  const deploySteps = steps("deploy");
+  const freshnessIndex = deploySteps.findIndex(step => step.id === "deployment-head");
+  const deploymentIndex = deploySteps.findIndex(step => step.id === "deployment");
+  assert.ok(freshnessIndex >= 0);
+  assert.equal(freshnessIndex + 1, deploymentIndex, "freshness must be rechecked immediately before actual deployment");
+  assert.equal(deploySteps[freshnessIndex].run, "node scripts/ci/check_deployment_head.mjs");
+  assert.equal(deploySteps[freshnessIndex].env.GH_TOKEN, "${{ github.token }}");
+  for (const step of deploySteps.filter(step => step.id === "deployment" || step.id === "deployment-head-final" || /verify_deployment/.test(step.run ?? ""))) {
+    assert.match(step.if, /steps.deployment-head.outputs.current == 'true'/, step.name);
+  }
+  const finalIndex = deploySteps.findIndex(step => step.id === "deployment-head-final");
+  const manifestIndex = deploySteps.findIndex(step => step.run?.includes("verify_deployment.mjs"));
+  const routesIndex = deploySteps.findIndex(step => step.run?.includes("test_live_seo_smoke"));
+  assert.ok(finalIndex > manifestIndex && routesIndex > finalIndex);
+  assert.equal(deploySteps[finalIndex].env.GH_TOKEN, "${{ github.token }}");
+  assert.equal(deploySteps[finalIndex].env.OIP_REQUIRE_CURRENT, "true");
+  assert.equal(deploySteps[finalIndex].env.OIP_DEPLOYMENT_HEAD_REPORT, ".deploy-reports/deployment-head-final.json");
+  for (const step of deploySteps.filter(step => /test_live_seo_smoke|probe_seo_rollout/.test(step.run ?? ""))) {
+    assert.match(step.if, /steps.deployment-head-final.outputs.current == 'true'/, step.name);
+    assert.match(step.if, /steps.deployment-head-final.outcome == 'success'/, step.name);
+  }
+  assert.match(deploySteps.find(step => step.run?.includes("probe_seo_rollout")).if, /steps.deployment.outcome == 'success'/);
+  assert.match(commands("classify"), /tests\/deployment_head.test.mjs/);
+  assert.equal(deploySteps.find(step => step.with?.name === "deployment-diagnostics").with.path, ".deploy-reports/**");
+});
 test("disabled analytics workflow remains manual-only", () => {
   const analytics = YAML.parse(fs.readFileSync(".github/workflows/refresh-analytics.yml", "utf8"), { version: "1.2" });
   assert.deepEqual(Object.keys(analytics.on), ["workflow_dispatch"]);
