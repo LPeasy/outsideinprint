@@ -9,8 +9,8 @@ draft: false
 slug: epcot-center-opening-1982
 section_label: Essay
 collections: ["brands-business-consumer-choice"]
-version: '1.0'
-edition: First web edition
+version: '1.1'
+edition: Second web edition
 featured: false
 featured_image: essays/epcot-center-opening-1982/hero
 featured_image_alt: An ink illustration shows a proposed radial city on a drafting table, with Spaceship Earth rising beyond it.
@@ -22,6 +22,12 @@ tags:
 - PeopleMover
 - theme parks
 - business history
+article_series: "disney-world-development"
+series_part: 2
+revision_history:
+  - version: "1.1"
+    date: "2026-10-22"
+    note: "Added automatic links to other installments in the series."
 ---
 
 *Brands, Business, and Consumer Choice · Disney World Development, Part Two: The EPCOT Project*

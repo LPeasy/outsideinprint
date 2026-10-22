@@ -1,0 +1,55 @@
+{{- $page := . -}}
+{{- if isset $page.Params "article_series" -}}
+  {{- $policy := partial "metadata/policy.html" (dict "page" $page) -}}
+  {{- $readingSections := slice "essays" "syd-and-oliver" "reports" "working-papers" -}}
+  {{- if and $page.IsPage (in $readingSections $page.Section) (partial "collections/is-published.html" $page) $policy.indexable (not $page.Params.redirect_to) -}}
+    {{- $series := "" -}}
+    {{- $rawSeries := $page.Params.article_series -}}
+    {{- if and (eq (printf "%T" $rawSeries) "string") (eq (len (findRE `^[a-z0-9]+(?:-[a-z0-9]+)*$` $rawSeries)) 1) -}}
+      {{- $series = $rawSeries -}}
+    {{- else -}}
+      {{- errorf "Article series for %q requires article_series to be a lowercase hyphenated slug; got %v" $page.RelPermalink $rawSeries -}}
+    {{- end -}}
+    {{- if $series -}}
+      {{- $members := slice -}}
+      {{- $parts := dict -}}
+      {{- range site.RegularPages -}}
+        {{- if and (eq (printf "%T" .Params.article_series) "string") (eq .Params.article_series $series) (in $readingSections .Section) (partial "collections/is-published.html" .) (not .Params.redirect_to) -}}
+          {{- $memberPolicy := partial "metadata/policy.html" (dict "page" .) -}}
+          {{- if $memberPolicy.indexable -}}
+            {{- $rawPart := .Params.series_part -}}
+            {{- $integerType := eq (len (findRE `^u?int(?:8|16|32|64)?$` (printf "%T" $rawPart))) 1 -}}
+            {{- if and $integerType (gt $rawPart 0) -}}
+              {{- $part := int $rawPart -}}
+              {{- $partKey := printf "%d" $part -}}
+              {{- if isset $parts $partKey -}}
+                {{- errorf "Article series %q has duplicate series_part %d on %q and %q" $series $part (index $parts $partKey) .RelPermalink -}}
+              {{- else -}}
+                {{- $parts = merge $parts (dict $partKey .RelPermalink) -}}
+                {{- $members = $members | append (dict "page" . "part" $part) -}}
+              {{- end -}}
+            {{- else -}}
+              {{- errorf "Article series %q member %q requires series_part to be a positive integer; got %v" $series .RelPermalink $rawPart -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $others := slice -}}
+      {{- range sort $members "part" "asc" -}}
+        {{- if ne .page.RelPermalink $page.RelPermalink -}}
+          {{- $others = $others | append . -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if $others -}}
+        <nav class="reading-path" data-article-series="{{ $series }}" aria-labelledby="article-series-title">
+          <h2 class="reading-path__title" id="article-series-title">More in this series</h2>
+          <ul class="reading-path__preview">
+            {{- range $others }}
+              <li class="reading-path__preview-item"><a class="reading-path__collection-link" href="{{ .page.RelPermalink }}">Part {{ .part }}: {{ .page.Title }}</a></li>
+            {{- end }}
+          </ul>
+        </nav>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

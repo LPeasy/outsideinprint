@@ -8,13 +8,19 @@ draft: false
 slug: "walt-disney-world-opening-1971"
 section_label: "Essay"
 collections: ["brands-business-consumer-choice"]
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
 featured: false
 featured_image: "essays/walt-disney-world-opening-1971/hero"
 featured_image_alt: "Cinderella Castle rises beyond resort plans spread across a drafting table, with blue lines connecting the drawings to the castle."
 featured_image_caption: "From drawings to a destination."
 tags: ["Walt Disney World", "Disney history", "Roy Disney", "theme parks", "business history"]
+article_series: "disney-world-development"
+series_part: 1
+revision_history:
+  - version: "1.1"
+    date: "2026-10-22"
+    note: "Added automatic links to other installments in the series."
 ---
 
 *Brands, Business, and Consumer Choice · Disney World Development, Part One: The Florida Project*
