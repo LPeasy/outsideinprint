@@ -56,7 +56,7 @@ jobs:
       - name: Install workflow parser
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Check workflow safety and selectors
-        run: node --test tests/ci_workflow.test.mjs tests/classify_changes.test.mjs tests/image_cache.test.mjs tests/release_gate.test.mjs tests/verify_deployment.test.mjs
+        run: node --test tests/ci_workflow.test.mjs tests/classify_changes.test.mjs tests/image_cache.test.mjs tests/release_gate.test.mjs tests/verify_deployment.test.mjs tests/deployment_head.test.mjs
       - name: Select checks and publication clock
         id: selection
         env:
@@ -488,19 +488,35 @@ jobs:
           package-manager-cache: false
       - name: Configure Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
+      - name: Check deployment still matches current main
+        id: deployment-head
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/ci/check_deployment_head.mjs
       - name: Deploy
         id: deployment
+        if: ${{ steps.deployment-head.outputs.current == 'true' }}
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
       - name: Verify canonical publication manifest
+        if: ${{ steps.deployment-head.outputs.current == 'true' }}
         env:
           OIP_EXPECTED_SHA: ${{ github.sha }}
           OIP_EXPECTED_GENERATED_AT: ${{ needs.site.outputs.generated_at }}
         run: node scripts/ci/verify_deployment.mjs
+      - name: Confirm published commit still matches current main
+        id: deployment-head-final
+        if: ${{ steps.deployment-head.outputs.current == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OIP_REQUIRE_CURRENT: 'true'
+          OIP_DEPLOYMENT_HEAD_REPORT: .deploy-reports/deployment-head-final.json
+        run: node scripts/ci/check_deployment_head.mjs
       - name: Verify canonical routes and SEO
+        if: ${{ steps.deployment-head-final.outcome == 'success' && steps.deployment-head-final.outputs.current == 'true' }}
         shell: pwsh
         run: ./tests/test_live_seo_smoke.ps1 -BaseUrl "https://outsideinprint.org"
       - name: SEO Rollout Probe
-        if: ${{ always() && needs.classify.outputs.seo == 'true' }}
+        if: ${{ always() && steps.deployment-head-final.outcome == 'success' && steps.deployment-head-final.outputs.current == 'true' && steps.deployment.outcome == 'success' && needs.classify.outputs.seo == 'true' }}
         shell: pwsh
         run: |
           ./scripts/probe_seo_rollout.ps1 -OutputDir ./.deploy-reports/seo-rollout -UpdateWorksheet:$false

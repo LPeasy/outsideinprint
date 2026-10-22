@@ -212,6 +212,7 @@ function Test-AssociationOnlyUpdate {
 
     @'
 current: newest-cartoon
+automatic_articles_since: "2026-10-22T00:00:00-04:00"
 cartoons:
   - slug: target-cartoon
     title: "Target Cartoon"
@@ -315,6 +316,7 @@ This fixture requires an Editorial Philosophy Audit.
       -EssayPath '/essays/source-free-musing/' | Out-Null
 
     $updatedData = Get-Content -LiteralPath (Join-Path $tempDataDir 'editorial_cartoons.yaml') -Raw
+    Assert-True ($updatedData -match '(?m)^automatic_articles_since: "2026-10-22T00:00:00-04:00"\r?$') 'Association-only publication removed or changed the automatic Gallery cutoff.'
     Assert-True `
       -Condition ([regex]::IsMatch($updatedData, '(?m)^current:\s+newest-cartoon\s*$')) `
       -Message 'Association-only cartoon update changed the current front-page cartoon.'
@@ -383,6 +385,7 @@ function Test-ExplicitPublishSlug {
 
     @'
 current: placeholder
+automatic_articles_since: "2026-10-22T00:00:00-04:00"
 cartoons:
   - slug: placeholder
     title: "Placeholder"
@@ -403,6 +406,7 @@ cartoons:
       -NoEssayLink | Out-Null
 
     $updatedData = Get-Content -LiteralPath (Join-Path $tempDataDir 'editorial_cartoons.yaml') -Raw
+    Assert-True ($updatedData -match '(?m)^automatic_articles_since: "2026-10-22T00:00:00-04:00"\r?$') 'Artwork publication removed or changed the automatic Gallery cutoff.'
     Assert-True `
       -Condition ([regex]::IsMatch($updatedData, '(?m)^current:\s+explicit-manifest-slug\s*$')) `
       -Message 'Explicit publish slug was not preserved as current.'
@@ -582,6 +586,7 @@ if (-not $currentExists) {
 
 if (-not $SourceOnly) {
   & (Join-Path $PSScriptRoot 'test_editorial_current_cartoon_contract.ps1')
+  & (Join-Path $PSScriptRoot 'test_automatic_article_gallery_contract.ps1')
   & (Join-Path $PSScriptRoot 'test_managed_gallery_publish.ps1')
   Test-AssociationOnlyUpdate
   Test-ExplicitPublishSlug

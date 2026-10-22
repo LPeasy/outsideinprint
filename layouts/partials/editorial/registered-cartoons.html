@@ -1,0 +1,105 @@
+{{- /* Explicit Gallery pairings retain their titles, slugs, and release schedules. */ -}}
+{{- $cartoons := . | default (slice) -}}
+{{- $registered := $cartoons -}}
+{{- $claimedRoutes := dict -}}
+{{- $claimedAssets := dict -}}
+{{- $claimedSlugs := dict -}}
+{{- $manifest := index hugo.Data "image-assets" | default dict -}}
+{{- $assets := $manifest.assets | default dict -}}
+{{- $aliases := $manifest.aliases | default dict -}}
+{{- range $cartoons -}}
+  {{- $claimedSlugs = merge $claimedSlugs (dict .slug true) -}}
+  {{- with .essay -}}
+    {{- $route := strings.TrimSuffix "/" (printf "/%s" (strings.TrimPrefix "/" (. | relURL))) -}}
+    {{- $claimedRoutes = merge $claimedRoutes (dict $route true) -}}
+  {{- end -}}
+  {{- with .image -}}
+    {{- /* Deduplication needs only the manifest ID, not every original resource. */ -}}
+    {{- $ref := strings.TrimSpace (strings.TrimPrefix "oip-image:" (strings.TrimSpace (printf "%v" .))) -}}
+    {{- $keys := slice $ref -}}
+    {{- if hasPrefix $ref "/" -}}
+      {{- $keys = $keys | append (strings.TrimPrefix "/" $ref) -}}
+    {{- else if hasPrefix $ref "images/" -}}
+      {{- $keys = $keys | append (printf "/%s" $ref) -}}
+    {{- end -}}
+    {{- range $keys -}}
+      {{- with index $assets . -}}
+        {{- $claimedAssets = merge $claimedAssets (dict .id true) -}}
+      {{- else -}}
+        {{- with index $aliases . -}}
+          {{- $claimedAssets = merge $claimedAssets (dict (printf "%v" .) true) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $cutoff := time.AsTime hugo.Data.editorial_cartoons.automatic_articles_since -}}
+{{- $readingSections := slice "essays" "syd-and-oliver" "reports" "working-papers" -}}
+{{- $candidates := slice -}}
+{{- range sort site.RegularPages "RelPermalink" "asc" -}}
+  {{- $page := . -}}
+  {{- if and
+    (in $readingSections $page.Section)
+    (partial "collections/is-published.html" $page)
+    (not $page.Params.private)
+    (not $page.Params.redirect_to)
+  -}}
+    {{- $policy := partial "metadata/policy.html" (dict "page" $page) -}}
+    {{- $release := $page.Date -}}
+    {{- if gt $page.PublishDate $release -}}
+      {{- $release = $page.PublishDate -}}
+    {{- end -}}
+    {{- $route := strings.TrimSuffix "/" $page.RelPermalink -}}
+    {{- if and $policy.indexable (ge $release $cutoff) (not (isset $claimedRoutes $route)) -}}
+      {{- with $page.Params.featured_image -}}
+        {{- $image := partial "images/resolve.html" (dict "page" $page "ref" .) -}}
+        {{- if $image.managed -}}
+          {{- $entry := $image.entry -}}
+          {{- $illustration := in (slice "editorial_cartoon" "essay_illustration") $entry.image_class -}}
+          {{- $approved := and
+            (eq $entry.review_state "approved")
+            (eq $entry.usage_state "referenced")
+            (eq $entry.processing_state "derivative_capable")
+          -}}
+          {{- if and $illustration $approved (not (isset $claimedAssets $image.id)) -}}
+            {{- $alt := strings.TrimSpace (printf "%v" ($page.Params.featured_image_alt | default "")) -}}
+            {{- if not $alt -}}
+              {{- errorf "Automatic Gallery illustration for %q requires featured_image_alt" $page.RelPermalink -}}
+            {{- else -}}
+              {{- $title := strings.TrimSpace (printf "%v" ($page.Params.short_title | default "")) | default $page.Title -}}
+              {{- $slug := printf "article-%s" (substr (crypto.SHA256 $page.RelPermalink) 0 16) -}}
+              {{- $cartoon := dict
+                "slug" $slug
+                "title" $title
+                "date" ($page.Date.Format "2006-01-02")
+                "publishDate" ($release.Format "2006-01-02T15:04:05.999999999Z07:00")
+                "image" $image.id
+                "essay" $page.RelPermalink
+                "alt" $alt
+                "width" $image.width
+                "height" $image.height
+              -}}
+              {{- $candidates = $candidates | append (dict "cartoon" $cartoon "release" $release.UnixNano) -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Reused artwork appears once; newest release wins, then canonical route order. */ -}}
+{{- range sort $candidates "release" "desc" -}}
+  {{- $cartoon := .cartoon -}}
+  {{- if not (isset $claimedAssets $cartoon.image) -}}
+    {{- if isset $claimedSlugs $cartoon.slug -}}
+      {{- errorf "Automatic Gallery illustration for %q conflicts with Gallery slug %q" $cartoon.essay $cartoon.slug -}}
+    {{- else -}}
+      {{- $registered = $registered | append $cartoon -}}
+      {{- $claimedAssets = merge $claimedAssets (dict $cartoon.image true) -}}
+      {{- $claimedSlugs = merge $claimedSlugs (dict $cartoon.slug true) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $registered -}}
