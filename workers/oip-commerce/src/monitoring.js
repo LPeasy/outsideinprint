@@ -1,31 +1,100 @@
 import {
   cleanupOperationalCanaries,
+  blockExpiredOperationalAlerts,
+  claimOperationalAlert,
+  completeOperationalAlertAttempt,
+  countBlockedOperationalAlerts,
   countFulfillmentDeliveryIssues,
   createOperationalCanary,
   finishOperationalHeartbeat,
   getOperationalHealthSnapshot,
+  getOperationalAlertStatus,
   getUnresolvedOperationalCanaries,
   listPendingOperationalAlerts,
-  markOperationalAlertFailed,
-  markOperationalAlertSent,
   markOperationalCanaryQueued,
   markOperationalCanarySendFailed,
   markStaleOperationalCanaries,
   receiveOperationalCanary,
   recordOperationalAlert,
   recordOperationalDlqReceipt,
+  recordOperationalRunError,
+  renewOperationalHeartbeat,
+  setOperationalAlertPayloadHash,
   startOperationalHeartbeat,
 } from "./database.js";
 import { sha256Hex } from "./crypto.js";
 import { parseBoolean, requireBinding } from "./http.js";
 import { expireUnusedPhysicalLinks } from "./maintenance.js";
-import { sendOperationalAlert } from "./square.js";
+import { operationalAlertPayloadDigest, sendOperationalAlert, SquareApiError } from "./square.js";
 
 export const OPERATIONAL_CANARY_KIND = "OIP_OPERATIONAL_CANARY_V1";
 export const OPERATIONAL_MONITOR_KEY = "TASK2_COMMERCE_OPERATIONS";
+const MONITOR_LEASE_SECONDS = 120;
 
 function nowSeconds() {
   return Math.floor(Date.now() / 1000);
+}
+
+// Anchor explicit test/start times while still recording elapsed wall time.
+// A run must never renew its lease using its original start timestamp.
+function operationClock(env, start) {
+  const wallStart = Date.now();
+  let latest = start;
+  return () => {
+    const value = env.__testNow
+      ? env.__testNow()
+      : start + Math.floor((Date.now() - wallStart) / 1000);
+    if (!Number.isSafeInteger(value) || value < 0) throw new Error("OPERATIONAL_CLOCK_INVALID");
+    latest = Math.max(latest, value);
+    return latest;
+  };
+}
+
+const SAFE_ERROR_CODES = new Set([
+  "PHYSICAL_EXPIRY_REVIEW_RECORD_FAILED", "QUEUE_CANARY_STATE_CONFLICT",
+  "OPERATIONAL_HEARTBEAT_CLAIM_LOST", "OPERATIONAL_ALERT_COMPLETION_FAILED",
+  "OPERATIONAL_ALERT_INPUT_INVALID", "OPERATIONAL_CLOCK_INVALID",
+  "OPERATIONAL_HEARTBEAT_COMPLETION_FAILED",
+  "SQUARE_UNREACHABLE", "SQUARE_INVALID_RESPONSE", "SQUARE_REQUEST_FAILED",
+  "SQUARE_RATE_LIMITED", "SQUARE_INTERNAL_SERVER_ERROR", "SQUARE_SERVICE_UNAVAILABLE",
+  "SQUARE_UNAUTHORIZED", "SQUARE_ACCESS_TOKEN_EXPIRED", "SQUARE_FORBIDDEN", "SQUARE_NOT_FOUND",
+]);
+
+function diagnosticCode(error, fallback = "OPERATIONAL_UNEXPECTED_ERROR") {
+  if (SAFE_ERROR_CODES.has(error?.message)) return error.message;
+  if (error instanceof SquareApiError) {
+    return SAFE_ERROR_CODES.has(error.code) ? error.code : "SQUARE_REQUEST_FAILED";
+  }
+  if (["TimeoutError", "AbortError"].includes(error?.name)) return "OPERATIONAL_TIMEOUT";
+  if (typeof error?.message === "string" && error.message.startsWith("D1_ERROR")) {
+    return "D1_OPERATION_FAILED";
+  }
+  return fallback;
+}
+
+async function recordRunError(env, runToken, stage, errorCode, now, httpStatus = null) {
+  // Console survives a D1 outage. Never log arbitrary exception text or payloads.
+  console.error(JSON.stringify({ event: "OIP_OPERATIONAL_ERROR", runToken, stage, errorCode, httpStatus, at: now }));
+  try {
+    await recordOperationalRunError(env.DB, { runToken, stage, errorCode, now, httpStatus });
+  } catch {
+    console.error(JSON.stringify({ event: "OIP_OPERATIONAL_ERROR", runToken,
+      stage: "ERROR_HISTORY", errorCode: "D1_HISTORY_WRITE_FAILED", at: now }));
+  }
+}
+
+function diagnosticHttpStatus(error) {
+  return error instanceof SquareApiError && Number.isInteger(error.status) &&
+    error.status >= 100 && error.status <= 599 ? error.status : null;
+}
+
+async function completeHeartbeat(db, record) {
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try { return await finishOperationalHeartbeat(db, record); } catch {
+      // An acknowledgement may be lost after commit. Replay the same completion.
+    }
+  }
+  throw new Error("OPERATIONAL_HEARTBEAT_COMPLETION_FAILED");
 }
 
 function boundedInteger(value, name, minimum, maximum) {
@@ -110,57 +179,104 @@ async function noteIssue(env, config, alertCode, now, occurrences = 1) {
   });
 }
 
-export async function flushPendingOperationalAlerts(env, now = nowSeconds(), limit = 10) {
-  const rows = await listPendingOperationalAlerts(env.DB, limit);
+export async function flushPendingOperationalAlerts(env, now = nowSeconds(), limit = 10, options = {}) {
+  const clock = operationClock(env, now);
+  await blockExpiredOperationalAlerts(env.DB, clock());
+  const rows = await listPendingOperationalAlerts(env.DB, limit, clock());
   let sent = 0;
-  let failed = 0;
-  for (const row of rows) {
+  let failed = await countBlockedOperationalAlerts(env.DB);
+  let examined = 0;
+  for (const candidate of rows) {
+    await options.beforeAttempt?.();
+    const claimToken = crypto.randomUUID();
+    const row = await claimOperationalAlert(env.DB, {
+      alertId: candidate.alert_id, claimToken, now: clock(),
+    });
+    if (!row) continue;
+    examined += 1;
+    const alert = {
+      alertCode: row.alert_code,
+      alertBucket: Number(row.alert_bucket),
+      occurrences: Number(row.delivery_occurrence_count),
+      firstSeenAt: Number(row.delivery_first_seen_at),
+      lastSeenAt: Number(row.delivery_last_seen_at),
+    };
     let delivery;
+    let payloadHash;
     try {
-      delivery = await sendOperationalAlert(env, {
-        alertCode: row.alert_code,
-        alertBucket: Number(row.alert_bucket),
-        occurrences: Number(row.occurrence_count),
-        firstSeenAt: Number(row.first_seen_at),
-        lastSeenAt: Number(row.last_seen_at),
-      });
+      payloadHash = await operationalAlertPayloadDigest(env, alert);
     } catch {
-      delivery = { status: "RETRY", errorCode: "OPERATIONAL_ALERT_CHANNEL_UNAVAILABLE" };
+      delivery = { status: "FAILED", errorCode: "OPERATIONAL_ALERT_INPUT_INVALID", blocked: true };
     }
-    if (delivery.status === "SENT") {
-      if (!(await markOperationalAlertSent(env.DB, row.alert_id, now))) {
-        throw new Error("OPERATIONAL_ALERT_STATE_LOST");
+    if (!delivery) {
+      if (row.payload_sha256 && row.payload_sha256 !== payloadHash) {
+        delivery = { status: "FAILED", errorCode: "RESEND_PAYLOAD_CHANGED", blocked: true };
+      } else if (!(await setOperationalAlertPayloadHash(env.DB, {
+        alertId: row.alert_id, claimToken, payloadHash, now: clock(),
+      }))) {
+        // Another owner or a late successful completion has already won.
+        continue;
+      } else {
+        if (clock() >= Number(row.claim_expires_at)) continue;
+        try {
+          delivery = await sendOperationalAlert(env, alert);
+        } catch {
+          delivery = { status: "RETRY", errorCode: "OPERATIONAL_ALERT_CHANNEL_UNAVAILABLE" };
+        }
       }
-      sent += 1;
-    } else {
-      const code = /^[A-Z0-9_]{3,64}$/u.test(String(delivery.errorCode || ""))
-        ? delivery.errorCode
-        : "OPERATIONAL_ALERT_DELIVERY_FAILED";
-      if (!(await markOperationalAlertFailed(env.DB, row.alert_id, code, now))) {
-        throw new Error("OPERATIONAL_ALERT_STATE_LOST");
-      }
-      failed += 1;
     }
+    const record = {
+      alertId: row.alert_id, claimToken, status: delivery.status,
+      errorCode: delivery.errorCode || null,
+      httpStatus: delivery.httpStatus || null,
+      // A rejected immutable payload needs review, not unbounded retry traffic.
+      blocked: Boolean(delivery.blocked || delivery.status === "FAILED"),
+      now: clock(),
+    };
+    let persisted = false;
+    for (let attempt = 0; attempt < 2; attempt += 1) {
+      try {
+        persisted = await completeOperationalAlertAttempt(env.DB, record);
+        break;
+      } catch {
+        // Retry the acknowledgement write, never the email, in this invocation.
+      }
+    }
+    if (!persisted) {
+      console.error(JSON.stringify({ event: "OIP_OPERATIONAL_ERROR", stage: "ALERT_COMPLETION",
+        errorCode: "OPERATIONAL_ALERT_COMPLETION_FAILED", claimToken,
+        providerStatus: delivery.status, providerErrorCode: delivery.errorCode || null,
+        httpStatus: delivery.httpStatus || null, at: clock() }));
+      throw new Error("OPERATIONAL_ALERT_COMPLETION_FAILED");
+    }
+    if (delivery.status === "SENT") sent += 1;
+    else if ((await getOperationalAlertStatus(env.DB, row.alert_id)) === "PENDING") failed += 1;
   }
-  return { examined: rows.length, sent, failed };
+  return { examined, sent, failed };
 }
 
 async function sendDirectMonitorFailure(env, config, alertCode, now) {
   const bucket = Math.floor(now / config.alertRepeatSeconds);
+  let result;
   try {
-    return await sendOperationalAlert(env, {
+    result = await sendOperationalAlert(env, {
       alertCode,
       alertBucket: bucket,
       occurrences: 1,
-      firstSeenAt: now,
-      lastSeenAt: now,
+      firstSeenAt: bucket * config.alertRepeatSeconds,
+      lastSeenAt: bucket * config.alertRepeatSeconds,
+      keyNamespace: "direct",
     });
   } catch {
-    return { status: "RETRY", errorCode: "OPERATIONAL_ALERT_CHANNEL_UNAVAILABLE" };
+    result = { status: "RETRY", errorCode: "OPERATIONAL_ALERT_CHANNEL_UNAVAILABLE" };
   }
+  console.error(JSON.stringify({ event: "OIP_OPERATIONAL_ALERT_RESULT", source: "D1_FALLBACK",
+    alertCode, providerStatus: result.status, errorCode: result.errorCode || null,
+    httpStatus: result.httpStatus || null, at: now }));
+  return result;
 }
 
-async function issueQueueCanary(env, config, now) {
+async function issueQueueCanary(env, config, now, onError) {
   const canaryId = crypto.randomUUID();
   if (!(await createOperationalCanary(env.DB, { canaryId, now }))) {
     throw new Error("QUEUE_CANARY_STATE_CONFLICT");
@@ -171,7 +287,8 @@ async function issueQueueCanary(env, config, now) {
       canaryId,
       queuedAt: now,
     });
-  } catch {
+  } catch (error) {
+    await onError?.(error);
     await markOperationalCanarySendFailed(env.DB, canaryId, now);
     await noteIssue(env, config, "QUEUE_CANARY_SEND_FAILED", now);
     return { sent: false };
@@ -185,16 +302,29 @@ export async function runOperationalSchedule(env, now = nowSeconds()) {
   if (!config.enabled) return { state: "DISABLED" };
 
   const runToken = crypto.randomUUID();
+  const clock = operationClock(env, now);
+  let admitted;
   try {
-    await startOperationalHeartbeat(env.DB, {
+    admitted = await startOperationalHeartbeat(env.DB, {
       monitorKey: OPERATIONAL_MONITOR_KEY,
       runToken,
       now,
+      leaseSeconds: MONITOR_LEASE_SECONDS,
     });
-  } catch {
+  } catch (error) {
+    await recordRunError(env, runToken, "HEARTBEAT_ADMISSION",
+      diagnosticCode(error, "D1_HEARTBEAT_FAILED"), clock());
     await sendDirectMonitorFailure(env, config, "D1_HEARTBEAT_FAILED", now);
     throw new Error("OPERATIONAL_MONITOR_D1_HEARTBEAT_FAILED");
   }
+  if (!admitted) return { state: "SKIPPED", reason: "MONITOR_BUSY" };
+
+  const guard = async () => {
+    const renewedAt = clock();
+    if (!(await renewOperationalHeartbeat(env.DB, {
+      monitorKey: OPERATIONAL_MONITOR_KEY, runToken, now: renewedAt, leaseSeconds: MONITOR_LEASE_SECONDS,
+    })) || clock() >= renewedAt + MONITOR_LEASE_SECONDS) throw new Error("OPERATIONAL_HEARTBEAT_CLAIM_LOST");
+  };
 
   const issueCodes = [];
   let delivery = { examined: 0, sent: 0, failed: 0 };
@@ -202,9 +332,13 @@ export async function runOperationalSchedule(env, now = nowSeconds()) {
   let unresolvedStaleCanaries = 0;
   let fulfillmentIssues = null;
   let maintenance = null;
+  let stage = "CANARY_CLEANUP";
   try {
+    await guard();
     await cleanupOperationalCanaries(env.DB, now - (7 * 24 * 60 * 60), 500);
 
+    stage = "CANARY_STALENESS";
+    await guard();
     staleCanaries = await markStaleOperationalCanaries(
       env.DB,
       now - config.canaryStaleSeconds,
@@ -217,6 +351,8 @@ export async function runOperationalSchedule(env, now = nowSeconds()) {
     // Keep historical losses visible without re-alerting or calling them a new outage.
     unresolvedStaleCanaries = (await getUnresolvedOperationalCanaries(env.DB)).count;
 
+    stage = "FULFILLMENT_CHECK";
+    await guard();
     fulfillmentIssues = await countFulfillmentDeliveryIssues(
       env.DB,
       now - config.fulfillmentStaleSeconds,
@@ -233,8 +369,15 @@ export async function runOperationalSchedule(env, now = nowSeconds()) {
       await noteIssue(env, config, code, now, count);
     }
 
+    stage = "PHYSICAL_MAINTENANCE";
+    await guard();
     try {
-      maintenance = await expireUnusedPhysicalLinks(env, now);
+      maintenance = await expireUnusedPhysicalLinks(env, clock(), 25, {
+        beforeStep: guard,
+        onError: async (operation, error) => {
+          await recordRunError(env, runToken, operation, diagnosticCode(error), clock(), diagnosticHttpStatus(error));
+        },
+      });
       if (maintenance.errors > 0) {
         issueCodes.push("PHYSICAL_LINK_EXPIRY_ERROR");
         await noteIssue(env, config, "PHYSICAL_LINK_EXPIRY_ERROR", now, maintenance.errors);
@@ -243,46 +386,59 @@ export async function runOperationalSchedule(env, now = nowSeconds()) {
         issueCodes.push("PHYSICAL_ORPHANED_REVIEW");
         await noteIssue(env, config, "PHYSICAL_ORPHANED_REVIEW", now, maintenance.orphaned);
       }
-    } catch {
+    } catch (error) {
+      if (error?.message === "OPERATIONAL_HEARTBEAT_CLAIM_LOST") throw error;
+      await recordRunError(env, runToken, stage, diagnosticCode(error), clock(), diagnosticHttpStatus(error));
       issueCodes.push("PHYSICAL_MAINTENANCE_FAILED");
       await noteIssue(env, config, "PHYSICAL_MAINTENANCE_FAILED", now);
     }
 
-    const canary = await issueQueueCanary(env, config, now);
+    stage = "QUEUE_CANARY_SEND";
+    await guard();
+    const canary = await issueQueueCanary(env, config, clock(), async (error) => {
+      await recordRunError(env, runToken, stage, diagnosticCode(error, "QUEUE_SEND_FAILED"), clock());
+    });
     if (!canary.sent) issueCodes.push("QUEUE_CANARY_SEND_FAILED");
 
-    delivery = await flushPendingOperationalAlerts(env, now);
+    stage = "ALERT_DELIVERY";
+    await guard();
+    delivery = await flushPendingOperationalAlerts(env, clock(), 10, { beforeAttempt: guard });
     const status = issueCodes.length > 0 || delivery.failed > 0 ? "DEGRADED" : "OK";
     const errorCode = delivery.failed > 0
       ? "OPERATIONAL_ALERT_DELIVERY_PENDING"
       : issueCodes[0] || null;
-    const finished = await finishOperationalHeartbeat(env.DB, {
+    stage = "HEARTBEAT_COMPLETION";
+    await guard();
+    const finished = await completeHeartbeat(env.DB, {
       monitorKey: OPERATIONAL_MONITOR_KEY,
       runToken,
       status,
       errorCode,
-      now,
+      now: clock(),
     });
     if (!finished) throw new Error("OPERATIONAL_HEARTBEAT_CLAIM_LOST");
-  } catch {
-    let d1RecoverySucceeded = false;
+  } catch (error) {
+    if (error?.message === "OPERATIONAL_HEARTBEAT_CLAIM_LOST") {
+      return { state: "SKIPPED", reason: "CLAIM_LOST" };
+    }
+    const errorCode = diagnosticCode(error);
+    await recordRunError(env, runToken, stage, errorCode, clock());
     try {
-      await noteIssue(env, config, "OPERATIONAL_MONITOR_RUN_FAILED", now);
-      await flushPendingOperationalAlerts(env, now);
-      d1RecoverySucceeded = await finishOperationalHeartbeat(env.DB, {
+      await noteIssue(env, config, "OPERATIONAL_MONITOR_RUN_FAILED", clock());
+      const finished = await completeHeartbeat(env.DB, {
         monitorKey: OPERATIONAL_MONITOR_KEY,
         runToken,
         status: "FAILED",
-        errorCode: "OPERATIONAL_MONITOR_RUN_FAILED",
-        now,
+        errorCode,
+        now: clock(),
       });
+      if (!finished) return { state: "SKIPPED", reason: "CLAIM_LOST" };
     } catch {
-      // The direct alert below is the only in-stack path left when D1 cannot persist state.
+      // Only a thrown persistence error takes the D1 fallback path. An expected
+      // lease/ownership no-op is never mislabeled as a database outage.
+      await sendDirectMonitorFailure(env, config, "D1_OPERATION_FAILED", clock());
     }
-    if (!d1RecoverySucceeded) {
-      await sendDirectMonitorFailure(env, config, "D1_OPERATION_FAILED", now);
-    }
-    throw new Error("OPERATIONAL_MONITOR_RUN_FAILED");
+    throw new Error(`OPERATIONAL_MONITOR_RUN_FAILED:${stage}:${errorCode}`);
   }
 
   if (delivery.failed > 0) {

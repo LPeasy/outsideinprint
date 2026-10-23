@@ -9,7 +9,7 @@ export default {
   async scheduled(_controller, env) {
     const now = Math.floor(Date.now() / 1000);
     const privacy = await scrubExpiredPurchaseMeasurement(env, now);
-    const monitoring = await runOperationalSchedule(env, now);
+    const monitoring = await runOperationalSchedule(env, Math.floor(Date.now() / 1000));
     if (privacy.state === "UNAVAILABLE") throw new Error("PURCHASE_MEASUREMENT_RETENTION_UNAVAILABLE");
     return monitoring;
   },

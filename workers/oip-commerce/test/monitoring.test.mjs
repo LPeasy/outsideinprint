@@ -179,7 +179,7 @@ test("Resend alert self-failure leaves a pending D1 alert and acknowledges recor
     keys.push(options.headers["idempotency-key"]);
     return Response.json({ id: "alert-retry" });
   };
-  const delivery = await flushPendingOperationalAlerts(env, 1_800_000_300);
+  const delivery = await flushPendingOperationalAlerts(env, alert.first_delivery_attempt_at + 300);
   assert.equal(delivery.sent, 1);
   assert.equal(alert.status, "SENT");
   assert.equal(keys[0], keys[1]);
