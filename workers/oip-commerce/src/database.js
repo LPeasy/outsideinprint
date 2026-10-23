@@ -848,41 +848,85 @@ export async function markStaleUnboundPhysicalReservationsForReview(db, now) {
   return Number(result?.meta?.changes || 0);
 }
 
+function operationalLeaseExpiry(now, leaseSeconds) {
+  if (!Number.isSafeInteger(now) || now < 0 || !Number.isSafeInteger(leaseSeconds) ||
+      leaseSeconds < 1 || leaseSeconds > 3600) throw new Error("OPERATIONAL_LEASE_INVALID");
+  return now + leaseSeconds;
+}
+
 export async function startOperationalHeartbeat(db, record) {
-  await db
+  const leaseSeconds = record.leaseSeconds ?? 120;
+  const result = await db
     .prepare(
       `INSERT INTO operational_heartbeats
        (monitor_key, run_token, last_started_at, last_completed_at, status,
-        last_error_code, updated_at)
-       VALUES (?, ?, ?, NULL, 'RUNNING', NULL, ?)
+        last_error_code, updated_at, lease_expires_at)
+       VALUES (?, ?, ?, NULL, 'RUNNING', NULL, ?, ?)
        ON CONFLICT(monitor_key) DO UPDATE SET
          run_token = excluded.run_token,
          last_started_at = excluded.last_started_at,
          status = 'RUNNING',
          last_error_code = NULL,
-         updated_at = excluded.updated_at`,
+         updated_at = excluded.updated_at,
+         lease_expires_at = excluded.lease_expires_at
+       WHERE (operational_heartbeats.status <> 'RUNNING'
+          OR COALESCE(operational_heartbeats.lease_expires_at, 0) <= excluded.last_started_at)
+          AND NOT EXISTS (SELECT 1 FROM operational_monitor_runs WHERE run_token = excluded.run_token)
+       RETURNING run_token`,
     )
-    .bind(record.monitorKey, record.runToken, record.now, record.now)
-    .run();
+    .bind(record.monitorKey, record.runToken, record.now, record.now, operationalLeaseExpiry(record.now, leaseSeconds))
+    .first();
+  return result != null;
+}
+
+export async function renewOperationalHeartbeat(db, record) {
+  const leaseSeconds = record.leaseSeconds ?? 120;
+  const result = await db.prepare(
+    `UPDATE operational_heartbeats SET lease_expires_at = ?, updated_at = ?
+     WHERE monitor_key = ? AND run_token = ? AND status = 'RUNNING'
+       AND lease_expires_at > ? RETURNING run_token`,
+  ).bind(operationalLeaseExpiry(record.now, leaseSeconds), record.now, record.monitorKey, record.runToken, record.now).first();
+  return result != null;
 }
 
 export async function finishOperationalHeartbeat(db, record) {
   const result = await db
     .prepare(
       `UPDATE operational_heartbeats
-       SET last_completed_at = ?, status = ?, last_error_code = ?, updated_at = ?
-       WHERE monitor_key = ? AND run_token = ?`,
+       SET last_completed_at = ?, status = ?, last_error_code = ?, updated_at = ?, lease_expires_at = ?
+       WHERE monitor_key = ? AND run_token = ? AND status = 'RUNNING' AND lease_expires_at > ?
+       RETURNING run_token`,
     )
     .bind(
       record.now,
       record.status,
       record.errorCode || null,
       record.now,
+      record.now,
       record.monitorKey,
       record.runToken,
+      record.now,
     )
-    .run();
-  return Number(result?.meta?.changes || 0) === 1;
+    .first();
+  if (result != null) return true;
+  const prior = await db.prepare(
+    `SELECT status, last_error_code, completed_at FROM operational_monitor_runs
+     WHERE monitor_key = ? AND run_token = ?`,
+  ).bind(record.monitorKey, record.runToken).first();
+  return prior?.status === record.status && prior.completed_at != null &&
+    (prior.last_error_code || null) === (record.errorCode || null);
+}
+
+export async function recordOperationalRunError(db, record) {
+  if (!/^[A-Z][A-Z0-9_]{0,63}$/u.test(String(record.stage || "")) ||
+      !/^[A-Z][A-Z0-9_]{0,95}$/u.test(String(record.errorCode || "")) ||
+      (record.httpStatus != null && (!Number.isInteger(record.httpStatus) || record.httpStatus < 100 || record.httpStatus > 599))) {
+    throw new Error("OPERATIONAL_ERROR_RECORD_INVALID");
+  }
+  await db.prepare(
+    `INSERT INTO operational_monitor_errors (run_token, stage, error_code, occurred_at, http_status)
+     VALUES (?, ?, ?, ?, ?)`,
+  ).bind(record.runToken, record.stage, record.errorCode, record.now, record.httpStatus ?? null).run();
 }
 
 export async function getOperationalHealthSnapshot(db, monitorKey) {
@@ -1017,7 +1061,8 @@ export async function recordOperationalAlert(db, record) {
        VALUES (?, ?, ?, 'PENDING', ?, ?, ?, 0)
        ON CONFLICT(alert_code, alert_bucket) DO UPDATE SET
          occurrence_count = operational_alerts.occurrence_count + excluded.occurrence_count,
-         last_seen_at = excluded.last_seen_at`,
+         first_seen_at = MIN(operational_alerts.first_seen_at, excluded.first_seen_at),
+         last_seen_at = MAX(operational_alerts.last_seen_at, excluded.last_seen_at)`,
     )
     .bind(
       alertId,
@@ -1031,43 +1076,102 @@ export async function recordOperationalAlert(db, record) {
   return alertId;
 }
 
-export async function listPendingOperationalAlerts(db, limit = 10) {
+export async function listPendingOperationalAlerts(db, limit = 10, now = Math.floor(Date.now() / 1000)) {
   const result = await db
     .prepare(
       `SELECT alert_id, alert_code, alert_bucket, occurrence_count,
-              first_seen_at, last_seen_at, delivery_attempts
-       FROM operational_alerts WHERE status = 'PENDING'
+               first_seen_at, last_seen_at, delivery_attempts, first_delivery_attempt_at,
+               claim_token, claim_expires_at, delivery_occurrence_count,
+               delivery_first_seen_at, delivery_last_seen_at, payload_sha256,
+               retry_blocked, last_delivery_error_code, last_delivery_http_status
+        FROM operational_alerts WHERE status = 'PENDING' AND retry_blocked = 0
+          AND (claim_token IS NULL OR claim_expires_at <= ?)
+          AND (first_delivery_attempt_at IS NULL OR first_delivery_attempt_at > ?)
        ORDER BY first_seen_at ASC LIMIT ?`,
     )
-    .bind(limit)
+    .bind(now, now - (23 * 60 * 60), limit)
     .all();
   return result?.results || [];
 }
 
-export async function markOperationalAlertSent(db, alertId, now) {
-  const result = await db
-    .prepare(
-      `UPDATE operational_alerts
-       SET status = 'SENT', delivery_attempts = delivery_attempts + 1,
-           last_delivery_attempt_at = ?, delivered_at = ?, last_delivery_error_code = NULL
-       WHERE alert_id = ? AND status = 'PENDING'`,
-    )
-    .bind(now, now, alertId)
-    .run();
-  return Number(result?.meta?.changes || 0) === 1;
+export async function claimOperationalAlert(db, record) {
+  const leaseSeconds = record.leaseSeconds ?? 60;
+  return db.prepare(
+    `UPDATE operational_alerts
+     SET claim_token = ?, claim_expires_at = ?,
+         first_delivery_attempt_at = COALESCE(first_delivery_attempt_at, ?),
+         delivery_occurrence_count = COALESCE(delivery_occurrence_count, occurrence_count),
+         delivery_first_seen_at = COALESCE(delivery_first_seen_at, first_seen_at),
+         delivery_last_seen_at = COALESCE(delivery_last_seen_at, last_seen_at),
+         delivery_attempts = delivery_attempts + 1, last_delivery_attempt_at = ?
+     WHERE alert_id = ? AND status = 'PENDING' AND retry_blocked = 0
+       AND (claim_token IS NULL OR claim_expires_at <= ?)
+       AND (first_delivery_attempt_at IS NULL OR first_delivery_attempt_at > ?)
+       AND NOT EXISTS (SELECT 1 FROM operational_alert_attempts WHERE claim_token = ?)
+     RETURNING *`,
+  ).bind(record.claimToken, operationalLeaseExpiry(record.now, leaseSeconds), record.now, record.now,
+    record.alertId, record.now, record.now - (23 * 60 * 60), record.claimToken).first();
 }
 
-export async function markOperationalAlertFailed(db, alertId, errorCode, now) {
-  const result = await db
-    .prepare(
-      `UPDATE operational_alerts
-       SET delivery_attempts = delivery_attempts + 1,
-           last_delivery_attempt_at = ?, last_delivery_error_code = ?
-       WHERE alert_id = ? AND status = 'PENDING'`,
-    )
-    .bind(now, errorCode, alertId)
-    .run();
-  return Number(result?.meta?.changes || 0) === 1;
+export async function blockExpiredOperationalAlerts(db, now) {
+  const result = await db.prepare(
+    `UPDATE operational_alerts SET retry_blocked = 1, last_delivery_error_code = 'RETRY_WINDOW_EXPIRED'
+     WHERE status = 'PENDING' AND retry_blocked = 0
+       AND first_delivery_attempt_at IS NOT NULL AND first_delivery_attempt_at <= ?`,
+  ).bind(now - (23 * 60 * 60)).run();
+  return Number(result?.meta?.changes || 0);
+}
+
+export async function countBlockedOperationalAlerts(db) {
+  const row = await db.prepare(
+    "SELECT COUNT(*) AS blocked_count FROM operational_alerts WHERE status = 'PENDING' AND retry_blocked = 1",
+  ).first();
+  return Number(row?.blocked_count || 0);
+}
+
+export async function getOperationalAlertStatus(db, alertId) {
+  const row = await db.prepare(
+    "SELECT status FROM operational_alerts WHERE alert_id = ?",
+  ).bind(alertId).first();
+  return row?.status || null;
+}
+
+export async function setOperationalAlertPayloadHash(db, record) {
+  if (!/^[a-f0-9]{64}$/u.test(String(record.payloadHash || ""))) throw new Error("OPERATIONAL_PAYLOAD_HASH_INVALID");
+  const now = record.now ?? Math.floor(Date.now() / 1000);
+  const result = await db.prepare(
+    `UPDATE operational_alerts SET payload_sha256 = ?
+     WHERE alert_id = ? AND claim_token = ? AND status = 'PENDING' AND retry_blocked = 0
+       AND claim_expires_at > ? AND (payload_sha256 IS NULL OR payload_sha256 = ?)
+     RETURNING alert_id`,
+  ).bind(record.payloadHash, record.alertId, record.claimToken, now, record.payloadHash).first();
+  return result != null;
+}
+
+export async function completeOperationalAlertAttempt(db, record) {
+  if (!["SENT", "RETRY", "FAILED"].includes(record.status) ||
+      (record.errorCode != null && !/^[A-Z][A-Z0-9_]{0,95}$/u.test(String(record.errorCode))) ||
+      (record.httpStatus != null && (!Number.isInteger(record.httpStatus) || record.httpStatus < 100 || record.httpStatus > 599))) {
+    throw new Error("OPERATIONAL_ATTEMPT_RECORD_INVALID");
+  }
+  const result = await db.prepare(
+    `UPDATE operational_alert_attempts
+     SET status = ?, error_code = ?, http_status = ?, completed_at = ?, retry_blocked = ?
+     WHERE alert_id = ? AND claim_token = ? AND status = 'IN_FLIGHT'
+       AND (? <> 'SENT' OR (payload_sha256 IS NOT NULL AND EXISTS (
+         SELECT 1 FROM operational_alerts
+         WHERE operational_alerts.alert_id = operational_alert_attempts.alert_id
+           AND operational_alerts.payload_sha256 = operational_alert_attempts.payload_sha256
+       ))) RETURNING claim_token`,
+  ).bind(record.status, record.errorCode ?? null, record.httpStatus ?? null, record.now,
+    record.blocked ? 1 : 0, record.alertId, record.claimToken, record.status).first();
+  if (result != null) return true;
+  const prior = await db.prepare(
+    `SELECT status, error_code, http_status, retry_blocked FROM operational_alert_attempts
+     WHERE alert_id = ? AND claim_token = ?`,
+  ).bind(record.alertId, record.claimToken).first();
+  return prior?.status === record.status && (prior.error_code ?? null) === (record.errorCode ?? null) &&
+    (prior.http_status ?? null) === (record.httpStatus ?? null) && Number(prior.retry_blocked) === (record.blocked ? 1 : 0);
 }
 
 export async function countFulfillmentDeliveryIssues(db, staleBefore) {

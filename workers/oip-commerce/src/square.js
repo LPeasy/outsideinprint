@@ -836,8 +836,7 @@ export async function sendDownloadEmail(env, { buyerEmail, product, downloadUrl,
   return { status: "SENT", messageId: payload.id || null };
 }
 
-export async function sendOperationalAlert(env, alert) {
-  const apiKey = requireBinding(env, "RESEND_API_KEY");
+function operationalAlertRequest(env, alert) {
   const from = requireBinding(env, "DOWNLOAD_EMAIL_FROM");
   const replyTo = requireBinding(env, "DOWNLOAD_EMAIL_REPLY_TO");
   const recipient = String(requireBinding(env, "OPERATIONAL_ALERT_EMAIL")).trim();
@@ -847,6 +846,7 @@ export async function sendOperationalAlert(env, alert) {
   const firstSeenAt = Number(alert.firstSeenAt);
   const lastSeenAt = Number(alert.lastSeenAt);
   const occurrences = Number(alert.occurrences);
+  const keyNamespace = alert.keyNamespace ?? "default";
   if (
     !/^[^\s@]+@[^\s@]+\.[^\s@]+$/u.test(recipient) || recipient.length > 320 ||
     !["SANDBOX", "PRODUCTION"].includes(environment) ||
@@ -854,11 +854,110 @@ export async function sendOperationalAlert(env, alert) {
     !Number.isSafeInteger(alertBucket) || alertBucket < 0 ||
     !Number.isSafeInteger(firstSeenAt) || firstSeenAt < 0 ||
     !Number.isSafeInteger(lastSeenAt) || lastSeenAt < firstSeenAt ||
-    !Number.isSafeInteger(occurrences) || occurrences < 1
+    lastSeenAt > 8_640_000_000_000 ||
+    !Number.isSafeInteger(occurrences) || occurrences < 1 ||
+    !["default", "direct"].includes(keyNamespace)
   ) {
-    return { status: "FAILED", errorCode: "OPERATIONAL_ALERT_INPUT_INVALID" };
+    throw new Error("OPERATIONAL_ALERT_INPUT_INVALID");
   }
-  const idempotencyKey = `oip-ops-${environment.toLowerCase()}-${alertCode.toLowerCase()}-${alertBucket}`;
+  const prefix = keyNamespace === "direct" ? "oip-ops-direct" : "oip-ops";
+  return {
+    idempotencyKey: `${prefix}-${environment.toLowerCase()}-${alertCode.toLowerCase()}-${alertBucket}`,
+    body: JSON.stringify({
+      from,
+      to: [recipient],
+      reply_to: replyTo,
+      subject: `[OIP ${environment}] operational alert: ${alertCode}`,
+      text: [
+        "Outside In Print operational monitoring detected a service condition.",
+        `Environment: ${environment}`,
+        `Code: ${alertCode}`,
+        ...(keyNamespace === "direct" ? [
+          `Alert window starts: ${new Date(firstSeenAt * 1000).toISOString()}`,
+          "Observation timestamps and count are unavailable while D1 persistence is unavailable.",
+        ] : [
+          `First observed: ${new Date(firstSeenAt * 1000).toISOString()}`,
+          `Last observed: ${new Date(lastSeenAt * 1000).toISOString()}`,
+          `Observations in this alert window: ${occurrences}`,
+        ]),
+        "",
+        "No buyer, order, payment, download-token, Queue-payload, or secret data is included.",
+        "Review the Cloudflare Worker, Queue, D1, and Resend operational state.",
+      ].join("\n"),
+    }),
+  };
+}
+
+// Persist only this digest alongside the frozen observation snapshot. It detects
+// binding changes without persisting recipient addresses or an email payload.
+export async function operationalAlertPayloadDigest(env, alert) {
+  const { body } = operationalAlertRequest(env, alert);
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(body));
+  return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+const OPERATIONAL_PROVIDER_ERROR_NAMES = new Set([
+  "invalid_idempotent_request",
+  "concurrent_idempotent_requests",
+  "invalid_idempotency_key",
+  "validation_error",
+  "missing_api_key",
+  "restricted_api_key",
+  "suspended_api_key",
+  "rate_limit_exceeded",
+  "daily_quota_exceeded",
+  "monthly_quota_exceeded",
+  "not_found",
+  "method_not_allowed",
+  "application_error",
+  "service_unavailable",
+]);
+
+async function operationalProviderErrorName(response) {
+  if (!response.body) return null;
+  const reader = response.body.getReader();
+  let timer;
+  const timeout = new Promise((resolve) => {
+    timer = setTimeout(() => resolve(null), 1000);
+  });
+  const read = async () => {
+    const chunks = [];
+    let length = 0;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      length += value.byteLength;
+      if (length > 4096) return null;
+      chunks.push(value);
+    }
+    const bytes = new Uint8Array(length);
+    let offset = 0;
+    for (const chunk of chunks) {
+      bytes.set(chunk, offset);
+      offset += chunk.byteLength;
+    }
+    const name = JSON.parse(new TextDecoder().decode(bytes))?.name;
+    return OPERATIONAL_PROVIDER_ERROR_NAMES.has(name) ? name : null;
+  };
+  try {
+    return await Promise.race([read(), timeout]);
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+    // Cancellation must not keep an already classified HTTP response waiting.
+    try { void reader.cancel().catch(() => {}); } catch { /* Best effort. */ }
+  }
+}
+
+export async function sendOperationalAlert(env, alert) {
+  let request;
+  try {
+    request = operationalAlertRequest(env, alert);
+  } catch {
+    return { status: "FAILED", errorCode: "OPERATIONAL_ALERT_INPUT_INVALID", httpStatus: null, providerErrorCode: null };
+  }
+  const apiKey = requireBinding(env, "RESEND_API_KEY");
   let response;
   try {
     response = await outboundFetch(env)("https://api.resend.com/emails", {
@@ -866,34 +965,32 @@ export async function sendOperationalAlert(env, alert) {
       headers: {
         authorization: `Bearer ${apiKey}`,
         "content-type": "application/json",
-        "idempotency-key": idempotencyKey,
+        "idempotency-key": request.idempotencyKey,
       },
-      body: JSON.stringify({
-        from,
-        to: [recipient],
-        reply_to: replyTo,
-        subject: `[OIP ${environment}] operational alert: ${alertCode}`,
-        text: [
-          "Outside In Print operational monitoring detected a service condition.",
-          `Environment: ${environment}`,
-          `Code: ${alertCode}`,
-          `First observed: ${new Date(firstSeenAt * 1000).toISOString()}`,
-          `Last observed: ${new Date(lastSeenAt * 1000).toISOString()}`,
-          `Observations in this alert window: ${occurrences}`,
-          "",
-          "No buyer, order, payment, download-token, Queue-payload, or secret data is included.",
-          "Review the Cloudflare Worker, Queue, D1, and Resend operational state.",
-        ].join("\n"),
-      }),
+      body: request.body,
       signal: AbortSignal.timeout(10000),
     });
-  } catch {
-    return { status: "RETRY", errorCode: "RESEND_UNREACHABLE" };
+  } catch (error) {
+    return {
+      status: "RETRY",
+      errorCode: ["TimeoutError", "AbortError"].includes(error?.name) ? "RESEND_TIMEOUT" : "RESEND_UNREACHABLE",
+      httpStatus: null,
+      providerErrorCode: null,
+    };
   }
-  if (response.ok) return { status: "SENT", errorCode: null };
-  if (response.status === 429) return { status: "RETRY", errorCode: "RESEND_RATE_LIMITED" };
-  if (response.status >= 500) return { status: "RETRY", errorCode: "RESEND_UPSTREAM_FAILED" };
-  return { status: "FAILED", errorCode: "RESEND_REJECTED" };
+  const httpStatus = response.status;
+  if (response.ok) return { status: "SENT", errorCode: null, httpStatus, providerErrorCode: null };
+  const providerErrorCode = await operationalProviderErrorName(response);
+  const evidence = { httpStatus, providerErrorCode };
+  if (httpStatus === 429) return { status: "RETRY", errorCode: "RESEND_RATE_LIMITED", ...evidence };
+  if (httpStatus >= 500) return { status: "RETRY", errorCode: "RESEND_UPSTREAM_FAILED", ...evidence };
+  if (httpStatus === 409 && providerErrorCode === "concurrent_idempotent_requests") {
+    return { status: "RETRY", errorCode: "RESEND_IDEMPOTENCY_IN_PROGRESS", ...evidence };
+  }
+  if (httpStatus === 409 && providerErrorCode === "invalid_idempotent_request") {
+    return { status: "FAILED", errorCode: "RESEND_IDEMPOTENCY_CONFLICT", ...evidence };
+  }
+  return { status: "FAILED", errorCode: "RESEND_REJECTED", ...evidence };
 }
 
 export function publicCheckoutError(error) {

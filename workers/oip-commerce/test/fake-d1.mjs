@@ -16,6 +16,9 @@ export class FakeD1 {
     this.operationalCanaries = new Map();
     this.operationalDlqReceipts = new Map();
     this.operationalAlerts = new Map();
+    this.operationalMonitorRuns = new Map();
+    this.operationalMonitorErrors = [];
+    this.operationalAlertAttempts = new Map();
   }
 
   prepare(sql) {
@@ -38,8 +41,14 @@ class FakeStatement {
   async run() {
     const { db, sql, args } = this;
     if (sql.startsWith("INSERT INTO operational_heartbeats")) {
-      const [monitorKey, runToken, startedAt, updatedAt] = args;
+      const [monitorKey, runToken, startedAt, updatedAt, leaseExpiresAt] = args;
       const existing = db.operationalHeartbeats.get(monitorKey) || {};
+      if ((existing.status === "RUNNING" && (existing.lease_expires_at || 0) > startedAt) ||
+          db.operationalMonitorRuns.has(runToken)) return changed(0);
+      const previous = db.operationalMonitorRuns.get(existing.run_token);
+      if (previous?.status === "RUNNING") Object.assign(previous, {
+        status: "ABANDONED", completed_at: startedAt, last_error_code: "MONITOR_LEASE_EXPIRED",
+      });
       db.operationalHeartbeats.set(monitorKey, {
         ...existing,
         monitor_key: monitorKey,
@@ -48,19 +57,42 @@ class FakeStatement {
         status: "RUNNING",
         last_error_code: null,
         updated_at: updatedAt,
+        lease_expires_at: leaseExpiresAt,
+      });
+      db.operationalMonitorRuns.set(runToken, {
+        run_token: runToken, monitor_key: monitorKey, started_at: startedAt,
+        lease_expires_at: leaseExpiresAt, status: "RUNNING", completed_at: null, last_error_code: null,
       });
       return changed(1);
     }
-    if (sql.startsWith("UPDATE operational_heartbeats")) {
-      const [completedAt, status, errorCode, updatedAt, monitorKey, runToken] = args;
+    if (sql.startsWith("UPDATE operational_heartbeats SET lease_expires_at")) {
+      const [leaseExpiresAt, now, monitorKey, runToken] = args;
       const row = db.operationalHeartbeats.get(monitorKey);
-      if (!row || row.run_token !== runToken) return changed(0);
+      if (!row || row.run_token !== runToken || row.status !== "RUNNING" || row.lease_expires_at <= now) return changed(0);
+      Object.assign(row, { lease_expires_at: leaseExpiresAt, updated_at: now });
+      Object.assign(db.operationalMonitorRuns.get(runToken), { lease_expires_at: leaseExpiresAt });
+      return changed(1);
+    }
+    if (sql.startsWith("UPDATE operational_heartbeats")) {
+      const [completedAt, status, errorCode, updatedAt, leaseExpiresAt, monitorKey, runToken] = args;
+      const row = db.operationalHeartbeats.get(monitorKey);
+      if (!row || row.run_token !== runToken || row.status !== "RUNNING" || row.lease_expires_at <= completedAt) return changed(0);
       Object.assign(row, {
         last_completed_at: completedAt,
         status,
         last_error_code: errorCode,
         updated_at: updatedAt,
+        lease_expires_at: leaseExpiresAt,
       });
+      Object.assign(db.operationalMonitorRuns.get(runToken), {
+        status, last_error_code: errorCode, completed_at: completedAt, lease_expires_at: leaseExpiresAt,
+      });
+      return changed(1);
+    }
+    if (sql.startsWith("INSERT INTO operational_monitor_errors")) {
+      const [runToken, stage, errorCode, occurredAt, httpStatus] = args;
+      db.operationalMonitorErrors.push({ id: db.operationalMonitorErrors.length + 1,
+        run_token: runToken, stage, error_code: errorCode, occurred_at: occurredAt, http_status: httpStatus });
       return changed(1);
     }
     if (sql.startsWith("INSERT OR IGNORE INTO operational_queue_canaries")) {
@@ -133,7 +165,8 @@ class FakeStatement {
       );
       if (existing) {
         existing.occurrence_count += occurrences;
-        existing.last_seen_at = lastSeenAt;
+        existing.first_seen_at = Math.min(existing.first_seen_at, firstSeenAt);
+        existing.last_seen_at = Math.max(existing.last_seen_at, lastSeenAt);
       } else {
         db.operationalAlerts.set(alertId, {
           alert_id: alertId,
@@ -147,28 +180,58 @@ class FakeStatement {
           last_delivery_attempt_at: null,
           delivered_at: null,
           last_delivery_error_code: null,
+          last_delivery_http_status: null,
+          claim_token: null,
+          claim_expires_at: null,
+          first_delivery_attempt_at: null,
+          delivery_occurrence_count: null,
+          delivery_first_seen_at: null,
+          delivery_last_seen_at: null,
+          payload_sha256: null,
+          retry_blocked: 0,
         });
       }
       return changed(1);
     }
-    if (sql.startsWith("UPDATE operational_alerts SET status = 'SENT'")) {
-      const [attemptedAt, deliveredAt, alertId] = args;
+    if (sql.startsWith("UPDATE operational_alerts SET retry_blocked = 1")) {
+      let count = 0;
+      for (const row of db.operationalAlerts.values()) {
+        if (row.status !== "PENDING" || row.retry_blocked || row.first_delivery_attempt_at == null ||
+            row.first_delivery_attempt_at > args[0]) continue;
+        row.retry_blocked = 1;
+        row.last_delivery_error_code = "RETRY_WINDOW_EXPIRED";
+        count += 1;
+      }
+      return changed(count);
+    }
+    if (sql.startsWith("UPDATE operational_alerts SET payload_sha256")) {
+      const [payloadHash, alertId, claimToken, now] = args;
       const row = db.operationalAlerts.get(alertId);
-      if (!row || row.status !== "PENDING") return changed(0);
-      row.status = "SENT";
-      row.delivery_attempts += 1;
-      row.last_delivery_attempt_at = attemptedAt;
-      row.delivered_at = deliveredAt;
-      row.last_delivery_error_code = null;
+      if (!row || row.claim_token !== claimToken || row.status !== "PENDING" || row.retry_blocked ||
+          row.claim_expires_at <= now || (row.payload_sha256 != null && row.payload_sha256 !== payloadHash)) return changed(0);
+      row.payload_sha256 = payloadHash;
+      const attempt = db.operationalAlertAttempts.get(claimToken);
+      if (attempt?.status === "IN_FLIGHT" && (attempt.payload_sha256 == null || attempt.payload_sha256 === payloadHash)) {
+        attempt.payload_sha256 = payloadHash;
+      }
       return changed(1);
     }
-    if (sql.startsWith("UPDATE operational_alerts SET delivery_attempts")) {
-      const [attemptedAt, errorCode, alertId] = args;
+    if (sql.startsWith("UPDATE operational_alert_attempts")) {
+      const [status, errorCode, httpStatus, now, blocked, alertId, claimToken] = args;
+      const attempt = db.operationalAlertAttempts.get(claimToken);
       const row = db.operationalAlerts.get(alertId);
-      if (!row || row.status !== "PENDING") return changed(0);
-      row.delivery_attempts += 1;
-      row.last_delivery_attempt_at = attemptedAt;
-      row.last_delivery_error_code = errorCode;
+      if (!attempt || attempt.alert_id !== alertId || attempt.status !== "IN_FLIGHT") return changed(0);
+      if (status === "SENT" && (!attempt.payload_sha256 || row?.payload_sha256 !== attempt.payload_sha256)) return changed(0);
+      Object.assign(attempt, { status, error_code: errorCode, http_status: httpStatus,
+        completed_at: now, retry_blocked: blocked });
+      if (status === "SENT") {
+        Object.assign(row, { status: "SENT", delivered_at: row.delivered_at ?? now,
+          last_delivery_http_status: httpStatus, claim_token: null, claim_expires_at: null, retry_blocked: 0 });
+      } else if (row?.status === "PENDING" && row.claim_token === claimToken && row.claim_expires_at > now) {
+        if (!row.retry_blocked) row.last_delivery_error_code = errorCode;
+        Object.assign(row, { last_delivery_http_status: httpStatus,
+          retry_blocked: Math.max(row.retry_blocked || 0, blocked), claim_token: null, claim_expires_at: null });
+      }
       return changed(1);
     }
     if (sql.startsWith("INSERT INTO rate_limits")) {
@@ -633,6 +696,60 @@ class FakeStatement {
 
   async first() {
     const { db, sql, args } = this;
+    if (sql.startsWith("INSERT INTO operational_heartbeats") || sql.startsWith("UPDATE operational_heartbeats")) {
+      const result = await this.run();
+      if (result.meta.changes !== 1) return null;
+      const token = sql.startsWith("INSERT") ? args[1]
+        : sql.startsWith("UPDATE operational_heartbeats SET lease_expires_at") ? args[3] : args[6];
+      return { run_token: token };
+    }
+    if (sql.startsWith("UPDATE operational_alerts SET payload_sha256")) {
+      const result = await this.run();
+      return result.meta.changes === 1 ? { alert_id: args[1] } : null;
+    }
+    if (sql.startsWith("UPDATE operational_alert_attempts")) {
+      const result = await this.run();
+      return result.meta.changes === 1 ? { claim_token: args[6] } : null;
+    }
+    if (sql.startsWith("UPDATE operational_alerts SET claim_token")) {
+      const [claimToken, leaseExpiresAt, now, attemptedAt, alertId, reclaimBefore, windowAfter] = args;
+      const row = db.operationalAlerts.get(alertId);
+      if (!row || row.status !== "PENDING" || row.retry_blocked ||
+          (row.claim_token != null && row.claim_expires_at > reclaimBefore) ||
+          (row.first_delivery_attempt_at != null && row.first_delivery_attempt_at <= windowAfter) ||
+          db.operationalAlertAttempts.has(claimToken)) return null;
+      Object.assign(row, {
+        claim_token: claimToken, claim_expires_at: leaseExpiresAt,
+        first_delivery_attempt_at: row.first_delivery_attempt_at ?? now,
+        delivery_occurrence_count: row.delivery_occurrence_count ?? row.occurrence_count,
+        delivery_first_seen_at: row.delivery_first_seen_at ?? row.first_seen_at,
+        delivery_last_seen_at: row.delivery_last_seen_at ?? row.last_seen_at,
+        delivery_attempts: row.delivery_attempts + 1, last_delivery_attempt_at: attemptedAt,
+      });
+      db.operationalAlertAttempts.set(claimToken, {
+        claim_token: claimToken, alert_id: alertId, started_at: attemptedAt,
+        lease_expires_at: leaseExpiresAt, payload_sha256: row.payload_sha256 ?? null,
+        status: "IN_FLIGHT", completed_at: null, error_code: null, http_status: null, retry_blocked: 0,
+      });
+      return { ...row };
+    }
+    if (sql.startsWith("SELECT status, last_error_code, completed_at FROM operational_monitor_runs")) {
+      const row = db.operationalMonitorRuns.get(args[1]);
+      return row?.monitor_key === args[0] ? { status: row.status,
+        last_error_code: row.last_error_code, completed_at: row.completed_at ?? null } : null;
+    }
+    if (sql.startsWith("SELECT status, error_code, http_status, retry_blocked FROM operational_alert_attempts")) {
+      const row = db.operationalAlertAttempts.get(args[1]);
+      return row?.alert_id === args[0] ? { ...row } : null;
+    }
+    if (sql.startsWith("SELECT status FROM operational_alerts WHERE alert_id = ?")) {
+      const row = db.operationalAlerts.get(args[0]);
+      return row ? { status: row.status } : null;
+    }
+    if (sql.startsWith("SELECT COUNT(*) AS blocked_count FROM operational_alerts")) {
+      return { blocked_count: [...db.operationalAlerts.values()]
+        .filter((row) => row.status === "PENDING" && row.retry_blocked === 1).length };
+    }
     if (sql.startsWith("SELECT status, last_started_at, last_completed_at FROM operational_heartbeats")) {
       const row = db.operationalHeartbeats.get(args[0]);
       if (!row) return null;
@@ -738,11 +855,14 @@ class FakeStatement {
   async all() {
     const { db, sql, args } = this;
     if (sql.startsWith("SELECT alert_id, alert_code, alert_bucket, occurrence_count")) {
+      const [now, windowAfter, limit] = args;
       return {
         results: [...db.operationalAlerts.values()]
-          .filter((row) => row.status === "PENDING")
+          .filter((row) => row.status === "PENDING" && !row.retry_blocked &&
+            (row.claim_token == null || row.claim_expires_at <= now) &&
+            (row.first_delivery_attempt_at == null || row.first_delivery_attempt_at > windowAfter))
           .sort((left, right) => left.first_seen_at - right.first_seen_at)
-          .slice(0, args[0])
+          .slice(0, limit)
           .map((row) => ({ ...row })),
       };
     }
