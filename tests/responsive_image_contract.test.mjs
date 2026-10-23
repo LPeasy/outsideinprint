@@ -51,11 +51,16 @@ test("responsive image manifest keeps the frozen baseline and processing default
     "essays/disney-world-expansion-studios-pleasure-island-hotels/pleasure-island-1989",
     "essays/disney-world-expansion-studios-pleasure-island-hotels/swan-dolphin-model-1988",
   ];
+  const animalKingdomPhotoIds = [
+    "essays/animal-kingdom-opening-1998/section-1",
+    "essays/animal-kingdom-opening-1998/section-3",
+  ];
   const routinePhotoIds = [
     ...modernBioPortraits.map(({ id }) => id),
     ...disneyOpeningPhotoIds,
     ...epcotOpeningPhotoIds,
     ...disneyExpansionPhotoIds,
+    ...animalKingdomPhotoIds,
   ];
   const intentionallyRetiredManagedAssetIds = [
     "essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts",

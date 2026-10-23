@@ -236,7 +236,11 @@ $disneyExpansionPhotoIds = @(
   'essays/disney-world-expansion-studios-pleasure-island-hotels/pleasure-island-1989',
   'essays/disney-world-expansion-studios-pleasure-island-hotels/swan-dolphin-model-1988'
 )
-$routinePhotoIds = @($modernBioPortraits | ForEach-Object { $_.id }) + $disneyOpeningPhotoIds + $epcotOpeningPhotoIds + $disneyExpansionPhotoIds
+$animalKingdomPhotoIds = @(
+  'essays/animal-kingdom-opening-1998/section-1',
+  'essays/animal-kingdom-opening-1998/section-3'
+)
+$routinePhotoIds = @($modernBioPortraits | ForEach-Object { $_.id }) + $disneyOpeningPhotoIds + $epcotOpeningPhotoIds + $disneyExpansionPhotoIds + $animalKingdomPhotoIds
 $intentionallyRetiredManagedAssetIds = @(
   'essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts',
   'essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/hero',
