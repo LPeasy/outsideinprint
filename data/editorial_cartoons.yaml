@@ -1231,3 +1231,12 @@ cartoons:
     alt: "An ink illustration shows a proposed radial city on a drafting table, with Spaceship Earth rising beyond it."
     width: 1672
     height: 941
+  - slug: a-kingdom-at-first-light
+    title: "A Kingdom at First Light"
+    date: "2026-10-23"
+    publishDate: "2026-10-23T09:00:00-04:00"
+    image: "essays/animal-kingdom-opening-1998/hero"
+    essay: "/essays/animal-kingdom-opening-1998/"
+    alt: "An ink and watercolor landscape shows the Tree of Life at dawn, with a safari vehicle, giraffes, and an elephant."
+    width: 1672
+    height: 941
