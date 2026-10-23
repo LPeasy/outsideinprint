@@ -1,4 +1,6 @@
 export class FakeD1 {
+  #batchQueue = Promise.resolve();
+
   constructor() {
     this.rateLimits = new Map();
     this.checkouts = new Map();
@@ -24,6 +26,33 @@ export class FakeD1 {
   prepare(sql) {
     return new FakeStatement(this, sql.replace(/\s+/gu, " ").trim());
   }
+
+  async batch(statements) {
+    const previous = this.#batchQueue;
+    let release;
+    this.#batchQueue = new Promise((resolve) => { release = resolve; });
+    await previous;
+    const snapshot = structuredClone(Object.fromEntries(
+      Object.entries(this).filter(([, value]) => typeof value !== "function"),
+    ));
+    try {
+      const results = [];
+      for (const statement of statements) results.push(await statement.all());
+      return results;
+    } catch (error) {
+      Object.assign(this, snapshot);
+      throw error;
+    } finally {
+      release();
+    }
+  }
+}
+
+function unreportedOperationalRuns(db, monitorKey) {
+  return [...db.operationalMonitorRuns.values()].filter((row) =>
+    row.monitor_key === monitorKey && row.status === "ABANDONED" &&
+    !db.operationalMonitorErrors.some((error) => error.run_token === row.run_token &&
+      error.stage === "MONITOR_RECOVERY" && error.error_code === "MONITOR_LEASE_EXPIRED"));
 }
 
 class FakeStatement {
@@ -696,6 +725,15 @@ class FakeStatement {
 
   async first() {
     const { db, sql, args } = this;
+    if (sql.startsWith("UPDATE operational_queue_canaries SET status = 'RECEIVED'")) {
+      const result = await this.run();
+      return result.meta.changes === 1 ? { canary_id: args[2] } : null;
+    }
+    if (sql.startsWith("SELECT canary_id FROM operational_queue_canaries")) {
+      const row = db.operationalCanaries.get(args[0]);
+      return row?.queued_at === args[1] && row.status === "RECEIVED" && row.received_at != null
+        ? { canary_id: row.canary_id } : null;
+    }
     if (sql.startsWith("INSERT INTO operational_heartbeats") || sql.startsWith("UPDATE operational_heartbeats")) {
       const result = await this.run();
       if (result.meta.changes !== 1) return null;
@@ -854,6 +892,23 @@ class FakeStatement {
 
   async all() {
     const { db, sql, args } = this;
+    if (sql.startsWith("INSERT INTO operational_alerts") && sql.includes("FROM operational_monitor_runs")) {
+      const [alertId, alertCode, bucket, firstSeenAt, lastSeenAt, monitorKey] = args;
+      const runs = unreportedOperationalRuns(db, monitorKey);
+      if (runs.length === 0) return { success: true, results: [], meta: { changes: 0 } };
+      const result = await new FakeStatement(db, "INSERT INTO operational_alerts")
+        .bind(alertId, alertCode, bucket, runs.length, firstSeenAt, lastSeenAt).run();
+      return { success: true, results: [], meta: result.meta };
+    }
+    if (sql.startsWith("INSERT INTO operational_monitor_errors") && sql.includes("FROM operational_monitor_runs")) {
+      const [now, monitorKey] = args;
+      const runs = unreportedOperationalRuns(db, monitorKey);
+      for (const row of runs) db.operationalMonitorErrors.push({
+        id: db.operationalMonitorErrors.length + 1, run_token: row.run_token,
+        stage: "MONITOR_RECOVERY", error_code: "MONITOR_LEASE_EXPIRED", occurred_at: now, http_status: null,
+      });
+      return { success: true, results: runs.map((row) => ({ run_token: row.run_token })), meta: { changes: runs.length } };
+    }
     if (sql.startsWith("SELECT alert_id, alert_code, alert_bucket, occurrence_count")) {
       const [now, windowAfter, limit] = args;
       return {

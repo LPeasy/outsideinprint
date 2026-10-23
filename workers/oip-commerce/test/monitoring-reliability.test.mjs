@@ -6,9 +6,11 @@ import * as database from "../src/database.js";
 import {
   flushPendingOperationalAlerts,
   OPERATIONAL_MONITOR_KEY,
+  processOperationalCanaryMessage,
   runOperationalSchedule,
 } from "../src/monitoring.js";
 import { operationalAlertPayloadDigest } from "../src/square.js";
+import { FakeD1 } from "./fake-d1.mjs";
 import { SqliteD1 } from "./sqlite-d1.mjs";
 
 // All network responses are synthetic and injected. An accidentally unmocked
@@ -302,14 +304,18 @@ test("expired monitor ownership cannot finish or renew a replacement run", async
   assert.equal(env.DB.row("SELECT * FROM operational_heartbeats").status, "RUNNING");
 });
 
-test("a resumed monitor with an expired lease skips without a false database-outage email", async (t) => {
+test("a resumed expired monitor skips while its replacement reports abandonment without a database-outage email", async (t) => {
   let clock = NOW;
   let fetches = 0;
   const entered = deferred();
   const release = deferred();
   const env = monitoringEnv(t, {
     __testNow: () => clock,
-    __testFetch: async () => { fetches += 1; throw new Error("no alert should be sent for normal lease loss"); },
+    __testFetch: async (_url, options) => {
+      fetches += 1;
+      assert.match(JSON.parse(options.body).subject, /MONITOR_RUN_ABANDONED/u);
+      return Response.json({ id: "synthetic-abandonment" });
+    },
   });
   env.OPERATIONAL_CANARY_QUEUE.send = async function send(body) {
     this.sent.push(body);
@@ -322,15 +328,15 @@ test("a resumed monitor with an expired lease skips without a false database-out
   try {
     await Promise.race([entered.promise, first.then(() => { throw new Error("monitor finished before barrier"); })]);
     clock = NOW + 121;
-    assert.equal((await runOperationalSchedule(env, clock)).state, "OK");
+    assert.equal((await runOperationalSchedule(env, clock)).state, "DEGRADED");
   } finally {
     release.resolve();
   }
   assert.deepEqual(await first, { state: "SKIPPED", reason: "CLAIM_LOST" });
-  assert.equal(fetches, 0);
-  assert.equal(operationRows(env.DB, "operational_alerts").length, 0);
-  assert.equal(env.DB.row("SELECT * FROM operational_heartbeats").status, "OK");
-  assert.deepEqual(env.DB.rows("SELECT status FROM operational_monitor_runs ORDER BY started_at").map((row) => row.status), ["ABANDONED", "OK"]);
+  assert.equal(fetches, 1);
+  assert.equal(operationRows(env.DB, "operational_alerts").length, 1);
+  assert.equal(env.DB.row("SELECT * FROM operational_heartbeats").status, "DEGRADED");
+  assert.deepEqual(env.DB.rows("SELECT status FROM operational_monitor_runs ORDER BY started_at").map((row) => row.status), ["ABANDONED", "DEGRADED"]);
 });
 
 test("late provider success terminalizes an expired claim and late failure cannot reopen it", async (t) => {
@@ -399,7 +405,8 @@ test("monitor error history survives a healthy run and excludes arbitrary except
   assert.ok(errors.length > 0);
   assert.doesNotMatch(errors.join("\n"), /buyer@example|Bearer|synthetic-resend-secret|private-order-123/u);
   const before = operationRows(env.DB, "operational_monitor_errors");
-  assert.ok(before.length > 0);
+  assert.equal(before.length, 1);
+  assert.equal(before[0].stage, "PHYSICAL_RESERVATION_RECONCILE");
   assert.doesNotMatch(JSON.stringify(before), /buyer@example|Bearer|synthetic-resend-secret|private-order-123/u);
   clock = NOW + 300;
   assert.equal((await runOperationalSchedule(env, clock)).state, "OK");
@@ -767,4 +774,232 @@ test("migration accepts unchanged legacy heartbeat and alert writes before the n
   assert.equal(history.length, 2);
   assert.equal(history.find((row) => row.run_token === modern.runToken).status, "OK");
   assert.equal(history.find((row) => row.run_token === modern.runToken).completed_at, NOW + 302);
+});
+
+async function seedAbandonedRun(db, token, at = NOW - 300, monitorKey = OPERATIONAL_MONITOR_KEY) {
+  await database.startOperationalHeartbeat(db, { monitorKey, runToken: token, now: at });
+  const replacement = { monitorKey, runToken: `replacement:${token}`, now: at + 121 };
+  assert.equal(await database.startOperationalHeartbeat(db, replacement), true);
+  assert.equal(await database.finishOperationalHeartbeat(db, { ...replacement, now: at + 122, status: "OK" }), true);
+}
+
+test("abandoned monitor recovery reports each run once across concurrent and later-window replays", async (t) => {
+  const env = monitoringEnv(t);
+  await seedAbandonedRun(env.DB, "lost-first", NOW - 900);
+  await seedAbandonedRun(env.DB, "lost-second", NOW - 600);
+  await seedAbandonedRun(env.DB, "unrelated-lost", NOW - 300, "OTHER_MONITOR");
+  const record = { monitorKey: OPERATIONAL_MONITOR_KEY, now: NOW, repeatSeconds: 21_600 };
+  const results = await Promise.all([
+    database.reportOperationalAbandonedRuns(env.DB, record),
+    database.reportOperationalAbandonedRuns(env.DB, record),
+  ]);
+  assert.deepEqual(results.sort(), [0, 2]);
+  const alert = env.DB.row("SELECT * FROM operational_alerts WHERE alert_code = 'MONITOR_RUN_ABANDONED'");
+  assert.equal(alert.status, "PENDING");
+  assert.equal(alert.occurrence_count, 2);
+  const markers = env.DB.rows("SELECT * FROM operational_monitor_errors WHERE stage = 'MONITOR_RECOVERY'");
+  assert.equal(markers.length, 2);
+  assert.deepEqual(markers.map((row) => row.run_token).sort(), ["lost-first", "lost-second"]);
+  assert.ok(markers.every((row) => row.error_code === "MONITOR_LEASE_EXPIRED"));
+  assert.equal(await database.reportOperationalAbandonedRuns(env.DB, { ...record, now: NOW + 21_600 }), 0);
+  assert.equal(env.DB.row("SELECT COUNT(*) AS count FROM operational_alerts").count, 1);
+});
+
+test("abandonment alert and marker commit atomically and survive an acknowledgement lost after commit", async (t) => {
+  const env = monitoringEnv(t);
+  await seedAbandonedRun(env.DB, "lost-acknowledgement");
+  const batch = env.DB.batch.bind(env.DB);
+  let loseResponse = true;
+  env.DB.batch = async (statements) => {
+    const result = await batch(statements);
+    if (loseResponse) {
+      loseResponse = false;
+      throw new Error("synthetic response lost after commit");
+    }
+    return result;
+  };
+  const record = { monitorKey: OPERATIONAL_MONITOR_KEY, now: NOW, repeatSeconds: 21_600 };
+  await assert.rejects(database.reportOperationalAbandonedRuns(env.DB, record), /synthetic response lost/u);
+  assert.equal(await database.reportOperationalAbandonedRuns(env.DB, record), 0);
+  assert.equal(env.DB.row("SELECT * FROM operational_alerts").occurrence_count, 1);
+  assert.equal(operationRows(env.DB, "operational_monitor_errors").length, 1);
+});
+
+test("later abandonment in a sent bucket updates its aggregate without reopening or changing the frozen email", async (t) => {
+  let clock = NOW;
+  let fetches = 0;
+  const env = monitoringEnv(t, { __testNow: () => clock,
+    __testFetch: async () => { fetches += 1; return Response.json({ id: "synthetic-frozen-recovery" }); } });
+  await seedAbandonedRun(env.DB, "first-bucket-loss");
+  const record = { monitorKey: OPERATIONAL_MONITOR_KEY, now: NOW, repeatSeconds: 21_600 };
+  assert.equal(await database.reportOperationalAbandonedRuns(env.DB, record), 1);
+  assert.equal((await flushPendingOperationalAlerts(env, NOW)).sent, 1);
+  const first = env.DB.row("SELECT * FROM operational_alerts");
+  await seedAbandonedRun(env.DB, "second-bucket-loss", NOW + 1);
+  clock = NOW + 300;
+  assert.equal(await database.reportOperationalAbandonedRuns(env.DB, { ...record, now: clock }), 1);
+  assert.equal((await flushPendingOperationalAlerts(env, clock)).examined, 0);
+  assert.equal(fetches, 1);
+  const after = env.DB.row("SELECT * FROM operational_alerts");
+  assert.equal(after.occurrence_count, 2);
+  for (const field of ["status", "delivery_attempts", "delivered_at", "delivery_occurrence_count",
+    "delivery_first_seen_at", "delivery_last_seen_at", "payload_sha256"]) {
+    assert.equal(after[field], first[field], `${field} must remain unchanged`);
+  }
+});
+
+test("abandonment marker failure rolls back the alert and retains existing operational history", async (t) => {
+  const env = monitoringEnv(t);
+  await seedAbandonedRun(env.DB, "lost-with-history");
+  await database.recordOperationalRunError(env.DB, {
+    runToken: "lost-with-history", stage: "PHYSICAL_ORDER_READ", errorCode: "SQUARE_UNREACHABLE", now: NOW - 250,
+  });
+  const existing = await seedAlert(env.DB, NOW - 200);
+  const claim = { alertId: existing.alert_id, claimToken: "previous-failure", now: NOW - 200 };
+  const row = await database.claimOperationalAlert(env.DB, claim);
+  await database.setOperationalAlertPayloadHash(env.DB, {
+    ...claim, payloadHash: await operationalAlertPayloadDigest(env, outgoingAlert(row)),
+  });
+  await database.completeOperationalAlertAttempt(env.DB, {
+    ...claim, status: "RETRY", errorCode: "RESEND_UPSTREAM_FAILED", httpStatus: 503, now: NOW - 199,
+  });
+  await database.createOperationalCanary(env.DB, { canaryId: "historical-stale", now: NOW - 1000 });
+  await database.markStaleOperationalCanaries(env.DB, NOW - 600, NOW - 400);
+  await database.createOperationalCanary(env.DB, { canaryId: "historical-send-failed", now: NOW - 200 });
+  await database.markOperationalCanarySendFailed(env.DB, "historical-send-failed", NOW - 200);
+  await database.recordOperationalDlqReceipt(env.DB, { receiptHash: "a".repeat(64), now: NOW - 200 });
+  env.DB.sqlite.prepare(`INSERT INTO fulfillment_reviews
+    (review_id, event_id, reason_code, details_json, status, created_at)
+    VALUES ('preserved-review', 'synthetic-event', 'PHYSICAL_LINK_EXPIRY_ERROR', '{}', 'OPEN', ?)`)
+    .run(NOW - 200);
+  const tables = ["operational_monitor_runs", "operational_monitor_errors", "operational_alert_attempts",
+    "operational_alerts", "operational_queue_canaries", "operational_dlq_receipts", "fulfillment_reviews"];
+  const before = Object.fromEntries(tables.map((table) => [table, env.DB.rows(`SELECT * FROM ${table}`)]));
+  env.DB.sqlite.exec(`CREATE TRIGGER synthetic_recovery_marker_failure
+    BEFORE INSERT ON operational_monitor_errors WHEN NEW.stage = 'MONITOR_RECOVERY'
+    BEGIN SELECT RAISE(ABORT, 'SYNTHETIC_RECOVERY_MARKER_FAILURE'); END;`);
+  const record = { monitorKey: OPERATIONAL_MONITOR_KEY, now: NOW, repeatSeconds: 21_600 };
+  await assert.rejects(database.reportOperationalAbandonedRuns(env.DB, record), /SYNTHETIC_RECOVERY_MARKER_FAILURE/u);
+  for (const table of tables) assert.deepEqual(env.DB.rows(`SELECT * FROM ${table}`), before[table]);
+  env.DB.sqlite.exec("DROP TRIGGER synthetic_recovery_marker_failure");
+  assert.equal(await database.reportOperationalAbandonedRuns(env.DB, record), 1);
+  for (const table of tables.filter((name) => !["operational_monitor_errors", "operational_alerts"].includes(name))) {
+    assert.deepEqual(env.DB.rows(`SELECT * FROM ${table}`), before[table]);
+  }
+  assert.deepEqual(env.DB.row("SELECT * FROM operational_alerts WHERE alert_id = ?", existing.alert_id), before.operational_alerts[0]);
+  assert.deepEqual(env.DB.rows("SELECT * FROM operational_monitor_errors WHERE stage <> 'MONITOR_RECOVERY'"), before.operational_monitor_errors);
+});
+
+test("the next admitted monitor sends abandonment once and a following healthy schedule does not repeat it", async (t) => {
+  let clock = NOW;
+  const messages = [];
+  const env = monitoringEnv(t, {
+    __testNow: () => clock,
+    __testFetch: async (_url, options) => { messages.push(options); return Response.json({ id: "synthetic-recovery" }); },
+  });
+  await database.startOperationalHeartbeat(env.DB, {
+    monitorKey: OPERATIONAL_MONITOR_KEY, runToken: "cancelled-without-completion", now: NOW - 300,
+  });
+  const recovered = await runOperationalSchedule(env, clock);
+  assert.equal(recovered.state, "DEGRADED");
+  assert.ok(recovered.issueCodes.includes("MONITOR_RUN_ABANDONED"));
+  assert.equal(messages.length, 1);
+  assert.match(JSON.parse(messages[0].body).subject, /MONITOR_RUN_ABANDONED/u);
+  const abandoned = env.DB.row("SELECT * FROM operational_monitor_runs WHERE run_token = 'cancelled-without-completion'");
+  assert.equal(abandoned.status, "ABANDONED");
+  assert.equal(abandoned.last_error_code, "MONITOR_LEASE_EXPIRED");
+  const alert = env.DB.row("SELECT * FROM operational_alerts WHERE alert_code = 'MONITOR_RUN_ABANDONED'");
+  assert.equal(alert.status, "SENT");
+  assert.equal(alert.delivery_attempts, 1);
+  clock += 300;
+  assert.equal((await runOperationalSchedule(env, clock)).state, "OK");
+  assert.equal(messages.length, 1);
+  assert.equal(env.DB.row("SELECT * FROM operational_alerts").occurrence_count, 1);
+  assert.equal(env.DB.rows("SELECT * FROM operational_monitor_errors WHERE stage = 'MONITOR_RECOVERY'").length, 1);
+});
+
+test("exact canary redelivery is idempotent, preserves first timestamps, and cannot match a different queued time", async (t) => {
+  const env = monitoringEnv(t);
+  const canaryId = "99999999-9999-4999-8999-999999999999";
+  await database.createOperationalCanary(env.DB, { canaryId, now: NOW });
+  env.DB.sqlite.exec(`CREATE TABLE synthetic_canary_receipts (canary_id TEXT);
+    CREATE TRIGGER synthetic_receipt_audit AFTER UPDATE ON operational_queue_canaries
+    WHEN NEW.status = 'RECEIVED' BEGIN INSERT INTO synthetic_canary_receipts VALUES (NEW.canary_id); END;`);
+  const received = await Promise.all([
+    database.receiveOperationalCanary(env.DB, { canaryId, queuedAt: NOW, now: NOW + 1 }),
+    database.receiveOperationalCanary(env.DB, { canaryId, queuedAt: NOW, now: NOW + 2 }),
+  ]);
+  assert.deepEqual(received, [true, true]);
+  const first = env.DB.row("SELECT * FROM operational_queue_canaries");
+  assert.equal(first.received_at, NOW + 1);
+  assert.equal(await database.receiveOperationalCanary(env.DB, { canaryId, queuedAt: NOW, now: NOW + 90 }), true);
+  assert.deepEqual(env.DB.row("SELECT * FROM operational_queue_canaries"), first);
+  assert.equal(env.DB.row("SELECT COUNT(*) AS count FROM synthetic_canary_receipts").count, 1);
+  assert.equal(await database.receiveOperationalCanary(env.DB, { canaryId, queuedAt: NOW + 1, now: NOW + 100 }), false);
+  assert.equal(await database.receiveOperationalCanary(env.DB, { canaryId: "unknown", queuedAt: NOW, now: NOW + 100 }), false);
+  assert.deepEqual(env.DB.row("SELECT * FROM operational_queue_canaries"), first);
+});
+
+test("a committed canary receipt with a lost acknowledgement retries without creating an unmatched alert", async (t) => {
+  const env = monitoringEnv(t);
+  const canaryId = "88888888-8888-4888-8888-888888888888";
+  await database.createOperationalCanary(env.DB, { canaryId, now: NOW });
+  const prepare = env.DB.prepare.bind(env.DB);
+  let loseResponse = true;
+  env.DB.prepare = (sql) => {
+    const statement = prepare(sql);
+    if (!/^\s*UPDATE operational_queue_canaries\s+SET status = 'RECEIVED'/u.test(sql)) return statement;
+    const bind = statement.bind.bind(statement);
+    statement.bind = (...args) => {
+      const bound = bind(...args);
+      const first = bound.first.bind(bound);
+      bound.first = async () => {
+        const result = await first();
+        if (loseResponse) { loseResponse = false; throw new Error("synthetic receipt acknowledgement lost"); }
+        return result;
+      };
+      return bound;
+    };
+    return statement;
+  };
+  let acknowledged = 0;
+  let retried = 0;
+  const message = { body: { kind: "OIP_OPERATIONAL_CANARY_V1", canaryId, queuedAt: NOW },
+    ack() { acknowledged += 1; }, retry() { retried += 1; } };
+  assert.equal((await processOperationalCanaryMessage(message, env, NOW + 1)).state, "CANARY_RETRY");
+  const first = env.DB.row("SELECT * FROM operational_queue_canaries");
+  assert.equal((await processOperationalCanaryMessage(message, env, NOW + 31)).state, "CANARY_RECEIVED");
+  assert.equal(acknowledged, 1);
+  assert.equal(retried, 1);
+  assert.deepEqual(env.DB.row("SELECT * FROM operational_queue_canaries"), first);
+  assert.equal(env.DB.row("SELECT COUNT(*) AS count FROM operational_alerts").count, 0);
+});
+
+test("FakeD1 recovery batches and duplicate canary receipts follow the database contracts", async () => {
+  const db = new FakeD1();
+  await seedAbandonedRun(db, "fake-lost");
+  const record = { monitorKey: OPERATIONAL_MONITOR_KEY, now: NOW, repeatSeconds: 21_600 };
+  const prepare = db.prepare.bind(db);
+  db.prepare = (sql) => {
+    const statement = prepare(sql);
+    if (sql.includes("INSERT INTO operational_monitor_errors")) {
+      statement.all = async () => { throw new Error("SYNTHETIC_FAKE_MARKER_FAILURE"); };
+    }
+    return statement;
+  };
+  await assert.rejects(database.reportOperationalAbandonedRuns(db, record), /SYNTHETIC_FAKE_MARKER_FAILURE/u);
+  assert.equal(db.operationalAlerts.size, 0);
+  assert.equal(db.operationalMonitorErrors.length, 0);
+  db.prepare = prepare;
+  assert.deepEqual((await Promise.all([
+    database.reportOperationalAbandonedRuns(db, record), database.reportOperationalAbandonedRuns(db, record),
+  ])).sort(), [0, 1]);
+  assert.equal([...db.operationalAlerts.values()][0].occurrence_count, 1);
+  assert.equal(db.operationalMonitorErrors.length, 1);
+  await database.createOperationalCanary(db, { canaryId: "fake-canary", now: NOW });
+  assert.equal(await database.receiveOperationalCanary(db, { canaryId: "fake-canary", queuedAt: NOW, now: NOW + 1 }), true);
+  const first = { ...db.operationalCanaries.get("fake-canary") };
+  assert.equal(await database.receiveOperationalCanary(db, { canaryId: "fake-canary", queuedAt: NOW, now: NOW + 90 }), true);
+  assert.equal(await database.receiveOperationalCanary(db, { canaryId: "fake-canary", queuedAt: NOW + 1, now: NOW + 90 }), false);
+  assert.deepEqual(db.operationalCanaries.get("fake-canary"), first);
 });

@@ -10,6 +10,7 @@ import {
 } from "../src/monitoring.js";
 import { handleConsumerQueueBatch } from "../src/queue.js";
 import { FakeD1 } from "./fake-d1.mjs";
+import { SqliteD1 } from "./sqlite-d1.mjs";
 
 function monitoringEnv(overrides = {}) {
   const queue = {
@@ -472,4 +473,92 @@ test("disabled bootstrap monitoring performs no D1, Queue, health, Square, or Re
     __testFetch: async () => { throw new Error("fetch must not run"); },
   });
   assert.deepEqual(await runOperationalSchedule(env, 1_800_000_000), { state: "DISABLED" });
+});
+
+test("Queue failures retain only documented numeric codes and fixed labels", async (t) => {
+  const cases = [
+    ["10104", "QUEUE_NOT_FOUND_10104"],
+    ["10106", "QUEUE_UNAUTHORIZED_10106"],
+    ["10107", "QUEUE_ID_MALFORMED_10107"],
+    ["10201", "QUEUE_CLIENT_DISCONNECTED_10201"],
+    ["10202", "QUEUE_BATCH_DELAY_INVALID_10202"],
+    ["10203", "QUEUE_MESSAGE_METADATA_INVALID_10203"],
+    ["10204", "QUEUE_MESSAGE_SIZE_INVALID_10204"],
+    ["10205", "QUEUE_BATCH_SIZE_INVALID_10205"],
+    ["10206", "QUEUE_BATCH_COUNT_INVALID_10206"],
+    ["10207", "QUEUE_JSON_BODY_INVALID_10207"],
+    ["10208", "QUEUE_JSON_BODY_MALFORMED_10208"],
+    ["10250", "QUEUE_OVERLOADED_10250"],
+    ["10251", "QUEUE_STORAGE_LIMIT_10251"],
+    ["10252", "QUEUE_DISABLED_10252"],
+    ["10253", "QUEUE_FREE_TIER_LIMIT_10253"],
+    ["15000", "QUEUE_INTERNAL_ERROR_15000"],
+  ];
+  for (const [code, expected] of cases) {
+    await t.test(code, async (t) => {
+      const db = new SqliteD1();
+      t.after(() => db.close());
+      const logs = [];
+      const originalError = console.error;
+      console.error = (...args) => { logs.push(args.join(" ")); };
+      const env = monitoringEnv({
+        DB: db,
+        __testNow: () => 1_800_000_000,
+        OPERATIONAL_CANARY_QUEUE: {
+          async send() { throw new Error(`buyer@example.test Bearer private-token (${code})`); },
+        },
+      });
+      try {
+        assert.equal((await runOperationalSchedule(env, 1_800_000_000)).state, "DEGRADED");
+      } finally {
+        console.error = originalError;
+      }
+      const history = db.rows("SELECT * FROM operational_monitor_errors");
+      assert.equal(history.length, 1);
+      assert.equal(history[0].stage, "QUEUE_CANARY_SEND");
+      assert.equal(history[0].error_code, expected);
+      assert.equal(history[0].http_status, null);
+      assert.doesNotMatch(JSON.stringify(history) + logs.join("\n"), /buyer@example|Bearer|private-token/u);
+    });
+  }
+});
+
+test("unrecognized Queue exception text stays generic and history survives recovery", async (t) => {
+  const cases = [
+    ["private-token 99999", "QUEUE_SEND_FAILED"],
+    ["private-token 10250 followed by private text", "QUEUE_SEND_FAILED"],
+    ["private-token 110250", "QUEUE_SEND_FAILED"],
+    ["private-token", "QUEUE_SEND_FAILED"],
+    ["10250", "QUEUE_OVERLOADED_10250"],
+    ["private-token [10252]", "QUEUE_DISABLED_10252"],
+  ];
+  for (const [message, expected] of cases) {
+    await t.test(message.replace(/private-token/gu, "redacted"), async (t) => {
+      const db = new SqliteD1();
+      t.after(() => db.close());
+      let now = 1_800_000_000;
+      const logs = [];
+      const originalError = console.error;
+      console.error = (...args) => { logs.push(args.join(" ")); };
+      const env = monitoringEnv({
+        DB: db,
+        __testNow: () => now,
+        OPERATIONAL_CANARY_QUEUE: { async send() { throw new Error(message); } },
+      });
+      try {
+        assert.equal((await runOperationalSchedule(env, now)).state, "DEGRADED");
+        const history = db.rows("SELECT * FROM operational_monitor_errors");
+        const failedCanary = db.row("SELECT * FROM operational_queue_canaries");
+        assert.equal(history[0].error_code, expected);
+        env.OPERATIONAL_CANARY_QUEUE.send = async () => {};
+        now += 300;
+        assert.equal((await runOperationalSchedule(env, now)).state, "OK");
+        assert.deepEqual(db.rows("SELECT * FROM operational_monitor_errors"), history);
+        assert.deepEqual(db.row("SELECT * FROM operational_queue_canaries WHERE canary_id = ?", failedCanary.canary_id), failedCanary);
+        assert.doesNotMatch(JSON.stringify(history) + logs.join("\n"), /private-token/u);
+      } finally {
+        console.error = originalError;
+      }
+    });
+  }
 });
