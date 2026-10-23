@@ -240,7 +240,14 @@ $animalKingdomPhotoIds = @(
   'essays/animal-kingdom-opening-1998/section-1',
   'essays/animal-kingdom-opening-1998/section-3'
 )
-$routinePhotoIds = @($modernBioPortraits | ForEach-Object { $_.id }) + $disneyOpeningPhotoIds + $epcotOpeningPhotoIds + $disneyExpansionPhotoIds + $animalKingdomPhotoIds
+$disney2000sPhotoIds = @(
+  'essays/disney-world-2000s/section-1',
+  'essays/disney-world-2000s/section-2',
+  'essays/disney-world-2000s/section-3',
+  'essays/disney-world-2000s/section-4',
+  'essays/disney-world-2000s/section-5'
+)
+$routinePhotoIds = @($modernBioPortraits | ForEach-Object { $_.id }) + $disneyOpeningPhotoIds + $epcotOpeningPhotoIds + $disneyExpansionPhotoIds + $animalKingdomPhotoIds + $disney2000sPhotoIds
 $intentionallyRetiredManagedAssetIds = @(
   'essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts',
   'essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/hero',
