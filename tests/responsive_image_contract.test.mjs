@@ -55,12 +55,20 @@ test("responsive image manifest keeps the frozen baseline and processing default
     "essays/animal-kingdom-opening-1998/section-1",
     "essays/animal-kingdom-opening-1998/section-3",
   ];
+  const disney2000sPhotoIds = [
+    "essays/disney-world-2000s/section-1",
+    "essays/disney-world-2000s/section-2",
+    "essays/disney-world-2000s/section-3",
+    "essays/disney-world-2000s/section-4",
+    "essays/disney-world-2000s/section-5",
+  ];
   const routinePhotoIds = [
     ...modernBioPortraits.map(({ id }) => id),
     ...disneyOpeningPhotoIds,
     ...epcotOpeningPhotoIds,
     ...disneyExpansionPhotoIds,
     ...animalKingdomPhotoIds,
+    ...disney2000sPhotoIds,
   ];
   const intentionallyRetiredManagedAssetIds = [
     "essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts",

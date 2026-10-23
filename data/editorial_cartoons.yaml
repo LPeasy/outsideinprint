@@ -1240,3 +1240,12 @@ cartoons:
     alt: "An ink and watercolor landscape shows the Tree of Life at dawn, with a safari vehicle, giraffes, and an elephant."
     width: 1672
     height: 941
+  - slug: a-packed-vacation
+    title: "A Packed Vacation"
+    date: "2026-10-24"
+    publishDate: "2026-10-24T09:00:00-04:00"
+    image: "essays/disney-world-2000s/hero"
+    essay: "/essays/disney-world-2000s/"
+    alt: "An open suitcase holds a folded map that rises into a mountain, a resort hotel, and a road with an airport coach, lit by a sunset."
+    width: 1672
+    height: 941
