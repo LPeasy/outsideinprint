@@ -18,6 +18,7 @@ import {
   recordOperationalAlert,
   recordOperationalDlqReceipt,
   recordOperationalRunError,
+  reportOperationalAbandonedRuns,
   renewOperationalHeartbeat,
   setOperationalAlertPayloadHash,
   startOperationalHeartbeat,
@@ -86,6 +87,33 @@ async function recordRunError(env, runToken, stage, errorCode, now, httpStatus =
 function diagnosticHttpStatus(error) {
   return error instanceof SquareApiError && Number.isInteger(error.status) &&
     error.status >= 100 && error.status <= 599 ? error.status : null;
+}
+
+// Queues appends its numeric provider code to exception.message. Keep only a
+// documented code and a fixed label; never retain the surrounding message.
+const QUEUE_PROVIDER_CODES = new Map([
+  ["10104", "QUEUE_NOT_FOUND_10104"],
+  ["10106", "QUEUE_UNAUTHORIZED_10106"],
+  ["10107", "QUEUE_ID_MALFORMED_10107"],
+  ["10201", "QUEUE_CLIENT_DISCONNECTED_10201"],
+  ["10202", "QUEUE_BATCH_DELAY_INVALID_10202"],
+  ["10203", "QUEUE_MESSAGE_METADATA_INVALID_10203"],
+  ["10204", "QUEUE_MESSAGE_SIZE_INVALID_10204"],
+  ["10205", "QUEUE_BATCH_SIZE_INVALID_10205"],
+  ["10206", "QUEUE_BATCH_COUNT_INVALID_10206"],
+  ["10207", "QUEUE_JSON_BODY_INVALID_10207"],
+  ["10208", "QUEUE_JSON_BODY_MALFORMED_10208"],
+  ["10250", "QUEUE_OVERLOADED_10250"],
+  ["10251", "QUEUE_STORAGE_LIMIT_10251"],
+  ["10252", "QUEUE_DISABLED_10252"],
+  ["10253", "QUEUE_FREE_TIER_LIMIT_10253"],
+  ["15000", "QUEUE_INTERNAL_ERROR_15000"],
+]);
+
+function queueDiagnosticCode(error) {
+  const message = typeof error?.message === "string" ? error.message : "";
+  const code = /(?:^|\D)(\d{5})[)\]]?\s*$/u.exec(message)?.[1];
+  return QUEUE_PROVIDER_CODES.get(code) || diagnosticCode(error, "QUEUE_SEND_FAILED");
 }
 
 async function completeHeartbeat(db, record) {
@@ -332,8 +360,17 @@ export async function runOperationalSchedule(env, now = nowSeconds()) {
   let unresolvedStaleCanaries = 0;
   let fulfillmentIssues = null;
   let maintenance = null;
-  let stage = "CANARY_CLEANUP";
+  let stage = "MONITOR_RECOVERY";
   try {
+    await guard();
+    const abandoned = await reportOperationalAbandonedRuns(env.DB, {
+      monitorKey: OPERATIONAL_MONITOR_KEY,
+      now: clock(),
+      repeatSeconds: config.alertRepeatSeconds,
+    });
+    if (abandoned > 0) issueCodes.push("MONITOR_RUN_ABANDONED");
+
+    stage = "CANARY_CLEANUP";
     await guard();
     await cleanupOperationalCanaries(env.DB, now - (7 * 24 * 60 * 60), 500);
 
@@ -371,11 +408,13 @@ export async function runOperationalSchedule(env, now = nowSeconds()) {
 
     stage = "PHYSICAL_MAINTENANCE";
     await guard();
+    const recordedMaintenanceErrors = new Set();
     try {
       maintenance = await expireUnusedPhysicalLinks(env, clock(), 25, {
         beforeStep: guard,
         onError: async (operation, error) => {
           await recordRunError(env, runToken, operation, diagnosticCode(error), clock(), diagnosticHttpStatus(error));
+          recordedMaintenanceErrors.add(error);
         },
       });
       if (maintenance.errors > 0) {
@@ -388,7 +427,9 @@ export async function runOperationalSchedule(env, now = nowSeconds()) {
       }
     } catch (error) {
       if (error?.message === "OPERATIONAL_HEARTBEAT_CLAIM_LOST") throw error;
-      await recordRunError(env, runToken, stage, diagnosticCode(error), clock(), diagnosticHttpStatus(error));
+      if (!recordedMaintenanceErrors.has(error)) {
+        await recordRunError(env, runToken, stage, diagnosticCode(error), clock(), diagnosticHttpStatus(error));
+      }
       issueCodes.push("PHYSICAL_MAINTENANCE_FAILED");
       await noteIssue(env, config, "PHYSICAL_MAINTENANCE_FAILED", now);
     }
@@ -396,7 +437,7 @@ export async function runOperationalSchedule(env, now = nowSeconds()) {
     stage = "QUEUE_CANARY_SEND";
     await guard();
     const canary = await issueQueueCanary(env, config, clock(), async (error) => {
-      await recordRunError(env, runToken, stage, diagnosticCode(error, "QUEUE_SEND_FAILED"), clock());
+      await recordRunError(env, runToken, stage, queueDiagnosticCode(error), clock());
     });
     if (!canary.sent) issueCodes.push("QUEUE_CANARY_SEND_FAILED");
 

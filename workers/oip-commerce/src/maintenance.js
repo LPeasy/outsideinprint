@@ -8,13 +8,28 @@ import {
 } from "./database.js";
 import { deletePaymentLink, getOrder } from "./square.js";
 
+async function maintenanceDatabaseStep(options, stage, operation) {
+  // Lease-guard failures belong to the monitor, not this database operation.
+  await options.beforeStep?.();
+  try {
+    return await operation();
+  } catch (error) {
+    try {
+      await options.onError?.(stage, error);
+    } catch {
+      // A diagnostic failure must not replace the original operation error.
+    }
+    throw error;
+  }
+}
+
 export async function expireUnusedPhysicalLinks(env, now, limit = 25, options = {}) {
-  await options.beforeStep?.();
-  await reconcileExpiredPhysicalReservations(env.DB, now);
-  await options.beforeStep?.();
-  const orphaned = await markStaleUnboundPhysicalReservationsForReview(env.DB, now);
-  await options.beforeStep?.();
-  const rows = await listExpiredPhysicalLinks(env.DB, now, limit);
+  await maintenanceDatabaseStep(options, "PHYSICAL_RESERVATION_RECONCILE",
+    () => reconcileExpiredPhysicalReservations(env.DB, now));
+  const orphaned = await maintenanceDatabaseStep(options, "PHYSICAL_ORPHAN_CHECK",
+    () => markStaleUnboundPhysicalReservationsForReview(env.DB, now));
+  const rows = await maintenanceDatabaseStep(options, "PHYSICAL_EXPIRED_LINK_LIST",
+    () => listExpiredPhysicalLinks(env.DB, now, limit));
   let expired = 0;
   let deferred = 0;
   let errors = 0;

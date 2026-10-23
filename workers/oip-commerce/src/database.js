@@ -929,6 +929,50 @@ export async function recordOperationalRunError(db, record) {
   ).bind(record.runToken, record.stage, record.errorCode, record.now, record.httpStatus ?? null).run();
 }
 
+// This marker triple is reserved for recovery reporting. D1 batches execute as
+// one transaction, so neither a retry nor another reporter can count a run
+// without also recording its marker, or mark it without queuing its alert.
+export async function reportOperationalAbandonedRuns(db, { monitorKey, now, repeatSeconds }) {
+  if (!Number.isSafeInteger(now) || now < 0 || !Number.isSafeInteger(repeatSeconds) || repeatSeconds < 1) {
+    throw new Error("OPERATIONAL_RECOVERY_INPUT_INVALID");
+  }
+  const alertCode = "MONITOR_RUN_ABANDONED";
+  const bucket = Math.floor(now / repeatSeconds);
+  const results = await db.batch([
+    db.prepare(
+      `INSERT INTO operational_alerts
+       (alert_id, alert_code, alert_bucket, status, occurrence_count,
+        first_seen_at, last_seen_at, delivery_attempts)
+       SELECT ?, ?, ?, 'PENDING', COUNT(*), ?, ?, 0
+       FROM operational_monitor_runs AS runs
+       WHERE runs.monitor_key = ? AND runs.status = 'ABANDONED'
+         AND NOT EXISTS (
+           SELECT 1 FROM operational_monitor_errors AS errors
+           WHERE errors.run_token = runs.run_token AND errors.stage = 'MONITOR_RECOVERY'
+             AND errors.error_code = 'MONITOR_LEASE_EXPIRED'
+         )
+       HAVING COUNT(*) > 0
+       ON CONFLICT(alert_code, alert_bucket) DO UPDATE SET
+         occurrence_count = operational_alerts.occurrence_count + excluded.occurrence_count,
+         first_seen_at = MIN(operational_alerts.first_seen_at, excluded.first_seen_at),
+         last_seen_at = MAX(operational_alerts.last_seen_at, excluded.last_seen_at)`,
+    ).bind(`${alertCode}:${bucket}`, alertCode, bucket, now, now, monitorKey),
+    db.prepare(
+      `INSERT INTO operational_monitor_errors (run_token, stage, error_code, occurred_at, http_status)
+       SELECT runs.run_token, 'MONITOR_RECOVERY', 'MONITOR_LEASE_EXPIRED', ?, NULL
+       FROM operational_monitor_runs AS runs
+       WHERE runs.monitor_key = ? AND runs.status = 'ABANDONED'
+         AND NOT EXISTS (
+           SELECT 1 FROM operational_monitor_errors AS errors
+           WHERE errors.run_token = runs.run_token AND errors.stage = 'MONITOR_RECOVERY'
+             AND errors.error_code = 'MONITOR_LEASE_EXPIRED'
+         )
+       RETURNING run_token`,
+    ).bind(now, monitorKey),
+  ]);
+  return results[1].results.length;
+}
+
 export async function getOperationalHealthSnapshot(db, monitorKey) {
   const heartbeat = await db
     .prepare(
@@ -1007,11 +1051,19 @@ export async function receiveOperationalCanary(db, record) {
     .prepare(
       `UPDATE operational_queue_canaries
        SET status = 'RECEIVED', received_at = ?, updated_at = ?
-       WHERE canary_id = ? AND queued_at = ? AND status <> 'RECEIVED'`,
+       WHERE canary_id = ? AND queued_at = ? AND status <> 'RECEIVED'
+       RETURNING canary_id`,
     )
     .bind(record.now, record.now, record.canaryId, record.queuedAt)
-    .run();
-  return Number(result?.meta?.changes || 0) === 1;
+    .first();
+  if (result != null) return true;
+  // A repeated delivery, including an acknowledgement lost after commit, is a
+  // successful match. Do not rewrite the first receipt or its update timestamp.
+  const received = await db.prepare(
+    `SELECT canary_id FROM operational_queue_canaries
+     WHERE canary_id = ? AND queued_at = ? AND status = 'RECEIVED' AND received_at IS NOT NULL`,
+  ).bind(record.canaryId, record.queuedAt).first();
+  return received != null;
 }
 
 export async function markStaleOperationalCanaries(db, staleBefore, now) {
