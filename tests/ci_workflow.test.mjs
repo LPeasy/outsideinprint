@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import YAML from "yaml";
+import { assertScheduleWorkflow } from "../scripts/ci/scheduled_releases.mjs";
 const document = YAML.parseDocument(fs.readFileSync(".github/workflows/deploy.yml", "utf8"), { version: "1.2", uniqueKeys: true });
 assert.deepEqual(document.errors, []);
 const workflow = document.toJS(), jobs = workflow.jobs;
@@ -53,12 +54,12 @@ test("classification uses complete Git history and sparse files", () => {
   assert.match(jobs.site.if, /needs.windows.result/);
   assert.match(jobs.site.if, /needs.worker.result/);
 });
-test("Eastern daily schedules and two bounded owner-approved releases retain PR supersession", () => {
-  assert.deepEqual(workflow.on.schedule, [
+test("Eastern maintenance and generated release triggers retain PR supersession", () => {
+  assert.deepEqual(workflow.on.schedule.slice(0, 2), [
     { cron: "17 0 * * 1", timezone: "America/New_York" },
     { cron: "17 0 * * 0,2-6", timezone: "America/New_York" },
-    { cron: "0 9 25,26 10 *", timezone: "America/New_York" },
   ]);
+  assertScheduleWorkflow(fs.readFileSync(".github/workflows/deploy.yml", "utf8"));
   assert.equal(workflow.on.workflow_dispatch.inputs.full_checks.type, "boolean");
   assert.equal(workflow.on.workflow_dispatch.inputs.full_checks.default, true);
   assert.match(workflow.concurrency["cancel-in-progress"], /github.event_name == 'pull_request'/);
@@ -74,6 +75,20 @@ test("timed releases use source validation and the verified production receipt",
   assert.match(steps("deploy")[index].if, /steps.deployment-head-final.outputs.current == 'true'/);
   assert.match(steps("deploy")[index].env.OIP_EXPECTED_GENERATED_AT, /needs.site.outputs.generated_at/);
   assert.ok(action("deploy", "actions/checkout").with["sparse-checkout"].includes("content/essays"));
+  assert.match(commands("classify"), /scheduled_releases.mjs --check/);
+  assert.match(commands("classify"), /scheduled_releases.mjs --check-pending/);
+  assert.match(commands("classify"), /tests\/scheduled_releases.test.mjs/);
+  assert.match(commands("classify"), /test_scheduled_release_verification.py/);
+  assert.equal(jobs.classify.outputs.release_ids, "${{ steps.selection.outputs.release_ids }}");
+  const generic = steps("deploy").findIndex(step => step.run?.includes("verify_scheduled_releases.py"));
+  assert.ok(generic > steps("deploy").findIndex(step => step.id === "deployment-head-final"));
+  assert.match(steps("deploy")[generic].if, /release_ids != '\[\]'/);
+  assert.match(steps("deploy")[generic].if, /steps.deployment-head-final.outputs.current == 'true'/);
+  assert.match(steps("deploy")[generic].env.OIP_EXPECTED_GENERATED_AT, /needs.site.outputs.generated_at/);
+  for (const at of [index, generic]) {
+    assert.match(steps("deploy")[at].if, /always\(\)/, "Independent release receipts must survive a preceding check failure");
+    assert.match(steps("deploy")[at].if, /steps.deployment-head-final.outcome == 'success'/);
+  }
 });
 test("Hugo resources restore compatibly and only validated production saves them", () => {
   const restore = action("site", "actions/cache/restore"), save = action("site", "actions/cache/save");
