@@ -101,19 +101,24 @@ Gallery: an Almanack issue does not create or promote a Gallery illustration.
 Static decoration may already be publicly hosted after queueing; issue dormancy
 protects the page and discovery surfaces, not those approved asset URLs.
 
-Only after those checks, use the scheduling skill to create/update the one-time
-release heartbeat. Bind it to the queued SHA, exact timestamp, issue number,
-canonical route, approved identifying copy and artwork. At or after that instant,
-verify ancestry and timestamp, dispatch `.github/workflows/deploy.yml` on `main`
-with `full_checks=false`, and require a successful fresh production workflow and
-canonical verification for the exact `commitSha` and original `generatedAtUtc`.
-Reuse that verification receipt. Check the live issue, archive/latest sample,
-feed/sitemap discovery and hosted artwork, while the existing homepage lead and
-Gallery remain intact. Write the publication record only after those checks pass.
-Follow the scheduling skill's no-retry/terminal-blocker rules.
+Use [GitHub-hosted scheduled publication](scheduled-publication.md) and the
+scheduling skill to register the release in the same reviewed queue PR. Complete
+the dedicated stager's content-only validation first. Bind its public source,
+exact timestamp, issue number, canonical route, identifying copy, and approved
+hosted artwork, then add the generated registry/workflow paths to the reviewed
+allowlist. Declare issue, archive/latest sample, and XML feed/sitemap checks.
+Preserve the homepage lead and Gallery; do not introduce a Gallery entry merely
+to schedule an Almanack. No local release heartbeat is required.
 
-Mark the source package `SCHEDULED / QUEUED` only after the queue and automation
-actually exist, recording their IDs, base/queued SHAs, clock and checks. Until then
+At release, GitHub checks the approved source and exact timestamp, builds with
+the actual clock, and verifies the deployed `commitSha` and original
+`generatedAtUtc`. Reuse its receipt and bounded scheduled-release results for
+later local reconciliation. Write the publication record only after the required
+checks pass. A failed release requires diagnosis, not automatic dispatch or retry.
+
+Mark the source package `SCHEDULED / QUEUED` only after the queue and GitHub
+registration are merged and verified, recording the release ID, workflow,
+base/queued SHAs, clock and checks. Until then
 use an honest local-preparation state. Website scheduling does not schedule or
 send the Buttondown email. Its saved draft must independently pass the exact
 subject and `secondary_id` readback and provider review before any authorized send.

@@ -15,9 +15,11 @@ on:
       timezone: America/New_York
     - cron: 17 0 * * 0,2-6
       timezone: America/New_York
-    # Owner-approved releases on October 25 and 26, 2026; classifier expires them.
-    - cron: 0 9 25,26 10 *
-      timezone: America/New_York
+    # BEGIN GENERATED SCHEDULED RELEASES
+    # Generated UTC instants; absolute registry windows prevent later-year releases.
+    - cron: 0 13 25,26 10 *
+      timezone: UTC
+    # END GENERATED SCHEDULED RELEASES
 permissions:
   contents: read
 concurrency:
@@ -39,6 +41,7 @@ jobs:
       full: ${{ steps.selection.outputs.full }}
       clock: ${{ steps.selection.outputs.clock }}
       release_slug: ${{ steps.selection.outputs.release_slug }}
+      release_ids: ${{ steps.selection.outputs.release_ids }}
       base: ${{ steps.selection.outputs.base }}
       selection: ${{ steps.selection.outputs.selection }}
     steps:
@@ -61,8 +64,11 @@ jobs:
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Check workflow safety and selectors
         run: |
-          node --test tests/ci_workflow.test.mjs tests/classify_changes.test.mjs tests/disney_release_schedule.test.mjs tests/image_cache.test.mjs tests/release_gate.test.mjs tests/verify_deployment.test.mjs tests/deployment_head.test.mjs
+          node --test tests/ci_workflow.test.mjs tests/classify_changes.test.mjs tests/disney_release_schedule.test.mjs tests/scheduled_releases.test.mjs tests/image_cache.test.mjs tests/release_gate.test.mjs tests/verify_deployment.test.mjs tests/deployment_head.test.mjs
           python3 -m unittest discover -s tests -p test_disney_release_verification.py
+          python3 -m unittest discover -s tests -p test_scheduled_release_verification.py
+          node scripts/ci/scheduled_releases.mjs --check
+          node scripts/ci/scheduled_releases.mjs --check-pending
       - name: Select checks and publication clock
         id: selection
         env:
@@ -523,12 +529,19 @@ jobs:
         shell: pwsh
         run: ./tests/test_live_seo_smoke.ps1 -BaseUrl "https://outsideinprint.org"
       - name: Verify scheduled Disney release
-        if: ${{ needs.classify.outputs.release_slug != '' && steps.deployment-head-final.outcome == 'success' && steps.deployment-head-final.outputs.current == 'true' }}
+        if: ${{ always() && needs.classify.outputs.release_slug != '' && steps.deployment-head-final.outcome == 'success' && steps.deployment-head-final.outputs.current == 'true' }}
         env:
           OIP_RELEASE_SLUG: ${{ needs.classify.outputs.release_slug }}
           OIP_EXPECTED_SHA: ${{ github.sha }}
           OIP_EXPECTED_GENERATED_AT: ${{ needs.site.outputs.generated_at }}
         run: python3 scripts/ci/verify_disney_release.py
+      - name: Verify scheduled releases
+        if: ${{ always() && needs.classify.outputs.release_ids != '[]' && needs.classify.outputs.release_ids != '' && steps.deployment-head-final.outcome == 'success' && steps.deployment-head-final.outputs.current == 'true' }}
+        env:
+          OIP_RELEASE_IDS: ${{ needs.classify.outputs.release_ids }}
+          OIP_EXPECTED_SHA: ${{ github.sha }}
+          OIP_EXPECTED_GENERATED_AT: ${{ needs.site.outputs.generated_at }}
+        run: python3 scripts/ci/verify_scheduled_releases.py
       - name: SEO Rollout Probe
         if: ${{ always() && steps.deployment-head-final.outcome == 'success' && steps.deployment-head-final.outputs.current == 'true' && steps.deployment.outcome == 'success' && needs.classify.outputs.seo == 'true' }}
         shell: pwsh
