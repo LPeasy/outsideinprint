@@ -1,0 +1,10 @@
+{{- with site.Params.pressroom.url -}}
+  {{- if $.compact -}}
+    <p class="pressroom-invitation pressroom-invitation--compact">For a closer look at the work, <a href="{{ . }}" data-analytics-source-slot="{{ $.sourceSlot }}">join The Pressroom on Patreon</a> for $5/month.</p>
+  {{- else -}}
+    <aside class="pressroom-invitation" aria-label="The Pressroom on Patreon">
+      <p><strong>Step inside the Pressroom.</strong> Get one monthly dispatch on the writing, research, art, and games behind Outside In Print.</p>
+      <p><a href="{{ . }}" data-analytics-source-slot="{{ $.sourceSlot }}">Explore the Pressroom on Patreon <span aria-hidden="true">&rarr;</span></a> <span class="pressroom-invitation__note">Follow for free, or join The Pressroom for $5/month.</span></p>
+    </aside>
+  {{- end -}}
+{{- end -}}

@@ -5697,6 +5697,14 @@ html[data-theme="light"] .paper-route-toggle{
   grid-template-columns:repeat(2, minmax(0, 1fr));
   gap:.8rem;
 }
+.support-pressroom{
+  margin-bottom:1rem;
+}
+.support-option.support-pressroom > .support-option__amount{
+  color:var(--text-primary);
+  font-size:2rem;
+  line-height:1;
+}
 .support-option{
   display:flex;
   flex-direction:column;
@@ -10092,6 +10100,45 @@ html[data-theme="light"] .collection-section[data-collection-identity]{
 .newsletter-signup__privacy a:focus-visible{
   outline:2px solid var(--focus-ring);
   outline-offset:2px;
+}
+.pressroom-invitation{
+  margin-top:1rem;
+  padding-top:.85rem;
+  border-top:1px solid var(--oip-rule-faint);
+  color:var(--text-secondary);
+  font-family:var(--font-ui);
+  font-size:.82rem;
+  line-height:1.6;
+}
+.pressroom-invitation p{
+  margin:0;
+}
+.pressroom-invitation p + p{
+  margin-top:.35rem;
+}
+.pressroom-invitation a{
+  color:var(--accent-hover);
+  font-weight:650;
+  text-underline-offset:.18em;
+}
+.pressroom-invitation a:hover{
+  color:var(--text-primary);
+}
+.pressroom-invitation a:focus-visible,
+.support-pressroom a:focus-visible{
+  outline:2px solid var(--focus-ring);
+  outline-offset:3px;
+}
+.pressroom-invitation__note{
+  color:var(--text-muted);
+  font-size:.76rem;
+}
+.pressroom-invitation--compact{
+  margin:0;
+  padding:0 .9rem .7rem;
+  border:0;
+  color:var(--text-muted);
+  font-size:.78rem;
 }
 @media (max-width:768px){
   .newsletter-prompt{

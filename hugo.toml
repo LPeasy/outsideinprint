@@ -72,6 +72,9 @@ privacy_label = "Privacy details"
 enabled = false
 allow_local = false
 
+[params.pressroom]
+url = "https://www.patreon.com/bobviously"
+
 [params.purchase_analytics]
 enabled = false
 measurement_id = ""

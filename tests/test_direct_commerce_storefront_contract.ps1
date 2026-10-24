@@ -482,8 +482,8 @@ if ($physicalCheckoutScript -match '(?i)analyticsAmount|order_id|customer_email|
 
 $supportIntroSource = Get-RequiredText -RelativePath 'content/support/_index.md'
 foreach ($requiredSupportPurpose in @(
-  "Your support helps fund Robert’s work building this website, writing stories, and doing research.",
-  'It also helps keep ads off the site.'
+  'Your support helps Robert build Outside In Print, write stories, create art and games, and follow research where it leads.',
+  'Join The Pressroom on Patreon for a closer look at the work, or make a direct contribution through Square.'
 )) {
   Assert-Contains -Text $supportIntroSource -Expected $requiredSupportPurpose -Context 'Support purpose copy'
 }
@@ -501,7 +501,7 @@ foreach ($requiredSupportText in @(
   'min="5" max="500" step="1"',
   'data-analytics-event="checkout_start"',
   'Reader support checkout opens after its activation gate passes.',
-  'Monthly support is charged today and renews each month until canceled.'
+  'Monthly direct support through Square is charged today and renews each month until canceled.'
 )) {
   Assert-Contains -Text $supportTemplate -Expected $requiredSupportText -Context 'Support template'
 }
@@ -933,11 +933,14 @@ if ($shopOutput -match '(?i)data-analytics-(?:amount|order|email|address|custome
 $supportOutput = [Net.WebUtility]::HtmlDecode([string]$output['support/index.html'])
 foreach ($requiredSupportOutput in @(
   'Support Outside In Print',
-  "Your support helps fund Robert’s work building this website, writing stories, and doing research.",
-  'It also helps keep ads off the site.',
+  'Your support helps Robert build Outside In Print, write stories, create art and games, and follow research where it leads.',
+  'The Pressroom',
+  'Membership on Patreon',
+  'https://www.patreon.com/bobviously',
+  'Contribute through Square without membership benefits.',
   'Support once',
   'Support $5 monthly',
-  'Monthly support is charged today and renews each month until canceled. Cancel anytime through the link in your Square receipt email.',
+  'Monthly direct support through Square is charged today and renews each month until canceled. Cancel anytime through the link in your Square receipt email.',
   'data-support-checkout-enabled=true',
   'https://downloads.outsideinprint.org/api/support/one-time',
   'https://downloads.outsideinprint.org/api/support/monthly',
@@ -945,8 +948,8 @@ foreach ($requiredSupportOutput in @(
 )) {
   Assert-Contains -Text $supportOutput -Expected $requiredSupportOutput -Context 'Built support page'
 }
-if ([regex]::Matches($supportOutput, '<section\b[^>]*class=(?:"|'''')?support-option\b', 'IgnoreCase').Count -ne 2) {
-  throw 'Built support page must contain exactly two public support options.'
+if ([regex]::Matches($supportOutput, '<section\b[^>]*class=(?:"|'''')?support-option\b', 'IgnoreCase').Count -ne 3) {
+  throw 'Built support page must contain one Patreon membership option and two direct-support options.'
 }
 if ([regex]::Matches($supportOutput, '<form\b[^>]*data-support-checkout', 'IgnoreCase').Count -ne 2) {
   throw 'Live support output must expose exactly two checkout forms.'

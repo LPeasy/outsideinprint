@@ -49,6 +49,8 @@
     {{- end }}
   </div>
 
+  {{ partial "pressroom_invitation.html" (dict "compact" true "sourceSlot" "homepage_newsletter_pressroom") }}
+
   {{- with $currentIssue -}}
     {{- $lead := dict -}}
     {{- with .Params.essays -}}

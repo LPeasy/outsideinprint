@@ -15,6 +15,7 @@
 {{ $class := .class }}
 {{ $anchorID := .anchorID | default "" }}
 {{ $focusTarget := .focusTarget | default false }}
+{{ $showPressroom := .pressroom | default false }}
 {{ $sampleSourceSlot := printf "%s_sample_issue" $sourceSlot }}
 {{ $samplePath := $sampleURL | relURL }}
 {{ $isSamplePage := and (eq $page.Section "almanack") (eq $page.RelPermalink $samplePath) }}
@@ -83,6 +84,9 @@
           </p>
           <p id="{{ $privacyID }}" class="newsletter-signup__privacy">{{ $privacyPromise }}</p>
         </div>
+        {{ if $showPressroom }}
+          {{ partial "pressroom_invitation.html" (dict "sourceSlot" (printf "%s_pressroom" $sourceSlot)) }}
+        {{ end }}
       </div>
     </section>
   {{ end }}
