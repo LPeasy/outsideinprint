@@ -43,6 +43,7 @@
         data-analytics-section="Support"
         data-analytics-path="{{ "support/" | relURL }}"
       >Support</a>
+      {{ with site.Params.pressroom.url }}<a href="{{ . }}" data-analytics-source-slot="footer_pressroom" aria-label="Pressroom on Patreon">Pressroom</a>{{ end }}
       <a href="{{ "contact/" | absURL }}">Contact</a>
     </nav>
     <nav class="site-footer__nav site-footer__nav--policies" aria-label="Commerce policies">

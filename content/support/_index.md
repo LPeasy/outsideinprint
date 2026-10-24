@@ -1,12 +1,10 @@
 ---
 title: "Support Outside In Print"
-description: "Support Outside In Print once or monthly through secure Square checkout."
+description: "Join The Pressroom on Patreon for $5/month, or support Outside In Print directly through Square."
 draft: false
 show_citation: false
 ---
 
-Your support helps fund Robert’s work building this website, writing stories, and doing research. It also helps keep ads off the site.
+Your support helps Robert build Outside In Print, write stories, create art and games, and follow research where it leads.
 
-**Support once** &middot; **Support $5 monthly**
-
-Monthly support is charged today and renews each month until canceled. Cancel anytime through the link in your Square receipt email.
+Join The Pressroom on Patreon for a closer look at the work, or make a direct contribution through Square.
