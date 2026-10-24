@@ -335,6 +335,10 @@ publishDate: 2026-05-29T08:00:00-04:00
 
 Date-only releases are interpreted in the site timezone, which is `America/New_York`. The deploy workflow also sets `TZ: America/New_York` and runs one scheduled GitHub Actions rebuild per day at 12:17 AM Eastern, so a dormant daily post appears on the first successful scheduled deploy after its `publishDate` becomes eligible. GitHub scheduled workflows are not exact-to-the-minute; use `workflow_dispatch` for a manual immediate release if timing is critical.
 
+The owner-approved Disney installments six and seven also use GitHub-hosted 9 AM Eastern triggers on October 25 and 26, 2026. `scripts/ci/disney-releases.json` binds each date to its approved source hash, queued commit and artwork. The classifier verifies those bindings and selects only the corresponding 2026 release-day window; the added cron becomes a no-op outside those windows, including later years. It never advances Hugo's clock or enables future content. The existing midnight schedules and Monday full checks remain unchanged.
+
+These two releases need no local computer or Codex heartbeat. After the normal current-main guard, deployment and exact canonical SHA/generated-time verification, a bounded live check records article, collection, Gallery, homepage, image and series-navigation results in `deployment-diagnostics/scheduled-release.json`. A failure stays failed for diagnosis; it does not automatically retry deployment. GitHub may delay or drop scheduled jobs, so 9 AM is the requested start, not a guarantee of minute-exact availability. Preserve these Actions receipts for later reconciliation into local publication packages and Contributor Desk; do not mark local records Published before observing successful release evidence. The replaced local release heartbeats must be disabled after this workflow is merged and verified.
+
 For the current daily-essay queue, set one essay per publishing day:
 
 ```yaml
