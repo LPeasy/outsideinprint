@@ -1,0 +1,128 @@
+{
+  "cron": "0 9 25,26 10 *",
+  "timezone": "America/New_York",
+  "collection": "/collections/brands-business-consumer-choice/",
+  "flagship": "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/",
+  "seriesRoutes": [
+    "/essays/walt-disney-world-opening-1971/",
+    "/essays/epcot-center-opening-1982/",
+    "/essays/disney-world-expansion-studios-pleasure-island-hotels/",
+    "/essays/animal-kingdom-opening-1998/",
+    "/essays/disney-world-2000s/",
+    "/essays/disney-world-2010s/",
+    "/essays/disney-world-2020s/"
+  ],
+  "releases": [
+    {
+      "slug": "disney-world-2010s",
+      "sourcePath": "content/essays/disney-world-2010s.md",
+      "releaseAt": "2026-10-25T09:00:00-04:00",
+      "endsAt": "2026-10-26T00:00:00-04:00",
+      "queuedCommit": "58db6804a83ddfbeff06f2da9093c577506f3c6e",
+      "sourceSha256": "fed68a31c6bd1d66c0b007c9f1f2f33c76f58ddfd5c08ea7f289022949ea674a",
+      "title": "Disney World in the 2010s: MagicBands, Pandora, and Star Wars: Galaxy’s Edge",
+      "opening": "Steel track curves between rock faces and beneath a timber-style bridge.",
+      "ending": "For now, a visitor could arrange the date, reserve an attraction, choose a room, and ride from a hotel toward the parks. Disney supplied more ways to plan the journey and more places for it to go. Inside Rise of the Resistance, the floor offered no track to follow. A droid sat at the controls, and the way out lay somewhere ahead. After all that planning, there was something to be said for letting the little fellow drive.",
+      "heroTitle": "Inside the Story",
+      "heroCaption": "A new setting for the next adventure.",
+      "seriesPart": 6,
+      "images": [
+        {
+          "id": "essays/disney-world-2010s/hero",
+          "width": 1672,
+          "height": 941,
+          "sha256": "393340df00e6a35e92e0e031bcade97e7f251c5977d8e9cd84dde69241e81061"
+        },
+        {
+          "id": "essays/disney-world-2010s/section-1",
+          "width": 3000,
+          "height": 1996,
+          "sha256": "3461b1b356262757f0e9908fd70f052e7ba536caee3f9b804419218da716fcac"
+        },
+        {
+          "id": "essays/disney-world-2010s/section-2",
+          "width": 2448,
+          "height": 3264,
+          "sha256": "db21a0843f0bff7c0bdc9f3a3de8d4370ff77ca0db32035577f2d0c120d1fbdc"
+        },
+        {
+          "id": "essays/disney-world-2010s/section-3",
+          "width": 960,
+          "height": 540,
+          "sha256": "f37561b9bf51d0ed44c9bcec28531f375278e3c7fa4fe45154d2ad299d3a6dc5"
+        },
+        {
+          "id": "essays/disney-world-2010s/section-4",
+          "width": 5184,
+          "height": 3456,
+          "sha256": "c5d9d39ec1372929b67d870406ce97f048b092221ae93fbb1778fc4ddea20a70"
+        },
+        {
+          "id": "essays/disney-world-2010s/section-6",
+          "width": 960,
+          "height": 720,
+          "sha256": "eaba237dfd0a3c0220c83921b55ddca9510f2add400fcbfdfc2b3284810c8f74"
+        },
+        {
+          "id": "essays/disney-world-2010s/section-7",
+          "width": 2592,
+          "height": 1936,
+          "sha256": "ae88d4d4a5e1ed53927118031e1b1b67dabc7619023907010a7fb2bc430c950b"
+        },
+        {
+          "id": "essays/disney-world-2010s/section-5",
+          "width": 4032,
+          "height": 3024,
+          "sha256": "ef6b16cd72d1cd60088687ce97492366124c5eff0a6de7dcbd94a1bb33e75866"
+        }
+      ]
+    },
+    {
+      "slug": "disney-world-2020s",
+      "sourcePath": "content/essays/disney-world-2020s.md",
+      "releaseAt": "2026-10-26T09:00:00-04:00",
+      "endsAt": "2026-10-27T00:00:00-04:00",
+      "queuedCommit": "5a8f6a64ed3e550dfc861af60c763690584f7243",
+      "sourceSha256": "ed6fa9ec7b49529f40d1662137afac9da09948045b64fe204bc31f852d9930d5",
+      "title": "Disney World in the 2020s: Fifty Years of Magic",
+      "opening": "Cinderella Castle wore a gold 50, with golden decorations around its towers.",
+      "ending": "For someone returning with children or grandchildren, the next trip can begin with a familiar view of the castle. They may know which way to turn, where to board the boat, and which ride they want to share first. Then comes the pleasure of taking someone who knows none of it through the gates.",
+      "heroTitle": "Through the Gates",
+      "heroCaption": "Through the Gates: a familiar place to share with someone new.",
+      "seriesPart": 7,
+      "images": [
+        {
+          "id": "essays/disney-world-2020s/hero",
+          "width": 1672,
+          "height": 941,
+          "sha256": "277be8db98d7c887ff21bba748abae800df49e94f55637a03f55bc1be64d7dc1"
+        },
+        {
+          "id": "essays/disney-world-2020s/section-1",
+          "width": 960,
+          "height": 1531,
+          "sha256": "247e5a1d3e05147ba7b7147822f85ed7dd3ada6ac1731b2da752dc681e1f8f08"
+        },
+        {
+          "id": "essays/disney-world-2020s/section-2",
+          "width": 1280,
+          "height": 960,
+          "sha256": "731c7b9f87dc795e09d68fe6545e4ff3d0fb1c2aabce38e839f8ecb6b7d2f78e"
+        },
+        {
+          "id": "essays/disney-world-2020s/section-3",
+          "width": 1280,
+          "height": 854,
+          "sha256": "d9dd5015fd193f63c82f55e85399d70ac655b843dbfa88a00d2208527697ad37"
+        },
+        {
+          "id": "essays/walt-disney-world-opening-1971/visitor-transport",
+          "width": 1200,
+          "height": 1178,
+          "sha256": "55e93ee7651ccb82b1bcd7c2371455c389d0347b0da575784e77f7d97e507a9e"
+        }
+      ],
+      "gallerySlug": "through-the-gates"
+    }
+  ]
+}

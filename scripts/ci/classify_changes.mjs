@@ -1,6 +1,7 @@
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import { pathToFileURL } from "node:url";
+import { selectDisneyRelease, verifyQueuedRelease } from "./disney_release_schedule.mjs";
 
 const empty = () => ({ site: false, browser: false, images: false, publishing: false, rendering: false, windows: false, worker: false, seo: false, full: false });
 const full = () => Object.fromEntries(Object.keys(empty()).map(key => [key, true]));
@@ -103,15 +104,17 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     try { comparison.base = execFileSync("git", ["rev-parse", "HEAD^"], { encoding: "utf8" }).trim(); }
     catch { uncertain = true; }
   }
-  const selected = selectChecks({
+  const clock = new Date().toISOString();
+  const timed = selectDisneyRelease(event === "schedule" ? process.env.OIP_SCHEDULE : "", clock);
+  if (timed.release) verifyQueuedRelease(timed.release);
+  const selected = timed.timed && !timed.release ? empty() : selectChecks({
     event, ...comparison, uncertain,
     fullChecks: process.env.OIP_FULL_CHECKS !== "false",
     protectedMain: process.env.OIP_PROTECTED_MAIN === "true",
     weekly: process.env.OIP_SCHEDULE === "17 0 * * 1",
   });
-  const clock = new Date().toISOString();
   const needs = { classify: true, site: selected.site, windows: selected.windows, worker: selected.worker };
-  const outputs = { ...selected, clock, base: comparison.base, selection: JSON.stringify(needs) };
+  const outputs = { ...selected, clock, release_slug: timed.release?.slug ?? "", base: comparison.base, selection: JSON.stringify(needs) };
   fs.appendFileSync(process.env.GITHUB_OUTPUT, Object.entries(outputs).map(([key, value]) => key + "=" + value).join("\n") + "\n");
   console.log(JSON.stringify({ changedPaths: comparison.paths, selected, buildClockUtc: clock }, null, 2));
 }
