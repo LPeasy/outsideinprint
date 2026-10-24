@@ -1249,3 +1249,12 @@ cartoons:
     alt: "An open suitcase holds a folded map that rises into a mountain, a resort hotel, and a road with an airport coach, lit by a sunset."
     width: 1672
     height: 941
+  - slug: through-the-gates
+    title: "Through the Gates"
+    date: "2026-10-26"
+    publishDate: "2026-10-26T09:00:00-04:00"
+    image: "essays/disney-world-2020s/hero"
+    essay: "/essays/disney-world-2020s/"
+    alt: "A grandfather, an adult daughter, and a young child approach a blue-spired castle in warm sunlight. The grandfather carries an old photograph."
+    width: 1672
+    height: 941

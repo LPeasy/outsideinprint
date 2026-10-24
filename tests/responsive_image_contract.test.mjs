@@ -71,6 +71,11 @@ test("responsive image manifest keeps the frozen baseline and processing default
     "essays/disney-world-2010s/section-6",
     "essays/disney-world-2010s/section-7",
   ];
+  const disney2020sPhotoIds = [
+    "essays/disney-world-2020s/section-1",
+    "essays/disney-world-2020s/section-2",
+    "essays/disney-world-2020s/section-3",
+  ];
   const routinePhotoIds = [
     ...modernBioPortraits.map(({ id }) => id),
     ...disneyOpeningPhotoIds,
@@ -79,6 +84,7 @@ test("responsive image manifest keeps the frozen baseline and processing default
     ...animalKingdomPhotoIds,
     ...disney2000sPhotoIds,
     ...disney2010sPhotoIds,
+    ...disney2020sPhotoIds,
   ];
   const intentionallyRetiredManagedAssetIds = [
     "essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts",
