@@ -17,26 +17,61 @@
     </header>
 
     {{ with $pressroom.url }}
-      <section class="support-option support-pressroom" aria-labelledby="support-pressroom-title">
-        <p class="support-option__frequency">Membership on Patreon</p>
-        <h2 id="support-pressroom-title">The Pressroom</h2>
-        <p>A closer look at the making of Outside In Print, with one monthly dispatch mixing research discoveries, writing in progress, art, and games.</p>
-        <p>Membership includes the Pressroom post archive and occasional reader polls.</p>
-        <p class="support-option__amount" aria-label="Five dollars per month">$5<span>/month</span></p>
-        <p><a
-          class="shop-cta"
-          href="{{ . }}"
-          data-analytics-source-slot="support_pressroom"
-          data-analytics-product="pressroom"
-        >Join The Pressroom on Patreon</a></p>
-        <p>Join and manage your membership on Patreon.</p>
+      <section class="support-memberships" aria-labelledby="support-patreon-title">
+        <h2 id="support-patreon-title" class="support-page__section-title">Membership on Patreon</h2>
+        <div class="support-options support-options--memberships">
+          <section class="support-option" aria-labelledby="support-pressroom-title">
+            <p class="support-option__frequency">Posts and downloads</p>
+            <h3 id="support-pressroom-title">The Pressroom</h3>
+            <p>A monthly dispatch about the writing, research, art, and games at Outside In Print. Includes the post archive, art downloads, and occasional reader polls.</p>
+            <div class="support-membership__join">
+              <p class="support-option__amount" aria-label="Five dollars per month">$5<span>/month</span></p>
+              <a
+                class="shop-cta"
+                href="{{ . }}"
+                data-analytics-source-slot="support_pressroom"
+                data-analytics-product="pressroom"
+              >Join The Pressroom</a>
+            </div>
+          </section>
+          <section class="support-option" aria-labelledby="support-correspondence-title">
+            <p class="support-option__frequency">10 places</p>
+            <h3 id="support-correspondence-title">Correspondence</h3>
+            <p>Each month, Bob chooses an OIP piece for you and sends it with a short personal letter. Your interests and replies guide his choice. Includes The Pressroom.</p>
+            <div class="support-membership__join">
+              <p class="support-option__amount" aria-label="Twenty-five dollars per month">$25<span>/month</span></p>
+              <a
+                class="shop-cta"
+                href="{{ . }}"
+                data-analytics-source-slot="support_correspondence"
+                data-analytics-product="correspondence"
+              >Join Correspondence</a>
+            </div>
+          </section>
+          <section class="support-option" aria-labelledby="support-desk-title">
+            <p class="support-option__frequency">4 places</p>
+            <h3 id="support-desk-title">At Bob’s Desk</h3>
+            <p>Each month, send up to 2,000 words for review, or ask for a written plan for one project. Includes a brief follow-up and The Pressroom.</p>
+            <div class="support-membership__join">
+              <p class="support-option__amount" aria-label="One hundred fifty dollars per month">$150<span>/month</span></p>
+              <a
+                class="shop-cta"
+                href="{{ . }}"
+                data-analytics-source-slot="support_bobs_desk"
+                data-analytics-product="bobs_desk"
+              >Join At Bob’s Desk</a>
+            </div>
+          </section>
+        </div>
+        <p class="support-memberships__note">Full details and membership terms are on Patreon.</p>
       </section>
     {{ end }}
 
+    <h2 class="support-page__section-title">Direct support through Square</h2>
     <div class="support-options" aria-label="Direct support through Square">
       <section class="support-option" aria-labelledby="support-once-title">
         <p class="support-option__frequency">One-time direct support</p>
-        <h2 id="support-once-title">Support once</h2>
+        <h3 id="support-once-title">Support once</h3>
         <p>Contribute through Square without membership benefits. Choose any whole-dollar amount from $5 to $500.</p>
         {{ if $supportCheckoutEnabled }}
           <form
@@ -77,7 +112,7 @@
 
       <section class="support-option" aria-labelledby="support-five-title">
         <p class="support-option__frequency">Monthly direct support</p>
-        <h2 id="support-five-title">Support $5 monthly</h2>
+        <h3 id="support-five-title">Support $5 monthly</h3>
         <p>Contribute through Square without membership benefits. Start a $5 monthly payment today; Square sends the receipt and account-management link.</p>
         {{ if $supportCheckoutEnabled }}
           <form

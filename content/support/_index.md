@@ -1,10 +1,10 @@
 ---
 title: "Support Outside In Print"
-description: "Join The Pressroom on Patreon for $5/month, or support Outside In Print directly through Square."
+description: "Join The Pressroom, Correspondence, or At Bob’s Desk on Patreon, or give direct support through Square."
 draft: false
 show_citation: false
 ---
 
-Your support helps Robert build Outside In Print, write stories, create art and games, and follow research where it leads.
+Your support helps Bob write, make art and games, and publish Outside In Print.
 
-Join The Pressroom on Patreon for a closer look at the work, or make a direct contribution through Square.
+Choose a Patreon membership, or give direct support through Square.

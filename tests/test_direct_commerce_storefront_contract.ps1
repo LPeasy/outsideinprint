@@ -482,8 +482,8 @@ if ($physicalCheckoutScript -match '(?i)analyticsAmount|order_id|customer_email|
 
 $supportIntroSource = Get-RequiredText -RelativePath 'content/support/_index.md'
 foreach ($requiredSupportPurpose in @(
-  'Your support helps Robert build Outside In Print, write stories, create art and games, and follow research where it leads.',
-  'Join The Pressroom on Patreon for a closer look at the work, or make a direct contribution through Square.'
+  'Your support helps Bob write, make art and games, and publish Outside In Print.',
+  'Choose a Patreon membership, or give direct support through Square.'
 )) {
   Assert-Contains -Text $supportIntroSource -Expected $requiredSupportPurpose -Context 'Support purpose copy'
 }
@@ -492,6 +492,15 @@ if ($supportIntroSource -match '(?i)no ads ever|always ad-free|never (?:run|show
 }
 $supportTemplate = Get-RequiredText -RelativePath 'layouts/support/list.html'
 foreach ($requiredSupportText in @(
+  'Membership on Patreon',
+  'The Pressroom',
+  '$5<span>/month</span>',
+  'Correspondence',
+  '$25<span>/month</span>',
+  '10 places',
+  "At Bob’s Desk",
+  '$150<span>/month</span>',
+  '4 places',
   'support_checkout_enabled',
   'data-support-checkout-enabled="{{ $supportCheckoutEnabled }}"',
   '/api/support/one-time',
@@ -933,8 +942,16 @@ if ($shopOutput -match '(?i)data-analytics-(?:amount|order|email|address|custome
 $supportOutput = [Net.WebUtility]::HtmlDecode([string]$output['support/index.html'])
 foreach ($requiredSupportOutput in @(
   'Support Outside In Print',
-  'Your support helps Robert build Outside In Print, write stories, create art and games, and follow research where it leads.',
+  'Your support helps Bob write, make art and games, and publish Outside In Print.',
+  'Choose a Patreon membership, or give direct support through Square.',
   'The Pressroom',
+  '$5<span>/month</span>',
+  'Correspondence',
+  '$25<span>/month</span>',
+  '10 places',
+  "At Bob’s Desk",
+  '$150<span>/month</span>',
+  '4 places',
   'Membership on Patreon',
   'https://www.patreon.com/bobviously',
   'Contribute through Square without membership benefits.',
@@ -948,8 +965,8 @@ foreach ($requiredSupportOutput in @(
 )) {
   Assert-Contains -Text $supportOutput -Expected $requiredSupportOutput -Context 'Built support page'
 }
-if ([regex]::Matches($supportOutput, '<section\b[^>]*class=(?:"|'''')?support-option\b', 'IgnoreCase').Count -ne 3) {
-  throw 'Built support page must contain one Patreon membership option and two direct-support options.'
+if ([regex]::Matches($supportOutput, '<section\b[^>]*class=(?:"|'''')?support-option\b', 'IgnoreCase').Count -ne 5) {
+  throw 'Built support page must contain three Patreon membership options and two direct-support options.'
 }
 if ([regex]::Matches($supportOutput, '<form\b[^>]*data-support-checkout', 'IgnoreCase').Count -ne 2) {
   throw 'Live support output must expose exactly two checkout forms.'
