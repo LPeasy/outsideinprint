@@ -74,6 +74,10 @@ allow_local = false
 
 [params.pressroom]
 url = "https://www.patreon.com/bobviously"
+start_here_url = "https://www.patreon.com/bobviously/posts/start-here-what-173281800"
+pressroom_join_url = "https://www.patreon.com/checkout/bobviously?rid=29901304"
+correspondence_join_url = "https://www.patreon.com/checkout/bobviously?rid=29903630"
+desk_join_url = "https://www.patreon.com/checkout/bobviously?rid=29903634"
 
 [params.purchase_analytics]
 enabled = false
