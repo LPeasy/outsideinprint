@@ -36,6 +36,21 @@
           "kind": "file",
           "path": "content/essays/disney-world-2020s.md",
           "sha256": "ed6fa9ec7b49529f40d1662137afac9da09948045b64fe204bc31f852d9930d5"
+        },
+        {
+          "kind": "file",
+          "path": "content/shop/_index.md",
+          "sha256": "776d1fec242cc2f59f395a8e008248f293fde57a17f56d8fa9f37de9f2638df8"
+        },
+        {
+          "kind": "file",
+          "path": "layouts/shop/list.html",
+          "sha256": "b29b393b62210ac956e25dab7dcda08136700afdb736a82e6ee766599d0fcf1e"
+        },
+        {
+          "kind": "file",
+          "path": "layouts/partials/shop/featured-book.html",
+          "sha256": "7ffb09b1d2645321c21fb916236a59573621b9839484c7215a7b5f11825e88a6"
         }
       ],
       "images": [
@@ -179,7 +194,8 @@
           "title": "Bookstore",
           "containsText": [
             "Fifty Years of Magic",
-            "$9.99"
+            "$9.99",
+            "Featured book Fifty Years of Magic The Making of Walt Disney World"
           ],
           "links": [
             "/shop/fifty-years-of-magic/",

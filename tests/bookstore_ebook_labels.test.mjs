@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import os from "node:os";
+import { execFileSync } from "node:child_process";
 
 const read = (file) => fs.readFileSync(path.resolve(file), "utf8");
 const catalog = read("data/bookstore.yaml");
@@ -133,7 +135,11 @@ test("shop cards expose book decisions without checkout or external retail exits
   assert.doesNotMatch(html, /data-epub-checkout|bookstore-checkout-disclosure|bookstore_index_kindle|epub-checkout\.[a-f0-9]+\.js/);
   assert.doesNotMatch(html, /<form\b[^>]*action=["']?https:\/\/downloads\.outsideinprint\.org|href=["']?https:\/\/(?:www\.amazon\.com|square\.link|checkout\.square\.site)/);
   const cards = [...html.matchAll(/<article\b[^>]*class=(?:"bookstore-record"|bookstore-record)[^>]*>[\s\S]*?<\/article>/g)].map(match => match[0]);
-  const shelfProducts = eligibleProducts.filter(([slug]) => slug !== "2045");
+  const featuredSlug = magicEligible ? "fifty-years-of-magic" : "2045";
+  const features = [...html.matchAll(/<section\b[^>]*class=(?:"bookstore-feature"|bookstore-feature)[^>]*>[\s\S]*?<\/section>/g)].map(match => match[0]);
+  assert.equal(features.length, 1);
+  assert.match(features[0], new RegExp(`href=["']?\\/shop\\/${featuredSlug}\\/`));
+  const shelfProducts = eligibleProducts.filter(([slug]) => slug !== featuredSlug);
   assert.equal(cards.length, shelfProducts.length);
   for (const [slug, , price] of shelfProducts) {
     const card = cards.find(card => card.includes(`/shop/${slug}/`));
@@ -151,6 +157,81 @@ test("shop cards expose book decisions without checkout or external retail exits
     assert.equal(detail.length, 1, `${slug} detail destination`);
   }
 });
+
+function renderBookstoreFeature(t, { clock, magicDraft = false }) {
+  const hugo = process.env.OIP_HUGO_BIN || "hugo";
+  const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "oip-bookstore-feature-"));
+  t.after(() => {
+    assert.equal(path.dirname(path.resolve(fixture)), path.resolve(os.tmpdir()));
+    assert.ok(path.basename(fixture).startsWith("oip-bookstore-feature-"));
+    fs.rmSync(fixture, { recursive: true, force: true });
+  });
+  const write = (file, value) => {
+    const target = path.join(fixture, file);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.writeFileSync(target, value);
+  };
+  const content = (file, metadata, body = "Fixture reading text.") => {
+    write(file, `---\n${Object.entries(metadata).map(([key, value]) => `${key}: ${JSON.stringify(value)}`).join("\n")}\n---\n${body}\n`);
+  };
+  write("hugo.toml", 'baseURL = "https://example.test/"\ntimeZone = "America/New_York"\ndisableKinds = ["taxonomy", "term", "RSS", "sitemap"]\n');
+  write("layouts/_default/baseof.html", '{{ block "main" . }}{{ end }}');
+  write("layouts/_default/list.html", '{{ define "main" }}{{ .Title }}{{ end }}');
+  write("layouts/_default/single.html", '{{ define "main" }}{{ .Title }}{{ end }}');
+  write("layouts/index.html", "Fixture home");
+  for (const template of ["layouts/shop/list.html", "layouts/partials/shop/featured-book.html", "layouts/partials/shop/sample-link.html"]) {
+    write(template, read(template));
+  }
+  write("layouts/partials/shop/product-data.html", '{{ return index hugo.Data.fixture_products .key }}');
+  write("layouts/partials/shop/resolve-reading-sample.html", '{{ return false }}');
+  write("layouts/partials/images/picture.html", '<img src="/fixture/{{ .ref }}.webp" alt="{{ .alt }}" loading="{{ .loading }}">');
+  const fixtureProduct = (title, key, price, extra = {}) => ({ title, display_title: title, subtitle: `${title} subtitle`, deck: `${title} description.`, price_display: price, cover_image: `books/${key}/cover`, cover_alt: `${title} cover.`, ...extra });
+  write("data/fixture_products.json", JSON.stringify({
+    "2045": fixtureProduct("2045", "2045", "$19.99", { positioning_label: "OIP Exclusive" }),
+    fifty_years_of_magic: fixtureProduct("Fifty Years of Magic", "fifty-years-of-magic", "$9.99"),
+    pending: fixtureProduct("PENDING", "pending", "$9.99"),
+  }));
+  write("content/shop/_index.md", read("content/shop/_index.md"));
+  content("content/shop/2045/_index.md", { title: "2045", book_key: "2045", weight: 5, date: "2020-01-01", sample_page: "/shop/2045/sample" });
+  content("content/shop/2045/sample.md", { title: "The Cracked Pot", date: "2020-01-01", sample_work_type: "short-story" });
+  content("content/shop/pending.md", { title: "PENDING", book_key: "pending", weight: 50, date: "2020-01-01" });
+  const magicMetadata = { date: "2026-10-27", publishDate: "2026-10-27T09:00:00-04:00", draft: magicDraft };
+  content("content/shop/fifty-years-of-magic/_index.md", { title: "Fifty Years of Magic", book_key: "fifty_years_of_magic", weight: 60, sample_page: "/shop/fifty-years-of-magic/sample", ...magicMetadata });
+  content("content/shop/fifty-years-of-magic/sample.md", { title: "Building Walt Disney World", sample_work_type: "nonfiction-excerpt", ...magicMetadata });
+  execFileSync(hugo, ["--source", fixture, "--clock", clock, "--panicOnWarning"], { encoding: "utf8" });
+  return fs.readFileSync(path.join(fixture, "public/shop/index.html"), "utf8");
+}
+
+for (const scenario of [
+  { name: "before release", clock: "2026-10-27T12:59:59Z", featuredSlug: "2045" },
+  { name: "at release", clock: "2026-10-27T13:00:00Z", featuredSlug: "fifty-years-of-magic" },
+  { name: "unpublished preferred title", clock: "2026-10-27T13:00:00Z", magicDraft: true, featuredSlug: "2045" },
+]) {
+  test(`bookstore feature follows publication eligibility — ${scenario.name}`, (t) => {
+    const html = renderBookstoreFeature(t, scenario);
+    const features = [...html.matchAll(/<section\b[^>]*class="bookstore-feature"[^>]*>[\s\S]*?<\/section>/g)].map(match => match[0]);
+    assert.equal(features.length, 1);
+    const feature = features[0];
+    assert.ok(feature.includes(`href="/shop/${scenario.featuredSlug}/"`));
+    assert.ok(feature.includes(`href="/shop/${scenario.featuredSlug}/sample/"`));
+    assert.equal((feature.match(/<h2\b/g) || []).length, 1);
+    const records = [...html.matchAll(/<article\b[^>]*class="bookstore-record"[^>]*>[\s\S]*?<\/article>/g)].map(match => match[0]);
+    assert.ok(records.every(record => !record.includes(`/shop/${scenario.featuredSlug}/`)), "featured title is excluded from ordinary cards");
+    assert.equal(records.filter(record => record.includes('/shop/pending/')).length, 1);
+    if (scenario.featuredSlug === "fifty-years-of-magic") {
+      assert.equal(records.length, 2);
+      assert.equal(records.filter(record => record.includes('/shop/2045/')).length, 1);
+      assert.match(feature, /\$9\.99/);
+      assert.match(feature, /Building Walt Disney World/);
+      assert.doesNotMatch(feature, /complete story|OIP Exclusive|aria-hidden="true">\//);
+    } else {
+      assert.equal(records.length, 1);
+      assert.match(feature, /complete story/);
+      assert.match(feature, /OIP Exclusive/);
+      assert.doesNotMatch(html, /\/shop\/fifty-years-of-magic\//);
+    }
+  });
+}
 
 test("every product opens with format, price, sample and a buy anchor, preserving checkout consent", { skip: !siteDir }, () => {
   for (const [slug, sku, price] of eligibleProducts) {

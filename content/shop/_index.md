@@ -4,6 +4,7 @@ description: "Independent fiction and nonfiction from Outside In Print. Browse t
 image: "books/2045/cover"
 image_alt: "Black cover for 2045 with a small OIP Exclusive mark, an oversized ivory scanline eye, a blue radial iris with red and ivory circles, a grid of pale squares, large ivory numerals, binary digits, the subtitle Ten Dark Fables from the Machine Age, and Robert V. Ussley’s name."
 featured_book: "2045"
+featured_book_on_release: "fifty_years_of_magic"
 draft: false
 show_citation: false
 outputs:

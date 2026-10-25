@@ -14,6 +14,11 @@ separately before release; no local computer is needed at the release instant.
 - Add the bookstore product, managed cover, product page and approved reading
   sample. Both public pages use the same future `publishDate`. Retain the current
   featured book and existing offers unless the owner requests a change.
+- For an authorized feature at release, set the shop index's optional
+  `featured_book_on_release` to the new book key. It replaces `featured_book`
+  only when that book exists among Hugo's published shop pages; the current
+  feature stays in place beforehand. Bind the index and feature templates to
+  the release registration and verify the featured title in its bookstore check.
 - Register a matching server-owned product in `workers/oip-commerce/src/catalog.js`
   with its fixed SKU, USD price, private R2 key and download filename.
 - For a timed offer, set `releaseNotBefore` to the approved instant. Bind the book's
