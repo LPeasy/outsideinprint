@@ -1893,7 +1893,7 @@ foreach ($requiredNavigationSnippet in @(
   '"description" "Editorial art"',
   '"label" "Bookstore"',
   '"label" "About"',
-  '"label" "Contribute"',
+  '"label" "Support"',
   'class="brand-link" href="{{ "" | absURL }}"',
   'aria-label="Primary" data-primary-nav',
   'nav-mobile-disclosure--read',
@@ -1911,8 +1911,8 @@ if ($mastheadPartial -match '"key" "latest"|"label" "Latest"') {
   throw 'Expected Read to omit Latest while the masthead brand retains the home link.'
 }
 
-if ($mastheadPartial -match '"label" "(?:Studio|Support)"|primary_nav_(?:studio|support)') {
-  throw 'Expected Studio and Support to remain footer destinations rather than primary-navigation items.'
+if ($mastheadPartial -match '"label" "Studio"|primary_nav_studio') {
+  throw 'Expected Studio to remain a footer destination rather than a primary-navigation item.'
 }
 
 if ($mastheadPartial -match '\$appsPage|\$showApps|"label" "Apps & Tools"') {
@@ -1923,8 +1923,8 @@ if ($mastheadPartial -notmatch '"analyticsSourceSlot" "primary_nav_bookstore"') 
   throw 'Expected the primary Bookstore destination to retain its analytics source slot.'
 }
 
-if ($mastheadPartial -notmatch [regex]::Escape('range $directKey := slice "about" "bookstore" "contribute"')) {
-  throw 'Expected direct desktop navigation order to be About, Bookstore, Contribute.'
+if ($mastheadPartial -notmatch [regex]::Escape('range $directKey := slice "about" "bookstore" "support"')) {
+  throw 'Expected direct desktop navigation order to be About, Bookstore, Support.'
 }
 if ($mastheadPartial -notmatch [regex]::Escape('range $mobileKey := slice "about"')) {
   throw 'Expected About to be the only direct mobile-primary link after the Read and Explore controls.'
@@ -1935,8 +1935,8 @@ if ($mastheadPartial -notmatch '(?s)"label" "Archive".*?"group" "read".*?"mobile
 if ($mastheadPartial -notmatch '(?s)"label" "About".*?"group" "direct".*?"mobilePrimary" true') {
   throw 'Expected About to be a direct mobile-primary destination.'
 }
-if ($mastheadPartial -notmatch '(?s)"label" "Contribute".*?"group" "direct".*?"mobilePrimary" false') {
-  throw 'Expected Contribute to appear in desktop navigation and the mobile Explore disclosure.'
+if ($mastheadPartial -notmatch '(?s)"label" "Support".*?"group" "direct".*?"mobilePrimary" false') {
+  throw 'Expected Support to appear in desktop navigation and the mobile Explore disclosure.'
 }
 if ($mastheadPartial -notmatch '(?s)nav-mobile-disclosure--read.*range \$mobileReadItems.*nav-mobile-disclosure--explore.*range \$mobileExploreItems') {
   throw 'Expected mobile Read and Explore disclosures to expose their dedicated destination lists.'
@@ -1949,8 +1949,8 @@ if ([regex]::Matches($mastheadPartial, '(?m)^\s+"group" "read"\s*$').Count -ne 5
 if ($mastheadPartial -notmatch '\$mobileReadCurrent := gt \(len \(where \$mobileReadItems "currentSection" true\)\) 0') {
   throw 'Expected the mobile Read disclosure to expose current-section state for Bookstore as well as reading destinations.'
 }
-if ($mastheadPartial -notmatch '(?s)\$mobileExploreItems := slice.*?range \$exploreItems.*?"key" "contribute"') {
-  throw 'Expected Contribute to remain accessible alongside the mobile Explore destinations.'
+if ($mastheadPartial -notmatch '(?s)\$mobileExploreItems := slice.*?range \$exploreItems.*?"key" "support"') {
+  throw 'Expected Support to remain accessible alongside the mobile Explore destinations.'
 }
 if ($mastheadPartial -notmatch '(?s)"label" "Bookstore".*?"group" "direct".*?"mobilePrimary" false') {
   throw 'Expected Bookstore to leave the visible mobile row and move into the Read disclosure.'

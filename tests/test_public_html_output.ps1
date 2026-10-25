@@ -3455,13 +3455,13 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?class=(?:"nav__desktop"|nav__desktop).*?nav-disclosure--read.*?<span>Read</span>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*<span[^>]*>Library</span>.*?(?:https://outsideinprint\.org)?/collections/bobs-almanack/[^>]*>\s*<span[^>]*>Bob.{1,8}s Almanack</span>.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*<span[^>]*>Feeling curious\?</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*>\s*<span[^>]*>Bookstore</span>.*?nav-disclosure--explore.*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*data-analytics-source-slot=(?:"primary_nav_bookstore"|primary_nav_bookstore)[^>]*>\s*<span[^>]*>Bookstore</span>.*?(?:https://outsideinprint\.org)?/contribute/[^>]*>\s*<span[^>]*>Contribute</span>'
-    Message = 'expected desktop Read to contain all six destinations and preserve direct About, Bookstore, and Contribute links'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?class=(?:"nav__desktop"|nav__desktop).*?nav-disclosure--read.*?<span>Read</span>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*<span[^>]*>Library</span>.*?(?:https://outsideinprint\.org)?/collections/bobs-almanack/[^>]*>\s*<span[^>]*>Bob.{1,8}s Almanack</span>.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*<span[^>]*>Feeling curious\?</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*>\s*<span[^>]*>Bookstore</span>.*?nav-disclosure--explore.*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*data-analytics-source-slot=(?:"primary_nav_bookstore"|primary_nav_bookstore)[^>]*>\s*<span[^>]*>Bookstore</span>.*?(?:https://outsideinprint\.org)?/support/[^>]*>\s*<span[^>]*>Support</span>'
+    Message = 'expected desktop Read to contain all six destinations and preserve direct About, Bookstore, and Support links'
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)class=(?:"nav__mobile"|nav__mobile).*?nav-mobile-disclosure--read.*?<span>Read</span>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*<span[^>]*>Library</span>.*?(?:https://outsideinprint\.org)?/collections/bobs-almanack/[^>]*>\s*<span[^>]*>Bob.{1,8}s Almanack</span>.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*<span[^>]*>Feeling curious\?</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*>\s*<span[^>]*>Bookstore</span>.*?nav-mobile-disclosure--explore.*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/contribute/[^>]*>\s*<span[^>]*>Contribute</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>'
-    Message = 'expected the mobile ribbon to be Read, Explore, About with six Read destinations and Contribute under Explore'
+    Pattern = '(?s)class=(?:"nav__mobile"|nav__mobile).*?nav-mobile-disclosure--read.*?<span>Read</span>.*?(?:https://outsideinprint\.org)?/archive/[^>]*>\s*<span[^>]*>Archive</span>.*?(?:https://outsideinprint\.org)?/collections/[^>]*>\s*<span[^>]*>Collections</span>.*?(?:https://outsideinprint\.org)?/library/[^>]*>\s*<span[^>]*>Library</span>.*?(?:https://outsideinprint\.org)?/collections/bobs-almanack/[^>]*>\s*<span[^>]*>Bob.{1,8}s Almanack</span>.*?(?:https://outsideinprint\.org)?/random/[^>]*>\s*<span[^>]*>Feeling curious\?</span>.*?(?:https://outsideinprint\.org)?/shop/[^>]*>\s*<span[^>]*>Bookstore</span>.*?nav-mobile-disclosure--explore.*?<span>Explore</span>.*?(?:https://outsideinprint\.org)?/support/[^>]*>\s*<span[^>]*>Support</span>.*?(?:https://outsideinprint\.org)?/about/[^>]*>\s*<span[^>]*>About</span>'
+    Message = 'expected the mobile ribbon to be Read, Explore, About with six Read destinations and Support under Explore'
   },
   @{
     Path = 'public/index.html'
@@ -3635,7 +3635,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/404.html'
-    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?class=(?:"nav__desktop"|nav__desktop).*?<span>Read</span>.*?<span>Explore</span>.*?<span[^>]*>About</span>.*?<span[^>]*>Bookstore</span>.*?<span[^>]*>Contribute</span>.*?class=(?:"nav__mobile"|nav__mobile).*?nav-mobile-disclosure--read.*?<span>Read</span>.*?<span[^>]*>Archive</span>.*?<span[^>]*>Bookstore</span>.*?nav-mobile-disclosure--explore.*?<span>Explore</span>.*?<span[^>]*>Contribute</span>.*?<span[^>]*>About</span>'
+    Pattern = '(?s)aria-label="?Primary"?[^>]*data-primary-nav[^>]*>.*?class=(?:"nav__desktop"|nav__desktop).*?<span>Read</span>.*?<span>Explore</span>.*?<span[^>]*>About</span>.*?<span[^>]*>Bookstore</span>.*?<span[^>]*>Support</span>.*?class=(?:"nav__mobile"|nav__mobile).*?nav-mobile-disclosure--read.*?<span>Read</span>.*?<span[^>]*>Archive</span>.*?<span[^>]*>Bookstore</span>.*?nav-mobile-disclosure--explore.*?<span>Explore</span>.*?<span[^>]*>Support</span>.*?<span[^>]*>About</span>'
     Message = 'expected the 404 page to use the same grouped desktop and Read, Explore, About mobile navigation'
   },
   @{
@@ -5572,7 +5572,7 @@ $exactPrimaryNavExpectations = @(
   @{ Path = 'public/games/index.html'; Destination = '/games/'; GroupClass = 'nav-disclosure--explore'; MobileGroupClass = 'nav-mobile-disclosure--explore' },
   @{ Path = 'public/shop/index.html'; Destination = '/shop/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
   @{ Path = 'public/about/index.html'; Destination = '/about/'; GroupClass = $null; MobileGroupClass = $null },
-  @{ Path = 'public/contribute/index.html'; Destination = '/contribute/'; GroupClass = $null; MobileGroupClass = 'nav-mobile-disclosure--explore' },
+  @{ Path = 'public/support/index.html'; Destination = '/support/'; GroupClass = $null; MobileGroupClass = 'nav-mobile-disclosure--explore' },
   @{ Path = 'public/random/index.html'; Destination = '/random/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' }
 )
 
@@ -5643,7 +5643,8 @@ $descendantPrimaryNavExpectations = @(
   @{ Path = 'public/essays/the-risk-management-buffet/index.html'; Destination = '/archive/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
   @{ Path = 'public/collections/the-ledger/index.html'; Destination = '/collections/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
   @{ Path = 'public/shop/the-water-cycle/index.html'; Destination = '/shop/'; GroupClass = 'nav-disclosure--read'; MobileGroupClass = 'nav-mobile-disclosure--read' },
-  @{ Path = 'public/games/idle-times/index.html'; Destination = '/games/'; GroupClass = 'nav-disclosure--explore'; MobileGroupClass = 'nav-mobile-disclosure--explore' }
+  @{ Path = 'public/games/idle-times/index.html'; Destination = '/games/'; GroupClass = 'nav-disclosure--explore'; MobileGroupClass = 'nav-mobile-disclosure--explore' },
+  @{ Path = 'public/support/cancellation-refunds/index.html'; Destination = '/support/'; GroupClass = $null; MobileGroupClass = 'nav-mobile-disclosure--explore' }
 )
 
 foreach ($expectation in $descendantPrimaryNavExpectations) {
