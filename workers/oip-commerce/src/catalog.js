@@ -40,7 +40,7 @@ export const EPUB_PRODUCTS = Object.freeze({
     sku: "OIP-FM-EPUB",
     title: "Fifty Years of Magic: The Making of Walt Disney World",
     priceCents: 999,
-    r2Key: "epubs/fifty-years-of-magic/v1/fifty-years-of-magic.epub",
+    r2Key: "epubs/fifty-years-of-magic/v1-isbn-9798952377059/fifty-years-of-magic.epub",
     downloadFilename: "fifty-years-of-magic.epub",
     // Owner-approved publication time; keep aligned with the website release.
     releaseNotBefore: "2026-10-27T09:00:00-04:00",

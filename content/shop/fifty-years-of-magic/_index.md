@@ -39,4 +39,8 @@ Robert V. Ussley brings the business history down to the scale of a holiday ~ a 
 
 Seven illustrated chapters, an author's note, a chronology, chapter-by-chapter sources, illustration credits, and author information. Historical coverage continues through October 2026.
 
+## Publication details
+
+ISBN (EPUB): 979-8-952377-05-9
+
 This independent publication is not authorized, sponsored, or endorsed by The Walt Disney Company.

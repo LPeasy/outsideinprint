@@ -10,7 +10,7 @@
         {
           "kind": "file",
           "path": "content/shop/fifty-years-of-magic/_index.md",
-          "sha256": "322deffd9fbe7319009c3ec42134c8dfdb930e6a492b0411b80c6a4e7c3800bc"
+          "sha256": "21e6c0dbc0ab28bacab59b79823e97e840c144a3f274cbc41ad2d7d8049d2e41"
         },
         {
           "kind": "file",
@@ -20,12 +20,12 @@
         {
           "kind": "file",
           "path": "data/bookstore.yaml",
-          "sha256": "eedb9a10dab4027bf284fb95cb6f933f08373438ab474dea9ef88bbd6765d4d8"
+          "sha256": "1da267def62a6b8f83e03a89a16b5c76fd3108bd0c2ebae4c62be8046e21b953"
         },
         {
           "kind": "file",
           "path": "workers/oip-commerce/src/catalog.js",
-          "sha256": "861fc596bc9a8e531ae727b1851db726f47ac4c8cdefaf00d215141304af314f"
+          "sha256": "21b407400fbfa9a5abc21a89e539949329597fff66e05e71dda9e61a62195759"
         },
         {
           "kind": "file",
