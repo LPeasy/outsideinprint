@@ -16,7 +16,18 @@ const products = [
   ["the-parable-of-the-sheep", "OIP-PS-EPUB", "9.99", "b32a5110ccbc1a3efa4a033f3b97be3be9fcbe3206edffe306da1744f5f10d60"],
   ["the-water-cycle", "OIP-WC-EPUB", "9.99", "271f25c260ede86db0363d3cfb551cf533485bcd2b2fd1d1f8512c74bfff001a"],
   ["pending", "OIP-PENDING-EPUB", "9.99", "9325642f96f0ebc56f73d65cefe6f73ed2e7fdb3487b90f84246846856cbd8a6"],
+  ["fifty-years-of-magic", "OIP-FM-EPUB", "9.99", "839ce1ff68bfe1906e2ae3f9828ba5ce8bd88fddf1a7dff7eb550285da0eefce"],
 ];
+const standaloneSampleSlugs = new Set(["2045", "pending", "fifty-years-of-magic"]);
+const magicSource = read("content/shop/fifty-years-of-magic/_index.md").replace(/\r\n/g, "\n");
+const magicFrontMatter = magicSource.match(/^---\n([\s\S]*?)\n---\n/)?.[1] ?? "";
+const magicPublicationValues = [...magicFrontMatter.matchAll(/^publishDate:\s*"?([^"\n]+)"?\s*$/gm)];
+assert.equal(magicPublicationValues.length, 1, "Fifty Years of Magic has one publication timestamp");
+const magicPublicationTime = Date.parse(magicPublicationValues[0][1].trim());
+assert.ok(Number.isFinite(magicPublicationTime), "Fifty Years of Magic publication time is valid");
+assert.match(magicFrontMatter, /^draft: false$/m);
+assert.match(magicFrontMatter, /^book_key: "fifty_years_of_magic"$/m);
+assert.match(magicFrontMatter, /^sample_page: "\/shop\/fifty-years-of-magic\/sample"$/m);
 
 test("e-book sales labels remain separate from the EPUB fulfillment format", () => {
   for (const label of ['product_type: "Outside In Print e-book"', 'price_label: "E-book price"', 'checkout_label: "Buy e-book — $9.99"', 'checkout_label: "Buy e-book — $19.99"', 'checkout_unavailable_label: "E-book temporarily unavailable"']) {
@@ -33,6 +44,10 @@ test("e-book sales labels remain separate from the EPUB fulfillment format", () 
     assert.ok(block.includes('format: "EPUB"'));
     assert.ok(block.includes(`price_display: "$${price}"`));
     assert.ok(block.includes(`price_cents: ${Math.round(Number(price) * 100)}`));
+    if (sku === "OIP-FM-EPUB") {
+      assert.ok(block.includes('isbn_status: "Not assigned"'));
+      assert.doesNotMatch(block, /^\s+isbn:\s*"?\d/m);
+    }
   }
   assert.ok(offers.includes('where $allOffers "format" "EPUB"'));
   assert.ok(offers.includes('data-analytics-format="{{ $format }}"'));
@@ -66,6 +81,13 @@ test("reading help is native, local to sales surfaces, and leaves story excerpts
 });
 
 const siteDir = process.env.OIP_SITE_DIR;
+const manifestPath = siteDir ? path.join(siteDir, ".oip-build-manifest.json") : null;
+const buildManifest = manifestPath && fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, "utf8")) : {};
+const clockValue = process.env.OIP_BUILD_CLOCK_UTC || buildManifest.buildClockUtc;
+const buildTime = clockValue ? Date.parse(clockValue) : Date.now();
+assert.ok(Number.isFinite(buildTime), "Rendered contract build clock is valid");
+const magicEligible = magicPublicationTime <= buildTime;
+const eligibleProducts = products.filter(([slug]) => slug !== "fifty-years-of-magic" || magicEligible);
 const attr = (tag, name) => {
   const found = tag.match(new RegExp(`\\b${name}=(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`));
   return found?.[1] ?? found?.[2] ?? found?.[3] ?? "";
@@ -74,7 +96,7 @@ const plain = (html) => html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "").r
 const output = (file) => fs.readFileSync(path.join(siteDir, file), "utf8");
 
 test("rendered sales surfaces use e-book labels and retain technical/legal EPUB references", { skip: !siteDir }, () => {
-  for (const file of ["shop/index.html", "shop/thanks/index.html", "shop/2045/sample/index.html", "shop/pending/sample/index.html", ...products.map(([slug]) => `shop/${slug}/index.html`)]) {
+  for (const file of ["shop/index.html", "shop/thanks/index.html", ...eligibleProducts.filter(([slug]) => standaloneSampleSlugs.has(slug)).map(([slug]) => `shop/${slug}/sample/index.html`), ...eligibleProducts.map(([slug]) => `shop/${slug}/index.html`)]) {
     const html = output(file);
     const visible = plain(html);
     assert.doesNotMatch(visible, /Buy (?:direct )?EPUB|DRM-free EPUB|Outside In Print EPUB|EPUB price|Your secure EPUB link|EPUB temporarily unavailable/, file);
@@ -89,7 +111,7 @@ test("rendered sales surfaces use e-book labels and retain technical/legal EPUB 
       }
     }
   }
-  for (const [slug, sku, price] of products) {
+  for (const [slug, sku, price] of eligibleProducts) {
     const html = output(`shop/${slug}/index.html`);
     const forms = [...html.matchAll(/<form\b[^>]*>/g)].map((match) => match[0]).filter((tag) => /\bdata-epub-checkout(?:\s|=|>)/.test(tag));
     assert.equal(forms.length, 1, `${slug} has one purchase form`);
@@ -111,8 +133,9 @@ test("shop cards expose book decisions without checkout or external retail exits
   assert.doesNotMatch(html, /data-epub-checkout|bookstore-checkout-disclosure|bookstore_index_kindle|epub-checkout\.[a-f0-9]+\.js/);
   assert.doesNotMatch(html, /<form\b[^>]*action=["']?https:\/\/downloads\.outsideinprint\.org|href=["']?https:\/\/(?:www\.amazon\.com|square\.link|checkout\.square\.site)/);
   const cards = [...html.matchAll(/<article\b[^>]*class=(?:"bookstore-record"|bookstore-record)[^>]*>[\s\S]*?<\/article>/g)].map(match => match[0]);
-  assert.equal(cards.length, 4);
-  for (const [slug, , price] of products.slice(1)) {
+  const shelfProducts = eligibleProducts.filter(([slug]) => slug !== "2045");
+  assert.equal(cards.length, shelfProducts.length);
+  for (const [slug, , price] of shelfProducts) {
     const card = cards.find(card => card.includes(`/shop/${slug}/`));
     assert.ok(card, slug);
     assert.match(card, /<img\b[^>]*alt=/);
@@ -120,7 +143,7 @@ test("shop cards expose book decisions without checkout or external retail exits
     assert.match(plain(card), /EPUB e-book/);
     assert.ok(plain(card).includes(`$${price}`));
     const anchors = [...card.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/g)].map(match => match[0]);
-    const sampleHref = slug === "pending" ? "/shop/pending/sample/" : `/shop/${slug}/#reading-sample`;
+    const sampleHref = standaloneSampleSlugs.has(slug) ? `/shop/${slug}/sample/` : `/shop/${slug}/#reading-sample`;
     const sample = anchors.filter(anchor => attr(anchor, "href") === sampleHref);
     const detail = anchors.filter(anchor => attr(anchor, "href") === `/shop/${slug}/` && /^View book\b/.test(plain(anchor).trim()));
     assert.equal(sample.length, 1, `${slug} sample destination`);
@@ -130,7 +153,7 @@ test("shop cards expose book decisions without checkout or external retail exits
 });
 
 test("every product opens with format, price, sample and a buy anchor, preserving checkout consent", { skip: !siteDir }, () => {
-  for (const [slug, sku, price] of products) {
+  for (const [slug, sku, price] of eligibleProducts) {
     const html = output(`shop/${slug}/index.html`);
     const decision = html.match(/<aside\b[^>]*\bdata-bookstore-early-decision(?:[\s=>])[^]*?<\/aside>/)?.[0];
     assert.ok(decision, `${slug} early decisions`);
@@ -138,7 +161,7 @@ test("every product opens with format, price, sample and a buy anchor, preservin
     assert.ok(plain(decision).includes(`$${price}`));
     assert.doesNotMatch(decision, /<form\b|https:\/\/(?:downloads\.outsideinprint\.org|square\.link|checkout\.square\.site)/);
     const links = [...decision.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/g)].map(match => match[0]);
-    const sampleHref = ["2045", "pending"].includes(slug) ? `/shop/${slug}/sample/` : "#reading-sample";
+    const sampleHref = standaloneSampleSlugs.has(slug) ? `/shop/${slug}/sample/` : "#reading-sample";
     assert.equal(links.filter(link => attr(link, "href") === sampleHref).length, 1);
     const buy = links.filter(link => attr(link, "href") === "#bookstore-purchase");
     assert.equal(buy.length, 1);
@@ -165,5 +188,14 @@ test("every product opens with format, price, sample and a buy anchor, preservin
     assert.match(html, /href=["']?\/privacy\//);
     assert.match(plain(html), /U\.S\. customers only/);
     assert.match(plain(html), /Square/);
+  }
+});
+
+test("Fifty Years of Magic enters the storefront only at its publication time", { skip: !siteDir }, () => {
+  for (const route of ["shop/fifty-years-of-magic/index.html", "shop/fifty-years-of-magic/sample/index.html"]) {
+    assert.equal(fs.existsSync(path.join(siteDir, route)), magicEligible, `${route} follows the build clock`);
+  }
+  if (!magicEligible) {
+    assert.doesNotMatch(output("shop/index.html"), /OIP-FM-EPUB|\/shop\/fifty-years-of-magic\//);
   }
 });

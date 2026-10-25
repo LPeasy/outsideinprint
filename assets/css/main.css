@@ -4669,6 +4669,12 @@ html[data-theme="light"] .paper-route-toggle{
   line-height:1.72;
   overflow-wrap:break-word;
 }
+.bookstore-reading-sample__body picture,
+.bookstore-reading-sample__body img{
+  display:block;
+  max-width:100%;
+  height:auto;
+}
 .bookstore-reading-sample__body > :first-child{
   margin-top:0;
 }

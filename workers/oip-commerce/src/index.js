@@ -52,6 +52,7 @@ import {
 } from "./http.js";
 import { preparePhysicalCheckout, serializedPhysicalItems } from "./physical.js";
 import { operationalHealthFields } from "./monitoring.js";
+import { requireEpubRelease } from "./release.js";
 import { bindPurchaseMeasurement, preparePurchaseMeasurement } from "./purchase-measurement.js";
 import {
   SquareApiError,
@@ -236,6 +237,7 @@ async function handleEpubCheckout(request, env) {
   if (!enabledEpubSkus(env).has(selection.sku)) {
     throw new HttpError(409, "EPUB_NOT_AVAILABLE", "This EPUB is not available yet.");
   }
+  await requireEpubRelease(product, { nowSeconds: now, fetcher: env.__testFetch || globalThis.fetch });
   const catalogObjectId = configuredEpubCatalogVariationId(env, selection.sku);
   try {
     await cleanupOperationalState(env.DB, now, 100);
