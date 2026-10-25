@@ -60,7 +60,8 @@ const regularPublishedRoutes = publishedPages.filter((page) => {
     .flatMap((match) => { const node = JSON.parse(match[1]); return node["@graph"] || [node]; });
   const work = nodes.find((node) => [node["@type"]].flat().some((type) => ["Article", "CreativeWork"].includes(type)));
   const authors = work?.author ? [work.author].flat() : [];
-  return authors.length > 0 && authors.every((author) => author["@id"]?.endsWith("#author-robert-v-ussley"));
+  return authors.length > 0 && authors.every((author) =>
+    ["#author-robert-v-ussley", "#author-robert-v.-ussley"].some((id) => author["@id"]?.endsWith(id)));
 }).map((page) => page.route);
 const pinnedRoutes = [
   "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/",

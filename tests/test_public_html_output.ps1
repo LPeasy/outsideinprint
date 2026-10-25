@@ -5921,7 +5921,8 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     $authors = @($work.author | Where-Object { $null -ne $_ })
     $authors.Count -gt 0 -and @($authors | Where-Object {
       -not $_.PSObject.Properties['@id'] -or
-      -not ([string]$_.'@id').EndsWith('#author-robert-v-ussley', [StringComparison]::Ordinal)
+      (-not ([string]$_.'@id').EndsWith('#author-robert-v-ussley', [StringComparison]::Ordinal) -and
+       -not ([string]$_.'@id').EndsWith('#author-robert-v.-ussley', [StringComparison]::Ordinal))
     }).Count -eq 0
   } | ForEach-Object { Get-SitePathFromHref -Href $_.permalink })
   $flagshipPath = '/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/'
