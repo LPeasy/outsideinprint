@@ -50,6 +50,28 @@ production build, weekly full sweep and exact deployment receipt are unchanged.
 
 ## Resources and publication identity
 
+### Browser environment
+
+Selected Chromium suites run in the existing site job using Microsoft's
+`mcr.microsoft.com/playwright:v1.64.0-noble` image, pinned to OCI index digest
+`sha256:06a9939e57531807f8d5fd76ce44b53165ffb7d7501d87ab10e285c20b1e971f`.
+The wrapper checks the image version against the package, lockfile and installed
+Playwright modules. It mounts the setup-node binary directory and checks the
+exact toolchain Node version (`24.21.0`) inside the prepared container.
+Update the Playwright package, lockfile and verified image digest together.
+
+The full checkout, installed npm modules and fresh host-built `public` directory
+are bind mounted at their existing paths. No browser job, site artifact transfer
+or generated-output cache is added. Suite selection, serial execution, analytics
+conditions and the publication clock remain unchanged. Containers use the host
+UID/GID so Bob's screenshots retain normal ownership, with 1 GiB of shared memory.
+The image supplies browser binaries and operating-system dependencies; the runner
+does not install them with apt. Its first amd64 pull is about 986 MB compressed;
+assess the first required CI run's preparation time without repeating a build for
+benchmarking. See [Playwright's Docker guidance](https://playwright.dev/docs/docker).
+
+### Hugo resources
+
 Only Hugo's processed `resources/_gen` are cached. Compatibility binds the OS,
 Hugo version and image-processing implementation/configuration. The normalized
 input fingerprint includes approved source identities, dimensions, processing

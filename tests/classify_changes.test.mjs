@@ -97,6 +97,7 @@ test("only matching generated schedule changes can skip system suites", () => {
 test("deletions are classified by path and unknown dependencies fail conservatively", () => {
   assert.equal(classifyPaths(["assets/images/originals/removed.png"]).site, true);
   assert.ok(Object.values(classifyPaths(["unexpected-dependency.config"])).every(Boolean));
+  assert.ok(Object.values(classifyPaths(["tests/browser_environment_future.test.mjs"])).every(Boolean));
   assert.ok(Object.values(selectChecks({ event: "pull_request", uncertain: true })).every(Boolean));
   assert.ok(Object.values(selectChecks({ event: "push", protectedMain: false })).every(Boolean));
 });
@@ -113,7 +114,10 @@ test("production always rebuilds; full/manual and Monday cover every active suit
 });
 
 test("unknown dependencies remain full when mixed with known system changes in either order", () => {
-  for (const known of [".github/workflows/deploy.yml", "tests/ci_workflow.test.mjs", "scripts/ci/classify_changes.mjs", ".nvmrc"]) {
+  for (const known of [".github/workflows/deploy.yml", "tests/ci_workflow.test.mjs", "tests/browser_environment.test.mjs", "scripts/ci/classify_changes.mjs", ".nvmrc"]) {
+    const pullRequest = selectChecks({ event: "pull_request", paths: [known] });
+    assert.equal(pullRequest.full, false, known);
+    assert.ok(Object.entries(pullRequest).every(([key, enabled]) => key === "full" || enabled), known);
     assert.equal(selectChecks({ event: "push", paths: [known], protectedMain: true }).browser, false, known);
     for (const paths of [[known, "unexpected-dependency.config"], ["unexpected-dependency.config", known]]) {
       for (const event of ["push", "pull_request"]) {

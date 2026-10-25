@@ -72,7 +72,7 @@ jobs:
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Check workflow safety and selectors
         run: |
-          node --test tests/ci_workflow.test.mjs tests/classify_changes.test.mjs tests/disney_release_schedule.test.mjs tests/scheduled_releases.test.mjs tests/image_cache.test.mjs tests/release_gate.test.mjs tests/verify_deployment.test.mjs tests/deployment_head.test.mjs
+          node --test tests/ci_workflow.test.mjs tests/browser_environment.test.mjs tests/classify_changes.test.mjs tests/disney_release_schedule.test.mjs tests/scheduled_releases.test.mjs tests/image_cache.test.mjs tests/release_gate.test.mjs tests/verify_deployment.test.mjs tests/deployment_head.test.mjs
           python3 -m unittest discover -s tests -p test_disney_release_verification.py
           python3 -m unittest discover -s tests -p test_scheduled_release_verification.py
           node scripts/ci/scheduled_releases.mjs --check
@@ -371,22 +371,22 @@ jobs:
       - name: Test rendering behavior fixtures
         if: ${{ needs.classify.outputs.rendering == 'true' }}
         run: node --test tests/homepage_selection_behavior.test.mjs tests/gallery_reading_behavior.test.mjs tests/collection_reading_path_behavior.test.mjs
-      - name: Install browser test dependencies
+      - name: Prepare browser test environment
         run: |
           npm ci --ignore-scripts --no-audit --no-fund
-          npx playwright install --with-deps chromium
+          node scripts/ci/run_browser_tests.mjs --prepare
         if: ${{ needs.classify.outputs.browser == 'true' }}
       - name: Test Mobile Navigation
-        run: node --test --test-concurrency=1 tests/mobile_navigation_browser.test.mjs
+        run: node scripts/ci/run_browser_tests.mjs tests/mobile_navigation_browser.test.mjs
         if: ${{ needs.classify.outputs.browser_navigation == 'true' }}
       - name: Test Bob reading and collection browsing
-        run: node --test --test-concurrency=1 tests/bob_reading_browser.test.mjs
+        run: node scripts/ci/run_browser_tests.mjs tests/bob_reading_browser.test.mjs
         if: ${{ needs.classify.outputs.browser_bob == 'true' }}
       - name: Test Hosted Analytics Network Privacy
         if: ${{ needs.classify.outputs.browser_analytics == 'true' && env.ANALYTICS_ENABLED == 'true' }}
-        run: node --test --test-concurrency=1 tests/hosted_analytics_browser.test.mjs
+        run: node scripts/ci/run_browser_tests.mjs tests/hosted_analytics_browser.test.mjs
       - name: Test Piece Sharing
-        run: node --test --test-concurrency=1 tests/piece_share_browser.test.mjs
+        run: node scripts/ci/run_browser_tests.mjs tests/piece_share_browser.test.mjs
         if: ${{ needs.classify.outputs.browser_share == 'true' }}
       - name: Remove public PDF artifacts
         shell: bash
