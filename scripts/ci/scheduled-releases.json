@@ -230,6 +230,152 @@
           ]
         }
       ]
+    },
+    {
+      "id": "breach-of-confidence-guest-essay-release",
+      "route": "/essays/breach-of-confidence-therapy-records/",
+      "releaseAt": "2026-10-27T11:00:00-04:00",
+      "bindings": [
+        {
+          "kind": "file",
+          "path": "content/essays/breach-of-confidence-therapy-records.md",
+          "sha256": "fb9c3606c515b3321e363bd6fea76eff3ebc39ba86b46357de05482042017b41"
+        },
+        {
+          "kind": "file",
+          "path": "layouts/partials/home_guest_selected.html",
+          "sha256": "08abe9c26c2597c82a5d399382966163797b32f8bb7bb26af13e27dd6abcc875"
+        },
+        {
+          "kind": "file",
+          "path": "data/collections.yaml",
+          "sha256": "424826751a67c5a933cf63991728b46cb80bf73b0139ea19cd8733f651784c7e"
+        },
+        {
+          "kind": "file",
+          "path": "assets/images/originals/essays/breach-of-confidence-therapy-records/hero.png",
+          "sha256": "33a7af468a3144d8b524fb1b5054864cd473cc377b19295a56ed5e21c7b60b4e"
+        },
+        {
+          "kind": "file",
+          "path": "assets/images/originals/essays/breach-of-confidence-therapy-records/section-1.png",
+          "sha256": "662ee8853d16510bf20540848c21032131cb2c4ce07c8d4d56d86e68e510d115"
+        },
+        {
+          "kind": "file",
+          "path": "assets/images/originals/essays/breach-of-confidence-therapy-records/section-2.png",
+          "sha256": "a4e97a244626297644518c5326ebf622f53a3ed532873ad0ff57b147910a5282"
+        },
+        {
+          "kind": "file",
+          "path": "assets/images/originals/essays/breach-of-confidence-therapy-records/section-3.png",
+          "sha256": "9e51a2216b3fcc8d1d4b9f0dfc8ae625d417cc7ba70359d34cce61d161560c68"
+        },
+        {
+          "kind": "file",
+          "path": "docs/editorial-audits/99-refinement/breach-of-confidence-therapy-records-99-refinement-report.md",
+          "sha256": "133c957ab87555e70156e8f1b76f4caa67dd6db33835f45a24fe2d11a58baef4"
+        },
+        {
+          "kind": "file",
+          "path": "docs/editorial-audits/99-refinement/breach-of-confidence-therapy-records-source-checklist.md",
+          "sha256": "afacfce3e85cda9dd29efb90779135513a0e7e4e9947d13831726d0ea0f8bb8e"
+        }
+      ],
+      "images": [
+        {
+          "id": "essays/breach-of-confidence-therapy-records/hero",
+          "sha256": "33a7af468a3144d8b524fb1b5054864cd473cc377b19295a56ed5e21c7b60b4e",
+          "width": 1672,
+          "height": 941
+        },
+        {
+          "id": "essays/breach-of-confidence-therapy-records/section-1",
+          "sha256": "662ee8853d16510bf20540848c21032131cb2c4ce07c8d4d56d86e68e510d115",
+          "width": 1800,
+          "height": 1130
+        },
+        {
+          "id": "essays/breach-of-confidence-therapy-records/section-2",
+          "sha256": "a4e97a244626297644518c5326ebf622f53a3ed532873ad0ff57b147910a5282",
+          "width": 1800,
+          "height": 835
+        },
+        {
+          "id": "essays/breach-of-confidence-therapy-records/section-3",
+          "sha256": "9e51a2216b3fcc8d1d4b9f0dfc8ae625d417cc7ba70359d34cce61d161560c68",
+          "width": 1672,
+          "height": 941
+        }
+      ],
+      "checks": [
+        {
+          "route": "/essays/breach-of-confidence-therapy-records/",
+          "title": "Breach of Confidence: How Private Are Your Therapy Records?",
+          "containsText": [
+            "By Elijah Fernandez, MSW, PMP, CISSP",
+            "Guest contributor",
+            "Edited by Robert V. Ussley",
+            "The review covered 261 people",
+            "Building that visibility is an engineering task as much as a clinical one, and it is overdue."
+          ],
+          "links": [
+            "https://www.changehealthcare.com/",
+            "https://cerevity.com/",
+            "https://outsideinprint.org/authors/robert-v-ussley/"
+          ],
+          "imageIds": [
+            "essays/breach-of-confidence-therapy-records/hero",
+            "essays/breach-of-confidence-therapy-records/section-1",
+            "essays/breach-of-confidence-therapy-records/section-2",
+            "essays/breach-of-confidence-therapy-records/section-3"
+          ]
+        },
+        {
+          "route": "/",
+          "containsText": [
+            "Guest Feature",
+            "Breach of Confidence: How Private Are Your Therapy Records?",
+            "By Elijah Fernandez, MSW, PMP, CISSP"
+          ],
+          "links": [
+            "/essays/breach-of-confidence-therapy-records/"
+          ],
+          "imageIds": [
+            "essays/breach-of-confidence-therapy-records/hero"
+          ]
+        },
+        {
+          "route": "/collections/risk-uncertainty/",
+          "links": [
+            "/essays/breach-of-confidence-therapy-records/"
+          ]
+        },
+        {
+          "route": "/gallery/",
+          "links": [
+            "/essays/breach-of-confidence-therapy-records/"
+          ],
+          "imageIds": [
+            "essays/breach-of-confidence-therapy-records/hero"
+          ]
+        },
+        {
+          "route": "/index.xml",
+          "format": "xml",
+          "containsText": [
+            "https://outsideinprint.org/essays/breach-of-confidence-therapy-records/"
+          ]
+        },
+        {
+          "route": "/sitemap.xml",
+          "format": "xml",
+          "containsText": [
+            "https://outsideinprint.org/essays/breach-of-confidence-therapy-records/"
+          ]
+        }
+      ],
+      "endsAt": "2026-10-28T15:00:00Z"
     }
   ]
 }

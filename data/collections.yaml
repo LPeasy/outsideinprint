@@ -256,6 +256,7 @@ collections:
       - id: warnings-safety-public-health
         title: Warnings, safety, and public health
         items:
+          - breach-of-confidence-therapy-records
           - the-bolt-beside-the-gas-tank
           - the-warning-reached-the-bridge
           - the-siren-on-the-pole

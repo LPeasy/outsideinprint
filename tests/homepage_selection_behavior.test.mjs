@@ -18,6 +18,12 @@ const guestMetadata = {
   section_label: "Essay", contributor_role: "guest", author: "Douglas B. Vandergraph",
   description: "Keep a lasting public record.",
 };
+const elijahRoute = "/essays/breach-of-confidence-therapy-records/";
+const elijahMetadata = {
+  title: "Breach of Confidence: How Private Are Your Therapy Records?", url: elijahRoute,
+  date: "2026-10-27", publishDate: "2026-10-27T11:00:00-04:00",
+  section_label: "Essay", contributor_role: "guest", author: "Elijah Fernandez, MSW, PMP, CISSP",
+};
 
 function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-01T12:00:00Z", cartoons = []) {
   assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.167\.0/);
@@ -212,6 +218,40 @@ test("the guest is reserved only from its exact release clock onward", (t) => {
   assert.equal(before.html, "");
   assert.equal(after.guest, guestRoute);
   assert.ok(!after.featured.includes(guestRoute));
+});
+
+test("Elijah takes the guest slot at his release instant while Douglas remains its pre-release fallback", (t) => {
+  const overrides = { guest: guestMetadata, elijah: elijahMetadata };
+  const before = renderSelection(t, overrides, "guest", "2026-10-27T14:59:59Z");
+  const atRelease = renderSelection(t, overrides, "guest", "2026-10-27T15:00:00Z");
+  assert.equal(before.guest, guestRoute);
+  assert.match(before.html, /By Douglas B\. Vandergraph/);
+  assert.ok(!before.featured.includes(elijahRoute));
+  assert.equal(atRelease.guest, elijahRoute);
+  assert.match(atRelease.html, /By Elijah Fernandez, MSW, PMP, CISSP/);
+  assert.equal((atRelease.html.match(/<article\b/g) || []).length, 1);
+  assert.ok(!atRelease.featured.includes(elijahRoute));
+  assert.equal(new Set([...atRelease.featured, atRelease.guest]).size, 6);
+});
+
+test("an ineligible preferred guest falls back to Douglas without bypassing publication or credit guards", (t) => {
+  const cases = {
+    absent: null,
+    draft: { ...elijahMetadata, draft: true },
+    futureDate: { ...elijahMetadata, date: "2030-01-01" },
+    futureRelease: { ...elijahMetadata, publishDate: "2030-01-01" },
+    expired: { ...elijahMetadata, expiryDate: "2026-10-27T11:00:00-04:00" },
+    anonymous: { ...elijahMetadata, author: " \t " },
+    ordinary: { ...elijahMetadata, contributor_role: "contributing" },
+    nonEssay: { ...elijahMetadata, library_type: "dialogue", section_label: "Dialogue" },
+  };
+  for (const [name, metadata] of Object.entries(cases)) {
+    const result = renderSelection(t, { guest: guestMetadata, elijah: metadata }, "guest", "2026-10-27T15:00:00Z");
+    assert.equal(result.guest, guestRoute, name);
+    assert.match(result.html, /By Douglas B\. Vandergraph/, name);
+    assert.equal(new Set([...result.featured, result.guest]).size, 6, name);
+    assert.ok(!result.featured.includes(guestRoute), name);
+  }
 });
 
 test("lead descriptions are trimmed and plain text while blank descriptions retain shared fallbacks", (t) => {
