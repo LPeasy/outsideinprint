@@ -87,7 +87,7 @@ export function classifyPaths(paths, { renderingDefaultsChanged = false, schedul
       continue;
     }
     if (path.startsWith("tests/")) {
-      if (/^tests\/(ci_|release_gate|image_cache|verify_deployment|classify_changes)/.test(path)) { Object.assign(selected, full(), { full: false }); continue; }
+      if (/^tests\/(ci_|release_gate|image_cache|verify_deployment|classify_changes|browser_environment\.test\.mjs$)/.test(path)) { Object.assign(selected, full(), { full: false }); continue; }
       const name = path.slice("tests/".length);
       if (siteTests.has(name)) continue;
       if (testFamilies.has(name)) {

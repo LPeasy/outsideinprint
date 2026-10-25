@@ -108,8 +108,17 @@ test("Hugo resources restore compatibly and only validated production saves them
   assert.match(install.run, /\+extended\*/);
   assert.ok(steps("site").findIndex(step => step.run?.includes("test_responsive_image_source_contract")) < steps("site").findIndex(step => step.run?.includes("start_epoch=")));
 });
-test("browser binaries are conditional and actual publication gates remain active", () => {
-  for (const step of steps("site").filter(step => /playwright install|_browser.test/.test(step.run ?? ""))) assert.match(step.if, /outputs.browser/);
+test("browser containers are conditional and actual publication gates remain active", () => {
+  const browserSteps = steps("site").filter(step => /run_browser_tests.mjs/.test(step.run ?? ""));
+  assert.equal(browserSteps.length, 5);
+  for (const step of browserSteps) assert.match(step.if, /outputs.browser/);
+  const preparation = browserSteps.find(step => step.run.includes("--prepare"));
+  assert.match(preparation.run, /npm ci --ignore-scripts --no-audit --no-fund/);
+  assert.ok(steps("site").indexOf(preparation) > steps("site").findIndex(step => step.run?.includes("hugo --gc")));
+  assert.ok(browserSteps.every(step => step === preparation || steps("site").indexOf(step) > steps("site").indexOf(preparation)));
+  assert.equal(jobs.site.container, undefined, "Hugo and output gates retain their existing host environment.");
+  assert.doesNotMatch(commands("site"), /playwright install|apt-get|apt install/);
+  assert.match(commands("classify"), /tests\/browser_environment.test.mjs/);
   assert.ok(!actions("site").some(step => step.with?.path?.includes("ms-playwright")));
   for (const gate of ["test_responsive_image_source_contract", "audit_essay_images", "check_essay_guardrails", "test_public_route_smoke", "test_public_html_output", "test_responsive_image_output_contract", "test_games_catalog_contract", "test_feed_policy_contract"]) assert.ok(commands("site").includes(gate), gate);
   assert.match(commands("worker"), /npm --prefix workers\/oip-commerce test/);
@@ -125,6 +134,7 @@ test("browser and worker families select their own steps while preserving aggreg
     ["hosted_analytics_browser", "browser_analytics"], ["piece_share_browser", "browser_share"],
   ]) {
     const step = steps("site").find(step => step.run?.includes(file + ".test.mjs"));
+    assert.equal(step.run, "node scripts/ci/run_browser_tests.mjs tests/" + file + ".test.mjs");
     assert.ok(step.if.includes("needs.classify.outputs." + family + " == 'true'"));
     assert.equal(jobs.classify.outputs[family], "${{ steps.selection.outputs." + family + " }}");
   }
@@ -135,7 +145,8 @@ test("browser and worker families select their own steps while preserving aggreg
       assert.equal(step.if, "${{ needs.classify.outputs." + family + " == 'true' }}");
     }
   }
-  assert.equal(steps("site").find(step => step.run?.includes("playwright install")).if, "${{ needs.classify.outputs.browser == 'true' }}");
+  assert.equal(steps("site").find(step => step.run?.includes("run_browser_tests.mjs --prepare")).if, "${{ needs.classify.outputs.browser == 'true' }}");
+  assert.equal(steps("site").find(step => step.run?.includes("hosted_analytics_browser.test.mjs")).if, "${{ needs.classify.outputs.browser_analytics == 'true' && env.ANALYTICS_ENABLED == 'true' }}");
   assert.match(jobs.worker.if, /outputs.worker == 'true'/);
   for (const mode of ["-SourceOnly", "-SiteDir public"]) assert.ok(commands("site").includes("test_direct_commerce_storefront_contract.ps1 " + mode));
 });
