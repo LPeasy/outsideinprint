@@ -1,13 +1,15 @@
 ---
-title: "Reader Support Cancellation and Refund Terms"
-description: "Renewal, cancellation, and refund terms for one-time and monthly reader support."
+title: "Square Support Cancellation and Refund Terms"
+description: "Renewal, cancellation, and refund terms for one-time and monthly direct support through Square."
 effective_date: "August 31, 2026"
 type: "commerce-policy"
 draft: false
 show_citation: false
 ---
 
-These terms apply to voluntary reader-support payments made through Outside In Print.
+These terms apply to voluntary reader-support payments made through Square on Outside In Print.
+
+Patreon memberships are separate. See the [membership details](https://www.patreon.com/cw/bobviously/membership). For cancellation instructions, use [Patreon’s guide to canceling a paid membership](https://support.patreon.com/hc/en-us/articles/360005502572-Canceling-a-paid-membership).
 
 ## Support options
 
@@ -16,7 +18,7 @@ The storefront may offer:
 - one-time support in a whole-dollar amount from $5 to $500; and
 - fixed support of $5 per month.
 
-Support does not include a book, membership benefit, editorial influence, or special access. Book purchases use separate checkout pages.
+Direct support through Square does not include a book, membership benefit, editorial influence, or special access. Book purchases use separate checkout pages.
 
 ## Monthly renewal
 
