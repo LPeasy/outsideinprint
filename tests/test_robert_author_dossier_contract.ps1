@@ -8,6 +8,10 @@ $layoutPath = Join-Path $repoRoot 'layouts/authors/dossier.html'
 $buildDir = Join-Path $repoRoot '.tmp-test-robert-dossier'
 $builtPagePath = Join-Path $buildDir 'authors/robert-v-ussley/index.html'
 $layoutTemplate = Get-Content -Path $layoutPath -Raw
+$buildClock = if ($env:OIP_BUILD_CLOCK_UTC) { [datetimeoffset]::Parse($env:OIP_BUILD_CLOCK_UTC) } else { [datetimeoffset]::UtcNow }
+$magicProductSource = Get-Content -LiteralPath (Join-Path $repoRoot 'content/shop/fifty-years-of-magic/_index.md') -Raw
+$magicPublishDate = [datetimeoffset]::Parse([regex]::Match($magicProductSource, '(?m)^publishDate:\s*"?(?<date>[^"\r\n]+)"?\s*$').Groups['date'].Value.Trim())
+$magicEligible = $magicPublishDate -le $buildClock
 
 . (Join-Path $PSScriptRoot 'helpers/public_output_common.ps1')
 $hugo = Resolve-PinnedHugo -RepoRoot $repoRoot
@@ -88,7 +92,7 @@ try {
     Remove-Item -LiteralPath $buildDir -Recurse -Force
   }
 
-  & $hugo.Command --quiet --panicOnWarning --destination $buildDir | Out-Null
+  & $hugo.Command --quiet --panicOnWarning --clock $buildClock.ToString('o') --destination $buildDir | Out-Null
   if ($LASTEXITCODE -ne 0) {
     throw 'Hugo build failed while validating the Robert dossier page.'
   }
@@ -165,8 +169,12 @@ try {
 
   $booksSection = [regex]::Match($builtPage, '(?s)<section[^>]*aria-labelledby=(?:"author-books-title"|author-books-title)[^>]*>(.*?)</section>').Value
   $bookLinks = [regex]::Matches($booksSection, '<a\b[^>]*href=(?:"(?:https://outsideinprint\.org)?/shop/[^"]+/"|(?:https://outsideinprint\.org)?/shop/[^\s>]+/)[^>]*>')
-  if ($bookLinks.Count -ne 5) {
-    throw "Expected all five books in the author page; found $($bookLinks.Count)."
+  $expectedBookCount = 5 + [int]$magicEligible
+  if ($bookLinks.Count -ne $expectedBookCount) {
+    throw "Expected $expectedBookCount clock-eligible books in the author page; found $($bookLinks.Count)."
+  }
+  if (($booksSection -match '/shop/fifty-years-of-magic/') -ne $magicEligible) {
+    throw 'Fifty Years of Magic must appear in the author page only at its publication time.'
   }
   if ($booksSection -notmatch 'href=(?:"(?:https://outsideinprint\.org)?/shop/pending/"|(?:https://outsideinprint\.org)?/shop/pending/)(?=\s|>)') {
     throw 'Expected PENDING among the author page book destinations.'
