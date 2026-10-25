@@ -50,7 +50,18 @@ const selectedGuest = guestCandidates.find(({ route, source, author }) => publis
   && /^contributor_role: "guest"\r?$/m.test(source) && Boolean(author));
 const { route: guestRoute = "", source: guestSource = "", author: guestAuthor = "" } = selectedGuest || {};
 const guestEligible = Boolean(selectedGuest);
-const regularPublishedRoutes = publishedRoutes.filter((route) => !guestEligible || route !== guestRoute);
+// Check public authorship independently of the homepage selector, including mixed bylines.
+const regularPublishedRoutes = publishedPages.filter((page) => {
+  const source = fs.readFileSync(path.resolve(page.path), "utf8");
+  const role = source.match(/^contributor_role:\s*([^\r\n]*)/m)?.[1]?.trim().replace(/^["']|["']$/g, "").trim() || "";
+  if (role) return false;
+  const article = fs.readFileSync(path.join(siteDir, page.route, "index.html"), "utf8");
+  const nodes = [...article.matchAll(/<script\b[^>]*type=(?:"application\/ld\+json"|'application\/ld\+json'|application\/ld\+json)[^>]*>([\s\S]*?)<\/script>/g)]
+    .flatMap((match) => { const node = JSON.parse(match[1]); return node["@graph"] || [node]; });
+  const work = nodes.find((node) => [node["@type"]].flat().some((type) => ["Article", "CreativeWork"].includes(type)));
+  const authors = work?.author ? [work.author].flat() : [];
+  return authors.length > 0 && authors.every((author) => author["@id"]?.endsWith("#author-robert-v-ussley"));
+}).map((page) => page.route);
 const pinnedRoutes = [
   "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/",
   "/essays/walt-disney-world-opening-1971/",

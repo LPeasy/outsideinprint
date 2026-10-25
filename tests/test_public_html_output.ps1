@@ -5905,8 +5905,25 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
       break
     }
   }
-  # An eligible guest has its own placement and cannot also consume a regular featured slot.
-  $publishedReadingPaths = @($publishedReadingPaths | Where-Object { $_ -notin $expectedGuestPaths })
+  # Regular slots contain only Bob's work; use each article's public author references,
+  # rather than duplicating the selector's source-author resolution.
+  $publishedReadingPaths = @($publishedReadingRecords | Where-Object {
+    $sourcePath = if ([IO.Path]::IsPathRooted($_.path)) { $_.path } else { Join-Path $repoRoot $_.path }
+    $role = (Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key 'contributor_role').Trim()
+    if ($role) { return $false }
+    $route = Get-SitePathFromHref -Href $_.permalink
+    $articlePath = Join-Path $SiteDir ($route.TrimStart('/') + 'index.html')
+    $articleHtml = Get-Content -LiteralPath $articlePath -Raw -Encoding utf8
+    $articleNodes = Get-JsonLdNodes -Objects (Get-JsonLdObjects -Html $articleHtml)
+    $work = @((Get-JsonLdNodesByType -Nodes $articleNodes -Type 'Article') +
+      (Get-JsonLdNodesByType -Nodes $articleNodes -Type 'CreativeWork')) | Select-Object -First 1
+    if ($null -eq $work -or -not $work.PSObject.Properties['author']) { return $false }
+    $authors = @($work.author | Where-Object { $null -ne $_ })
+    $authors.Count -gt 0 -and @($authors | Where-Object {
+      -not $_.PSObject.Properties['@id'] -or
+      -not ([string]$_.'@id').EndsWith('#author-robert-v-ussley', [StringComparison]::Ordinal)
+    }).Count -eq 0
+  } | ForEach-Object { Get-SitePathFromHref -Href $_.permalink })
   $flagshipPath = '/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/'
   $expectedLeadPaths = @($publishedReadingPaths | Select-Object -First 1)
   if ($flagshipPath -in $publishedReadingPaths) {

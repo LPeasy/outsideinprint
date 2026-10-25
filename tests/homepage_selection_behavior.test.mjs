@@ -37,9 +37,11 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
     fs.writeFileSync(path.join(fixture, file), content);
   };
   write("hugo.toml", 'baseURL = "https://example.test/"\ndisableKinds = ["taxonomy", "term", "RSS", "sitemap"]\n');
-  for (const partial of ["home_v2_selected.html", "home_guest_selected.html", "home_guest_feature.html", "archive/longform-kind.html", "collections/normalize-values.html", "home_lead_summary.html", "discovery/page-summary.html", "metadata_description.html", "metadata/route.html", "collections/lookup-definition.html"]) {
+  for (const partial of ["home_v2_selected.html", "home_guest_selected.html", "home_guest_feature.html", "authors/resolve.html", "archive/longform-kind.html", "collections/normalize-values.html", "home_lead_summary.html", "discovery/page-summary.html", "metadata_description.html", "metadata/route.html", "collections/lookup-definition.html"]) {
     write(`layouts/partials/${partial}`, fs.readFileSync(`layouts/partials/${partial}`, "utf8"));
   }
+  write("data/organization.json", JSON.stringify({ default_author_id: "robert-v-ussley" }));
+  write("data/authors.json", JSON.stringify({ authors: { "robert-v-ussley": { type: "Person", name: "Robert V. Ussley" } } }));
   if (summaries === "frontpage") {
     for (const partial of ["home_v2_front_page.html", "home_feature_freshness.html", "home_featured_image_button.html", "home_featured_image_dialog.html", "editorial/cartoon-for-page.html", "editorial/published-cartoons.html", "editorial/cartoon-is-published.html"]) {
       write(`layouts/partials/${partial}`, fs.readFileSync(`layouts/partials/${partial}`, "utf8"));
@@ -202,11 +204,48 @@ test("absent, draft, future, expired, or uncredited guest work leaves no Guest F
     assert.equal(result.guest, false, name);
     assert.equal(result.html, "", name);
     assert.equal(new Set(result.featured).size, 5, name);
-    if (["absent", "draft", "futureDate", "futureRelease", "expired"].includes(name)) {
-      assert.ok(!result.featured.includes(guestRoute), name);
-    } else {
-      assert.equal(result.featured[1], guestRoute, `${name}: unreserved published reading remains eligible normally`);
-    }
+    assert.ok(!result.featured.includes(guestRoute), `${name}: unavailable or non-Bob work stays out of regular slots`);
+  }
+});
+
+test("all regular positions reject outside authors and contributor roles, including unselected guests", (t) => {
+  const cases = {
+    unselectedGuest: { author: "Another Guest", contributor_role: "guest" },
+    unlabelledOutsideAuthor: { author: "Another Writer" },
+    regularContributor: { author: "Another Writer", contributor_role: "contributing" },
+    guestEditedByBob: { author: "Another Guest", editor_name: "Robert V. Ussley" },
+    contributorWithDefaultByline: { contributor_role: "guest" },
+    roleOverridesBob: { author_id: "robert-v-ussley", contributor_role: "guest" },
+  };
+  for (const [label, byline] of Object.entries(cases)) {
+    const result = renderSelection(t, {
+      guest: guestMetadata,
+      franklin: { title: "Outside flagship", url: franklin, date: "2020-08-01", ...byline },
+      disneyOpening: { title: "Outside curated piece", url: disneyOpening, date: "2020-08-01", ...byline },
+      outside: { title: "Outside latest and fallback", date: "2020-08-01", ...byline },
+      replacement: { title: "Bob replacement", date: "2020-05-01" },
+    }, "guest");
+    assert.equal(result.guest, guestRoute, label);
+    assert.deepEqual(result.featured, ["/essays/latest/", "/essays/earlier/", noise, coinSlot, "/essays/replacement/"], label);
+  }
+});
+
+test("regular slots honor Bob's author ID, legacy name and default while excluding other and mixed bylines", (t) => {
+  const cases = {
+    authorId: [{ author_id: "robert-v-ussley", author: "Ignored legacy display" }, true],
+    legacyName: [{ author: "Robert V. Ussley" }, true],
+    authorList: [{ authors: ["robert-v-ussley"] }, true],
+    defaultByline: [{}, true],
+    otherId: [{ author_id: "another-writer", author: "Robert V. Ussley" }, false],
+    mixedByline: [{ authors: ["robert-v-ussley", "another-writer"] }, false],
+    otherName: [{ author: "Another Writer" }, false],
+  };
+  for (const [label, [byline, eligible]] of Object.entries(cases)) {
+    const selection = renderSelection(t, {
+      candidate: { title: "Newest candidate", date: "2020-08-01", ...byline },
+    });
+    assert.equal(selection.includes("/essays/candidate/"), eligible, label);
+    assert.equal(selection[1], eligible ? "/essays/candidate/" : "/essays/latest/", label);
   }
 });
 
@@ -227,10 +266,12 @@ test("Elijah takes the guest slot at his release instant while Douglas remains i
   assert.equal(before.guest, guestRoute);
   assert.match(before.html, /By Douglas B\. Vandergraph/);
   assert.ok(!before.featured.includes(elijahRoute));
+  assert.ok(!before.featured.includes(guestRoute));
   assert.equal(atRelease.guest, elijahRoute);
   assert.match(atRelease.html, /By Elijah Fernandez, MSW, PMP, CISSP/);
   assert.equal((atRelease.html.match(/<article\b/g) || []).length, 1);
   assert.ok(!atRelease.featured.includes(elijahRoute));
+  assert.ok(!atRelease.featured.includes(guestRoute));
   assert.equal(new Set([...atRelease.featured, atRelease.guest]).size, 6);
 });
 
