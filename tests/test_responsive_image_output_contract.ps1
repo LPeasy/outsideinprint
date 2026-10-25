@@ -14,7 +14,6 @@ $ErrorActionPreference = 'Stop'
 $maxArtifactBytes = 900MB
 $maxPublicImageBytes = 800MB
 $maxDerivativeBytes = 1MB
-$maxPublicFiles = 6500
 
 function Get-HtmlAttribute {
   param(
@@ -184,9 +183,6 @@ if ($sourceOnlyAssetIds.Count -ne 1) {
 }
 
 $publicFiles = @(Get-ChildItem -LiteralPath $siteRoot -File -Recurse)
-if ($publicFiles.Count -gt $maxPublicFiles) {
-  throw "Public output exceeds 6,500 files: $($publicFiles.Count)"
-}
 $publicBytes = ($publicFiles | Measure-Object -Property Length -Sum).Sum
 if ($publicBytes -gt $maxArtifactBytes) {
   throw "Prepared Pages payload exceeds the 900 MiB artifact budget: $publicBytes bytes"
@@ -223,9 +219,8 @@ $renderedFiles = @(Get-ChildItem -LiteralPath $renderedRoot -File -Recurse)
 if ($renderedFiles.Count -eq 0) {
   throw 'Production output contains no generated responsive images.'
 }
-if ($renderedFiles.Count -gt $maxGeneratedImages) {
-  throw "Generated image count exceeds the approved recipe allowance of ${maxGeneratedImages}: $($renderedFiles.Count)"
-}
+$fileBudget = Assert-OipPublicFileBudget -PublicFileCount $publicFiles.Count -RenderedFileCount $renderedFiles.Count -AllowedDerivativeCount $maxGeneratedImages
+$maxPublicFiles = $fileBudget.MaxPublicFiles
 
 $renderedModelsByRelativePath = @{}
 foreach ($renderedFile in $renderedFiles) {
@@ -562,5 +557,6 @@ if ($managedSocialPageCount -eq 0) {
 
 Write-Host "Responsive-image output contract passed: $($renderedFiles.Count) derivatives, $managedPictureCount managed pictures, $publicImageBytes public image bytes, $publicBytes total public bytes."
 Write-Host "Headroom: $($maxArtifactBytes - $publicBytes) payload bytes; $($maxPublicImageBytes - $publicImageBytes) image bytes; $($maxPublicFiles - $publicFiles.Count) public files; $($maxGeneratedImages - $renderedFiles.Count) allowed derivatives."
+Write-Host "Other public files: $($fileBudget.NonDerivativeFileCount) of $($fileBudget.MaxNonDerivativeFiles)."
 $global:LASTEXITCODE = 0
 exit 0

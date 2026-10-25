@@ -51,7 +51,7 @@ diagnostics are retained; no automatic rebuild or rollback is performed.
 
 Image output is limited to the legal recipes for approved assets, current
 twelve-character source hashes, widths, formats and social variants. Retain the
-900 MiB payload, 800 MiB image, 1 MiB derivative and 6,500-file budgets and report
+900 MiB payload, 800 MiB image, 1 MiB derivative and recipe-based total-file budgets (approved derivatives plus 1,500 other files) and report
 headroom. Quarantined originals never render.
 
 ## Rollout and maintenance
