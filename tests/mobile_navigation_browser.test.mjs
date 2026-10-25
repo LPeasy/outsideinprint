@@ -87,7 +87,27 @@ test("homepage masthead and reader controls stay visible without overflow", asyn
 });
 
 test("Guest Feature fits below the lead beside supporting stories and stacks safely across breakpoints", async () => {
-  const guestRoute = "/essays/a-public-record-must-outlast-the-feed/";
+  const observationTime = process.env.OIP_BUILD_CLOCK_UTC ? Date.parse(process.env.OIP_BUILD_CLOCK_UTC) : Date.now();
+  const scalar = (source, key) => {
+    const value = source.match(new RegExp(`^${key}:\\s*(.+?)\\r?$`, "m"))?.[1] || "";
+    return value.startsWith('"') ? JSON.parse(value) : value.replace(/^'|'$/g, "");
+  };
+  const expectedGuest = ["/essays/breach-of-confidence-therapy-records/", "/essays/a-public-record-must-outlast-the-feed/"]
+    .map((route) => {
+      const file = path.join(repoRoot, `content${route.slice(0, -1)}.md`);
+      const source = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : "";
+      return { route, source, author: scalar(source, "author").trim() };
+    }).find(({ route, source, author }) => {
+      const date = scalar(source, "date");
+      const released = scalar(source, "publishDate") || date;
+      const expiry = scalar(source, "expiryDate");
+      return fs.existsSync(path.join(siteDir, route, "index.html")) && scalar(source, "draft") !== "true"
+        && scalar(source, "contributor_role") === "guest" && author
+        && Date.parse(date) <= observationTime && Date.parse(released) <= observationTime
+        && (!expiry || Date.parse(expiry) > observationTime);
+    });
+  assert.ok(expectedGuest, "one approved guest must be eligible in this output");
+  const guestRoute = expectedGuest.route;
   for (const width of [360, 768, 769, 900, 901, 1280]) {
     const { context, page } = await createPage(width);
     try {
@@ -113,7 +133,7 @@ test("Guest Feature fits below the lead beside supporting stories and stacks saf
       });
       assert.ok(state.documentWidth <= state.width + 1, `no homepage overflow at ${width}px`);
       assert.equal(state.guestCards, 1);
-      assert.equal(state.byline, "By Douglas B. Vandergraph");
+      assert.equal(state.byline, `By ${expectedGuest.author}`);
       assert.equal(state.routes.length, 6);
       assert.equal(new Set(state.routes).size, 6, "the guest must be promoted once");
       assert.ok(state.routes.includes(guestRoute));

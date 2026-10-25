@@ -5888,11 +5888,23 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     [DateTimeOffset]::Parse($_.publishDate) -le $selectionObservationTime
   } | Sort-Object @{ Expression = { [DateTimeOffset]::Parse($_.publishDate) }; Descending = $true }, title)
   $publishedReadingPaths = @($publishedReadingRecords | ForEach-Object { Get-SitePathFromHref -Href $_.permalink })
-  $guestPath = '/essays/a-public-record-must-outlast-the-feed/'
-  $guestSourcePath = Join-Path $repoRoot 'content/essays/a-public-record-must-outlast-the-feed.md'
-  $guestAuthor = (Get-FrontMatterScalarFromMarkdownFile -Path $guestSourcePath -Key 'author').Trim()
-  $guestRole = Get-FrontMatterScalarFromMarkdownFile -Path $guestSourcePath -Key 'contributor_role'
-  $expectedGuestPaths = @($publishedReadingPaths | Where-Object { $_ -ceq $guestPath -and $guestRole -ceq 'guest' -and $guestAuthor })
+  $guestPath = $null
+  $guestSourcePath = $null
+  $guestAuthor = ''
+  $expectedGuestPaths = @()
+  foreach ($candidateGuestPath in @('/essays/breach-of-confidence-therapy-records/', '/essays/a-public-record-must-outlast-the-feed/')) {
+    $candidateSourcePath = Join-Path $repoRoot ('content' + $candidateGuestPath.TrimEnd('/') + '.md')
+    if (-not (Test-Path -LiteralPath $candidateSourcePath -PathType Leaf)) { continue }
+    $candidateAuthor = (Get-FrontMatterScalarFromMarkdownFile -Path $candidateSourcePath -Key 'author').Trim()
+    $candidateRole = Get-FrontMatterScalarFromMarkdownFile -Path $candidateSourcePath -Key 'contributor_role'
+    if ($candidateGuestPath -cin $publishedReadingPaths -and $candidateRole -ceq 'guest' -and $candidateAuthor) {
+      $guestPath = $candidateGuestPath
+      $guestSourcePath = $candidateSourcePath
+      $guestAuthor = $candidateAuthor
+      $expectedGuestPaths = @($guestPath)
+      break
+    }
+  }
   # An eligible guest has its own placement and cannot also consume a regular featured slot.
   $publishedReadingPaths = @($publishedReadingPaths | Where-Object { $_ -notin $expectedGuestPaths })
   $flagshipPath = '/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/'
@@ -5957,7 +5969,8 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     }
     $guestImages = @(Get-OpenTags -Html $guestHtml -TagName 'img')
     $guestImageAlt = Get-FrontMatterScalarFromMarkdownFile -Path $guestSourcePath -Key 'featured_image_alt'
-    if ($guestImages.Count -ne 1 -or (Get-AttributeValue -Tag $guestImages[0] -Name 'data-oip-image-id') -cne 'essays/a-public-record-must-outlast-the-feed/hero' -or
+    $guestImageId = Get-FrontMatterScalarFromMarkdownFile -Path $guestSourcePath -Key 'featured_image'
+    if ($guestImages.Count -ne 1 -or (Get-AttributeValue -Tag $guestImages[0] -Name 'data-oip-image-id') -cne $guestImageId -or
         (Get-AttributeValue -Tag $guestImages[0] -Name 'alt') -cne $guestImageAlt -or
         (Get-AttributeValue -Tag $guestImages[0] -Name 'loading') -cne 'lazy' -or
         (Get-AttributeValue -Tag $guestImages[0] -Name 'sizes') -cne '160px' -or

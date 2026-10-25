@@ -157,7 +157,11 @@ test("featured eligibility excludes drafts, future and expired work before choos
 });
 
 test("the Guest Feature reserves its eligible route and keeps credited reading beneath the lead", () => {
-  assert.match(guestSelected, /\/essays\/a-public-record-must-outlast-the-feed\//);
+  const preferredGuest = guestSelected.indexOf('"/essays/breach-of-confidence-therapy-records/"');
+  const fallbackGuest = guestSelected.indexOf('"/essays/a-public-record-must-outlast-the-feed/"');
+  assert.ok(preferredGuest >= 0 && fallbackGuest > preferredGuest);
+  assert.match(guestSelected, /range \$route := \$guestRoutes/);
+  assert.match(guestSelected, /if not \$guest/);
   for (const source of [selected, guestSelected]) {
     assert.match(source, /not \.Draft/);
     assert.match(source, /le \.Date\.Unix \$now\.Unix/);

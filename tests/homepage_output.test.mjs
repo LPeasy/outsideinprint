@@ -40,11 +40,16 @@ const publishedPages = rows.map((row) => Object.fromEntries(columns.map((column,
     && Date.parse(row.date) <= observationTime && Date.parse(row.publishDate) <= observationTime)
   .sort((a, b) => Date.parse(b.publishDate) - Date.parse(a.publishDate) || a.title.localeCompare(b.title));
 const publishedRoutes = publishedPages.map((row) => row.route);
-const guestRoute = "/essays/a-public-record-must-outlast-the-feed/";
-const guestSource = fs.readFileSync(path.resolve("content/essays/a-public-record-must-outlast-the-feed.md"), "utf8");
-const guestAuthor = guestSource.match(/^author: "([^"]+)"\r?$/m)?.[1]?.trim() || "";
-const guestEligible = publishedRoutes.includes(guestRoute)
-  && /^contributor_role: "guest"\r?$/m.test(guestSource) && Boolean(guestAuthor);
+const guestCandidates = ["/essays/breach-of-confidence-therapy-records/", "/essays/a-public-record-must-outlast-the-feed/"]
+  .map((route) => {
+    const file = path.resolve(`content${route.slice(0, -1)}.md`);
+    const source = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : "";
+    return { route, source, author: source.match(/^author: "([^"]+)"\r?$/m)?.[1]?.trim() || "" };
+  });
+const selectedGuest = guestCandidates.find(({ route, source, author }) => publishedRoutes.includes(route)
+  && /^contributor_role: "guest"\r?$/m.test(source) && Boolean(author));
+const { route: guestRoute = "", source: guestSource = "", author: guestAuthor = "" } = selectedGuest || {};
+const guestEligible = Boolean(selectedGuest);
 const regularPublishedRoutes = publishedRoutes.filter((route) => !guestEligible || route !== guestRoute);
 const pinnedRoutes = [
   "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/",
@@ -300,7 +305,7 @@ test("the compact Guest Feature credits its writer and shares the lead column wi
     for (const [name, value] of Object.entries({
       "href": guestRoute, "data-analytics-event": "internal_promo_click",
       "data-analytics-title": title, "data-analytics-section": "Essay",
-      "data-analytics-path": guestRoute, "data-analytics-slug": "a-public-record-must-outlast-the-feed",
+      "data-analytics-path": guestRoute, "data-analytics-slug": guestRoute.split("/").filter(Boolean).at(-1),
     })) assert.equal(attribute(tracked[0], name), value, `${slot} ${name}`);
   }
   assert.equal((guest[2].match(/<h3\b/g) || []).length, 1);
@@ -317,7 +322,7 @@ test("the compact Guest Feature credits its writer and shares the lead column wi
   assert.ok(image);
   assert.equal(attribute(image, "loading"), "lazy");
   assert.equal(attribute(image, "sizes"), "160px");
-  assert.equal(attribute(image, "data-oip-image-id"), "essays/a-public-record-must-outlast-the-feed/hero");
+  assert.equal(attribute(image, "data-oip-image-id"), guestSource.match(/^featured_image: "([^"]+)"\r?$/m)?.[1]);
   assert.equal(attribute(image, "alt"), guestSource.match(/^featured_image_alt: "([^"]+)"\r?$/m)?.[1]);
   assert.doesNotMatch(guest[2], /homepage_guest_feature_cta|home-v2-guest__copy|data-home-featured-image-(?:trigger|fallback)|home-v2-featured__new-tag/);
   const normalTitleLinks = [...html.matchAll(/<a\b[^>]*>/g)]
