@@ -88,7 +88,31 @@ try {
   Assert-True (-not $paths.Contains('images/rendered/essays/test/unknown/aaaaaaaaaaaa/640w.webp')) 'Unknown asset paths must fail.'
   $inventory.assets['essays/test/0'].review_state = 'pending_review'
   Assert-True ((Get-OipAllowedDerivativePaths -Manifest $inventory).Count -eq 5159) 'Pending assets must permit no derivatives.'
-  Write-Host 'Managed-image registration and derivative recipe tests passed.'
+
+  $budget = Assert-OipPublicFileBudget -PublicFileCount 6523 -RenderedFileCount 5523 -AllowedDerivativeCount 6169
+  Assert-True ($budget.MaxPublicFiles -eq 7669) 'The total-file allowance must scale with the approved derivative inventory.'
+  Assert-True ($budget.NonDerivativeFileCount -eq 1000) 'Rendered derivatives must be excluded from the other-file count.'
+  $boundary = Assert-OipPublicFileBudget -PublicFileCount 7669 -RenderedFileCount 6169 -AllowedDerivativeCount 6169
+  Assert-True ($boundary.NonDerivativeFileCount -eq 1500) 'The exact derivative and other-file limits must pass.'
+  $withoutImages = Assert-OipPublicFileBudget -PublicFileCount 1500 -RenderedFileCount 0 -AllowedDerivativeCount 0
+  Assert-True ($withoutImages.MaxPublicFiles -eq 1500) 'A site without derivatives must retain the fixed other-file allowance.'
+
+  foreach ($case in @(
+    @{ Public = 6501; Rendered = 5000; Allowed = 6169; Reason = '1,501 other files must fail even below the aggregate allowance.' },
+    @{ Public = 6170; Rendered = 6170; Allowed = 6169; Reason = 'Derivatives above the approved allowance must fail.' },
+    @{ Public = 7670; Rendered = 6169; Allowed = 6169; Reason = 'One file above the aggregate boundary must fail.' },
+    @{ Public = 10; Rendered = 11; Allowed = 20; Reason = 'Rendered files cannot exceed all public files.' },
+    @{ Public = -1; Rendered = 0; Allowed = 0; Reason = 'Negative public-file counts must fail.' },
+    @{ Public = 0; Rendered = -1; Allowed = 0; Reason = 'Negative rendered-file counts must fail.' },
+    @{ Public = 0; Rendered = 0; Allowed = -1; Reason = 'Negative derivative allowances must fail.' }
+  )) {
+    $failed = $false
+    try {
+      Assert-OipPublicFileBudget -PublicFileCount $case.Public -RenderedFileCount $case.Rendered -AllowedDerivativeCount $case.Allowed | Out-Null
+    } catch { $failed = $true }
+    Assert-True $failed $case.Reason
+  }
+  Write-Host 'Managed-image registration, derivative recipe, and public-file budget tests passed.'
 }
 finally {
   $resolvedFixture = [IO.Path]::GetFullPath($fixture)

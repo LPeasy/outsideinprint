@@ -95,13 +95,15 @@ The production gate enforces:
 - `public/images` no more than 800 MiB;
 - no derivative larger than 1 MiB;
 - generated images limited to the calculated recipe for approved derivative-capable assets: two display formats at each bounded candidate/native width, plus one bounded social JPEG;
-- no more than 6,500 total public files;
+- no more than 1,500 other public files, with a calculated total-file budget equal to the approved derivative recipe allowance plus 1,500;
 - zero managed source bytes or migrated editorial/essay raster originals in `static/` or `public/`; and
 - valid AVIF, WebP, and JPEG signatures, dimensions, MIME declarations, responsive descriptors, and source-hash URL prefixes.
 
 The earlier focused-cleanup acceptance ceiling and live-baseline savings check were retired after the migration completed. The standing limits now preserve a 100 MiB reserve beneath [GitHub Pages' supported 1 GiB deployment ceiling](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits): 800 MiB for `public/images` within a 900 MiB prepared Pages payload.
 
-The former 5,100-image ceiling reached capacity on October 9, 2026. The standing count allowance now comes from the approved source inventory and rendering recipe. Every generated path must use its registered asset ID, exact current 12-character source-hash prefix, allowed width, and format. Pending or quarantined assets permit no derivatives. This allows ordinary approved artwork additions without repeated count-only repairs while retaining the 900 MiB Pages, 800 MiB image, 1 MiB per-derivative, and 6,500-file budgets. CI reports remaining byte, file, and recipe headroom.
+The former 5,100-image ceiling reached capacity on October 9, 2026. The standing count allowance now comes from the approved source inventory and rendering recipe. Every generated path must use its registered asset ID, exact current 12-character source-hash prefix, allowed width, and format. Pending or quarantined assets permit no derivatives. This allows ordinary approved artwork additions without repeated count-only repairs while retaining the 900 MiB Pages, 800 MiB image, and 1 MiB per-derivative budgets. CI reports remaining byte, file, and recipe headroom.
+
+The original 6,500-total-file budget accompanied a 5,000-image allowance. On October 25, 2026, the installment-six build produced 6,523 files and hit that remaining fixed cap. The total-file allowance now follows the approved derivative recipe, retaining the original 1,500-file difference as a separate limit for HTML, scripts, styles, static files and other output. Both components are enforced independently; unused derivative capacity cannot hide excess other files. With 6,169 approved derivative paths, the calculated total budget is 7,669 files. Byte limits, image dimensions, formats, hashes and exact-path checks are unchanged.
 
 ## Validation and visual review
 

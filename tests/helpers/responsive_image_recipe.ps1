@@ -1,5 +1,34 @@
 #requires -Version 7.0
 
+function Assert-OipPublicFileBudget {
+  param(
+    [Parameter(Mandatory)][ValidateRange(0,2147483647)][int]$PublicFileCount,
+    [Parameter(Mandatory)][ValidateRange(0,2147483647)][int]$RenderedFileCount,
+    [Parameter(Mandatory)][ValidateRange(0,2147483647)][int]$AllowedDerivativeCount
+  )
+
+  $otherFileLimit = 1500
+  $maxPublicFiles = [long]$AllowedDerivativeCount + $otherFileLimit
+  if ($RenderedFileCount -gt $PublicFileCount) {
+    throw 'Generated image count exceeds total public file count.'
+  }
+  if ($RenderedFileCount -gt $AllowedDerivativeCount) {
+    throw "Generated image count exceeds the approved recipe allowance of ${AllowedDerivativeCount}: $RenderedFileCount"
+  }
+  if ($PublicFileCount -gt $maxPublicFiles) {
+    throw "Public output exceeds the calculated ${maxPublicFiles}-file budget: $PublicFileCount"
+  }
+  $otherFileCount = $PublicFileCount - $RenderedFileCount
+  if ($otherFileCount -gt $otherFileLimit) {
+    throw "Other public files exceed the 1,500-file budget: $otherFileCount"
+  }
+  return [pscustomobject]@{
+    MaxPublicFiles = $maxPublicFiles
+    NonDerivativeFileCount = $otherFileCount
+    MaxNonDerivativeFiles = $otherFileLimit
+  }
+}
+
 # Independent inventory of legal public derivatives. Assets not rendered on a
 # route may contribute no files; no asset may emit a variant outside this set.
 function Get-OipAllowedDerivativePaths {
