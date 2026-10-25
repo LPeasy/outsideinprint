@@ -33,7 +33,9 @@ authorize content, send email, or replace the dedicated publisher.
    those two paths alongside the already validated content allowlist. Do not
    loosen a dedicated publisher's content-only validator to accept workflow files.
    Re-register if an approved source changes before merge.
-6. Follow the checked-PR, reviewed-diff, owner-authorized auto-merge flow. After
+6. Follow the checked-PR, reviewed-diff, owner-authorized auto-merge flow and
+   [shared PR monitoring procedure](publishing-workflow.md#finalize-and-monitor-the-pr),
+   including prompt conflict-free refresh if `main` advances while checks run. After
    merge, verify the queue deployment's exact commit/time receipt and the required
    dormancy checks. Record the actual merged queue SHA, registration ID, workflow,
    Eastern/UTC times, source hashes, and checks in the package as `SCHEDULED / QUEUED`.
@@ -149,9 +151,13 @@ the helper nor verifier dispatches another build or silently reschedules content
 
 ## Local records and exceptions
 
-Use the Actions receipts to reconcile the private publication package and
-Contributor Desk when the local machine is next available. Record the actual
-verified milestone and canonical URL before marking local records Published.
+Use the [shared receipt finalization procedure](publishing-workflow.md#finalize-from-deployment-receipts)
+to reconcile the private publication package and Contributor Desk in one pass
+when bookkeeping is in scope. Reuse the exact successful production identity,
+canonical route/SEO evidence, and applicable passed per-release checks; perform
+only missing article-specific checks. Record the actual verified milestone and
+canonical URL before marking local records Published. A dormant queue receipt
+only supports `SCHEDULED / QUEUED`; it does not create `publication-record.md`.
 Do not edit manuscript history or infer email delivery. This later bookkeeping
 is not a prerequisite for public release.
 

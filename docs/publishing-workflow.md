@@ -310,7 +310,7 @@ Publishing happens through `main`.
 2. Create a PR and review its exact diff. Enable auto-merge only after the owner authorizes publication. Require an up-to-date branch and the `release-ready` check.
 3. PR checks run the actual source and output gates before merging. The merge triggers a fresh production build and GitHub Pages deployment.
 
-Merging is the publish action. Failed PR checks leave `main` untouched; correct the PR before merging. If the subsequent production build or deployment fails, diagnose it and merge a checked repair PR before another publication. Verify the deployed build manifest and live routes after expected completion or accept owner-supplied live evidence; avoid repeated status polling.
+Merging is the publish action. Failed PR checks leave `main` untouched; correct the PR before merging. If the subsequent production build or deployment fails, diagnose it and merge a checked repair PR before another publication. Use the monitoring and receipt procedure below through final package bookkeeping.
 
 CI selects work from complete Git changed-path sets. Routine essay/artwork PRs
 run the actual source, editorial and image gates, one Hugo build, and generated
@@ -320,6 +320,84 @@ and worker-only PRs skip Hugo. Every production publication and daily run builds
 afresh at one UTC clock; production artifacts are never restored from cache.
 See [Publishing optimization](publishing-optimization.md) for selection,
 cache compatibility, release identity, maintenance and rollout details.
+
+### Finalize and monitor the PR
+
+When practical, sequence owner-controlled PR finalizations so one merge's
+production result is known before finalizing the next. Prepare independent work
+in parallel. This is an operating practice, not a new merge queue or permission
+to delay an already authorized timed release.
+
+1. Keep one compact observation of the PR number, current head SHA, current
+   `main` SHA, mergeability/up-to-date state, workflow run ID and attempt, and
+   status/conclusion. Read PR state and check/run summaries together when
+   possible. Observe transitions; do not repeatedly download unchanged logs.
+2. Check base drift first at each existing observation, including while checks
+   are running. If `main` advanced and the owner-authorized PR is now behind,
+   inspect the incoming changes and confirm it can update without conflicts or
+   changing the authorized scope. Promptly use GitHub's
+   [update-branch API](https://docs.github.com/en/rest/pulls/pulls#update-a-pull-request-branch),
+   `PUT /repos/LPeasy/outsideinprint/pulls/{number}/update-branch`, with
+   `expected_head_sha` set to the head just observed. Do not wait for obsolete
+   checks to finish. An accepted update is pending until the new head is observed;
+   do not submit it again. A head mismatch, conflict, or unknown mergeability
+   requires refreshed state and diagnosis, not a force update or blind retry.
+3. On a new head, follow only its new checks and run ID. The workflow's existing
+   per-PR concurrency cancels superseded runs; a canceled stale run is not a
+   reason to rerun it. Review the resulting diff and retain strict up-to-date
+   protection and `release-ready` on the new head. Prior-head success never
+   authorizes a merge of the updated head.
+4. Use bounded backoff for unchanged state, for example an initial 30 seconds,
+   then 90 and 180 seconds between observations. Reset the interval on a head,
+   base, run, status, or conclusion transition and act promptly on new state.
+   Keep the observation period bounded by the workflow's expected duration and
+   timeout; a stall calls for one targeted inspection. Do useful independent work
+   or use short nonblocking waits between observations. Do not start a
+   separate base-drift polling loop or a long fixed-count GET loop. Fetch detailed
+   jobs, annotations, or logs only for a newly observed failure or diagnosed stall.
+5. After merge, follow the production run for the merged release with the same
+   state tracking. If current-main protection supersedes it, inspect the newer
+   current-main run and confirm it includes the approved release. Do not dispatch
+   a replacement build. Any failure needs diagnosis before retry or repair.
+
+### Finalize from deployment receipts
+
+Consume successful production evidence once, then complete the applicable local
+package records in one pass:
+
+1. Record the production run URL, ID and attempt, expected deployed `commitSha`,
+   and the original `generatedAtUtc` string. Require successful Pages deployment,
+   both current-main guards, canonical manifest verification, and the canonical
+   route/SEO step from that same run. A green PR or successful build alone is
+   insufficient.
+2. Reuse `deployment-diagnostics/live-manifest.json`: its `expectedSha` and
+   `expectedGeneratedAt` must equal the expected production identity, and
+   `observed.commitSha` and `observed.generatedAtUtc` must match them exactly.
+   Reject a receipt with an error, a different run/build, or missing required
+   success evidence. Do not parse and reformat the timestamp before comparing it.
+   Preserve the receipt and successful route/SEO step outcomes or diagnostics;
+   do not refetch the manifest or rerun those successful live checks.
+3. Map the content-specific requirements to available evidence. Reuse the matching
+   passed entry in `scheduled-releases.json` or the specialized
+   `scheduled-release.json` when present. Run only missing article-specific
+   checks, such as the approved byline, protected copy, artwork, collection,
+   Gallery, or release dormancy assertions. A general route/SEO smoke result does
+   not prove an article-specific assertion it never checked. If required evidence
+   is missing or contradictory, keep that milestone unverified and diagnose it;
+   do not rebuild merely to obtain another receipt.
+4. Once the required evidence is complete, update the package manifest,
+   publication record where applicable, and authorized Contributor Desk status
+   together. Include the canonical URL, actual verified milestone, PR/merge and
+   production identities, receipt references, and any additional check results.
+   A future queue merge is `SCHEDULED / QUEUED`, not Published, and does not create
+   `publication-record.md`. Mark Published only after its eligible release and
+   required public checks succeed. Preserve historical records and separate
+   email-delivery evidence.
+
+Complete owner-supplied receipts may establish the same facts. Attribute them as
+owner-supplied, preserve their exact identities, and do not ask for the same
+observation again solely to obtain it through another tool. This procedure adds
+no receipt cache, alternate merge path, or automatic deployment retry.
 
 ## Future-dated publishing
 

@@ -2,38 +2,83 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import { pathToFileURL } from "node:url";
 import { verifyQueuedRelease } from "./disney_release_schedule.mjs";
-import { selectScheduledReleases, verifyScheduledRelease } from "./scheduled_releases.mjs";
+import { assertScheduleWorkflow, selectScheduledReleases, syncScheduleBlock, validateRegistry, verifyScheduledRelease } from "./scheduled_releases.mjs";
 
-const empty = () => ({ site: false, browser: false, images: false, publishing: false, rendering: false, windows: false, worker: false, seo: false, full: false });
+const browserFamilies = ["browser_navigation", "browser_bob", "browser_analytics", "browser_share"];
+const empty = () => ({ site: false, browser: false, ...Object.fromEntries(browserFamilies.map(key => [key, false])), images: false, publishing: false, rendering: false, windows: false, worker: false, worker_commerce: false, worker_bob: false, seo: false, full: false });
 const full = () => Object.fromEntries(Object.keys(empty()).map(key => [key, true]));
-export function classifyPaths(paths, { renderingDefaultsChanged = false } = {}) {
+const browsers = (selected, families = browserFamilies) => { for (const family of families) selected[family] = true; selected.browser = true; };
+
+// Exact entries only: adding an unfamiliar test must not silently exempt it.
+// These contracts run unconditionally in the site job (source or fresh output).
+const siteTests = new Set([
+  "all.test.mjs", "article_form_grammar_contract.test.mjs", "almanack_attribution.test.mjs", "article_mobile_layout.test.mjs",
+  "affirmation_bank_surface.test.mjs", "apps_tools_contract.test.mjs", "affirmation_type_surfaces.test.mjs",
+  "collection_room_themes_contract.test.mjs", "entry_threads_contract.test.mjs", "featured_continuation_contract.test.mjs",
+  "games_catalog_contract.test.mjs", "homepage_selected.test.mjs", "companion_bob_visit.test.mjs", "route_widget_lifecycle.test.mjs",
+  "home_featured_image.test.mjs", "layout_ownership_contract.test.mjs", "oip_commerce_provisioning_order.test.mjs",
+  "paper_route_contract.test.mjs", "paper_route_rules.test.mjs", "piece_share.test.mjs", "responsive_image_contract.test.mjs",
+  "rcp85_audit_appendix_contract.test.mjs", "release_a_metadata_contract.test.mjs", "release_b_discovery_contract.test.mjs",
+  "reader_refinements_contract.test.mjs", "article_contents.test.mjs", "reader_actions_output.test.mjs", "contributor_pitch.test.mjs",
+  "library_browse.test.mjs", "bookstore_ebook_labels.test.mjs", "epub_checkout_client.test.mjs", "ga4_purchase_context.test.mjs",
+  "collection_reading_path_contract.test.mjs", "collection_continuation_assignments.test.mjs", "seo_route_schema_contract.test.mjs",
+  "site_chrome_contract.test.mjs", "web_publishing_direction.test.mjs", "homepage_output.test.mjs", "point7_ux_output.test.mjs",
+  "reader_refinements_output.test.mjs", "release_a_metadata_output.test.mjs",
+  "test_responsive_image_source_contract.ps1", "test_responsive_image_output_contract.ps1", "test_bookstore_reading_sample_contract.ps1",
+  "test_2045_storefront.ps1", "test_direct_commerce_storefront_contract.ps1", "test_schema_template_contract.ps1",
+  "test_author_directory_contract.ps1", "test_contributor_header_contract.ps1", "test_apps_tools_contract.ps1",
+  "test_indexation_policy_contract.ps1", "test_discovery_surface_contract.ps1", "test_feed_policy_contract.ps1",
+  "test_almanack_module_data.ps1", "test_legacy_render_contract.ps1", "test_imported_content_media.ps1",
+  "test_collection_organization_contract.ps1", "test_public_route_smoke.ps1", "test_public_html_output.ps1", "test_games_catalog_contract.ps1",
+]);
+const testFamilies = new Map([
+  ["mobile_navigation_browser.test.mjs", ["browser_navigation"]], ["bob_reading_browser.test.mjs", ["browser_bob"]],
+  ["hosted_analytics_browser.test.mjs", ["browser_analytics"]], ["piece_share_browser.test.mjs", ["browser_share"]],
+  ["homepage_selection_behavior.test.mjs", ["rendering"]], ["gallery_reading_behavior.test.mjs", ["rendering"]],
+  ["collection_reading_path_behavior.test.mjs", ["rendering"]], ["test_bob_catalog_contract.ps1", ["rendering"]],
+  ["test_hugo_upgrade_contract.ps1", ["rendering"]], ["test_seo_rollout_contract.ps1", ["seo"]],
+  ["test_essay_guardrails.ps1", ["publishing", "windows"]], ["test_essay_image_audit.ps1", ["publishing", "windows"]],
+  ["test_affirmation_contract.ps1", ["publishing", "windows"]], ["test_almanack_buttondown_numbering.ps1", ["publishing", "windows"]],
+  ["test_editorial_cartoon_schedule_contract.ps1", ["publishing"]],
+  ["test_managed_image_registration.ps1", ["images", "windows"]], ["test_focused_image_review_promotion.ps1", ["images", "windows"]],
+  ["test_focused_legacy_image_migration.ps1", ["images"]], ["responsive_image_cache_behavior.test.mjs", ["images"]],
+  // The classify job always runs schedule structure, source-binding and receipt fixtures.
+  ["disney_release_schedule.test.mjs", []], ["scheduled_releases.test.mjs", []],
+  ["test_disney_release_verification.py", []], ["test_scheduled_release_verification.py", []],
+]);
+
+export function classifyPaths(paths, { renderingDefaultsChanged = false, scheduleWorkflowOnlyChanged = false } = {}) {
   const selected = empty();
   for (const path of paths) {
-    if (/^workers\/oip-(commerce|bob)\//.test(path)) { selected.worker = true; continue; }
+    const worker = /^workers\/oip-(commerce|bob)\//.exec(path);
+    if (worker) { selected.worker = selected["worker_" + worker[1]] = true; continue; }
     if (/^(docs\/(?!editorial-audits\/)|README\.md$|AGENTS\.md$|CODEX_WORKFLOW\.md$|LICENSE)/.test(path)) continue;
     selected.site = true;
+    if (path === "scripts/ci/scheduled-releases.json" || (path === ".github/workflows/deploy.yml" && scheduleWorkflowOnlyChanged)) continue;
     if (path === "data/image-assets.json" || path.startsWith("assets/images/originals/")) continue;
     if (path.startsWith("content/")) {
-      if (/^content\/(apps|games|shop|studio)\//.test(path)) selected.browser = true;
+      if (path.startsWith("content/shop/")) browsers(selected, ["browser_analytics", "browser_share"]);
+      else if (/^content\/(apps|games|studio)\//.test(path)) browsers(selected);
       if (/^content\/(about|authors)\//.test(path)) selected.seo = true;
       continue;
     }
     if (path.startsWith("docs/editorial-audits/")) continue;
     if (path.startsWith("editorial/")) { selected.publishing = true; continue; }
     if (path.startsWith("data/")) {
-      selected.browser = true;
+      // Bookstore offers feed analytics and sample sharing, not Bob or navigation fixtures.
+      browsers(selected, path === "data/bookstore.yaml" ? ["browser_analytics", "browser_share"] : browserFamilies);
       if (/^data\/(authors|organization|collections)\.yaml$/.test(path)) selected.seo = true;
       continue;
     }
     if (/^(layouts\/|assets\/(?!images\/)|static\/)/.test(path)) {
-      selected.browser = true;
+      browsers(selected);
       selected.rendering = true;
       if (/images|render-image|metadata_image/.test(path)) selected.images = true;
       if (/schema|opengraph|twitter|robots|sitemap|head|feed|rss|metadata|partials\/(authors|collections)\//.test(path)) selected.seo = true;
       continue;
     }
     if (/^scripts\/(lib\/image_asset|.*(?:image|png|jpeg|webp|avif))/.test(path)) {
-      selected.images = selected.windows = selected.browser = true; continue;
+      selected.images = selected.windows = true; browsers(selected); continue;
     }
     if (path.startsWith("scripts/") && !path.startsWith("scripts/ci/")) {
       selected.publishing = true;
@@ -43,14 +88,16 @@ export function classifyPaths(paths, { renderingDefaultsChanged = false } = {}) 
     }
     if (path.startsWith("tests/")) {
       if (/^tests\/(ci_|release_gate|image_cache|verify_deployment|classify_changes)/.test(path)) { Object.assign(selected, full(), { full: false }); continue; }
-      if (/responsive_image|managed_image|focused.*image|helpers\/.*image/.test(path)) {
-        selected.images = selected.windows = true; continue;
+      const name = path.slice("tests/".length);
+      if (siteTests.has(name)) continue;
+      if (testFamilies.has(name)) {
+        for (const family of testFamilies.get(name)) selected[family] = true;
+        selected.browser ||= browserFamilies.some(family => selected[family]);
+        continue;
       }
-      if (/browser|helpers\//.test(path)) selected.browser = true;
-      if (/^tests\/test_(essay_guardrails|essay_image_audit|affirmation_contract|almanack_buttondown_numbering)\.ps1$/.test(path)) selected.windows = true;
-      if (/seo|search_console|indexnow|metadata/.test(path)) selected.seo = true;
-      selected.publishing = selected.rendering = true;
-      continue;
+      if (/^test_almanack[^/]*\.py$/.test(name)) { selected.publishing = true; continue; }
+      if (/^helpers\/responsive_image_(common|recipe)\.ps1$/.test(name)) { selected.images = selected.windows = true; continue; }
+      return full();
     }
     // Known system dependencies get full PR validation without repeating it
     // after the protected merge. Unknown paths remain full on every event.
@@ -58,15 +105,15 @@ export function classifyPaths(paths, { renderingDefaultsChanged = false } = {}) 
     return full();
   }
   if (renderingDefaultsChanged) {
-    selected.site = selected.browser = selected.images = selected.windows = true;
+    selected.site = selected.images = selected.windows = true; browsers(selected);
   }
   return selected;
 }
 
-export function selectChecks({ event, paths = [], fullChecks = true, protectedMain = false, weekly = false, uncertain = false, renderingDefaultsChanged = false }) {
+export function selectChecks({ event, paths = [], fullChecks = true, protectedMain = false, weekly = false, uncertain = false, ...pathOptions }) {
   if (uncertain || !["pull_request", "push", "schedule", "workflow_dispatch"].includes(event)) return full();
   if ((event === "workflow_dispatch" && fullChecks) || weekly || (event === "push" && !protectedMain)) return full();
-  const selected = classifyPaths(paths, { renderingDefaultsChanged });
+  const selected = classifyPaths(paths, pathOptions);
   if (selected.full) return selected;
   if (event !== "pull_request") {
     // Main has already passed required PR fixtures; every publication still
@@ -74,6 +121,15 @@ export function selectChecks({ event, paths = [], fullChecks = true, protectedMa
     return { ...empty(), site: true, seo: selected.seo };
   }
   return selected;
+}
+
+export function isGeneratedScheduleOnlyChange(before, after, beforeOptions, afterOptions) {
+  // Validate both generated blocks before ignoring them. Exact outside-block
+  // equality forbids an unrelated job, permission, trigger or condition edit.
+  assertScheduleWorkflow(before, beforeOptions);
+  assertScheduleWorkflow(after, afterOptions);
+  const noReleases = { registry: { schemaVersion: 1, releases: [] }, disneyPlan: { releases: [] } };
+  return syncScheduleBlock(before, noReleases) === syncScheduleBlock(after, noReleases);
 }
 
 function changedPaths(event) {
@@ -91,7 +147,18 @@ function changedPaths(event) {
     const after = JSON.parse(git("show", head + ":data/image-assets.json"));
     renderingDefaultsChanged = JSON.stringify(before.defaults) !== JSON.stringify(after.defaults);
   }
-  return { paths, renderingDefaultsChanged, base: comparisonBase };
+  let scheduleWorkflowOnlyChanged = false;
+  if (paths.includes(".github/workflows/deploy.yml")) {
+    const scheduleOptions = ref => ({
+      registry: validateRegistry(JSON.parse(git("show", ref + ":scripts/ci/scheduled-releases.json"))),
+      disneyPlan: JSON.parse(git("show", ref + ":scripts/ci/disney-releases.json")),
+    });
+    scheduleWorkflowOnlyChanged = isGeneratedScheduleOnlyChange(
+      git("show", comparisonBase + ":.github/workflows/deploy.yml"), git("show", head + ":.github/workflows/deploy.yml"),
+      scheduleOptions(comparisonBase), scheduleOptions(head),
+    );
+  }
+  return { paths, renderingDefaultsChanged, scheduleWorkflowOnlyChanged, base: comparisonBase };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

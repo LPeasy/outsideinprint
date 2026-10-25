@@ -34,11 +34,17 @@ jobs:
     outputs:
       site: ${{ steps.selection.outputs.site }}
       browser: ${{ steps.selection.outputs.browser }}
+      browser_navigation: ${{ steps.selection.outputs.browser_navigation }}
+      browser_bob: ${{ steps.selection.outputs.browser_bob }}
+      browser_analytics: ${{ steps.selection.outputs.browser_analytics }}
+      browser_share: ${{ steps.selection.outputs.browser_share }}
       images: ${{ steps.selection.outputs.images }}
       publishing: ${{ steps.selection.outputs.publishing }}
       rendering: ${{ steps.selection.outputs.rendering }}
       windows: ${{ steps.selection.outputs.windows }}
       worker: ${{ steps.selection.outputs.worker }}
+      worker_commerce: ${{ steps.selection.outputs.worker_commerce }}
+      worker_bob: ${{ steps.selection.outputs.worker_bob }}
       seo: ${{ steps.selection.outputs.seo }}
       full: ${{ steps.selection.outputs.full }}
       clock: ${{ steps.selection.outputs.clock }}
@@ -135,12 +141,16 @@ jobs:
           node-version: 24.21.0
           package-manager-cache: false
       - name: Worker behavior, monitoring and tax fixtures
+        if: ${{ needs.classify.outputs.worker_commerce == 'true' }}
         run: npm --prefix workers/oip-commerce test
       - name: Worker provisioning fixtures
+        if: ${{ needs.classify.outputs.worker_commerce == 'true' }}
         run: python3 -m unittest discover -s workers/oip-commerce/test -p 'test_*.py'
       - name: Install Bob local runtime test dependencies
+        if: ${{ needs.classify.outputs.worker_bob == 'true' }}
         run: npm --prefix workers/oip-bob ci --ignore-scripts --no-audit --no-fund
       - name: Bob recommendations, budgets and local Workers runtime
+        if: ${{ needs.classify.outputs.worker_bob == 'true' }}
         run: npm --prefix workers/oip-bob test
   site:
     runs-on: ubuntu-latest
@@ -202,6 +212,7 @@ jobs:
         run: |
           ./tests/test_bookstore_reading_sample_contract.ps1 -SourceOnly
           ./tests/test_2045_storefront.ps1 -SourceOnly
+          ./tests/test_direct_commerce_storefront_contract.ps1 -SourceOnly
       - name: Test Schema Template Contract
         shell: pwsh
         run: |
@@ -367,16 +378,16 @@ jobs:
         if: ${{ needs.classify.outputs.browser == 'true' }}
       - name: Test Mobile Navigation
         run: node --test --test-concurrency=1 tests/mobile_navigation_browser.test.mjs
-        if: ${{ needs.classify.outputs.browser == 'true' }}
+        if: ${{ needs.classify.outputs.browser_navigation == 'true' }}
       - name: Test Bob reading and collection browsing
         run: node --test --test-concurrency=1 tests/bob_reading_browser.test.mjs
-        if: ${{ needs.classify.outputs.browser == 'true' }}
+        if: ${{ needs.classify.outputs.browser_bob == 'true' }}
       - name: Test Hosted Analytics Network Privacy
-        if: ${{ needs.classify.outputs.browser == 'true' && env.ANALYTICS_ENABLED == 'true' }}
+        if: ${{ needs.classify.outputs.browser_analytics == 'true' && env.ANALYTICS_ENABLED == 'true' }}
         run: node --test --test-concurrency=1 tests/hosted_analytics_browser.test.mjs
       - name: Test Piece Sharing
         run: node --test --test-concurrency=1 tests/piece_share_browser.test.mjs
-        if: ${{ needs.classify.outputs.browser == 'true' }}
+        if: ${{ needs.classify.outputs.browser_share == 'true' }}
       - name: Remove public PDF artifacts
         shell: bash
         run: |
@@ -397,6 +408,7 @@ jobs:
         run: |
           ./tests/test_bookstore_reading_sample_contract.ps1 -SiteDir public
           ./tests/test_2045_storefront.ps1 -SiteDir public
+          ./tests/test_direct_commerce_storefront_contract.ps1 -SiteDir public
       - name: Test Public HTML Output
         shell: pwsh
         run: |

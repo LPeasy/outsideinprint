@@ -18,6 +18,11 @@ Before creating the publication PR, work from current `origin/main` and inspect 
 
 The exhaustive source contract validates canonical hashes, dimensions, aliases, and review state without generating derivatives; it covers the entire library and is not the default local gate for a routine image addition. For collection changes, run the collection source audit and review any count-dependent assertions; do not include its generated report unless that report is intentionally part of the change. For a text-only correction with unchanged image sources and rendering code, do not run image checks or provision Hugo.
 
+Reuse successful local checks while their inputs remain unchanged. After a base
+refresh, rerun only local checks affected by the incoming changes or an unresolved
+failure. Required GitHub checks still run on the new PR head; local evidence does
+not replace them.
+
 For changed essays, run the direct PowerShell guardrail:
 
 ```powershell
@@ -64,7 +69,7 @@ When a full local build is justified, use the existing sequence after provisioni
 
 ## CI Boundary
 
-`.github/workflows/deploy.yml` is the authoritative release gate. Publish through a branch and PR created with the GitHub connector/API. Require the stable `release-ready` check and an up-to-date branch before merging to protected `main`. The owner's publication request authorizes enabling auto-merge for that publication PR; dependency and system changes still need review. A failing PR stays off `main`. After merge, CI builds the merged release and verifies Pages. A production failure requires diagnosis before another publication. Check CI after its expected run time or accept owner-supplied live confirmation, rather than polling continuously. Dashboard publishing is paused; do not reintroduce local npm or npx checks as a substitute.
+`.github/workflows/deploy.yml` is the authoritative release gate. Publish through a branch and PR created with the GitHub connector/API. Require the stable `release-ready` check and an up-to-date branch before merging to protected `main`. The owner's publication request authorizes enabling auto-merge for that publication PR; dependency and system changes still need review. A failing PR stays off `main`. After merge, CI builds the merged release and verifies Pages. A production failure requires diagnosis before another publication. Follow [PR monitoring](publishing-workflow.md#finalize-and-monitor-the-pr) for bounded observations and prompt conflict-free base refreshes while checks run. Follow [receipt finalization](publishing-workflow.md#finalize-from-deployment-receipts) to reuse exact production identity and successful diagnostics, checking only missing article-specific evidence. Dashboard publishing is paused; do not reintroduce local npm or npx checks as a substitute.
 
 If a local OIP skill or workflow asks for npm or npx during public-site publishing, treat the instruction as stale and update the workflow instead of forcing the command through.
 
