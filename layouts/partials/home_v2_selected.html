@@ -13,7 +13,15 @@
   {{- $kind := partial "archive/longform-kind.html" . -}}
   {{- $published := and (not .Draft) (le .Date.Unix $now.Unix) (le .PublishDate.Unix $now.Unix) -}}
   {{- $unexpired := or .ExpiryDate.IsZero (gt .ExpiryDate.Unix $now.Unix) -}}
-  {{- if and $published $unexpired (ne .RelPermalink $guestRoute) (in (slice "essay" "affirmation" "dialogue") $kind) -}}
+  {{- $authors := partial "authors/resolve.html" (dict "page" . "fallbackDefault" true) -}}
+  {{- $bobOnly := gt (len $authors.entries) 0 -}}
+  {{- range $authors.entries -}}
+    {{- if not (in (slice "robert-v-ussley" "robert v. ussley") .key) -}}
+      {{- $bobOnly = false -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $contributorRole := strings.TrimSpace (printf "%v" (.Params.contributor_role | default "")) -}}
+  {{- if and $published $unexpired $bobOnly (not $contributorRole) (ne .RelPermalink $guestRoute) (in (slice "essay" "affirmation" "dialogue") $kind) -}}
     {{- $eligible = $eligible | append . -}}
   {{- end -}}
 {{- end -}}

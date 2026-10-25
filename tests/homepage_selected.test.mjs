@@ -156,7 +156,7 @@ test("featured eligibility excludes drafts, future and expired work before choos
   assert.match(read("content/essays/dialogues/what-i-had.md"), /^section_label: 'Dialogue'\r?$/m);
 });
 
-test("the Guest Feature reserves its eligible route and keeps credited reading beneath the lead", () => {
+test("regular slots resolve Bob's authorship and the Guest Feature keeps credited reading beneath the lead", () => {
   const preferredGuest = guestSelected.indexOf('"/essays/breach-of-confidence-therapy-records/"');
   const fallbackGuest = guestSelected.indexOf('"/essays/a-public-record-must-outlast-the-feed/"');
   assert.ok(preferredGuest >= 0 && fallbackGuest > preferredGuest);
@@ -171,8 +171,12 @@ test("the Guest Feature reserves its eligible route and keeps credited reading b
   assert.match(guestSelected, /eq \.Params\.contributor_role "guest"/);
   assert.match(guestSelected, /strings\.TrimSpace[\s\S]*\.Params\.author/);
   assert.match(guestSelected, /archive\/longform-kind\.html" \.\) "essay"/);
-  assert.match(selected, /partial "home_guest_selected\.html"/);
-  assert.match(selected, /ne \.RelPermalink \$guestRoute/);
+  assert.match(selected, /partial "authors\/resolve\.html"/);
+  assert.match(selected, /"fallbackDefault" true/);
+  assert.match(selected, /robert-v-ussley/);
+  assert.match(selected, /robert v\. ussley/);
+  assert.match(selected, /\.entries/);
+  assert.match(selected, /\.Params\.contributor_role/);
   const primary = homeV2.indexOf('class="home-v2-featured__primary"');
   const lead = homeV2.indexOf('<article class="home-v2-featured__lead reading-card">');
   const guest = homeV2.indexOf('partial "home_guest_feature.html"');
