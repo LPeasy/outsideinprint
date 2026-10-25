@@ -47,8 +47,8 @@ test("e-book sales labels remain separate from the EPUB fulfillment format", () 
     assert.ok(block.includes(`price_display: "$${price}"`));
     assert.ok(block.includes(`price_cents: ${Math.round(Number(price) * 100)}`));
     if (sku === "OIP-FM-EPUB") {
-      assert.ok(block.includes('isbn_status: "Not assigned"'));
-      assert.doesNotMatch(block, /^\s+isbn:\s*"?\d/m);
+      assert.ok(block.includes('isbn_status: "Pending Bowker processing"'));
+      assert.match(magicSource, /^ISBN \(EPUB\): 979-8-952377-05-9$/m);
     }
   }
   assert.ok(offers.includes('where $allOffers "format" "EPUB"'));

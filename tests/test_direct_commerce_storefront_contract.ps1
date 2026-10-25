@@ -163,10 +163,8 @@ foreach ($sku in $catalogSkus) {
       Assert-Contains -Text $offerBlock -Expected 'isbn_status: "Pending Bowker processing"' -Context 'PENDING saved ISBN submission status'
     }
     elseif ($sku -eq 'OIP-FM-EPUB') {
-      Assert-Contains -Text $offerBlock -Expected 'isbn_status: "Not assigned"' -Context 'Fifty Years of Magic truthful ISBN status'
-      if ($offerBlock -match '(?im)^\s+isbn:\s*"?\d') {
-        throw 'Fifty Years of Magic must not invent an assigned ISBN.'
-      }
+      Assert-Contains -Text $offerBlock -Expected 'isbn_status: "Pending Bowker processing"' -Context 'Fifty Years of Magic saved ISBN submission status'
+      Assert-Contains -Text $magicProductSource -Expected 'ISBN (EPUB): 979-8-952377-05-9' -Context 'Fifty Years of Magic registered EPUB ISBN'
     }
     else {
       Assert-Contains -Text $offerBlock -Expected 'isbn_status: "Assigned"' -Context "Live catalog offer $sku"
@@ -798,8 +796,9 @@ foreach ($expectation in $productSchemaExpectations) {
   if ($expectation.ContainsKey('ReleaseDate') -and $bookProduct.datePublished -cne $expectation.ReleaseDate) {
     throw "Built shop product $($expectation.Path) exposes an incorrect release date."
   }
-  if ($expectation.Sku -eq 'OIP-FM-EPUB' -and $bookProduct.PSObject.Properties.Name -contains 'isbn') {
-    throw 'Fifty Years of Magic structured data must omit an unassigned ISBN.'
+  if ($expectation.Sku -eq 'OIP-FM-EPUB' -and $bookProduct.PSObject.Properties.Name -contains 'isbn' -and
+      ([string]$bookProduct.isbn).Replace('-', '') -cne '9798952377059') {
+    throw 'Fifty Years of Magic structured data must not contradict its registered EPUB ISBN.'
   }
 
   $offers = @($bookProduct.offers)
@@ -939,7 +938,7 @@ $shopSurfaceExpectations = @(
   @{ Path = 'shop/the-water-cycle/index.html'; KindleCount = 1; Expected = @('Outside In Print e-book', 'Secure checkout through Square. E-book delivered by email.', 'Continue to Square — $9.99', 'EPUB e-book', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') }
 )
 if ($magicEligible) {
-  $shopSurfaceExpectations += @{ Path = 'shop/fifty-years-of-magic/index.html'; KindleCount = 0; Expected = @('Outside In Print e-book', 'Continue to Square — $9.99', 'EPUB e-book', 'Robert V. Ussley', 'Outside In Print') }
+  $shopSurfaceExpectations += @{ Path = 'shop/fifty-years-of-magic/index.html'; KindleCount = 0; Expected = @('Outside In Print e-book', 'Continue to Square — $9.99', 'EPUB e-book', 'Robert V. Ussley', 'Outside In Print', 'ISBN (EPUB): 979-8-952377-05-9') }
 }
 foreach ($surface in $shopSurfaceExpectations) {
   $surfaceHtml = [Net.WebUtility]::HtmlDecode([string]$output[$surface.Path])
