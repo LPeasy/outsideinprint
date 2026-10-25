@@ -7,7 +7,9 @@ draft: false
 show_citation: false
 ---
 
-These terms govern direct purchases, reader-support payments, and Studio inquiries and services through Outside In Print. The public imprint is Outside In Print; the business operating the checkout, fulfilling direct orders, and providing accepted Studio services is Outside In Print LLC.
+These terms govern direct purchases, reader-support payments through Square, and Studio inquiries and services through Outside In Print. The public imprint is Outside In Print; the business operating the checkout, fulfilling direct orders, and providing accepted Studio services is Outside In Print LLC.
+
+Patreon memberships are separate. See the [membership details](https://www.patreon.com/cw/bobviously/membership) and [Patreon’s official membership help](https://support.patreon.com/hc/en-us/sections/360011948912-Manage-Your-Membership).
 
 ## Checkout and order acceptance
 
@@ -23,7 +25,7 @@ An EPUB purchase grants a personal-use license, not ownership of the copyright. 
 
 ## Reader support
 
-Reader support does not include a book, membership benefit, editorial influence, or special access. Monthly support is charged when started and then renews each month until canceled. Cancellation and refund rules are stated in the [Reader Support Cancellation and Refund Terms](/support/cancellation-refunds/).
+Direct support through Square does not include a book, membership benefit, editorial influence, or special access. Monthly support is charged when started and then renews each month until canceled. Cancellation and refund rules are stated in the [Square support cancellation and refund terms](/support/cancellation-refunds/).
 
 ## Studio inquiries and services
 
