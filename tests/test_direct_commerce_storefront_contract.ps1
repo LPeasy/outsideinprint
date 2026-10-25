@@ -594,8 +594,8 @@ if ($analyticsVendor -notmatch '(?m)^\s*q:\s*''''\s*,?\s*$') {
 
 $mastheadTemplate = Get-RequiredText -RelativePath 'layouts/partials/masthead.html'
 $footerTemplate = Get-RequiredText -RelativePath 'layouts/partials/footer.html'
-if ($mastheadTemplate -match 'primary_nav_support|"label" "Support"') {
-  throw 'Support must remain available in the footer without crowding the focused primary navigation.'
+if ($mastheadTemplate -match 'primary_nav_studio|"label" "Studio"') {
+  throw 'Studio must remain available in the footer without crowding the focused primary navigation.'
 }
 foreach ($requiredFooterRoute in @(
   'support/',

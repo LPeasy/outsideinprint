@@ -156,12 +156,12 @@ test("masthead defines the grouped desktop and mobile navigation from one destin
   assert.match(masthead, /\$inGamesSection := or \$isGamesPage \(eq \.Section "games"\)/);
 
   assert.match(masthead, /"label" "Bookstore"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" false[\s\S]*?"analyticsSourceSlot" "primary_nav_bookstore"/);
-  assert.match(masthead, /range \$directKey := slice "about" "bookstore" "contribute"/);
+  assert.match(masthead, /range \$directKey := slice "about" "bookstore" "support"/);
   assert.match(masthead, /range \$mobileKey := slice "about"/);
   assert.match(masthead, /"label" "Archive"[\s\S]*?"group" "read"[\s\S]*?"mobilePrimary" false/);
   assert.match(masthead, /"label" "About"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" true/);
-  assert.match(masthead, /"label" "Contribute"[\s\S]*?"href" \("contribute\/" \| absURL\)[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" false/);
-  assert.doesNotMatch(masthead, /"label" "(?:Studio|Support)"[\s\S]*?"group" "direct"/);
+  assert.match(masthead, /"label" "Support"[\s\S]*?"href" \("support\/" \| absURL\)[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" false/);
+  assert.doesNotMatch(masthead, /"label" "Studio"[\s\S]*?"group" "direct"/);
   assert.match(masthead, /\$currentPath := \.RelPermalink/);
   assert.match(masthead, /\$archivePageNumber := int \(\.Scratch\.Get "oip_archive_page_number" \| default 1\)/);
   assert.match(masthead, /\$isArchivePage := and \(eq \$currentPath "\/archive\/"\) \(eq \$archivePageNumber 1\)/);
@@ -169,7 +169,7 @@ test("masthead defines the grouped desktop and mobile navigation from one destin
   assert.match(masthead, /\$isBookstorePage := eq \$currentPath "\/shop\/"/);
   assert.match(masthead, /\$inBookstoreSection := or \$isBookstorePage \(eq \.Section "shop"\)/);
   assert.match(masthead, /\$inAboutSection := or \$isAboutPage \(eq \.Section "about"\)/);
-  assert.match(masthead, /\$inContributeSection := or \$isContributePage \(eq \.Section "contribute"\)/);
+  assert.match(masthead, /\$inSupportSection := or \$isSupportPage \(eq \.Section "support"\)/);
   assert.match(masthead, /\$inRandomSection := or \$isRandomPage \(eq \.Section "random"\)/);
   assert.equal((masthead.match(/"currentPage" \$[A-Za-z]/g) || []).length, 10);
   assert.equal((masthead.match(/"currentSection" \$[A-Za-z]/g) || []).length, 10);
@@ -181,7 +181,7 @@ test("masthead defines the grouped desktop and mobile navigation from one destin
   assert.doesNotMatch(masthead, /<span>EST\. 2025<\/span>/);
   assert.match(masthead, /class="nav__mobile"[\s\S]*?<span>Read<\/span>[\s\S]*?<span>Explore<\/span>[\s\S]*?range \$mobilePrimaryItems/);
   assert.doesNotMatch(masthead, /<span>Menu<\/span>/);
-  assert.match(masthead, /\$mobileExploreItems := slice[\s\S]*?range \$exploreItems[\s\S]*?\$mobileExploreItems = \$mobileExploreItems \| append \.[\s\S]*?"key" "contribute"[\s\S]*?\$mobileExploreItems = \$mobileExploreItems \| append \./);
+  assert.match(masthead, /\$mobileExploreItems := slice[\s\S]*?range \$exploreItems[\s\S]*?\$mobileExploreItems = \$mobileExploreItems \| append \.[\s\S]*?"key" "support"[\s\S]*?\$mobileExploreItems = \$mobileExploreItems \| append \./);
   assert.match(masthead, /class="nav__mobile"[\s\S]*?range \$mobileReadItems[\s\S]*?range \$mobileExploreItems[\s\S]*?range \$mobilePrimaryItems/);
   assert.doesNotMatch(masthead, /range \$mobileKey := slice[^\n]*"bookstore"/);
   assert.match(masthead, /\$readCurrent := gt \(len \(where \$readItems "currentSection" true\)\) 0/);

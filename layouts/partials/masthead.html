@@ -16,8 +16,8 @@
 {{ $inBookstoreSection := or $isBookstorePage (eq .Section "shop") }}
 {{ $isAboutPage := eq $currentPath "/about/" }}
 {{ $inAboutSection := or $isAboutPage (eq .Section "about") }}
-{{ $isContributePage := eq $currentPath "/contribute/" }}
-{{ $inContributeSection := or $isContributePage (eq .Section "contribute") }}
+{{ $isSupportPage := eq $currentPath "/support/" }}
+{{ $inSupportSection := or $isSupportPage (eq .Section "support") }}
 {{ $isGamesPage := and $gamesPage (eq $currentPath $gamesPage.RelPermalink) }}
 {{ $inGamesSection := or $isGamesPage (eq .Section "games") }}
 {{ $isGalleryPage := eq $currentPath "/gallery/" }}
@@ -127,12 +127,12 @@
     "mobilePrimary" true
   )
   (dict
-    "key" "contribute"
-    "label" "Contribute"
-    "href" ("contribute/" | absURL)
+    "key" "support"
+    "label" "Support"
+    "href" ("support/" | absURL)
     "group" "direct"
-    "currentPage" $isContributePage
-    "currentSection" $inContributeSection
+    "currentPage" $isSupportPage
+    "currentSection" $inSupportSection
     "mobilePrimary" false
   )
 }}
@@ -142,7 +142,7 @@
 {{ end }}
 {{ $exploreItems := where $navItems "group" "explore" }}
 {{ $directItems := slice }}
-{{ range $directKey := slice "about" "bookstore" "contribute" }}
+{{ range $directKey := slice "about" "bookstore" "support" }}
   {{ range where $navItems "key" $directKey }}
     {{ $directItems = $directItems | append . }}
   {{ end }}
@@ -158,7 +158,7 @@
 {{ range $exploreItems }}
   {{ $mobileExploreItems = $mobileExploreItems | append . }}
 {{ end }}
-{{ range where $directItems "key" "contribute" }}
+{{ range where $directItems "key" "support" }}
   {{ $mobileExploreItems = $mobileExploreItems | append . }}
 {{ end }}
 {{ $readCurrent := gt (len (where $readItems "currentSection" true)) 0 }}
