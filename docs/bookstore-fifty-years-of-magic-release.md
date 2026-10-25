@@ -6,8 +6,10 @@ World**, by Robert V. Ussley, at **$9.99 USD**, with release on October 27, 2026
 
 The product uses `/shop/fifty-years-of-magic/`, SKU `OIP-FM-EPUB`, and the existing
 U.S.-only Square checkout and private EPUB delivery service. The free sample is
-the complete first chapter at `/shop/fifty-years-of-magic/sample/`. The featured
-book, other prices and offers, newsletter and original essays remain unchanged.
+the complete first chapter at `/shop/fifty-years-of-magic/sample/`. At release,
+the owner-selected bookstore feature changes from 2045 to Fifty Years of Magic;
+2045 remains on the regular shelf. Other prices and offers, the newsletter and
+original essays remain unchanged.
 
 ## Approved edition
 

@@ -1,6 +1,9 @@
 {{ define "main" }}
   {{ $shopPages := sort (where .Pages "Params.book_key" "!=" nil) "Weight" "asc" }}
   {{ $featuredBooks := first 1 (where $shopPages "Params.book_key" (.Params.featured_book | default "")) }}
+  {{ with .Params.featured_book_on_release }}
+    {{ with first 1 (where $shopPages "Params.book_key" .) }}{{ $featuredBooks = . }}{{ end }}
+  {{ end }}
   {{ $catalogPages := $shopPages }}
   {{ range $featuredBooks }}{{ $catalogPages = where $shopPages "Params.book_key" "!=" .Params.book_key }}{{ end }}
   <section class="bookstore-index bookstore-index--featured page-shell page-shell--wide" aria-labelledby="page-title">

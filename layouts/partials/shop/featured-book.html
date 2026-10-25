@@ -5,7 +5,7 @@
     {{ partial "images/picture.html" (dict "page" $book "ref" (index $product "cover_image") "alt" (index $product "cover_alt") "loading" "eager" "fetchpriority" "high" "sizes" "(min-width: 45rem) 9rem, 8rem") }}
   </a>
   <div class="bookstore-feature__body">
-    <p class="bookstore-feature__eyebrow">Featured book <span aria-hidden="true">/</span> <span class="bookstore-feature__exclusive">{{ index $product "positioning_label" }}</span></p>
+    <p class="bookstore-feature__eyebrow">Featured book{{ with index $product "positioning_label" }} <span aria-hidden="true">/</span> <span class="bookstore-feature__exclusive">{{ . }}</span>{{ end }}</p>
     <h2 id="bookstore-feature-title" class="bookstore-feature__title"><a href="{{ $book.RelPermalink }}">{{ index $product "display_title" | default $book.Title }}</a></h2>
     {{ with index $product "subtitle" }}<p class="bookstore-feature__subtitle">{{ . }}</p>{{ end }}
     {{ with index $product "deck" }}<p class="bookstore-feature__deck">{{ . }}</p>{{ end }}
@@ -14,6 +14,6 @@
       {{ partial "shop/sample-link.html" (dict "page" $book "product" $product "sourceSlot" "bookstore_feature_sample" "hideMeta" true) }}
       <a class="bookstore-detail-link" href="{{ $book.RelPermalink }}">View book <span aria-hidden="true">&rarr;</span></a>
     </div>
-    {{ with $book.Params.sample_page }}{{ with site.GetPage . }}<p class="bookstore-feature__sample-note">“{{ .Title }}” ~ a complete story · {{ math.Max 1 .ReadingTime }} min read</p>{{ end }}{{ end }}
+    {{ with $book.Params.sample_page }}{{ with site.GetPage . }}<p class="bookstore-feature__sample-note">“{{ .Title }}”{{ if eq .Params.sample_work_type "short-story" }} ~ a complete story{{ end }} · {{ math.Max 1 .ReadingTime }} min read</p>{{ end }}{{ end }}
   </div>
 </section>

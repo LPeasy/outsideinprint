@@ -67,7 +67,8 @@ foreach ($source in @($productSource, $sampleSource, $shopSource)) {
   $socialAlt = [regex]::Match($source, '(?m)^image_alt: "(?<alt>[^"]+)"\r?$').Groups['alt'].Value
   Assert-True ($socialAlt -ceq $approvedAlt) '2045 social cover alt must match the approved catalog alt.'
 }
-Assert-True ($shopSource -match '(?m)^featured_book: "2045"\r?$') 'The bookstore must explicitly feature 2045.'
+Assert-True ($shopSource -match '(?m)^featured_book: "2045"\r?$') '2045 must remain the bookstore fallback feature.'
+Assert-True ($shopSource -match '(?m)^featured_book_on_release: "fifty_years_of_magic"\r?$') 'Fifty Years of Magic must become the feature when its page is publication-visible.'
 Assert-True ($shopSource -match '(?m)^image: "books/2045/cover"\r?$') 'Bookstore sharing metadata must use the approved 2045 cover.'
 Assert-True ($shopTemplate -match 'where\s+\$shopPages\s+"Params\.book_key"' -and $shopTemplate.Contains('.Params.featured_book', [StringComparison]::Ordinal)) 'The feature must be selected only from publication-visible book pages.'
 $featureCall = $shopTemplate.IndexOf('partial "shop/featured-book.html"', [StringComparison]::Ordinal)
@@ -284,15 +285,27 @@ $catalogHtml = $catalogMatch.Value
 $catalogImages = @([regex]::Matches($catalogHtml, '(?is)<img\b[^>]*>'))
 $catalogRecords = @([regex]::Matches($catalogHtml, '(?is)<article\b[^>]*class="?bookstore-record"?(?:\s|>).*?</article>'))
 $features = @([regex]::Matches($shopHtml, '(?is)<(?<tag>section|article)\b[^>]*class="bookstore-feature(?:\s[^"]*)?"[^>]*>.*?</\k<tag>>|<(?<baretag>section|article)\b[^>]*class=bookstore-feature(?:\s|>).*?</\k<baretag>>'))
+$eligibleBookSlugs = @('2045', 'the-american-nightmare-keep-dreaming-kid', 'the-parable-of-the-sheep', 'the-water-cycle', 'pending', 'fifty-years-of-magic') | Where-Object {
+  Test-Path -LiteralPath (Join-Path $SiteDir ("shop/$_/index.html"))
+}
+$magicEligible = $eligibleBookSlugs -contains 'fifty-years-of-magic'
+$featureSlug = if ($magicEligible) { 'fifty-years-of-magic' } elseif ($eligibleBookSlugs -contains '2045') { '2045' } else { '' }
+$expectedShelfSlugs = @($eligibleBookSlugs | Where-Object { $_ -ne $featureSlug })
 if ($isDraft -and -not $Preview) {
   Assert-True (-not (Test-Path $detailPath) -and -not (Test-Path $samplePath)) 'Draft 2045 routes leaked into production.'
   Assert-True ($homeHtml -notmatch 'data-analytics-slug="?2045"?' -and $shopHtml -notmatch 'data-direct-offer-sku="?OIP-TD-EPUB"?') 'Draft 2045 promotion or offer leaked into production.'
   Assert-True ($authorHtml -notmatch 'href="?/shop/2045/') 'Draft 2045 leaked into the author bibliography.'
-  Assert-True ($features.Count -eq 0 -and $shopHtml -notmatch 'id="?bookstore-feature-title"?') 'Draft 2045 must not render the bookstore feature.'
-  Assert-True ($catalogRecords.Count -eq 4 -and $catalogImages.Count -eq 4) 'Dormant production must retain the four other shelf books.'
+  if ($magicEligible) {
+    Assert-True ($features.Count -eq 1 -and $features[0].Value -match '/shop/fifty-years-of-magic/') 'Eligible Fifty Years of Magic must remain featured when 2045 is a draft.'
+  } else {
+    Assert-True ($features.Count -eq 0 -and $shopHtml -notmatch 'id="?bookstore-feature-title"?') 'Unavailable feature books must render no bookstore feature.'
+  }
+  Assert-True ($catalogRecords.Count -eq $expectedShelfSlugs.Count -and $catalogImages.Count -eq $expectedShelfSlugs.Count) 'Dormant production must retain every other eligible shelf book.'
   Assert-True ($catalogRecords[0].Value -match 'href="?/shop/the-american-nightmare-keep-dreaming-kid/') 'Without the feature, the previous first book must remain first.'
-  Assert-True ((Html-Attribute $catalogImages[0].Value 'loading') -eq 'eager' -and (Html-Attribute $catalogImages[0].Value 'fetchpriority') -eq 'high') 'Without the feature, the first existing cover must retain eager/high loading.'
-  Assert-True (($features.Count + $catalogRecords.Count) -eq 4) 'Dormant bookstore count must retain the four other titles.'
+  if (-not $magicEligible) {
+    Assert-True ((Html-Attribute $catalogImages[0].Value 'loading') -eq 'eager' -and (Html-Attribute $catalogImages[0].Value 'fetchpriority') -eq 'high') 'Without the feature, the first existing cover must retain eager/high loading.'
+  }
+  Assert-True (($features.Count + $catalogRecords.Count) -eq $eligibleBookSlugs.Count) 'Dormant bookstore count must retain all eligible titles.'
   Write-Host '2045 storefront source and dormant production contract passed.'
   exit 0
 }
@@ -348,8 +361,12 @@ foreach ($html in @($shopHtml, $authorHtml)) {
     Assert-True ($html -match ('href="?(?:https://outsideinprint\.org)?/shop/' + $slug + '/')) "Book $slug is missing from a discovery surface."
   }
 }
-Assert-True ($features.Count -eq 1) 'Published or preview 2045 must have exactly one bookstore feature.'
+Assert-True ($features.Count -eq 1) 'Published or preview bookstore must have exactly one eligible feature.'
 $featureHtml = $features[0].Value
+$featureProduct = if ($magicEligible) {
+  [regex]::Match($catalog, '(?ms)^  fifty_years_of_magic:\r?\n(?<product>.*?)(?=^  [a-z_]+:|\z)').Groups['product'].Value
+} else { $product }
+$featureApprovedAlt = [regex]::Match($featureProduct, '(?m)^\s+cover_alt: "(?<alt>[^"]+)"\r?$').Groups['alt'].Value
 $issueHtml = Read-Output 'almanack/2026-09-12/index.html'
 foreach ($html in @($issueHtml)) {
   $invitations = @([regex]::Matches($html, '(?is)<a\b[^>]*>.*?</a>') | Where-Object { (Html-Attribute $_.Value 'href') -eq '/shop/2045/sample/' })
@@ -363,32 +380,37 @@ foreach ($copy in @($launchMessage, $launchNote)) {
 $campaignCover = @([regex]::Matches($issueHtml, '(?is)<a\b[^>]*>') | Where-Object { (Html-Attribute $_.Value 'class') -eq 'almanack-campaign__cover' })
 Assert-True ($campaignCover.Count -eq 1 -and (Html-Attribute $campaignCover[0].Value 'href') -eq '/shop/2045/') 'Campaign cover must lead to the book overview.'
 Assert-True ($issueHtml.Contains('/shop/2045/#bookstore-purchase') -and $issueHtml.Contains($datedFed) -and $issueHtml -notmatch '/z1/current/') 'Issue must use the purchase anchor and dated citation.'
-Assert-True ($features[0].Index -lt $catalogMatch.Index -and $featureHtml -match 'id="?bookstore-feature-title"?') 'The named 2045 feature must precede the ordinary catalog.'
-Assert-True ($catalogRecords.Count -eq 4 -and $catalogHtml -notmatch '/shop/2045/|OIP-TD-EPUB') '2045 must not be duplicated among the four remaining shelf books.'
-Assert-True ($featureHtml -notmatch '/shop/pending/|OIP-PENDING-EPUB') 'PENDING must remain a shelf title without replacing the 2045 feature.'
-foreach ($slug in @('the-american-nightmare-keep-dreaming-kid', 'the-parable-of-the-sheep', 'the-water-cycle', 'pending')) {
+Assert-True ($features[0].Index -lt $catalogMatch.Index -and $featureHtml -match 'id="?bookstore-feature-title"?') 'The named feature must precede the ordinary catalog.'
+Assert-True ($catalogRecords.Count -eq $expectedShelfSlugs.Count -and $catalogHtml -notmatch ([regex]::Escape("/shop/$featureSlug/"))) 'The featured book must not be duplicated among the remaining shelf books.'
+Assert-True ($featureHtml -notmatch '/shop/pending/|OIP-PENDING-EPUB') 'PENDING must remain a shelf title.'
+foreach ($slug in $expectedShelfSlugs) {
   Assert-True ($catalogHtml -match ('href="?/shop/' + $slug + '/')) "Existing shelf book $slug is missing."
 }
-Assert-True (($features.Count + $catalogRecords.Count) -eq 5) 'The total catalog count must include the featured book and PENDING.'
+Assert-True (($features.Count + $catalogRecords.Count) -eq $eligibleBookSlugs.Count) 'The total catalog count must include every eligible book exactly once.'
 $featureImages = @([regex]::Matches($featureHtml, '(?is)<img\b[^>]*>'))
 Assert-True ($featureImages.Count -eq 1 -and $featureHtml -match 'image/avif' -and $featureHtml -match 'image/webp') 'The feature must render one managed responsive cover.'
-Assert-True ((Html-Attribute $featureImages[0].Value 'src') -match '/images/rendered/books/2045/cover/' -and (Html-Attribute $featureImages[0].Value 'alt') -ceq $approvedAlt) 'The feature must preserve the approved cover and alt text.'
+Assert-True ((Html-Attribute $featureImages[0].Value 'src') -match ([regex]::Escape("/images/rendered/books/$featureSlug/cover/")) -and (Html-Attribute $featureImages[0].Value 'alt') -ceq $featureApprovedAlt) 'The feature must preserve its approved cover and alt text.'
 Assert-True ((Html-Attribute $featureImages[0].Value 'loading') -eq 'eager' -and (Html-Attribute $featureImages[0].Value 'fetchpriority') -eq 'high') 'The featured cover must own eager/high loading.'
-Assert-True ($catalogImages.Count -eq 4) 'The remaining shelf must retain exactly four cover images.'
+Assert-True ($catalogImages.Count -eq $expectedShelfSlugs.Count) 'The remaining shelf must retain one cover image per eligible book.'
 foreach ($image in $catalogImages) {
   Assert-True ((Html-Attribute $image.Value 'loading') -eq 'lazy' -and (Html-Attribute $image.Value 'fetchpriority') -ne 'high') 'Remaining shelf covers must be lazy when the feature exists.'
 }
 $featureText = Plain-Text $featureHtml
 foreach ($field in @('title', 'subtitle', 'deck', 'price_display')) {
-  $expected = [regex]::Match($product, ('(?m)^\s+' + $field + ': "(?<value>[^"]+)"\r?$')).Groups['value'].Value
+  $expected = [regex]::Match($featureProduct, ('(?m)^\s+' + $field + ': "(?<value>[^"]+)"\r?$')).Groups['value'].Value
   Assert-True ($expected.Length -gt 0 -and $featureText.Contains($expected, [StringComparison]::Ordinal)) "The feature must display canonical $field."
 }
 $featureLinks = @([regex]::Matches($featureHtml, '(?is)<a\b[^>]*>'))
-$sampleLinks = @($featureLinks | Where-Object { (Html-Attribute $_.Value 'href') -eq '/shop/2045/sample/' })
+$sampleLinks = @($featureLinks | Where-Object { (Html-Attribute $_.Value 'href') -eq "/shop/$featureSlug/sample/" })
 Assert-True ($sampleLinks.Count -eq 1 -and (Html-Attribute $sampleLinks[0].Value 'data-analytics-event') -eq 'book_sample_open') 'The feature needs one free sample link with normal sample analytics.'
+if ($magicEligible) {
+  Assert-True ($featureText -notmatch 'complete story|OIP Exclusive') 'The nonfiction feature must not inherit 2045 story or exclusivity labels.'
+} else {
+  Assert-True ($featureText -match 'complete story') 'The 2045 feature must retain its complete-story distinction.'
+}
 Assert-True ($featureHtml -notmatch '<form\b|data-epub-checkout|https://(?:square\.link|checkout\.square\.site|downloads\.outsideinprint\.org)') 'The feature must not activate provider checkout itself.'
 if ($isLiveOffer) {
-  $buyLinks = @([regex]::Matches($featureHtml, '(?is)<a\b[^>]*>.*?</a>') | Where-Object { (Html-Attribute $_.Value 'href') -eq '/shop/2045/' -and (Plain-Text $_.Value) -match '^View book\b' })
+  $buyLinks = @([regex]::Matches($featureHtml, '(?is)<a\b[^>]*>.*?</a>') | Where-Object { (Html-Attribute $_.Value 'href') -eq "/shop/$featureSlug/" -and (Plain-Text $_.Value) -match '^View book\b' })
   Assert-True ($buyLinks.Count -eq 1 -and $featureHtml -match '>View book\b' -and $featureHtml -notmatch '<button\b[^>]*\bdisabled\b') 'The live feature must link to the book overview with a View book action.'
   $checkoutForms = @([regex]::Matches($detailHtml, '(?is)<form\b[^>]*\bdata-epub-checkout(?:\s|>).*?</form>'))
   Assert-True ($checkoutForms.Count -eq 1) 'Live 2045 requires one primary checkout form; its free sample is on a separate page.'
@@ -400,7 +422,7 @@ if ($isLiveOffer) {
     Assert-True ($emailInputs.Count -eq 1 -and $emailInputs[0].Value -match '\brequired(?:\s|=|>)') 'Each 2045 checkout must require a delivery email.'
   }
 } else {
-  Assert-True ($featureHtml -match 'href="?/shop/2045/' -and $featureText -match 'View book') 'An unavailable feature must preserve book discovery.'
+  Assert-True ($featureHtml -match ('href="?/shop/' + [regex]::Escape($featureSlug) + '/') -and $featureText -match 'View book') 'An unavailable feature must preserve book discovery.'
   Assert-True ($featureHtml -notmatch 'href="?[^\s">]*#bookstore-purchase|<form\b|data-epub-checkout') 'An unavailable feature must not expose a live purchase action.'
 }
 Assert-True ($detailHtml -match 'books/2045/cover' -and $detailHtml -match 'image/avif' -and $detailHtml -match 'OIP Exclusive') '2045 product is missing managed artwork or exclusive positioning.'
