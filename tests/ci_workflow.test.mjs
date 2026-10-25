@@ -118,6 +118,27 @@ test("browser binaries are conditional and actual publication gates remain activ
   assert.ok(action("worker", "actions/checkout").with["sparse-checkout"].includes("workers/oip-bob"));
   assert.doesNotMatch(commands("worker"), /wrangler.*deploy|cloudflare.*deploy/i);
 });
+
+test("browser and worker families select their own steps while preserving aggregate gates", () => {
+  for (const [file, family] of [
+    ["mobile_navigation_browser", "browser_navigation"], ["bob_reading_browser", "browser_bob"],
+    ["hosted_analytics_browser", "browser_analytics"], ["piece_share_browser", "browser_share"],
+  ]) {
+    const step = steps("site").find(step => step.run?.includes(file + ".test.mjs"));
+    assert.ok(step.if.includes("needs.classify.outputs." + family + " == 'true'"));
+    assert.equal(jobs.classify.outputs[family], "${{ steps.selection.outputs." + family + " }}");
+  }
+  for (const kind of ["commerce", "bob"]) {
+    const family = "worker_" + kind;
+    assert.equal(jobs.classify.outputs[family], "${{ steps.selection.outputs." + family + " }}");
+    for (const step of steps("worker").filter(step => step.run?.includes("workers/oip-" + kind))) {
+      assert.equal(step.if, "${{ needs.classify.outputs." + family + " == 'true' }}");
+    }
+  }
+  assert.equal(steps("site").find(step => step.run?.includes("playwright install")).if, "${{ needs.classify.outputs.browser == 'true' }}");
+  assert.match(jobs.worker.if, /outputs.worker == 'true'/);
+  for (const mode of ["-SourceOnly", "-SiteDir public"]) assert.ok(commands("site").includes("test_direct_commerce_storefront_contract.ps1 " + mode));
+});
 test("deployment verifies exact generation before canonical route checks", () => {
   const manifest = steps("deploy").findIndex(step => step.run?.includes("verify_deployment.mjs"));
   const smoke = steps("deploy").findIndex(step => step.run?.includes("test_live_seo_smoke.ps1"));

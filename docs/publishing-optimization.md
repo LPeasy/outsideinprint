@@ -15,9 +15,11 @@ full checks. Deletions remain part of the changed-path set.
 | Change or event | Work |
 | --- | --- |
 | Essay or registered artwork PR | Actual source/editorial/image gates, one Hugo build, output gates |
-| Frontend, template, application/storefront content, relevant data or dependency PR | Site gates plus browser suites |
+| Frontend, template, application content, general data or dependency PR | Site gates plus browser suites |
+| Shop content or `data/bookstore.yaml` PR | Site gates plus hosted analytics and piece-sharing browser suites |
+| Scheduled-release registry or verified generated cron block only | Site gates and existing schedule/source-binding validation; no unrelated implementation suites |
 | Publishing/image tooling PR | Relevant implementation fixtures; Windows for affected PowerShell/image tooling |
-| Worker-only PR | Commerce, monitoring, tax importer, source preparer and Python provisioning fixtures; no Hugo |
+| Worker-only PR | The changed commerce or Bob worker's fixtures; no Hugo |
 | Documentation-only PR | Workflow safety checks; no Hugo |
 | Protected main merge | Fresh production source/build/output checks; previously checked fixtures/browser suites omitted |
 | Daily schedule | One fresh time-dependent build at 00:17 America/New_York |
@@ -29,6 +31,22 @@ Superseded PR runs cancel; production runs remain serialized.
 `CI_BRANCH_PROTECTION_ACTIVE=true` records that the strict required-PR policy
 was enabled and verified. The main ref must also be protected before merge builds
 omit implementation fixtures.
+
+Browser selection distinguishes mobile navigation, Bob reading, hosted analytics
+and piece sharing. Their shared dependency install runs when any family is
+selected. Shop content and bookstore data retain analytics and sharing coverage;
+shared layouts/scripts and unfamiliar dependencies retain broad coverage.
+`workers/oip-commerce/src/catalog.js` includes runtime functions and always
+selects commerce tests. It is not treated as inert book metadata.
+
+Known test files select their actual CI suite; unrecognized tests remain full.
+The direct-commerce storefront contract runs with the bookstore source and fresh
+output gates. The scheduled-release registry exemption is exact, not a blanket
+exception for JSON or `scripts/ci/`. Workflow narrowing requires valid matching
+generated schedules on both Git revisions and identical content outside the
+managed block. Missing/deleted comparison inputs and malformed schedules cannot
+take this narrow path. The strict `release-ready` prerequisite set, fresh
+production build, weekly full sweep and exact deployment receipt are unchanged.
 
 ## Resources and publication identity
 
