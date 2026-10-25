@@ -301,3 +301,46 @@ products:
         checkout_endpoint: "https://downloads.outsideinprint.org/api/books/epub"
         gate_note: "Secure checkout through Square. E-book delivered by email after payment is confirmed."
     tags: ["Literary fiction", "Workplace fiction", "Institutional satire", "Relationships"]
+
+  fifty_years_of_magic:
+    title: "Fifty Years of Magic"
+    display_title: "Fifty Years of Magic"
+    metadata_title: "Fifty Years of Magic: The Making of Walt Disney World"
+    subtitle: "The Making of Walt Disney World"
+    author: "Robert V. Ussley"
+    publisher: "Outside In Print"
+    product_type: "E-book"
+    release_date: "2026-10-27"
+    contents_summary: "Seven illustrated chapters, a chronology, sources, and illustration credits."
+    edition_note: "Illustrated EPUB edition · English"
+    word_count: 14110
+    deck: "An illustrated history of Walt Disney World, from Walt's Florida plans to the resort's next generation of visitors. Seven chapters follow the planning, money, construction, and choices behind the family holiday, using records made at the time."
+    price_display: "$9.99"
+    checkout_label: "Buy e-book — $9.99"
+    checkout_note: "E-book for personal use. Secure checkout through Square, with a download link delivered by email after payment confirmation."
+    checkout_unavailable_label: "E-book temporarily unavailable"
+    cover_image: "books/fifty-years-of-magic/cover"
+    cover_alt: "Cover of Fifty Years of Magic: The Making of Walt Disney World, by Robert V. Ussley. A grandparent, parent and child approach Cinderella Castle in warm gold and cream light, framed by trees and blue-green shadows."
+    suggested_slug: "fifty-years-of-magic"
+    formats:
+      - "E-book"
+    direct_offers:
+      - sku: "OIP-FM-EPUB"
+        format: "EPUB"
+        availability_status: "live"
+        availability_label: "Available now"
+        isbn_status: "Not assigned"
+        price_display: "$9.99"
+        price_cents: 999
+        currency: "USD"
+        permitted_geography: "U.S. customers"
+        tax_class: "nonphysical_nontaxable"
+        fulfillment_type: "secure_epub_download"
+        checkout_action: "epub_checkout_api"
+        checkout_url: ""
+        checkout_endpoint: "https://downloads.outsideinprint.org/api/books/epub"
+        gate_note: "Secure checkout through Square. E-book delivered by email after payment is confirmed."
+    tags:
+      - "Walt Disney World"
+      - "business history"
+      - "illustrated history"

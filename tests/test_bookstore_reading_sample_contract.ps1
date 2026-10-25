@@ -2,7 +2,8 @@
 [CmdletBinding()]
 param(
   [string]$SiteDir = (Join-Path (Split-Path -Parent $PSScriptRoot) 'public'),
-  [switch]$SourceOnly
+  [switch]$SourceOnly,
+  [string]$Clock = $env:OIP_BUILD_CLOCK_UTC
 )
 
 Set-StrictMode -Version Latest
@@ -472,7 +473,7 @@ $expectedSamplePaths = @(
 $samplePaths = @(
   Get-ChildItem -LiteralPath (Join-Path $repoRoot 'content/shop') -Recurse -File -Filter 'sample.md' |
     ForEach-Object { [IO.Path]::GetRelativePath($repoRoot, $_.FullName).Replace('\', '/') } |
-    Where-Object { $_ -notin @('content/shop/2045/sample.md', 'content/shop/pending/sample.md') } |
+    Where-Object { $_ -notin @('content/shop/2045/sample.md', 'content/shop/pending/sample.md', 'content/shop/fifty-years-of-magic/sample.md') } |
     Sort-Object
 )
 if (($samplePaths -join '|') -cne ($expectedSamplePaths -join '|')) {
@@ -1047,13 +1048,50 @@ if ((Get-NormalizedBodyDigest -Body $pendingSample.Body) -cne 'b4af090c59cc0ca3a
   throw 'PENDING must preserve the approved complete Prologue, Part I date bridge and Chapter 1 without Chapter 2.'
 }
 
+$magicSample = Get-SampleDocument -RelativePath 'content/shop/fifty-years-of-magic/sample.md' -RequiredKeys @('draft', 'date', 'publishDate', 'sample_of_book_key', 'sample_work_type', 'sample_source', 'sample_source_id', 'sample_boundary', 'sample_release_status')
+$magicProduct = Get-SampleDocument -RelativePath 'content/shop/fifty-years-of-magic/_index.md' -RequiredKeys @('draft', 'date', 'publishDate', 'book_key', 'sample_page')
+if ($magicProduct.Fields.draft -cne 'false' -or $magicSample.Fields.draft -cne 'false' -or
+    $magicProduct.Fields.book_key -cne 'fifty_years_of_magic' -or
+    $magicSample.Fields.sample_of_book_key -cne 'fifty_years_of_magic' -or
+    $magicProduct.Fields.sample_page -cne '/shop/fifty-years-of-magic/sample' -or
+    $magicProduct.Fields.date -cne $magicSample.Fields.date -or
+    $magicProduct.Fields.publishDate -cne $magicSample.Fields.publishDate) {
+  throw 'Fifty Years of Magic product and sample must share one scheduled release and exact book binding.'
+}
+$magicPublishDate = [datetimeoffset]::Parse($magicProduct.Fields.publishDate)
+foreach ($entry in @{
+  sample_work_type = 'nonfiction-excerpt'; sample_source = 'frozen_publication_package';
+  sample_source_id = 'fifty-years-of-magic-v1'; sample_release_status = 'published';
+  sample_boundary = 'Complete Chapter 1, Building Walt Disney World; stop before Chapter 2'
+}.GetEnumerator()) {
+  if ($magicSample.Fields[$entry.Key] -cne $entry.Value) { throw "Fifty Years of Magic sample has incorrect $($entry.Key)." }
+}
+if ((Get-NormalizedBodyDigest -Body $magicSample.Body) -cne '44f0aa8a00d4b19689451f3c740e093f1b4c6eb4c07b43d78ab137e74910ac47') {
+  throw 'Fifty Years of Magic must preserve its approved Chapter 1 text and illustrated sample boundary.'
+}
+$magicImageIds = @(
+  'hero', 'oswald', 'mickey', 'land-before-disney', 'announcement',
+  'roy-and-legislation', 'financing', 'construction', 'visitor-transport'
+) | ForEach-Object { 'essays/walt-disney-world-opening-1971/' + $_ }
+$magicSourceImageIds = @([regex]::Matches($magicSample.Body, '\(oip-image:(?<id>[^)]+)\)') | ForEach-Object { $_.Groups['id'].Value })
+if (($magicSourceImageIds -join '|') -cne ($magicImageIds -join '|')) {
+  throw 'Fifty Years of Magic must retain all nine approved managed images in chapter order.'
+}
+
 if ($SourceOnly) {
-  Write-Host 'Bookstore reading-sample source contract passed, including the frozen PENDING excerpt.'
+  Write-Host 'Bookstore reading-sample source contract passed, including the frozen PENDING and Fifty Years of Magic excerpts.'
   exit 0
 }
 if (-not (Test-Path -LiteralPath $SiteDir -PathType Container)) {
   throw "Reading-sample output validation requires a built site at $SiteDir."
 }
+$buildManifestPath = Join-Path $SiteDir '.oip-build-manifest.json'
+if (-not $Clock -and (Test-Path -LiteralPath $buildManifestPath -PathType Leaf)) {
+  $buildManifest = Get-Content -LiteralPath $buildManifestPath -Raw -Encoding utf8 | ConvertFrom-Json
+  if ($buildManifest.PSObject.Properties.Name -contains 'buildClockUtc') { $Clock = [string]$buildManifest.buildClockUtc }
+}
+$buildClock = if ($Clock) { [datetimeoffset]::Parse($Clock) } else { [datetimeoffset]::UtcNow }
+$magicEligible = $magicPublishDate -le $buildClock
 Test-SampleLinkDirectionFixtures
 Test-ContextualBookFixtures
 
@@ -1187,6 +1225,42 @@ if ((Get-NormalizedHtmlText -Html $pendingBody) -cne (Get-NormalizedHtmlText -Ht
   throw 'Rendered PENDING excerpt differs from its frozen reading text.'
 }
 
+$magicSampleOutputPath = Join-Path $SiteDir 'shop/fifty-years-of-magic/sample/index.html'
+$magicProductOutputPath = Join-Path $SiteDir 'shop/fifty-years-of-magic/index.html'
+if ($magicEligible) {
+  if (-not (Test-Path -LiteralPath $magicSampleOutputPath -PathType Leaf) -or
+      -not (Test-Path -LiteralPath $magicProductOutputPath -PathType Leaf)) {
+    throw 'Fifty Years of Magic product and sample must both publish at the scheduled release.'
+  }
+  $magicSampleHtml = Get-Content -LiteralPath $magicSampleOutputPath -Raw -Encoding utf8
+  $magicProductHtml = Get-Content -LiteralPath $magicProductOutputPath -Raw -Encoding utf8
+  foreach ($html in @($catalogHtml, $magicProductHtml)) {
+    if ($html -notmatch 'href="?/shop/fifty-years-of-magic/sample/"?') { throw 'Fifty Years of Magic catalog and product must link to its standalone sample.' }
+  }
+  if ($magicSampleHtml -notmatch 'href="?/shop/fifty-years-of-magic/#bookstore-purchase"?' -or
+      $magicSampleHtml -match '<form\b|data-epub-checkout|Ten dark fables|A complete story from') {
+    throw 'Fifty Years of Magic sample must return to its product purchase anchor without checkout forms or fiction-specific copy.'
+  }
+  $magicBody = [regex]::Match($magicSampleHtml, '(?is)<div\b[^>]*class="?bookstore-reading-sample__body"?[^>]*>(?<body>.*?)</div>\s*<footer\b').Groups['body'].Value
+  $magicPlainBody = Get-NormalizedHtmlText -Html $magicBody
+  foreach ($boundary in @('Chapter 1 · 1960s', 'Oswald the Lucky Rabbit was headed for movie theaters in a series of short comedies.', 'The audience could now walk into the picture.')) {
+    Assert-Contains -Text $magicPlainBody -Expected $boundary -Context 'Rendered Fifty Years of Magic chapter boundary'
+  }
+  $magicRenderedImageIds = @([regex]::Matches($magicBody, '(?is)<img\b[^>]*>') | ForEach-Object { Get-ContextualHtmlAttribute -Tag $_.Value -Name 'data-oip-image-id' })
+  if (($magicRenderedImageIds -join '|') -cne ($magicImageIds -join '|')) {
+    throw 'Rendered Fifty Years of Magic sample must retain all nine approved managed images in chapter order.'
+  }
+  if ($magicPlainBody -match 'Chapter 2|From City to EPCOT Center') { throw 'Fifty Years of Magic sample must stop before Chapter 2.' }
+  if ((Get-NormalizedHtmlText -Html $catalogHtml).Contains('Oswald the Lucky Rabbit was headed for movie theaters', [StringComparison]::Ordinal)) {
+    throw 'Fifty Years of Magic sample prose leaked into the compact catalog.'
+  }
+} else {
+  if ((Test-Path -LiteralPath $magicSampleOutputPath) -or (Test-Path -LiteralPath $magicProductOutputPath) -or
+      $catalogHtml -match '/shop/fifty-years-of-magic/') {
+    throw 'Fifty Years of Magic product, sample and catalog links must remain absent before publication time.'
+  }
+}
+
 $homeLaunchStrips = @([regex]::Matches($homeHtml, '(?is)<section\b[^>]*\bdata-home-2045-launch(?:=|\s|>).*?</section>'))
 if ($homeLaunchStrips.Count -gt 1) {
   throw 'The homepage rendered more than one 2045 launch strip.'
@@ -1204,8 +1278,9 @@ if ($homeWithoutLaunchStrip -match '(?i)book_sample_open|#reading-sample|booksto
 }
 
 $standalone2045 = Test-Path -LiteralPath (Join-Path $SiteDir 'shop/2045/sample/index.html') -PathType Leaf
-if ([regex]::Matches($catalogHtml, 'data-analytics-source-slot="?bookstore_index_sample"?', 'IgnoreCase').Count -ne 4) {
-  throw 'Built bookstore catalog must expose exactly four shelf reading-sample links.'
+$expectedShelfSampleCount = $sampleSpecs.Count + 1 + [int]$magicEligible
+if ([regex]::Matches($catalogHtml, 'data-analytics-source-slot="?bookstore_index_sample"?', 'IgnoreCase').Count -ne $expectedShelfSampleCount) {
+  throw 'Built bookstore catalog must expose one sample link per clock-eligible shelf book.'
 }
 if ([regex]::Matches($catalogHtml, 'data-analytics-source-slot="?bookstore_feature_sample"?', 'IgnoreCase').Count -ne [int]$standalone2045) {
   throw 'Built bookstore catalog must expose exactly one featured reading-sample link when the 2045 sample is published, otherwise none.'
@@ -1312,7 +1387,7 @@ foreach ($spec in $sampleSpecs) {
 $sampleArtifacts = @(
   Get-ChildItem -LiteralPath (Join-Path $SiteDir 'shop') -Recurse -File |
     Where-Object { $_.Name -match '^sample(?:\.|$)' -or $_.DirectoryName -match '[\\/]sample$' } |
-    Where-Object { [IO.Path]::GetRelativePath($SiteDir, $_.FullName).Replace('\', '/') -notin @('shop/2045/sample/index.html', 'shop/pending/sample/index.html') }
+    Where-Object { [IO.Path]::GetRelativePath($SiteDir, $_.FullName).Replace('\', '/') -notin @('shop/2045/sample/index.html', 'shop/pending/sample/index.html', 'shop/fifty-years-of-magic/sample/index.html') }
 )
 if ($sampleArtifacts.Count -gt 0) {
   throw "Standalone sample artifacts were generated: $($sampleArtifacts.FullName -join ', ')"
@@ -1321,11 +1396,14 @@ foreach ($routeIndex in @('sitemap.xml', 'index.xml', 'shop/index.xml')) {
   $path = Join-Path $SiteDir $routeIndex
   if (Test-Path -LiteralPath $path -PathType Leaf) {
     $text = Get-Content -LiteralPath $path -Raw -Encoding utf8
-    if ($text -match '(?i)/shop/(?!(?:2045|pending)/sample/)[^<"'']+/sample(?:/|\.|<|"|''|$)') {
+    if ($text -match '(?i)/shop/(?!(?:2045|pending|fifty-years-of-magic)/sample/)[^<"'']+/sample(?:/|\.|<|"|''|$)') {
       throw "Standalone reading-sample route leaked into public/$routeIndex."
+    }
+    if (-not $magicEligible -and $text -match '/shop/fifty-years-of-magic/') {
+      throw "Future Fifty Years of Magic route leaked into public/$routeIndex."
     }
   }
 }
 
-Write-Host 'Bookstore reading-sample source and production-output contract passed, including PENDING.'
+Write-Host 'Bookstore reading-sample source and production-output contract passed, including PENDING and scheduled Fifty Years of Magic.'
 exit 0

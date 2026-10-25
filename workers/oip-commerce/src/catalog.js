@@ -36,6 +36,29 @@ export const EPUB_PRODUCTS = Object.freeze({
     r2Key: "epubs/pending/v1.2/pending.epub",
     downloadFilename: "pending.epub",
   }),
+  "OIP-FM-EPUB": Object.freeze({
+    sku: "OIP-FM-EPUB",
+    title: "Fifty Years of Magic: The Making of Walt Disney World",
+    priceCents: 999,
+    r2Key: "epubs/fifty-years-of-magic/v1/fifty-years-of-magic.epub",
+    downloadFilename: "fifty-years-of-magic.epub",
+    // Owner-approved publication time; keep aligned with the website release.
+    releaseNotBefore: "2026-10-27T09:00:00-04:00",
+    requiredPublications: Object.freeze([
+      Object.freeze({
+        url: "https://outsideinprint.org/shop/fifty-years-of-magic/",
+        title: "Fifty Years of Magic",
+      }),
+      Object.freeze({
+        url: "https://outsideinprint.org/essays/disney-world-2010s/",
+        title: "Disney World in the 2010s: MagicBands, Pandora, and Star Wars: Galaxy’s Edge",
+      }),
+      Object.freeze({
+        url: "https://outsideinprint.org/essays/disney-world-2020s/",
+        title: "Disney World in the 2020s: Fifty Years of Magic",
+      }),
+    ]),
+  }),
 });
 
 export const PAPERBACK_PRODUCTS = Object.freeze({

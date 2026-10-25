@@ -48,6 +48,20 @@
         "avif_quality": 70
       }
     },
+    "books/fifty-years-of-magic/cover": {
+      "id": "books/fifty-years-of-magic/cover",
+      "source": "images/originals/books/fifty-years-of-magic/cover.png",
+      "sha256": "4e53d99177a21e0d8f8c23228f6e96e53a8f9632c4f43bfe24e2d9c03393a3ac",
+      "width": 2400,
+      "height": 3600,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "books/pending/cover": {
       "id": "books/pending/cover",
       "source": "images/originals/books/pending/cover.jpg",
@@ -8701,6 +8715,7 @@
   "aliases": {
     "/images/books/2045/cover.jpg": "books/2045/cover",
     "/images/books/2045/stories/the-cracked-pot.png": "books/2045/stories/the-cracked-pot",
+    "/images/books/fifty-years-of-magic/cover.png": "books/fifty-years-of-magic/cover",
     "/images/books/pending/cover.jpg": "books/pending/cover",
     "/images/editorial/after-the-tone.png": "editorial/after-the-tone",
     "/images/editorial/algae-fueled-fever-dreams.png": "editorial/algae-fueled-fever-dreams",

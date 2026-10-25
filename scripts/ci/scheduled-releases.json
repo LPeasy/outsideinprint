@@ -1,4 +1,219 @@
 {
   "schemaVersion": 1,
-  "releases": []
+  "releases": [
+    {
+      "id": "fifty-years-of-magic-book-release",
+      "route": "/shop/fifty-years-of-magic/",
+      "releaseAt": "2026-10-27T09:00:00-04:00",
+      "endsAt": "2026-10-28T09:00:00-04:00",
+      "bindings": [
+        {
+          "kind": "file",
+          "path": "content/shop/fifty-years-of-magic/_index.md",
+          "sha256": "322deffd9fbe7319009c3ec42134c8dfdb930e6a492b0411b80c6a4e7c3800bc"
+        },
+        {
+          "kind": "file",
+          "path": "content/shop/fifty-years-of-magic/sample.md",
+          "sha256": "ec64e39033e748b75ced5f4a93f9e66c5f0f2b68acba28236f1b21effe0d3ed7"
+        },
+        {
+          "kind": "file",
+          "path": "data/bookstore.yaml",
+          "sha256": "eedb9a10dab4027bf284fb95cb6f933f08373438ab474dea9ef88bbd6765d4d8"
+        },
+        {
+          "kind": "file",
+          "path": "workers/oip-commerce/src/catalog.js",
+          "sha256": "861fc596bc9a8e531ae727b1851db726f47ac4c8cdefaf00d215141304af314f"
+        },
+        {
+          "kind": "file",
+          "path": "content/essays/disney-world-2010s.md",
+          "sha256": "fed68a31c6bd1d66c0b007c9f1f2f33c76f58ddfd5c08ea7f289022949ea674a"
+        },
+        {
+          "kind": "file",
+          "path": "content/essays/disney-world-2020s.md",
+          "sha256": "ed6fa9ec7b49529f40d1662137afac9da09948045b64fe204bc31f852d9930d5"
+        }
+      ],
+      "images": [
+        {
+          "id": "books/fifty-years-of-magic/cover",
+          "sha256": "4e53d99177a21e0d8f8c23228f6e96e53a8f9632c4f43bfe24e2d9c03393a3ac",
+          "width": 2400,
+          "height": 3600
+        },
+        {
+          "id": "essays/walt-disney-world-opening-1971/hero",
+          "sha256": "658836766521d5bbe63944bcefc63756813d4146942a7a4722d4f06c28f6fdeb",
+          "width": 1672,
+          "height": 941
+        },
+        {
+          "id": "essays/walt-disney-world-opening-1971/oswald",
+          "sha256": "09f21bebefb93be436be908b4fa3acd5a741f085b161d14c4a8f4026ea610a57",
+          "width": 666,
+          "height": 820
+        },
+        {
+          "id": "essays/walt-disney-world-opening-1971/mickey",
+          "sha256": "d871f0f9d198d412cd13ab9bec8622e5cd3640f61c4ceb3fa412235efe91a926",
+          "width": 802,
+          "height": 1024
+        },
+        {
+          "id": "essays/walt-disney-world-opening-1971/land-before-disney",
+          "sha256": "04a4a1d612aa0417353ba8551749938719acd8a47ecc91dc0d961e6e33779b32",
+          "width": 692,
+          "height": 693
+        },
+        {
+          "id": "essays/walt-disney-world-opening-1971/announcement",
+          "sha256": "b401f9083a44885df55a9adbce5022a937cd1cefc312ef8342cf9c27a7942980",
+          "width": 5518,
+          "height": 4503
+        },
+        {
+          "id": "essays/walt-disney-world-opening-1971/roy-and-legislation",
+          "sha256": "2e72470dff2edcd67154c20327e405e7981f2de59c84d55f56bc4430010a0ad2",
+          "width": 600,
+          "height": 598
+        },
+        {
+          "id": "essays/walt-disney-world-opening-1971/financing",
+          "sha256": "0370e4c30990b156a2a1d10d126f8422477130a66d042a8e51e70dd11683ad70",
+          "width": 1596,
+          "height": 432
+        },
+        {
+          "id": "essays/walt-disney-world-opening-1971/construction",
+          "sha256": "f3eb201a5893fe00062451fb2e79a75bdba179cb013bdd2a502bed354de39e30",
+          "width": 600,
+          "height": 504
+        },
+        {
+          "id": "essays/walt-disney-world-opening-1971/visitor-transport",
+          "sha256": "55e93ee7651ccb82b1bcd7c2371455c389d0347b0da575784e77f7d97e507a9e",
+          "width": 1200,
+          "height": 1178
+        },
+        {
+          "id": "essays/disney-world-2010s/hero",
+          "sha256": "393340df00e6a35e92e0e031bcade97e7f251c5977d8e9cd84dde69241e81061",
+          "width": 1672,
+          "height": 941
+        },
+        {
+          "id": "essays/disney-world-2020s/hero",
+          "sha256": "277be8db98d7c887ff21bba748abae800df49e94f55637a03f55bc1be64d7dc1",
+          "width": 1672,
+          "height": 941
+        }
+      ],
+      "checks": [
+        {
+          "route": "/shop/fifty-years-of-magic/",
+          "title": "Fifty Years of Magic",
+          "containsText": [
+            "The Making of Walt Disney World",
+            "Robert V. Ussley",
+            "$9.99",
+            "Seven illustrated chapters, a chronology, sources, and illustration credits.",
+            "This independent publication is not authorized, sponsored, or endorsed by The Walt Disney Company."
+          ],
+          "links": [
+            "/shop/fifty-years-of-magic/sample/"
+          ],
+          "imageIds": [
+            "books/fifty-years-of-magic/cover"
+          ]
+        },
+        {
+          "route": "/shop/fifty-years-of-magic/sample/",
+          "title": "Building Walt Disney World",
+          "containsText": [
+            "Chapter 1 · 1960s",
+            "Robert V. Ussley",
+            "In 1927, Walt Disney's Oswald the Lucky Rabbit was headed for movie theaters in a series of short comedies.",
+            "From drawings to a destination.",
+            "Oswald advertised to theater owners in Universal Weekly, December 10, 1927, page 1. The published drawing and sales copy link Walt Disney, Winkler Productions, and Universal. Original issue; scan and reuse record.",
+            "Story drawings for Plane Crazy (1928), credited to Ub Iwerks. Graphite and colored pencil, sheet 1 of 6. Library of Congress, LC-DIG-ppmsca-57586.",
+            "The future resort area southwest of Orlando in a Soil Conservation Service aerial photograph, March 1, 1954, before Disney's land purchases. National Archives, 595120. Public domain.",
+            "Walt Disney, Governor Haydon Burns, and Roy Disney, left to right, at the Florida announcement on November 15, 1965. Florida Development Commission photograph, State Archives of Florida / Library of Congress.",
+            "Governor Claude Kirk signs Disney-related legislation with Roy Disney among those behind him, May 12, 1967. Photograph by Karl E. Holland. State Archives of Florida, C069089DE. Public domain.",
+            "The SEC recorded Disney's proposed $50 million convertible-debenture sale and its intended use for the Florida complex. Detail from SEC News Digest, February 17, 1969, page 1.",
+            "The resort taking shape in September 1971, shortly before its public opening. The Magic Kingdom, lakes, and Contemporary Hotel appear in one view. State Archives of Florida, C678614. Public domain.",
+            "Visitors and the monorail in October 1971: transportation had become part of the resort experience. State Archives of Florida, C678601. Public domain.",
+            "Walt's proposals had set out a place where the company could shape more of a visitor's stay, and eventually experiment with a community beyond it. Roy's task was to keep development within reach of an operating business: arrange capital, divide responsibility, and carry construction through to paying guests. By October 1971, visitors could board the boats and walk the streets that designers had put on paper. The audience could now walk into the picture.",
+            "End of sample"
+          ],
+          "links": [
+            "/shop/fifty-years-of-magic/",
+            "https://archive.org/details/universalweekly100movi_4/page/n476/mode/1up",
+            "https://commons.wikimedia.org/wiki/File:Oswald_the_Lucky_Rabbit_-_Dec_1927_UW.jpg",
+            "https://www.loc.gov/item/2018662265/",
+            "https://docsteach.org/document/aerial-disney-world/",
+            "https://www.loc.gov/item/2021669931/",
+            "https://floridamemory.com/items/show/80377",
+            "https://www.sec.gov/news/digest/1969/dig021769.pdf#page=1",
+            "https://floridamemory.com/items/show/86540",
+            "https://floridamemory.com/items/show/86529",
+            "https://commons.wikimedia.org/wiki/File:Steamboat_Willie_%281928%29_by_Walt_Disney.webm"
+          ],
+          "imageIds": [
+            "essays/walt-disney-world-opening-1971/hero",
+            "essays/walt-disney-world-opening-1971/oswald",
+            "essays/walt-disney-world-opening-1971/mickey",
+            "essays/walt-disney-world-opening-1971/land-before-disney",
+            "essays/walt-disney-world-opening-1971/announcement",
+            "essays/walt-disney-world-opening-1971/roy-and-legislation",
+            "essays/walt-disney-world-opening-1971/financing",
+            "essays/walt-disney-world-opening-1971/construction",
+            "essays/walt-disney-world-opening-1971/visitor-transport"
+          ]
+        },
+        {
+          "route": "/shop/",
+          "title": "Bookstore",
+          "containsText": [
+            "Fifty Years of Magic",
+            "$9.99"
+          ],
+          "links": [
+            "/shop/fifty-years-of-magic/",
+            "/shop/fifty-years-of-magic/sample/"
+          ],
+          "imageIds": [
+            "books/fifty-years-of-magic/cover"
+          ]
+        },
+        {
+          "route": "/essays/disney-world-2010s/",
+          "title": "Disney World in the 2010s: MagicBands, Pandora, and Star Wars: Galaxy’s Edge",
+          "containsText": [
+            "Steel track curves between rock faces and beneath a timber-style bridge.",
+            "For now, a visitor could arrange the date, reserve an attraction, choose a room, and ride from a hotel toward the parks. Disney supplied more ways to plan the journey and more places for it to go. Inside Rise of the Resistance, the floor offered no track to follow. A droid sat at the controls, and the way out lay somewhere ahead. After all that planning, there was something to be said for letting the little fellow drive.",
+            "A new setting for the next adventure."
+          ],
+          "imageIds": [
+            "essays/disney-world-2010s/hero"
+          ]
+        },
+        {
+          "route": "/essays/disney-world-2020s/",
+          "title": "Disney World in the 2020s: Fifty Years of Magic",
+          "containsText": [
+            "Cinderella Castle wore a gold 50, with golden decorations around its towers.",
+            "For someone returning with children or grandchildren, the next trip can begin with a familiar view of the castle. They may know which way to turn, where to board the boat, and which ride they want to share first. Then comes the pleasure of taking someone who knows none of it through the gates.",
+            "Through the Gates: a familiar place to share with someone new."
+          ],
+          "imageIds": [
+            "essays/disney-world-2020s/hero"
+          ]
+        }
+      ]
+    }
+  ]
 }

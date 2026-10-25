@@ -1,6 +1,7 @@
 param(
   [string]$SiteDir = (Join-Path (Split-Path -Parent $PSScriptRoot) 'public'),
-  [switch]$SourceOnly
+  [switch]$SourceOnly,
+  [string]$Clock = $env:OIP_BUILD_CLOCK_UTC
 )
 
 Set-StrictMode -Version Latest
@@ -81,12 +82,23 @@ function Get-MetaContent {
 
 $bookstoreData = Get-RequiredText -RelativePath 'data/bookstore.yaml'
 $bookstoreIndexContent = Get-RequiredText -RelativePath 'content/shop/_index.md'
+$magicProductSource = Get-RequiredText -RelativePath 'content/shop/fifty-years-of-magic/_index.md'
+$magicFrontMatter = [regex]::Match($magicProductSource, '(?s)\A---\r?\n(?<body>.*?)\r?\n---').Groups['body'].Value
+$magicPublishDates = @([regex]::Matches($magicFrontMatter, '(?m)^publishDate:\s*"?(?<date>[^"\r\n]+)"?\s*$'))
+if ($magicPublishDates.Count -ne 1 -or $magicFrontMatter -notmatch '(?m)^draft: false\s*$') {
+  throw 'Fifty Years of Magic must have one scheduled publication timestamp and draft:false.'
+}
+$magicPublishDate = [datetimeoffset]::Parse($magicPublishDates[0].Groups['date'].Value.Trim())
+foreach ($required in @('book_key: "fifty_years_of_magic"', 'sample_page: "/shop/fifty-years-of-magic/sample"')) {
+  Assert-Contains -Text $magicProductSource -Expected $required -Context 'Scheduled Fifty Years of Magic product'
+}
 $usCheckoutRestriction = 'Direct e-book checkout is currently available to U.S. customers only.'
 $americanNightmarePage = Get-RequiredText -RelativePath 'content/shop/the-american-nightmare-keep-dreaming-kid/index.md'
 if ([regex]::Matches($americanNightmarePage, '(?m)^date: 2026-08-21\s*$').Count -ne 1) {
   throw 'The American Nightmare site edition metadata must bind the owner-accepted 2026-08-21 publication date exactly once.'
 }
 $catalogSkus = @(
+  'OIP-FM-EPUB',
   'OIP-PENDING-EPUB',
   'OIP-TD-EPUB',
   'OIP-AN-EPUB',
@@ -96,8 +108,8 @@ $catalogSkus = @(
   'OIP-WC-EPUB',
   'OIP-WC-PB'
 )
-$publicEpubSkus = @('OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB', 'OIP-PENDING-EPUB')
-$liveEpubSkus = @('OIP-TD-EPUB', 'OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB', 'OIP-PENDING-EPUB')
+$publicEpubSkus = @('OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB', 'OIP-PENDING-EPUB', 'OIP-FM-EPUB')
+$liveEpubSkus = @('OIP-TD-EPUB', 'OIP-AN-EPUB', 'OIP-PS-EPUB', 'OIP-WC-EPUB', 'OIP-PENDING-EPUB', 'OIP-FM-EPUB')
 $disabledOfferSkus = @('OIP-AN-PB', 'OIP-PS-PB', 'OIP-WC-PB')
 
 foreach ($requiredCatalogText in @(
@@ -150,6 +162,12 @@ foreach ($sku in $catalogSkus) {
     if ($sku -eq 'OIP-PENDING-EPUB') {
       Assert-Contains -Text $offerBlock -Expected 'isbn_status: "Pending Bowker processing"' -Context 'PENDING saved ISBN submission status'
     }
+    elseif ($sku -eq 'OIP-FM-EPUB') {
+      Assert-Contains -Text $offerBlock -Expected 'isbn_status: "Not assigned"' -Context 'Fifty Years of Magic truthful ISBN status'
+      if ($offerBlock -match '(?im)^\s+isbn:\s*"?\d') {
+        throw 'Fifty Years of Magic must not invent an assigned ISBN.'
+      }
+    }
     else {
       Assert-Contains -Text $offerBlock -Expected 'isbn_status: "Assigned"' -Context "Live catalog offer $sku"
     }
@@ -197,8 +215,8 @@ if ($bookstoreData -match '(?im)^\s+checkout_note:\s+"[^"]*Amazon') {
   throw 'Bookstore data must not retain an Amazon checkout note.'
 }
 
-if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "live"\s*$').Count -ne 5) {
-  throw 'All five direct EPUB offers must be live.'
+if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "live"\s*$').Count -ne $liveEpubSkus.Count) {
+  throw 'Each known direct EPUB must have a live catalog offer; publication time separately controls page eligibility.'
 }
 if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "disabled"\s*$').Count -ne 3) {
   throw 'The three paperback offers must remain disabled.'
@@ -206,8 +224,8 @@ if ([regex]::Matches($bookstoreData, '(?m)^\s+availability_status: "disabled"\s*
 if ($bookstoreData -match '(?im)^\s+checkout_url:\s+"https?://') {
   throw 'The API-based direct EPUB launch must not expose a hosted checkout URL.'
 }
-if ([regex]::Matches($bookstoreData, '(?m)^\s+checkout_endpoint: "https://downloads\.outsideinprint\.org/api/books/epub"\s*$').Count -ne 5) {
-  throw 'All five direct EPUB offers must expose the approved production endpoint.'
+if ([regex]::Matches($bookstoreData, '(?m)^\s+checkout_endpoint: "https://downloads\.outsideinprint\.org/api/books/epub"\s*$').Count -ne $liveEpubSkus.Count) {
+  throw 'Each known direct EPUB must use the approved production endpoint.'
 }
 if ($bookstoreData -match '(?i)stripe') {
   throw 'The Square-only catalog must not contain Stripe configuration.'
@@ -680,6 +698,15 @@ if ($SourceOnly) {
   return
 }
 
+$buildManifestPath = Join-Path $SiteDir '.oip-build-manifest.json'
+if (-not $Clock -and (Test-Path -LiteralPath $buildManifestPath -PathType Leaf)) {
+  $buildManifest = Get-Content -LiteralPath $buildManifestPath -Raw -Encoding utf8 | ConvertFrom-Json
+  if ($buildManifest.PSObject.Properties.Name -contains 'buildClockUtc') { $Clock = [string]$buildManifest.buildClockUtc }
+}
+$buildClock = if ($Clock) { [datetimeoffset]::Parse($Clock) } else { [datetimeoffset]::UtcNow }
+$magicEligible = $magicPublishDate -le $buildClock
+$eligibleEpubSkus = @($liveEpubSkus | Where-Object { $_ -ne 'OIP-FM-EPUB' -or $magicEligible })
+
 $requiredOutputFiles = @(
   'shop/pending/index.html',
   'shop/index.html',
@@ -696,6 +723,13 @@ $requiredOutputFiles = @(
   'epub-license-refunds/index.html',
   'contact/index.html'
 )
+if ($magicEligible) {
+  $requiredOutputFiles += 'shop/fifty-years-of-magic/index.html'
+} else {
+  foreach ($relativePath in @('shop/fifty-years-of-magic/index.html', 'shop/fifty-years-of-magic/sample/index.html')) {
+    if (Test-Path -LiteralPath (Join-Path $SiteDir $relativePath)) { throw "Future book route was published early: $relativePath" }
+  }
+}
 $output = @{}
 foreach ($relativePath in $requiredOutputFiles) {
   $fullPath = Join-Path $SiteDir $relativePath
@@ -712,6 +746,9 @@ $productSchemaExpectations = @(
   @{ Path = 'shop/the-parable-of-the-sheep/index.html'; Url = 'https://outsideinprint.org/shop/the-parable-of-the-sheep/'; Sku = 'OIP-PS-EPUB'; Price = '9.99' },
   @{ Path = 'shop/the-water-cycle/index.html'; Url = 'https://outsideinprint.org/shop/the-water-cycle/'; Sku = 'OIP-WC-EPUB'; Price = '9.99' }
 )
+if ($magicEligible) {
+  $productSchemaExpectations += @{ Path = 'shop/fifty-years-of-magic/index.html'; Url = 'https://outsideinprint.org/shop/fifty-years-of-magic/'; Sku = 'OIP-FM-EPUB'; Price = '9.99'; ReleaseDate = $magicPublishDate.ToString('yyyy-MM-dd') }
+}
 foreach ($expectation in $productSchemaExpectations) {
   $rawHtml = [string]$output[$expectation.Path]
   $titleMatch = [regex]::Match($rawHtml, '(?is)<title\b[^>]*>(?<title>.*?)</title>')
@@ -761,6 +798,9 @@ foreach ($expectation in $productSchemaExpectations) {
   if ($expectation.ContainsKey('ReleaseDate') -and $bookProduct.datePublished -cne $expectation.ReleaseDate) {
     throw "Built shop product $($expectation.Path) exposes an incorrect release date."
   }
+  if ($expectation.Sku -eq 'OIP-FM-EPUB' -and $bookProduct.PSObject.Properties.Name -contains 'isbn') {
+    throw 'Fifty Years of Magic structured data must omit an unassigned ISBN.'
+  }
 
   $offers = @($bookProduct.offers)
   if ($offers.Count -ne 1) {
@@ -784,6 +824,9 @@ foreach ($expectation in $productSchemaExpectations) {
 $shopIndexOutput = [string]$output['shop/index.html']
 $shopDetailOutput = @($productSchemaExpectations | ForEach-Object { $output[$_.Path] }) -join "`n"
 $shopOutput = $shopIndexOutput + "`n" + $shopDetailOutput
+if (-not $magicEligible -and $shopOutput -match 'OIP-FM-EPUB|/shop/fifty-years-of-magic/') {
+  throw 'Fifty Years of Magic must remain absent from the bookstore before its scheduled publication.'
+}
 $decodedShopIndexOutput = [Net.WebUtility]::HtmlDecode($shopIndexOutput)
 Assert-Contains -Text $decodedShopIndexOutput -Expected 'Direct purchases are for U.S. customers.' -Context 'Built bookstore geographic checkout notice'
 if ($shopIndexOutput -match '\bdata-epub-checkout(?:=|\s|>)|data-bookstore-checkout-disclosure|data-bookstore-kindle-button') {
@@ -838,7 +881,7 @@ foreach ($expectation in $productSchemaExpectations) {
     throw "Built bookstore detail $($expectation.Path) must retain one direct EPUB H2."
   }
 }
-foreach ($sku in $liveEpubSkus) {
+foreach ($sku in $eligibleEpubSkus) {
   if ([regex]::Matches($shopOutput, ('data-direct-offer-sku=(?:"|'')?' + [regex]::Escape($sku) + '(?:"|'')?(?=\s|>)')).Count -ne 1) {
     throw "Built shop output must expose exactly one purchase offer for $sku."
   }
@@ -846,9 +889,9 @@ foreach ($sku in $liveEpubSkus) {
 if ($shopOutput -match '(?is)<a\b[^>]*bookstore-direct-offer__action') {
   throw 'The API-based EPUB launch must not expose a hosted direct-offer checkout link.'
 }
-if ([regex]::Matches($shopOutput, 'data-direct-offer-status=(?:"|'')?live(?:"|'')?', 'IgnoreCase').Count -ne 5 -or
-    [regex]::Matches($shopOutput, '\bdata-epub-checkout(?:=|\s|>)', 'IgnoreCase').Count -ne 5) {
-  throw 'Expected five live EPUB offers and forms, one per product page.'
+if ([regex]::Matches($shopOutput, 'data-direct-offer-status=(?:"|'')?live(?:"|'')?', 'IgnoreCase').Count -ne $eligibleEpubSkus.Count -or
+    [regex]::Matches($shopOutput, '\bdata-epub-checkout(?:=|\s|>)', 'IgnoreCase').Count -ne $eligibleEpubSkus.Count) {
+  throw 'Expected one live EPUB offer and form per clock-eligible product page.'
 }
 if ($shopOutput -match 'data-direct-offer-status=(?:"|'')?disabled(?:"|'')?') {
   throw 'No closed EPUB offer may remain on the storefront.'
@@ -895,6 +938,9 @@ $shopSurfaceExpectations = @(
   @{ Path = 'shop/the-parable-of-the-sheep/index.html'; KindleCount = 1; Expected = @('Outside In Print e-book', 'Secure checkout through Square. E-book delivered by email.', 'Continue to Square — $9.99', 'EPUB e-book', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') },
   @{ Path = 'shop/the-water-cycle/index.html'; KindleCount = 1; Expected = @('Outside In Print e-book', 'Secure checkout through Square. E-book delivered by email.', 'Continue to Square — $9.99', 'EPUB e-book', 'Robert V. Ussley', 'Outside In Print', 'Kindle on Amazon · $9.99') }
 )
+if ($magicEligible) {
+  $shopSurfaceExpectations += @{ Path = 'shop/fifty-years-of-magic/index.html'; KindleCount = 0; Expected = @('Outside In Print e-book', 'Continue to Square — $9.99', 'EPUB e-book', 'Robert V. Ussley', 'Outside In Print') }
+}
 foreach ($surface in $shopSurfaceExpectations) {
   $surfaceHtml = [Net.WebUtility]::HtmlDecode([string]$output[$surface.Path])
   foreach ($expectedText in $surface.Expected) {
