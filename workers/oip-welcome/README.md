@@ -14,6 +14,11 @@ subscriber import, bulk enrollment, timer, email renderer, or unsubscribe sync.
    omits `data.newsletter`; that field is optional. Retrieve the exact subscriber
    ID from Buttondown with the configured `Buttondown-Context` newsletter header;
    never trust an email in the webhook.
+   Normalize legacy UUIDs and current TypeIDs to one canonical `sub_` TypeID before
+   the owner-test filter, API lookup, and ledger reservation. Normalize the API's
+   returned ID before comparing it too. Explicit newsletter IDs likewise compare
+   by their canonical `news_` TypeID. TypeIDs require exactly 26 lowercase Crockford
+   base32 characters and a first character no greater than `7` (128-bit limit).
 3. Require canonical `type: regular`, a valid email, and `creation_date` at or after
    the fixed UTC cutover and no later than the current time. Imported records are
    excluded. Old pending records that confirm later are also excluded. Other
@@ -24,7 +29,8 @@ subscriber import, bulk enrollment, timer, email renderer, or unsubscribe sync.
    `enrollment_ref` (random UUID) and `sequence_version` (`welcome-v1`).
 
 At most one event request is attempted for each Buttondown subscriber ID, including
-concurrent deliveries and subsequent sequence-version changes. This is not an
+concurrent UUID/TypeID deliveries and subsequent sequence-version changes. Existing
+TypeID ledger keys remain unchanged. This is not an
 exactly-once delivery guarantee: a crash between reservation and POST can leave an
 unsent welcome requiring review. Deleting and recreating a Buttondown subscriber
 creates a new identity; the bridge does not deduplicate that new ID by email.
@@ -128,6 +134,8 @@ Checked 2026-10-26:
 - [Buttondown webhook signature and confirmed-event contract](https://docs.buttondown.com/api-webhooks-introduction)
 - [Buttondown canonical subscriber endpoint](https://docs.buttondown.com/api-subscribers-retrieve)
 - [Buttondown subscriber states](https://docs.buttondown.com/api-subscribers-introduction)
+- [Buttondown UUID/TypeID compatibility and object prefixes](https://buttondown.com/blog/how-we-migrate-typeID)
+- [TypeID encoding specification and reference vectors](https://github.com/jetify-com/typeid/tree/main/spec)
 - [Resend event send endpoint](https://resend.com/docs/api-reference/events/send-event)
 
 The Resend event response contains `object: event` and the event name, not a unique
