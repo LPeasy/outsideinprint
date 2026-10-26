@@ -7,6 +7,9 @@ import { handleRequest } from '../src/index.js';
 
 const ID = 'sub_00000000000000000000000001';
 const OTHER_ID = 'sub_00000000000000000000000002';
+const UUID_ID = '00000000-0000-0000-0000-000000000001';
+const NEWSLETTER_UUID = '00000000-0000-0000-0000-000000000010';
+const NEWSLETTER_TYPE_ID = 'news_0000000000000000000000000g';
 const NOW = Date.parse('2026-10-26T18:00:00Z');
 const EVENT = 'oip.almanack.confirmed.v1';
 
@@ -30,7 +33,7 @@ function fixture() {
     };
     return statement;
   } };
-  const env = { DB, NEWSLETTER_ID: 'fixture-newsletter', BUTTONDOWN_API_KEY: 'fixture-buttondown-key', RESEND_API_KEY: 'fixture-resend-key',
+  const env = { DB, NEWSLETTER_ID: NEWSLETTER_UUID, BUTTONDOWN_API_KEY: 'fixture-buttondown-key', RESEND_API_KEY: 'fixture-resend-key',
     WEBHOOK_SIGNING_KEY: 'fixture-signing-key-that-is-long-enough', ADMIN_TOKEN: 'fixture-admin-token-that-is-long-enough',
     WELCOME_ENABLED: 'true', WELCOME_CUTOVER_AT: '2026-10-26T17:00:00Z', WELCOME_SEQUENCE_VERSION: 'welcome-v1', RESEND_EVENT_NAME: EVENT };
   let subscriber = { id: ID, type: 'regular', creation_date: '2026-10-26T17:30:00Z', email_address: 'owner@example.test', subscriber_import_id: null, source: 'organic' };
@@ -115,6 +118,84 @@ test('omitted newsletter does not bypass signature or canonical subscriber valid
   assert.deepEqual(await (await f.send(f.request(payload))).json(), { status: 'ineligible' });
   assert.equal(f.events().length, 0);
   assert.equal(f.row(), undefined);
+});
+
+test('legacy UUID hook and TypeID API response use the canonical owner filter, GET, and ledger key', async () => {
+  const f = fixture();
+  f.env.TEST_SUBSCRIBER_ID = ID;
+  assert.deepEqual(await (await f.send(f.request({ data: { subscriber: UUID_ID } }))).json(), { status: 'accepted' });
+  assert.equal(f.calls[0].url, `https://api.buttondown.com/v1/subscribers/${ID}`);
+  assert.equal(f.row().subscriber_id, ID);
+  assert.equal(f.row().state, 'accepted');
+  assert.equal(f.sql.prepare('SELECT COUNT(*) AS count FROM welcome_enrollments WHERE subscriber_id = ?').get(UUID_ID).count, 0);
+});
+
+test('concurrent UUID and TypeID deliveries share one reservation with a UUID owner allowlist', async () => {
+  const f = fixture();
+  f.env.TEST_SUBSCRIBER_ID = UUID_ID;
+  await Promise.all(Array.from({ length: 12 }, (_, index) => f.send(f.request({ data: {
+    subscriber: index % 2 ? ID : UUID_ID, newsletter: index % 2 ? NEWSLETTER_UUID : NEWSLETTER_TYPE_ID,
+  } }))));
+  assert.equal(f.events().length, 1);
+  assert.equal(f.sql.prepare('SELECT COUNT(*) AS count FROM welcome_enrollments').get().count, 1);
+  assert.equal(f.row().subscriber_id, ID);
+});
+
+test('canonical API response UUID is accepted only for the same subscriber identity', async () => {
+  const f = fixture();
+  f.setSubscriber({ id: UUID_ID });
+  assert.deepEqual(await (await f.send()).json(), { status: 'accepted' });
+  const mismatch = fixture();
+  mismatch.setSubscriber({ id: '00000000-0000-0000-0000-000000000002' });
+  assert.equal((await mismatch.send(mismatch.request({ data: { subscriber: UUID_ID } }))).status, 503);
+  assert.equal(mismatch.events().length, 0);
+  assert.equal(mismatch.row(), undefined);
+});
+
+test('UUID conversion matches published TypeID vectors and the full 128-bit range', async () => {
+  // https://github.com/jetify-com/typeid/blob/main/spec/valid.json
+  for (const [uuid, suffix] of [
+    ['01890a5d-ac96-774b-bcce-b302099a8057', '01h455vb4pex5vsknk084sn02q'],
+    ['00000000-0000-0000-0000-000000000000', '00000000000000000000000000'],
+    ['ffffffff-ffff-ffff-ffff-ffffffffffff', '7zzzzzzzzzzzzzzzzzzzzzzzzz'],
+  ]) {
+    const f = fixture(); const expected = `sub_${suffix}`;
+    f.setSubscriber({ id: expected });
+    f.env.TEST_SUBSCRIBER_ID = expected;
+    assert.deepEqual(await (await f.send(f.request({ data: { subscriber: uuid.toUpperCase() } }))).json(), { status: 'accepted' });
+    assert.equal(f.calls[0].url, `https://api.buttondown.com/v1/subscribers/${expected}`);
+    assert.equal(f.sql.prepare('SELECT subscriber_id FROM welcome_enrollments').get().subscriber_id, expected);
+  }
+});
+
+test('subscriber TypeIDs require exact Crockford lowercase, length, prefix, and 128-bit bounds', async () => {
+  const invalid = [
+    'sub_0000000000000000000000000', 'sub_000000000000000000000000001', 'sub_80000000000000000000000000',
+    ...['i', 'l', 'o', 'u', 'A'].map(char => `sub_0000000000000000000000000${char}`),
+    'SUB_00000000000000000000000001', 'news_00000000000000000000000001',
+  ];
+  for (const id of invalid) {
+    const incoming = fixture();
+    assert.equal((await incoming.send(incoming.request({ data: { subscriber: id } }))).status, 400, id);
+    assert.equal(incoming.calls.length, 0);
+    const response = fixture(); response.setSubscriber({ id });
+    assert.equal((await response.send()).status, 503, id);
+    assert.equal(response.events().length, 0);
+  }
+});
+
+test('explicit newsletter UUID and news_ TypeID must name the same newsletter', async () => {
+  for (const [configuredId, suppliedId] of [[NEWSLETTER_UUID, NEWSLETTER_TYPE_ID], [NEWSLETTER_TYPE_ID, NEWSLETTER_UUID]]) {
+    const f = fixture(); f.env.NEWSLETTER_ID = configuredId;
+    assert.deepEqual(await (await f.send(f.request({ data: { subscriber: ID, newsletter: suppliedId } }))).json(), { status: 'accepted' });
+    assert.equal(f.calls[0].options.headers['Buttondown-Context'], configuredId);
+  }
+  for (const newsletter of ['00000000-0000-0000-0000-000000000011', 'news_0000000000000000000000000h',
+    'sub_0000000000000000000000000g', 'news_80000000000000000000000000', 'news_0000000000000000000000000i']) {
+    const f = fixture();
+    assert.equal((await f.send(f.request({ data: { subscriber: ID, newsletter } }))).status, 400);
+    assert.equal(f.calls.length, 0);
+  }
 });
 
 test('signature, body, newsletter, and subscriber validation happen before external calls', async () => {

@@ -1,7 +1,23 @@
 const MAX_BODY_BYTES = 16 * 1024;
-const SUBSCRIBER_ID = /^(?:sub_[a-z0-9]{20,40}|[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12})$/i;
+const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i;
+const TYPE_ID_SUFFIX = /^[0-7][0-9a-hjkmnp-tv-z]{25}$/;
+const BASE32 = '0123456789abcdefghjkmnpqrstvwxyz';
 const NAME = /^[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}$/;
 const encoder = new TextEncoder();
+
+function canonicalId(value, prefix) {
+  if (typeof value !== 'string') return null;
+  if (value.startsWith(`${prefix}_`) && TYPE_ID_SUFFIX.test(value.slice(prefix.length + 1))) return value;
+  if (!UUID.test(value)) return null;
+  // TypeIDs encode the same 128 UUID bits; preserve one ledger key across formats.
+  let bits = BigInt(`0x${value.replaceAll('-', '')}`);
+  let suffix = '';
+  for (let i = 0; i < 26; i++) {
+    suffix = BASE32[Number(bits & 31n)] + suffix;
+    bits >>= 5n;
+  }
+  return `${prefix}_${suffix}`;
+}
 
 function json(value, status = 200) {
   return Response.json(value, { status, headers: { 'Cache-Control': 'no-store' } });
@@ -13,11 +29,11 @@ function date(value) {
 }
 
 function configured(env) {
-  return Boolean(env.DB && env.NEWSLETTER_ID && env.BUTTONDOWN_API_KEY && env.RESEND_API_KEY
+  return Boolean(env.DB && canonicalId(env.NEWSLETTER_ID, 'news') && env.BUTTONDOWN_API_KEY && env.RESEND_API_KEY
     && typeof env.WEBHOOK_SIGNING_KEY === 'string' && env.WEBHOOK_SIGNING_KEY.length >= 32
     && Number.isFinite(date(env.WELCOME_CUTOVER_AT)) && NAME.test(env.RESEND_EVENT_NAME ?? '')
     && NAME.test(env.WELCOME_SEQUENCE_VERSION ?? '')
-    && (!env.TEST_SUBSCRIBER_ID || SUBSCRIBER_ID.test(env.TEST_SUBSCRIBER_ID)));
+    && (!env.TEST_SUBSCRIBER_ID || canonicalId(env.TEST_SUBSCRIBER_ID, 'sub')));
 }
 
 async function readBody(request) {
@@ -67,7 +83,7 @@ async function currentSubscriber(id, env, fetcher) {
   if (response.status === 404) return null;
   if (response.status !== 200) throw new Error('buttondown_unavailable');
   const value = await response.json();
-  if (value?.id !== id) throw new Error('buttondown_invalid_response');
+  if (canonicalId(value?.id, 'sub') !== id) throw new Error('buttondown_invalid_response');
   return value;
 }
 
@@ -119,12 +135,13 @@ async function webhook(request, env, fetcher, now) {
   if (payload?.event_type !== 'subscriber.confirmed') return json({ status: 'ignored' });
   // Buttondown's current webhook preview omits newsletter. The dedicated signing
   // key and canonical GET's Buttondown-Context bind this handler to its newsletter.
-  if ((payload.data?.newsletter !== undefined && payload.data.newsletter !== env.NEWSLETTER_ID)
-    || !SUBSCRIBER_ID.test(payload.data?.subscriber ?? '')) return json({ error: 'invalid_event' }, 400);
+  const id = canonicalId(payload.data?.subscriber, 'sub');
+  const newsletter = canonicalId(env.NEWSLETTER_ID, 'news');
+  if ((payload.data?.newsletter !== undefined && (!newsletter || canonicalId(payload.data.newsletter, 'news') !== newsletter))
+    || !id) return json({ error: 'invalid_event' }, 400);
   if (env.WELCOME_ENABLED !== 'true') return json({ status: 'disabled' });
   if (!configured(env)) return json({ error: 'not_configured' }, 503);
-  const id = payload.data.subscriber;
-  if (env.TEST_SUBSCRIBER_ID && id !== env.TEST_SUBSCRIBER_ID) return json({ status: 'test_only' });
+  if (env.TEST_SUBSCRIBER_ID && id !== canonicalId(env.TEST_SUBSCRIBER_ID, 'sub')) return json({ status: 'test_only' });
 
   let enrollment;
   let subscriber;
