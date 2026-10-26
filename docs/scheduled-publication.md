@@ -82,6 +82,12 @@ The helper fills missing hashes and image dimensions from the staged index.
   wall times. `endsAt` defaults to 24 hours later and is an exclusive absolute
   verification-window end. A shorter window may be declared; windows longer than
   24 hours are rejected to prevent overlap with a following day's grouped trigger.
+- Optional `rebuildAt` adds one separately owner-authorized rebuild after
+  `releaseAt` and before `endsAt`, using an explicit Eastern timestamp. It keeps
+  the original publication eligibility and reuses the same source bindings and
+  public checks. Each trigger checks its own absolute start and the release's
+  end, so a later-year cron cannot rebuild the site. This is a requested extra
+  run, not an automatic retry of a failed deployment; GitHub timing delays apply.
 - `bindings` records SHA-256 hashes. A `file` hashes the exact Git blob. A `gallery`
   hashes only the uniquely selected Gallery row, using sorted-key canonical JSON;
   unrelated Gallery additions do not invalidate it. A Gallery-only release can
