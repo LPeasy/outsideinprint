@@ -117,7 +117,10 @@ async function webhook(request, env, fetcher, now) {
   let payload;
   try { payload = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes)); } catch { return json({ error: 'invalid_json' }, 400); }
   if (payload?.event_type !== 'subscriber.confirmed') return json({ status: 'ignored' });
-  if (payload.data?.newsletter !== env.NEWSLETTER_ID || !SUBSCRIBER_ID.test(payload.data?.subscriber ?? '')) return json({ error: 'invalid_event' }, 400);
+  // Buttondown's current webhook preview omits newsletter. The dedicated signing
+  // key and canonical GET's Buttondown-Context bind this handler to its newsletter.
+  if ((payload.data?.newsletter !== undefined && payload.data.newsletter !== env.NEWSLETTER_ID)
+    || !SUBSCRIBER_ID.test(payload.data?.subscriber ?? '')) return json({ error: 'invalid_event' }, 400);
   if (env.WELCOME_ENABLED !== 'true') return json({ status: 'disabled' });
   if (!configured(env)) return json({ error: 'not_configured' }, 503);
   const id = payload.data.subscriber;

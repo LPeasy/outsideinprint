@@ -7,9 +7,13 @@ subscriber import, bulk enrollment, timer, email renderer, or unsubscribe sync.
 
 ## Enrollment contract
 
-1. Verify Buttondown's HMAC-SHA256 signature over the original request bytes.
-2. Require the configured newsletter and a subscriber ID. Retrieve that exact ID
-   from Buttondown with newsletter context; never trust an email in the webhook.
+1. Verify Buttondown's HMAC-SHA256 signature over the original request bytes using
+   the dedicated signing key for this newsletter's webhook.
+2. Require a subscriber ID and reject a mismatched newsletter when explicitly
+   supplied. Buttondown's provider-side webhook preview observed on 2026-10-26
+   omits `data.newsletter`; that field is optional. Retrieve the exact subscriber
+   ID from Buttondown with the configured `Buttondown-Context` newsletter header;
+   never trust an email in the webhook.
 3. Require canonical `type: regular`, a valid email, and `creation_date` at or after
    the fixed UTC cutover and no later than the current time. Imported records are
    excluded. Old pending records that confirm later are also excluded. Other
