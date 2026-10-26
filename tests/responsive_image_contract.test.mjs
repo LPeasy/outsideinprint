@@ -491,7 +491,7 @@ test("publishing guides preserve responsive budgets and migration history", () =
   assert.match(workflow, /test_responsive_image_output_contract\.ps1/);
   assert.match(workflow, /node --test tests\/all\.test\.mjs/);
 
-  for (const required of ["900 MiB", "800 MiB", "1 MiB", "calculated", "1,500", "15 minutes", "five minutes"]) {
+  for (const required of ["900 MiB", "800 MiB", "1 MiB", "calculated", "1,500", "20 minutes", "five minutes"]) {
     assert.ok(imageGuide.includes(required), `responsive image guide must document ${required}`);
   }
   for (const required of [
