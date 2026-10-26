@@ -1,0 +1,164 @@
+{{- /* Load once per build. Raw-byte hashes intentionally include every policy edit. */ -}}
+{{- $path := "data/image-signatures.json" -}}
+{{- if not (fileExists $path) -}}
+  {{- errorf "Image signature policy is missing: %s" $path -}}
+{{- end -}}
+{{- $raw := readFile $path -}}
+{{- $policy := $raw | transform.Unmarshal -}}
+{{- if not (reflect.IsMap $policy) -}}
+  {{- errorf "Image signature policy must be an object" -}}
+{{- end -}}
+{{- $required := slice "version" "mark" "default_classes" "width_ratio" "inset_ratio" "overrides" "legacy_assets" -}}
+{{- range $key, $value := $policy -}}
+  {{- if not (in $required $key) -}}
+    {{- errorf "Image signature policy has unknown field %q" $key -}}
+  {{- end -}}
+{{- end -}}
+{{- range $required -}}
+  {{- if not (isset $policy .) -}}
+    {{- errorf "Image signature policy is missing field %q" . -}}
+  {{- end -}}
+{{- end -}}
+{{- $numberTypes := slice "int" "int64" "uint64" "float64" "json.Number" -}}
+{{- if or (not (in $numberTypes (printf "%T" $policy.version))) (ne (printf "%v" $policy.version) "1") -}}
+  {{- errorf "Image signature policy version must be the number 1" -}}
+{{- end -}}
+{{- $markPath := printf "%v" $policy.mark -}}
+{{- if or (ne (printf "%T" $policy.mark) "string") (not (findRE `^images/signatures/[a-z0-9][a-z0-9._-]*\.png$` $markPath)) -}}
+  {{- errorf "Image signature mark must be a PNG under assets/images/signatures/: %q" $markPath -}}
+{{- end -}}
+{{- if not (reflect.IsSlice $policy.default_classes) -}}
+  {{- errorf "Image signature default_classes must be an array" -}}
+{{- else -}}
+  {{- if eq (len $policy.default_classes) 0 -}}
+    {{- errorf "Image signature default_classes must not be empty" -}}
+  {{- end -}}
+  {{- $seen := slice -}}
+  {{- range $policy.default_classes -}}
+    {{- if or (ne (printf "%T" .) "string") (not (in (slice "essay_illustration" "editorial_cartoon") .)) (in $seen .) -}}
+      {{- errorf "Image signature default class is invalid or repeated: %v" . -}}
+    {{- end -}}
+    {{- $seen = $seen | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- range $key := slice "width_ratio" "inset_ratio" -}}
+  {{- $value := index $policy $key -}}
+  {{- if not (in $numberTypes (printf "%T" $value)) -}}
+    {{- errorf "Image signature %s must be a number" $key -}}
+  {{- else if or (lt (float $value) 0.0) (gt (float $value) 0.25) (and (eq $key "width_ratio") (eq (float $value) 0.0)) -}}
+    {{- errorf "Image signature %s is outside its allowed range" $key -}}
+  {{- end -}}
+{{- end -}}
+{{- $assets := (index hugo.Data "image-assets").assets -}}
+{{- if not (reflect.IsMap $policy.legacy_assets) -}}
+  {{- errorf "Image signature legacy_assets must be an object" -}}
+{{- else -}}
+  {{- $legacyFields := slice "id" "source" "sha256" "width" "height" "image_class" "processing_hint" "processing_state" "review_state" "usage_state" "url" "reason" -}}
+  {{- $legacyURLs := slice -}}
+  {{- range $id, $entry := $policy.legacy_assets -}}
+    {{- if isset $assets $id -}}
+      {{- errorf "Image signature legacy asset %q collides with the managed manifest" $id -}}
+    {{- end -}}
+    {{- if not (reflect.IsMap $entry) -}}
+      {{- errorf "Image signature legacy asset %q must be an object" $id -}}
+    {{- else -}}
+      {{- range $field := $legacyFields -}}
+        {{- if not (isset $entry $field) -}}
+          {{- errorf "Image signature legacy asset %q is missing field %q" $id $field -}}
+        {{- end -}}
+      {{- end -}}
+      {{- range $field, $value := $entry -}}
+        {{- if not (in $legacyFields $field) -}}
+          {{- errorf "Image signature legacy asset %q has unknown field %q" $id $field -}}
+        {{- end -}}
+        {{- if in (slice "width" "height") $field -}}
+          {{- if not (in $numberTypes (printf "%T" $value)) -}}
+            {{- errorf "Image signature legacy asset %q %s must be a positive integer" $id $field -}}
+          {{- else if or (le (float $value) 0.0) (ne (float $value) (float (int $value))) -}}
+            {{- errorf "Image signature legacy asset %q %s must be a positive integer" $id $field -}}
+          {{- end -}}
+        {{- else if or (ne (printf "%T" $value) "string") (eq (strings.TrimSpace (printf "%v" $value)) "") -}}
+          {{- errorf "Image signature legacy asset %q %s must be nonempty text" $id $field -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if or (ne $id $entry.id) (ne $id (printf "legacy/%s" $entry.sha256)) (not (findRE `^[a-f0-9]{64}$` $entry.sha256)) -}}
+        {{- errorf "Image signature legacy asset %q must use its actual SHA-256 as its ID" $id -}}
+      {{- end -}}
+      {{- if or (not (findRE `^images/legacy-medium/[a-z0-9_-]+/[a-zA-Z0-9._-]+\.(?:jpeg|jpg)$` $entry.source)) (in $entry.source "..") -}}
+        {{- errorf "Image signature legacy asset %q has unsafe source %q" $id $entry.source -}}
+      {{- end -}}
+      {{- $expectedURL := printf "/images/medium/%s" (strings.TrimPrefix "images/legacy-medium/" $entry.source) -}}
+      {{- if or (ne $entry.url $expectedURL) (in $legacyURLs $entry.url) (isset ((index hugo.Data "image-assets").aliases) $entry.url) -}}
+        {{- errorf "Image signature legacy asset %q has invalid or duplicate alias %q" $id $entry.url -}}
+      {{- end -}}
+      {{- $legacyURLs = $legacyURLs | append $entry.url -}}
+      {{- range $field, $expected := (dict "image_class" "essay_illustration" "processing_hint" "drawing" "processing_state" "derivative_capable" "review_state" "approved" "usage_state" "referenced") -}}
+        {{- if ne (index $entry $field) $expected -}}
+          {{- errorf "Image signature legacy asset %q requires %s=%q" $id $field $expected -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $assets = merge $assets $policy.legacy_assets -}}
+{{- end -}}
+{{- if not (reflect.IsMap $policy.overrides) -}}
+  {{- errorf "Image signature overrides must be an object" -}}
+{{- else -}}
+  {{- range $id, $override := $policy.overrides -}}
+    {{- $entry := index $assets $id -}}
+    {{- if not $entry -}}
+      {{- errorf "Image signature override references unknown asset %q" $id -}}
+    {{- end -}}
+    {{- if not (reflect.IsMap $override) -}}
+      {{- errorf "Image signature override for %q must be an object" $id -}}
+    {{- else -}}
+      {{- if eq (len $override) 0 -}}
+        {{- errorf "Image signature override for %q must not be empty" $id -}}
+      {{- end -}}
+      {{- range $key, $value := $override -}}
+        {{- if not (in (slice "enabled" "reason" "position" "width_ratio" "inset_ratio") $key) -}}
+          {{- errorf "Image signature override for %q has unknown field %q" $id $key -}}
+        {{- end -}}
+        {{- if eq $key "enabled" -}}
+          {{- if ne (printf "%T" $value) "bool" -}}
+            {{- errorf "Image signature enabled for %q must be a boolean" $id -}}
+          {{- end -}}
+          {{- if not (isset $override "reason") -}}
+            {{- errorf "Image signature enabled override for %q requires a reason" $id -}}
+          {{- end -}}
+          {{- if and (eq $value true) $entry (not (in (slice "essay_illustration" "editorial_cartoon" "medium_import") $entry.image_class)) -}}
+            {{- errorf "Image signature cannot be enabled for %q with class %q" $id $entry.image_class -}}
+          {{- end -}}
+        {{- else if eq $key "reason" -}}
+          {{- if or (ne (printf "%T" $value) "string") (eq (strings.TrimSpace (printf "%v" $value)) "") -}}
+            {{- errorf "Image signature reason for %q must be nonempty text" $id -}}
+          {{- end -}}
+        {{- else if eq $key "position" -}}
+          {{- if not (in (slice "bottom-right" "bottom-left" "top-right" "top-left") $value) -}}
+            {{- errorf "Image signature position for %q is invalid: %v" $id $value -}}
+          {{- end -}}
+        {{- else if in (slice "width_ratio" "inset_ratio") $key -}}
+          {{- if not (in $numberTypes (printf "%T" $value)) -}}
+            {{- errorf "Image signature %s for %q must be a number" $key $id -}}
+          {{- else if or (lt (float $value) 0.0) (gt (float $value) 0.25) (and (eq $key "width_ratio") (eq (float $value) 0.0)) -}}
+            {{- errorf "Image signature %s for %q is outside its allowed range" $key $id -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $mark := resources.Get $markPath -}}
+{{- if not $mark -}}
+  {{- errorf "Image signature mark is missing: assets/%s" $markPath -}}
+{{- else if not (reflect.IsImageResourceProcessable $mark) -}}
+  {{- errorf "Image signature mark is not a processable image: %s" $markPath -}}
+{{- else if ne $mark.MediaType.Type "image/png" -}}
+  {{- errorf "Image signature mark must have PNG content: %s" $markPath -}}
+{{- end -}}
+{{- return (dict
+  "policy" $policy
+  "policy_sha256" (crypto.SHA256 $raw)
+  "mark_sha256" (crypto.SHA256 $mark.Content)
+  "mark" $mark
+) -}}

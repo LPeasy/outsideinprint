@@ -10,6 +10,7 @@ $ErrorActionPreference = 'Stop'
 
 . (Join-Path $PSScriptRoot 'helpers/responsive_image_common.ps1')
 . (Join-Path $PSScriptRoot 'helpers/responsive_image_recipe.ps1')
+. (Join-Path $PSScriptRoot 'helpers/image_signatures.ps1')
 
 $maxArtifactBytes = 900MB
 $maxPublicImageBytes = 800MB
@@ -56,7 +57,8 @@ function Get-RenderedUrlModel {
   param(
     [Parameter(Mandatory)][string]$Url,
     [Parameter(Mandatory)][object]$Manifest,
-    [Parameter(Mandatory)][string]$SiteRoot
+    [Parameter(Mandatory)][string]$SiteRoot,
+    [switch]$AllowCompatibility
   )
 
   $relativePath = Get-RenderedRelativePath -Url $Url
@@ -76,8 +78,14 @@ function Get-RenderedUrlModel {
   }
   $asset = $Manifest.assets.$assetId
   $prefix = $match.Groups['prefix'].Value
-  if (-not ([string]$asset.sha256).StartsWith($prefix, [System.StringComparison]::OrdinalIgnoreCase)) {
-    throw "Generated image URL hash prefix does not match '$assetId': $Url"
+  $isCompatibility = $false
+  if ($prefix -cne (Get-OipSignatureRenderPrefix -Asset $asset -SignaturePolicy $script:signaturePolicy)) {
+    $aliasUrl='/' + $relativePath
+    if ($AllowCompatibility -and $script:signatureCompatibility.Aliases.Contains($aliasUrl) -and $script:signatureCompatibility.Aliases[$aliasUrl] -ceq $assetId) {
+      $isCompatibility = $true
+    } else {
+      throw "Generated image URL rendition hash prefix does not match '$assetId': $Url"
+    }
   }
 
   $fullPath = Join-Path $SiteRoot $relativePath.Replace('/', [System.IO.Path]::DirectorySeparatorChar)
@@ -95,6 +103,7 @@ function Get-RenderedUrlModel {
     Width = [int]$match.Groups['width'].Value
     Extension = $match.Groups['extension'].Value
     IsSocial = $match.Groups['social'].Success
+    IsCompatibility = $isCompatibility
   }
 }
 
@@ -170,7 +179,10 @@ if (-not (Test-Path -LiteralPath $siteRoot -PathType Container)) {
 }
 
 $manifest = Get-OipImageManifest -Path $ManifestPath
-$allowedDerivativePaths = Get-OipAllowedDerivativePaths -Manifest $manifest
+$signaturePolicy = Get-OipImageSignaturePolicy -Root (Split-Path -Parent (Split-Path -Parent $ManifestPath)) -Manifest $manifest
+$signatureCompatibility = Get-OipImageSignatureCompatibility -Root (Split-Path -Parent (Split-Path -Parent $ManifestPath)) -Manifest $manifest -SignaturePolicy $signaturePolicy
+$manifest = Get-OipSignatureManifest -Manifest $manifest -LegacyAssets $signaturePolicy.Policy.legacy_assets
+$allowedDerivativePaths = Get-OipAllowedDerivativePaths -Manifest $manifest -SignaturePolicy $signaturePolicy -SignatureCompatibility $signatureCompatibility
 $maxGeneratedImages = $allowedDerivativePaths.Count
 $allowedWidths = @($manifest.defaults.widths | ForEach-Object { [int]$_ })
 $maxRenderWidth = [int]$manifest.defaults.max_render_width
@@ -206,7 +218,7 @@ if ($publicImageBytes -gt $maxPublicImageBytes) {
   throw "public/images exceeds the 800 MiB budget: $publicImageBytes bytes"
 }
 
-$originalsLeak = @($publicFiles | Where-Object { $_.FullName.Replace('\','/') -match '/images/originals/' })
+$originalsLeak = @($publicFiles | Where-Object { $_.FullName.Replace('\','/') -match '/images/(?:originals|legacy-medium)/' })
 if ($originalsLeak.Count -gt 0) {
   throw "Managed original source paths leaked into public output."
 }
@@ -228,7 +240,7 @@ foreach ($renderedFile in $renderedFiles) {
   if (-not $allowedDerivativePaths.Contains($relativePath)) {
     throw "Generated image is outside the approved asset/hash/variant recipe: $relativePath"
   }
-  $model = Get-RenderedUrlModel -Url ('/' + $relativePath) -Manifest $manifest -SiteRoot $siteRoot
+  $model = Get-RenderedUrlModel -Url ('/' + $relativePath) -Manifest $manifest -SiteRoot $siteRoot -AllowCompatibility
   if ($sourceOnlyAssetIds -ccontains $model.Id) {
     throw "Quarantined source-only asset produced a public derivative: $relativePath"
   }
@@ -237,6 +249,14 @@ foreach ($renderedFile in $renderedFiles) {
     throw "Duplicate generated-image output path: $relativePath"
   }
   $renderedModelsByRelativePath[$relativePath] = $model
+}
+foreach ($url in $signatureCompatibility.Aliases.Keys) {
+  $aliasPath=Join-Path $siteRoot $url.TrimStart('/')
+  $canonicalPath=Join-Path $siteRoot $signatureCompatibility.CanonicalByAlias[$url].TrimStart('/')
+  if (-not (Test-Path -LiteralPath $aliasPath -PathType Leaf) -or -not (Test-Path -LiteralPath $canonicalPath -PathType Leaf) -or
+      (Get-OipSha256 $aliasPath) -cne (Get-OipSha256 $canonicalPath)) {
+    throw "Historical image alias must contain the identical signed canonical JPEG: $url"
+  }
 }
 
 $legacyMediumIds = @(
@@ -280,7 +300,7 @@ if ($missingFocusedCleanupDerivatives.Count -gt 0) {
 $sourceLengths = @{}
 foreach ($assetId in $assetIds) {
   $asset = $manifest.assets.$assetId
-  $sourceFullPath = Join-Path (Split-Path -Parent (Split-Path -Parent $ManifestPath)) ('assets/' + ([string]$asset.source))
+  $sourceFullPath = if ($signaturePolicy.LegacySourcePaths.ContainsKey($assetId)) { $signaturePolicy.LegacySourcePaths[$assetId] } else { Join-Path (Split-Path -Parent (Split-Path -Parent $ManifestPath)) ('assets/' + ([string]$asset.source)) }
   $sourceFile = Get-Item -LiteralPath $sourceFullPath
   $lengthKey = [string]$sourceFile.Length
   if (-not $sourceLengths.ContainsKey($lengthKey)) {
@@ -316,8 +336,24 @@ if (-not (Test-Path -LiteralPath $publicMediumRoot -PathType Container)) {
   throw 'Production output is missing the retained compact Medium JPEG/JPG fleet.'
 }
 $publicMediumFiles = @(Get-ChildItem -LiteralPath $publicMediumRoot -File -Recurse)
-if ($publicMediumFiles.Count -ne 316) {
-  throw "Production output must contain exactly 316 retained Medium JPEG/JPG files; found $($publicMediumFiles.Count)."
+$expectedStaticMediumCount = 316 - $signaturePolicy.Policy.legacy_assets.Count
+if ($publicMediumFiles.Count -ne $expectedStaticMediumCount) {
+  throw "Production output must contain exactly $expectedStaticMediumCount retained Medium JPEG/JPG files after signature mounts; found $($publicMediumFiles.Count)."
+}
+foreach ($id in $signaturePolicy.Policy.legacy_assets.Keys) {
+  $legacy = $signaturePolicy.Policy.legacy_assets[$id]
+  if (Test-Path -LiteralPath (Join-Path $siteRoot $legacy.url.TrimStart('/'))) { throw "Unsigned legacy artwork leaked at $($legacy.url)." }
+  if (-not $renderedAssetIds.Contains($id)) { throw "Signed legacy artwork has no public derivative: $id" }
+}
+$excludedLegacyUrls=@($signaturePolicy.Policy.legacy_assets.Values | ForEach-Object { $_.url })
+$staticMediumRoot=Join-Path (Split-Path -Parent (Split-Path -Parent $ManifestPath)) 'static/images/medium'
+foreach ($sourceFile in @(Get-ChildItem -LiteralPath $staticMediumRoot -File -Recurse)) {
+  $url='/images/medium/' + $sourceFile.FullName.Substring($staticMediumRoot.Length + 1).Replace('\','/')
+  if ($url -cin $excludedLegacyUrls) { continue }
+  $publicFile=Join-Path $siteRoot $url.TrimStart('/')
+  if (-not (Test-Path -LiteralPath $publicFile -PathType Leaf) -or (Get-OipSha256 $sourceFile.FullName) -cne (Get-OipSha256 $publicFile)) {
+    throw "Retained static Medium file is missing or changed: $url"
+  }
 }
 $unsupportedPublicMediumFiles = @($publicMediumFiles | Where-Object { $_.Extension.ToLowerInvariant() -notin @('.jpg','.jpeg') })
 if ($unsupportedPublicMediumFiles.Count -gt 0) {
@@ -332,6 +368,7 @@ $eagerPictureCount = 0
 $lazyPictureCount = 0
 $managedLightboxCount = 0
 $managedSocialPageCount = 0
+$galleryDownloadCount = 0
 
 foreach ($htmlFile in $htmlFiles) {
   $relativeHtmlPath = $htmlFile.FullName.Substring($siteRoot.Length + 1).Replace('\','/')
@@ -355,6 +392,11 @@ foreach ($htmlFile in $htmlFiles) {
     $assetId = $pictureMatch.Groups['id1'].Value + $pictureMatch.Groups['id2'].Value + $pictureMatch.Groups['id3'].Value
     if ($assetIds -cnotcontains $assetId) {
       throw "Managed picture references unknown asset '$assetId': $relativeHtmlPath"
+    }
+    $expectedSigned=(Test-OipImageSignatureEnabled -Asset $manifest.assets.$assetId -SignaturePolicy $signaturePolicy).ToString().ToLowerInvariant()
+    $pictureTag=[regex]::Match($pictureHtml,'(?is)^<picture\b[^>]*>').Value
+    if ((Get-HtmlAttribute -Tag $pictureTag -Name 'data-oip-image-signed') -cne $expectedSigned) {
+      throw "Managed picture has incorrect signature state: $relativeHtmlPath => $assetId"
     }
 
     $sourceMatches = @([regex]::Matches($pictureHtml, '(?is)<source\b[^>]*>'))
@@ -482,6 +524,17 @@ foreach ($htmlFile in $htmlFiles) {
     }
     $managedLightboxCount++
   }
+  foreach ($downloadMatch in [regex]::Matches($html, '(?is)<a\b[^>]*\bdata-gallery-download(?:\s|=|>)[^>]*>')) {
+    $downloadUrl=Get-HtmlAttribute -Tag $downloadMatch.Value -Name 'href'
+    $downloadModel=Get-RenderedUrlModel -Url $downloadUrl -Manifest $manifest -SiteRoot $siteRoot
+    if ($downloadModel.Extension -cne 'webp' -or $downloadModel.IsSocial -or
+        $downloadModel.Width -ne [Math]::Min([int]$downloadModel.Asset.width,$maxRenderWidth) -or
+        -not (Test-OipImageSignatureEnabled -Asset $downloadModel.Asset -SignaturePolicy $signaturePolicy) -or
+        (Get-HtmlAttribute -Tag $downloadMatch.Value -Name 'download') -cnotmatch '^[a-z0-9-]+-bob\.webp$') {
+      throw "Gallery download must use the signed largest WebP: $relativeHtmlPath"
+    }
+    $galleryDownloadCount++
+  }
 
   if ($html -match '(?i)/images/medium/[^"''<>\s\)]+\.(?:png|gif)') {
     throw "Generated HTML retains a retired raw Medium PNG/GIF URL: $relativeHtmlPath"
@@ -490,7 +543,7 @@ foreach ($htmlFile in $htmlFiles) {
     throw "Generated HTML retains a retired raw Syd-and-Oliver hero URL: $relativeHtmlPath"
   }
 
-  $socialUrlMatches = @([regex]::Matches($html, '(?i)(?:https?://[^"''<>\s]+)?/images/rendered/(?:editorial/[a-z0-9-]+|essays/[a-z0-9/-]+|medium/[0-9a-f]{64}|books/[a-z0-9-]+/cover)/[0-9a-f]{8,64}/social-[1-9][0-9]*w\.jpg'))
+  $socialUrlMatches = @([regex]::Matches($html, '(?i)(?:https?://[^"''<>\s]+)?/images/rendered/(?:editorial/[a-z0-9-]+|essays/[a-z0-9/-]+|(?:medium|legacy)/[0-9a-f]{64}|books/[a-z0-9-]+/cover)/[0-9a-f]{8,64}/social-[1-9][0-9]*w\.jpg'))
   if ($socialUrlMatches.Count -gt 0) {
     $uniqueSocialUrls = @($socialUrlMatches | ForEach-Object { Get-RenderedRelativePath -Url $_.Value } | Sort-Object -Unique)
     if ($uniqueSocialUrls.Count -ne 1) {
@@ -553,6 +606,9 @@ if ($managedLightboxCount -eq 0) {
 }
 if ($managedSocialPageCount -eq 0) {
   throw 'Generated HTML contains no managed shared social JPEG metadata.'
+}
+if ($galleryDownloadCount -eq 0) {
+  throw 'Generated Gallery contains no signed illustration download links.'
 }
 
 Write-Host "Responsive-image output contract passed: $($renderedFiles.Count) derivatives, $managedPictureCount managed pictures, $publicImageBytes public image bytes, $publicBytes total public bytes."

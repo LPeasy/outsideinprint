@@ -1,0 +1,31 @@
+{{- /* Always start with the original; resize and composite before one final encode. */ -}}
+{{- $resource := .resource -}}
+{{- $width := int .width -}}
+{{- $spec := printf "%dx %s" $width .spec -}}
+{{- $result := false -}}
+{{- if .signature.enabled -}}
+  {{- $filters := slice (images.Process (printf "resize %s" $spec)) -}}
+  {{- $signature := .signature -}}
+  {{- $height := int (math.Round (div (mul (float $resource.Height) (float $width)) (float $resource.Width))) -}}
+  {{- $markWidth := int (math.Max 1 (math.Round (mul (float $width) (float $signature.width_ratio)))) -}}
+  {{- $signatureMark := .mark -}}
+  {{- $mark := $signatureMark.Resize (printf "%dx png lanczos" $markWidth) -}}
+  {{- /* Hugo 0.167 gives newly resized and disk-cached resources different Keys.
+        Rewrap the same PNG bytes so Overlay uses one stable key on every build. */ -}}
+  {{- $markBytes := $mark.Content -}}
+  {{- $mark = resources.FromString (printf "images/signature-intermediates/%s/%dw.png" (crypto.SHA256 $markBytes) $markWidth) $markBytes -}}
+  {{- $insetX := int (math.Round (mul (float $width) (float $signature.inset_ratio))) -}}
+  {{- $insetY := int (math.Round (mul (float $height) (float $signature.inset_ratio))) -}}
+  {{- $x := sub (sub $width $mark.Width) $insetX -}}
+  {{- $y := sub (sub $height $mark.Height) $insetY -}}
+  {{- if strings.HasSuffix $signature.position "left" }}{{ $x = $insetX }}{{ end -}}
+  {{- if strings.HasPrefix $signature.position "top" }}{{ $y = $insetY }}{{ end -}}
+  {{- if or (lt $x 0) (lt $y 0) (gt (add $x $mark.Width) $width) (gt (add $y $mark.Height) $height) -}}
+    {{- errorf "Image signature does not fit asset %q at %dx%d; adjust its signature override" .id $width $height -}}
+  {{- end -}}
+  {{- $filters = $filters | append (images.Overlay $mark $x $y) -}}
+  {{- $result = $resource.Filter $filters -}}
+{{- else -}}
+  {{- $result = $resource.Resize $spec -}}
+{{- end -}}
+{{- return $result -}}

@@ -1,0 +1,1227 @@
+{
+  "reviewed_at": "2026-10-26",
+  "basis": "Caption and recovery-report provenance plus visual review. Class alone is not authorship evidence. Default original-illustration classes reviewed for clear sourced exceptions. All 461 default bottom-right corners reviewed; no visible BOB there. Other corners were not exhaustively checked.",
+  "policy_sha256": "bfb2bdd3f06fa6124e144529b18678eac87f3ee122eb5b592c9fe1006d84af0c",
+  "mark_approval": "Owner selected recreated lettering derived from The Plunge reference. See assets/images/signatures/provenance.json.",
+  "authored_medium": [
+    {
+      "id": "medium/07375509446ac63c4f1ab98b192ca8d98ce96c0999ecc857ec664438ef6c26b5",
+      "source": "assets/images/originals/medium/07375509446ac63c4f1ab98b192ca8d98ce96c0999ecc857ec664438ef6c26b5.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md",
+          "line": 322,
+          "context": "### A Simple Rule for Mutually Exclusive and Collectively Exhaustive Thinking\n\n![](oip-image:medium/07375509446ac63c4f1ab98b192ca8d98ce96c0999ecc857ec664438ef6c26b5)\n\n*Created by Author with GPT-4o*\n\n#### If you want an easy way to remember, think about this:"
+        }
+      ]
+    },
+    {
+      "id": "medium/0fda9c1e65b4765b7fee77b3a143c7f3a4684f8f18330b1d593dab408d0f6717",
+      "source": "assets/images/originals/medium/0fda9c1e65b4765b7fee77b3a143c7f3a4684f8f18330b1d593dab408d0f6717.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/35-years-of-yellow-the-simpsons-time-loop.md",
+          "line": 178,
+          "context": "> lore.***\n\n![Made by Author with ChatGPT](oip-image:medium/0fda9c1e65b4765b7fee77b3a143c7f3a4684f8f18330b1d593dab408d0f6717)\n\n*Made by Author with ChatGPT*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Made by Author with ChatGPT*",
+          "sha256": "0fda9c1e65b4765b7fee77b3a143c7f3a4684f8f18330b1d593dab408d0f6717"
+        }
+      ]
+    },
+    {
+      "id": "medium/127a3134915b163410d34aba8d3263f7d684c1306006dba699489d14b244d8f1",
+      "source": "assets/images/originals/medium/127a3134915b163410d34aba8d3263f7d684c1306006dba699489d14b244d8f1.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md",
+          "line": 205,
+          "context": "### Christianity is not a permission slip for hate\n\n![“INRI” ~ art by author with gpt4-o](oip-image:medium/127a3134915b163410d34aba8d3263f7d684c1306006dba699489d14b244d8f1)\n\n*“INRI” ~ art by author with gpt4-o*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*“INRI” ~ art by author with gpt4-o*",
+          "sha256": "127a3134915b163410d34aba8d3263f7d684c1306006dba699489d14b244d8f1"
+        }
+      ]
+    },
+    {
+      "id": "medium/153cece529a7ffda26838482590d4452bfeb0d433eb44eb31f56ddf970a662b4",
+      "source": "assets/images/originals/medium/153cece529a7ffda26838482590d4452bfeb0d433eb44eb31f56ddf970a662b4.png",
+      "usage": "retained_unreferenced",
+      "authorship_evidence": [
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Made by User with ChatGPT*",
+          "sha256": "153cece529a7ffda26838482590d4452bfeb0d433eb44eb31f56ddf970a662b4"
+        }
+      ]
+    },
+    {
+      "id": "medium/1f1d3b1b3797dbf21156a02a37cad6417ea54d12553912a36c624d601b877738",
+      "source": "assets/images/originals/medium/1f1d3b1b3797dbf21156a02a37cad6417ea54d12553912a36c624d601b877738.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.md",
+          "line": 227,
+          "context": "### Philosophy & Mindset\n\n![Made by Author with ChatGPT](oip-image:medium/1f1d3b1b3797dbf21156a02a37cad6417ea54d12553912a36c624d601b877738)\n\n*Made by Author with ChatGPT*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Made by Author with ChatGPT*",
+          "sha256": "1f1d3b1b3797dbf21156a02a37cad6417ea54d12553912a36c624d601b877738"
+        }
+      ]
+    },
+    {
+      "id": "medium/239a846e7399926815a645c6b6832ced8ea33effbd917f9673ca0e5a8f214e80",
+      "source": "assets/images/originals/medium/239a846e7399926815a645c6b6832ced8ea33effbd917f9673ca0e5a8f214e80.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/cuomo-vs-mamdani-nyc-2025.md",
+          "line": 82,
+          "context": "### **June 2025**\n\n![Created by Author with ChatGPT](oip-image:medium/239a846e7399926815a645c6b6832ced8ea33effbd917f9673ca0e5a8f214e80)\n\n*Created by Author with ChatGPT*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Created by Author with ChatGPT*",
+          "sha256": "239a846e7399926815a645c6b6832ced8ea33effbd917f9673ca0e5a8f214e80"
+        }
+      ]
+    },
+    {
+      "id": "medium/2b1ea15963df8f0ead4c1584d505e98958fda02da20805844fb78e19ee658286",
+      "source": "assets/images/originals/medium/2b1ea15963df8f0ead4c1584d505e98958fda02da20805844fb78e19ee658286.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md",
+          "line": 102,
+          "context": "### Mutually Exclusive Categories: One Dollar, One Budget Bucket\n\n![](oip-image:medium/2b1ea15963df8f0ead4c1584d505e98958fda02da20805844fb78e19ee658286)\n\n*Created by Author with GPT-4o*\n\n#### Take the first idea: no overlaps."
+        }
+      ]
+    },
+    {
+      "id": "medium/2de353269c4d6a550cb95a4cbbc71516d2dd95d0f79ca18c0f12c6244062d70f",
+      "source": "assets/images/originals/medium/2de353269c4d6a550cb95a4cbbc71516d2dd95d0f79ca18c0f12c6244062d70f.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md",
+          "line": 281,
+          "context": "### From Personal Budgeting to Economics and Risk Analysis\n\n![](oip-image:medium/2de353269c4d6a550cb95a4cbbc71516d2dd95d0f79ca18c0f12c6244062d70f)\n\n*Created by Author with GPT-4o*\n\n> Once these ideas feel natural in your own money tracking, it becomes"
+        }
+      ]
+    },
+    {
+      "id": "medium/31776846cc421ab1bcee6aaece5550347c944752cf9ee5c53b886ab28449b42f",
+      "source": "assets/images/originals/medium/31776846cc421ab1bcee6aaece5550347c944752cf9ee5c53b886ab28449b42f.png",
+      "usage": "retained_unreferenced",
+      "authorship_evidence": [
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Flood Timing Comparison | Made by Author with ChatGPT*",
+          "sha256": "31776846cc421ab1bcee6aaece5550347c944752cf9ee5c53b886ab28449b42f"
+        }
+      ]
+    },
+    {
+      "id": "medium/3b78dafd8c7316c9689933faefd508443e382f22ca5017e2ca312d6e76f570b3",
+      "source": "assets/images/originals/medium/3b78dafd8c7316c9689933faefd508443e382f22ca5017e2ca312d6e76f570b3.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/35-years-of-yellow-the-simpsons-time-loop.md",
+          "line": 200,
+          "context": "#### **The Pandemic (1993)**\n\n![Made by Author with ChatGPT](oip-image:medium/3b78dafd8c7316c9689933faefd508443e382f22ca5017e2ca312d6e76f570b3)\n\n*Made by Author with ChatGPT*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Made by Author with ChatGPT*",
+          "sha256": "3b78dafd8c7316c9689933faefd508443e382f22ca5017e2ca312d6e76f570b3"
+        }
+      ]
+    },
+    {
+      "id": "medium/4247da9d13f86756606baad8f9661f974e3c04e62ed489843878a13ad15c9ebe",
+      "source": "assets/images/originals/medium/4247da9d13f86756606baad8f9661f974e3c04e62ed489843878a13ad15c9ebe.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/cuomo-vs-mamdani-nyc-2025.md",
+          "line": 59,
+          "context": "### **A Brief History ~ (With Links)**\n\n![Created by Author with ChatGPT](oip-image:medium/4247da9d13f86756606baad8f9661f974e3c04e62ed489843878a13ad15c9ebe)\n\n*Created by Author with ChatGPT*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Created by Author with ChatGPT*",
+          "sha256": "4247da9d13f86756606baad8f9661f974e3c04e62ed489843878a13ad15c9ebe"
+        }
+      ]
+    },
+    {
+      "id": "medium/46756d02dc998cc47ad24a4ff9544ae588d45a4d57235fca3fb5ec3c0e37cb29",
+      "source": "assets/images/originals/medium/46756d02dc998cc47ad24a4ff9544ae588d45a4d57235fca3fb5ec3c0e37cb29.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md",
+          "line": 275,
+          "context": "### A final look ~ and the question the image asks\n\n![“Will you speak the truth?” ~ art by author with gpt4-o](oip-image:medium/46756d02dc998cc47ad24a4ff9544ae588d45a4d57235fca3fb5ec3c0e37cb29)\n\n*“Will you speak the truth?” ~ art by author with gpt4-o*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*“Will you speak the truth?” ~ art by author with gpt4-o*",
+          "sha256": "46756d02dc998cc47ad24a4ff9544ae588d45a4d57235fca3fb5ec3c0e37cb29"
+        }
+      ]
+    },
+    {
+      "id": "medium/4b78e3e3d056a68126fbae12e3a387e2a1a93ba6a5bcdfe93955e75c0839c8c7",
+      "source": "assets/images/originals/medium/4b78e3e3d056a68126fbae12e3a387e2a1a93ba6a5bcdfe93955e75c0839c8c7.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/ai-in-education-is-a-wicked-problem.md",
+          "line": 126,
+          "context": "### Why Detection and Governance Fail for the Same Reason\n\n![\"The Futility of Control\"](oip-image:medium/4b78e3e3d056a68126fbae12e3a387e2a1a93ba6a5bcdfe93955e75c0839c8c7)\n\n*\"The Futility of Control\" | Created by Author*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*“The Futility of Control” | Created by Author*",
+          "sha256": "4b78e3e3d056a68126fbae12e3a387e2a1a93ba6a5bcdfe93955e75c0839c8c7"
+        }
+      ]
+    },
+    {
+      "id": "medium/4ebf48bacdff824a125b429a9410afd6a03bd15d67452e2b4a17743ab10836db",
+      "source": "assets/images/originals/medium/4ebf48bacdff824a125b429a9410afd6a03bd15d67452e2b4a17743ab10836db.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/ai-in-education-is-a-wicked-problem.md",
+          "line": 76,
+          "context": "> classroom.\n\n![\"The Wicked Problem Loop\"](oip-image:medium/4ebf48bacdff824a125b429a9410afd6a03bd15d67452e2b4a17743ab10836db)\n\n*\"The Wicked Problem Loop\" | Created by Author*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*“The Wicked Problem Loop” | Created by Author*",
+          "sha256": "4ebf48bacdff824a125b429a9410afd6a03bd15d67452e2b4a17743ab10836db"
+        }
+      ]
+    },
+    {
+      "id": "medium/50a83029f54620986d55be12b97085c5387929661ca91bdc00c6857d519ec04a",
+      "source": "assets/images/originals/medium/50a83029f54620986d55be12b97085c5387929661ca91bdc00c6857d519ec04a.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md",
+          "line": 61,
+          "context": "### Building a Simple Paycheck Budget With Clear Spending Categories\n\n![](oip-image:medium/50a83029f54620986d55be12b97085c5387929661ca91bdc00c6857d519ec04a)\n\n*Created by Author with GPT-4o*\n\n#### Say you bring home \\$3,000."
+        }
+      ]
+    },
+    {
+      "id": "medium/50d02e451c35927758f3e56e9c5fb22e708f8a4aea123f1958ad08551846a4d0",
+      "source": "assets/images/originals/medium/50d02e451c35927758f3e56e9c5fb22e708f8a4aea123f1958ad08551846a4d0.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md",
+          "line": 142,
+          "context": "### Collectively Exhaustive Categories: Making Sure Every Dollar Is Counted\n\n![](oip-image:medium/50d02e451c35927758f3e56e9c5fb22e708f8a4aea123f1958ad08551846a4d0)\n\n*Created by Author with GPT-4o*\n\n#### Now let's look at the second idea: no gaps."
+        }
+      ]
+    },
+    {
+      "id": "medium/5259adbea4308247944f02e7e6be83966064aba054b2c1a011a826f60635f8ba",
+      "source": "assets/images/originals/medium/5259adbea4308247944f02e7e6be83966064aba054b2c1a011a826f60635f8ba.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/ai-in-education-is-a-wicked-problem.md",
+          "line": 9,
+          "context": "subtitle: \"~ And Why We Can’t Figure it Out\"\ndescription: \"Control is impossible when everyone depends on the machine. Schools can’t control AI misuse because everyone depends on it\"\nfeatured_image: \"medium/5259adbea4308247944f02e7e6be83966064aba054b2c1a011a826f60635f8ba\"\nfeatured_image_caption: \"“In My Voice” | Art by Author\"\nfeatured_image_alt: \"“In My Voice”\"\nversion: \"1.3\"\nedition: \"Fourth web edition\""
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*“In My Voice” | Art by Author*",
+          "sha256": "5259adbea4308247944f02e7e6be83966064aba054b2c1a011a826f60635f8ba"
+        }
+      ]
+    },
+    {
+      "id": "medium/57d2e2573cdbc659261cd4a869b43321fa96cd36a2a4f92c0efd3357c04c0318",
+      "source": "assets/images/originals/medium/57d2e2573cdbc659261cd4a869b43321fa96cd36a2a4f92c0efd3357c04c0318.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/35-years-of-yellow-the-simpsons-time-loop.md",
+          "line": 11,
+          "context": "subtitle: \"A fake series finale and the cartoon that somehow predicted 9/11, COVID, and President Donald Trump on an escalator.\"\ndescription: \"In September 2024, The Simpsons aired Bart’s Birthday, a fake series finale that turned the show’s refusal to end into the joke.\"\nfeatured_image: \"medium/57d2e2573cdbc659261cd4a869b43321fa96cd36a2a4f92c0efd3357c04c0318\"\nfeatured_image_caption: \"Illustration by author\"\nfeatured_image_alt: \"35 Years of Yellow: The Simpsons Time Loop\"\nversion: \"1.2\"\nedition: \"Third web edition\""
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Made by Author with ChatGPT*",
+          "sha256": "57d2e2573cdbc659261cd4a869b43321fa96cd36a2a4f92c0efd3357c04c0318"
+        }
+      ]
+    },
+    {
+      "id": "medium/61a52f886b9d1e4bdb9b1d293ab6bbd3419ed45b322e637926a8ce7894b1325e",
+      "source": "assets/images/originals/medium/61a52f886b9d1e4bdb9b1d293ab6bbd3419ed45b322e637926a8ce7894b1325e.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md",
+          "line": 28,
+          "context": "### Mutual Exclusivity and Collective Exhaustion\n\n![](oip-image:medium/61a52f886b9d1e4bdb9b1d293ab6bbd3419ed45b322e637926a8ce7894b1325e)\n\n*Created by Author with GPT-4o*\n\n#### **Your paycheck hits your account on the first of the month.**"
+        }
+      ]
+    },
+    {
+      "id": "medium/68599305e3376636d034277eda9d7b37f1a1108500a77c949f8d8d200d531095",
+      "source": "assets/images/originals/medium/68599305e3376636d034277eda9d7b37f1a1108500a77c949f8d8d200d531095.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/2025-supreme-court-wrap-up.md",
+          "line": 10,
+          "context": "subtitle: \"Final Rulings from the 2025 Term\"\ndescription: \"The U.S. Supreme Court ended its term with rulings and procedural orders touching judicial power, online access, education, and redistricting.\"\nfeatured_image: \"medium/68599305e3376636d034277eda9d7b37f1a1108500a77c949f8d8d200d531095\"\nfeatured_image_caption: \"Illustration by author\"\nfeatured_image_alt: \"2025 Supreme Court Wrap-Up\"\nversion: \"1.3\"\nedition: \"Fourth web edition\""
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Created by Author*",
+          "sha256": "68599305e3376636d034277eda9d7b37f1a1108500a77c949f8d8d200d531095"
+        }
+      ]
+    },
+    {
+      "id": "medium/72b2d666368a71ddb17bd0cfda25d444213f46060c98323516ddb9c941c1ad24",
+      "source": "assets/images/originals/medium/72b2d666368a71ddb17bd0cfda25d444213f46060c98323516ddb9c941c1ad24.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/35-years-of-yellow-the-simpsons-time-loop.md",
+          "line": 241,
+          "context": "#### The Simpsons: 35 Years and Counting\n\n![Made by Author with ChatGPT](oip-image:medium/72b2d666368a71ddb17bd0cfda25d444213f46060c98323516ddb9c941c1ad24)\n\n*Made by Author with ChatGPT*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Made by Author with ChatGPT*",
+          "sha256": "72b2d666368a71ddb17bd0cfda25d444213f46060c98323516ddb9c941c1ad24"
+        }
+      ]
+    },
+    {
+      "id": "medium/749ee55ce9ab60c1fcd9c08c9a18005323d61e7da148e1fbcf4e8ef3daf13794",
+      "source": "assets/images/originals/medium/749ee55ce9ab60c1fcd9c08c9a18005323d61e7da148e1fbcf4e8ef3daf13794.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/mcdonalds-faces-week-long-boycott-june-24-2025.md",
+          "line": 8,
+          "context": "section_label: \"Essay\"\nsubtitle: \"Why? What is going on with the McDonald’s Boycott?\"\nfeatured_image: \"medium/749ee55ce9ab60c1fcd9c08c9a18005323d61e7da148e1fbcf4e8ef3daf13794\"\nfeatured_image_caption: \"Illustration by author\"\nfeatured_image_alt: \"McDonald’s Faces Week‑Long Boycott\"\ndescription: \"The People’s Union USA is urging a boycott of McDonald’s over DEI rollbacks, prices, labor claims, and sales pressure.\"\nversion: \"1.3\""
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Created by Author with ChatGPT*",
+          "sha256": "749ee55ce9ab60c1fcd9c08c9a18005323d61e7da148e1fbcf4e8ef3daf13794"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-second-pass-recovery.json",
+          "caption": "*Created by Author with ChatGPT*",
+          "sha256": "749ee55ce9ab60c1fcd9c08c9a18005323d61e7da148e1fbcf4e8ef3daf13794"
+        }
+      ]
+    },
+    {
+      "id": "medium/768c86219b26313aa92384449e22dc95871c60f30f3d481cca64a911c3a872a5",
+      "source": "assets/images/originals/medium/768c86219b26313aa92384449e22dc95871c60f30f3d481cca64a911c3a872a5.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md",
+          "line": 92,
+          "context": "### The crucifix is a forced look at the worst-case outcome\n\n![“All Eyes on Christ” ~ art by author with gpt4-o](oip-image:medium/768c86219b26313aa92384449e22dc95871c60f30f3d481cca64a911c3a872a5)\n\n*“All Eyes on Christ” ~ art by author with gpt4-o*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*“All Eyes on Christ” ~ art by author with gpt4-o*",
+          "sha256": "768c86219b26313aa92384449e22dc95871c60f30f3d481cca64a911c3a872a5"
+        }
+      ]
+    },
+    {
+      "id": "medium/77416938ef5aa442d49faa61f66857dd3c14ad457156a1596a35131d306c7f28",
+      "source": "assets/images/originals/medium/77416938ef5aa442d49faa61f66857dd3c14ad457156a1596a35131d306c7f28.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/ai-in-education-is-a-wicked-problem.md",
+          "line": 158,
+          "context": "### How AI Is Replacing Judgment and Labor\n\n![\"The Erosion of Judgement\"](oip-image:medium/77416938ef5aa442d49faa61f66857dd3c14ad457156a1596a35131d306c7f28)\n\n*\"The Erosion of Judgement\" | Created by Author*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*“The Erosion of Judgement” | Created by Author*",
+          "sha256": "77416938ef5aa442d49faa61f66857dd3c14ad457156a1596a35131d306c7f28"
+        }
+      ]
+    },
+    {
+      "id": "medium/7ad8c941d8ef0cdebc494ff8267a543e57c619fd45d84384f09cf5330e4dd0f6",
+      "source": "assets/images/originals/medium/7ad8c941d8ef0cdebc494ff8267a543e57c619fd45d84384f09cf5330e4dd0f6.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/the-economics-of-the-mongol-empire.md",
+          "line": 145,
+          "context": "Today's digital networks do the same thing ~ boosting connectivity while exposing vulnerabilities to cyber threats and misinformation.\n\n![Image of a 13th century Mongol Post Rider](oip-image:medium/7ad8c941d8ef0cdebc494ff8267a543e57c619fd45d84384f09cf5330e4dd0f6)\n\n*Image of a 13th century Mongol Post Rider | Created by Author with GPT-4o*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "Image of a 13th century Mongol Post Rider | Created by Author with GPT-4o",
+          "sha256": "7ad8c941d8ef0cdebc494ff8267a543e57c619fd45d84384f09cf5330e4dd0f6"
+        }
+      ]
+    },
+    {
+      "id": "medium/88f4f494e2ff589170be3401c9ed3d398e844d18f013ff3f3d8a08b0923969c1",
+      "source": "assets/images/originals/medium/88f4f494e2ff589170be3401c9ed3d398e844d18f013ff3f3d8a08b0923969c1.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md",
+          "line": 67,
+          "context": "### Exposure therapy, in plain English\n\n![“Exposure Therapy” ~ art by author with gpt4-o](oip-image:medium/88f4f494e2ff589170be3401c9ed3d398e844d18f013ff3f3d8a08b0923969c1)\n\n*“Exposure Therapy” ~ art by author with gpt4-o*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*“Exposure Therapy” ~ art by author with gpt4-o*",
+          "sha256": "88f4f494e2ff589170be3401c9ed3d398e844d18f013ff3f3d8a08b0923969c1"
+        }
+      ]
+    },
+    {
+      "id": "medium/89bef6904367ed90bd1df5dae093513ffb9431cd4ada04fb0fc3e2a971bb3564",
+      "source": "assets/images/originals/medium/89bef6904367ed90bd1df5dae093513ffb9431cd4ada04fb0fc3e2a971bb3564.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md",
+          "line": 189,
+          "context": "### Common Budget Mistakes: Overlapping and Missing Categories\n\n![](oip-image:medium/89bef6904367ed90bd1df5dae093513ffb9431cd4ada04fb0fc3e2a971bb3564)\n\n*Created by Author with GPT-4o*\n\nWhen you understand mutual exclusivity and collective exhaustion ***~ no"
+        }
+      ]
+    },
+    {
+      "id": "medium/8bf803e8dd137b92326086801f6b9c36dc36a39515ae3cfa163548d4d6c79a74",
+      "source": "assets/images/originals/medium/8bf803e8dd137b92326086801f6b9c36dc36a39515ae3cfa163548d4d6c79a74.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md",
+          "line": 140,
+          "context": "### Truth-telling is the offense ~ not \"meanness\"\n\n![“Truth to Power” ~ art by author with gpt4-o](oip-image:medium/8bf803e8dd137b92326086801f6b9c36dc36a39515ae3cfa163548d4d6c79a74)\n\n*“Truth to Power” ~ art by author with gpt4-o*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*“Truth to Power” ~ art by author with gpt4-o*",
+          "sha256": "8bf803e8dd137b92326086801f6b9c36dc36a39515ae3cfa163548d4d6c79a74"
+        }
+      ]
+    },
+    {
+      "id": "medium/96760c63e9c81f06dc764ee41f179b537e4032e4942b05030adcf388cb86d1a7",
+      "source": "assets/images/originals/medium/96760c63e9c81f06dc764ee41f179b537e4032e4942b05030adcf388cb86d1a7.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md",
+          "line": 174,
+          "context": "### The parables weren't just cute stories ~ Jesus was speaking over the crowd's head\n\n![“Over their heads” ~ art by author with gpt4-o](oip-image:medium/96760c63e9c81f06dc764ee41f179b537e4032e4942b05030adcf388cb86d1a7)\n\n*“Over their heads” ~ art by author with gpt4-o*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*“Over their heads” ~ art by author with gpt4-o*",
+          "sha256": "96760c63e9c81f06dc764ee41f179b537e4032e4942b05030adcf388cb86d1a7"
+        }
+      ]
+    },
+    {
+      "id": "medium/d32b31f7a3db44deb112a66e61ec07b3a2bedbf638702514345096633d5eb443",
+      "source": "assets/images/originals/medium/d32b31f7a3db44deb112a66e61ec07b3a2bedbf638702514345096633d5eb443.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md",
+          "line": 239,
+          "context": "### Your Budget as a Model: How Category Design Shapes What You See\n\n![](oip-image:medium/d32b31f7a3db44deb112a66e61ec07b3a2bedbf638702514345096633d5eb443)\n\n*Created by Author with GPT-4o*\n\n#### When you design categories for your own paycheck, you're building a model of your financial life."
+        }
+      ]
+    },
+    {
+      "id": "medium/d5ae33ce9140a26ea50ddcad6752dba0ced8a8c5d8b1492450eeca28fdafb00c",
+      "source": "assets/images/originals/medium/d5ae33ce9140a26ea50ddcad6752dba0ced8a8c5d8b1492450eeca28fdafb00c.png",
+      "usage": "retained_unreferenced",
+      "authorship_evidence": [
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Made by Author with ChatGPT*",
+          "sha256": "d5ae33ce9140a26ea50ddcad6752dba0ced8a8c5d8b1492450eeca28fdafb00c"
+        }
+      ]
+    },
+    {
+      "id": "medium/d6b3a7394b6883ceeb4b5ff9cc7b775a30cd1dcab75999818ee1ff1b0e735f89",
+      "source": "assets/images/originals/medium/d6b3a7394b6883ceeb4b5ff9cc7b775a30cd1dcab75999818ee1ff1b0e735f89.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/mcdonalds-faces-week-long-boycott-june-24-2025.md",
+          "line": 108,
+          "context": "#### ***Schwarz said in social media:***\n\n![Created by Author with ChatGPT](oip-image:medium/d6b3a7394b6883ceeb4b5ff9cc7b775a30cd1dcab75999818ee1ff1b0e735f89)\n\n*Created by Author with ChatGPT*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Created by Author with ChatGPT*",
+          "sha256": "d6b3a7394b6883ceeb4b5ff9cc7b775a30cd1dcab75999818ee1ff1b0e735f89"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-second-pass-recovery.json",
+          "caption": "*Created by Author with ChatGPT*",
+          "sha256": "d6b3a7394b6883ceeb4b5ff9cc7b775a30cd1dcab75999818ee1ff1b0e735f89"
+        }
+      ]
+    },
+    {
+      "id": "medium/dc0bc08b82ecdb66318448661045c8aae2b3bafcd035d49a7b536c4690c0e2ea",
+      "source": "assets/images/originals/medium/dc0bc08b82ecdb66318448661045c8aae2b3bafcd035d49a7b536c4690c0e2ea.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.md",
+          "line": 64,
+          "context": "### June 2025: How Did We Get Here?\n\n![Created by Author](oip-image:medium/dc0bc08b82ecdb66318448661045c8aae2b3bafcd035d49a7b536c4690c0e2ea)\n\n*Created by Author*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Created by Author*",
+          "sha256": "dc0bc08b82ecdb66318448661045c8aae2b3bafcd035d49a7b536c4690c0e2ea"
+        }
+      ]
+    },
+    {
+      "id": "medium/ec2bb9dc0766069355d9f4f70440d0524b58806d4aa59c44715567c4eaac9923",
+      "source": "assets/images/originals/medium/ec2bb9dc0766069355d9f4f70440d0524b58806d4aa59c44715567c4eaac9923.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/the-dolphin-company.md",
+          "line": 275,
+          "context": ">  - Summary of the [county's June 25, 2024 announcement](https://wwwx.miamidade.gov/global/release.page?Mduid_release=rel1719342473798301)\n\n![Art by author with gpt4-o](oip-image:medium/ec2bb9dc0766069355d9f4f70440d0524b58806d4aa59c44715567c4eaac9923)\n\n*Art by author with gpt4-o*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Art by author with gpt4-o*",
+          "sha256": "ec2bb9dc0766069355d9f4f70440d0524b58806d4aa59c44715567c4eaac9923"
+        }
+      ]
+    },
+    {
+      "id": "medium/f4b292028370a2cbfdaaa85746c2a27aa0c34975f31b8064779f9d20e694af59",
+      "source": "assets/images/originals/medium/f4b292028370a2cbfdaaa85746c2a27aa0c34975f31b8064779f9d20e694af59.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/mcdonalds-faces-week-long-boycott-june-24-2025.md",
+          "line": 70,
+          "context": "#### Fall 2024 ~ E. coli Outbreak\n\n![Created by Author with ChatGPT](oip-image:medium/f4b292028370a2cbfdaaa85746c2a27aa0c34975f31b8064779f9d20e694af59)\n\n*Created by Author with ChatGPT*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Created by Author with ChatGPT*",
+          "sha256": "f4b292028370a2cbfdaaa85746c2a27aa0c34975f31b8064779f9d20e694af59"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-second-pass-recovery.json",
+          "caption": "*Created by Author with ChatGPT*",
+          "sha256": "f4b292028370a2cbfdaaa85746c2a27aa0c34975f31b8064779f9d20e694af59"
+        }
+      ]
+    },
+    {
+      "id": "medium/f8dcdf76053d3058b94d60d74509d2a44620d489fd1ef11307c1106c3a50e054",
+      "source": "assets/images/originals/medium/f8dcdf76053d3058b94d60d74509d2a44620d489fd1ef11307c1106c3a50e054.png",
+      "usage": "retained_unreferenced",
+      "authorship_evidence": [
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*NWS Alert Process | Made by Author with ChatGPT*",
+          "sha256": "f8dcdf76053d3058b94d60d74509d2a44620d489fd1ef11307c1106c3a50e054"
+        }
+      ]
+    },
+    {
+      "id": "medium/fd0f1ae37104133f64db49aa96661f7cbf5195612f3f6144f76f90768f0939d1",
+      "source": "assets/images/originals/medium/fd0f1ae37104133f64db49aa96661f7cbf5195612f3f6144f76f90768f0939d1.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/cuomo-vs-mamdani-nyc-2025.md",
+          "line": 96,
+          "context": "#### **Why It Matters**\n\n![Created by Author with ChatGPT](oip-image:medium/fd0f1ae37104133f64db49aa96661f7cbf5195612f3f6144f76f90768f0939d1)\n\n*Created by Author with ChatGPT*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Created by Author with ChatGPT*",
+          "sha256": "fd0f1ae37104133f64db49aa96661f7cbf5195612f3f6144f76f90768f0939d1"
+        }
+      ]
+    },
+    {
+      "id": "medium/fd3d29842d5fa7dd8e071751beb3ce1bfd7fc051e86dd6d3d10ff003ccb8a042",
+      "source": "assets/images/originals/medium/fd3d29842d5fa7dd8e071751beb3ce1bfd7fc051e86dd6d3d10ff003ccb8a042.png",
+      "usage": "referenced",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/ai-in-education-is-a-wicked-problem.md",
+          "line": 181,
+          "context": "### Why the AI Misuse Problem Can't Be Solved ~ Only Redefined\n\n![\"The Reflection of Learning\"](oip-image:medium/fd3d29842d5fa7dd8e071751beb3ce1bfd7fc051e86dd6d3d10ff003ccb8a042)\n\n*\"The Reflection of Learning\" | Art by Author*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*“The Reflection of Learning” | Art by Author*",
+          "sha256": "fd3d29842d5fa7dd8e071751beb3ce1bfd7fc051e86dd6d3d10ff003ccb8a042"
+        }
+      ]
+    }
+  ],
+  "authored_legacy_static": [
+    {
+      "id": "/images/medium/beyond-moores-law/2aae02b62e26713f72883871ed81f0a57d570de577814ea1767fd1f55bcda440.jpeg",
+      "source": "static/images/medium/beyond-moores-law/2aae02b62e26713f72883871ed81f0a57d570de577814ea1767fd1f55bcda440.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/beyond-moores-law.md",
+          "line": 76,
+          "context": "\n![](/images/medium/beyond-moores-law/2aae02b62e26713f72883871ed81f0a57d570de577814ea1767fd1f55bcda440.jpeg)\n\nMade using ChatGPT in January 2025.\n\n### Cost Reductions and Production Scaling"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/beyond-moores-law/3b3c4ea4a3e5ca7f782bea75beeac8910e87f0fc0bd2cfd62f20de5d9c490869.jpeg",
+      "source": "static/images/medium/beyond-moores-law/3b3c4ea4a3e5ca7f782bea75beeac8910e87f0fc0bd2cfd62f20de5d9c490869.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/beyond-moores-law.md",
+          "line": 112,
+          "context": "\n![](/images/medium/beyond-moores-law/3b3c4ea4a3e5ca7f782bea75beeac8910e87f0fc0bd2cfd62f20de5d9c490869.jpeg)\n\nMade using ChatGPT in January 2025.\n\n### Nature of Progress"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/beyond-moores-law/43301bba9f85ff09ade4314b5c96f66d6a06d47eef4b2567ed050ee76a0d1467.jpeg",
+      "source": "static/images/medium/beyond-moores-law/43301bba9f85ff09ade4314b5c96f66d6a06d47eef4b2567ed050ee76a0d1467.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/beyond-moores-law.md",
+          "line": 32,
+          "context": "\n![](/images/medium/beyond-moores-law/43301bba9f85ff09ade4314b5c96f66d6a06d47eef4b2567ed050ee76a0d1467.jpeg)\n\nMade using ChatGPT in January 2025.\n\nIn our previous essay on Moore's Law, we explored how the [doubling of transistors every two years](https://newsroom.intel.com/press-kit/moores-law) has driven unprecedented progress in computing power and shaped the modern technological landscape. But could the principles underlying Moore's Law extend beyond computing? Renewable energy technologies like solar and wind, as well as battery storage systems, appear to exhibit similar patterns of exponential growth in efficiency and cost reductions."
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/beyond-moores-law/4d24f47051c7f64dd2a367f7ac261e98cd79cc2dc77d628fe3647886c3e0d1a5.jpeg",
+      "source": "static/images/medium/beyond-moores-law/4d24f47051c7f64dd2a367f7ac261e98cd79cc2dc77d628fe3647886c3e0d1a5.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/beyond-moores-law.md",
+          "line": 56,
+          "context": "\n![](/images/medium/beyond-moores-law/4d24f47051c7f64dd2a367f7ac261e98cd79cc2dc77d628fe3647886c3e0d1a5.jpeg)\n\nMade using ChatGPT in January 2025.\n\n### Swanson's Law and the Learning Curve"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/beyond-moores-law/b8914491438428cf93a0f4a8b477899def8dfbca6910f537a6f417ee0cbe5f34.jpeg",
+      "source": "static/images/medium/beyond-moores-law/b8914491438428cf93a0f4a8b477899def8dfbca6910f537a6f417ee0cbe5f34.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/beyond-moores-law.md",
+          "line": 94,
+          "context": "\n![](/images/medium/beyond-moores-law/b8914491438428cf93a0f4a8b477899def8dfbca6910f537a6f417ee0cbe5f34.jpeg)\n\nMade using ChatGPT in January 2025.\n\n### Exponential Progress"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/beyond-moores-law/c1c915ad29ca50f98e67ec1a456d9579ccbb4f6c1ed8017468eddbca776a43c0.jpeg",
+      "source": "static/images/medium/beyond-moores-law/c1c915ad29ca50f98e67ec1a456d9579ccbb4f6c1ed8017468eddbca776a43c0.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/beyond-moores-law.md",
+          "line": 44,
+          "context": "\n![](/images/medium/beyond-moores-law/c1c915ad29ca50f98e67ec1a456d9579ccbb4f6c1ed8017468eddbca776a43c0.jpeg)\n\nMade using ChatGPT in January 2025.\n\nMoore's Law is often regarded as one of the most influential principles in modern technology. First articulated by Gordon Moore in 1965 and [revised in 1975](https://www.intel.com/pressroom/archive/speeches/moore20030210.htm), it predicted that the number of transistors on integrated circuits would double roughly every two years, leading to exponential growth in computing power. Over the past half-century, this trend has held and spurred massive advancements in computing, enabling the development of smaller, faster, and cheaper devices."
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/declaring-equality/36a21b68974f610407cb4fd9666bdeecd27ab9e1b48d614f50114a4aa8344c3d.jpeg",
+      "source": "static/images/medium/declaring-equality/36a21b68974f610407cb4fd9666bdeecd27ab9e1b48d614f50114a4aa8344c3d.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/declaring-equality.md",
+          "line": 10,
+          "context": "description: \"President Joe Biden’s recent declaration of the Equal Rights Amendment (ERA) as “the law of the land” has ignited a profound debate at the crossroads of cons...\"\nfeatured_image: \"/images/medium/declaring-equality/36a21b68974f610407cb4fd9666bdeecd27ab9e1b48d614f50114a4aa8344c3d.jpeg\"\nfeatured_image_alt: \"Declaring Equality?\"\nfeatured_image_caption: \"Image generated by author with ChatGPT.\"\nversion: \"2.0\"\nedition: \"Third web edition\""
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-second-pass-recovery.json",
+          "caption": "Image Generated by Author from Chat GPT",
+          "sha256": "36a21b68974f610407cb4fd9666bdeecd27ab9e1b48d614f50114a4aa8344c3d"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants/bd004c2ef628161dabf422814a612a5ec128b8ab922e1e9015faea0e3ae8ef49.jpeg",
+      "source": "static/images/medium/deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants/bd004c2ef628161dabf422814a612a5ec128b8ab922e1e9015faea0e3ae8ef49.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "reports/medium-image-recovery/20260706-second-pass-recovery.json",
+          "caption": "Created using Chat GPT in January, 2025.",
+          "sha256": "bd004c2ef628161dabf422814a612a5ec128b8ab922e1e9015faea0e3ae8ef49"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/deference-lost/bbbe329f954f57ca95f2047e2220acfaf756fdf4499e35bf9a4e736166663dc0.jpeg",
+      "source": "static/images/medium/deference-lost/bbbe329f954f57ca95f2047e2220acfaf756fdf4499e35bf9a4e736166663dc0.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "reports/medium-image-recovery/20260706-second-pass-recovery.json",
+          "caption": "Made in ChatGPT, February 2025.",
+          "sha256": "bbbe329f954f57ca95f2047e2220acfaf756fdf4499e35bf9a4e736166663dc0"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/is-doge-legal/10b1c7b46535559a1db55235ed5b8fcaf86191152000c369edc06819eb6c84b6.jpeg",
+      "source": "static/images/medium/is-doge-legal/10b1c7b46535559a1db55235ed5b8fcaf86191152000c369edc06819eb6c84b6.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/is-doge-legal.md",
+          "line": 120,
+          "context": "\n![Made using ChatGPT, February 2025](/images/medium/is-doge-legal/10b1c7b46535559a1db55235ed5b8fcaf86191152000c369edc06819eb6c84b6.jpeg)\n\n*Made using ChatGPT, February 2025.*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-second-pass-recovery.json",
+          "caption": "^Made using ChatGPT, February 2025.",
+          "sha256": "10b1c7b46535559a1db55235ed5b8fcaf86191152000c369edc06819eb6c84b6"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/is-doge-legal/10ffd90e9af53ac34383d3682567157a1cd9f31053fe0456e16e2f7ee243bb24.jpeg",
+      "source": "static/images/medium/is-doge-legal/10ffd90e9af53ac34383d3682567157a1cd9f31053fe0456e16e2f7ee243bb24.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "reports/medium-image-recovery/20260706-second-pass-recovery.json",
+          "caption": "^Made using ChatGPT, February 2025.",
+          "sha256": "10ffd90e9af53ac34383d3682567157a1cd9f31053fe0456e16e2f7ee243bb24"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/is-doge-legal/3208645cf2b4501ef6629cebe2d3118acc6d3aefafe5da074f4bb5025e2ed8bb.jpeg",
+      "source": "static/images/medium/is-doge-legal/3208645cf2b4501ef6629cebe2d3118acc6d3aefafe5da074f4bb5025e2ed8bb.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/is-doge-legal.md",
+          "line": 191,
+          "context": "\n![Made using ChatGPT, February 2025](/images/medium/is-doge-legal/3208645cf2b4501ef6629cebe2d3118acc6d3aefafe5da074f4bb5025e2ed8bb.jpeg)\n\n*Made using ChatGPT, February 2025.*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-second-pass-recovery.json",
+          "caption": "^Made using ChatGPT, February 2025.",
+          "sha256": "3208645cf2b4501ef6629cebe2d3118acc6d3aefafe5da074f4bb5025e2ed8bb"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/is-doge-legal/57094fc3b48685946a22b7ed153f80ed26838585b0889001a2e6fcc3d440a22e.jpeg",
+      "source": "static/images/medium/is-doge-legal/57094fc3b48685946a22b7ed153f80ed26838585b0889001a2e6fcc3d440a22e.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/is-doge-legal.md",
+          "line": 140,
+          "context": "\n![Made using ChatGPT, February 2025](/images/medium/is-doge-legal/57094fc3b48685946a22b7ed153f80ed26838585b0889001a2e6fcc3d440a22e.jpeg)\n\n*Made using ChatGPT, February 2025.*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-second-pass-recovery.json",
+          "caption": "^Made using ChatGPT, February 2025.",
+          "sha256": "57094fc3b48685946a22b7ed153f80ed26838585b0889001a2e6fcc3d440a22e"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/is-doge-legal/6908e38a972a0549b2886b0d8fe1762db912286d3cc2f41eabb0abc4bfb3b3df.jpeg",
+      "source": "static/images/medium/is-doge-legal/6908e38a972a0549b2886b0d8fe1762db912286d3cc2f41eabb0abc4bfb3b3df.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/is-doge-legal.md",
+          "line": 62,
+          "context": "\n![Made using ChatGPT, February 2025](/images/medium/is-doge-legal/6908e38a972a0549b2886b0d8fe1762db912286d3cc2f41eabb0abc4bfb3b3df.jpeg)\n\n*Made using ChatGPT, February 2025.*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-second-pass-recovery.json",
+          "caption": "^Made using ChatGPT, February 2025.",
+          "sha256": "6908e38a972a0549b2886b0d8fe1762db912286d3cc2f41eabb0abc4bfb3b3df"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/is-doge-legal/8720760bee969f4bc2f540e9e4b170cd8a0ab9d90371c82344dd5562dc5a44e9.jpeg",
+      "source": "static/images/medium/is-doge-legal/8720760bee969f4bc2f540e9e4b170cd8a0ab9d90371c82344dd5562dc5a44e9.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/is-doge-legal.md",
+          "line": 45,
+          "context": "\n![Made using ChatGPT, February 2025](/images/medium/is-doge-legal/8720760bee969f4bc2f540e9e4b170cd8a0ab9d90371c82344dd5562dc5a44e9.jpeg)\n\n*Made using ChatGPT, February 2025.*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-second-pass-recovery.json",
+          "caption": "^Made using ChatGPT, February 2025.",
+          "sha256": "8720760bee969f4bc2f540e9e4b170cd8a0ab9d90371c82344dd5562dc5a44e9"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/is-doge-legal/e723d4f00340bad5655b721481042fadd90210bc9973097d521afd3249b446e6.jpeg",
+      "source": "static/images/medium/is-doge-legal/e723d4f00340bad5655b721481042fadd90210bc9973097d521afd3249b446e6.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/is-doge-legal.md",
+          "line": 85,
+          "context": "\n![Made using ChatGPT, February 2025](/images/medium/is-doge-legal/e723d4f00340bad5655b721481042fadd90210bc9973097d521afd3249b446e6.jpeg)\n\n*Made using ChatGPT, February 2025.*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-second-pass-recovery.json",
+          "caption": "^Made using ChatGPT, February 2025.",
+          "sha256": "e723d4f00340bad5655b721481042fadd90210bc9973097d521afd3249b446e6"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/synthetic-reasoning/ab5d6b96221162123353ad71faf7cbc1e89b8a6787b337e50aa92ba92fd32a76.jpeg",
+      "source": "static/images/medium/synthetic-reasoning/ab5d6b96221162123353ad71faf7cbc1e89b8a6787b337e50aa92ba92fd32a76.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/synthetic-reasoning.md",
+          "line": 52,
+          "context": "\n![](/images/medium/synthetic-reasoning/ab5d6b96221162123353ad71faf7cbc1e89b8a6787b337e50aa92ba92fd32a76.jpeg)\n\nMade using Chat GPT in January, 2025.\n\n### The Risks of Reinforcement"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/the-death-of-moores-law/c8f9f3c89cefb298ee7f1eab911925dd4eb577b40e806d67b5985a474aee18b9.jpeg",
+      "source": "static/images/medium/the-death-of-moores-law/c8f9f3c89cefb298ee7f1eab911925dd4eb577b40e806d67b5985a474aee18b9.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/the-death-of-moores-law.md",
+          "line": 8,
+          "context": "subtitle: \"How the Limits of Physics Are Reshaping the Future of Computing\"\nfeatured_image: \"/images/medium/the-death-of-moores-law/c8f9f3c89cefb298ee7f1eab911925dd4eb577b40e806d67b5985a474aee18b9.jpeg\"\nfeatured_image_caption: \"Source: Author via ChatGPT.\"\nfeatured_image_alt: \"The Death of Moore’s Law\"\ndescription: \"When Did It End, and What Comes Next?. This insight, later adjusted to a two-year doubling period, became known as Moore’s Law. It became the semiconductor industry’s heartbeat...\"\nversion: \"1.2\""
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "Source: Author via ChatGPTIn 1965, Gordon Moore, a young research director at Fairchild Semiconductor, made a prediction that would define the modern technological era. Observing that the number of transistors on integrated circuits was doubling annually while costs dropped, he forecast that this trend would continue.",
+          "sha256": "c8f9f3c89cefb298ee7f1eab911925dd4eb577b40e806d67b5985a474aee18b9"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/the-dolphin-company/92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4.jpeg",
+      "source": "static/images/medium/the-dolphin-company/92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/the-dolphin-company.md",
+          "line": 9,
+          "context": "description: \"A Gulf World dolphin death, bankruptcy filings, and The Dolphin Company's debt-fueled expansion show how leveraged tourism, animal welfare, and changing public norms collided.\"\nfeatured_image: \"/images/medium/the-dolphin-company/92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4.jpeg\"\nfeatured_image_caption: \"Art by author.\"\nfeatured_image_alt: \"The Dolphin Company\"\nversion: \"3.0\"\nedition: \"Sixth web edition\""
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "*Art by author with gpt4-o*",
+          "sha256": "92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/the-max-mistake-why-hbos-name-change-backfired/3c53b36844456f4a6e5f87b61e1757c7c3714a2a29bf6de00a2ef93c40397b92.jpeg",
+      "source": "static/images/medium/the-max-mistake-why-hbos-name-change-backfired/3c53b36844456f4a6e5f87b61e1757c7c3714a2a29bf6de00a2ef93c40397b92.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/the-max-mistake-why-hbos-name-change-backfired.md",
+          "line": 59,
+          "context": "\n![HBO Logo Timeline](/images/medium/the-max-mistake-why-hbos-name-change-backfired/3c53b36844456f4a6e5f87b61e1757c7c3714a2a29bf6de00a2ef93c40397b92.jpeg)\n\n*HBO Logo Timeline \\| Source: Me lol*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "> HBO Logo Timeline \\| Source: Me lol",
+          "sha256": "3c53b36844456f4a6e5f87b61e1757c7c3714a2a29bf6de00a2ef93c40397b92"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/the-max-mistake-why-hbos-name-change-backfired/8dc2ba89b5f4fcbdbb4eb5f733b30c982e121db90084e3ef16ba0ca908de1f2f.jpeg",
+      "source": "static/images/medium/the-max-mistake-why-hbos-name-change-backfired/8dc2ba89b5f4fcbdbb4eb5f733b30c982e121db90084e3ef16ba0ca908de1f2f.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/the-max-mistake-why-hbos-name-change-backfired.md",
+          "line": 127,
+          "context": "\n![HBO Classic Titles](/images/medium/the-max-mistake-why-hbos-name-change-backfired/8dc2ba89b5f4fcbdbb4eb5f733b30c982e121db90084e3ef16ba0ca908de1f2f.jpeg)\n\n*HBO Classic Titles \\| Source: User with ChatGPT*\n\n"
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "> HBO Classic Titles \\| Source: User with ChatGPT",
+          "sha256": "8dc2ba89b5f4fcbdbb4eb5f733b30c982e121db90084e3ef16ba0ca908de1f2f"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/the-undead-state/cbe459c20ee612506e5eb4167a56aa6042bb7ba8df8ac55426d583d0c7f10e53.jpeg",
+      "source": "static/images/medium/the-undead-state/cbe459c20ee612506e5eb4167a56aa6042bb7ba8df8ac55426d583d0c7f10e53.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "reports/medium-image-recovery/20260706-second-pass-recovery.json",
+          "caption": "Made in ChatGPT, February 2025.",
+          "sha256": "cbe459c20ee612506e5eb4167a56aa6042bb7ba8df8ac55426d583d0c7f10e53"
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf.jpeg",
+      "source": "static/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025.md",
+          "line": 9,
+          "context": "subtitle: \"Chili’s is eating fast food’s lunch.\"\nfeatured_image: \"/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf.jpeg\"\nfeatured_image_caption: \"McDonald's vs. Chili's | Source: User with ChatGPT\"\nfeatured_image_alt: \"McDonald's and Chili's value comparison illustration\"\ndescription: \"Fast food stopped feeling cheap for many customers, and Chili's 3 for Me menu turned casual dining into a value competitor.\"\nversion: \"2.0\""
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "> McDonald’s vs Chili’s \\| Source: User with ChatGPT",
+          "sha256": ""
+        }
+      ]
+    },
+    {
+      "id": "/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/2826bfc60d4144f0359cc4d57178b38608fde8c284b80ddca5493b4a2c790017.jpeg",
+      "source": "static/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/2826bfc60d4144f0359cc4d57178b38608fde8c284b80ddca5493b4a2c790017.jpeg",
+      "authorship_evidence": [
+        {
+          "file": "content/essays/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025.md",
+          "line": 123,
+          "context": "\n![](/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/2826bfc60d4144f0359cc4d57178b38608fde8c284b80ddca5493b4a2c790017.jpeg)\n\n> McDonald's vs Chili's \\| Source: User with ChatGPT\n\n> Chili's made a few smart moves that paid off."
+        },
+        {
+          "file": "reports/medium-image-recovery/20260706-recovery.json",
+          "caption": "> McDonald’s vs Chili’s \\| Source: User with ChatGPT",
+          "sha256": ""
+        }
+      ]
+    }
+  ],
+  "sourced_exceptions": [
+    {
+      "id": "essays/animal-kingdom-opening-1998/section-2",
+      "file": "content/essays/animal-kingdom-opening-1998.md",
+      "line": 75,
+      "reason": "Disney 1996 property map from annual report; caption credits © The Walt Disney Company."
+    },
+    {
+      "id": "essays/animal-kingdom-opening-1998/section-4",
+      "file": "content/essays/animal-kingdom-opening-1998.md",
+      "line": 119,
+      "reason": "1998 park guide scan; caption credits © Walt Disney World and Mouse Museum."
+    },
+    {
+      "id": "essays/epcot-center-opening-1982/city-transport-plan",
+      "file": "content/essays/epcot-center-opening-1982.md",
+      "line": 49,
+      "reason": "Project Florida 1967 drawing; caption credits © Walt Disney Productions."
+    },
+    {
+      "id": "essays/walt-disney-world-opening-1971/financing",
+      "file": "content/essays/walt-disney-world-opening-1971.md",
+      "line": 100,
+      "reason": "SEC News Digest February 17, 1969 extract; source document, not Bob-authored illustration."
+    },
+    {
+      "id": "essays/walt-disney-world-opening-1971/mickey",
+      "file": "content/essays/walt-disney-world-opening-1971.md",
+      "line": 38,
+      "reason": "Plane Crazy 1928 story drawings by Ub Iwerks, LOC LC-DIG-ppmsca-57586."
+    },
+    {
+      "id": "essays/walt-disney-world-opening-1971/oswald",
+      "file": "content/essays/walt-disney-world-opening-1971.md",
+      "line": 30,
+      "reason": "Universal Weekly 1927 advertisement, Universal/Winkler."
+    }
+  ],
+  "uncertain_medium": [
+    {
+      "id": "medium/0bf634bc6fb074374be1b483fd021f75b61a1324004b4771b72577a23f635011",
+      "source": "assets/images/originals/medium/0bf634bc6fb074374be1b483fd021f75b61a1324004b4771b72577a23f635011.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/14795fdf038d7210715e0637d23a724a2064f915fe3e2f55db2b03675f165534",
+      "source": "assets/images/originals/medium/14795fdf038d7210715e0637d23a724a2064f915fe3e2f55db2b03675f165534.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/1f230691df58ff2f8c509028142818467399db9c613d3836ad3944db9cb0f741",
+      "source": "assets/images/originals/medium/1f230691df58ff2f8c509028142818467399db9c613d3836ad3944db9cb0f741.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/3e3314784d7537761d81f4f12a5caf75700231bbb4a666f30ae7a77f33831c05",
+      "source": "assets/images/originals/medium/3e3314784d7537761d81f4f12a5caf75700231bbb4a666f30ae7a77f33831c05.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/479947b0305f9c7ff0a51cf464c2dc7c8fa6ddb8a88f9fae2c3557088ec78af8",
+      "source": "assets/images/originals/medium/479947b0305f9c7ff0a51cf464c2dc7c8fa6ddb8a88f9fae2c3557088ec78af8.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/511e88398070970581caf192a5cca6ecc1864e5c78caee1c7ffb853707b00313",
+      "source": "assets/images/originals/medium/511e88398070970581caf192a5cca6ecc1864e5c78caee1c7ffb853707b00313.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/597f8a7cf6738f762be826d657b4934b810710e6a95e9d555d102551e0e315ca",
+      "source": "assets/images/originals/medium/597f8a7cf6738f762be826d657b4934b810710e6a95e9d555d102551e0e315ca.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/62f0fb3864ceb4813e881d20c9a7a7a7554bff4fda40f04243de07f75757233e",
+      "source": "assets/images/originals/medium/62f0fb3864ceb4813e881d20c9a7a7a7554bff4fda40f04243de07f75757233e.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/6303f2fc0491959708bd7643240384b5bdc2252ce12471c08de09c80e3cd6c83",
+      "source": "assets/images/originals/medium/6303f2fc0491959708bd7643240384b5bdc2252ce12471c08de09c80e3cd6c83.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/697afcd47059e365bcca0f5a04697d3d99818ae12a2f5a8adf20109dfab8fcdc",
+      "source": "assets/images/originals/medium/697afcd47059e365bcca0f5a04697d3d99818ae12a2f5a8adf20109dfab8fcdc.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/6c8fd43fd1403b44671c678afe02e150e0d9909cfd95555dac8e6553b2bb4826",
+      "source": "assets/images/originals/medium/6c8fd43fd1403b44671c678afe02e150e0d9909cfd95555dac8e6553b2bb4826.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/76a6a378caa1eb3b58af6361ee589a730ede3716843b3cf89405795871ee2f5d",
+      "source": "assets/images/originals/medium/76a6a378caa1eb3b58af6361ee589a730ede3716843b3cf89405795871ee2f5d.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/79135b86692f72d399ab6e14643d150385b4419e4c10a2c66a7e32ccacd64cbe",
+      "source": "assets/images/originals/medium/79135b86692f72d399ab6e14643d150385b4419e4c10a2c66a7e32ccacd64cbe.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/7eb60631a04b8cb1308977106bf7f981686b06414bcb07565b9576cec6a59b37",
+      "source": "assets/images/originals/medium/7eb60631a04b8cb1308977106bf7f981686b06414bcb07565b9576cec6a59b37.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/85db9a233bbe2b8ce8b37bf2cffb170d82db88760fa0ebb3fb2e14a0e881e798",
+      "source": "assets/images/originals/medium/85db9a233bbe2b8ce8b37bf2cffb170d82db88760fa0ebb3fb2e14a0e881e798.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/92e0d1f4de6e7c9fa4d4e2dec28a53b6864fd0ea60a07d6692579443201d9cb0",
+      "source": "assets/images/originals/medium/92e0d1f4de6e7c9fa4d4e2dec28a53b6864fd0ea60a07d6692579443201d9cb0.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/9c54d75cf8915f13a6f607f11ff95af75481eeda2d7f2112a9def237c9a2531d",
+      "source": "assets/images/originals/medium/9c54d75cf8915f13a6f607f11ff95af75481eeda2d7f2112a9def237c9a2531d.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/be0c707ae681f1804192900e2334bb3b53c8fe6a9d8128d9d7406b7b3580090e",
+      "source": "assets/images/originals/medium/be0c707ae681f1804192900e2334bb3b53c8fe6a9d8128d9d7406b7b3580090e.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/c26875c883b2301fadc219abba8ce620b3718e16ac0ba77004c33e0d8d2f4160",
+      "source": "assets/images/originals/medium/c26875c883b2301fadc219abba8ce620b3718e16ac0ba77004c33e0d8d2f4160.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/c9342109be76928a5b019df4929dad331b3880c5af9f730bbc397e3a16bbccf5",
+      "source": "assets/images/originals/medium/c9342109be76928a5b019df4929dad331b3880c5af9f730bbc397e3a16bbccf5.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/cf87d44f6e14106cf84c491686d72a57f3c45a3a924b5615f1609cb7374953ff",
+      "source": "assets/images/originals/medium/cf87d44f6e14106cf84c491686d72a57f3c45a3a924b5615f1609cb7374953ff.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/d235798077ba020d5701ca4cdf8385e04a63a00c9f99c5f31a86d4721e59b120",
+      "source": "assets/images/originals/medium/d235798077ba020d5701ca4cdf8385e04a63a00c9f99c5f31a86d4721e59b120.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/d44953c273cb2e6277217f577942f0bf3f2c1028ac37d36ca7648f51c0e37ffc",
+      "source": "assets/images/originals/medium/d44953c273cb2e6277217f577942f0bf3f2c1028ac37d36ca7648f51c0e37ffc.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/e08e2d9e594e88fe577e132b4ab69e9bf449fe573bd5abd1e3db0ccdb88311ce",
+      "source": "assets/images/originals/medium/e08e2d9e594e88fe577e132b4ab69e9bf449fe573bd5abd1e3db0ccdb88311ce.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/e23c8576517bfd920bf1fbf1fb6251a8c440c1ee6b91f4f261b2c9a4876c6503",
+      "source": "assets/images/originals/medium/e23c8576517bfd920bf1fbf1fb6251a8c440c1ee6b91f4f261b2c9a4876c6503.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/e23eb0c06f9b9269eb68bf003662f9bb052f278ce14a2d8cf1d1ebcb61934caf",
+      "source": "assets/images/originals/medium/e23eb0c06f9b9269eb68bf003662f9bb052f278ce14a2d8cf1d1ebcb61934caf.png",
+      "usage": "referenced"
+    },
+    {
+      "id": "medium/ed43488f59939b5080ba23ef52dfa5ce055fb5e4e997ec2f07e853757e973a71",
+      "source": "assets/images/originals/medium/ed43488f59939b5080ba23ef52dfa5ce055fb5e4e997ec2f07e853757e973a71.png",
+      "usage": "referenced"
+    }
+  ],
+  "uncertain_static": [
+    {
+      "id": "/images/medium/a-really-boring-topic/13f104a076041fdbaade5a4170a11c255824a13a6e2d24144c53bc720785fcf8.jpeg",
+      "source": "static/images/medium/a-really-boring-topic/13f104a076041fdbaade5a4170a11c255824a13a6e2d24144c53bc720785fcf8.jpeg"
+    },
+    {
+      "id": "/images/medium/a-really-boring-topic/17d200b6f973c2ea6006c352137db1b1c4097ae4358c6de508e695fc81f65aaa.jpeg",
+      "source": "static/images/medium/a-really-boring-topic/17d200b6f973c2ea6006c352137db1b1c4097ae4358c6de508e695fc81f65aaa.jpeg"
+    },
+    {
+      "id": "/images/medium/a-really-boring-topic/21d0ba8af1bb61e16314860a6882761060c73a13546554cb1749d975d65bea8e.jpeg",
+      "source": "static/images/medium/a-really-boring-topic/21d0ba8af1bb61e16314860a6882761060c73a13546554cb1749d975d65bea8e.jpeg"
+    },
+    {
+      "id": "/images/medium/a-really-boring-topic/5dcea6e4b519f905b5900976210f2ef5f1df00aeb4fe47712f8026d17a10bdf7.jpeg",
+      "source": "static/images/medium/a-really-boring-topic/5dcea6e4b519f905b5900976210f2ef5f1df00aeb4fe47712f8026d17a10bdf7.jpeg"
+    },
+    {
+      "id": "/images/medium/a-really-boring-topic/7de9c9caf8186c2e96a8512a889ad2d0bb3d4532fe9218b38ca0750d07ffda7c.jpeg",
+      "source": "static/images/medium/a-really-boring-topic/7de9c9caf8186c2e96a8512a889ad2d0bb3d4532fe9218b38ca0750d07ffda7c.jpeg"
+    },
+    {
+      "id": "/images/medium/a-really-boring-topic/ea538b7e25f223ca7bc43066c7f57065e7ea8de3eeaa0140489cde40968621f8.jpeg",
+      "source": "static/images/medium/a-really-boring-topic/ea538b7e25f223ca7bc43066c7f57065e7ea8de3eeaa0140489cde40968621f8.jpeg"
+    },
+    {
+      "id": "/images/medium/are-we-alone/1ce3cc8b74c5eaf2a0c196b0336516bcb69d3d1d42136c3b9004a643582074e6.jpeg",
+      "source": "static/images/medium/are-we-alone/1ce3cc8b74c5eaf2a0c196b0336516bcb69d3d1d42136c3b9004a643582074e6.jpeg"
+    },
+    {
+      "id": "/images/medium/how-american-farm-labor-is-set-to-evolve/bd474b19e1d8e250ae28ed9cabb4b9f671f259c7c111af8aa95611afe20a819d.jpeg",
+      "source": "static/images/medium/how-american-farm-labor-is-set-to-evolve/bd474b19e1d8e250ae28ed9cabb4b9f671f259c7c111af8aa95611afe20a819d.jpeg"
+    },
+    {
+      "id": "/images/medium/how-american-farm-labor-is-set-to-evolve/d0ebf617799f60b5768b4ded5d4c9428210589be563959ff3ccf04f59c10aac2.jpeg",
+      "source": "static/images/medium/how-american-farm-labor-is-set-to-evolve/d0ebf617799f60b5768b4ded5d4c9428210589be563959ff3ccf04f59c10aac2.jpeg"
+    },
+    {
+      "id": "/images/medium/how-american-farm-labor-is-set-to-evolve/d57f995742d79bac3aacd480d2ad4e674a6850d25044bb0eef63ec8197513fb1.jpeg",
+      "source": "static/images/medium/how-american-farm-labor-is-set-to-evolve/d57f995742d79bac3aacd480d2ad4e674a6850d25044bb0eef63ec8197513fb1.jpeg"
+    },
+    {
+      "id": "/images/medium/how-american-farm-labor-is-set-to-evolve/dff114a907fa929b6f43c06c5643b2f9f242465875c39b6eaef5edffbcf6be33.jpeg",
+      "source": "static/images/medium/how-american-farm-labor-is-set-to-evolve/dff114a907fa929b6f43c06c5643b2f9f242465875c39b6eaef5edffbcf6be33.jpeg"
+    },
+    {
+      "id": "/images/medium/how-did-mother-become-a-controversial-word-in-america/c0712a9e67b7cf81b94f7909a750b129a9690f4b24f7022a544f14f43d3605c3.jpeg",
+      "source": "static/images/medium/how-did-mother-become-a-controversial-word-in-america/c0712a9e67b7cf81b94f7909a750b129a9690f4b24f7022a544f14f43d3605c3.jpeg"
+    },
+    {
+      "id": "/images/medium/its-hard-to-condemn-what-doge-is-doing/d0e770bbe36eaacb02b0485d21c33b388d5975eb34ddcb15f38b678658bb506e.jpeg",
+      "source": "static/images/medium/its-hard-to-condemn-what-doge-is-doing/d0e770bbe36eaacb02b0485d21c33b388d5975eb34ddcb15f38b678658bb506e.jpeg"
+    },
+    {
+      "id": "/images/medium/life-is-a-bull-market/df53bd86e1b4ab0886a4b5346bb4fb1d3213d35de23e09436064bf85cca64a77.jpeg",
+      "source": "static/images/medium/life-is-a-bull-market/df53bd86e1b4ab0886a4b5346bb4fb1d3213d35de23e09436064bf85cca64a77.jpeg"
+    },
+    {
+      "id": "/images/medium/pornography-the-modern-secular-state-religion-and-american-morality/73e4b3b8aef6b4c1ca7a9e43be4aedaea51acd0c671994152f688f0655ad31bb.jpeg",
+      "source": "static/images/medium/pornography-the-modern-secular-state-religion-and-american-morality/73e4b3b8aef6b4c1ca7a9e43be4aedaea51acd0c671994152f688f0655ad31bb.jpeg"
+    },
+    {
+      "id": "/images/medium/synthetic-reasoning/07c57a8f208c2fc53fc2c10e5deb4e365b94b9d37089dde7e1612013d373b9e0.jpeg",
+      "source": "static/images/medium/synthetic-reasoning/07c57a8f208c2fc53fc2c10e5deb4e365b94b9d37089dde7e1612013d373b9e0.jpeg"
+    },
+    {
+      "id": "/images/medium/the-ledger-vol-2/524b2137f3e583a5c6361ea8974303d8543c20ce64ae7c973310372ab56f454f.jpeg",
+      "source": "static/images/medium/the-ledger-vol-2/524b2137f3e583a5c6361ea8974303d8543c20ce64ae7c973310372ab56f454f.jpeg"
+    },
+    {
+      "id": "/images/medium/the-political-economy-of-airports/03d81147c17634b1515b9c1a51b387d29d7c88fda18a07195e6bd5aa69fd593c.jpeg",
+      "source": "static/images/medium/the-political-economy-of-airports/03d81147c17634b1515b9c1a51b387d29d7c88fda18a07195e6bd5aa69fd593c.jpeg"
+    },
+    {
+      "id": "/images/medium/tiktok-the-trojan-horse-of-global-influence/a8232adfa4bde25e8b21a4830b941a336b8d1f29f04e63649adb01d93e21d4c3.jpeg",
+      "source": "static/images/medium/tiktok-the-trojan-horse-of-global-influence/a8232adfa4bde25e8b21a4830b941a336b8d1f29f04e63649adb01d93e21d4c3.jpeg"
+    },
+    {
+      "id": "/images/medium/what-is-risk-a-four-part-framework/c5d17c0978b1a86a5144dea14f43e6da15d3559347c45d71edd7d9a334e79ab2.jpeg",
+      "source": "static/images/medium/what-is-risk-a-four-part-framework/c5d17c0978b1a86a5144dea14f43e6da15d3559347c45d71edd7d9a334e79ab2.jpeg"
+    },
+    {
+      "id": "/images/medium/whos-really-funding-terror/f4cb36205f595996bccdedb28b5d2e346791195a73cb9f3e5aae2cafc01c1c96.jpeg",
+      "source": "static/images/medium/whos-really-funding-terror/f4cb36205f595996bccdedb28b5d2e346791195a73cb9f3e5aae2cafc01c1c96.jpeg"
+    },
+    {
+      "id": "/images/medium/whos-responsible-for-building-in-the-floodplain/1bcd120993b4cf986a7889b69e8db0f9d74e2fa0001b28afa10d5bb661d6bcd7.jpeg",
+      "source": "static/images/medium/whos-responsible-for-building-in-the-floodplain/1bcd120993b4cf986a7889b69e8db0f9d74e2fa0001b28afa10d5bb661d6bcd7.jpeg"
+    },
+    {
+      "id": "/images/medium/why-oberfell-will-not-be-overturned/595776c99d821a71f2dbee09e007ecec515fadf1dda801300725c09ae9af0673.jpeg",
+      "source": "static/images/medium/why-oberfell-will-not-be-overturned/595776c99d821a71f2dbee09e007ecec515fadf1dda801300725c09ae9af0673.jpeg"
+    },
+    {
+      "id": "/images/medium/why-oberfell-will-not-be-overturned/642b3a0d97b101a5a53bac29390f2ee60d1274d06a06a073c3b77717181a160c.jpeg",
+      "source": "static/images/medium/why-oberfell-will-not-be-overturned/642b3a0d97b101a5a53bac29390f2ee60d1274d06a06a073c3b77717181a160c.jpeg"
+    },
+    {
+      "id": "/images/medium/why-oberfell-will-not-be-overturned/aacead5d166ff170750776a4bd7891918ea5c530a36cdc95ad38bf9278faa553.jpeg",
+      "source": "static/images/medium/why-oberfell-will-not-be-overturned/aacead5d166ff170750776a4bd7891918ea5c530a36cdc95ad38bf9278faa553.jpeg"
+    },
+    {
+      "id": "/images/medium/why-oberfell-will-not-be-overturned/be797dfbde94dd0f84d521428df8679334b72fffd73c2b138961116ae7d5ff4d.jpeg",
+      "source": "static/images/medium/why-oberfell-will-not-be-overturned/be797dfbde94dd0f84d521428df8679334b72fffd73c2b138961116ae7d5ff4d.jpeg"
+    },
+    {
+      "id": "/images/medium/why-oberfell-will-not-be-overturned/bf0e2375f530022065b7487d8a86b9ec7c42453da12913ba5956f0b2e675313d.jpeg",
+      "source": "static/images/medium/why-oberfell-will-not-be-overturned/bf0e2375f530022065b7487d8a86b9ec7c42453da12913ba5956f0b2e675313d.jpeg"
+    }
+  ],
+  "uncertain_treatment": "Excluded from signing pending owner clarification or provenance evidence. A visual impression alone does not opt an image in.",
+  "visual_review": "Reviewed all 496 largest signed outputs from the initial build at their signature corners. Three chart placement overrides prevent label/footer collisions; full frames inspected for these exceptions."
+}

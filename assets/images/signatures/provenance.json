@@ -1,0 +1,10 @@
+{
+  "created": "2026-10-26",
+  "tool": "built-in image_gen",
+  "reference": "Patreon artwork package: downloads/01 - The Plunge - BOB.png",
+  "reference_sha256": "8bb9960c8b71e2abb0cab61c1888221def63ba441fb595579946ccc6ceaa3ff9",
+  "mark": "bob-plunge.png",
+  "mark_sha256": "9fcaafd6fd1d29426ad3a072f4d28b6a6341dc8fd65460b884836d93f0ce38b7",
+  "approval": "Owner explicitly selected \"Use the recreated lettering\" after being told the tool recreated the lettering instead of extracting original pixels. This is an approved recreation, not an exact pixel extraction.",
+  "prompt": "Use case: background-extraction. Edit target: attached The Plunge illustration. Extract ONLY the exact small BOB signature at the extreme bottom right, including its understated thin underline flourish, warm ivory strokes and subtle charcoal edge/shadow. Deliver a tightly framed transparent PNG signature master with no bird, no water, no sky, no ground, no rectangle, no background remnants. Preserve the existing three letter shapes precisely: thin elegant right-leaning handwritten capitals B O B, their spacing, proportions, curved strokes and underline. Do not invent a new handwriting style, do not thicken or embellish it, and do not add letters. Enlarge the extracted mark cleanly for reuse as a small website image overlay; place it centered, filling most of the canvas with only a small transparent margin. This is the signature cutout only, not a signed copy of the whole illustration."
+}

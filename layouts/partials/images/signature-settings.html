@@ -1,0 +1,25 @@
+{{- /* Pure resolution: the caller supplies validated policy and raw-byte digests. */ -}}
+{{- $entry := .entry -}}
+{{- $policy := .policy -}}
+{{- $enabled := in $policy.default_classes $entry.image_class -}}
+{{- $position := "bottom-right" -}}
+{{- $widthRatio := $policy.width_ratio -}}
+{{- $insetRatio := $policy.inset_ratio -}}
+{{- with index $policy.overrides $entry.id -}}
+  {{- if isset . "enabled" }}{{ $enabled = .enabled }}{{ end -}}
+  {{- if isset . "position" }}{{ $position = .position }}{{ end -}}
+  {{- if isset . "width_ratio" }}{{ $widthRatio = .width_ratio }}{{ end -}}
+  {{- if isset . "inset_ratio" }}{{ $insetRatio = .inset_ratio }}{{ end -}}
+{{- end -}}
+{{- $identity := $entry.sha256 -}}
+{{- if $enabled -}}
+  {{- $identity = crypto.SHA256 (printf "%s|%s|%s|bob-v1" $entry.sha256 .policy_sha256 .mark_sha256) -}}
+{{- end -}}
+{{- return (dict
+  "enabled" $enabled
+  "identity" $identity
+  "hash_prefix" (substr $identity 0 12)
+  "position" $position
+  "width_ratio" $widthRatio
+  "inset_ratio" $insetRatio
+) -}}

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { imageCacheIdentity, collectOtherImageInputs } from "../scripts/ci/image_cache.mjs";
+import { imageCacheIdentity, collectOtherImageInputs, collectSignatureInputs } from "../scripts/ci/image_cache.mjs";
 const fixture = () => ({
   os: "Linux", hugoVersion: "0.164.0", imaging: { resampleFilter: "Lanczos" }, implementation: { model: "resize" },
   manifest: { defaults: { widths: [320, 640], max_render_width: 1600 }, assets: {
@@ -53,6 +53,37 @@ test("asset and page-bundle image changes invalidate exact identity without hash
     }
   } finally {
     assert.ok(path.resolve(root).startsWith(path.resolve(os.tmpdir()) + path.sep));
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("signature policy bytes and mark bytes invalidate cached renders", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "oip-signature-inputs-"));
+  const write = (file, value) => { const target = path.join(root, file); fs.mkdirSync(path.dirname(target), { recursive: true }); fs.writeFileSync(target, value); };
+  const policy = { version: 1, mark: "images/signatures/bob.png", width_ratio: 0.04 };
+  const identity = () => imageCacheIdentity({ ...fixture(), signatureInputs: collectSignatureInputs(root) });
+  try {
+    write("data/image-signatures.json", JSON.stringify(policy));
+    write("data/image-signature-compatibility.json", JSON.stringify({ version: 1, aliases: {} }));
+    write("assets/" + policy.mark, "first transparent mark");
+    const before = identity();
+    write("assets/" + policy.mark, "replacement transparent mark");
+    const markChanged = identity();
+    assert.equal(markChanged.prefix, before.prefix);
+    assert.notEqual(markChanged.key, before.key);
+    write("data/image-signatures.json", JSON.stringify({ ...policy, width_ratio: 0.05 }));
+    assert.notEqual(identity().key, markChanged.key);
+    const settingsChanged = identity();
+    write("data/image-signatures.json", JSON.stringify({ ...policy, width_ratio: 0.05 }) + "\n");
+    assert.notEqual(identity().key, settingsChanged.key, "raw policy bytes are rendition inputs");
+    const beforeCompatibility = identity();
+    write("data/image-signature-compatibility.json", JSON.stringify({ version: 1, aliases: { "/historical-social.jpg": "first" } }));
+    assert.notEqual(identity().key, beforeCompatibility.key, "compatibility output inventory changes invalidate the exact build cache");
+    write("data/image-signatures.json", JSON.stringify({ ...policy, mark: "../../secret.png" }));
+    assert.throws(identity, /inside assets\/images\/signatures/);
+    fs.rmSync(path.join(root, "data/image-signatures.json"));
+    assert.throws(identity, /ENOENT/);
+  } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
 });

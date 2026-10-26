@@ -25,6 +25,7 @@
 <picture
   class="{{ $pictureClass }}"
   data-oip-image-id="{{ $model.id }}"
+  data-oip-image-signed="{{ $model.signature_enabled }}"
   {{- with $model.image_class }} data-oip-image-class="{{ . }}"{{ end -}}
   {{- with $model.review_state }} data-oip-image-review-state="{{ . }}"{{ end -}}
 >

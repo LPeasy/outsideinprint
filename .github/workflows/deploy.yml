@@ -326,6 +326,10 @@ jobs:
       - name: Test image resource reuse
         if: ${{ needs.classify.outputs.images == 'true' }}
         run: node --test tests/responsive_image_cache_behavior.test.mjs
+      - name: Test image signature policy
+        if: ${{ needs.classify.outputs.images == 'true' }}
+        shell: pwsh
+        run: ./tests/test_image_signatures.ps1
       - name: Fingerprint image resources
         id: image-key
         run: |-
@@ -345,7 +349,7 @@ jobs:
           start_epoch="$(date +%s)"
           hugo --gc --minify --panicOnWarning --clock "$OIP_BUILD_CLOCK_UTC"
           elapsed_seconds="$(( $(date +%s) - start_epoch ))"
-          limit_seconds=900
+          limit_seconds=1200
           build_lane="cold"
           if [[ "${{ steps.image-cache.outputs.cache-hit }}" == "true" ]]; then
             limit_seconds=300

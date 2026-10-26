@@ -32,8 +32,9 @@ function Assert-OipPublicFileBudget {
 # Independent inventory of legal public derivatives. Assets not rendered on a
 # route may contribute no files; no asset may emit a variant outside this set.
 function Get-OipAllowedDerivativePaths {
-  param([Parameter(Mandatory)][object]$Manifest)
+  param([Parameter(Mandatory)][object]$Manifest, [AllowNull()][object]$SignaturePolicy, [AllowNull()][object]$SignatureCompatibility)
 
+  if ($null -ne $SignaturePolicy) { $Manifest = Get-OipSignatureManifest -Manifest $Manifest -LegacyAssets $SignaturePolicy.Policy.legacy_assets }
   $paths = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
   $defaults = $Manifest.defaults
   $renderCap = [int]$defaults.max_render_width
@@ -57,13 +58,17 @@ function Get-OipAllowedDerivativePaths {
       if ($width -le $terminal) { [void]$widths.Add($width) }
     }
     [void]$widths.Add($terminal)
-    $prefix = 'images/rendered/{0}/{1}' -f $id, ([string]$asset.sha256).Substring(0, 12)
+    $hashPrefix = if ($null -eq $SignaturePolicy) { ([string]$asset.sha256).Substring(0,12) } else { Get-OipSignatureRenderPrefix -Asset $asset -SignaturePolicy $SignaturePolicy }
+    $prefix = 'images/rendered/{0}/{1}' -f $id, $hashPrefix
     foreach ($width in $widths) {
       foreach ($format in @('avif', 'webp')) {
         [void]$paths.Add(('{0}/{1}w.{2}' -f $prefix, $width, $format))
       }
     }
     [void]$paths.Add(('{0}/social-{1}w.jpg' -f $prefix, [Math]::Min($sourceWidth, $socialCap)))
+  }
+  if ($null -ne $SignatureCompatibility) {
+    foreach ($url in $SignatureCompatibility.Aliases.Keys) { [void]$paths.Add($url.TrimStart('/')) }
   }
   return ,$paths
 }

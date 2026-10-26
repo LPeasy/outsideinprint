@@ -96,3 +96,68 @@ enabled = true
 [params.bob_reading]
 enabled = true
 api_base = "https://oip-bob-reading.red-snow-678d.workers.dev"
+
+# Keep legacy originals on disk while publishing only their signed derivatives.
+[[module.mounts]]
+source = "assets"
+target = "assets"
+
+[[module.mounts]]
+source = "static"
+target = "static"
+files = [
+  "! images/medium/beyond-moores-law/2aae02b62e26713f72883871ed81f0a57d570de577814ea1767fd1f55bcda440.jpeg",
+  "! images/medium/beyond-moores-law/3b3c4ea4a3e5ca7f782bea75beeac8910e87f0fc0bd2cfd62f20de5d9c490869.jpeg",
+  "! images/medium/beyond-moores-law/43301bba9f85ff09ade4314b5c96f66d6a06d47eef4b2567ed050ee76a0d1467.jpeg",
+  "! images/medium/beyond-moores-law/4d24f47051c7f64dd2a367f7ac261e98cd79cc2dc77d628fe3647886c3e0d1a5.jpeg",
+  "! images/medium/beyond-moores-law/b8914491438428cf93a0f4a8b477899def8dfbca6910f537a6f417ee0cbe5f34.jpeg",
+  "! images/medium/beyond-moores-law/c1c915ad29ca50f98e67ec1a456d9579ccbb4f6c1ed8017468eddbca776a43c0.jpeg",
+  "! images/medium/declaring-equality/36a21b68974f610407cb4fd9666bdeecd27ab9e1b48d614f50114a4aa8344c3d.jpeg",
+  "! images/medium/deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants/bd004c2ef628161dabf422814a612a5ec128b8ab922e1e9015faea0e3ae8ef49.jpeg",
+  "! images/medium/deference-lost/bbbe329f954f57ca95f2047e2220acfaf756fdf4499e35bf9a4e736166663dc0.jpeg",
+  "! images/medium/is-doge-legal/10b1c7b46535559a1db55235ed5b8fcaf86191152000c369edc06819eb6c84b6.jpeg",
+  "! images/medium/is-doge-legal/10ffd90e9af53ac34383d3682567157a1cd9f31053fe0456e16e2f7ee243bb24.jpeg",
+  "! images/medium/is-doge-legal/3208645cf2b4501ef6629cebe2d3118acc6d3aefafe5da074f4bb5025e2ed8bb.jpeg",
+  "! images/medium/is-doge-legal/57094fc3b48685946a22b7ed153f80ed26838585b0889001a2e6fcc3d440a22e.jpeg",
+  "! images/medium/is-doge-legal/6908e38a972a0549b2886b0d8fe1762db912286d3cc2f41eabb0abc4bfb3b3df.jpeg",
+  "! images/medium/is-doge-legal/8720760bee969f4bc2f540e9e4b170cd8a0ab9d90371c82344dd5562dc5a44e9.jpeg",
+  "! images/medium/is-doge-legal/e723d4f00340bad5655b721481042fadd90210bc9973097d521afd3249b446e6.jpeg",
+  "! images/medium/synthetic-reasoning/ab5d6b96221162123353ad71faf7cbc1e89b8a6787b337e50aa92ba92fd32a76.jpeg",
+  "! images/medium/the-death-of-moores-law/c8f9f3c89cefb298ee7f1eab911925dd4eb577b40e806d67b5985a474aee18b9.jpeg",
+  "! images/medium/the-dolphin-company/92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4.jpeg",
+  "! images/medium/the-max-mistake-why-hbos-name-change-backfired/3c53b36844456f4a6e5f87b61e1757c7c3714a2a29bf6de00a2ef93c40397b92.jpeg",
+  "! images/medium/the-max-mistake-why-hbos-name-change-backfired/8dc2ba89b5f4fcbdbb4eb5f733b30c982e121db90084e3ef16ba0ca908de1f2f.jpeg",
+  "! images/medium/the-undead-state/cbe459c20ee612506e5eb4167a56aa6042bb7ba8df8ac55426d583d0c7f10e53.jpeg",
+  "! images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf.jpeg",
+  "! images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/2826bfc60d4144f0359cc4d57178b38608fde8c284b80ddca5493b4a2c790017.jpeg"
+]
+
+[[module.mounts]]
+source = "static/images/medium"
+target = "assets/images/legacy-medium"
+files = [
+  "beyond-moores-law/2aae02b62e26713f72883871ed81f0a57d570de577814ea1767fd1f55bcda440.jpeg",
+  "beyond-moores-law/3b3c4ea4a3e5ca7f782bea75beeac8910e87f0fc0bd2cfd62f20de5d9c490869.jpeg",
+  "beyond-moores-law/43301bba9f85ff09ade4314b5c96f66d6a06d47eef4b2567ed050ee76a0d1467.jpeg",
+  "beyond-moores-law/4d24f47051c7f64dd2a367f7ac261e98cd79cc2dc77d628fe3647886c3e0d1a5.jpeg",
+  "beyond-moores-law/b8914491438428cf93a0f4a8b477899def8dfbca6910f537a6f417ee0cbe5f34.jpeg",
+  "beyond-moores-law/c1c915ad29ca50f98e67ec1a456d9579ccbb4f6c1ed8017468eddbca776a43c0.jpeg",
+  "declaring-equality/36a21b68974f610407cb4fd9666bdeecd27ab9e1b48d614f50114a4aa8344c3d.jpeg",
+  "deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants/bd004c2ef628161dabf422814a612a5ec128b8ab922e1e9015faea0e3ae8ef49.jpeg",
+  "deference-lost/bbbe329f954f57ca95f2047e2220acfaf756fdf4499e35bf9a4e736166663dc0.jpeg",
+  "is-doge-legal/10b1c7b46535559a1db55235ed5b8fcaf86191152000c369edc06819eb6c84b6.jpeg",
+  "is-doge-legal/10ffd90e9af53ac34383d3682567157a1cd9f31053fe0456e16e2f7ee243bb24.jpeg",
+  "is-doge-legal/3208645cf2b4501ef6629cebe2d3118acc6d3aefafe5da074f4bb5025e2ed8bb.jpeg",
+  "is-doge-legal/57094fc3b48685946a22b7ed153f80ed26838585b0889001a2e6fcc3d440a22e.jpeg",
+  "is-doge-legal/6908e38a972a0549b2886b0d8fe1762db912286d3cc2f41eabb0abc4bfb3b3df.jpeg",
+  "is-doge-legal/8720760bee969f4bc2f540e9e4b170cd8a0ab9d90371c82344dd5562dc5a44e9.jpeg",
+  "is-doge-legal/e723d4f00340bad5655b721481042fadd90210bc9973097d521afd3249b446e6.jpeg",
+  "synthetic-reasoning/ab5d6b96221162123353ad71faf7cbc1e89b8a6787b337e50aa92ba92fd32a76.jpeg",
+  "the-death-of-moores-law/c8f9f3c89cefb298ee7f1eab911925dd4eb577b40e806d67b5985a474aee18b9.jpeg",
+  "the-dolphin-company/92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4.jpeg",
+  "the-max-mistake-why-hbos-name-change-backfired/3c53b36844456f4a6e5f87b61e1757c7c3714a2a29bf6de00a2ef93c40397b92.jpeg",
+  "the-max-mistake-why-hbos-name-change-backfired/8dc2ba89b5f4fcbdbb4eb5f733b30c982e121db90084e3ef16ba0ca908de1f2f.jpeg",
+  "the-undead-state/cbe459c20ee612506e5eb4167a56aa6042bb7ba8df8ac55426d583d0c7f10e53.jpeg",
+  "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf.jpeg",
+  "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/2826bfc60d4144f0359cc4d57178b38608fde8c284b80ddca5493b4a2c790017.jpeg"
+]

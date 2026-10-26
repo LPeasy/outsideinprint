@@ -1,0 +1,535 @@
+{
+  "version": 1,
+  "mark": "images/signatures/bob-plunge.png",
+  "default_classes": [
+    "essay_illustration",
+    "editorial_cartoon"
+  ],
+  "width_ratio": 0.04,
+  "inset_ratio": 0.025,
+  "overrides": {
+    "essays/animal-kingdom-opening-1998/section-2": {
+      "enabled": false,
+      "reason": "Disney park map; sourced artwork identified in article caption."
+    },
+    "essays/animal-kingdom-opening-1998/section-4": {
+      "enabled": false,
+      "reason": "Disney park guide and legend; sourced artwork identified in article caption."
+    },
+    "essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/evidence-types-corrected-20260927": {
+      "inset_ratio": 0.075,
+      "reason": "Move above the sources footer so BOB does not cover source text."
+    },
+    "essays/camp-mystic-evacuation-timeline-guadalupe-river-flash-flood-july-4-2025/illustrative-timing-corrected-20260927": {
+      "inset_ratio": 0.1,
+      "reason": "Move above the final warning so the full warning remains readable."
+    },
+    "essays/epcot-center-opening-1982/city-transport-plan": {
+      "enabled": false,
+      "reason": "Archival Disney EPCOT transportation plan; sourced artwork identified in article caption."
+    },
+    "essays/walt-disney-world-opening-1971/financing": {
+      "enabled": false,
+      "reason": "SEC archival document; provenance records identify an external source."
+    },
+    "essays/walt-disney-world-opening-1971/mickey": {
+      "enabled": false,
+      "reason": "Historical Mickey Mouse artwork attributed to Ub Iwerks in provenance records."
+    },
+    "essays/walt-disney-world-opening-1971/oswald": {
+      "enabled": false,
+      "reason": "Historical Oswald artwork attributed to Universal/Winkler in provenance records."
+    },
+    "medium/07375509446ac63c4f1ab98b192ca8d98ce96c0999ecc857ec664438ef6c26b5": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md:322."
+    },
+    "medium/0fda9c1e65b4765b7fee77b3a143c7f3a4684f8f18330b1d593dab408d0f6717": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/35-years-of-yellow-the-simpsons-time-loop.md:178."
+    },
+    "medium/127a3134915b163410d34aba8d3263f7d684c1306006dba699489d14b244d8f1": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md:205."
+    },
+    "medium/153cece529a7ffda26838482590d4452bfeb0d433eb44eb31f56ddf970a662b4": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in reports/medium-image-recovery/20260706-recovery.json."
+    },
+    "medium/1f1d3b1b3797dbf21156a02a37cad6417ea54d12553912a36c624d601b877738": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible.md:227."
+    },
+    "medium/239a846e7399926815a645c6b6832ced8ea33effbd917f9673ca0e5a8f214e80": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/cuomo-vs-mamdani-nyc-2025.md:82."
+    },
+    "medium/2b1ea15963df8f0ead4c1584d505e98958fda02da20805844fb78e19ee658286": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md:102."
+    },
+    "medium/2de353269c4d6a550cb95a4cbbc71516d2dd95d0f79ca18c0f12c6244062d70f": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md:281."
+    },
+    "medium/31776846cc421ab1bcee6aaece5550347c944752cf9ee5c53b886ab28449b42f": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in reports/medium-image-recovery/20260706-recovery.json."
+    },
+    "medium/3b78dafd8c7316c9689933faefd508443e382f22ca5017e2ca312d6e76f570b3": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/35-years-of-yellow-the-simpsons-time-loop.md:200."
+    },
+    "medium/4247da9d13f86756606baad8f9661f974e3c04e62ed489843878a13ad15c9ebe": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/cuomo-vs-mamdani-nyc-2025.md:59."
+    },
+    "medium/46756d02dc998cc47ad24a4ff9544ae588d45a4d57235fca3fb5ec3c0e37cb29": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md:275."
+    },
+    "medium/4b78e3e3d056a68126fbae12e3a387e2a1a93ba6a5bcdfe93955e75c0839c8c7": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/ai-in-education-is-a-wicked-problem.md:126."
+    },
+    "medium/4ebf48bacdff824a125b429a9410afd6a03bd15d67452e2b4a17743ab10836db": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/ai-in-education-is-a-wicked-problem.md:76."
+    },
+    "medium/50a83029f54620986d55be12b97085c5387929661ca91bdc00c6857d519ec04a": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md:61."
+    },
+    "medium/50d02e451c35927758f3e56e9c5fb22e708f8a4aea123f1958ad08551846a4d0": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md:142."
+    },
+    "medium/5259adbea4308247944f02e7e6be83966064aba054b2c1a011a826f60635f8ba": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/ai-in-education-is-a-wicked-problem.md:9."
+    },
+    "medium/57d2e2573cdbc659261cd4a869b43321fa96cd36a2a4f92c0efd3357c04c0318": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/35-years-of-yellow-the-simpsons-time-loop.md:11."
+    },
+    "medium/61a52f886b9d1e4bdb9b1d293ab6bbd3419ed45b322e637926a8ce7894b1325e": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md:28."
+    },
+    "medium/68599305e3376636d034277eda9d7b37f1a1108500a77c949f8d8d200d531095": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/2025-supreme-court-wrap-up.md:10."
+    },
+    "medium/72b2d666368a71ddb17bd0cfda25d444213f46060c98323516ddb9c941c1ad24": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/35-years-of-yellow-the-simpsons-time-loop.md:241."
+    },
+    "medium/749ee55ce9ab60c1fcd9c08c9a18005323d61e7da148e1fbcf4e8ef3daf13794": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/mcdonalds-faces-week-long-boycott-june-24-2025.md:8."
+    },
+    "medium/768c86219b26313aa92384449e22dc95871c60f30f3d481cca64a911c3a872a5": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md:92."
+    },
+    "medium/77416938ef5aa442d49faa61f66857dd3c14ad457156a1596a35131d306c7f28": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/ai-in-education-is-a-wicked-problem.md:158."
+    },
+    "medium/7ad8c941d8ef0cdebc494ff8267a543e57c619fd45d84384f09cf5330e4dd0f6": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/the-economics-of-the-mongol-empire.md:145."
+    },
+    "medium/88f4f494e2ff589170be3401c9ed3d398e844d18f013ff3f3d8a08b0923969c1": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md:67."
+    },
+    "medium/89bef6904367ed90bd1df5dae093513ffb9431cd4ada04fb0fc3e2a971bb3564": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md:189."
+    },
+    "medium/8bf803e8dd137b92326086801f6b9c36dc36a39515ae3cfa163548d4d6c79a74": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md:140."
+    },
+    "medium/96760c63e9c81f06dc764ee41f179b537e4032e4942b05030adcf388cb86d1a7": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/the-crucifix-courage-training-to-speak-truth-in-a-false-world.md:174."
+    },
+    "medium/d32b31f7a3db44deb112a66e61ec07b3a2bedbf638702514345096633d5eb443": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go.md:239."
+    },
+    "medium/d5ae33ce9140a26ea50ddcad6752dba0ced8a8c5d8b1492450eeca28fdafb00c": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in reports/medium-image-recovery/20260706-recovery.json."
+    },
+    "medium/d6b3a7394b6883ceeb4b5ff9cc7b775a30cd1dcab75999818ee1ff1b0e735f89": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/mcdonalds-faces-week-long-boycott-june-24-2025.md:108."
+    },
+    "medium/dc0bc08b82ecdb66318448661045c8aae2b3bafcd035d49a7b536c4690c0e2ea": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/iran-fires-missiles-at-u-s-base-in-qatar-what-just-happened.md:64. Top-right placement preserves the Jun25 axis label.",
+      "position": "top-right"
+    },
+    "medium/ec2bb9dc0766069355d9f4f70440d0524b58806d4aa59c44715567c4eaac9923": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/the-dolphin-company.md:275."
+    },
+    "medium/f4b292028370a2cbfdaaa85746c2a27aa0c34975f31b8064779f9d20e694af59": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/mcdonalds-faces-week-long-boycott-june-24-2025.md:70."
+    },
+    "medium/f8dcdf76053d3058b94d60d74509d2a44620d489fd1ef11307c1106c3a50e054": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in reports/medium-image-recovery/20260706-recovery.json."
+    },
+    "medium/fd0f1ae37104133f64db49aa96661f7cbf5195612f3f6144f76f90768f0939d1": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/cuomo-vs-mamdani-nyc-2025.md:96."
+    },
+    "medium/fd3d29842d5fa7dd8e071751beb3ce1bfd7fc051e86dd6d3d10ff003ccb8a042": {
+      "enabled": true,
+      "reason": "Author-created artwork credited in content/essays/ai-in-education-is-a-wicked-problem.md:181."
+    }
+  },
+  "legacy_assets": {
+    "legacy/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf": {
+      "id": "legacy/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf",
+      "source": "images/legacy-medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf.jpeg",
+      "sha256": "04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf",
+      "width": 800,
+      "height": 533,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf.jpeg",
+      "reason": "Author-created artwork credited in content/essays/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025.md:9."
+    },
+    "legacy/10b1c7b46535559a1db55235ed5b8fcaf86191152000c369edc06819eb6c84b6": {
+      "id": "legacy/10b1c7b46535559a1db55235ed5b8fcaf86191152000c369edc06819eb6c84b6",
+      "source": "images/legacy-medium/is-doge-legal/10b1c7b46535559a1db55235ed5b8fcaf86191152000c369edc06819eb6c84b6.jpeg",
+      "sha256": "10b1c7b46535559a1db55235ed5b8fcaf86191152000c369edc06819eb6c84b6",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/is-doge-legal/10b1c7b46535559a1db55235ed5b8fcaf86191152000c369edc06819eb6c84b6.jpeg",
+      "reason": "Author-created artwork credited in content/essays/is-doge-legal.md:120."
+    },
+    "legacy/10ffd90e9af53ac34383d3682567157a1cd9f31053fe0456e16e2f7ee243bb24": {
+      "id": "legacy/10ffd90e9af53ac34383d3682567157a1cd9f31053fe0456e16e2f7ee243bb24",
+      "source": "images/legacy-medium/is-doge-legal/10ffd90e9af53ac34383d3682567157a1cd9f31053fe0456e16e2f7ee243bb24.jpeg",
+      "sha256": "10ffd90e9af53ac34383d3682567157a1cd9f31053fe0456e16e2f7ee243bb24",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/is-doge-legal/10ffd90e9af53ac34383d3682567157a1cd9f31053fe0456e16e2f7ee243bb24.jpeg",
+      "reason": "Author-created artwork credited in reports/medium-image-recovery/20260706-second-pass-recovery.json."
+    },
+    "legacy/2826bfc60d4144f0359cc4d57178b38608fde8c284b80ddca5493b4a2c790017": {
+      "id": "legacy/2826bfc60d4144f0359cc4d57178b38608fde8c284b80ddca5493b4a2c790017",
+      "source": "images/legacy-medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/2826bfc60d4144f0359cc4d57178b38608fde8c284b80ddca5493b4a2c790017.jpeg",
+      "sha256": "2826bfc60d4144f0359cc4d57178b38608fde8c284b80ddca5493b4a2c790017",
+      "width": 800,
+      "height": 533,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/2826bfc60d4144f0359cc4d57178b38608fde8c284b80ddca5493b4a2c790017.jpeg",
+      "reason": "Author-created artwork credited in content/essays/why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025.md:123."
+    },
+    "legacy/2aae02b62e26713f72883871ed81f0a57d570de577814ea1767fd1f55bcda440": {
+      "id": "legacy/2aae02b62e26713f72883871ed81f0a57d570de577814ea1767fd1f55bcda440",
+      "source": "images/legacy-medium/beyond-moores-law/2aae02b62e26713f72883871ed81f0a57d570de577814ea1767fd1f55bcda440.jpeg",
+      "sha256": "2aae02b62e26713f72883871ed81f0a57d570de577814ea1767fd1f55bcda440",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/beyond-moores-law/2aae02b62e26713f72883871ed81f0a57d570de577814ea1767fd1f55bcda440.jpeg",
+      "reason": "Author-created artwork credited in content/essays/beyond-moores-law.md:76."
+    },
+    "legacy/3208645cf2b4501ef6629cebe2d3118acc6d3aefafe5da074f4bb5025e2ed8bb": {
+      "id": "legacy/3208645cf2b4501ef6629cebe2d3118acc6d3aefafe5da074f4bb5025e2ed8bb",
+      "source": "images/legacy-medium/is-doge-legal/3208645cf2b4501ef6629cebe2d3118acc6d3aefafe5da074f4bb5025e2ed8bb.jpeg",
+      "sha256": "3208645cf2b4501ef6629cebe2d3118acc6d3aefafe5da074f4bb5025e2ed8bb",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/is-doge-legal/3208645cf2b4501ef6629cebe2d3118acc6d3aefafe5da074f4bb5025e2ed8bb.jpeg",
+      "reason": "Author-created artwork credited in content/essays/is-doge-legal.md:191."
+    },
+    "legacy/36a21b68974f610407cb4fd9666bdeecd27ab9e1b48d614f50114a4aa8344c3d": {
+      "id": "legacy/36a21b68974f610407cb4fd9666bdeecd27ab9e1b48d614f50114a4aa8344c3d",
+      "source": "images/legacy-medium/declaring-equality/36a21b68974f610407cb4fd9666bdeecd27ab9e1b48d614f50114a4aa8344c3d.jpeg",
+      "sha256": "36a21b68974f610407cb4fd9666bdeecd27ab9e1b48d614f50114a4aa8344c3d",
+      "width": 800,
+      "height": 457,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/declaring-equality/36a21b68974f610407cb4fd9666bdeecd27ab9e1b48d614f50114a4aa8344c3d.jpeg",
+      "reason": "Author-created artwork credited in content/essays/declaring-equality.md:10."
+    },
+    "legacy/3b3c4ea4a3e5ca7f782bea75beeac8910e87f0fc0bd2cfd62f20de5d9c490869": {
+      "id": "legacy/3b3c4ea4a3e5ca7f782bea75beeac8910e87f0fc0bd2cfd62f20de5d9c490869",
+      "source": "images/legacy-medium/beyond-moores-law/3b3c4ea4a3e5ca7f782bea75beeac8910e87f0fc0bd2cfd62f20de5d9c490869.jpeg",
+      "sha256": "3b3c4ea4a3e5ca7f782bea75beeac8910e87f0fc0bd2cfd62f20de5d9c490869",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/beyond-moores-law/3b3c4ea4a3e5ca7f782bea75beeac8910e87f0fc0bd2cfd62f20de5d9c490869.jpeg",
+      "reason": "Author-created artwork credited in content/essays/beyond-moores-law.md:112."
+    },
+    "legacy/3c53b36844456f4a6e5f87b61e1757c7c3714a2a29bf6de00a2ef93c40397b92": {
+      "id": "legacy/3c53b36844456f4a6e5f87b61e1757c7c3714a2a29bf6de00a2ef93c40397b92",
+      "source": "images/legacy-medium/the-max-mistake-why-hbos-name-change-backfired/3c53b36844456f4a6e5f87b61e1757c7c3714a2a29bf6de00a2ef93c40397b92.jpeg",
+      "sha256": "3c53b36844456f4a6e5f87b61e1757c7c3714a2a29bf6de00a2ef93c40397b92",
+      "width": 800,
+      "height": 324,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/the-max-mistake-why-hbos-name-change-backfired/3c53b36844456f4a6e5f87b61e1757c7c3714a2a29bf6de00a2ef93c40397b92.jpeg",
+      "reason": "Author-created artwork credited in content/essays/the-max-mistake-why-hbos-name-change-backfired.md:59."
+    },
+    "legacy/43301bba9f85ff09ade4314b5c96f66d6a06d47eef4b2567ed050ee76a0d1467": {
+      "id": "legacy/43301bba9f85ff09ade4314b5c96f66d6a06d47eef4b2567ed050ee76a0d1467",
+      "source": "images/legacy-medium/beyond-moores-law/43301bba9f85ff09ade4314b5c96f66d6a06d47eef4b2567ed050ee76a0d1467.jpeg",
+      "sha256": "43301bba9f85ff09ade4314b5c96f66d6a06d47eef4b2567ed050ee76a0d1467",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/beyond-moores-law/43301bba9f85ff09ade4314b5c96f66d6a06d47eef4b2567ed050ee76a0d1467.jpeg",
+      "reason": "Author-created artwork credited in content/essays/beyond-moores-law.md:32."
+    },
+    "legacy/4d24f47051c7f64dd2a367f7ac261e98cd79cc2dc77d628fe3647886c3e0d1a5": {
+      "id": "legacy/4d24f47051c7f64dd2a367f7ac261e98cd79cc2dc77d628fe3647886c3e0d1a5",
+      "source": "images/legacy-medium/beyond-moores-law/4d24f47051c7f64dd2a367f7ac261e98cd79cc2dc77d628fe3647886c3e0d1a5.jpeg",
+      "sha256": "4d24f47051c7f64dd2a367f7ac261e98cd79cc2dc77d628fe3647886c3e0d1a5",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/beyond-moores-law/4d24f47051c7f64dd2a367f7ac261e98cd79cc2dc77d628fe3647886c3e0d1a5.jpeg",
+      "reason": "Author-created artwork credited in content/essays/beyond-moores-law.md:56."
+    },
+    "legacy/57094fc3b48685946a22b7ed153f80ed26838585b0889001a2e6fcc3d440a22e": {
+      "id": "legacy/57094fc3b48685946a22b7ed153f80ed26838585b0889001a2e6fcc3d440a22e",
+      "source": "images/legacy-medium/is-doge-legal/57094fc3b48685946a22b7ed153f80ed26838585b0889001a2e6fcc3d440a22e.jpeg",
+      "sha256": "57094fc3b48685946a22b7ed153f80ed26838585b0889001a2e6fcc3d440a22e",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/is-doge-legal/57094fc3b48685946a22b7ed153f80ed26838585b0889001a2e6fcc3d440a22e.jpeg",
+      "reason": "Author-created artwork credited in content/essays/is-doge-legal.md:140."
+    },
+    "legacy/6908e38a972a0549b2886b0d8fe1762db912286d3cc2f41eabb0abc4bfb3b3df": {
+      "id": "legacy/6908e38a972a0549b2886b0d8fe1762db912286d3cc2f41eabb0abc4bfb3b3df",
+      "source": "images/legacy-medium/is-doge-legal/6908e38a972a0549b2886b0d8fe1762db912286d3cc2f41eabb0abc4bfb3b3df.jpeg",
+      "sha256": "6908e38a972a0549b2886b0d8fe1762db912286d3cc2f41eabb0abc4bfb3b3df",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/is-doge-legal/6908e38a972a0549b2886b0d8fe1762db912286d3cc2f41eabb0abc4bfb3b3df.jpeg",
+      "reason": "Author-created artwork credited in content/essays/is-doge-legal.md:62."
+    },
+    "legacy/8720760bee969f4bc2f540e9e4b170cd8a0ab9d90371c82344dd5562dc5a44e9": {
+      "id": "legacy/8720760bee969f4bc2f540e9e4b170cd8a0ab9d90371c82344dd5562dc5a44e9",
+      "source": "images/legacy-medium/is-doge-legal/8720760bee969f4bc2f540e9e4b170cd8a0ab9d90371c82344dd5562dc5a44e9.jpeg",
+      "sha256": "8720760bee969f4bc2f540e9e4b170cd8a0ab9d90371c82344dd5562dc5a44e9",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/is-doge-legal/8720760bee969f4bc2f540e9e4b170cd8a0ab9d90371c82344dd5562dc5a44e9.jpeg",
+      "reason": "Author-created artwork credited in content/essays/is-doge-legal.md:45."
+    },
+    "legacy/8dc2ba89b5f4fcbdbb4eb5f733b30c982e121db90084e3ef16ba0ca908de1f2f": {
+      "id": "legacy/8dc2ba89b5f4fcbdbb4eb5f733b30c982e121db90084e3ef16ba0ca908de1f2f",
+      "source": "images/legacy-medium/the-max-mistake-why-hbos-name-change-backfired/8dc2ba89b5f4fcbdbb4eb5f733b30c982e121db90084e3ef16ba0ca908de1f2f.jpeg",
+      "sha256": "8dc2ba89b5f4fcbdbb4eb5f733b30c982e121db90084e3ef16ba0ca908de1f2f",
+      "width": 800,
+      "height": 533,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/the-max-mistake-why-hbos-name-change-backfired/8dc2ba89b5f4fcbdbb4eb5f733b30c982e121db90084e3ef16ba0ca908de1f2f.jpeg",
+      "reason": "Author-created artwork credited in content/essays/the-max-mistake-why-hbos-name-change-backfired.md:127."
+    },
+    "legacy/92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4": {
+      "id": "legacy/92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4",
+      "source": "images/legacy-medium/the-dolphin-company/92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4.jpeg",
+      "sha256": "92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4",
+      "width": 800,
+      "height": 400,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/the-dolphin-company/92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4.jpeg",
+      "reason": "Author-created artwork credited in content/essays/the-dolphin-company.md:9."
+    },
+    "legacy/ab5d6b96221162123353ad71faf7cbc1e89b8a6787b337e50aa92ba92fd32a76": {
+      "id": "legacy/ab5d6b96221162123353ad71faf7cbc1e89b8a6787b337e50aa92ba92fd32a76",
+      "source": "images/legacy-medium/synthetic-reasoning/ab5d6b96221162123353ad71faf7cbc1e89b8a6787b337e50aa92ba92fd32a76.jpeg",
+      "sha256": "ab5d6b96221162123353ad71faf7cbc1e89b8a6787b337e50aa92ba92fd32a76",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/synthetic-reasoning/ab5d6b96221162123353ad71faf7cbc1e89b8a6787b337e50aa92ba92fd32a76.jpeg",
+      "reason": "Author-created artwork credited in content/essays/synthetic-reasoning.md:52."
+    },
+    "legacy/b8914491438428cf93a0f4a8b477899def8dfbca6910f537a6f417ee0cbe5f34": {
+      "id": "legacy/b8914491438428cf93a0f4a8b477899def8dfbca6910f537a6f417ee0cbe5f34",
+      "source": "images/legacy-medium/beyond-moores-law/b8914491438428cf93a0f4a8b477899def8dfbca6910f537a6f417ee0cbe5f34.jpeg",
+      "sha256": "b8914491438428cf93a0f4a8b477899def8dfbca6910f537a6f417ee0cbe5f34",
+      "width": 800,
+      "height": 728,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/beyond-moores-law/b8914491438428cf93a0f4a8b477899def8dfbca6910f537a6f417ee0cbe5f34.jpeg",
+      "reason": "Author-created artwork credited in content/essays/beyond-moores-law.md:94."
+    },
+    "legacy/bbbe329f954f57ca95f2047e2220acfaf756fdf4499e35bf9a4e736166663dc0": {
+      "id": "legacy/bbbe329f954f57ca95f2047e2220acfaf756fdf4499e35bf9a4e736166663dc0",
+      "source": "images/legacy-medium/deference-lost/bbbe329f954f57ca95f2047e2220acfaf756fdf4499e35bf9a4e736166663dc0.jpeg",
+      "sha256": "bbbe329f954f57ca95f2047e2220acfaf756fdf4499e35bf9a4e736166663dc0",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/deference-lost/bbbe329f954f57ca95f2047e2220acfaf756fdf4499e35bf9a4e736166663dc0.jpeg",
+      "reason": "Author-created artwork credited in reports/medium-image-recovery/20260706-second-pass-recovery.json."
+    },
+    "legacy/bd004c2ef628161dabf422814a612a5ec128b8ab922e1e9015faea0e3ae8ef49": {
+      "id": "legacy/bd004c2ef628161dabf422814a612a5ec128b8ab922e1e9015faea0e3ae8ef49",
+      "source": "images/legacy-medium/deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants/bd004c2ef628161dabf422814a612a5ec128b8ab922e1e9015faea0e3ae8ef49.jpeg",
+      "sha256": "bd004c2ef628161dabf422814a612a5ec128b8ab922e1e9015faea0e3ae8ef49",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/deepseek-lean-ai-disrupts-americas-compute-heavy-tech-giants/bd004c2ef628161dabf422814a612a5ec128b8ab922e1e9015faea0e3ae8ef49.jpeg",
+      "reason": "Author-created artwork credited in reports/medium-image-recovery/20260706-second-pass-recovery.json."
+    },
+    "legacy/c1c915ad29ca50f98e67ec1a456d9579ccbb4f6c1ed8017468eddbca776a43c0": {
+      "id": "legacy/c1c915ad29ca50f98e67ec1a456d9579ccbb4f6c1ed8017468eddbca776a43c0",
+      "source": "images/legacy-medium/beyond-moores-law/c1c915ad29ca50f98e67ec1a456d9579ccbb4f6c1ed8017468eddbca776a43c0.jpeg",
+      "sha256": "c1c915ad29ca50f98e67ec1a456d9579ccbb4f6c1ed8017468eddbca776a43c0",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/beyond-moores-law/c1c915ad29ca50f98e67ec1a456d9579ccbb4f6c1ed8017468eddbca776a43c0.jpeg",
+      "reason": "Author-created artwork credited in content/essays/beyond-moores-law.md:44."
+    },
+    "legacy/c8f9f3c89cefb298ee7f1eab911925dd4eb577b40e806d67b5985a474aee18b9": {
+      "id": "legacy/c8f9f3c89cefb298ee7f1eab911925dd4eb577b40e806d67b5985a474aee18b9",
+      "source": "images/legacy-medium/the-death-of-moores-law/c8f9f3c89cefb298ee7f1eab911925dd4eb577b40e806d67b5985a474aee18b9.jpeg",
+      "sha256": "c8f9f3c89cefb298ee7f1eab911925dd4eb577b40e806d67b5985a474aee18b9",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/the-death-of-moores-law/c8f9f3c89cefb298ee7f1eab911925dd4eb577b40e806d67b5985a474aee18b9.jpeg",
+      "reason": "Author-created artwork credited in content/essays/the-death-of-moores-law.md:8."
+    },
+    "legacy/cbe459c20ee612506e5eb4167a56aa6042bb7ba8df8ac55426d583d0c7f10e53": {
+      "id": "legacy/cbe459c20ee612506e5eb4167a56aa6042bb7ba8df8ac55426d583d0c7f10e53",
+      "source": "images/legacy-medium/the-undead-state/cbe459c20ee612506e5eb4167a56aa6042bb7ba8df8ac55426d583d0c7f10e53.jpeg",
+      "sha256": "cbe459c20ee612506e5eb4167a56aa6042bb7ba8df8ac55426d583d0c7f10e53",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/the-undead-state/cbe459c20ee612506e5eb4167a56aa6042bb7ba8df8ac55426d583d0c7f10e53.jpeg",
+      "reason": "Author-created artwork credited in reports/medium-image-recovery/20260706-second-pass-recovery.json."
+    },
+    "legacy/e723d4f00340bad5655b721481042fadd90210bc9973097d521afd3249b446e6": {
+      "id": "legacy/e723d4f00340bad5655b721481042fadd90210bc9973097d521afd3249b446e6",
+      "source": "images/legacy-medium/is-doge-legal/e723d4f00340bad5655b721481042fadd90210bc9973097d521afd3249b446e6.jpeg",
+      "sha256": "e723d4f00340bad5655b721481042fadd90210bc9973097d521afd3249b446e6",
+      "width": 800,
+      "height": 800,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "processing_state": "derivative_capable",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "url": "/images/medium/is-doge-legal/e723d4f00340bad5655b721481042fadd90210bc9973097d521afd3249b446e6.jpeg",
+      "reason": "Author-created artwork credited in content/essays/is-doge-legal.md:85."
+    }
+  }
+}

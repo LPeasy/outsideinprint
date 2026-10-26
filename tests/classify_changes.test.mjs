@@ -29,6 +29,16 @@ test("browser selection follows rendering, applications, storefronts and helpers
     assert.equal(selectChecks({ event: "push", paths: [path], protectedMain: true }).seo, true, path);
   }
 });
+test("signature policy and mark changes select image and rendering verification", () => {
+  for (const path of ["data/image-signatures.json", "data/image-signature-compatibility.json", "assets/images/signatures/bob-plunge.png"]) {
+    const selected = classifyPaths([path]);
+    assert.equal(selected.images, true, path);
+    assert.equal(selected.rendering, true, path);
+    assert.equal(selected.full, false, path);
+  }
+  assert.equal(classifyPaths(["tests/test_image_signatures.ps1"]).images, true);
+  assert.equal(classifyPaths(["tests/helpers/image_signatures.ps1"]).images, true);
+});
 test("workers and documentation do not need Hugo; mixed changes preserve all selected work", () => {
   assert.equal(classifyPaths(["workers/oip-commerce/src/index.mjs"]).site, false);
   assert.equal(classifyPaths(["workers/oip-commerce/test/commerce.test.mjs"]).worker, true);

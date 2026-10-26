@@ -23,6 +23,8 @@ The September 27, 2026 graphic corrections register replacement artwork under ne
 
 One malformed supplemental legacy JPG is quarantined as `processing_state: source_only_unprocessable`, `review_state: rejected_corrupt_source`, and `usage_state: retained_unreferenced`. It keeps one historical alias but may never be referenced, rendered, or copied into production. Every other asset must be `processing_state: derivative_capable` and `review_state: approved`; every referenced asset must be derivative-capable. The rejected raw original remains only as provenance and recovery evidence.
 
+Reviewed author-created images from the retained static Medium fleet can enter the signature registry in `data/image-signatures.json` without changing their source bytes or the historical image manifest. Hugo mounts those exact files as assets and omits their raw public copies; the source baseline remains 316 files while the deployed static count subtracts the registered signature entries. Uncertain ownership and known sourced artwork remain unsigned. See [BOB illustration signatures](image-signatures.md) and `reports/image-signature-ownership.json`.
+
 Aliases are resolver inputs, not redirects. Retired raw PNG/JPEG URLs are allowed to return 404. An alias must resolve directly to a canonical asset and must not create a second source copy.
 The 459-source and 500-alias counts are focused-cleanup release baselines. Future registered artwork must advance the manifest deliberately, stay approved before release, and preserve the one-new-alias-per-new-asset relationship. Unexplained baseline loss or alias drift fails validation.
 
@@ -77,15 +79,15 @@ The shared resolver, model, and picture partials serve article heroes, body figu
 - One route LCP image may use `loading="eager"` with `fetchpriority="high"`; body images, cards, and thumbnails use lazy loading.
 - Lightboxes defer a maximum-1600px WebP until activation.
 - Open Graph, Twitter, and JSON-LD share one maximum-1200px JPEG at quality 85.
-- Public URLs use `/images/rendered/<asset-id>/<source-hash-prefix>/...`. They never expose `/originals/`.
+- Public URLs use `/images/rendered/<asset-id>/<rendition-hash-prefix>/...`. Unsigned assets retain the source-hash prefix; signed artwork binds the source, BOB mark, and policy into its rendition hash. They never expose `/originals/`. See [BOB illustration signatures](image-signatures.md).
 
 ## Build cache and performance
 
 GitHub Actions caches only `resources/_gen`. Its compatibility prefix binds the OS, pinned Hugo version, and image-processing implementation/configuration; its normalized rendering-input fingerprint covers approved source identities, dimensions, hints, quality overrides, and other processed image sources. Editorial notes and unrelated tool versions do not invalidate it. Restore an exact match first, then the newest compatible cache. Sources are checked before building and outputs afterward. Only successful trusted main builds save resources; PRs restore without saving. Cache absence remains supported, and incompatible Hugo versions never share a restore prefix.
 
-- Cold image build: no more than 15 minutes.
+- Cold image build: no more than 20 minutes. The October 2026 signature rollout measured 976 seconds for 5,808 processed images on Linux CI; the previous 5,183-image cold build took 832 seconds. See `reports/image-signature-build-evidence.json`.
 - Exact restored-cache build: no more than five minutes.
-- Image-generating job timeout: 30 minutes, allowing time for output checks and the Pages artifact upload after the image build.
+- Image-generating job timeout: 35 minutes, allowing time for output checks and the Pages artifact upload after the image build.
 
 ## Output budgets
 
@@ -97,11 +99,11 @@ The production gate enforces:
 - generated images limited to the calculated recipe for approved derivative-capable assets: two display formats at each bounded candidate/native width, plus one bounded social JPEG;
 - no more than 1,500 other public files, with a calculated total-file budget equal to the approved derivative recipe allowance plus 1,500;
 - zero managed source bytes or migrated editorial/essay raster originals in `static/` or `public/`; and
-- valid AVIF, WebP, and JPEG signatures, dimensions, MIME declarations, responsive descriptors, and source-hash URL prefixes.
+- valid AVIF, WebP, and JPEG signatures, dimensions, MIME declarations, responsive descriptors, and source/signature-policy rendition URL prefixes.
 
 The earlier focused-cleanup acceptance ceiling and live-baseline savings check were retired after the migration completed. The standing limits now preserve a 100 MiB reserve beneath [GitHub Pages' supported 1 GiB deployment ceiling](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits): 800 MiB for `public/images` within a 900 MiB prepared Pages payload.
 
-The former 5,100-image ceiling reached capacity on October 9, 2026. The standing count allowance now comes from the approved source inventory and rendering recipe. Every generated path must use its registered asset ID, exact current 12-character source-hash prefix, allowed width, and format. Pending or quarantined assets permit no derivatives. This allows ordinary approved artwork additions without repeated count-only repairs while retaining the 900 MiB Pages, 800 MiB image, and 1 MiB per-derivative budgets. CI reports remaining byte, file, and recipe headroom.
+The former 5,100-image ceiling reached capacity on October 9, 2026. The standing count allowance now comes from the approved source inventory and rendering recipe. Every generated path must use its registered asset ID, exact current 12-character rendition-hash prefix, allowed width, and format. Pending or quarantined assets permit no derivatives. This allows ordinary approved artwork additions without repeated count-only repairs while retaining the 900 MiB Pages, 800 MiB image, and 1 MiB per-derivative budgets. CI reports remaining byte, file, and recipe headroom.
 
 The original 6,500-total-file budget accompanied a 5,000-image allowance. On October 25, 2026, the installment-six build produced 6,523 files and hit that remaining fixed cap. The total-file allowance now follows the approved derivative recipe, retaining the original 1,500-file difference as a separate limit for HTML, scripts, styles, static files and other output. Both components are enforced independently; unused derivative capacity cannot hide excess other files. With 6,169 approved derivative paths, the calculated total budget is 7,669 files. Byte limits, image dimensions, formats, hashes and exact-path checks are unchanged.
 
