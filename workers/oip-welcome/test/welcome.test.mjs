@@ -91,12 +91,40 @@ test('duplicate and concurrent deliveries cannot trigger duplicate events, even 
   assert.equal(f.row().sequence_version, 'welcome-v1');
 });
 
+test('signed provider preview shape without newsletter still performs a contextual canonical GET', async () => {
+  const f = fixture();
+  const payload = { id: 'ext_evt_00000000000000000000000001', event_type: 'subscriber.confirmed', data: { subscriber: ID } };
+  assert.deepEqual(await (await f.send(f.request(payload))).json(), { status: 'accepted' });
+  assert.equal(f.calls[0].url, `https://api.buttondown.com/v1/subscribers/${ID}`);
+  assert.equal(f.calls[0].options.headers['Buttondown-Context'], f.env.NEWSLETTER_ID);
+  assert.equal(f.calls[0].options.headers.Authorization, `Token ${f.env.BUTTONDOWN_API_KEY}`);
+  assert.equal(f.calls[0].options.redirect, 'manual');
+  assert.equal(f.row().state, 'accepted');
+  await f.send(f.request(payload));
+  assert.equal(f.events().length, 1);
+});
+
+test('omitted newsletter does not bypass signature or canonical subscriber validation', async () => {
+  const f = fixture();
+  const payload = { data: { subscriber: ID } };
+  assert.equal((await f.send(f.request(payload, { signature: false }))).status, 401);
+  assert.equal(f.calls.length, 0);
+  f.setSubscriber({ id: OTHER_ID });
+  assert.equal((await f.send(f.request(payload))).status, 503);
+  f.setSubscriber({ id: ID, type: 'unsubscribed' });
+  assert.deepEqual(await (await f.send(f.request(payload))).json(), { status: 'ineligible' });
+  assert.equal(f.events().length, 0);
+  assert.equal(f.row(), undefined);
+});
+
 test('signature, body, newsletter, and subscriber validation happen before external calls', async () => {
   const f = fixture();
   for (const req of [
     f.request({}, { signature: false }),
     f.request({}, { raw: '{invalid' }),
     f.request({ data: { newsletter: 'different', subscriber: ID } }),
+    f.request({ data: { newsletter: null, subscriber: ID } }),
+    f.request({ data: { newsletter: '', subscriber: ID } }),
     f.request({ data: { newsletter: f.env.NEWSLETTER_ID, subscriber: 'owner@example.test' } }),
     f.request({}, { raw: 'x'.repeat(16 * 1024 + 1) }),
   ]) assert.ok((await f.send(req)).status >= 400);
