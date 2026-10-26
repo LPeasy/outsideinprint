@@ -55,6 +55,35 @@ test("legacy and generic collisions share one UTC cron while returning both reco
   assert.deepEqual(selectScheduledReleases("0 13 25 10 *", "2026-10-25T13:00:00Z", plan), { timed: true, generic: [release], disney: [legacy] });
 });
 
+test("an authorized later rebuild preserves the release time and expires after its absolute window", () => {
+  const { release, readGit } = fixture({ ...spec("book", "2026-10-27T09:00:00-04:00"), rebuildAt: "2026-10-27T09:30:00-04:00" });
+  const plan = options([release]);
+  assert.deepEqual(scheduledCrons(plan), ["0 13 27 10 *", "30 13 27 10 *"]);
+  assert.equal(release.releaseAt, "2026-10-27T09:00:00-04:00");
+  assert.doesNotThrow(() => verifyScheduledRelease(release, { readGit }));
+  assert.deepEqual(selectScheduledReleases("0 13 27 10 *", "2026-10-27T13:00:00Z", plan).generic, [release]);
+  const pick = clock => selectScheduledReleases("30 13 27 10 *", clock, plan).generic;
+  assert.deepEqual(pick("2026-10-27T13:29:59Z"), []);
+  assert.deepEqual(pick("2026-10-27T13:30:00Z"), [release]);
+  assert.deepEqual(pick(release.endsAt), []);
+  assert.deepEqual(pick("2027-10-27T13:30:00Z"), []);
+});
+
+test("rebuild instants require the correct Eastern offset and stay strictly inside the release window", () => {
+  const { release } = fixture(spec("book", "2026-10-27T09:00:00-04:00"));
+  for (const rebuildAt of ["2026-10-27T08:30:00-04:00", release.releaseAt, "2026-10-28T09:00:00-04:00", "2026-10-27T09:30:00-05:00"])
+    assert.throws(() => validateRegistry(options([{ ...release, rebuildAt }]).registry), /rebuildAt|Eastern|New_York/);
+});
+
+test("a rebuild at maintenance time reuses that trigger without changing primary eligibility", () => {
+  const { release } = fixture({ ...spec("book", "2026-10-26T09:00:00-04:00"), rebuildAt: "2026-10-27T00:17:00-04:00" });
+  const plan = options([release]);
+  assert.deepEqual(scheduledCrons(plan), ["0 13 26 10 *"]);
+  assert.deepEqual(selectScheduledReleases("17 0 * * 0,2-6", "2026-10-27T04:16:59Z", plan).generic, []);
+  assert.deepEqual(selectScheduledReleases("17 0 * * 0,2-6", "2026-10-27T04:17:00Z", plan).generic, [release]);
+  assert.deepEqual(selectScheduledReleases("17 0 * * 0,2-6", "2027-10-27T04:17:00Z", plan).generic, []);
+});
+
 test("00:17 Eastern releases reuse daily or Monday maintenance without suppressing it", () => {
   const sunday = fixture(spec("sunday", "2026-10-25T00:17:00-04:00")).release;
   const monday = fixture(spec("monday", "2026-10-26T00:17:00-04:00")).release;
