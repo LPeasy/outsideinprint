@@ -1,4 +1,6 @@
 /data/image-assets.json text eol=lf
+/data/image-signatures.json text eol=lf
+/data/image-signature-compatibility.json text eol=lf
 /data/bookstore.yaml text eol=lf
 /data/collections.yaml text eol=lf
 /static/data/rcp85-bibliometrics/*.csv text eol=lf

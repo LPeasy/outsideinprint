@@ -173,7 +173,7 @@ $cases = @(
 $partials = @(
   'editorial/registered-cartoons.html', 'editorial/published-cartoons.html', 'editorial/cartoon-is-published.html',
   'editorial/current-cartoon.html', 'editorial/cartoon-for-page.html', 'collections/is-published.html',
-  'metadata/policy.html', 'metadata/route.html', 'images/resolve.html'
+  'metadata/policy.html', 'metadata/route.html', 'images/resolve.html', 'images/signature-policy.html'
 )
 $homeTemplate = @'
 {{- $entries := partial "editorial/published-cartoons.html" (hugo.Data.editorial_cartoons.cartoons | default (slice)) -}}
@@ -229,6 +229,10 @@ try {
     }
     $aliases = if ($case.ContainsKey('Aliases')) { $case.Aliases } else { @{} }
     Write-Fixture $caseRoot 'data/image-assets.json' (ConvertTo-Json -InputObject @{ assets = $assets; aliases = $aliases } -Depth 8)
+    Write-Fixture $caseRoot 'data/image-signatures.json' ('{"version":1,"mark":"images/signatures/fixture.png","default_classes":["essay_illustration","editorial_cartoon"],"width_ratio":0.04,"inset_ratio":0.025,"overrides":{},"legacy_assets":{}}' + "`n")
+    $markPath = Join-Path $caseRoot 'assets/images/signatures/fixture.png'
+    [IO.Directory]::CreateDirectory((Split-Path -Parent $markPath)) | Out-Null
+    [IO.File]::WriteAllBytes($markPath, $pngBytes)
 
     $clock = if ($case.ContainsKey('Clock')) { $case.Clock } else { '2026-10-22T12:00:00-04:00' }
     $buildFlags = if ($case.ContainsKey('BuildFlags')) { @($case.BuildFlags) } else { @() }

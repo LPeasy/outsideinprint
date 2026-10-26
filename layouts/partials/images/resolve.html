@@ -30,8 +30,13 @@
     ) -}}
   {{- else -}}
     {{- $manifest := index hugo.Data "image-assets" | default dict -}}
-    {{- $assets := $manifest.assets | default dict -}}
+    {{- $signaturePolicy := partialCached "images/signature-policy.html" (dict) -}}
+    {{- $legacyAssets := $signaturePolicy.policy.legacy_assets -}}
+    {{- $assets := merge ($manifest.assets | default dict) $legacyAssets -}}
     {{- $aliases := $manifest.aliases | default dict -}}
+    {{- range $id, $entry := $legacyAssets -}}
+      {{- $aliases = merge $aliases (dict $entry.url $id) -}}
+    {{- end -}}
     {{- $explicitManaged := hasPrefix $rawRef "oip-image:" -}}
     {{- $lookupRef := $rawRef -}}
     {{- if $explicitManaged -}}
@@ -82,8 +87,13 @@
       {{- end -}}
 
       {{- $source := strings.TrimSpace (printf "%v" $entry.source) -}}
+      {{- $legacy := isset $legacyAssets $canonicalID -}}
+      {{- $allowedSource := or
+        (and (not $legacy) (hasPrefix $source "images/originals/"))
+        (and $legacy (hasPrefix $source "images/legacy-medium/"))
+      -}}
       {{- if or
-        (not (hasPrefix $source "images/originals/"))
+        (not $allowedSource)
         (hasPrefix $source "/")
         (in $source "..")
       -}}
@@ -132,6 +142,7 @@
         (hasPrefix $lookupRef "essays/")
         (hasPrefix $lookupRef "medium/")
         (hasPrefix $lookupRef "books/")
+        (hasPrefix $lookupRef "legacy/")
       -}}
       {{- if or $explicitManaged $managedNamespace $managedID -}}
         {{- errorf "Managed responsive image reference %q is not declared in data/image-assets.json" $rawRef -}}

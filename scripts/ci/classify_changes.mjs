@@ -42,6 +42,7 @@ const testFamilies = new Map([
   ["test_editorial_cartoon_schedule_contract.ps1", ["publishing"]],
   ["test_managed_image_registration.ps1", ["images", "windows"]], ["test_focused_image_review_promotion.ps1", ["images", "windows"]],
   ["test_focused_legacy_image_migration.ps1", ["images"]], ["responsive_image_cache_behavior.test.mjs", ["images"]],
+  ["test_image_signatures.ps1", ["images"]],
   // The classify job always runs schedule structure, source-binding and receipt fixtures.
   ["disney_release_schedule.test.mjs", []], ["scheduled_releases.test.mjs", []],
   ["test_disney_release_verification.py", []], ["test_scheduled_release_verification.py", []],
@@ -56,6 +57,9 @@ export function classifyPaths(paths, { renderingDefaultsChanged = false, schedul
     selected.site = true;
     if (path === "scripts/ci/scheduled-releases.json" || (path === ".github/workflows/deploy.yml" && scheduleWorkflowOnlyChanged)) continue;
     if (path === "data/image-assets.json" || path.startsWith("assets/images/originals/")) continue;
+    if (["data/image-signatures.json", "data/image-signature-compatibility.json"].includes(path) || path.startsWith("assets/images/signatures/")) {
+      selected.images = selected.rendering = true; browsers(selected); continue;
+    }
     if (path.startsWith("content/")) {
       if (path.startsWith("content/shop/")) browsers(selected, ["browser_analytics", "browser_share"]);
       else if (/^content\/(apps|games|studio)\//.test(path)) browsers(selected);
@@ -96,7 +100,7 @@ export function classifyPaths(paths, { renderingDefaultsChanged = false, schedul
         continue;
       }
       if (/^test_almanack[^/]*\.py$/.test(name)) { selected.publishing = true; continue; }
-      if (/^helpers\/responsive_image_(common|recipe)\.ps1$/.test(name)) { selected.images = selected.windows = true; continue; }
+      if (/^helpers\/(?:responsive_image_(?:common|recipe)|image_signatures)\.ps1$/.test(name)) { selected.images = selected.windows = true; continue; }
       return full();
     }
     // Known system dependencies get full PR validation without repeating it

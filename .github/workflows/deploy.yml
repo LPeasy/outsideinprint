@@ -324,6 +324,10 @@ jobs:
       - name: Test image resource reuse
         if: ${{ needs.classify.outputs.images == 'true' }}
         run: node --test tests/responsive_image_cache_behavior.test.mjs
+      - name: Test image signature policy
+        if: ${{ needs.classify.outputs.images == 'true' }}
+        shell: pwsh
+        run: ./tests/test_image_signatures.ps1
       - name: Fingerprint image resources
         id: image-key
         run: |-

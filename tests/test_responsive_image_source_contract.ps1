@@ -9,6 +9,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 . (Join-Path $PSScriptRoot 'helpers/responsive_image_common.ps1')
+. (Join-Path $PSScriptRoot 'helpers/image_signatures.ps1')
 
 function Assert-Equal {
   param(
@@ -156,6 +157,8 @@ if (-not (Test-Path -LiteralPath $gitattributesPath -PathType Leaf)) {
 $gitattributes = [System.IO.File]::ReadAllText($gitattributesPath, [System.Text.Encoding]::UTF8).Replace("`r`n", "`n").Replace("`r", "`n")
 foreach ($requiredAttribute in @(
   '/data/image-assets.json text eol=lf',
+  '/data/image-signatures.json text eol=lf',
+  '/data/image-signature-compatibility.json text eol=lf',
   '/reports/image-review-candidates.json text eol=lf',
   '/reports/image-visual-review.json text eol=lf',
   '/reports/responsive-image-build-evidence.json text eol=lf',
@@ -169,6 +172,11 @@ foreach ($requiredAttribute in @(
 
 $manifestCanonicalSha256 = Get-OipCanonicalTextFileSha256 -Path $manifestPath -Label 'Image asset manifest' -RequireCanonical
 $manifest = Get-OipImageManifest -Path $manifestPath
+$signaturePolicy = Get-OipImageSignaturePolicy -Root $rootPath -Manifest $manifest
+$signatureCompatibility = Get-OipImageSignatureCompatibility -Root $rootPath -Manifest $manifest -SignaturePolicy $signaturePolicy
+$emailImageReferenceCount=Assert-OipSignatureEmailReferences -Root $rootPath -Manifest $manifest -SignaturePolicy $signaturePolicy -SignatureCompatibility $signatureCompatibility
+if ($emailImageReferenceCount -eq 0) { throw 'Almanack signature compatibility guard matched no rendered email_image references.' }
+Write-Host "Validated $emailImageReferenceCount Almanack email_image references."
 
 Assert-ExactProperties -Value $manifest -Expected @('schema_version','defaults','assets','aliases') -Context 'Manifest root'
 Assert-Equal -Actual ([string]$manifest.schema_version) -Expected '1.0' -Message 'Manifest schema_version changed.'
@@ -832,7 +840,7 @@ foreach ($referenceRoot in @('content','data')) {
   $fullReferenceRoot = Join-Path $rootPath $referenceRoot
   if (Test-Path -LiteralPath $fullReferenceRoot -PathType Container) {
     $referenceFiles += @(Get-ChildItem -LiteralPath $fullReferenceRoot -File -Recurse | Where-Object {
-      $_.FullName -cne $manifestPath -and $_.Extension -in @('.md','.html','.yaml','.yml','.json','.toml')
+      $_.FullName -cne $manifestPath -and $_.FullName -cne (Join-Path $rootPath 'data/image-signatures.json') -and $_.FullName -cne (Join-Path $rootPath 'data/image-signature-compatibility.json') -and $_.Extension -in @('.md','.html','.yaml','.yml','.json','.toml')
     })
   }
 }

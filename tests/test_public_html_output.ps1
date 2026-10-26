@@ -12,6 +12,8 @@ $ErrorActionPreference = "Stop"
 $validationNow = if ($Clock) { [datetimeoffset]::Parse($Clock) } else { [datetimeoffset]::UtcNow }
 
 . (Join-Path $PSScriptRoot 'helpers/public_output_common.ps1')
+. (Join-Path $PSScriptRoot 'helpers/responsive_image_common.ps1')
+. (Join-Path $PSScriptRoot 'helpers/image_signatures.ps1')
 
 function Format-SampleList {
   param(
@@ -456,7 +458,7 @@ function Get-ManagedSocialImageUrl {
     throw "Managed social-image asset cannot produce derivatives: $AssetId"
   }
 
-  $hashPrefix = ([string]$asset.sha256).Substring(0, 12)
+  $hashPrefix = Get-OipSignatureRenderPrefix -Asset $asset -SignaturePolicy $script:imageSignaturePolicy
   $socialWidth = [Math]::Min([int]$asset.width, [int]$Manifest.defaults.social_max_width)
   return "https://outsideinprint.org/images/rendered/$AssetId/$hashPrefix/social-${socialWidth}w.jpg"
 }
@@ -476,9 +478,18 @@ function Get-ManagedVisibleImagePath {
     throw "Managed visible-image asset cannot produce derivatives: $AssetId"
   }
 
-  $hashPrefix = ([string]$asset.sha256).Substring(0, 12)
+  $hashPrefix = Get-OipSignatureRenderPrefix -Asset $asset -SignaturePolicy $script:imageSignaturePolicy
   $visibleWidth = [Math]::Min([int]$asset.width, [int]$Manifest.defaults.max_render_width)
   return "/images/rendered/$AssetId/$hashPrefix/${visibleWidth}w.webp"
+}
+
+function Get-ExpectedImportedImage {
+  param([hashtable]$Manifest, [string]$StaticUrl)
+  $registered=@($script:imageSignaturePolicy.Policy.legacy_assets.Values | Where-Object { $_.url -ceq $StaticUrl })
+  if ($registered.Count -eq 0) { return @{ Path=$StaticUrl; AssetId='' } }
+  if ($registered.Count -ne 1) { throw "Imported image has ambiguous signature registration: $StaticUrl" }
+  $id=[string]$registered[0].id
+  return @{ Path=(Get-ManagedVisibleImagePath -Manifest $Manifest -AssetId $id); AssetId=$id }
 }
 
 function ConvertTo-CanonicalImageUrl {
@@ -774,6 +785,9 @@ if (-not (Test-Path -LiteralPath $imageManifestPath -PathType Leaf)) {
   throw "Responsive image manifest not found: $imageManifestPath"
 }
 $imageManifest = Get-Content -LiteralPath $imageManifestPath -Raw | ConvertFrom-Json -AsHashtable -Depth 20
+$script:imageSignaturePolicy = Get-OipImageSignaturePolicy -Root $repoRoot -Manifest $imageManifest
+$imageManifest = Get-OipSignatureManifest -Manifest $imageManifest -LegacyAssets $script:imageSignaturePolicy.Policy.legacy_assets |
+  ConvertTo-Json -Depth 30 | ConvertFrom-Json -AsHashtable -Depth 30
 $canonicalAffirmations = @(Get-CanonicalAffirmations -Path (Join-Path $repoRoot 'editorial\affirmations-bank.md'))
 $freshness = Test-PublicBuildFreshness -RepoRoot $repoRoot -SiteDir $SiteDir
 if (-not $freshness.IsFresh) {
@@ -2572,9 +2586,10 @@ foreach ($check in $essayHeroChecks) {
       continue
     }
 
-    $isManagedFeaturedImage = $imageManifest.assets.ContainsKey($featuredImage)
+    $featuredImageId = if ($imageManifest.aliases.ContainsKey($featuredImage)) { [string]$imageManifest.aliases[$featuredImage] } else { $featuredImage }
+    $isManagedFeaturedImage = $imageManifest.assets.ContainsKey($featuredImageId)
     $expectedHeroPath = if ($isManagedFeaturedImage) {
-      Get-ManagedVisibleImagePath -Manifest $imageManifest -AssetId $featuredImage
+      Get-ManagedVisibleImagePath -Manifest $imageManifest -AssetId $featuredImageId
     }
     else {
       $featuredImage
@@ -2587,7 +2602,7 @@ foreach ($check in $essayHeroChecks) {
     }
 
     $expectedSocialImage = if ($isManagedFeaturedImage) {
-      Get-ManagedSocialImageUrl -Manifest $imageManifest -AssetId $featuredImage
+      Get-ManagedSocialImageUrl -Manifest $imageManifest -AssetId $featuredImageId
     }
     else {
       ConvertTo-CanonicalImageUrl -Value $featuredImage
@@ -2615,7 +2630,7 @@ foreach ($check in $essayHeroChecks) {
         $bodyRepeatsHero = if ($isManagedFeaturedImage) {
           @(
             Get-OpenTags -Html $pieceBodyHtml -TagName 'img' |
-              Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-oip-image-id') -ceq $featuredImage }
+              Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-oip-image-id') -ceq $featuredImageId }
           ).Count -gt 0
         }
         else {
@@ -2806,8 +2821,11 @@ if ($targetPageHtml.ContainsKey($hboPath)) {
       if ($alt -cne $expected.Alt) {
         $importedMediaIssues.Add("$hboPath => body image $($index + 1) must retain alt '$($expected.Alt)' in its original position")
       }
-      if ($expected.ContainsKey('File') -and $src -cne ($staticPrefix + $expected.File)) {
-        $importedMediaIssues.Add("$hboPath => body image $($index + 1) must retain its original static source")
+      if ($expected.ContainsKey('File')) {
+        $expectedImage=Get-ExpectedImportedImage -Manifest $imageManifest -StaticUrl ($staticPrefix + $expected.File)
+        if ($src -cne $expectedImage.Path -or ($expectedImage.AssetId -and (Get-AttributeValue -Tag $tag -Name 'data-oip-image-id') -cne $expectedImage.AssetId)) {
+          $importedMediaIssues.Add("$hboPath => body image $($index + 1) must retain its source identity and registered signature treatment")
+        }
       }
       if ($expected.ContainsKey('ImageID') -and (Get-AttributeValue -Tag $tag -Name 'data-oip-image-id') -cne $expected.ImageID) {
         $importedMediaIssues.Add("$hboPath => managed body image must retain its registered asset")
@@ -2868,7 +2886,8 @@ foreach ($slug in $recoveredImageSequences.Keys) {
     if (-not [string]::IsNullOrWhiteSpace($expected.Alt) -and $alt -cne $expected.Alt) {
       $importedMediaIssues.Add("$relativePath => body image $($index + 1) must preserve its expected alt text")
     }
-    if ($src -cne "/images/medium/$slug/$($expected.File)") {
+    $expectedImage=Get-ExpectedImportedImage -Manifest $imageManifest -StaticUrl "/images/medium/$slug/$($expected.File)"
+    if ($src -cne $expectedImage.Path -or ($expectedImage.AssetId -and (Get-AttributeValue -Tag $tag -Name 'data-oip-image-id') -cne $expectedImage.AssetId)) {
       $importedMediaIssues.Add("$relativePath => body image $($index + 1) must preserve its original source and sequence")
     }
     if (-not $src.StartsWith('/') -or -not (Test-Path -LiteralPath (Join-Path $SiteDir $src.TrimStart('/')) -PathType Leaf)) {

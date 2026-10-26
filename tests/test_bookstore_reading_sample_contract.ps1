@@ -140,15 +140,24 @@ function Test-ContextualBookFixtures {
   $fixture = Join-Path $tempRoot ('oip-contextual-book-' + [guid]::NewGuid().ToString('N'))
   [void](New-Item -ItemType Directory -Path $fixture)
   try {
-    foreach ($directory in @('layouts/partials/shop', 'layouts/partials/images', 'static/images/books/the-water-cycle', 'layouts/_default', 'content/essays', 'data')) {
+    foreach ($directory in @('layouts/partials/shop', 'layouts/partials/images', 'assets/images/signatures', 'static/images/books/the-water-cycle', 'layouts/_default', 'content/essays', 'data')) {
       [void](New-Item -ItemType Directory -Path (Join-Path $fixture $directory) -Force)
     }
     foreach ($partial in @('contextual-book', 'product-data', 'sample-link', 'resolve-reading-sample')) {
       Copy-Item -LiteralPath (Join-Path $repoRoot "layouts/partials/shop/$partial.html") -Destination (Join-Path $fixture "layouts/partials/shop/$partial.html")
     }
-    foreach ($partial in @('picture', 'model', 'resolve')) {
+    foreach ($partial in @('picture', 'model', 'resolve', 'signature-policy', 'signature-settings', 'derivative')) {
       Copy-Item -LiteralPath (Join-Path $repoRoot "layouts/partials/images/$partial.html") -Destination (Join-Path $fixture "layouts/partials/images/$partial.html")
     }
+    $fixtureSignature = [ordered]@{
+      version = 1; mark = 'images/signatures/bob-plunge.png'
+      default_classes = @('essay_illustration', 'editorial_cartoon')
+      width_ratio = 0.04; inset_ratio = 0.025; overrides = @{}; legacy_assets = @{}
+    }
+    [IO.File]::WriteAllText((Join-Path $fixture 'data/image-signatures.json'), ($fixtureSignature | ConvertTo-Json -Depth 5) + "`n", [Text.UTF8Encoding]::new($false))
+    [IO.File]::WriteAllText((Join-Path $fixture 'data/image-signature-compatibility.json'), '{"version":1,"aliases":{}}' + "`n", [Text.UTF8Encoding]::new($false))
+    [IO.File]::WriteAllText((Join-Path $fixture 'data/image-assets.json'), '{"assets":{},"aliases":{}}' + "`n", [Text.UTF8Encoding]::new($false))
+    Copy-Item -LiteralPath (Join-Path $repoRoot 'assets/images/signatures/bob-plunge.png') -Destination (Join-Path $fixture 'assets/images/signatures/bob-plunge.png')
     $fixtureCover = '/images/books/the-water-cycle/the-water-cycle-cover-v2.0.jpg'
     Copy-Item -LiteralPath (Join-Path $repoRoot "static$fixtureCover") -Destination (Join-Path $fixture "static$fixtureCover")
     [IO.File]::WriteAllText((Join-Path $fixture 'layouts/_default/single.html'), '{{ .Title }}')
@@ -1098,6 +1107,9 @@ Test-ContextualBookFixtures
 $contextualOutput = @($contextualEntries | ForEach-Object { $_.route.TrimStart('/') + 'index.html' })
 $catalogSource = Get-RequiredText -RelativePath 'data/bookstore.yaml'
 . (Join-Path $PSScriptRoot 'helpers/responsive_image_common.ps1')
+. (Join-Path $PSScriptRoot 'helpers/image_signatures.ps1')
+$imageSignaturePolicy = Get-OipImageSignaturePolicy -Root $repoRoot -Manifest $manifest
+$renderManifest = Get-OipSignatureManifest -Manifest $manifest -LegacyAssets $imageSignaturePolicy.Policy.legacy_assets
 foreach ($entry in $contextualEntries) {
   $outputPath = $entry.route.TrimStart('/') + 'index.html'
   $slug = ($entry.book_path -split '/')[-1]
@@ -1119,9 +1131,9 @@ foreach ($entry in $contextualEntries) {
   $expectedSrc = Get-ContextualHtmlAttribute -Tag $canonicalImage -Name 'src'
   if ($entry.key -eq '2045') {
     if ($expectedCover -cne 'books/2045/cover' -or (Get-ContextualHtmlAttribute -Tag $canonicalImage -Name 'data-oip-image-id') -cne $expectedCover) { throw '2045 must retain its exact managed catalog cover.' }
-    $asset = $manifest.assets[$expectedCover]
-    $prefix = '/images/rendered/' + $expectedCover + '/' + $asset.sha256.Substring(0, 12) + '/'
-    if (-not $expectedSrc.StartsWith($prefix, [StringComparison]::Ordinal)) { throw '2045 cover must resolve to its managed source-hash derivatives.' }
+    $asset = $renderManifest.assets.$expectedCover
+    $prefix = '/images/rendered/' + $expectedCover + '/' + (Get-OipSignatureRenderPrefix -Asset $asset -SignaturePolicy $imageSignaturePolicy) + '/'
+    if (-not $expectedSrc.StartsWith($prefix, [StringComparison]::Ordinal)) { throw '2045 cover must resolve to its managed rendition-hash derivatives.' }
   } elseif ($expectedSrc -cne $expectedCover) { throw "$($entry.key) must retain its exact static catalog cover." }
   $coverDimensions = Get-OipImageDimensions -Path (Join-Path $SiteDir $expectedSrc.TrimStart('/'))
   $html = Get-Content -LiteralPath (Join-Path $SiteDir $outputPath) -Raw -Encoding utf8

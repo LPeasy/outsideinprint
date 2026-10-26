@@ -1,0 +1,3 @@
+{{- if .model.signature_enabled -}}
+<a class="cartoon-gallery__download" data-gallery-download href="{{ .model.largest_webp_url }}" download="{{ .slug }}-bob.webp" type="image/webp" aria-label="Download {{ .title }}">Download image</a>
+{{- end -}}

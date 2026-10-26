@@ -51,6 +51,10 @@ foreach ($case in @(
 [IO.Directory]::CreateDirectory((Join-Path $FixtureRoot 'static')) | Out-Null
 $pixel = [Convert]::FromBase64String('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jVJkAAAAASUVORK5CYII=')
 foreach ($image in @('fixture-hero.png','fixture-portrait.png')) { [IO.File]::WriteAllBytes((Join-Path $FixtureRoot "static/$image"), $pixel) }
+Write-Fixture 'data/image-assets.json' '{"assets":{},"aliases":{}}'
+Write-Fixture 'data/image-signatures.json' ('{"version":1,"mark":"images/signatures/fixture.png","default_classes":["essay_illustration","editorial_cartoon"],"width_ratio":0.04,"inset_ratio":0.025,"overrides":{},"legacy_assets":{}}' + "`n")
+[IO.Directory]::CreateDirectory((Join-Path $FixtureRoot 'assets/images/signatures')) | Out-Null
+[IO.File]::WriteAllBytes((Join-Path $FixtureRoot 'assets/images/signatures/fixture.png'), $pixel)
 function Build-Catalog([string]$BaseURL = 'https://outsideinprint.org/') {
   & $HugoPath --source $FixtureRoot --destination (Join-Path $FixtureRoot 'public') --baseURL $BaseURL --buildDrafts --buildFuture --buildExpired --panicOnWarning --quiet
   Assert-Contract ($LASTEXITCODE -eq 0) 'Catalog fixture did not build.'
