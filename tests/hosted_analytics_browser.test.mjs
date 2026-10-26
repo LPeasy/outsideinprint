@@ -854,7 +854,7 @@ test("collection title and artwork clicks share one event each while magnifiers 
   const sentinels = ["COLLECTION_QUERY_SENTINEL", "COLLECTION_FRAGMENT_SENTINEL", "COLLECTION_EMAIL_SENTINEL"];
   const cases = [
     { collection: "musings", articlePath: "/essays/life-is-a-controlled-fall/", gallery: true, imagePath: /\/images\/rendered\/editorial\/life-is-a-controlled-fall\// },
-    { collection: "reported-case-studies", articlePath: "/essays/the-dolphin-company/", gallery: false, imagePath: /\/images\/medium\/the-dolphin-company\// },
+    { collection: "reported-case-studies", articlePath: "/essays/the-dolphin-company/", gallery: false, imagePath: /^\/images\/rendered\/legacy\/92120106176bb8291df18e01fb3fa7d266b0e02ca97777a6a6619ddc90ea5bb4\/[a-f0-9]{12}\/800w\.webp$/ },
     { collection: "modern-bios", articlePath: "/essays/jack-stratton-and-the-vulfpeck-model/", gallery: false, imagePath: /\/images\/medium\/jack-stratton-and-the-vulfpeck-model\// },
     { collection: "syd-and-oliver-dialogues", articlePath: "/syd-and-oliver/smoke-and-brass/", textOnly: true }
   ];
