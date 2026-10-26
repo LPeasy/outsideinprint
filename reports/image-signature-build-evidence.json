@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "recorded_at": "2026-10-26",
+  "hugo_version": "0.167.0-extended",
+  "historical_linux_cold": {
+    "run_id": 37985633661,
+    "job_id": 114006868698,
+    "seconds": 832.076,
+    "processed_images": 5183,
+    "limit_seconds": 900,
+    "outcome": "pass"
+  },
+  "signature_linux_initial_cold": {
+    "run_id": 40346776440,
+    "job_id": 121657499917,
+    "head_sha": "4aaacd8dfd10796c739d0d7f9ccd5b8589b4c636",
+    "seconds": 976.415,
+    "processed_images": 5808,
+    "hugo_render_exit_code": 0,
+    "build_step_outcome": "failure",
+    "failure_reason": "Successful complete render exceeded the previous 900-second cold-build limit."
+  },
+  "local_mac": {
+    "cold_seconds": 180.804,
+    "first_warm_seconds": 20.934,
+    "warm_cleaned_cache_files": 0,
+    "output_contract": "pass",
+    "derivatives": 5744,
+    "managed_pictures": 1286,
+    "public_image_bytes": 668563014,
+    "total_public_bytes": 767085165
+  },
+  "capacity_decision": {
+    "cold_limit_seconds": 1200,
+    "exact_cache_limit_seconds": 300,
+    "site_job_timeout_minutes": 35,
+    "rationale": "The previous cold build already used 92% of its 15-minute allowance. Processed-image count grew 12.1%; the measured cold build grew 17.3%. A bounded 20-minute cold limit accommodates the expanded library with headroom while retaining the cached-build limit, quality settings, and public byte/file budgets. Both platforms use Hugo embedded Wasm codecs; there is no native-codec dependency to install."
+  },
+  "references": {
+    "historical_ci": "https://github.com/LPeasy/outsideinprint/actions/runs/37985633661",
+    "initial_signature_ci": "https://github.com/LPeasy/outsideinprint/actions/runs/40346776440",
+    "hugo_codec_source": "https://github.com/gohugoio/hugo/blob/v0.167.0/resources/images/image.go#L118-L157"
+  }
+}

@@ -85,9 +85,9 @@ The shared resolver, model, and picture partials serve article heroes, body figu
 
 GitHub Actions caches only `resources/_gen`. Its compatibility prefix binds the OS, pinned Hugo version, and image-processing implementation/configuration; its normalized rendering-input fingerprint covers approved source identities, dimensions, hints, quality overrides, and other processed image sources. Editorial notes and unrelated tool versions do not invalidate it. Restore an exact match first, then the newest compatible cache. Sources are checked before building and outputs afterward. Only successful trusted main builds save resources; PRs restore without saving. Cache absence remains supported, and incompatible Hugo versions never share a restore prefix.
 
-- Cold image build: no more than 15 minutes.
+- Cold image build: no more than 20 minutes. The October 2026 signature rollout measured 976 seconds for 5,808 processed images on Linux CI; the previous 5,183-image cold build took 832 seconds. See `reports/image-signature-build-evidence.json`.
 - Exact restored-cache build: no more than five minutes.
-- Image-generating job timeout: 30 minutes, allowing time for output checks and the Pages artifact upload after the image build.
+- Image-generating job timeout: 35 minutes, allowing time for output checks and the Pages artifact upload after the image build.
 
 ## Output budgets
 

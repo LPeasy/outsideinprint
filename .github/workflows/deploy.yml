@@ -349,7 +349,7 @@ jobs:
           start_epoch="$(date +%s)"
           hugo --gc --minify --panicOnWarning --clock "$OIP_BUILD_CLOCK_UTC"
           elapsed_seconds="$(( $(date +%s) - start_epoch ))"
-          limit_seconds=900
+          limit_seconds=1200
           build_lane="cold"
           if [[ "${{ steps.image-cache.outputs.cache-hit }}" == "true" ]]; then
             limit_seconds=300

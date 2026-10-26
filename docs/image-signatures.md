@@ -131,6 +131,8 @@ rendition URL. The build cache includes these inputs. This prevents an old
 browser/CDN cache entry from concealing a signature update while keeping the
 source hashes and historical artwork review records intact.
 
+The complete initial render measured 976 seconds on Linux CI and 181 seconds on the local Mac. The earlier Linux cold build processed 5,183 images in 832 seconds; this rollout processes 5,808. The cold-build capacity limit is 1,200 seconds, with the existing 300-second exact-cache limit and 35-minute site-job timeout retained. A local first warm build took 21 seconds with zero cache files cleaned. See `reports/image-signature-build-evidence.json`.
+
 Only requested derivatives are published. Do not publish originals, signature
 intermediates, or another full-size copy of every image. Existing output sizes,
 formats, quality rules, and deployment byte/file budgets remain applicable.

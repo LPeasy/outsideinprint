@@ -99,8 +99,10 @@ test("Hugo resources restore compatibly and only validated production saves them
   assert.match(save.if, /success\(\)/);
   assert.match(save.if, /refs\/heads\/main/);
   assert.match(save.if, /github.event_name != 'pull_request'/);
-  assert.match(commands("site"), /limit_seconds=300/);
-  assert.match(commands("site"), /limit_seconds=900/);
+  const build = steps("site").find(step => step.name === "Build Hugo");
+  assert.match(build.run, /limit_seconds=1200\s+build_lane="cold"/);
+  assert.match(build.run, /cache-hit.*== "true" \]\]; then\s+limit_seconds=300\s+build_lane="exact-cache"/);
+  assert.equal(jobs.site["timeout-minutes"], 35);
   assert.match(commands("site"), /hugo --gc --minify --panicOnWarning --clock/);
   const install = steps("site").find(step => step.run?.includes("sha256sum --check --strict"));
   assert.ok(install);
