@@ -81,6 +81,33 @@ class ReleaseVerification(unittest.TestCase):
                     self.verify()
         self.pages["/essays/fixture/"] = article
 
+    def test_caption_credit_accepts_hugo_encoded_path_parentheses(self):
+        original = "https://commons.wikimedia.org/wiki/File:Cinderella_Castle_%C3%A0_Magic_Kingdom_(f%C3%A9vrier_2022).JPG"
+        rendered = original.replace("(", "%28").replace(")", "%29")
+        self.source = self.source.replace("https://example.org/photo", original)
+        self.release["sourceSha256"] = hashlib.sha256(self.source.encode()).hexdigest()
+        self.pages["/essays/fixture/"] = self.pages["/essays/fixture/"].replace("https://example.org/photo", rendered)
+        self.verify()
+
+    def test_caption_link_matching_keeps_other_url_parts_exact(self):
+        original = "https://example.org/photo_(2022).jpg?source=(archive)#credit"
+        rendered = "https://example.org/photo_%282022%29.jpg?source=(archive)#credit"
+        self.source = self.source.replace("https://example.org/photo", original)
+        self.release["sourceSha256"] = hashlib.sha256(self.source.encode()).hexdigest()
+        article = self.pages["/essays/fixture/"]
+        for changed in [rendered.replace("example.org", "wrong.example"),
+                        rendered.replace("2022", "2023"),
+                        rendered.replace("%28", "%2528"),
+                        rendered.replace("source=(archive)", "source=%28archive%29"),
+                        rendered.replace("#credit", "#different"),
+                        rendered.replace("photo_", "photo%2F")]:
+            with self.subTest(href=changed):
+                self.pages["/essays/fixture/"] = article.replace("https://example.org/photo", changed)
+                with self.assertRaisesRegex(ValueError, "credit links differ"):
+                    self.verify()
+        self.pages["/essays/fixture/"] = article.replace("https://example.org/photo", rendered)
+        self.verify()
+
     def test_missing_collection_gallery_or_series_fails(self):
         for path, html, message in [("/collections/brands-business-consumer-choice/", "", "collection"), ("/gallery/", "", "Gallery"), ("/essays/first/", self.nav([]), "Series")]:
             with self.subTest(path=path):

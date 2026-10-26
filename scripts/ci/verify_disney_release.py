@@ -87,6 +87,13 @@ def links(node):
     return [item.attrs.get("href", "") for item in node.find("a")]
 
 
+def caption_link_key(value):
+    # Hugo escapes path parentheses; preserve every other encoded path byte,
+    # the credit's host, query and fragment instead of broadly unquoting URLs.
+    parts = urlsplit(value)
+    return parts._replace(path=parts.path.replace("(", "%28").replace(")", "%29")).geturl()
+
+
 def internal_links(node):
     return [urlsplit(urljoin(BASE, value)).path for value in links(node)
             if urlsplit(urljoin(BASE, value)).netloc == "outsideinprint.org"]
@@ -213,7 +220,8 @@ def verify_release(release, config, receipt, fetch, source, expected_sha, expect
             actual_caption = normalized(caption_node.text())
             require(expected["id"] in captions, "Source caption missing: " + expected["id"])
             text, hrefs = captions[expected["id"]]
-            require(text == actual_caption and all(href in links(caption_node) for href in hrefs), "Body caption or credit links differ: " + expected["id"])
+            actual_hrefs = {caption_link_key(href) for href in links(caption_node)}
+            require(text == actual_caption and all(caption_link_key(href) in actual_hrefs for href in hrefs), "Body caption or credit links differ: " + expected["id"])
 
     for name, attribute in [("og:image", "property"), ("twitter:image", "name")]:
         meta = article.find("meta", **{attribute: name})
