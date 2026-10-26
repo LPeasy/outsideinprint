@@ -47,6 +47,7 @@ jobs:
       worker: ${{ steps.selection.outputs.worker }}
       worker_commerce: ${{ steps.selection.outputs.worker_commerce }}
       worker_bob: ${{ steps.selection.outputs.worker_bob }}
+      worker_welcome: ${{ steps.selection.outputs.worker_welcome }}
       seo: ${{ steps.selection.outputs.seo }}
       full: ${{ steps.selection.outputs.full }}
       clock: ${{ steps.selection.outputs.clock }}
@@ -136,6 +137,7 @@ jobs:
           sparse-checkout: |-
             workers/oip-commerce
             workers/oip-bob
+            workers/oip-welcome
           persist-credentials: false
       - name: Setup Node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
@@ -148,6 +150,9 @@ jobs:
       - name: Worker provisioning fixtures
         if: ${{ needs.classify.outputs.worker_commerce == 'true' }}
         run: python3 -m unittest discover -s workers/oip-commerce/test -p 'test_*.py'
+      - name: Welcome enrollment, confirmation and duplicate prevention fixtures
+        if: ${{ needs.classify.outputs.worker_welcome == 'true' }}
+        run: node --test workers/oip-welcome/test/*.test.mjs
       - name: Install Bob local runtime test dependencies
         if: ${{ needs.classify.outputs.worker_bob == 'true' }}
         run: npm --prefix workers/oip-bob ci --ignore-scripts --no-audit --no-fund

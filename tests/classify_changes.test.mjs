@@ -52,6 +52,10 @@ test("workers and documentation do not need Hugo; mixed changes preserve all sel
   const bob = classifyPaths(["workers/oip-bob/src/index.js"]);
   assert.equal(bob.worker_bob, true);
   assert.equal(bob.worker_commerce, false);
+  for (const path of ["workers/oip-welcome/src/index.js", "workers/oip-welcome/migrations/0001_welcome.sql", "workers/oip-welcome/test/welcome.test.mjs"]) {
+    const welcome = classifyPaths([path]);
+    assert.deepEqual(Object.entries(welcome).filter(([, enabled]) => enabled).map(([key]) => key), ["worker", "worker_welcome"]);
+  }
 });
 
 test("the six-path ISBN update keeps site, schedule, sharing, analytics and commerce checks only", () => {

@@ -5,7 +5,7 @@ import { verifyQueuedRelease } from "./disney_release_schedule.mjs";
 import { assertScheduleWorkflow, selectScheduledReleases, syncScheduleBlock, validateRegistry, verifyScheduledRelease } from "./scheduled_releases.mjs";
 
 const browserFamilies = ["browser_navigation", "browser_bob", "browser_analytics", "browser_share"];
-const empty = () => ({ site: false, browser: false, ...Object.fromEntries(browserFamilies.map(key => [key, false])), images: false, publishing: false, rendering: false, windows: false, worker: false, worker_commerce: false, worker_bob: false, seo: false, full: false });
+const empty = () => ({ site: false, browser: false, ...Object.fromEntries(browserFamilies.map(key => [key, false])), images: false, publishing: false, rendering: false, windows: false, worker: false, worker_commerce: false, worker_bob: false, worker_welcome: false, seo: false, full: false });
 const full = () => Object.fromEntries(Object.keys(empty()).map(key => [key, true]));
 const browsers = (selected, families = browserFamilies) => { for (const family of families) selected[family] = true; selected.browser = true; };
 
@@ -51,7 +51,7 @@ const testFamilies = new Map([
 export function classifyPaths(paths, { renderingDefaultsChanged = false, scheduleWorkflowOnlyChanged = false } = {}) {
   const selected = empty();
   for (const path of paths) {
-    const worker = /^workers\/oip-(commerce|bob)\//.exec(path);
+    const worker = /^workers\/oip-(commerce|bob|welcome)\//.exec(path);
     if (worker) { selected.worker = selected["worker_" + worker[1]] = true; continue; }
     if (/^(docs\/(?!editorial-audits\/)|README\.md$|AGENTS\.md$|CODEX_WORKFLOW\.md$|LICENSE)/.test(path)) continue;
     selected.site = true;

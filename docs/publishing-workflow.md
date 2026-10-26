@@ -68,13 +68,14 @@ For Almanack issue assembly and web/email parity, use the concise
 [Almanack editorial checklist](almanack-editorial-checklist.md). It covers the
 shared issue source, local email artifacts, and provider-preview checks.
 
-Keep every public signup prompt plain: call the product the Outside In Print newsletter. Introduce the editorial name only after signup, in Buttondown's welcome email under **Settings > Subscribing > Welcome**.
+Keep every public signup prompt plain: call the product the Outside In Print newsletter. Introduce the editorial name only after signup. Buttondown handles confirmation and the weekly newsletter; the Resend welcome sequence introduces Bob’s Almanack with emails after confirmation and two and four days later. Use the [welcome bridge handoff](../workers/oip-welcome/README.md) for eligibility and cutover.
 
 - Subject: `Welcome to Bob’s Almanack`
-- Opening: `Welcome to Bob’s Almanack, the weekly newsletter from Outside In Print.`
-- Follow with: `Each Saturday, you'll receive new essays, original visuals, and selected work from the archive. No spam ever. Unsubscribe anytime.`
+- Opening: `Welcome to Bob’s Almanack, my free Saturday letter from Outside In Print.`
+- Follow with: `Each week, I send new writing, cartoons, brief notices, and a piece from the archive.`
+- Sequence introduction: `Over the next few days, I’ll send two short notes to introduce more of my work and the Pressroom.`
 
-Do not promise an ad-free publication. After changing the Buttondown copy, confirm the full handoff with a test subscription: public newsletter form, confirmation step, then Bob’s Almanack welcome email.
+Do not promise an ad-free publication. Keep Buttondown’s single welcome enabled until the Resend sequence and bridge are ready; disable it at cutover to prevent two welcomes. Confirm the full handoff with an owner-controlled test subscription: public newsletter form, Buttondown confirmation, one Resend welcome run, and the day-2/day-4 steps.
 
 ## Metadata and discovery decisions
 
