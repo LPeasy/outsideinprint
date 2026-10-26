@@ -12,6 +12,15 @@ const actions = job => steps(job).filter(step => step.uses);
 const action = (job, name) => actions(job).find(step => step.uses.split("@")[0] === name);
 const dependencies = job => [jobs[job].needs ?? []].flat();
 
+test("welcome bridge fixtures are included in the selectable worker gate", () => {
+  assert.match(jobs.classify.outputs.worker_welcome, /steps.selection.outputs.worker_welcome/);
+  assert.ok(action("worker", "actions/checkout").with["sparse-checkout"].includes("workers/oip-welcome"));
+  const step = steps("worker").find(step => step.run?.includes("workers/oip-welcome/test/"));
+  assert.ok(step);
+  assert.equal(step.if, "${{ needs.classify.outputs.worker_welcome == 'true' }}");
+  assert.equal(step.run, "node --test workers/oip-welcome/test/*.test.mjs");
+});
+
 test("release-ready always inspects all selectable prerequisite jobs", () => {
   assert.equal(jobs["release-ready"].name, "release-ready");
   assert.match(jobs["release-ready"].if, /always\(\)/);

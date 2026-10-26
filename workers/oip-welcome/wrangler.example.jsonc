@@ -1,0 +1,21 @@
+{
+  "name": "oip-welcome",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-26",
+  "workers_dev": true,
+  "observability": { "enabled": false },
+  "vars": {
+    "WELCOME_ENABLED": "false",
+    "WELCOME_CUTOVER_AT": "",
+    "WELCOME_SEQUENCE_VERSION": "welcome-v1",
+    "RESEND_EVENT_NAME": "oip.almanack.confirmed.v1",
+    "NEWSLETTER_ID": "",
+    "TEST_SUBSCRIBER_ID": ""
+  },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "oip-welcome",
+    "database_id": "REPLACE_WITH_NEW_DATABASE_ID",
+    "migrations_dir": "migrations"
+  }]
+}
