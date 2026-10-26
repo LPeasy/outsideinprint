@@ -107,12 +107,17 @@ function validatePrimary(release, readGit) {
 }
 
 export function validateRelease(release) {
-  fields(release, ["id", "route", "releaseAt", "endsAt", "queuedCommit", "bindings", "images", "checks"], "release");
+  fields(release, ["id", "route", "releaseAt", "rebuildAt", "endsAt", "queuedCommit", "bindings", "images", "checks"], "release");
   require(typeof release.id === "string" && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(release.id), "Invalid release id.");
   canonicalRoute(release.route);
   validateEasternTimestamp(release.releaseAt);
   require(instant(release.endsAt) > instant(release.releaseAt), "endsAt must follow releaseAt.");
   require(instant(release.endsAt) - instant(release.releaseAt) <= 24 * 60 * 60 * 1000, "Release window cannot exceed 24 hours.");
+  if (release.rebuildAt !== undefined) {
+    validateEasternTimestamp(release.rebuildAt);
+    require(instant(release.rebuildAt) > instant(release.releaseAt) && instant(release.rebuildAt) < instant(release.endsAt),
+      "rebuildAt must follow releaseAt and precede endsAt.");
+  }
   if (release.queuedCommit !== undefined) require(/^[a-f0-9]{40}$/.test(release.queuedCommit), "Invalid queuedCommit.");
   require(Array.isArray(release.bindings) && release.bindings.length > 0, "Release requires source bindings, with its primary source first.");
   const bindingIds = new Set();
@@ -174,17 +179,21 @@ function maintenanceCron(release) {
   return weekday === 1 ? "17 0 * * 1" : "17 0 * * 0,2-6";
 }
 
+const triggerInstants = release => [release.releaseAt, ...(release.rebuildAt === undefined ? [] : [release.rebuildAt])];
+
 function scheduleGroups({ registry: planned = registry, disneyPlan = releasePlan } = {}) {
   validateRegistry(planned);
   const groups = new Map();
   for (const [kind, entries] of [["generic", planned.releases], ["disney", disneyPlan.releases]]) {
     for (const release of entries) {
-      const date = new Date(validateEasternTimestamp(release.releaseAt));
-      if (maintenanceCron(release)) continue;
-      const key = [date.getUTCMinutes(), date.getUTCHours(), date.getUTCMonth() + 1].join(" ");
-      if (!groups.has(key)) groups.set(key, { minute: date.getUTCMinutes(), hour: date.getUTCHours(), month: date.getUTCMonth() + 1, days: new Set(), generic: [], disney: [] });
-      const group = groups.get(key);
-      group.days.add(date.getUTCDate()); group[kind].push(release);
+      for (const scheduledAt of triggerInstants(release)) {
+        const date = new Date(validateEasternTimestamp(scheduledAt));
+        if (maintenanceCron({ releaseAt: scheduledAt })) continue;
+        const key = [date.getUTCMinutes(), date.getUTCHours(), date.getUTCMonth() + 1].join(" ");
+        if (!groups.has(key)) groups.set(key, { minute: date.getUTCMinutes(), hour: date.getUTCHours(), month: date.getUTCMonth() + 1, days: new Set(), generic: [], disney: [] });
+        const group = groups.get(key);
+        group.days.add(date.getUTCDate()); group[kind].push({ release, scheduledAt });
+      }
     }
   }
   return [...groups.values()].sort((a, b) => a.month - b.month || a.hour - b.hour || a.minute - b.minute).map(group => ({
@@ -205,15 +214,16 @@ export function selectScheduledReleases(schedule, clock, options) {
     validateRegistry(planned);
     const now = Date.parse(clock);
     require(Number.isFinite(now), "Invalid release clock.");
-    const due = release => maintenanceCron(release) === schedule && now >= instant(release.releaseAt) && now < instant(release.endsAt);
+    const due = release => triggerInstants(release).some(scheduledAt =>
+      maintenanceCron({ releaseAt: scheduledAt }) === schedule && now >= instant(scheduledAt) && now < instant(release.endsAt));
     return boundedSelection({ timed: false, generic: planned.releases.filter(due), disney: disneyPlan.releases.filter(due) });
   }
   const group = scheduleGroups(options).find(item => item.cron === schedule);
   if (!group) return { timed: false, generic: [], disney: [] };
   const now = Date.parse(clock);
   require(Number.isFinite(now), "Invalid release clock.");
-  const due = release => now >= instant(release.releaseAt) && now < instant(release.endsAt);
-  return boundedSelection({ timed: true, generic: group.generic.filter(due), disney: group.disney.filter(due) });
+  const due = ({ release, scheduledAt }) => now >= instant(scheduledAt) && now < instant(release.endsAt);
+  return boundedSelection({ timed: true, generic: group.generic.filter(due).map(item => item.release), disney: group.disney.filter(due).map(item => item.release) });
 }
 
 export function verifyScheduledRelease(release, {
