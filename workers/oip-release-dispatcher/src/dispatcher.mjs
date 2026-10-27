@@ -117,6 +117,9 @@ export class Dispatcher {
       });
     } else {
       for (const op of due) {
+        const siblings = await Promise.all(due.filter(item => item.id === op.id).map(item => this.store.get(item.key)));
+        // An extra approved rebuild is not permission to replay a known failure.
+        if (siblings.some(record => record?.status === "blocked")) continue;
         const previous = await this.store.get(op.key);
         if (previous && previous.fingerprint !== op.fingerprint) {
           await this.store.put(op.key, { ...previous, status: "blocked", error: "Registered release changed after dispatch; operator review required." });
