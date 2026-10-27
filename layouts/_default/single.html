@@ -5,6 +5,9 @@
   {{ $articleVariant := partial "article/variant-key.html" . }}
   {{ $featuredContinuation := index (hugo.Data.featured_continuations | default dict) .RelPermalink }}
   {{ $articleClasses := slice "piece" }}
+  {{ if .Params.timeline_sidebar }}
+    {{ $articleClasses = $articleClasses | append "piece--with-timeline" }}
+  {{ end }}
   {{ with .Params.style_variant }}
     {{ $articleClasses = $articleClasses | append (printf "style-variant-%s" (urlize (printf "%v" .))) }}
   {{ end }}
@@ -163,9 +166,18 @@
 
     {{ $articleBody := partial "render_article_body.html" . }}
     {{ partial "article/contents.html" (dict "page" . "body" $articleBody) }}
-    <div class="piece-body">
-      {{ $articleBody }}
-    </div>
+    {{ if .Params.timeline_sidebar }}
+      <div class="piece-reading-layout">
+        <div class="piece-body">
+          {{ $articleBody }}
+        </div>
+        {{ partial "article/timeline-sidebar.html" . }}
+      </div>
+    {{ else }}
+      <div class="piece-body">
+        {{ $articleBody }}
+      </div>
+    {{ end }}
     <div class="piece-aftermatter">
       {{ if and (in (slice "essays" "reports" "working-papers") .Section) (ge .ReadingTime 8) (not .Params.studio_sample) }}
         <template data-article-inline-signup>

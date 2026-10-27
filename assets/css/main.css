@@ -7831,6 +7831,98 @@ body.cartoon-lightbox-open{
   margin-left:auto;
   margin-right:auto;
 }
+/* Optional article timeline: entries extend beside the complete main text. */
+.piece-reading-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 15rem;
+  align-items:stretch;
+  gap:2.5rem;
+  width:100%;
+  max-width:62rem;
+  margin-inline:auto;
+}
+.piece-reading-layout > .piece-body{
+  min-width:0;
+}
+.piece-timeline{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  padding-inline-start:1.5rem;
+  border-inline-start:1px solid var(--oip-rule-faint);
+  color:var(--text-secondary);
+  font-size:.95rem;
+  line-height:1.55;
+}
+.piece-timeline__title{
+  margin:0;
+  color:var(--text-primary);
+  font-size:1.2rem;
+  line-height:1.3;
+}
+.piece-timeline__entries{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:1.5rem;
+  margin:1.5rem 0 0;
+  padding:0;
+  list-style:none;
+}
+.piece-timeline__entries > li{
+  margin:0;
+  padding:0;
+  overflow-wrap:anywhere;
+}
+.piece-timeline__date{
+  margin-bottom:.35rem;
+  color:var(--text-primary);
+  font-family:var(--font-ui);
+  font-weight:650;
+}
+@media (max-width:980px){
+  .piece-reading-layout{
+    display:block;
+    max-width:var(--measure-reading);
+  }
+  .piece-timeline{
+    display:block;
+    margin-top:2.5rem;
+    padding:1.5rem 0 0;
+    border-inline-start:0;
+    border-top:1px solid var(--oip-rule-faint);
+  }
+  .piece-timeline__entries{
+    display:block;
+  }
+  .piece-timeline__entries > li + li{
+    margin-top:1.5rem;
+  }
+}
+@media print{
+  .piece-reading-layout{
+    display:block;
+    max-width:none;
+  }
+  .piece-timeline{
+    display:block;
+    margin-top:1.5rem;
+    padding:1rem 0 0;
+    border-inline-start:0;
+    border-top:1px solid #bbb;
+  }
+  .piece-timeline__entries{
+    display:block;
+  }
+  .piece-timeline__entries > li{
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
+  .piece-timeline__entries > li + li{
+    margin-top:1rem;
+  }
+}
 .piece-contents{
   margin-top:1rem;
   margin-bottom:1.5rem;
