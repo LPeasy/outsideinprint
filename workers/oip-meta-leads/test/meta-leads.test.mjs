@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
 import { readFileSync } from 'node:fs';
 import { createHmac } from 'node:crypto';
-import { handleRequest, processQueue } from '../src/index.js';
+import worker, { handleRequest, processQueue } from '../src/index.js';
 
 const NOW = Date.parse('2026-10-26T18:00:00Z');
 const FORM = { formId: '22222222', adIds: ['33333333', '33333334'], campaignCode: 'almanack-meta-pilot',
@@ -306,4 +306,97 @@ test('a backward clock step during retrieval cannot backdate the durable reserva
   f.setGet(url => { clockNow -= 10_000; return Response.json(f.lead(new URL(url).pathname.split('/').at(-1))); });
   await f.send(new Request('https://worker.example.invalid/admin/process', { method: 'POST', headers: { Authorization: `Bearer ${f.env.ADMIN_TOKEN}` } }), () => clockNow);
   assert.equal(f.row().attempted_at, new Date(NOW + 60_000).toISOString());
+});
+
+function ownedFixture() {
+  const f = fixture();
+  const email = 'owner-test@example.invalid';
+  const approval = { pageId: f.env.META_PAGE_ID, leadId: '44444444', formId: FORM.formId,
+    createdAt: new Date(NOW - 1000).toISOString(), expiresAt: new Date(NOW + 3_600_000).toISOString(),
+    emailKey: createHmac('sha256', f.env.EMAIL_HMAC_KEY).update(email).digest('hex'),
+    consentCheckboxKey: FORM.consentCheckboxKey, consentCheckedValue: '1' };
+  f.env.APPROVED_FORMS_JSON = '[]';
+  f.env.OWNED_TEST_JSON = JSON.stringify(approval);
+  f.overrides.set(approval.leadId, { ad_id: undefined, field_data: fields(email), custom_disclaimer_responses: consent('1') });
+  f.ownedRequest = (id = approval.leadId, changes = {}, signed = true) => f.request(id, { ad_id: '0', ...changes }, signed);
+  return { ...f, approval, email };
+}
+
+test('one approved adless owned test shares durable dispatch and remains excluded from paid attribution', async () => {
+  const f = ownedFixture();
+  assert.equal((await f.send(f.ownedRequest())).status, 200);
+  assert.equal(f.calls.length, 0);
+  assert.equal(f.row().ad_id, 'owned-test');
+  await Promise.all([f.send(f.ownedRequest()), f.process(), f.process()]);
+  await f.send(f.ownedRequest()); await f.process();
+  assert.equal(f.posts().length, 1);
+  assert.equal(f.row().state, 'pending_confirmation');
+  const body = JSON.parse(f.posts()[0].options.body);
+  assert.equal(body.email_address, f.email);
+  assert.equal(body.type, 'unactivated');
+  assert.equal(body.utm_campaign, 'oip-owned-test');
+  assert.equal(body.utm_medium, 'owned_test');
+  assert.ok(!JSON.stringify(f.row()).includes(f.email));
+});
+
+test('owned-test exception requires exact signed lead, Page, form, creation time and adless notice', async () => {
+  const f = ownedFixture();
+  assert.equal((await f.send(f.ownedRequest(undefined, {}, false))).status, 401);
+  for (const [id, changes] of [['44444445', {}], ['44444444', { page_id: '99999999' }],
+    ['44444444', { form_id: '99999999' }], ['44444444', { created_time: Math.floor(NOW / 1000) }],
+    ['44444444', { ad_id: FORM.adIds[0] }]]) {
+    assert.equal((await f.send(f.ownedRequest(id, changes))).status, 400);
+  }
+  assert.equal(f.row(), undefined); assert.equal(f.calls.length, 0);
+});
+
+test('canonical wrong inbox, missing consent, changed consent type or unexpected ad cannot dispatch the owned test', async () => {
+  for (const changes of [{ field_data: fields('another@example.invalid') }, { custom_disclaimer_responses: [] },
+    { custom_disclaimer_responses: consent(true) }, { ad_id: '0' }, { ad_id: FORM.adIds[0] }]) {
+    const f = ownedFixture();
+    f.overrides.set(f.approval.leadId, { ...f.overrides.get(f.approval.leadId), ...changes });
+    await f.send(f.ownedRequest()); await f.process();
+    assert.equal(f.row().state, 'held'); assert.equal(f.posts().length, 0);
+  }
+});
+
+test('expired or overlong test approval cannot receive or dispatch; expiry during retrieval sends nothing', async () => {
+  for (const expiresAt of [new Date(NOW).toISOString(), new Date(NOW + 25 * 3_600_000).toISOString()]) {
+    const f = ownedFixture(); f.env.OWNED_TEST_JSON = JSON.stringify({ ...f.approval, expiresAt });
+    assert.equal((await f.send(f.ownedRequest())).status, 503);
+    await f.process(); assert.equal(f.posts().length, 0);
+  }
+  const f = ownedFixture(); await f.send(f.ownedRequest());
+  let time = NOW;
+  await processQueue(f.env, { fetcher: async (url, options) => {
+    f.calls.push({ url, options }); time = NOW + 3_600_001; return Response.json(f.lead(f.approval.leadId));
+  }, clock: () => time });
+  assert.equal(f.row().state, 'held'); assert.equal(f.posts().length, 0);
+});
+
+test('a removed private test approval cannot use the paid registry to dispatch its reserved test', async () => {
+  const f = ownedFixture(); await f.send(f.ownedRequest());
+  delete f.env.OWNED_TEST_JSON; f.env.APPROVED_FORMS_JSON = JSON.stringify([FORM]);
+  await f.process(); assert.equal(f.row().state, 'held'); assert.equal(f.posts().length, 0);
+  const paid = fixture(); paid.env.OWNED_TEST_JSON = JSON.stringify({ ...f.approval, leadId: '44444449' });
+  assert.equal((await paid.send(paid.request('44444445', { ad_id: '0' }))).status, 400);
+  await paid.send(); await paid.process(); assert.equal(paid.posts().length, 1);
+});
+
+test('admin status flags a stale queue without exposing its lead reference', async () => {
+  const f = fixture(); await f.send();
+  const response = await f.send(new Request('https://worker.example.invalid/admin/status', {
+    headers: { Authorization: `Bearer ${f.env.ADMIN_TOKEN}` },
+  }), () => NOW + 901_000);
+  const body = await response.json();
+  assert.equal(body.oldest_queued_age_seconds, 901); assert.equal(body.review_required, true);
+  assert.ok(!JSON.stringify(body).includes('44444444'));
+});
+
+test('scheduled entry point waits for the shared processor and honors disabled dispatch', async () => {
+  const f = fixture(); f.env.DISPATCH_ENABLED = 'false';
+  let scheduledWork;
+  await worker.scheduled({}, f.env, { waitUntil: promise => { scheduledWork = promise; } });
+  assert.deepEqual(await scheduledWork, { status: 'dispatch_disabled' });
+  assert.equal(f.calls.length, 0);
 });
