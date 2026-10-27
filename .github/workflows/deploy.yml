@@ -61,6 +61,7 @@ jobs:
       publishing: ${{ steps.selection.outputs.publishing }}
       rendering: ${{ steps.selection.outputs.rendering }}
       windows: ${{ steps.selection.outputs.windows }}
+      windows_checkout: ${{ steps.selection.outputs.windows_checkout }}
       worker: ${{ steps.selection.outputs.worker }}
       worker_commerce: ${{ steps.selection.outputs.worker_commerce }}
       worker_bob: ${{ steps.selection.outputs.worker_bob }}
@@ -131,16 +132,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          sparse-checkout: |-
-            scripts
-            tests
-            tools
-            data
-            reports
-            assets/images/originals
-            static/images
-            content/essays/affirmations
-            editorial
+          # Fixtures retain their exact review records and affirmation originals,
+          # without downloading the full 1.3 GiB image library on Windows.
+          sparse-checkout: ${{ needs.classify.outputs.windows_checkout }}
+          sparse-checkout-cone-mode: false
           persist-credentials: false
       - name: Image tooling on Windows
         if: ${{ needs.classify.outputs.images == 'true' }}

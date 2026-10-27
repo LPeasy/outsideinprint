@@ -44,7 +44,9 @@ class Element:
 
     def text(self):
         return "".join(child if isinstance(child, str) else
-                       (" " + child.text() + " " if child.tag in BLOCK else child.text())
+                       (" " + child.text() + " " if child.tag in BLOCK or
+                        set(child.attrs.get("class", "").split()) & {"piece-byline__label", "piece-byline__role"}
+                        else child.text())
                        for child in self.children if not isinstance(child, Element) or child.tag not in {"script", "style"})
 
 

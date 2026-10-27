@@ -4,6 +4,28 @@ import { pathToFileURL } from "node:url";
 import { verifyQueuedRelease } from "./disney_release_schedule.mjs";
 import { assertScheduleWorkflow, selectScheduledReleases, syncScheduleBlock, validateRegistry, verifyScheduledRelease, validateDispatcherConfig } from "./scheduled_releases.mjs";
 import { releaseFingerprint, selectRequestedReleases, validateDispatchRequest } from "./release_request.mjs";
+import YAML from "yaml";
+
+export function windowsFixturePaths({ list, read } = {}) {
+  list ??= () => execFileSync("git", ["ls-tree", "-r", "--name-only", "HEAD", "--", "content/essays/affirmations"], { encoding: "utf8" }).trim().split("\n");
+  read ??= path => execFileSync("git", ["show", "HEAD:" + path], { encoding: "utf8", maxBuffer: 4 * 1024 * 1024 });
+  const paths = ["/*", "!/*/", "/scripts/", "/tests/", "/tools/", "/data/", "/editorial/", "/content/essays/affirmations/",
+    "/reports/legacy-image-focused-cleanup-inventory.json", "/reports/focused-image-visual-review.json",
+    "/reports/image-review-candidates.json", "/reports/image-visual-review.json"];
+  const files = list().filter(path => path.endsWith(".md"));
+  if (!files.length) return paths;
+  const manifest = JSON.parse(read("data/image-assets.json"));
+  for (const file of files) {
+    const match = read(file).match(/^\uFEFF?---\s*\r?\n([\s\S]*?)\r?\n---/);
+    const page = match ? YAML.parse(match[1], { uniqueKeys: true }) : {};
+    if (!page.featured_image) continue;
+    const source = manifest.assets?.[page.featured_image]?.source;
+    if (typeof source !== "string" || !source.startsWith("images/originals/") || /[\\\s:*?\[\]]/.test(source) || source.split("/").some(part => part === ".." || part === "." || !part))
+      throw Error("Invalid affirmation fixture source: " + file);
+    paths.push("/assets/" + source);
+  }
+  return [...new Set(paths)];
+}
 
 const browserFamilies = ["browser_navigation", "browser_bob", "browser_analytics", "browser_share"];
 const empty = () => ({ site: false, browser: false, ...Object.fromEntries(browserFamilies.map(key => [key, false])), images: false, publishing: false, rendering: false, windows: false, worker: false, worker_commerce: false, worker_bob: false, worker_welcome: false, worker_meta_leads: false, worker_release_dispatcher: false, seo: false, full: false });
@@ -206,5 +228,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
       releases: timed.generic.map(release => ({ id: release.id, fingerprint: releaseFingerprint(release) })) }, null, 2));
   }
   fs.appendFileSync(process.env.GITHUB_OUTPUT, Object.entries(outputs).map(([key, value]) => key + "=" + value).join("\n") + "\n");
+  fs.appendFileSync(process.env.GITHUB_OUTPUT, "windows_checkout<<OIP_WINDOWS_PATHS\n" +
+    (selected.windows ? windowsFixturePaths().join("\n") : "") + "\nOIP_WINDOWS_PATHS\n");
   console.log(JSON.stringify({ changedPaths: comparison.paths, selected, buildClockUtc: clock }, null, 2));
 }

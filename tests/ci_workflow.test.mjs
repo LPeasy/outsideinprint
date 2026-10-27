@@ -80,6 +80,8 @@ test("classification uses complete Git history and sparse files", () => {
   const checkout = action("classify", "actions/checkout");
   assert.equal(checkout.with["fetch-depth"], 0);
   assert.ok(checkout.with["sparse-checkout"].includes("scripts/ci"));
+  assert.equal(action("windows", "actions/checkout").with["sparse-checkout"], "${{ needs.classify.outputs.windows_checkout }}");
+  assert.equal(action("windows", "actions/checkout").with["sparse-checkout-cone-mode"], false);
   const selection = steps("classify").find(step => step.id === "selection");
   assert.match(selection.env.OIP_BASE_SHA, /pull_request.base.sha/);
   assert.match(selection.env.OIP_HEAD_SHA, /pull_request.head.sha/);
