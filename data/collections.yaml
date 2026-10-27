@@ -560,6 +560,7 @@ collections:
       - id: public-services-civic-systems
         title: Public services and civic systems
         items:
+          - why-daylight-saving-time
           - a-public-record-must-outlast-the-feed
           - the-meter-at-the-curb
           - the-little-machine-in-the-glass-case

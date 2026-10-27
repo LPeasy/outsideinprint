@@ -1,0 +1,27 @@
+{{- $page := . -}}
+{{- $timeline := .Params.timeline_sidebar -}}
+{{- if not (reflect.IsMap $timeline) -}}
+  {{- errorf "timeline_sidebar on %s must be a map" .File.Path -}}
+{{- else if or (not $timeline.title) (not (reflect.IsSlice $timeline.entries)) -}}
+  {{- errorf "timeline_sidebar on %s requires a title and entries list" .File.Path -}}
+{{- else if eq (len $timeline.entries) 0 -}}
+  {{- errorf "timeline_sidebar on %s requires at least one entry" .File.Path -}}
+{{- else -}}
+  <aside class="piece-timeline" aria-labelledby="piece-timeline-title">
+    <h2 id="piece-timeline-title" class="piece-timeline__title">{{ $timeline.title }}</h2>
+    <ol class="piece-timeline__entries">
+      {{- range $timeline.entries -}}
+        {{- if not (reflect.IsMap .) -}}
+          {{- errorf "timeline_sidebar entry on %s must be a map" $page.File.Path -}}
+        {{- else if or (not .date) (not .text) -}}
+          {{- errorf "timeline_sidebar entry on %s requires date and text" $page.File.Path -}}
+        {{- else -}}
+          <li>
+            <div class="piece-timeline__date">{{ $page.RenderString (dict "display" "inline") .date }}</div>
+            <div class="piece-timeline__text">{{ $page.RenderString (dict "display" "inline") .text }}</div>
+          </li>
+        {{- end -}}
+      {{- end -}}
+    </ol>
+  </aside>
+{{- end -}}
