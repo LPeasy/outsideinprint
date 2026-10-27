@@ -9,6 +9,7 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent $PSScriptRoot
+$validationClock = if ($Clock) { [DateTimeOffset]::Parse($Clock) } else { [DateTimeOffset]::UtcNow }
 
 function Assert-True {
   param(
@@ -27,6 +28,20 @@ function Read-RequiredText {
     throw "Missing feed-policy file: $RelativePath"
   }
   Get-Content -LiteralPath $path -Raw -Encoding utf8
+}
+
+function Get-ExpectedShopFeedLinks {
+  param([Parameter(Mandatory)][DateTimeOffset]$ValidationClock)
+
+  $links = @(
+    'https://outsideinprint.org/shop/2045/',
+    'https://outsideinprint.org/shop/pending/',
+    'https://outsideinprint.org/shop/the-american-nightmare-keep-dreaming-kid/'
+  )
+  if ($ValidationClock -ge [DateTimeOffset]'2026-10-27T09:00:00-04:00') {
+    $links += 'https://outsideinprint.org/shop/fifty-years-of-magic/'
+  }
+  return @($links | Sort-Object)
 }
 
 $wrapperModes = [ordered]@{
@@ -217,7 +232,7 @@ function Read-Feed {
     catch {
       throw "$RelativePath contains an invalid pubDate '$dateText'."
     }
-    $feedClock = if ($Clock) { ([datetimeoffset]::Parse($Clock)).UtcDateTime } else { [DateTime]::UtcNow }
+    $feedClock = $validationClock.UtcDateTime
     Assert-True ($date.Year -gt 2000 -and $date.UtcDateTime -le $feedClock.AddMinutes(5)) "$RelativePath contains an invalid or future pubDate: $dateText"
     if ($dates.Count -gt 0) {
       Assert-True ($dates[$dates.Count - 1] -ge $date) "$RelativePath items are not sorted newest first."
@@ -248,7 +263,8 @@ $expectedAlmanackLinks = @(
 Assert-True ($expectedAlmanackLinks.Count -gt 0) 'Production sitemap must contain published Almanack issues.'
 $almanackFeed = Read-Feed 'almanack/index.xml' 'https://outsideinprint.org/almanack/index.xml' 'https://outsideinprint.org/collections/bobs-almanack/' $expectedAlmanackLinks.Count
 Assert-True ((@($almanackFeed.Links | Sort-Object) -join "`n") -ceq ($expectedAlmanackLinks -join "`n")) 'Almanack feed must contain every published issue in the production sitemap exactly once.'
-$shopFeed = Read-Feed 'shop/index.xml' 'https://outsideinprint.org/shop/index.xml' 'https://outsideinprint.org/shop/' 3
+$expectedShopLinks = @(Get-ExpectedShopFeedLinks -ValidationClock $validationClock)
+$shopFeed = Read-Feed 'shop/index.xml' 'https://outsideinprint.org/shop/index.xml' 'https://outsideinprint.org/shop/' $expectedShopLinks.Count
 
 $archiveHtml = Get-Content -LiteralPath (Join-Path $siteRoot 'archive/index.html') -Raw -Encoding utf8
 Assert-True (-not $archiveHtml.Contains('https://outsideinprint.org/essays/index.xml', [StringComparison]::Ordinal)) 'Rendered Archive page must not advertise the Essays compatibility feed.'
@@ -269,14 +285,13 @@ Assert-True ($rootAlmanackTitles.Count -gt 0) 'Root feed must contain at least o
 Assert-True ((@($rootAlmanackTitles | Select-Object -Unique)).Count -eq $rootAlmanackTitles.Count) 'Root-feed Almanack titles must be unique.'
 Assert-True ((@($rootAlmanackTitles | Where-Object { $_ -notmatch '^Bob''s Almanack — [A-Z][a-z]+ \d{1,2}, \d{4}$' })).Count -eq 0) 'Root-feed Almanack titles must carry their issue dates.'
 
-$expectedShopLinks = @(
-  'https://outsideinprint.org/shop/2045/',
-  'https://outsideinprint.org/shop/pending/',
-  'https://outsideinprint.org/shop/the-american-nightmare-keep-dreaming-kid/'
-) | Sort-Object
-Assert-True ((@($shopFeed.Links | Sort-Object) -join "`n") -ceq ($expectedShopLinks -join "`n")) 'Shop feed must contain exactly the three release-dated products with live numeric offers.'
+Assert-True ((@($shopFeed.Links | Sort-Object) -join "`n") -ceq ($expectedShopLinks -join "`n")) 'Shop feed must contain exactly the release-eligible products with live numeric offers.'
 $pendingFeedIndex = [array]::IndexOf($shopFeed.Links, 'https://outsideinprint.org/shop/pending/')
 Assert-True ($shopFeed.Titles[$pendingFeedIndex] -ceq 'PENDING: A Novel' -and $shopFeed.Dates[$pendingFeedIndex] -eq [DateTimeOffset]'2026-10-09T00:00:00-04:00') 'PENDING feed metadata must retain its full title and approved release date.'
+if ($expectedShopLinks -contains 'https://outsideinprint.org/shop/fifty-years-of-magic/') {
+  $magicFeedIndex = [array]::IndexOf($shopFeed.Links, 'https://outsideinprint.org/shop/fifty-years-of-magic/')
+  Assert-True ($shopFeed.Titles[$magicFeedIndex] -ceq 'Fifty Years of Magic: The Making of Walt Disney World' -and $shopFeed.Dates[$magicFeedIndex] -eq [DateTimeOffset]'2026-10-27T00:00:00-04:00') 'Fifty Years of Magic feed metadata must retain its full title and catalog release date.'
+}
 
 $rootCandidates = foreach ($feed in @($archiveFeed, $almanackFeed, $shopFeed)) {
   for ($index = 0; $index -lt $feed.Links.Count; $index++) {
