@@ -48,3 +48,18 @@ test("read-only provider failures may be observed again without dispatching", as
   await assert.rejects(gh.run(1), error => error.transient === true);
   await assert.rejects(gh.api("/repos/another/repo/actions/runs"), /scope/);
 });
+
+test("signed artifact download uses the edge-supported manual mode and rejects another redirect", async () => {
+  const calls = [];
+  const gh = new GitHub({}, async (url, init) => {
+    calls.push({ url, init });
+    assert.equal(init.redirect, "manual");
+    assert.equal(init.headers, undefined, "The signed URL must not receive GitHub credentials.");
+    return new Response(null, { status: 302, headers: { location: "https://other.invalid/" } });
+  });
+  gh.api = async path => path.endsWith("/zip")
+    ? new Response(null, { status: 302, headers: { location: "https://storage.invalid/receipt" } })
+    : { artifacts: [{ id: 1, name: "release-dispatch", size_in_bytes: 100, expired: false }] };
+  await assert.rejects(gh.receipts(1, "release-dispatch"), /Artifact download failed/);
+  assert.equal(calls.length, 1);
+});

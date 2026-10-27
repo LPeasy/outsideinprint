@@ -84,7 +84,7 @@ export class GitHub {
     const url = new URL(redirect.headers.get("location"));
     require(url.protocol === "https:" && !url.username && !url.password, "Unsafe artifact redirect.");
     // Never forward the GitHub credential to the signed storage URL.
-    const response = await this.fetch(url.href, { redirect: "error", signal: AbortSignal.timeout(20_000) });
+    const response = await this.fetch(url.href, { redirect: "manual", signal: AbortSignal.timeout(20_000) });
     require(response.ok, "Artifact download failed.");
     return readReceiptZip(await boundedBody(response, 8 * 1024 * 1024), artifact.digest);
   }

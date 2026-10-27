@@ -45,6 +45,18 @@ export class ReleaseCoordinator {
     if (url.pathname === "/admin/state" && request.method === "GET") {
       return json(Object.fromEntries(await store.list({ limit: 1000 })));
     }
+    if (url.pathname === "/admin/observe-probe" && request.method === "POST") {
+      const { requestId } = await request.json();
+      const batch = typeof requestId === "string" ? await store.get("request:" + requestId) : null;
+      if (await store.get("active") || await store.get("probe") || !batch?.probe || batch.status !== "blocked" ||
+        !Number.isSafeInteger(batch.runId) || batch.operations?.length !== 0)
+        return json({ error: "Expected an existing blocked non-publishing probe with a known run." }, 409);
+      // Re-read the existing run only. This route cannot dispatch a workflow.
+      const github = new GitHub(this.env);
+      const result = await new Dispatcher(store, github).reconcile(batch, await github.snapshot());
+      if (result.status === "verified" && (await store.get("attention"))?.requestId === requestId) await store.delete("attention");
+      return json(result);
+    }
     if (url.pathname === "/admin/probe" && request.method === "POST") {
       if (await store.get("active") || await store.get("probe")) return json({ error: "A request is already pending." }, 409);
       const { ids } = await request.json();
