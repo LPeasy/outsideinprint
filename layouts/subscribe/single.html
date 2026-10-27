@@ -10,7 +10,7 @@
         <header class="subscriber-funnel__header">
           <p class="subscriber-funnel__eyebrow">Outside In Print ~ the Saturday letter</p>
           <h1 id="funnel-title">{{ .Title }}</h1>
-          <a class="subscriber-funnel__jump newsletter-signup__button" href="#get-almanack">Get Bob&rsquo;s Almanack</a>
+          <a class="subscriber-funnel__jump newsletter-signup__button" href="#get-almanack">Join the newsletter</a>
           <p class="subscriber-funnel__intro">{{ .Params.intro }}</p>
           <p class="subscriber-funnel__byline">By Robert V. Ussley</p>
         </header>
@@ -20,9 +20,9 @@
           "anchorID" "get-almanack"
           "focusTarget" true
           "sourceSlot" (printf "funnel_%s" .Params.segment)
-          "title" "Bob's Almanack ~ the Saturday letter"
-          "contents" "New essays, original pictures, and work from the archive. One email each Saturday (free)."
-          "buttonLabel" "Get Bob's Almanack"
+          "title" "The Outside In Print newsletter"
+          "contents" "New essays, original pictures, and work from the archive. Free each Saturday, plus three short introductory emails after you confirm."
+          "buttonLabel" "Join the newsletter"
         ) }}
       </div>
       <figure class="subscriber-funnel__art">

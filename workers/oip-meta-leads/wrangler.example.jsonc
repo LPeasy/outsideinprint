@@ -1,0 +1,25 @@
+{
+  "name": "oip-meta-leads",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-26",
+  "workers_dev": true,
+  "observability": { "enabled": false },
+  "vars": {
+    "META_VERIFY_ENABLED": "false",
+    "INTAKE_ENABLED": "false",
+    "DISPATCH_ENABLED": "false",
+    "SYNTHETIC_ONLY": "true",
+    "TRUSTED_SOURCE_BYPASS": "false",
+    "META_GRAPH_VERSION": "",
+    "META_PAGE_ID": "1311390865396450",
+    "NEWSLETTER_ID": "",
+    "APPROVED_FORMS_JSON": "[]"
+  },
+  "triggers": { "crons": [] },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "oip-meta-leads",
+    "database_id": "REPLACE_WITH_NEW_DATABASE_ID",
+    "migrations_dir": "migrations"
+  }]
+}

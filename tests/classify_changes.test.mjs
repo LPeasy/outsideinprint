@@ -72,6 +72,15 @@ test("the six-path ISBN update keeps site, schedule, sharing, analytics and comm
   }
 });
 
+test("Meta lead changes select their worker suite and preserve mixed site checks", () => {
+  for (const path of ["workers/oip-meta-leads/src/index.js", "workers/oip-meta-leads/migrations/0001_meta_leads.sql", "workers/oip-meta-leads/test/meta-leads.test.mjs", "workers/oip-meta-leads/package.json", "workers/oip-meta-leads/wrangler.example.jsonc"]) {
+    const selected = classifyPaths([path]);
+    assert.deepEqual(Object.entries(selected).filter(([, enabled]) => enabled).map(([key]) => key), ["worker", "worker_meta_leads"], path);
+  }
+  const mixed = selectChecks({ event: "pull_request", paths: ["workers/oip-meta-leads/src/index.js", "content/privacy/index.md"] });
+  assert.deepEqual(Object.entries(mixed).filter(([, enabled]) => enabled).map(([key]) => key), ["site", "worker", "worker_meta_leads"]);
+});
+
 test("known tests select their owning suite and unfamiliar tests remain conservative", () => {
   for (const [path, family] of [
     ["tests/mobile_navigation_browser.test.mjs", "browser_navigation"], ["tests/bob_reading_browser.test.mjs", "browser_bob"],
@@ -207,7 +216,7 @@ test("Git classification includes deletions and missing bases select every check
     assert.equal(selected.worker, "true");
     assert.equal(selected.browser, "false");
     const missing = select("0".repeat(40));
-    for (const key of ["site", "browser", "browser_navigation", "browser_bob", "browser_analytics", "browser_share", "images", "publishing", "rendering", "windows", "worker", "worker_commerce", "worker_bob", "seo"]) assert.equal(missing[key], "true", key);
+    for (const key of ["site", "browser", "browser_navigation", "browser_bob", "browser_analytics", "browser_share", "images", "publishing", "rendering", "windows", "worker", "worker_commerce", "worker_bob", "worker_welcome", "worker_meta_leads", "seo"]) assert.equal(missing[key], "true", key);
   } finally {
     assert.ok(path.resolve(root).startsWith(path.resolve(os.tmpdir()) + path.sep));
     fs.rmSync(root, { recursive: true, force: true });
