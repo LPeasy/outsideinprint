@@ -12,6 +12,21 @@ const actions = job => steps(job).filter(step => step.uses);
 const action = (job, name) => actions(job).find(step => step.uses.split("@")[0] === name);
 const dependencies = job => [jobs[job].needs ?? []].flat();
 
+test("release API inputs enter the same source and live verifier path; probes cannot build", () => {
+  for (const key of ["release_ids", "release_request_id", "release_expected_sha", "release_probe"])
+    assert.ok(workflow.on.workflow_dispatch.inputs[key]);
+  assert.equal(workflow.on.workflow_dispatch.inputs.release_probe.default, false);
+  assert.match(workflow["run-name"], /inputs.release_request_id/);
+  const selection = steps("classify").find(step => step.id === "selection");
+  assert.equal(selection.env.OIP_RELEASE_IDS, "${{ inputs.release_ids }}");
+  assert.equal(selection.env.OIP_RELEASE_EXPECTED_SHA, "${{ inputs.release_expected_sha }}");
+  const receipt = steps("classify").find(step => step.with?.name === "release-dispatch");
+  assert.match(receipt.if, /always\(\)/);
+  assert.equal(receipt.with["include-hidden-files"], true);
+  assert.match(commands("classify"), /release_request.test.mjs/);
+  assert.match(commands("worker"), /oip-release-dispatcher\/test/);
+});
+
 test("welcome bridge fixtures are included in the selectable worker gate", () => {
   assert.match(jobs.classify.outputs.worker_welcome, /steps.selection.outputs.worker_welcome/);
   assert.ok(action("worker", "actions/checkout").with["sparse-checkout"].includes("workers/oip-welcome"));
@@ -65,6 +80,8 @@ test("classification uses complete Git history and sparse files", () => {
   const checkout = action("classify", "actions/checkout");
   assert.equal(checkout.with["fetch-depth"], 0);
   assert.ok(checkout.with["sparse-checkout"].includes("scripts/ci"));
+  assert.equal(action("windows", "actions/checkout").with["sparse-checkout"], "${{ needs.classify.outputs.windows_checkout }}");
+  assert.equal(action("windows", "actions/checkout").with["sparse-checkout-cone-mode"], false);
   const selection = steps("classify").find(step => step.id === "selection");
   assert.match(selection.env.OIP_BASE_SHA, /pull_request.base.sha/);
   assert.match(selection.env.OIP_HEAD_SHA, /pull_request.head.sha/);
@@ -159,7 +176,7 @@ test("browser and worker families select their own steps while preserving aggreg
     assert.ok(step.if.includes("needs.classify.outputs." + family + " == 'true'"));
     assert.equal(jobs.classify.outputs[family], "${{ steps.selection.outputs." + family + " }}");
   }
-  for (const kind of ["commerce", "bob", "welcome", "meta-leads"]) {
+  for (const kind of ["commerce", "bob", "welcome", "meta-leads", "release-dispatcher"]) {
     const family = "worker_" + kind.replaceAll("-", "_");
     assert.equal(jobs.classify.outputs[family], "${{ steps.selection.outputs." + family + " }}");
     for (const step of steps("worker").filter(step => step.run?.includes("workers/oip-" + kind))) {

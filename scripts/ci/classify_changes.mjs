@@ -2,10 +2,42 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import { pathToFileURL } from "node:url";
 import { verifyQueuedRelease } from "./disney_release_schedule.mjs";
-import { assertScheduleWorkflow, selectScheduledReleases, syncScheduleBlock, validateRegistry, verifyScheduledRelease } from "./scheduled_releases.mjs";
+import { assertScheduleWorkflow, selectScheduledReleases, syncScheduleBlock, validateRegistry, verifyScheduledRelease, validateDispatcherConfig } from "./scheduled_releases.mjs";
+import { releaseFingerprint, selectRequestedReleases, validateDispatchRequest } from "./release_request.mjs";
+import YAML from "yaml";
+
+export function windowsFixturePaths({ list, read } = {}) {
+  list ??= () => execFileSync("git", ["ls-tree", "-r", "--name-only", "HEAD", "--", "content/essays/affirmations"], { encoding: "utf8" }).trim().split("\n");
+  read ??= path => execFileSync("git", ["show", "HEAD:" + path], { encoding: "utf8", maxBuffer: 4 * 1024 * 1024 });
+  const paths = ["/*", "!/*/", "/scripts/", "/tests/", "/tools/", "/data/", "/editorial/", "/content/essays/affirmations/",
+    "/reports/legacy-image-focused-cleanup-inventory.json", "/reports/focused-image-visual-review.json",
+    "/reports/image-review-candidates.json", "/reports/image-visual-review.json"];
+  const files = list().filter(path => path.endsWith(".md"));
+  if (!files.length) return paths;
+  const manifest = JSON.parse(read("data/image-assets.json"));
+  for (const file of files) {
+    const match = read(file).match(/^\uFEFF?---\s*\r?\n([\s\S]*?)\r?\n---/);
+    const page = match ? YAML.parse(match[1], { uniqueKeys: true }) : {};
+    if (!page.featured_image) continue;
+    const source = manifest.assets?.[page.featured_image]?.source;
+    if (typeof source !== "string" || !source.startsWith("images/originals/") || /[\\\s:*?\[\]]/.test(source) || source.split("/").some(part => part === ".." || part === "." || !part))
+      throw Error("Invalid affirmation fixture source: " + file);
+    paths.push("/assets/" + source);
+  }
+  return [...new Set(paths)];
+}
+
+export function dispatcherConfigAtRef(ref, git) {
+  // Before this migration, the registry used GitHub timers without a mode file.
+  // Preserve the verified comparison base rather than turning its absence into
+  // an unrelated whole-library prose scan. A present invalid config still fails.
+  return git("ls-tree", ref, "--", "scripts/ci/release-dispatcher.json").trim() ?
+    validateDispatcherConfig(JSON.parse(git("show", ref + ":scripts/ci/release-dispatcher.json"))) :
+    { schemaVersion: 1, mode: "github" };
+}
 
 const browserFamilies = ["browser_navigation", "browser_bob", "browser_analytics", "browser_share"];
-const empty = () => ({ site: false, browser: false, ...Object.fromEntries(browserFamilies.map(key => [key, false])), images: false, publishing: false, rendering: false, windows: false, worker: false, worker_commerce: false, worker_bob: false, worker_welcome: false, worker_meta_leads: false, seo: false, full: false });
+const empty = () => ({ site: false, browser: false, ...Object.fromEntries(browserFamilies.map(key => [key, false])), images: false, publishing: false, rendering: false, windows: false, worker: false, worker_commerce: false, worker_bob: false, worker_welcome: false, worker_meta_leads: false, worker_release_dispatcher: false, seo: false, full: false });
 const full = () => Object.fromEntries(Object.keys(empty()).map(key => [key, true]));
 const browsers = (selected, families = browserFamilies) => { for (const family of families) selected[family] = true; selected.browser = true; };
 
@@ -45,17 +77,18 @@ const testFamilies = new Map([
   ["test_image_signatures.ps1", ["images"]],
   // The classify job always runs schedule structure, source-binding and receipt fixtures.
   ["disney_release_schedule.test.mjs", []], ["scheduled_releases.test.mjs", []],
+  ["release_request.test.mjs", []], ["shop_feed_inventory.test.mjs", []],
   ["test_disney_release_verification.py", []], ["test_scheduled_release_verification.py", []],
 ]);
 
 export function classifyPaths(paths, { renderingDefaultsChanged = false, scheduleWorkflowOnlyChanged = false } = {}) {
   const selected = empty();
   for (const path of paths) {
-    const worker = /^workers\/oip-(commerce|bob|welcome|meta-leads)\//.exec(path);
+    const worker = /^workers\/oip-(commerce|bob|welcome|meta-leads|release-dispatcher)\//.exec(path);
     if (worker) { selected.worker = selected["worker_" + worker[1].replaceAll("-", "_")] = true; continue; }
     if (/^(docs\/(?!editorial-audits\/)|README\.md$|AGENTS\.md$|CODEX_WORKFLOW\.md$|LICENSE)/.test(path)) continue;
     selected.site = true;
-    if (path === "scripts/ci/scheduled-releases.json" || (path === ".github/workflows/deploy.yml" && scheduleWorkflowOnlyChanged)) continue;
+    if (["scripts/ci/scheduled-releases.json", "scripts/ci/release-dispatcher.json"].includes(path) || (path === ".github/workflows/deploy.yml" && scheduleWorkflowOnlyChanged)) continue;
     if (path === "data/image-assets.json" || path.startsWith("assets/images/originals/")) continue;
     if (["data/image-signatures.json", "data/image-signature-compatibility.json"].includes(path) || path.startsWith("assets/images/signatures/")) {
       selected.images = selected.rendering = true; browsers(selected); continue;
@@ -156,6 +189,7 @@ function changedPaths(event) {
     const scheduleOptions = ref => ({
       registry: validateRegistry(JSON.parse(git("show", ref + ":scripts/ci/scheduled-releases.json"))),
       disneyPlan: JSON.parse(git("show", ref + ":scripts/ci/disney-releases.json")),
+      dispatcherConfig: dispatcherConfigAtRef(ref, git),
     });
     scheduleWorkflowOnlyChanged = isGeneratedScheduleOnlyChange(
       git("show", comparisonBase + ":.github/workflows/deploy.yml"), git("show", head + ":.github/workflows/deploy.yml"),
@@ -177,11 +211,17 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     catch { uncertain = true; }
   }
   const clock = new Date().toISOString();
-  const timed = selectScheduledReleases(event === "schedule" ? process.env.OIP_SCHEDULE : "", clock);
+  const request = { event, ids: process.env.OIP_RELEASE_IDS, requestId: process.env.OIP_RELEASE_REQUEST_ID,
+    expectedSha: process.env.OIP_RELEASE_EXPECTED_SHA, probe: process.env.OIP_RELEASE_PROBE === "true" };
+  const explicit = validateDispatchRequest(request);
+  const head = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
+  const superseded = explicit && head !== request.expectedSha;
+  const timed = explicit ? { timed: true, generic: superseded ? [] : selectRequestedReleases(request.ids, clock), disney: [] } :
+    selectScheduledReleases(event === "schedule" ? process.env.OIP_SCHEDULE : "", clock);
   if (timed.disney.length > 1) throw new Error("Legacy Disney release windows overlap.");
   for (const release of timed.disney) verifyQueuedRelease(release);
   for (const release of timed.generic) await verifyScheduledRelease(release);
-  const selected = timed.timed && !timed.disney.length && !timed.generic.length ? empty() : selectChecks({
+  const selected = request.probe || superseded || (timed.timed && !timed.disney.length && !timed.generic.length) ? empty() : selectChecks({
     event, ...comparison, uncertain,
     fullChecks: process.env.OIP_FULL_CHECKS !== "false",
     protectedMain: process.env.OIP_PROTECTED_MAIN === "true",
@@ -189,6 +229,15 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   });
   const needs = { classify: true, site: selected.site, windows: selected.windows, worker: selected.worker };
   const outputs = { ...selected, clock, release_slug: timed.disney[0]?.slug ?? "", release_ids: JSON.stringify(timed.generic.map(release => release.id)), base: comparison.base, selection: JSON.stringify(needs) };
+  if (explicit) {
+    fs.mkdirSync(".release-dispatch", { recursive: true });
+    fs.writeFileSync(".release-dispatch/admission.json", JSON.stringify({ schemaVersion: 1, requestId: request.requestId,
+      expectedSha: request.expectedSha, commitSha: head, checkedAtUtc: clock, probe: request.probe,
+      status: superseded ? "superseded" : "admitted",
+      releases: timed.generic.map(release => ({ id: release.id, fingerprint: releaseFingerprint(release) })) }, null, 2));
+  }
   fs.appendFileSync(process.env.GITHUB_OUTPUT, Object.entries(outputs).map(([key, value]) => key + "=" + value).join("\n") + "\n");
+  fs.appendFileSync(process.env.GITHUB_OUTPUT, "windows_checkout<<OIP_WINDOWS_PATHS\n" +
+    (selected.windows ? windowsFixturePaths().join("\n") : "") + "\nOIP_WINDOWS_PATHS\n");
   console.log(JSON.stringify({ changedPaths: comparison.paths, selected, buildClockUtc: clock }, null, 2));
 }

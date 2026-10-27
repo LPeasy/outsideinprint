@@ -11,6 +11,12 @@ SPEC.loader.exec_module(verifier)
 
 
 class ReleaseVerification(unittest.TestCase):
+    def test_minified_byline_labels_keep_rendered_boundaries_without_splitting_inline_words(self):
+        page = verifier.Document('<p class="piece-byline"><span class="piece-byline__label">By</span><span>Elijah Fernandez, MSW, PMP, CISSP</span><span class="piece-byline__role">Guest contributor</span></p><p>C<em>O</em>D</p>')
+        text = verifier.normalized(page.root.text())
+        self.assertIn('By Elijah Fernandez, MSW, PMP, CISSP Guest contributor', text)
+        self.assertIn('COD', text)
+
     def setUp(self):
         self.source = '---\nfeatured_image_alt: "Artwork"\n---\n![Artwork](oip-image:essays/fixture/body)\n\n*Photo by [Owner](https://example.org/photo), [CC BY](https://example.org/license).*\n'
         self.release = {"slug": "fixture", "releaseAt": "2026-10-25T09:00:00-04:00", "endsAt": "2026-10-26T00:00:00-04:00",

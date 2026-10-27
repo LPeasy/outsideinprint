@@ -22,7 +22,17 @@ function fixture(input = spec()) {
   const release = prepareScheduledRelease(input, { readGit, clock: "2026-10-01T00:00:00Z" });
   return { release, files, readGit };
 }
-const options = releases => ({ registry: { schemaVersion: 1, releases }, disneyPlan: { releases: [] } });
+const options = releases => ({ registry: { schemaVersion: 1, releases }, disneyPlan: { releases: [] }, dispatcherConfig: { schemaVersion: 1, mode: "github" } });
+
+test("cloud cutover removes per-release timers and suppresses late native events without removing maintenance", () => {
+  const { release } = fixture();
+  const plan = { ...options([release]), dispatcherConfig: { schemaVersion: 1, mode: "cloudflare" } };
+  assert.deepEqual(scheduledCrons(plan), []);
+  assert.deepEqual(selectScheduledReleases("", at, plan), { timed: false, generic: [], disney: [] });
+  assert.deepEqual(selectScheduledReleases("0 14 1 11 *", at, plan), { timed: true, generic: [], disney: [] });
+  const workflow = "on:\n  schedule:\n    - cron: 17 0 * * 1\n      timezone: America/New_York\n    - cron: 17 0 * * 0,2-6\n      timezone: America/New_York\n" + renderScheduleBlock(plan) + "\n";
+  assert.doesNotThrow(() => assertScheduleWorkflow(workflow, plan));
+});
 
 test("Eastern offsets are date-specific, including the two explicit fall-back instants", () => {
   for (const value of ["2026-10-25T09:00:00-04:00", at, "2026-11-01T01:30:00-04:00", "2026-11-01T01:30:00-05:00"])

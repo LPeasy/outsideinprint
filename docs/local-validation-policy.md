@@ -2,6 +2,11 @@
 
 This policy covers local Outside In Print publishing and content-maintenance work in Codex or a local Windows shell.
 
+Scheduler changes use fixed-clock admission/state/receipt fixtures and the small
+source-derived shop-feed inventory fixture. A non-publishing cloud canary proves
+dispatch without a site build. Reuse successful production diagnostics; do not
+repeat full local site, image-library or browser checks for scheduler-only work.
+
 ## Decision
 
 Routine local OIP publishing uses source checks, not a full Hugo build. Do not run npm, npx, or Node package-manager commands as a required local gate for essay, cartoon, collection, or public-site publishing work.

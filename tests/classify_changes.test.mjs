@@ -5,8 +5,28 @@ import os from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { classifyPaths, isGeneratedScheduleOnlyChange, selectChecks } from "../scripts/ci/classify_changes.mjs";
+import { classifyPaths, isGeneratedScheduleOnlyChange, selectChecks, windowsFixturePaths, dispatcherConfigAtRef } from "../scripts/ci/classify_changes.mjs";
 import { registry, syncScheduleBlock } from "../scripts/ci/scheduled_releases.mjs";
+
+test("the pre-migration GitHub clock remains a valid comparison base; invalid present configs fail", () => {
+  assert.deepEqual(dispatcherConfigAtRef("old-main", () => ""), { schemaVersion: 1, mode: "github" });
+  const read = value => dispatcherConfigAtRef("current", command => command === "ls-tree" ? "100644 blob fixture" : value);
+  assert.deepEqual(read('{"schemaVersion":1,"mode":"cloudflare"}'), { schemaVersion: 1, mode: "cloudflare" });
+  assert.throws(() => read("malformed"));
+  assert.throws(() => read('{"schemaVersion":1,"mode":"other"}'));
+});
+
+test("Windows retains fixture inputs and resolves affirmation originals without the whole image library", () => {
+  const files = { "data/image-assets.json": JSON.stringify({ assets: { "editorial/example": { source: "images/originals/editorial/example.png" } } }),
+    "content/essays/affirmations/example.md": '---\nfeatured_image: "editorial/example"\n---\nWords.' };
+  const paths = windowsFixturePaths({ list: () => ["content/essays/affirmations/example.md"], read: path => files[path] });
+  assert.ok(paths.includes("/assets/images/originals/editorial/example.png"));
+  assert.ok(paths.includes("/reports/image-visual-review.json"));
+  assert.ok(!paths.includes("/assets/images/originals/"));
+  assert.ok(!paths.includes("/static/images/"));
+  files["data/image-assets.json"] = JSON.stringify({ assets: { "editorial/example": { source: "images/originals/../private.png" } } });
+  assert.throws(() => windowsFixturePaths({ list: () => ["content/essays/affirmations/example.md"], read: path => files[path] }), /Invalid/);
+});
 
 test("ordinary publications build without unrelated browser or fixture suites", () => {
   for (const path of ["content/essays/article.md", "content/essays/musings/new.md", "assets/images/originals/essays/new/hero.png", "data/image-assets.json"]) {
@@ -162,6 +182,7 @@ test("Git schedule comparison exempts only generated triggers and fails closed f
     write(".github/workflows/deploy.yml", workflow);
     write("scripts/ci/scheduled-releases.json", JSON.stringify(registry));
     write("scripts/ci/disney-releases.json", JSON.stringify(disneyPlan));
+    write("scripts/ci/release-dispatcher.json", fs.readFileSync("scripts/ci/release-dispatcher.json", "utf8"));
     git("add", "."); git("commit", "-qm", "base");
     const base = git("rev-parse", "HEAD");
     const updatedRegistry = { schemaVersion: 1, releases: [] };
