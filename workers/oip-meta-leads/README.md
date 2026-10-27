@@ -149,12 +149,30 @@ Before any live test or activation, review these concrete gaps:
 
 ## Routes and states
 
+An optional **secret** `OWNED_TEST_JSON` can bind one separately approved Meta test
+that lacks a canonical ad ID. It contains exact Page/form/lead IDs, the canonical
+creation instant in ISO UTC, an expiry no more than 24 hours after creation, the
+existing-key email HMAC, and the observed consent key/value. Keep this contract
+out of source, aggregate records and logs. Signed notices must match its identity
+and time and have an absent/zero ad ID. Canonical retrieval must omit `ad_id` and
+return the exact approved inbox HMAC and affirmative consent. Expiry is checked
+again before dispatch. Remove the secret after the test; retain its permanent
+ledger reservation. Production forms still require exact numeric ad IDs.
+
+Test rows use the explicit `owned-test` ad marker, `oip-owned-test` campaign and
+`owned_test` medium. They cannot pass the paid approval registry. This path uses
+the same queue, scheduled processor, canonical retrieval, rate cap, pending-only
+Buttondown creation and duplicate reservation as production. A locally signed
+operator replay is a replay test, not evidence of an authentic Meta delivery.
+Do not infer notification retries from generic webhook documentation; retain
+actual provider-delivery evidence for the acceptance result.
+
 | Route | Behavior |
 | --- | --- |
 | `GET /health` | Non-sensitive switch/configuration booleans; no delivery assurance. |
 | `GET /webhooks/meta` | Exact challenge response only with explicit verification switch and correct token. |
 | `POST /webhooks/meta` | Verified Meta notices only; disabled intake returns 503 and stores nothing. |
-| `GET /admin/status` | Authenticated aggregate counts and review flag; confirmed subscribers explicitly not measured here. |
+| `GET /admin/status` | Authenticated aggregate counts, oldest queued age and review flag (including queue age over 15 minutes); confirmed subscribers explicitly not measured here. |
 | `POST /admin/process` | Authenticated bounded queue pass, sharing the same reservation/rate rules as scheduled work. |
 | `POST /admin/synthetic-preview` | Authenticated canonical-shape check restricted to `@example.invalid`; no network or database writes. |
 
