@@ -10,7 +10,7 @@ test("card artwork reads first, while zoom stays separate", { skip: !siteDir }, 
   const home = page("");
   const library = page("library");
   const gallery = page("gallery");
-  assert.match(home, /class=home-v2-featured__lead-media href=\/essays\/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible\//);
+  assert.match(home, /class=home-v2-featured__lead-media href=\/essays\/why-daylight-saving-time\//);
   assert.match(home, /class=home-v2-featured__item-media href=\/(?:essays|syd-and-oliver)\/[^/]+\//);
   assert.match(home, /data-home-featured-image-trigger/);
   assert.match(library, /class=(?:"essay-cartoon-thumb[^"]*"|essay-cartoon-thumb) href=\/essays\//);

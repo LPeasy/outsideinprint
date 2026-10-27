@@ -64,7 +64,7 @@ const regularPublishedRoutes = publishedPages.filter((page) => {
     ["#author-robert-v-ussley", "#author-robert-v.-ussley"].some((id) => author["@id"]?.endsWith(id)));
 }).map((page) => page.route);
 const pinnedRoutes = [
-  "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/",
+  "/essays/why-daylight-saving-time/",
   "/essays/walt-disney-world-opening-1971/",
   "/essays/the-noise-of-the-crowd/",
   "/essays/the-coin-slot-on-the-corner/",
@@ -123,7 +123,7 @@ test("Dolphin correction retains the original publication date and renders a con
     || text(dolphinHtml).includes(currentRevision[2]), "the complete correction note must render");
 });
 
-test("rendered homepage leads with Benjamin Franklin, then the newest remaining publication", () => {
+test("rendered homepage leads with Why Daylight Saving Time?, then the newest remaining publication", () => {
   const cards = [...html.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/g)]
     .filter((match) => /\bhome-v2-featured__(?:lead|item)\b/.test(attribute(`<article ${match[1]}>`, "class")));
   assert.ok(regularPublishedRoutes.length >= 5, "the production archive must supply five regular published reading pages");
@@ -141,7 +141,7 @@ test("rendered homepage leads with Benjamin Franklin, then the newest remaining 
     assert.ok(canonicalKind, `${route} must have a canonical form label`);
     const kind = route === "/essays/the-dolphin-company/" ? "Case study" : canonicalKind;
     if (route === "/essays/the-dolphin-company/") assert.equal(canonicalKind, "Essay", "Dolphin's homepage label must not reclassify its destination");
-    if (route === pinnedRoutes[0]) assert.equal(canonicalKind, "Modern Bio");
+    if (route === pinnedRoutes[0]) assert.equal(canonicalKind, "Essay");
     if (route === pinnedRoutes[2]) assert.equal(canonicalKind, "Musing");
     if (route === pinnedRoutes[1] || route === pinnedRoutes[3]) assert.equal(canonicalKind, "Essay");
     const metric = metricRecords.get(route);
@@ -272,8 +272,22 @@ test("rendered homepage leads with Benjamin Franklin, then the newest remaining 
   assert.doesNotMatch(html, /25 reads|Medium reads|(?:3\.4K|1\.95K|1\.8K) readers/);
 });
 
-test("Franklin's homepage lead and zoom share the Gallery illustration while the biography keeps its portrait and social image", () => {
-  const franklinRoute = pinnedRoutes[0];
+test("the daylight saving lead and zoom use the approved station-clock illustration", () => {
+  const route = "/essays/why-daylight-saving-time/";
+  if (!regularPublishedRoutes.includes(route)) return;
+  const source = fs.readFileSync(path.resolve(`content${route.slice(0, -1)}.md`), "utf8");
+  const scalar = key => JSON.parse(source.match(new RegExp(`^${key}: (".*")\\r?$`, "m"))?.[1] || '""');
+  const lead = html.match(/<article\b[^>]*home-v2-featured__lead[^>]*>([\s\S]*?)<\/article>/)?.[1];
+  const image = lead?.match(/<img\b[^>]*>/)?.[0];
+  const zoom = lead?.match(/<button\b[^>]*data-home-featured-image-trigger[^>]*>/)?.[0];
+  assert.equal(attribute(image, "data-oip-image-id"), scalar("featured_image"));
+  assert.equal(attribute(image, "alt"), scalar("featured_image_alt"));
+  assert.equal(attribute(zoom, "data-alt"), scalar("featured_image_alt"));
+  assert.ok(attribute(zoom, "data-image").includes("/essays/why-daylight-saving-time/hero/"));
+});
+
+test("the former Franklin lead retains its Gallery record, biography portrait and social image", () => {
+  const franklinRoute = "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/";
   if (!regularPublishedRoutes.includes(franklinRoute)) return;
   const gallerySource = fs.readFileSync(path.resolve("data/editorial_cartoons.yaml"), "utf8");
   const galleryEntry = gallerySource.match(/^  - slug: the-american-at-versailles\r?\n([\s\S]*?)(?=^  - slug:|(?![\s\S]))/m)?.[1];
@@ -283,13 +297,6 @@ test("Franklin's homepage lead and zoom share the Gallery illustration while the
   if (Date.parse(releasedAt) > observationTime) return;
   assert.equal(scalar(galleryEntry, "essay"), franklinRoute);
   assert.equal(scalar(galleryEntry, "image"), "editorial/the-american-at-versailles");
-  const lead = html.match(/<article\b[^>]*home-v2-featured__lead[^>]*>([\s\S]*?)<\/article>/)?.[1];
-  const image = lead?.match(/<img\b[^>]*>/)?.[0];
-  const zoom = lead?.match(/<button\b[^>]*data-home-featured-image-trigger[^>]*>/)?.[0];
-  assert.equal(attribute(image, "data-oip-image-id"), scalar(galleryEntry, "image"));
-  assert.equal(attribute(image, "alt"), scalar(galleryEntry, "alt"));
-  assert.equal(attribute(zoom, "data-alt"), scalar(galleryEntry, "alt"));
-  assert.ok(attribute(zoom, "data-image").includes("/editorial/the-american-at-versailles/"));
   const biographySource = fs.readFileSync(path.resolve(`content${franklinRoute.slice(0, -1)}.md`), "utf8");
   const legacyPortrait = "/images/medium/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/60260729069245aec2c2513ff114e881be68451fae1ca363432ab40d1bdaab17.jpeg";
   assert.equal(scalar(biographySource, "featured_image"), legacyPortrait);

@@ -88,9 +88,9 @@ test("masthead proof sits between its controls and lead summaries keep supportin
   assert.equal((homeV2.match(/partial "discovery\/page-summary\.html"/g) || []).length, 1);
 });
 
-test("featured reading leads with Benjamin Franklin, then the latest publication and curated supports", () => {
+test("featured reading leads with daylight saving, then the latest publication and curated supports", () => {
   const routes = [
-    "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/",
+    "/essays/why-daylight-saving-time/",
     "/essays/walt-disney-world-opening-1971/",
     "/essays/the-noise-of-the-crowd/",
     "/essays/the-coin-slot-on-the-corner/",
@@ -100,7 +100,7 @@ test("featured reading leads with Benjamin Franklin, then the latest publication
   assert.deepEqual(indexes, [...indexes].sort((left, right) => left - right));
   assert.doesNotMatch(selected, /what-happened-at-camp-mystic|why-a-return-to-the-gold-standard|the-little-prince|russias-slow-surrender/);
   assert.match(selected, /\$eligible = sort \(sort \$eligible "Title" "asc"\) "PublishDate" "desc"/);
-  assert.match(selected, /\$flagshipRoute := "\/essays\/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible\/"/);
+  assert.match(selected, /\$flagshipRoute := "\/essays\/why-daylight-saving-time\/"/);
   assert.match(selected, /range where \$eligible "RelPermalink" \$flagshipRoute/);
   assert.match(selected, /range first 1 \$eligible/);
   assert.ok(selected.indexOf('range where $eligible "RelPermalink" $flagshipRoute') < selected.indexOf("range first 1 $eligible"));
