@@ -15,6 +15,7 @@ const consent = checked => [{ checkbox_key: FORM.consentCheckboxKey, is_checked:
 function fixture() {
   const sql = new DatabaseSync(':memory:');
   sql.exec(readFileSync(new URL('../migrations/0001_meta_leads.sql', import.meta.url), 'utf8'));
+  sql.exec(readFileSync(new URL('../migrations/0002_owned_test_recovery.sql', import.meta.url), 'utf8'));
   const faults = { afterClaim: false, finish: false };
   const DB = { prepare(query) { return { values: [], bind(...args) { this.values = args; return this; },
     async first() {
@@ -399,4 +400,71 @@ test('scheduled entry point waits for the shared processor and honors disabled d
   await worker.scheduled({}, f.env, { waitUntil: promise => { scheduledWork = promise; } });
   assert.deepEqual(await scheduledWork, { status: 'dispatch_disabled' });
   assert.equal(f.calls.length, 0);
+});
+
+test('firewall rejection retains a fixed diagnostic and one audited recovery preserves the original reservation', async () => {
+  const f = ownedFixture();
+  f.setPost(() => Response.json({ code: 'subscriber_blocked', detail: 'private response' }, { status: 400 }));
+  await f.send(f.ownedRequest()); await f.process();
+  const first = { ...f.row() };
+  assert.equal(first.error_code, 'buttondown_firewall_blocked');
+  f.sql.prepare("UPDATE meta_leads SET state = 'queued', error_code = 'approved_owned_test_firewall_retry', attempted_at = NULL, finished_at = NULL WHERE lead_id = ?").run(first.lead_id);
+  const audit = f.sql.prepare('SELECT * FROM meta_owned_test_recoveries').get();
+  assert.equal(audit.original_attempted_at, first.attempted_at);
+  assert.equal(audit.original_finished_at, first.finished_at);
+  assert.equal(f.row().email_key, first.email_key);
+  f.env.TRUSTED_SOURCE_BYPASS = 'true'; f.setPost(null); await f.process();
+  assert.equal(f.row().state, 'pending_confirmation'); assert.equal(f.posts().length, 2);
+  assert.equal(f.posts()[1].options.headers['X-Buttondown-Bypass-Firewall'], 'true');
+  await f.send(f.ownedRequest()); await f.process(); assert.equal(f.posts().length, 2);
+  assert.throws(() => f.sql.prepare('DELETE FROM meta_owned_test_recoveries').run(), /immutable_recovery_audit/);
+});
+
+test('recovery cannot release paid, uncertain, suppressed or twice-rejected test reservations', async () => {
+  for (const [owned, response] of [[false, { code: 'subscriber_blocked' }], [true, { code: 'subscriber_suppressed' }]]) {
+    const f = owned ? ownedFixture() : fixture();
+    f.setPost(() => Response.json(response, { status: 400 }));
+    await f.send(owned ? f.ownedRequest() : undefined); await f.process();
+    // Generic 400 needs a documented operator diagnosis; the guarded transition
+    // still rejects a normal requeue without the explicit reviewed reason.
+    assert.throws(() => f.sql.prepare("UPDATE meta_leads SET state = 'queued', error_code = 'approved_owned_test_firewall_retry', attempted_at = NULL, finished_at = NULL WHERE lead_id = '44444444'").run(), /owned_test_recovery_not_allowed/);
+  }
+  const f = ownedFixture(); f.setPost(() => Response.json({ code:'subscriber_blocked' }, { status:400 }));
+  await f.send(f.ownedRequest()); await f.process();
+  const recover = () => f.sql.prepare("UPDATE meta_leads SET state = 'queued', error_code = 'approved_owned_test_firewall_retry', attempted_at = NULL, finished_at = NULL WHERE lead_id = '44444444'").run();
+  recover(); await f.process(); assert.throws(recover, /UNIQUE/);
+  assert.equal(f.posts().length, 2);
+  const uncertain = ownedFixture(); uncertain.setPost(() => new Response('', {status:503}));
+  await uncertain.send(uncertain.ownedRequest()); await uncertain.process();
+  assert.throws(() => uncertain.sql.prepare("UPDATE meta_leads SET state = 'queued', error_code = 'approved_owned_test_firewall_retry', attempted_at = NULL, finished_at = NULL WHERE lead_id = '44444444'").run(), /owned_test_recovery_not_allowed/);
+});
+
+test('the original rejected attempt remains in the hourly cap after audited recovery is queued', async () => {
+  const f = ownedFixture(); f.setPost(() => Response.json({code:'subscriber_blocked'}, {status:400}));
+  f.env.OWNED_TEST_JSON = JSON.stringify({ ...f.approval, expiresAt: new Date(NOW+2*3_600_000).toISOString() });
+  await f.send(f.ownedRequest()); await f.process(); f.setPost(null);
+  f.env.APPROVED_FORMS_JSON = JSON.stringify([FORM]);
+  for (let n=0; n<4; n++) await f.send(f.request(String(44444445+n)));
+  await f.process(); assert.equal(f.posts().length, 5);
+  f.sql.prepare("UPDATE meta_leads SET state = 'queued', error_code = 'approved_owned_test_firewall_retry', attempted_at = NULL, finished_at = NULL WHERE lead_id = '44444444'").run();
+  await f.process(); assert.equal(f.posts().length, 5); assert.equal(f.row().state, 'queued');
+  await f.process(NOW+3_600_001); assert.equal(f.posts().length, 6); assert.equal(f.row().state, 'pending_confirmation');
+});
+
+test('native owned-inbox probe admits a new adless reference but cannot create a subscriber', async () => {
+  const f = ownedFixture();
+  f.env.OWNED_TEST_JSON = JSON.stringify({ ...f.approval, leadId: undefined, allowNewLead: true, dispatchAllowed: false });
+  f.overrides.set('44444445', { ad_id: undefined, field_data: fields(f.email), custom_disclaimer_responses: consent('1') });
+  assert.equal((await f.send(f.ownedRequest('44444445'))).status, 200);
+  await f.process(); assert.equal(f.row('44444445').state, 'held'); assert.equal(f.posts().length, 0);
+  const bad = ownedFixture(); bad.env.OWNED_TEST_JSON = JSON.stringify({ ...bad.approval, allowNewLead: true, dispatchAllowed: true });
+  assert.equal((await bad.send(bad.ownedRequest())).status, 503);
+});
+
+test('native same-inbox probe proves canonical deduplication after the first pending signup without another POST', async () => {
+  const f = ownedFixture(); await f.send(f.ownedRequest()); await f.process();
+  f.env.OWNED_TEST_JSON = JSON.stringify({ ...f.approval, leadId: undefined, allowNewLead: true, dispatchAllowed: false });
+  f.overrides.set('44444445', { ad_id: undefined, field_data: fields(f.email), custom_disclaimer_responses: consent('1') });
+  await f.send(f.ownedRequest('44444445')); await f.process();
+  assert.equal(f.row('44444445').state, 'duplicate'); assert.equal(f.posts().length, 1);
 });
