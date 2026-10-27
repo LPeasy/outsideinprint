@@ -33,13 +33,7 @@ on:
     - cron: 17 0 * * 0,2-6
       timezone: America/New_York
     # BEGIN GENERATED SCHEDULED RELEASES
-    # Generated UTC instants; absolute registry windows prevent later-year releases.
-    - cron: 0 13 25,26,27 10 *
-      timezone: UTC
-    - cron: 30 13 27 10 *
-      timezone: UTC
-    - cron: 0 15 27 10 *
-      timezone: UTC
+    # Cloudflare dispatches approved registry releases; maintenance crons remain above.
     # END GENERATED SCHEDULED RELEASES
 permissions:
   contents: read

@@ -114,3 +114,15 @@ test("initial activation leaves earlier releases untouched and catches up later 
     schemaVersion: 1, releases: [{ ...release, releaseAt: "2026-11-01T09:02:00-05:00" }] } });
   assert.equal((await f.engine.tick()).status, "dispatched");
 });
+
+test("an approved extra rebuild cannot replay a known failed release", async () => {
+  const f = fixture(), plan = { schemaVersion: 1, releases: [{ ...release, rebuildAt: "2026-11-01T09:30:00-05:00" }] };
+  f.engine.now = () => now + 31 * 60_000;
+  f.gh.snapshot = async () => ({ sha, registry: plan, config: { schemaVersion: 1, mode: "cloudflare" } });
+  const first = operations(plan, now)[0];
+  f.data.set(first.key, { ...first, status: "blocked" });
+  assert.equal((await f.engine.tick()).status, "idle");
+  assert.equal(f.posts, 0);
+  f.data.set(first.key, { ...first, status: "verified" });
+  assert.equal((await f.engine.tick()).status, "dispatched");
+});
