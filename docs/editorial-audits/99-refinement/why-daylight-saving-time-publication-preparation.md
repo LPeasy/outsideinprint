@@ -19,6 +19,8 @@ The publication subtitle is “Where it came from, and why we turn the clocks ba
 
 The adjacent hash-bound refinement report and source checklist record the current editorial audits and bounded legal-status check. The immutable revision 11 export and full publication staging package remain outside the public content tree. Package provenance records export, artwork and adapted essay hashes. `validation-receipt.md` in the staging package records completed source and visual checks; exhaustive production output checks remain the checked PR's responsibility.
 
+The registered Breach of Confidence guest essay also binds the shared `data/collections.yaml` file. This publication adds only the daylight-saving slug in the civic-services section, so that registration's collection-file hash is refreshed. Its other eight bound files, approved image records, primary route, release window and public checks remain unchanged. The source guard remains strict; no binding is removed or bypassed.
+
 ## Publication authorization and reviewed diff
 
 Following the completed preparation and external preview, the owner explicitly instructed: “lets go ahead and publish this essay onto the live site when its ready.” Authorization was received on October 27, 2026, and recorded during this release. It covers the prepared essay, three approved illustrations, collection assignment and the opt-in responsive timeline shown in the preview. Email distribution is outside this request.
