@@ -954,12 +954,17 @@ foreach ($surface in $shopSurfaceExpectations) {
 $privacyOutput = ([Net.WebUtility]::HtmlDecode([string]$output['privacy/index.html'])).Replace([char]0x2019, [char]0x27)
 foreach ($requiredPrivacyText in @(
   "Effective $privacyEffectiveDate",
-  'standalone Bob''s Almanack signup form',
+  'standalone Outside In Print newsletter signup form',
   'IP address, browser or device information, and referring page',
   'selected preference tags',
   'message-open or link-click information',
   'email-client, browser, device, IP-address, or referrer metadata',
   'Outside In Print does not sell or rent personal information.',
+  'three introductory emails, sent after confirmation and two and four days later.',
+  'Meta collects the email and consent response you provide under its own privacy policy.',
+  'Submitting the Meta form alone does not activate the subscription.',
+  'The transfer service does not store the raw email address in its ledger or send it to site analytics.',
+  'The unsubscribe link in a Buttondown newsletter stops that newsletter; the link in a Resend introductory email stops the introductory series.',
   'Unsubscribing stops the selected emails but is not the same as deleting subscription records.'
 )) {
   Assert-Contains -Text $privacyOutput -Expected $requiredPrivacyText -Context 'Built privacy policy'
