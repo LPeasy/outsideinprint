@@ -4267,7 +4267,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-07-25/index.html'
-    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Free\. No spam ever\. Unsubscribe anytime\..*?Read the latest issue.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.'
+    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?The weekly newsletter.*?New essays, original pictures, and selected archive work from Outside In Print\. Free each Saturday, plus three short introductory emails after you confirm\..*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Free\. Each email series has an unsubscribe link\..*?Read the latest issue.*?(?:https://outsideinprint\.org)?/privacy/.*?Buttondown manages the Saturday newsletter\. Resend delivers three introductory emails, including an optional Pressroom invitation\. The two email series have separate unsubscribe links\. Outside In Print does not sell or rent subscriber information\.'
     Message = 'expected an archived Almanack issue to end with the plain-language weekly newsletter proposition and issue-exit analytics slot'
   },
   @{
@@ -4942,7 +4942,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Join the newsletter.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/\d{4}-\d{2}-\d{2}/[^>]*>\s*Read the latest issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.'
+    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original pictures, and selected archive work from Outside In Print\. Free each Saturday, plus three short introductory emails after you confirm\..*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Join the newsletter.*?Free\. Each email series has an unsubscribe link\..*?(?:https://outsideinprint\.org)?/almanack/\d{4}-\d{2}-\d{2}/[^>]*>\s*Read the latest issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Buttondown manages the Saturday newsletter\. Resend delivers three introductory emails, including an optional Pressroom invitation\. The two email series have separate unsubscribe links\. Outside In Print does not sell or rent subscriber information\.'
     Message = 'expected article aftermatter to place the full weekly newsletter signup after the publication record'
   },
   @{
@@ -6345,7 +6345,7 @@ foreach ($articlePath in @(
     $uxIssues.Add("$articlePath => expected exactly one standard reading continuation, not the retired article-paths exit")
   }
 
-  if ($newsletterHtml -notmatch '(?s)newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original visuals, and selected archive work from Outside In Print\. One thoughtful email each week\..*?Join the newsletter.*?Free\. No spam ever\. Unsubscribe anytime\..*?(?:https://outsideinprint\.org)?/almanack/\d{4}-\d{2}-\d{2}/.*?(?:https://outsideinprint\.org)?/privacy/.*?Your email goes to Buttondown to deliver and manage the Outside In Print newsletter\.') {
+  if ($newsletterHtml -notmatch '(?s)newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original pictures, and selected archive work from Outside In Print\. Free each Saturday, plus three short introductory emails after you confirm\..*?Join the newsletter.*?Free\. Each email series has an unsubscribe link\..*?(?:https://outsideinprint\.org)?/almanack/\d{4}-\d{2}-\d{2}/.*?(?:https://outsideinprint\.org)?/privacy/.*?Buttondown manages the Saturday newsletter\. Resend delivers three introductory emails, including an optional Pressroom invitation\. The two email series have separate unsubscribe links\. Outside In Print does not sell or rent subscriber information\.') {
     $uxIssues.Add("$articlePath => expected the weekly newsletter cadence, contents, no-spam promise, sample, and privacy proposition")
   }
 
