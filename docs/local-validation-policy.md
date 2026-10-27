@@ -4,7 +4,9 @@ This policy covers local Outside In Print publishing and content-maintenance wor
 
 Scheduler changes use fixed-clock admission/state/receipt fixtures and the small
 source-derived shop-feed inventory fixture. A non-publishing cloud canary proves
-dispatch without a site build. Reuse successful production diagnostics; do not
+dispatch during commissioning or relevant infrastructure repairs, without a site
+build. Ordinary scheduled posts reuse the verified canary. Reuse successful
+production diagnostics; do not
 repeat full local site, image-library or browser checks for scheduler-only work.
 
 ## Decision
@@ -80,4 +82,4 @@ If a local OIP skill or workflow asks for npm or npx during public-site publishi
 
 ## Scheduled publication
 
-GitHub Actions is the default executor for future web releases. Follow [scheduled publication](scheduled-publication.md). Complete the publisher's strict content-only staged validator before adding the release registry and generated workflow block; then validate the scheduler metadata and review the union of intentional paths. Adding a routine release record does not require another local Hugo build or duplicate browser/image suites. CI retains its required checks. Local package and Contributor Desk reconciliation follows observed release evidence and must not make the release depend on an online local machine.
+Cloudflare is the default release clock; GitHub Actions builds, deploys and verifies future web releases. Follow the [routine release fast path](scheduled-publication.md#routine-release-fast-path). Complete the publisher's strict content-only staged validator before adding the release registry and generated workflow block; then validate the scheduler metadata and review the union of intentional paths. Adding a routine release record does not require another local Hugo build or duplicate browser/image suites. CI retains its required checks. Local package and Contributor Desk reconciliation follows observed release evidence and must not make the release depend on an online local machine.

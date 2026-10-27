@@ -51,6 +51,26 @@ cutover: `github` retains generated timers until the Worker canary passes;
 Only call a queue ready when the configured dispatcher is deployed, enabled,
 and has a verified canary. See the [operator runbook](../workers/oip-release-dispatcher/README.md).
 
+## Routine release fast path
+
+The non-publishing canary validates dispatcher commissioning or relevant
+infrastructure repairs. Reuse its persisted verified result for ordinary
+scheduled posts; confirm the existing dispatcher is enabled rather than
+calling `/admin/probe` or dispatching `release_probe` for each post. Relevant
+changes to dispatch, authentication or receipt handling may require a new
+canary within that infrastructure change's validation scope.
+
+The routine sequence is targeted publisher source checks, a source-bound
+registry entry, a checked PR, the Cloudflare trigger with `full_checks:false`,
+a fresh GitHub production build, and the existing deployment and per-release
+receipts. Preserve required GitHub gates, source bindings, current-main guards
+and exact canonical `commitSha`/original `generatedAtUtc` verification.
+
+Reuse successful diagnostics for the same production identity and unchanged
+inputs. Perform only missing release-specific checks; do not repeat whole-site
+smoke tests, browser suites or image-library audits merely because another
+post is scheduled. No test publication or extra rebuild is part of this path.
+
 ## Registration fields
 
 Example for an essay; substitute real approved copy, sources, artwork, and time.
