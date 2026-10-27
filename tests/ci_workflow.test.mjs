@@ -151,11 +151,7 @@ test("browser containers are conditional and actual publication gates remain act
   assert.equal(browserSteps.length, 5);
   for (const step of browserSteps) assert.match(step.if, /outputs.browser/);
   const preparation = browserSteps.find(step => step.run.includes("--prepare"));
-  const parsers = steps("site").find(step => step.name === "Install source parsers");
-  assert.equal(parsers.if, undefined);
-  assert.equal(parsers.run, "npm ci --ignore-scripts --no-audit --no-fund");
-  assert.equal(steps("site").filter(step => step.run?.includes("npm ci")).length, 1);
-  assert.doesNotMatch(preparation.run, /npm ci/);
+  assert.match(preparation.run, /npm ci --ignore-scripts --no-audit --no-fund/);
   assert.ok(steps("site").indexOf(preparation) > steps("site").findIndex(step => step.run?.includes("hugo --gc")));
   assert.ok(browserSteps.every(step => step === preparation || steps("site").indexOf(step) > steps("site").indexOf(preparation)));
   assert.equal(jobs.site.container, undefined, "Hugo and output gates retain their existing host environment.");
@@ -168,6 +164,22 @@ test("browser containers are conditional and actual publication gates remain act
   assert.match(commands("worker"), /npm --prefix workers\/oip-bob test/);
   assert.ok(action("worker", "actions/checkout").with["sparse-checkout"].includes("workers/oip-bob"));
   assert.doesNotMatch(commands("worker"), /wrangler.*deploy|cloudflare.*deploy/i);
+});
+
+test("output checks have one root dependency install with or without browser fixtures", () => {
+  const siteSteps = steps("site");
+  const feedGate = siteSteps.findIndex(step => step.run?.includes("test_feed_policy_contract.ps1 -SiteDir"));
+  assert.ok(feedGate >= 0, "The rendered feed check must remain selected.");
+  const installs = siteSteps.filter(step => /npm ci --ignore-scripts --no-audit --no-fund/.test(step.run ?? ""));
+  for (const browser of [false, true]) {
+    const selected = installs.filter(step => {
+      const condition = step.if?.match(/needs\.classify\.outputs\.browser\s+(==|!=)\s+'true'/);
+      assert.ok(condition, "Root installs must declare their browser selection.");
+      return condition[1] === "==" ? browser : !browser;
+    });
+    assert.equal(selected.length, 1, `One dependency install is needed with browser=${browser}.`);
+    assert.ok(siteSteps.indexOf(selected[0]) < feedGate, "Install the YAML parser before the feed inventory check.");
+  }
 });
 
 test("browser and worker families select their own steps while preserving aggregate gates", () => {
