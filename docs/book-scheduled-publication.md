@@ -1,7 +1,7 @@
 # Scheduled direct e-book publication
 
 This contract extends the existing bookstore and private EPUB delivery service to
-an owner-authorized future book release. The public site uses the shared GitHub
+an owner-authorized future book release. The public site uses the shared cloud
 schedule in [scheduled publication](scheduled-publication.md). Commerce is deployed
 separately before release; no local computer is needed at the release instant.
 

@@ -1,4 +1,5 @@
 name: Build Hugo, Deploy to GitHub Pages
+run-name: ${{ inputs.release_request_id && format('OIP release {0}', inputs.release_request_id) || github.event.pull_request.title || github.event.head_commit.message || github.workflow }}
 on:
   push:
     branches:
@@ -10,6 +11,22 @@ on:
         description: Run all active fixture, browser, Windows and worker suites
         type: boolean
         default: true
+      release_ids:
+        description: JSON array of approved scheduled release IDs (dispatcher only)
+        type: string
+        default: ''
+      release_request_id:
+        description: Unique dispatcher request UUID
+        type: string
+        default: ''
+      release_expected_sha:
+        description: Current main SHA observed by the dispatcher
+        type: string
+        default: ''
+      release_probe:
+        description: Validate admission without building or deploying
+        type: boolean
+        default: false
   schedule:
     - cron: 17 0 * * 1
       timezone: America/New_York
@@ -49,6 +66,7 @@ jobs:
       worker_bob: ${{ steps.selection.outputs.worker_bob }}
       worker_welcome: ${{ steps.selection.outputs.worker_welcome }}
       worker_meta_leads: ${{ steps.selection.outputs.worker_meta_leads }}
+      worker_release_dispatcher: ${{ steps.selection.outputs.worker_release_dispatcher }}
       seo: ${{ steps.selection.outputs.seo }}
       full: ${{ steps.selection.outputs.full }}
       clock: ${{ steps.selection.outputs.clock }}
@@ -77,6 +95,7 @@ jobs:
       - name: Check workflow safety and selectors
         run: |
           node --test tests/ci_workflow.test.mjs tests/browser_environment.test.mjs tests/classify_changes.test.mjs tests/disney_release_schedule.test.mjs tests/scheduled_releases.test.mjs tests/image_cache.test.mjs tests/release_gate.test.mjs tests/verify_deployment.test.mjs tests/deployment_head.test.mjs
+          node --test tests/release_request.test.mjs tests/shop_feed_inventory.test.mjs
           python3 -m unittest discover -s tests -p test_disney_release_verification.py
           python3 -m unittest discover -s tests -p test_scheduled_release_verification.py
           node scripts/ci/scheduled_releases.mjs --check
@@ -89,7 +108,19 @@ jobs:
           OIP_FULL_CHECKS: ${{ inputs.full_checks }}
           OIP_PROTECTED_MAIN: ${{ github.ref_protected && vars.CI_BRANCH_PROTECTION_ACTIVE == 'true' }}
           OIP_SCHEDULE: ${{ github.event.schedule }}
+          OIP_RELEASE_IDS: ${{ inputs.release_ids }}
+          OIP_RELEASE_REQUEST_ID: ${{ inputs.release_request_id }}
+          OIP_RELEASE_EXPECTED_SHA: ${{ inputs.release_expected_sha }}
+          OIP_RELEASE_PROBE: ${{ inputs.release_probe }}
         run: node scripts/ci/classify_changes.mjs
+      - name: Save release admission receipt
+        if: ${{ always() && inputs.release_request_id != '' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: release-dispatch
+          path: .release-dispatch/**
+          include-hidden-files: true
+          if-no-files-found: warn
   windows:
     runs-on: windows-latest
     timeout-minutes: 10
@@ -140,6 +171,7 @@ jobs:
             workers/oip-bob
             workers/oip-welcome
             workers/oip-meta-leads
+            workers/oip-release-dispatcher
           persist-credentials: false
       - name: Setup Node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
@@ -164,6 +196,9 @@ jobs:
       - name: Bob recommendations, budgets and local Workers runtime
         if: ${{ needs.classify.outputs.worker_bob == 'true' }}
         run: npm --prefix workers/oip-bob test
+      - name: Release dispatcher eligibility, idempotency and receipt fixtures
+        if: ${{ needs.classify.outputs.worker_release_dispatcher == 'true' }}
+        run: node --test workers/oip-release-dispatcher/test/*.test.mjs
   site:
     runs-on: ubuntu-latest
     timeout-minutes: 35
@@ -184,6 +219,7 @@ jobs:
       OIP_BUILD_CLOCK_UTC: ${{ needs.classify.outputs.clock }}
       OIP_HUGO_BIN: hugo
       OIP_HUGO_CONFIG: hugo.toml
+      OIP_PUBLISHED_INVENTORY_PATH: ${{ github.workspace }}/.ci-published-inventory.json
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -428,8 +464,8 @@ jobs:
       - name: Test Public HTML Output
         shell: pwsh
         run: |
-          ./tests/test_feed_policy_contract.ps1 -SiteDir public
           ./tests/test_public_html_output.ps1 -RequireFreshBuild -Clock $env:OIP_BUILD_CLOCK_UTC
+          ./tests/test_feed_policy_contract.ps1 -SiteDir public
       - name: Test Release A Metadata Output
         run: node --test tests/release_a_metadata_output.test.mjs
       - name: Test Games Catalog Output

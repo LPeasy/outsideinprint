@@ -162,6 +162,7 @@ test("Git schedule comparison exempts only generated triggers and fails closed f
     write(".github/workflows/deploy.yml", workflow);
     write("scripts/ci/scheduled-releases.json", JSON.stringify(registry));
     write("scripts/ci/disney-releases.json", JSON.stringify(disneyPlan));
+    write("scripts/ci/release-dispatcher.json", fs.readFileSync("scripts/ci/release-dispatcher.json", "utf8"));
     git("add", "."); git("commit", "-qm", "base");
     const base = git("rev-parse", "HEAD");
     const updatedRegistry = { schemaVersion: 1, releases: [] };

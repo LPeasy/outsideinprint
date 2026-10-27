@@ -1,0 +1,19 @@
+name = "oip-release-dispatcher"
+main = "src/worker.mjs"
+compatibility_date = "2026-10-27"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+
+[triggers]
+crons = ["*/5 * * * *"]
+
+[[durable_objects.bindings]]
+name = "COORDINATOR"
+class_name = "ReleaseCoordinator"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["ReleaseCoordinator"]
+
+[observability]
+enabled = true

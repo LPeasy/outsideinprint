@@ -3,7 +3,8 @@
 param(
   [string]$SiteDir = (Join-Path (Split-Path -Parent $PSScriptRoot) 'public'),
   [switch]$SourceOnly,
-  [string]$Clock = $env:OIP_BUILD_CLOCK_UTC
+  [string]$Clock = $env:OIP_BUILD_CLOCK_UTC,
+  [string]$PublishedInventoryPath = $env:OIP_PUBLISHED_INVENTORY_PATH
 )
 
 Set-StrictMode -Version Latest
@@ -30,18 +31,26 @@ function Read-RequiredText {
   Get-Content -LiteralPath $path -Raw -Encoding utf8
 }
 
-function Get-ExpectedShopFeedLinks {
+function Get-ExpectedShopFeedEntries {
   param([Parameter(Mandatory)][DateTimeOffset]$ValidationClock)
 
-  $links = @(
-    'https://outsideinprint.org/shop/2045/',
-    'https://outsideinprint.org/shop/pending/',
-    'https://outsideinprint.org/shop/the-american-nightmare-keep-dreaming-kid/'
-  )
-  if ($ValidationClock -ge [DateTimeOffset]'2026-10-27T09:00:00-04:00') {
-    $links += 'https://outsideinprint.org/shop/fifty-years-of-magic/'
+  $temporaryInventory = $false
+  if (-not $PublishedInventoryPath) {
+    . (Join-Path $PSScriptRoot 'helpers/public_output_common.ps1')
+    $hugo = Resolve-PinnedHugo -RepoRoot $repoRoot
+    $config = if ($env:OIP_HUGO_CONFIG) { $env:OIP_HUGO_CONFIG } else { 'hugo.toml' }
+    $rows = & $hugo.Command list published --source $repoRoot --config $config --clock $ValidationClock.ToString('o')
+    if ($LASTEXITCODE -ne 0) { throw 'Hugo feed inventory failed.' }
+    $PublishedInventoryPath = [IO.Path]::GetTempFileName()
+    $temporaryInventory = $true
+    ConvertTo-Json -InputObject @($rows | ConvertFrom-Csv) -Depth 10 | Set-Content -LiteralPath $PublishedInventoryPath -Encoding utf8
   }
-  return @($links | Sort-Object)
+  try {
+    $json = & node (Join-Path $repoRoot 'scripts/ci/shop_feed_inventory.mjs') $PublishedInventoryPath $ValidationClock.ToString('o')
+    if ($LASTEXITCODE -ne 0) { throw 'Expected shop feed inventory failed.' }
+    return @($json | ConvertFrom-Json)
+  }
+  finally { if ($temporaryInventory) { Remove-Item -LiteralPath $PublishedInventoryPath } }
 }
 
 $wrapperModes = [ordered]@{
@@ -263,7 +272,8 @@ $expectedAlmanackLinks = @(
 Assert-True ($expectedAlmanackLinks.Count -gt 0) 'Production sitemap must contain published Almanack issues.'
 $almanackFeed = Read-Feed 'almanack/index.xml' 'https://outsideinprint.org/almanack/index.xml' 'https://outsideinprint.org/collections/bobs-almanack/' $expectedAlmanackLinks.Count
 Assert-True ((@($almanackFeed.Links | Sort-Object) -join "`n") -ceq ($expectedAlmanackLinks -join "`n")) 'Almanack feed must contain every published issue in the production sitemap exactly once.'
-$expectedShopLinks = @(Get-ExpectedShopFeedLinks -ValidationClock $validationClock)
+$expectedShopEntries = @(Get-ExpectedShopFeedEntries -ValidationClock $validationClock)
+$expectedShopLinks = @($expectedShopEntries | ForEach-Object { $_.link } | Sort-Object)
 $shopFeed = Read-Feed 'shop/index.xml' 'https://outsideinprint.org/shop/index.xml' 'https://outsideinprint.org/shop/' $expectedShopLinks.Count
 
 $archiveHtml = Get-Content -LiteralPath (Join-Path $siteRoot 'archive/index.html') -Raw -Encoding utf8
@@ -286,6 +296,10 @@ Assert-True ((@($rootAlmanackTitles | Select-Object -Unique)).Count -eq $rootAlm
 Assert-True ((@($rootAlmanackTitles | Where-Object { $_ -notmatch '^Bob''s Almanack — [A-Z][a-z]+ \d{1,2}, \d{4}$' })).Count -eq 0) 'Root-feed Almanack titles must carry their issue dates.'
 
 Assert-True ((@($shopFeed.Links | Sort-Object) -join "`n") -ceq ($expectedShopLinks -join "`n")) 'Shop feed must contain exactly the release-eligible products with live numeric offers.'
+for ($index = 0; $index -lt $expectedShopEntries.Count; $index++) {
+  $entry = $expectedShopEntries[$index]
+  Assert-True ($shopFeed.Links[$index] -ceq $entry.link -and $shopFeed.Titles[$index] -ceq $entry.title -and $shopFeed.Dates[$index] -eq [DateTimeOffset]$entry.date) 'Shop feed order, title and date must match the published source inventory and live catalog.'
+}
 $pendingFeedIndex = [array]::IndexOf($shopFeed.Links, 'https://outsideinprint.org/shop/pending/')
 Assert-True ($shopFeed.Titles[$pendingFeedIndex] -ceq 'PENDING: A Novel' -and $shopFeed.Dates[$pendingFeedIndex] -eq [DateTimeOffset]'2026-10-09T00:00:00-04:00') 'PENDING feed metadata must retain its full title and approved release date.'
 if ($expectedShopLinks -contains 'https://outsideinprint.org/shop/fifty-years-of-magic/') {

@@ -810,6 +810,9 @@ $selectionInventoryArgs = @('list', 'published', '--source', $repoRoot, '--confi
 if ($Clock) { $selectionInventoryArgs += @('--clock', $Clock) }
 $publishedInventory = & $selectionHugo.Command @selectionInventoryArgs
 if ($LASTEXITCODE -ne 0) { throw 'Hugo published inventory failed during Gallery and homepage selection validation.' }
+if ($env:OIP_PUBLISHED_INVENTORY_PATH) {
+  ConvertTo-Json -InputObject @($publishedInventory | ConvertFrom-Csv) -Depth 10 | Set-Content -LiteralPath $env:OIP_PUBLISHED_INVENTORY_PATH -Encoding utf8
+}
 $automaticGalleryEntries = @(Get-AutomaticArticleCartoonEntries -RepoRoot $repoRoot -Manifest $imageManifest -PublishedInventory @($publishedInventory | ConvertFrom-Csv))
 $currentCartoon = Get-PublicCurrentCartoonEntry -RepoRoot $repoRoot -AutomaticEntries $automaticGalleryEntries
 $currentCartoonSlug = if ($null -ne $currentCartoon) { [string]$currentCartoon.slug } else { '' }

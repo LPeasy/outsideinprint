@@ -172,6 +172,12 @@ export function validateRegistry(value) {
 }
 
 export const registry = validateRegistry(JSON.parse(fs.readFileSync(new URL("./scheduled-releases.json", import.meta.url), "utf8")));
+export function validateDispatcherConfig(value) {
+  fields(value, ["schemaVersion", "mode"], "dispatcher config");
+  require(value.schemaVersion === 1 && ["github", "cloudflare"].includes(value.mode), "Invalid release dispatcher mode.");
+  return value;
+}
+export const dispatcherConfig = validateDispatcherConfig(JSON.parse(fs.readFileSync(new URL("./release-dispatcher.json", import.meta.url), "utf8")));
 
 function maintenanceCron(release) {
   if (release.releaseAt.slice(11, 16) !== "00:17") return null;
@@ -201,7 +207,10 @@ function scheduleGroups({ registry: planned = registry, disneyPlan = releasePlan
   }));
 }
 
-export function scheduledCrons(options) { return scheduleGroups(options).map(group => group.cron); }
+export function scheduledCrons(options) {
+  const config = validateDispatcherConfig(options?.dispatcherConfig ?? dispatcherConfig);
+  return config.mode === "cloudflare" ? [] : scheduleGroups(options).map(group => group.cron);
+}
 
 function boundedSelection(result) {
   require(result.generic.length <= 64, "Selected release batch cannot exceed 64 IDs.");
@@ -218,6 +227,9 @@ export function selectScheduledReleases(schedule, clock, options) {
       maintenanceCron({ releaseAt: scheduledAt }) === schedule && now >= instant(scheduledAt) && now < instant(release.endsAt));
     return boundedSelection({ timed: false, generic: planned.releases.filter(due), disney: disneyPlan.releases.filter(due) });
   }
+  // A delayed native event from before cutover must not create a second
+  // per-release build after Cloudflare has become the clock.
+  if (schedule && (options?.dispatcherConfig ?? dispatcherConfig).mode === "cloudflare") return { timed: true, generic: [], disney: [] };
   const group = scheduleGroups(options).find(item => item.cron === schedule);
   if (!group) return { timed: false, generic: [], disney: [] };
   const now = Date.parse(clock);
@@ -285,7 +297,9 @@ export function prepareScheduledRelease(spec, { readGit = readIndex, clock = new
 }
 
 export function renderScheduleBlock(options) {
-  return [BEGIN, "    # Generated UTC instants; absolute registry windows prevent later-year releases.",
+  const cloud = (options?.dispatcherConfig ?? dispatcherConfig).mode === "cloudflare";
+  return [BEGIN, cloud ? "    # Cloudflare dispatches approved registry releases; maintenance crons remain above." :
+    "    # Generated UTC instants; absolute registry windows prevent later-year releases.",
     ...scheduledCrons(options).flatMap(cron => ["    - cron: " + cron, "      timezone: UTC"]), END].join("\n");
 }
 

@@ -1,7 +1,8 @@
-# GitHub-hosted scheduled publication
+# Cloud-triggered scheduled publication
 
-GitHub Actions is the default release clock for owner-authorized future OIP web
-publications. The local computer and Codex need not be online. Each format keeps
+Cloudflare supplies the independent release clock; GitHub Actions owns every
+build, gate, deployment and canonical verification. The local computer and Codex
+need not be online. Each format keeps
 its own editorial, artwork, staging, and approval requirements. This convention
 adds a release registration to the same reviewed publication PR; it does not
 authorize content, send email, or replace the dedicated publisher.
@@ -28,9 +29,10 @@ authorize content, send email, or replace the dedicated publisher.
    .\tools\bin\generated\node.cmd scripts/ci/scheduled_releases.mjs --check
    ```
 
-5. The helper changes only `scripts/ci/scheduled-releases.json` and the marked
-   generated schedule block in `.github/workflows/deploy.yml`. Review and stage
-   those two paths alongside the already validated content allowlist. Do not
+5. The helper maintains `scripts/ci/scheduled-releases.json` and checks the marked
+   schedule block in `.github/workflows/deploy.yml`. In Cloudflare mode the block
+   has no per-release cron entries, so an ordinary new schedule changes only the
+   registry. Review the actual changed paths alongside the validated content allowlist. Do not
    loosen a dedicated publisher's content-only validator to accept workflow files.
    Re-register if an approved source changes before merge.
 6. Follow the checked-PR, reviewed-diff, owner-authorized auto-merge flow and
@@ -40,9 +42,14 @@ authorize content, send email, or replace the dedicated publisher.
    dormancy checks. Record the actual merged queue SHA, registration ID, workflow,
    Eastern/UTC times, source hashes, and checks in the package as `SCHEDULED / QUEUED`.
 
-The registry starts empty. The existing two Disney releases remain in
+The existing two Disney releases remain in
 `scripts/ci/disney-releases.json` with their original bindings and live verifier;
-the generated trigger block includes both registries.
+the legacy verifier retains their historical bindings and receipts. New releases
+use the generic registry. `scripts/ci/release-dispatcher.json` controls the staged
+cutover: `github` retains generated timers until the Worker canary passes;
+`cloudflare` retires those timers while preserving daily/Monday maintenance.
+Only call a queue ready when the configured dispatcher is deployed, enabled,
+and has a verified canary. See the [operator runbook](../workers/oip-release-dispatcher/README.md).
 
 ## Registration fields
 
@@ -87,7 +94,8 @@ The helper fills missing hashes and image dimensions from the staged index.
   the original publication eligibility and reuses the same source bindings and
   public checks. Each trigger checks its own absolute start and the release's
   end, so a later-year cron cannot rebuild the site. This is a requested extra
-  run, not an automatic retry of a failed deployment; GitHub timing delays apply.
+  run, not an automatic retry of a failed deployment. It receives its own durable
+  operation record; do not use repeated rebuilds to compensate for a failed check.
 - `bindings` records SHA-256 hashes. A `file` hashes the exact Git blob. A `gallery`
   hashes only the uniquely selected Gallery row, using sorted-key canonical JSON;
   unrelated Gallery additions do not invalidate it. A Gallery-only release can
@@ -124,14 +132,34 @@ not claim that a declared link-presence check proves link order or uniqueness.
 
 ## Trigger and verification behavior
 
-The helper converts each absolute Eastern release to a UTC cron and groups
-matching minute/hour/month dates. The classifier checks the actual instant
-against the absolute window, preventing early and later-year timed dispatches.
-Multiple due registrations share one production build. The two existing 12:17 AM
-Eastern maintenance schedules and Monday full checks remain unchanged; a release
-at 12:17 AM reuses the appropriate maintenance trigger.
+The Worker checks current main's registry every five minutes. It uses the actual
+instant and `[releaseAt, endsAt)` window, including overdue eligible work. It
+writes durable intent before dispatching the existing workflow on current main
+with `full_checks:false`, a unique request ID, the observed main SHA, and a
+validated JSON array of registered `release_ids`. Multiple due registrations
+share one build. The two 12:17 AM Eastern maintenance schedules and Monday full
+checks remain unchanged. During initial `github` mode, the helper retains the old
+UTC per-release crons until the separate checked cutover.
 
-GitHub schedules can be delayed or dropped. The requested time is a start time,
+API requests enter the same source-bound live verification path as timed runs.
+A `release_probe` validates admission and source bindings with no site build or
+Pages deployment. The `release-dispatch` artifact binds the nonce, exact main SHA,
+actual check time and release fingerprints. A stale expected SHA is superseded
+without building; the dispatcher can follow newer current main. Neither a probe
+nor admission alone proves publication.
+
+One repository Durable Object suppresses duplicate ticks, completed operations
+and in-flight work. An uncertain dispatch is reconciled by its nonce, never
+blindly resent. Real workflow or live-check failures remain blocked. Read-only
+transient observations can resume without dispatching another build. Completed
+operations require the original canonical commit/time receipt, both main guards,
+successful route/SEO checks and passed per-release results. Existing verified
+releases can be reconciled from actual operator-supplied format evidence and
+GitHub's immutable production artifacts; this provenance remains explicit.
+
+GitHub's native schedules can be delayed or dropped; they are no longer the
+per-release clock after cutover. Cloudflare polling and GitHub queues still make
+the requested time a start time,
 not a guarantee of minute-exact availability or exactly-once execution. Expiring
 a verification window does not withdraw content: normal pushes and daily builds
 can publish any already eligible source. Do not advance Hugo's clock, enable
@@ -168,7 +196,7 @@ Do not edit manuscript history or infer email delivery. This later bookkeeping
 is not a prerequisite for public release.
 
 Do not create a local release heartbeat by default. Disable an equivalent local
-timer only after its GitHub replacement has merged and been verified. An owner
+timer only after its cloud replacement has merged and been verified. An owner
 may explicitly request a local exception; record the reason and dependency. Local
 preparation/review automations and separately authorized email delivery are not
 changed by this web-publication default.
