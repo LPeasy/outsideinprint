@@ -151,7 +151,11 @@ test("browser containers are conditional and actual publication gates remain act
   assert.equal(browserSteps.length, 5);
   for (const step of browserSteps) assert.match(step.if, /outputs.browser/);
   const preparation = browserSteps.find(step => step.run.includes("--prepare"));
-  assert.match(preparation.run, /npm ci --ignore-scripts --no-audit --no-fund/);
+  const parsers = steps("site").find(step => step.name === "Install source parsers");
+  assert.equal(parsers.if, undefined);
+  assert.equal(parsers.run, "npm ci --ignore-scripts --no-audit --no-fund");
+  assert.equal(steps("site").filter(step => step.run?.includes("npm ci")).length, 1);
+  assert.doesNotMatch(preparation.run, /npm ci/);
   assert.ok(steps("site").indexOf(preparation) > steps("site").findIndex(step => step.run?.includes("hugo --gc")));
   assert.ok(browserSteps.every(step => step === preparation || steps("site").indexOf(step) > steps("site").indexOf(preparation)));
   assert.equal(jobs.site.container, undefined, "Hugo and output gates retain their existing host environment.");

@@ -220,6 +220,8 @@ jobs:
         with:
           node-version: 24.21.0
           package-manager-cache: false
+      - name: Install source parsers
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Setup Hugo (extended)
         shell: bash
         run: |
@@ -414,7 +416,6 @@ jobs:
         run: node --test tests/homepage_selection_behavior.test.mjs tests/gallery_reading_behavior.test.mjs tests/collection_reading_path_behavior.test.mjs
       - name: Prepare browser test environment
         run: |
-          npm ci --ignore-scripts --no-audit --no-fund
           node scripts/ci/run_browser_tests.mjs --prepare
         if: ${{ needs.classify.outputs.browser == 'true' }}
       - name: Test Mobile Navigation
