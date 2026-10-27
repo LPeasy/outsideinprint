@@ -1,7 +1,7 @@
 ---
 title: "Privacy Policy"
 description: "How Outside In Print handles information connected to site use, Studio inquiry emails, email subscriptions, Steam storefront visits, orders, EPUB delivery, and reader support."
-effective_date: "October 20, 2026"
+effective_date: "October 27, 2026"
 type: "commerce-policy"
 draft: false
 show_citation: false
@@ -13,7 +13,11 @@ When you check out through Square, Square collects the payment and contact infor
 
 For an EPUB order, the delivery service processes the email address supplied to Square long enough to send the secure download message. It stores limited fulfillment records, such as the Square order identifier, product SKU, delivery status, email hash, download-token hash, expiration, and download count.
 
-When you use a standalone Bob's Almanack signup form, your browser sends the email address, the configured newsletter tag, and the embedded-form signup fields directly to Buttondown. Buttondown records subscription and confirmation details and may receive signup metadata such as the time, IP address, browser or device information, and referring page. It also processes delivery information such as successful deliveries, bounces, complaints, and unsubscribes. If engagement measurement is enabled in Outside In Print's Buttondown settings, Buttondown may also process message-open or link-click information and associated email-client, browser, device, IP-address, or referrer metadata.
+When you use a standalone Outside In Print newsletter signup form, your browser sends the email address, the configured newsletter tag, and the embedded-form signup fields directly to Buttondown. Buttondown records subscription and confirmation details and may receive signup metadata such as the time, IP address, browser or device information, and referring page. It also processes delivery information such as successful deliveries, bounces, complaints, and unsubscribes. If engagement measurement is enabled in Outside In Print's Buttondown settings, Buttondown may also process message-open or link-click information and associated email-client, browser, device, IP-address, or referrer metadata.
+
+After a new reader confirms, Outside In Print passes their email address to Resend for three introductory emails, sent after confirmation and two and four days later. These emails introduce the writing and the optional Pressroom membership. Resend processes contact, delivery, bounce, complaint, unsubscribe and any enabled engagement information. A Cloudflare service keeps limited enrollment records to prevent repeated welcome sequences. The introductory emails and Saturday newsletter have separate unsubscribe controls.
+
+When you request the newsletter through a Facebook or Instagram lead form, Meta collects the email and consent response you provide under its own privacy policy. Outside In Print retrieves the response and sends a new eligible email address to Buttondown for confirmation. Submitting the Meta form alone does not activate the subscription. Outside In Print keeps limited lead, form, ad and campaign identifiers, the consent version, timestamps, processing status, a keyed email hash and any resulting subscriber identifier to prevent duplicates and measure confirmed subscriptions. The transfer service does not store the raw email address in its ledger or send it to site analytics. Buttondown and Resend retain their own subscriber and contact records as described above.
 
 Before EPUB checkout, you may separately choose to receive Bob's Almanack, new-publication notices, both, or neither. These choices are optional and are not required to buy. If you select either choice, Outside In Print sends the email address, the selected preference tags, and the embedded-form signup fields to Buttondown, which sends a confirmation message and manages subscription preferences and unsubscribes. The same delivery and, when enabled, engagement information described above may apply. Transactional EPUB delivery through Resend remains separate from these optional emails.
 
@@ -48,6 +52,7 @@ Information is used to:
 - process, fulfill, and support transactions;
 - review and respond to Studio inquiries, screen for conflicts, and prepare a possible written scope;
 - deliver EPUBs and control download links;
+- deliver requested newsletters and introductory emails, maintain consent records, prevent duplicate signups, and measure which ads bring confirmed subscribers;
 - calculate, reconcile, file, and document taxes;
 - maintain accounting records;
 - detect duplicate, fraudulent, disputed, or refunded transactions; and
@@ -55,7 +60,7 @@ Information is used to:
 
 ## Service providers and disclosure
 
-Square processes checkout, payments, subscriptions, receipts, refunds, and related transaction records. Cloudflare hosts the secure delivery service and its limited fulfillment data. Resend sends EPUB delivery messages. Buttondown receives and manages optional Bob's Almanack and new-publication subscriptions, including the subscription, delivery, and enabled engagement information described above. GitHub Pages hosts the public website, and GoatCounter provides aggregate site analytics. Google provides optional purchase measurement when you allow it; linked Google Merchant Center reports may use that measurement.
+Square processes checkout, payments, subscriptions, receipts, refunds, and related transaction records. Cloudflare hosts the secure delivery, newsletter lead-transfer and welcome services and their limited operational records. Resend sends EPUB delivery messages and the three newsletter introductory emails. Buttondown receives and manages optional newsletter and new-publication subscriptions, including the subscription, delivery, and enabled engagement information described above. Meta provides Facebook and Instagram lead forms and advertising reports. GitHub Pages hosts the public website, and GoatCounter provides aggregate site analytics. Google provides optional purchase measurement when you allow it; linked Google Merchant Center reports may use that measurement.
 
 The Games pages link to Steam storefront pages and may load a Steam store widget. Following a Steam link or loading the widget sends a request to Valve's Steam services, which receives the technical information ordinarily sent with a web request. Steam may also set or read cookies according to your Steam settings and Valve's own privacy practices.
 
@@ -71,7 +76,7 @@ Outside In Print limits access to commerce records and keeps payment credentials
 
 ## Your choices
 
-You may ask about, correct, or request deletion of information held directly by Outside In Print, subject to transaction, tax, fraud-prevention, and legal retention duties. You can unsubscribe through the link in any Buttondown message or contact Outside In Print to change which optional messages you receive. Unsubscribing stops the selected emails but is not the same as deleting subscription records. To request deletion, contact Outside In Print; Buttondown, Square, and other service providers also maintain their own privacy processes for information they control.
+You may ask about, correct, or request deletion of information held directly by Outside In Print, subject to transaction, tax, fraud-prevention, and legal retention duties. The unsubscribe link in a Buttondown newsletter stops that newsletter; the link in a Resend introductory email stops the introductory series. These controls are separate. You can contact Outside In Print to stop both or change which optional messages you receive. Unsubscribing stops the selected emails but is not the same as deleting subscription records. To request deletion, contact Outside In Print; Meta, Buttondown, Resend, Square, and other service providers also maintain their own privacy processes for information they control.
 
 ## Contact
 

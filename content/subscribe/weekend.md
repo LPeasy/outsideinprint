@@ -1,12 +1,12 @@
 ---
 title: "A few quiet minutes on Saturday."
-description: "Short reflections from Outside In Print. Read a sample, then get Bob's Almanack each Saturday (free)."
+description: "Short reflections from Outside In Print. Read a sample, then get the free Outside In Print newsletter each Saturday."
 draft: false
 segment: "weekend"
 author_id: "robert-v-ussley"
 image: "editorial/both-hands"
 art_page: "/essays/after-the-cup-falls/"
-intro: "Read a short reflection. Take a moment with the words you use each day. Bob's Almanack brings new writing and pictures from Outside In Print to your inbox each Saturday (free)."
+intro: "Read a short reflection. Take a moment with the words you use each day. The free Outside In Print newsletter brings new writing and pictures to your inbox each Saturday."
 samples:
   - title: "The Things We Say"
     url: "/collections/the-things-we-say/"

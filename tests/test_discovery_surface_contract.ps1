@@ -341,6 +341,8 @@ foreach ($requiredSnippet in @(
   'One thoughtful letter each week.',
   'Every Saturday: new writing, one revealing number, and a thought worth keeping.',
   'No spam ever. Unsubscribe anytime.',
+  'After you confirm your email, you will also receive three short introductory emails, including an optional Pressroom invitation.',
+  'The introductory series and Saturday newsletter have separate unsubscribe links.',
   'Join the newsletter',
   'class="home-reader-banner__form"',
   'action="https://buttondown.com/api/emails/embed-subscribe/{{ $buttondownUsername }}"',

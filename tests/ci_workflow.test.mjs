@@ -21,6 +21,16 @@ test("welcome bridge fixtures are included in the selectable worker gate", () =>
   assert.equal(step.run, "node --test workers/oip-welcome/test/*.test.mjs");
 });
 
+test("Meta lead fixtures are included in the selectable worker gate without deployment", () => {
+  assert.equal(jobs.classify.outputs.worker_meta_leads, "${{ steps.selection.outputs.worker_meta_leads }}");
+  assert.ok(action("worker", "actions/checkout").with["sparse-checkout"].includes("workers/oip-meta-leads"));
+  const step = steps("worker").find(step => step.run?.includes("workers/oip-meta-leads/test/"));
+  assert.ok(step);
+  assert.equal(step.if, "${{ needs.classify.outputs.worker_meta_leads == 'true' }}");
+  assert.equal(step.run, "node --test workers/oip-meta-leads/test/*.test.mjs");
+  assert.doesNotMatch(commands("worker"), /wrangler.*deploy|cloudflare.*deploy/i);
+});
+
 test("release-ready always inspects all selectable prerequisite jobs", () => {
   assert.equal(jobs["release-ready"].name, "release-ready");
   assert.match(jobs["release-ready"].if, /always\(\)/);
@@ -149,8 +159,8 @@ test("browser and worker families select their own steps while preserving aggreg
     assert.ok(step.if.includes("needs.classify.outputs." + family + " == 'true'"));
     assert.equal(jobs.classify.outputs[family], "${{ steps.selection.outputs." + family + " }}");
   }
-  for (const kind of ["commerce", "bob"]) {
-    const family = "worker_" + kind;
+  for (const kind of ["commerce", "bob", "welcome", "meta-leads"]) {
+    const family = "worker_" + kind.replaceAll("-", "_");
     assert.equal(jobs.classify.outputs[family], "${{ steps.selection.outputs." + family + " }}");
     for (const step of steps("worker").filter(step => step.run?.includes("workers/oip-" + kind))) {
       assert.equal(step.if, "${{ needs.classify.outputs." + family + " == 'true' }}");

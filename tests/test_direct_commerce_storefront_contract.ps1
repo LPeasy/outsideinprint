@@ -238,14 +238,14 @@ foreach ($requiredConfig in @(
   'publication_tag = "new-publications"',
   'cadence = "Every Saturday"',
   'title = "The weekly newsletter"',
-  'contents = "New essays, original visuals, and selected archive work from Outside In Print. One thoughtful email each week."',
-  'price_promise = "Free. No spam ever. Unsubscribe anytime."',
+  'contents = "New essays, original pictures, and selected archive work from Outside In Print. Free each Saturday, plus three short introductory emails after you confirm."',
+  'price_promise = "Free. Each email series has an unsubscribe link."',
   'button_label = "Join the newsletter"',
   'prompt_label = "Join the weekly Outside In Print newsletter."',
   'checkout_label = "Send me the weekly Outside In Print newsletter. Free. No spam ever."',
   'sample_url = "/collections/bobs-almanack/"',
   'sample_label = "Read the latest issue"',
-  'privacy_promise = "Your email goes to Buttondown to deliver and manage the Outside In Print newsletter. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime."',
+  'privacy_promise = "Buttondown manages the Saturday newsletter. Resend delivers three introductory emails, including an optional Pressroom invitation. The two email series have separate unsubscribe links. Outside In Print does not sell or rent subscriber information."',
   'privacy_url = "/privacy/"',
   'privacy_label = "Privacy details"'
 )) {
@@ -897,10 +897,10 @@ if ($shopOutput -match 'data-direct-offer-status=(?:"|'')?disabled(?:"|'')?') {
 }
 foreach ($requiredNewsletterText in @(
   'Send me the weekly Outside In Print newsletter. Free. No spam ever.',
-  'New essays, original visuals, and selected archive work from Outside In Print. One thoughtful email each week.',
+  'New essays, original pictures, and selected archive work from Outside In Print. Free each Saturday, plus three short introductory emails after you confirm.',
   'Read the latest issue',
   'Privacy details',
-  'Your email goes to Buttondown to deliver and manage the Outside In Print newsletter. Outside In Print does not sell or rent subscriber information. Unsubscribe anytime.',
+  'Buttondown manages the Saturday newsletter. Resend delivers three introductory emails, including an optional Pressroom invitation. The two email series have separate unsubscribe links. Outside In Print does not sell or rent subscriber information.',
   'Optional. Not required to buy.'
 )) {
   Assert-Contains -Text ([Net.WebUtility]::HtmlDecode($shopOutput)) -Expected $requiredNewsletterText -Context 'Built bookstore newsletter opt-in'
@@ -954,12 +954,17 @@ foreach ($surface in $shopSurfaceExpectations) {
 $privacyOutput = ([Net.WebUtility]::HtmlDecode([string]$output['privacy/index.html'])).Replace([char]0x2019, [char]0x27)
 foreach ($requiredPrivacyText in @(
   "Effective $privacyEffectiveDate",
-  'standalone Bob''s Almanack signup form',
+  'standalone Outside In Print newsletter signup form',
   'IP address, browser or device information, and referring page',
   'selected preference tags',
   'message-open or link-click information',
   'email-client, browser, device, IP-address, or referrer metadata',
   'Outside In Print does not sell or rent personal information.',
+  'three introductory emails, sent after confirmation and two and four days later.',
+  'Meta collects the email and consent response you provide under its own privacy policy.',
+  'Submitting the Meta form alone does not activate the subscription.',
+  'The transfer service does not store the raw email address in its ledger or send it to site analytics.',
+  'The unsubscribe link in a Buttondown newsletter stops that newsletter; the link in a Resend introductory email stops the introductory series.',
   'Unsubscribing stops the selected emails but is not the same as deleting subscription records.'
 )) {
   Assert-Contains -Text $privacyOutput -Expected $requiredPrivacyText -Context 'Built privacy policy'
