@@ -6,7 +6,7 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { classifyPaths, isGeneratedScheduleOnlyChange, selectChecks, windowsFixturePaths, dispatcherConfigAtRef } from "../scripts/ci/classify_changes.mjs";
-import { registry, syncScheduleBlock } from "../scripts/ci/scheduled_releases.mjs";
+import { registry, syncScheduleBlock, dispatcherConfig } from "../scripts/ci/scheduled_releases.mjs";
 
 test("the pre-migration GitHub clock remains a valid comparison base; invalid present configs fail", () => {
   assert.deepEqual(dispatcherConfigAtRef("old-main", () => ""), { schemaVersion: 1, mode: "github" });
@@ -133,7 +133,11 @@ test("only matching generated schedule changes can skip system suites", () => {
     generated.replace("timeout-minutes: 35", "timeout-minutes: 36"),
     generated.replace("node scripts/ci/release_gate.mjs", "echo skipped"),
   ]) assert.equal(isGeneratedScheduleOnlyChange(workflow, edit, { registry }, { registry: changedRegistry }), false);
-  assert.throws(() => isGeneratedScheduleOnlyChange(workflow, generated, { registry }, { registry }));
+  // Cloud mode has no per-release cron bytes; registry/source validation is a
+  // separate mandatory gate. GitHub mode still binds the generated timer set.
+  const mismatched = () => isGeneratedScheduleOnlyChange(workflow, generated, { registry }, { registry });
+  if (dispatcherConfig.mode === "github") assert.throws(mismatched);
+  else assert.doesNotThrow(mismatched);
   assert.throws(() => isGeneratedScheduleOnlyChange(workflow, generated.replace("# END GENERATED SCHEDULED RELEASES", "# missing"), { registry }, { registry: changedRegistry }));
   assert.throws(() => isGeneratedScheduleOnlyChange(workflow, generated + "\non: [invalid\n", { registry }, { registry: changedRegistry }));
 });
@@ -200,7 +204,7 @@ test("Git schedule comparison exempts only generated triggers and fails closed f
     assert.equal(select().browser, "false");
     write(".github/workflows/deploy.yml", updated.replace("contents: read", "contents: write"));
     assert.equal(select().browser, "true");
-    write(".github/workflows/deploy.yml", updated);
+    write(".github/workflows/deploy.yml", updated + "\n# Registration comparison fixture\n");
     write("scripts/ci/scheduled-releases.json", "malformed");
     assert.equal(select().full, "true");
     write("scripts/ci/scheduled-releases.json", JSON.stringify(updatedRegistry));

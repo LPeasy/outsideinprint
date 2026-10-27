@@ -23,6 +23,9 @@ the only dispatch target is `.github/workflows/deploy.yml` on `main`.
    admission artifact, successful `release-ready`, and skipped site/deploy jobs.
    Read `/admin/state` for the exact canary run and result. This does not mark
    a real release complete or build the website.
+   If a diagnosed observer defect blocked a completed probe, repair the observer
+   and POST its existing `requestId` to `/admin/observe-probe`. This only reads
+   the recorded run; it cannot dispatch another workflow or recover a real release.
 4. Initial activation starts the new clock. Earlier release operations keep
    their existing publication records and are not replayed or reverified. Confirm
    activation precedes the next queued release. Pausing or redeploying preserves
