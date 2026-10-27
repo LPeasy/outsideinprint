@@ -37,7 +37,10 @@ function forms(env) {
 function ownedTest(env, now) {
   if (!env.OWNED_TEST_JSON) return null;
   const row = JSON.parse(env.OWNED_TEST_JSON);
-  if (!row || row.pageId !== env.META_PAGE_ID || !META_ID.test(row.leadId) || !META_ID.test(row.formId)
+  const probe = row?.allowNewLead === true && row.dispatchAllowed === false;
+  if (!row || row.pageId !== env.META_PAGE_ID || (!META_ID.test(row.leadId) && !probe) || !META_ID.test(row.formId)
+    || ![undefined, false, true].includes(row.allowNewLead) || ![undefined, false, true].includes(row.dispatchAllowed)
+    || (row.allowNewLead === true && !probe)
     || !validDate(row.createdAt) || !validDate(row.expiresAt)
     || Date.parse(row.expiresAt) <= Date.parse(row.createdAt)
     || Date.parse(row.expiresAt) > Date.parse(row.createdAt) + 24 * HOUR
@@ -48,8 +51,11 @@ function ownedTest(env, now) {
 }
 
 function testMatches(row, test) {
-  return Boolean(test && row.ad_id === OWNED_TEST_AD && row.lead_id === test.leadId && row.page_id === test.pageId
-    && row.form_id === test.formId && row.created_at === test.createdAt && row.campaign_code === 'oip-owned-test'
+  const identity = test && (test.allowNewLead === true
+    ? Date.parse(row.created_at) >= Date.parse(test.createdAt) && Date.parse(row.created_at) < Date.parse(test.expiresAt)
+    : row.lead_id === test.leadId && row.created_at === test.createdAt);
+  return Boolean(identity && row.ad_id === OWNED_TEST_AD && row.page_id === test.pageId
+    && row.form_id === test.formId && row.campaign_code === 'oip-owned-test'
     && row.consent_version === 'owned-test-v1' && row.consent_key === test.consentCheckboxKey
     && row.consent_value === JSON.stringify(test.consentCheckedValue));
 }
@@ -117,12 +123,15 @@ function normalizeNotice(value, pageId, registry, test, now) {
   if (!value || !META_ID.test(value.leadgen_id) || value.page_id !== pageId || !META_ID.test(value.form_id)
     || !Number.isSafeInteger(value.created_time)) throw new Error('invalid_notice');
   const created = value.created_time * 1000;
-  if (test && value.leadgen_id === test.leadId) {
-    if (value.form_id !== test.formId || created !== Date.parse(test.createdAt)
+  const adless = [undefined, null, 0, '0'].includes(value.ad_id);
+  if (test && (value.leadgen_id === test.leadId || (test.allowNewLead === true && adless))) {
+    const timeMatches = test.allowNewLead === true
+      ? created >= Date.parse(test.createdAt) && created < Date.parse(test.expiresAt) : created === Date.parse(test.createdAt);
+    if (value.form_id !== test.formId || !timeMatches
       || ![undefined, null, 0, '0'].includes(value.ad_id) || created > now + 300_000 || created < now - MAX_LEAD_AGE) throw new Error('unapproved_owned_test');
-    return { lead_id: test.leadId, page_id: pageId, form_id: test.formId, ad_id: OWNED_TEST_AD,
+    return { lead_id: value.leadgen_id, page_id: pageId, form_id: test.formId, ad_id: OWNED_TEST_AD,
       campaign_code: 'oip-owned-test', consent_version: 'owned-test-v1', consent_key: test.consentCheckboxKey,
-      consent_value: JSON.stringify(test.consentCheckedValue), created_at: test.createdAt };
+      consent_value: JSON.stringify(test.consentCheckedValue), created_at: iso(created) };
   }
   if (!META_ID.test(value.ad_id)) throw new Error('invalid_notice');
   const approved = registry.find(row => row.formId === value.form_id && row.adIds.includes(value.ad_id));
@@ -212,7 +221,18 @@ async function dispatch(row, email, env, fetcher) {
       body: JSON.stringify({ email_address: email, type: 'unactivated', tags: ['outside-in-print'],
         utm_campaign: row.campaign_code, utm_medium: row.ad_id === OWNED_TEST_AD ? 'owned_test' : 'paid_social', utm_source: 'meta' }),
     });
-    if (response.status >= 400 && response.status < 500 && response.status !== 408) return { state: 'rejected', code: `buttondown_http_${response.status}` };
+    if (response.status >= 400 && response.status < 500 && response.status !== 408) {
+      let code = `buttondown_http_${response.status}`;
+      if (response.status === 400) {
+        try {
+          const known = { subscriber_blocked: 'buttondown_firewall_blocked',
+            subscriber_suppressed: 'buttondown_subscriber_suppressed', subscriber_already_exists: 'buttondown_subscriber_already_exists' };
+          const value = (await response.json()).code;
+          if (Object.hasOwn(known, value)) code = known[value];
+        } catch {}
+      }
+      return { state: 'rejected', code };
+    }
     if (response.status !== 201) return { state: 'uncertain', code: 'buttondown_response_uncertain' };
     const created = await response.json();
     if (!SUBSCRIBER_ID.test(created.id || '') || created.type !== 'unactivated'
@@ -241,7 +261,11 @@ export async function processQueue(env, { fetcher = fetch, clock = Date.now } = 
       await env.DB.prepare("UPDATE meta_leads SET state = 'held', error_code = 'approval_removed_or_changed' WHERE lead_id = ? AND state = 'queued'").bind(row.lead_id).run();
       continue;
     }
-    const rate = await env.DB.prepare('SELECT COUNT(*) AS count FROM meta_leads WHERE attempted_at > ?').bind(iso(currentTime() - HOUR)).first();
+    const rateCutoff = iso(currentTime() - HOUR);
+    const rate = await env.DB.prepare(`SELECT
+      (SELECT COUNT(*) FROM meta_leads WHERE attempted_at > ?)
+      + (SELECT COUNT(*) FROM meta_owned_test_recoveries WHERE original_attempted_at > ?) AS count`)
+      .bind(rateCutoff, rateCutoff).first();
     if (rate.count >= 5) break;
     let value;
     try { value = await retrieve(row, env, fetcher); } catch (error) {
@@ -281,6 +305,10 @@ export async function processQueue(env, { fetcher = fetch, clock = Date.now } = 
       await env.DB.prepare("UPDATE meta_leads SET state = 'duplicate', error_code = 'existing_email_reservation' WHERE lead_id = ? AND state = 'queued'").bind(row.lead_id).run();
       continue;
     }
+    if (row.ad_id === OWNED_TEST_AD && ownedTest(env, currentTime())?.dispatchAllowed === false) {
+      await env.DB.prepare("UPDATE meta_leads SET state = 'held', error_code = 'owned_probe_has_no_prior_reservation' WHERE lead_id = ? AND state = 'queued'").bind(row.lead_id).run();
+      continue;
+    }
     // One atomic SQL statement both reserves the side effect and enforces the
     // rolling-hour limit, including concurrent scheduled invocations.
     const claimTime = currentTime();
@@ -290,8 +318,9 @@ export async function processQueue(env, { fetcher = fetch, clock = Date.now } = 
     }
     const claimed = await env.DB.prepare(`UPDATE meta_leads SET state = 'dispatching', attempted_at = ?, error_code = NULL
       WHERE lead_id = ? AND state = 'queued' AND email_key = ?
-      AND (SELECT COUNT(*) FROM meta_leads WHERE attempted_at > ?) < 5 RETURNING *`)
-      .bind(iso(claimTime), row.lead_id, digest, iso(claimTime - HOUR)).first();
+      AND ((SELECT COUNT(*) FROM meta_leads WHERE attempted_at > ?)
+        + (SELECT COUNT(*) FROM meta_owned_test_recoveries WHERE original_attempted_at > ?)) < 5 RETURNING *`)
+      .bind(iso(claimTime), row.lead_id, digest, iso(claimTime - HOUR), iso(claimTime - HOUR)).first();
     if (!claimed) continue;
     attempted++;
     const result = await dispatch(claimed, email, env, fetcher);
@@ -322,8 +351,9 @@ export async function handleRequest(request, env, { fetcher = fetch, clock = Dat
         const counts = Object.fromEntries(results.map(row => [row.state, row.count]));
         const failures = await env.DB.prepare("SELECT COUNT(*) AS count FROM meta_leads WHERE state = 'queued' AND error_code IS NOT NULL").first();
         const oldest = await env.DB.prepare("SELECT MIN(received_at) AS received_at FROM meta_leads WHERE state = 'queued'").first();
+        const recoveries = await env.DB.prepare('SELECT COUNT(*) AS count FROM meta_owned_test_recoveries').first();
         const age = oldest.received_at ? Math.max(0, Math.floor((clock() - Date.parse(oldest.received_at)) / 1000)) : null;
-        return json({ counts, queued_failures: failures.count, oldest_queued_age_seconds: age,
+        return json({ counts, queued_failures: failures.count, oldest_queued_age_seconds: age, owned_test_recovery_count: recoveries.count,
           review_required: failures.count > 0 || age > 900 || ['dispatching', 'uncertain', 'held', 'rejected'].some(state => counts[state] > 0), confirmed_subscribers: 'not_measured_here' });
       }
       if (url.pathname === '/admin/process' && request.method === 'POST') return json(await processQueue(env, { fetcher, clock }));

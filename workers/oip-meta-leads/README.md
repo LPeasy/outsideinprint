@@ -167,6 +167,28 @@ operator replay is a replay test, not evidence of an authentic Meta delivery.
 Do not infer notification retries from generic webhook documentation; retain
 actual provider-delivery evidence for the acceptance result.
 
+For a native delivery/deduplication probe after the first owner signup, the private
+contract may instead set `allowNewLead: true` and `dispatchAllowed: false`, omit
+`leadId`, and use `createdAt`/`expiresAt` as a short approved submission window.
+It still requires the exact Page/form, affirmative consent and owner-inbox HMAC.
+A new reference can only become a duplicate of the permanent email reservation;
+if no prior reservation exists it is held. This probe can never create a subscriber.
+
+Migration `0002_owned_test_recovery.sql` allows one **manual, reviewed correction**
+of a definitely rejected owner test. Before using it, verify the exact inbox is
+absent in Buttondown, diagnose `subscriber_blocked` from the saved provider response,
+and configure the documented trusted-source header. Only an `owned-test` row in
+`rejected`, with a 400/firewall code, unchanged email HMAC and no subscriber ID,
+can be requeued with `error_code = 'approved_owned_test_firewall_retry'` and the
+previous attempt/completion timestamps moved from the live row into the audit. The trigger
+atomically retains the original error/attempt/completion in an immutable audit and
+refuses a second recovery. It does not clear the email reservation. No endpoint or
+scheduled handler performs this transition. Paid and uncertain rows remain reserved.
+This is an explicit exception to one POST attempt for that reviewed owner test;
+the corrected attempt must still require confirmation and obey the five/hour cap,
+including the original attempt retained in the audit. The owner authorizes the
+test; the operator must review the actual failure before that correction.
+
 | Route | Behavior |
 | --- | --- |
 | `GET /health` | Non-sensitive switch/configuration booleans; no delivery assurance. |
