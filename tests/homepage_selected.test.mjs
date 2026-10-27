@@ -51,6 +51,8 @@ test("reader banner contains only owner-provided proof and the newsletter offer 
   assert.match(readerNewsletter, /One thoughtful letter each week\./);
   assert.match(readerNewsletter, /Every Saturday: new writing, one revealing number, and a thought worth keeping\./);
   assert.match(readerNewsletter, /No spam ever\. Unsubscribe anytime\./);
+  assert.match(readerNewsletter, /After you confirm your email, you will also receive three short introductory emails, including an optional Pressroom invitation\./);
+  assert.match(readerNewsletter, /The introductory series and Saturday newsletter have separate unsubscribe links\./);
   assert.match(readerNewsletter, /Join the newsletter/);
   assert.match(readerNewsletter, /eq \$provider "buttondown"/);
   assert.match(readerNewsletter, /data-analytics-event="newsletter_submit"/);

@@ -547,6 +547,8 @@ test("newsletter proposition is plain-language across signup and checkout surfac
   assert.match(homeV2FrontPage, /partial "home_reader_newsletter\.html"/);
   assert.match(homeReaderNewsletter, /One thoughtful letter each week\./);
   assert.match(homeReaderNewsletter, /No spam ever\. Unsubscribe anytime\./);
+  assert.match(homeReaderNewsletter, /After you confirm your email, you will also receive three short introductory emails, including an optional Pressroom invitation\./);
+  assert.match(homeReaderNewsletter, /The introductory series and Saturday newsletter have separate unsubscribe links\./);
   assert.match(homeReaderNewsletter, /data-analytics-source-slot="homepage_reader_banner"/);
   assert.doesNotMatch(homeV2FrontPage, /Bob(?:'|’)s Almanack|home-almanack/);
   assert.match(articleSingle, /"class" "newsletter-signup--article-exit"/);

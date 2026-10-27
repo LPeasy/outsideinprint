@@ -3387,7 +3387,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)home-reader-banner__signup.*?From the imprint.*?One thoughtful letter each week\..*?No spam ever\. Unsubscribe anytime\..*?data-analytics-event=(?:"newsletter_submit"|newsletter_submit).*?data-analytics-source-slot=(?:"homepage_reader_banner"|homepage_reader_banner).*?Join the newsletter'
+    Pattern = '(?s)home-reader-banner__signup.*?From the imprint.*?One thoughtful letter each week\..*?No spam ever\. Unsubscribe anytime\..*?After you confirm your email, you will also receive three short introductory emails, including an optional Pressroom invitation\..*?The introductory series and Saturday newsletter have separate unsubscribe links\..*?data-analytics-event=(?:"newsletter_submit"|newsletter_submit).*?data-analytics-source-slot=(?:"homepage_reader_banner"|homepage_reader_banner).*?Join the newsletter'
     Message = 'expected the homepage to retain the plain-language tracked newsletter signup below the reading surface'
   },
   @{
