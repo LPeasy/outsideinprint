@@ -166,6 +166,22 @@ test("browser containers are conditional and actual publication gates remain act
   assert.doesNotMatch(commands("worker"), /wrangler.*deploy|cloudflare.*deploy/i);
 });
 
+test("output checks have one root dependency install with or without browser fixtures", () => {
+  const siteSteps = steps("site");
+  const feedGate = siteSteps.findIndex(step => step.run?.includes("test_feed_policy_contract.ps1 -SiteDir"));
+  assert.ok(feedGate >= 0, "The rendered feed check must remain selected.");
+  const installs = siteSteps.filter(step => /npm ci --ignore-scripts --no-audit --no-fund/.test(step.run ?? ""));
+  for (const browser of [false, true]) {
+    const selected = installs.filter(step => {
+      const condition = step.if?.match(/needs\.classify\.outputs\.browser\s+(==|!=)\s+'true'/);
+      assert.ok(condition, "Root installs must declare their browser selection.");
+      return condition[1] === "==" ? browser : !browser;
+    });
+    assert.equal(selected.length, 1, `One dependency install is needed with browser=${browser}.`);
+    assert.ok(siteSteps.indexOf(selected[0]) < feedGate, "Install the YAML parser before the feed inventory check.");
+  }
+});
+
 test("browser and worker families select their own steps while preserving aggregate gates", () => {
   for (const [file, family] of [
     ["mobile_navigation_browser", "browser_navigation"], ["bob_reading_browser", "browser_bob"],

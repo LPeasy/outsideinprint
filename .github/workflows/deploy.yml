@@ -456,6 +456,9 @@ jobs:
           ./tests/test_bookstore_reading_sample_contract.ps1 -SiteDir public
           ./tests/test_2045_storefront.ps1 -SiteDir public
           ./tests/test_direct_commerce_storefront_contract.ps1 -SiteDir public
+      - name: Install output-check dependencies
+        if: ${{ needs.classify.outputs.browser != 'true' }}
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Test Public HTML Output
         shell: pwsh
         run: |
