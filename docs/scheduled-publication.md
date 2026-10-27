@@ -153,9 +153,10 @@ and in-flight work. An uncertain dispatch is reconciled by its nonce, never
 blindly resent. Real workflow or live-check failures remain blocked. Read-only
 transient observations can resume without dispatching another build. Completed
 operations require the original canonical commit/time receipt, both main guards,
-successful route/SEO checks and passed per-release results. Existing verified
-releases can be reconciled from actual operator-supplied format evidence and
-GitHub's immutable production artifacts; this provenance remains explicit.
+successful route/SEO checks and passed per-release results. Initial activation starts the new clock. Earlier operations and their existing
+publication records remain untouched. Confirm activation precedes the next
+queued release. Keep this boundary through pauses and redeployments so later
+overdue work can catch up without replaying older publications.
 
 GitHub's native schedules can be delayed or dropped; they are no longer the
 per-release clock after cutover. Cloudflare polling and GitHub queues still make

@@ -86,11 +86,18 @@ export class Dispatcher {
       }
     }
     if (!probe && (!control.enabled || snapshot.config.mode !== "cloudflare")) return { status: "shadow" };
-    const due = operations(snapshot.registry, this.now());
+    // Initial activation starts the new clock. Earlier operations retain their
+    // existing publication records and are not replayed by this service.
+    // Preserve this boundary when pausing or redeploying, so later overdue work
+    // remains eligible after an interruption.
+    const since = Date.parse(control.activatedAtUtc ?? "");
+    const due = operations(snapshot.registry, this.now()).filter(op =>
+      !Number.isFinite(since) || Date.parse(op.at) >= since);
     if (!probe && control.activatedAtUtc) {
       for (const release of snapshot.registry.releases) {
         if (Date.parse(release.endsAt) > this.now() || Date.parse(release.endsAt) <= Date.parse(control.activatedAtUtc)) continue;
         for (const at of [release.releaseAt, ...(release.rebuildAt ? [release.rebuildAt] : [])]) {
+          if (Date.parse(at) < since) continue;
           const key = `op:${release.id}:${at}`;
           if (!await this.store.get(key)) {
             const record = { id: release.id, at, fingerprint: fingerprint(release), status: "expired", error: "Approved window expired without a verified release; operator action required." };

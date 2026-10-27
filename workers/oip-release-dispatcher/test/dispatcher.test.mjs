@@ -103,3 +103,14 @@ test("production evidence must match original commit/time, current-main guards a
   }
   assert.throws(() => verifyAdmission({ schemaVersion: 1, requestId: "wrong" }, { ...batch, requestId: "expected" }, run), /identity/);
 });
+
+test("initial activation leaves earlier releases untouched and catches up later eligible work", async () => {
+  const f = fixture();
+  f.data.set("control", { enabled: true, activatedAtUtc: "2026-11-01T14:01:00Z" });
+  assert.equal((await f.engine.tick()).status, "idle");
+  assert.equal(f.posts, 0);
+  assert.equal(f.data.has(operations(registry, now)[0].key), false);
+  f.gh.snapshot = async () => ({ sha, config: { schemaVersion: 1, mode: "cloudflare" }, registry: {
+    schemaVersion: 1, releases: [{ ...release, releaseAt: "2026-11-01T09:02:00-05:00" }] } });
+  assert.equal((await f.engine.tick()).status, "dispatched");
+});

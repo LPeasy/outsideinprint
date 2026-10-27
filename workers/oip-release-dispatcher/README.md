@@ -8,7 +8,8 @@ the only dispatch target is `.github/workflows/deploy.yml` on `main`.
 ## Provisioning and cutover
 
 1. Merge the reviewed support code through the checked PR flow. Deploy this
-   directory with the existing pinned Wrangler installation. Supply
+   directory with the existing pinned Wrangler installation. Use `--keep-vars`
+   for subsequent updates to preserve the scoped App IDs and service variables. Supply
    `SOURCE_COMMIT_SHA` as the reviewed main SHA. The new Durable Object defaults
    to inactive; deploying or restarting cannot activate publication.
 2. Install the owner-approved private GitHub App on this repository only, with
@@ -22,8 +23,10 @@ the only dispatch target is `.github/workflows/deploy.yml` on `main`.
    admission artifact, successful `release-ready`, and skipped site/deploy jobs.
    Read `/admin/state` for the exact canary run and result. This does not mark
    a real release complete or build the website.
-4. Reconcile already published operations from their actual immutable receipts
-   before activation; do not rebuild a live release just to initialize state.
+4. Initial activation starts the new clock. Earlier release operations keep
+   their existing publication records and are not replayed or reverified. Confirm
+   activation precedes the next queued release. Pausing or redeploying preserves
+   that original boundary, allowing later overdue work to catch up normally.
 5. In a separate checked cutover PR, set `scripts/ci/release-dispatcher.json` to
    `mode: "cloudflare"` and regenerate the marked workflow block with the
    maintained helper. Keep daily/Monday maintenance unchanged. After its exact

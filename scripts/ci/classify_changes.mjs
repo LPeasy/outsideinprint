@@ -27,6 +27,15 @@ export function windowsFixturePaths({ list, read } = {}) {
   return [...new Set(paths)];
 }
 
+export function dispatcherConfigAtRef(ref, git) {
+  // Before this migration, the registry used GitHub timers without a mode file.
+  // Preserve the verified comparison base rather than turning its absence into
+  // an unrelated whole-library prose scan. A present invalid config still fails.
+  return git("ls-tree", ref, "--", "scripts/ci/release-dispatcher.json").trim() ?
+    validateDispatcherConfig(JSON.parse(git("show", ref + ":scripts/ci/release-dispatcher.json"))) :
+    { schemaVersion: 1, mode: "github" };
+}
+
 const browserFamilies = ["browser_navigation", "browser_bob", "browser_analytics", "browser_share"];
 const empty = () => ({ site: false, browser: false, ...Object.fromEntries(browserFamilies.map(key => [key, false])), images: false, publishing: false, rendering: false, windows: false, worker: false, worker_commerce: false, worker_bob: false, worker_welcome: false, worker_meta_leads: false, worker_release_dispatcher: false, seo: false, full: false });
 const full = () => Object.fromEntries(Object.keys(empty()).map(key => [key, true]));
@@ -180,7 +189,7 @@ function changedPaths(event) {
     const scheduleOptions = ref => ({
       registry: validateRegistry(JSON.parse(git("show", ref + ":scripts/ci/scheduled-releases.json"))),
       disneyPlan: JSON.parse(git("show", ref + ":scripts/ci/disney-releases.json")),
-      dispatcherConfig: validateDispatcherConfig(JSON.parse(git("show", ref + ":scripts/ci/release-dispatcher.json"))),
+      dispatcherConfig: dispatcherConfigAtRef(ref, git),
     });
     scheduleWorkflowOnlyChanged = isGeneratedScheduleOnlyChange(
       git("show", comparisonBase + ":.github/workflows/deploy.yml"), git("show", head + ":.github/workflows/deploy.yml"),
