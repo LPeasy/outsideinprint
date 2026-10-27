@@ -7,7 +7,8 @@ import { execFileSync } from "node:child_process";
 
 const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.167.0/hugo")
   ? path.resolve(".tools/hugo-0.167.0/hugo") : "hugo");
-const franklin = "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/";
+const flagship = "/essays/why-daylight-saving-time/";
+const formerFlagship = "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/";
 const disneyOpening = "/essays/walt-disney-world-opening-1971/";
 const noise = "/essays/the-noise-of-the-crowd/";
 const coinSlot = "/essays/the-coin-slot-on-the-corner/";
@@ -64,7 +65,8 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   write("layouts/_default/single.html", '{{ .Title }}<img src="{{ .Params.featured_image }}" alt="{{ .Params.featured_image_alt }}">');
   write("layouts/_default/list.html", "{{ .Title }}");
   const entries = {
-    franklin: { title: "Benjamin Franklin", url: franklin, date: "2020-01-01", section_label: "Modern Bio" },
+    flagship: { title: "Why Daylight Saving Time?", url: flagship, date: "2020-01-01", section_label: "Essay" },
+    formerFlagship: { title: "Benjamin Franklin", url: formerFlagship, date: "2019-01-01", section_label: "Modern Bio" },
     disneyOpening: { title: "How Walt Disney World Opened in 1971: Walt’s Plans, Roy’s Role", url: disneyOpening, date: "2020-01-01", section_label: "Essay" },
     noise: { title: "The Noise of the Crowd", url: noise, date: "2020-01-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
     coinSlot: { title: "The Coin Slot on the Corner", url: coinSlot, date: "2020-01-01", section_label: "Essay" },
@@ -87,26 +89,32 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   execFileSync(hugo, ["--source", fixture, "--clock", clock, "--buildDrafts", "--buildFuture", "--buildExpired", "--panicOnWarning"], { encoding: "utf8" });
   const output = fs.readFileSync(path.join(fixture, "public/index.html"), "utf8");
   if (summaries === "frontpage") {
-    return { html: output, article: fs.readFileSync(path.join(fixture, "public", franklin, "index.html"), "utf8") };
+    return { html: output, article: fs.readFileSync(path.join(fixture, "public", flagship, "index.html"), "utf8") };
   }
   return JSON.parse(output);
 }
 
-test("Benjamin Franklin leads, followed by the latest release, while preview-only work stays excluded", (t) => {
-  assert.deepEqual(renderSelection(t), [franklin, "/essays/latest/", disneyOpening, noise, coinSlot]);
+test("Why Daylight Saving Time? leads, followed by the latest release, while preview-only work stays excluded", (t) => {
+  assert.deepEqual(renderSelection(t), [flagship, "/essays/latest/", disneyOpening, noise, coinSlot]);
+});
+
+test("the former flagship follows recency instead of retaining the lead", (t) => {
+  assert.deepEqual(renderSelection(t, {
+    formerFlagship: { title: "Benjamin Franklin", url: formerFlagship, date: "2020-08-01", section_label: "Modern Bio" },
+  }), [flagship, formerFlagship, disneyOpening, noise, coinSlot]);
 });
 
 test("a newer flagship stays first and missing curated work receives newest eligible fallback", (t) => {
   const selection = renderSelection(t, {
-    franklin: { title: "Benjamin Franklin", url: franklin, date: "2020-06-01", publishDate: "2020-07-01" },
+    flagship: { title: "Why Daylight Saving Time?", url: flagship, date: "2020-06-01", publishDate: "2020-07-01" },
     noise: null,
   });
-  assert.deepEqual(selection, [franklin, "/essays/latest/", disneyOpening, coinSlot, "/essays/earlier/"]);
+  assert.deepEqual(selection, [flagship, "/essays/latest/", disneyOpening, coinSlot, "/essays/earlier/"]);
   assert.equal(new Set(selection).size, 5);
 });
 
 test("when the flagship is unavailable, the two newest releases lead", (t) => {
-  assert.deepEqual(renderSelection(t, { franklin: null }), [
+  assert.deepEqual(renderSelection(t, { flagship: null }), [
     "/essays/latest/", "/essays/earlier/", disneyOpening, noise, coinSlot,
   ]);
 });
@@ -114,17 +122,17 @@ test("when the flagship is unavailable, the two newest releases lead", (t) => {
 test("a newly released curated piece occupies the latest slot only once", (t) => {
   assert.deepEqual(renderSelection(t, {
     noise: { title: "The Noise of the Crowd", url: noise, date: "2020-07-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
-  }), [franklin, noise, disneyOpening, coinSlot, "/essays/latest/"]);
+  }), [flagship, noise, disneyOpening, coinSlot, "/essays/latest/"]);
 });
 
 test("the lead uses eligible associated Gallery art and matching zoom alt, with hero fallback and unchanged supporting art", (t) => {
   const leadMetadata = {
-    title: "Benjamin Franklin", url: franklin, date: "2020-01-01", section_label: "Modern Bio",
-    featured_image: "legacy/franklin-portrait", featured_image_alt: "The existing Franklin portrait.",
+    title: "Why Daylight Saving Time?", url: flagship, date: "2020-01-01", section_label: "Essay",
+    featured_image: "legacy/clock-illustration", featured_image_alt: "The existing clock illustration.",
   };
   const galleryArt = {
-    slug: "the-american-at-versailles", essay: franklin, date: "2020-07-01",
-    image: "editorial/the-american-at-versailles", alt: "Franklin in a fur cap speaks with a French minister.",
+    slug: "daylight-after-work", essay: flagship, date: "2020-07-01",
+    image: "editorial/daylight-after-work", alt: "Commuters leave a station beneath a large clock.",
   };
   const supportingArt = {
     slug: "supporting-gallery", essay: "/essays/latest/", date: "2020-07-01",
@@ -138,7 +146,7 @@ test("the lead uses eligible associated Gallery art and matching zoom alt, with 
     ["future", { ...galleryArt, publishDate: "2030-01-01T00:00:00Z" }, leadMetadata.featured_image, leadMetadata.featured_image_alt],
   ]) {
     const result = renderSelection(t, {
-      franklin: leadMetadata,
+      flagship: leadMetadata,
       latest: { title: "Latest piece", date: "2020-06-01", publishDate: "2020-06-01T12:00:00Z", featured_image: "essays/latest/hero", featured_image_alt: "The supporting article hero." },
       guest: guestMetadata,
     }, "frontpage", "2020-09-01T12:00:00Z", [...(leadArt ? [leadArt] : []), supportingArt]);
@@ -152,7 +160,7 @@ test("the lead uses eligible associated Gallery art and matching zoom alt, with 
     assert.equal(attr(zoom, "data-image"), `/fixture/${expectedImage}/large.webp`, label);
     assert.equal(attr(zoom, "data-alt"), expectedAlt, label);
     assert.equal(attr(fallback, "href"), attr(zoom, "data-image"), label);
-    assert.match(result.article, /src="legacy\/franklin-portrait" alt="The existing Franklin portrait\."/, label);
+    assert.match(result.article, /src="legacy\/clock-illustration" alt="The existing clock illustration\."/, label);
     const support = result.html.match(/<article\b[^>]*home-v2-featured__item--latest[^>]*>([\s\S]*?)<\/article>/)?.[1];
     const supportImage = support?.match(/<img\b[^>]*>/)?.[0];
     const supportZoom = support?.match(/<button\b[^>]*data-home-featured-image-trigger[^>]*>/)?.[0];
@@ -166,7 +174,7 @@ test("the lead uses eligible associated Gallery art and matching zoom alt, with 
 
 test("the eligible guest renders once below the flagship without consuming the latest supporting slot", (t) => {
   const result = renderSelection(t, { guest: guestMetadata }, "guest");
-  assert.deepEqual(result.featured, [franklin, "/essays/latest/", disneyOpening, noise, coinSlot]);
+  assert.deepEqual(result.featured, [flagship, "/essays/latest/", disneyOpening, noise, coinSlot]);
   assert.equal(result.guest, guestRoute);
   assert.equal(new Set([...result.featured, result.guest]).size, 6);
   assert.equal((result.html.match(/<article\b/g) || []).length, 1);
@@ -179,7 +187,7 @@ test("the eligible guest renders once below the flagship without consuming the l
 
 test("the reserved guest cannot become the lead or fill a missing curated slot", (t) => {
   const result = renderSelection(t, {
-    guest: guestMetadata, franklin: null, noise: null,
+    guest: guestMetadata, flagship: null, noise: null,
     replacement: { title: "Older replacement", date: "2020-05-01" },
   }, "guest");
   assert.equal(result.guest, guestRoute);
@@ -220,7 +228,7 @@ test("all regular positions reject outside authors and contributor roles, includ
   for (const [label, byline] of Object.entries(cases)) {
     const result = renderSelection(t, {
       guest: guestMetadata,
-      franklin: { title: "Outside flagship", url: franklin, date: "2020-08-01", ...byline },
+      flagship: { title: "Outside flagship", url: flagship, date: "2020-08-01", ...byline },
       disneyOpening: { title: "Outside curated piece", url: disneyOpening, date: "2020-08-01", ...byline },
       outside: { title: "Outside latest and fallback", date: "2020-08-01", ...byline },
       replacement: { title: "Bob replacement", date: "2020-05-01" },

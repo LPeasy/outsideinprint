@@ -5948,7 +5948,7 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
        -not ([string]$_.'@id').EndsWith('#author-robert-v.-ussley', [StringComparison]::Ordinal))
     }).Count -eq 0
   } | ForEach-Object { Get-SitePathFromHref -Href $_.permalink })
-  $flagshipPath = '/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/'
+  $flagshipPath = '/essays/why-daylight-saving-time/'
   $expectedLeadPaths = @($publishedReadingPaths | Select-Object -First 1)
   if ($flagshipPath -in $publishedReadingPaths) {
     $expectedLeadPaths = @($flagshipPath)
@@ -6080,6 +6080,7 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   $featuredLabelOverrides = @{
     '/essays/the-dolphin-company/' = 'Case study'
     '/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/' = 'Modern Bio'
+    '/essays/why-daylight-saving-time/' = 'Essay'
     '/essays/walt-disney-world-opening-1971/' = 'Essay'
     '/essays/the-noise-of-the-crowd/' = 'Musing'
     '/essays/the-coin-slot-on-the-corner/' = 'Essay'

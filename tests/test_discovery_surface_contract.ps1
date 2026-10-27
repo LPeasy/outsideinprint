@@ -128,7 +128,7 @@ if ($homeFrontPageTemplate -notmatch [regex]::Escape('partial "home_v2_front_pag
 
 $homeSelectionTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_v2_selected.html') -Raw -Encoding utf8
 $featuredRoutes = @(
-  '"/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/"',
+  '"/essays/why-daylight-saving-time/"',
   '"/essays/walt-disney-world-opening-1971/"',
   '"/essays/the-noise-of-the-crowd/"',
   '"/essays/the-coin-slot-on-the-corner/"'
@@ -144,7 +144,7 @@ foreach ($route in $featuredRoutes) {
 foreach ($requiredSnippet in @(
   'partial "archive/longform-kind.html"',
   '$eligible = sort (sort $eligible "Title" "asc") "PublishDate" "desc"',
-  '$flagshipRoute := "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/"',
+  '$flagshipRoute := "/essays/why-daylight-saving-time/"',
   'range where $eligible "RelPermalink" $flagshipRoute',
   'range first 1 $eligible',
   'not (in $selectedPaths .RelPermalink)',
