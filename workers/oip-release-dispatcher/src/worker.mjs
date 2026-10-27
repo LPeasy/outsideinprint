@@ -24,12 +24,14 @@ export class ReleaseCoordinator {
         if (result.status === "blocked") {
           await store.put("attention", result);
           console.error(JSON.stringify(result));
+        } else if (result.status === "verified" && (await store.get("attention"))?.status === "error") {
+          await store.delete("attention");
         }
         return json(result);
       } catch (error) {
         const result = { status: "error", error: error.message, checkedAtUtc: new Date().toISOString() };
         await store.put("lastTick", result);
-        await store.put("attention", result);
+        if ((await store.get("attention"))?.status !== "blocked") await store.put("attention", result);
         console.error(JSON.stringify(result));
         return json(result, 502);
       }

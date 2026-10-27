@@ -4,6 +4,19 @@ import { createHash, generateKeyPairSync } from "node:crypto";
 import { GitHub } from "../src/github.mjs";
 import { readReceiptZip } from "../src/receipts.mjs";
 
+test("default fetch keeps the native runtime receiver instead of binding GitHub as this", async () => {
+  const original = globalThis.fetch;
+  globalThis.fetch = function () {
+    assert.ok(this === undefined || this === globalThis, "Native fetch cannot use the GitHub client as its receiver.");
+    return Promise.resolve(Response.json({ id: 1 }));
+  };
+  try {
+    const gh = new GitHub({});
+    gh.cachedToken = { token: "fixture-token", expires_at: "2099-01-01T00:00:00Z" };
+    assert.equal((await gh.run(1)).id, 1);
+  } finally { globalThis.fetch = original; }
+});
+
 test("receipt ZIPs require the API digest and retain exact JSON values", () => {
   const zip = Buffer.from("UEsDBBQAAAAIACZpW11d/wpxKQAAACcAAAAOAAAAYWRtaXNzaW9uLmpzb26rVipOzkjNTQxLLSrOzM9TsjLUUSouSSwpLVayUkpMyc0sKUlNUaoFAFBLAQIUABQAAAAIACZpW11d/wpxKQAAACcAAAAOAAAAAAAAAAAAAACAAQAAAABhZG1pc3Npb24uanNvblBLBQYAAAAAAQABADwAAABVAAAAAAA=", "base64");
   const digest = "sha256:" + createHash("sha256").update(zip).digest("hex");

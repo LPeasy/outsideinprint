@@ -19,7 +19,7 @@ export async function boundedBody(response, limit) {
 }
 
 export class GitHub {
-  constructor(env, fetchImpl = fetch) { this.env = env; this.fetch = fetchImpl; }
+  constructor(env, fetchImpl = (...args) => fetch(...args)) { this.env = env; this.fetch = fetchImpl; }
   async api(path, { method = "GET", body, jwt = false, raw = false } = {}) {
     require(path.startsWith("/repos/" + REPO + "/") || /^\/app\/installations\/\d+\/access_tokens$/.test(path), "GitHub endpoint is outside the release scope.");
     const token = jwt ? this.jwt() : await this.token();
