@@ -168,7 +168,8 @@ test("browser containers are conditional and actual publication gates remain act
 
 test("output checks have one root dependency install with or without browser fixtures", () => {
   const siteSteps = steps("site");
-  const feedGate = siteSteps.findIndex(step => step.run?.includes("test_feed_policy_contract.ps1"));
+  const feedGate = siteSteps.findIndex(step => step.run?.includes("test_feed_policy_contract.ps1 -SiteDir"));
+  assert.ok(feedGate >= 0, "The rendered feed check must remain selected.");
   const installs = siteSteps.filter(step => /npm ci --ignore-scripts --no-audit --no-fund/.test(step.run ?? ""));
   for (const browser of [false, true]) {
     const selected = installs.filter(step => {
