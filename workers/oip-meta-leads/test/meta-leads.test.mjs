@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
 import { readFileSync } from 'node:fs';
 import { createHmac } from 'node:crypto';
-import worker, { handleRequest, processQueue } from '../src/index.js';
+import worker, { handleRequest, processQueue, validateCanonicalLead } from '../src/index.js';
 
 const NOW = Date.parse('2026-10-26T18:00:00Z');
 const FORM = { formId: '22222222', adIds: ['33333333', '33333334'], campaignCode: 'almanack-meta-pilot',
@@ -16,6 +16,7 @@ function fixture() {
   const sql = new DatabaseSync(':memory:');
   sql.exec(readFileSync(new URL('../migrations/0001_meta_leads.sql', import.meta.url), 'utf8'));
   sql.exec(readFileSync(new URL('../migrations/0002_owned_test_recovery.sql', import.meta.url), 'utf8'));
+  sql.exec(readFileSync(new URL('../migrations/0003_paid_lead_recovery.sql', import.meta.url), 'utf8'));
   const faults = { afterClaim: false, finish: false };
   const DB = { prepare(query) { return { values: [], bind(...args) { this.values = args; return this; },
     async first() {
@@ -105,6 +106,7 @@ test('unsigned, wrong page/form/ad, stale and future notices are rejected withou
   const f = fixture();
   assert.equal((await f.send(f.request('44444444', {}, false))).status, 401);
   for (const changes of [{ page_id: '99999999' }, { form_id: '99999999' }, { ad_id: '99999999' },
+    { ad_id: undefined }, { ad_id: null }, { ad_id: '' }, { ad_id: 0 }, { ad_id: '0' },
     { created_time: Math.floor(NOW / 1000) + 301 }, { created_time: Math.floor(NOW / 1000) - 8 * 86400 }]) {
     assert.equal((await f.send(f.request('44444444', changes))).status, 400);
   }
@@ -138,6 +140,108 @@ test('canonical mismatch or missing/declined/duplicate consent blocks subscriber
     const f = fixture(); f.overrides.set('44444444', override); await f.send(); await f.process();
     assert.equal(f.row().state, 'held'); assert.equal(f.posts().length, 0);
   }
+});
+
+test('approved signed paid notice supplies an omitted canonical ad_id without changing consent or paid attribution', async () => {
+  const f = fixture();
+  f.env.APPROVED_FORMS_JSON = JSON.stringify([{ ...FORM, consentCheckedValue: '1' }]);
+  f.overrides.set('44444444', { ad_id: undefined, custom_disclaimer_responses: consent('1') });
+  assert.equal((await f.send()).status, 200);
+  assert.equal(f.calls.length, 0);
+  assert.deepEqual(await f.process(), { status: 'processed', attempted: 1 });
+  assert.equal(f.row().state, 'pending_confirmation');
+  assert.equal(f.row().ad_id, FORM.adIds[0]);
+  assert.equal(f.row().consent_value, JSON.stringify('1'));
+  assert.match(f.row().email_key, /^[a-f0-9]{64}$/);
+  assert.equal(f.posts().length, 1);
+  assert.deepEqual(JSON.parse(f.posts()[0].options.body), { email_address: 'lead-44444444@example.invalid',
+    type: 'unactivated', tags: ['outside-in-print'], utm_campaign: FORM.campaignCode, utm_medium: 'paid_social', utm_source: 'meta' });
+  assert.ok(new URL(f.calls[0].url).searchParams.get('fields').split(',').includes('ad_id'));
+  await f.send(); await f.process();
+  assert.equal(f.posts().length, 1);
+});
+
+test('paid notice context never permits a present invalid or mismatching canonical ad_id', async () => {
+  for (const ad_id of [null, '', 0, '0', FORM.adIds[1], '99999999']) {
+    const f = fixture(); f.overrides.set('44444444', { ad_id });
+    await f.send(); await f.process();
+    assert.equal(f.row().state, 'held');
+    assert.equal(f.row().error_code, 'canonical_lead_mismatch');
+    assert.equal(f.row().attempted_at, null);
+    assert.equal(f.row().email_key, null);
+    assert.equal(f.posts().length, 0);
+  }
+});
+
+test('omitted paid ad_id cannot bypass canonical identity, time, email or exact consent checks', async () => {
+  const cases = [
+    [{ id: '99999999' }, 'canonical_lead_mismatch'],
+    [{ form_id: '99999999' }, 'canonical_lead_mismatch'],
+    [{ created_time: new Date(NOW).toISOString() }, 'canonical_lead_mismatch'],
+    [{ created_time: 'not-a-time' }, 'canonical_lead_mismatch'],
+    [{ created_time: new Date(NOW + 301_000).toISOString() }, 'canonical_lead_mismatch'],
+    [{ created_time: new Date(NOW - 8 * 86400_000).toISOString() }, 'canonical_lead_mismatch'],
+    [{ field_data: null }, 'canonical_lead_mismatch'],
+    [{ field_data: [] }, 'required_field_missing'],
+    [{ field_data: [...fields('one@example.invalid'), ...fields('two@example.invalid')] }, 'required_field_missing'],
+    [{ field_data: fields('not-an-email') }, 'invalid_email'],
+    [{ custom_disclaimer_responses: undefined }, 'consent_missing'],
+    [{ custom_disclaimer_responses: consent('false') }, 'consent_missing'],
+    [{ custom_disclaimer_responses: consent(true) }, 'consent_missing'],
+    [{ custom_disclaimer_responses: [...consent('true'), ...consent('true')] }, 'consent_missing'],
+    [{ custom_disclaimer_responses: [{ checkbox_key: 'different', is_checked: 'true' }] }, 'consent_missing'],
+  ];
+  for (const [override, code] of cases) {
+    const f = fixture(); f.overrides.set('44444444', { ad_id: undefined, ...override });
+    await f.send(); await f.process();
+    assert.equal(f.row().state, 'held');
+    assert.equal(f.row().error_code, code);
+    assert.equal(f.row().attempted_at, null);
+    assert.equal(f.row().email_key, null);
+    assert.equal(f.posts().length, 0);
+  }
+});
+
+test('default canonical validation stays strict and never reads an omission exception from lead data', async () => {
+  const f = fixture(); await f.send();
+  const lead = f.lead('44444444'); delete lead.ad_id;
+  lead.allowMissingPaidAdId = true;
+  assert.throws(() => validateCanonicalLead(lead, f.row(), NOW), /canonical_lead_mismatch/);
+  assert.throws(() => validateCanonicalLead(lead, f.row(), NOW, { allowMissingPaidAdId: false }), /canonical_lead_mismatch/);
+  assert.equal(validateCanonicalLead(lead, f.row(), NOW, { allowMissingPaidAdId: true }), 'lead-44444444@example.invalid');
+  assert.throws(() => validateCanonicalLead({ ...lead, ad_id: null }, f.row(), NOW,
+    { allowMissingPaidAdId: true }), /canonical_lead_mismatch/);
+  assert.equal(f.posts().length, 0);
+});
+
+test('paid ad_id omission requires unchanged Page and exact current paid approval before retrieval', async () => {
+  for (const change of [
+    f => { f.env.META_PAGE_ID = '99999999'; },
+    f => { f.env.APPROVED_FORMS_JSON = JSON.stringify([{ ...FORM, adIds: [FORM.adIds[1]] }]); },
+    f => { f.env.APPROVED_FORMS_JSON = JSON.stringify([{ ...FORM, startsAt: new Date(NOW).toISOString() }]); },
+  ]) {
+    const f = fixture(); f.overrides.set('44444444', { ad_id: undefined });
+    await f.send(); change(f); await f.process();
+    assert.equal(f.row().state, 'held');
+    assert.equal(f.row().error_code, 'approval_removed_or_changed');
+    assert.equal(f.calls.length, 0);
+    assert.equal(f.posts().length, 0);
+  }
+});
+
+test('synthetic preview cannot accept absent paid ad_id through caller-supplied context', async () => {
+  const f = fixture(); f.env.SYNTHETIC_ONLY = 'true';
+  const expected = { lead_id: '44444444', form_id: FORM.formId, ad_id: FORM.adIds[0],
+    created_at: new Date(NOW - 1000).toISOString(), consent_key: FORM.consentCheckboxKey,
+    consent_value: JSON.stringify(FORM.consentCheckedValue) };
+  const lead = f.lead('44444444'); delete lead.ad_id;
+  const response = await f.send(new Request('https://worker.example.invalid/admin/synthetic-preview', {
+    method: 'POST', headers: { Authorization: `Bearer ${f.env.ADMIN_TOKEN}` },
+    body: JSON.stringify({ expected, lead, context: { allowMissingPaidAdId: true }, allowMissingPaidAdId: true }),
+  }));
+  assert.equal(response.status, 400);
+  assert.equal(f.row(), undefined);
+  assert.equal(f.calls.length, 0);
 });
 
 test('same normalized address across distinct leads preserves first attribution and sends once', async () => {
@@ -467,4 +571,106 @@ test('native same-inbox probe proves canonical deduplication after the first pen
   f.overrides.set('44444445', { ad_id: undefined, field_data: fields(f.email), custom_disclaimer_responses: consent('1') });
   await f.send(f.ownedRequest('44444445')); await f.process();
   assert.equal(f.row('44444445').state, 'duplicate'); assert.equal(f.posts().length, 1);
+});
+
+const PAID_RECOVERY = { approvedAt: '2026-10-26T18:10:00.000Z', source: 'a'.repeat(64),
+  reason: 'approved_paid_missing_ad_id_retry' };
+function recoverPaid(f, override = {}) {
+  const review = { ...PAID_RECOVERY, code: PAID_RECOVERY.reason, ...override };
+  return f.sql.prepare(`UPDATE meta_leads SET state = 'queued', error_code = ?,
+    recovery_approved_at = ?, recovery_review_source = ?, recovery_approval_reason = ?
+    WHERE lead_id = '44444444'`).run(review.code, review.approvedAt, review.source, review.reason);
+}
+
+test('reviewed paid held recovery records an immutable audit and permits one normal pending-only attempt', async () => {
+  for (const originalCode of ['lead_or_consent_invalid', 'canonical_lead_mismatch']) {
+    const f = fixture(); await f.send();
+    f.sql.prepare("UPDATE meta_leads SET state = 'held', error_code = ?, retrieval_attempts = 2, next_retrieval_at = ? WHERE lead_id = '44444444'")
+      .run(originalCode, new Date(NOW - 1000).toISOString());
+    const original = { ...f.row() };
+    recoverPaid(f);
+    const queued = f.row();
+    for (const key of Object.keys(original).filter(key => !['state', 'error_code', 'recovery_approved_at', 'recovery_review_source', 'recovery_approval_reason'].includes(key))) {
+      assert.equal(queued[key], original[key], key);
+    }
+    const audit = f.sql.prepare('SELECT * FROM meta_paid_lead_recoveries').get();
+    assert.deepEqual({ ...audit }, { lead_id: original.lead_id, original_state: 'held', original_error_code: originalCode,
+      reviewed_at: PAID_RECOVERY.approvedAt, review_source: PAID_RECOVERY.source, reason: PAID_RECOVERY.reason });
+    assert.equal(f.sql.prepare('SELECT COUNT(*) AS count FROM meta_owned_test_recoveries').get().count, 0);
+    f.overrides.set('44444444', { ad_id: undefined });
+    await f.process(); await f.send(); await f.process();
+    assert.equal(f.row().state, 'pending_confirmation');
+    assert.equal(f.posts().length, 1);
+    assert.equal(JSON.parse(f.posts()[0].options.body).type, 'unactivated');
+    assert.throws(() => recoverPaid(f), /recovery_not_allowed/);
+    assert.throws(() => f.sql.prepare('UPDATE meta_paid_lead_recoveries SET reason = reason').run(), /immutable_recovery_audit/);
+    assert.throws(() => f.sql.prepare('DELETE FROM meta_paid_lead_recoveries').run(), /immutable_recovery_audit/);
+  }
+});
+
+test('paid recovery rejects other states and any prior reservation, attempt, subscriber or completion', async () => {
+  const invalid = [
+    ...['queued', 'dispatching', 'pending_confirmation', 'duplicate', 'rejected', 'uncertain'].map(state => ({ state })),
+    { email_key: 'b'.repeat(64) }, { attempted_at: PAID_RECOVERY.approvedAt },
+    { subscriber_id: 'sub_00000000000000000000000001' }, { finished_at: PAID_RECOVERY.approvedAt },
+    { error_code: 'consent_missing' }, { error_code: null },
+  ];
+  for (const fields of invalid) {
+    const f = fixture(); await f.send();
+    const setup = { state: 'held', error_code: 'lead_or_consent_invalid', ...fields };
+    const keys = Object.keys(setup);
+    f.sql.prepare(`UPDATE meta_leads SET ${keys.map(key => `${key} = ?`).join(', ')} WHERE lead_id = '44444444'`).run(...Object.values(setup));
+    assert.throws(() => recoverPaid(f), /recovery_(?:approval_)?not_allowed/);
+    assert.equal(f.sql.prepare('SELECT COUNT(*) AS count FROM meta_paid_lead_recoveries').get().count, 0);
+    assert.equal(f.posts().length, 0);
+  }
+});
+
+test('paid recovery requires exact review reason, UTC timestamp and lowercase source SHA256', async () => {
+  for (const review of [
+    { code: 'unreviewed_retry' }, { reason: 'unreviewed_retry' },
+    { source: null }, { source: '' }, { source: 'a'.repeat(63) }, { source: 'g'.repeat(64) }, { source: 'A'.repeat(64) },
+    { approvedAt: null }, { approvedAt: 'not-a-date' }, { approvedAt: '2026-02-30T18:10:00.000Z' },
+    { approvedAt: '2026-10-26T18:10:00Z' }, { approvedAt: '2026-10-26T18:10:00.000+00:00' },
+  ]) {
+    const f = fixture(); await f.send();
+    f.sql.prepare("UPDATE meta_leads SET state = 'held', error_code = 'lead_or_consent_invalid' WHERE lead_id = '44444444'").run();
+    assert.throws(() => recoverPaid(f, review), /recovery_(?:approval_)?not_allowed/);
+    assert.equal(f.row().state, 'held');
+    assert.equal(f.row().recovery_approved_at, null);
+    assert.equal(f.sql.prepare('SELECT COUNT(*) AS count FROM meta_paid_lead_recoveries').get().count, 0);
+  }
+});
+
+test('paid approval metadata cannot be preset, edited independently, cleared or reused after another hold', async () => {
+  const f = fixture(); await f.send();
+  f.sql.prepare("UPDATE meta_leads SET state = 'held', error_code = 'lead_or_consent_invalid' WHERE lead_id = '44444444'").run();
+  assert.throws(() => f.sql.prepare("UPDATE meta_leads SET recovery_approved_at = ? WHERE lead_id = '44444444'")
+    .run(PAID_RECOVERY.approvedAt), /paid_recovery_approval_not_allowed/);
+  assert.throws(() => f.sql.prepare(`INSERT INTO meta_leads
+    (lead_id, page_id, form_id, ad_id, campaign_code, consent_version, consent_key, consent_value, created_at, received_at, state, recovery_approved_at)
+    SELECT '44444449', page_id, form_id, ad_id, campaign_code, consent_version, consent_key, consent_value, created_at, received_at, 'held', ?
+    FROM meta_leads WHERE lead_id = '44444444'`).run(PAID_RECOVERY.approvedAt), /paid_recovery_approval_not_allowed/);
+  recoverPaid(f);
+  for (const [column, value] of [['recovery_approved_at', null], ['recovery_review_source', 'b'.repeat(64)], ['recovery_approval_reason', null]]) {
+    assert.throws(() => f.sql.prepare(`UPDATE meta_leads SET ${column} = ? WHERE lead_id = '44444444'`).run(value), /immutable_paid_recovery_approval/);
+  }
+  f.sql.prepare("UPDATE meta_leads SET state = 'held', error_code = 'lead_or_consent_invalid' WHERE lead_id = '44444444'").run();
+  assert.throws(() => recoverPaid(f), /paid_lead_recovery_not_allowed/);
+  assert.equal(f.sql.prepare('SELECT COUNT(*) AS count FROM meta_paid_lead_recoveries').get().count, 1);
+  assert.equal(f.posts().length, 0);
+});
+
+test('paid recovery cannot reset retrieval history or change immutable attribution', async () => {
+  const f = fixture(); await f.send();
+  f.sql.prepare("UPDATE meta_leads SET state = 'held', error_code = 'lead_or_consent_invalid', retrieval_attempts = 2 WHERE lead_id = '44444444'").run();
+  const recoverWith = clause => f.sql.prepare(`UPDATE meta_leads SET state = 'queued', error_code = ?,
+    recovery_approved_at = ?, recovery_review_source = ?, recovery_approval_reason = ?, ${clause}
+    WHERE lead_id = '44444444'`).run(PAID_RECOVERY.reason, PAID_RECOVERY.approvedAt, PAID_RECOVERY.source, PAID_RECOVERY.reason);
+  assert.throws(() => recoverWith('retrieval_attempts = 0'), /paid_lead_recovery_not_allowed/);
+  assert.throws(() => recoverWith("next_retrieval_at = '2026-10-26T18:00:00.000Z'"), /paid_lead_recovery_not_allowed/);
+  assert.throws(() => recoverWith("ad_id = '33333334'"), /immutable_attribution/);
+  assert.equal(f.row().state, 'held');
+  assert.equal(f.row().retrieval_attempts, 2);
+  assert.equal(f.sql.prepare('SELECT COUNT(*) AS count FROM meta_paid_lead_recoveries').get().count, 0);
 });

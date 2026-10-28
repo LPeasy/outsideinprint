@@ -8,6 +8,7 @@ const MAX_BYTES = 32 * 1024;
 const HOUR = 3_600_000;
 const MAX_LEAD_AGE = 7 * 24 * HOUR;
 const OWNED_TEST_AD = 'owned-test';
+const CANONICAL_FAILURE_CODES = new Set(['canonical_lead_mismatch', 'required_field_missing', 'consent_missing', 'invalid_email']);
 
 const json = (body, status = 200) => Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } });
 const iso = value => new Date(value).toISOString();
@@ -172,8 +173,12 @@ async function receive(request, env, now) {
   return json({ status: 'queued', notices: notices.length });
 }
 
-export function validateCanonicalLead(value, row, now) {
-  const adMatches = value && (row.ad_id === OWNED_TEST_AD ? !Object.hasOwn(value, 'ad_id') : value.ad_id === row.ad_id);
+export function validateCanonicalLead(value, row, now, { allowMissingPaidAdId = false } = {}) {
+  // Only the queue processor may rely on its verified notice when Meta omits
+  // ad_id. A present null, empty or different value must never use this fallback.
+  const adMatches = value && (row.ad_id === OWNED_TEST_AD ? !Object.hasOwn(value, 'ad_id')
+    : Object.hasOwn(value, 'ad_id') ? value.ad_id === row.ad_id
+      : allowMissingPaidAdId === true && META_ID.test(row.ad_id));
   if (!value || value.id !== row.lead_id || value.form_id !== row.form_id || !adMatches
     || !validMetaDate(value.created_time) || Date.parse(value.created_time) !== Date.parse(row.created_at)
     || Date.parse(value.created_time) > now + 300_000 || Date.parse(value.created_time) < now - MAX_LEAD_AGE
@@ -253,7 +258,7 @@ export async function processQueue(env, { fetcher = fetch, clock = Date.now } = 
   let attempted = 0;
   for (const row of results) {
     const approved = row.ad_id === OWNED_TEST_AD ? testMatches(row, ownedTest(env, currentTime()))
-      : forms(env).find(form => form.formId === row.form_id && form.adIds.includes(row.ad_id)
+      : row.page_id === env.META_PAGE_ID && forms(env).find(form => form.formId === row.form_id && form.adIds.includes(row.ad_id)
       && form.campaignCode === row.campaign_code && form.consentVersion === row.consent_version
       && form.consentCheckboxKey === row.consent_key && JSON.stringify(form.consentCheckedValue) === row.consent_value
       && Date.parse(row.created_at) >= Date.parse(form.startsAt) && Date.parse(row.created_at) < Date.parse(form.endsAt));
@@ -281,8 +286,14 @@ export async function processQueue(env, { fetcher = fetch, clock = Date.now } = 
       continue; // No subscriber POST has begun. Holds require operator review.
     }
     let email;
-    try { email = validateCanonicalLead(value, row, currentTime()); } catch {
-      await env.DB.prepare("UPDATE meta_leads SET state = 'held', error_code = 'lead_or_consent_invalid' WHERE lead_id = ? AND state = 'queued'").bind(row.lead_id).run();
+    try {
+      // receive() admits paid rows only after signature and exact attribution
+      // checks; the ledger keeps those fields immutable. Approval was rechecked
+      // above. This context is never taken from a webhook or admin request body.
+      email = validateCanonicalLead(value, row, currentTime(), { allowMissingPaidAdId: row.ad_id !== OWNED_TEST_AD });
+    } catch (error) {
+      const code = CANONICAL_FAILURE_CODES.has(error?.message) ? error.message : 'lead_or_consent_invalid';
+      await env.DB.prepare("UPDATE meta_leads SET state = 'held', error_code = ? WHERE lead_id = ? AND state = 'queued'").bind(code, row.lead_id).run();
       continue;
     }
     const digest = await emailKey(email, env);
