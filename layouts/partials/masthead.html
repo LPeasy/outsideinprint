@@ -3,6 +3,8 @@
 {{ $currentPath := .RelPermalink }}
 {{ $gamesPage := site.GetPage "/games" }}
 {{ $showGames := and $gamesPage (or (not $gamesPage.Draft) hugo.IsServer) }}
+{{ $musicPage := site.GetPage "/music" }}
+{{ $showMusic := and $musicPage (or (not $musicPage.Draft) hugo.IsServer) }}
 {{ $archivePageNumber := int (.Scratch.Get "oip_archive_page_number" | default 1) }}
 {{ $isArchivePage := and (eq $currentPath "/archive/") (eq $archivePageNumber 1) }}
 {{ $inArchiveSection := or $isArchivePage (eq .Section "archive") (eq .Section "essays") (eq .Section "syd-and-oliver") }}
@@ -20,6 +22,8 @@
 {{ $inSupportSection := or $isSupportPage (eq .Section "support") }}
 {{ $isGamesPage := and $gamesPage (eq $currentPath $gamesPage.RelPermalink) }}
 {{ $inGamesSection := or $isGamesPage (eq .Section "games") }}
+{{ $isMusicPage := and $musicPage (eq $currentPath $musicPage.RelPermalink) }}
+{{ $inMusicSection := or $isMusicPage (eq .Section "music") }}
 {{ $isGalleryPage := eq $currentPath "/gallery/" }}
 {{ $inGallerySection := or $isGalleryPage (eq .Section "gallery") }}
 {{ $isRandomPage := eq $currentPath "/random/" }}
@@ -98,6 +102,18 @@
     "group" "explore"
     "currentPage" $isGamesPage
     "currentSection" $inGamesSection
+    "mobilePrimary" false
+  ) }}
+{{ end }}
+{{ if $showMusic }}
+  {{ $navItems = $navItems | append (dict
+    "key" "music"
+    "label" "Music"
+    "href" $musicPage.RelPermalink
+    "description" "Listen with JukeBob"
+    "group" "explore"
+    "currentPage" $isMusicPage
+    "currentSection" $inMusicSection
     "mobilePrimary" false
   ) }}
 {{ end }}

@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "station": "JukeBob",
+  "defaultTrackId": "sans-serif-chairman",
+  "albums": [
+    {
+      "id": "sans-serif",
+      "title": "Sans Serif",
+      "artist": "Robby V and the Paperboys",
+      "displayOrder": 1,
+      "cover": {
+        "source": "assets/music/sans-serif/cover.png",
+        "sourceSha256": "a0eeb19228f869666ce8d5c00ac5cc7a7fc464eee7956b622c16de6f06b8e908",
+        "revision": "v2-oip-house-style",
+        "alt": "Sans Serif album cover: a writer rests beside a printing press in a lamplit newsroom.",
+        "src": "music/artwork/sans-serif-640.webp",
+        "width": 640,
+        "height": 640,
+        "variants": [
+          {
+            "src": "music/artwork/sans-serif-320.webp",
+            "width": 320,
+            "height": 320
+          },
+          {
+            "src": "music/artwork/sans-serif-640.webp",
+            "width": 640,
+            "height": 640
+          },
+          {
+            "src": "music/artwork/sans-serif-960.webp",
+            "width": 960,
+            "height": 960
+          }
+        ]
+      },
+      "tracks": [
+        {
+          "id": "sans-serif-chairman",
+          "title": "Chairman",
+          "artist": "Robby V and the Paperboys",
+          "number": 1,
+          "duration": 184.8,
+          "src": "music/tracks/sans-serif/01-chairman.mp3",
+          "bytes": 8164187,
+          "sha256": "0019f1acecc49e56ad587207589a997a0ac5f2ec865a5d209e4e02c79b946a96"
+        },
+        {
+          "id": "sans-serif-inkwell",
+          "title": "Inkwell",
+          "artist": "Robby V and the Paperboys",
+          "number": 2,
+          "duration": 199.2,
+          "src": "music/tracks/sans-serif/02-inkwell.mp3",
+          "bytes": 8040115,
+          "sha256": "7b81267743421ebc7eadd6f013a7aa9e63b8108a503af2bb8ea6657f2de17594"
+        },
+        {
+          "id": "sans-serif-late-nights-at-the-office",
+          "title": "Late Nights at the Office",
+          "artist": "Robby V and the Paperboys",
+          "number": 3,
+          "duration": 141.6,
+          "src": "music/tracks/sans-serif/03-late-nights-at-the-office.mp3",
+          "bytes": 7162786,
+          "sha256": "0f03fad8cadb1bb3b995bca8352efde2c0fc7cce4f2e37912790cfef0327357a"
+        },
+        {
+          "id": "sans-serif-blue-skies-arent-they",
+          "title": "Blue Skies, Aren’t They?",
+          "artist": "Robby V and the Paperboys",
+          "number": 4,
+          "duration": 174.8,
+          "src": "music/tracks/sans-serif/04-blue-skies-arent-they.mp3",
+          "bytes": 7803394,
+          "sha256": "8059b3e04705e5cd9590df70f44629833da4fa1a99798ebe4e8e5898f5a1fe26"
+        },
+        {
+          "id": "sans-serif-feather-quill",
+          "title": "Feather Quill",
+          "artist": "Robby V and the Paperboys",
+          "number": 5,
+          "duration": 177.2,
+          "src": "music/tracks/sans-serif/05-feather-quill.mp3",
+          "bytes": 7791426,
+          "sha256": "4cd59dc6342d6fefc6679bb426b1499ba4910bcbc64064a0a81ad01ec71fe0e1"
+        },
+        {
+          "id": "sans-serif-round",
+          "title": "Round",
+          "artist": "Robby V and the Paperboys",
+          "number": 6,
+          "duration": 162.24,
+          "src": "music/tracks/sans-serif/06-round.mp3",
+          "bytes": 7627861,
+          "sha256": "c7f596c6d7c6767c33b768d7628df97702fdaed1b68a5d74dcb1c5594d63f031"
+        },
+        {
+          "id": "sans-serif-deep-research",
+          "title": "Deep Research",
+          "artist": "Robby V and the Paperboys",
+          "number": 7,
+          "duration": 154.8,
+          "src": "music/tracks/sans-serif/07-deep-research.mp3",
+          "bytes": 7449619,
+          "sha256": "03218ea94bcc6d5b58562b182497ab53eb89e5d6ff58ac270d0fa89f5627d560"
+        }
+      ]
+    },
+    {
+      "id": "the-fine-print-vol-1",
+      "title": "The Fine Print, Vol. 1",
+      "artist": "Robby V and the Paper Boys",
+      "displayOrder": 2,
+      "tracks": [
+        {
+          "id": "first-edition",
+          "title": "First Edition",
+          "artist": "Robby V and the Paper Boys",
+          "number": 1,
+          "duration": 139.944,
+          "src": "music/tracks/first-edition.mp3"
+        },
+        {
+          "id": "fresh-black",
+          "title": "Fresh Black",
+          "artist": "Robby V and the Paper Boys",
+          "number": 2,
+          "duration": 154.584,
+          "src": "music/tracks/fresh-black.mp3"
+        },
+        {
+          "id": "wire-service",
+          "title": "Wire Service",
+          "artist": "Robby V and the Paper Boys",
+          "number": 3,
+          "duration": 153.072,
+          "src": "music/tracks/wire-service.mp3"
+        },
+        {
+          "id": "sunrise-headlines",
+          "title": "Sunrise Headlines",
+          "artist": "Robby V and the Paper Boys",
+          "number": 4,
+          "duration": 152.184,
+          "src": "music/tracks/sunrise-headlines.mp3"
+        },
+        {
+          "id": "city-awakens",
+          "title": "City Awakens",
+          "artist": "Robby V and the Paper Boys",
+          "number": 5,
+          "duration": 117.072,
+          "src": "music/tracks/city-awakens.mp3"
+        },
+        {
+          "id": "confidential-sources",
+          "title": "Confidential Sources",
+          "artist": "Robby V and the Paper Boys",
+          "number": 6,
+          "duration": 132.72,
+          "src": "music/tracks/confidential-sources.mp3"
+        },
+        {
+          "id": "editorial-meeting",
+          "title": "Editorial Meeting",
+          "artist": "Robby V and the Paper Boys",
+          "number": 7,
+          "duration": 154.824,
+          "src": "music/tracks/editorial-meeting.mp3"
+        },
+        {
+          "id": "hot-off-the-press",
+          "title": "Hot Off The (Press)",
+          "artist": "Robby V and the Paper Boys",
+          "number": 8,
+          "duration": 244.824,
+          "src": "music/tracks/hot-off-the-press.mp3"
+        }
+      ]
+    }
+  ]
+}

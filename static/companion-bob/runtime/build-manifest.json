@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "gameSourceCommit": "4f7873301fa208a72b12e704e29530a5857dd7a7",
+  "gameSourceCommit": "2ea38a59ea542b6d85dee94efd5887ab5f8d49a3",
   "adapter": "Full-viewport site Pet, native-style drag and alpha hit regions; no desk, economy or unlocks.",
   "protocol": "oip-site-bob-v1",
-  "sourceWorkingTree": true,
+  "sourceWorkingTree": false,
   "sources": [
     {
       "path": "browser/site-pet/entry.tsx",
-      "sha256": "f0a30bb0ad2689214bdd049ba4e1eedce8f62291102e77fb90a7bf2bb4a81b75"
+      "sha256": "3ac6d5864949e86924099cf0ee84de14aa1f2d6f7e5589697daa5ac4cf8db6e0"
     },
     {
       "path": "browser/site-pet/style.css",
-      "sha256": "3df4378f31cf09d0d7743279cae0bdeedfed41a8352cfa28084f0297fa81c176"
+      "sha256": "7f71ec82fa567ec26bab3554315b1da54335cc8604c547f79396a79a9eb90fff"
     },
     {
       "path": "browser/site-pet/index.html",
@@ -19,7 +19,15 @@
     },
     {
       "path": "src/components/BobPet.tsx",
-      "sha256": "847c55769aa30f8f8aa95c24195cf07bcb1581db219aaed221ac5820811fe29c"
+      "sha256": "2190e524c13297f0fd55963b91328cc1cc47b34a4fb5715931c26d4a2551b656"
+    },
+    {
+      "path": "src/components/PetJukebox.tsx",
+      "sha256": "f5eb64261da6ca48255a6393f93c25d12ebd0974b01c0e6f2106e98e44335678"
+    },
+    {
+      "path": "src/components/PetJukebox.css",
+      "sha256": "0aa4a1647ebb9ac2def1de3be98f8a640c6585f19333dbf6145969e8a108f3a8"
     },
     {
       "path": "src/components/PetActivityControls.tsx",
@@ -27,7 +35,23 @@
     },
     {
       "path": "src/music/MusicPlayerProvider.tsx",
-      "sha256": "39ffe12fc645f1833753763d382044032a9d64c6068fcb6345e546e3cce62ba7"
+      "sha256": "b328d5024c8804faecd8e1f3369aef04fa9a01349647b8dea24df8f86c5cba75"
+    },
+    {
+      "path": "src/music/controller.ts",
+      "sha256": "de79ef8cb3acf41eac8666f3bdd02bce3654a807a7cec4f02fb24c2359befcdd"
+    },
+    {
+      "path": "src/music/playlist.ts",
+      "sha256": "7c7d719308a68d4c9036a37953a07c691fb7cd7c7d699641d259992bacff1b31"
+    },
+    {
+      "path": "src/music/settings.ts",
+      "sha256": "ebea0f5c9f76e3ee27fa8b26b87570b59c39f01d6853b2306c6ec68aeeaa1826"
+    },
+    {
+      "path": "src/music/shuffle.ts",
+      "sha256": "bf106e5e8e87388d2ebbeaf0e69ab59d503ec210f2406998b1546842e29f4c81"
     },
     {
       "path": "vite.site-pet.config.ts",
@@ -35,11 +59,16 @@
     },
     {
       "path": "tools/build-site-pet.mjs",
-      "sha256": "7bc77937cebaeddeaad0a9477b7492e53a5efba839615b9d71735324fb8d7746"
+      "sha256": "45614ce9f6b0c8851cff9add0df44b0710cc50de4406ee1ff105a8488c9bb4c2"
     }
   ],
+  "musicCatalogSource": {
+    "repository": "LPeasy/outsideinprint",
+    "path": "data/music.json",
+    "sha256": "e13acc58c9875b90051f6f5e89cca110ded433bf774a2b51013a19a6a32059dc"
+  },
   "fullGameIncluded": false,
-  "totalBytes": 26919164,
+  "totalBytes": 81648994,
   "files": [
     {
       "path": "assets/bob-armrest-BAi3CKpz.webp",
@@ -207,24 +236,39 @@
       "sha256": "8b894077d8a817901350044cfa1ca86ab67ca23863d7d3f1b50dfe26d59524c7"
     },
     {
-      "path": "assets/index-BYXARHwK.css",
-      "bytes": 69118,
-      "sha256": "d719e4b0e7a6041d7c5a7cc91f5f37d6aee12df2f647082ae00c2dd3e7de2dd2"
+      "path": "assets/index-65q40fIV.js",
+      "bytes": 534351,
+      "sha256": "6dcd24e380d9483280b9bdb3b512b78ed9f071118b11fad34e5f0cb62dac03e0"
     },
     {
-      "path": "assets/index-CfZEBzVr.js",
-      "bytes": 526191,
-      "sha256": "9e9ad303b3a8270f65f26e8e00a61cde8b7fe948207dd335d2fda96ad1fc0877"
+      "path": "assets/index-L1qTF5XD.css",
+      "bytes": 69456,
+      "sha256": "afd7c5c1151d5fe14cbf9dd5896e929e807f344278e7d63301b1389e1aa16fbe"
     },
     {
       "path": "index.html",
       "bytes": 501,
-      "sha256": "142ea55a6a62abcbddbbaa516b526fcf5bf94ecca5b3f8ab69f2ee0398fde75f"
+      "sha256": "1351b61b3b0492def1e0aa90f1020e9bbbbfb649611b5e3ac8b61a2da0c1d960"
+    },
+    {
+      "path": "music/artwork/sans-serif-320.webp",
+      "bytes": 51894,
+      "sha256": "1d298762250668ee02f303898cc9875e6386a898242bb47a4d3a046af6db9b6d"
+    },
+    {
+      "path": "music/artwork/sans-serif-640.webp",
+      "bytes": 199330,
+      "sha256": "76c32ec9a60f930e6031bb05461665f2caa96bd9bcc19cd3ac17d5dc53a4e177"
+    },
+    {
+      "path": "music/artwork/sans-serif-960.webp",
+      "bytes": 426590,
+      "sha256": "94e04510d971c9098c492129e7d1b34eef98c338cd2c1a9086ac306d396ffbd2"
     },
     {
       "path": "music/playlist.json",
-      "bytes": 1772,
-      "sha256": "b8c1202c3b0e84c85f11347d645e5781d24621f4586e2d3b6aae71aa95a3e749"
+      "bytes": 5902,
+      "sha256": "24ff0b4f41a079929c2f4d55b58bd24ad958ebcc729058e207e8801454fb2d61"
     },
     {
       "path": "music/tracks/city-awakens.mp3",
@@ -255,6 +299,41 @@
       "path": "music/tracks/hot-off-the-press.mp3",
       "bytes": 3917612,
       "sha256": "80527d2465eea69c4034bb9919c88f7b768fd1204647ddf3539f3db3f9ee2987"
+    },
+    {
+      "path": "music/tracks/sans-serif/01-chairman.mp3",
+      "bytes": 8164187,
+      "sha256": "0019f1acecc49e56ad587207589a997a0ac5f2ec865a5d209e4e02c79b946a96"
+    },
+    {
+      "path": "music/tracks/sans-serif/02-inkwell.mp3",
+      "bytes": 8040115,
+      "sha256": "7b81267743421ebc7eadd6f013a7aa9e63b8108a503af2bb8ea6657f2de17594"
+    },
+    {
+      "path": "music/tracks/sans-serif/03-late-nights-at-the-office.mp3",
+      "bytes": 7162786,
+      "sha256": "0f03fad8cadb1bb3b995bca8352efde2c0fc7cce4f2e37912790cfef0327357a"
+    },
+    {
+      "path": "music/tracks/sans-serif/04-blue-skies-arent-they.mp3",
+      "bytes": 7803394,
+      "sha256": "8059b3e04705e5cd9590df70f44629833da4fa1a99798ebe4e8e5898f5a1fe26"
+    },
+    {
+      "path": "music/tracks/sans-serif/05-feather-quill.mp3",
+      "bytes": 7791426,
+      "sha256": "4cd59dc6342d6fefc6679bb426b1499ba4910bcbc64064a0a81ad01ec71fe0e1"
+    },
+    {
+      "path": "music/tracks/sans-serif/06-round.mp3",
+      "bytes": 7627861,
+      "sha256": "c7f596c6d7c6767c33b768d7628df97702fdaed1b68a5d74dcb1c5594d63f031"
+    },
+    {
+      "path": "music/tracks/sans-serif/07-deep-research.mp3",
+      "bytes": 7449619,
+      "sha256": "03218ea94bcc6d5b58562b182497ab53eb89e5d6ff58ac270d0fa89f5627d560"
     },
     {
       "path": "music/tracks/sunrise-headlines.mp3",

@@ -1,0 +1,1660 @@
+From 2ea38a59ea542b6d85dee94efd5887ab5f8d49a3 Mon Sep 17 00:00:00 2001
+From: Lawton Perret <lawtonperret96@gmail.com>
+Date: Wed, 28 Oct 2026 11:06:20 -0400
+Subject: [PATCH] Add album-aware JukeBob controller and mobile reading layout
+
+---
+ browser/site-pet/entry.tsx        | 121 ++++--
+ browser/site-pet/style.css        |  27 +-
+ progress.md                       |   8 +
+ src/components/BobPet.tsx         |   3 +
+ src/components/PetJukebox.tsx     |   4 +-
+ src/music/MusicPlayerProvider.tsx | 631 ++++--------------------------
+ src/music/controller.test.ts      | 128 ++++++
+ src/music/controller.ts           | 205 ++++++++++
+ src/music/playlist.test.ts        |  42 +-
+ src/music/playlist.ts             |  72 +++-
+ tools/build-site-pet.mjs          |  32 +-
+ 11 files changed, 662 insertions(+), 611 deletions(-)
+ create mode 100644 src/music/controller.test.ts
+ create mode 100644 src/music/controller.ts
+
+diff --git a/browser/site-pet/entry.tsx b/browser/site-pet/entry.tsx
+index 449e5bd..23ef1ad 100644
+--- a/browser/site-pet/entry.tsx
++++ b/browser/site-pet/entry.tsx
+@@ -4,7 +4,7 @@ import { BobPet } from '../../src/components/BobPet';
+ import { formatDeskClock } from '../../src/components/DeskClock';
+ import { configureBrowserBridge, getDesktopBridge, type PetDragState, type PetPointerState } from '../../src/desktopBridge';
+ import { createInitialState } from '../../src/game/simulation/rules';
+-import { MusicPlayerProvider } from '../../src/music/MusicPlayerProvider';
++import { MusicPlayerProvider, useMusicPlayer, type MusicPlayerContextValue } from '../../src/music/MusicPlayerProvider';
+ import { petSounds } from '../../src/pet/petSounds';
+ import { PET_SOUND_SETTINGS_KEY } from '../../src/pet/petSoundSettings';
+ import { petMusicLayout } from '../../desktop/electron/petJukeboxLayout.mjs';
+@@ -15,6 +15,9 @@ import './style.css';
+ const CHANNEL = 'oip-site-bob-v1';
+ type Point = { x: number; y: number };
+ type Rect = Point & { width: number; height: number };
++type VisibleViewport = { width: number; height: number; left: number; top: number; scale: number };
++let parentViewport: VisibleViewport | null = null;
++const viewport = (): VisibleViewport => parentViewport ?? { width: innerWidth, height: innerHeight, left: 0, top: 0, scale: 1 };
+ const memory = new Map<string, unknown>();
+ let persistenceAvailable = true;
+ const scoped = (key: string) => `oip-site-bob:${key}`;
+@@ -49,6 +52,8 @@ let readingInteraction = 0;
+ let readingEditSequence = 0;
+ let readingEditText = '';
+ let readingEnabled = false;
++let readingTyping = false;
++let reportedTyping = false;
+ let readingTopInset = 0;
+ let settingsExpanded = false;
+ const stage = () => talking ? { width: innerWidth <= 600 ? Math.min(288, innerWidth - 16) : 240, height: innerWidth <= 600 ? 248 : 180 } : base;
+@@ -77,18 +82,26 @@ let drag: { offset: Point; last: PetPointerState | null } | null = null;
+ let dragTimer: number | undefined;
+ const clamp = (value: number, low: number, high: number) => Math.max(low, Math.min(value, Math.max(low, high)));
+ const running = () => active && documentVisible;
++const typingLayout = () => readingTyping && (innerWidth <= 768 || matchMedia('(pointer: coarse)').matches);
+ 
+ function geometry() {
++  const view = viewport();
+   const currentStage = stage();
++  if (menu.open && typingLayout()) {
++    const width = Math.min(336, view.width - 16), height = currentStage.height + 64;
++    const left = clamp(anchor.x - currentStage.width / 2, view.left + 8, view.left + view.width - width - 8);
++    const top = Math.max(view.top + 8, view.top + view.height - height - 12);
++    return { width, height, x: left + currentStage.width / 2, y: top + currentStage.height, left, top, canvasOffsetY: 0 };
++  }
+   const layout = menu.open ? petMusicLayout(currentStage) : { ...currentStage, canvasOffsetY: 0 };
+   const smallDock = menu.open && innerWidth <= 600;
+-  const footBottom = smallDock ? settingsExpanded ? 176 : 44 : 0;
+-  const size = { ...layout, width: smallDock ? Math.min(336, innerWidth - 16) : menu.open && !settingsExpanded ? Math.ceil(petMusicLayout(currentStage).panelLeft + petMusicLayout(currentStage).panelWidth) : layout.width,
+-    height: smallDock ? Math.max(settingsExpanded ? 401 : 269, currentStage.height + footBottom) : layout.height };
++  const footBottom = smallDock ? settingsExpanded ? 192 : 60 : 0;
++  const size = { ...layout, width: smallDock ? Math.min(336, view.width - 16) : menu.open && !settingsExpanded ? Math.ceil(petMusicLayout(currentStage).panelLeft + petMusicLayout(currentStage).panelWidth) : layout.width,
++    height: smallDock ? Math.max(settingsExpanded ? 417 : 285, currentStage.height + footBottom) : layout.height };
+   // Panel fitting is temporary. Closing restores the parent's requested foot.
+-  const x = drag ? anchor.x : clamp(anchor.x, currentStage.width / 2 + 4, innerWidth - size.width + currentStage.width / 2 - 4);
+-  const inset = menu.open ? Math.min(readingTopInset, Math.max(0,innerHeight-size.height-20)) : 0;
+-  const y = drag ? anchor.y : clamp(anchor.y, size.height - footBottom + inset, innerHeight - (menu.open ? smallDock ? settingsExpanded ? 232 : 68 : 56 : 12));
++  const x = drag ? anchor.x : clamp(anchor.x, view.left + currentStage.width / 2 + 4, view.left + view.width - size.width + currentStage.width / 2 - 4);
++  const inset = menu.open ? Math.min(readingTopInset, Math.max(0,view.height-size.height-20)) : 0;
++  const y = drag ? anchor.y : clamp(anchor.y, view.top + size.height - footBottom + inset, view.top + view.height - (menu.open ? smallDock ? settingsExpanded ? 248 : 84 : 68 : 12));
+   return { ...size, x, y, left: x - currentStage.width / 2, top: y - size.height + 8 + footBottom };
+ }
+ function layout() {
+@@ -96,12 +109,15 @@ function layout() {
+   const box = geometry();
+   Object.assign(element.style, { left: `${box.left}px`, top: `${box.top}px`, width: `${box.width}px`, height: `${box.height}px` });
+   const compactReading = menu.open && innerWidth <= 600;
+-  const readingWidth = compactReading ? Math.min(260, box.width - 48) : 260;
++  const readingWidth = typingLayout() ? Math.min(320, box.width) : compactReading ? Math.min(280, box.width - 48) : 300;
+   const musicLayout = petMusicLayout(stage());
+-  const readingLeft = compactReading ? (box.width - readingWidth + 48) / 2 : (musicLayout.panelLeft + musicLayout.panelWidth - readingWidth) / 2;
++  const readingLeft = typingLayout() ? (box.width - readingWidth) / 2 : compactReading ? (box.width - readingWidth + 48) / 2 : (musicLayout.panelLeft + musicLayout.panelWidth - readingWidth) / 2;
+   element.style.setProperty('--site-reading-left', `${readingLeft}px`);
+   element.style.setProperty('--site-reading-width', `${readingWidth}px`);
+   element.dataset.open = String(menu.open);
++  element.dataset.typing = String(menu.open && typingLayout());
++  const concealed=menu.open && typingLayout();
++  if(concealed!==reportedTyping){reportedTyping=concealed;tell({type:'reading-typing',active:concealed});}
+   element.dataset.theme = theme;
+   scheduleReadingLayout();
+ }
+@@ -111,12 +127,13 @@ function reportReadingLayout() {
+   const visible = Boolean(running() && menu.open && composer?.checkVisibility() && !composer.closest('[inert]'));
+   const box = composer?.getBoundingClientRect();
+   const pet = document.querySelector('.pet-bob__canvas')?.getBoundingClientRect();
+-  const jukebox = document.querySelector('.pet-jukebox')?.getBoundingClientRect();
++  const jukeboxElement = document.querySelector<HTMLElement>('.pet-jukebox');
++  const jukebox = jukeboxElement?.checkVisibility({ visibilityProperty: true }) ? jukeboxElement.getBoundingClientRect() : null;
+   const rect = box ? { x: box.x, y: box.y, width: box.width, height: box.height } : null;
+   const petRect = pet ? { x: pet.x, y: pet.y, width: pet.width, height: pet.height } : null;
+   const jukeboxRect = jukebox ? { x: jukebox.x, y: jukebox.y, width: jukebox.width, height: jukebox.height } : null;
+-  const reservedTop=menu.open?Math.min(readingTopInset,Math.max(0,innerHeight-geometry().height-20)):0;
+-  const message = { type: 'reading-layout', visible, rect, petRect, jukeboxRect, reservedTop };
++  const reservedTop=menu.open&&!typingLayout()?Math.min(readingTopInset,Math.max(0,viewport().height-geometry().height-20)):0;
++  const message = { type: 'reading-layout', visible, rect, petRect, jukeboxRect, reservedTop, typing: typingLayout(), viewport: viewport() };
+   const key = JSON.stringify(message);
+   if (key !== readingLayoutKey) { readingLayoutKey = key; tell(message); }
+ }
+@@ -125,7 +142,11 @@ function scheduleReadingLayout() {
+ }
+ function sendHits(force = false) {
+   if (!running()) { tell({ type: 'hit-regions', rects: [] }); hitKey = ''; return; }
+-  const rects = lastRects;
++  const view = viewport();
++  const rects = lastRects.map(rect => {
++    const x=Math.max(view.left,rect.x), y=Math.max(view.top,rect.y);
++    return { x,y,width:Math.min(view.left+view.width,rect.x+rect.width)-x,height:Math.min(view.top+view.height,rect.y+rect.height)-y };
++  }).filter(rect=>rect.width>0&&rect.height>0);
+   const key = JSON.stringify(rects);
+   if (force || key !== hitKey) { hitKey = key; tell({ type: 'hit-regions', rects }); }
+ }
+@@ -148,13 +169,16 @@ function endDrag() {
+   drag = null;
+   clearInterval(dragTimer);
+   dragTimer = undefined;
+-  anchor = { x: clamp(anchor.x, base.width / 2 + 4, innerWidth - base.width / 2 - 4), y: clamp(anchor.y, base.height, innerHeight - 12) };
++  const view=viewport();
++  anchor = { x: clamp(anchor.x, view.left + base.width / 2 + 4, view.left + view.width - base.width / 2 - 4), y: clamp(anchor.y, view.top + base.height, view.top + view.height - 12) };
+   layout();
+   if (last) dragListeners.forEach(callback => callback({ ...last, phase: 'end', deltaX: 0, deltaY: 0, timestamp: performance.now() }));
+   tell({ type: 'position', ...anchor, dragging: false });
+ }
+-function closeMenu() {
++function closeMenu(reason: 'user' | 'home' | 'hide') {
++  const changed = menu.open;
+   menu = { ...menu, open: false }; layout(); menuListeners.forEach(callback => callback(menu)); notify();
++  if (changed) tell({ type: 'cabinet-state', open: false, reason });
+ }
+ function setTalking(value: boolean) {
+   if (talking === value) return;
+@@ -167,7 +191,11 @@ function setSettingsExpanded(value: boolean) {
+   if (settingsExpanded === value) return;
+   settingsExpanded = value; layout(); notify();
+ }
+-function home() { endDrag(); closeMenu(); notify(); tell({ type: 'home' }); }
++function setReadingTyping(value: boolean) {
++  if (readingTyping === value) return;
++  readingTyping = value; layout(); notify(); hitKey=''; sendHits(true);
++}
++function home(reason: 'user' | 'home' = 'user') { endDrag(); setReadingTyping(false); closeMenu(reason); notify(); tell({ type: 'home' }); }
+ function observe(point: PetPointerState) {
+   pointer = point;
+   if (observing && running()) pointerListeners.forEach(callback => callback(point));
+@@ -181,7 +209,7 @@ configureBrowserBridge({
+   },
+   window: {
+     ...fallback.window,
+-    async dismissPet() { endDrag(); closeMenu(); petSounds.setVisible(false); tell({ type: 'hide' }); return true; },
++    async dismissPet() { endDrag(); setReadingTyping(false); closeMenu('hide'); petSounds.setVisible(false); tell({ type: 'hide' }); return true; },
+     async setPetHitRegions(rects) {
+       // The desktop's temporary whole-window drag mask is unnecessary here:
+       // captured input and the stage rectangle keep the website accessible.
+@@ -190,8 +218,13 @@ configureBrowserBridge({
+       sendHits(); return true;
+     },
+     async setPetMusicOpen(open) {
++      const changed = menu.open !== open;
+       const size = stage();
+-      menu = { open, petWidth: size.width, petHeight: size.height }; layout(); notify(); return menu;
++      menu = { open, petWidth: size.width, petHeight: size.height };
++      if (!open) setReadingTyping(false);
++      layout(); notify();
++      if (changed) tell({ type: 'cabinet-state', open, reason: 'user' });
++      return menu;
+     },
+     onPetMusicChanged(callback) { menuListeners.add(callback); return () => { menuListeners.delete(callback); }; },
+     async beginPetDrag(grip) {
+@@ -211,6 +244,37 @@ configureBrowserBridge({
+ const manifest: OipManifest = { version: 2, source: 'Idle Times site Pet', importedAt: '2026-10-11', rightsStatus: 'owned-approved', items: [] };
+ const initial = createInitialState(manifest);
+ const clock = formatDeskClock(new Date());
++function MusicController() {
++  const music=useMusicPlayer();
++  const current=useRef<MusicPlayerContextValue>(music);current.current=music;
++  const listeners=useRef(new Set<(state: object)=>void>());
++  const state=useMemo(()=>({
++    ready:music.playlistStatus==='ready',playlistStatus:music.playlistStatus,station:music.station,
++    albums:music.albums,tracks:music.tracks,currentAlbum:music.currentAlbum,currentTrack:music.currentTrack,
++    currentTrackIndex:music.currentTrackIndex,currentAlbumTrackIndex:music.currentAlbumTrackIndex,
++    currentAlbumTrackCount:music.currentAlbumTrackCount,isPlaying:music.isPlaying,isBuffering:music.isBuffering,
++    hasStarted:music.hasStarted,volume:music.volume,muted:music.muted,currentTime:music.currentTime,
++    duration:music.duration,errorMessage:music.errorMessage,
++  }),[music]);
++  const snapshotRef=useRef(state);snapshotRef.current=state;
++  useEffect(()=>{
++    // Same-origin callers invoke actions directly in their trusted click stack.
++    // Never defer Play through postMessage or create a second audio element.
++    const api={
++      getState:()=>structuredClone(snapshotRef.current),
++      subscribe(callback:(state:object)=>void){listeners.current.add(callback);callback(structuredClone(snapshotRef.current));return()=>{listeners.current.delete(callback);};},
++      playAlbum:(id:string)=>current.current.playAlbum(id),playTrack:(id:string)=>current.current.playTrack(id),
++      play:()=>current.current.play(),pause:()=>current.current.pause(),togglePlay:()=>current.current.togglePlay(),
++      next:()=>current.current.next(),previous:()=>current.current.previous(),
++      setVolume:(value:number)=>{if(Number.isFinite(value))current.current.setVolume(clamp(value,0,1));},
++    };
++    const target=window as Window & {oipBobMusic?:typeof api};target.oipBobMusic=api;
++    window.dispatchEvent(new Event('oipBobMusic-ready'));tell({type:'music-ready'});
++    return()=>{if(target.oipBobMusic===api)delete target.oipBobMusic;listeners.current.clear();};
++  },[]);
++  useEffect(()=>{listeners.current.forEach(callback=>callback(structuredClone(state)));},[state]);
++  return null;
++}
+ function onPainted() {
+   if (!running() || painted) return;
+   painted = true; tell({ type: 'painted' }); sendHits(true);
+@@ -255,6 +319,8 @@ function ReadingComposer() {
+     {readingEnabled ? <><label htmlFor="site-reading-query" className="site-reading-composer__label">What would you like to read about?</label>
+     <textarea ref={input} id="site-reading-query" name="interest" rows={1} maxLength={500}
+       placeholder="What would you like to read about?" value={text} disabled={readingBusy}
++      onFocus={()=>setReadingTyping(true)}
++      onBlur={()=>requestAnimationFrame(()=>{if(document.activeElement!==input.current)setReadingTyping(false);})}
+       onChange={event => setText(event.target.value)}
+       onKeyDown={event => {
+         if (event.key === 'Escape') {
+@@ -287,14 +353,16 @@ function SitePet() {
+   }, [live]);
+   useEffect(() => { layout(); sendHits(true); });
+   return <div ref={node => { element = node; layout(); }} className="site-bob" data-open={menu.open}>
+-    {started && <MusicPlayerProvider lazyAudio suspended={!audioActive}>
+-      <BobPet siteOverlay siteTapDisclosure siteRevealSequence={controlsRevealSequence} siteRevealKeyboard={controlsRevealKeyboard} state={state} manifest={manifest} clock={clock} companionVisible={live} menuOpen={false}
++    <MusicPlayerProvider lazyAudio suspended={!audioActive}>
++      <MusicController />
++      {started && <BobPet siteOverlay siteTapDisclosure siteRevealSequence={controlsRevealSequence} siteRevealKeyboard={controlsRevealKeyboard} state={state} manifest={manifest} clock={clock} companionVisible={live} menuOpen={false}
+         greetingSequence={greetingSequence} onTalkChanged={setTalking} onPainted={onPainted} onContextMenu={() => {}} onDismissMenu={() => {}}
+         readingComposer={<ReadingComposer />} readingOpenSequence={readingOpenSequence} onSiteSettingsChanged={setSettingsExpanded}
++        onBrowseMusic={()=>tell({type:'browse-music'})}
+         onActivityChange={value => { activity = value; write('activity', value); notify(); }}
+         onCalmChange={value => { calm = value; write('calm', calm); notify(); }}
+-        controls={<button type="button" className="toggle" data-view-button aria-label="Return Bob to his starting spot" onClick={home}>Home</button>} />
+-    </MusicPlayerProvider>}
++        controls={<button type="button" className="toggle" data-view-button aria-label="Return Bob to his starting spot" onClick={()=>home()}>Home</button>} />}
++    </MusicPlayerProvider>
+   </div>;
+ }
+ 
+@@ -303,6 +371,10 @@ window.addEventListener('message', event => {
+   const data = event.data;
+   if (data.type === 'placement' && Number.isFinite(data.x) && Number.isFinite(data.y) && !drag) {
+     anchor = { x: data.x, y: data.y }; layout(); hitKey = '';
++  } else if (data.type === 'viewport' && [data.width,data.height,data.left,data.top,data.scale].every(Number.isFinite)
++      && data.width>0 && data.height>0 && data.left>=0 && data.top>=0 && data.scale>0) {
++    parentViewport={width:data.width,height:data.height,left:data.left,top:data.top,scale:data.scale};
++    layout();notify();sendHits(true);
+   } else if (data.type === 'visibility' && typeof data.active === 'boolean') {
+     const nextAudio = typeof data.audioActive === 'boolean' ? data.audioActive : data.active;
+     if (active !== data.active || audioActive !== nextAudio) {
+@@ -342,7 +414,7 @@ window.addEventListener('message', event => {
+   } else if (data.type === 'reading-reserve' && Number.isFinite(data.height)) {
+     const next=Math.max(0,Math.min(240,data.height));
+     if(readingTopInset!==next){readingTopInset=next;layout();notify();sendHits(true);}
+-  } else if (data.type === 'home' || data.type === 'reset') home();
++  } else if (data.type === 'home' || data.type === 'reset') home('home');
+ });
+ window.addEventListener('pointermove', event => observe({ x: event.clientX, y: event.clientY, screenX: event.screenX, screenY: event.screenY, timestamp: performance.now() }), true);
+ document.addEventListener('pointerdown', event => {
+@@ -359,7 +431,8 @@ document.addEventListener('keydown', event => {
+   if (!direction[event.key]) return;
+   event.preventDefault();
+   const step = event.shiftKey ? 40 : 10, delta = direction[event.key];
+-  anchor = { x: clamp(anchor.x + delta.x * step, base.width / 2 + 4, innerWidth - base.width / 2 - 4), y: clamp(anchor.y + delta.y * step, base.height, innerHeight - 12) };
++  const view=viewport();
++  anchor = { x: clamp(anchor.x + delta.x * step, view.left + base.width / 2 + 4, view.left + view.width - base.width / 2 - 4), y: clamp(anchor.y + delta.y * step, view.top + base.height, view.top + view.height - 12) };
+   layout(); tell({ type: 'position', ...anchor, dragging: false });
+ }, true);
+ document.addEventListener('focusin',()=>{readingInteraction++;},true);
+diff --git a/browser/site-pet/style.css b/browser/site-pet/style.css
+index f46d363..0491031 100644
+--- a/browser/site-pet/style.css
++++ b/browser/site-pet/style.css
+@@ -12,17 +12,17 @@ html[data-theme="dark"] { color-scheme:dark; }
+ .site-bob .pet-activity-controls__choices { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
+ .site-bob .pet-activity-controls__option { min-width:0; min-height:29px; margin:0; padding:3px; border:1px solid #6a694d; border-radius:4px; background:#20251d; color:#b9b89e; font:inherit; cursor:pointer; }
+ .site-bob .pet-activity-controls__option[aria-checked="true"] { background:#525b3c; border-color:#a6aa68; color:#fff0c5; font-weight:700; }
+-.site-reading-composer { position:absolute; left:var(--site-reading-left); bottom:-44px; z-index:32; display:flex; align-items:center; gap:2px; width:var(--site-reading-width,260px); height:36px; box-sizing:border-box; margin:0; padding:2px 3px 2px 9px; border:1px solid #ffffff9c; border-radius:11px; background:#ffffff50; backdrop-filter:blur(16px) saturate(1.35); -webkit-backdrop-filter:blur(16px) saturate(1.35); box-shadow:0 2px 9px #44342112,inset 0 1px #ffffff6b; color:#443b30; }
+-.site-bob .pet-bob--music .pet-bob__settings { top:auto; right:auto; bottom:-38px; left:calc(var(--site-reading-left) - 32px); }
++.site-reading-composer { position:absolute; left:var(--site-reading-left); bottom:-56px; z-index:32; display:flex; align-items:center; gap:2px; width:var(--site-reading-width,300px); height:48px; box-sizing:border-box; margin:0; padding:1px 1px 1px 9px; border:1px solid #ffffff9c; border-radius:11px; background:#ffffff50; backdrop-filter:blur(16px) saturate(1.35); -webkit-backdrop-filter:blur(16px) saturate(1.35); box-shadow:0 2px 9px #44342112,inset 0 1px #ffffff6b; color:#443b30; }
++.site-bob .pet-bob--music .pet-bob__settings { top:auto; right:auto; bottom:-44px; left:calc(var(--site-reading-left) - 32px); }
+ .site-reading-composer__label { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+-.site-reading-composer textarea { flex:1; min-width:0; width:100%; height:28px; box-sizing:border-box; margin:0; padding:6px 0; border:0; border-radius:3px; resize:none; overflow:hidden; white-space:nowrap; background:transparent; color:#443b30; font:11px/16px system-ui,sans-serif; }
++.site-reading-composer textarea { flex:1; min-width:0; width:100%; height:44px; box-sizing:border-box; margin:0; padding:12px 0; border:0; border-radius:3px; resize:none; overflow:hidden; white-space:nowrap; background:transparent; color:#443b30; font:16px/20px system-ui,sans-serif; }
+ .site-reading-composer textarea::placeholder { color:#70695f; opacity:.85; }
+ .site-reading-composer textarea:focus-visible { outline:1px solid #8f795f8c; outline-offset:2px; }
+-.site-reading-composer button { display:grid; place-items:center; flex:0 0 30px; width:30px; height:30px; min-height:30px; margin:0; padding:6px; border:1px solid #ffffff80; border-radius:8px; background:#ffffff4d; color:#645848; cursor:pointer; }
++.site-reading-composer button { display:grid; place-items:center; flex:0 0 44px; width:44px; height:44px; min-height:44px; margin:0; padding:10px; border:1px solid #ffffff80; border-radius:8px; background:#ffffff4d; color:#645848; cursor:pointer; }
+ .site-reading-composer button svg { width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+ .site-reading-composer button:focus-visible { outline:2px solid #8f795f; outline-offset:2px; }
+ .site-reading-composer button:disabled { opacity:.4; cursor:default; }
+-.site-reading-composer .site-reading-composer__discover { display:flex; justify-content:space-between; flex:1; width:auto; padding:4px 7px 4px 0; border:0; background:transparent; font:11px/16px system-ui,sans-serif; }
++.site-reading-composer .site-reading-composer__discover { display:flex; justify-content:space-between; flex:1; width:auto; padding:4px 7px 4px 0; border:0; background:transparent; font:14px/20px system-ui,sans-serif; }
+ .site-reading-composer textarea:disabled { opacity:.7; }
+ .site-bob .pet-settings-dock[data-closing="true"] .site-reading-composer { visibility:hidden; pointer-events:none; }
+ html[data-theme="dark"] .site-reading-composer { background:#24251f52; border-color:#ffffff35; color:#f3e9d7; }
+@@ -33,12 +33,12 @@ html[data-theme="dark"] .site-reading-composer button { background:#ffffff12; bo
+   .site-bob .pet-bob__settings { width:44px; height:44px; top:0; right:0; }
+   .site-bob .pet-bob__settings-button { width:44px; height:44px; min-width:44px; }
+   .site-bob .pet-bob__settings-button svg { width:20px; height:20px; }
+-  .site-bob .pet-bob--music .pet-bob__stage { bottom:44px !important; }
+-  .site-bob .pet-jukebox-slot { left:calc(100% - 204px); bottom:52px; width:204px; height:209px; --pet-jukebox-scale:1; }
++  .site-bob .pet-bob--music .pet-bob__stage { bottom:60px !important; }
++  .site-bob .pet-jukebox-slot { left:calc(100% - 204px); bottom:68px; width:204px; height:209px; --pet-jukebox-scale:1; }
+   .site-reading-composer { bottom:0; }
+-  .site-bob .pet-bob--music .pet-bob__settings { bottom:-48px; left:calc(var(--site-reading-left) - 48px); }
+-  .site-bob .pet-bob--music[data-site-settings-open="true"] .pet-bob__stage { bottom:176px !important; }
+-  .site-bob .pet-bob[data-site-settings-open="true"] .pet-jukebox-slot { bottom:184px; }
++  .site-bob .pet-bob--music .pet-bob__settings { bottom:-60px; left:calc(var(--site-reading-left) - 48px); }
++  .site-bob .pet-bob--music[data-site-settings-open="true"] .pet-bob__stage { bottom:192px !important; }
++  .site-bob .pet-bob[data-site-settings-open="true"] .pet-jukebox-slot { bottom:200px; }
+   .site-bob .pet-bob[data-site-settings-open="true"] .site-reading-composer { bottom:132px; }
+   .site-bob .pet-bob__settings-panel { left:0; width:100%; bottom:0; gap:5px; padding:5px; grid-template-columns:repeat(3,minmax(0,1fr)); }
+   .site-bob .pet-bob__settings-panel .toggle { min-height:44px; height:44px; font-size:10px; }
+@@ -49,3 +49,10 @@ html[data-theme="dark"] .site-reading-composer button { background:#ffffff12; bo
+   .site-bob .pet-interview-paper { min-width:136px; min-height:60px; }
+   .site-bob .pet-bob--interview .pet-jukebox-slot { visibility:hidden; pointer-events:none; }
+ }
++
++/* Keyboard accommodation is visual only: the cabinet and music keep their state. */
++.site-bob[data-typing="true"] .pet-jukebox-slot,
++.site-bob[data-typing="true"] .pet-bob__settings,
++.site-bob[data-typing="true"] .pet-bob__settings-panel { visibility:hidden; pointer-events:none; }
++.site-bob[data-typing="true"] .pet-bob--music .pet-bob__stage { bottom:64px !important; }
++.site-bob[data-typing="true"] .site-reading-composer { bottom:0 !important; }
+diff --git a/progress.md b/progress.md
+index 53b3371..33536bc 100644
+--- a/progress.md
++++ b/progress.md
+@@ -1535,3 +1535,11 @@ The next two 72-record checkpoints are historical. The six illustrated `The Thin
+ - Preserved the pending universal-disclosure adapter/progress edits and three untracked QA helpers. All eight sources matched the previous export before this edit. Focused type checks, export verification and smoke remain pending; parent owns website browser QA. No provider calls, publication or remote game writes.
+ - Validation complete: shared TypeScript and strict site-adapter TypeScript passed. Exported `index-CfZEBzVr.js` with unchanged `index-BYXARHwK.css` to the context preview runtime: 46 payload files, 26,919,164 bytes. Verified all eight source hashes and all 46 payload hashes/byte lengths; manifest records source commit `4f7873301fa208a72b12e704e29530a5857dd7a7` plus intentional working-tree changes.
+ - Required standard web-game client completed one idle burst at `http://127.0.0.1:8772/`; inspected screenshot shows quiet sprite-only arrival, state is ready with reading/composer hidden, and no error artifact. Evidence: `C:/Users/lawto/Documents/40_Scratch/2026-10/bob-context-preview-runtime/standard-client-right-click/` and `runtime-manifest-right-click-check.json`. Parent separately verified five focused browser cases: actual right-click toggle in normal/reduced motion, Help dismissal/music continuity, keyboard and mobile disclosure. No recommendation API calls or publication.
++
++## 2026-10-28 - Sans Serif website music and mobile reading adapter
++
++- Read the full approved Sans-Serif-JukeBob implementation plan and preserved source checkpoint cd5c3bf matching the deployed hashes. This isolated source checkout reuses the earlier checkout's node_modules through a junction; no dependency installation or installed Steam change.
++- Website adapter mounts the lazy shared music provider independently of Bob visibility and exposes same-origin window.oipBobMusic state/subscription plus direct trusted-click playback methods. The cabinet adds a website-only Browse albums action. Album card numbering now uses the playing album's index/count.
++- Parent viewport width/height/left/top/scale are accepted only through the existing exact-parent/source/origin bridge. Temporary mobile typing layout hides the cabinet/settings visually, retains logical cabinet/music/saved placement, places the 16px textarea and 44px send control above the keyboard, and clips hit regions in the same layout viewport coordinates. No pinch-zoom restriction was added. Explicit cabinet transitions distinguish user/home/hide; typing and visibility do not manufacture user transitions.
++- Export tool supports website-owned grouped music, nested MP3 paths, explicit cover renditions and optional --catalog-source provenance, and hashes all maintained music implementation sources. It does not change the source MP3 bytes.
++- Shared and strict adapter TypeScript pass after the engine's parser narrowing fix; export script syntax and diff checks pass. Export and final integrated browser/standard-client smoke are pending root coordination. Real iPhone keyboard/zoom validation remains unavailable and must not be claimed from Chromium emulation. No provider recommendation calls, commits, merge, deployment or game remote writes.
+diff --git a/src/components/BobPet.tsx b/src/components/BobPet.tsx
+index dcf0702..22a1717 100644
+--- a/src/components/BobPet.tsx
++++ b/src/components/BobPet.tsx
+@@ -57,6 +57,7 @@ type Props = {
+   readingComposer?: ReactNode;
+   readingOpenSequence?: number;
+   onSiteSettingsChanged?: (open: boolean) => void;
++  onBrowseMusic?: () => void;
+   onPainted?: () => void;
+ };
+ type PetWindow = Window & {
+@@ -1021,6 +1022,8 @@ export function BobPet(props: Props) {
+           }} />}
+           {props.controls ?? <button type="button" className="toggle" data-view-button aria-label="View" title="Open the app to change views"
+             onClick={() => { window.location.href = "/"; }}>View</button>}
++          {props.siteOverlay && props.onBrowseMusic && <button type="button" className="toggle" data-pet-browse-music
++            onClick={props.onBrowseMusic}>Browse albums</button>}
+           <PetActivityControls value={normalizePetActivity(props.state.settings.petActivity)} open={activityOpen}
+             calm={props.siteOverlay && props.onCalmChange ? { enabled: props.state.settings.reducedMotion, onChange: props.onCalmChange } : undefined}
+             onChange={props.onActivityChange} onOpenChange={open => {
+diff --git a/src/components/PetJukebox.tsx b/src/components/PetJukebox.tsx
+index a13ed15..4023c8a 100644
+--- a/src/components/PetJukebox.tsx
++++ b/src/components/PetJukebox.tsx
+@@ -18,8 +18,8 @@ export function PetJukebox({ onClose, onEscape = onClose, autoFocus = true, redu
+   const volume = Math.round((player.muted ? 0 : player.volume) * 100);
+   const status = player.errorMessage ? "Try another record" : player.isBuffering ? "Tuning…" : player.isPlaying ? "Now playing" : "Ready to play";
+   const card = useMemo<JukeboxCard>(() => ({ id: player.currentTrack?.id ?? `playlist-${player.playlistStatus}`, title,
+-    index: hasTracks ? player.currentTrackIndex + 1 : 0, count: player.tracks.length }),
+-    [player.currentTrack?.id, player.playlistStatus, title, hasTracks, player.currentTrackIndex, player.tracks.length]);
++    index: hasTracks ? player.currentAlbumTrackIndex + 1 : 0, count: player.currentAlbumTrackCount }),
++    [player.currentTrack?.id, player.playlistStatus, title, hasTracks, player.currentAlbumTrackIndex, player.currentAlbumTrackCount]);
+   const [selector] = useState(() => new PetJukeboxCards(card));
+   const [cards, setCards] = useState(() => selector.snapshot());
+   const turn = cards.turn;
+diff --git a/src/music/MusicPlayerProvider.tsx b/src/music/MusicPlayerProvider.tsx
+index 20cae39..e20bce9 100644
+--- a/src/music/MusicPlayerProvider.tsx
++++ b/src/music/MusicPlayerProvider.tsx
+@@ -1,592 +1,105 @@
+-import {
+-  createContext,
+-  useCallback,
+-  useContext,
+-  useEffect,
+-  useMemo,
+-  useRef,
+-  useState
+-} from "react";
++import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
+ import { getDesktopBridge } from "../desktopBridge";
+-import { buildShuffleOrder } from "./shuffle";
+-import { loadMusicPlaylist, type MusicPlaylist, type MusicTrack } from "./playlist";
+-import {
+-  DEFAULT_MUSIC_SETTINGS,
+-  MUSIC_SETTINGS_KEY,
+-  normalizeMusicSettings,
+-  type PersistedMusicSettings
+-} from "./settings";
+-
+-export type MusicPlayerState = {
+-  playlistStatus: "loading" | "empty" | "ready" | "error";
+-  station: string;
+-  tracks: MusicTrack[];
+-  currentTrack: MusicTrack | null;
+-  currentTrackIndex: number;
+-  isPlaying: boolean;
+-  isBuffering: boolean;
+-  volume: number;
+-  muted: boolean;
+-  shuffle: boolean;
+-  favoriteTrackIds: string[];
+-  currentTime: number;
+-  duration: number;
+-  errorMessage: string | null;
+-};
+-
+-type MusicPlayerContextValue = MusicPlayerState & {
+-  togglePlay: () => void;
+-  next: () => void;
+-  previous: (options?: { restartCurrent?: boolean }) => void;
+-  setVolume: (volume: number) => void;
+-  toggleMute: () => void;
+-  toggleShuffle: () => void;
+-  selectTrack: (index: number) => void;
+-  isFavorite: (trackId: string) => boolean;
+-  toggleFavorite: (trackId: string) => void;
+-};
+-
++import { loadMusicPlaylist } from "./playlist";
++import { MUSIC_SETTINGS_KEY, type PersistedMusicSettings } from "./settings";
++import { MusicPlayerController, initialMusicState, type MusicPlayerState } from "./controller";
++export type { MusicPlayerState } from "./controller";
++
++export type MusicPlayerContextValue = MusicPlayerState & Pick<MusicPlayerController,
++  "play" | "pause" | "togglePlay" | "playAlbum" | "playTrack" | "next" | "previous" | "setVolume" |
++  "toggleMute" | "toggleShuffle" | "selectTrack" | "isFavorite" | "toggleFavorite">;
+ const MusicPlayerContext = createContext<MusicPlayerContextValue | null>(null);
+ let musicInstanceSequence = 0;
+ 
+ export function MusicPlayerProvider({ children, lazyAudio = false, suspended = false }: { children: React.ReactNode; lazyAudio?: boolean; suspended?: boolean }) {
+   const bridge = useMemo(() => getDesktopBridge(), []);
+-  const audioRef = useRef<HTMLAudioElement | null>(null);
+-  const tracksRef = useRef<MusicTrack[]>([]);
+-  const currentIndexRef = useRef(0);
+-  const isPlayingRef = useRef(false);
+-  const shuffleRef = useRef(false);
+-  const shuffleQueueRef = useRef<number[]>([]);
+-  const historyRef = useRef<number[]>([]);
+-  const initialTrackIdRef = useRef<string | null>(null);
+-  const hydratedRef = useRef(false);
+-  const nextRef = useRef<(autoplay?: boolean) => void>(() => {});
+-  const previousRef = useRef<() => void>(() => {});
+-  const togglePlayRef = useRef<() => void>(() => {});
+-  const toggleShuffleRef = useRef<() => void>(() => {});
++  const controller = useRef<MusicPlayerController | null>(null);
++  const [state, setState] = useState(initialMusicState);
+   const [instanceId] = useState(() => ++musicInstanceSequence);
+-  const suspendedRef = useRef(suspended);
+-  const resumeAfterSuspend = useRef(false);
+-  suspendedRef.current = suspended;
++  const suspendedRef = useRef(suspended); suspendedRef.current = suspended;
+ 
+-  const [playlist, setPlaylist] = useState<MusicPlaylist | null>(null);
+-  const [playlistStatus, setPlaylistStatus] = useState<MusicPlayerState["playlistStatus"]>("loading");
+-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+-  const [isPlaying, setIsPlaying] = useState(false);
+-  const [isBuffering, setIsBuffering] = useState(false);
+-  const [volume, setVolumeState] = useState(DEFAULT_MUSIC_SETTINGS.volume);
+-  const [muted, setMuted] = useState(DEFAULT_MUSIC_SETTINGS.muted);
+-  const [shuffle, setShuffle] = useState(DEFAULT_MUSIC_SETTINGS.shuffle);
+-  const [favoriteTrackIds, setFavoriteTrackIds] = useState<string[]>([]);
+-  const [currentTime, setCurrentTime] = useState(0);
+-  const [duration, setDuration] = useState(0);
+-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+   useEffect(() => {
++    const player = new MusicPlayerController(new Audio(), { lazyAudio, baseURI: document.baseURI });
++    controller.current = player; player.setSuspended(suspendedRef.current);
++    const unsubscribe = player.subscribe(() => setState(player.getState()));
+     let active = true;
+-
+-    async function boot() {
+-      try {
+-        const [loadedPlaylist, savedSettings] = await Promise.all([
+-          loadMusicPlaylist(),
+-          bridge.save.load(MUSIC_SETTINGS_KEY)
+-        ]);
+-        if (!active) return;
+-
+-        const settings = normalizeMusicSettings(savedSettings);
+-        initialTrackIdRef.current = settings.currentTrackId;
+-        setVolumeState(settings.volume);
+-        setMuted(settings.muted);
+-        setShuffle(settings.shuffle);
+-        const trackIds = new Set(loadedPlaylist.tracks.map((track) => track.id));
+-        setFavoriteTrackIds(settings.favoriteTrackIds.filter((trackId) => trackIds.has(trackId)));
+-        shuffleRef.current = settings.shuffle;
+-        setPlaylist(loadedPlaylist);
+-        setPlaylistStatus(loadedPlaylist.tracks.length ? "ready" : "empty");
+-        hydratedRef.current = true;
+-      } catch (error) {
+-        if (!active) return;
+-        setPlaylistStatus("error");
+-        setErrorMessage(error instanceof Error ? error.message : String(error));
+-      }
+-    }
+-
+-    void boot();
+-    return () => {
+-      active = false;
+-    };
+-  }, [bridge]);
+-
+-  useEffect(() => {
+-    const audio = new Audio();
+-    audio.preload = lazyAudio ? "none" : "auto";
+-    audio.volume = volume;
+-    audio.muted = muted;
+-    audioRef.current = audio;
+-
+-    const onPlay = () => {
+-      isPlayingRef.current = true;
+-      setIsPlaying(true);
+-      setIsBuffering(false);
+-      if ("mediaSession" in navigator) {
+-        navigator.mediaSession.playbackState = "playing";
+-      }
+-    };
+-    const onPause = () => {
+-      isPlayingRef.current = false;
+-      setIsPlaying(false);
+-      setIsBuffering(false);
+-      if ("mediaSession" in navigator) {
+-        navigator.mediaSession.playbackState = "paused";
+-      }
+-    };
+-    const onWaiting = () => setIsBuffering(true);
+-    const onPlaying = () => setIsBuffering(false);
+-    const onLoadedMetadata = () => {
+-      setDuration(Number.isFinite(audio.duration) ? audio.duration : 0);
+-      updateMediaPosition(audio);
+-    };
+-    const onTimeUpdate = () => {
+-      setCurrentTime(audio.currentTime);
+-      updateMediaPosition(audio);
+-    };
+-    const onEnded = () => nextRef.current(true);
+-    const onError = () => {
+-      const track = tracksRef.current[currentIndexRef.current];
+-      setErrorMessage(track
+-        ? `Could not play "${track.title}". Check its bundled audio file.`
+-        : "Pressroom Radio could not play this track.");
+-      setIsBuffering(false);
+-    };
+-
+-    audio.addEventListener("play", onPlay);
+-    audio.addEventListener("pause", onPause);
+-    audio.addEventListener("waiting", onWaiting);
+-    audio.addEventListener("playing", onPlaying);
+-    audio.addEventListener("loadedmetadata", onLoadedMetadata);
+-    audio.addEventListener("timeupdate", onTimeUpdate);
+-    audio.addEventListener("ended", onEnded);
+-    audio.addEventListener("error", onError);
+-
+-    return () => {
+-      audio.pause();
+-      audio.removeAttribute("src");
+-      audio.load();
+-      audio.removeEventListener("play", onPlay);
+-      audio.removeEventListener("pause", onPause);
+-      audio.removeEventListener("waiting", onWaiting);
+-      audio.removeEventListener("playing", onPlaying);
+-      audio.removeEventListener("loadedmetadata", onLoadedMetadata);
+-      audio.removeEventListener("timeupdate", onTimeUpdate);
+-      audio.removeEventListener("ended", onEnded);
+-      audio.removeEventListener("error", onError);
+-      audioRef.current = null;
+-    };
+-    // The media element is intentionally created once. Volume and mute have
+-    // dedicated synchronization effects below.
++    void Promise.all([loadMusicPlaylist(), bridge.save.load(MUSIC_SETTINGS_KEY)]).then(([playlist, settings]) => {
++      if (active) player.configure(playlist, settings);
++    }).catch(error => { if (active) player.failLoad(error instanceof Error ? error.message : "The music catalog could not be loaded."); });
++    return () => { active = false; unsubscribe(); player.dispose(); controller.current = null; };
++    // A provider owns one audio instance for its entire persistent lifetime.
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+-  }, []);
+-
+-  useEffect(() => {
+-    const audio = audioRef.current;
+-    if (!audio) return;
+-    if (suspended) {
+-      resumeAfterSuspend.current = !audio.paused;
+-      audio.pause();
+-    } else if (resumeAfterSuspend.current) {
+-      resumeAfterSuspend.current = false;
+-      setIsBuffering(true);
+-      void audio.play().catch(error => {
+-        setIsPlaying(false); isPlayingRef.current = false; setIsBuffering(false);
+-        setErrorMessage(error instanceof Error ? error.message : "Press Play to resume music.");
+-      });
+-    }
+-  }, [suspended]);
+-
+-  const selectTrackAt = useCallback((index: number, autoplay: boolean, rememberCurrent = true) => {
+-    const tracks = tracksRef.current;
+-    const audio = audioRef.current;
+-    if (!audio || !tracks.length) return;
+-
+-    const safeIndex = ((Math.floor(index) % tracks.length) + tracks.length) % tracks.length;
+-    const previousIndex = currentIndexRef.current;
+-    if (rememberCurrent && previousIndex !== safeIndex) {
+-      historyRef.current.push(previousIndex);
+-      historyRef.current = historyRef.current.slice(-50);
+-    }
+-
+-    currentIndexRef.current = safeIndex;
+-    setCurrentTrackIndex(safeIndex);
+-    setCurrentTime(0);
+-    setErrorMessage(null);
+-
+-    const source = new URL(tracks[safeIndex].src, document.baseURI).href;
+-    if (lazyAudio && !autoplay) {
+-      // Browsing the website's cards must not download a song before Play.
+-      audio.removeAttribute("src");
+-      audio.load();
+-      setDuration(0);
+-    } else if (audio.src !== source) {
+-      setDuration(0);
+-      audio.src = source;
+-      audio.load();
+-    } else {
+-      audio.currentTime = 0;
+-      setDuration(Number.isFinite(audio.duration) ? audio.duration : 0);
+-    }
+-
+-    if (autoplay) {
+-      setIsBuffering(true);
+-      void audio.play().catch((error) => {
+-        setIsBuffering(false);
+-        setErrorMessage(error instanceof Error ? error.message : "Playback was blocked.");
+-      });
+-    }
+-  }, [lazyAudio]);
+-
+-  useEffect(() => {
+-    const tracks = playlist?.tracks ?? [];
+-    tracksRef.current = tracks;
+-    if (!tracks.length) return;
+-
+-    const savedIndex = initialTrackIdRef.current
+-      ? tracks.findIndex((track) => track.id === initialTrackIdRef.current)
+-      : -1;
+-    selectTrackAt(savedIndex >= 0 ? savedIndex : 0, false, false);
+-  }, [playlist, selectTrackAt]);
+-
+-  const next = useCallback((autoplay = isPlayingRef.current) => {
+-    const tracks = tracksRef.current;
+-    if (!tracks.length) return;
+-
+-    let targetIndex: number;
+-    if (shuffleRef.current && tracks.length > 1) {
+-      if (!shuffleQueueRef.current.length) {
+-        shuffleQueueRef.current = buildShuffleOrder(tracks.length, currentIndexRef.current);
+-      }
+-      targetIndex = shuffleQueueRef.current.shift() ?? currentIndexRef.current;
+-    } else {
+-      targetIndex = (currentIndexRef.current + 1) % tracks.length;
+-    }
+-
+-    selectTrackAt(targetIndex, autoplay);
+-  }, [selectTrackAt]);
+-
+-  const previous = useCallback((options?: { restartCurrent?: boolean }) => {
+-    const audio = audioRef.current;
+-    const tracks = tracksRef.current;
+-    if (!audio || !tracks.length) return;
+-
+-    // The jukebox's hinged selector always browses a card. Other playback
+-    // controls retain the usual restart-current-song behavior.
+-    if (options?.restartCurrent !== false && audio.currentTime > 4) {
+-      audio.currentTime = 0;
+-      setCurrentTime(0);
+-      return;
+-    }
+-
+-    const historicalIndex = historyRef.current.pop();
+-    const targetIndex = historicalIndex ?? (currentIndexRef.current - 1 + tracks.length) % tracks.length;
+-    selectTrackAt(targetIndex, isPlayingRef.current, false);
+-  }, [selectTrackAt]);
+-
+-  const togglePlay = useCallback(() => {
+-    const audio = audioRef.current;
+-    if (!audio || !tracksRef.current.length) return;
+-    if (suspendedRef.current) { resumeAfterSuspend.current = !resumeAfterSuspend.current; return; }
+-
+-    if (audio.paused) {
+-      if (lazyAudio && !audio.getAttribute("src")) {
+-        const track = tracksRef.current[currentIndexRef.current];
+-        audio.src = new URL(track.src, document.baseURI).href;
+-      }
+-      setErrorMessage(null);
+-      setIsBuffering(true);
+-      void audio.play().catch((error) => {
+-        setIsBuffering(false);
+-        setErrorMessage(error instanceof Error ? error.message : "Playback was blocked.");
+-      });
+-    } else {
+-      audio.pause();
+-    }
+-  }, [lazyAudio]);
+-
+-  const setVolume = useCallback((nextVolume: number) => {
+-    const safeVolume = Math.min(1, Math.max(0, Number.isFinite(nextVolume) ? nextVolume : 0));
+-    setVolumeState(safeVolume);
+-    if (safeVolume > 0) {
+-      setMuted(false);
+-    }
+-  }, []);
+-
+-  const toggleMute = useCallback(() => setMuted((current) => !current), []);
+-
+-  const toggleShuffle = useCallback(() => {
+-    setShuffle((current) => {
+-      const nextValue = !current;
+-      shuffleRef.current = nextValue;
+-      shuffleQueueRef.current = [];
+-      return nextValue;
+-    });
+-  }, []);
+-
+-  const selectTrack = useCallback((index: number) => {
+-    selectTrackAt(index, true);
+-  }, [selectTrackAt]);
+-
+-  const isFavorite = useCallback(
+-    (trackId: string) => favoriteTrackIds.includes(trackId),
+-    [favoriteTrackIds]
+-  );
+-
+-  const toggleFavorite = useCallback((trackId: string) => {
+-    if (!tracksRef.current.some((track) => track.id === trackId)) return;
+-
+-    setFavoriteTrackIds((current) => (
+-      current.includes(trackId)
+-        ? current.filter((id) => id !== trackId)
+-        : [...current, trackId]
+-    ));
+-  }, []);
+-
+-  nextRef.current = next;
+-  previousRef.current = previous;
+-  togglePlayRef.current = togglePlay;
+-  toggleShuffleRef.current = toggleShuffle;
+-
+-  useEffect(() => {
+-    const audio = audioRef.current;
+-    if (audio) audio.volume = volume;
+-  }, [volume]);
+-
+-  useEffect(() => {
+-    const audio = audioRef.current;
+-    if (audio) audio.muted = muted;
+-  }, [muted]);
++  }, [bridge]);
+ 
+-  const currentTrack = playlist?.tracks[currentTrackIndex] ?? null;
++  useEffect(() => controller.current?.setSuspended(suspended), [suspended]);
+ 
+-  useEffect(() => {
+-    const debugWindow = window as Window & {
+-      __idleTimesMusicDebug?: {
+-        playlistStatus: MusicPlayerState["playlistStatus"];
+-        trackCount: number;
+-        currentTrackId: string | null;
+-        currentTrackIndex: number;
+-        isPlaying: boolean;
+-        isBuffering: boolean;
+-        volume: number;
+-        muted: boolean;
+-        shuffle: boolean;
+-        favoriteTrackIds: string[];
+-        instanceId: number; currentTime: number; duration: number;
+-        readyState: number; audioPaused: boolean; audioError: { code: number; message: string } | null;
+-        suspended: boolean;
+-      };
+-    };
+-    debugWindow.__idleTimesMusicDebug = {
+-      playlistStatus,
+-      trackCount: playlist?.tracks.length ?? 0,
+-      currentTrackId: currentTrack?.id ?? null,
+-      currentTrackIndex,
+-      isPlaying,
+-      isBuffering,
+-      volume,
+-      muted,
+-      shuffle,
+-      favoriteTrackIds,
+-      instanceId, currentTime: audioRef.current?.currentTime ?? currentTime,
+-      duration: Number.isFinite(audioRef.current?.duration) ? audioRef.current!.duration : duration,
+-      readyState: audioRef.current?.readyState ?? 0, audioPaused: audioRef.current?.paused ?? true,
+-      audioError: audioRef.current?.error ? { code: audioRef.current.error.code, message: audioRef.current.error.message } : null,
+-      suspended
+-    };
+-  }, [
+-    currentTrack?.id,
+-    currentTrackIndex,
+-    favoriteTrackIds,
+-    isBuffering,
+-    isPlaying,
+-    muted,
+-    playlist?.tracks.length,
+-    playlistStatus,
+-    shuffle,
+-    volume, currentTime, duration, errorMessage, instanceId, suspended
+-  ]);
++  const actions = useMemo(() => ({
++    play: () => controller.current?.play(), pause: () => controller.current?.pause(), togglePlay: () => controller.current?.togglePlay(),
++    playAlbum: (id: string) => controller.current?.playAlbum(id), playTrack: (id: string) => controller.current?.playTrack(id),
++    next: () => controller.current?.next(), previous: (options?: { restartCurrent?: boolean }) => controller.current?.previous(options),
++    setVolume: (volume: number) => controller.current?.setVolume(volume), toggleMute: () => controller.current?.toggleMute(),
++    toggleShuffle: () => controller.current?.toggleShuffle(), selectTrack: (index: number) => controller.current?.selectTrack(index),
++    isFavorite: (id: string) => controller.current?.isFavorite(id) ?? false, toggleFavorite: (id: string) => controller.current?.toggleFavorite(id)
++  }), []);
+ 
+   useEffect(() => {
+-    if (!hydratedRef.current) return;
+-
+-    const saveTimer = window.setTimeout(() => {
+-      const settings: PersistedMusicSettings = {
+-        version: 1,
+-        currentTrackId: currentTrack?.id ?? null,
+-        volume,
+-        muted,
+-        shuffle,
+-        favoriteTrackIds
+-      };
++    if (state.playlistStatus !== "ready" && state.playlistStatus !== "empty") return;
++    const timer = window.setTimeout(() => {
++      const settings: PersistedMusicSettings = { version: 1, currentTrackId: state.currentTrack?.id ?? null,
++        volume: state.volume, muted: state.muted, shuffle: state.shuffle, favoriteTrackIds: state.favoriteTrackIds };
+       void bridge.save.save(MUSIC_SETTINGS_KEY, settings);
+     }, 250);
+-
+-    return () => window.clearTimeout(saveTimer);
+-  }, [bridge, currentTrack?.id, favoriteTrackIds, muted, shuffle, volume]);
++    return () => window.clearTimeout(timer);
++  }, [bridge, state.playlistStatus, state.currentTrack?.id, state.volume, state.muted, state.shuffle, state.favoriteTrackIds]);
+ 
+   useEffect(() => {
+-    void bridge.companion.setStatus({
+-      musicHasTracks: Boolean(playlist?.tracks.length),
+-      musicPlaying: isPlaying,
+-      musicTrackTitle: currentTrack?.title ?? null,
+-      musicShuffle: shuffle
+-    });
+-  }, [bridge, currentTrack?.title, isPlaying, playlist?.tracks.length, shuffle]);
+-
++    void bridge.companion.setStatus({ musicHasTracks: Boolean(state.tracks.length), musicPlaying: state.isPlaying,
++      musicTrackTitle: state.currentTrack?.title ?? null, musicShuffle: state.shuffle });
++  }, [bridge, state.tracks.length, state.isPlaying, state.currentTrack?.title, state.shuffle]);
+   useEffect(() => {
+-    const unsubscribeToggle = bridge.companion.onToggleMusic(() => togglePlayRef.current());
+-    const unsubscribeNext = bridge.companion.onMusicNext(() => nextRef.current());
+-    const unsubscribePrevious = bridge.companion.onMusicPrevious(() => previousRef.current());
+-    const unsubscribeShuffle = bridge.companion.onToggleMusicShuffle(() => toggleShuffleRef.current());
+-    return () => {
+-      unsubscribeToggle();
+-      unsubscribeNext();
+-      unsubscribePrevious();
+-      unsubscribeShuffle();
+-    };
+-  }, [bridge]);
++    const unsubscribe = [bridge.companion.onToggleMusic(actions.togglePlay), bridge.companion.onMusicNext(actions.next),
++      bridge.companion.onMusicPrevious(actions.previous), bridge.companion.onToggleMusicShuffle(actions.toggleShuffle)];
++    return () => unsubscribe.forEach(callback => callback());
++  }, [bridge, actions]);
+ 
+   useEffect(() => {
+     if (!("mediaSession" in navigator)) return;
+-
+-    const handlers: Array<[MediaSessionAction, MediaSessionActionHandler]> = [
+-      ["play", () => {
+-        if (audioRef.current?.paused) togglePlayRef.current();
+-      }],
+-      ["pause", () => {
+-        if (audioRef.current && !audioRef.current.paused) togglePlayRef.current();
+-      }],
+-      ["previoustrack", () => previousRef.current()],
+-      ["nexttrack", () => nextRef.current()]
+-    ];
+-
+-    for (const [action, handler] of handlers) {
+-      try {
+-        navigator.mediaSession.setActionHandler(action, handler);
+-      } catch {
+-        // Chromium can expose Media Session while omitting an individual
+-        // action. The on-screen and tray controls remain authoritative.
+-      }
+-    }
+-
+-    return () => {
+-      for (const [action] of handlers) {
+-        try {
+-          navigator.mediaSession.setActionHandler(action, null);
+-        } catch {
+-          // Ignore unsupported cleanup actions.
+-        }
+-      }
+-    };
+-  }, []);
+-
++    const handlers: Array<[MediaSessionAction, MediaSessionActionHandler]> = [["play", actions.play], ["pause", actions.pause],
++      ["previoustrack", () => actions.previous()], ["nexttrack", actions.next]];
++    for (const [name, handler] of handlers) { try { navigator.mediaSession.setActionHandler(name, handler); } catch { /* Optional browser support. */ } }
++    return () => { for (const [name] of handlers) { try { navigator.mediaSession.setActionHandler(name, null); } catch { /* Optional browser support. */ } } };
++  }, [actions]);
+   useEffect(() => {
+-    if (!("mediaSession" in navigator) || typeof MediaMetadata === "undefined") return;
+-
+-    navigator.mediaSession.metadata = currentTrack
+-      ? new MediaMetadata({
+-          title: currentTrack.title,
+-          artist: currentTrack.artist,
+-          album: currentTrack.album,
+-          ...(currentTrack.artwork
+-            ? {
+-                artwork: [{
+-                  src: new URL(currentTrack.artwork, document.baseURI).href
+-                }]
+-              }
+-            : {})
+-        })
+-      : null;
+-  }, [currentTrack]);
++    if (!("mediaSession" in navigator)) return;
++    navigator.mediaSession.playbackState = state.isPlaying ? "playing" : state.hasStarted ? "paused" : "none";
++    if (typeof MediaMetadata !== "undefined") navigator.mediaSession.metadata = state.currentTrack ? new MediaMetadata({
++      title: state.currentTrack.title, artist: state.currentTrack.artist, album: state.currentTrack.album,
++      ...(state.currentTrack.artwork ? { artwork: [{ src: new URL(state.currentTrack.artwork, document.baseURI).href }] } : {})
++    }) : null;
++  }, [state.currentTrack, state.isPlaying, state.hasStarted]);
++  useEffect(() => { if (controller.current) updateMediaPosition(controller.current.audio); }, [state.currentTime, state.duration]);
+ 
+-  const value = useMemo<MusicPlayerContextValue>(() => ({
+-    playlistStatus,
+-    station: playlist?.station ?? "Pressroom Radio",
+-    tracks: playlist?.tracks ?? [],
+-    currentTrack,
+-    currentTrackIndex,
+-    isPlaying,
+-    isBuffering,
+-    volume,
+-    muted,
+-    shuffle,
+-    favoriteTrackIds,
+-    currentTime,
+-    duration,
+-    errorMessage,
+-    togglePlay,
+-    next: () => next(),
+-    previous,
+-    setVolume,
+-    toggleMute,
+-    toggleShuffle,
+-    selectTrack,
+-    isFavorite,
+-    toggleFavorite
+-  }), [
+-    currentTime,
+-    currentTrack,
+-    currentTrackIndex,
+-    duration,
+-    errorMessage,
+-    favoriteTrackIds,
+-    isFavorite,
+-    isBuffering,
+-    isPlaying,
+-    muted,
+-    next,
+-    playlist,
+-    playlistStatus,
+-    previous,
+-    selectTrack,
+-    setVolume,
+-    shuffle,
+-    toggleMute,
+-    togglePlay,
+-    toggleFavorite,
+-    toggleShuffle,
+-    volume
+-  ]);
++  useEffect(() => {
++    const audio = controller.current?.audio;
++    (window as Window & { __idleTimesMusicDebug?: unknown }).__idleTimesMusicDebug = {
++      ...state, trackCount: state.tracks.length, currentTrackId: state.currentTrack?.id ?? null, currentAlbumId: state.currentAlbum?.id ?? null,
++      instanceId, currentTime: audio?.currentTime ?? state.currentTime,
++      duration: Number.isFinite(audio?.duration) ? audio!.duration : state.duration,
++      readyState: audio?.readyState ?? 0, audioPaused: audio?.paused ?? true,
++      audioError: audio?.error ? { code: audio.error.code, message: audio.error.message } : null, suspended
++    };
++  }, [state, instanceId, suspended]);
+ 
+-  return (
+-    <MusicPlayerContext.Provider value={value}>
+-      {children}
+-    </MusicPlayerContext.Provider>
+-  );
++  const value = useMemo<MusicPlayerContextValue>(() => ({ ...state, ...actions }), [state, actions]);
++  return <MusicPlayerContext.Provider value={value}>{children}</MusicPlayerContext.Provider>;
+ }
+-
+ export function useMusicPlayer(): MusicPlayerContextValue {
+   const context = useContext(MusicPlayerContext);
+-  if (!context) {
+-    throw new Error("useMusicPlayer must be used within MusicPlayerProvider.");
+-  }
++  if (!context) throw new Error("useMusicPlayer must be used within MusicPlayerProvider.");
+   return context;
+ }
+-
+ function updateMediaPosition(audio: HTMLAudioElement) {
+-  if (
+-    !("mediaSession" in navigator)
+-    || typeof navigator.mediaSession.setPositionState !== "function"
+-    || !Number.isFinite(audio.duration)
+-    || audio.duration <= 0
+-  ) {
+-    return;
+-  }
+-
+-  try {
+-    navigator.mediaSession.setPositionState({
+-      duration: audio.duration,
+-      playbackRate: audio.playbackRate,
+-      position: Math.min(audio.duration, Math.max(0, audio.currentTime))
+-    });
+-  } catch {
+-    // Position reporting is enhancement-only.
+-  }
++  if (!("mediaSession" in navigator) || typeof navigator.mediaSession.setPositionState !== "function" || !Number.isFinite(audio.duration) || audio.duration <= 0) return;
++  try { navigator.mediaSession.setPositionState({ duration: audio.duration, playbackRate: audio.playbackRate, position: Math.min(audio.duration, Math.max(0, audio.currentTime)) }); }
++  catch { /* Position reporting is enhancement-only. */ }
+ }
+diff --git a/src/music/controller.test.ts b/src/music/controller.test.ts
+new file mode 100644
+index 0000000..bb3c2e6
+--- /dev/null
++++ b/src/music/controller.test.ts
+@@ -0,0 +1,128 @@
++import { describe, expect, it } from "vitest";
++import { MusicPlayerController } from "./controller";
++import { parseMusicPlaylist } from "./playlist";
++
++class FakeAudio extends EventTarget {
++  preload = ""; volume = 1; muted = false; paused = true; currentTime = 0; duration = NaN;
++  src = ""; loads: string[] = []; calls: Array<{ resolve: () => void; reject: (error: Error) => void }> = [];
++  getAttribute(name: string) { return name === "src" && this.src ? this.src : null; }
++  removeAttribute(name: string) { if (name === "src") this.src = ""; }
++  load() { this.loads.push(this.src); this.currentTime = 0; }
++  play() {
++    this.paused = false; this.dispatchEvent(new Event("play"));
++    return new Promise<void>((resolve, reject) => this.calls.push({ resolve, reject }));
++  }
++  pause() { const changed = !this.paused; this.paused = true; if (changed) this.dispatchEvent(new Event("pause")); }
++  started(index = this.calls.length - 1) { this.paused = false; this.dispatchEvent(new Event("playing")); this.calls[index].resolve(); }
++  ended() { this.paused = true; this.dispatchEvent(new Event("ended")); }
++}
++const manifest = parseMusicPlaylist({ version: 1, defaultTrackId: "sans-serif-chairman", albums: [
++  { id: "sans-serif", title: "Sans Serif", artist: "Robby V and the Paperboys", artwork: "music/cover.webp", trackIds: ["sans-serif-chairman", "sans-serif-inkwell", "sans-serif-round"] },
++  { id: "fine-print", title: "The Fine Print, Vol. 1", artist: "Robby V and the Paper Boys", trackIds: ["first-edition", "fresh-black"] }
++], tracks: [
++  // Deliberately interleaved: album order comes from trackIds, not array adjacency.
++  { id: "first-edition", title: "First Edition", artist: "Paper Boys", albumId: "fine-print", src: "music/first.wav" },
++  { id: "sans-serif-round", title: "Round", artist: "Paperboys", albumId: "sans-serif", src: "music/round.mp3" },
++  { id: "sans-serif-chairman", title: "Chairman", artist: "Paperboys", albumId: "sans-serif", src: "music/chairman.mp3", duration: 150 },
++  { id: "fresh-black", title: "Fresh Black", artist: "Paper Boys", albumId: "fine-print", src: "music/black.wav" },
++  { id: "sans-serif-inkwell", title: "Inkwell", artist: "Paperboys", albumId: "sans-serif", src: "music/inkwell.mp3" }
++] });
++function setup(saved: unknown = null) {
++  const audio = new FakeAudio();
++  const player = new MusicPlayerController(audio as unknown as HTMLAudioElement, { lazyAudio: true, baseURI: "https://outsideinprint.org/companion-bob/runtime/", random: () => 0 });
++  player.configure(manifest, saved);
++  return { audio, player, id: () => player.getState().currentTrack?.id };
++}
++const tick = () => Promise.resolve();
++
++describe("shared music controller", () => {
++  it("defaults to Chairman without fetching audio and preserves valid old saved selection/settings", () => {
++    const fresh = setup();
++    expect(fresh.id()).toBe("sans-serif-chairman"); expect(fresh.audio.preload).toBe("none");
++    expect(fresh.audio.src).toBe(""); expect(fresh.audio.loads).toEqual([]); expect(fresh.audio.calls).toHaveLength(0);
++    expect(fresh.player.getState()).toMatchObject({ isPlaying: false, hasStarted: false, currentAlbumTrackIndex: 0, currentAlbumTrackCount: 3, duration: 150 });
++    const old = setup({ version: 1, currentTrackId: "fresh-black", volume: .3, muted: true, shuffle: true, favoriteTrackIds: ["first-edition", "deleted"] });
++    expect(old.id()).toBe("fresh-black"); expect(old.player.getState()).toMatchObject({ volume: .3, muted: true, shuffle: true, favoriteTrackIds: ["first-edition"], isPlaying: false });
++    expect(old.audio.calls).toHaveLength(0); expect(old.audio.src).toBe("");
++    expect(setup({ currentTrackId: "deleted" }).id()).toBe("sans-serif-chairman");
++  });
++
++  it("calls play synchronously and only reports playing after success", async () => {
++    const { player, audio } = setup();
++    player.play();
++    expect(audio.calls).toHaveLength(1); // Before yielding the trusted gesture call stack.
++    expect(player.getState()).toMatchObject({ isPlaying: false, isBuffering: true, hasStarted: false });
++    audio.started(); await tick();
++    expect(player.getState()).toMatchObject({ isPlaying: true, isBuffering: false, hasStarted: true });
++    player.pause(); expect(player.getState()).toMatchObject({ isPlaying: false, hasStarted: true });
++    player.togglePlay(); expect(audio.calls).toHaveLength(2);
++    audio.calls[1].resolve(); await tick(); expect(player.getState().isPlaying).toBe(true);
++  });
++
++  it("reports blocked playback and ignores stale play promises after a new selection or pause", async () => {
++    const { player, audio, id } = setup();
++    player.play(); audio.calls[0].reject(new Error("blocked")); await tick();
++    expect(player.getState()).toMatchObject({ isPlaying: false, isBuffering: false, hasStarted: false });
++    expect(player.getState().errorMessage).toMatch(/Press Play/);
++    player.playTrack("sans-serif-inkwell"); player.playTrack("first-edition");
++    expect(audio.calls).toHaveLength(3); audio.started(2); await tick();
++    audio.calls[1].reject(new Error("old selection aborted")); await tick();
++    expect(id()).toBe("first-edition"); expect(player.getState()).toMatchObject({ isPlaying: true, errorMessage: null });
++    player.pause(); audio.calls[2].resolve(); await tick(); expect(player.getState().isPlaying).toBe(false);
++  });
++
++  it("keeps next, previous and natural endings inside the active album with wrap", async () => {
++    const { player, audio, id } = setup();
++    player.previous({ restartCurrent: false }); expect(id()).toBe("sans-serif-round");
++    expect(audio.src).toBe(""); expect(audio.calls).toHaveLength(0);
++    player.next(); expect(id()).toBe("sans-serif-chairman");
++    player.playAlbum("fine-print"); expect(id()).toBe("first-edition"); expect(audio.calls).toHaveLength(1);
++    audio.started(); await tick(); player.next(); expect(id()).toBe("fresh-black");
++    audio.started(); await tick(); audio.ended(); expect(id()).toBe("first-edition");
++    expect(audio.calls).toHaveLength(3);
++    audio.started(); await tick(); player.previous({ restartCurrent: false }); expect(id()).toBe("fresh-black");
++    player.playAlbum("sans-serif"); expect(id()).toBe("sans-serif-chairman");
++    expect(player.getState().currentAlbumTrackIndex).toBe(0);
++  });
++
++  it("shuffle visits only its album and clears cross-album history and queues", () => {
++    const { player, id } = setup(); player.toggleShuffle();
++    const visited = [];
++    for (let n = 0; n < 2; n++) { player.next(); visited.push(id()); }
++    expect(new Set(visited)).toEqual(new Set(["sans-serif-inkwell", "sans-serif-round"]));
++    player.playAlbum("fine-print"); player.next(); expect(id()).toBe("fresh-black");
++    player.next(); expect(id()).toBe("first-edition");
++    player.previous({ restartCurrent: false }); expect(id()).toBe("fresh-black");
++  });
++
++  it("keeps one element synchronized across all actions and clears real media errors", async () => {
++    const { player, audio } = setup(); let updates = 0;
++    const unsubscribe = player.subscribe(() => updates++);
++    player.playAlbum("sans-serif"); audio.started(); await tick();
++    player.setVolume(.2); player.toggleMute(); expect(audio.volume).toBe(.2); expect(audio.muted).toBe(true);
++    player.setVolume(.4); expect(audio.muted).toBe(false);
++    audio.currentTime = 18; audio.dispatchEvent(new Event("timeupdate")); expect(player.getState().currentTime).toBe(18);
++    player.previous(); expect(audio.currentTime).toBe(0); expect(player.getState().currentTrack?.id).toBe("sans-serif-chairman");
++    audio.dispatchEvent(new Event("error")); expect(player.getState()).toMatchObject({ isPlaying: false, isBuffering: false });
++    expect(player.getState().errorMessage).toMatch(/Could not play/);
++    player.playTrack("sans-serif-inkwell"); expect(player.audio).toBe(audio); expect(player.getState().errorMessage).toBeNull();
++    expect(updates).toBeGreaterThan(4); unsubscribe(); const previous = updates;
++    player.pause(); expect(updates).toBe(previous); player.dispose(); expect(audio.src).toBe("");
++  });
++
++  it("preserves arcade pause/resume intent and never starts while suspended", async () => {
++    const { player, audio } = setup(); player.play(); audio.started(); await tick();
++    player.setSuspended(true); expect(audio.paused).toBe(true); expect(player.getState().isPlaying).toBe(false);
++    player.playTrack("first-edition"); expect(audio.calls).toHaveLength(1);
++    player.setSuspended(false); expect(audio.calls).toHaveLength(2); audio.started(); await tick();
++    expect(player.getState().currentTrack?.id).toBe("first-edition");
++    player.setSuspended(true); player.pause(); player.setSuspended(false); expect(audio.calls).toHaveLength(2);
++  });
++
++  it("unknown IDs and selection browsing cannot interrupt a valid playing track", async () => {
++    const { player, audio, id } = setup(); player.play(); audio.started(); await tick();
++    player.playAlbum("missing"); player.playTrack("missing");
++    expect(id()).toBe("sans-serif-chairman"); expect(player.getState().isPlaying).toBe(true); expect(audio.calls).toHaveLength(1);
++    expect(player.getState().albums[1].title).toBe("The Fine Print, Vol. 1"); expect(audio.calls).toHaveLength(1);
++  });
++});
+diff --git a/src/music/controller.ts b/src/music/controller.ts
+new file mode 100644
+index 0000000..beeec25
+--- /dev/null
++++ b/src/music/controller.ts
+@@ -0,0 +1,205 @@
++import type { MusicAlbum, MusicPlaylist, MusicTrack } from "./playlist";
++import { DEFAULT_MUSIC_SETTINGS, normalizeMusicSettings } from "./settings";
++import { buildShuffleOrder } from "./shuffle";
++
++export type MusicPlayerState = {
++  playlistStatus: "loading" | "empty" | "ready" | "error";
++  station: string;
++  tracks: MusicTrack[];
++  albums: MusicAlbum[];
++  currentTrack: MusicTrack | null;
++  currentAlbum: MusicAlbum | null;
++  currentTrackIndex: number;
++  currentAlbumTrackIndex: number;
++  currentAlbumTrackCount: number;
++  isPlaying: boolean;
++  isBuffering: boolean;
++  hasStarted: boolean;
++  volume: number;
++  muted: boolean;
++  shuffle: boolean;
++  favoriteTrackIds: string[];
++  currentTime: number;
++  duration: number;
++  errorMessage: string | null;
++};
++
++export const initialMusicState = (): MusicPlayerState => ({
++  playlistStatus: "loading", station: "Pressroom Radio", tracks: [], albums: [], currentTrack: null,
++  currentAlbum: null, currentTrackIndex: 0, currentAlbumTrackIndex: 0, currentAlbumTrackCount: 0,
++  isPlaying: false, isBuffering: false, hasStarted: false, volume: DEFAULT_MUSIC_SETTINGS.volume,
++  muted: false, shuffle: false, favoriteTrackIds: [], currentTime: 0, duration: 0, errorMessage: null
++});
++
++// One media element, shared by cabinet, site controls, Media Session and tray.
++// All Play methods reach audio.play() in the caller's synchronous gesture path.
++export class MusicPlayerController {
++  private state = initialMusicState();
++  private listeners = new Set<() => void>();
++  private handlers: Array<[string, EventListener]> = [];
++  private playRequest = 0;
++  private playRequested = false;
++  private suspended = false;
++  private resumeAfterSuspend = false;
++  private disposed = false;
++  private history: number[] = [];
++  private shuffleQueue: number[] = [];
++
++  constructor(readonly audio: HTMLAudioElement, private options: { lazyAudio?: boolean; baseURI: string; random?: () => number }) {
++    audio.preload = options.lazyAudio ? "none" : "auto";
++    audio.volume = this.state.volume;
++    const listen = (type: string, callback: () => void) => { const handler: EventListener = callback; this.handlers.push([type, handler]); audio.addEventListener(type, handler); };
++    listen("playing", () => this.markPlaying());
++    listen("pause", () => {
++      if (!audio.paused) return;
++      this.playRequest++; this.playRequested = false;
++      this.update({ isPlaying: false, isBuffering: false });
++    });
++    listen("waiting", () => { if (this.playRequested && !audio.paused) this.update({ isBuffering: true }); });
++    listen("loadedmetadata", () => this.update({ duration: Number.isFinite(audio.duration) ? audio.duration : this.state.currentTrack?.duration ?? 0 }));
++    listen("timeupdate", () => this.update({ currentTime: audio.currentTime }));
++    listen("ended", () => this.advance(true));
++    listen("error", () => {
++      this.playRequest++; this.playRequested = false; this.resumeAfterSuspend = false;
++      audio.pause();
++      this.update({ isPlaying: false, isBuffering: false, errorMessage: this.state.currentTrack ? `Could not play "${this.state.currentTrack.title}". Try another track.` : "This track could not be played." });
++    });
++  }
++
++  getState = (): MusicPlayerState => this.state;
++  subscribe = (listener: () => void) => { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; };
++  private update(patch: Partial<MusicPlayerState>) {
++    if (this.disposed) return;
++    this.state = { ...this.state, ...patch };
++    this.listeners.forEach(listener => listener());
++  }
++
++  configure(playlist: MusicPlaylist, saved: unknown) {
++    const settings = normalizeMusicSettings(saved), known = new Set(playlist.tracks.map(track => track.id));
++    const savedIndex = playlist.tracks.findIndex(track => track.id === settings.currentTrackId);
++    const defaultIndex = playlist.tracks.findIndex(track => track.id === playlist.defaultTrackId);
++    this.audio.volume = settings.volume; this.audio.muted = settings.muted;
++    this.update({ tracks: playlist.tracks, albums: playlist.albums, station: playlist.station,
++      playlistStatus: playlist.tracks.length ? "ready" : "empty", volume: settings.volume, muted: settings.muted,
++      shuffle: settings.shuffle, favoriteTrackIds: settings.favoriteTrackIds.filter(id => known.has(id)) });
++    if (playlist.tracks.length) this.select(savedIndex >= 0 ? savedIndex : Math.max(0, defaultIndex), false, false);
++  }
++  failLoad(message: string) { this.update({ playlistStatus: "error", errorMessage: message }); }
++
++  private select(index: number, autoplay: boolean, remember = true) {
++    if (this.disposed || !this.state.tracks.length || !Number.isFinite(index)) return;
++    const safeIndex = ((Math.floor(index) % this.state.tracks.length) + this.state.tracks.length) % this.state.tracks.length;
++    const track = this.state.tracks[safeIndex], album = this.state.albums.find(group => group.id === track.albumId) ?? null;
++    const changedAlbum = this.state.currentAlbum?.id !== album?.id;
++    if (changedAlbum) { this.history = []; this.shuffleQueue = []; }
++    else if (remember && this.state.currentTrack && this.state.currentTrackIndex !== safeIndex) this.history = [...this.history, this.state.currentTrackIndex].slice(-50);
++    this.playRequest++; this.playRequested = false;
++    this.audio.pause();
++    this.update({ currentTrackIndex: safeIndex, currentTrack: track, currentAlbum: album,
++      currentAlbumTrackIndex: Math.max(0, album?.trackIds.indexOf(track.id) ?? 0), currentAlbumTrackCount: album?.trackIds.length ?? 0,
++      currentTime: 0, duration: track.duration ?? 0, isPlaying: false, isBuffering: false, errorMessage: null });
++    if (this.options.lazyAudio && !autoplay) {
++      if (this.audio.getAttribute("src")) { this.audio.removeAttribute("src"); this.audio.load(); }
++    } else if (!this.suspended || !this.options.lazyAudio) this.ensureSource(true);
++    if (autoplay) this.play();
++  }
++
++  private ensureSource(restart = false) {
++    const track = this.state.currentTrack;
++    if (!track) return;
++    const source = new URL(track.src, this.options.baseURI).href;
++    if (this.audio.src !== source) {
++      this.audio.src = source;
++      this.audio.load();
++    } else if (restart) this.audio.currentTime = 0;
++  }
++  private markPlaying() {
++    if (!this.playRequested || this.suspended || this.audio.paused || this.disposed) return;
++    this.update({ isPlaying: true, isBuffering: false, hasStarted: true, errorMessage: null });
++  }
++  play = () => {
++    if (this.disposed || !this.state.currentTrack) return;
++    if (this.suspended) { this.resumeAfterSuspend = true; return; }
++    if (this.state.isPlaying && !this.audio.paused) return;
++    this.ensureSource();
++    const request = ++this.playRequest;
++    this.playRequested = true;
++    this.update({ isBuffering: true, errorMessage: null });
++    const failed = () => {
++      if (request !== this.playRequest || this.disposed) return;
++      this.playRequested = false;
++      this.audio.pause();
++      this.update({ isPlaying: false, isBuffering: false, errorMessage: "Playback could not start. Press Play to try again." });
++    };
++    try {
++      // Do not move this call into an effect, timer, or promise continuation.
++      const promise = this.audio.play();
++      void Promise.resolve(promise).then(() => { if (request === this.playRequest) this.markPlaying(); }, failed);
++    } catch { failed(); }
++  };
++  pause = () => {
++    this.playRequest++; this.playRequested = false; this.resumeAfterSuspend = false;
++    this.audio.pause(); this.update({ isPlaying: false, isBuffering: false });
++  };
++  togglePlay = () => {
++    if (this.suspended) { this.resumeAfterSuspend = !this.resumeAfterSuspend; return; }
++    if (this.playRequested || !this.audio.paused) this.pause(); else this.play();
++  };
++  playTrack = (id: string) => {
++    const index = this.state.tracks.findIndex(track => track.id === id);
++    if (index < 0) return;
++    this.shuffleQueue = []; this.select(index, true);
++  };
++  playAlbum = (id: string) => {
++    const album = this.state.albums.find(group => group.id === id);
++    if (album?.trackIds[0]) this.playTrack(album.trackIds[0]);
++  };
++  selectTrack = (index: number) => { this.shuffleQueue = []; this.select(index, true); };
++  private albumIndices() {
++    const byId = new Map(this.state.tracks.map((track, index) => [track.id, index]));
++    return (this.state.currentAlbum?.trackIds ?? []).map(id => byId.get(id)!).filter(index => index !== undefined);
++  }
++  private advance(autoplay = this.playRequested || this.state.isPlaying) {
++    const indices = this.albumIndices(); if (!indices.length) return;
++    const position = indices.indexOf(this.state.currentTrackIndex);
++    let target: number;
++    if (this.state.shuffle && indices.length > 1) {
++      if (!this.shuffleQueue.length) this.shuffleQueue = buildShuffleOrder(indices.length, position, this.options.random).map(index => indices[index]);
++      target = this.shuffleQueue.shift() ?? this.state.currentTrackIndex;
++    } else target = indices[(position + 1) % indices.length];
++    this.select(target, autoplay);
++  }
++  next = () => this.advance();
++  previous = (options?: { restartCurrent?: boolean }) => {
++    if (options?.restartCurrent !== false && this.audio.currentTime > 4) { this.audio.currentTime = 0; this.update({ currentTime: 0 }); return; }
++    const indices = this.albumIndices(); if (!indices.length) return;
++    const historical = this.history.pop();
++    const index = historical !== undefined && indices.includes(historical) ? historical : indices[(indices.indexOf(this.state.currentTrackIndex) - 1 + indices.length) % indices.length];
++    this.shuffleQueue = []; this.select(index, this.playRequested || this.state.isPlaying, false);
++  };
++  setVolume = (volume: number) => {
++    const value = Math.min(1, Math.max(0, Number.isFinite(volume) ? volume : 0));
++    this.audio.volume = value; if (value > 0) this.audio.muted = false;
++    this.update({ volume: value, ...(value > 0 ? { muted: false } : {}) });
++  };
++  toggleMute = () => { this.audio.muted = !this.state.muted; this.update({ muted: this.audio.muted }); };
++  toggleShuffle = () => { this.shuffleQueue = []; this.history = []; this.update({ shuffle: !this.state.shuffle }); };
++  isFavorite = (id: string) => this.state.favoriteTrackIds.includes(id);
++  toggleFavorite = (id: string) => {
++    if (!this.state.tracks.some(track => track.id === id)) return;
++    this.update({ favoriteTrackIds: this.isFavorite(id) ? this.state.favoriteTrackIds.filter(trackId => trackId !== id) : [...this.state.favoriteTrackIds, id] });
++  };
++  setSuspended(suspended: boolean) {
++    if (this.suspended === suspended) return;
++    this.suspended = suspended;
++    if (suspended) {
++      this.resumeAfterSuspend = this.playRequested || this.state.isPlaying || !this.audio.paused;
++      this.playRequest++; this.playRequested = false; this.audio.pause(); this.update({ isPlaying: false, isBuffering: false });
++    } else if (this.resumeAfterSuspend) { this.resumeAfterSuspend = false; this.play(); }
++  }
++  dispose() {
++    this.disposed = true; this.playRequest++; this.playRequested = false;
++    for (const [type, handler] of this.handlers) this.audio.removeEventListener(type, handler);
++    this.audio.pause(); this.audio.removeAttribute("src"); this.audio.load(); this.listeners.clear();
++  }
++}
+diff --git a/src/music/playlist.test.ts b/src/music/playlist.test.ts
+index 96b1e9c..0ccd666 100644
+--- a/src/music/playlist.test.ts
++++ b/src/music/playlist.test.ts
+@@ -20,8 +20,11 @@ describe("parseMusicPlaylist", () => {
+       title: "Midnight Copy",
+       artist: "Idle Times",
+       album: "Idle Times",
++      albumId: "legacy-idle-times",
+       src: "/music/tracks/midnight-copy.mp3"
+     }]);
++    expect(playlist.albums).toEqual([{ id: "legacy-idle-times", title: "Idle Times", artist: "Idle Times", trackIds: ["midnight-copy"] }]);
++    expect(playlist.defaultTrackId).toBe("midnight-copy");
+   });
+ 
+   it("rejects duplicate ids and non-local sources", () => {
+@@ -45,7 +48,44 @@ describe("parseMusicPlaylist", () => {
+     expect(parseMusicPlaylist({ version: 1, tracks: [] })).toEqual({
+       version: 1,
+       station: "Pressroom Radio",
+-      tracks: []
++      tracks: [],
++      albums: [],
++      defaultTrackId: null
+     });
+   });
++
++  it("accepts ordered version-one album metadata without changing old track IDs", () => {
++    const playlist = parseMusicPlaylist({ version: 1, defaultTrackId: "sans-serif-chairman", albums: [
++      { id: "sans-serif", title: "Sans Serif", artist: "Robby V and the Paperboys", artwork: "music/artwork/sans-serif.webp", trackIds: ["sans-serif-chairman", "sans-serif-inkwell"] },
++      { id: "the-fine-print-vol-1", title: "The Fine Print, Vol. 1", artist: "Robby V and the Paper Boys", trackIds: ["first-edition"] }
++    ], tracks: [
++      { id: "first-edition", title: "First Edition", artist: "Robby V and the Paper Boys", albumId: "the-fine-print-vol-1", src: "music/tracks/first-edition.wav" },
++      { id: "sans-serif-inkwell", title: "Inkwell", artist: "Robby V and the Paperboys", albumId: "sans-serif", src: "music/tracks/inkwell.mp3", duration: 120.5 },
++      { id: "sans-serif-chairman", title: "Chairman", artist: "Robby V and the Paperboys", albumId: "sans-serif", src: "music/tracks/chairman.mp3", duration: 140 }
++    ] });
++    expect(playlist.defaultTrackId).toBe("sans-serif-chairman");
++    expect(playlist.albums.map(album => album.id)).toEqual(["sans-serif", "the-fine-print-vol-1"]);
++    expect(playlist.albums[0].trackIds).toEqual(["sans-serif-chairman", "sans-serif-inkwell"]);
++    expect(playlist.tracks[0].id).toBe("first-edition");
++    expect(playlist.tracks[1]).toMatchObject({ duration: 120.5, album: "Sans Serif", artwork: "/music/artwork/sans-serif.webp" });
++  });
++
++  it("rejects broken memberships, unknown defaults and invalid durations", () => {
++    const track = { id: "first-edition", title: "First Edition", artist: "Paper Boys", src: "music/a.mp3" };
++    const album = { id: "fine-print", title: "Fine Print", artist: "Paper Boys", trackIds: [track.id] };
++    for (const value of [
++      { tracks: [track], albums: [] }, { tracks: [track], albums: [{ ...album, trackIds: ["missing"] }] },
++      { tracks: [track], albums: [album, album] }, { tracks: [track], albums: [{ ...album, trackIds: [track.id, track.id] }] },
++      { tracks: [{ ...track, albumId: "elsewhere" }], albums: [album] }, { tracks: [track], defaultTrackId: "missing" },
++      { tracks: [{ ...track, duration: -1 }] }, { tracks: [{ ...track, duration: Infinity }] }
++    ]) expect(() => parseMusicPlaylist({ version: 1, ...value })).toThrow();
++  });
++
++  it("rejects protocol-relative and encoded traversal in audio and album covers", () => {
++    for (const src of ["//example.com/a.mp3", "../a.mp3", "music/%2e%2e/a.mp3", "music/%2f../a.mp3", "music/%5c../a.mp3", "data:audio/mp3,x", "music/a.mp3?redirect=1"]) {
++      const track = { id: "one", title: "One", artist: "Paperboys", src };
++      expect(() => parseMusicPlaylist({ version: 1, tracks: [track] })).toThrow(/safe bundled asset path/);
++      expect(() => parseMusicPlaylist({ version: 1, tracks: [{ ...track, src: "music/a.mp3" }], albums: [{ id: "one", title: "One", artist: "Paperboys", artwork: src, trackIds: ["one"] }] })).toThrow(/safe bundled asset path/);
++    }
++  });
+ });
+diff --git a/src/music/playlist.ts b/src/music/playlist.ts
+index 9ae3691..21dc0b1 100644
+--- a/src/music/playlist.ts
++++ b/src/music/playlist.ts
+@@ -5,14 +5,26 @@ export type MusicTrack = {
+   title: string;
+   artist: string;
+   album: string;
++  albumId: string;
+   src: string;
+   artwork?: string;
++  duration?: number;
++};
++
++export type MusicAlbum = {
++  id: string;
++  title: string;
++  artist: string;
++  artwork?: string;
++  trackIds: string[];
+ };
+ 
+ export type MusicPlaylist = {
+   version: 1;
+   station: string;
+   tracks: MusicTrack[];
++  albums: MusicAlbum[];
++  defaultTrackId: string | null;
+ };
+ 
+ type UnknownRecord = Record<string, unknown>;
+@@ -34,7 +46,8 @@ export function parseMusicPlaylist(candidate: unknown): MusicPlaylist {
+   }
+ 
+   const seenIds = new Set<string>();
+-  const tracks = candidate.tracks.map((rawTrack, index) => {
++  const rawTracks = candidate.tracks;
++  const tracks: MusicTrack[] = rawTracks.map((rawTrack, index) => {
+     if (!isRecord(rawTrack)) {
+       throw new Error(`Pressroom Radio track ${index + 1} must be an object.`);
+     }
+@@ -45,34 +58,81 @@ export function parseMusicPlaylist(candidate: unknown): MusicPlaylist {
+     }
+     seenIds.add(id);
+ 
++    const album = optionalText(rawTrack.album) || "Idle Times";
++    if (rawTrack.duration !== undefined && (typeof rawTrack.duration !== "number" || !Number.isFinite(rawTrack.duration) || rawTrack.duration < 0)) {
++      throw new Error(`Pressroom Radio track ${index + 1} duration must be non-negative seconds.`);
++    }
+     return {
+       id,
+       title: requiredText(rawTrack.title, `track ${index + 1} title`),
+       artist: requiredText(rawTrack.artist, `track ${index + 1} artist`),
+-      album: optionalText(rawTrack.album) || "Idle Times",
++      album,
++      albumId: optionalText(rawTrack.albumId) || `legacy-${album.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "album"}`,
+       src: normalizeLocalAsset(rawTrack.src, `track ${index + 1} source`),
++      ...(rawTrack.duration !== undefined ? { duration: rawTrack.duration as number } : {}),
+       ...(optionalText(rawTrack.artwork)
+         ? { artwork: normalizeLocalAsset(rawTrack.artwork, `track ${index + 1} artwork`) }
+         : {})
+     };
+   });
+ 
++  let albums: MusicAlbum[];
++  if (candidate.albums !== undefined) {
++    if (!Array.isArray(candidate.albums)) throw new Error("Pressroom Radio albums must be an array.");
++    const albumIds = new Set<string>(), assigned = new Set<string>(), byId = new Map(tracks.map(track => [track.id, track]));
++    albums = candidate.albums.map((raw, index) => {
++      if (!isRecord(raw)) throw new Error(`Pressroom Radio album ${index + 1} must be an object.`);
++      const id = requiredText(raw.id, `album ${index + 1} id`);
++      if (albumIds.has(id)) throw new Error(`Pressroom Radio contains duplicate album id "${id}".`);
++      albumIds.add(id);
++      if (!Array.isArray(raw.trackIds) || !raw.trackIds.length) throw new Error(`Pressroom Radio album "${id}" must list its tracks.`);
++      const album: MusicAlbum = { id, title: requiredText(raw.title, `album ${index + 1} title`), artist: requiredText(raw.artist, `album ${index + 1} artist`), trackIds: [],
++        ...(optionalText(raw.artwork) ? { artwork: normalizeLocalAsset(raw.artwork, `album ${index + 1} artwork`) } : {}) };
++      for (const trackId of raw.trackIds) {
++        if (typeof trackId !== "string" || !byId.has(trackId) || assigned.has(trackId)) throw new Error(`Pressroom Radio album "${id}" has an unknown or repeated track.`);
++        const track = byId.get(trackId)!;
++        const rawTrack = rawTracks.find((value: unknown) => isRecord(value) && value.id === trackId) as UnknownRecord;
++        if (optionalText(rawTrack.albumId) && rawTrack.albumId !== id) throw new Error(`Pressroom Radio track "${trackId}" belongs to a different album.`);
++        track.albumId = id;
++        track.album = album.title;
++        track.artwork ||= album.artwork;
++        assigned.add(trackId); album.trackIds.push(trackId);
++      }
++      return album;
++    });
++    if (assigned.size !== tracks.length) throw new Error("Pressroom Radio albums must include every track exactly once.");
++  } else {
++    const groups = new Map<string, MusicAlbum>();
++    for (const track of tracks) {
++      if (!groups.has(track.albumId)) groups.set(track.albumId, { id: track.albumId, title: track.album, artist: track.artist, ...(track.artwork ? { artwork: track.artwork } : {}), trackIds: [] });
++      groups.get(track.albumId)!.trackIds.push(track.id);
++    }
++    albums = [...groups.values()];
++  }
++  const defaultTrackId = candidate.defaultTrackId === undefined ? tracks[0]?.id ?? null : requiredText(candidate.defaultTrackId, "default track id");
++  if (defaultTrackId !== null && !seenIds.has(defaultTrackId)) throw new Error("Pressroom Radio default track id must name a catalog track.");
++
+   return {
+     version: 1,
+     station: optionalText(candidate.station) || "Pressroom Radio",
+-    tracks
++    tracks,
++    albums,
++    defaultTrackId
+   };
+ }
+ 
+ function normalizeLocalAsset(value: unknown, label: string): string {
+-  const source = requiredText(value, label).replaceAll("\\", "/");
++  let source = requiredText(value, label).replaceAll("\\", "/");
++  try { source = decodeURIComponent(source).replaceAll("\\", "/"); }
++  catch { throw new Error(`Pressroom Radio ${label} must be a safe bundled asset path.`); }
+   const relative = source.replace(/^\/+/, "");
+ 
+   if (
+     !relative
+-    || relative.split("/").includes("..")
++    || relative.split("/").some(segment => segment === ".." || segment === ".")
+     || /^[a-z][a-z0-9+.-]*:/iu.test(relative)
+-    || relative.startsWith("//")
++    || source.startsWith("//")
++    || /[?#\u0000-\u001f]/u.test(source)
+   ) {
+     throw new Error(`Pressroom Radio ${label} must be a safe bundled asset path.`);
+   }
+diff --git a/tools/build-site-pet.mjs b/tools/build-site-pet.mjs
+index c898e0b..8c70584 100644
+--- a/tools/build-site-pet.mjs
++++ b/tools/build-site-pet.mjs
+@@ -5,20 +5,31 @@ import { execFileSync } from 'node:child_process';
+ import { resolve, join, relative, dirname } from 'node:path';
+ 
+ const args = process.argv.slice(2);
+-const option = name => args[args.indexOf(name) + 1];
++const option = name => args.includes(name) ? args[args.indexOf(name) + 1] : undefined;
+ if (!args.includes('--out') || !args.includes('--music-from')) throw new Error('Pass --out <OIP runtime directory> --music-from <existing Pet demo directory>.');
+ const target = resolve(option('--out')), previousDemo = resolve(option('--music-from'));
+ let previousManifest;
+ try { previousManifest = JSON.parse(await readFile(join(target, 'build-manifest.json'), 'utf8')); }
+ catch (error) { if (error.code !== 'ENOENT') throw error; }
+-await build({ configFile: resolve('vite.site-pet.config.ts') });
+-const built = resolve('dist/site-pet');
+ const playlist = JSON.parse(await readFile(join(previousDemo, 'music/playlist.json'), 'utf8'));
+-await mkdir(join(built, 'music/tracks'), { recursive: true });
+-for (const track of playlist.tracks) {
+-  if (!/^music\/tracks\/[a-z0-9._-]+\.mp3$/i.test(track.src)) throw new Error(`Unexpected existing music path: ${track.src}`);
+-  await copyFile(join(previousDemo, track.src), join(built, track.src));
++if (playlist.version !== 1 || !Array.isArray(playlist.tracks)) throw new Error('Expected the version-1 website music catalog.');
++const media = new Set();
++function includeMedia(path, kind) {
++  const pattern = kind === 'audio' ? /^music\/tracks\/(?:[a-z0-9_-]+\/)*[a-z0-9._-]+\.mp3$/i : /^music\/artwork\/(?:[a-z0-9_-]+\/)*[a-z0-9._-]+\.(?:webp|png|jpe?g|avif)$/i;
++  if (typeof path !== 'string' || !pattern.test(path) || path.split('/').some(part => part === '.' || part === '..')) throw new Error(`Unexpected ${kind} path: ${path}`);
++  media.add(path);
++}
++for (const track of playlist.tracks) { includeMedia(track.src, 'audio'); if (track.artwork) includeMedia(track.artwork, 'artwork'); }
++for (const album of playlist.albums ?? []) {
++  if (album.artwork) includeMedia(album.artwork, 'artwork');
++  for (const artwork of album.artworks ?? []) includeMedia(artwork.src, 'artwork');
+ }
++const catalogSource = option('--catalog-source');
++const catalogSourceHash = catalogSource ? createHash('sha256').update(await readFile(resolve(catalogSource))).digest('hex') : null;
++await build({ configFile: resolve('vite.site-pet.config.ts') });
++const built = resolve('dist/site-pet');
++for (const path of media) { await mkdir(dirname(join(built,path)), { recursive:true }); await copyFile(join(previousDemo,path),join(built,path)); }
++await mkdir(join(built,'music'), { recursive:true });
+ await writeFile(join(built, 'music/playlist.json'), JSON.stringify(playlist, null, 2) + '\n');
+ await copyFile('src/assets/pet-sounds/CREDITS.md', join(built, 'sound-credits.txt'));
+ async function files(dir) {
+@@ -34,11 +45,14 @@ for (const file of await files(built)) {
+   const bytes = await readFile(file);
+   records.push({ path: relative(built, file).replaceAll('\\', '/'), bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') });
+ }
+-const sourcePaths = ['browser/site-pet/entry.tsx', 'browser/site-pet/style.css', 'browser/site-pet/index.html', 'src/components/BobPet.tsx', 'src/components/PetActivityControls.tsx', 'src/music/MusicPlayerProvider.tsx', 'vite.site-pet.config.ts', 'tools/build-site-pet.mjs'];
++const musicSources=(await files(resolve('src/music'))).filter(path=>/\.[cm]?[jt]sx?$/.test(path)&&!/(?:\.test|\.spec)\.[^.]+$/.test(path)).map(path=>relative(resolve('.'),path).replaceAll('\\','/'));
++const sourcePaths = ['browser/site-pet/entry.tsx', 'browser/site-pet/style.css', 'browser/site-pet/index.html', 'src/components/BobPet.tsx', 'src/components/PetJukebox.tsx', 'src/components/PetJukebox.css', 'src/components/PetActivityControls.tsx', ...musicSources, 'vite.site-pet.config.ts', 'tools/build-site-pet.mjs'];
+ const sources = await Promise.all(sourcePaths.map(async path => ({ path, sha256: createHash('sha256').update(await readFile(path)).digest('hex') })));
+ const manifest = { version: 1, gameSourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+   adapter: 'Full-viewport site Pet, native-style drag and alpha hit regions; no desk, economy or unlocks.',
+-  protocol: 'oip-site-bob-v1', sourceWorkingTree: true, sources, fullGameIncluded: false, totalBytes: records.reduce((sum, file) => sum + file.bytes, 0), files: records };
++  protocol: 'oip-site-bob-v1', sourceWorkingTree: Boolean(execFileSync('git', ['status', '--porcelain', '--untracked-files=no'], { encoding:'utf8' }).trim()), sources,
++  ...(catalogSourceHash ? { musicCatalogSource: { repository:'LPeasy/outsideinprint', path:'data/music.json', sha256:catalogSourceHash } } : {}),
++  fullGameIncluded: false, totalBytes: records.reduce((sum, file) => sum + file.bytes, 0), files: records };
+ await writeFile(join(built, 'build-manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
+ // Archive only obsolete entry bundles from our last verified export manifest.
+ // Sprite/music files are immutable by content hash and need no cleanup here.

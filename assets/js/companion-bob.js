@@ -1,5 +1,6 @@
 import { createBobStorage, claimVisit, PREFERENCES_KEY, VISITOR_KEY } from './companion-bob-visit.js';
 import { initializeBobReading } from './companion-bob-reading.js';
+import { initializeBobMusic } from './companion-bob-music.js';
 
 const POSITION_KEY = 'oip-bob-position:v1';
 const CHANNEL = 'oip-site-bob-v1';
@@ -34,6 +35,7 @@ function initialize() {
   let loadTimer;
   let positioning = 0;
   let lastPlacement = '';
+  let lastViewport = '';
   let regionCount = 0;
   let pageBindings;
   const slotObserver = new ResizeObserver(schedulePosition);
@@ -73,8 +75,10 @@ function initialize() {
   }
   function position() {
     positioning = 0;
-    if (dragging || !slot?.isConnected || routing) return;
     const view = viewport();
+    const viewportMessage = JSON.stringify({ ...view, scale: window.visualViewport?.scale || 1 });
+    if (viewportMessage !== lastViewport) { send({ type: 'viewport', ...JSON.parse(viewportMessage) }); lastViewport = viewportMessage; }
+    if (dragging || !slot?.isConnected || routing) return;
     const rect = slot.getBoundingClientRect();
     let mode, point;
     if (savedPosition) {
@@ -122,11 +126,12 @@ function initialize() {
     // The frame occupies the viewport but only these actual sprite/control
     // islands participate in hit testing. Transparent page areas stay usable.
     const paths = [];
+    const view = viewport();
     for (const rect of rects.slice(0, 1024)) {
       if (![rect?.x, rect?.y, rect?.width, rect?.height].every(Number.isFinite) || rect.width <= 0 || rect.height <= 0) continue;
-      const x = Math.max(0, rect.x), y = Math.max(0, rect.y);
-      const right = Math.min(innerWidth, rect.x + rect.width);
-      const bottom = Math.min(innerHeight, rect.y + rect.height);
+      const x = Math.max(view.left, rect.x), y = Math.max(view.top, rect.y);
+      const right = Math.min(view.left + view.width, rect.x + rect.width);
+      const bottom = Math.min(view.top + view.height, rect.y + rect.height);
       if (right <= x || bottom <= y) continue;
       const n = value => Math.round(value * 10) / 10;
       paths.push(`M ${n(x)} ${n(y)} H ${n(right)} V ${n(bottom)} H ${n(x)} Z`);
@@ -176,8 +181,8 @@ function initialize() {
     const covered = obscured();
     const next = visible() && !minimized && !covered;
     // Music continues through page/menu transitions and background tabs.
-    // Explicit Hide and the separate Paper-Bob arcade pause at the same time.
-    const nextAudio = !minimized && !suspended && !document.body.classList.contains('paper-route-open');
+    // Hide leaves playback available through compact controls; only the arcade suspends it.
+    const nextAudio = !suspended && !document.body.classList.contains('paper-route-open');
     host.hidden = minimized || covered;
     host.inert = !next;
     host.dataset.obscured = String(covered);
@@ -251,6 +256,7 @@ function initialize() {
     if (data.type === 'ready') {
       ready = true;
       lastPlacement = '';
+      lastViewport = '';
       position();
       syncTheme();
       send({ type: 'visibility', active, audioActive });
@@ -342,4 +348,5 @@ function initialize() {
     home();
     send({ type: 'home' });
   } });
+  initializeBobMusic(host, { ensureRuntime() { if (!frame.hasAttribute('src')) load(); } });
 }

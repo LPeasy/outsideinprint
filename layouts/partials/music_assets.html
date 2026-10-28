@@ -1,0 +1,7 @@
+{{- if eq .kind "styles" -}}
+  {{- $css := resources.Get "css/music-page.css" | resources.Minify | resources.Fingerprint "sha384" -}}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{- else -}}
+  {{- $script := resources.Get "js/music-page.js" | resources.Minify | resources.Fingerprint "sha384" -}}
+  <script data-oip-route-script="music-page" defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+{{- end -}}

@@ -45,6 +45,7 @@
     {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
     <link data-oip-persistent="main-css" rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
     {{ partial "companion_bob_assets.html" (dict "kind" "styles") }}
+    {{ if eq .Section "music" }}{{ partial "music_assets.html" (dict "kind" "styles") }}{{ end }}
     {{ partial "site_navigation_assets.html" (dict "kind" "head") }}
     {{ partial "ga4-purchase-context.html" (dict "kind" "styles" "page" .) }}
   </head>

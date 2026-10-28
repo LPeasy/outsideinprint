@@ -1,0 +1,16 @@
+{{- $album := .album -}}
+{{- $small := .small | default false -}}
+{{- with $album.cover -}}
+  {{- $srcset := slice -}}
+  {{- range .variants -}}
+    {{- $srcset = $srcset | append (printf "%s %dw" ((printf "companion-bob/runtime/%s" .src) | relURL) (int .width)) -}}
+  {{- end -}}
+  <img class="music-cover" src="{{ (printf "companion-bob/runtime/%s" .src) | relURL }}" srcset="{{ delimit $srcset ", " }}" sizes="{{ if $small }}72px{{ else }}(max-width: 620px) calc(100vw - 64px), 360px{{ end }}" width="{{ .width }}" height="{{ .height }}" alt="{{ if not $small }}{{ .alt }}{{ end }}" decoding="async"{{ if $small }} loading="lazy"{{ end }}>
+{{- else -}}
+  <div class="music-title-cover{{ if $small }} music-title-cover--small{{ end }}"{{ if $small }} aria-hidden="true"{{ else }} role="img" aria-label="{{ $album.title }} album title card"{{ end }}>
+    <span class="music-title-cover__rule"></span>
+    <span class="music-title-cover__name">{{ $album.title }}</span>
+    {{ if not $small }}<span class="music-title-cover__artist">{{ $album.artist }}</span>{{ end }}
+    <span class="music-title-cover__rule"></span>
+  </div>
+{{- end -}}
