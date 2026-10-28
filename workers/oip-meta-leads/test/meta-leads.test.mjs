@@ -17,6 +17,7 @@ function fixture() {
   sql.exec(readFileSync(new URL('../migrations/0001_meta_leads.sql', import.meta.url), 'utf8'));
   sql.exec(readFileSync(new URL('../migrations/0002_owned_test_recovery.sql', import.meta.url), 'utf8'));
   sql.exec(readFileSync(new URL('../migrations/0003_paid_lead_recovery.sql', import.meta.url), 'utf8'));
+  sql.exec(readFileSync(new URL('../migrations/0004_paid_recovery_timestamp.sql', import.meta.url), 'utf8'));
   const faults = { afterClaim: false, finish: false };
   const DB = { prepare(query) { return { values: [], bind(...args) { this.values = args; return this; },
     async first() {
@@ -632,6 +633,9 @@ test('paid recovery requires exact review reason, UTC timestamp and lowercase so
     { source: null }, { source: '' }, { source: 'a'.repeat(63) }, { source: 'g'.repeat(64) }, { source: 'A'.repeat(64) },
     { approvedAt: null }, { approvedAt: 'not-a-date' }, { approvedAt: '2026-02-30T18:10:00.000Z' },
     { approvedAt: '2026-10-26T18:10:00Z' }, { approvedAt: '2026-10-26T18:10:00.000+00:00' },
+    { approvedAt: '2026-13-26T18:10:00.000Z' }, { approvedAt: '2026-10-26T25:10:00.000Z' },
+    { approvedAt: '2026-10-26 18:10:00.000Z' }, { approvedAt: '2026-10-26t18:10:00.000z' },
+    { approvedAt: '2026-10-26T18:10:00.00Z' }, { approvedAt: '2026-10-26T18:10:00.0000Z' },
   ]) {
     const f = fixture(); await f.send();
     f.sql.prepare("UPDATE meta_leads SET state = 'held', error_code = 'lead_or_consent_invalid' WHERE lead_id = '44444444'").run();
