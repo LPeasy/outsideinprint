@@ -93,7 +93,8 @@ export function initializeBobMusic(host, { ensureRuntime }) {
     if (controls.hidden) clearNearby();
     title.textContent = state.currentTrack ? `${state.currentTrack.title} · ${state.currentTrack.artist}` : 'JukeBob';
     controls.title = title.textContent; controls.dataset.playing = String(state.isPlaying === true);
-    play.textContent = state.isPlaying ? 'Ⅱ' : state.isBuffering ? '…' : '▶';
+    play.dataset.playing = String(state.isPlaying === true);
+    play.textContent = state.isPlaying ? '' : state.isBuffering ? '…' : '▶';
     const label = state.isPlaying ? 'Pause music' : state.isBuffering ? 'Loading music' : 'Play music';
     play.setAttribute('aria-label', label); play.title = label;
     for (const el of [previous, play, next]) el.disabled = !state.ready;

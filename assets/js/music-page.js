@@ -105,7 +105,9 @@
         else button.removeAttribute('aria-current');
         button.setAttribute('aria-label', `${active && playing ? 'Pause' : 'Play'} ${button.dataset.musicTitle}`);
         setText(row.querySelector('[data-music-track-status]'), active && loading ? 'Loading…' : active && playing ? 'Playing' : active && state.hasStarted ? 'Paused' : '');
-        setText(row.querySelector('[data-music-track-icon]'), active && playing ? 'Ⅱ' : '▶');
+        const icon = row.querySelector('[data-music-track-icon]');
+        if (icon) icon.dataset.playing = String(active && playing);
+        setText(icon, active && playing ? '' : '▶');
       });
       const notice = state.errorMessage || (state.playlistStatus === 'error' ? 'JukeBob could not load its music catalog. Reload the page to try again.' : state.playlistStatus === 'empty' ? 'No tracks are available.' : loading ? `Loading ${track ? track.title : 'music'}…` : playing && track ? `Playing ${track.title}.` : '');
       setText(message, notice);

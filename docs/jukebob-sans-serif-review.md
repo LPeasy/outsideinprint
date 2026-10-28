@@ -1,7 +1,9 @@
 # Sans Serif / JukeBob review — 2026-10-28
 
-Review branch only. This work does not authorize merging, production deployment,
-Steam publication, or changes to Bob's model and spending limits.
+The owner approved the reviewed demo and authorized live website publication on
+2026-10-28, with a final change to use a standard two-bar pause icon. This approval
+includes the final album covers and website presentation. Steam publication and
+changes to Bob's model and spending limits remain outside this release.
 
 ## Package and source
 
@@ -159,12 +161,13 @@ catalog and runtime checks were reused because those inputs did not change.
   reading-status endpoint rejecting the new loopback port by CORS; no
   recommendation was submitted. Integrated cases blocked external requests and
   reported no JavaScript errors.
-- GitHub remains responsible for full production checks. No merge or deployment
-  was requested or performed. The final PR incorporates the intervening unrelated
-  No Audience content commit (`b937ed1cef95086c37c7c69b34d09f957f7b8aa1`); it changes
-  no music, Bob, navigation or policy files, so the focused results remain valid.
+- GitHub owns the full production checks and verified deployment for this
+  owner-authorized release. The intervening No Audience and Gallery-title changes
+  have no overlapping paths with this feature; the focused results remain valid.
+- Final pause controls use two CSS-drawn rectangular bars in the compact speaker
+  and track list, with the existing accessible Play/Pause labels preserved.
 
-Native iPhone Safari review remains required before publication: first Play from
-Music and compact controls, focus without automatic zoom, keyboard opening and
-closing, rotation, and pinch zoom. Chromium viewport/protocol fixtures do not
-establish those native browser behaviors.
+Native iPhone Safari was not available for validation. The Chromium checks do not
+establish native Safari behavior for first Play, focus zoom, keyboard
+opening/closing, rotation or pinch zoom. The owner approved publication after
+reviewing the demo.

@@ -57,6 +57,7 @@
 .music-track__title{overflow-wrap:anywhere}
 .music-track__state{font:.66rem/1.5 var(--font-ui);letter-spacing:.025em;color:var(--text-secondary)}
 .music-track__icon{font-size:.68rem;text-align:center;pointer-events:none;color:var(--text-secondary)}
+.music-track__icon[data-playing="true"]::before{content:"";display:inline-block;box-sizing:border-box;width:9px;height:11px;border-left:3px solid currentColor;border-right:3px solid currentColor}
 .music-track--current{box-shadow:inset 2px 0 var(--text-secondary)}
 .music-track--current .music-track__title{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 
