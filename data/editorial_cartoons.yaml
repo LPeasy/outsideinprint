@@ -1,4 +1,4 @@
-current: the-epcot-project
+current: no-audience
 automatic_articles_since: "2026-10-22T00:00:00-04:00"
 cartoons:
   - slug: staging-the-resort
@@ -1258,3 +1258,12 @@ cartoons:
     alt: "A grandfather, an adult daughter, and a young child approach a blue-spired castle in warm sunlight. The grandfather carries an old photograph."
     width: 1672
     height: 941
+  - slug: no-audience
+    title: "No Audience"
+    date: "2026-10-28"
+    publishDate: "2026-10-28T10:57:51-04:00"
+    image: "editorial/no-audience"
+    essay: "/essays/no-audience/"
+    alt: "An anonymous barefoot man dances with his feet apart on a sunlit wooden floor beside a green couch, a draped shirt, and a laundry basket in his apartment."
+    width: 1672
+    height: 940
