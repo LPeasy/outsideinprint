@@ -846,6 +846,20 @@
       "processing_note": null,
       "quality_override": null
     },
+    "editorial/no-audience": {
+      "id": "editorial/no-audience",
+      "source": "images/originals/editorial/no-audience.png",
+      "sha256": "46ed75565ac94a63a72bc9f04d2c30662df628c093641463d5f06723ba6201e8",
+      "width": 1672,
+      "height": 940,
+      "image_class": "editorial_cartoon",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "editorial/no-receipt": {
       "id": "editorial/no-receipt",
       "source": "images/originals/editorial/no-receipt.png",
@@ -8870,6 +8884,7 @@
     "/images/editorial/modern-prometheus.png": "editorial/modern-prometheus",
     "/images/editorial/net-zero-prosperity.png": "editorial/net-zero-prosperity",
     "/images/editorial/nine-driveways-sunrise.png": "editorial/nine-driveways-sunrise",
+    "/images/editorial/no-audience.png": "editorial/no-audience",
     "/images/editorial/no-receipt.png": "editorial/no-receipt",
     "/images/editorial/not-mine-to-carry.png": "editorial/not-mine-to-carry",
     "/images/editorial/not-my-river-not-my-problem.png": "editorial/not-my-river-not-my-problem",
