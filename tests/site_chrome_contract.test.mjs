@@ -155,6 +155,14 @@ test("masthead defines the grouped desktop and mobile navigation from one destin
   assert.match(masthead, /\$isGamesPage := and \$gamesPage \(eq \$currentPath \$gamesPage\.RelPermalink\)/);
   assert.match(masthead, /\$inGamesSection := or \$isGamesPage \(eq \.Section "games"\)/);
 
+  assert.match(masthead, /\$musicPage := site\.GetPage "\/music"/);
+  assert.match(masthead, /\$showMusic := and \$musicPage \(or \(not \$musicPage\.Draft\) hugo\.IsServer\)/);
+  assert.equal((masthead.match(/"label" "Music"/g) || []).length, 1, "Music should be defined once");
+  assert.match(masthead, /"label" "Music"[\s\S]*?"href" \$musicPage\.RelPermalink[\s\S]*?"description" "Listen with JukeBob"[\s\S]*?"group" "explore"[\s\S]*?"currentPage" \$isMusicPage[\s\S]*?"currentSection" \$inMusicSection/);
+  assert.match(masthead, /\$isMusicPage := and \$musicPage \(eq \$currentPath \$musicPage\.RelPermalink\)/);
+  assert.match(masthead, /\$inMusicSection := or \$isMusicPage \(eq \.Section "music"\)/);
+  assert.ok(masthead.indexOf('"label" "Games"') < masthead.indexOf('"label" "Music"'), "Music must follow Games in Explore");
+
   assert.match(masthead, /"label" "Bookstore"[\s\S]*?"group" "direct"[\s\S]*?"mobilePrimary" false[\s\S]*?"analyticsSourceSlot" "primary_nav_bookstore"/);
   assert.match(masthead, /range \$directKey := slice "about" "bookstore" "support"/);
   assert.match(masthead, /range \$mobileKey := slice "about"/);
@@ -171,8 +179,8 @@ test("masthead defines the grouped desktop and mobile navigation from one destin
   assert.match(masthead, /\$inAboutSection := or \$isAboutPage \(eq \.Section "about"\)/);
   assert.match(masthead, /\$inSupportSection := or \$isSupportPage \(eq \.Section "support"\)/);
   assert.match(masthead, /\$inRandomSection := or \$isRandomPage \(eq \.Section "random"\)/);
-  assert.equal((masthead.match(/"currentPage" \$[A-Za-z]/g) || []).length, 10);
-  assert.equal((masthead.match(/"currentSection" \$[A-Za-z]/g) || []).length, 10);
+  assert.equal((masthead.match(/"currentPage" \$[A-Za-z]/g) || []).length, 11);
+  assert.equal((masthead.match(/"currentSection" \$[A-Za-z]/g) || []).length, 11);
   assert.doesNotMatch(masthead, /"current"/);
   assert.match(masthead, /<nav class="nav nav--section-rail" aria-label="Primary" data-primary-nav>/);
   assert.equal((masthead.match(/aria-label="Primary"/g) || []).length, 1);

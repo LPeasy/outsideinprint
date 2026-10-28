@@ -2,11 +2,7 @@
 {{ $catalog := hugo.Data.music }}
 {{ $albums := sort $catalog.albums "displayOrder" }}
 <section class="music-page" data-music-page aria-labelledby="music-heading">
-  <header class="music-page__header">
-    <p class="music-page__brand">JukeBob <span aria-hidden="true">·</span> Outside In Print</p>
-    <h1 id="music-heading">Music</h1>
-    <p>Pick a record. Keep listening while you read.</p>
-  </header>
+  <h1 id="music-heading" class="visually-hidden">Music</h1>
 
   <div class="music-albums" role="group" aria-label="Browse albums">
     {{ range $index, $album := $albums }}

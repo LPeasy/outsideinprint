@@ -19,9 +19,10 @@ Steam publication, or changes to Bob's model and spending limits.
 - Idle Times has no configured Git remote. Its reviewable source change is
   included as [an applyable Git patch](runtime-source/0001-Add-album-aware-JukeBob-controller-and-mobile-readin.patch)
   against that base. The Windows source worktree retains the commit.
-- The runtime build manifest records the clean source commit, implementation
-  hashes, website catalog hash, and all 56 exported files (81,648,994 bytes).
-  Exported payload hashes and lengths passed before installation into OIP.
+- The initial runtime export recorded the clean source commit, implementation
+  hashes, website catalog hash, and 56 files (81,648,994 bytes). Exported payload
+  hashes and lengths passed before installation. Later catalog/art refreshes
+  retain that source provenance and update only media/catalog records and totals.
 
 ## Behavior
 
@@ -51,6 +52,28 @@ The cabinet artwork remains intact. New controls use cream, brass and dark green
 with 44px targets and Browse albums. Volume remains inside the cabinet and Music
 page. Sans Serif MP3s are unchanged; full-frame cover derivatives are 320, 640 and
 960px WebP. The original cover is retained under nonpublic `assets/music/`.
+
+## Owner's visual revision
+
+Both albums and all tracks use **Robby V and The Paperboys**. The visible Music
+heading, JukeBob badge and introductory copy are removed; an accessible hidden
+heading remains. Album choices begin under the navigation. The page now uses the
+site's serif titles, ink/paper theme variables, square artwork and thin rules,
+with quieter playback controls in place of green boxed surfaces.
+
+Fine Print has new engraved newsroom cover art, created with built-in imagegen.
+Both cover credits were then edited to the owner's exact capitalization. Original
+images remain preserved beside the versioned final covers. Generation and edit
+prompts are saved in `assets/music/the-fine-print-vol-1/cover-generation.md` and
+`assets/music/sans-serif/cover-revision.md`. All MP3s and runtime code are unchanged.
+The catalog generator now updates its playlist/art records without rebuilding
+the runtime or rehashing unchanged audio.
+
+The first PR's site check failed only because the existing navigation fixture
+expected ten destinations. Music adds the eleventh. That exact test was corrected
+and passed, including Music's order and current-section highlighting.
+Five affected catalog/art/provenance tests and generator `--check` passed after
+the final artist-credit edits; unchanged audio and playback checks were reused.
 
 The actual iframe textarea uses 16px text and a 44px Send target. During mobile
 typing, the cabinet is visually concealed while its logical state, playback and

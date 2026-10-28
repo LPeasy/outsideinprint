@@ -65,10 +65,10 @@
   "musicCatalogSource": {
     "repository": "LPeasy/outsideinprint",
     "path": "data/music.json",
-    "sha256": "e13acc58c9875b90051f6f5e89cca110ded433bf774a2b51013a19a6a32059dc"
+    "sha256": "548381b945fbfaa27818bdd03141ba8512fd42d341309b62baead5323af014e1"
   },
   "fullGameIncluded": false,
-  "totalBytes": 81648994,
+  "totalBytes": 82826659,
   "files": [
     {
       "path": "assets/bob-armrest-BAi3CKpz.webp",
@@ -266,9 +266,39 @@
       "sha256": "94e04510d971c9098c492129e7d1b34eef98c338cd2c1a9086ac306d396ffbd2"
     },
     {
+      "path": "music/artwork/sans-serif-v3-320.webp",
+      "bytes": 51572,
+      "sha256": "60dcf04c7b9d54f8793bb7cd2e1d0ea52c0f3c54e3c50f4b3ef74b75936bbe20"
+    },
+    {
+      "path": "music/artwork/sans-serif-v3-640.webp",
+      "bytes": 190094,
+      "sha256": "6cdfb150dfe3e531f0b52a98a2eb341b139724fd71b3413ea5a9e80c54280a1e"
+    },
+    {
+      "path": "music/artwork/sans-serif-v3-960.webp",
+      "bytes": 375974,
+      "sha256": "816375d3d03f8be91d87c98e4a03cafcb6d96767e4fa7ffa6ba676f4d10c64c4"
+    },
+    {
+      "path": "music/artwork/the-fine-print-vol-1-v2-320.webp",
+      "bytes": 47198,
+      "sha256": "277fc90b9774a7ef4450e0b8051796f1843604e707cc6985b7eae6ef0f09e62a"
+    },
+    {
+      "path": "music/artwork/the-fine-print-vol-1-v2-640.webp",
+      "bytes": 169436,
+      "sha256": "eb5e006c3ef0f933a1a9411b4e1c7afeff760f6e315ff75ad65a282b7b044d2e"
+    },
+    {
+      "path": "music/artwork/the-fine-print-vol-1-v2-960.webp",
+      "bytes": 342328,
+      "sha256": "d11d0f9128ee52b43802fca730f8d491acbe08f1d48965187ad57b3162e9ce19"
+    },
+    {
       "path": "music/playlist.json",
-      "bytes": 5902,
-      "sha256": "24ff0b4f41a079929c2f4d55b58bd24ad958ebcc729058e207e8801454fb2d61"
+      "bytes": 6965,
+      "sha256": "6e00febd4604863493cbf320c58b6f853eca0ae5ab28db4c53004e017b7e89a9"
     },
     {
       "path": "music/tracks/city-awakens.mp3",

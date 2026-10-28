@@ -6,29 +6,29 @@
     {
       "id": "sans-serif",
       "title": "Sans Serif",
-      "artist": "Robby V and the Paperboys",
+      "artist": "Robby V and The Paperboys",
       "displayOrder": 1,
       "cover": {
-        "source": "assets/music/sans-serif/cover.png",
-        "sourceSha256": "a0eeb19228f869666ce8d5c00ac5cc7a7fc464eee7956b622c16de6f06b8e908",
-        "revision": "v2-oip-house-style",
+        "source": "assets/music/sans-serif/cover-v3.png",
+        "sourceSha256": "8278a6ad51e413a3bf8b5a36f9b29eb9f909a3c23193c8959a7558ff6590d34a",
+        "revision": "v3-artist-credit",
         "alt": "Sans Serif album cover: a writer rests beside a printing press in a lamplit newsroom.",
-        "src": "music/artwork/sans-serif-640.webp",
+        "src": "music/artwork/sans-serif-v3-640.webp",
         "width": 640,
         "height": 640,
         "variants": [
           {
-            "src": "music/artwork/sans-serif-320.webp",
+            "src": "music/artwork/sans-serif-v3-320.webp",
             "width": 320,
             "height": 320
           },
           {
-            "src": "music/artwork/sans-serif-640.webp",
+            "src": "music/artwork/sans-serif-v3-640.webp",
             "width": 640,
             "height": 640
           },
           {
-            "src": "music/artwork/sans-serif-960.webp",
+            "src": "music/artwork/sans-serif-v3-960.webp",
             "width": 960,
             "height": 960
           }
@@ -38,7 +38,7 @@
         {
           "id": "sans-serif-chairman",
           "title": "Chairman",
-          "artist": "Robby V and the Paperboys",
+          "artist": "Robby V and The Paperboys",
           "number": 1,
           "duration": 184.8,
           "src": "music/tracks/sans-serif/01-chairman.mp3",
@@ -48,7 +48,7 @@
         {
           "id": "sans-serif-inkwell",
           "title": "Inkwell",
-          "artist": "Robby V and the Paperboys",
+          "artist": "Robby V and The Paperboys",
           "number": 2,
           "duration": 199.2,
           "src": "music/tracks/sans-serif/02-inkwell.mp3",
@@ -58,7 +58,7 @@
         {
           "id": "sans-serif-late-nights-at-the-office",
           "title": "Late Nights at the Office",
-          "artist": "Robby V and the Paperboys",
+          "artist": "Robby V and The Paperboys",
           "number": 3,
           "duration": 141.6,
           "src": "music/tracks/sans-serif/03-late-nights-at-the-office.mp3",
@@ -68,7 +68,7 @@
         {
           "id": "sans-serif-blue-skies-arent-they",
           "title": "Blue Skies, Aren’t They?",
-          "artist": "Robby V and the Paperboys",
+          "artist": "Robby V and The Paperboys",
           "number": 4,
           "duration": 174.8,
           "src": "music/tracks/sans-serif/04-blue-skies-arent-they.mp3",
@@ -78,7 +78,7 @@
         {
           "id": "sans-serif-feather-quill",
           "title": "Feather Quill",
-          "artist": "Robby V and the Paperboys",
+          "artist": "Robby V and The Paperboys",
           "number": 5,
           "duration": 177.2,
           "src": "music/tracks/sans-serif/05-feather-quill.mp3",
@@ -88,7 +88,7 @@
         {
           "id": "sans-serif-round",
           "title": "Round",
-          "artist": "Robby V and the Paperboys",
+          "artist": "Robby V and The Paperboys",
           "number": 6,
           "duration": 162.24,
           "src": "music/tracks/sans-serif/06-round.mp3",
@@ -98,7 +98,7 @@
         {
           "id": "sans-serif-deep-research",
           "title": "Deep Research",
-          "artist": "Robby V and the Paperboys",
+          "artist": "Robby V and The Paperboys",
           "number": 7,
           "duration": 154.8,
           "src": "music/tracks/sans-serif/07-deep-research.mp3",
@@ -110,13 +110,13 @@
     {
       "id": "the-fine-print-vol-1",
       "title": "The Fine Print, Vol. 1",
-      "artist": "Robby V and the Paper Boys",
+      "artist": "Robby V and The Paperboys",
       "displayOrder": 2,
       "tracks": [
         {
           "id": "first-edition",
           "title": "First Edition",
-          "artist": "Robby V and the Paper Boys",
+          "artist": "Robby V and The Paperboys",
           "number": 1,
           "duration": 139.944,
           "src": "music/tracks/first-edition.mp3"
@@ -124,7 +124,7 @@
         {
           "id": "fresh-black",
           "title": "Fresh Black",
-          "artist": "Robby V and the Paper Boys",
+          "artist": "Robby V and The Paperboys",
           "number": 2,
           "duration": 154.584,
           "src": "music/tracks/fresh-black.mp3"
@@ -132,7 +132,7 @@
         {
           "id": "wire-service",
           "title": "Wire Service",
-          "artist": "Robby V and the Paper Boys",
+          "artist": "Robby V and The Paperboys",
           "number": 3,
           "duration": 153.072,
           "src": "music/tracks/wire-service.mp3"
@@ -140,7 +140,7 @@
         {
           "id": "sunrise-headlines",
           "title": "Sunrise Headlines",
-          "artist": "Robby V and the Paper Boys",
+          "artist": "Robby V and The Paperboys",
           "number": 4,
           "duration": 152.184,
           "src": "music/tracks/sunrise-headlines.mp3"
@@ -148,7 +148,7 @@
         {
           "id": "city-awakens",
           "title": "City Awakens",
-          "artist": "Robby V and the Paper Boys",
+          "artist": "Robby V and The Paperboys",
           "number": 5,
           "duration": 117.072,
           "src": "music/tracks/city-awakens.mp3"
@@ -156,7 +156,7 @@
         {
           "id": "confidential-sources",
           "title": "Confidential Sources",
-          "artist": "Robby V and the Paper Boys",
+          "artist": "Robby V and The Paperboys",
           "number": 6,
           "duration": 132.72,
           "src": "music/tracks/confidential-sources.mp3"
@@ -164,7 +164,7 @@
         {
           "id": "editorial-meeting",
           "title": "Editorial Meeting",
-          "artist": "Robby V and the Paper Boys",
+          "artist": "Robby V and The Paperboys",
           "number": 7,
           "duration": 154.824,
           "src": "music/tracks/editorial-meeting.mp3"
@@ -172,12 +172,38 @@
         {
           "id": "hot-off-the-press",
           "title": "Hot Off The (Press)",
-          "artist": "Robby V and the Paper Boys",
+          "artist": "Robby V and The Paperboys",
           "number": 8,
           "duration": 244.824,
           "src": "music/tracks/hot-off-the-press.mp3"
         }
-      ]
+      ],
+      "cover": {
+        "source": "assets/music/the-fine-print-vol-1/cover-v2.png",
+        "sourceSha256": "034b1cb4f4d87759a53042de811937f497b044fa87ac00a9959558b732f91748",
+        "revision": "v2-artist-credit",
+        "alt": "The Fine Print, Vol. 1 album cover: a typewriter, marked-up newspaper and coffee on a newsroom desk at sunrise.",
+        "src": "music/artwork/the-fine-print-vol-1-v2-640.webp",
+        "width": 640,
+        "height": 640,
+        "variants": [
+          {
+            "src": "music/artwork/the-fine-print-vol-1-v2-320.webp",
+            "width": 320,
+            "height": 320
+          },
+          {
+            "src": "music/artwork/the-fine-print-vol-1-v2-640.webp",
+            "width": 640,
+            "height": 640
+          },
+          {
+            "src": "music/artwork/the-fine-print-vol-1-v2-960.webp",
+            "width": 960,
+            "height": 960
+          }
+        ]
+      }
     }
   ]
 }
