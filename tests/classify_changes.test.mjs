@@ -37,6 +37,19 @@ test("ordinary publications build without unrelated browser or fixture suites", 
   }
   assert.equal(classifyPaths(["data/image-assets.json"], { renderingDefaultsChanged: true }).browser, true);
 });
+
+test("artwork title admission stays in the site path for content and manifest publications", () => {
+  for (const path of ["content/essays/article.md", "content/essays/dialogues/new.md", "data/image-assets.json", "data/editorial_cartoons.yaml"]) {
+    for (const event of ["pull_request", "push"]) {
+      const selected = selectChecks({ event, paths: [path], protectedMain: true });
+      assert.equal(selected.site, true, `${event}: ${path}`);
+    }
+  }
+  const fixture = classifyPaths(["tests/test_gallery_artwork_title_admission.ps1"]);
+  assert.equal(fixture.site, true);
+  assert.equal(fixture.publishing, true);
+  assert.equal(fixture.full, false);
+});
 test("browser selection follows rendering, applications, storefronts and helpers", () => {
   for (const path of ["assets/js/piece-share.js", "layouts/partials/images/model.html", "content/apps/test.md", "content/shop/2045/index.md", "data/bookstore.yaml", "tests/mobile_navigation_browser.test.mjs", "tests/helpers/browser-fixture.mjs", "package-lock.json", "hugo.toml"]) {
     assert.equal(classifyPaths([path]).browser, true, path);

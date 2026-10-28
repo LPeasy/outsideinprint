@@ -434,6 +434,58 @@ cartoons:
     $derivedManifest = Get-Content -LiteralPath (Join-Path $tempDataDir 'image-assets.json') -Raw | ConvertFrom-Json -AsHashtable -Depth 20
     Assert-True ($derivedManifest.assets.ContainsKey('editorial/derived-slug-title')) 'Title-derived default did not register its managed asset ID.'
 
+    $rollbackDataPath = Join-Path $tempDataDir 'editorial_cartoons.yaml'
+    $rollbackManifestPath = Join-Path $tempDataDir 'image-assets.json'
+    $rollbackDataHash = (Get-FileHash -LiteralPath $rollbackDataPath).Hash
+    $rollbackManifestHash = (Get-FileHash -LiteralPath $rollbackManifestPath).Hash
+    $futureDirectory = Join-Path $tempRoot 'content/essays/affirmations'
+    [IO.Directory]::CreateDirectory($futureDirectory) | Out-Null
+    [IO.File]::WriteAllText((Join-Path $futureDirectory 'future-ready.md'), @'
+---
+title: "Future Ready"
+slug: "future-ready"
+date: 2099-01-01
+draft: false
+section_label: "Affirmation"
+library_type: "affirmation"
+collections: ["the-things-we-say"]
+source_mode: "SOURCE_FREE"
+external_factual_claims: "none"
+---
+I am ready.
+'@)
+    $blocked = $false
+    try { & $updateScript -Root $tempRoot -ImagePath $sourceImage.FullName -Title 'The Unopened Gate' -Slug 'early-linked-art' -Alt 'An original scene.' -Date '2026-01-01' -EssayPath '/essays/future-ready/' | Out-Null }
+    catch { $blocked = $_.Exception.Message -match 'earlier than linked essay' }
+    Assert-True $blocked 'A raw publication preceding its linked article did not fail before writes.'
+    Assert-True (-not (Test-Path -LiteralPath (Join-Path $tempRoot 'assets/images/originals/editorial/early-linked-art.png'))) 'Rejected linked release copied original artwork.'
+    Assert-True ((Get-FileHash -LiteralPath $rollbackDataPath).Hash -ceq $rollbackDataHash -and (Get-FileHash -LiteralPath $rollbackManifestPath).Hash -ceq $rollbackManifestHash) 'Rejected linked release changed metadata.'
+
+    # Inject one late write failure into an isolated copy, covering both a new
+    # original and replacement of an existing original without touching source.
+    $injectedScripts = Join-Path $tempRoot 'scripts'
+    $injectedLibrary = Join-Path $injectedScripts 'lib'
+    [IO.Directory]::CreateDirectory($injectedLibrary) | Out-Null
+    foreach ($library in @('image_asset_manifest.ps1', 'artwork_titles.ps1')) { Copy-Item -LiteralPath (Join-Path $repoRoot "scripts/lib/$library") -Destination (Join-Path $injectedLibrary $library) }
+    $injectedPublisher = Join-Path $injectedScripts 'publisher-write-failure.ps1'
+    $publisherText = [IO.File]::ReadAllText($updateScript)
+    $rawWrite = 'Write-CartoonData -Path $dataPath -Current $resolvedSlug -Cartoons @($cartoons)'
+    Assert-True ($publisherText.Contains($rawWrite)) 'Raw write failure injection target is missing.'
+    [IO.File]::WriteAllText($injectedPublisher, $publisherText.Replace($rawWrite, "throw 'Injected Gallery write failure.'"))
+    $replacementInput = Join-Path $tempRoot 'replacement.png'
+    [IO.File]::WriteAllBytes($replacementInput, [Convert]::FromBase64String('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGNgYPj/HwADAgH/5ncLrgAAAABJRU5ErkJggg=='))
+    foreach ($failureCase in @(@{Slug='new-failed-art';Title='An Unfinished Scene'}, @{Slug='explicit-manifest-slug';Title='Short Title'})) {
+      $failedOriginal = Join-Path $tempRoot "assets/images/originals/editorial/$($failureCase.Slug).png"
+      $originalHash = if ([IO.File]::Exists($failedOriginal)) { (Get-FileHash -LiteralPath $failedOriginal).Hash } else { '' }
+      $blocked = $false
+      try { & $injectedPublisher -Root $tempRoot -ImagePath $replacementInput -Title $failureCase.Title -Slug $failureCase.Slug -Alt 'A failed write fixture.' -Date '2026-01-04' -NoEssayLink | Out-Null }
+      catch { $blocked = $_.Exception.Message -match 'Injected Gallery write failure' }
+      Assert-True $blocked 'Injected raw Gallery write failure did not fire.'
+      Assert-True ((Get-FileHash -LiteralPath $rollbackDataPath).Hash -ceq $rollbackDataHash -and (Get-FileHash -LiteralPath $rollbackManifestPath).Hash -ceq $rollbackManifestHash) 'Failed raw Gallery write did not restore metadata byte-for-byte.'
+      if ($originalHash) { Assert-True ((Get-FileHash -LiteralPath $failedOriginal).Hash -ceq $originalHash) 'Failed raw Gallery write did not restore the prior original.' }
+      else { Assert-True (-not [IO.File]::Exists($failedOriginal)) 'Failed raw Gallery write left a newly copied original.' }
+    }
+
     $dataBeforeInvalid = [System.IO.File]::ReadAllBytes((Join-Path $tempDataDir 'editorial_cartoons.yaml'))
     $manifestBeforeInvalid = [System.IO.File]::ReadAllBytes((Join-Path $tempDataDir 'image-assets.json'))
     $invalidBlocked = $false

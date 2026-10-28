@@ -72,6 +72,7 @@ const testFamilies = new Map([
   ["test_essay_guardrails.ps1", ["publishing", "windows"]], ["test_essay_image_audit.ps1", ["publishing", "windows"]],
   ["test_affirmation_contract.ps1", ["publishing", "windows"]], ["test_almanack_buttondown_numbering.ps1", ["publishing", "windows"]],
   ["test_editorial_cartoon_schedule_contract.ps1", ["publishing"]],
+  ["test_gallery_artwork_title_admission.ps1", ["publishing"]],
   ["test_managed_image_registration.ps1", ["images", "windows"]], ["test_focused_image_review_promotion.ps1", ["images", "windows"]],
   ["test_focused_legacy_image_migration.ps1", ["images"]], ["responsive_image_cache_behavior.test.mjs", ["images"]],
   ["test_image_signatures.ps1", ["images"]],

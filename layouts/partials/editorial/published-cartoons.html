@@ -1,7 +1,5 @@
 {{- $cartoons := . | default (slice) -}}
-{{- with hugo.Data.editorial_cartoons.automatic_articles_since -}}
-  {{- $cartoons = partialCached "editorial/registered-cartoons.html" $cartoons . (crypto.SHA256 (jsonify $cartoons)) -}}
-{{- end -}}
+{{- $cartoons = partialCached "editorial/registered-cartoons.html" $cartoons (hugo.Data.editorial_cartoons.automatic_articles_since | default "") (crypto.SHA256 (jsonify $cartoons)) -}}
 {{- $published := slice -}}
 {{- range $cartoons -}}
   {{- if partial "editorial/cartoon-is-published.html" . -}}

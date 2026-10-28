@@ -54,6 +54,8 @@ test("compatible resources agree with cold renders after image and recipe change
     const warm = path.join(temp, "warm");
     const cases = [
       ["original", () => {}],
+      ["artwork-title-added", () => { manifest.assets["books/fixture/first"].artwork_title = "One Lasting Name"; }],
+      ["artwork-title-renamed", () => { manifest.assets["books/fixture/first"].artwork_title = "A New Editorial Name"; }],
       ["added", () => { manifest.assets["books/fixture/second"] = { ...examples[1], id: "books/fixture/second" }; }],
       ["replaced", () => { manifest.assets["books/fixture/first"] = { ...examples[1], id: "books/fixture/first" }; }],
       ["removed", () => { delete manifest.assets["books/fixture/second"]; }],
@@ -61,6 +63,7 @@ test("compatible resources agree with cold renders after image and recipe change
       ["widths", () => { manifest.defaults.widths = [24, 48]; manifest.defaults.max_render_width = 80; }],
       ["note-only", () => { manifest.assets.quarantine = { review_state: "rejected_corrupt_source", processing_state: "source_only_unprocessable", processing_note: "Updated quarantine explanation." }; }],
     ];
+    let originalFiles, originalResources;
     for (const [name, mutate] of cases) {
       mutate();
       const cold = path.join(temp, name);
@@ -69,6 +72,11 @@ test("compatible resources agree with cold renders after image and recipe change
       const warmOutput = path.join(warm, "output-" + name), coldOutput = path.join(cold, "output");
       render(warm, warmOutput); render(cold, coldOutput);
       assert.deepEqual(snapshot(warmOutput), snapshot(coldOutput), name + " warm/cold bytes and paths");
+      if (name === "original") { originalFiles = snapshot(warmOutput); originalResources = cacheSnapshot(path.join(warm, "resources/_gen")); }
+      if (name.startsWith("artwork-title-")) {
+        assert.deepEqual(snapshot(warmOutput), originalFiles, "editorial artwork titles change no derivative bytes or URLs");
+        assert.deepEqual(cacheSnapshot(path.join(warm, "resources/_gen")), originalResources, "title edits reuse the existing image resources without writes");
+      }
       assert.ok(!Object.keys(snapshot(warmOutput)).some(file => file.includes("quarantine")), "quarantine must not render");
     }
     const exact = path.join(warm, "exact");

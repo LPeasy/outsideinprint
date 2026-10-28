@@ -68,6 +68,7 @@ try {
   [IO.Directory]::CreateDirectory((Join-Path $fixtureRoot 'scripts/lib')) | Out-Null
   [IO.File]::Copy((Join-Path $rootPath 'scripts/migrate_focused_legacy_images.ps1'), (Join-Path $fixtureRoot 'scripts/migrate_focused_legacy_images.ps1'), $true)
   [IO.File]::Copy((Join-Path $rootPath 'scripts/lib/image_asset_manifest.ps1'), (Join-Path $fixtureRoot 'scripts/lib/image_asset_manifest.ps1'), $true)
+  [IO.File]::Copy((Join-Path $rootPath 'scripts/lib/artwork_titles.ps1'), (Join-Path $fixtureRoot 'scripts/lib/artwork_titles.ps1'), $true)
 
   # Materialize one selected content input as CRLF before the fixture commit.
   # Its Git blob and tracked evidence use LF, so the successful migration below

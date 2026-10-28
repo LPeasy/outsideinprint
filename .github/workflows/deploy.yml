@@ -282,6 +282,18 @@ jobs:
         shell: pwsh
         run: |-
           ./tests/test_editorial_cartoon_schedule_contract.ps1 -SourceOnly -Clock $env:OIP_BUILD_CLOCK_UTC
+      - name: Check Gallery Artwork Titles
+        shell: pwsh
+        env:
+          OIP_BASE_SHA: ${{ needs.classify.outputs.base }}
+        run: |-
+          if ($env:OIP_BASE_SHA) {
+            ./scripts/check_gallery_artwork_titles.ps1 -BaseRef $env:OIP_BASE_SHA -HeadRef HEAD -Clock $env:OIP_BUILD_CLOCK_UTC
+          } elseif ($env:GITHUB_EVENT_NAME -in @('schedule', 'workflow_dispatch')) {
+            ./scripts/check_gallery_artwork_titles.ps1 -HeadRef HEAD -ConsistencyOnly -Clock $env:OIP_BUILD_CLOCK_UTC
+          } else {
+            throw 'Gallery artwork title admission requires a valid publication comparison base.'
+          }
       - name: Test Legacy Render Contract
         shell: pwsh
         run: |
@@ -326,7 +338,9 @@ jobs:
       - name: Test cartoon publishing fixtures
         if: ${{ needs.classify.outputs.publishing == 'true' }}
         shell: pwsh
-        run: ./tests/test_editorial_cartoon_schedule_contract.ps1 -Clock $env:OIP_BUILD_CLOCK_UTC
+        run: |-
+          ./tests/test_editorial_cartoon_schedule_contract.ps1 -Clock $env:OIP_BUILD_CLOCK_UTC
+          ./tests/test_gallery_artwork_title_admission.ps1
       - name: Test Essay Guardrails
         shell: pwsh
         run: |

@@ -166,6 +166,21 @@ test("browser containers are conditional and actual publication gates remain act
   assert.doesNotMatch(commands("worker"), /wrangler.*deploy|cloudflare.*deploy/i);
 });
 
+test("Gallery artwork title admission is unconditional and precedes prose exemptions", () => {
+  const siteSteps = steps("site");
+  const gate = siteSteps.find(step => step.name === "Check Gallery Artwork Titles");
+  assert.ok(gate);
+  assert.equal(gate.if, undefined, "Content-only and manifest-only publications must not depend on publishing fixtures.");
+  assert.equal(gate.env.OIP_BASE_SHA, "${{ needs.classify.outputs.base }}");
+  assert.match(gate.run, /check_gallery_artwork_titles\.ps1 -BaseRef \$env:OIP_BASE_SHA -HeadRef HEAD/);
+  assert.match(gate.run, /GITHUB_EVENT_NAME -in @\('schedule', 'workflow_dispatch'\)/);
+  assert.match(gate.run, /-ConsistencyOnly/);
+  assert.match(gate.run, /throw 'Gallery artwork title admission requires a valid publication comparison base/);
+  assert.ok(siteSteps.indexOf(gate) < siteSteps.findIndex(step => step.name === "Check changed publication prose"));
+  const fixtures = siteSteps.find(step => step.name === "Test cartoon publishing fixtures");
+  assert.match(fixtures.run, /test_gallery_artwork_title_admission\.ps1/);
+});
+
 test("output checks have one root dependency install with or without browser fixtures", () => {
   const siteSteps = steps("site");
   const feedGate = siteSteps.findIndex(step => step.run?.includes("test_feed_policy_contract.ps1 -SiteDir"));
