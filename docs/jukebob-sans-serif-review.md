@@ -81,6 +81,30 @@ saved Bob placement remain intact. Parent visual viewport dimensions and offsets
 drive frame fitting and hit regions; parent reading overlays use those same
 layout coordinates. Pinch zoom remains enabled.
 
+## JukeBob record selector revision
+
+The album tabs are replaced by a responsive tabletop JukeBob selector with wood,
+brass, speaker cloth and a glass record display. Covers turn into the center while
+neighboring sleeves angle to either side. The existing opened-album artwork,
+track list and playback controls below are preserved.
+
+Previous/next buttons, cover taps, Arrow keys, Home/End and horizontal touch
+swipes select an album without starting or changing audio. Selection is bounded
+by the catalog, with a current-record counter and screen-reader announcement.
+Only the selected cover is a cover tab stop; distant covers are hidden from
+assistive technology. Reduced-motion preferences disable the transition. Vertical
+scrolling and pinch zoom remain native. The selector reads the catalog directly,
+so future albums do not need a layout or script change.
+
+Three focused carousel behavior tests pass, covering catalog sizes up to six,
+navigation bounds, keyboard and endpoint focus, swipe/click suppression, browsing
+without audio commands and route cleanup/remount. One warm-cache Hugo preview
+passed. Edge review confirmed the 3D cover transform, selection/panel updates and
+keyboard focus at an endpoint. A narrow viewport check (291 CSS pixels at the
+browser's existing zoom) showed no horizontal overflow and 44px arrow controls.
+The viewport was restored and the demo refreshed for owner review. Prior audio,
+catalog and runtime checks were reused because those inputs did not change.
+
 ## Focused validation
 
 - Package verifier and imported destination MP3 hashes: pass, unchanged bytes.

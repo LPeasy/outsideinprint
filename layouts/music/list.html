@@ -4,14 +4,35 @@
 <section class="music-page" data-music-page aria-labelledby="music-heading">
   <h1 id="music-heading" class="visually-hidden">Music</h1>
 
-  <div class="music-albums" role="group" aria-label="Browse albums">
+  {{ $first := index $albums 0 }}
+  <section class="music-selector" data-music-selector aria-label="JukeBob album selector" aria-roledescription="carousel">
+    <div class="music-selector__crown" aria-hidden="true"><span>Outside In Print</span><strong>JUKE·BOB</strong><span>Record Library</span></div>
+    <div class="music-selector__cabinet">
+      <div class="music-selector__speaker" aria-hidden="true"><span>HIGH<br>FIDELITY</span></div>
+      <div class="music-selector__window">
+        <div class="music-covers" data-music-covers role="group" aria-label="Album covers">
     {{ range $index, $album := $albums }}
-    <button type="button" class="music-album-choice" data-music-album="{{ $album.id }}" aria-pressed="{{ if eq $index 0 }}true{{ else }}false{{ end }}" aria-controls="music-album-{{ $album.id }}">
-      {{ partial "music/cover.html" (dict "album" $album "small" true) }}
-      <span class="music-album-choice__text"><strong>{{ $album.title }}</strong><span>{{ $album.artist }}</span><span>{{ len $album.tracks }} tracks</span></span>
+    <button type="button" class="music-record" data-music-album="{{ $album.id }}" data-music-album-title="{{ $album.title }}" data-music-album-artist="{{ $album.artist }}" data-music-position="{{ if eq $index 0 }}current{{ else if eq $index 1 }}right{{ else }}after{{ end }}" aria-label="Select {{ $album.title }}" aria-pressed="{{ if eq $index 0 }}true{{ else }}false{{ end }}" aria-controls="music-album-{{ $album.id }}" tabindex="{{ if eq $index 0 }}0{{ else }}-1{{ end }}"{{ if gt $index 1 }} aria-hidden="true"{{ end }}>
+      {{ partial "music/cover.html" (dict "album" $album "selector" true) }}
     </button>
     {{ end }}
-  </div>
+        </div>
+        <div class="music-selector__shelf" aria-hidden="true"></div>
+      </div>
+      <div class="music-selector__speaker" aria-hidden="true"><span>LONG<br>PLAYING</span></div>
+    </div>
+    <div class="music-selector__console">
+      <button type="button" class="music-selector__arrow" data-music-browse-previous aria-label="Previous album" disabled><span aria-hidden="true">‹</span></button>
+      <div class="music-selector__label">
+        <span class="music-selector__counter">Record <span data-music-selection-count>01 / {{ printf "%02d" (len $albums) }}</span></span>
+        <strong data-music-selection-title>{{ $first.title }}</strong>
+        <span data-music-selection-artist>{{ $first.artist }}</span>
+      </div>
+      <button type="button" class="music-selector__arrow" data-music-browse-next aria-label="Next album"{{ if lt (len $albums) 2 }} disabled{{ end }}><span aria-hidden="true">›</span></button>
+    </div>
+    <p class="music-selector__hint">Flip through the covers. Play a record below.</p>
+    <p class="visually-hidden" data-music-selection-announcement aria-live="polite" aria-atomic="true"></p>
+  </section>
 
   {{ range $index, $album := $albums }}
   <section class="music-album" id="music-album-{{ $album.id }}" data-music-panel="{{ $album.id }}" aria-labelledby="music-title-{{ $album.id }}"{{ if ne $index 0 }} hidden{{ end }}>

@@ -9,6 +9,7 @@ import "./entry_threads_contract.test.mjs";
 import "./featured_continuation_contract.test.mjs";
 import "./games_catalog_contract.test.mjs";
 import "./music_catalog_contract.test.mjs";
+import "./music_page_carousel.test.mjs";
 import "./bob_music_compact.test.mjs";
 import "./homepage_selected.test.mjs";
 import "./companion_bob_visit.test.mjs";

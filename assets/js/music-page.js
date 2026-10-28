@@ -5,6 +5,14 @@
     if (!page) return;
     const choices = Array.from(page.querySelectorAll('[data-music-album]'));
     const panels = Array.from(page.querySelectorAll('[data-music-panel]'));
+    const selector = page.querySelector('[data-music-selector]');
+    const covers = page.querySelector('[data-music-covers]');
+    const browsePrevious = page.querySelector('[data-music-browse-previous]');
+    const browseNext = page.querySelector('[data-music-browse-next]');
+    const selectionTitle = page.querySelector('[data-music-selection-title]');
+    const selectionArtist = page.querySelector('[data-music-selection-artist]');
+    const selectionCount = page.querySelector('[data-music-selection-count]');
+    const selectionAnnouncement = page.querySelector('[data-music-selection-announcement]');
     const rows = Array.from(page.querySelectorAll('[data-music-track-row]'));
     const commands = Array.from(page.querySelectorAll('[data-music-command]'));
     const status = page.querySelector('[data-music-status]');
@@ -15,16 +23,72 @@
     let api = null;
     let unsubscribe = null;
     let state = { ready: false };
+    let selectedIndex = 0;
+    let touch = null;
+    let ignoreClickUntil = 0;
 
     function setText(node, value) {
-      if (node.textContent !== value) node.textContent = value;
+      if (node && node.textContent !== value) node.textContent = value;
     }
-    function chooseAlbum(id) {
-      choices.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.musicAlbum === id)));
+    function chooseAlbum(index, announce = true) {
+      if (!choices.length) return;
+      selectedIndex = Math.max(0, Math.min(choices.length - 1, index));
+      const selected = choices[selectedIndex];
+      const id = selected.dataset.musicAlbum;
+      choices.forEach((button, position) => {
+        const offset = position - selectedIndex;
+        button.dataset.musicPosition = offset === 0 ? 'current' : offset === -1 ? 'left' : offset === 1 ? 'right' : offset < 0 ? 'before' : 'after';
+        button.setAttribute('aria-pressed', String(offset === 0));
+        button.setAttribute('aria-hidden', String(Math.abs(offset) > 1));
+        button.tabIndex = offset === 0 ? 0 : -1;
+      });
       panels.forEach(panel => { panel.hidden = panel.dataset.musicPanel !== id; });
+      if (browsePrevious) { browsePrevious.disabled = selectedIndex === 0; browsePrevious.hidden = choices.length < 2; }
+      if (browseNext) { browseNext.disabled = selectedIndex === choices.length - 1; browseNext.hidden = choices.length < 2; }
+      const count = `${String(selectedIndex + 1).padStart(2, '0')} / ${String(choices.length).padStart(2, '0')}`;
+      setText(selectionTitle, selected.dataset.musicAlbumTitle || '');
+      setText(selectionArtist, selected.dataset.musicAlbumArtist || '');
+      setText(selectionCount, count);
+      if (announce) setText(selectionAnnouncement, `${selected.dataset.musicAlbumTitle || 'Album'}, ${selectedIndex + 1} of ${choices.length}.`);
     }
     // Browsing is independent of the playing album, including Back/Forward.
-    if (choices[0]) chooseAlbum(choices[0].dataset.musicAlbum);
+    chooseAlbum(0, false);
+    function browseFromArrow(button, index, event) {
+      const keyboardFocus = event.detail === 0 && document.activeElement === button;
+      chooseAlbum(index);
+      if (keyboardFocus && button.disabled && choices[selectedIndex]) choices[selectedIndex].focus({ preventScroll: true });
+    }
+    scope.on(browsePrevious, 'click', event => browseFromArrow(browsePrevious, selectedIndex - 1, event));
+    scope.on(browseNext, 'click', event => browseFromArrow(browseNext, selectedIndex + 1, event));
+    scope.on(selector, 'keydown', event => {
+      if (event.altKey || event.ctrlKey || event.metaKey) return;
+      const index = event.key === 'ArrowLeft' ? selectedIndex - 1 : event.key === 'ArrowRight' ? selectedIndex + 1 : event.key === 'Home' ? 0 : event.key === 'End' ? choices.length - 1 : null;
+      if (index === null || !choices.length) return;
+      event.preventDefault();
+      chooseAlbum(index);
+      if (event.target.closest('[data-music-album]') || ((event.target === browsePrevious || event.target === browseNext) && event.target.disabled)) choices[selectedIndex].focus({ preventScroll: true });
+    });
+    scope.on(covers, 'touchstart', event => {
+      ignoreClickUntil = 0;
+      const point = event.touches.length === 1 ? event.touches[0] : null;
+      touch = point ? { id: point.identifier, x: point.clientX, y: point.clientY } : null;
+    }, { passive: true });
+    scope.on(covers, 'touchmove', event => {
+      const point = touch && event.touches.length === 1 ? event.touches[0] : null;
+      if (!point || point.identifier !== touch.id || (Math.abs(point.clientY - touch.y) > 8 && Math.abs(point.clientY - touch.y) > Math.abs(point.clientX - touch.x))) touch = null;
+    }, { passive: true });
+    scope.on(covers, 'touchend', event => {
+      const start = touch;
+      touch = null;
+      if (!start) return;
+      const point = Array.from(event.changedTouches).find(point => point.identifier === start.id);
+      if (!point) return;
+      const dx = point.clientX - start.x, dy = point.clientY - start.y;
+      if (Math.abs(dx) < 40 || Math.abs(dx) <= Math.abs(dy) * 1.25) return;
+      ignoreClickUntil = Date.now() + 600;
+      chooseAlbum(selectedIndex + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+    scope.on(covers, 'touchcancel', () => { touch = null; }, { passive: true });
 
     function render(nextState) {
       if (!scope.active()) return;
@@ -74,7 +138,10 @@
         setText(message, 'Playback could not start. Try Play again.');
       }
     }
-    choices.forEach(button => scope.on(button, 'click', () => chooseAlbum(button.dataset.musicAlbum)));
+    choices.forEach((button, index) => scope.on(button, 'click', event => {
+      if (event.detail !== 0 && Date.now() < ignoreClickUntil) { event.preventDefault(); return; }
+      chooseAlbum(index);
+    }));
     page.querySelectorAll('[data-music-play-album]').forEach(button => scope.on(button, 'click', () => invoke('playAlbum', button.dataset.musicPlayAlbum)));
     page.querySelectorAll('[data-music-track]').forEach(button => scope.on(button, 'click', () => {
       if (state.isPlaying && state.currentTrack && state.currentTrack.id === button.dataset.musicTrack) invoke('pause');
@@ -85,7 +152,7 @@
     scope.on(page.querySelector('[data-music-next]'), 'click', () => invoke('next'));
     scope.on(volume, 'input', () => invoke('setVolume', Number(volume.value)));
     scope.on(document, 'oip:music-ready', connect);
-    scope.cleanup(() => { if (unsubscribe) unsubscribe(); unsubscribe = null; api = null; });
+    scope.cleanup(() => { if (unsubscribe) unsubscribe(); unsubscribe = null; api = null; touch = null; ignoreClickUntil = 0; });
     connect();
   });
 }());
