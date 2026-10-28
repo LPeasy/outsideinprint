@@ -171,6 +171,7 @@ try {
   $headClaims = @(Get-AdmissionClaims -SnapshotRoot $headSnapshot.Root -Manifest $headManifest)
   $headEffectiveClaims = @(Get-OipArtworkTitleClaims -Root $headSnapshot.Root -Manifest $headManifest)
   $baseClaims = @()
+  $baseEffectiveClaims = @()
   $baseManifest = @{ assets = @{}; aliases = @{} }
   $baseCommit = ''
   if (-not $ConsistencyOnly) {
@@ -178,6 +179,7 @@ try {
     $baseCommit = $baseSnapshot.Commit
     $baseManifest = Read-SourceManifest $baseSnapshot.Root
     $baseClaims = @(Get-AdmissionClaims -SnapshotRoot $baseSnapshot.Root -Manifest $baseManifest)
+    $baseEffectiveClaims = @(Get-OipArtworkTitleClaims -Root $baseSnapshot.Root -Manifest $baseManifest)
   }
 
   # The remainder compares source claims, not prose-audit target lists. Legacy
@@ -202,6 +204,27 @@ try {
     }
     if ($changed -and -not (Test-HasArtworkTitle $asset)) {
       Add-AdmissionError 'ARTWORK-TITLE-MISSING' "New or changed publication artwork '$assetId' requires a canonical artwork_title ($key)."
+    }
+  }
+
+  # A Gallery policy or pairing change can expose an unchanged article hero.
+  # Compare effective canonical artwork identities as well as raw source claims;
+  # switching an existing artwork between explicit and automatic keeps its identity.
+  if (-not $ConsistencyOnly) {
+    $beforeGalleryAssets = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    foreach ($claim in $baseEffectiveClaims) {
+      if ([string](Get-OptionalValue $claim 'Origin') -ceq 'Manifest') { continue }
+      $assetId = [string](Get-OptionalValue $claim 'AssetId')
+      if ($assetId -and $baseManifest.assets.Contains($assetId)) { [void]$beforeGalleryAssets.Add($assetId) }
+    }
+    foreach ($claim in $headEffectiveClaims) {
+      if ([string](Get-OptionalValue $claim 'Origin') -ceq 'Manifest') { continue }
+      $assetId = [string](Get-OptionalValue $claim 'AssetId')
+      if (-not $assetId -or -not $headManifest.assets.Contains($assetId) -or $beforeGalleryAssets.Contains($assetId)) { continue }
+      $key = 'gallery-asset:' + $assetId
+      if ($admitted.Add($key) -and -not (Test-HasArtworkTitle $headManifest.assets[$assetId])) {
+        Add-AdmissionError 'ARTWORK-TITLE-MISSING' "Newly exposed Gallery artwork '$assetId' requires a canonical artwork_title ($key)."
+      }
     }
   }
 

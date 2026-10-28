@@ -37,10 +37,10 @@ function Write-Story([string]$Slug, [string]$Title, [string]$Image, [hashtable]$
 }
 
 function Write-Manifest { Write-FixtureFile 'data/image-assets.json' (($script:manifest | ConvertTo-Json -Depth 12) + "`n") }
-function Write-Gallery {
+function Write-Gallery([string]$AutomaticSince = '1999-01-01T00:00:00-05:00') {
   $lines = [Collections.Generic.List[string]]::new()
   $lines.Add('current: legacy-a')
-  $lines.Add('automatic_articles_since: "1999-01-01T00:00:00-05:00"')
+  if ($AutomaticSince) { $lines.Add('automatic_articles_since: ' + (ConvertTo-Json -InputObject $AutomaticSince -Compress)) }
   $lines.Add('cartoons:')
   foreach ($row in $script:rows) {
     $lines.Add('  - slug: ' + $row.slug)
@@ -139,6 +139,23 @@ try {
   } 'ARTWORK-TITLE-COPIED'
   Assert-Case 'new name collides with legacy effective title' { $script:manifest.assets['essays/unused/hero'].artwork_title = 'Old Lantern'; Write-Manifest; Write-Story 'new' 'A New Story' 'essays/unused/hero' } 'ARTWORK-TITLE-DUPLICATE'
   Assert-Case 'pre-cutoff hidden headline does not reserve a Gallery name' { $script:manifest.assets['essays/unused/hero'].artwork_title = 'A Hidden Legacy Story'; Write-Manifest; Write-Story 'new' 'A New Story' 'essays/unused/hero' }
+  Assert-Case 'lower cutoff admits newly exposed unnamed automatic artwork' { Write-Gallery '1899-01-01T00:00:00-05:00' } 'ARTWORK-TITLE-MISSING'
+  Assert-Case 'lower cutoff accepts newly exposed independently named artwork' { $script:manifest.assets['essays/hidden/hero'].artwork_title = 'A Distant Window'; Write-Manifest; Write-Gallery '1899-01-01T00:00:00-05:00' }
+  Assert-Case 'removed alternate pairing admits newly exposed unnamed hero' { $script:rows = @($script:rows | Where-Object { $_.slug -cne 'substitute' }); Write-Gallery } 'ARTWORK-TITLE-MISSING'
+  Assert-Case 'removed alternate pairing accepts independently named hero' { $script:manifest.assets['essays/suppressed/hero'].artwork_title = 'Behind the Curtain'; Write-Manifest; $script:rows = @($script:rows | Where-Object { $_.slug -cne 'substitute' }); Write-Gallery }
+  Assert-Case 'explicit removal preserves an existing unnamed canonical artwork identity' {
+    $script:rows = @($script:rows | Where-Object { $_.slug -cne 'legacy-a' })
+    Write-Gallery
+    $claims = @(Get-OipArtworkTitleClaims -Root $FixtureRoot -Manifest $script:manifest | Where-Object { $_.Origin -cne 'Manifest' -and $_.AssetId -ceq 'essays/legacy-a/hero' })
+    if ($claims.Count -ne 1) { throw 'Explicit-to-automatic transition duplicated canonical artwork.' }
+  }
+  Assert-Case 'renamed canonical artwork reused through an alias remains one Gallery identity' {
+    $script:manifest.assets['essays/named/hero'].artwork_title = 'The Quiet Stage'
+    Write-Manifest
+    Write-Story 'reuse' 'A Reused Scene' '/images/named.png'
+    $claims = @(Get-OipArtworkTitleClaims -Root $FixtureRoot -Manifest $script:manifest | Where-Object { $_.Origin -cne 'Manifest' -and $_.AssetId -ceq 'essays/named/hero' })
+    if ($claims.Count -ne 1 -or $claims[0].Title -cne 'The Quiet Stage') { throw 'Renamed reused artwork lost its canonical Gallery identity or title.' }
+  }
   Assert-Case 'explicitly suppressed hero does not claim paired artwork title' { $script:manifest.assets['essays/pairing/hero'].artwork_title = 'The Substitute Scene'; Write-Manifest }
   Assert-Case 'normalized modern title collision fails' { $script:manifest.assets['essays/unused/hero'].artwork_title = '  BORROWED LIGHT!  '; Write-Manifest; Write-Story 'new' 'A New Story' 'essays/unused/hero' } 'ARTWORK-TITLE-DUPLICATE'
   Assert-Case 'new explicit row requires name' { $script:rows += [ordered]@{slug='new-row';title='A Fine Scene';date='2000-01-01';image='essays/unused/hero';alt='An original scene.';width=1200;height=675}; Write-Gallery } 'ARTWORK-TITLE-MISSING'
