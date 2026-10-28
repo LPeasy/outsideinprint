@@ -24,7 +24,8 @@ unconfigured.
    queues only the lead reference and fixed attribution. It does not take an
    email from that webhook or make a provider request during intake.
 3. A later scheduled invocation retrieves that exact lead from Meta. It requires
-   matching lead/form/ad/time, a single email field, and a single matching
+   matching canonical lead/form/time and, when present, ad identity, a single
+   email field, and a single matching
    `custom_disclaimer_responses` checkbox with the exact approved affirmative
    value. Consent is never inferred from an email, form submission, or an
    absent checkbox response.
@@ -84,6 +85,32 @@ responses, a different key, an unchecked value, and a type mismatch are held.
 Keep the saved form copy/readback with the consent version; review any form-copy
 change as a new version. Queued rows snapshot their form/ad/campaign/consent
 binding immutably. Removing or changing that approval holds them before a GET.
+
+## Paid ad identity when Meta omits the field
+
+A canonical paid-lead response can omit `ad_id` even when explicitly requested.
+Only the shared queue processor can accept that omission. Its row must have been
+admitted by the verified Meta webhook signature and exact paid Page/form/ad/time
+allowlist; those attribution fields are immutable in the ledger. Before each
+retrieval, the processor rechecks the current Page and exact form, paid ad,
+campaign, consent version/key/value and submission window. If Meta omits the
+canonical field, that approved signed-notice ad identity remains the attribution.
+
+The optional validation context defaults to false and is supplied only by that
+processor after approval succeeds. Direct validation and the synthetic-preview
+endpoint remain strict; neither a webhook nor an admin request body can set the
+exception. A present `ad_id` must match exactly: `null`, empty, zero or a different
+ID are rejected. Canonical lead/form/time, age limits, exact affirmative consent
+and the single valid email requirement remain unchanged. The owned-test exception
+is unchanged and cannot authorize an adless paid notice.
+
+New validation holds retain fixed non-sensitive reasons:
+`canonical_lead_mismatch`, `required_field_missing`, `consent_missing` or
+`invalid_email`. The legacy `lead_or_consent_invalid` code remains a fallback;
+existing held rows and their history are not rewritten or automatically retried.
+This correction adds no recovery endpoint and releases no prior reservation.
+The separately reviewed operator recovery below is limited to held rows that
+never reserved a subscriber POST.
 
 ## Configuration and review gates
 
@@ -188,6 +215,40 @@ This is an explicit exception to one POST attempt for that reviewed owner test;
 the corrected attempt must still require confirmation and obey the five/hour cap,
 including the original attempt retained in the audit. The owner authorizes the
 test; the operator must review the actual failure before that correction.
+
+Migration `0003_paid_lead_recovery.sql` permits one **manual, reviewed correction**
+for a paid row held because Meta omitted canonical `ad_id`. It installs the new
+guard before dropping the original guard as the last migration statement, keeps
+the owner-test exception/audit intact, and does not requeue an existing row.
+
+Before a paid correction, keep ads paused and processing disabled. Privately
+verify each exact held reference against the signed immutable Page/form/ad/time
+binding, current approval registry, canonical identity/consent/email and
+Buttondown absence. Preserve the original row and review evidence in encrypted
+operator storage. Bind that review to the deployed, reviewed source SHA256; do
+not treat the SQL guard as a replacement for canonical or provider checks.
+
+An eligible row is `held` with `lead_or_consent_invalid` or
+`canonical_lead_mismatch`, a numeric paid ad ID, no email-HMAC reservation,
+attempt timestamp, subscriber ID or completion timestamp, and no prior paid
+recovery approval. One guarded operator update may set only `state = 'queued'`,
+`error_code = 'approved_paid_missing_ad_id_retry'` and these review fields:
+
+- `recovery_approved_at`: a valid UTC ISO timestamp with milliseconds, exactly
+  `YYYY-MM-DDTHH:mm:ss.sssZ`.
+- `recovery_review_source`: the reviewed source SHA256, 64 lowercase hex digits.
+- `recovery_approval_reason`: exact `approved_paid_missing_ad_id_retry`.
+
+Leave attribution, reservations, timestamps, retrieval attempts and backoff
+unchanged. The trigger atomically records the original held state/error and
+review timestamp/source/reason in `meta_paid_lead_recoveries`. Its unique lead
+key and immutable review columns/audit prevent a second recovery. Review fields
+cannot be preset on insert, edited independently, cleared or replaced. Other
+states, errors, prior attempts/reservations and malformed review metadata fail
+closed. No runtime endpoint or scheduled handler performs this update. The
+ordinary processor must repeat its canonical checks, reserve once, require
+confirmation and obey the existing five-attempt rolling-hour cap. Ambiguous or
+reserved subscriber writes are never released by this recovery path.
 
 | Route | Behavior |
 | --- | --- |
