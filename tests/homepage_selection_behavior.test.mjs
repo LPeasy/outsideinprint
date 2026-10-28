@@ -44,7 +44,7 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   write("data/organization.json", JSON.stringify({ default_author_id: "robert-v-ussley" }));
   write("data/authors.json", JSON.stringify({ authors: { "robert-v-ussley": { type: "Person", name: "Robert V. Ussley" } } }));
   if (summaries === "frontpage") {
-    for (const partial of ["home_v2_front_page.html", "home_feature_freshness.html", "home_featured_image_button.html", "home_featured_image_dialog.html", "editorial/cartoon-for-page.html", "editorial/published-cartoons.html", "editorial/cartoon-is-published.html"]) {
+    for (const partial of ["home_v2_front_page.html", "home_feature_freshness.html", "home_featured_image_button.html", "home_featured_image_dialog.html", "editorial/cartoon-for-page.html", "editorial/published-cartoons.html", "editorial/registered-cartoons.html", "editorial/cartoon-is-published.html"]) {
       write(`layouts/partials/${partial}`, fs.readFileSync(`layouts/partials/${partial}`, "utf8"));
     }
     // Isolate selection and the real homepage/zoom markup from derivative generation and signup content.

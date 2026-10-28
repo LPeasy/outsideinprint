@@ -22,6 +22,7 @@ try {
     AssetSource = 'images/originals/essays/test/hero.png'
     ImageClass = 'essay_illustration'; ProcessingHint = 'drawing'
     Aliases = @('/images/test.png')
+    ArtworkTitle = 'A Quiet Corner'
   }
   $registrar = Join-Path $Root 'scripts/register_managed_image_asset.ps1'
   & $registrar @arguments | Out-Null
@@ -29,6 +30,7 @@ try {
   $asset = $manifest.assets['essays/test/hero']
   Assert-True ($null -eq $asset.processing_note) 'CLI registration must serialize a JSON null processing note.'
   Assert-True ($asset.review_state -ceq 'pending_review') 'New assets need review.'
+  Assert-True ($asset.artwork_title -ceq 'A Quiet Corner') 'Registration must retain the independent artwork title.'
   Assert-True ($manifest.aliases['/images/test.png'] -ceq 'essays/test/hero') 'Registration must preserve aliases.'
   $asset.review_state = 'approved'
   Write-OipImageAssetManifest -Root $fixture -Manifest $manifest
@@ -36,15 +38,40 @@ try {
   & $registrar @arguments | Out-Null
   $after = [IO.File]::ReadAllBytes((Get-OipImageAssetManifestPath -Root $fixture))
   Assert-True ([Convert]::ToBase64String($before) -ceq [Convert]::ToBase64String($after)) 'Unchanged approved registration must be byte-idempotent.'
+  $withoutTitle = $arguments.Clone()
+  $withoutTitle.Remove('ArtworkTitle')
+  & $registrar @withoutTitle | Out-Null
+  Assert-True ((Read-OipImageAssetManifest -Root $fixture).assets['essays/test/hero'].artwork_title -ceq 'A Quiet Corner') 'Re-registration without a title must preserve its name.'
+  foreach ($badTitle in @('A Different Name', '', '<b>A Name</b>')) {
+    $conflictArguments = $arguments.Clone()
+    $conflictArguments.ArtworkTitle = $badTitle
+    $beforeManifestHash = (Get-FileHash (Get-OipImageAssetManifestPath -Root $fixture)).Hash
+    $beforeSourceHash = (Get-FileHash (Join-Path $fixture 'assets/images/originals/essays/test/hero.png')).Hash
+    $failed = $false
+    try { & $registrar @conflictArguments -Replace | Out-Null } catch { $failed = $true }
+    Assert-True $failed 'Conflicting or invalid names must fail before replacement.'
+    Assert-True ((Get-FileHash (Get-OipImageAssetManifestPath -Root $fixture)).Hash -ceq $beforeManifestHash) 'Title rejection changed the manifest.'
+    Assert-True ((Get-FileHash (Join-Path $fixture 'assets/images/originals/essays/test/hero.png')).Hash -ceq $beforeSourceHash) 'Title rejection changed source bytes.'
+  }
+  $duplicateArguments = $arguments.Clone()
+  $duplicateArguments.AssetId = 'essays/other/hero'
+  $duplicateArguments.AssetSource = 'images/originals/essays/other/hero.png'
+  $duplicateArguments.Aliases = @('/images/other.png')
+  $duplicateArguments.ArtworkTitle = 'A QUIET CORNER!'
+  $failed = $false
+  try { & $registrar @duplicateArguments | Out-Null } catch { $failed = $true }
+  Assert-True $failed 'Different artwork must not acquire a punctuation/case-equivalent title.'
+  Assert-True (-not (Test-Path (Join-Path $fixture 'assets/images/originals/essays/other/hero.png'))) 'A duplicate name copied artwork before rejection.'
 
   [IO.File]::WriteAllBytes($inputPath, $second)
   $failed = $false
   try { & $registrar @arguments | Out-Null } catch { $failed = $true }
   Assert-True $failed 'Changed source bytes require explicit replacement.'
-  & $registrar @arguments -Replace | Out-Null
+  & $registrar @withoutTitle -Replace | Out-Null
   $manifest = Read-OipImageAssetManifest -Root $fixture
   $asset = $manifest.assets['essays/test/hero']
   Assert-True ($asset.review_state -ceq 'pending_review') 'Replacement must reset approval.'
+  Assert-True ($asset.artwork_title -ceq 'A Quiet Corner') 'Replacing image bytes must preserve its established artwork title.'
   Assert-True ($null -eq $asset.processing_note) 'Replacement must retain JSON null.'
 
   foreach ($emptyNote in @($null, '')) {

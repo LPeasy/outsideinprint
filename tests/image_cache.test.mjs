@@ -17,6 +17,14 @@ test("notes and unrelated tool versions do not invalidate image resources", () =
   after.nodeVersion = "24.21.0";
   assert.deepEqual(imageCacheIdentity(after), imageCacheIdentity(before));
 });
+
+test("adding or renaming an artwork title preserves image cache identity", () => {
+  const original = fixture(), named = fixture();
+  named.manifest.assets.first.artwork_title = "Saving Daylight";
+  assert.deepEqual(imageCacheIdentity(named), imageCacheIdentity(original));
+  named.manifest.assets.first.artwork_title = "A Capella";
+  assert.deepEqual(imageCacheIdentity(named), imageCacheIdentity(original));
+});
 test("addition, replacement, removal and quality changes use compatible fallback", () => {
   for (const mutate of [
     f => { f.manifest.assets.second = { ...f.manifest.assets.first, sha256: "b".repeat(64) }; },

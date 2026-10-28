@@ -73,18 +73,25 @@ try {
     Where-Object { $_.Extension -in @('.jpg', '.jpeg') } | Select-Object -First 1
   Assert-True ($null -ne $jpegFixture) 'A managed dialogue JPEG is required for the reuse fixture.'
   Copy-Item -LiteralPath $jpegFixture.FullName -Destination $sourcePath
-  Register-OipImageAsset -Root $fixtureRoot -Id $assetId -Source $sourceRelative -ImageClass 'essay_illustration' -ProcessingHint 'drawing' -ReviewState 'approved' -UsageState 'referenced' -Aliases @('/images/syd-and-oliver/gallery-dialogue/hero.jpg') | Out-Null
+  Register-OipImageAsset -Root $fixtureRoot -Id $assetId -Source $sourceRelative -ImageClass 'essay_illustration' -ProcessingHint 'drawing' -ReviewState 'approved' -UsageState 'referenced' -ArtworkTitle 'The Empty Coffee Cup' -Aliases @('/images/syd-and-oliver/gallery-dialogue/hero.jpg') | Out-Null
   Write-Fixture $contentPath $baseContent
   Write-Fixture $dataPath $baseData
   $originalManifestHash = Get-Hash $manifestPath
   $originalSourceHash = Get-Hash $sourcePath
   $originalContentHash = Get-Hash $contentPath
+  $unnamed = Read-OipImageAssetManifest -Root $fixtureRoot
+  $unnamed.assets[$assetId].Remove('artwork_title')
+  Write-OipImageAssetManifest -Root $fixtureRoot -Manifest $unnamed
+  Assert-Rejected { & $publisher -Root $fixtureRoot -DialoguePath $route } 'requires an independent artwork_title'
+  $unnamed.assets[$assetId].artwork_title = 'The Empty Coffee Cup'
+  Write-OipImageAssetManifest -Root $fixtureRoot -Manifest $unnamed
 
   & $publisher -Root $fixtureRoot -DialoguePath $route | Out-Null
   $published = [IO.File]::ReadAllText($dataPath)
   Assert-True ($published -match '(?m)^automatic_articles_since: "2026-10-22T00:00:00-04:00"\r?$') 'Dialogue publication removed or changed the automatic Gallery cutoff.'
   Assert-True ($published -match '(?m)^current: gallery-dialogue\r?$') 'Immediate dialogue publication did not select current.'
   Assert-True ($published -match 'image: "essays/dialogues/gallery-dialogue/hero"') 'Gallery failed to reuse the dialogue hero ID.'
+  Assert-True ($published -match 'title: "The Empty Coffee Cup"') 'Gallery title must come from its managed artwork, not the dialogue headline.'
   Assert-True ($published -match 'essay: "/syd-and-oliver/gallery-dialogue/"') 'Gallery failed to link the dialogue canonical URL.'
   Assert-True ($published -match 'publishDate: "2000-01-01T15:00:00') 'Default Gallery release lost the exact same-day dialogue timestamp.'
   Assert-True ($published -match 'alt: "Two men talk over breakfast\."') 'Gallery alt did not come from the dialogue.'
@@ -93,6 +100,14 @@ try {
   $firstPublishHash = Get-Hash $dataPath
   & $publisher -Root $fixtureRoot -DialoguePath $route | Out-Null
   Assert-True ((Get-Hash $dataPath) -ceq $firstPublishHash) 'Repeated publication is not byte-idempotent, including quoted titles.'
+  $legacyManifest = Read-OipImageAssetManifest -Root $fixtureRoot
+  $legacyManifest.assets[$assetId].Remove('artwork_title')
+  Write-OipImageAssetManifest -Root $fixtureRoot -Manifest $legacyManifest
+  $legacyManifestHash = Get-Hash $manifestPath
+  & $publisher -Root $fixtureRoot -DialoguePath $route | Out-Null
+  Assert-True ((Get-Hash $dataPath) -ceq $firstPublishHash -and (Get-Hash $manifestPath) -ceq $legacyManifestHash) 'An unchanged unnamed legacy pairing must keep its established Gallery title without copying the headline.'
+  $legacyManifest.assets[$assetId].artwork_title = 'The Empty Coffee Cup'
+  Write-OipImageAssetManifest -Root $fixtureRoot -Manifest $legacyManifest
   Assert-True ((Get-Hash $manifestPath) -ceq $originalManifestHash) 'Dialogue reuse changed image-assets.json.'
   Assert-True ((Get-Hash $sourcePath) -ceq $originalSourceHash) 'Dialogue reuse changed its original artwork.'
   Assert-True ((Get-Hash $contentPath) -ceq $originalContentHash) 'Dialogue reuse changed the story.'

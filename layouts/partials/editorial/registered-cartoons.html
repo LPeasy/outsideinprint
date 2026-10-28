@@ -1,6 +1,6 @@
-{{- /* Explicit Gallery pairings retain their titles, slugs, and release schedules. */ -}}
+{{- /* Named artwork owns its title; explicit pairings retain slugs and schedules. */ -}}
 {{- $cartoons := . | default (slice) -}}
-{{- $registered := $cartoons -}}
+{{- $registered := slice -}}
 {{- $claimedRoutes := dict -}}
 {{- $claimedAssets := dict -}}
 {{- $claimedSlugs := dict -}}
@@ -8,6 +8,8 @@
 {{- $assets := $manifest.assets | default dict -}}
 {{- $aliases := $manifest.aliases | default dict -}}
 {{- range $cartoons -}}
+  {{- $cartoon := . -}}
+  {{- $canonicalEntry := dict -}}
   {{- $claimedSlugs = merge $claimedSlugs (dict .slug true) -}}
   {{- with .essay -}}
     {{- $route := strings.TrimSuffix "/" (printf "/%s" (strings.TrimPrefix "/" (. | relURL))) -}}
@@ -24,19 +26,28 @@
     {{- end -}}
     {{- range $keys -}}
       {{- with index $assets . -}}
+        {{- $canonicalEntry = . -}}
         {{- $claimedAssets = merge $claimedAssets (dict .id true) -}}
       {{- else -}}
         {{- with index $aliases . -}}
           {{- $claimedAssets = merge $claimedAssets (dict (printf "%v" .) true) -}}
+          {{- with index $assets (printf "%v" .) -}}
+            {{- $canonicalEntry = . -}}
+          {{- end -}}
         {{- end -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}
+  {{- with $canonicalEntry.artwork_title -}}
+    {{- $cartoon = merge $cartoon (dict "title" (strings.TrimSpace (printf "%v" .))) -}}
+  {{- end -}}
+  {{- $registered = $registered | append $cartoon -}}
 {{- end -}}
 
-{{- $cutoff := time.AsTime hugo.Data.editorial_cartoons.automatic_articles_since -}}
-{{- $readingSections := slice "essays" "syd-and-oliver" "reports" "working-papers" -}}
 {{- $candidates := slice -}}
+{{- with hugo.Data.editorial_cartoons.automatic_articles_since -}}
+{{- $cutoff := time.AsTime . -}}
+{{- $readingSections := slice "essays" "syd-and-oliver" "reports" "working-papers" -}}
 {{- range sort site.RegularPages "RelPermalink" "asc" -}}
   {{- $page := . -}}
   {{- if and
@@ -67,7 +78,8 @@
             {{- if not $alt -}}
               {{- errorf "Automatic Gallery illustration for %q requires featured_image_alt" $page.RelPermalink -}}
             {{- else -}}
-              {{- $title := strings.TrimSpace (printf "%v" ($page.Params.short_title | default "")) | default $page.Title -}}
+              {{- $legacyTitle := strings.TrimSpace (printf "%v" ($page.Params.short_title | default "")) | default $page.Title -}}
+              {{- $title := strings.TrimSpace (printf "%v" ($entry.artwork_title | default "")) | default $legacyTitle -}}
               {{- $slug := printf "article-%s" (substr (crypto.SHA256 $page.RelPermalink) 0 16) -}}
               {{- $cartoon := dict
                 "slug" $slug
@@ -87,6 +99,7 @@
       {{- end -}}
     {{- end -}}
   {{- end -}}
+{{- end -}}
 {{- end -}}
 
 {{- /* Reused artwork appears once; newest release wins, then canonical route order. */ -}}

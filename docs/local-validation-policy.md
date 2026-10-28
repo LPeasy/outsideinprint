@@ -30,6 +30,8 @@ refresh, rerun only local checks affected by the incoming changes or an unresolv
 failure. Required GitHub checks still run on the new PR head; local evidence does
 not replace them.
 
+Newly published Gallery illustrations require an independent, fitting, Gallery-unique `artwork_title` on their canonical managed asset. Choose it after direct art review and preserve it on reuse. Run `scripts/check_gallery_artwork_titles.ps1 -BaseRef origin/main -HeadRef WORKTREE` through the pinned PowerShell wrapper before a publication PR. This source-only gate inspects complete content, manifest, alias, and Gallery deltas, including scheduled and backdated pieces; prose exemptions do not bypass it. CI runs the same check unconditionally with the actual comparison base and head. Use `-ConsistencyOnly` only for legitimate full/daily checks without a publication delta. Title-only renames preserve artwork bytes and derivative identity, so they need no full local image build. See [independent illustration titles](publishing-workflow.md#independent-illustration-titles).
+
 For changed essays, run the direct PowerShell guardrail:
 
 ```powershell

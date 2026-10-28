@@ -858,7 +858,8 @@
       "usage_state": "referenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
-      "quality_override": null
+      "quality_override": null,
+      "artwork_title": "A Capella"
     },
     "editorial/no-receipt": {
       "id": "editorial/no-receipt",
@@ -2132,7 +2133,8 @@
       "usage_state": "referenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
-      "quality_override": null
+      "quality_override": null,
+      "artwork_title": "Vulnerable Records"
     },
     "essays/breach-of-confidence-therapy-records/section-1": {
       "id": "essays/breach-of-confidence-therapy-records/section-1",
@@ -7197,7 +7199,8 @@
       "usage_state": "referenced",
       "processing_state": "derivative_capable",
       "processing_note": null,
-      "quality_override": null
+      "quality_override": null,
+      "artwork_title": "Saving Daylight"
     },
     "essays/why-daylight-saving-time/section-1": {
       "id": "essays/why-daylight-saving-time/section-1",

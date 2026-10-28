@@ -80,7 +80,7 @@ try {
   }
   $png = [Convert]::FromBase64String('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRz8AAAAASUVORK5CYII=')
   [IO.File]::WriteAllBytes($sourcePath, $png)
-  Register-OipImageAsset -Root $fixtureRoot -Id $assetId -Source $sourceRelative -ImageClass 'essay_illustration' -ProcessingHint 'drawing' -ReviewState 'approved' -UsageState 'referenced' -Aliases @('/images/essays/gallery-essay/hero.png') | Out-Null
+  Register-OipImageAsset -Root $fixtureRoot -Id $assetId -Source $sourceRelative -ImageClass 'essay_illustration' -ProcessingHint 'drawing' -ReviewState 'approved' -UsageState 'referenced' -ArtworkTitle 'An "Approved" Hero' -Aliases @('/images/essays/gallery-essay/hero.png') | Out-Null
   Write-Fixture $contentPath $baseContent
   Write-Fixture $reportPath $audit
   Write-Fixture $dataPath $baseData
@@ -106,6 +106,10 @@ try {
   Assert-True ((Get-Hash $contentPath) -ceq $originalContentHash) 'Managed reuse changed its linked essay.'
   Assert-True (@(Get-ChildItem -LiteralPath (Join-Path $fixtureRoot 'assets') -File -Recurse).Count -eq 1) 'Managed reuse created a duplicate original.'
   Assert-True (-not (Test-Path -LiteralPath (Join-Path $fixtureRoot 'static'))) 'Managed reuse created static artwork.'
+  $prospectiveCopy = $baseContent.Replace('title: Gallery Essay', 'title: An "Approved" Hero').Replace('featured_image: essays/gallery-essay/hero', 'featured_image: https://example.test/other.png')
+  Write-Fixture $contentPath $prospectiveCopy
+  Assert-Rejected { Invoke-Publish } 'independent'
+  Write-Fixture $contentPath $baseContent
 
   $fixtureManifest = Read-OipImageAssetManifest -Root $fixtureRoot
   foreach ($state in @('review_state', 'usage_state')) {
@@ -142,6 +146,26 @@ try {
   Assert-Rejected { Invoke-Publish } 'already belongs to different artwork'
   Assert-True ((Get-Hash $manifestPath) -ceq $originalManifestHash) 'Fixtures found an unintended manifest write.'
   Assert-True ((Get-Hash $sourcePath) -ceq $originalSourceHash) 'Fixtures found an unintended original-art write.'
+  Write-Fixture $dataPath $published
+  Assert-Rejected { & $publisher -Root $fixtureRoot -RenameManagedImageId $assetId -Title 'Older illustration' } 'already claimed'
+  Assert-Rejected { & $publisher -Root $fixtureRoot -RenameManagedImageId $assetId -Title 'Gallery Essay' } 'independent'
+  # Alias pairings share the same art identity. Rename changes only titles.
+  $renameData = $published + '  - slug: alias-pairing' + [char]10 + '    title: "An \"Approved\" Hero"' + [char]10 + '    image: "/images/essays/gallery-essay/hero.png"' + [char]10
+  Write-Fixture $dataPath $renameData
+  $renameBefore = [IO.File]::ReadAllText($dataPath)
+  $renameManifestBefore = Read-OipImageAssetManifest -Root $fixtureRoot
+  & $publisher -Root $fixtureRoot -RenameManagedImageId '/images/essays/gallery-essay/hero.png' -Title 'The Quiet Threshold' | Out-Null
+  $renameAfter = [IO.File]::ReadAllText($dataPath)
+  $renameManifestAfter = Read-OipImageAssetManifest -Root $fixtureRoot
+  Assert-True ($renameAfter -ceq $renameBefore.Replace('An \"Approved\" Hero', 'The Quiet Threshold')) 'Rename changed fields besides matching explicit Gallery titles.'
+  Assert-True ($renameManifestAfter.assets[$assetId].artwork_title -ceq 'The Quiet Threshold') 'Rename failed to update the canonical asset title.'
+  $renameManifestAfter.assets[$assetId].artwork_title = $renameManifestBefore.assets[$assetId].artwork_title
+  Assert-True (($renameManifestAfter | ConvertTo-Json -Depth 12 -Compress) -ceq ($renameManifestBefore | ConvertTo-Json -Depth 12 -Compress)) 'Rename changed asset properties besides artwork_title.'
+  Assert-True ((Get-Hash $sourcePath) -ceq $originalSourceHash -and (Get-Hash $contentPath) -ceq $originalContentHash) 'Rename changed original art or article bytes.'
+  $renameDataHash = Get-Hash $dataPath
+  $renameManifestHash = Get-Hash $manifestPath
+  & $publisher -Root $fixtureRoot -RenameManagedImageId $assetId -Title 'The Quiet Threshold' | Out-Null
+  Assert-True ((Get-Hash $dataPath) -ceq $renameDataHash -and (Get-Hash $manifestPath) -ceq $renameManifestHash) 'Repeated rename is not byte-idempotent.'
   Write-Host 'Managed Gallery publisher passed: approved reuse, idempotency, unchanged artwork/manifest, association safety, and essay editorial/schedule gates.'
 }
 finally {

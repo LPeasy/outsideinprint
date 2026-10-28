@@ -1,3 +1,5 @@
+. (Join-Path $PSScriptRoot 'artwork_titles.ps1')
+
 function New-OipImageAssetManifest {
   return [ordered]@{
     schema_version = '1.0'
@@ -437,6 +439,7 @@ function Assert-OipImageAssetManifest {
     }
 
     $entry = $Manifest.assets[$id]
+    if ($entry.Contains('artwork_title')) { Assert-OipArtworkTitle -Title $entry['artwork_title'] -Context "Artwork title for '$id'" }
     if ([string]$entry.id -ne [string]$id) {
       throw "Image asset entry ID differs from its key: $id"
     }
@@ -568,6 +571,7 @@ function Write-OipImageAssetManifest {
       processing_note = if ([string]::IsNullOrEmpty([string]$entry['processing_note'])) { $null } else { [string]$entry['processing_note'] }
       quality_override = $qualityOverride
     }
+    if ($entry.Contains('artwork_title')) { $assets[$id]['artwork_title'] = [string]$entry['artwork_title'] }
   }
 
   $aliases = [ordered]@{}
@@ -626,6 +630,7 @@ function Register-OipImageAsset {
     [string]$ProcessingState = 'derivative_capable',
     [AllowNull()][string]$ProcessingNote = $null,
     [AllowNull()][System.Collections.IDictionary]$QualityOverride = $null,
+    [AllowNull()][object]$ArtworkTitle = $null,
     [string[]]$Aliases = @(),
     [AllowNull()][System.Collections.IDictionary]$Manifest = $null,
     [switch]$DeferWrite
@@ -651,6 +656,13 @@ function Register-OipImageAsset {
   }
 
   $hash = (Get-FileHash -LiteralPath $sourcePath -Algorithm SHA256).Hash.ToLowerInvariant()
+  $resolvedArtworkTitle = $null
+  if ($PSBoundParameters.ContainsKey('ArtworkTitle')) {
+    Assert-OipArtworkTitleAvailable -Root $Root -Manifest $Manifest -AssetId $Id -Title $ArtworkTitle
+    $resolvedArtworkTitle = [string]$ArtworkTitle
+  } elseif ($Manifest.assets.Contains($Id) -and $Manifest.assets[$Id].Contains('artwork_title')) {
+    $resolvedArtworkTitle = [string]$Manifest.assets[$Id]['artwork_title']
+  }
   $dimensions = Get-OipImageNativeDimensions -Path $sourcePath
   $normalizedOverride = $null
   if ($null -ne $QualityOverride) {
@@ -674,6 +686,7 @@ function Register-OipImageAsset {
     processing_note = if ([string]::IsNullOrEmpty($ProcessingNote)) { $null } else { $ProcessingNote }
     quality_override = $normalizedOverride
   }
+  if ($null -ne $resolvedArtworkTitle) { $Manifest.assets[$Id]['artwork_title'] = $resolvedArtworkTitle }
 
   foreach ($alias in @($Aliases)) {
     $normalizedAlias = ([string]$alias).Trim()

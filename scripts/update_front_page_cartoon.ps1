@@ -6,8 +6,12 @@ param(
   [Parameter(Mandatory = $true, ParameterSetName = 'ManagedImage')]
   [string]$ManagedImageId,
 
+  [Parameter(Mandatory = $true, ParameterSetName = 'Rename')]
+  [string]$RenameManagedImageId,
+
   [Parameter(Mandatory = $true, ParameterSetName = 'Publish')]
   [Parameter(Mandatory = $true, ParameterSetName = 'ManagedImage')]
+  [Parameter(Mandatory = $true, ParameterSetName = 'Rename')]
   [string]$Title,
 
   [Parameter(Mandatory = $true, ParameterSetName = 'Publish')]
@@ -668,6 +672,40 @@ function Write-CartoonData {
 
 $resolvedRoot = [System.IO.Path]::GetFullPath((Resolve-Path $Root).Path)
 
+if ($PSCmdlet.ParameterSetName -eq 'Rename') {
+  $manifest = Read-OipImageAssetManifest -Root $resolvedRoot
+  $assetId = Resolve-OipArtworkAssetId -Reference $RenameManagedImageId -Manifest $manifest
+  if (-not $assetId) { throw "RenameManagedImageId must identify registered artwork: $RenameManagedImageId" }
+  Assert-OipArtworkTitleAvailable -Root $resolvedRoot -Manifest $manifest -AssetId $assetId -Title $Title -AllowRename
+  $manifestPath = Get-OipImageAssetManifestPath -Root $resolvedRoot
+  $galleryPath = Join-Path $resolvedRoot 'data/editorial_cartoons.yaml'
+  $manifestSnapshot = [IO.File]::ReadAllBytes($manifestPath)
+  $gallerySnapshot = if ([IO.File]::Exists($galleryPath)) { [IO.File]::ReadAllBytes($galleryPath) } else { $null }
+  $galleryText = if ($null -ne $gallerySnapshot) { [Text.Encoding]::UTF8.GetString($gallerySnapshot) } else { '' }
+  $quotedTitle = ConvertTo-Json -InputObject $Title -Compress
+  $updatedGallery = [regex]::Replace($galleryText, '(?ms)^\s*-\s+slug:[^\r\n]*(?:\r?\n(?!\s*-\s+slug:)[^\r\n]*)*', {
+    param($block)
+    $rows = @(Read-OipArtworkGallery -Text $block.Value)
+    if ($rows.Count -eq 1 -and (Resolve-OipArtworkAssetId -Reference ([string]$rows[0]['image']) -Manifest $manifest) -ceq $assetId) {
+      if ($block.Value -notmatch '(?m)^\s+title:') { throw "Matching Gallery entry is missing its title: $($rows[0]['slug'])" }
+      return [regex]::Replace($block.Value, '(?m)^(\s+title:\s*)[^\r\n]*', { param($line) $line.Groups[1].Value + $quotedTitle })
+    }
+    return $block.Value
+  })
+  $manifest.assets[$assetId]['artwork_title'] = $Title
+  # All checks precede writes. Roll back the complete pair if either write fails.
+  try {
+    Write-OipImageAssetManifest -Root $resolvedRoot -Manifest $manifest
+    if ($updatedGallery -cne $galleryText) { [IO.File]::WriteAllText($galleryPath, $updatedGallery, [Text.UTF8Encoding]::new($false)) }
+  } catch {
+    [IO.File]::WriteAllBytes($manifestPath, $manifestSnapshot)
+    if ($null -ne $gallerySnapshot) { [IO.File]::WriteAllBytes($galleryPath, $gallerySnapshot) }
+    throw
+  }
+  Write-Host "Renamed managed artwork '$assetId' to '$Title'; source bytes, dates, links, and current selection preserved."
+  return
+}
+
 if ($PSCmdlet.ParameterSetName -eq 'Dialogue') {
   # Reuse the dialogue's approved managed hero. This branch never copies art,
   # registers an asset, infers an essay, or invokes an essay editorial gate.
@@ -719,6 +757,12 @@ if ($PSCmdlet.ParameterSetName -eq 'Dialogue') {
   $data = Read-CartoonData -Path $dataPath
   $existing = @($data.cartoons | Where-Object { $_.slug -ceq $dialogueSlug })
   if ($existing.Count -gt 1) { throw "Duplicate Gallery slug: $dialogueSlug" }
+  $artworkTitle = if ($asset.Contains('artwork_title')) { [string]$asset['artwork_title'] }
+    elseif ($existing.Count -eq 1) { [string]$existing[0].title }
+    else { throw "New dialogue Gallery artwork requires an independent artwork_title on its managed asset: $assetId" }
+  if ($asset.Contains('artwork_title')) {
+    Assert-OipArtworkTitleAvailable -Root $resolvedRoot -Manifest $manifest -AssetId $assetId -Title $artworkTitle
+  }
   foreach ($cartoon in @($data.cartoons)) {
     if ($cartoon.slug -ceq $dialogueSlug) {
       if ([string]$cartoon.image -cne $assetId -or ($cartoon.Contains('essay') -and [string]$cartoon.essay -cne $DialoguePath)) {
@@ -759,7 +803,7 @@ if ($PSCmdlet.ParameterSetName -eq 'Dialogue') {
     foreach ($property in $existing[0].GetEnumerator()) { $entry[$property.Key] = $property.Value }
   }
   $entry.slug = $dialogueSlug
-  $entry.title = [string]$frontMatter['title']
+  $entry.title = $artworkTitle
   $entry.date = $galleryDate
   if (-not [string]::IsNullOrWhiteSpace($galleryPublishDate)) { $entry.publishDate = $galleryPublishDate }
   elseif ($entry.Contains('publishDate')) { $entry.Remove('publishDate') }
@@ -867,6 +911,8 @@ if ($PSCmdlet.ParameterSetName -eq 'ManagedImage') {
 
   $resolvedEssayPath = Normalize-EssayPath -Value $EssayPath
   Assert-LinkedEssayPhilosophyAudit -Root $resolvedRoot -SiteEssayPath $resolvedEssayPath
+  $associatedFrontMatter = Read-MarkdownFrontMatter -Path (Resolve-EssayMarkdownPath -Root $resolvedRoot -SiteEssayPath $resolvedEssayPath)
+  Assert-OipArtworkTitleAvailable -Root $resolvedRoot -Manifest $manifest -AssetId $ManagedImageId -Title $Title -ArticleTitles @([string]$associatedFrontMatter['title'], [string]$associatedFrontMatter['short_title'])
   $resolvedSlug = if ([string]::IsNullOrWhiteSpace($Slug)) { ConvertTo-Slug $Title } else { $Slug }
   $dataPath = Join-Path $resolvedRoot 'data/editorial_cartoons.yaml'
   $data = Read-CartoonData -Path $dataPath
@@ -912,7 +958,19 @@ if ($PSCmdlet.ParameterSetName -eq 'ManagedImage') {
     if ($cartoon.slug -ceq $resolvedSlug) { $entry } else { $cartoon }
   })
   if ($existing.Count -eq 0) { $cartoons += $entry }
-  Write-CartoonData -Path $dataPath -Current $resolvedSlug -Cartoons $cartoons
+  $manifestSnapshot = [IO.File]::ReadAllBytes((Get-OipImageAssetManifestPath -Root $resolvedRoot))
+  $dataSnapshot = if ([IO.File]::Exists($dataPath)) { [IO.File]::ReadAllBytes($dataPath) } else { $null }
+  try {
+    if (-not $asset.Contains('artwork_title')) {
+      $asset['artwork_title'] = $Title
+      Write-OipImageAssetManifest -Root $resolvedRoot -Manifest $manifest
+    }
+    Write-CartoonData -Path $dataPath -Current $resolvedSlug -Cartoons $cartoons
+  } catch {
+    [IO.File]::WriteAllBytes((Get-OipImageAssetManifestPath -Root $resolvedRoot), $manifestSnapshot)
+    if ($null -ne $dataSnapshot) { [IO.File]::WriteAllBytes($dataPath, $dataSnapshot) }
+    throw
+  }
   Write-Host "Updated managed Gallery illustration: $Title"
   Write-Host "Reused managed image: $ManagedImageId"
   Write-Host "Essay: $resolvedEssayPath"
@@ -964,6 +1022,42 @@ $targetRelativePath = "assets\images\originals\editorial\$resolvedSlug.png"
 $targetPath = Join-Path $resolvedRoot $targetRelativePath
 $targetDirectory = Split-Path -Parent $targetPath
 
+$manifest = Read-OipImageAssetManifest -Root $resolvedRoot -AllowMissing
+$associatedTitles = @()
+$titleEssayPath = if ($resolvedEssayPath) { $resolvedEssayPath } else { $defaultEssayPath }
+if ($titleEssayPath) {
+  $linkedFrontMatter = Read-MarkdownFrontMatter -Path (Resolve-EssayMarkdownPath -Root $resolvedRoot -SiteEssayPath $titleEssayPath)
+  $associatedTitles = @([string]$linkedFrontMatter['title'], [string]$linkedFrontMatter['short_title'])
+}
+Assert-OipArtworkTitleAvailable -Root $resolvedRoot -Manifest $manifest -AssetId $assetId -Title $Title -ArticleTitles $associatedTitles
+
+# Validate every association and ownership constraint before copying source bytes.
+if ($titleEssayPath) {
+  Assert-LinkedEssayPhilosophyAudit -Root $resolvedRoot -SiteEssayPath $titleEssayPath
+  Assert-LinkedEssayScheduleCompatibility -Root $resolvedRoot -SiteEssayPath $titleEssayPath -CartoonReleaseAt $cartoonReleaseAt
+}
+if ($manifest.assets.Contains($assetId) -and [string]$manifest.assets[$assetId].source -cne $assetSource) {
+  throw "Managed artwork '$assetId' already belongs to a different source path."
+}
+$alias = "/images/editorial/$resolvedSlug.png"
+if ($manifest.aliases.Contains($alias) -and [string]$manifest.aliases[$alias] -cne $assetId) {
+  throw "Image alias '$alias' already points to a different asset."
+}
+$dataPath = Join-Path $resolvedRoot 'data/editorial_cartoons.yaml'
+$data = Read-CartoonData -Path $dataPath
+if (@($data.cartoons | Where-Object { $_.slug -ceq $resolvedSlug }).Count -gt 1) { throw "Duplicate Gallery slug: $resolvedSlug" }
+foreach ($row in @($data.cartoons)) {
+  if ($row.slug -cne $resolvedSlug -and (Resolve-OipArtworkAssetId -Reference ([string]$row.image) -Manifest $manifest) -ceq $assetId) {
+    throw "Artwork already has a different Gallery entry: $($row.slug)"
+  }
+}
+$manifestPath = Get-OipImageAssetManifestPath -Root $resolvedRoot
+$rawSnapshots = @{}
+foreach ($path in @($targetPath, $manifestPath, $dataPath)) {
+  $rawSnapshots[$path] = if ([IO.File]::Exists($path)) { [IO.File]::ReadAllBytes($path) } else { $null }
+}
+try {
+
 if (-not (Test-Path -LiteralPath $targetDirectory -PathType Container)) {
   New-Item -Path $targetDirectory -ItemType Directory -Force | Out-Null
 }
@@ -987,6 +1081,7 @@ Register-OipImageAsset `
   -Source $assetSource `
   -ImageClass 'editorial_cartoon' `
   -ProcessingHint 'drawing' `
+  -ArtworkTitle $Title `
   -ReviewState $reviewState `
   -UsageState 'referenced' `
   -Aliases @("/images/editorial/$resolvedSlug.png") | Out-Null
@@ -1067,6 +1162,13 @@ if (-not $updated) {
 }
 
 Write-CartoonData -Path $dataPath -Current $resolvedSlug -Cartoons @($cartoons)
+} catch {
+  foreach ($path in @($targetPath, $manifestPath, $dataPath)) {
+    if ($null -ne $rawSnapshots[$path]) { [IO.File]::WriteAllBytes($path, [byte[]]$rawSnapshots[$path]) }
+    elseif ([IO.File]::Exists($path)) { Remove-Item -LiteralPath $path -Force }
+  }
+  throw
+}
 
 $linkedEssay = $null
 foreach ($cartoon in @($cartoons)) {
