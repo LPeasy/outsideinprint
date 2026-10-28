@@ -11,6 +11,7 @@ param(
   [ValidateSet('drawing', 'photo')]
   [string]$ProcessingHint,
   [string[]]$Aliases = @(),
+  [AllowNull()][object]$ArtworkTitle = $null,
   [ValidateSet('referenced', 'retained_unreferenced')]
   [string]$UsageState = 'referenced',
   [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
@@ -43,6 +44,9 @@ if ($inputExtension -notin @('.png', '.jpg', '.jpeg') -or $inputExtension -ne $s
 Assert-OipManagedImageFile -Path $resolvedInput -ExpectedExtension $inputExtension -Label 'Managed image input' | Out-Null
 
 $manifest = Read-OipImageAssetManifest -Root $Root -AllowMissing
+if ($PSBoundParameters.ContainsKey('ArtworkTitle')) {
+  Assert-OipArtworkTitleAvailable -Root $Root -Manifest $manifest -AssetId $AssetId -Title $ArtworkTitle
+}
 $inputHash = (Get-FileHash -LiteralPath $resolvedInput -Algorithm SHA256).Hash.ToLowerInvariant()
 $reviewState = 'pending_review'
 if ($manifest.assets.Contains($AssetId)) {
@@ -88,7 +92,9 @@ if ($copyRequired) {
   }
 }
 
-Register-OipImageAsset `
+$titleArguments = @{}
+if ($PSBoundParameters.ContainsKey('ArtworkTitle')) { $titleArguments.ArtworkTitle = $ArtworkTitle }
+Register-OipImageAsset @titleArguments `
   -Root $Root `
   -Id $AssetId `
   -Source $normalizedSource `

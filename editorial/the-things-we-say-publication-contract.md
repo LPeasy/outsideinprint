@@ -112,6 +112,8 @@ Midpoint art is optional. Use it only when it helps the piece.
 The illustration belongs in the existing unified Gallery. Do not create a
 separate public gallery, badge, or label for this collection's art.
 
+Choose the illustration's own fitting title after reviewing the final art. Package `front_page_illustration.title` becomes the managed asset's `artwork_title`; it must differ from the piece's headline and be unique across the Gallery. Reusing an asset keeps its established title. The shared [independent illustration title rules](../docs/publishing-workflow.md#independent-illustration-titles) and source-admission gate apply to source-free Affirmations too.
+
 ## Publication Gate
 
 A ready entry must pass:

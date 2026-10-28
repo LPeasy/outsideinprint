@@ -532,6 +532,13 @@ function Get-CartoonEntries {
     $entries.Add([pscustomobject]$entry)
   }
 
+  $manifest = Get-Content -LiteralPath (Join-Path $RepoRoot 'data/image-assets.json') -Raw | ConvertFrom-Json -AsHashtable
+  foreach ($cartoon in $entries) {
+    $imageId = Resolve-GalleryManagedImageId -Reference ([string]$cartoon.image) -Manifest $manifest
+    if ($imageId -and $manifest.assets[$imageId].ContainsKey('artwork_title')) {
+      $cartoon.title = ([string]$manifest.assets[$imageId].artwork_title).Trim()
+    }
+  }
   return $entries.ToArray()
 }
 
@@ -675,7 +682,8 @@ function Get-AutomaticArticleCartoonEntries {
       $asset.usage_state -cne 'referenced' -or $asset.processing_state -cne 'derivative_capable') { continue }
     $alt = (Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key 'featured_image_alt').Trim()
     if ([string]::IsNullOrWhiteSpace($alt)) { throw "Automatic Gallery article is missing illustration alt text: $route" }
-    $title = (Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key 'short_title').Trim()
+    $title = if ($asset.ContainsKey('artwork_title')) { ([string]$asset.artwork_title).Trim() } else { '' }
+    if (-not $title) { $title = (Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key 'short_title').Trim() }
     if (-not $title) { $title = $record.title }
     $slug = 'article-' + (Get-StringSha256 -Value $route).Substring(0, 16)
     $automatic.Add([pscustomobject]@{ slug = $slug; title = $title; date = $date.ToString('yyyy-MM-dd'); publishDate = $release.ToString('o');

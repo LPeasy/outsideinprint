@@ -324,7 +324,12 @@ foreach ($assetId in $assetIds) {
   }
 
   $asset = $manifest.assets.$assetId
-  Assert-ExactProperties -Value $asset -Expected $allowedAssetProperties -Context "Asset '$assetId'"
+  $expectedProperties = @($allowedAssetProperties)
+  if ($asset.PSObject.Properties.Name -contains 'artwork_title') {
+    $expectedProperties += 'artwork_title'
+    Assert-OipArtworkTitle -Title $asset.artwork_title -Context "Artwork title for '$assetId'"
+  }
+  Assert-ExactProperties -Value $asset -Expected $expectedProperties -Context "Asset '$assetId'"
   Assert-Equal -Actual ([string]$asset.id) -Expected $assetId -Message "Asset key/id mismatch for '$assetId'."
 
   $source = ([string]$asset.source).Replace('\','/')

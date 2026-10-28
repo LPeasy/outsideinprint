@@ -46,6 +46,20 @@ Assert-Contract ($LASTEXITCODE -eq 0 -and "$version" -match '^hugo v0\.167\.0') 
 
 $cases = @(
   @{
+    Name = 'named-artwork-identity'; Pages = @(
+      (New-Page 'daylight' @{ title = 'Why Daylight Saving Time?'; short_title = 'Daylight Essay' } 'essays' @{ artwork_title = 'Saving Daylight' }),
+      (New-Page 'breach' @{ title = 'Breach of Confidence: How Private Are Your Therapy Records?' } 'essays' @{ artwork_title = 'Vulnerable Records' }),
+      (New-Page 'no-audience' @{ title = 'No Audience'; publishDate = '2026-10-22T10:00:00-04:00' } 'essays' @{ artwork_title = 'A Capella' })
+    )
+    Manual = @(@{ slug = 'named-explicit'; title = 'No Audience'; date = '2026-10-22'; publishDate = '2026-10-22T10:00:00-04:00'; image = '/images/legacy/no-audience.png'; essay = '/essays/no-audience/'; alt = 'A grounded dance step.' })
+    Aliases = @{ '/images/legacy/no-audience.png' = 'essays/fixture/no-audience/hero' }
+    ExpectedRoutes = @('/essays/daylight/', '/essays/breach/', '/essays/no-audience/')
+    ExpectedCurrentRoute = '/essays/no-audience/'
+    ExpectedCurrentTitle = 'A Capella'
+    ExpectedTitles = @{ '/essays/daylight/' = 'Saving Daylight'; '/essays/breach/' = 'Vulnerable Records'; '/essays/no-audience/' = 'A Capella' }
+    ExpectedReadingTitles = @{ '/essays/daylight/' = 'Why Daylight Saving Time?'; '/essays/breach/' = 'Breach of Confidence: How Private Are Your Therapy Records?'; '/essays/no-audience/' = 'No Audience' }
+  },
+  @{
     Name = 'new-reading-illustrations'; Pages = @(
       (New-Page 'new-essay' @{ short_title = 'New Essay Illustration' }),
       (New-Page 'dialogues/new-dialogue' @{ url = '/syd-and-oliver/new-dialogue/'; library_type = 'dialogue'; publishDate = '2026-10-22T10:00:00-04:00' }),
@@ -149,17 +163,27 @@ $cases = @(
     Name = 'reused-automatic-artwork'; Pages = @(
       (New-Page 'reuse-older' @{ featured_image = 'essays/fixture/reuse-newer/hero' }),
       (New-Page 'tie-zulu' @{ featured_image = 'essays/fixture/tie-alpha/hero' }),
-      (New-Page 'reuse-newer' @{ publishDate = '2026-10-22T10:00:00-04:00' }),
+      (New-Page 'reuse-newer' @{ publishDate = '2026-10-22T10:00:00-04:00' } 'essays' @{ artwork_title = 'One Lasting Name' }),
       (New-Page 'tie-alpha' @{})
     )
     ExpectedRoutes = @('/essays/reuse-newer/', '/essays/tie-alpha/')
     ExpectedCurrentRoute = '/essays/reuse-newer/'
+    ExpectedCurrentTitle = 'One Lasting Name'
+    ExpectedTitles = @{ '/essays/reuse-newer/' = 'One Lasting Name' }
     ExpectedLookups = @{ '/essays/reuse-newer/' = 'essays/fixture/reuse-newer/hero'; '/essays/tie-alpha/' = 'essays/fixture/tie-alpha/hero' }
     AbsentLookups = @('/essays/reuse-older/', '/essays/tie-zulu/')
   },
   @{
     Name = 'missing-alt-fails-closed'; Pages = @((New-Page 'missing-alt' @{ featured_image_alt = '   ' }))
     ExpectedFailure = 'featured_image_alt|alt text'
+  },
+  @{
+    Name = 'unconfigured-named-artwork'; Disabled = $true; Pages = @((New-Page 'named-legacy' @{} 'essays' @{ artwork_title = 'An Established Artwork Name' }))
+    Manual = @(@{ slug = 'legacy-named'; title = 'Older Registry Name'; date = '2026-10-01'; image = 'essays/fixture/named-legacy/hero'; essay = '/essays/named-legacy/'; alt = 'Named legacy artwork.' })
+    ExpectedRoutes = @('/essays/named-legacy/')
+    ExpectedCurrentRoute = '/essays/named-legacy/'
+    ExpectedCurrentTitle = 'An Established Artwork Name'
+    ExpectedTitles = @{ '/essays/named-legacy/' = 'An Established Artwork Name' }
   },
   @{
     Name = 'unconfigured-legacy-behavior'; Disabled = $true; Pages = @((New-Page 'automatic-disabled' @{}))
@@ -173,7 +197,8 @@ $cases = @(
 $partials = @(
   'editorial/registered-cartoons.html', 'editorial/published-cartoons.html', 'editorial/cartoon-is-published.html',
   'editorial/current-cartoon.html', 'editorial/cartoon-for-page.html', 'collections/is-published.html',
-  'metadata/policy.html', 'metadata/route.html', 'images/resolve.html', 'images/signature-policy.html'
+  'metadata/policy.html', 'metadata/route.html', 'images/resolve.html', 'images/signature-policy.html',
+  'editorial/linked-reading-page.html', 'editorial/gallery-reading-link.html', 'editorial/gallery-download-link.html'
 )
 $homeTemplate = @'
 {{- $entries := partial "editorial/published-cartoons.html" (hugo.Data.editorial_cartoons.cartoons | default (slice)) -}}
@@ -200,6 +225,13 @@ try {
     Write-Fixture $caseRoot 'layouts/index.html' $homeTemplate
     Write-Fixture $caseRoot 'layouts/_default/single.html' 'Fixture article.'
     Write-Fixture $caseRoot 'layouts/_default/list.html' 'Fixture section.'
+    Write-Fixture $caseRoot 'layouts/_default/baseof.html' '{{ block "main" . }}{{ end }}'
+    Write-Fixture $caseRoot 'layouts/gallery/list.html' ([IO.File]::ReadAllText((Join-Path $repoRoot 'layouts/gallery/list.html')))
+    Write-Fixture $caseRoot 'content/gallery/_index.md' "---`ntitle: Gallery`n---`n"
+    Write-Fixture $caseRoot 'assets/js/gallery-load-more.js' ([IO.File]::ReadAllText((Join-Path $repoRoot 'assets/js/gallery-load-more.js')))
+    # Title/link contracts use the production Gallery layout without generating image derivatives.
+    Write-Fixture $caseRoot 'layouts/partials/images/model.html' '{{ return (dict "lightbox_url" "/fixture.webp" "lightbox_width" 1 "lightbox_height" 1 "signature_enabled" false "largest_webp_url" "/fixture.webp") }}'
+    Write-Fixture $caseRoot 'layouts/partials/images/picture.html' '<img src="/fixture.webp" alt="{{ .alt }}">'
     Write-Fixture $caseRoot 'hugo.toml' "baseURL = 'https://example.test/'`ntimeZone = 'America/New_York'`ndisableKinds = ['taxonomy', 'term', 'RSS', 'sitemap']`n"
     $galleryData = @{ cartoons = @() }
     if (-not $case.ContainsKey('Disabled')) { $galleryData.automatic_articles_since = '2026-10-22T00:00:00-04:00' }
@@ -243,6 +275,7 @@ try {
     }
     Assert-Contract ($LASTEXITCODE -eq 0) ("Automatic Gallery fixture '$($case.Name)' failed to build:`n" + ($buildOutput -join "`n"))
     $actual = [IO.File]::ReadAllText((Join-Path $caseRoot 'public/index.html')) | ConvertFrom-Json -AsHashtable -Depth 20
+    $galleryHtml = [IO.File]::ReadAllText((Join-Path $caseRoot 'public/gallery/index.html'))
     $entries = @($actual.entries)
     $manualSlugs = if ($case.ContainsKey('Manual')) { @($case.Manual | ForEach-Object { [string]$_.slug }) } else { @() }
     foreach ($entry in $entries) {
@@ -255,6 +288,11 @@ try {
     if ($case.ContainsKey('ExpectedCurrentRoute')) {
       Assert-Contract ($actual.current.essay -ceq $case.ExpectedCurrentRoute) "Automatic Gallery fixture '$($case.Name)' selected the wrong current illustration."
     }
+    if ($case.ContainsKey('ExpectedCurrentTitle')) {
+      Assert-Contract ($actual.current.title -ceq $case.ExpectedCurrentTitle) "Automatic Gallery fixture '$($case.Name)' renamed current artwork from its article."
+      $heading = [regex]::Match($galleryHtml, '(?s)<h2 id="current-cartoon-title">(?<title>.*?)</h2>')
+      Assert-Contract ($heading.Success -and [Net.WebUtility]::HtmlDecode($heading.Groups['title'].Value) -ceq $case.ExpectedCurrentTitle) "Automatic Gallery fixture '$($case.Name)' lost the current illustration heading."
+    }
     foreach ($field in @('ExpectedLookups', 'ExpectedTitles', 'ExpectedReleases')) {
       if (-not $case.ContainsKey($field)) { continue }
       foreach ($expected in $case[$field].GetEnumerator()) {
@@ -264,7 +302,19 @@ try {
           $entry = @($entries | Where-Object { $_.essay -ceq $expected.Key })[0]
           $matches = if ($field -eq 'ExpectedTitles') { $entry.title -ceq $expected.Value } else { [datetimeoffset]::Parse($entry.publishDate) -eq [datetimeoffset]::Parse($expected.Value) }
           Assert-Contract $matches "Automatic Gallery fixture '$($case.Name)' has wrong $field for $($expected.Key)."
+          if ($field -eq 'ExpectedTitles') {
+            $trigger = @([regex]::Matches($galleryHtml, '<button\b[^>]*>') | Where-Object { $_.Value -match ('data-cartoon-slug="' + [regex]::Escape([string]$entry.slug) + '"') })
+            Assert-Contract ($trigger.Count -eq 1) "Automatic Gallery fixture '$($case.Name)' lost its unique lightbox trigger."
+            $label = [regex]::Match($trigger[0].Value, 'data-title="(?<title>[^"]*)"')
+            Assert-Contract ($label.Success -and [Net.WebUtility]::HtmlDecode($label.Groups['title'].Value) -ceq $expected.Value) "Automatic Gallery fixture '$($case.Name)' lost the artwork lightbox title."
+          }
         }
+      }
+    }
+    if ($case.ContainsKey('ExpectedReadingTitles')) {
+      foreach ($reading in $case.ExpectedReadingTitles.GetEnumerator()) {
+        $links = @([regex]::Matches($galleryHtml, '(?s)<a\b[^>]*class="cartoon-gallery__reading-link"[^>]*>.*?</a>') | Where-Object { $_.Value -match ('href="' + [regex]::Escape($reading.Key) + '"') })
+        Assert-Contract ($links.Count -eq 1 -and [Net.WebUtility]::HtmlDecode($links[0].Value).Contains([string]$reading.Value)) "Automatic Gallery fixture '$($case.Name)' changed the associated article's reading-link title."
       }
     }
     if ($case.ContainsKey('AbsentLookups')) {
