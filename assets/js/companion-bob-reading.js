@@ -34,7 +34,7 @@ let requestController, configured = false, apiStatus = 'unknown', model = '', ca
 let hoverTimer, closeTimer, currentTrigger, currentCard, restoringFocus = false, interactionVersion = 0;
 let discoveryDataPromise, discoveryCatalog, discoveryMode = 'ai', discoveryIntro = '', collectionChoices = [], selectedCollection = null;
 let collectionSeen = new Set(), collectionBounds = {min:null,max:null}, lastCollectionChoices = [];
-let currentArticle = null, articleSequence = 0, routeChanging = false, activeRequestContext = null;
+let currentArticle = null, articleSequence = 0, routeChanging = false, activeRequestContext = null, typing = false;
 const bubble = node('section', 'bob-reading');
 bubble.tabIndex = -1;
 // Backdrop blur must live in the parent document to sample the page beneath
@@ -87,15 +87,19 @@ function articleAtLocation() {
   return item&&safePath(item)===location.pathname?item:null;
 }
 function updateLaunchers() {
-  const visible=Boolean(layout?.visible&&!host.hidden);
+  const visible=Boolean(layout?.visible&&!host.hidden&&!typing&&!routeChanging);
   discoveryButton.hidden=!visible||!apiBase;
   articleButton.hidden=!visible||!apiBase||apiStatus==='disabled'||!currentArticle;
   articleButton.disabled=busy;
   articleButton.title=currentArticle?`Find reading related to ${currentArticle.title}`:'';
   if(!layout?.rect)return;
-  const {x,y,width,height}=layout.rect,top=Math.min(innerHeight-30,y+height+2);
-  Object.assign(discoveryButton.style,{left:`${x+5}px`,top:`${top}px`});
-  Object.assign(articleButton.style,{left:`${x+width-5}px`,top:`${top}px`});
+  const {x,y,width,height}=layout.rect,view=readingViewport();
+  const top=Math.max(view.top+8,Math.min(view.bottom-30,y+height+2));
+  const discoveryWidth=discoveryButton.offsetWidth||64,articleWidth=articleButton.offsetWidth||90;
+  const left=Math.max(view.left+12,Math.min(view.right-discoveryWidth-12,x+5));
+  const right=Math.max(view.left+articleWidth+12,Math.min(view.right-12,x+width-5));
+  Object.assign(discoveryButton.style,{left:`${left}px`,top:`${top}px`,maxWidth:`${Math.max(1,view.width-24)}px`});
+  Object.assign(articleButton.style,{left:`${right}px`,top:`${top}px`,maxWidth:`${Math.max(1,view.width-24)}px`});
 }
 async function refreshArticleContext() {
   const ticket=++articleSequence,path=location.pathname;
@@ -253,14 +257,21 @@ async function refreshStatus() {
   } finally { clearTimeout(timeout);updateLaunchers(); }
 }
 
+function readingViewport() {
+  const viewport=window.visualViewport;
+  const left=viewport?.offsetLeft||0,top=viewport?.offsetTop||0;
+  const width=viewport?.width||innerWidth,height=viewport?.height||innerHeight;
+  return {left,top,width,height,right:left+width,bottom:top+height};
+}
 function popupWidthAndLeft(preferred) {
   const p=layout?.petRect || layout?.rect;
   const j=layout?.jukeboxRect;
-  const right=j && j.x>p.x ? Math.min(innerWidth-12,j.x-8) : innerWidth-12;
-  const combined=Boolean(j && right-12<156);
-  const width=Math.min(preferred,innerWidth-24,combined?preferred:right-12);
+  const view=readingViewport(),start=view.left+12;
+  const right=j && j.x>p.x ? Math.min(view.right-12,j.x-8) : view.right-12;
+  const combined=Boolean(j && right-start<156);
+  const width=Math.max(1,Math.min(preferred,view.width-24,combined?preferred:right-start));
   const center=combined?(Math.min(p.x,j.x)+Math.max(p.x+p.width,j.x+j.width))/2:p.x+p.width/2;
-  const left=Math.max(12,Math.min(innerWidth-width-12,combined?Infinity:right-width,center-width/2));
+  const left=Math.max(start,Math.min(view.right-width-12,combined?Infinity:right-width,center-width/2));
   return {width,left,combined,top:combined?Math.min(p.y,j.y):p.y};
 }
 function reserveTop(height) {
@@ -270,21 +281,23 @@ function reserveTop(height) {
 function popupReserve(placement,height) {
   if(placement.combined)return height+24;
   const p=layout?.petRect||layout?.rect;
-  return Math.max(0,height+16-(p.y-(layout.reservedTop||0)));
+  return Math.max(0,height+16-(p.y-readingViewport().top-(layout.reservedTop||0)));
 }
 function positionBubble() {
-  if (!layout?.visible || dismissed || host.hidden || (!answered && !busy)) { bubble.hidden = true; reserveTop(0); return; }
+  updateLaunchers();
+  if (!layout?.visible || dismissed || host.hidden || typing || (!answered && !busy)) { bubble.hidden = true; host.dataset.readingActive='false'; if(typing)hideCard(); reserveTop(0); return; }
   bubble.hidden = false; host.dataset.readingActive = 'true';
   const r = layout.rect, p = layout.petRect || r;
-  const vh = window.visualViewport?.height || innerHeight;
-  const offsetY = window.visualViewport?.offsetTop || 0;
+  const view=readingViewport();
   const placement=popupWidthAndLeft(242), w=placement.width;
   bubble.style.width=`${w}px`;
+  bubble.style.maxHeight=`${Math.max(1,view.height-24)}px`;
+  const bodyLimit=bubble.dataset.mode==='collections'?200:showingPrevious?190:180;
+  body.style.maxHeight=`${Math.max(0,Math.min(bodyLimit,view.height-42))}px`;
   const h = bubble.offsetHeight;
   reserveTop(popupReserve(placement,Math.max(h,card.hidden?0:card.offsetHeight)));
   let left = placement.left;
-  let top = Math.max(offsetY + 8, placement.top - h - 8), side = 'above';
-  top = Math.min(top, offsetY + vh - h - 12);
+  let top = Math.max(view.top+12,Math.min(placement.top-h-8,view.bottom-h-12)), side = 'above';
   bubble.style.left = `${Math.round(left)}px`; bubble.style.top = `${Math.round(top)}px`;
   bubble.dataset.side = side;
   bubble.style.setProperty('--tail-top', `${Math.max(25, Math.min(h-28, p.y + p.height*.38-top))}px`);
@@ -585,6 +598,7 @@ function hideCard(){clearTimeout(hoverTimer);clearTimeout(closeTimer);currentTri
 function restoreTriggerFocus(trigger){restoringFocus=true;trigger?.focus({preventScroll:true});requestAnimationFrame(()=>{restoringFocus=false;});}
 function showCard(item,trigger){
   clearTimeout(hoverTimer);clearTimeout(closeTimer);
+  if(typing||!layout?.visible||host.hidden||!trigger.isConnected)return;
   currentTrigger?.setAttribute('aria-expanded','false');currentTrigger?.removeAttribute('aria-describedby');
   currentTrigger=trigger;currentCard=item;trigger.setAttribute('aria-expanded','true');trigger.setAttribute('aria-describedby',card.id);
   card.replaceChildren();
@@ -603,21 +617,24 @@ function showCard(item,trigger){
   image?.addEventListener('error',()=>{if(!image.isConnected)return;image.remove();card.classList.add('bob-card--text-only');if(!card.hidden)placeCard(trigger);},{once:true});
 }
 function placeCard(trigger){
-  const br=bubble.getBoundingClientRect(), p=layout?.petRect || br, placement=popupWidthAndLeft(260);
+  const placement=popupWidthAndLeft(260),view=readingViewport();
   card.style.width=`${placement.width}px`;
   card.classList.toggle('bob-card--narrow',placement.width<220);
+  card.style.maxHeight=`${Math.max(1,Math.min(placement.width<220?140:144,view.height-24))}px`;
   const h=card.offsetHeight, y=placement.top-h-10;
   reserveTop(popupReserve(placement,Math.max(h,bubble.offsetHeight)));
-  const view=window.visualViewport, offset=view?.offsetTop||0, height=view?.height||innerHeight;
   card.style.left=`${Math.round(placement.left)}px`;
-  card.style.top=`${Math.round(Math.max(offset+12,Math.min(offset+height-h-12,y)))}px`;
+  card.style.top=`${Math.round(Math.max(view.top+12,Math.min(view.bottom-h-12,y)))}px`;
 }
 window.addEventListener('message',event=>{
   if(event.origin!==location.origin || event.source!==frame?.contentWindow || event.data?.channel!==CHANNEL)return;
   const data=event.data;
+  if(data.type==='reading-typing'&&typeof data.active==='boolean'){
+    typing=data.active;positionBubble();
+  }
   if(data.type==='reading-query' && typeof data.text==='string')recommend(data.text,{focusToken:data.focusToken});
   if(data.type==='reading-layout' && data.rect && [data.rect.x,data.rect.y,data.rect.width,data.rect.height].every(Number.isFinite)){
-    layout=data;composerGlass.hidden=!data.visible;
+    layout=data;if(typeof data.typing==='boolean')typing=data.typing;composerGlass.hidden=!data.visible;
     Object.assign(composerGlass.style,{left:`${data.rect.x}px`,top:`${data.rect.y}px`,width:`${data.rect.width}px`,height:`${data.rect.height}px`});
     updateLaunchers();
     positionBubble();if(!data.visible)hideCard();

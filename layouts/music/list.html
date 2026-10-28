@@ -1,0 +1,65 @@
+{{ define "main" }}
+{{ $catalog := hugo.Data.music }}
+{{ $albums := sort $catalog.albums "displayOrder" }}
+<section class="music-page" data-music-page aria-labelledby="music-heading">
+  <h1 id="music-heading" class="visually-hidden">Music</h1>
+
+  <section class="music-selector" data-music-selector aria-label="JukeBob album selector" aria-roledescription="carousel">
+    <div class="music-selector__crown" aria-hidden="true"><span>Outside In Print</span><strong>JUKE·BOB</strong><span>Record Library</span></div>
+    <div class="music-selector__cabinet">
+      <div class="music-selector__speaker music-selector__speaker--left"><button type="button" class="music-selector__arrow" data-music-browse-previous aria-label="Previous album" disabled><span aria-hidden="true">‹</span></button></div>
+      <div class="music-selector__window">
+        <div class="music-covers" data-music-covers role="group" aria-label="Album covers">
+    {{ range $index, $album := $albums }}
+    <button type="button" class="music-record" data-music-album="{{ $album.id }}" data-music-album-title="{{ $album.title }}" data-music-position="{{ if eq $index 0 }}current{{ else if eq $index 1 }}right{{ else }}after{{ end }}" aria-label="Select {{ $album.title }}" aria-pressed="{{ if eq $index 0 }}true{{ else }}false{{ end }}" aria-controls="music-album-{{ $album.id }}" tabindex="{{ if eq $index 0 }}0{{ else }}-1{{ end }}"{{ if gt $index 1 }} aria-hidden="true"{{ end }}>
+      {{ partial "music/cover.html" (dict "album" $album "selector" true) }}
+    </button>
+    {{ end }}
+        </div>
+        <div class="music-selector__shelf" aria-hidden="true"></div>
+      </div>
+      <div class="music-selector__speaker music-selector__speaker--right"><button type="button" class="music-selector__arrow" data-music-browse-next aria-label="Next album"{{ if lt (len $albums) 2 }} disabled{{ end }}><span aria-hidden="true">›</span></button></div>
+    </div>
+    <p class="visually-hidden" data-music-selection-announcement aria-live="polite" aria-atomic="true"></p>
+  </section>
+
+  {{ range $index, $album := $albums }}
+  <section class="music-album" id="music-album-{{ $album.id }}" data-music-panel="{{ $album.id }}" aria-labelledby="music-title-{{ $album.id }}"{{ if ne $index 0 }} hidden{{ end }}>
+    <div class="music-album__art">{{ partial "music/cover.html" (dict "album" $album) }}</div>
+    <div class="music-album__body">
+      <p class="music-page__eyebrow">Album <span aria-hidden="true">·</span> {{ len $album.tracks }} tracks</p>
+      <h2 id="music-title-{{ $album.id }}">{{ $album.title }}</h2>
+      <p class="music-album__artist">{{ $album.artist }}</p>
+      <button type="button" class="music-button music-button--primary" data-music-play-album="{{ $album.id }}" data-music-command disabled>Play album <span aria-hidden="true">▶</span></button>
+      <ol class="music-tracks" aria-label="{{ $album.title }} tracks">
+        {{ range $album.tracks }}
+        {{ $seconds := int (math.Round .duration) }}
+        <li class="music-track" data-music-track-row="{{ .id }}">
+          <span class="music-track__number" aria-hidden="true">{{ .number }}</span>
+          <button type="button" data-music-track="{{ .id }}" data-music-title="{{ .title }}" data-music-command aria-label="Play {{ .title }}" disabled>
+            <span class="music-track__title">{{ .title }}</span>
+            <span class="music-track__state" data-music-track-status></span>
+          </button>
+          <span class="music-track__duration" aria-label="{{ math.Floor (div $seconds 60.0) }} minutes {{ mod $seconds 60 }} seconds">{{ math.Floor (div $seconds 60.0) }}:{{ printf "%02d" (mod $seconds 60) }}</span>
+          <span class="music-track__icon" data-music-track-icon aria-hidden="true">▶</span>
+        </li>
+        {{ end }}
+      </ol>
+    </div>
+  </section>
+  {{ end }}
+
+  <section class="music-now" aria-label="JukeBob playback controls">
+    <div class="music-now__text"><span class="music-page__eyebrow" data-music-status>Connecting to JukeBob…</span><p data-music-now-title>Choose a track when the player is ready.</p></div>
+    <div class="music-now__transport">
+      <button type="button" class="music-button" data-music-previous data-music-command aria-label="Previous track" disabled>⏮</button>
+      <button type="button" class="music-button music-button--primary" data-music-toggle data-music-command aria-label="Play music" disabled>Play</button>
+      <button type="button" class="music-button" data-music-next data-music-command aria-label="Next track" disabled>⏭</button>
+    </div>
+    <label class="music-now__volume">Volume <input type="range" min="0" max="1" step="0.05" value="0.5" data-music-volume data-music-command disabled></label>
+    <p class="music-now__message" data-music-message role="status" aria-live="polite" aria-atomic="true"></p>
+  </section>
+  <noscript><p>Enable JavaScript to play music with JukeBob.</p></noscript>
+</section>
+{{ partial "music_assets.html" (dict "kind" "script") }}
+{{ end }}

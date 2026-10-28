@@ -12,3 +12,5 @@
 /static/demos/idle-times-pet/** -text
 /static/companion-bob/runtime/** -text
 /config/almanack-email/exporter/** -text
+# Preserve Git patch context markers without treating them as authored whitespace.
+/docs/runtime-source/*.patch text eol=lf whitespace=-blank-at-eol
