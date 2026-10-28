@@ -221,6 +221,14 @@ for a paid row held because Meta omitted canonical `ad_id`. It installs the new
 guard before dropping the original guard as the last migration statement, keeps
 the owner-test exception/audit intact, and does not requeue an existing row.
 
+Apply `0004_paid_recovery_timestamp.sql` before using that paid recovery path.
+It replaces the recovery guard before dropping its predecessor as the last
+statement. It removes a long timestamp `GLOB` that exceeds workerd's pattern
+limit; text type, exactly 24 characters, canonical UTC `strftime` equality and
+the null-safe eligibility check retain the timestamp requirement. All other
+paid/owner-test checks and audit writes are unchanged. Migration 3 remains
+immutable; migration 4 neither changes nor releases any existing row.
+
 Before a paid correction, keep ads paused and processing disabled. Privately
 verify each exact held reference against the signed immutable Page/form/ad/time
 binding, current approval registry, canonical identity/consent/email and
