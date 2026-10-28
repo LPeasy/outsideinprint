@@ -48,8 +48,13 @@ them. Typing, menus, navigation and Hide do not manufacture a paused dismissal.
 Hide keeps music and compact controls available at the bottom-right; Show Bob
 restores their anchor to Bob. The arcade retains its suspend/resume behavior.
 
-The cabinet artwork remains intact. New controls use cream, brass and dark green,
-with 44px targets and Browse albums. Volume remains inside the cabinet and Music
+The cabinet artwork remains intact. Persistent controls are a skinny dark speaker
+with brass/wood trim, stacked transport buttons and an accessible Browse albums
+icon. Desktop controls measure 44 × 145px; coarse-touch controls use a 48 × 198px
+speaker with 44px targets. They prefer Bob's right side with a 6px gap and use
+bounded edge fallbacks. On hover-capable devices they fade to 20% opacity when
+idle, returning to full opacity on hover or keyboard focus; touch devices remain
+opaque. Reduced-motion preferences remove the fade. Volume remains inside the cabinet and Music
 page. Sans Serif MP3s are unchanged; full-frame cover derivatives are 320, 640 and
 960px WebP. The original cover is retained under nonpublic `assets/music/`.
 
@@ -90,11 +95,23 @@ track list and playback controls below are preserved.
 
 Previous/next buttons, cover taps, Arrow keys, Home/End and horizontal touch
 swipes select an album without starting or changing audio. Selection is bounded
-by the catalog, with a current-record counter and screen-reader announcement.
+by the catalog, with a screen-reader announcement.
 Only the selected cover is a cover tab stop; distant covers are hidden from
 assistive technology. Reduced-motion preferences disable the transition. Vertical
 scrolling and pinch zoom remain native. The selector reads the catalog directly,
 so future albums do not need a layout or script change.
+
+The owner requested a quieter selector: the instruction line, speaker labels and
+album/artist/counter panel are removed. Navigation arrows now sit in the side
+speaker grilles on desktop and beneath the covers on small screens. The opened
+album section retains its existing artwork, artist and track list.
+
+For the speaker revision, all four focused state/placement tests and the three
+updated carousel tests passed. A warm-cache preview build passed. Browser review
+confirmed the small desktop speaker, working Play/Pause, preserved volume, and
+computed opacity of 0.2 when idle and 1 on hover. The narrow selector retained
+visible 44px arrows without horizontal overflow. The demo was restored to its
+normal desktop viewport and refreshed; the player is paused and volume restored.
 
 Three focused carousel behavior tests pass, covering catalog sizes up to six,
 navigation bounds, keyboard and endpoint focus, swipe/click suppression, browsing

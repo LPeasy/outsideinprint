@@ -10,7 +10,8 @@ export function initializeBobMusic(host, { ensureRuntime }) {
   const controls = document.createElement('section');
   controls.className = 'bob-music-compact'; controls.hidden = true;
   controls.setAttribute('aria-label', 'JukeBob compact music controls');
-  const title = document.createElement('p'); title.className = 'bob-music-compact__title';
+  const title = document.createElement('p'); title.className = 'bob-music-compact__title'; title.id = 'bob-music-compact-title';
+  controls.setAttribute('aria-describedby', title.id);
   const row = document.createElement('div'); row.className = 'bob-music-compact__buttons';
   const button = (label, text, action) => {
     const el = document.createElement('button'); el.type = 'button';
@@ -20,7 +21,8 @@ export function initializeBobMusic(host, { ensureRuntime }) {
   const previous = button('Previous track', '‹', 'previous');
   const play = button('Play music', '▶', 'togglePlay');
   const next = button('Next track', '›', 'next');
-  const browse = document.createElement('a'); browse.href = '/music/'; browse.textContent = 'Browse albums'; row.append(browse);
+  const browse = document.createElement('a'); browse.href = '/music/'; browse.textContent = '▤';
+  browse.setAttribute('aria-label', 'Browse albums'); browse.title = 'Browse albums'; row.append(browse);
   const error = document.createElement('p'); error.className = 'bob-music-compact__error'; error.setAttribute('role', 'status'); error.hidden = true;
   controls.append(title, row, error); document.body.append(controls);
 
@@ -34,7 +36,8 @@ export function initializeBobMusic(host, { ensureRuntime }) {
   function render() {
     const hiddenBob = !document.querySelector('[data-bob-restore]')?.hidden;
     controls.hidden = !compactVisible(presentation, { bobHidden: hiddenBob, concealed: concealed() });
-    title.textContent = state.currentTrack?.title || 'JukeBob'; title.title = title.textContent;
+    title.textContent = state.currentTrack ? `${state.currentTrack.title} · ${state.currentTrack.artist}` : 'JukeBob';
+    controls.title = title.textContent; controls.dataset.playing = String(state.isPlaying === true);
     play.textContent = state.isPlaying ? 'Ⅱ' : state.isBuffering ? '…' : '▶';
     const label = state.isPlaying ? 'Pause music' : state.isBuffering ? 'Loading music' : 'Play music';
     play.setAttribute('aria-label', label); play.title = label;
@@ -45,7 +48,7 @@ export function initializeBobMusic(host, { ensureRuntime }) {
   function position() {
     positionFrame = 0;
     if (controls.hidden) return;
-    const viewport = view(); controls.style.width = `${Math.min(250, Math.max(0, viewport.width - 24))}px`;
+    const viewport = view(); controls.style.maxWidth = `${Math.max(0, viewport.width - 24)}px`;
     const hiddenBob = !document.querySelector('[data-bob-restore]')?.hidden;
     const anchorX = parseFloat(host.style.getPropertyValue('--bob-x')) || viewport.left + viewport.width / 2;
     const anchorY = parseFloat(host.style.getPropertyValue('--bob-y')) || viewport.top + viewport.height;
@@ -54,6 +57,14 @@ export function initializeBobMusic(host, { ensureRuntime }) {
     const reservedBottom = hiddenBob && restore ? Math.max(0, viewport.top + viewport.height - restore.getBoundingClientRect().top) : 0;
     const point = compactPlacement(viewport, { width: controls.offsetWidth, height: controls.offsetHeight }, pet, hiddenBob, reservedBottom);
     controls.style.left = `${Math.round(point.left)}px`; controls.style.top = `${Math.round(point.top)}px`;
+    if (!error.hidden) {
+      error.style.maxWidth = `${Math.max(0, viewport.width - 24)}px`;
+      error.style.maxHeight = `${Math.max(40, viewport.height - 24)}px`;
+      const width = error.offsetWidth, height = error.offsetHeight;
+      const desiredTop = point.top - height - 6 >= viewport.top + 12 ? point.top - height - 6 : point.top + controls.offsetHeight + 6;
+      error.style.left = `${Math.max(viewport.left + 12, Math.min(point.left + controls.offsetWidth / 2 - width / 2, viewport.left + viewport.width - width - 12))}px`;
+      error.style.top = `${Math.max(viewport.top + 12, Math.min(desiredTop, viewport.top + viewport.height - height - 12))}px`;
+    }
   }
   function schedulePosition() { if (!positionFrame) positionFrame = requestAnimationFrame(position); }
   function publish(value) {

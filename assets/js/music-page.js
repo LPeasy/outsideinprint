@@ -9,9 +9,6 @@
     const covers = page.querySelector('[data-music-covers]');
     const browsePrevious = page.querySelector('[data-music-browse-previous]');
     const browseNext = page.querySelector('[data-music-browse-next]');
-    const selectionTitle = page.querySelector('[data-music-selection-title]');
-    const selectionArtist = page.querySelector('[data-music-selection-artist]');
-    const selectionCount = page.querySelector('[data-music-selection-count]');
     const selectionAnnouncement = page.querySelector('[data-music-selection-announcement]');
     const rows = Array.from(page.querySelectorAll('[data-music-track-row]'));
     const commands = Array.from(page.querySelectorAll('[data-music-command]'));
@@ -45,10 +42,6 @@
       panels.forEach(panel => { panel.hidden = panel.dataset.musicPanel !== id; });
       if (browsePrevious) { browsePrevious.disabled = selectedIndex === 0; browsePrevious.hidden = choices.length < 2; }
       if (browseNext) { browseNext.disabled = selectedIndex === choices.length - 1; browseNext.hidden = choices.length < 2; }
-      const count = `${String(selectedIndex + 1).padStart(2, '0')} / ${String(choices.length).padStart(2, '0')}`;
-      setText(selectionTitle, selected.dataset.musicAlbumTitle || '');
-      setText(selectionArtist, selected.dataset.musicAlbumArtist || '');
-      setText(selectionCount, count);
       if (announce) setText(selectionAnnouncement, `${selected.dataset.musicAlbumTitle || 'Album'}, ${selectedIndex + 1} of ${choices.length}.`);
     }
     // Browsing is independent of the playing album, including Back/Forward.

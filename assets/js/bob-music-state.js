@@ -13,17 +13,28 @@ export function compactVisible(state, { bobHidden = false, concealed = false } =
 }
 
 export function compactPlacement(view, size, pet, hidden = false, reservedBottom = 0) {
-  const gap = 10, pad = 12;
+  const gap = 6, pad = 12;
   const clamp = (n, low, high) => Math.max(low, Math.min(n, Math.max(low, high)));
   const minX = view.left + pad, maxX = view.left + view.width - size.width - pad;
   const minY = view.top + pad, maxY = view.top + view.height - size.height - pad - reservedBottom;
-  if (hidden || !pet) return { left: Math.max(minX, maxX), top: Math.max(minY, maxY) };
+  if (hidden || !pet) {
+    // If a short viewport cannot fit the tower above Show Bob, use the other
+    // bottom corner rather than covering that bottom-right restore control.
+    if (reservedBottom && maxY < minY) return { left: minX, top: Math.max(minY, maxY + reservedBottom) };
+    return { left: Math.max(minX, maxX), top: Math.max(minY, maxY) };
+  }
+  const alignedTop = clamp(pet.y + pet.height - size.height, minY, maxY);
+  const right = pet.x + pet.width + gap, left = pet.x - size.width - gap;
+  // Vertical clamping should not send a speaker away from Bob's right side.
+  if (right >= minX && right <= maxX) return { left: right, top: alignedTop };
+  if (left >= minX && left <= maxX) return { left, top: alignedTop };
   const choices = [
-    { left: pet.x + pet.width + gap, top: pet.y + pet.height - size.height },
-    { left: pet.x - size.width - gap, top: pet.y + pet.height - size.height },
     { left: pet.x + pet.width / 2 - size.width / 2, top: pet.y - size.height - gap },
     { left: pet.x + pet.width / 2 - size.width / 2, top: pet.y + pet.height + gap },
+    { left: right, top: alignedTop },
+    { left, top: alignedTop },
   ];
-  const fit = choices.find(p => p.left >= minX && p.left <= maxX && p.top >= minY && p.top <= maxY) || choices[2];
-  return { left: clamp(fit.left, minX, maxX), top: clamp(fit.top, minY, maxY) };
+  const bounded = choices.map(p => ({ left: clamp(p.left, minX, maxX), top: clamp(p.top, minY, maxY) }));
+  const overlap = p => Math.max(0, Math.min(p.left + size.width, pet.x + pet.width) - Math.max(p.left, pet.x)) * Math.max(0, Math.min(p.top + size.height, pet.y + pet.height) - Math.max(p.top, pet.y));
+  return bounded.reduce((best, point) => overlap(point) < overlap(best) ? point : best);
 }

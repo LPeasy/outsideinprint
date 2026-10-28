@@ -22,8 +22,8 @@ function fixture(count = 5) {
     focus(options) { document.activeElement = this; this.focusOptions = options; }
   }
   const page = new Node(), selector = new Node(), covers = new Node();
-  const nodes = Object.fromEntries(['browse-previous', 'browse-next', 'selection-title', 'selection-artist', 'selection-count', 'selection-announcement', 'status', 'now-title', 'message', 'toggle', 'volume', 'previous', 'next'].map(name => [name, new Node()]));
-  const choices = Array.from({ length: count }, (_, index) => new Node({ musicAlbum: `album-${index}`, musicAlbumTitle: `Album ${index + 1}`, musicAlbumArtist: `Artist ${index + 1}` }));
+  const nodes = Object.fromEntries(['browse-previous', 'browse-next', 'selection-announcement', 'status', 'now-title', 'message', 'toggle', 'volume', 'previous', 'next'].map(name => [name, new Node()]));
+  const choices = Array.from({ length: count }, (_, index) => new Node({ musicAlbum: `album-${index}`, musicAlbumTitle: `Album ${index + 1}` }));
   const panels = choices.map(button => new Node({ musicPanel: button.dataset.musicAlbum }));
   choices.forEach(button => { button.parentNode = covers; });
   covers.parentNode = selector;
@@ -67,9 +67,6 @@ test('album carousel scales beyond two albums, clamps bounds, and never invokes 
   assert.deepEqual(f.choices.map(button => button.getAttribute('aria-hidden')), ['true', 'false', 'false', 'false', 'true', 'true']);
   assert.deepEqual(f.choices.map(button => button.tabIndex), [-1, -1, 0, -1, -1, -1]);
   assert.deepEqual(f.panels.map(panel => panel.hidden), [true, true, false, true, true, true]);
-  assert.equal(f.nodes['selection-title'].textContent, 'Album 3');
-  assert.equal(f.nodes['selection-artist'].textContent, 'Artist 3');
-  assert.equal(f.nodes['selection-count'].textContent, '03 / 06');
   assert.equal(f.nodes['selection-announcement'].textContent, 'Album 3, 3 of 6.');
   for (let i = 0; i < 8; i += 1) f.click(f.nodes['browse-next']);
   assert.equal(f.selected(), 5); assert.equal(f.nodes['browse-next'].disabled, true);
@@ -100,7 +97,7 @@ test('carousel keyboard movement keeps cover focus, respects modifiers, and hand
   assert.equal(single.nodes['browse-previous'].disabled, true);
   assert.equal(single.nodes['browse-next'].disabled, true);
   single.fire(single.selector, 'keydown', { key: 'End', target: single.choices[0] });
-  assert.equal(single.selected(), 0); assert.equal(single.nodes['selection-count'].textContent, '01 / 01');
+  assert.equal(single.selected(), 0); assert.equal(single.nodes['selection-announcement'].textContent, 'Album 1, 1 of 1.');
   assert.deepEqual(single.calls, []);
 });
 
