@@ -2352,23 +2352,76 @@ test("physical expiry isolates row failures and fences stale unbound reservation
   );
 });
 
-test("a concurrent checkout request cannot share the active claim", async () => {
+test("a concurrent checkout request cannot share the active claim", { timeout: 10000 }, async () => {
   let releaseSquare;
   const squareResponse = new Promise((resolve) => { releaseSquare = resolve; });
-  const env = baseEnv({ __testFetch: async () => squareResponse });
+  let markSquareEntered;
+  const squareEntered = new Promise((resolve) => { markSquareEntered = resolve; });
+  let providerCalls = 0;
+  const env = baseEnv({ __testFetch: async () => {
+    providerCalls += 1;
+    markSquareEntered();
+    return squareResponse;
+  } });
+  const waitFor = async (promise, phase) => {
+    let timer;
+    try {
+      return await Promise.race([promise, new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new Error(`Concurrent checkout fixture stalled while ${phase}`)), 2000);
+      })]);
+    } finally {
+      clearTimeout(timer);
+    }
+  };
+  // Hold the first claim across an event-loop turn. A zero-delay timer cannot
+  // prove claim ownership while the request still awaits crypto, body or D1.
+  let markFirstClaimEntered;
+  const firstClaimEntered = new Promise((resolve) => { markFirstClaimEntered = resolve; });
+  let releaseFirstClaim;
+  const firstClaimGate = new Promise((resolve) => { releaseFirstClaim = resolve; });
+  const prepare = env.DB.prepare.bind(env.DB);
+  let claimCalls = 0;
+  env.DB.prepare = (sql) => {
+    const statement = prepare(sql);
+    if (sql.includes("UPDATE checkout_requests") && sql.includes("SET status = 'PROCESSING'")) {
+      const run = statement.run.bind(statement);
+      statement.run = async () => {
+        if (++claimCalls === 1) {
+          markFirstClaimEntered();
+          await firstClaimGate;
+        }
+        return run();
+      };
+    }
+    return statement;
+  };
   const firstPromise = handleRequest(
     supportRequest("/api/support/one-time", { amount_cents: 500 }, { "idempotency-key": "same-intent-123" }),
     env,
   );
-  await new Promise((resolve) => setTimeout(resolve, 0));
-  const concurrent = await handleRequest(
-    supportRequest("/api/support/one-time", { amount_cents: 500 }, { "idempotency-key": "same-intent-123" }),
-    env,
-  );
-  assert.equal(concurrent.status, 503);
-  assert.equal((await concurrent.json()).error.code, "CHECKOUT_ALREADY_PROCESSING");
-  releaseSquare(Response.json({ payment_link: { id: "link-1", url: "https://square.link/u/test" } }));
-  assert.equal((await firstPromise).status, 201);
+  let concurrentPromise;
+  let completed;
+  try {
+    await waitFor(firstClaimEntered, "waiting for the first claim");
+    await new Promise((resolve) => setImmediate(resolve));
+    assert.equal(providerCalls, 0, "a timer turn does not mean the first claim has completed");
+    releaseFirstClaim();
+    await waitFor(squareEntered, "waiting for the first provider call");
+    concurrentPromise = handleRequest(
+      supportRequest("/api/support/one-time", { amount_cents: 500 }, { "idempotency-key": "same-intent-123" }),
+      env,
+    );
+    const concurrent = await waitFor(concurrentPromise, "waiting for concurrent claim rejection");
+    assert.equal(concurrent.status, 503);
+    assert.equal((await concurrent.json()).error.code, "CHECKOUT_ALREADY_PROCESSING");
+    assert.equal(providerCalls, 1);
+  } finally {
+    releaseFirstClaim();
+    releaseSquare(Response.json({ payment_link: { id: "link-1", url: "https://square.link/u/test" } }));
+    completed = await waitFor(Promise.allSettled([firstPromise, ...(concurrentPromise ? [concurrentPromise] : [])]), "draining checkout requests");
+  }
+  assert.equal(completed[0].status, "fulfilled");
+  assert.equal(completed[0].value.status, 201);
 });
 
 test("checkout requires the website to supply an Idempotency-Key", async () => {

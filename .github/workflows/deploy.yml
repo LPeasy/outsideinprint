@@ -169,6 +169,7 @@ jobs:
           package-manager-cache: false
       - name: Worker behavior, monitoring and tax fixtures
         if: ${{ needs.classify.outputs.worker_commerce == 'true' }}
+        timeout-minutes: 2
         run: npm --prefix workers/oip-commerce test
       - name: Worker provisioning fixtures
         if: ${{ needs.classify.outputs.worker_commerce == 'true' }}
