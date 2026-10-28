@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { initialCompactState, compactTransition, compactVisible, compactPlacement } from '../assets/js/bob-music-state.js';
+import { initialCompactState, compactTransition, compactVisible, compactPlacement, paintedCanvasBounds, paintedCanvasRect, compactNearby } from '../assets/js/bob-music-state.js';
 
 const playback = (state, playing) => compactTransition(state, { type: 'playback', playing });
 const cabinet = (state, open, playing = false, reason = 'user') => compactTransition(state, { type: 'cabinet', open, playing, reason });
@@ -64,4 +64,34 @@ test('speaker stays six pixels right of Bob and bottom aligned; only horizontal 
   const above = compactPlacement(view, size, widePet);
   assert.equal(above.top + size.height, widePet.y - 6, 'If neither side fits, use clear space above the sprite');
   assert.ok(above.left >= 12 && above.left + size.width <= 1012);
+});
+
+test('painted bounds discard transparent padding and map backing pixels through CSS size and iframe offsets', () => {
+  const width = 8, height = 6, data = new Uint8ClampedArray(width * height * 4);
+  const pixel = (x, y, alpha) => { data[(y * width + x) * 4 + 3] = alpha; };
+  pixel(0, 0, 24); // A faint antialiasing fringe should not restore the canvas gap.
+  pixel(2, 1, 255); pixel(3, 2, 255); pixel(4, 3, 25);
+  const bounds = paintedCanvasBounds({ data, width, height });
+  assert.deepEqual(bounds, { x: 2 / 8, y: 1 / 6, width: 3 / 8, height: 3 / 6 });
+  const pet = paintedCanvasRect(bounds, { left: 100, top: 40, width: 160, height: 120 }, { left: 10, top: 20 });
+  assert.deepEqual(pet, { x: 150, y: 80, width: 60, height: 60 });
+  const point = compactPlacement({ left: 0, top: 0, width: 800, height: 600 }, { width: 44, height: 145 }, pet);
+  assert.equal(point.left, 216, 'The six-pixel speaker gap follows painted pixels rather than the canvas right edge at 270');
+  assert.deepEqual(paintedCanvasRect(bounds, { left: 100, top: 40, width: 80, height: 60 }), { x: 120, y: 50, width: 30, height: 30 }, 'A cached normalized shape remains valid after CSS scaling');
+  assert.equal(paintedCanvasBounds({ data: new Uint8ClampedArray(width * height * 4), width, height }), null);
+  assert.equal(paintedCanvasBounds({ data: new Uint8ClampedArray(0), width: 0, height: 0 }), null);
+  assert.equal(paintedCanvasRect(null, { left: 0, top: 0, width: 80, height: 60 }), null);
+});
+
+test('nearby reveal spans the painted sprite, the speaker and their gap, but not remote canvas padding', () => {
+  const pet = { x: 150, y: 200, width: 60, height: 100 };
+  const speaker = { x: 216, y: 155, width: 44, height: 145 };
+  for (const point of [{ x: 150, y: 200 }, { x: 114, y: 250 }, { x: 213, y: 250 }, { x: 259, y: 156 }, { x: 296, y: 250 }]) {
+    assert.equal(compactNearby(point, pet, speaker), true);
+  }
+  assert.equal(compactNearby({ x: 80, y: 250 }, pet, speaker), false, 'Transparent canvas padding outside the nearby margin does not reveal controls');
+  assert.equal(compactNearby({ x: 297, y: 250 }, pet, speaker), false);
+  assert.equal(compactNearby({ x: 170, y: 120 }, pet, speaker), false);
+  assert.equal(compactNearby({ x: 180, y: 250 }, null, speaker), true, 'Hidden Bob can still reveal the speaker itself');
+  assert.equal(compactNearby(null, pet, speaker), false, 'Leaving the page clears proximity');
 });

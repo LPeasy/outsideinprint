@@ -16,7 +16,7 @@
 .bob-music-compact__error{position:fixed;box-sizing:border-box;width:180px;margin:0;padding:8px 10px;overflow:auto;border:1px solid #ad8c54;border-radius:6px;background:#252b20;color:#ffe4c9;box-shadow:0 3px 10px #0004;font-size:11px;line-height:1.4}
 .bob-music-compact__error[hidden]{display:none}
 @media (pointer:coarse){.bob-music-compact{width:48px;padding:14px 0 4px}.bob-music-compact::before{top:2px;width:8px;height:8px}.bob-music-compact__buttons{gap:0}.bob-music-compact__buttons button,.bob-music-compact__buttons a{height:44px;min-height:44px;border-radius:4px}}
-@media (hover:hover){.bob-music-compact{opacity:.2;transition:opacity 220ms ease}.bob-music-compact:hover,.bob-music-compact:focus-within{opacity:1}}
+@media (hover:hover){.bob-music-compact{opacity:0;pointer-events:none;transition:opacity 220ms ease}.bob-music-compact[data-nearby="true"],.bob-music-compact:hover,.bob-music-compact:focus-within{opacity:1;pointer-events:auto}}
 @media (prefers-reduced-motion:reduce){.bob-music-compact{transition:none}}
 @media print{.bob-music-compact{display:none!important}}
 .masthead--with-bob{

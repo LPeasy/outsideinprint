@@ -51,12 +51,24 @@ restores their anchor to Bob. The arcade retains its suspend/resume behavior.
 The cabinet artwork remains intact. Persistent controls are a skinny dark speaker
 with brass/wood trim, stacked transport buttons and an accessible Browse albums
 icon. Desktop controls measure 44 × 145px; coarse-touch controls use a 48 × 198px
-speaker with 44px targets. They prefer Bob's right side with a 6px gap and use
-bounded edge fallbacks. On hover-capable devices they fade to 20% opacity when
-idle, returning to full opacity on hover or keyboard focus; touch devices remain
-opaque. Reduced-motion preferences remove the fade. Volume remains inside the cabinet and Music
+speaker with 44px targets. They prefer Bob's right side with a 6px gap from the
+painted sprite, ignoring the transparent canvas padding, and use bounded edge
+fallbacks. On hover-capable devices they are fully transparent and do not
+intercept pointer clicks while idle. Moving near Bob or the speaker reveals them;
+hover and keyboard focus also keep them visible. Touch devices remain opaque.
+Reduced-motion preferences remove the fade. Volume remains inside the cabinet and Music
 page. Sans Serif MP3s are unchanged; full-frame cover derivatives are 320, 640 and
 960px WebP. The original cover is retained under nonpublic `assets/music/`.
+
+The final placement correction reads painted canvas bounds only while compact
+controls are eligible, at most ten times per second, and reuses cached bounds
+between reads. This removes transparent padding without changing the runtime.
+Parent and iframe pointer events reveal the speaker within 36px of Bob or its
+buttons. Six focused geometry/state/proximity tests and one preview build passed.
+Browser review confirmed idle opacity 0 with pointer events disabled, then
+opacity 1 near Bob while the speaker itself was not hovered. The speaker sat
+directly beside the visible sprite, and playback was left paused with the prior
+volume restored.
 
 ## Owner's visual revision
 
