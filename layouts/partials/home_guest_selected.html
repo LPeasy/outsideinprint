@@ -1,6 +1,6 @@
 {{- $guest := false -}}
 {{- $now := now -}}
-{{- $guestRoutes := slice "/essays/breach-of-confidence-therapy-records/" "/essays/a-public-record-must-outlast-the-feed/" -}}
+{{- $guestRoutes := slice "/essays/the-true-cost-of-a-used-car/" "/essays/breach-of-confidence-therapy-records/" "/essays/a-public-record-must-outlast-the-feed/" -}}
 {{- range $route := $guestRoutes -}}
   {{- if not $guest -}}
     {{- range where site.RegularPages "RelPermalink" $route -}}
