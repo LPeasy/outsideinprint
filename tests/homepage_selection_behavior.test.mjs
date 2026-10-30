@@ -25,6 +25,13 @@ const elijahMetadata = {
   date: "2026-10-27", publishDate: "2026-10-27T11:00:00-04:00",
   section_label: "Essay", contributor_role: "guest", author: "Elijah Fernandez, MSW, PMP, CISSP",
 };
+const usedCarRoute = "/essays/the-true-cost-of-a-used-car/";
+// Synthetic timing and byline for selector coverage, not a publication schedule.
+const usedCarMetadata = {
+  title: "The True Cost of A Used Car", url: usedCarRoute,
+  date: "2026-10-30", publishDate: "2026-10-30T09:00:00-04:00",
+  section_label: "Essay", contributor_role: "guest", author: "Jacob Fixture",
+};
 
 function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-01T12:00:00Z", cartoons = []) {
   assert.match(execFileSync(hugo, ["version"], { encoding: "utf8" }), /^hugo v0\.167\.0/);
@@ -300,6 +307,43 @@ test("an ineligible preferred guest falls back to Douglas without bypassing publ
     assert.match(result.html, /By Douglas B\. Vandergraph/, name);
     assert.equal(new Set([...result.featured, result.guest]).size, 6, name);
     assert.ok(!result.featured.includes(guestRoute), name);
+  }
+});
+
+test("the used-car essay takes the guest slot at its release instant without changing Bob's five slots", (t) => {
+  const overrides = { guest: guestMetadata, elijah: elijahMetadata, usedCar: usedCarMetadata };
+  const before = renderSelection(t, overrides, "guest", "2026-10-30T12:59:59Z");
+  const atRelease = renderSelection(t, overrides, "guest", "2026-10-30T13:00:00Z");
+  assert.equal(before.guest, elijahRoute);
+  assert.match(before.html, /By Elijah Fernandez, MSW, PMP, CISSP/);
+  assert.equal(atRelease.guest, usedCarRoute);
+  assert.match(atRelease.html, /By Jacob Fixture/);
+  assert.equal((atRelease.html.match(/<article\b/g) || []).length, 1);
+  for (const result of [before, atRelease]) {
+    assert.deepEqual(result.featured, [flagship, "/essays/latest/", disneyOpening, noise, coinSlot]);
+    assert.equal(new Set([...result.featured, result.guest]).size, 6);
+    for (const route of [usedCarRoute, elijahRoute, guestRoute]) assert.ok(!result.featured.includes(route));
+  }
+});
+
+test("an ineligible used-car essay falls back to Elijah while preserving all guest eligibility guards", (t) => {
+  const cases = {
+    absent: null,
+    draft: { ...usedCarMetadata, draft: true },
+    futureDate: { ...usedCarMetadata, date: "2030-01-01" },
+    futureRelease: { ...usedCarMetadata, publishDate: "2030-01-01" },
+    expired: { ...usedCarMetadata, expiryDate: "2026-10-30T09:00:00-04:00" },
+    anonymous: { ...usedCarMetadata, author: " \t " },
+    ordinary: { ...usedCarMetadata, contributor_role: "contributing" },
+    nonEssay: { ...usedCarMetadata, library_type: "dialogue", section_label: "Dialogue" },
+  };
+  for (const [name, metadata] of Object.entries(cases)) {
+    const result = renderSelection(t, { guest: guestMetadata, elijah: elijahMetadata, usedCar: metadata }, "guest", "2026-10-30T13:00:00Z");
+    assert.equal(result.guest, elijahRoute, name);
+    assert.match(result.html, /By Elijah Fernandez, MSW, PMP, CISSP/, name);
+    assert.deepEqual(result.featured, [flagship, "/essays/latest/", disneyOpening, noise, coinSlot], name);
+    assert.equal(new Set([...result.featured, result.guest]).size, 6, name);
+    for (const route of [usedCarRoute, elijahRoute, guestRoute]) assert.ok(!result.featured.includes(route), name);
   }
 });
 

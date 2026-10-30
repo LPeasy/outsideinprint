@@ -40,7 +40,7 @@ const publishedPages = rows.map((row) => Object.fromEntries(columns.map((column,
     && Date.parse(row.date) <= observationTime && Date.parse(row.publishDate) <= observationTime)
   .sort((a, b) => Date.parse(b.publishDate) - Date.parse(a.publishDate) || a.title.localeCompare(b.title));
 const publishedRoutes = publishedPages.map((row) => row.route);
-const guestCandidates = ["/essays/breach-of-confidence-therapy-records/", "/essays/a-public-record-must-outlast-the-feed/"]
+const guestCandidates = ["/essays/the-true-cost-of-a-used-car/", "/essays/breach-of-confidence-therapy-records/", "/essays/a-public-record-must-outlast-the-feed/"]
   .map((route) => {
     const file = path.resolve(`content${route.slice(0, -1)}.md`);
     const source = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : "";

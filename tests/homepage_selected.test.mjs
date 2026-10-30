@@ -159,9 +159,10 @@ test("featured eligibility excludes drafts, future and expired work before choos
 });
 
 test("regular slots resolve Bob's authorship and the Guest Feature keeps credited reading beneath the lead", () => {
-  const preferredGuest = guestSelected.indexOf('"/essays/breach-of-confidence-therapy-records/"');
+  const preferredGuest = guestSelected.indexOf('"/essays/the-true-cost-of-a-used-car/"');
+  const secondGuest = guestSelected.indexOf('"/essays/breach-of-confidence-therapy-records/"');
   const fallbackGuest = guestSelected.indexOf('"/essays/a-public-record-must-outlast-the-feed/"');
-  assert.ok(preferredGuest >= 0 && fallbackGuest > preferredGuest);
+  assert.ok(preferredGuest >= 0 && secondGuest > preferredGuest && fallbackGuest > secondGuest);
   assert.match(guestSelected, /range \$route := \$guestRoutes/);
   assert.match(guestSelected, /if not \$guest/);
   for (const source of [selected, guestSelected]) {

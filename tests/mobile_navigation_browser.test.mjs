@@ -92,7 +92,7 @@ test("Guest Feature fits below the lead beside supporting stories and stacks saf
     const value = source.match(new RegExp(`^${key}:\\s*(.+?)\\r?$`, "m"))?.[1] || "";
     return value.startsWith('"') ? JSON.parse(value) : value.replace(/^'|'$/g, "");
   };
-  const expectedGuest = ["/essays/breach-of-confidence-therapy-records/", "/essays/a-public-record-must-outlast-the-feed/"]
+  const expectedGuest = ["/essays/the-true-cost-of-a-used-car/", "/essays/breach-of-confidence-therapy-records/", "/essays/a-public-record-must-outlast-the-feed/"]
     .map((route) => {
       const file = path.join(repoRoot, `content${route.slice(0, -1)}.md`);
       const source = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : "";

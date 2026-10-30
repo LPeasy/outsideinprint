@@ -5923,7 +5923,7 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   $guestSourcePath = $null
   $guestAuthor = ''
   $expectedGuestPaths = @()
-  foreach ($candidateGuestPath in @('/essays/breach-of-confidence-therapy-records/', '/essays/a-public-record-must-outlast-the-feed/')) {
+  foreach ($candidateGuestPath in @('/essays/the-true-cost-of-a-used-car/', '/essays/breach-of-confidence-therapy-records/', '/essays/a-public-record-must-outlast-the-feed/')) {
     $candidateSourcePath = Join-Path $repoRoot ('content' + $candidateGuestPath.TrimEnd('/') + '.md')
     if (-not (Test-Path -LiteralPath $candidateSourcePath -PathType Leaf)) { continue }
     $candidateAuthor = (Get-FrontMatterScalarFromMarkdownFile -Path $candidateSourcePath -Key 'author').Trim()
