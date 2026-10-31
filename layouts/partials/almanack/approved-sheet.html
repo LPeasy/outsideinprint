@@ -1,0 +1,29 @@
+{{- if ne .Params.almanack_layout "alternating-margins-v1" -}}
+  {{- errorf "Unsupported Almanack layout %q on %s" .Params.almanack_layout .File.Path -}}
+{{- end -}}
+{{- $date := .Date.Format "2006-01-02" -}}
+{{- $root := printf "almanack/%s" $date -}}
+{{- $body := resources.Get (printf "%s/body.html" $root) -}}
+{{- $record := resources.Get (printf "%s/manifest.json" $root) -}}
+{{- $css := resources.Get "css/almanack-alternating-v1.css" -}}
+{{- if not (and $body $record $css) -}}
+  {{- errorf "Missing approved Almanack presentation assets for %s; stage the approved package" $date -}}
+{{- else -}}
+  {{- $manifest := $record.Content | transform.Unmarshal -}}
+  {{- $source := readFile .File.Filename -}}
+  {{- if or (ne $manifest.schema "oip-almanack-web-fragment/v1") (ne $manifest.layout .Params.almanack_layout) (ne $manifest.issue_date $date) (ne (int $manifest.issue_number) (int .Params.issue_number)) (ne $manifest.staged_source_sha256 (crypto.SHA256 $source)) (ne $manifest.fragment_sha256 (crypto.SHA256 $body.Content)) (ne $manifest.css_sha256 (crypto.SHA256 $css.Content)) -}}
+    {{- errorf "Stale approved Almanack source/presentation binding for %s; regenerate from the approved package" $date -}}
+  {{- end -}}
+  <style>{{ $css.Content | safeCSS }}</style>
+  <style>@media(min-width:1208px){#almanack-approved{width:1160px;margin-left:calc((100% - 1160px)/2);}}</style>
+  <section id="almanack-approved" aria-labelledby="almanack-title" data-almanack-layout="alternating-margins-v1">
+    <div class="review-shell"><article class="review-issue" id="issue">{{ $body.Content | safeHTML }}</article></div>
+  </section>
+  {{ partial "newsletter_signup.html" (dict
+    "page" .
+    "class" "newsletter-signup--article-exit page-shell page-shell--wide"
+    "anchorID" "bobs-almanack-signup"
+    "focusTarget" true
+    "sourceSlot" "almanack_issue_exit_newsletter"
+  ) }}
+{{- end -}}

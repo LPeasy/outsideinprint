@@ -1,0 +1,154 @@
+#almanack-approved .bob-ornament:focus-visible,#almanack-approved .bob-demo:focus-visible{outline:2px solid #346782;outline-offset:4px}
+#almanack-approved .bob-ornament{line-height:0;cursor:pointer}
+#almanack-approved .bob-ornament img{image-rendering:pixelated}
+#almanack-approved .bob-feature{padding:8px 0 16px}
+#almanack-approved .bob-feature h3,#almanack-approved .bob-feature h2{font-size:36px;line-height:1.2;margin:20px 0;font-family:Georgia,'Times New Roman',serif}
+#almanack-approved .bob-feature p{font-size:17px;line-height:1.6}
+#almanack-approved .bob-feature .bob-kicker{font-family:Arial,sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin:16px 0}
+#almanack-approved .bob-actions{width:100%;table-layout:fixed;border-collapse:collapse;margin:20px 0 12px}
+#almanack-approved .bob-actions .bob-invitation{vertical-align:middle;padding-right:14px}
+#almanack-approved .bob-actions .bob-hanging-cell{width:107px;vertical-align:middle;text-align:right}
+#almanack-approved .bob-demo{display:inline-block;max-width:100%;box-sizing:border-box;border:1px solid #346782;padding:12px 18px;font-size:17px;font-weight:bold;line-height:1.5;text-decoration:underline;color:#346782}
+#almanack-approved .bob-feature .bob-secondary{font-size:16px;margin:14px 0}
+#almanack-approved .bob-feature .bob-facts{font-size:14px;line-height:1.6}
+#almanack-approved .bob-stage{height:118px;text-align:right;margin:0;position:relative;z-index:1}
+#almanack-approved .bob-masthead-frame{display:inline-block;border-right:1px solid #6b543c;border-bottom:1px solid #6b543c;width:90px;height:117px;text-align:right}
+#almanack-approved .bob-stage img{width:73px;height:auto}
+#almanack-approved .bob-paper-masthead{margin-top:-36px!important;position:relative}
+#almanack-approved .bob-divider{width:100%;table-layout:fixed;margin:18px 0 8px;border-collapse:collapse}
+#almanack-approved .bob-divider .bob-plane-cell{width:100%;vertical-align:bottom}
+#almanack-approved .bob-divider .bob-divider-caption{text-align:right;vertical-align:bottom;font-size:12px;font-style:italic;line-height:1.5;color:#554d42;padding:6px 0 4px}
+#almanack-approved .bob-signoff{width:100%;table-layout:fixed;border-collapse:collapse}
+#almanack-approved .bob-signoff .bob-signoff-cell{width:100px;text-align:right;vertical-align:bottom}
+#almanack-approved .bob-signoff blockquote{margin:24px 0}
+#almanack-approved .bob-feature a,#almanack-approved .bob-feature a:visited{color:#346782;text-decoration:underline}
+#almanack-approved .almanack-issue .almanack-bookshelf .oip-picture{display:block;max-width:104px}
+#almanack-approved .almanack-issue .almanack-bookshelf img{display:block;width:100%;max-width:104px;height:auto}
+#almanack-approved .almanack-issue .almanack-secondary-card p,#almanack-approved .almanack-issue .almanack-margin section p,#almanack-approved .almanack-issue .almanack-margin li{font-size:16px}
+@media(max-width:700px){#almanack-approved .almanack-inner{padding:16px!important}
+#almanack-approved .bob-feature h3,#almanack-approved .bob-feature h2{font-size:32px}
+#almanack-approved .bob-actions .bob-hanging-cell{width:87px}
+#almanack-approved .bob-actions [data-bob="feature"] img{width:75px!important}
+#almanack-approved .bob-stage{height:98px}
+#almanack-approved .bob-masthead-frame{height:97px;width:76px}
+#almanack-approved .bob-stage img{width:60px!important}
+#almanack-approved .bob-paper-masthead{margin-top:-28px!important}
+}
+@media(max-width:350px){#almanack-approved .bob-feature h3,#almanack-approved .bob-feature h2{font-size:29px}
+#almanack-approved .bob-actions .bob-hanging-cell{width:77px}
+#almanack-approved .bob-actions [data-bob="feature"] img{width:68px!important}
+#almanack-approved .bob-demo{padding:10px 12px;font-size:16px}
+}
+#almanack-approved .bob-heading td,#almanack-approved .bob-edge td{border:none}
+#almanack-approved .bob-heading h2,#almanack-approved .bob-heading h3{overflow-wrap:anywhere}
+#almanack-approved .almanack-secondary-grid>.bob-edge{grid-column:1/-1}
+#almanack-approved .bob-edge .bob-ornament{vertical-align:bottom}
+#almanack-approved .bob-edge--masthead .bob-ornament{vertical-align:top}
+#almanack-approved .bob-heading .bob-ornament{vertical-align:bottom}
+#almanack-approved .bob-heading .bob-ornament img,#almanack-approved .bob-edge .bob-ornament img{object-fit:contain}
+#almanack-approved .almanack-issue .bob-heading{margin:18px 0 14px}
+#almanack-approved .almanack-issue .bob-heading h2,#almanack-approved .almanack-issue .bob-heading h3{margin:0}
+#almanack-approved .almanack-issue .bob-heading a{color:inherit!important}
+#almanack-approved .bob-heading--inline{overflow-wrap:anywhere}
+#almanack-approved .bob-trail:focus-visible{outline:2px solid #346782;outline-offset:4px}
+@media(max-width:350px){#almanack-approved .bob-heading h2,#almanack-approved .bob-heading h3,#almanack-approved .bob-heading--inline{font-size:23px!important}
+}
+#almanack-approved, #almanack-approved *{box-sizing:border-box}
+#almanack-approved{margin:0;background:#dcd4c5;color:#332a22;font:17px/1.6 Georgia,'Times New Roman',serif}
+#almanack-approved .review-bar{background:#f4eddf;border-bottom:1px solid #b0a087;padding:12px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font:14px/1.4 system-ui,'Segoe UI',sans-serif}
+#almanack-approved .review-bar strong{display:block;font-size:15px}
+#almanack-approved .review-bar small{display:block;color:#65584b;margin-top:5px}
+#almanack-approved .review-bar nav{display:flex;gap:16px;flex-wrap:wrap}
+#almanack-approved .review-bar a{color:#346782;text-underline-offset:3px}
+#almanack-approved .review-shell{padding:28px 20px 44px}
+#almanack-approved .review-issue{max-width:1120px;margin:0 auto;background:#f4eddf;padding:28px 32px 36px;box-shadow:0 2px 16px #332a2215;overflow-wrap:anywhere}
+#almanack-approved .review-message{max-width:760px;margin:40px auto;padding:20px;background:#f4eddf;border:1px solid #b0a087;font-size:16px}
+#almanack-approved [hidden]{display:none!important}
+#almanack-approved .demo-intro{max-width:680px;margin:0 auto 28px}
+#almanack-approved .demo-columns{display:grid;grid-template-columns:minmax(0,680px) 260px;gap:44px;justify-content:center;align-items:stretch}
+#almanack-approved .demo-main{min-width:0}
+#almanack-approved .demo-main>section:first-child{margin-top:0!important}
+#almanack-approved .demo-rail{min-width:0;display:flex;flex-direction:column;border-left:1px solid #b0a087;padding:0 0 0 24px;font-size:14px;line-height:1.6}
+#almanack-approved .demo-rail>blockquote{margin:0 0 24px!important}
+#almanack-approved .demo-rail>blockquote p:first-child{font-size:16px!important;line-height:1.5}
+#almanack-approved .demo-rail>blockquote p:last-child{font-size:12px!important;line-height:1.5}
+#almanack-approved .demo-rail>.demo-margin-section{display:flex;flex:1;flex-direction:column;border-top:0!important;padding-top:0!important}
+#almanack-approved .demo-rail .demo-margin-section>h2{font-size:23px!important;line-height:1.25;margin:0 0 25px!important}
+#almanack-approved .demo-notices{display:flex;flex:1;flex-direction:column;justify-content:space-between;gap:24px}
+#almanack-approved .demo-notice{min-width:0;break-inside:avoid}
+#almanack-approved .demo-rail .demo-notice h3{font-size:14px!important;line-height:1.4;margin:0 0 8px!important}
+#almanack-approved .demo-rail .demo-notice p,#almanack-approved .demo-rail .demo-notice li{font-size:14px!important;line-height:1.6;margin:0 0 9px!important}
+#almanack-approved .demo-rail .demo-notice ul{padding-left:18px;margin:0!important}
+#almanack-approved .demo-rail .demo-notice p:last-child{margin-bottom:0!important}
+#almanack-approved .demo-rail .demo-number{font-size:22px!important;line-height:1.3}
+#almanack-approved .demo-rail .demo-document-title{font-size:16px!important;line-height:1.4}
+#almanack-approved .demo-rail .bob-edge--margin_records,#almanack-approved .demo-rail .bob-edge--margin_document{margin:14px 0 0!important}
+#almanack-approved .demo-tail{margin-top:32px}
+#almanack-approved .demo-tail>section>a>img{width:100%!important;max-width:680px!important;height:auto!important}
+#almanack-approved .review-issue img{max-width:100%}
+#almanack-approved .review-issue a:focus-visible,#almanack-approved .review-bar a:focus-visible{outline:2px solid #346782;outline-offset:4px}
+@media(max-width:980px){#almanack-approved .review-issue{max-width:760px;padding:24px}
+#almanack-approved .demo-columns{display:block}
+#almanack-approved .demo-rail{display:block;border-left:0;border-top:1px solid #b0a087;padding:22px 0 0;margin:28px 0 0}
+#almanack-approved .demo-rail>.demo-margin-section,#almanack-approved .demo-notices{display:block}
+#almanack-approved .demo-notice{margin:0 0 24px}
+#almanack-approved .demo-notice:last-child{margin-bottom:0}
+#almanack-approved .demo-tail{margin-top:28px}
+}
+@media(max-width:700px){#almanack-approved .review-shell{padding:14px 8px 28px}
+#almanack-approved .review-issue{padding:16px}
+#almanack-approved .review-bar{padding:12px 16px}
+#almanack-approved .demo-columns{gap:0}
+#almanack-approved .demo-intro{margin-bottom:22px}
+}
+@media print{#almanack-approved{background:white}
+#almanack-approved .review-bar{display:none}
+#almanack-approved .review-shell{padding:0}
+#almanack-approved .review-issue{max-width:none;padding:0;box-shadow:none}
+#almanack-approved .demo-columns,#almanack-approved .demo-rail>.demo-margin-section,#almanack-approved .demo-notices{display:block}
+#almanack-approved .demo-rail{display:block;border-left:0;border-top:1px solid #b0a087;padding:18px 0 0;margin-top:24px}
+#almanack-approved .demo-notice{margin-bottom:20px}
+}
+#almanack-approved .demo-rail{align-self:start}
+#almanack-approved .demo-rail>blockquote{padding:0 0 20px;border-bottom:1px solid #b0a087}
+#almanack-approved .demo-rail>.demo-margin-section{flex:0}
+#almanack-approved .demo-rail .demo-margin-section>h2{font-size:26px!important;letter-spacing:-.25px;padding:0 0 12px!important;margin:0!important;border-bottom:3px double #74624d}
+#almanack-approved .demo-rail .demo-notices{display:block;flex:none}
+#almanack-approved .demo-rail .demo-notice{padding:20px 0 22px;margin:0;border-top:1px solid #b0a087}
+#almanack-approved .demo-rail .demo-notice:first-child{border-top:0}
+#almanack-approved .demo-rail .demo-notice:last-child{padding-bottom:0}
+#almanack-approved .demo-rail .demo-notice h3{display:flex;align-items:baseline;gap:10px;font:700 12px/1.4 system-ui,'Segoe UI',sans-serif!important;letter-spacing:1px;text-transform:uppercase;margin:0 0 13px!important}
+#almanack-approved .demo-rail .demo-notice h3::before{content:attr(data-index);font-size:11px;font-weight:500;letter-spacing:0;color:#74624d;min-width:20px;border-right:1px solid #b0a087;padding-right:9px}
+#almanack-approved .demo-rail .demo-notice ul{list-style:none;padding:0!important}
+#almanack-approved .demo-rail .demo-number{display:block;font-size:42px!important;line-height:1.05;letter-spacing:-1px;font-weight:400;font-variant-numeric:tabular-nums;margin-bottom:12px}
+#almanack-approved .demo-rail .demo-document-title{font-size:18px!important;line-height:1.35}
+#almanack-approved .demo-rail .demo-notice .demo-document-meta{font:12px/1.5 system-ui,'Segoe UI',sans-serif!important;color:#65584b!important;margin:8px 0 14px!important}
+#almanack-approved .demo-rail .demo-notice a.demo-source-link{display:block;width:fit-content;margin-top:12px;font:12px/1.5 system-ui,'Segoe UI',sans-serif!important;text-underline-offset:3px}
+#almanack-approved .demo-rail .demo-notice a.demo-source-link::after{content:' \2197';font-size:11px}
+#almanack-approved .demo-rail .bob-edge--margin_records,#almanack-approved .demo-rail .bob-edge--margin_document{border-bottom:0!important;margin-top:16px!important}
+@media(max-width:980px){#almanack-approved .demo-rail .demo-notice{padding:20px 0 22px;margin:0}
+#almanack-approved .demo-rail .demo-margin-section>h2{font-size:25px!important}
+}
+#almanack-approved .demo-columns.demo-alternating{max-width:984px;margin:0 auto;grid-template-columns:260px 44px minmax(0,1fr) 44px 260px;gap:36px 0;align-items:stretch}
+#almanack-approved .demo-alternating>.demo-main-block{min-width:0}
+#almanack-approved .demo-alternating>.demo-main-block>.almanack-guest-features{margin:0!important}
+#almanack-approved .demo-alternating>.demo-rail{align-self:center}
+#almanack-approved .demo-alternating>.demo-rail.demo-first-notice{align-self:start}
+#almanack-approved .demo-alternating>.demo-rail[data-side="left"]{border-left:0;border-right:1px solid #b0a087;padding:0 24px 0 0}
+#almanack-approved .demo-alternating>.demo-rail[data-side="right"]{border-left:1px solid #b0a087;border-right:0;padding:0 0 0 24px}
+#almanack-approved .demo-alternating>.demo-rail>.demo-notice{padding-top:0;border-top:0}
+#almanack-approved .demo-alternating>.demo-rail .demo-notice:last-child{padding-bottom:0}
+#almanack-approved .demo-alternating>.demo-rail .demo-grouped-notice{border-top:1px solid #b0a087;padding-top:20px;margin-top:24px}
+#almanack-approved .demo-alternating>.demo-main-block>section:first-child{margin-top:0!important}
+#almanack-approved .demo-rail>blockquote.demo-quote-after{margin:24px 0 0!important;padding:18px 0 0;border-top:1px solid #b0a087;border-bottom:0}
+@media(max-width:980px){#almanack-approved .demo-columns.demo-alternating{display:block;max-width:none}
+#almanack-approved .demo-alternating>.demo-main-block{margin:0 0 28px}
+#almanack-approved .demo-alternating>.demo-rail[data-side]{display:block;border-left:0;border-right:0;border-top:0;padding:0;margin:0}
+#almanack-approved .demo-alternating>.demo-rail.demo-first-notice{border-top:1px solid #b0a087;padding-top:22px;margin-top:28px}
+#almanack-approved .demo-alternating>.demo-rail:not(.demo-first-notice)>.demo-notice{border-top:1px solid #b0a087;padding-top:20px}
+#almanack-approved .demo-alternating>.demo-rail .demo-notice{padding-bottom:22px!important}
+}
+@media print{#almanack-approved .demo-columns.demo-alternating{display:block;max-width:none}
+#almanack-approved .demo-alternating>.demo-main-block{margin-bottom:24px}
+#almanack-approved .demo-alternating>.demo-rail[data-side]{border-left:0;border-right:0;padding:0;margin:0 0 20px}
+}
