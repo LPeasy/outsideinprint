@@ -1,0 +1,64 @@
+{
+  "schema": "oip-almanack-web-fragment/v1",
+  "layout": "alternating-margins-v1",
+  "issue_date": "2026-10-31",
+  "issue_number": 26,
+  "approved_source_sha256": "01d624ede63108c103e543a83a8d180f00deeea220b9f91e80b4f605de1895ed",
+  "staged_source_sha256": "ae6ddf051307588ff55de04ea9d3576968cce7069472992fbfee1b70fb0497e8",
+  "approved_full_issue_sha256": "ab3ab5f74d07dd245dea92f049b53def931ad428bcddacc1f4b7af5f6364564c",
+  "fragment_sha256": "eaeb7c6cba4a22667da527be39cb510cef9595cbbcd9021292c990e15f39f9df",
+  "css_sha256": "0adf6547cbab296613602f008db0b9951664634246031ad78f0a60b10eedae11",
+  "template_signature": "64ca7806af7ffbdcb7d0f4e0774a9e9589dc93dfb6742c9885f4a13d00ab8404",
+  "managed_images": [
+    {
+      "ref": "essays/why-daylight-saving-time/hero",
+      "source_url": "https://outsideinprint.org/images/rendered/essays/why-daylight-saving-time/hero/c4aa5ef82ec6/social-1200w.jpg",
+      "alt": "An ink-and-watercolor station clock above commuters walking toward an amber autumn sunset.",
+      "token": "<!--ALMANACK-MANAGED-IMAGE-0-->",
+      "display_style": "display:block;max-width:100%;height:auto;width:632px;",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "sizes": "(min-width:75.5rem) 680px, (max-width:61.25rem) calc(100vw - 6rem), 680px"
+    },
+    {
+      "ref": "essays/breach-of-confidence-therapy-records/hero",
+      "source_url": "https://outsideinprint.org/images/rendered/essays/breach-of-confidence-therapy-records/hero/eee5438a9be2/social-1200w.jpg",
+      "alt": "An unmarked medical file rests on a table between a warmly lit therapy room and a shadowed corridor with filing cabinets and servers.",
+      "token": "<!--ALMANACK-MANAGED-IMAGE-1-->",
+      "display_style": "display:block;width:100%;max-width:100%;height:auto;margin:0 0 12px;",
+      "loading": "lazy",
+      "fetchpriority": "",
+      "sizes": "(min-width:75.5rem) 680px, (max-width:61.25rem) calc(100vw - 6rem), 680px"
+    },
+    {
+      "ref": "essays/the-true-cost-of-a-used-car/hero",
+      "source_url": "https://outsideinprint.org/images/rendered/essays/the-true-cost-of-a-used-car/hero/31ce26ba5685/social-1200w.jpg",
+      "alt": "A buyer gestures across a desk as a salesman studies an offer, with car keys between them and a silver sedan outside the window.",
+      "token": "<!--ALMANACK-MANAGED-IMAGE-2-->",
+      "display_style": "display:block;width:100%;max-width:100%;height:auto;margin:0 0 12px;",
+      "loading": "lazy",
+      "fetchpriority": "",
+      "sizes": "(min-width:75.5rem) 680px, (max-width:61.25rem) calc(100vw - 6rem), 680px"
+    },
+    {
+      "ref": "books/fifty-years-of-magic/cover",
+      "source_url": "https://outsideinprint.org/images/rendered/books/fifty-years-of-magic/cover/44512fbc8e0f/social-1200w.jpg",
+      "alt": "Cover of Fifty Years of Magic: The Making of Walt Disney World, by Robert V. Ussley. A grandparent, parent and child approach Cinderella Castle in warm gold and cream light, framed by trees and blue-green shadows.",
+      "token": "<!--ALMANACK-MANAGED-IMAGE-3-->",
+      "display_style": "display:block;width:104px;max-width:100%;height:auto;",
+      "loading": "lazy",
+      "fetchpriority": "",
+      "sizes": "104px"
+    },
+    {
+      "ref": "editorial/modern-prometheus",
+      "source_url": "https://outsideinprint.org/images/rendered/editorial/modern-prometheus/598358faa70b/social-1200w.jpg",
+      "alt": "Editorial cartoon showing a massive grid switchboard drawing yellow lightning from a tower labeled SKY POWER and sending electric lines to signs for NIGHT WORK, HOME LIGHT, and FARM LINE.",
+      "token": "<!--ALMANACK-MANAGED-IMAGE-4-->",
+      "display_style": "display:block;width:100%;max-width:100%;height:auto;margin:0 0 12px;",
+      "loading": "lazy",
+      "fetchpriority": "",
+      "sizes": "(min-width:75.5rem) 680px, (max-width:61.25rem) calc(100vw - 6rem), 680px"
+    }
+  ]
+}

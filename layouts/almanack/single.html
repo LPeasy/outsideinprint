@@ -1,4 +1,4 @@
-{{ define "main" }}
+{{ define "main" }}{{ if isset .Params "almanack_layout" }}{{ partial "almanack/approved-sheet.html" . }}{{ else }}
   {{ $issueDate := .Date }}
   {{ $essays := .Params.essays | default (slice) }}
   {{ $lead := dict }}
@@ -299,4 +299,4 @@
     "focusTarget" true
     "sourceSlot" "almanack_issue_exit_newsletter"
   ) }}
-{{ end }}
+{{ end }}{{ end }}

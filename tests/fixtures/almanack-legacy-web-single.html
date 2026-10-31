@@ -1,0 +1,302 @@
+{{ define "main" }}
+  {{ $issueDate := .Date }}
+  {{ $essays := .Params.essays | default (slice) }}
+  {{ $lead := dict }}
+  {{ if gt (len $essays) 0 }}
+    {{ $lead = index $essays 0 }}
+  {{ end }}
+  {{ $secondary := after 1 $essays }}
+  {{ $virtue := .Params.virtue | default (dict) }}
+  {{ $worth := .Params.worth_reprinting | default (dict) }}
+  {{ $margin := .Params.margin | default (dict) }}
+  {{ $oneNumber := index $margin "one_number" | default (dict) }}
+  {{ $oneDocument := index $margin "one_document" | default (dict) }}
+  {{ $results := index $margin "results" | default (slice) }}
+  {{ $records := index $margin "records" | default (slice) }}
+  {{ $finalBows := index $margin "final_bows" | default (slice) }}
+  {{ $obituaries := index $margin "obituaries" | default (slice) }}
+  {{ $campaign := .Params.campaign | default (dict) }}
+  {{ $campaignImageModel := false }}
+  {{ with $campaign.image }}
+    {{ $campaignImageModel = partial "images/model.html" (dict
+      "page" $
+      "ref" .
+      "display" true
+    ) }}
+  {{ end }}
+
+  <article class="almanack-issue page-shell page-shell--wide" aria-labelledby="almanack-title">
+    {{ partial "almanack/bob-style.html" .Params }}{{ partial "almanack/bob-masthead.html" .Params }}<header class="almanack-masthead">
+      <p class="almanack-kicker">Outside In Print weekly sheet</p>
+      <h1 id="almanack-title"><a href="{{ "collections/bobs-almanack/" | relURL }}">{{ if eq .Params.editorial_contract "almanack-v1" }}{{ .Title }}{{ else }}Bob's Almanack{{ end }}</a></h1>
+      <div class="piece-byline-row">
+        <div class="almanack-masthead__meta">
+          <time datetime="{{ $issueDate.Format "2006-01-02" }}">{{ $issueDate.Format "January 2, 2006" }}</time>
+          {{ with .Params.issue_number }}<span>Issue {{ . }}</span>{{ end }}
+        </div>
+        {{ partial "article/share.html" . }}
+      </div>
+      {{ with .Params.subtitle }}<p class="almanack-subtitle">{{ . }}</p>{{ end }}
+      {{ if and (eq (lower .Site.Params.newsletter.provider) "buttondown") .Site.Params.newsletter.buttondown_username }}
+        <p class="almanack-masthead__meta newsletter-prompt"><a href="#bobs-almanack-signup">Subscribe to Bob&rsquo;s Almanack</a></p>
+      {{ end }}
+    </header>
+
+    <figure class="almanack-quote almanack-quote--opening">
+      <blockquote>{{ .Params.opening_quote }}</blockquote>
+      <figcaption>~ {{ .Params.opening_quote_attribution }}</figcaption>
+    </figure>
+
+    {{ with $campaign }}
+      {{ $campaignHref := .cta_url | default "#" }}
+      {{ $campaignImageHref := .image_link_url | default $campaignHref }}
+      {{ if not (hasPrefix $campaignImageHref "http") }}
+        {{ $campaignImageHref = $campaignImageHref | relURL }}
+      {{ end }}
+      {{ if not (hasPrefix $campaignHref "http") }}
+        {{ $campaignHref = $campaignHref | relURL }}
+      {{ end }}
+      <section class="almanack-campaign{{ if $campaignImageModel }} almanack-campaign--illustrated{{ end }}" aria-labelledby="almanack-campaign-title">
+        {{ if $campaignImageModel }}
+          <a class="almanack-campaign__cover" href="{{ $campaignImageHref }}">
+            {{ partial "images/picture.html" (dict
+              "model" $campaignImageModel
+              "alt" .image_alt
+              "loading" "eager"
+              "fetchpriority" "high"
+              "sizes" "(min-width: 40rem) 16rem, 14rem"
+              "lightbox" false
+            ) }}
+          </a>
+        {{ end }}
+        <div class="almanack-campaign__body">
+          <p class="almanack-section-label">{{ .label | default "September campaign" }}</p>
+          <h2 id="almanack-campaign-title">{{ .headline }}</h2>
+          <p>{{ .message }}</p>
+          {{ with .cta_url }}
+            <p class="almanack-campaign__action">
+              <a href="{{ $campaignHref }}">{{ $campaign.cta_label | default "Join Bob's Almanack" }} &rarr;</a>
+              {{ if and $campaign.secondary_cta_label $campaign.secondary_cta_url }}
+                {{ $secondaryHref := $campaign.secondary_cta_url }}
+                {{ if not (hasPrefix $secondaryHref "http") }}
+                  {{ $secondaryHref = $secondaryHref | relURL }}
+                {{ end }}
+                <a{{ if eq $campaign.secondary_cta_url "/shop/2045/sample/" }} class="almanack-campaign__complete-story"{{ end }} href="{{ $secondaryHref }}">{{ $campaign.secondary_cta_label }}{{ if ne $campaign.secondary_cta_url "/shop/2045/sample/" }} &rarr;{{ end }}</a>
+              {{ end }}
+            </p>
+          {{ end }}
+        </div>
+      </section>
+    {{ end }}
+
+    {{ with .Params.bob_note }}
+      <section class="almanack-note" aria-labelledby="almanack-note-title">
+        <p class="almanack-section-label" id="almanack-note-title">Note from Bob</p>
+        <p>{{ if eq $.Params.editorial_contract "almanack-v1" }}{{ . | markdownify }}{{ else }}{{ . }}{{ end }}</p>{{ partial "almanack/bob-edge.html" (dict "issue" $.Params "slot" "note" "align" "right") }}
+      </section>
+    {{ end }}
+
+    <div class="almanack-columns">
+      <div class="almanack-main">
+        <section class="almanack-new" aria-labelledby="almanack-new-title">
+          <p class="almanack-section-label" id="almanack-new-title">New from Outside In Print</p>{{ partial "almanack/bob-feature.html" .Params }}
+          {{ with $lead }}
+            {{ $leadURL := .url | default "#" }}
+            {{ $leadHref := $leadURL }}
+            {{ if and $leadURL (not (hasPrefix $leadURL "http")) }}
+              {{ $leadHref = $leadURL | relURL }}
+            {{ end }}
+            {{ $leadImage := .image | default "" }}
+            {{ $leadImageModel := false }}
+            {{ if $leadImage }}
+              {{ $leadImageModel = partial "images/model.html" (dict
+                "page" $
+                "ref" $leadImage
+                "display" true
+              ) }}
+            {{ end }}
+            <article class="almanack-lead">
+              {{ if $leadImageModel }}
+                <figure class="almanack-lead__figure">
+                  <a
+                    href="{{ $leadHref }}"
+                    class="almanack-image-button"
+                    aria-label="Read {{ .title }}"
+                  >
+                    {{ $leadLoading := "eager" }}
+                    {{ $leadPriority := "high" }}
+                    {{ if $campaignImageModel }}
+                      {{ $leadLoading = "lazy" }}
+                      {{ $leadPriority = "auto" }}
+                    {{ end }}
+                    {{ partial "images/picture.html" (dict
+                      "model" $leadImageModel
+                      "alt" .image_alt
+                      "loading" $leadLoading
+                      "fetchpriority" $leadPriority
+                      "sizes" "(min-width: 72rem) 42rem, (min-width: 48rem) 58vw, calc(100vw - 2rem)"
+                      "lightbox" false
+                    ) }}
+                  </a>
+                </figure>
+              {{ end }}
+              <div class="almanack-lead__body">
+                {{ if eq $.Params.bob_layout "scattered-v1" }}{{ partial "almanack/bob-heading.html" (dict "issue" $.Params "slot" "lead" "title" .title "url" $leadHref "level" 2) }}{{ else }}<h2><a href="{{ $leadHref }}">{{ .title }}</a></h2>{{ end }}
+                {{ with .excerpt }}
+                  <p class="almanack-section-label">{{ $lead.excerpt_label | default "From the essay" }}</p>
+                  {{ range split . "\n\n" }}<p>{{ . }}</p>{{ end }}
+                  <p><a href="{{ $leadHref }}">{{ $lead.read_label | default "Read the full essay" }} &rarr;</a></p>
+                {{ else }}
+                  <p>{{ .description }}</p>
+                {{ end }}
+              </div>
+            </article>
+          {{ end }}
+
+          {{ partial "almanack/guest-feature-web.html" . }}{{ if gt (len $secondary) 0 }}
+            <div class="almanack-secondary-grid" aria-label="Secondary essays">
+              {{ range $i, $item := $secondary }}{{ if eq $i 1 }}{{ partial "almanack/bob-edge.html" (dict "issue" $.Params "slot" "stories" "align" "center") }}{{ end }}
+                {{ $itemURL := .url | default "#" }}
+                {{ $itemHref := $itemURL }}
+                {{ if and $itemURL (not (hasPrefix $itemURL "http")) }}
+                  {{ $itemHref = $itemURL | relURL }}
+                {{ end }}
+                {{ $itemImage := .image | default "" }}
+                {{ $itemImageModel := false }}
+                {{ if $itemImage }}
+                  {{ $itemImageModel = partial "images/model.html" (dict
+                    "page" $
+                    "ref" $itemImage
+                    "display" true
+                  ) }}
+                {{ end }}
+                <article class="almanack-secondary-card">
+                  {{ if $itemImageModel }}
+                    <a
+                      href="{{ $itemHref }}"
+                      class="almanack-secondary-card__thumb"
+                      aria-label="Read {{ .title }}"
+                    >
+                      {{ partial "images/picture.html" (dict
+                        "model" $itemImageModel
+                        "alt" .image_alt
+                        "loading" "lazy"
+                        "sizes" "(min-width: 48rem) 18rem, calc(100vw - 2rem)"
+                        "lightbox" false
+                      ) }}
+                    </a>
+                  {{ end }}
+                  <h3><a href="{{ $itemHref }}">{{ .title }}</a></h3>
+                  <p>{{ .capsule | default .description }}</p>
+                </article>
+              {{ end }}
+            </div>
+          {{ end }}
+        </section>
+
+        {{ partial "almanack/bob-edge.html" (dict "issue" .Params "slot" "bookshelf" "align" "left") }}{{ with .Params.bookshelf }}{{ partial "almanack/bookshelf-web.html" (dict "page" $ "book" .) }}{{ end }}<section class="almanack-virtue" aria-labelledby="almanack-virtue-title">
+          <p class="almanack-section-label" id="almanack-virtue-title">This Week's Virtue</p>
+          <h2>{{ $virtue.name }}</h2>
+          <p>{{ $virtue.reflection }}</p>
+        </section>{{ partial "almanack/bob-divider.html" .Params }}
+      </div>
+
+      <aside class="almanack-margin" aria-labelledby="almanack-margin-title">
+        <figure class="almanack-quote almanack-quote--middle">
+          <blockquote>{{ .Params.middle_quote }}</blockquote>
+          <figcaption>~ {{ .Params.middle_quote_attribution }}{{ if eq .Params.editorial_contract "almanack-v1" }}{{ with .Params.middle_quote_source_url }} · <a href="{{ . }}">Source</a>{{ end }}{{ end }}</figcaption>
+        </figure>
+        <div class="almanack-margin__header">
+          <h2 id="almanack-margin-title">In the Margins</h2>
+          <p>figures, records, notices</p>
+        </div>
+
+        <section>
+          <h3>One Number</h3>
+          <p class="almanack-margin__figure">{{ $oneNumber.figure }}</p>
+          <p>{{ $oneNumber.note }} {{ with $oneNumber.source_url }}<a href="{{ . }}">source</a>{{ end }}</p>
+        </section>
+
+        <section>
+          <h3>One Document</h3>
+          <p class="almanack-margin__figure">{{ $oneDocument.title }}</p>
+          <p>{{ $oneDocument.issued_by }}{{ with $oneDocument.date }}, {{ . }}{{ end }}</p>
+          <p>{{ $oneDocument.note }} {{ with $oneDocument.url }}<a href="{{ . }}">source</a>{{ end }}</p>
+        </section>
+
+        {{ with $results }}
+          <section>
+            <h3>Results</h3>
+            <ul>
+              {{ range . }}<li>{{ .text }} {{ with .url }}<a href="{{ . }}">source</a>{{ end }}</li>{{ end }}
+            </ul>
+          </section>
+        {{ end }}
+
+        {{ with $records }}
+          <section>
+            <h3>Records</h3>
+            <ul>
+              {{ range . }}<li>{{ .text }} {{ with .url }}<a href="{{ . }}">source</a>{{ end }}</li>{{ end }}
+            </ul>
+          </section>
+        {{ end }}
+
+        {{ with $finalBows }}
+          <section>
+            <h3>Final Bows</h3>
+            <ul>
+              {{ range . }}<li>{{ .text }} {{ with .url }}<a href="{{ . }}">source</a>{{ end }}</li>{{ end }}
+            </ul>
+          </section>
+        {{ end }}
+
+        {{ with $obituaries }}
+          <section>
+            <h3>Obituaries</h3>
+            <ul>
+              {{ range . }}<li>{{ .text }} {{ with .url }}<a href="{{ . }}">source</a>{{ end }}</li>{{ end }}
+            </ul>
+          </section>
+        {{ end }}
+      </aside>
+    </div>
+
+    <section class="almanack-worth" aria-labelledby="almanack-worth-title">
+      <p class="almanack-section-label" id="almanack-worth-title">Worth Reprinting</p>
+      {{ $worthURL := $worth.url | default "#" }}
+      {{ $worthHref := $worthURL }}
+      {{ if and $worthURL (not (hasPrefix $worthURL "http")) }}
+        {{ $worthHref = $worthURL | relURL }}
+      {{ end }}
+      <h2><a href="{{ $worthHref }}">{{ $worth.title }}</a></h2>
+      {{ with $worth.rationale }}
+        <p class="almanack-worth__blurb">{{ . }}</p>
+      {{ else }}
+        <p class="almanack-worth__deck">{{ $worth.description }}</p>
+        {{ with $worth.blurb }}<p class="almanack-worth__blurb">{{ . }}</p>{{ end }}
+      {{ end }}
+    </section>
+
+    {{ if eq .Params.bob_layout "scattered-v1" }}<figure class="almanack-quote almanack-quote--closing"><blockquote>{{ .Params.closing_quote }}</blockquote><figcaption>~ {{ .Params.closing_quote_attribution }}</figcaption></figure>{{ partial "almanack/bob-edge.html" (dict "issue" .Params "slot" "signoff" "align" "right") }}{{ else }}{{ if .Params.bob_ornaments.signoff }}<table role="presentation" class="bob-signoff"><tr><td><figure class="almanack-quote almanack-quote--closing">
+      <blockquote>{{ .Params.closing_quote }}</blockquote>
+      <figcaption>~ {{ .Params.closing_quote_attribution }}</figcaption>
+    </figure></td><td class="bob-signoff-cell">{{ partial "almanack/bob-ornament.html" (dict "issue" $.Params "slot" "signoff") }}</td></tr></table>{{ else }}<figure class="almanack-quote almanack-quote--closing">
+      <blockquote>{{ .Params.closing_quote }}</blockquote>
+      <figcaption>~ {{ .Params.closing_quote_attribution }}</figcaption>
+    </figure>{{ end }}{{ end }}
+
+    <footer class="almanack-footer">
+      <p>{{ if eq .Params.editorial_contract "almanack-v1" }}<a href="{{ "" | absURL }}">Outside In Print</a>{{ else }}Outside In Print{{ end }}</p>
+      <p>Color over the lines. Read beyond the feed. Think for yourself.</p>
+    </footer>
+  </article>
+
+  {{ partial "newsletter_signup.html" (dict
+    "page" .
+    "class" "newsletter-signup--article-exit page-shell page-shell--wide"
+    "anchorID" "bobs-almanack-signup"
+    "focusTarget" true
+    "sourceSlot" "almanack_issue_exit_newsletter"
+  ) }}
+{{ end }}

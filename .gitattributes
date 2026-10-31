@@ -14,3 +14,6 @@
 /config/almanack-email/exporter/** -text
 # Preserve Git patch context markers without treating them as authored whitespace.
 /docs/runtime-source/*.patch text eol=lf whitespace=-blank-at-eol
+/assets/almanack/** -text
+/assets/css/almanack-alternating-v1.css -text
+/content/almanack/2026-10-31.md -text
