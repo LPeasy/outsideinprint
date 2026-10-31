@@ -151,7 +151,7 @@ class ApprovedWebTests(unittest.TestCase):
             content.write_bytes(original.replace(b"alternating-margins-v1",b"unknown-version"))
             with self.assertRaisesRegex(RuntimeError,"Unsupported Almanack layout"):render(site)
 
-    def test_no_field_historical_render_is_byte_identical(self):
+    def test_no_field_historical_reader_content_is_unchanged_with_shared_chrome(self):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder)
             baseline=(ROOT/"tests/fixtures/almanack-legacy-web-single.html").read_text()
@@ -160,7 +160,34 @@ class ApprovedWebTests(unittest.TestCase):
             (root/"content/almanack/issue.md").write_text('---\ntitle: Historical fixture\ndate: 2026-10-31\ndraft: false\nurl: /almanack/2026-10-31/\nissue_number: 26\nopening_quote: Protected opening\nopening_quote_attribution: Robert\nmiddle_quote: Protected middle\nmiddle_quote_attribution: Poor Richard\nclosing_quote: Protected closing\nclosing_quote_attribution: Robert\nvirtue:\n  name: Attention\n  reflection: Exact prior reflection.\n---\n',encoding="utf-8")
             previous=render(root)
             (root/"layouts/almanack/single.html").write_text((ROOT/"layouts/almanack/single.html").read_text(),encoding="utf-8")
-            self.assertEqual(render(root),previous)
+            current=render(root)
+            Node=STAGE["Node"]
+            before=STAGE["Tree"](previous.decode("utf-8")).root
+            after=STAGE["Tree"](current.decode("utf-8")).root
+            def has_class(node,name):return name in node.attrs.get("class","").split()
+            def protected_tree(node,exclude=()):
+                # Ignore only formatting-only text nodes. Every reader text
+                # token, element, link and image attribute remains exact.
+                children=[]
+                for child in node.children:
+                    if isinstance(child,Node):
+                        if child not in exclude:children.append(protected_tree(child,exclude))
+                    elif child.strip():children.append(child)
+                return (node.tag,tuple(sorted(node.attrs.items())),tuple(children))
+            old_article=next(n for n in before.all() if n.tag=="article" and has_class(n,"almanack-issue"))
+            new_article=next(n for n in after.all() if n.tag=="article" and has_class(n,"almanack-issue"))
+            toolbars=[n for n in after.all() if n.tag=="section" and has_class(n,"almanack-share-toolbar")]
+            self.assertEqual(len(toolbars),2)
+            self.assertFalse(any(n in list(new_article.all()) for n in toolbars))
+            self.assertEqual(protected_tree(new_article),protected_tree(old_article))
+            # Only the two named shell regions may differ across the whole
+            # document; the existing signup is still identical and occurs once.
+            self.assertEqual(protected_tree(after,toolbars),protected_tree(before))
+            all_nodes=list(after.all())
+            signup=[n for n in all_nodes if n.attrs.get("id")=="bobs-almanack-signup"]
+            self.assertEqual(len(signup),1)
+            self.assertLess(all_nodes.index(new_article),all_nodes.index(toolbars[1]))
+            self.assertLess(all_nodes.index(toolbars[1]),all_nodes.index(signup[0]))
 
 
 if __name__=="__main__":unittest.main(verbosity=2)

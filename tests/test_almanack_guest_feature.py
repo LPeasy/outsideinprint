@@ -44,7 +44,9 @@ def build_web_fixture(folder, issue_source, guest_source=None):
     shutil.copyfile(ROOT / 'assets/css/main.css', folder / 'static/main.css')
     (folder / 'layouts/_default/baseof.html').write_text('<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/main.css"><title>{{ .Title }}</title></head><body class="section-almanack"><div class="wrap" id="site-page"><main id="main-content">{{ block "main" . }}{{ end }}</main></div></body></html>', encoding='utf-8')
     (folder / 'layouts/_default/single.html').write_text('{{ define "main" }}{{ .Content }}{{ end }}', encoding='utf-8')
-    for name in ('article/share.html', 'newsletter_signup.html'):
+    # This fixture owns contributor/editorial layout, not public sharing chrome.
+    # The real toolbar and its eligibility/dependencies have separate Hugo tests.
+    for name in ('article/share.html', 'almanack/share-toolbar.html', 'newsletter_signup.html'):
         (folder / 'layouts/partials' / name).write_text('', encoding='utf-8')
     (folder / 'layouts/partials/images/model.html').write_text('''{{- $url := "" -}}
 {{- $ref := .ref -}}{{- range .page.Params.essays -}}{{- if eq .image $ref -}}{{- $url = .email_image -}}{{- end -}}{{- end -}}
