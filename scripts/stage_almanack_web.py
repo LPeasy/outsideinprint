@@ -147,9 +147,18 @@ def prepare(package,expected_source,hugo):
         if node.tag=="img" and "data-source-src" in node.attrs:
             node.attrs["src"]=node.attrs.pop("data-source-src");node.attrs.pop("data-source-sha256",None);restored.append(node.attrs["src"])
     # The already-visible masthead is the page heading: no duplicate text title.
-    parents=[n for n in [sheet,*sheet.all()] if any(isinstance(c,Node) and c.tag=="img" and c.attrs.get("src")==content["email_masthead"]["image_url"] for c in n.children)]
+    masthead=content["email_masthead"];masthead_url=masthead["image_url"]
+    if "masthead_navigation" in content:
+        if content["masthead_navigation"]!="linked-image-v1":raise ValueError("Unsupported masthead_navigation for web staging.")
+        masthead_url=masthead.get("web_image_url")
+        images=[n for n in sheet.all() if n.tag=="img" and n.attrs.get("src") in (masthead["image_url"],masthead_url)]
+        if len(images)!=1 or images[0].attrs.get("src")!=masthead_url or images[0].attrs.get("alt")!=masthead.get("web_image_alt"):
+            raise ValueError("Approved web artifact must use only its clean masthead variant and exact alt.")
+        if any(n.tag=="a" and any(c is images[0] for c in n.all()) for n in sheet.all()):
+            raise ValueError("The clean web masthead must remain unlinked.")
+    parents=[n for n in [sheet,*sheet.all()] if any(isinstance(c,Node) and c.tag=="img" and c.attrs.get("src")==masthead_url for c in n.children)]
     if len(parents)!=1:raise ValueError("Approved paper masthead must occur once.")
-    parent=parents[0];index=next(i for i,c in enumerate(parent.children) if isinstance(c,Node) and c.tag=="img" and c.attrs.get("src")==content["email_masthead"]["image_url"])
+    parent=parents[0];index=next(i for i,c in enumerate(parent.children) if isinstance(c,Node) and c.tag=="img" and c.attrs.get("src")==masthead_url)
     heading=Node("h1",{"id":"almanack-title","aria-label":f"{content['title']} ~ {date} ~ Issue {email['issue_number']}","style":"margin:0;line-height:0;"}.items());heading.children=[parent.children[index]];parent.children[index]=heading
     # Email's hosted JPEGs remain unchanged there. Web display must use the
     # site's approved AVIF/WebP picture pipeline, not sharing derivatives.

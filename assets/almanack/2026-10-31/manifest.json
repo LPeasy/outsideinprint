@@ -3,12 +3,12 @@
   "layout": "alternating-margins-v1",
   "issue_date": "2026-10-31",
   "issue_number": 26,
-  "approved_source_sha256": "01d624ede63108c103e543a83a8d180f00deeea220b9f91e80b4f605de1895ed",
-  "staged_source_sha256": "ae6ddf051307588ff55de04ea9d3576968cce7069472992fbfee1b70fb0497e8",
-  "approved_full_issue_sha256": "7dd7cb80bef54b92438437d799841aa1171de02917936e2a2686fa0c426fe576",
-  "fragment_sha256": "eaaf42ea1496c63b364b172a0a7db5163093f64e83c03f1ca755d562f1296a7b",
+  "approved_source_sha256": "05bcfeaf7f893ccf6e8dca8164dc402be6cd89422cf38b66027a16f3d6c5b45d",
+  "staged_source_sha256": "b67e0473954f55e7714bc24d55424da50a08b99b81077eb2b4b7ab30d8e4b628",
+  "approved_full_issue_sha256": "0dfa992462e609bbc9f86f9579ecdfb4902858b58079b422464f4cb3730bd809",
+  "fragment_sha256": "2e5efc3b91843c8ec692f477197972be921f25c05ecc24b3d03995f28de3971c",
   "css_sha256": "0adf6547cbab296613602f008db0b9951664634246031ad78f0a60b10eedae11",
-  "template_signature": "40ce75efb6f35d006f6f377ef16afd576847ac453172523968224ce62be2d03a",
+  "template_signature": "8fb546b18b5e5c79a47736bb27e83ab6a507d00ed8ba394f2ffe9e43a212d8f8",
   "managed_images": [
     {
       "ref": "essays/why-daylight-saving-time/hero",

@@ -107,6 +107,21 @@ def issue_assets(content, issue_date, package):
     """Only issue-specific approved static PNGs are copied; existing story art is reused."""
     prefix = f"/images/almanack/{issue_date}/"
     paths = set()
+    web_name = None
+    web_hash = None
+    if "masthead_navigation" in content:
+        if content["masthead_navigation"] != "linked-image-v1":
+            raise ValueError("Unsupported masthead_navigation for publication.")
+        masthead = content.get("email_masthead") or {}
+        parsed = urlsplit(masthead.get("web_image_url", ""))
+        web_name = parsed.path.removeprefix(prefix)
+        web_hash = masthead.get("web_image_sha256", "")
+        if (parsed.scheme != "https" or parsed.netloc != "outsideinprint.org"
+                or not parsed.path.startswith(prefix) or parsed.query or parsed.fragment
+                or not re.fullmatch(r"[a-z0-9-]+[.]png", web_name)
+                or masthead.get("web_image_url") == masthead.get("image_url")
+                or not re.fullmatch(r"[0-9a-f]{64}", web_hash)):
+            raise ValueError("Clean web masthead needs a distinct issue-local PNG URL and exact SHA-256.")
 
     def walk(value):
         if isinstance(value, dict):
@@ -127,13 +142,15 @@ def issue_assets(content, issue_date, package):
         raise ValueError("Scheduled Almanack requires its approved issue-specific paper masthead.")
     assets = {}
     for name in sorted(paths):
-        source = package / name if name == "paper-masthead.png" else package / "bob-poses" / name
+        source = package / name if name in ("paper-masthead.png", web_name) else package / "bob-poses" / name
         data = source.read_bytes()
         if len(data) < 33 or data[:8] != b"\x89PNG\r\n\x1a\n" or data[12:16] != b"IHDR":
             raise ValueError(f"Issue artwork is not a PNG: {source}")
         width, height = struct.unpack(">II", data[16:24])
         if not width or not height or max(width, height) > 8192:
             raise ValueError(f"Invalid artwork dimensions: {source}")
+        if name == web_name and sha256(data) != web_hash:
+            raise ValueError("Clean web masthead bytes differ from the approved SHA-256.")
         assets[f"static{prefix}{name}"] = (source, data, width, height)
     return assets
 
