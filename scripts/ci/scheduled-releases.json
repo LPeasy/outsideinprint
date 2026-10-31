@@ -377,6 +377,258 @@
         }
       ],
       "endsAt": "2026-10-28T15:00:00Z"
+    },
+    {
+      "id": "both-colors-dialogue-release",
+      "route": "/syd-and-oliver/both-colors/",
+      "releaseAt": "2026-11-01T09:00:00-05:00",
+      "bindings": [
+        {
+          "kind": "file",
+          "path": "content/essays/dialogues/both-colors.md",
+          "sha256": "3c2bb69fa072262c383186bdf20613240ed3f79b782f9375375c5f958b8d850c"
+        }
+      ],
+      "images": [
+        {
+          "id": "essays/dialogues/both-colors/hero",
+          "sha256": "dc0de747a00656d122eaf3982521d36ae13158c621e7b41573911b2544644dcf",
+          "width": 1672,
+          "height": 941
+        }
+      ],
+      "checks": [
+        {
+          "route": "/syd-and-oliver/both-colors/",
+          "title": "Both Colors",
+          "containsText": [
+            "Robert V. Ussley",
+            "The clock above the paint counter said ten to six.",
+            "I thought you handed me a job.",
+            "Oliver moved his hand out of the way."
+          ],
+          "imageIds": [
+            "essays/dialogues/both-colors/hero"
+          ]
+        },
+        {
+          "route": "/collections/syd-and-oliver-dialogues/",
+          "links": [
+            "/syd-and-oliver/both-colors/"
+          ]
+        },
+        {
+          "route": "/gallery/",
+          "containsText": [
+            "Room to Choose"
+          ],
+          "links": [
+            "/syd-and-oliver/both-colors/"
+          ],
+          "imageIds": [
+            "essays/dialogues/both-colors/hero"
+          ]
+        },
+        {
+          "route": "/",
+          "links": [
+            "/syd-and-oliver/both-colors/"
+          ],
+          "imageIds": [
+            "essays/dialogues/both-colors/hero"
+          ]
+        }
+      ],
+      "endsAt": "2026-11-02T14:00:00Z"
+    },
+    {
+      "id": "very-serious-dialogue-release",
+      "route": "/syd-and-oliver/very-serious/",
+      "releaseAt": "2026-11-03T09:00:00-05:00",
+      "bindings": [
+        {
+          "kind": "file",
+          "path": "content/essays/dialogues/very-serious.md",
+          "sha256": "ad80b178df729f07dae211318979d14d8bfa03014f7f8268460d0ca2aa3e4257"
+        }
+      ],
+      "images": [
+        {
+          "id": "essays/dialogues/very-serious/hero",
+          "sha256": "6d173106d35d8ca1aa3becf17b6b535602cdc4f5d2d49bec475f449328d368c9",
+          "width": 1672,
+          "height": 940
+        }
+      ],
+      "checks": [
+        {
+          "route": "/syd-and-oliver/very-serious/",
+          "title": "Very Serious",
+          "containsText": [
+            "Robert V. Ussley",
+            "Oliver pressed the corner of his name tag against his jacket.",
+            "I have associates.",
+            "Apple po'."
+          ],
+          "imageIds": [
+            "essays/dialogues/very-serious/hero"
+          ]
+        },
+        {
+          "route": "/collections/syd-and-oliver-dialogues/",
+          "links": [
+            "/syd-and-oliver/very-serious/"
+          ]
+        },
+        {
+          "route": "/gallery/",
+          "containsText": [
+            "First Impressions"
+          ],
+          "links": [
+            "/syd-and-oliver/very-serious/"
+          ],
+          "imageIds": [
+            "essays/dialogues/very-serious/hero"
+          ]
+        },
+        {
+          "route": "/",
+          "links": [
+            "/syd-and-oliver/very-serious/"
+          ],
+          "imageIds": [
+            "essays/dialogues/very-serious/hero"
+          ]
+        }
+      ],
+      "endsAt": "2026-11-04T14:00:00Z"
+    },
+    {
+      "id": "anything-you-want-dialogue-release",
+      "route": "/syd-and-oliver/anything-you-want/",
+      "releaseAt": "2026-11-05T09:00:00-05:00",
+      "bindings": [
+        {
+          "kind": "file",
+          "path": "content/essays/dialogues/anything-you-want.md",
+          "sha256": "a2043f1d36b2f3ede186a8615382bae904599135a71935b78d58f024ec1e7221"
+        }
+      ],
+      "images": [
+        {
+          "id": "essays/dialogues/anything-you-want/hero",
+          "sha256": "e289f96365632ee42666b0267571649f9ac5b42f8fdaccb3bebc8d2a04a3c1e6",
+          "width": 1672,
+          "height": 941
+        }
+      ],
+      "checks": [
+        {
+          "route": "/syd-and-oliver/anything-you-want/",
+          "title": "Anything You Want",
+          "containsText": [
+            "Robert V. Ussley",
+            "Syd checked his phone. Nine minutes.",
+            "I like all this. Some evenings I don't want any of it.",
+            "Dude, a pizza."
+          ],
+          "imageIds": [
+            "essays/dialogues/anything-you-want/hero"
+          ]
+        },
+        {
+          "route": "/collections/syd-and-oliver-dialogues/",
+          "links": [
+            "/syd-and-oliver/anything-you-want/"
+          ]
+        },
+        {
+          "route": "/gallery/",
+          "containsText": [
+            "Before the First Bite"
+          ],
+          "links": [
+            "/syd-and-oliver/anything-you-want/"
+          ],
+          "imageIds": [
+            "essays/dialogues/anything-you-want/hero"
+          ]
+        },
+        {
+          "route": "/",
+          "links": [
+            "/syd-and-oliver/anything-you-want/"
+          ],
+          "imageIds": [
+            "essays/dialogues/anything-you-want/hero"
+          ]
+        }
+      ],
+      "endsAt": "2026-11-06T14:00:00Z"
+    },
+    {
+      "id": "business-before-work-dialogue-release",
+      "route": "/syd-and-oliver/business-before-work/",
+      "releaseAt": "2026-11-07T09:00:00-05:00",
+      "bindings": [
+        {
+          "kind": "file",
+          "path": "content/essays/dialogues/business-before-work.md",
+          "sha256": "adf629e7d52e7f1f3d6dd2f8629be64837c3ebc4261482151af310046a600eaf"
+        }
+      ],
+      "images": [
+        {
+          "id": "essays/dialogues/business-before-work/hero",
+          "sha256": "e4cd4aac372dd094e40da25ca3e0286e1866bc03146f0a174ebe0f7210588903",
+          "width": 1672,
+          "height": 941
+        }
+      ],
+      "checks": [
+        {
+          "route": "/syd-and-oliver/business-before-work/",
+          "title": "Business Before Work",
+          "containsText": [
+            "Robert V. Ussley",
+            "The stall opposite was gone.",
+            "After I've found the clients?",
+            "Half seven. Let me get home first."
+          ],
+          "imageIds": [
+            "essays/dialogues/business-before-work/hero"
+          ]
+        },
+        {
+          "route": "/collections/syd-and-oliver-dialogues/",
+          "links": [
+            "/syd-and-oliver/business-before-work/"
+          ]
+        },
+        {
+          "route": "/gallery/",
+          "containsText": [
+            "After the Market"
+          ],
+          "links": [
+            "/syd-and-oliver/business-before-work/"
+          ],
+          "imageIds": [
+            "essays/dialogues/business-before-work/hero"
+          ]
+        },
+        {
+          "route": "/",
+          "links": [
+            "/syd-and-oliver/business-before-work/"
+          ],
+          "imageIds": [
+            "essays/dialogues/business-before-work/hero"
+          ]
+        }
+      ],
+      "endsAt": "2026-11-08T14:00:00Z"
     }
   ]
 }

@@ -2467,6 +2467,21 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/dialogues/anything-you-want/hero": {
+      "id": "essays/dialogues/anything-you-want/hero",
+      "source": "images/originals/essays/dialogues/anything-you-want/hero.png",
+      "sha256": "e289f96365632ee42666b0267571649f9ac5b42f8fdaccb3bebc8d2a04a3c1e6",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null,
+      "artwork_title": "Before the First Bite"
+    },
     "essays/dialogues/bobanonymous/hero": {
       "id": "essays/dialogues/bobanonymous/hero",
       "source": "images/originals/essays/dialogues/bobanonymous/hero.png",
@@ -2481,6 +2496,21 @@
       "processing_note": null,
       "quality_override": null
     },
+    "essays/dialogues/both-colors/hero": {
+      "id": "essays/dialogues/both-colors/hero",
+      "source": "images/originals/essays/dialogues/both-colors/hero.png",
+      "sha256": "dc0de747a00656d122eaf3982521d36ae13158c621e7b41573911b2544644dcf",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null,
+      "artwork_title": "Room to Choose"
+    },
     "essays/dialogues/broke-rich/hero": {
       "id": "essays/dialogues/broke-rich/hero",
       "source": "images/originals/essays/dialogues/broke-rich/hero.png",
@@ -2494,6 +2524,21 @@
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
+    },
+    "essays/dialogues/business-before-work/hero": {
+      "id": "essays/dialogues/business-before-work/hero",
+      "source": "images/originals/essays/dialogues/business-before-work/hero.png",
+      "sha256": "e4cd4aac372dd094e40da25ca3e0286e1866bc03146f0a174ebe0f7210588903",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null,
+      "artwork_title": "After the Market"
     },
     "essays/dialogues/everyone-knows-the-words/hero": {
       "id": "essays/dialogues/everyone-knows-the-words/hero",
@@ -2606,6 +2651,21 @@
       "processing_state": "derivative_capable",
       "processing_note": null,
       "quality_override": null
+    },
+    "essays/dialogues/very-serious/hero": {
+      "id": "essays/dialogues/very-serious/hero",
+      "source": "images/originals/essays/dialogues/very-serious/hero.png",
+      "sha256": "6d173106d35d8ca1aa3becf17b6b535602cdc4f5d2d49bec475f449328d368c9",
+      "width": 1672,
+      "height": 940,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null,
+      "artwork_title": "First Impressions"
     },
     "essays/dialogues/what-i-had/hero": {
       "id": "essays/dialogues/what-i-had/hero",
@@ -9529,8 +9589,11 @@
     "/images/medium/why-a-return-to-the-gold-standard-would-break-the-economy/982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb.jpeg": "medium/982e8af5463df6dd09ee9b9aeb11f3c8764461085e2bf676f51d03a5fc9fe1fb",
     "/images/medium/why-superintelligence-strategy-gets-ai-governance-wrong/20f97dfa3cacfdad0e6ad4e8bd6b9f40259e269d01de4e85977a31d1468a0731.jpeg": "medium/20f97dfa3cacfdad0e6ad4e8bd6b9f40259e269d01de4e85977a31d1468a0731",
     "/images/syd-and-oliver/a-thousand-brick-walls/hero.png": "essays/dialogues/a-thousand-brick-walls/hero",
+    "/images/syd-and-oliver/anything-you-want/hero.png": "essays/dialogues/anything-you-want/hero",
     "/images/syd-and-oliver/bobanonymous/hero.png": "essays/dialogues/bobanonymous/hero",
+    "/images/syd-and-oliver/both-colors/hero.png": "essays/dialogues/both-colors/hero",
     "/images/syd-and-oliver/broke-rich/hero.png": "essays/dialogues/broke-rich/hero",
+    "/images/syd-and-oliver/business-before-work/hero.png": "essays/dialogues/business-before-work/hero",
     "/images/syd-and-oliver/everyone-knows-the-words/hero.png": "essays/dialogues/everyone-knows-the-words/hero",
     "/images/syd-and-oliver/hell-have-some-words/hero.png": "essays/dialogues/hell-have-some-words/hero",
     "/images/syd-and-oliver/infinite-incontent/hero.png": "essays/dialogues/infinite-incontent/hero",
@@ -9539,6 +9602,7 @@
     "/images/syd-and-oliver/the-ant-problem/hero.png": "essays/dialogues/the-ant-problem/hero",
     "/images/syd-and-oliver/the-last-cheese/hero.png": "essays/dialogues/the-last-cheese/hero",
     "/images/syd-and-oliver/the-morning-after/hero.jpg": "essays/dialogues/the-morning-after/hero",
+    "/images/syd-and-oliver/very-serious/hero.png": "essays/dialogues/very-serious/hero",
     "/images/syd-and-oliver/what-i-had/hero.png": "essays/dialogues/what-i-had/hero",
     "/images/syd-and-oliver/with-ice-cream/hero.png": "essays/dialogues/with-ice-cream/hero"
   }
