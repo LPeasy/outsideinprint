@@ -3375,6 +3375,8 @@ if ($targetPageHtml.ContainsKey('public/404.html')) {
 
 $expectedHomeReaderNote = 'Outside In Print publishes independent reporting, essays, dialogues, and reflections. Find the evidence behind public issues and fresh perspectives on everyday life. Step away from doomscrolling, ads, and algorithmic feeds, and follow your own curiosity.'
 
+$almanackIssueExitBoundary = '(?s)</article>\s*<section\b(?=[^>]*\sclass=(?:"(?:[^"]*\s)?almanack-share-toolbar--bottom(?:\s[^"]*)?"|''(?:[^'']*\s)?almanack-share-toolbar--bottom(?:\s[^'']*)?''|almanack-share-toolbar--bottom)(?:\s|>))[^>]*>(?:(?!</?section\b).)*</section>\s*'
+
 $requiredUxChecks = @(
   @{
     Path = 'public/index.html'
@@ -4278,12 +4280,12 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-07-25/index.html'
-    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?The weekly newsletter.*?New essays, original pictures, and selected archive work from Outside In Print\. Free each Saturday, plus three short introductory emails after you confirm\..*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Free\. Each email series has an unsubscribe link\..*?Read the latest issue.*?(?:https://outsideinprint\.org)?/privacy/.*?Buttondown manages the Saturday newsletter\. Resend delivers three introductory emails, including an optional Pressroom invitation\. The two email series have separate unsubscribe links\. Outside In Print does not sell or rent subscriber information\.'
+    Pattern = $almanackIssueExitBoundary + '<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?The weekly newsletter.*?New essays, original pictures, and selected archive work from Outside In Print\. Free each Saturday, plus three short introductory emails after you confirm\..*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Free\. Each email series has an unsubscribe link\..*?Read the latest issue.*?(?:https://outsideinprint\.org)?/privacy/.*?Buttondown manages the Saturday newsletter\. Resend delivers three introductory emails, including an optional Pressroom invitation\. The two email series have separate unsubscribe links\. Outside In Print does not sell or rent subscriber information\.'
     Message = 'expected an archived Almanack issue to end with the plain-language weekly newsletter proposition and issue-exit analytics slot'
   },
   @{
     Path = 'public/almanack/2026-08-29/index.html'
-    Pattern = '(?s)</article>\s*<section\b(?=[^>]*newsletter-signup--article-exit)[^>]*>.*?action=(?:"|'''')?https://buttondown\.com/api/emails/embed-subscribe/OutsideInPrint(?:"|'''')?.*?data-analytics-event=(?:"|'''')?newsletter_submit(?:"|'''')?.*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter'
+    Pattern = $almanackIssueExitBoundary + '<section\b(?=[^>]*newsletter-signup--article-exit)[^>]*>.*?action=(?:"|'''')?https://buttondown\.com/api/emails/embed-subscribe/OutsideInPrint(?:"|'''')?.*?data-analytics-event=(?:"|'''')?newsletter_submit(?:"|'''')?.*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter'
     Message = 'expected an ordinary Almanack issue to reuse the shared Buttondown signup after the issue content'
   },
   @{
