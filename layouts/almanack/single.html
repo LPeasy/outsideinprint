@@ -1,4 +1,4 @@
-{{ define "main" }}{{ if isset .Params "almanack_layout" }}{{ partial "almanack/approved-sheet.html" . }}{{ else }}
+{{ define "main" }}{{ partial "almanack/share-toolbar.html" (dict "page" . "position" "top") }}{{ if isset .Params "almanack_layout" }}{{ partial "almanack/approved-sheet.html" . }}{{ else }}
   {{ $issueDate := .Date }}
   {{ $essays := .Params.essays | default (slice) }}
   {{ $lead := dict }}
@@ -34,7 +34,6 @@
           <time datetime="{{ $issueDate.Format "2006-01-02" }}">{{ $issueDate.Format "January 2, 2006" }}</time>
           {{ with .Params.issue_number }}<span>Issue {{ . }}</span>{{ end }}
         </div>
-        {{ partial "article/share.html" . }}
       </div>
       {{ with .Params.subtitle }}<p class="almanack-subtitle">{{ . }}</p>{{ end }}
       {{ if and (eq (lower .Site.Params.newsletter.provider) "buttondown") .Site.Params.newsletter.buttondown_username }}
@@ -292,6 +291,8 @@
     </footer>
   </article>
 
+{{ end }}
+{{ partial "almanack/share-toolbar.html" (dict "page" . "position" "bottom") }}
   {{ partial "newsletter_signup.html" (dict
     "page" .
     "class" "newsletter-signup--article-exit page-shell page-shell--wide"
@@ -299,4 +300,4 @@
     "focusTarget" true
     "sourceSlot" "almanack_issue_exit_newsletter"
   ) }}
-{{ end }}{{ end }}
+{{ end }}

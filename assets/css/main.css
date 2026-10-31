@@ -8169,6 +8169,47 @@ body.cartoon-lightbox-open{
 .almanack-masthead .piece-share{
   flex:0 0 auto;
 }
+.almanack-share-toolbar{
+  --bg-page:#f4eddf;
+  --bg-surface:#f4eddf;
+  --bg-raised:#eadfcf;
+  --text-primary:#332a22;
+  --text-secondary:#554d42;
+  --oip-rule-standard:#b0a087;
+  --oip-rule-clear:#74624d;
+  --focus-ring:#346782;
+  box-sizing:border-box;
+  margin:1rem auto;
+  padding:.75rem 1rem;
+  border-top:1px solid var(--oip-rule-standard);
+  border-bottom:1px solid var(--oip-rule-standard);
+  background:var(--bg-page);
+  color:var(--text-primary);
+}
+.almanack-share-toolbar__label{
+  margin:0 0 .5rem;
+  font:600 .85rem/1.5 var(--font-ui);
+}
+.almanack-share-toolbar__fallback label{
+  display:block;
+  margin:0 0 .35rem;
+  font:inherit;
+}
+.almanack-share-toolbar__fallback input{
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  min-height:44px;
+  padding:.5rem;
+  border:1px solid var(--oip-rule-clear);
+  background:var(--bg-page);
+  color:var(--text-primary);
+  font:1rem/1.5 var(--font-ui);
+}
+.almanack-share-toolbar__fallback input:focus-visible{
+  outline:2px solid var(--focus-ring);
+  outline-offset:3px;
+}
 .piece-title-block h1{
   max-width:18ch;
   margin-top:0;
@@ -15608,6 +15649,7 @@ section.games-facts dd,
   .journey-links--article-exit,
   .collection-membership,
   .piece-share,
+  .almanack-share-toolbar,
   .paper-route-overlay{
     display:none !important;
   }

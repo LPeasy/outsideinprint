@@ -46,11 +46,4 @@
   <section id="almanack-approved" aria-labelledby="almanack-title" data-almanack-layout="alternating-margins-v1">
     <div class="review-shell"><article class="review-issue" id="issue">{{ $renderedBody | safeHTML }}</article></div>
   </section>
-  {{ partial "newsletter_signup.html" (dict
-    "page" .
-    "class" "newsletter-signup--article-exit page-shell page-shell--wide"
-    "anchorID" "bobs-almanack-signup"
-    "focusTarget" true
-    "sourceSlot" "almanack_issue_exit_newsletter"
-  ) }}
 {{- end -}}

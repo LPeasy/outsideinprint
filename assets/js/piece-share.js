@@ -30,6 +30,7 @@
     var status = wrapper.querySelector("[data-share-status]");
     var title = (wrapper.dataset.shareTitle || "").trim();
     var shareUrl = cleanShareUrl(wrapper.dataset.shareUrl || "");
+    var manualShareFallback = wrapper.dataset.shareManualFallback === "issue";
     var sharing = false;
     var panelGeneration = 0;
 
@@ -63,11 +64,12 @@
       trigger.focus();
     }
 
-    function showManualCopy() {
+    function showManualCopy(message) {
+      if (!scope.active() || wrapper.isConnected === false) return;
       if (panel.hidden) showPanel();
       manual.hidden = false;
       input.value = shareUrl;
-      status.textContent = "Copying is unavailable. The link is selected; copy it manually.";
+      status.textContent = message || "Copying is unavailable. The link is selected; copy it manually.";
       input.focus();
       input.select();
     }
@@ -78,7 +80,8 @@
       }
 
       if (typeof navigator.share !== "function") {
-        showPanel();
+        if (manualShareFallback) showManualCopy("Copy this link to share this issue.");
+        else showPanel();
         return;
       }
 
@@ -89,7 +92,8 @@
         await navigator.share({ title: title, url: shareUrl });
       } catch (error) {
         if (!error || error.name !== "AbortError") {
-          showPanel();
+          if (manualShareFallback) showManualCopy("Copy this link to share this issue.");
+          else showPanel();
         }
       } finally {
         sharing = false;

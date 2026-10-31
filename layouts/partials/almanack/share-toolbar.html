@@ -1,0 +1,15 @@
+{{- $page := .page -}}
+{{- $position := .position -}}
+{{- if not (in (slice "top" "bottom") $position) -}}{{ errorf "Invalid Almanack share toolbar position %q" $position }}{{- end -}}
+{{- if partial "article/share-eligible.html" $page -}}
+  {{- $meta := partial "metadata/page.html" $page -}}
+  {{- $canonical := urls.Parse $meta.canonical -}}
+  {{- if and (eq $canonical.Scheme "https") (eq $canonical.Host "outsideinprint.org") (not $canonical.User) (not $canonical.RawQuery) (not $canonical.Fragment) -}}
+  {{- $fallbackID := printf "almanack-share-url-%s" $position -}}
+  <section class="almanack-share-toolbar almanack-share-toolbar--{{ $position }} page-shell page-shell--wide" aria-label="Share this issue {{ if eq $position "top" }}at the start{{ else }}at the end{{ end }}">
+    <p class="almanack-share-toolbar__label">Share this issue</p>
+    {{ partial "article/share.html" (dict "page" $page "instance" (printf "almanack-%s" $position) "manualShareFallback" true) }}
+    <noscript><div class="almanack-share-toolbar__fallback"><label for="{{ $fallbackID }}">Copy this issue's link</label><input id="{{ $fallbackID }}" type="text" value="{{ $meta.canonical }}" readonly spellcheck="false"></div></noscript>
+  </section>
+  {{- end -}}
+{{- end -}}
