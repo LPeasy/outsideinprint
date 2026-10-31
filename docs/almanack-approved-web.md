@@ -25,6 +25,15 @@ URLs, removes private review controls/data-URI storage, and makes the existing
 visible paper masthead the single accessible H1 without a duplicate text title.
 All source text, links, full artwork and quote positions remain unchanged.
 
+Managed article, guest and book images become bound identity placeholders in the
+fragment. Hugo resolves them through the existing `images/model.html` and
+`images/picture.html` display pipeline: AVIF/WebP sources and a WebP fallback.
+The manifest preserves the original approved ID, alt and display style, including
+the lead's632px constraint and compact104px portrait cover. Source matching,
+duplicate/unresolved tokens and nonmanaged references fail closed. Only the lead
+loads eagerly with high priority; remaining illustrations are lazy. Sharing JPEG
+URLs remain in the unchanged email; they are not the web display pipeline.
+
 `manifest.json` binds this trusted generated source asset to the exact staged
 Markdown and approved package. Hugo verifies the actual source, fragment and
 page-local CSS hashes during every build. Edit the package and regenerate its

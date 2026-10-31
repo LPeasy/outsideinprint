@@ -17,13 +17,16 @@ HUGO=Path(os.environ.get("OIP_HUGO_BIN") or (str(PINNED) if PINNED.is_file() els
 PNG=base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/l9sAAAAASUVORK5CYII=")
 
 
-def package(path):
+def package(path,managed=False):
     path.mkdir()
     url="https://outsideinprint.org/images/almanack/2026-10-31/"
     source=('---\ntitle: Fixture Almanack\ndate: 2026-10-31\ndraft: true\nurl: /almanack/2026-10-31/\nissue_number: 26\neditorial_contract: almanack-v1\nalmanack_layout: alternating-margins-v1\nemail_masthead:\n  image_url: '+url+'paper-masthead.png\n  image_alt: Full approved paper masthead\nbob_ornaments:\n  masthead:\n    image_url: '+url+'bob.png\n---\nProtected source body.\n').encode()
+    if managed:
+        source=source.replace(b"---\nProtected source body.",b"essays:\n  - title: Fixture article\n    url: https://outsideinprint.org/essays/fixture/\n    image: essays/fixture/hero\n    email_image: https://outsideinprint.org/images/rendered/essays/fixture/hero/test/social-1200w.jpg\n    image_alt: Exact complete fixture frame\n---\nProtected source body.")
     (path/"web-archive.md").write_bytes(source)
     content=STAGE["HELPER"]["parse_with_hugo"](source,HUGO)["params"]
     approved=('<html><head><style>body{color:#332a22}.demo-columns{display:grid}@media(max-width:980px){.demo-columns{display:block}}</style></head><body><header>Private draft controls</header><article id="issue"><header><img src="data:image/png;base64,'+base64.b64encode(PNG).decode()+'" data-source-src="'+url+'paper-masthead.png" data-source-sha256="test" alt="Full approved paper masthead"></header><p>Exact fixture copy.</p><a class="bob-ornament" href="https://example.org/steam"><img src="'+url+'bob.png" alt="Complete fixture pose"></a></article><script type="application/json">private receipt</script></body></html>').encode()
+    if managed:approved=approved.replace(b"<p>Exact fixture copy.</p>",b'<a href="https://outsideinprint.org/essays/fixture/"><img src="https://outsideinprint.org/images/rendered/essays/fixture/hero/test/social-1200w.jpg" alt="Exact complete fixture frame" width="632" style="display:block;max-width:100%;height:auto;"></a><p>Exact fixture copy.</p>')
     (path/"full-issue.html").write_bytes(approved);(path/"email.html").write_bytes(b"Approved email.")
     meta={"source_sha256":STAGE["sha"](source),"issue_date":"2026-10-31","issue_number":26,"content":content}
     (path/"email.json").write_bytes(STAGE["dump"](meta))
@@ -50,6 +53,23 @@ def render(root):
 
 
 class ApprovedWebTests(unittest.TestCase):
+    def test_native_picture_preserves_source_alt_and_original_display_width(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);source=package(root/"package",managed=True)
+            payload,_=STAGE["prepare"](root/"package",STAGE["sha"](source),HUGO)
+            site=root/"site";mini(site,(ROOT/"layouts/almanack/single.html").read_text())
+            # The actual picture partial is retained. A deterministic model
+            # keeps this admission fixture independent of the image library;
+            # the real five-asset pipeline is separately rendered for release.
+            (site/"layouts/partials/images/model.html").write_text('{{ return (dict "managed" true "id" .ref "signature_enabled" false "image_class" "essay_illustration" "review_state" "approved" "avif_srcset" "/native/1600w.avif 1600w" "webp_srcset" "/native/1600w.webp 1600w" "fallback_url" "/native/1600w.webp" "intrinsic_width" 1600 "intrinsic_height" 900) }}',encoding="utf-8")
+            STAGE["HELPER"]["apply_payload"](payload,site)
+            output=render(site)
+            for expected in (b'<picture',b'type="image/avif"',b'type="image/webp"',b'src="/native/1600w.webp"',b'alt="Exact complete fixture frame"',b'width:632px;',b'loading="eager"',b'fetchpriority="high"'):self.assertIn(expected,output)
+            self.assertNotIn(b'ALMANACK-MANAGED-IMAGE',output)
+            manifest=site/"assets/almanack/2026-10-31/manifest.json";record=json.loads(manifest.read_text())
+            record["managed_images"][0]["alt"]="Unapproved alternate text";manifest.write_text(json.dumps(record),encoding="utf-8")
+            with self.assertRaisesRegex(RuntimeError,"approved Almanack image binding"):render(site)
+
     def test_git_autocrlf_cannot_rewrite_bound_issue_assets(self):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder)

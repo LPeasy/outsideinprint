@@ -14,10 +14,37 @@
   {{- if or (ne $manifest.schema "oip-almanack-web-fragment/v1") (ne $manifest.layout .Params.almanack_layout) (ne $manifest.issue_date $date) (ne (int $manifest.issue_number) (int .Params.issue_number)) (ne $manifest.staged_source_sha256 (crypto.SHA256 $source)) (ne $manifest.fragment_sha256 (crypto.SHA256 $body.Content)) (ne $manifest.css_sha256 (crypto.SHA256 $css.Content)) -}}
     {{- errorf "Stale approved Almanack source/presentation binding for %s; regenerate from the approved package" $date -}}
   {{- end -}}
+  {{- $cards := slice -}}
+  {{- range .Params.essays }}{{ $cards = $cards | append . }}{{ end -}}
+  {{- range .Params.guest_features }}{{ $cards = $cards | append . }}{{ end -}}
+  {{- with .Params.guest_feature }}{{ $cards = $cards | append . }}{{ end -}}
+  {{- with .Params.bookshelf }}{{ $cards = $cards | append . }}{{ end -}}
+  {{- with .Params.worth_reprinting }}{{ $cards = $cards | append . }}{{ end -}}
+  {{- with .Params.campaign }}{{ $cards = $cards | append . }}{{ end -}}
+  {{- $approvedImages := dict -}}
+  {{- range $cards -}}
+    {{- if and .image .email_image .image_alt -}}
+      {{- $approvedImages = merge $approvedImages (dict .email_image (dict "ref" .image "alt" .image_alt)) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $renderedBody := $body.Content -}}
+  {{- range $manifest.managed_images -}}
+    {{- $image := . -}}
+    {{- $approved := index $approvedImages .source_url -}}
+    {{- if or (not $approved) (ne $approved.ref .ref) (ne $approved.alt .alt) (ne (sub (len (split $renderedBody .token)) 1) 1) -}}
+      {{- errorf "Stale or duplicated approved Almanack image binding for %s" $date -}}
+    {{- end -}}
+    {{- $model := partial "images/model.html" (dict "page" $ "ref" .ref "display" true) -}}
+    {{- if not $model.managed }}{{ errorf "Almanack web artwork must resolve as managed: %s" .ref }}{{ end -}}
+    {{- $picture := partial "images/picture.html" (dict "model" $model "alt" .alt "class" "almanack-approved-picture" "sizes" .sizes "loading" .loading "fetchpriority" .fetchpriority "lightbox" false) -}}
+    {{- $picture = replace (printf "%s" $picture) "<img" (printf "<img style=\"%s\"" (htmlEscape .display_style)) 1 -}}
+    {{- $renderedBody = replace $renderedBody .token $picture 1 -}}
+  {{- end -}}
+  {{- if strings.Contains $renderedBody "<!--ALMANACK-MANAGED-IMAGE-" }}{{ errorf "Unresolved approved Almanack image for %s" $date }}{{ end -}}
   <style>{{ $css.Content | safeCSS }}</style>
-  <style>@media(min-width:1208px){#almanack-approved{width:1160px;margin-left:calc((100% - 1160px)/2);}}</style>
+  <style>#almanack-approved .almanack-approved-picture{display:block;max-width:100%}@media(min-width:1208px){#almanack-approved{width:1160px;margin-left:calc((100% - 1160px)/2);}}</style>
   <section id="almanack-approved" aria-labelledby="almanack-title" data-almanack-layout="alternating-margins-v1">
-    <div class="review-shell"><article class="review-issue" id="issue">{{ $body.Content | safeHTML }}</article></div>
+    <div class="review-shell"><article class="review-issue" id="issue">{{ $renderedBody | safeHTML }}</article></div>
   </section>
   {{ partial "newsletter_signup.html" (dict
     "page" .

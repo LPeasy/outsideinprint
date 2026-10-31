@@ -97,6 +97,23 @@ def bound_attributes(original,date):
     return original+(b"" if not original or original.endswith(b"\n") else newline)+newline.join(add)+newline
 
 
+def managed_cards(value):
+    """Use only complete, approved source references already in issue metadata."""
+    found={}
+    def walk(item):
+        if isinstance(item,dict):
+            if item.get("image") and item.get("email_image") and item.get("image_alt"):
+                ref=item["image"]
+                if re.fullmatch(r"[a-z0-9][a-z0-9_/-]+",ref):
+                    record={"ref":ref,"source_url":item["email_image"],"alt":item["image_alt"]}
+                    if record["source_url"] in found and found[record["source_url"]]!=record:raise ValueError("Ambiguous managed image source.")
+                    found[record["source_url"]]=record
+            for child in item.values():walk(child)
+        elif isinstance(item,list):
+            for child in item:walk(child)
+    walk(value);return found
+
+
 def apply_payload(payload,root,validate_only=False):
     root=Path(root).resolve();others={key:value for key,value in payload.items() if key!=".gitattributes"}
     target=root/".gitattributes";existing=target.read_bytes() if target.exists() else b""
@@ -134,12 +151,26 @@ def prepare(package,expected_source,hugo):
     if len(parents)!=1:raise ValueError("Approved paper masthead must occur once.")
     parent=parents[0];index=next(i for i,c in enumerate(parent.children) if isinstance(c,Node) and c.tag=="img" and c.attrs.get("src")==content["email_masthead"]["image_url"])
     heading=Node("h1",{"id":"almanack-title","aria-label":f"{content['title']} ~ {date} ~ Issue {email['issue_number']}","style":"margin:0;line-height:0;"}.items());heading.children=[parent.children[index]];parent.children[index]=heading
+    # Email's hosted JPEGs remain unchanged there. Web display must use the
+    # site's approved AVIF/WebP picture pipeline, not sharing derivatives.
+    approved_images=managed_cards(content);managed=[]
+    for parent in [sheet,*sheet.all()]:
+        for index,node in enumerate(parent.children):
+            if not isinstance(node,Node) or node.tag!="img" or node.attrs.get("src") not in approved_images:continue
+            item=dict(approved_images[node.attrs["src"]])
+            if node.attrs.get("alt")!=item["alt"]:raise ValueError("Approved artwork alt differs from source metadata.")
+            presentation=node.attrs.get("style","")
+            if not re.search(r"(?:^|;)\s*width\s*:",presentation) and node.attrs.get("width"):
+                presentation+="width:"+node.attrs["width"]+"px;"
+            token=f"<!--ALMANACK-MANAGED-IMAGE-{len(managed)}-->"
+            item.update(token=token,display_style=presentation,loading="eager" if not managed else "lazy",fetchpriority="high" if not managed else "",sizes="104px" if node.attrs.get("width")=="104" else "(min-width:75.5rem) 680px, (max-width:61.25rem) calc(100vw - 6rem), 680px")
+            managed.append(item);parent.children[index]=token
     fragment="".join(c.markup() if isinstance(c,Node) else c for c in sheet.children).encode()
     if re.search(rb"<script\b|data:image/|Private draft|Read-only|[A-Z]:[\\/]Users[\\/]|file:",fragment,re.I):raise ValueError("Private controls or embedded/local resources entered the public fragment.")
     styles="\n".join("".join(c for c in n.children if isinstance(c,str)) for n in tree.root.all() if n.tag=="style")
     css=scope_css(styles).encode()
     asset_root=f"assets/almanack/{date}"
-    manifest={"schema":SCHEMA,"layout":LAYOUT,"issue_date":date,"issue_number":email["issue_number"],"approved_source_sha256":sha(source),"staged_source_sha256":sha(staged),"approved_full_issue_sha256":sha(approved),"fragment_sha256":sha(fragment),"css_sha256":sha(css),"template_signature":record["template_signature"]}
+    manifest={"schema":SCHEMA,"layout":LAYOUT,"issue_date":date,"issue_number":email["issue_number"],"approved_source_sha256":sha(source),"staged_source_sha256":sha(staged),"approved_full_issue_sha256":sha(approved),"fragment_sha256":sha(fragment),"css_sha256":sha(css),"template_signature":record["template_signature"],"managed_images":managed}
     assets=HELPER["issue_assets"](content,date,package)
     attributes=(ROOT/".gitattributes").read_bytes()
     payload={".gitattributes":bound_attributes(attributes,date),f"content/almanack/{date}.md":staged,f"{asset_root}/body.html":fragment,f"{asset_root}/manifest.json":dump(manifest),CSS_PATH:css,**{key:value[1] for key,value in assets.items()}}
