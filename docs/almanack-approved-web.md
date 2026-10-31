@@ -4,6 +4,25 @@
 alternating-margin presentation. Issues without this field keep their existing
 Hugo rendering. An unknown version or missing/stale presentation fails the build.
 
+Published, indexable issues receive compact Share and Copy link toolbars above
+the reading content and at its end, before the newsletter signup. Both legacy
+and approved-sheet render paths use this shared Hugo shell, so existing and
+future issues inherit the controls without per-issue source fields or regenerated
+fragments. The toolbars remain outside the source-bound issue body; keep its
+editorial content, artwork, masthead and versioned CSS unchanged.
+
+Sharing uses the issue's resolved canonical URL, without tracking parameters or
+fragments. Native sharing opens only after a reader presses Share. When it is
+unavailable or fails, the Almanack control exposes the selectable URL; cancelling
+native sharing remains quiet. Copy link confirms success or offers manual
+selection. Each instance has separate accessible IDs, keyboard focus handling,
+44px targets and a selectable no-JavaScript URL fallback. These actions add no
+analytics event, third-party sharing widget or automatic transmission.
+
+Private static editorial previews do not contain these interactive controls.
+Verify the published-template fixture and actual released issue instead. This
+web feature changes neither the email template nor any sent newsletter.
+
 The source package remains the shared editorial source. Its standard renderer
 creates the approved `full-issue.html/json`. For immediate publication, run the
 following from a clean, current-main release worktree:

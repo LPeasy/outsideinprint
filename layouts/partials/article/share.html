@@ -1,17 +1,30 @@
-{{- if partial "article/share-eligible.html" . -}}
-  {{- $meta := partial "metadata/page.html" . -}}
-  <div class="piece-share" data-piece-share data-share-title="{{ $meta.title }}" data-share-url="{{ $meta.canonical }}" hidden>
+{{- $page := . -}}
+{{- $instance := "" -}}
+{{- $manualShareFallback := false -}}
+{{- if reflect.IsMap . -}}
+  {{- $page = .page -}}
+  {{- $instance = .instance | default "" -}}
+  {{- $manualShareFallback = .manualShareFallback | default false -}}
+{{- end -}}
+{{- if and $instance (not (findRE `^[a-z0-9-]+$` $instance)) -}}{{ errorf "Invalid share control instance %q" $instance }}{{- end -}}
+{{- $suffix := cond (ne $instance "") (printf "-%s" $instance) "" -}}
+{{- $panelID := printf "piece-share-options%s" $suffix -}}
+{{- $inputID := printf "piece-share-link%s" $suffix -}}
+{{- $statusID := printf "piece-share-status%s" $suffix -}}
+{{- if partial "article/share-eligible.html" $page -}}
+  {{- $meta := partial "metadata/page.html" $page -}}
+  <div class="piece-share" data-piece-share data-share-title="{{ $meta.title }}" data-share-url="{{ $meta.canonical }}"{{ if $manualShareFallback }} data-share-manual-fallback="issue"{{ end }} hidden>
     <div class="piece-share__actions">
-      <button class="piece-share__button" type="button" data-share-trigger aria-expanded="false" aria-controls="piece-share-options"><span class="piece-share__label">Share</span></button>
+      <button class="piece-share__button" type="button" data-share-trigger aria-expanded="false" aria-controls="{{ $panelID }}"><span class="piece-share__label">Share</span></button>
       <button class="piece-share__button" type="button" data-share-copy>Copy link</button>
     </div>
-    <div class="piece-share__panel" data-share-panel id="piece-share-options" hidden>
+    <div class="piece-share__panel" data-share-panel id="{{ $panelID }}" hidden>
       <button class="piece-share__button" type="button" data-share-close>Close</button>
       <div class="piece-share__manual" data-share-manual hidden>
-        <label for="piece-share-link">Link to this piece</label>
-        <input id="piece-share-link" type="text" data-share-input value="{{ $meta.canonical }}" readonly spellcheck="false" aria-describedby="piece-share-status">
+        <label for="{{ $inputID }}">{{ if $manualShareFallback }}Link to this issue{{ else }}Link to this piece{{ end }}</label>
+        <input id="{{ $inputID }}" type="text" data-share-input value="{{ $meta.canonical }}" readonly spellcheck="false" aria-describedby="{{ $statusID }}">
       </div>
     </div>
-    <p class="piece-share__status" data-share-status id="piece-share-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    <p class="piece-share__status" data-share-status id="{{ $statusID }}" role="status" aria-live="polite" aria-atomic="true"></p>
   </div>
 {{- end -}}
