@@ -25,6 +25,16 @@ URLs, removes private review controls/data-URI storage, and makes the existing
 visible paper masthead the single accessible H1 without a duplicate text title.
 All source text, links, full artwork and quote positions remain unchanged.
 
+Future `masthead_navigation: "linked-image-v1"` issues declare a separate clean
+web masthead through `email_masthead.web_image_url`, `web_image_alt` and
+`web_image_sha256`. Keep this approved PNG beside `paper-masthead.png` in the
+package root, using a distinct lowercase/hyphen basename in the exact canonical
+issue image directory. The collector verifies its bytes against the declared
+hash. Web staging requires this variant once, with its exact alt and no anchor;
+it becomes the accessible H1. The email original remains unchanged. Its future
+email presentation links the whole image to the issue and omits the separate
+web-version paragraph; this does not modify or resend historical emails.
+
 Managed article, guest and book images become bound identity placeholders in the
 fragment. Hugo resolves them through the existing `images/model.html` and
 `images/picture.html` display pipeline: AVIF/WebP sources and a WebP fallback.
@@ -45,7 +55,8 @@ package renderer rather than a second implementation in Hugo.
 Approved styles are scoped to `#almanack-approved`, including media rules. Site
 navigation, SEO/canonical metadata and public footer remain owned by the normal
 base template. The static decoration lane contains one masthead plus the selected
-one-to-eight approved Bob PNGs (seven total files in the reference issue); existing managed editorial artwork
+one-to-eight approved Bob PNGs (seven total files in the original reference issue,
+plus a distinct clean web masthead when declared); existing managed editorial artwork
 is reused. No managed originals, package reports, local paths or review receipts
 are published. The adjacent asset manifest contains only hashes and identities.
 

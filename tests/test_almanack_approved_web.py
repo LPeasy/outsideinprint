@@ -53,6 +53,36 @@ def render(root):
 
 
 class ApprovedWebTests(unittest.TestCase):
+    def test_clean_web_masthead_uses_a_separate_hash_bound_unlinked_png(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);path=root/"package";source=package(path)
+            prefix="https://outsideinprint.org/images/almanack/2026-10-31/"
+            source=source.replace(b"email_masthead:\n",b"email_layout: fluid-1080-v1\nmasthead_navigation: linked-image-v1\nemail_masthead:\n")
+            fields=("  web_image_url: "+prefix+"paper-masthead-web.png\n  web_image_alt: Clean paper masthead\n  web_image_sha256: "+STAGE["sha"](PNG)+"\n").encode()
+            source=source.replace(b"bob_ornaments:\n",fields+b"bob_ornaments:\n")
+            (path/"web-archive.md").write_bytes(source)
+            meta=json.loads((path/"email.json").read_text());meta.update(source_sha256=STAGE["sha"](source),content=STAGE["HELPER"]["parse_with_hugo"](source,HUGO)["params"])
+            (path/"email.json").write_bytes(STAGE["dump"](meta))
+            approved=(path/"full-issue.html").read_bytes().replace((prefix+"paper-masthead.png").encode(),(prefix+"paper-masthead-web.png").encode()).replace(b"Full approved paper masthead",b"Clean paper masthead")
+            (path/"full-issue.html").write_bytes(approved)
+            record=json.loads((path/"full-issue.json").read_text());record.update(source_sha256=STAGE["sha"](source),html_sha256=STAGE["sha"](approved))
+            (path/"full-issue.json").write_bytes(STAGE["dump"](record));(path/"paper-masthead-web.png").write_bytes(PNG)
+            payload,_=STAGE["prepare"](path,STAGE["sha"](source),HUGO)
+            self.assertEqual(payload["static/images/almanack/2026-10-31/paper-masthead.png"],PNG)
+            self.assertEqual(payload["static/images/almanack/2026-10-31/paper-masthead-web.png"],PNG)
+            fragment=payload["assets/almanack/2026-10-31/body.html"]
+            self.assertIn((prefix+"paper-masthead-web.png").encode(),fragment)
+            self.assertNotIn((prefix+"paper-masthead.png").encode(),fragment)
+            self.assertIn(b'alt="Clean paper masthead"',fragment)
+            (path/"paper-masthead-web.png").write_bytes(PNG+b"changed")
+            with self.assertRaisesRegex(ValueError,"approved SHA-256"):
+                STAGE["prepare"](path,STAGE["sha"](source),HUGO)
+            (path/"paper-masthead-web.png").write_bytes(PNG)
+            linked=approved.replace(b'<header><img',b'<header><a href="https://outsideinprint.org/almanack/2026-10-31/"><img').replace(b'</header>',b'</a></header>')
+            (path/"full-issue.html").write_bytes(linked);record["html_sha256"]=STAGE["sha"](linked);(path/"full-issue.json").write_bytes(STAGE["dump"](record))
+            with self.assertRaisesRegex(ValueError,"must remain unlinked"):
+                STAGE["prepare"](path,STAGE["sha"](source),HUGO)
+
     def test_native_picture_preserves_source_alt_and_original_display_width(self):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder);source=package(root/"package",managed=True)
