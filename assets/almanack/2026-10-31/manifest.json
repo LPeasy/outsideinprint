@@ -5,10 +5,10 @@
   "issue_number": 26,
   "approved_source_sha256": "01d624ede63108c103e543a83a8d180f00deeea220b9f91e80b4f605de1895ed",
   "staged_source_sha256": "ae6ddf051307588ff55de04ea9d3576968cce7069472992fbfee1b70fb0497e8",
-  "approved_full_issue_sha256": "ab3ab5f74d07dd245dea92f049b53def931ad428bcddacc1f4b7af5f6364564c",
-  "fragment_sha256": "eaeb7c6cba4a22667da527be39cb510cef9595cbbcd9021292c990e15f39f9df",
+  "approved_full_issue_sha256": "7dd7cb80bef54b92438437d799841aa1171de02917936e2a2686fa0c426fe576",
+  "fragment_sha256": "eaaf42ea1496c63b364b172a0a7db5163093f64e83c03f1ca755d562f1296a7b",
   "css_sha256": "0adf6547cbab296613602f008db0b9951664634246031ad78f0a60b10eedae11",
-  "template_signature": "64ca7806af7ffbdcb7d0f4e0774a9e9589dc93dfb6742c9885f4a13d00ab8404",
+  "template_signature": "40ce75efb6f35d006f6f377ef16afd576847ac453172523968224ce62be2d03a",
   "managed_images": [
     {
       "ref": "essays/why-daylight-saving-time/hero",
