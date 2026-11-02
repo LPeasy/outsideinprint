@@ -262,8 +262,15 @@ function Read-Feed {
 $rootFeed = Read-Feed 'index.xml' 'https://outsideinprint.org/index.xml' 'https://outsideinprint.org/' 50
 $archiveFeed = Read-Feed 'archive/index.xml' 'https://outsideinprint.org/archive/index.xml' 'https://outsideinprint.org/archive/' 50
 $essaysFeed = Read-Feed 'essays/index.xml' 'https://outsideinprint.org/essays/index.xml' 'https://outsideinprint.org/archive/' 50
-$dialogueFeed = Read-Feed 'syd-and-oliver/index.xml' 'https://outsideinprint.org/syd-and-oliver/index.xml' 'https://outsideinprint.org/collections/syd-and-oliver-dialogues/' 24
 [xml]$sitemap = Get-Content -LiteralPath (Join-Path $siteRoot 'sitemap.xml') -Raw -Encoding utf8
+$expectedDialogueLinks = @(
+  $sitemap.urlset.url | ForEach-Object { [string]$_.loc } |
+    Where-Object { $_ -match '^https://outsideinprint\.org/syd-and-oliver/[^/]+/$' } |
+    Sort-Object
+)
+Assert-True ($expectedDialogueLinks.Count -gt 0) 'Production sitemap must contain published dialogues.'
+$dialogueFeed = Read-Feed 'syd-and-oliver/index.xml' 'https://outsideinprint.org/syd-and-oliver/index.xml' 'https://outsideinprint.org/collections/syd-and-oliver-dialogues/' $expectedDialogueLinks.Count
+Assert-True ((@($dialogueFeed.Links | Sort-Object) -join "`n") -ceq ($expectedDialogueLinks -join "`n")) 'Dialogue feed must contain every published dialogue in the production sitemap exactly once.'
 $expectedAlmanackLinks = @(
   $sitemap.urlset.url | ForEach-Object { [string]$_.loc } |
     Where-Object { $_ -match '^https://outsideinprint\.org/almanack/\d{4}-\d{2}-\d{2}/$' } |
