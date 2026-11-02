@@ -126,3 +126,20 @@ test("an approved extra rebuild cannot replay a known failed release", async () 
   f.data.set(first.key, { ...first, status: "verified" });
   assert.equal((await f.engine.tick()).status, "dispatched");
 });
+
+test("a blocked historical release does not prevent a different future release from dispatching", async () => {
+  const f = fixture();
+  const next = { ...release, id: "next-dialogue", releaseAt: "2026-11-03T09:00:00-05:00",
+    endsAt: "2026-11-04T09:00:00-05:00" };
+  const previous = operations(registry, now)[0];
+  f.data.set(previous.key, { ...previous, status: "blocked" });
+  f.data.set("attention", { status: "blocked", error: "Historical failure retained" });
+  f.data.set("control", { enabled: true, activatedAtUtc: "2026-10-27T12:00:00Z" });
+  f.engine.now = () => Date.parse(next.releaseAt);
+  f.gh.snapshot = async () => ({ sha, registry: { schemaVersion: 1, releases: [release, next] },
+    config: { schemaVersion: 1, mode: "cloudflare" } });
+  assert.equal((await f.engine.tick()).status, "dispatched");
+  assert.deepEqual(f.data.get("active").operations.map(op => op.id), [next.id]);
+  assert.equal(f.data.get(previous.key).status, "blocked", "failed history is not replayed or relabeled");
+  assert.equal(f.posts, 1);
+});

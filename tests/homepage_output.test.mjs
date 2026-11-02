@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import { isBobAuthoredReadingWork } from "../scripts/ci/homepage_reading_authorship.mjs";
 
 const siteDir = path.resolve(process.env.OIP_SITE_DIR || "public");
 const html = fs.readFileSync(path.join(siteDir, "index.html"), "utf8");
@@ -58,10 +59,7 @@ const regularPublishedRoutes = publishedPages.filter((page) => {
   const article = fs.readFileSync(path.join(siteDir, page.route, "index.html"), "utf8");
   const nodes = [...article.matchAll(/<script\b[^>]*type=(?:"application\/ld\+json"|'application\/ld\+json'|application\/ld\+json)[^>]*>([\s\S]*?)<\/script>/g)]
     .flatMap((match) => { const node = JSON.parse(match[1]); return node["@graph"] || [node]; });
-  const work = nodes.find((node) => [node["@type"]].flat().some((type) => ["Article", "CreativeWork"].includes(type)));
-  const authors = work?.author ? [work.author].flat() : [];
-  return authors.length > 0 && authors.every((author) =>
-    ["#author-robert-v-ussley", "#author-robert-v.-ussley"].some((id) => author["@id"]?.endsWith(id)));
+  return isBobAuthoredReadingWork(nodes);
 }).map((page) => page.route);
 const pinnedRoutes = [
   "/essays/why-daylight-saving-time/",

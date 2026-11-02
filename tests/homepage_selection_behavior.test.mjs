@@ -105,6 +105,30 @@ test("Why Daylight Saving Time? leads, followed by the latest release, while pre
   assert.deepEqual(renderSelection(t), [flagship, "/essays/latest/", disneyOpening, noise, coinSlot]);
 });
 
+test("the four queued dialogues enter the latest slot only at their approved Eastern instants", (t) => {
+  const slugs = ["both-colors", "very-serious", "anything-you-want", "business-before-work"];
+  const entries = Object.fromEntries(slugs.map((slug) => {
+    const source = fs.readFileSync(`content/essays/dialogues/${slug}.md`, "utf8");
+    const metadata = Object.fromEntries([
+      "title", "author", "date", "publishDate", "url", "section_label", "library_type", "collections",
+    ].map((key) => [key, JSON.parse(source.match(new RegExp(`^${key}: (.+)$`, "m"))[1])]));
+    return [slug, metadata];
+  }));
+  let previous = "/essays/latest/";
+  for (const slug of slugs) {
+    const release = entries[slug];
+    const at = Date.parse(release.publishDate);
+    assert.equal(renderSelection(t, entries, false, new Date(at - 1000).toISOString())[1], previous);
+    const selected = renderSelection(t, entries, false, new Date(at).toISOString());
+    assert.equal(selected[1], release.url);
+    assert.equal(new Set(selected).size, 5);
+    for (const future of slugs.slice(slugs.indexOf(slug) + 1)) {
+      assert.ok(!selected.includes(entries[future].url), `${future} must remain dormant`);
+    }
+    previous = release.url;
+  }
+});
+
 test("the former flagship follows recency instead of retaining the lead", (t) => {
   assert.deepEqual(renderSelection(t, {
     formerFlagship: { title: "Benjamin Franklin", url: formerFlagship, date: "2020-08-01", section_label: "Modern Bio" },
