@@ -9,9 +9,9 @@ const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.167.0/hug
   ? path.resolve(".tools/hugo-0.167.0/hugo") : "hugo");
 const flagship = "/essays/why-daylight-saving-time/";
 const formerFlagship = "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/";
-const disneyOpening = "/essays/walt-disney-world-opening-1971/";
-const noise = "/essays/the-noise-of-the-crowd/";
-const coinSlot = "/essays/the-coin-slot-on-the-corner/";
+const mountain = "/essays/the-other-side-of-the-mountain/";
+const modelo = "/essays/whos-drinking-all-the-modelo/";
+const antProblem = "/syd-and-oliver/the-ant-problem/";
 const guestRoute = "/essays/a-public-record-must-outlast-the-feed/";
 const guestMetadata = {
   title: "A Public Record Must Outlast the Feed", url: guestRoute,
@@ -85,9 +85,9 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   const entries = {
     flagship: { title: "Why Daylight Saving Time?", url: flagship, date: "2020-01-01", section_label: "Essay" },
     formerFlagship: { title: "Benjamin Franklin", url: formerFlagship, date: "2019-01-01", section_label: "Modern Bio" },
-    disneyOpening: { title: "How Walt Disney World Opened in 1971: Walt’s Plans, Roy’s Role", url: disneyOpening, date: "2020-01-01", section_label: "Essay" },
-    noise: { title: "The Noise of the Crowd", url: noise, date: "2020-01-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
-    coinSlot: { title: "The Coin Slot on the Corner", url: coinSlot, date: "2020-01-01", section_label: "Essay" },
+    mountain: { title: "The Other Side of the Mountain", url: mountain, date: "2020-01-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
+    modelo: { title: "Who’s Drinking All the Modelo?", url: modelo, date: "2020-01-01", section_label: "Essay" },
+    antProblem: { title: "The Ant Problem", url: antProblem, date: "2020-01-01", section_label: "Dialogue", library_type: "dialogue" },
     earlier: { title: "A earlier release", date: "2020-06-01", publishDate: "2020-06-01T09:00:00Z" },
     latest: { title: "Z later release", date: "2020-06-01", publishDate: "2020-06-01T12:00:00Z" },
     draft: { title: "Draft", date: "2020-07-01", draft: true },
@@ -123,7 +123,7 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
 }
 
 test("Why Daylight Saving Time? leads, followed by the latest release, while preview-only work stays excluded", (t) => {
-  assert.deepEqual(renderSelection(t), [flagship, "/essays/latest/", disneyOpening, noise, coinSlot]);
+  assert.deepEqual(renderSelection(t), [flagship, "/essays/latest/", mountain, modelo, antProblem]);
 });
 
 test("the four queued dialogues enter the latest slot only at their approved Eastern instants", (t) => {
@@ -141,10 +141,12 @@ test("the four queued dialogues enter the latest slot only at their approved Eas
     const at = Date.parse(release.publishDate);
     const before = renderSelection(t, entries, "release", new Date(at - 1000).toISOString());
     assert.equal(before.selected[1], previous);
-    assert.equal(before.feedLinks.length, slugs.indexOf(slug));
+    assert.equal(before.feedLinks.length, slugs.indexOf(slug) + 1);
+    assert.ok(before.feedLinks.includes(antProblem));
     const after = renderSelection(t, entries, "release", new Date(at).toISOString());
     const selected = after.selected;
-    assert.equal(after.feedLinks.length, slugs.indexOf(slug) + 1);
+    assert.equal(after.feedLinks.length, slugs.indexOf(slug) + 2);
+    assert.ok(after.feedLinks.includes(antProblem));
     assert.ok(after.feedLinks.includes(release.url));
     assert.equal(selected[1], release.url);
     assert.equal(new Set(selected).size, 5);
@@ -158,28 +160,28 @@ test("the four queued dialogues enter the latest slot only at their approved Eas
 test("the former flagship follows recency instead of retaining the lead", (t) => {
   assert.deepEqual(renderSelection(t, {
     formerFlagship: { title: "Benjamin Franklin", url: formerFlagship, date: "2020-08-01", section_label: "Modern Bio" },
-  }), [flagship, formerFlagship, disneyOpening, noise, coinSlot]);
+  }), [flagship, formerFlagship, mountain, modelo, antProblem]);
 });
 
 test("a newer flagship stays first and missing curated work receives newest eligible fallback", (t) => {
   const selection = renderSelection(t, {
     flagship: { title: "Why Daylight Saving Time?", url: flagship, date: "2020-06-01", publishDate: "2020-07-01" },
-    noise: null,
+    modelo: null,
   });
-  assert.deepEqual(selection, [flagship, "/essays/latest/", disneyOpening, coinSlot, "/essays/earlier/"]);
+  assert.deepEqual(selection, [flagship, "/essays/latest/", mountain, antProblem, "/essays/earlier/"]);
   assert.equal(new Set(selection).size, 5);
 });
 
 test("when the flagship is unavailable, the two newest releases lead", (t) => {
   assert.deepEqual(renderSelection(t, { flagship: null }), [
-    "/essays/latest/", "/essays/earlier/", disneyOpening, noise, coinSlot,
+    "/essays/latest/", "/essays/earlier/", mountain, modelo, antProblem,
   ]);
 });
 
 test("a newly released curated piece occupies the latest slot only once", (t) => {
   assert.deepEqual(renderSelection(t, {
-    noise: { title: "The Noise of the Crowd", url: noise, date: "2020-07-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
-  }), [flagship, noise, disneyOpening, coinSlot, "/essays/latest/"]);
+    modelo: { title: "Who’s Drinking All the Modelo?", url: modelo, date: "2020-07-01", section_label: "Essay" },
+  }), [flagship, modelo, mountain, antProblem, "/essays/latest/"]);
 });
 
 test("the lead uses eligible associated Gallery art and matching zoom alt, with hero fallback and unchanged supporting art", (t) => {
@@ -231,7 +233,7 @@ test("the lead uses eligible associated Gallery art and matching zoom alt, with 
 
 test("the eligible guest renders once below the flagship without consuming the latest supporting slot", (t) => {
   const result = renderSelection(t, { guest: guestMetadata }, "guest");
-  assert.deepEqual(result.featured, [flagship, "/essays/latest/", disneyOpening, noise, coinSlot]);
+  assert.deepEqual(result.featured, [flagship, "/essays/latest/", mountain, modelo, antProblem]);
   assert.equal(result.guest, guestRoute);
   assert.equal(new Set([...result.featured, result.guest]).size, 6);
   assert.equal((result.html.match(/<article\b/g) || []).length, 1);
@@ -244,7 +246,7 @@ test("the eligible guest renders once below the flagship without consuming the l
 
 test("the reserved guest cannot become the lead or fill a missing curated slot", (t) => {
   const result = renderSelection(t, {
-    guest: guestMetadata, flagship: null, noise: null,
+    guest: guestMetadata, flagship: null, modelo: null,
     replacement: { title: "Older replacement", date: "2020-05-01" },
   }, "guest");
   assert.equal(result.guest, guestRoute);
@@ -286,12 +288,12 @@ test("all regular positions reject outside authors and contributor roles, includ
     const result = renderSelection(t, {
       guest: guestMetadata,
       flagship: { title: "Outside flagship", url: flagship, date: "2020-08-01", ...byline },
-      disneyOpening: { title: "Outside curated piece", url: disneyOpening, date: "2020-08-01", ...byline },
+      mountain: { title: "Outside curated piece", url: mountain, date: "2020-08-01", ...byline },
       outside: { title: "Outside latest and fallback", date: "2020-08-01", ...byline },
       replacement: { title: "Bob replacement", date: "2020-05-01" },
     }, "guest");
     assert.equal(result.guest, guestRoute, label);
-    assert.deepEqual(result.featured, ["/essays/latest/", "/essays/earlier/", noise, coinSlot, "/essays/replacement/"], label);
+    assert.deepEqual(result.featured, ["/essays/latest/", "/essays/earlier/", modelo, antProblem, "/essays/replacement/"], label);
   }
 });
 
@@ -370,7 +372,7 @@ test("the used-car essay takes the guest slot at its release instant without cha
   assert.match(atRelease.html, /By Jacob Fixture/);
   assert.equal((atRelease.html.match(/<article\b/g) || []).length, 1);
   for (const result of [before, atRelease]) {
-    assert.deepEqual(result.featured, [flagship, "/essays/latest/", disneyOpening, noise, coinSlot]);
+    assert.deepEqual(result.featured, [flagship, "/essays/latest/", mountain, modelo, antProblem]);
     assert.equal(new Set([...result.featured, result.guest]).size, 6);
     for (const route of [usedCarRoute, elijahRoute, guestRoute]) assert.ok(!result.featured.includes(route));
   }
@@ -391,7 +393,7 @@ test("an ineligible used-car essay falls back to Elijah while preserving all gue
     const result = renderSelection(t, { guest: guestMetadata, elijah: elijahMetadata, usedCar: metadata }, "guest", "2026-10-30T13:00:00Z");
     assert.equal(result.guest, elijahRoute, name);
     assert.match(result.html, /By Elijah Fernandez, MSW, PMP, CISSP/, name);
-    assert.deepEqual(result.featured, [flagship, "/essays/latest/", disneyOpening, noise, coinSlot], name);
+    assert.deepEqual(result.featured, [flagship, "/essays/latest/", mountain, modelo, antProblem], name);
     assert.equal(new Set([...result.featured, result.guest]).size, 6, name);
     for (const route of [usedCarRoute, elijahRoute, guestRoute]) assert.ok(!result.featured.includes(route), name);
   }

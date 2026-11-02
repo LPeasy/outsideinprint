@@ -91,9 +91,9 @@ test("masthead proof sits between its controls and lead summaries keep supportin
 test("featured reading leads with daylight saving, then the latest publication and curated supports", () => {
   const routes = [
     "/essays/why-daylight-saving-time/",
-    "/essays/walt-disney-world-opening-1971/",
-    "/essays/the-noise-of-the-crowd/",
-    "/essays/the-coin-slot-on-the-corner/",
+    "/essays/the-other-side-of-the-mountain/",
+    "/essays/whos-drinking-all-the-modelo/",
+    "/syd-and-oliver/the-ant-problem/",
   ];
   const indexes = routes.map((route) => selected.indexOf(`"${route}"`));
   assert.ok(indexes.every((index) => index >= 0));
