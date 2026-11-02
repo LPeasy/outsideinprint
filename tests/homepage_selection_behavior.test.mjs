@@ -44,7 +44,9 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
     fs.mkdirSync(path.dirname(path.join(fixture, file)), { recursive: true });
     fs.writeFileSync(path.join(fixture, file), content);
   };
-  write("hugo.toml", 'baseURL = "https://example.test/"\ndisableKinds = ["taxonomy", "term", "RSS", "sitemap"]\n');
+  write("hugo.toml", summaries === "release"
+    ? 'baseURL = "https://example.test/"\ndisableKinds = ["taxonomy", "term"]\n'
+    : 'baseURL = "https://example.test/"\ndisableKinds = ["taxonomy", "term", "RSS", "sitemap"]\n');
   for (const partial of ["home_v2_selected.html", "home_guest_selected.html", "home_guest_feature.html", "authors/resolve.html", "archive/longform-kind.html", "collections/normalize-values.html", "home_lead_summary.html", "discovery/page-summary.html", "metadata_description.html", "metadata/route.html", "collections/lookup-definition.html"]) {
     write(`layouts/partials/${partial}`, fs.readFileSync(`layouts/partials/${partial}`, "utf8"));
   }
@@ -62,7 +64,16 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
     write("data/homepage_metrics.json", JSON.stringify({ reader_threshold: 1000, articles: {} }));
     write("data/editorial_cartoons.json", JSON.stringify({ cartoons }));
   }
-  write("layouts/index.html", summaries === "frontpage"
+  if (summaries === "release") {
+    for (const partial of ["feeds/resolve-entries.html", "feeds/render-rss.xml"]) {
+      write(`layouts/partials/${partial}`, fs.readFileSync(`layouts/partials/${partial}`, "utf8"));
+    }
+    write("layouts/syd-and-oliver/rss.xml", fs.readFileSync("layouts/syd-and-oliver/rss.xml", "utf8"));
+    write("content/syd-and-oliver/_index.md", '---\ntitle: "Dialogues"\noutputs: ["HTML", "RSS"]\n---\n');
+  }
+  write("layouts/index.html", summaries === "release"
+    ? '{{ $paths := slice }}{{ range partial "home_v2_selected.html" . }}{{ $paths = $paths | append .RelPermalink }}{{ end }}{{ $paths | jsonify | safeHTML }}'
+    : summaries === "frontpage"
     ? '{{ partial "home_v2_front_page.html" . }}'
     : summaries === "guest"
     ? '{{ $paths := slice }}{{ range partial "home_v2_selected.html" . }}{{ $paths = $paths | append .RelPermalink }}{{ end }}{{ $guestPath := false }}{{ $guestHtml := "" }}{{ with partial "home_guest_selected.html" . }}{{ $guestPath = .RelPermalink }}{{ $guestHtml = partial "home_guest_feature.html" . }}{{ end }}{{ dict "featured" $paths "guest" $guestPath "html" $guestHtml | jsonify | safeHTML }}'
@@ -93,16 +104,55 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   }
   write("content/essays/_index.md", '---\ntitle: "Landing"\ndate: 2020-08-01\n---\n');
   write("content/shop/book.md", '---\ntitle: "Book"\ndate: 2020-08-01\n---\n');
-  execFileSync(hugo, ["--source", fixture, "--clock", clock, "--buildDrafts", "--buildFuture", "--buildExpired", "--panicOnWarning"], { encoding: "utf8" });
+  const previewFlags = summaries === "release" ? [] : ["--buildDrafts", "--buildFuture", "--buildExpired"];
+  execFileSync(hugo, ["--source", fixture, "--clock", clock, ...previewFlags, "--panicOnWarning"], { encoding: "utf8" });
   const output = fs.readFileSync(path.join(fixture, "public/index.html"), "utf8");
   if (summaries === "frontpage") {
     return { html: output, article: fs.readFileSync(path.join(fixture, "public", flagship, "index.html"), "utf8") };
+  }
+  if (summaries === "release") {
+    const feed = fs.readFileSync(path.join(fixture, "public/syd-and-oliver/index.xml"), "utf8");
+    const sitemap = fs.readFileSync(path.join(fixture, "public/sitemap.xml"), "utf8");
+    const feedLinks = [...feed.matchAll(/<item>[\s\S]*?<link>(.*?)<\/link>/g)].map(match => new URL(match[1]).pathname).sort();
+    const sitemapLinks = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => new URL(match[1]).pathname)
+      .filter(route => /^\/syd-and-oliver\/[^/]+\/$/.test(route)).sort();
+    assert.deepEqual(feedLinks, sitemapLinks, "dialogue feed exactly covers the published sitemap at this clock");
+    return { selected: JSON.parse(output), feedLinks };
   }
   return JSON.parse(output);
 }
 
 test("Why Daylight Saving Time? leads, followed by the latest release, while preview-only work stays excluded", (t) => {
   assert.deepEqual(renderSelection(t), [flagship, "/essays/latest/", disneyOpening, noise, coinSlot]);
+});
+
+test("the four queued dialogues enter the latest slot only at their approved Eastern instants", (t) => {
+  const slugs = ["both-colors", "very-serious", "anything-you-want", "business-before-work"];
+  const entries = Object.fromEntries(slugs.map((slug) => {
+    const source = fs.readFileSync(`content/essays/dialogues/${slug}.md`, "utf8");
+    const metadata = Object.fromEntries([
+      "title", "author", "date", "publishDate", "url", "section_label", "library_type", "collections",
+    ].map((key) => [key, JSON.parse(source.match(new RegExp(`^${key}: (.+)$`, "m"))[1])]));
+    return [slug, metadata];
+  }));
+  let previous = "/essays/latest/";
+  for (const slug of slugs) {
+    const release = entries[slug];
+    const at = Date.parse(release.publishDate);
+    const before = renderSelection(t, entries, "release", new Date(at - 1000).toISOString());
+    assert.equal(before.selected[1], previous);
+    assert.equal(before.feedLinks.length, slugs.indexOf(slug));
+    const after = renderSelection(t, entries, "release", new Date(at).toISOString());
+    const selected = after.selected;
+    assert.equal(after.feedLinks.length, slugs.indexOf(slug) + 1);
+    assert.ok(after.feedLinks.includes(release.url));
+    assert.equal(selected[1], release.url);
+    assert.equal(new Set(selected).size, 5);
+    for (const future of slugs.slice(slugs.indexOf(slug) + 1)) {
+      assert.ok(!selected.includes(entries[future].url), `${future} must remain dormant`);
+    }
+    previous = release.url;
+  }
 });
 
 test("the former flagship follows recency instead of retaining the lead", (t) => {

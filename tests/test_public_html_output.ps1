@@ -14,6 +14,7 @@ $validationNow = if ($Clock) { [datetimeoffset]::Parse($Clock) } else { [datetim
 . (Join-Path $PSScriptRoot 'helpers/public_output_common.ps1')
 . (Join-Path $PSScriptRoot 'helpers/responsive_image_common.ps1')
 . (Join-Path $PSScriptRoot 'helpers/image_signatures.ps1')
+. (Join-Path $PSScriptRoot 'helpers/homepage_reading_authorship.ps1')
 
 function Format-SampleList {
   param(
@@ -3210,10 +3211,7 @@ foreach ($relativePath in $requiredStructuredDataPages.Keys) {
     $structuredDataIssues.Add("$relativePath => expected WebSite JSON-LD to omit retired sitelinks SearchAction markup")
   }
 
-  $workNode = @(
-    (Get-JsonLdNodesByType -Nodes $nodes -Type 'Article') +
-    (Get-JsonLdNodesByType -Nodes $nodes -Type 'CreativeWork')
-  ) | Select-Object -First 1
+  $workNode = Get-JsonLdReadingWork -Nodes $nodes
 
   if (Test-ExpectedFlag -Entry $expected -Key 'RequireWorkPublisher') {
     if ($null -eq $workNode -or $null -eq $workNode.publisher) {
@@ -5948,15 +5946,7 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     $articlePath = Join-Path $SiteDir ($route.TrimStart('/') + 'index.html')
     $articleHtml = Get-Content -LiteralPath $articlePath -Raw -Encoding utf8
     $articleNodes = Get-JsonLdNodes -Objects (Get-JsonLdObjects -Html $articleHtml)
-    $work = @((Get-JsonLdNodesByType -Nodes $articleNodes -Type 'Article') +
-      (Get-JsonLdNodesByType -Nodes $articleNodes -Type 'CreativeWork')) | Select-Object -First 1
-    if ($null -eq $work -or -not $work.PSObject.Properties['author']) { return $false }
-    $authors = @($work.author | Where-Object { $null -ne $_ })
-    $authors.Count -gt 0 -and @($authors | Where-Object {
-      -not $_.PSObject.Properties['@id'] -or
-      (-not ([string]$_.'@id').EndsWith('#author-robert-v-ussley', [StringComparison]::Ordinal) -and
-       -not ([string]$_.'@id').EndsWith('#author-robert-v.-ussley', [StringComparison]::Ordinal))
-    }).Count -eq 0
+    Test-JsonLdBobReadingWork -Nodes $articleNodes
   } | ForEach-Object { Get-SitePathFromHref -Href $_.permalink })
   $flagshipPath = '/essays/why-daylight-saving-time/'
   $expectedLeadPaths = @($publishedReadingPaths | Select-Object -First 1)

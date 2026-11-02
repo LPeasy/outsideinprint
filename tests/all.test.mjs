@@ -12,6 +12,7 @@ import "./music_catalog_contract.test.mjs";
 import "./music_page_carousel.test.mjs";
 import "./bob_music_compact.test.mjs";
 import "./homepage_selected.test.mjs";
+import "./homepage_reading_authorship.test.mjs";
 import "./companion_bob_visit.test.mjs";
 import "./route_widget_lifecycle.test.mjs";
 import "./home_featured_image.test.mjs";
