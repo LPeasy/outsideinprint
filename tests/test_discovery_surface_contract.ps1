@@ -129,9 +129,9 @@ if ($homeFrontPageTemplate -notmatch [regex]::Escape('partial "home_v2_front_pag
 $homeSelectionTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_v2_selected.html') -Raw -Encoding utf8
 $featuredRoutes = @(
   '"/essays/why-daylight-saving-time/"',
-  '"/essays/walt-disney-world-opening-1971/"',
-  '"/essays/the-noise-of-the-crowd/"',
-  '"/essays/the-coin-slot-on-the-corner/"'
+  '"/essays/the-other-side-of-the-mountain/"',
+  '"/essays/whos-drinking-all-the-modelo/"',
+  '"/syd-and-oliver/the-ant-problem/"'
 )
 $previousFeaturedIndex = -1
 foreach ($route in $featuredRoutes) {

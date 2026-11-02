@@ -63,9 +63,9 @@ const regularPublishedRoutes = publishedPages.filter((page) => {
 }).map((page) => page.route);
 const pinnedRoutes = [
   "/essays/why-daylight-saving-time/",
-  "/essays/walt-disney-world-opening-1971/",
-  "/essays/the-noise-of-the-crowd/",
-  "/essays/the-coin-slot-on-the-corner/",
+  "/essays/the-other-side-of-the-mountain/",
+  "/essays/whos-drinking-all-the-modelo/",
+  "/syd-and-oliver/the-ant-problem/",
 ];
 const metricsSource = fs.readFileSync(path.resolve("data/homepage_metrics.yaml"), "utf8");
 const threshold = Number(metricsSource.match(/^reader_threshold: (\d+)$/m)?.[1]);
@@ -140,8 +140,9 @@ test("rendered homepage leads with Why Daylight Saving Time?, then the newest re
     const kind = route === "/essays/the-dolphin-company/" ? "Case study" : canonicalKind;
     if (route === "/essays/the-dolphin-company/") assert.equal(canonicalKind, "Essay", "Dolphin's homepage label must not reclassify its destination");
     if (route === pinnedRoutes[0]) assert.equal(canonicalKind, "Essay");
-    if (route === pinnedRoutes[2]) assert.equal(canonicalKind, "Musing");
-    if (route === pinnedRoutes[1] || route === pinnedRoutes[3]) assert.equal(canonicalKind, "Essay");
+    if (route === pinnedRoutes[1]) assert.equal(canonicalKind, "Musing");
+    if (route === pinnedRoutes[2]) assert.equal(canonicalKind, "Essay");
+    if (route === pinnedRoutes[3]) assert.equal(canonicalKind, "Dialogue");
     const metric = metricRecords.get(route);
     const badge = metric?.value >= threshold ? metric.label : "";
     const anchors = [...card[2].matchAll(/<a\b[^>]*>/g)].map((match) => match[0]);
