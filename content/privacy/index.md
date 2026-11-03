@@ -1,7 +1,7 @@
 ---
 title: "Privacy Policy"
 description: "How Outside In Print handles information connected to site use, Studio inquiry emails, email subscriptions, Steam storefront visits, orders, EPUB delivery, and reader support."
-effective_date: "October 27, 2026"
+effective_date: "November 3, 2026"
 type: "commerce-policy"
 draft: false
 show_citation: false
@@ -35,15 +35,15 @@ For Studio use, site analytics may receive the Studio page path, offer code, sou
 
 ### Optional purchase measurement
 
-If optional purchase measurement is offered and you select “Allow measurement,” Outside In Print uses Google Analytics cookies to connect website visits with verified EPUB purchases. Declining leaves checkout and optional email choices available. Google Analytics is loaded only after you allow it; advertising storage, advertising personalization, and Google signals remain disabled.
+Outside In Print no longer offers Google Analytics purchase measurement on the website. Previously, visitors could choose to allow Google Analytics cookies to connect website visits with verified EPUB purchases. Declining did not affect checkout or optional email choices. Google Analytics was loaded only after a visitor allowed it; advertising storage, advertising personalization, and Google signals remained disabled.
 
-With your permission, Google receives a page path and public title, the origin of a referring website, browser and session identifiers, and checkout-start events. A bounded Google Merchant Center click identifier supplied on the landing page may be included for attribution. Other URL query values and fragments are excluded. For eligible purchases, the delivery service verifies the completed production payment before sending the product identifier, currency, purchase value, and an opaque transaction identifier to Google. It does not send your email address, name, street address, card details, Square customer identifier, or download link to Google Analytics.
+For visitors who allowed it, Google could receive a page path and public title, the origin of a referring website, browser and session identifiers, and checkout-start events. A bounded Google Merchant Center click identifier supplied on the landing page could be included for attribution. Other URL query values and fragments were excluded. For eligible purchases, the delivery service verified the completed production payment before sending the product identifier, currency, purchase value, and an opaque transaction identifier to Google. It did not send email addresses, names, street addresses, card details, Square customer identifiers, or download links to Google Analytics.
 
-One verified order is eligible for one purchase event. Sandbox activity, zero-dollar orders, and orders identified as tests are excluded. A thank-you-page visit alone does not create a purchase event. Consented purchases can be reported even if the buyer does not return from Square. Consent and browser restrictions mean reports will not include every sale.
+One verified order was eligible for one purchase event. Sandbox activity, zero-dollar orders, and orders identified as tests were excluded. A thank-you-page visit alone did not create a purchase event. A checkout started before measurement was removed may still produce a purchase report.
 
 When Google Analytics is linked to Merchant Center, Google shares the service names and identifiers and conversion data between them. Google uses shared purchase events for Merchant performance reporting, improving shopping search, and improving its products and services. It may also use events for privacy-safe listing annotations and resources pooled across merchants. Read [how Google uses key events data](https://support.google.com/merchants/answer/14763078?hl=en).
 
-Your choice is saved in this browser for up to 180 days. Use “Measurement preferences” to change it. Turning measurement off stops future collection from this browser and removes the Google Analytics cookies used here. It does not recall events already sent or purchase context already attached to a checkout. Contact Outside In Print about previously collected information. Clearing browser storage or using another browser can require a new choice. Google Analytics measurement records are separate from order and accounting records.
+Removing measurement does not recall events already sent or erase cookies previously stored in your browser. You can clear those cookies in your browser settings and contact Outside In Print about previously collected information. Google Analytics measurement records are separate from order and accounting records.
 
 ## How information is used
 
@@ -60,7 +60,7 @@ Information is used to:
 
 ## Service providers and disclosure
 
-Square processes checkout, payments, subscriptions, receipts, refunds, and related transaction records. Cloudflare hosts the secure delivery, newsletter lead-transfer and welcome services and their limited operational records. Resend sends EPUB delivery messages and the three newsletter introductory emails. Buttondown receives and manages optional newsletter and new-publication subscriptions, including the subscription, delivery, and enabled engagement information described above. Meta provides Facebook and Instagram lead forms and advertising reports. GitHub Pages hosts the public website, and GoatCounter provides aggregate site analytics. Google provides optional purchase measurement when you allow it; linked Google Merchant Center reports may use that measurement.
+Square processes checkout, payments, subscriptions, receipts, refunds, and related transaction records. Cloudflare hosts the secure delivery, newsletter lead-transfer and welcome services and their limited operational records. Resend sends EPUB delivery messages and the three newsletter introductory emails. Buttondown receives and manages optional newsletter and new-publication subscriptions, including the subscription, delivery, and enabled engagement information described above. Meta provides Facebook and Instagram lead forms and advertising reports. GitHub Pages hosts the public website, and GoatCounter provides aggregate site analytics. Google may retain previously collected purchase measurement; linked Google Merchant Center reports may use that measurement.
 
 The Games pages link to Steam storefront pages and may load a Steam store widget. Following a Steam link or loading the widget sends a request to Valve's Steam services, which receives the technical information ordinarily sent with a web request. Steam may also set or read cookies according to your Steam settings and Valve's own privacy practices.
 

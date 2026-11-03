@@ -204,7 +204,8 @@ jobs:
       TZ: America/New_York
       ANALYTICS_ENABLED: ${{ vars.ANALYTICS_ENABLED }}
       ANALYTICS_ALLOW_LOCAL: ${{ vars.ANALYTICS_ALLOW_LOCAL }}
-      ANALYTICS_PURCHASE_ENABLED: ${{ vars.ANALYTICS_PURCHASE_ENABLED }}
+      # Keep optional Google purchase measurement off, even if the old repository variable remains set.
+      ANALYTICS_PURCHASE_ENABLED: 'false'
       ANALYTICS_PURCHASE_MEASUREMENT_ID: ${{ vars.ANALYTICS_PURCHASE_MEASUREMENT_ID }}
       OIP_BUILD_CLOCK_UTC: ${{ needs.classify.outputs.clock }}
       OIP_HUGO_BIN: hugo
@@ -410,6 +411,13 @@ jobs:
           echo "Hugo image build lane=${build_lane} elapsed_seconds=${elapsed_seconds} limit_seconds=${limit_seconds}"
           if (( elapsed_seconds > limit_seconds )); then
             echo "Hugo ${build_lane} image build exceeded ${limit_seconds} seconds." >&2
+            exit 1
+          fi
+      - name: Verify purchase measurement is disabled
+        shell: bash
+        run: |
+          if grep -R -l -E 'data-purchase-consent|data-oip-route-config="purchase-analytics"|data-oip-route-script="purchase-analytics"' public --include='*.html'; then
+            echo 'Purchase measurement must not appear in the public site.' >&2
             exit 1
           fi
       - name: Test Homepage Output and Selection
