@@ -1,0 +1,10 @@
+{{- $item := .item -}}
+{{- with $item.image -}}
+  {{- $image := partial "images/model.html" (dict "page" $.page "ref" . "display" true) -}}
+  {{- with $image.fallback_url -}}
+    <figure>
+      <img src="{{ . }}" alt="{{ $item.image_alt | default $image.alt }}">
+      {{ with or $item.image_caption $item.caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+    </figure>
+  {{- end -}}
+{{- end -}}

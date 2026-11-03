@@ -3,6 +3,19 @@ import argparse, datetime, hashlib, json
 from pathlib import Path
 from urllib.parse import urlparse, urljoin
 from html.parser import HTMLParser
+
+
+class AlmanackMarkup(HTMLParser):
+ def __init__(self):
+  super().__init__();self.version=None;self.covers=0;self.sections=[];self.images=[]
+ def handle_starttag(self,tag,attrs):
+  attrs=dict(attrs)
+  if tag=='article':self.version=attrs.get('data-oip-almanack')
+  if tag=='header' and 'data-oip-cover' in attrs:self.covers+=1
+  if tag=='section' and 'data-oip-section' in attrs:self.sections.append(attrs['data-oip-section'])
+  if tag=='img':self.images.append(attrs)
+
+
 p=argparse.ArgumentParser();p.add_argument('--site-dir',required=True);p.add_argument('--clock');args=p.parse_args();root=Path(args.site_dir)
 c=json.loads((root/'app/v1/catalog.json').read_text());assert c['schemaVersion']==1 and c['offlineContentComplete'] is True and c['offlineGalleryComplete'] is True
 ids=[x['id'] for x in c['items']];assert len(ids)==len(set(ids)) and ids
@@ -15,6 +28,14 @@ for item in c['items']:
  assert hashlib.sha256(payload['html'].encode()).hexdigest()==item['revision']
  assert 'oip-image:' not in payload['html'] and '/images/originals/' not in payload['html']
  assert 'APP_PRIVATE_SENTINEL' not in payload['html']
+ if item['type']=='almanack':
+  issue=AlmanackMarkup();issue.feed(payload['html'])
+  assert issue.version=='1' and issue.covers==1 and issue.sections, item['id']
+  assert len(issue.sections)==len(set(issue.sections)), (item['id'], issue.sections)
+  for image in issue.images:
+   assert image.get('src') and image.get('alt'), (item['id'], image)
+   path=urlparse(image['src']).path
+   if path.startswith('/images/'):assert (root/path.lstrip('/')).is_file(), (item['id'], path)
 f=c['frontPage'];assert f['schemaVersion']==1 and set(f['selectedIds'])<=set(ids)
 assert len(f['selectedIds'])==len(set(f['selectedIds']))
 assert f['lead']['mode'] in ['latest','pinned']

@@ -1,0 +1,123 @@
+{{- $page := . -}}
+{{- $issue := .Params -}}
+{{- $essays := $issue.essays | default (slice) -}}
+{{- $lead := dict -}}
+{{- if $essays -}}{{- $lead = index $essays 0 -}}{{- end -}}
+{{- $guests := $issue.guest_features | default (slice) -}}
+{{- with partial "almanack/guest-feature-model.html" (dict "page" $page "checkSource" false) -}}
+  {{- $guests = $guests | append . -}}
+{{- end -}}
+<article class="almanack-issue" data-oip-almanack="1">
+  <header data-oip-cover>
+    <h1>Bob’s Almanack</h1>
+    <p data-oip-date>{{ .Date.Format "January 2, 2006" }}</p>
+    {{ with $issue.issue_number }}<p data-oip-issue>Issue {{ . }}</p>{{ end }}
+    {{ with $lead }}
+      <h2><a href="{{ .url }}">{{ .title }}</a></h2>
+      {{ partial "app/almanack-art.html" (dict "page" $page "item" .) }}
+    {{ end }}
+    {{ with $issue.description }}<p data-oip-deck>{{ . }}</p>{{ end }}
+  </header>
+  {{ with $issue.opening_quote }}
+    <blockquote><p>{{ . }}</p>{{ with $issue.opening_quote_attribution }}<p>— {{ . }}</p>{{ end }}</blockquote>
+  {{ end }}
+  {{ with $issue.bob_note }}
+    <section data-oip-section="note" data-oip-role="note">
+      <h2>Note from Bob</h2>
+      <p>{{ . | markdownify }}</p>
+    </section>
+  {{ end }}
+  {{ with $issue.campaign }}
+    <section data-oip-section="campaign" data-oip-role="feature">
+      <h2>{{ .headline }}</h2>
+      {{ partial "app/almanack-art.html" (dict "page" $page "item" .) }}
+      <p>{{ .message }}</p>
+      {{ if and .cta_url .cta_label }}<p><a href="{{ .cta_url }}">{{ .cta_label }}</a></p>{{ end }}
+      {{ if and .secondary_cta_url .secondary_cta_label }}<p><a href="{{ .secondary_cta_url }}">{{ .secondary_cta_label }}</a></p>{{ end }}
+    </section>
+  {{ end }}
+  {{ with $issue.bob_feature }}
+    <section data-oip-section="bob-feature" data-oip-role="feature">
+      <h2>{{ .title }}</h2>
+      {{ with .label }}<p>{{ . }}</p>{{ end }}
+      {{ range .paragraphs }}<p>{{ . }}</p>{{ end }}
+      {{ with .facts }}<p>{{ . }}</p>{{ end }}
+      {{ if and .cta_url .cta_label }}<p><a href="{{ .cta_url }}">{{ .cta_label }}</a></p>{{ end }}
+      {{ if and .secondary_cta_url .secondary_cta_label }}<p><a href="{{ .secondary_cta_url }}">{{ .secondary_cta_label }}</a></p>{{ end }}
+    </section>
+  {{ end }}
+  {{ range $i, $item := $essays }}
+    <section data-oip-section="{{ if eq $i 0 }}lead{{ else }}story-{{ anchorize $item.url }}{{ end }}" data-oip-role="{{ if eq $i 0 }}lead{{ else }}feature{{ end }}">
+      <h2><a href="{{ $item.url }}">{{ $item.title }}</a></h2>
+      {{ if ne $i 0 }}{{ partial "app/almanack-art.html" (dict "page" $page "item" $item) }}{{ end }}
+      {{ with $item.description }}<p>{{ . }}</p>{{ end }}
+      {{ with $item.excerpt }}
+        <h3>{{ $item.excerpt_label | default "From the piece" }}</h3>
+        {{ range split . "\n\n" }}<p>{{ . }}</p>{{ end }}
+      {{ end }}
+      {{ with $item.url }}<p><a href="{{ . }}">{{ $item.read_label | default "Read the full piece" }}</a></p>{{ end }}
+    </section>
+  {{ end }}
+  {{ range $guests }}
+    <section data-oip-section="guest-{{ anchorize .url }}" data-oip-role="guest">
+      <h2><a href="{{ .url }}">{{ .title }}</a></h2>
+      <p data-oip-byline>By {{ .author }}</p>
+      {{ partial "app/almanack-art.html" (dict "page" $page "item" .) }}
+      <p>{{ .capsule }}</p>
+    </section>
+  {{ end }}
+  {{ with $issue.bookshelf }}
+    <section data-oip-section="bookshelf" data-oip-role="bookshelf">
+      <h2><a href="{{ .url }}" data-oip-book="{{ .book_key }}">{{ .title }}</a></h2>
+      {{ with .subtitle }}<p>{{ . }}</p>{{ end }}
+      {{ with .author }}<p data-oip-byline>By {{ . }}</p>{{ end }}
+      {{ partial "app/almanack-art.html" (dict "page" $page "item" .) }}
+      <p>{{ .introduction }}</p>
+      {{ range .excerpts }}<blockquote><p>{{ .text }}</p></blockquote>{{ end }}
+      {{ with .excerpt_source_title }}<p>{{ if $issue.bookshelf.excerpt_source_url }}<a href="{{ $issue.bookshelf.excerpt_source_url }}">{{ . }}</a>{{ else }}{{ . }}{{ end }}</p>{{ end }}
+      {{ if and .url .cta_label }}<p><a href="{{ .url }}" data-oip-book="{{ .book_key }}">{{ .cta_label }}</a></p>{{ end }}
+    </section>
+  {{ end }}
+  {{ with $issue.virtue }}
+    <section data-oip-section="virtue" data-oip-role="virtue">
+      <h2>{{ .name }}</h2>
+      <p>{{ .reflection }}</p>
+    </section>
+  {{ end }}
+  {{ with $issue.middle_quote }}
+    <blockquote><p>{{ . }}</p><p>{{ with $issue.middle_quote_attribution }}— {{ . }}{{ end }}{{ with $issue.middle_quote_source_url }} · <a href="{{ . }}">Source</a>{{ end }}</p></blockquote>
+  {{ end }}
+  {{ with $issue.margin }}
+    <section data-oip-section="margins" data-oip-role="margins">
+      <h2>In the Margins</h2>
+      {{ with .one_number }}
+        <h3>One Number</h3>
+        <p data-oip-number>{{ .figure }}</p>
+        <p>{{ .note }} {{ with .source_url }}<a href="{{ . }}">Source</a>{{ end }}</p>
+      {{ end }}
+      {{ with .one_document }}
+        <h3>One Document</h3>
+        <p><strong>{{ .title }}</strong></p>
+        <p>{{ .issued_by }}{{ with .date }}, {{ . }}{{ end }}</p>
+        <p>{{ .note }} {{ with .url }}<a href="{{ . }}">Source</a>{{ end }}</p>
+      {{ end }}
+      {{ range $notice := slice (dict "key" "results" "label" "Results") (dict "key" "records" "label" "Records") (dict "key" "final_bows" "label" "Final Bows") (dict "key" "obituaries" "label" "Obituaries") }}
+        {{ with index $issue.margin $notice.key }}
+          <h3>{{ $notice.label }}</h3>
+          <ul>{{ range . }}<li>{{ .text }} {{ with .url }}<a href="{{ . }}">Source</a>{{ end }}</li>{{ end }}</ul>
+        {{ end }}
+      {{ end }}
+    </section>
+  {{ end }}
+  {{ with $issue.worth_reprinting }}
+    <section data-oip-section="reprint" data-oip-role="reprint">
+      <h2><a href="{{ .url }}">{{ .title }}</a></h2>
+      {{ partial "app/almanack-art.html" (dict "page" $page "item" .) }}
+      {{ with or .rationale .description }}<p>{{ . }}</p>{{ end }}
+      {{ with .blurb }}<p>{{ . }}</p>{{ end }}
+    </section>
+  {{ end }}
+  {{ with $issue.closing_quote }}
+    <blockquote><p>{{ . }}</p>{{ with $issue.closing_quote_attribution }}<p>— {{ . }}</p>{{ end }}</blockquote>
+  {{ end }}
+</article>
