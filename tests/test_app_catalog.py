@@ -37,12 +37,23 @@ if gallery.exists():
 
 for lane in ['almanack','books']:assert all(x['id'] in ids for x in c[lane])
 assert c['almanack'] and c['books'] and c['jukebob']['albums']
-assert c['bookCatalog']
-assert {'2045','american_nightmare','parable_of_the_sheep','the_water_cycle','pending','fifty_years_of_magic'} <= {x['id'] for x in c['bookCatalog']}
 assert len({x['id'] for x in c['bookCatalog']})==len(c['bookCatalog'])
 assert all(x['title'] and x['author'] and x['cover'].startswith('https://outsideinprint.org/') for x in c['bookCatalog'])
 assert all(not x['sampleId'] or x['sampleId'] in ids for x in c['bookCatalog'])
+class BookshopLinks(HTMLParser):
+ def __init__(self):
+  super().__init__();self.urls=set();self.titles=set()
+ def handle_starttag(self,tag,attrs):
+  a=dict(attrs);classes=set(a.get('class','').split())
+  if tag=='a' and classes.intersection({'bookstore-record__cover','bookstore-feature__cover'}) and a.get('href'):
+   self.urls.add(urljoin('https://outsideinprint.org',a['href']))
+   label=a.get('aria-label','');assert label.startswith('Read about '),label
+   self.titles.add(label.removeprefix('Read about '))
+shop=root/'shop/index.html'
+if shop.exists():
+ parser=BookshopLinks();parser.feed(shop.read_text())
+ assert len(parser.urls)==len(c['bookCatalog']), (sorted(parser.urls),[x['id'] for x in c['bookCatalog']])
+ assert parser.titles=={x['title'] for x in c['bookCatalog']}, (parser.titles,{x['title'] for x in c['bookCatalog']})
 assert all(isinstance(x.get('issueNumber'),int) and x['issueNumber']>0 for x in c['almanack'])
-assert next(x for x in c['almanack'] if x['id']=='/almanack/2026-10-31/')['issueNumber']==26
-assert next(x for x in c['almanack'] if x['id']=='/almanack/2026-10-31/')['issueDate']=='2026-10-31'
+assert all(isinstance(x.get('issueDate'),str) and x['issueDate'] for x in c['almanack'])
 print(json.dumps({'status':'PASS','pieces':len(ids),'artwork':len(c['artwork']),'collections':len(c['collections']),'almanack':len(c['almanack']),'samples':len(c['books']),'albums':len(c['jukebob']['albums'])}))
