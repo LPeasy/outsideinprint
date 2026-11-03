@@ -78,6 +78,8 @@ jobs:
             scripts/ci
             tests
             tools
+            data
+            content/essays/affirmations
           persist-credentials: false
           fetch-depth: 0
       - name: Setup Node
