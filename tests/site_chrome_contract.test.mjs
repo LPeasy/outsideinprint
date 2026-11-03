@@ -578,7 +578,7 @@ test("newsletter proposition is plain-language across signup and checkout surfac
   assert.equal((almanackIssue.match(/partial "newsletter_signup\.html"/g) || []).length, 1);
   assert.ok(almanackIssue.lastIndexOf("</article>") < almanackIssue.indexOf('partial "newsletter_signup.html"'));
 
-  assert.match(frontMatter(privacyPolicy, "privacy policy"), /^effective_date: "October 27, 2026"$/m);
+  assert.match(frontMatter(privacyPolicy, "privacy policy"), /^effective_date: "November 3, 2026"$/m);
   assert.match(privacyPolicy, /standalone Outside In Print newsletter signup form/);
   assert.match(privacyPolicy, /IP address, browser or device information, and referring page/);
   assert.match(privacyPolicy, /email-client, browser, device, IP-address, or referrer metadata/);
