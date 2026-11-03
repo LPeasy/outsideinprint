@@ -1,7 +1,7 @@
 {{- $p := . -}}
 {{- $html := "" -}}
 {{- if eq $p.Section "almanack" -}}
-  {{- $html = partial "app/render-web-view.html" (dict "page" $p "template" "layouts/almanack/single.html") -}}
+  {{- $html = partial "app/almanack.html" $p -}}
 {{- else if $p.Params.sample_of_book_key -}}
   {{- $html = partial "app/render-web-view.html" (dict "page" $p "template" "layouts/shop/sample.html") -}}
 {{- else -}}
