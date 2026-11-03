@@ -420,6 +420,8 @@ jobs:
             echo 'Purchase measurement must not appear in the public site.' >&2
             exit 1
           fi
+      - name: Validate published app content export
+        run: python3 tests/test_app_catalog.py --site-dir public --clock "$OIP_BUILD_CLOCK_UTC"
       - name: Test Homepage Output and Selection
         env:
           OIP_HUGO_CONFIG: hugo.toml

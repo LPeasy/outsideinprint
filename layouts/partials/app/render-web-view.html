@@ -1,0 +1,8 @@
+{{- /* Execute the existing web view without its outer main block. This keeps
+Almanack and public sample content in the same authored template as the web. */ -}}
+{{- $source := os.ReadFile .template -}}
+{{- $source = replaceRE `^\s*\{\{\s*define "main"\s*\}\}` "" $source -}}
+{{- $source = replaceRE `\{\{\s*end\s*\}\}\s*$` "" $source -}}
+{{- $r := resources.FromString (printf "app-source/%s.html" (crypto.MD5 .template)) $source -}}
+{{- $r = $r | resources.ExecuteAsTemplate (printf "app-view/%s.html" (crypto.MD5 .page.RelPermalink)) .page -}}
+{{- return $r.Content -}}
