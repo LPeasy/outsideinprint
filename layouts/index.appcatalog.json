@@ -1,0 +1,77 @@
+{{- $items := slice -}}{{- $artwork := slice -}}{{- $issues := slice -}}{{- $books := slice -}}{{- $ids := slice -}}{{- $collectionMap := dict -}}{{- $sampleMap := dict -}}{{- $routeMap := dict -}}
+{{- $source := partial "library/resolve-entries.html" . -}}
+{{- $pages := slice -}}
+{{- range $source.entries -}}{{- $pages = $pages | append .page -}}{{- end -}}
+{{- range site.RegularPages -}}{{- if or (eq .Section "almanack") (and (eq .Section "shop") .Params.sample_of_book_key) -}}{{- $pages = $pages | append . -}}{{- end -}}{{- end -}}
+{{- range $p := $pages -}}
+  {{- if partial "app/eligible.html" $p -}}
+    {{- $id := $p.Params.content_id | default $p.RelPermalink -}}
+    {{- if in $ids $id -}}{{- errorf "Duplicate app content ID: %s" $id -}}{{- end -}}
+    {{- $ids = $ids | append $id -}}{{- $routeMap = merge $routeMap (dict $p.RelPermalink $id) -}}
+    {{- $html := partial "app/article.html" $p -}}
+    {{- $revision := crypto.SHA256 $html -}}
+    {{- $canonical := printf "https://outsideinprint.org%s" $p.RelPermalink -}}
+    {{- $payload := dict "id" $id "html" $html "revision" $revision "canonicalURL" $canonical -}}
+    {{- $resource := resources.FromString (printf "app/v1/articles/%s-%s.json" (crypto.MD5 $id) (substr $revision 0 12)) ($payload | jsonify) -}}
+    {{- $articleURL := $resource.Permalink -}}
+    {{- $image := partial "library/artwork-for-entry.html" $p -}}
+    {{- $hero := "" -}}{{- $alt := "" -}}
+    {{- with $image -}}{{- $hero = printf "https://outsideinprint.org%s" .src -}}{{- $alt = .alt -}}{{- $artID := "" -}}{{- with .imageId }}{{ $artID = printf "image:%s" . }}{{ else }}{{ with .cartoonSlug }}{{ $artID = printf "cartoon:%s" . }}{{ end }}{{ end -}}{{- with $artID }}{{- $artwork = $artwork | append (dict "id" . "articleId" $id "url" $hero "alt" $alt "title" $image.title "credit" $image.credit "gallery" $image.gallery) -}}{{- end -}}{{- end -}}
+    {{- $collections := slice -}}
+    {{- range partial "collections/resolve-page-collections.html" (dict "page" $p "publicOnly" true) -}}
+      {{- $c := dict "slug" .collection.slug "title" .collection.title "url" (printf "https://outsideinprint.org/collections/%s/" .collection.slug) -}}
+      {{- $collections = $collections | append $c -}}{{- $collectionMap = merge $collectionMap (dict .collection.slug $c) -}}
+    {{- end -}}
+    {{- $type := partial "archive/longform-kind.html" $p -}}
+    {{- if eq $p.Section "almanack" -}}{{- $type = "almanack" -}}{{- end -}}
+    {{- if $p.Params.sample_of_book_key -}}{{- $type = "book-sample" -}}{{- end -}}
+    {{- $item := dict "id" $id "title" $p.Title "subtitle" (partial "discovery/page-summary.html" $p) "author" ($p.Params.author | default "Outside In Print") "date" ($p.PublishDate.Format "2006-01-02T15:04:05Z07:00") "canonicalURL" $canonical "revision" $revision "articleURL" $articleURL "type" $type "hero" $hero "heroAlt" $alt "collections" $collections -}}
+    {{- if eq $type "almanack" -}}{{- $item = merge $item (dict "issueDate" ($p.Date.Format "2006-01-02")) -}}{{- with $p.Params.issue_number -}}{{- $item = merge $item (dict "issueNumber" .) -}}{{- end -}}{{- end -}}
+    {{- $items = $items | append $item -}}
+    {{- if eq $type "almanack" -}}{{- $issues = $issues | append $item -}}{{- end -}}
+    {{- if eq $type "book-sample" -}}{{- if isset $sampleMap $p.Params.sample_of_book_key -}}{{- errorf "Duplicate public sample for %s" $p.Params.sample_of_book_key -}}{{- end -}}{{- $books = $books | append $item -}}{{- $sampleMap = merge $sampleMap (dict $p.Params.sample_of_book_key $id) -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $bookCatalog := slice -}}
+{{- with site.GetPage "/shop" -}}
+  {{- range sort (where .Pages "Params.book_key" "!=" nil) "Weight" "asc" -}}
+    {{- $policy := partial "metadata/policy.html" (dict "page" .) -}}
+    {{- $visible := and (not .Draft) $policy.indexable (or .Date.IsZero (le .Date now)) (or .PublishDate.IsZero (le .PublishDate now)) (or .ExpiryDate.IsZero (gt .ExpiryDate now)) -}}
+    {{- if $visible -}}
+      {{- $key := .Params.book_key -}}
+      {{- $product := partial "shop/product-data.html" (dict "key" $key "page" .) -}}
+      {{- $image := partial "images/model.html" (dict "page" . "ref" ($product.cover_image | default .Params.image) "display" true) -}}
+      {{- $sample := index $sampleMap $key | default nil -}}
+      {{- $bookCatalog = $bookCatalog | append (dict "id" $key "title" ($product.title | default .Title) "subtitle" ($product.subtitle | default "") "author" ($product.author | default "Outside In Print") "description" ($product.deck | default "") "edition" ($product.edition_note | default "") "cover" (printf "https://outsideinprint.org%s" $image.fallback_url) "alt" ($product.cover_alt | default "") "sampleId" $sample) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $galleryData := hugo.Data.editorial_cartoons | default dict -}}
+{{- range partial "editorial/published-cartoons.html" ($galleryData.cartoons | default (slice)) -}}
+  {{- $image := partial "images/model.html" (dict "page" site.Home "ref" .image "display" true) -}}
+  {{- $reading := partial "editorial/linked-reading-page.html" . -}}
+  {{- $articleId := "" -}}
+  {{- with $reading -}}{{- $articleId = index $routeMap .RelPermalink | default "" -}}{{- end -}}
+  {{- $artId := printf "cartoon:%s" .slug -}}
+  {{- if $image.id -}}{{- $artId = printf "image:%s" $image.id -}}{{- end -}}
+  {{- $artwork = $artwork | append (dict "id" $artId "articleId" $articleId "url" (printf "https://outsideinprint.org%s" $image.lightbox_url) "title" .title "alt" .alt) -}}
+{{- end -}}
+{{- $front := hugo.Data.app_front_page -}}
+{{- if ne $front.schemaVersion 1 -}}{{- errorf "Unsupported app front page schema" -}}{{- end -}}
+{{- if not (in (slice "latest" "pinned") $front.lead.mode) -}}{{- errorf "Unknown app lead mode" -}}{{- end -}}
+{{- if and (eq $front.lead.mode "pinned") (not (in $ids $front.lead.id)) -}}{{- errorf "App lead is not published: %s" $front.lead.id -}}{{- end -}}
+{{- range $front.selectedIds -}}{{- if not (in $ids .) -}}{{- errorf "App selection is not published: %s" . -}}{{- end -}}{{- end -}}
+{{- if ne (len $front.selectedIds) (len (uniq $front.selectedIds)) -}}{{- errorf "Duplicate app selections" -}}{{- end -}}
+{{- $curated := $front.selectedIds -}}
+{{- if eq $front.lead.mode "pinned" -}}{{- $curated = $curated | append $front.lead.id -}}{{- end -}}
+{{- range $curated -}}{{- range where $items "id" . -}}
+  {{- if in (slice "almanack" "book-sample") .type -}}{{- errorf "App front page selection must be a published piece: %s" .id -}}{{- end -}}
+{{- end -}}{{- end -}}
+{{- $collections := slice -}}{{- range $collectionMap -}}{{- $collections = $collections | append . -}}{{- end -}}
+{{- $albums := slice -}}
+{{- range hugo.Data.music.albums -}}
+  {{- $tracks := slice -}}{{- range .tracks -}}{{- $tracks = $tracks | append (dict "id" .id "title" .title "number" .number "duration" .duration "src" .src) -}}{{- end -}}
+  {{- $albums = $albums | append (dict "id" .id "title" .title "artist" .artist "cover" (dict "src" .cover.src "alt" .cover.alt) "tracks" $tracks) -}}
+{{- end -}}
+{{- $catalog := dict "schemaVersion" 1 "offlineContentComplete" true "offlineGalleryComplete" true "bookCatalog" $bookCatalog "generatedAt" (now.Format "2006-01-02T15:04:05Z07:00") "revision" (crypto.SHA256 (printf "%s%s%s%s" ($items | jsonify) ($front | jsonify) ($bookCatalog | jsonify) ($artwork | jsonify))) "items" (sort $items "date" "desc") "frontPage" $front "collections" $collections "artwork" $artwork "almanack" $issues "books" $books "jukebob" (dict "title" "JukeBob" "url" "https://outsideinprint.org/music/" "source" "published-music-page" "albums" $albums) -}}
+{{- $catalog | jsonify -}}

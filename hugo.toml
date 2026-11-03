@@ -22,7 +22,7 @@ isPlainText = true
 notAlternative = true
 
 [outputs]
-home = ["HTML", "RSS"]
+home = ["HTML", "RSS", "AppCatalog"]
 page = ["HTML"]
 section = ["HTML"]
 
@@ -161,3 +161,15 @@ files = [
   "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/04b2dcb77098c7f62348da1aab95730f03b92e9a41e694cdbafe3526e942b6cf.jpeg",
   "why-more-people-are-choosing-chilis-over-mcdonald-s-in-2025/2826bfc60d4144f0359cc4d57178b38608fde8c284b80ddca5493b4a2c790017.jpeg"
 ]
+
+[outputFormats.AppCatalog]
+mediaType = "application/json"
+baseName = "catalog"
+path = "app/v1"
+isPlainText = true
+notAlternative = true
+
+[segments.app]
+[[segments.app.includes]]
+kind = "home"
+output = "{AppCatalog,appcatalog}"

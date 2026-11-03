@@ -83,7 +83,7 @@ $config = Read-RequiredText 'hugo.toml'
 $outputsBlock = [regex]::Match($config, '(?ms)^\[outputs\]\s*\r?\n(?<body>.*?)(?=^\[|\z)').Groups['body'].Value
 Assert-True ($outputsBlock.Length -gt 0) 'hugo.toml must define an explicit outputs policy.'
 foreach ($line in @(
-  'home = ["HTML", "RSS"]',
+  'home = ["HTML", "RSS", "AppCatalog"]',
   'page = ["HTML"]',
   'section = ["HTML"]'
 )) {

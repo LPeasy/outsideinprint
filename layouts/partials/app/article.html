@@ -1,0 +1,22 @@
+{{- $p := . -}}
+{{- $html := "" -}}
+{{- if eq $p.Section "almanack" -}}
+  {{- $html = partial "app/render-web-view.html" (dict "page" $p "template" "layouts/almanack/single.html") -}}
+{{- else if $p.Params.sample_of_book_key -}}
+  {{- $html = partial "app/render-web-view.html" (dict "page" $p "template" "layouts/shop/sample.html") -}}
+{{- else -}}
+  {{- $image := partial "library/artwork-for-entry.html" $p -}}
+  {{- $hero := "" -}}
+  {{- with $image -}}
+    {{- $hero = printf `<figure class="piece-hero"><img src="%s" alt="%s"><figcaption>%s</figcaption></figure>` .src (.alt | htmlEscape) ($p.Params.featured_image_caption | default "" | markdownify) -}}
+  {{- end -}}
+  {{- $body := partial "render_article_body.html" $p -}}
+  {{- $timeline := "" -}}
+  {{- with $p.Params.timeline_sidebar -}}
+    {{- $timeline = printf `<aside class="timeline-sidebar"><h2>%s</h2>` (.title | htmlEscape) -}}
+    {{- range .entries -}}{{- $timeline = printf `%s<p><strong>%s</strong> — %s</p>` $timeline (.date | markdownify) (.text | markdownify) -}}{{- end -}}
+    {{- $timeline = printf `%s</aside>` $timeline -}}
+  {{- end -}}
+  {{- $html = printf `<article class="piece"><h1>%s</h1><p class="subtitle">%s</p><p class="piece-byline">By %s</p>%s<div class="piece-body">%s</div>%s</article>` ($p.Title | htmlEscape) ($p.Params.subtitle | default "" | htmlEscape) ($p.Params.author | default "Outside In Print" | htmlEscape) $hero $body $timeline -}}
+{{- end -}}
+{{- return (printf "%s" $html) -}}
