@@ -159,7 +159,10 @@ foreach ($requiredSnippet in @(
 $homeV2Template = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_v2_front_page.html') -Raw -Encoding utf8
 $homeGuestSelection = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_guest_selected.html') -Raw -Encoding utf8
 $homeGuestFeature = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_guest_feature.html') -Raw -Encoding utf8
-if ($homeGuestSelection -notmatch '/essays/a-public-record-must-outlast-the-feed/' -or
+if ($homeGuestSelection -notmatch 'range site\.RegularPages' -or
+    $homeGuestSelection -notmatch [regex]::Escape('$eligible = sort (sort $eligible "Title" "asc") "PublishDate" "desc"') -or
+    $homeGuestSelection -notmatch [regex]::Escape('range first 1 $eligible') -or
+    $homeGuestSelection -match '\$guestRoutes|"/essays/' -or
     $homeGuestSelection -notmatch 'eq \.Params\.contributor_role "guest"' -or
     $homeGuestSelection -notmatch 'strings\.TrimSpace.*?\.Params\.author' -or
     $homeGuestSelection -notmatch 'not \.Draft' -or
@@ -168,7 +171,7 @@ if ($homeGuestSelection -notmatch '/essays/a-public-record-must-outlast-the-feed
     $homeGuestSelection -notmatch 'or \.ExpiryDate\.IsZero \(gt \.ExpiryDate\.Unix \$now\.Unix\)' -or
     $homeSelectionTemplate -notmatch 'partial "home_guest_selected\.html"' -or
     $homeSelectionTemplate -notmatch 'ne \.RelPermalink \$guestRoute') {
-  throw 'Expected the guest placement to reserve only the named eligible guest essay with an explicit writer.'
+  throw 'Expected the guest placement to reserve the newest eligible guest essay with an explicit writer.'
 }
 foreach ($requiredSnippet in @(
   'class="home-v2-guest reading-card"',

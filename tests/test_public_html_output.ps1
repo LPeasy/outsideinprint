@@ -5923,13 +5923,16 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   $guestSourcePath = $null
   $guestAuthor = ''
   $expectedGuestPaths = @()
-  foreach ($candidateGuestPath in @('/essays/the-true-cost-of-a-used-car/', '/essays/breach-of-confidence-therapy-records/', '/essays/a-public-record-must-outlast-the-feed/')) {
-    $candidateSourcePath = Join-Path $repoRoot ('content' + $candidateGuestPath.TrimEnd('/') + '.md')
-    if (-not (Test-Path -LiteralPath $candidateSourcePath -PathType Leaf)) { continue }
+  # Hugo's published inventory is already ordered newest-first, with title ties.
+  foreach ($candidate in $publishedReadingRecords) {
+    $candidateSourcePath = if ([IO.Path]::IsPathRooted($candidate.path)) { $candidate.path } else { Join-Path $repoRoot $candidate.path }
+    $candidateRelativePath = [IO.Path]::GetRelativePath($repoRoot, $candidateSourcePath).Replace('\', '/')
+    if ($candidateRelativePath -notlike 'content/essays/*' -or -not (Test-Path -LiteralPath $candidateSourcePath -PathType Leaf)) { continue }
     $candidateAuthor = (Get-FrontMatterScalarFromMarkdownFile -Path $candidateSourcePath -Key 'author').Trim()
     $candidateRole = Get-FrontMatterScalarFromMarkdownFile -Path $candidateSourcePath -Key 'contributor_role'
-    if ($candidateGuestPath -cin $publishedReadingPaths -and $candidateRole -ceq 'guest' -and $candidateAuthor) {
-      $guestPath = $candidateGuestPath
+    $candidateKind = (Get-FrontMatterScalarFromMarkdownFile -Path $candidateSourcePath -Key 'library_type').Trim().ToLowerInvariant()
+    if ($candidateRole -ceq 'guest' -and $candidateAuthor -and $candidateKind -notin @('dialogue', 'affirmation')) {
+      $guestPath = Get-SitePathFromHref -Href $candidate.permalink
       $guestSourcePath = $candidateSourcePath
       $guestAuthor = $candidateAuthor
       $expectedGuestPaths = @($guestPath)
