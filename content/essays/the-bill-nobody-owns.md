@@ -31,6 +31,8 @@ The handoff is where the bill gets stuck. The first person to see the alert may 
 
 I work with organizations adopting artificial intelligence (AI) and other digital tools. The most useful question I ask about a new automated process is often a surprisingly old-fashioned one. Who has to answer when the process encounters something that doesn't fit?
 
+## Who Can Make the Decision?
+
 The software has done the first of four jobs by flagging the fee. Whoever checks the orders has to judge whether the charge needs a closer look. A person with the power to act can then decide whether to pay it or dispute it. The last job is to check that the decision was carried out. One person can do more than one of these jobs, as long as everyone knows who does what.
 
 ![Four jobs for a flagged invoice: detect the unfamiliar fee, assess it against purchase orders, decide whether to pay or dispute it, and check that the decision was carried out.](oip-image:essays/the-bill-nobody-owns/section-1)
@@ -45,6 +47,8 @@ The software can save the reviewer time by pulling up the contract and pointing 
 
 The National Institute of Standards and Technology's [AI Risk Management Framework playbook](https://airc.nist.gov/airmf-resources/playbook/govern/) calls for clear roles and lines of communication. It also asks organizations to spell out who is responsible for human oversight. The framework is voluntary. In our example, the person who gets the alert should know whether they can act on the fee and whom to call if they can't.
 
+## The Handoff Needs an Owner
+
 Say purchasing checks the orders and sends the bill to contracts. That clears one item from the purchasing queue. Contracts can check whether the agreement allows the fee, but may need accounting to confirm what the vendor charged. A manager can see the handoff on the dashboard. The vendor is waiting to find out who can decide and when to expect an answer. For the handoff to work, someone has to take the case and be responsible for getting a decision back to the vendor.
 
 ![The system logs that a fee was flagged and the invoice passed from purchasing to contracts. The vendor needs to know who can decide, when to expect an answer, and whether the decision was carried out.](oip-image:essays/the-bill-nobody-owns/section-2)
@@ -54,6 +58,8 @@ Say purchasing checks the orders and sends the bill to contracts. That clears on
 The manager can check how long the bill has been open, whether it keeps coming back to the same desk, and whether anyone carried out the decision. For AI systems, the U.S. Government Accountability Office's [AI Accountability Framework](https://www.gao.gov/products/gao-21-519sp) calls for clear roles and delegated authority. It also recommends keeping records of what monitoring turns up and what people do to correct a problem.
 
 Several people may have a say in the bill. The person who takes the case has to be able to say, in effect, "This is ours until it is closed." They can handle routine decisions within set limits and go straight to someone with more authority when needed. Sending every case through another round of approvals could leave the vendor waiting longer.
+
+## Keep the Case Through Closure
 
 I'd draw up an *exception map* before a fee gets stuck. It says where the alert goes, who takes the case and what they're allowed to decide. It also tells the vendor when they'll hear back and where to go if they dispute the answer. Somebody has to check that the final decision was put into effect.
 
