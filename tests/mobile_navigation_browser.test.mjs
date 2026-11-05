@@ -92,20 +92,27 @@ test("Guest Feature fits below the lead beside supporting stories and stacks saf
     const value = source.match(new RegExp(`^${key}:\\s*(.+?)\\r?$`, "m"))?.[1] || "";
     return value.startsWith('"') ? JSON.parse(value) : value.replace(/^'|'$/g, "");
   };
-  const expectedGuest = ["/essays/the-true-cost-of-a-used-car/", "/essays/breach-of-confidence-therapy-records/", "/essays/a-public-record-must-outlast-the-feed/"]
-    .map((route) => {
-      const file = path.join(repoRoot, `content${route.slice(0, -1)}.md`);
-      const source = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : "";
-      return { route, source, author: scalar(source, "author").trim() };
-    }).find(({ route, source, author }) => {
+  const essaysRoot = path.join(repoRoot, "content/essays");
+  const expectedGuest = fs.readdirSync(essaysRoot, { recursive: true })
+    .filter((file) => file.endsWith(".md") && path.basename(file) !== "_index.md")
+    .map((file) => {
+      const source = fs.readFileSync(path.join(essaysRoot, file), "utf8")
+        .match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] || "";
+      const name = path.basename(file, ".md");
+      const slug = scalar(source, "slug") || (name === "index" ? path.basename(path.dirname(file)) : name);
+      const route = scalar(source, "url") || "/essays/" + slug + "/";
       const date = scalar(source, "date");
-      const released = scalar(source, "publishDate") || date;
+      return { route, source, title: scalar(source, "title"), author: scalar(source, "author").trim(),
+        date, released: scalar(source, "publishDate") || date };
+    }).filter(({ route, source, author, date, released }) => {
       const expiry = scalar(source, "expiryDate");
+      const kind = scalar(source, "library_type").trim().toLowerCase();
       return fs.existsSync(path.join(siteDir, route, "index.html")) && scalar(source, "draft") !== "true"
         && scalar(source, "contributor_role") === "guest" && author
+        && !["dialogue", "affirmation"].includes(kind)
         && Date.parse(date) <= observationTime && Date.parse(released) <= observationTime
         && (!expiry || Date.parse(expiry) > observationTime);
-    });
+    }).sort((a, b) => Date.parse(b.released) - Date.parse(a.released) || a.title.localeCompare(b.title))[0];
   assert.ok(expectedGuest, "one approved guest must be eligible in this output");
   const guestRoute = expectedGuest.route;
   for (const width of [360, 768, 769, 900, 901, 1280]) {
