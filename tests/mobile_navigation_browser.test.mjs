@@ -95,9 +95,13 @@ test("Guest Feature fits below the lead beside supporting stories and stacks saf
   const essaysRoot = path.join(repoRoot, "content/essays");
   const expectedGuest = fs.readdirSync(essaysRoot, { recursive: true })
     .filter((file) => file.endsWith(".md") && path.basename(file) !== "_index.md")
-    .map((file) => {
-      const source = fs.readFileSync(path.join(essaysRoot, file), "utf8")
-        .match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] || "";
+    .map((file) => ({
+      file,
+      source: fs.readFileSync(path.join(essaysRoot, file), "utf8")
+        .match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] || "",
+    }))
+    .filter(({ source }) => scalar(source, "contributor_role") === "guest")
+    .map(({ file, source }) => {
       const name = path.basename(file, ".md");
       const slug = scalar(source, "slug") || (name === "index" ? path.basename(path.dirname(file)) : name);
       const route = scalar(source, "url") || "/essays/" + slug + "/";
