@@ -245,6 +245,7 @@ collections:
       - id: risk-frameworks-decisions
         title: Risk frameworks and decisions
         items:
+          - the-bill-nobody-owns
           - what-is-risk-a-four-part-framework
           - risk-management-vs-risk-analysis-whats-the-difference
           - its-tough-to-weigh-short-term-costs-against-what-people-perceive-as-low-probability-events
