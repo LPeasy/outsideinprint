@@ -1,4 +1,4 @@
-{{- $items := slice -}}{{- $artwork := slice -}}{{- $issues := slice -}}{{- $books := slice -}}{{- $ids := slice -}}{{- $collectionMap := dict -}}{{- $sampleMap := dict -}}{{- $routeMap := dict -}}
+{{- $items := slice -}}{{- $artwork := slice -}}{{- $issues := slice -}}{{- $books := slice -}}{{- $ids := slice -}}{{- $collectionMap := dict -}}{{- $sampleMap := dict -}}{{- $routeMap := dict -}}{{- $issueLeadRoutes := dict -}}
 {{- $source := partial "library/resolve-entries.html" . -}}
 {{- $pages := slice -}}
 {{- range $source.entries -}}{{- $pages = $pages | append .page -}}{{- end -}}
@@ -25,13 +25,38 @@
     {{- $type := partial "archive/longform-kind.html" $p -}}
     {{- if eq $p.Section "almanack" -}}{{- $type = "almanack" -}}{{- end -}}
     {{- if $p.Params.sample_of_book_key -}}{{- $type = "book-sample" -}}{{- end -}}
-    {{- $item := dict "id" $id "title" $p.Title "subtitle" (partial "discovery/page-summary.html" $p) "author" ($p.Params.author | default "Outside In Print") "date" ($p.PublishDate.Format "2006-01-02T15:04:05Z07:00") "canonicalURL" $canonical "revision" $revision "articleURL" $articleURL "type" $type "hero" $hero "heroAlt" $alt "collections" $collections -}}
-    {{- if eq $type "almanack" -}}{{- $item = merge $item (dict "issueDate" ($p.Date.Format "2006-01-02")) -}}{{- with $p.Params.issue_number -}}{{- $item = merge $item (dict "issueNumber" .) -}}{{- end -}}{{- end -}}
+    {{- $item := dict "id" $id "title" $p.Title "subtitle" (partial "discovery/page-summary.html" $p) "author" ($p.Params.author | default "Outside In Print") "date" ($p.PublishDate.Format "2006-01-02T15:04:05Z07:00") "canonicalURL" $canonical "revision" $revision "articleURL" $articleURL "type" $type "readingTime" (math.Max 1 $p.ReadingTime) "hero" $hero "heroAlt" $alt "collections" $collections -}}
+    {{- if eq $type "almanack" -}}
+      {{- $item = merge $item (dict "issueDate" ($p.Date.Format "2006-01-02")) -}}
+      {{- with $p.Params.issue_number -}}{{- $item = merge $item (dict "issueNumber" .) -}}{{- end -}}
+      {{- with $p.Params.essays -}}
+        {{- with (index . 0).url -}}
+          {{- $link := urls.Parse . -}}
+          {{- if and (or (eq $link.Host "") (eq $link.Host "outsideinprint.org")) (hasPrefix $link.Path "/") -}}
+            {{- $issueLeadRoutes = merge $issueLeadRoutes (dict $id (printf "%s/" (strings.TrimSuffix "/" $link.Path))) -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
     {{- $items = $items | append $item -}}
-    {{- if eq $type "almanack" -}}{{- $issues = $issues | append $item -}}{{- end -}}
     {{- if eq $type "book-sample" -}}{{- if isset $sampleMap $p.Params.sample_of_book_key -}}{{- errorf "Duplicate public sample for %s" $p.Params.sample_of_book_key -}}{{- end -}}{{- $books = $books | append $item -}}{{- $sampleMap = merge $sampleMap (dict $p.Params.sample_of_book_key $id) -}}{{- end -}}
   {{- end -}}
 {{- end -}}
+{{/* Resolve after collecting eligible pages so explicit content IDs and forward references work. */}}
+{{- $resolvedItems := slice -}}
+{{- range $item := $items -}}
+  {{- if eq $item.type "almanack" -}}
+    {{- $leadID := index $routeMap (index $issueLeadRoutes $item.id | default "") -}}
+    {{- $publishedLeadID := "" -}}
+    {{- range where $items "id" $leadID -}}
+      {{- if not (in (slice "almanack" "book-sample") .type) -}}{{- $publishedLeadID = .id -}}{{- end -}}
+    {{- end -}}
+    {{- $item = merge $item (dict "leadStoryId" ($publishedLeadID | default nil)) -}}
+    {{- $issues = $issues | append $item -}}
+  {{- end -}}
+  {{- $resolvedItems = $resolvedItems | append $item -}}
+{{- end -}}
+{{- $items = $resolvedItems -}}
 {{- $bookCatalog := slice -}}
 {{- with site.GetPage "/shop" -}}
   {{- range sort (where .Pages "Params.book_key" "!=" nil) "Weight" "asc" -}}
