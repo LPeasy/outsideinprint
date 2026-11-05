@@ -7,20 +7,29 @@ from html.parser import HTMLParser
 
 class AlmanackMarkup(HTMLParser):
  def __init__(self):
-  super().__init__();self.version=None;self.covers=0;self.sections=[];self.images=[]
+  super().__init__();self.version=None;self.covers=0;self.sections=[];self.images=[];self.in_cover=False;self.cover_link=None
  def handle_starttag(self,tag,attrs):
   attrs=dict(attrs)
   if tag=='article':self.version=attrs.get('data-oip-almanack')
-  if tag=='header' and 'data-oip-cover' in attrs:self.covers+=1
+  if tag=='header' and 'data-oip-cover' in attrs:self.covers+=1;self.in_cover=True
+  if tag=='a' and self.in_cover and self.cover_link is None:self.cover_link=attrs.get('href')
   if tag=='section' and 'data-oip-section' in attrs:self.sections.append(attrs['data-oip-section'])
   if tag=='img':self.images.append(attrs)
+ def handle_endtag(self,tag):
+  if tag=='header':self.in_cover=False
 
 
 p=argparse.ArgumentParser();p.add_argument('--site-dir',required=True);p.add_argument('--clock');args=p.parse_args();root=Path(args.site_dir)
 c=json.loads((root/'app/v1/catalog.json').read_text());assert c['schemaVersion']==1 and c['offlineContentComplete'] is True and c['offlineGalleryComplete'] is True
 ids=[x['id'] for x in c['items']];assert len(ids)==len(set(ids)) and ids
 now=datetime.datetime.fromisoformat(args.clock.replace('Z','+00:00')) if args.clock else datetime.datetime.now(datetime.timezone.utc)
+stories_by_path={
+ urlparse(item['canonicalURL']).path.rstrip('/'):item['id']
+ for item in c['items'] if item['type'] not in {'almanack','book-sample'}
+}
+issues_by_id={issue['id']:issue for issue in c['almanack']}
 for item in c['items']:
+ assert isinstance(item.get('readingTime'), (int,float)) and item['readingTime']>=1, item['id']
  assert datetime.datetime.fromisoformat(item['date'].replace('Z','+00:00'))<=now,item['id']
  assert item['canonicalURL'].startswith('https://outsideinprint.org/'),item['id']
  payload=json.loads((root/urlparse(item['articleURL']).path.lstrip('/')).read_text())
@@ -31,6 +40,10 @@ for item in c['items']:
  if item['type']=='almanack':
   issue=AlmanackMarkup();issue.feed(payload['html'])
   assert issue.version=='1' and issue.covers==1 and issue.sections, item['id']
+  url=urlparse(urljoin('https://outsideinprint.org/',issue.cover_link or ''))
+  expected_lead=stories_by_path.get(url.path.rstrip('/')) if url.netloc=='outsideinprint.org' else None
+  assert item['leadStoryId']==expected_lead, (item['id'],item['leadStoryId'],expected_lead)
+  assert issues_by_id[item['id']]==item, item['id']
   assert len(issue.sections)==len(set(issue.sections)), (item['id'], issue.sections)
   for image in issue.images:
    assert image.get('src') and image.get('alt'), (item['id'], image)
