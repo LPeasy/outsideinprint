@@ -286,7 +286,7 @@ test("all regular positions reject outside authors and contributor roles, includ
   };
   for (const [label, byline] of Object.entries(cases)) {
     const result = renderSelection(t, {
-      guest: guestMetadata,
+      guest: { ...guestMetadata, date: "2020-08-02", publishDate: "2020-08-02T09:00:00Z" },
       flagship: { title: "Outside flagship", url: flagship, date: "2020-08-01", ...byline },
       mountain: { title: "Outside curated piece", url: mountain, date: "2020-08-01", ...byline },
       outside: { title: "Outside latest and fallback", date: "2020-08-01", ...byline },
@@ -397,6 +397,71 @@ test("an ineligible used-car essay falls back to Elijah while preserving all gue
     assert.equal(new Set([...result.featured, result.guest]).size, 6, name);
     for (const route of [usedCarRoute, elijahRoute, guestRoute]) assert.ok(!result.featured.includes(route), name);
   }
+});
+
+test("Gleb becomes the Guest Feature at his release and any newer guest essay replaces him automatically", (t) => {
+  const source = fs.readFileSync("content/essays/the-bill-nobody-owns.md", "utf8");
+  const gleb = Object.fromEntries(["title", "author", "date", "publishDate", "section_label", "contributor_role"]
+    .map((key) => {
+      const value = source.match(new RegExp(`^${key}: (.+)$`, "m"))[1].trim();
+      return [key, value.startsWith('"') ? JSON.parse(value) : value];
+    }));
+  gleb.url = "/essays/the-bill-nobody-owns/";
+  const release = Date.parse(gleb.publishDate);
+  const nextRelease = release + 86400000;
+  const newcomer = { ...gleb, title: "A completely new guest essay", author: "Next Guest",
+    url: "/essays/never-listed-before/", publishDate: new Date(nextRelease).toISOString() };
+  const entries = { guest: guestMetadata, elijah: elijahMetadata, usedCar: usedCarMetadata, gleb, newcomer };
+  for (const [clock, expected, byline] of [
+    [release - 1000, usedCarRoute, "Jacob Fixture"],
+    [release, gleb.url, gleb.author],
+    [nextRelease - 1000, gleb.url, gleb.author],
+    [nextRelease, newcomer.url, newcomer.author],
+  ]) {
+    const result = renderSelection(t, entries, "guest", new Date(clock).toISOString());
+    assert.equal(result.guest, expected);
+    assert.ok(result.html.includes(`By ${byline}`));
+    assert.equal((result.html.match(/<article\b/g) || []).length, 1);
+    assert.deepEqual(result.featured, [flagship, "/essays/latest/", mountain, modelo, antProblem]);
+    assert.equal(new Set([...result.featured, result.guest]).size, 6);
+  }
+});
+
+test("unlisted guests obey every eligibility guard and fall back to the newest published guest", (t) => {
+  const candidate = { ...guestMetadata, title: "New guest", url: "/essays/new-guest/",
+    date: "2026-11-01", publishDate: "2026-11-01T09:00:00-05:00", author: "New Guest" };
+  const cases = {
+    absent: null,
+    draft: { ...candidate, draft: true },
+    futureDate: { ...candidate, date: "2030-01-01" },
+    futureRelease: { ...candidate, publishDate: "2030-01-01" },
+    expired: { ...candidate, expiryDate: "2026-11-01T09:00:00-05:00" },
+    anonymous: { ...candidate, author: " \t " },
+    contributing: { ...candidate, contributor_role: "contributing" },
+    unlabelled: { ...candidate, contributor_role: "" },
+    dialogue: { ...candidate, library_type: "dialogue", section_label: "Dialogue" },
+    affirmation: { ...candidate, library_type: "affirmation", section_label: "Affirmation" },
+  };
+  for (const [name, newcomer] of Object.entries(cases)) {
+    const result = renderSelection(t, { guest: guestMetadata, usedCar: usedCarMetadata, newcomer }, "guest", "2026-11-01T14:00:00Z");
+    assert.equal(result.guest, usedCarRoute, name);
+    assert.deepEqual(result.featured, [flagship, "/essays/latest/", mountain, modelo, antProblem], name);
+    assert.equal(new Set([...result.featured, result.guest]).size, 6, name);
+  }
+});
+
+test("guest recency uses publication time before article date and title to break equal publication times", (t) => {
+  const early = { ...guestMetadata, title: "A earlier release", url: "/essays/newer-article-date/",
+    date: "2020-08-02", publishDate: "2020-08-02T09:00:00Z" };
+  const late = { ...guestMetadata, title: "Z later release", url: "/essays/older-article-date/",
+    date: "2020-01-01", publishDate: "2020-08-02T12:00:00Z" };
+  assert.equal(renderSelection(t, { early, late }, "guest").guest, late.url);
+  assert.equal(renderSelection(t, { early, late: { ...late, publishDate: early.publishDate } }, "guest").guest, early.url);
+});
+
+test("guest publication falls back to date when publishDate is absent", (t) => {
+  const dated = { title: "Date-only guest", date: "2020-08-01", author: "Date Guest", contributor_role: "guest" };
+  assert.equal(renderSelection(t, { guest: guestMetadata, dated }, "guest").guest, "/essays/dated/");
 });
 
 test("lead descriptions are trimmed and plain text while blank descriptions retain shared fallbacks", (t) => {

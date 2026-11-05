@@ -41,14 +41,18 @@ const publishedPages = rows.map((row) => Object.fromEntries(columns.map((column,
     && Date.parse(row.date) <= observationTime && Date.parse(row.publishDate) <= observationTime)
   .sort((a, b) => Date.parse(b.publishDate) - Date.parse(a.publishDate) || a.title.localeCompare(b.title));
 const publishedRoutes = publishedPages.map((row) => row.route);
-const guestCandidates = ["/essays/the-true-cost-of-a-used-car/", "/essays/breach-of-confidence-therapy-records/", "/essays/a-public-record-must-outlast-the-feed/"]
-  .map((route) => {
-    const file = path.resolve(`content${route.slice(0, -1)}.md`);
-    const source = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : "";
-    return { route, source, author: source.match(/^author: "([^"]+)"\r?$/m)?.[1]?.trim() || "" };
+// Discover guests from Hugo's published inventory, not a hand-maintained route list.
+const guestCandidates = publishedPages
+  .filter((page) => /^content[\\/]essays[\\/]/.test(page.path))
+  .map((page) => {
+    const source = fs.readFileSync(path.resolve(page.path), "utf8");
+    const frontMatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] || "";
+    const scalar = (name) => frontMatter.match(new RegExp(`^${name}:[ \t]*([^\\r\\n]*)`, "m"))?.[1]
+      ?.trim().replace(/^["']|["']$/g, "").trim() || "";
+    return { ...page, source, author: scalar("author"), role: scalar("contributor_role"), kind: scalar("library_type") };
   });
-const selectedGuest = guestCandidates.find(({ route, source, author }) => publishedRoutes.includes(route)
-  && /^contributor_role: "guest"\r?$/m.test(source) && Boolean(author));
+const selectedGuest = guestCandidates.find(({ route, author, role, kind }) => role === "guest" && Boolean(author)
+  && !["dialogue", "affirmation"].includes(kind.toLowerCase()) && !route.startsWith("/syd-and-oliver/"));
 const { route: guestRoute = "", source: guestSource = "", author: guestAuthor = "" } = selectedGuest || {};
 const guestEligible = Boolean(selectedGuest);
 // Check public authorship independently of the homepage selector, including mixed bylines.
