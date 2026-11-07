@@ -6,7 +6,25 @@
     {{- errorf "Almanack guest_feature must be a mapping" -}}
   {{- else -}}
     {{- $limits := dict "label" 80 "title" 240 "author" 160 "url" 200 "capsule" 600 -}}
-    {{- if ne (len $guest) (len $limits) -}}{{- errorf "Almanack guest_feature requires exactly label, title, author, url and capsule" -}}{{- end -}}
+    {{- if eq $page.Params.almanack_layout "alternating-margins-v1" -}}
+      {{- $art := slice "image" "email_image" "image_alt" -}}
+      {{- $artCount := 0 -}}
+      {{- range $key, $value := $guest -}}
+        {{- if in $art $key -}}
+          {{- $artCount = add $artCount 1 -}}
+          {{- if or (ne (printf "%T" $value) "string") (eq (strings.TrimSpace (printf "%v" $value)) "") -}}
+            {{- errorf "Almanack guest_feature.%s must be nonempty text" $key -}}
+          {{- end -}}
+        {{- else if not (isset $limits $key) -}}
+          {{- errorf "Almanack guest_feature has unsupported field %s" $key -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if and (gt $artCount 0) (ne $artCount (len $art)) -}}
+        {{- errorf "Almanack guest_feature artwork requires image, email_image and image_alt together" -}}
+      {{- end -}}
+    {{- else if ne (len $guest) (len $limits) -}}
+      {{- errorf "Almanack guest_feature requires exactly label, title, author, url and capsule" -}}
+    {{- end -}}
     {{- range $key, $limit := $limits -}}
       {{- $value := index $guest $key -}}
       {{- if ne (printf "%T" $value) "string" -}}
