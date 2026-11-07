@@ -1,0 +1,74 @@
+{
+  "schema": "oip-almanack-web-fragment/v1",
+  "layout": "alternating-margins-v1",
+  "issue_date": "2026-11-07",
+  "issue_number": 27,
+  "approved_source_sha256": "5e928ee5dd9c954d9905540ca50fbbd0faf860da4724df61049801b3e099bf38",
+  "staged_source_sha256": "3f979f41615bc490a9a01d826ab835b155f7f867ba6b23cc02ba30c359df9c9d",
+  "approved_full_issue_sha256": "5c2e830d54747bca77ea998b84322b081b0b1daa55b6c622cab6d3efa6987cc6",
+  "fragment_sha256": "dc03101dcd23cacb552a6c3f0477b3d51815c4a1d2575f9b1679367176137fe9",
+  "css_sha256": "0adf6547cbab296613602f008db0b9951664634246031ad78f0a60b10eedae11",
+  "template_signature": "8fb546b18b5e5c79a47736bb27e83ab6a507d00ed8ba394f2ffe9e43a212d8f8",
+  "managed_images": [
+    {
+      "ref": "essays/dialogues/business-before-work/hero",
+      "source_url": "https://outsideinprint.org/images/rendered/essays/dialogues/business-before-work/hero/26f32800049e/social-1200w.jpg",
+      "alt": "Two men pack matching rust-colored paperbacks into a carton on a chair at an outdoor book market in warm late-afternoon light.",
+      "token": "<!--ALMANACK-MANAGED-IMAGE-0-->",
+      "display_style": "display:block;max-width:100%;height:auto;width:632px;",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "sizes": "(min-width:75.5rem) 680px, (max-width:61.25rem) calc(100vw - 6rem), 680px"
+    },
+    {
+      "ref": "essays/the-bill-nobody-owns/hero",
+      "source_url": "https://outsideinprint.org/images/rendered/essays/the-bill-nobody-owns/hero/9c9b14763543/social-1200w.jpg",
+      "alt": "Two hands reach toward a flagged invoice suspended between them in warm desk light.",
+      "token": "<!--ALMANACK-MANAGED-IMAGE-1-->",
+      "display_style": "display:block;width:100%;max-width:100%;height:auto;margin:0 0 12px;",
+      "loading": "lazy",
+      "fetchpriority": "",
+      "sizes": "(min-width:75.5rem) 680px, (max-width:61.25rem) calc(100vw - 6rem), 680px"
+    },
+    {
+      "ref": "essays/dialogues/anything-you-want/hero",
+      "source_url": "https://outsideinprint.org/images/rendered/essays/dialogues/anything-you-want/hero/a748fd34eb06/social-1200w.jpg",
+      "alt": "Two men at a pizza-shop counter, one steadying an open box while the other lifts a slice over a paper plate, with a glowing oven and delivery rider behind them.",
+      "token": "<!--ALMANACK-MANAGED-IMAGE-2-->",
+      "display_style": "display:block;max-width:100%;height:auto;width:632px;",
+      "loading": "lazy",
+      "fetchpriority": "",
+      "sizes": "(min-width:75.5rem) 680px, (max-width:61.25rem) calc(100vw - 6rem), 680px"
+    },
+    {
+      "ref": "essays/dialogues/very-serious/hero",
+      "source_url": "https://outsideinprint.org/images/rendered/essays/dialogues/very-serious/hero/700b09561534/social-1200w.jpg",
+      "alt": "At a warmly lit hotel mixer, one man adjusts a white name tag while his companion watches over a glass of beer.",
+      "token": "<!--ALMANACK-MANAGED-IMAGE-3-->",
+      "display_style": "display:block;max-width:100%;height:auto;width:632px;",
+      "loading": "lazy",
+      "fetchpriority": "",
+      "sizes": "(min-width:75.5rem) 680px, (max-width:61.25rem) calc(100vw - 6rem), 680px"
+    },
+    {
+      "ref": "essays/dialogues/both-colors/hero",
+      "source_url": "https://outsideinprint.org/images/rendered/essays/dialogues/both-colors/hero/08e39197cd6a/social-1200w.jpg",
+      "alt": "Two men beside an open car hatch compare red, blue and green paint swatches against a blank plywood sign under parking-lot lights.",
+      "token": "<!--ALMANACK-MANAGED-IMAGE-4-->",
+      "display_style": "display:block;max-width:100%;height:auto;width:632px;",
+      "loading": "lazy",
+      "fetchpriority": "",
+      "sizes": "(min-width:75.5rem) 680px, (max-width:61.25rem) calc(100vw - 6rem), 680px"
+    },
+    {
+      "ref": "editorial/strait-to-voicemail",
+      "source_url": "https://outsideinprint.org/images/rendered/editorial/strait-to-voicemail/3daa703337bb/960w.webp",
+      "alt": "Editorial cartoon showing a phone reading TEHRAN - SENT TO VOICEMAIL beside sanctions papers, a locked blockade over the Strait of Hormuz, tankers, and a public-costs chart for oil, jet fuel, and shipping.",
+      "token": "<!--ALMANACK-MANAGED-IMAGE-5-->",
+      "display_style": "display:block;width:100%;max-width:100%;height:auto;margin:0 0 12px;",
+      "loading": "lazy",
+      "fetchpriority": "",
+      "sizes": "(min-width:75.5rem) 680px, (max-width:61.25rem) calc(100vw - 6rem), 680px"
+    }
+  ]
+}
