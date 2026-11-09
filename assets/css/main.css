@@ -8599,6 +8599,29 @@ h1,
   text-wrap:balance;
 }
 h2{ margin-top:34px; }
+/* Expandable text alternatives for article charts. */
+.piece-body .chart-text .table-scroll{
+  max-width:100%;
+  overflow-x:auto;
+}
+.piece-body .chart-text table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.9em;
+  line-height:1.45;
+}
+.piece-body .chart-text caption{
+  padding:.5em 0;
+  text-align:left;
+}
+.piece-body .chart-text :is(th,td){
+  padding:.35em .25em;
+  text-align:left;
+  vertical-align:top;
+  overflow-wrap:normal;
+  border-bottom:1px solid var(--oip-rule-list);
+}
+
 .piece-body h2,
 .piece-body h3{
   position:relative;
