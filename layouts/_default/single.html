@@ -110,6 +110,7 @@
         {{ end }}
         <div class="piece-title-block"{{ if $hasContributorHeader }} data-contributor-header="true"{{ end }}>
           <h1>{{ .Title }}</h1>
+          {{ with .Params.scope_line }}<p class="piece-record-line piece-scope-line">{{ . }}</p>{{ end }}
           {{ if $hasContributorHeader }}
             {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
           {{ end }}
@@ -206,7 +207,7 @@
           {{ if ne .Params.show_citation false }}
             <div class="article-publication-record__section article-publication-record__section--citation">
               <p class="article-publication-record__label">Cite this</p>
-              <code>{{ $meta.author_name | default "Robert V. Ussley" }}. "{{ .Title }}{{ if not (or (strings.HasSuffix .Title ".") (strings.HasSuffix .Title "?") (strings.HasSuffix .Title "!")) }}.{{ end }}" <i>Outside In Print</i>, {{ .Date.Format "2006-01-02" }}. Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
+              <code>{{ $meta.author_name | default "Robert V. Ussley" }}. "{{ .Title }}{{ if not (or (strings.HasSuffix .Title ".") (strings.HasSuffix .Title "?") (strings.HasSuffix .Title "!")) }}.{{ end }}" <i>Outside In Print</i>, {{ with .Date }}{{ .Format "2006-01-02" }}.{{ else }}n.d.{{ end }} Version {{ .Params.version | default "1.0" }}. {{ .Permalink }}</code>
             </div>
           {{ end }}
           {{ with .Params.revision_history }}
