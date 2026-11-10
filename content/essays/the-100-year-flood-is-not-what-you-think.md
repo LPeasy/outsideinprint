@@ -177,9 +177,7 @@ But in this case, the house does **not** always win.
 The term "100-year flood" is a technical definition, not a prediction.
 [FEMA describes](https://www.fema.gov/flood-maps/know-your-risk/homeowners)
 the 100-year flood as the 1% annual chance flood and uses the same 26%
-figure for a 30-year mortgage in high-risk flood zones. The math here
-assumes independence and constant risk, which is how floodplain maps are
-formally constructed.
+figure for a 30-year mortgage in high-risk flood zones. This calculation assumes independent years and a constant annual flood probability.
 
 Real-world flood risk can be higher or lower depending on location,
 elevation, drainage, and changing climate conditions.
