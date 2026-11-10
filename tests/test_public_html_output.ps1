@@ -3373,7 +3373,7 @@ if ($targetPageHtml.ContainsKey('public/404.html')) {
 
 $expectedHomeReaderNote = 'Outside In Print publishes independent reporting, essays, dialogues, and reflections. Find the evidence behind public issues and fresh perspectives on everyday life. Step away from doomscrolling, ads, and algorithmic feeds, and follow your own curiosity.'
 
-$almanackIssueExitBoundary = '(?s)</article>\s*<section\b(?=[^>]*\sclass=(?:"(?:[^"]*\s)?almanack-share-toolbar--bottom(?:\s[^"]*)?"|''(?:[^'']*\s)?almanack-share-toolbar--bottom(?:\s[^'']*)?''|almanack-share-toolbar--bottom)(?:\s|>))[^>]*>(?:(?!</?section\b).)*</section>\s*'
+$almanackIssueExitBoundary = '(?s)</article>\s*'
 
 $requiredUxChecks = @(
   @{

@@ -69,42 +69,40 @@ function elementBlock(html, start, tag) {
   assert.fail(`Unclosed ${tag} fixture element`);
 }
 
-test("real Hugo shells add two independent controls to legacy, current and future published issues", t => {
+test("real Hugo shells add one masthead share row to legacy, current and future published issues", t => {
   const fixture = buildShareFixture();
   t.diagnostic(`Retained Almanack sharing fixture: ${fixture.site}`);
   const ordinary = fixture.read("public", "essays/fixture").split("<main>")[1].split("</main>")[0];
   assert.equal(ordinary, read("tests/fixtures/piece-share-default-rendered.html"), "Ordinary article control HTML must remain byte-identical.");
   for (const date of ["2026-10-24", "2026-10-31", "2026-11-07"]) {
     const html = fixture.read("public", `almanack/${date}`);
-    assert.equal((html.match(/data-piece-share\b/g) || []).length, 2, date);
+    assert.equal((html.match(/data-piece-share\b/g) || []).length, 1, date);
     const canonical = `https://outsideinprint.org/almanack/${date}/`;
     const urls = [...html.matchAll(/data-share-url="([^"]+)"/g)].map(m => m[1]);
-    assert.deepEqual(urls, [canonical, canonical]);
-    const ids = [...html.matchAll(/\bid="((?:piece-share-|almanack-share-url-)[^"]+)"/g)].map(m => m[1]);
-    assert.equal(ids.length, 8);assert.equal(new Set(ids).size, 8);
-    for (const instance of ["top", "bottom"]) {
-      assert.ok(html.includes(`aria-controls="piece-share-options-almanack-${instance}"`));
-      assert.ok(html.includes(`for="piece-share-link-almanack-${instance}"`));
-      assert.ok(html.includes(`aria-describedby="piece-share-status-almanack-${instance}"`));
-      assert.ok(html.includes(`for="almanack-share-url-${instance}"`));
-    }
+    assert.deepEqual(urls, [canonical]);
+    const ids = [...html.matchAll(/\bid="(piece-share-[^"]+|almanack-share-url)"/g)].map(m => m[1]);
+    assert.equal(ids.length, 4);assert.equal(new Set(ids).size, 4);
+    assert.ok(html.includes('aria-controls="piece-share-options-almanack"'));
+    assert.ok(html.includes('for="piece-share-link-almanack"'));
+    assert.ok(html.includes('aria-describedby="piece-share-status-almanack"'));
+    assert.ok(html.includes('for="almanack-share-url"'));
     const articleStart = html.indexOf(date === "2026-10-24" ? '<article class="almanack-issue' : '<article class="review-issue" id="issue"');
     const article = elementBlock(html, articleStart, "article");
-    assert.doesNotMatch(article, /data-piece-share|almanack-share-toolbar/);
-    assert.ok(html.indexOf("almanack-share-toolbar--top") < articleStart);
-    assert.ok(html.indexOf("almanack-share-toolbar--bottom") > articleStart + article.length);
-    assert.ok(html.indexOf("almanack-share-toolbar--bottom") < html.indexOf('id="bobs-almanack-signup"'));
+    assert.match(article, /<\/header>\s*<div class="almanack-share-toolbar"/);
+    assert.doesNotMatch(html, /Share this issue|almanack-share-toolbar--/);
+    assert.ok(articleStart + article.length < html.indexOf('id="bobs-almanack-signup"'));
     assert.equal((html.match(/id="bobs-almanack-signup"/g) || []).length, 1);
     if (date === "2026-10-31") {
       const visible = value => value.replace(/<!--[\s\S]*?-->/g, "").replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
-      assert.equal(visible(article), visible(fixture.currentBody));
+      const row = elementBlock(article, article.indexOf('<div class="almanack-share-toolbar"'), "div");
+      assert.equal(visible(article.replace(row, "")), visible(fixture.currentBody));
       const hrefs = value => [...value.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)].map(m => m[1]);
       assert.deepEqual(hrefs(article), hrefs(fixture.currentBody));
     }
   }
   for (const [mode, route] of [["before", "almanack/2026-11-07"], ["public", "almanack/2026-11-14"], ["public", "almanack/2026-10-17"], ["local", "almanack/2026-10-31"]]) {
     const html = fixture.read(mode, route);
-    assert.doesNotMatch(html, /data-piece-share|almanack-share-url-|almanack-share-toolbar--/);
+    assert.doesNotMatch(html, /<[^>]+(?:data-piece-share|id="almanack-share-url"|class="almanack-share-toolbar")/);
   }
 });
 
@@ -114,6 +112,7 @@ function shareHarness({ manual = true, native = "none", clipboard = "success" } 
     constructor(id = "") { super(); this.id = id; this.hidden = true; this.isConnected = true; this.textContent = ""; this.attrs = {}; }
     getAttribute(name) { return this.attrs[name] ?? null; }
     setAttribute(name, value) { this.attrs[name] = String(value); }
+    removeAttribute(name) { delete this.attrs[name]; }
     focus() { state.activeElement = this; }
     select() { state.selection = this.value; }
   }
@@ -133,11 +132,16 @@ function shareHarness({ manual = true, native = "none", clipboard = "success" } 
   };
   if (clipboard !== "none") navigator.clipboard = { writeText: url => { state.copies.push(url);return clipboard === "success" ? Promise.resolve() : Promise.reject(new Error("denied")); } };
   const removers = [];
-  const scope = { active: () => state.active, on: (target, name, callback, options) => { target.addEventListener(name, callback, options);removers.push(() => target.removeEventListener(name, callback, options)); } };
-  vm.runInNewContext(client, { navigator, URL, document: { readyState: "complete", querySelectorAll: () => wrappers }, window: { oipRegisterRouteWidget: (_, mount) => mount(scope) } });
+  const timers = new Map();
+  const scope = { active: () => state.active, cleanup: callback => removers.push(callback), on: (target, name, callback, options) => { target.addEventListener(name, callback, options);removers.push(() => target.removeEventListener(name, callback, options)); } };
+  const window = { oipRegisterRouteWidget: (_, mount) => mount(scope),
+    setTimeout: callback => { const id = Symbol();timers.set(id, callback);return id; },
+    clearTimeout: id => timers.delete(id) };
+  vm.runInNewContext(client, { navigator, URL, document: { readyState: "complete", querySelectorAll: () => wrappers }, window });
   const click = async node => { node.dispatchEvent(new Event("click"));await new Promise(resolve => setImmediate(resolve)); };
   const escape = wrapper => { const event = new Event("keydown", { cancelable: true });event.key = "Escape";wrapper.dispatchEvent(event); };
-  return { state, wrappers, click, escape, dispose: () => { state.active = false;removers.forEach(remove => remove()); } };
+  return { state, wrappers, click, escape, expireCopyFeedback: () => [...timers.values()].forEach(callback => callback()),
+    dispose: () => { state.active = false;removers.forEach(remove => remove()); } };
 }
 
 test("two Almanack controls isolate canonical copy feedback and provide a selected desktop share fallback", async () => {
@@ -149,7 +153,10 @@ test("two Almanack controls isolate canonical copy feedback and provide a select
   await env.click(bottom.nodes.copy);
   assert.deepEqual(env.state.copies, ["https://outsideinprint.org/almanack/2026-10-31/"]);
   assert.equal(bottom.nodes.status.textContent, "Link copied.");
+  assert.equal(bottom.nodes.copy.textContent, "Copied");
   assert.equal(top.nodes.status.textContent, "Copy this link to share this issue.");
+  env.expireCopyFeedback();
+  assert.equal(bottom.nodes.copy.textContent, "Copy link");
   env.escape(top);assert.equal(top.nodes.panel.hidden, true);assert.equal(env.state.activeElement, top.nodes.trigger);
   assert.deepEqual(env.state.shares, []);
 });

@@ -33,6 +33,7 @@
     var manualShareFallback = wrapper.dataset.shareManualFallback === "issue";
     var sharing = false;
     var panelGeneration = 0;
+    var copiedTimer;
 
     if (!trigger || !panel || !copyButton || !closeButton || !manual || !input || !status ||
         !panel.id || trigger.getAttribute("aria-controls") !== panel.id || !title || !shareUrl) {
@@ -45,6 +46,17 @@
     manual.hidden = true;
     trigger.setAttribute("aria-expanded", "false");
     wrapper.hidden = false;
+
+    function resetCopyFeedback() {
+      if (copiedTimer === undefined) return;
+      window.clearTimeout(copiedTimer);
+      copiedTimer = undefined;
+      copyButton.textContent = "Copy link";
+      status.removeAttribute("data-share-copied");
+      if (status.textContent === "Link copied.") status.textContent = "";
+    }
+
+    if (manualShareFallback) scope.cleanup(resetCopyFeedback);
 
     function showPanel() {
       if (!scope.active() || wrapper.isConnected === false) return;
@@ -78,6 +90,7 @@
       if (sharing) {
         return;
       }
+      resetCopyFeedback();
 
       if (typeof navigator.share !== "function") {
         if (manualShareFallback) showManualCopy("Copy this link to share this issue.");
@@ -107,6 +120,7 @@
     scope.on(copyButton, "click", async function () {
       var requestGeneration = ++panelGeneration;
 
+      resetCopyFeedback();
       status.textContent = "";
       manual.hidden = true;
 
@@ -121,6 +135,11 @@
           return;
         }
         status.textContent = "Link copied.";
+        if (manualShareFallback) {
+          copyButton.textContent = "Copied";
+          status.setAttribute("data-share-copied", "");
+          copiedTimer = window.setTimeout(resetCopyFeedback, 1800);
+        }
       } catch (error) {
         if (!scope.active() || requestGeneration !== panelGeneration) {
           return;

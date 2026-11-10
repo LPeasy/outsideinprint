@@ -33,7 +33,7 @@ Write-Fixture 'layouts/partials/metadata/page.html' '{{ return (dict "title" .Ti
 # archives eligible to display the real signup's existing latest-issue link.
 Write-Fixture 'layouts/partials/almanack/latest-issue-url.html' '{{ return "/almanack/2026-10-31/" }}'
 Write-Fixture 'layouts/_default/baseof.html' '<html><body>{{ block "main" . }}{{ end }}</body></html>'
-Write-Fixture 'layouts/almanack/single.html' '{{ define "main" }}<article><p>Protected archive content.</p></article>{{ partial "almanack/share-toolbar.html" (dict "page" . "position" "bottom") }}{{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--article-exit page-shell page-shell--wide" "anchorID" "bobs-almanack-signup" "focusTarget" true "sourceSlot" "almanack_issue_exit_newsletter") }}{{ end }}'
+Write-Fixture 'layouts/almanack/single.html' '{{ define "main" }}<article><header><h1>Almanack</h1></header>{{ partial "almanack/share-toolbar.html" . }}<p>Protected archive content.</p></article>{{ partial "newsletter_signup.html" (dict "page" . "class" "newsletter-signup--article-exit page-shell page-shell--wide" "anchorID" "bobs-almanack-signup" "focusTarget" true "sourceSlot" "almanack_issue_exit_newsletter") }}{{ end }}'
 foreach ($date in @('2026-07-25','2026-08-29')) { Write-Fixture "content/almanack/$date.md" ("---`ntitle: Archive fixture`ndate: $date`ndraft: false`nurl: /almanack/$date/`n---`n") }
 $assertions=0
 foreach ($minified in @($false,$true)) {
@@ -44,20 +44,13 @@ foreach ($minified in @($false,$true)) {
   Assert-Exit ($LASTEXITCODE -eq 0) ($build -join "`n")
   foreach ($check in $checks) {
     $html=[IO.File]::ReadAllText((Join-Path $destination ($check.Path.Substring(7))))
-    Assert-Exit ($html -match $check.Pattern) "Actual toolbar+newsletter must pass: $($check.Path), minified=$minified";$assertions++
-    $toolbar=[regex]::Match($html,'(?s)<section\b(?=[^>]*almanack-share-toolbar--bottom)[^>]*>(?:(?!</?section\b).)*</section>')
-    Assert-Exit $toolbar.Success 'Fixture must contain the real bottom toolbar.'
+    Assert-Exit ($html -match $check.Pattern) "Newsletter must follow the issue: $($check.Path), minified=$minified";$assertions++
+    $issueEnd=$html.IndexOf('</article>') + '</article>'.Length
     $bad=@{
-      missing=$html.Remove($toolbar.Index,$toolbar.Length)
-      duplicate=$html.Insert($toolbar.Index,$toolbar.Value)
-      wrong=$html.Replace('almanack-share-toolbar--bottom','almanack-share-toolbar--top')
-      dataClass=$html.Replace($toolbar.Value,($toolbar.Value -replace '^<section\b([^>]*?)\sclass=','<section$1 data-class='))
-      wrongRealClass=$html.Replace($toolbar.Value,($toolbar.Value -replace '^<section\b([^>]*?)\sclass=','<section$1 class="wrong" data-class='))
-      extra=$html.Insert($toolbar.Index+$toolbar.Length,'<section>Unrelated region</section>')
-      nested=$html.Insert($toolbar.Index+$toolbar.Length-10,'<section>Unrelated region</section>')
+      extra=$html.Insert($issueEnd,'<section>Unrelated region</section>')
+      retiredToolbar=$html.Insert($issueEnd,'<section class="almanack-share-toolbar--bottom">Share this issue</section>')
       wrongSlot=$html.Replace('almanack_issue_exit_newsletter','unrelated_slot')
       noSlot=[regex]::Replace($html,'\sdata-analytics-source-slot=(?:"[^"]*"|''[^'']*''|[^\s>]+)','')
-      misplaced=$html.Insert(0,$toolbar.Value).Remove($toolbar.Index+$toolbar.Length,$toolbar.Length)
     }
     foreach ($name in $bad.Keys) { Assert-Exit ($bad[$name] -notmatch $check.Pattern) "Must reject $name for $($check.Path), minified=$minified";$assertions++ }
     if ($check.Path -like '*2026-07-25*') { Assert-Exit ($html.Replace('The weekly newsletter','Altered proposition') -notmatch $check.Pattern) 'Keep exact archived newsletter copy.';$assertions++ }

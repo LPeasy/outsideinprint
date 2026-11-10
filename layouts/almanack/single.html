@@ -1,4 +1,4 @@
-{{ define "main" }}{{ partial "almanack/share-toolbar.html" (dict "page" . "position" "top") }}{{ if isset .Params "almanack_layout" }}{{ partial "almanack/approved-sheet.html" . }}{{ else }}
+{{ define "main" }}{{ if isset .Params "almanack_layout" }}{{ partial "almanack/approved-sheet.html" . }}{{ else }}
   {{ $issueDate := .Date }}
   {{ $essays := .Params.essays | default (slice) }}
   {{ $lead := dict }}
@@ -40,6 +40,7 @@
         <p class="almanack-masthead__meta newsletter-prompt"><a href="#bobs-almanack-signup">Subscribe to Bob&rsquo;s Almanack</a></p>
       {{ end }}
     </header>
+    {{ partial "almanack/share-toolbar.html" . }}
 
     <figure class="almanack-quote almanack-quote--opening">
       <blockquote>{{ .Params.opening_quote }}</blockquote>
@@ -292,7 +293,6 @@
   </article>
 
 {{ end }}
-{{ partial "almanack/share-toolbar.html" (dict "page" . "position" "bottom") }}
   {{ partial "newsletter_signup.html" (dict
     "page" .
     "class" "newsletter-signup--article-exit page-shell page-shell--wide"
