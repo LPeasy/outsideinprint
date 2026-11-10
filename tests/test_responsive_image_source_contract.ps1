@@ -269,7 +269,14 @@ $disney2020sPhotoIds = @(
   'essays/disney-world-2020s/section-2',
   'essays/disney-world-2020s/section-3'
 )
-$routinePhotoIds = @($modernBioPortraits | ForEach-Object { $_.id }) + $disneyOpeningPhotoIds + $epcotOpeningPhotoIds + $disneyExpansionPhotoIds + $animalKingdomPhotoIds + $disney2000sPhotoIds + $disney2010sPhotoIds + $disney2020sPhotoIds
+$seoulCommutePhotoIds = @(
+  'essays/between-buses-in-seoul/itaewon-rooftops',
+  'essays/between-buses-in-seoul/section-2',
+  'essays/between-buses-in-seoul/nonhyeon-stop',
+  'essays/between-buses-in-seoul/yeoksam-shelter',
+  'essays/between-buses-in-seoul/itaewon-arrival-display'
+)
+$routinePhotoIds = @($modernBioPortraits | ForEach-Object { $_.id }) + $disneyOpeningPhotoIds + $epcotOpeningPhotoIds + $disneyExpansionPhotoIds + $animalKingdomPhotoIds + $disney2000sPhotoIds + $disney2010sPhotoIds + $disney2020sPhotoIds + $seoulCommutePhotoIds
 $intentionallyRetiredManagedAssetIds = @(
   'essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts',
   'essays/charlie-kirk-how-a-campus-activist-learned-to-command-the-national-conversation/hero',
@@ -484,7 +491,7 @@ foreach ($assetId in $assetIds) {
 }
 
 Assert-Equal -Actual ([int]($classCounts['medium_import'] ?? 0)) -Expected 112 -Message 'Managed Medium canonical count changed.'
-Assert-Equal -Actual ([int]($classCounts['essay_photo'] ?? 0)) -Expected (13 + $routinePhotoIds.Count) -Message 'The 13 legacy essay photos plus the explicit Modern Bios and Disney development photo sets must remain intact.'
+Assert-Equal -Actual ([int]($classCounts['essay_photo'] ?? 0)) -Expected (13 + $routinePhotoIds.Count) -Message 'The 13 legacy essay photos and the explicitly registered essay photo sets must remain intact.'
 foreach ($photoId in $routinePhotoIds) {
   if ($assetIds -cnotcontains $photoId) {
     throw "Missing explicitly registered essay photograph: $photoId"

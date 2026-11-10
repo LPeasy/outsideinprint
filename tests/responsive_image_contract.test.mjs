@@ -85,6 +85,11 @@ test("responsive image manifest keeps the frozen baseline and processing default
     ...disney2000sPhotoIds,
     ...disney2010sPhotoIds,
     ...disney2020sPhotoIds,
+    "essays/between-buses-in-seoul/itaewon-rooftops",
+    "essays/between-buses-in-seoul/section-2",
+    "essays/between-buses-in-seoul/nonhyeon-stop",
+    "essays/between-buses-in-seoul/yeoksam-shelter",
+    "essays/between-buses-in-seoul/itaewon-arrival-display",
   ];
   const intentionallyRetiredManagedAssetIds = [
     "essays/the-scenario-that-ate-the-future/bibliometrics-framing-counts",
