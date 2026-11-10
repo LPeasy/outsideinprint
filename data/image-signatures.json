@@ -24,6 +24,10 @@
       "inset_ratio": 0.1,
       "reason": "Move above the final warning so the full warning remains readable."
     },
+    "essays/between-buses-in-seoul/section-1": {
+      "enabled": false,
+      "reason": "Seoul government lane-data map; preserve its approved presentation and linked map credits."
+    },
     "essays/epcot-center-opening-1982/city-transport-plan": {
       "enabled": false,
       "reason": "Archival Disney EPCOT transportation plan; sourced artwork identified in article caption."
