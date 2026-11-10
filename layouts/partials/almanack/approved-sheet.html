@@ -41,6 +41,12 @@
     {{- $renderedBody = replace $renderedBody .token $picture 1 -}}
   {{- end -}}
   {{- if strings.Contains $renderedBody "<!--ALMANACK-MANAGED-IMAGE-" }}{{ errorf "Unresolved approved Almanack image for %s" $date }}{{ end -}}
+  {{- with partial "almanack/share-toolbar.html" . -}}
+    {{- if not (strings.Contains $renderedBody "</header>") -}}
+      {{- errorf "Missing approved Almanack masthead header for %s" $date -}}
+    {{- end -}}
+    {{- $renderedBody = replace $renderedBody "</header>" (printf "</header>%s" .) 1 -}}
+  {{- end -}}
   <style>{{ $css.Content | safeCSS }}</style>
   <style>#almanack-approved .almanack-approved-picture{display:block;max-width:100%}@media(min-width:1208px){#almanack-approved{width:1160px;margin-left:calc((100% - 1160px)/2);}}</style>
   <section id="almanack-approved" aria-labelledby="almanack-title" data-almanack-layout="alternating-margins-v1">

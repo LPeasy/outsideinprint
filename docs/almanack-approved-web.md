@@ -4,18 +4,17 @@
 alternating-margin presentation. Issues without this field keep their existing
 Hugo rendering. An unknown version or missing/stale presentation fails the build.
 
-Published, indexable issues receive compact Share and Copy link toolbars above
-the reading content and at its end, before the newsletter signup. Both legacy
-and approved-sheet render paths use this shared Hugo shell, so existing and
-future issues inherit the controls without per-issue source fields or regenerated
-fragments. The toolbars remain outside the source-bound issue body; keep its
-editorial content, artwork, masthead and versioned CSS unchanged.
+Published, indexable issues show one inline row with Share and Copy link just
+below the masthead. Align the row right on desktop and center it on phones.
+Hugo adds the controls when it renders both legacy and approved-sheet layouts.
+The approved issue fragments keep their saved content and hashes.
 
 Sharing uses the issue's resolved canonical URL, without tracking parameters or
 fragments. Native sharing opens only after a reader presses Share. When it is
 unavailable or fails, the Almanack control exposes the selectable URL; cancelling
 native sharing remains quiet. Copy link confirms success or offers manual
-selection. Each instance has separate accessible IDs, keyboard focus handling,
+selection. The copy button briefly reads Copied after success. The row has
+accessible IDs, keyboard focus handling,
 44px targets and a selectable no-JavaScript URL fallback. These actions add no
 analytics event, third-party sharing widget or automatic transmission.
 

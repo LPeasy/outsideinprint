@@ -8179,16 +8179,38 @@ body.cartoon-lightbox-open{
   --oip-rule-clear:#74624d;
   --focus-ring:#346782;
   box-sizing:border-box;
-  margin:1rem auto;
-  padding:.75rem 1rem;
-  border-top:1px solid var(--oip-rule-standard);
-  border-bottom:1px solid var(--oip-rule-standard);
-  background:var(--bg-page);
+  margin:0 auto .5rem;
   color:var(--text-primary);
 }
-.almanack-share-toolbar__label{
-  margin:0 0 .5rem;
-  font:600 .85rem/1.5 var(--font-ui);
+#almanack-approved .almanack-share-toolbar{
+  max-width:600px;
+}
+.almanack-share-toolbar .piece-share__actions{
+  justify-content:flex-end;
+  gap:.25rem;
+}
+.almanack-share-toolbar .piece-share__actions .piece-share__button{
+  border-color:transparent;
+  background:transparent;
+  color:#346782;
+}
+.almanack-share-toolbar .piece-share__actions .piece-share__button:hover{
+  text-decoration:underline;
+}
+.almanack-share-toolbar .piece-share__panel{
+  margin-inline-start:auto;
+}
+.almanack-share-toolbar [data-share-copied]{
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip-path:inset(50%);
+}
+@media(max-width:640px){
+  .almanack-share-toolbar .piece-share__actions{
+    justify-content:center;
+  }
 }
 .almanack-share-toolbar__fallback label{
   display:block;

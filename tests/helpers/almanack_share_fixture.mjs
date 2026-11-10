@@ -54,7 +54,7 @@ export function buildShareFixture() {
   const manifestPath = path.join(site, "assets/almanack/2026-10-31/manifest.json");
   fs.writeFileSync(manifestPath, JSON.stringify({ ...JSON.parse(fs.readFileSync(manifestPath)), managed_images: currentManifest.managed_images }));
   fs.cpSync(path.join(root, "static/images/almanack/2026-10-31"), path.join(site, "static/images/almanack/2026-10-31"), { recursive: true });
-  const futureBody = '<h1 id="almanack-title">A future published issue</h1><p>Exact future protected copy.</p>';
+  const futureBody = '<header><h1 id="almanack-title">A future published issue</h1></header><p>Exact future protected copy.</p>';
   approved("2026-11-07", Buffer.from(JSON.stringify(simple("2026-11-07", { almanack_layout: "alternating-margins-v1", issue_number: 27 })) + "\n"), Buffer.from(futureBody), css);
   const shared = process.platform === "win32" ? path.join(os.homedir(), "Documents/30_Resources/toolchains/hugo/0.167.0/hugo.exe") : "hugo";
   const hugo = process.env.OIP_HUGO_BIN || shared;

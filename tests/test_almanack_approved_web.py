@@ -176,18 +176,17 @@ class ApprovedWebTests(unittest.TestCase):
                 return (node.tag,tuple(sorted(node.attrs.items())),tuple(children))
             old_article=next(n for n in before.all() if n.tag=="article" and has_class(n,"almanack-issue"))
             new_article=next(n for n in after.all() if n.tag=="article" and has_class(n,"almanack-issue"))
-            toolbars=[n for n in after.all() if n.tag=="section" and has_class(n,"almanack-share-toolbar")]
-            self.assertEqual(len(toolbars),2)
-            self.assertFalse(any(n in list(new_article.all()) for n in toolbars))
-            self.assertEqual(protected_tree(new_article),protected_tree(old_article))
-            # Only the two named shell regions may differ across the whole
-            # document; the existing signup is still identical and occurs once.
+            toolbars=[n for n in after.all() if n.tag=="div" and has_class(n,"almanack-share-toolbar")]
+            self.assertEqual(len(toolbars),1)
+            self.assertIn(toolbars[0],list(new_article.all()))
+            self.assertEqual(protected_tree(new_article,toolbars),protected_tree(old_article))
+            # Only the inline share row differs. The signup is identical.
             self.assertEqual(protected_tree(after,toolbars),protected_tree(before))
             all_nodes=list(after.all())
             signup=[n for n in all_nodes if n.attrs.get("id")=="bobs-almanack-signup"]
             self.assertEqual(len(signup),1)
-            self.assertLess(all_nodes.index(new_article),all_nodes.index(toolbars[1]))
-            self.assertLess(all_nodes.index(toolbars[1]),all_nodes.index(signup[0]))
+            self.assertLess(all_nodes.index(new_article),all_nodes.index(toolbars[0]))
+            self.assertLess(all_nodes.index(toolbars[0]),all_nodes.index(signup[0]))
 
 
 if __name__=="__main__":unittest.main(verbosity=2)

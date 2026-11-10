@@ -166,12 +166,12 @@ test("share control progressively enhances only representative eligible routes",
       const response = await page.goto(`${siteOrigin}${route}`, { waitUntil: "load" });
       assert.equal(response.status(), 200, route);
       const wrappers = page.locator("[data-piece-share]");
-      assert.equal(await wrappers.count(), route.startsWith("/almanack/") ? 2 : 1);
+      assert.equal(await wrappers.count(), 1);
       const wrapper = wrappers.first();
       await wrapper.waitFor({ state: "visible" });
       assert.equal(await wrapper.locator("[data-share-trigger]").textContent(), "Share");
       assert.equal(await wrapper.locator("[data-share-trigger]").getAttribute("aria-expanded"), "false");
-      const panelID = route.startsWith("/almanack/") ? "piece-share-options-almanack-top" : "piece-share-options";
+      const panelID = route.startsWith("/almanack/") ? "piece-share-options-almanack" : "piece-share-options";
       assert.equal(await wrapper.locator("[data-share-trigger]").getAttribute("aria-controls"), panelID);
       assert.equal(await wrapper.locator("[data-share-panel]").getAttribute("id"), panelID);
       assert.equal(await wrapper.locator("[data-share-input]").getAttribute("readonly"), "");
@@ -603,15 +603,18 @@ test("article Share sits in its publication rail while other byline rows and mob
       }
       await page.goto(`${siteOrigin}/almanack/2026-09-12/`, { waitUntil: "load" });
       const toolbars = page.locator(".almanack-share-toolbar");
-      assert.equal(await toolbars.count(), 2);
+      assert.equal(await toolbars.count(), 1);
       for (const toolbar of await toolbars.all()) {
         await toolbar.locator("[data-piece-share]").waitFor({ state: "visible" });
         const geometry = await toolbar.evaluate(node => ({
           buttons: [...node.querySelectorAll(".piece-share__actions button")].map(button => ({ width: button.getBoundingClientRect().width, height: button.getBoundingClientRect().height })),
           left: node.getBoundingClientRect().left, right: node.getBoundingClientRect().right,
+          followsMasthead: node.previousElementSibling?.matches("header"),
+          inIssue: !!node.closest("article.almanack-issue"),
           viewportWidth: innerWidth, scrollWidth: document.documentElement.scrollWidth, clientWidth: document.documentElement.clientWidth
         }));
         assert.ok(geometry.buttons.every(button => button.width >= 44 && button.height >= 44), JSON.stringify(geometry));
+        assert.ok(geometry.followsMasthead && geometry.inIssue, JSON.stringify(geometry));
         assert.ok(geometry.left >= 0 && geometry.right <= geometry.viewportWidth, JSON.stringify(geometry));
         assert.ok(geometry.scrollWidth <= geometry.clientWidth, JSON.stringify(geometry));
       }
@@ -686,7 +689,7 @@ test("article Share sits in its publication rail while other byline rows and mob
   }
 });
 
-test("every built indexable Almanack issue has two canonical shell controls with unique accessible IDs", () => {
+test("every built indexable Almanack issue has one canonical share row with unique accessible IDs", () => {
   const attribute = (tag, name) => {
     const match = tag.match(new RegExp(`(?:^|\\s)${name}=(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "i"));
     return match ? match[1] ?? match[2] ?? match[3] : null;
@@ -700,14 +703,12 @@ test("every built indexable Almanack issue has two canonical shell controls with
     if (tags.some(tag => attribute(tag, "name") === "robots" && (attribute(tag, "content") || "").includes("noindex"))) continue;
     const canonical = `${siteOrigin}/almanack/${issue.name}/`;
     const urls = tags.map(tag => attribute(tag, "data-share-url")).filter(value => value !== null);
-    assert.deepEqual(urls, [canonical, canonical], issue.name);
-    const ids = tags.map(tag => attribute(tag, "id")).filter(value => /^(?:piece-share-|almanack-share-url-)/.test(value || ""));
-    assert.equal(ids.length, 8, issue.name);assert.equal(new Set(ids).size, 8, issue.name);
-    for (const instance of ["top", "bottom"]) {
-      assert.ok(tags.some(tag => attribute(tag, "aria-controls") === `piece-share-options-almanack-${instance}`), issue.name);
-      assert.ok(tags.some(tag => attribute(tag, "for") === `piece-share-link-almanack-${instance}`), issue.name);
-      assert.ok(tags.some(tag => attribute(tag, "aria-describedby") === `piece-share-status-almanack-${instance}`), issue.name);
-    }
+    assert.deepEqual(urls, [canonical], issue.name);
+    const ids = tags.map(tag => attribute(tag, "id")).filter(value => /^(?:piece-share-|almanack-share-url$)/.test(value || ""));
+    assert.equal(ids.length, 4, issue.name);assert.equal(new Set(ids).size, 4, issue.name);
+    assert.ok(tags.some(tag => attribute(tag, "aria-controls") === "piece-share-options-almanack"), issue.name);
+    assert.ok(tags.some(tag => attribute(tag, "for") === "piece-share-link-almanack"), issue.name);
+    assert.ok(tags.some(tag => attribute(tag, "aria-describedby") === "piece-share-status-almanack"), issue.name);
     checked += 1;
   }
   assert.ok(checked > 0, "The production output must include published Almanack issues.");
