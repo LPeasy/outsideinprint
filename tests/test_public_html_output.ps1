@@ -5951,7 +5951,7 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     $articleNodes = Get-JsonLdNodes -Objects (Get-JsonLdObjects -Html $articleHtml)
     Test-JsonLdBobReadingWork -Nodes $articleNodes
   } | ForEach-Object { Get-SitePathFromHref -Href $_.permalink })
-  $flagshipPath = '/essays/why-daylight-saving-time/'
+  $flagshipPath = '/essays/what-armistice-day-meant/'
   $expectedLeadPaths = @($publishedReadingPaths | Select-Object -First 1)
   if ($flagshipPath -in $publishedReadingPaths) {
     $expectedLeadPaths = @($flagshipPath)
@@ -6084,6 +6084,7 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     '/essays/the-dolphin-company/' = 'Case study'
     '/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/' = 'Modern Bio'
     '/essays/why-daylight-saving-time/' = 'Essay'
+    '/essays/what-armistice-day-meant/' = 'Essay'
     '/essays/the-other-side-of-the-mountain/' = 'Musing'
     '/essays/whos-drinking-all-the-modelo/' = 'Essay'
     '/syd-and-oliver/the-ant-problem/' = 'Dialogue'

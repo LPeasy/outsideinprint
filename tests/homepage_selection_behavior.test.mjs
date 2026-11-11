@@ -7,7 +7,7 @@ import { execFileSync } from "node:child_process";
 
 const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.167.0/hugo")
   ? path.resolve(".tools/hugo-0.167.0/hugo") : "hugo");
-const flagship = "/essays/why-daylight-saving-time/";
+const flagship = "/essays/what-armistice-day-meant/";
 const formerFlagship = "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/";
 const mountain = "/essays/the-other-side-of-the-mountain/";
 const modelo = "/essays/whos-drinking-all-the-modelo/";
@@ -83,7 +83,7 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   write("layouts/_default/single.html", '{{ .Title }}<img src="{{ .Params.featured_image }}" alt="{{ .Params.featured_image_alt }}">');
   write("layouts/_default/list.html", "{{ .Title }}");
   const entries = {
-    flagship: { title: "Why Daylight Saving Time?", url: flagship, date: "2020-01-01", section_label: "Essay" },
+    flagship: { title: "How Armistice Day Became Veterans Day", url: flagship, date: "2020-01-01", section_label: "Essay" },
     formerFlagship: { title: "Benjamin Franklin", url: formerFlagship, date: "2019-01-01", section_label: "Modern Bio" },
     mountain: { title: "The Other Side of the Mountain", url: mountain, date: "2020-01-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
     modelo: { title: "Who’s Drinking All the Modelo?", url: modelo, date: "2020-01-01", section_label: "Essay" },
@@ -122,7 +122,7 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   return JSON.parse(output);
 }
 
-test("Why Daylight Saving Time? leads, followed by the latest release, while preview-only work stays excluded", (t) => {
+test("How Armistice Day Became Veterans Day leads, followed by the latest release, while preview-only work stays excluded", (t) => {
   assert.deepEqual(renderSelection(t), [flagship, "/essays/latest/", mountain, modelo, antProblem]);
 });
 
@@ -165,7 +165,7 @@ test("the former flagship follows recency instead of retaining the lead", (t) =>
 
 test("a newer flagship stays first and missing curated work receives newest eligible fallback", (t) => {
   const selection = renderSelection(t, {
-    flagship: { title: "Why Daylight Saving Time?", url: flagship, date: "2020-06-01", publishDate: "2020-07-01" },
+    flagship: { title: "How Armistice Day Became Veterans Day", url: flagship, date: "2020-06-01", publishDate: "2020-07-01" },
     modelo: null,
   });
   assert.deepEqual(selection, [flagship, "/essays/latest/", mountain, antProblem, "/essays/earlier/"]);
@@ -186,7 +186,7 @@ test("a newly released curated piece occupies the latest slot only once", (t) =>
 
 test("the lead uses eligible associated Gallery art and matching zoom alt, with hero fallback and unchanged supporting art", (t) => {
   const leadMetadata = {
-    title: "Why Daylight Saving Time?", url: flagship, date: "2020-01-01", section_label: "Essay",
+    title: "How Armistice Day Became Veterans Day", url: flagship, date: "2020-01-01", section_label: "Essay",
     featured_image: "legacy/clock-illustration", featured_image_alt: "The existing clock illustration.",
   };
   const galleryArt = {
