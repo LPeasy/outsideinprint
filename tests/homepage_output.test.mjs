@@ -66,7 +66,7 @@ const regularPublishedRoutes = publishedPages.filter((page) => {
   return isBobAuthoredReadingWork(nodes);
 }).map((page) => page.route);
 const pinnedRoutes = [
-  "/essays/why-daylight-saving-time/",
+  "/essays/what-armistice-day-meant/",
   "/essays/the-other-side-of-the-mountain/",
   "/essays/whos-drinking-all-the-modelo/",
   "/syd-and-oliver/the-ant-problem/",
@@ -125,7 +125,7 @@ test("Dolphin correction retains the original publication date and renders a con
     || text(dolphinHtml).includes(currentRevision[2]), "the complete correction note must render");
 });
 
-test("rendered homepage leads with Why Daylight Saving Time?, then the newest remaining publication", () => {
+test("rendered homepage leads with How Armistice Day Became Veterans Day, then the newest remaining publication", () => {
   const cards = [...html.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/g)]
     .filter((match) => /\bhome-v2-featured__(?:lead|item)\b/.test(attribute(`<article ${match[1]}>`, "class")));
   assert.ok(regularPublishedRoutes.length >= 5, "the production archive must supply five regular published reading pages");
@@ -275,8 +275,8 @@ test("rendered homepage leads with Why Daylight Saving Time?, then the newest re
   assert.doesNotMatch(html, /25 reads|Medium reads|(?:3\.4K|1\.95K|1\.8K) readers/);
 });
 
-test("the daylight saving lead and zoom use the approved station-clock illustration", () => {
-  const route = "/essays/why-daylight-saving-time/";
+test("the Armistice Day lead and zoom use Rifles in the Mud", () => {
+  const route = "/essays/what-armistice-day-meant/";
   if (!regularPublishedRoutes.includes(route)) return;
   const source = fs.readFileSync(path.resolve(`content${route.slice(0, -1)}.md`), "utf8");
   const scalar = key => JSON.parse(source.match(new RegExp(`^${key}: (".*")\\r?$`, "m"))?.[1] || '""');
@@ -286,7 +286,7 @@ test("the daylight saving lead and zoom use the approved station-clock illustrat
   assert.equal(attribute(image, "data-oip-image-id"), scalar("featured_image"));
   assert.equal(attribute(image, "alt"), scalar("featured_image_alt"));
   assert.equal(attribute(zoom, "data-alt"), scalar("featured_image_alt"));
-  assert.ok(attribute(zoom, "data-image").includes("/essays/why-daylight-saving-time/hero/"));
+  assert.ok(attribute(zoom, "data-image").includes("/essays/what-armistice-day-meant/hero/"));
 });
 
 test("the former Franklin lead retains its Gallery record, biography portrait and social image", () => {

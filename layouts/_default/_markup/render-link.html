@@ -23,3 +23,4 @@
   {{- end -}}
 {{- end -}}
 <a href="{{ $resolvedDestination | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
+{{- /* Keep punctuation adjacent to the rendered link. */ -}}
