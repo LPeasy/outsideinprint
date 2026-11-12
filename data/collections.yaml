@@ -254,6 +254,7 @@ collections:
           - the-scenario-that-ate-the-future
           - explaining-mutually-exclusive-and-collectively-exhaustive-where-did-my-paycheck-go
           - the-slow-way-is-the-fast-way
+          - ten-words-over
       - id: warnings-safety-public-health
         title: Warnings, safety, and public health
         items:
