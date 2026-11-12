@@ -9298,6 +9298,10 @@
     }
   },
   "aliases": {
+    "/images/essays/ten-words-over/hero.png": "essays/ten-words-over/hero",
+    "/images/essays/ten-words-over/section-1.png": "essays/ten-words-over/section-1",
+    "/images/essays/ten-words-over/section-2.png": "essays/ten-words-over/section-2",
+    "/images/essays/ten-words-over/section-3.png": "essays/ten-words-over/section-3",
     "/images/essays/between-buses-in-seoul/hero.png": "essays/between-buses-in-seoul/hero",
     "/images/essays/between-buses-in-seoul/itaewon-arrival-display.jpeg": "essays/between-buses-in-seoul/itaewon-arrival-display",
     "/images/essays/between-buses-in-seoul/itaewon-rooftops.jpeg": "essays/between-buses-in-seoul/itaewon-rooftops",
