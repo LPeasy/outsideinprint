@@ -6,6 +6,7 @@
   "syd-and-oliver-dialogues": { "mark": "dialogue", "ink": "#B4A0C8", "paper_ink": "#6E4C84", "type": "serif", "page_enabled": true },
   "modern-bios": { "mark": "portrait", "ink": "#B7AA93", "paper_ink": "#66533D", "type": "smallcaps", "page_enabled": true },
   "lit-review": { "mark": "book", "ink": "#D0A0AC", "paper_ink": "#824456", "type": "italic", "page_enabled": true },
+  "everyday-history": { "mark": "calendar", "ink": "#D0A78D", "paper_ink": "#784B34", "type": "serif", "page_enabled": true },
   "reported-case-studies": { "mark": "document", "ink": "#C7B394", "paper_ink": "#6D5637", "type": "serif", "page_enabled": true },
   "risk-uncertainty": { "mark": "compass", "ink": "#D2BD76", "paper_ink": "#745B1B", "type": "sans", "page_enabled": true },
   "geopolitics-trade-global-power": { "mark": "globe", "ink": "#87BCAF", "paper_ink": "#28675B", "type": "serif", "page_enabled": true },

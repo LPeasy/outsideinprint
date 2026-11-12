@@ -20,6 +20,7 @@ featured_image_alt: "An ink-and-watercolor station clock above commuters walking
 featured_image_caption: "Shared clocks organize the working day. Advancing the clock moves the working day an hour earlier relative to the sun."
 collections:
   - "civic-institutions-and-public-power"
+  - "everyday-history"
 tags:
   - "history"
   - "daylight-saving-time"

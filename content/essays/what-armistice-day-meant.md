@@ -20,6 +20,7 @@ featured_image_alt: "A German soldier raises an empty hand as an American soldie
 featured_image_caption: "German soldiers approach the American line after the firing stops on November 11, 1918."
 collections:
   - "civic-institutions-and-public-power"
+  - "everyday-history"
 tags:
   - "history"
   - "world-war-i"

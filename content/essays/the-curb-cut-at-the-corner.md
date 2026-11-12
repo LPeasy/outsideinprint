@@ -18,6 +18,7 @@ featured_image_alt: "Editorial illustration of a city corner where a curb ramp, 
 featured_image_caption: "The corner looks ordinary because a public fight became poured concrete."
 collections:
   - "civic-institutions-and-public-power"
+  - "everyday-history"
 tags:
   - "disability law"
   - "street design"

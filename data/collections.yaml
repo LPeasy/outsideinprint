@@ -227,6 +227,31 @@ collections:
       tags: []
       sections: []
 
+  - slug: everyday-history
+    title: Everyday History
+    kind: topic
+    public: true
+    force_public: false
+    min_items: 3
+    explicit_only: true
+    featured: false
+    weight: 28
+    start_here: why-daylight-saving-time
+    related_collections:
+      - civic-institutions-and-public-power
+      - brands-business-consumer-choice
+    description: Historical explainers on the holidays we observe, the routines we follow, and the objects we use.
+    metadata:
+      - label: Format
+        value: Historical explainers
+      - label: Scope
+        value: Public memory, daily life, and shared standards
+    fallback:
+      series: []
+      topics: []
+      tags: []
+      sections: []
+
   - slug: risk-uncertainty
     title: Risk, Uncertainty, and Decision-Making
     kind: topic

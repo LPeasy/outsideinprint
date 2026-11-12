@@ -3,6 +3,7 @@ title: "Why Do We Celebrate Memorial Day? Origins, Traditions, and Importance"
 date: 2025-05-19
 draft: false
 slug: "why-we-celebrate-memorial-day-origins-traditions-and-importance"
+collections: ["everyday-history"]
 section_label: "Essay"
 subtitle: "The history of Memorial Day, its key observances, and why every American pauses to honor our fallen service members."
 featured_image: "/images/medium/why-we-celebrate-memorial-day-origins-traditions-and-importance/ff5282d7bd36ea86362477bec408be437387519e4fe6b73ee9caa9170a6d6b26.jpeg"
