@@ -760,7 +760,7 @@ test("homepage article links emit one surface-specific click each while newslett
     const links = [
       { selector: ".home-v2-featured__lead h3 a", slot: "homepage_v2_featured_lead", count: 1 },
       { selector: ".home-v2-featured__lead-media", slot: "homepage_v2_featured_lead_image" },
-      { selector: ".home-v2-featured__action a", slot: "homepage_v2_featured_lead_cta", count: 1 },
+      { selector: ".home-v2-featured__lead .home-v2-featured__action a", slot: "homepage_v2_featured_lead_cta", count: 1 },
       { selector: ".home-v2-featured__item h3 a", slot: "homepage_v2_featured_supporting", count: 4 },
       { selector: ".home-v2-featured__item-media", slot: "homepage_v2_featured_supporting_image" }
     ];
@@ -800,6 +800,25 @@ test("homepage article links emit one surface-specific click each while newslett
     }
     assert.equal(expectedClicks, 6 + illustrationCount, "Featured article links include five titles, one lead CTA, and every rendered illustration.");
 
+    const guestSeries = page.getByRole("link", { name: "Browse The Outside Byline", exact: true });
+    assert.equal(await guestSeries.count(), 1);
+    await guestSeries.evaluate((node) => {
+      node.setAttribute("data-no-swup", "");
+      node.addEventListener("click", (event) => event.preventDefault(), { once: true });
+      node.click();
+    });
+    const seriesClick = await waitFor(
+      () => counts.find((record) => countData(record).path.startsWith("oip:collection_click")),
+      "The guest series link did not send its collection click."
+    );
+    assert.deepEqual(eventParts(seriesClick), {
+      name: "collection_click",
+      fields: {
+        path: "/collections/the-outside-byline/", slug: "the-outside-byline", section: "Collections",
+        source_slot: "homepage_guest_feature_collection", collection: "the-outside-byline"
+      }
+    });
+
     const zooms = page.locator("[data-home-featured-image-trigger]");
     assert.equal(await zooms.count(), illustrationCount, "Each rendered featured illustration needs its own zoom control.");
     assert.equal(await page.locator("[data-home-featured-image-fallback]").count(), illustrationCount);
@@ -837,6 +856,7 @@ test("homepage article links emit one surface-specific click each while newslett
 
     const clickEvents = counts.filter((record) => countData(record).path.startsWith("oip:internal_promo_click"));
     assert.equal(clickEvents.length, expectedClicks, "Illustration controls must not add article click events.");
+    assert.equal(counts.filter((record) => countData(record).path.startsWith("oip:collection_click")).length, 1);
     const submitEvents = counts.filter((record) => countData(record).path.startsWith("oip:newsletter_submit"));
     assert.equal(submitEvents.length, 1, "One prevented form submit must record one attempt, not a confirmation.");
     assert.equal(eventParts(submitEvents[0]).fields.source_slot, "homepage_reader_banner");
