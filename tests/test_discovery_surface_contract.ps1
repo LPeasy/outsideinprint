@@ -180,9 +180,10 @@ foreach ($requiredSnippet in @(
   'Guest Feature',
   'class="home-v2-guest__byline">By {{ $page.Params.author }}',
   'class="home-v2-guest__media"',
-  '"loading" "lazy" "sizes" "160px"',
+  '"loading" "lazy" "sizes" "(max-width: 520px) calc(100vw - 2rem), clamp(10rem, 18vw, 15rem)"',
   'homepage_guest_feature',
-  'homepage_guest_feature_image'
+  'homepage_guest_feature_image',
+  'homepage_guest_feature_collection'
 )) {
   if (-not $homeGuestFeature.Contains($requiredSnippet, [System.StringComparison]::Ordinal)) {
     throw "Expected the credited compact guest feature to contain: $requiredSnippet"

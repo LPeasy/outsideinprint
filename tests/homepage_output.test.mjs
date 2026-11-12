@@ -312,7 +312,7 @@ test("the former Franklin lead retains its Gallery record, biography portrait an
   assert.equal(new URL(attribute(social, "content"), "https://outsideinprint.org").pathname, legacyPortrait);
 });
 
-test("the compact Guest Feature credits its writer and shares the lead column without duplicate promotion", () => {
+test("the Guest Feature credits its writer and offers a path to the guest series", () => {
   const guestCards = [...html.matchAll(/(<article\b[^>]*>)([\s\S]*?)<\/article>/g)]
     .filter((match) => attribute(match[1], "class").split(/\s+/).includes("home-v2-guest"));
   assert.equal(guestCards.length, guestEligible ? 1 : 0);
@@ -320,7 +320,20 @@ test("the compact Guest Feature credits its writer and shares the lead column wi
   const guest = guestCards[0];
   const anchors = [...guest[2].matchAll(/<a\b[^>]*>/g)].map((match) => match[0]);
   const title = publishedPages.find((page) => page.route === guestRoute).title;
-  assert.equal(anchors.length, 2, "the thin guest card offers title and artwork links");
+  const seriesPath = "/collections/the-outside-byline/";
+  const directory = fs.readFileSync(path.join(siteDir, "collections/index.html"), "utf8");
+  const publicSeries = [...directory.matchAll(/<a\b[^>]*>/g)].some(([tag]) =>
+    attribute(tag, "data-analytics-source-slot") === "collections_directory" && attribute(tag, "href") === seriesPath);
+  const seriesLinks = anchors.filter((tag) => attribute(tag, "data-analytics-source-slot") === "homepage_guest_feature_collection");
+  assert.equal(anchors.length, publicSeries ? 3 : 2);
+  assert.equal(seriesLinks.length, publicSeries ? 1 : 0);
+  if (publicSeries) {
+    assert.equal(anchors.at(-1), seriesLinks[0], "the series link follows the guest title and illustration");
+    assert.equal(attribute(seriesLinks[0], "href"), seriesPath);
+    assert.equal(attribute(seriesLinks[0], "data-analytics-event"), "collection_click");
+    assert.equal(attribute(seriesLinks[0], "data-analytics-collection"), "the-outside-byline");
+    assert.match(text(guest[2]), /Browse The Outside Byline/);
+  }
   for (const slot of ["homepage_guest_feature", "homepage_guest_feature_image"]) {
     const tracked = anchors.filter((tag) => attribute(tag, "data-analytics-source-slot") === slot);
     assert.equal(tracked.length, 1, `one ${slot} link`);
@@ -343,7 +356,7 @@ test("the compact Guest Feature credits its writer and shares the lead column wi
   const image = media[2].match(/<img\b[^>]*>/)?.[0];
   assert.ok(image);
   assert.equal(attribute(image, "loading"), "lazy");
-  assert.equal(attribute(image, "sizes"), "160px");
+  assert.equal(attribute(image, "sizes"), "(max-width: 520px) calc(100vw - 2rem), clamp(10rem, 18vw, 15rem)");
   assert.equal(attribute(image, "data-oip-image-id"), guestSource.match(/^featured_image: "([^"]+)"\r?$/m)?.[1]);
   assert.equal(attribute(image, "alt"), guestSource.match(/^featured_image_alt: "([^"]+)"\r?$/m)?.[1]);
   assert.doesNotMatch(guest[2], /homepage_guest_feature_cta|home-v2-guest__copy|data-home-featured-image-(?:trigger|fallback)|home-v2-featured__new-tag/);

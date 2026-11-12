@@ -24,6 +24,17 @@
       data-analytics-title="{{ $page.Title }}"
       data-analytics-section="{{ $sectionLabel }}"
       data-analytics-path="{{ $page.RelPermalink }}"
-    >{{ partial "images/picture.html" (dict "model" $imageModel "alt" ($page.Params.featured_image_alt | default "") "loading" "lazy" "sizes" "160px") }}</a>
+    >{{ partial "images/picture.html" (dict "model" $imageModel "alt" ($page.Params.featured_image_alt | default "") "loading" "lazy" "sizes" "(max-width: 520px) calc(100vw - 2rem), clamp(10rem, 18vw, 15rem)") }}</a>
+  {{- end }}
+  {{- range where (partial "collections/get-public-entries.html" site) "collection.slug" "the-outside-byline" }}
+    <p class="home-v2-guest__browse home-v2-featured__action"><a href="{{ .page.RelPermalink }}"
+      data-analytics-event="collection_click"
+      data-analytics-source-slot="homepage_guest_feature_collection"
+      data-analytics-collection="{{ .collection.slug }}"
+      data-analytics-slug="{{ .collection.slug }}"
+      data-analytics-title="{{ .collection.title }}"
+      data-analytics-section="Collections"
+      data-analytics-path="{{ .page.RelPermalink }}"
+    >Browse {{ .collection.title }} <span aria-hidden="true">&rarr;</span></a></p>
   {{- end }}
 </article>

@@ -119,7 +119,7 @@ test("Guest Feature fits below the lead beside supporting stories and stacks saf
     }).sort((a, b) => Date.parse(b.released) - Date.parse(a.released) || a.title.localeCompare(b.title))[0];
   assert.ok(expectedGuest, "one approved guest must be eligible in this output");
   const guestRoute = expectedGuest.route;
-  for (const width of [360, 768, 769, 900, 901, 1280]) {
+  for (const width of [360, 520, 521, 768, 769, 900, 901, 1280]) {
     const { context, page } = await createPage(width);
     try {
       await page.goto(siteOrigin + "/", { waitUntil: "networkidle" });
@@ -137,6 +137,7 @@ test("Guest Feature fits below the lead beside supporting stories and stacks saf
           primary: rect(".home-v2-featured__primary"), lead: rect(".home-v2-featured__lead"),
           guest: rect(".home-v2-guest"), supporting: rect(".home-v2-featured__supporting"),
           media: rect(".home-v2-guest__media"), title: rect('[data-analytics-source-slot="homepage_guest_feature"]'),
+          heading: rect(".home-v2-guest__heading"), browse: rect(".home-v2-guest__browse a"),
           routes: titles.map((link) => new URL(link.href).pathname),
           guestCards: document.querySelectorAll(".home-v2-guest").length,
           byline: document.querySelector(".home-v2-guest__byline")?.textContent.trim(),
@@ -148,13 +149,23 @@ test("Guest Feature fits below the lead beside supporting stories and stacks saf
       assert.equal(state.routes.length, 6);
       assert.equal(new Set(state.routes).size, 6, "the guest must be promoted once");
       assert.ok(state.routes.includes(guestRoute));
-      for (const name of ["primary", "lead", "guest", "supporting", "media", "title"]) {
+      for (const name of ["primary", "lead", "guest", "supporting", "media", "title", "browse"]) {
         assert.ok(state[name]?.height > 0 && state[name].width > 0, `${name} visible at ${width}px`);
         assert.ok(state[name].left >= -1 && state[name].right <= state.width + 1, `${name} fits at ${width}px`);
       }
       assert.ok(state.guest.top >= state.lead.bottom - 1, `guest follows lead at ${width}px`);
       assert.ok(state.guest.left >= state.primary.left - 1 && state.guest.right <= state.primary.right + 1);
       assert.ok(state.title.height >= 44, "the guest title retains a 44px target");
+      assert.ok(Math.abs(state.media.width * 9 / 16 - state.media.height) < 1, "the guest illustration is 16:9");
+      assert.ok(state.browse.height >= 44 && state.browse.top >= Math.max(state.media.bottom, state.heading.bottom) - 1,
+        "the browse link is below the artwork and heading with a 44px target");
+      if (width <= 520) {
+        assert.ok(state.media.top >= state.heading.bottom - 1 && Math.abs(state.media.width - state.guest.width) < 1,
+          "the illustration fills the card below the heading on phones");
+      } else {
+        assert.ok(state.media.right <= state.heading.left && state.media.width >= 160,
+          "the illustration has a wider column beside the heading");
+      }
       if (width > 900) {
         assert.ok(state.guest.right <= state.supporting.left + 1, "guest stays in the left column");
         assert.ok(state.supporting.top < state.guest.top, "supporting stories remain beside the primary stack");
@@ -169,6 +180,15 @@ test("Guest Feature fits below the lead beside supporting stories and stacks saf
         return { active: document.activeElement === link, style: style.outlineStyle, width: parseFloat(style.outlineWidth) };
       });
       assert.ok(focus.active && focus.style !== "none" && focus.width >= 2, "the guest title has visible keyboard focus");
+      const browse = page.getByRole("link", { name: "Browse The Outside Byline" });
+      assert.equal(await browse.getAttribute("href"), "/collections/the-outside-byline/");
+      if (width === 360 || width === 1280) {
+        await browse.focus();
+        assert.ok(await browse.evaluate((link) => link.matches(":focus-visible")), "the series link supports keyboard focus");
+        await browse.press("Enter");
+        await page.waitForURL(siteOrigin + "/collections/the-outside-byline/");
+        await page.getByRole("heading", { name: "The Outside Byline", level: 1, exact: true }).waitFor();
+      }
     } finally { await context.close(); }
   }
 });

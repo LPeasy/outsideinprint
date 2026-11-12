@@ -188,13 +188,15 @@ test("regular slots resolve Bob's authorship and the Guest Feature keeps credite
   assert.match(guestFeature, /<h3 id="home-guest-feature-title">/);
   assert.match(guestFeature, /Guest Feature/);
   assert.match(guestFeature, /class="home-v2-guest__byline">By \{\{ \$page\.Params\.author \}\}/);
-  assert.match(guestFeature, /"loading" "lazy" "sizes" "160px"/);
+  assert.ok(guestFeature.includes('"loading" "lazy" "sizes" "(max-width: 520px) calc(100vw - 2rem), clamp(10rem, 18vw, 15rem)"'));
+  assert.match(guestFeature, /collections\/get-public-entries\.html.*"the-outside-byline"/);
   assert.doesNotMatch(guestFeature, /home_lead_summary|home-v2-guest__copy|homepage_guest_feature_cta|home_featured_image_button|data-home-featured-image-trigger/);
-  for (const slot of ["homepage_guest_feature", "homepage_guest_feature_image"]) {
+  for (const slot of ["homepage_guest_feature", "homepage_guest_feature_image", "homepage_guest_feature_collection"]) {
     assert.match(guestFeature, new RegExp(`data-analytics-source-slot="${slot}"`));
   }
   assert.match(css, /\.home-v2-featured__primary\{[^}]*display:flex;[^}]*flex-direction:column;[^}]*grid-area:lead;/);
   assert.match(css, /\.home-v2-guest\{/);
+  assert.match(css, /\.home-v2-guest__media\{[^}]*aspect-ratio:16 \/ 9;/);
   assert.match(css, /\.home-v2-guest h3 a\{[^}]*display:inline-block;[^}]*min-height:44px(?:;|\})/);
 });
 
