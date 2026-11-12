@@ -5998,8 +5998,23 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
       $uxIssues.Add('public/index.html => the Guest Feature must retain its label, unique heading, and actual writer')
     }
     $guestAnchors = @(Get-OpenTags -Html $guestHtml -TagName 'a')
-    if ($guestAnchors.Count -ne 2) {
-      $uxIssues.Add('public/index.html => the thin Guest Feature must offer only its article title and artwork links')
+    $guestSeriesPath = '/collections/the-outside-byline/'
+    $publicGuestSeries = @(Get-OpenTags -Html ([string]$targetPageHtml['public/collections/index.html']) -TagName 'a' | Where-Object {
+      (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'collections_directory' -and
+      (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $_ -Name 'href')) -ceq $guestSeriesPath
+    }).Count -eq 1
+    $guestSeriesLinks = @($guestAnchors | Where-Object {
+      (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq 'homepage_guest_feature_collection'
+    })
+    if ($guestAnchors.Count -ne (2 + [int]$publicGuestSeries) -or $guestSeriesLinks.Count -ne [int]$publicGuestSeries) {
+      $uxIssues.Add('public/index.html => expected the guest title, artwork, and one browse link when The Outside Byline is public')
+    } elseif ($publicGuestSeries -and (
+      $guestAnchors[-1] -cne $guestSeriesLinks[0] -or
+      (Get-SitePathFromHref -Href (Get-AttributeValue -Tag $guestSeriesLinks[0] -Name 'href')) -cne $guestSeriesPath -or
+      (Get-AttributeValue -Tag $guestSeriesLinks[0] -Name 'data-analytics-event') -cne 'collection_click' -or
+      (Get-AttributeValue -Tag $guestSeriesLinks[0] -Name 'data-analytics-collection') -cne 'the-outside-byline'
+    )) {
+      $uxIssues.Add('public/index.html => the final Guest Feature link must point to The Outside Byline with collection metadata')
     }
     foreach ($slot in @('homepage_guest_feature', 'homepage_guest_feature_image')) {
       $guestLinks = @($guestAnchors | Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -ceq $slot })
@@ -6017,9 +6032,9 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     if ($guestImages.Count -ne 1 -or (Get-AttributeValue -Tag $guestImages[0] -Name 'data-oip-image-id') -cne $guestImageId -or
         (Get-AttributeValue -Tag $guestImages[0] -Name 'alt') -cne $guestImageAlt -or
         (Get-AttributeValue -Tag $guestImages[0] -Name 'loading') -cne 'lazy' -or
-        (Get-AttributeValue -Tag $guestImages[0] -Name 'sizes') -cne '160px' -or
+        (Get-AttributeValue -Tag $guestImages[0] -Name 'sizes') -cne '(max-width: 520px) calc(100vw - 2rem), clamp(10rem, 18vw, 15rem)' -or
         $guestHtml -match 'home-v2-guest__copy|homepage_guest_feature_cta|data-home-featured-image-(?:trigger|fallback)|home-v2-featured__new-tag') {
-      $uxIssues.Add('public/index.html => the compact guest artwork must reuse its managed hero and alt text with lazy 160px sizing')
+      $uxIssues.Add('public/index.html => the wide guest artwork must reuse its managed hero and alt text with lazy responsive sizing')
     }
     if ($homeIndexHtml -notmatch '(?s)home-v2-featured__primary[^>]*>.*?home-v2-featured__lead.*?</article>\s*<article\b[^>]*home-v2-guest.*?</article>\s*</div>\s*<div\b[^>]*home-v2-featured__supporting') {
       $uxIssues.Add('public/index.html => the guest must follow the lead inside the primary column before supporting stories in document order')

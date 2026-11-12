@@ -52,6 +52,15 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   }
   write("data/organization.json", JSON.stringify({ default_author_id: "robert-v-ussley" }));
   write("data/authors.json", JSON.stringify({ authors: { "robert-v-ussley": { type: "Person", name: "Robert V. Ussley" } } }));
+  if (summaries === "guest" || summaries === "frontpage") {
+    fs.cpSync("layouts/partials/collections", path.join(fixture, "layouts/partials/collections"), { recursive: true });
+    write("data/collections.json", JSON.stringify({ collections: [
+      { slug: "subject", title: "Subject", kind: "topic", public: true, explicit_only: true },
+      { slug: "the-outside-byline", title: "The Outside Byline", kind: "series", public: true,
+        min_items: 2, explicit_only: true, secondary_contributor_role: "guest" },
+    ] }));
+    write("content/collections/the-outside-byline.md", '---\ntitle: "The Outside Byline"\ndate: 2020-01-01\n---\n');
+  }
   if (summaries === "frontpage") {
     for (const partial of ["home_v2_front_page.html", "home_feature_freshness.html", "home_featured_image_button.html", "home_featured_image_dialog.html", "editorial/cartoon-for-page.html", "editorial/published-cartoons.html", "editorial/registered-cartoons.html", "editorial/cartoon-is-published.html"]) {
       write(`layouts/partials/${partial}`, fs.readFileSync(`layouts/partials/${partial}`, "utf8"));
@@ -327,15 +336,20 @@ test("the guest is reserved only from its exact release clock onward", (t) => {
 });
 
 test("Elijah takes the guest slot at his release instant while Douglas remains its pre-release fallback", (t) => {
-  const overrides = { guest: guestMetadata, elijah: elijahMetadata };
+  const overrides = {
+    guest: { ...guestMetadata, collections: ["subject"] },
+    elijah: { ...elijahMetadata, collections: ["subject"] },
+  };
   const before = renderSelection(t, overrides, "guest", "2026-10-27T14:59:59Z");
   const atRelease = renderSelection(t, overrides, "guest", "2026-10-27T15:00:00Z");
   assert.equal(before.guest, guestRoute);
   assert.match(before.html, /By Douglas B\. Vandergraph/);
+  assert.doesNotMatch(before.html, /homepage_guest_feature_collection/);
   assert.ok(!before.featured.includes(elijahRoute));
   assert.ok(!before.featured.includes(guestRoute));
   assert.equal(atRelease.guest, elijahRoute);
   assert.match(atRelease.html, /By Elijah Fernandez, MSW, PMP, CISSP/);
+  assert.match(atRelease.html, /href="\/collections\/the-outside-byline\/"[\s\S]*?data-analytics-source-slot="homepage_guest_feature_collection"[\s\S]*?>Browse The Outside Byline/);
   assert.equal((atRelease.html.match(/<article\b/g) || []).length, 1);
   assert.ok(!atRelease.featured.includes(elijahRoute));
   assert.ok(!atRelease.featured.includes(guestRoute));
