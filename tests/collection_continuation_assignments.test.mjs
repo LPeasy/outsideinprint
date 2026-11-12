@@ -6,6 +6,18 @@ const read = (file) => fs.readFileSync(file, "utf8");
 const audit = read("docs/collection-continuation-audit.md");
 const ledger = JSON.parse(audit.match(/```json\s*([\s\S]*?)```/)?.[1] || "null");
 const definitions = read("data/collections.yaml");
+const everydayHistoryMembers = new Set([
+  "why-daylight-saving-time",
+  "what-armistice-day-meant",
+  "why-we-celebrate-memorial-day-origins-traditions-and-importance",
+  "fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet",
+  "the-bars-on-the-gum",
+  "the-curb-cut-at-the-corner",
+]);
+
+function currentMembership(slug, original) {
+  return everydayHistoryMembers.has(slug) ? [...original, "everyday-history"] : original;
+}
 
 function collections(source) {
   const frontMatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] || "";
@@ -20,7 +32,7 @@ test("the approved archive ledger locks 51 new assignments and two expanded memb
   assert.equal(Object.values(ledger.assignments).filter((items) => items.length === 1).length, 51);
   assert.equal(Object.values(ledger.assignments).filter((items) => items.length === 2).length, 2);
   for (const [slug, expected] of Object.entries(ledger.assignments)) {
-    assert.deepEqual(collections(read(`content/essays/${slug}.md`)), expected, slug);
+    assert.deepEqual(collections(read(`content/essays/${slug}.md`)), currentMembership(slug, expected), slug);
     assert.equal(new Set(expected).size, expected.length, slug);
     for (const member of expected) assert.ok(definitions.includes(`- slug: ${member}\n`), `${slug}: ${member} must exist`);
   }
@@ -36,13 +48,14 @@ test("deliberate exclusions, editorial holds, and private Ledger memberships sta
   assert.equal(new Set(excluded).size, 14);
   for (const slug of [...ledger.excluded, ...ledger.editorialHolds]) {
     assert.equal(ledger.assignments[slug], undefined);
-    assert.deepEqual(collections(read(`content/essays/${slug}.md`)), [], slug);
+    assert.deepEqual(collections(read(`content/essays/${slug}.md`)), currentMembership(slug, []), slug);
   }
   for (const slug of ledger.privateLedger) assert.deepEqual(collections(read(`content/essays/${slug}.md`)), ["the-ledger"], slug);
 });
 
 test("new collection definitions are explicit public topics with a real starting member", () => {
   for (const [slug, title, weight, start] of [
+    ["everyday-history", "Everyday History", 28, "why-daylight-saving-time"],
     ["money-banking-inflation", "Money, Banking, and Inflation", 100, "why-a-return-to-the-gold-standard-would-break-the-economy"],
     ["brands-business-consumer-choice", "Brands, Business, and Consumer Choice", 105, "whos-drinking-all-the-modelo"],
   ]) {
@@ -55,6 +68,14 @@ test("new collection definitions are explicit public topics with a real starting
     assert.match(landing, /^draft: false$/m);
     assert.ok(landing.includes('/images/social/outside-in-print-default.png'));
   }
+});
+
+test("Everyday History resolves to the six approved essays", () => {
+  const members = fs.readdirSync("content/essays", { recursive: true, withFileTypes: true })
+    .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
+    .filter((entry) => collections(read(`${entry.parentPath}/${entry.name}`)).includes("everyday-history"))
+    .map((entry) => entry.name.slice(0, -3));
+  assert.deepEqual(members.sort(), [...everydayHistoryMembers].sort());
 });
 
 test("Pope articles keep their explicit reciprocal reading links", () => {

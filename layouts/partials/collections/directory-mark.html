@@ -18,6 +18,9 @@
     <path d="M9 24c0-8 14-8 14 0M3 8h2M3 24h2M27 8h2M27 24h2"/>
   {{- else if eq . "book" -}}
     <path d="M16 8C12 4 6 4 3 5v21c4-1 9-1 13 3 4-4 9-4 13-3V5c-3-1-9-1-13 3Zm0 0v21M7 10l5 1M7 15l5 1M7 20l5 1M20 11l5-1M20 16l5-1M20 21l5-1"/>
+  {{- else if eq . "calendar" -}}
+    <rect x="4" y="7" width="24" height="22" rx="2"/>
+    <path d="M10 3v8M22 3v8M4 14h24M9 19h3m3 0h3m3 0h3M9 24h3m3 0h3m3 0h3"/>
   {{- else if eq . "document" -}}
     <path d="M15 28H4V3h17v9M8 8h9M8 13h5M8 18h4"/>
     <circle cx="21" cy="20" r="6"/><path d="m25 25 5 5M18 20h6M21 17v6"/>

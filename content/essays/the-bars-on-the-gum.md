@@ -5,7 +5,7 @@ description: "How the UPC barcode turned a pack of gum into a shared retail reco
 date: 2026-06-26
 draft: false
 slug: "the-bars-on-the-gum"
-collections: ["brands-business-consumer-choice"]
+collections: ["brands-business-consumer-choice", "everyday-history"]
 section_label: "Essay"
 version: "2.0"
 edition: "Second web edition"
