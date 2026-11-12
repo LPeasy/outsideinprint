@@ -20,6 +20,7 @@ featured_image_alt: "A buyer gestures across a desk as a salesman studies an off
 featured_image_caption: "The Offer"
 collections:
   - "brands-business-consumer-choice"
+  - "the-outside-byline"
 ---
 
 Imagine walking onto a used-car lot. A sedan catches your eye. You check the mileage, take it for a test drive, and listen for a rattle. Back at the salesman's desk, you offer less than the price on the windshield. He counters. You start working toward a number you can both accept.

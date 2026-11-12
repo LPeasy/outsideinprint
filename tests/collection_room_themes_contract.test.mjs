@@ -106,7 +106,7 @@ test("collection page identities are explicit opt-ins and related cards stay neu
     .filter(([, identity]) => identity.page_enabled === true)
     .map(([slug]) => slug)
     .sort();
-  assert.equal(publicSlugs.length, 19);
+  assert.equal(publicSlugs.length, 20);
   assert.deepEqual(Object.keys(collectionIdentities).sort(), publicSlugs);
   assert.deepEqual(pageEnabledSlugs, publicSlugs);
   assert.ok(!pageEnabledSlugs.includes("the-ledger"));

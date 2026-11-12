@@ -19,11 +19,15 @@ function currentMembership(slug, original) {
   return everydayHistoryMembers.has(slug) ? [...original, "everyday-history"] : original;
 }
 
+function frontMatter(source) {
+  return source.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] || "";
+}
+
 function collections(source) {
-  const frontMatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] || "";
-  const inline = frontMatter.match(/^collections:\s*\[([^\]]*)\]/m);
+  const metadata = frontMatter(source);
+  const inline = metadata.match(/^collections:\s*\[([^\]]*)\]/m);
   if (inline) return inline[1].split(",").map((value) => value.trim().replace(/^["']|["']$/g, "")).filter(Boolean);
-  const block = frontMatter.match(/^collections:[ \t]*\r?\n((?:[ \t]+-[^\r\n]*(?:\r?\n|$))+)/m);
+  const block = metadata.match(/^collections:[ \t]*\r?\n((?:[ \t]+-[^\r\n]*(?:\r?\n|$))+)/m);
   return block ? [...block[1].matchAll(/^\s+-\s*["']?([^"'\r\n]+)["']?\s*$/gm)].map((match) => match[1].trim()) : [];
 }
 
@@ -76,6 +80,33 @@ test("Everyday History resolves to the six approved essays", () => {
     .filter((entry) => collections(read(`${entry.parentPath}/${entry.name}`)).includes("everyday-history"))
     .map((entry) => entry.name.slice(0, -3));
   assert.deepEqual(members.sort(), [...everydayHistoryMembers].sort());
+});
+
+test("The Outside Byline is a public series and secondary to every guest contributor's subject collection", () => {
+  const series = "the-outside-byline";
+  const publicDefinitions = new Map(
+    [...definitions.matchAll(/^  - slug: ([a-z0-9-]+)\r?\n([\s\S]*?)(?=^  - slug:|(?![\s\S]))/gm)]
+      .filter(([, , body]) => /^    public: true[ \t]*\r?$/m.test(body))
+      .map(([, slug, body]) => [slug, body]),
+  );
+  assert.match(publicDefinitions.get(series) || "", /^    kind: series[ \t]*\r?$/m);
+
+  for (const entry of fs.readdirSync("content", { recursive: true, withFileTypes: true })) {
+    if (!entry.isFile() || !entry.name.endsWith(".md")) continue;
+    const path = `${entry.parentPath}/${entry.name}`;
+    const source = read(path);
+    const metadata = frontMatter(source);
+    const guest = /^contributor_role:[ \t]*["']?guest["']?[ \t]*\r?$/m.test(metadata);
+    const draft = /^draft:[ \t]*true[ \t]*\r?$/m.test(metadata);
+    const memberships = collections(source);
+    if (!guest) {
+      assert.ok(!memberships.includes(series), path);
+    } else if (!draft || memberships.includes(series)) {
+      assert.equal(memberships.length, 2, path);
+      assert.ok(memberships[0] !== series && publicDefinitions.has(memberships[0]), path);
+      assert.equal(memberships[1], series, path);
+    }
+  }
 });
 
 test("Pope articles keep their explicit reciprocal reading links", () => {

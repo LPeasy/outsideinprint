@@ -167,6 +167,30 @@ collections:
       tags: []
       sections: []
 
+  - slug: the-outside-byline
+    title: The Outside Byline
+    kind: series
+    public: true
+    force_public: false
+    min_items: 2
+    explicit_only: true
+    featured: false
+    weight: 23
+    start_here: ""
+    related_collections:
+      - civic-institutions-and-public-power
+      - risk-uncertainty
+      - brands-business-consumer-choice
+    description: Essays by guest contributors to Outside In Print.
+    metadata:
+      - label: Format
+        value: Guest essays
+    fallback:
+      series: []
+      topics: []
+      tags: []
+      sections: []
+
   - slug: modern-bios
     title: Modern Bios
     kind: series

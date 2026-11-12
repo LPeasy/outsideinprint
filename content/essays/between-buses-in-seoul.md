@@ -21,6 +21,7 @@ featured_image_alt: "Watercolor looking down a brick bus island at eye level. A 
 featured_image_caption: "Five Minutes on the Island. Outside In Print illustration based on a photograph by Tristan Kim / PG Global Insight."
 collections:
   - "civic-institutions-and-public-power"
+  - "the-outside-byline"
 ---
 
 My journey to work begins on a hill.
