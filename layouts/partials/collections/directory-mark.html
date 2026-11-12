@@ -13,6 +13,10 @@
     <path d="M4 5h24"/>
   {{- else if eq . "dialogue" -}}
     <path d="M3 5h20v13H11l-6 5v-5H3ZM12 21v4h9l6 4v-4h2V12h-3M7 10h12M7 14h7"/>
+  {{- else if eq . "byline" -}}
+    <rect x="4" y="5" width="24" height="22" rx="2"/>
+    <circle cx="11" cy="12" r="2.5"/>
+    <path d="M7.5 20c0-4 7-4 7 0M17 11h7M17 15h7M17 19h5M8 23h16"/>
   {{- else if eq . "portrait" -}}
     <rect x="5" y="3" width="22" height="26"/><circle cx="16" cy="12" r="4"/>
     <path d="M9 24c0-8 14-8 14 0M3 8h2M3 24h2M27 8h2M27 24h2"/>

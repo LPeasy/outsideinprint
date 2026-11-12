@@ -1,7 +1,7 @@
 {{ $page := .page }}
 {{ $publicOnly := default false .publicOnly }}
 {{ $definitions := sort (sort (default (slice) hugo.Data.collections.collections) "title" "asc") "weight" "asc" }}
-{{ $explicit := partial "collections/normalize-values.html" (dict "value" $page.Params.collections "limit" 2) }}
+{{ $explicit := partialCached "collections/membership-slugs.html" $page $page.RelPermalink }}
 {{ $matches := slice }}
 
 {{ if gt (len $explicit) 0 }}

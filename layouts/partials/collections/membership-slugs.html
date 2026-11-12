@@ -1,0 +1,19 @@
+{{- $slugs := partial "collections/normalize-values.html" (dict "value" .Params.collections "limit" 2) -}}
+{{- with .Params.contributor_role -}}
+  {{- if eq (len $slugs) 1 -}}
+    {{- $primary := index $slugs 0 -}}
+    {{- $collections := default (slice) hugo.Data.collections.collections -}}
+    {{- $series := where (where $collections "kind" "series") "secondary_contributor_role" . -}}
+    {{- if eq (len $series) 1 -}}
+      {{- $secondary := (index $series 0).slug -}}
+      {{- if ne $primary $secondary -}}
+        {{- with partialCached "collections/lookup-definition.html" $primary $primary -}}
+          {{- if .public -}}
+            {{- $slugs = $slugs | append $secondary -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $slugs -}}

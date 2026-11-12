@@ -4,6 +4,7 @@
   "musings": { "mark": "quill", "ink": "#A6B995", "paper_ink": "#496137", "type": "italic", "page_enabled": true },
   "the-things-we-say": { "mark": "quotation", "ink": "#D2A190", "paper_ink": "#854631", "type": "serif", "page_enabled": true },
   "syd-and-oliver-dialogues": { "mark": "dialogue", "ink": "#B4A0C8", "paper_ink": "#6E4C84", "type": "serif", "page_enabled": true },
+  "the-outside-byline": { "mark": "byline", "ink": "#A6BFAF", "paper_ink": "#3E6254", "type": "serif", "page_enabled": true },
   "modern-bios": { "mark": "portrait", "ink": "#B7AA93", "paper_ink": "#66533D", "type": "smallcaps", "page_enabled": true },
   "lit-review": { "mark": "book", "ink": "#D0A0AC", "paper_ink": "#824456", "type": "italic", "page_enabled": true },
   "everyday-history": { "mark": "calendar", "ink": "#D0A78D", "paper_ink": "#784B34", "type": "serif", "page_enabled": true },

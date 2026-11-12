@@ -43,6 +43,7 @@ foreach ($relativePath in @(
   'layouts/partials/schema/creative-work.html',
   'layouts/partials/schema/organization.html',
   'layouts/partials/collections/resolve-page-collections.html',
+  'layouts/partials/collections/membership-slugs.html',
   'layouts/partials/collections/normalize-values.html',
   'data/authors.yaml',
   'data/organization.yaml'
