@@ -578,7 +578,10 @@ test("newsletter proposition is plain-language across signup and checkout surfac
   assert.equal((almanackIssue.match(/partial "newsletter_signup\.html"/g) || []).length, 1);
   assert.ok(almanackIssue.lastIndexOf("</article>") < almanackIssue.indexOf('partial "newsletter_signup.html"'));
 
-  assert.match(frontMatter(privacyPolicy, "privacy policy"), /^effective_date: "November 3, 2026"$/m);
+  assert.match(frontMatter(privacyPolicy, "privacy policy"), /^effective_date: "November 12, 2026"$/m);
+  assert.match(privacyPolicy, /has stopped sending Google Analytics purchase events, including for earlier checkouts\./);
+  assert.match(privacyPolicy, /scheduled cleanup removes the browser and session identifiers and their associated timestamp after the 24-hour attribution window expires\./);
+  assert.match(privacyPolicy, /does not recall events already sent or erase cookies previously stored in your browser\./);
   assert.match(privacyPolicy, /standalone Outside In Print newsletter signup form/);
   assert.match(privacyPolicy, /IP address, browser or device information, and referring page/);
   assert.match(privacyPolicy, /email-client, browser, device, IP-address, or referrer metadata/);

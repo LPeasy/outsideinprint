@@ -1,7 +1,7 @@
 ---
 title: "Privacy Policy"
 description: "How Outside In Print handles information connected to site use, Studio inquiry emails, email subscriptions, Steam storefront visits, orders, EPUB delivery, and reader support."
-effective_date: "November 3, 2026"
+effective_date: "November 12, 2026"
 type: "commerce-policy"
 draft: false
 show_citation: false
@@ -39,7 +39,7 @@ Outside In Print no longer offers Google Analytics purchase measurement on the w
 
 For visitors who allowed it, Google could receive a page path and public title, the origin of a referring website, browser and session identifiers, and checkout-start events. A bounded Google Merchant Center click identifier supplied on the landing page could be included for attribution. Other URL query values and fragments were excluded. For eligible purchases, the delivery service verified the completed production payment before sending the product identifier, currency, purchase value, and an opaque transaction identifier to Google. It did not send email addresses, names, street addresses, card details, Square customer identifiers, or download links to Google Analytics.
 
-One verified order was eligible for one purchase event. Sandbox activity, zero-dollar orders, and orders identified as tests were excluded. A thank-you-page visit alone did not create a purchase event. A checkout started before measurement was removed may still produce a purchase report.
+One verified order was eligible for one purchase event. Sandbox activity, zero-dollar orders, and orders identified as tests were excluded. A thank-you-page visit alone did not create a purchase event. Since November 12, 2026, the delivery service has stopped sending Google Analytics purchase events, including for earlier checkouts. For checkouts that already had measurement data attached, scheduled cleanup removes the browser and session identifiers and their associated timestamp after the 24-hour attribution window expires. Outside In Print retains limited records to prevent duplicate reporting.
 
 When Google Analytics is linked to Merchant Center, Google shares the service names and identifiers and conversion data between them. Google uses shared purchase events for Merchant performance reporting, improving shopping search, and improving its products and services. It may also use events for privacy-safe listing annotations and resources pooled across merchants. Read [how Google uses key events data](https://support.google.com/merchants/answer/14763078?hl=en).
 
