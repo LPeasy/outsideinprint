@@ -38,3 +38,4 @@ import "./collection_continuation_assignments.test.mjs";
 import "./seo_route_schema_contract.test.mjs";
 import "./site_chrome_contract.test.mjs";
 import "./web_publishing_direction.test.mjs";
+import "./timeline_scale.test.cjs";

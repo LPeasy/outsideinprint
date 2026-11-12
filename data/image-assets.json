@@ -17,6 +17,49 @@
     "social_max_width": 1200
   },
   "assets": {
+    "essays/the-last-voyage-of-the-ss-united-states/hero": {
+      "id": "essays/the-last-voyage-of-the-ss-united-states/hero",
+      "source": "images/originals/essays/the-last-voyage-of-the-ss-united-states/hero.png",
+      "sha256": "b54c460911782d40a2b4e722cc3a8ca61674a0cb2a67f73d15d4fde1bf5a5924",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null,
+      "artwork_title": "Full Steam Ahead"
+    },
+    "essays/the-last-voyage-of-the-ss-united-states/section-1": {
+      "id": "essays/the-last-voyage-of-the-ss-united-states/section-1",
+      "source": "images/originals/essays/the-last-voyage-of-the-ss-united-states/section-1.png",
+      "sha256": "cbe0e7567d4c324799faa55ec8382383f2d7c9a4ff012e282fdb86634face14e",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
+    "essays/the-last-voyage-of-the-ss-united-states/section-2": {
+      "id": "essays/the-last-voyage-of-the-ss-united-states/section-2",
+      "source": "images/originals/essays/the-last-voyage-of-the-ss-united-states/section-2.png",
+      "sha256": "fd533a0af5bf157d810d41e7526ccd4ce4566c8adecec386944cb3d336d6ef96",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "essays/ten-words-over/hero": {
       "id": "essays/ten-words-over/hero",
       "source": "images/originals/essays/ten-words-over/hero.png",
@@ -9298,6 +9341,9 @@
     }
   },
   "aliases": {
+    "/images/essays/the-last-voyage-of-the-ss-united-states/hero.png": "essays/the-last-voyage-of-the-ss-united-states/hero",
+    "/images/essays/the-last-voyage-of-the-ss-united-states/section-1.png": "essays/the-last-voyage-of-the-ss-united-states/section-1",
+    "/images/essays/the-last-voyage-of-the-ss-united-states/section-2.png": "essays/the-last-voyage-of-the-ss-united-states/section-2",
     "/images/essays/ten-words-over/hero.png": "essays/ten-words-over/hero",
     "/images/essays/ten-words-over/section-1.png": "essays/ten-words-over/section-1",
     "/images/essays/ten-words-over/section-2.png": "essays/ten-words-over/section-2",

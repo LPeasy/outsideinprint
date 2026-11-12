@@ -1,0 +1,36 @@
+{{- $page := .page -}}
+{{- $body := printf "%s" .body -}}
+{{- $timeline := $page.Params.timeline_sidebar -}}
+{{- $start := $timeline.start_heading | default "" -}}
+{{- $end := $timeline.end_heading | default "" -}}
+{{- $valid := true -}}
+{{- range slice $start $end -}}
+  {{- if not (findRE `^[a-z0-9]+(?:-[a-z0-9]+)*$` .) -}}
+    {{- errorf "bounded timeline on %s requires start_heading and end_heading IDs" $page.File.Path -}}
+    {{- $valid = false -}}
+  {{- end -}}
+{{- end -}}
+{{- if $valid -}}
+  {{- $startMatches := findRE (printf `<h2\b[^>]*\bid="%s"[^>]*>` $start) $body -}}
+  {{- $endMatches := findRE (printf `<h2\b[^>]*\bid="%s"[^>]*>` $end) $body -}}
+  {{- if or (ne (len $startMatches) 1) (ne (len $endMatches) 1) (eq $start $end) -}}
+    {{- errorf "bounded timeline on %s requires two distinct, unique H2 IDs" $page.File.Path -}}
+  {{- else -}}
+    {{- $startTag := index $startMatches 0 -}}
+    {{- $endTag := index $endMatches 0 -}}
+    {{- $parts := split $body $startTag -}}
+    {{- $intro := index $parts 0 -}}
+    {{- $remaining := index $parts 1 -}}
+    {{- $tail := split $remaining $endTag -}}
+    {{- if ne (len $tail) 2 -}}
+      {{- errorf "bounded timeline on %s requires end_heading after start_heading" $page.File.Path -}}
+    {{- else -}}
+      <div class="piece-body piece-timeline-introduction">{{ $intro | safeHTML }}</div>
+      <div class="piece-reading-layout piece-reading-layout--bounded">
+        <div class="piece-body">{{ printf "%s%s" $startTag (index $tail 0) | safeHTML }}</div>
+        {{ partial "article/timeline-sidebar.html" $page }}
+      </div>
+      <div class="piece-body piece-timeline-conclusion">{{ printf "%s%s" $endTag (index $tail 1) | safeHTML }}</div>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

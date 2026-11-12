@@ -9,6 +9,7 @@ const definitions = read("data/collections.yaml");
 const everydayHistoryMembers = new Set([
   "why-daylight-saving-time",
   "what-armistice-day-meant",
+  "the-last-voyage-of-the-ss-united-states",
   "why-we-celebrate-memorial-day-origins-traditions-and-importance",
   "fine-china-the-long-road-from-jingdezhen-to-grandmas-cabinet",
   "the-bars-on-the-gum",
@@ -74,7 +75,7 @@ test("new collection definitions are explicit public topics with a real starting
   }
 });
 
-test("Everyday History resolves to the six approved essays", () => {
+test("Everyday History resolves to the seven approved essays", () => {
   const members = fs.readdirSync("content/essays", { recursive: true, withFileTypes: true })
     .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
     .filter((entry) => collections(read(`${entry.parentPath}/${entry.name}`)).includes("everyday-history"))

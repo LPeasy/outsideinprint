@@ -7844,6 +7844,19 @@ body.cartoon-lightbox-open{
 .piece-reading-layout > .piece-body{
   min-width:0;
 }
+.piece-timeline-introduction,
+.piece-timeline-conclusion{
+  max-width:62rem;
+}
+.piece-timeline-introduction{
+  margin-bottom:2.5rem;
+}
+.piece-timeline-conclusion{
+  margin-top:2.5rem;
+}
+.piece-reading-layout--bounded > .piece-body > h2:first-child{
+  margin-top:0;
+}
 .piece-timeline{
   display:flex;
   flex-direction:column;
@@ -7882,6 +7895,10 @@ body.cartoon-lightbox-open{
   font-weight:650;
 }
 @media (max-width:980px){
+  .piece-timeline-introduction,
+  .piece-timeline-conclusion{
+    max-width:var(--measure-reading);
+  }
   .piece-reading-layout{
     display:block;
     max-width:var(--measure-reading);
@@ -7922,6 +7939,28 @@ body.cartoon-lightbox-open{
   .piece-timeline__entries > li + li{
     margin-top:1rem;
   }
+}
+/* Annual ticks follow the original entry spacing, with no leader lines. */
+.piece-timeline.timeline-scale-rail{border-inline-start-color:transparent}
+.timeline-scale-ready{position:relative}
+.timeline-scale-ready > li::before{display:none !important}
+.timeline-scale-axis{
+  position:absolute;
+  top:0;
+  left:-24px;
+  overflow:visible;
+  pointer-events:none;
+  color:inherit;
+  fill:none;
+  stroke:currentColor;
+}
+.timeline-scale-spine,.timeline-scale-year{stroke-width:1;opacity:.55}
+.timeline-scale-event{stroke-width:1.8;opacity:.95}
+@media(max-width:980px){
+  .piece-timeline__entries.timeline-scale-ready{margin-left:24px}
+}
+@media print{
+  .timeline-scale-axis{display:none}
 }
 .piece-contents{
   margin-top:1rem;

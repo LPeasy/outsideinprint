@@ -167,7 +167,9 @@
 
     {{ $articleBody := partial "render_article_body.html" . }}
     {{ partial "article/contents.html" (dict "page" . "body" $articleBody) }}
-    {{ if .Params.timeline_sidebar }}
+    {{ if and .Params.timeline_sidebar .Params.timeline_sidebar.start_heading }}
+      {{ partial "article/bounded-timeline.html" (dict "page" . "body" $articleBody) }}
+    {{ else if .Params.timeline_sidebar }}
       <div class="piece-reading-layout">
         <div class="piece-body">
           {{ $articleBody }}
@@ -178,6 +180,11 @@
       <div class="piece-body">
         {{ $articleBody }}
       </div>
+    {{ end }}
+    {{ if .Params.timeline_sidebar }}
+      {{ with resources.Get "js/timeline-scale.js" | minify | fingerprint "sha384" }}
+        <script data-oip-route-script="timeline-scale" src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+      {{ end }}
     {{ end }}
     <div class="piece-aftermatter">
       {{ if and (in (slice "essays" "reports" "working-papers") .Section) (ge .ReadingTime 8) (not .Params.studio_sample) }}
