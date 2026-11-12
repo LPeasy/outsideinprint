@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DISTRIBUTION = runpy.run_path(str(ROOT / 'scripts/render_almanack_distribution.py'))
 HUGO = str(DISTRIBUTION['HUGO'])
 GUEST = {'label': 'Our First Guest Essay', 'title': 'A Public Record Must Outlast the Feed',
-         'author': 'Douglas B. Vandergraph',
+         'author': 'Douglas Vandergraph',
          'url': 'https://outsideinprint.org/essays/a-public-record-must-outlast-the-feed/',
          'capsule': 'Our first guest essay follows a public notice after its post slips out of view.'}
 
