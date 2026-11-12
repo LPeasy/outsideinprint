@@ -7,6 +7,10 @@ Review: Current publication-staging audit of Contributor Desk revision 15
 
 Selected desk revision: 15. Source story SHA-256: `f64e2cef41ff40263e418a2cac033f731c32afa49a052a33abcfd7989f21073d`. Staged story SHA-256: `57c9263b7a47802c8d286b54bbd43ee27ac99251a74b1e1bfce96b4a9d65573e`. Reviewed at 2026-10-11T20:57:19Z.
 
+## Version 1.1 attribution review
+
+Reviewed 2026-11-11. The corrected name is Douglas Vandergraph. Comparison with the published source confirms the only essay changes are the byline, the name in the author bio, and the version, edition, and revision history. The essay argument, evidence, wording outside the author bio, links, artwork, publication date, and collection are unchanged. The existing Editorial Philosophy and Media Framing PASS findings below apply to the unchanged claims and argument. The original audit documents its reviewed version.
+
 ## Decision State
 
 99_READY for conversion and the remaining publication gates. This is a readiness state, not a new numerical score. Earlier 91/100 assessments describe their earlier named copies and remain historical. No fresh numerical grade is asserted here.

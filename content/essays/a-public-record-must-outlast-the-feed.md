@@ -2,7 +2,7 @@
 title: "A Public Record Must Outlast the Feed"
 subtitle: "People need a way to find what was said, who said it, and what changed."
 description: "Public notices need stable links, dated versions, and assigned upkeep so people can find what was said and see what changed."
-author: "Douglas B. Vandergraph"
+author: "Douglas Vandergraph"
 contributor_role: "guest"
 guest_links:
   - label: "YouTube"
@@ -17,8 +17,12 @@ publishDate: 2026-10-12T09:00:00-04:00
 draft: false
 slug: "a-public-record-must-outlast-the-feed"
 section_label: "Essay"
-version: "1.0"
-edition: "First web edition"
+version: "1.1"
+edition: "Second web edition"
+revision_history:
+  - version: "1.1"
+    date: "2026-11-11"
+    note: "Corrected the byline and author bio to use Douglas Vandergraph."
 featured: false
 featured_image: "essays/a-public-record-must-outlast-the-feed/hero"
 featured_image_alt: "A paper notice remains pinned to a civic notice board while message cards drift off a phone screen."
@@ -102,4 +106,4 @@ The resident who missed the city's first post should be able to find the full no
 
 ## About the author
 
-Douglas B. Vandergraph is a senior program/project manager, Christian writer, and independent digital publisher based in Fort Collins, Colorado. He maintains an interconnected library of long-form writing, video, and audio resources at [DouglasVandergraph.com](https://douglasvandergraph.com/).
+Douglas Vandergraph is a senior program/project manager, Christian writer, and independent digital publisher based in Fort Collins, Colorado. He maintains an interconnected library of long-form writing, video, and audio resources at [DouglasVandergraph.com](https://douglasvandergraph.com/).
