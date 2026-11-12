@@ -4,7 +4,7 @@
 {{ $items := slice }}
 
 {{ range site.RegularPages }}
-  {{ $explicit := partial "collections/normalize-values.html" (dict "value" .Params.collections "limit" 2) }}
+  {{ $explicit := partialCached "collections/membership-slugs.html" . .RelPermalink }}
   {{ $include := false }}
 
   {{ if gt (len $explicit) 0 }}

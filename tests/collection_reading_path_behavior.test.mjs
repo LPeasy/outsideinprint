@@ -224,6 +224,28 @@ test("public listing and detail share eligible membership while raw resolver ret
   assert.equal(privateList.trim(), "alpha;");
 });
 
+test("a contributor series follows the explicit subject collection and includes eligible guests only", (t) => {
+  const guest = { date: "2020-01-01", collections: ["alpha"], contributor_role: "guest" };
+  const html = renderPath(t, {
+    collections: [
+      { slug: "alpha", title: "Subject", kind: "topic", public: true, explicit_only: true },
+      { slug: "beta", title: "Guests", kind: "series", public: true, explicit_only: true, secondary_contributor_role: "guest" },
+    ],
+    entries: {
+      a: { ...guest, title: "Guest A" },
+      b: { ...guest, title: "Guest B" },
+      c: { ...guest, title: "Other contributor", contributor_role: "contributing" },
+      queued: { ...guest, title: "Scheduled guest", publishDate: "2030-01-01" },
+      unassigned: { ...guest, title: "Unassigned guest", collections: [] },
+      unknown: { ...guest, title: "Unknown subject", collections: ["unknown"] },
+    },
+    indexTemplate: '{{ with site.GetPage "essays/a" }}{{ range partial "collections/resolve-page-collections.html" (dict "page" . "publicOnly" true) }}{{ .collection.slug }};{{ end }}{{ partial "collections/reading-path.html" . }}{{ end }}{{ $series := partial "collections/lookup-definition.html" "beta" }}members={{ range sort (partial "collections/resolve-items.html" (dict "collection" $series "publishedOnly" true)) "Title" }}{{ .Title }};{{ end }}',
+  });
+  assert.match(html, /^alpha;beta;/);
+  assert.equal(primaryDestination(html), "/collections/alpha/");
+  assert.match(html, /members=Guest A;Guest B;\s*$/);
+});
+
 function directoryCounts(html) {
   const summary = html.match(/class="collections-broadsheet__summary">(\d+) public collections &middot; (\d+) published pieces/);
   assert.ok(summary, "the actual directory summary must render");

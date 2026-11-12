@@ -21,7 +21,6 @@ featured_image_alt: "An unmarked medical file rests on a table between a warmly 
 featured_image_caption: "The promise made in the therapy room depends on the systems that carry its records."
 collections:
   - "risk-uncertainty"
-  - "the-outside-byline"
 tags:
   - "therapy confidentiality"
   - "medical records"

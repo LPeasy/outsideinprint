@@ -71,6 +71,7 @@ function Parse-CollectionRegistry {
         ForcePublic = $false
         MinItems = 0
         ExplicitOnly = $false
+        SecondaryContributorRole = ''
         Featured = $false
         Weight = 0
         StartHere = ''
@@ -113,6 +114,7 @@ function Parse-CollectionRegistry {
         'force_public' { $current.ForcePublic = [bool]$value }
         'min_items' { $current.MinItems = [int]$value }
         'explicit_only' { $current.ExplicitOnly = [bool]$value }
+        'secondary_contributor_role' { $current.SecondaryContributorRole = Normalize-Token ([string]$value) }
         'featured' { $current.Featured = [bool]$value }
         'weight' { $current.Weight = [int]$value }
         'start_here' { $current.StartHere = Normalize-Token ([string]$value) }
@@ -182,6 +184,7 @@ function Parse-Page {
     RelativePath = Get-RelativePath $ContentRoot $Path
     Path = $Path
     Collections = @()
+    ContributorRole = ''
     Series = ''
     Topics = @()
     Tags = @()
@@ -201,6 +204,7 @@ function Parse-Page {
         'slug' { $front.Slug = Normalize-Token ([string](Convert-Scalar $raw)) }
         'date' { $front.Date = [string](Convert-Scalar $raw) }
         'series' { $front.Series = Normalize-Token ([string](Convert-Scalar $raw)) }
+        'contributor_role' { $front.ContributorRole = [string](Convert-Scalar $raw) }
         'collection_weight' { $front.CollectionWeight = [int](Convert-Scalar $raw) }
         'collections' {
           if ($raw.Trim()) {
@@ -267,13 +271,17 @@ function Get-ExplicitCollections {
 }
 
 function Resolve-CollectionItems {
-  param($Collection,$Pages)
+  param($Collection,$Pages,$PublicCollectionSlugs,$SecondaryContributorRole)
   $items = New-Object System.Collections.Generic.List[object]
   foreach ($page in $Pages) {
-    $explicit = Get-ExplicitCollections $page
+    $explicit = @(Get-ExplicitCollections $page)
     $include = $false
     if ($explicit.Count -gt 0) {
-      $include = $explicit -contains $Collection.Slug
+      $include = ($explicit -contains $Collection.Slug) -or (
+        $explicit.Count -eq 1 -and $SecondaryContributorRole -and
+        $page.ContributorRole -ceq $SecondaryContributorRole -and
+        $PublicCollectionSlugs -contains $explicit[0]
+      )
     } elseif (Test-FallbackMatch $page $Collection) {
       $include = $true
     }
@@ -322,8 +330,13 @@ $pages = Get-ChildItem $contentRoot -Recurse -File -Filter '*.md' |
   ForEach-Object { Parse-Page $_.FullName $contentRoot } |
   Where-Object { $null -ne $_ }
 
+$publicCollectionSlugs = @($collections | Where-Object Public | ForEach-Object Slug)
+$contributorSeries = @($collections | Where-Object { $_.Kind -eq 'series' -and $_.SecondaryContributorRole })
 $collectionSummaries = foreach ($collection in ($collections | Sort-Object Weight, Title)) {
-  $items = Resolve-CollectionItems $collection $pages
+  $role = $collection.SecondaryContributorRole
+  $roleMatches = @($contributorSeries | Where-Object { $_.SecondaryContributorRole -ceq $role })
+  $secondaryRole = if ($roleMatches.Count -eq 1 -and $roleMatches[0].Slug -eq $collection.Slug) { $role }
+  $items = Resolve-CollectionItems $collection $pages $publicCollectionSlugs $secondaryRole
   $state = Get-CollectionState $collection $items
   $legacyFallbackItems = @($items | Where-Object { (Get-ExplicitCollections $_).Count -eq 0 })
   [pscustomobject]@{

@@ -12,7 +12,7 @@ For a ready-to-run Codex implementation brief and follow-up prompt sequence for 
 - A topic collection should usually have at least 3 strong pieces before it is listed publicly.
 - A series collection may go live with 2 connected pieces.
 - One piece should belong to at most 2 collections.
-- Publish guest contributor pieces (`contributor_role: guest`) with their subject collection first and The Outside Byline second.
+- Publish guest contributor pieces (`contributor_role: guest`) with one explicit public subject collection. Hugo appends The Outside Byline as the second collection.
 - Explicit front matter membership is authoritative.
 - Fallback matching exists only for legacy support.
 - New pieces need at most one strong collection choice, with a second only when it genuinely fits. A piece without a suitable collection keeps the Library fallback; do not create essay-to-essay recommendation pairs.
@@ -30,6 +30,7 @@ Each collection in `data/collections.yaml` supports these fields:
 - `force_public`: optional override that allows a public collection to stay listed before it reaches `min_items`.
 - `min_items`: minimum resolved piece count before public listing.
 - `explicit_only`: disables fallback matching when true.
+- `secondary_contributor_role`: optional series membership for a matching contributor role. The series follows the piece's one explicit public collection.
 - `featured`: legacy featured-surface metadata retained for compatibility; the active homepage and `/collections/` directory do not use it for ordering or presentation.
 - `weight`: ordering control for collection listings.
 - `order`: optional `oldest-first` sorts members by article `Date` ascending, with title ascending for equal dates, instead of using article weights. Omit it to retain the default weighted/newest-first ordering. Currently only Syd and Oliver Dialogues opts in.
@@ -67,7 +68,7 @@ Resolver entry points:
 
 Resolution rules:
 
-1. If a page has `collections`, only those explicit memberships count, and their front matter order is preserved.
+1. If a page has `collections`, use its explicit memberships in front matter order. A matching contributor series can fill the second slot when the page has one explicit public collection.
 2. If a page has no `collections`, fallback matching may be used.
 3. If a collection has `explicit_only: true`, fallback is never used for that collection.
 4. Public listings require `public: true`, either `count >= min_items` or `force_public: true`, and an eligible published `content/collections/<slug>.md` page. Counts include only published members: not draft, article date and release date no later than the build clock, and no elapsed expiry date. This also applies to public navigation in preview builds.

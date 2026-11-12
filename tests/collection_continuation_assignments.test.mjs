@@ -82,7 +82,7 @@ test("Everyday History resolves to the six approved essays", () => {
   assert.deepEqual(members.sort(), [...everydayHistoryMembers].sort());
 });
 
-test("The Outside Byline is a public series and secondary to every guest contributor's subject collection", () => {
+test("The Outside Byline derives membership from guest contributors with a public subject collection", () => {
   const series = "the-outside-byline";
   const publicDefinitions = new Map(
     [...definitions.matchAll(/^  - slug: ([a-z0-9-]+)\r?\n([\s\S]*?)(?=^  - slug:|(?![\s\S]))/gm)]
@@ -90,6 +90,7 @@ test("The Outside Byline is a public series and secondary to every guest contrib
       .map(([, slug, body]) => [slug, body]),
   );
   assert.match(publicDefinitions.get(series) || "", /^    kind: series[ \t]*\r?$/m);
+  assert.match(publicDefinitions.get(series), /^    secondary_contributor_role: guest[ \t]*\r?$/m);
 
   for (const entry of fs.readdirSync("content", { recursive: true, withFileTypes: true })) {
     if (!entry.isFile() || !entry.name.endsWith(".md")) continue;
@@ -99,12 +100,10 @@ test("The Outside Byline is a public series and secondary to every guest contrib
     const guest = /^contributor_role:[ \t]*["']?guest["']?[ \t]*\r?$/m.test(metadata);
     const draft = /^draft:[ \t]*true[ \t]*\r?$/m.test(metadata);
     const memberships = collections(source);
-    if (!guest) {
-      assert.ok(!memberships.includes(series), path);
-    } else if (!draft || memberships.includes(series)) {
-      assert.equal(memberships.length, 2, path);
-      assert.ok(memberships[0] !== series && publicDefinitions.has(memberships[0]), path);
-      assert.equal(memberships[1], series, path);
+    assert.ok(!memberships.includes(series), path);
+    if (guest && !draft) {
+      assert.equal(memberships.length, 1, path);
+      assert.ok(publicDefinitions.has(memberships[0]), path);
     }
   }
 });

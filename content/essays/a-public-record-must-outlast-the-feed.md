@@ -29,7 +29,6 @@ featured_image_alt: "A paper notice remains pinned to a civic notice board while
 featured_image_caption: "A lasting record needs a clear source and a path back to it."
 collections:
   - "civic-institutions-and-public-power"
-  - "the-outside-byline"
 tags:
   - "public records"
   - "public services"

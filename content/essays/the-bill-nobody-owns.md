@@ -21,7 +21,6 @@ featured_image_alt: "Two hands reach toward a flagged invoice suspended between 
 featured_image_caption: "An invoice can change hands without anyone taking responsibility for the decision."
 collections:
   - "risk-uncertainty"
-  - "the-outside-byline"
 ---
 
 Imagine a small office that has finally automated its invoices. The system matches routine bills to purchase orders, which show what the office agreed to buy. Those bills move toward payment with hardly a human touch. Then a bill comes in with an unfamiliar fee. The bill could match either of two orders. The software marks it for review. Everyone assumes somebody else will handle it.

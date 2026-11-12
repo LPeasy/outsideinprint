@@ -21,7 +21,6 @@ featured_image_alt: "A writer pauses with her right hand at the trackpad. Highli
 featured_image_caption: "Between Two Windows. A writer pauses before pasting her draft. Outside In Print illustration."
 collections:
   - "risk-uncertainty"
-  - "the-outside-byline"
 ---
 
 Say you're ten words over a submission limit. You open a counter, paste the whole draft, and get a number. It takes a few seconds. The draft might include an unpublished interview, a client's plans, or a detail someone told you in confidence. To get the number, you may have handed over much more than the tool needed.
