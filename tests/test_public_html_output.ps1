@@ -6533,8 +6533,8 @@ if ($directoryCardSlugs.Count -ne $directoryDefinitions.Count) {
   $uxIssues.Add('Collections directory => visible cards must match the complete eligible public collection inventory')
 }
 $standardCollectionDefinitions = @($collectionInventory.collections | Where-Object { $_.public -and $_.slug -cne 'bobs-almanack' })
-if ($standardCollectionDefinitions.Count -ne 17) {
-  $uxIssues.Add("Collection organization => expected 17 public standard collection definitions, found $($standardCollectionDefinitions.Count)")
+if ($standardCollectionDefinitions.Count -ne 18) {
+  $uxIssues.Add("Collection organization => expected 18 public standard collection definitions, found $($standardCollectionDefinitions.Count)")
 }
 foreach ($definition in $standardCollectionDefinitions) {
   $slug = [string]$definition.slug
