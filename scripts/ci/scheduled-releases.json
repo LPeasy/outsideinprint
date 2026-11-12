@@ -712,6 +712,108 @@
         }
       ],
       "endsAt": "2026-11-08T14:00:00Z"
+    },
+    {
+      "id": "ten-words-over-essay-release",
+      "route": "/essays/ten-words-over/",
+      "releaseAt": "2026-11-12T07:00:00-05:00",
+      "bindings": [
+        {
+          "kind": "file",
+          "path": "content/essays/ten-words-over.md",
+          "sha256": "6d60a266546eed51809c5d475e254a747d22ffff5e52dcb05523a201f2f8eb10"
+        }
+      ],
+      "images": [
+        {
+          "id": "essays/ten-words-over/hero",
+          "sha256": "0cc0fdcd052acdef592bf60b702265a9a9384018bd6e175f607a022ace93a57d",
+          "width": 1672,
+          "height": 941
+        },
+        {
+          "id": "essays/ten-words-over/section-1",
+          "sha256": "bc0ddc8e4361ed1d6cb56a315a9e680361c882cb65cc2d17e7c752facb2d76e9",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "id": "essays/ten-words-over/section-2",
+          "sha256": "5b97f4a40868012bfcde5fffa2bd13dc1bfd474caf035fff489724ecb490b2ee",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "id": "essays/ten-words-over/section-3",
+          "sha256": "19b26183010734cb2f1af3ef480a8c65d54af5d905bb8ed548bed130bee440cf",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "checks": [
+        {
+          "route": "/essays/ten-words-over/",
+          "title": "Ten Words Over",
+          "containsText": [
+            "Josh Liljenquist",
+            "Robert V. Ussley",
+            "I want to know where my words go before I paste them onto a website.",
+            "To get the number, you may have handed over much more than the tool needed.",
+            "WordCount says it sends text to an AI model for rewriting and discards the text after processing.",
+            "Use a made-up sentence to see what the tool sends during the test.",
+            "The box can be empty even if your browser or the service has a copy.",
+            "reason enough to keep the file where it is.",
+            "Between Two Windows.",
+            "About the author"
+          ],
+          "links": [
+            "https://wordcount.com/privacy",
+            "https://kitglade.com/resources/text-utilities/character-counter/",
+            "https://developer.chrome.com/docs/devtools/network/reference",
+            "https://authorsguild.org/news/use-of-ai-in-publishing-and-new-model-contract-clause/",
+            "https://joshliljenquist.com/",
+            "/authors/robert-v-ussley/"
+          ],
+          "imageIds": [
+            "essays/ten-words-over/hero",
+            "essays/ten-words-over/section-1",
+            "essays/ten-words-over/section-2",
+            "essays/ten-words-over/section-3"
+          ]
+        },
+        {
+          "route": "/",
+          "containsText": [
+            "Guest Feature",
+            "Josh Liljenquist"
+          ],
+          "links": [
+            "/essays/ten-words-over/"
+          ],
+          "imageIds": [
+            "essays/ten-words-over/hero"
+          ]
+        },
+        {
+          "route": "/collections/risk-uncertainty/",
+          "links": [
+            "/essays/ten-words-over/"
+          ]
+        },
+        {
+          "route": "/gallery/",
+          "containsText": [
+            "Between Two Windows"
+          ],
+          "links": [
+            "/essays/ten-words-over/"
+          ],
+          "imageIds": [
+            "essays/ten-words-over/hero"
+          ]
+        }
+      ],
+      "endsAt": "2026-11-13T12:00:00Z"
     }
   ]
 }

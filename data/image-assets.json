@@ -17,6 +17,63 @@
     "social_max_width": 1200
   },
   "assets": {
+    "essays/ten-words-over/hero": {
+      "id": "essays/ten-words-over/hero",
+      "source": "images/originals/essays/ten-words-over/hero.png",
+      "sha256": "0cc0fdcd052acdef592bf60b702265a9a9384018bd6e175f607a022ace93a57d",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null,
+      "artwork_title": "Between Two Windows"
+    },
+    "essays/ten-words-over/section-1": {
+      "id": "essays/ten-words-over/section-1",
+      "source": "images/originals/essays/ten-words-over/section-1.png",
+      "sha256": "bc0ddc8e4361ed1d6cb56a315a9e680361c882cb65cc2d17e7c752facb2d76e9",
+      "width": 1536,
+      "height": 1024,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
+    "essays/ten-words-over/section-2": {
+      "id": "essays/ten-words-over/section-2",
+      "source": "images/originals/essays/ten-words-over/section-2.png",
+      "sha256": "5b97f4a40868012bfcde5fffa2bd13dc1bfd474caf035fff489724ecb490b2ee",
+      "width": 1536,
+      "height": 1024,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
+    "essays/ten-words-over/section-3": {
+      "id": "essays/ten-words-over/section-3",
+      "source": "images/originals/essays/ten-words-over/section-3.png",
+      "sha256": "19b26183010734cb2f1af3ef480a8c65d54af5d905bb8ed548bed130bee440cf",
+      "width": 1536,
+      "height": 1024,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
     "essays/between-buses-in-seoul/hero": {
       "id": "essays/between-buses-in-seoul/hero",
       "source": "images/originals/essays/between-buses-in-seoul/hero.png",
@@ -9241,6 +9298,10 @@
     }
   },
   "aliases": {
+    "/images/essays/ten-words-over/hero.png": "essays/ten-words-over/hero",
+    "/images/essays/ten-words-over/section-1.png": "essays/ten-words-over/section-1",
+    "/images/essays/ten-words-over/section-2.png": "essays/ten-words-over/section-2",
+    "/images/essays/ten-words-over/section-3.png": "essays/ten-words-over/section-3",
     "/images/essays/between-buses-in-seoul/hero.png": "essays/between-buses-in-seoul/hero",
     "/images/essays/between-buses-in-seoul/itaewon-arrival-display.jpeg": "essays/between-buses-in-seoul/itaewon-arrival-display",
     "/images/essays/between-buses-in-seoul/itaewon-rooftops.jpeg": "essays/between-buses-in-seoul/itaewon-rooftops",
