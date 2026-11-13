@@ -2013,10 +2013,6 @@ html[data-theme="light"] .paper-route-toggle{
   padding:.8rem .9rem .88rem;
   border-top:1px solid var(--oip-rule-standard);
 }
-.home-reader-newsletter > .pressroom-invitation--compact{
-  padding-top:.65rem;
-  border-top:1px solid var(--oip-rule-standard);
-}
 .home-reader-newsletter__issue-heading p{
   margin:0 0 .18rem;
   color:var(--accent-hover);

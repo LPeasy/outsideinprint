@@ -473,8 +473,7 @@ test("homepage signup offers a brief from the current published Almanack edition
     .map((match) => match[0]).find((tag) => attribute(tag, "class") === "home-reader-newsletter__issue-link");
   assert.ok(fullIssueLink);
   assert.equal(attribute(fullIssueLink, "href"), currentRoute);
-  const pressroomPosition = html.indexOf("homepage_newsletter_pressroom", briefStart);
-  assert.ok(pressroomPosition > html.indexOf(fullIssueLink, briefStart));
+  assert.doesNotMatch(html, /homepage_newsletter_pressroom|The Pressroom is \$5 a month\./);
   const signup = html.slice(html.indexOf("home-reader-banner__signup"), briefStart);
   assert.doesNotMatch(signup, /After you confirm your email|separate unsubscribe links/);
   assert.match(brief, /New writing:/);
