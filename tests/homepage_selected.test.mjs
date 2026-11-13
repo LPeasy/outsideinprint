@@ -52,8 +52,8 @@ test("reader banner contains only owner-provided proof and the newsletter offer 
   assert.match(readerNewsletter, /One thoughtful letter each week\./);
   assert.match(readerNewsletter, /Every Saturday: new writing, one revealing number, and a thought worth keeping\./);
   assert.match(readerNewsletter, /No spam ever\. Unsubscribe anytime\./);
-  assert.match(readerNewsletter, /After you confirm your email, you will also receive three short introductory emails, including an optional Pressroom invitation\./);
-  assert.match(readerNewsletter, /The introductory series and Saturday newsletter have separate unsubscribe links\./);
+  assert.doesNotMatch(readerNewsletter, /After you confirm your email, you will also receive three short introductory emails, including an optional Pressroom invitation\./);
+  assert.doesNotMatch(readerNewsletter, /The introductory series and Saturday newsletter have separate unsubscribe links\./);
   assert.match(readerNewsletter, /Join the newsletter/);
   assert.match(readerNewsletter, /eq \$provider "buttondown"/);
   assert.match(readerNewsletter, /data-analytics-event="newsletter_submit"/);
@@ -115,7 +115,7 @@ test("featured reading leads with the SS United States, then the latest publicat
     assert.ok(!homeV2.includes(label), "metric values belong in the internal data record");
   }
   assert.match(homeV2, /hugo\.Data\.homepage_metrics/);
-  assert.match(homeV2, /A featured essay, the latest publication, and selected work\./);
+  assert.doesNotMatch(homeV2, /A featured essay, the latest publication, and selected work\./);
   assert.match(homeV2, /Read the piece/);
   assert.doesNotMatch(homeV2, /Read the essay/);
   assert.doesNotMatch(metrics, /\d(?:K)? readers/);
@@ -362,15 +362,14 @@ test("new homepage system has responsive, keyboard-visible editorial styling", (
   assert.match(css, /\.home-reader-banner__newsletter-link:focus-visible[^{}]*\{[^}]*outline:3px solid var\(--focus-ring\);/);
   assert.match(css, /\.home-reader-banner__newsletter-link\{[^}]*min-height:34px;/);
   assert.match(css, /\.home-reader-banner__newsletter-link::before\{[^}]*inset:-5px 0;/);
-  assert.match(css, /\.home-v2-featured\{[^}]*margin-top:\.75rem;[^}]*padding-top:\.65rem;/);
-  assert.match(css, /\.home-v2-featured__header\{[^}]*padding-bottom:\.65rem;/);
+  assert.match(css, /\.home-v2-featured\{[^}]*margin-top:\.45rem;[^}]*padding-top:\.45rem;/);
+  assert.match(css, /\.home-v2-featured__header\{[^}]*padding-bottom:\.45rem;/);
   assert.match(css, /\.home-v2-featured__lead\{[^}]*padding:\.9rem/);
   assert.match(css, /\.home-v2-featured__lead-heading\{[^}]*margin-bottom:\.7rem;/);
   assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-library\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
-  assert.match(css, /\.home-front-page__orientation\{[^}]*display:grid;[^}]*grid-template-areas:\s*"label"\s*"copy"\s*"links";[^}]*max-width:70rem;/);
+  assert.match(css, /\.home-front-page__orientation\{[^}]*display:grid;[^}]*grid-template-areas:\s*"label links"\s*"copy links";[^}]*max-width:70rem;/);
   assert.match(css, /\.home-front-page__welcome-copy\{[^}]*margin:0;[^}]*font-size:\.94rem;[^}]*line-height:1\.42;/);
   assert.match(css, /@media \(max-width:900px\)[\s\S]*\.home-v2-featured__grid\{[^}]*grid-template-columns:1fr/);
-  assert.match(css, /@media \(max-width:900px\)[\s\S]*\.home-v2-featured__header\{[^}]*grid-template-columns:1fr;[^}]*gap:\.55rem;/);
   assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-v2-featured__supporting\{\s*display:block/);
   assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-reader-banner__proof-item\{[^}]*padding:0 \.2rem/);
   assert.match(css, /@media \(max-width:520px\)[\s\S]*\.home-reader-banner__controls\{[\s\S]*grid-template-columns:minmax\(0, 1fr\) auto/);

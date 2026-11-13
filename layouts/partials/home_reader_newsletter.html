@@ -17,7 +17,6 @@
       <h2 id="home-reader-banner-title" tabindex="-1">One thoughtful letter each week.</h2>
       <p>Every Saturday: new writing, one revealing number, and a thought worth keeping.</p>
       <p>Free. No spam ever. Unsubscribe anytime.</p>
-      <p>After you confirm your email, you will also receive three short introductory emails, including an optional Pressroom invitation. The introductory series and Saturday newsletter have separate unsubscribe links.</p>
     </div>
 
     {{- if and (eq $provider "buttondown") $buttondownUsername }}
@@ -50,8 +49,6 @@
     {{- end }}
   </div>
 
-  {{ partial "pressroom_invitation.html" (dict "compact" true "sourceSlot" "homepage_newsletter_pressroom") }}
-
   {{- with $currentIssue -}}
     {{- $lead := dict -}}
     {{- with .Params.essays -}}
@@ -82,4 +79,6 @@
       <a class="home-reader-newsletter__issue-link" href="{{ .RelPermalink }}">Read the full issue <span aria-hidden="true">&rarr;</span></a>
     </div>
   {{- end -}}
+
+  {{ partial "pressroom_invitation.html" (dict "compact" true "sourceSlot" "homepage_newsletter_pressroom") }}
 </section>

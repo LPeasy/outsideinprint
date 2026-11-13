@@ -150,7 +150,10 @@ test("rendered homepage leads with The Last Voyage of the SS United States, then
       assert.equal(canonicalKind, "Essay");
       assert.match(text(card[2]), /By Tristan Kim/);
     }
-    if (route === pinnedRoutes[2]) assert.equal(canonicalKind, "Essay");
+    if (route === pinnedRoutes[2]) {
+      assert.equal(canonicalKind, "Essay");
+      assert.match(text(card[2]), /Disney World reopened, turned 50, and rebuilt parts of EPCOT\./);
+    }
     if (route === pinnedRoutes[3]) assert.equal(canonicalKind, "Dialogue");
     const metric = metricRecords.get(route);
     const badge = metric?.value >= threshold ? metric.label : "";
@@ -275,7 +278,7 @@ test("rendered homepage leads with The Last Voyage of the SS United States, then
       }
     }
   }
-  assert.match(html, /A featured essay, the latest publication, and selected work\./);
+  assert.doesNotMatch(html, /A featured essay, the latest publication, and selected work\./);
   assert.match(html, /Read the piece/);
   assert.doesNotMatch(html, /25 reads|Medium reads|(?:3\.4K|1\.95K|1\.8K) readers/);
 });
@@ -470,6 +473,10 @@ test("homepage signup offers a brief from the current published Almanack edition
     .map((match) => match[0]).find((tag) => attribute(tag, "class") === "home-reader-newsletter__issue-link");
   assert.ok(fullIssueLink);
   assert.equal(attribute(fullIssueLink, "href"), currentRoute);
+  const pressroomPosition = html.indexOf("homepage_newsletter_pressroom", briefStart);
+  assert.ok(pressroomPosition > html.indexOf(fullIssueLink, briefStart));
+  const signup = html.slice(html.indexOf("home-reader-banner__signup"), briefStart);
+  assert.doesNotMatch(signup, /After you confirm your email|separate unsubscribe links/);
   assert.match(brief, /New writing:/);
   assert.match(brief, /One number:/);
   assert.match(brief, /This week(?:'|&#39;|&#x27;)s virtue:/);

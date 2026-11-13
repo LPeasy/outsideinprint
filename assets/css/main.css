@@ -2013,6 +2013,10 @@ html[data-theme="light"] .paper-route-toggle{
   padding:.8rem .9rem .88rem;
   border-top:1px solid var(--oip-rule-standard);
 }
+.home-reader-newsletter > .pressroom-invitation--compact{
+  padding-top:.65rem;
+  border-top:1px solid var(--oip-rule-standard);
+}
 .home-reader-newsletter__issue-heading p{
   margin:0 0 .18rem;
   color:var(--accent-hover);
@@ -2057,17 +2061,15 @@ html[data-theme="light"] .paper-route-toggle{
 }
 .home-front-page__orientation{
   display:grid;
-  grid-template-columns:minmax(0, 1fr);
+  grid-template-columns:minmax(0, 1fr) auto;
   grid-template-areas:
-    "label"
-    "copy"
-    "links";
+    "label links"
+    "copy links";
   gap:.12rem 1.5rem;
   align-items:start;
   max-width:70rem;
-  margin:0 auto 1rem;
-  padding:0 0 .7rem;
-  border-bottom:1px solid var(--oip-rule-standard);
+  margin:0 auto .4rem;
+  padding:0 0 .3rem;
   color:var(--text-secondary);
   text-align:left;
 }
@@ -2127,16 +2129,12 @@ html[data-theme="light"] .paper-route-toggle{
   text-transform:uppercase;
 }
 .home-v2-featured{
-  margin-top:.75rem;
-  padding-top:.65rem;
+  margin-top:.45rem;
+  padding-top:.45rem;
   border-top:4px double var(--oip-rule-engraved-strong);
 }
 .home-v2-featured__header{
-  display:grid;
-  grid-template-columns:minmax(0, 1fr) minmax(16rem, 29rem);
-  gap:1rem 2rem;
-  align-items:end;
-  padding-bottom:.65rem;
+  padding-bottom:.45rem;
   border-bottom:1px solid var(--oip-rule-standard);
 }
 .home-v2-featured__header h2{
@@ -2146,16 +2144,7 @@ html[data-theme="light"] .paper-route-toggle{
   font-weight:720;
   letter-spacing:-.025em;
   line-height:1.05;
-}
-.home-v2-featured__header h2{
-  font-size:clamp(2rem, 4.6vw, 3.45rem);
-}
-.home-v2-featured__header > p{
-  max-width:34rem;
-  margin:0;
-  color:var(--text-secondary);
-  font-size:1rem;
-  line-height:1.55;
+  font-size:clamp(1.75rem, 3vw, 2.5rem);
 }
 .home-v2-featured__grid{
   display:grid;
@@ -2618,8 +2607,8 @@ html[data-theme="light"] .paper-route-toggle{
   .home-reader-newsletter__issue-heading span{margin-left:.3rem}
   .home-front-page__orientation{
     display:block;
-    margin-bottom:.85rem;
-    padding-bottom:.55rem;
+    margin-bottom:.35rem;
+    padding-bottom:.25rem;
   }
   .home-front-page__welcome-label{
     margin-bottom:.18rem;
@@ -2645,10 +2634,6 @@ html[data-theme="light"] .paper-route-toggle{
   }
 }
 @media (max-width:900px){
-  .home-v2-featured__header{
-    grid-template-columns:1fr;
-    gap:.55rem;
-  }
   .home-v2-featured__grid{
     grid-template-columns:1fr;
     grid-template-areas:"lead" "supporting";

@@ -555,8 +555,8 @@ test("newsletter proposition is plain-language across signup and checkout surfac
   assert.match(homeV2FrontPage, /partial "home_reader_newsletter\.html"/);
   assert.match(homeReaderNewsletter, /One thoughtful letter each week\./);
   assert.match(homeReaderNewsletter, /No spam ever\. Unsubscribe anytime\./);
-  assert.match(homeReaderNewsletter, /After you confirm your email, you will also receive three short introductory emails, including an optional Pressroom invitation\./);
-  assert.match(homeReaderNewsletter, /The introductory series and Saturday newsletter have separate unsubscribe links\./);
+  assert.doesNotMatch(homeReaderNewsletter, /After you confirm your email, you will also receive three short introductory emails, including an optional Pressroom invitation\./);
+  assert.doesNotMatch(homeReaderNewsletter, /The introductory series and Saturday newsletter have separate unsubscribe links\./);
   assert.match(homeReaderNewsletter, /data-analytics-source-slot="homepage_reader_banner"/);
   assert.doesNotMatch(homeV2FrontPage, /Bob(?:'|’)s Almanack|home-almanack/);
   assert.match(articleSingle, /"class" "newsletter-signup--article-exit"/);
@@ -1088,12 +1088,12 @@ test("homepage editorial layout keeps the reader note compact and drops retired 
   assert.match(cssRule(css, ".home-reader-banner__controls button"), /min-height:2\.75rem;/);
   const orientationRule = cssRule(css, ".home-front-page__orientation");
   assert.match(orientationRule, /display:grid;/);
-  assert.match(orientationRule, /grid-template-columns:minmax\(0, 1fr\);/);
-  assert.match(orientationRule, /grid-template-areas:\s*"label"\s*"copy"\s*"links";/);
+  assert.match(orientationRule, /grid-template-columns:minmax\(0, 1fr\) auto;/);
+  assert.match(orientationRule, /grid-template-areas:\s*"label links"\s*"copy links";/);
   assert.match(orientationRule, /gap:\.12rem 1\.5rem;/);
   assert.match(orientationRule, /max-width:70rem;/);
-  assert.match(orientationRule, /margin:0 auto 1rem;/);
-  assert.match(orientationRule, /padding:0 0 \.7rem;/);
+  assert.match(orientationRule, /margin:0 auto \.4rem;/);
+  assert.match(orientationRule, /padding:0 0 \.3rem;/);
   assert.doesNotMatch(orientationRule, /max-width:52rem;/);
   assert.match(cssRule(css, ".home-front-page__welcome-label"), /font-size:\.8125rem;[\s\S]*letter-spacing:\.1em;/);
   assert.match(cssRule(css, ".home-front-page__welcome-copy"), /margin:0;[\s\S]*font-size:\.94rem;[\s\S]*line-height:1\.42;/);

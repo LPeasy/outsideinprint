@@ -347,8 +347,6 @@ foreach ($requiredSnippet in @(
   'One thoughtful letter each week.',
   'Every Saturday: new writing, one revealing number, and a thought worth keeping.',
   'No spam ever. Unsubscribe anytime.',
-  'After you confirm your email, you will also receive three short introductory emails, including an optional Pressroom invitation.',
-  'The introductory series and Saturday newsletter have separate unsubscribe links.',
   'Join the newsletter',
   'class="home-reader-banner__form"',
   'action="https://buttondown.com/api/emails/embed-subscribe/{{ $buttondownUsername }}"',
@@ -403,7 +401,6 @@ foreach ($requiredSnippet in @(
   'homepage_v2_featured_lead',
   'homepage_v2_featured_supporting',
   'hugo.Data.homepage_metrics',
-  'A featured essay, the latest publication, and selected work.',
   'Read the piece',
   'Browse the library',
   'Surprise me',
@@ -640,8 +637,8 @@ if ($mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link\{[^}]*position
     $mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link::before\{[^}]*position:absolute;[^}]*inset:-5px 0;' -or
     $mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link span\{[^}]*text-decoration:underline;' -or
     $mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link:focus-visible[^{}]*\{[^}]*outline:3px solid var\(--focus-ring\);' -or
-    $mainCss -notmatch '(?s)\.home-v2-featured\{[^}]*margin-top:\.75rem;[^}]*padding-top:\.65rem;' -or
-    $mainCss -notmatch '(?s)\.home-v2-featured__header\{[^}]*padding-bottom:\.65rem;' -or
+    $mainCss -notmatch '(?s)\.home-v2-featured\{[^}]*margin-top:\.45rem;[^}]*padding-top:\.45rem;' -or
+    $mainCss -notmatch '(?s)\.home-v2-featured__header\{[^}]*padding-bottom:\.45rem;' -or
     $mainCss -notmatch '(?s)\.home-v2-featured__lead\{[^}]*padding:\.9rem' -or
     $mainCss -notmatch '(?s)\.home-v2-featured__lead-heading\{[^}]*margin-bottom:\.7rem;') {
   throw 'Expected an underlined, keyboard-visible newsletter link with a 44px tap target and compact Featured Articles spacing.'
@@ -677,15 +674,14 @@ if (-not $homeOrientationCss.Success) {
 }
 foreach ($requiredRule in @(
   'display:grid;',
-  'grid-template-columns:minmax(0, 1fr);',
+  'grid-template-columns:minmax(0, 1fr) auto;',
   'grid-template-areas:',
-  '"label"',
-  '"copy"',
-  '"links";',
+  '"label links"',
+  '"copy links";',
   'gap:.12rem 1.5rem;',
   'max-width:70rem;',
-  'margin:0 auto 1rem;',
-  'padding:0 0 .7rem;'
+  'margin:0 auto .4rem;',
+  'padding:0 0 .3rem;'
 )) {
   if ($homeOrientationCss.Groups['rules'].Value -notmatch [regex]::Escape($requiredRule)) {
     throw "Expected the compact homepage reader note CSS to contain: $requiredRule"
@@ -1017,9 +1013,6 @@ if ($mainCss -notmatch '(?s)\.home-v2-featured__grid\{[^}]*grid-template-columns
 }
 if ($mainCss -notmatch '(?s)@media \(max-width:900px\)\{.*?\.home-v2-featured__grid\{[^}]*grid-template-columns:1fr;') {
   throw 'Expected the featured-reading grid to collapse at 900px.'
-}
-if ($mainCss -notmatch '(?s)@media \(max-width:900px\)\{.*?\.home-v2-featured__header\{[^}]*grid-template-columns:1fr;[^}]*gap:\.55rem;') {
-  throw 'Expected the featured-reading header to stack at 900px with the grid.'
 }
 if ($mainCss -notmatch '(?s)@media \(max-width:520px\)\{.*?\.home-v2-featured__supporting\{\s*display:block;') {
   throw 'Expected supporting featured stories to stack at 520px.'

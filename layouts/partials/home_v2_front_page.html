@@ -18,10 +18,7 @@
   {{- if gt (len $featured) 0 }}
     <section class="home-v2-featured page-shell page-shell--wide" aria-labelledby="home-v2-featured-title">
       <header class="home-v2-featured__header">
-        <div>
-          <h2 id="home-v2-featured-title">Featured Articles</h2>
-        </div>
-        <p>A featured essay, the latest publication, and selected work.</p>
+        <h2 id="home-v2-featured-title">Featured Articles</h2>
       </header>
 
       <div class="home-v2-featured__grid">
@@ -131,7 +128,9 @@
                 </div>
               {{- end }}
               <div class="home-v2-featured__item-copy">
-                {{- with (partial "discovery/page-summary.html" $page) }}<p>{{ . }}</p>{{ end }}
+                {{- $summary := index hugo.Data.homepage_features.summaries $page.RelPermalink -}}
+                {{- if not $summary -}}{{ $summary = partial "discovery/page-summary.html" $page }}{{- end -}}
+                {{- with $summary }}<p>{{ . }}</p>{{ end }}
               </div>
             </article>
             {{- if eq $index (sub (len $featured) 1) }}</div>{{ end }}
