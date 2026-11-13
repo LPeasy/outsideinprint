@@ -458,6 +458,7 @@ collections:
       - id: governance-privacy-data
         title: Governance, privacy, and data
         items:
+          - inter-not
           - the-model-that-could-not-leave
           - you-paid-for-that-ct-scan
           - why-superintelligence-strategy-gets-ai-governance-wrong
