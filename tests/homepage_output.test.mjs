@@ -41,7 +41,14 @@ const publishedPages = rows.map((row) => Object.fromEntries(columns.map((column,
     && Date.parse(row.date) <= observationTime && Date.parse(row.publishDate) <= observationTime)
   .sort((a, b) => Date.parse(b.publishDate) - Date.parse(a.publishDate) || a.title.localeCompare(b.title));
 const publishedRoutes = publishedPages.map((row) => row.route);
-// Discover guests from Hugo's published inventory, not a hand-maintained route list.
+const pinnedRoutes = [
+  "/essays/the-last-voyage-of-the-ss-united-states/",
+  "/essays/between-buses-in-seoul/",
+  "/essays/disney-world-2020s/",
+  "/syd-and-oliver/the-last-cheese/",
+];
+const curatedRoutes = pinnedRoutes.slice(1);
+// Discover guests from Hugo's published inventory.
 const guestCandidates = publishedPages
   .filter((page) => /^content[\\/]essays[\\/]/.test(page.path))
   .map((page) => {
@@ -51,8 +58,9 @@ const guestCandidates = publishedPages
       ?.trim().replace(/^["']|["']$/g, "").trim() || "";
     return { ...page, source, author: scalar("author"), role: scalar("contributor_role"), kind: scalar("library_type") };
   });
-const selectedGuest = guestCandidates.find(({ route, author, role, kind }) => role === "guest" && Boolean(author)
+const creditedGuests = guestCandidates.filter(({ route, author, role, kind }) => role === "guest" && Boolean(author)
   && !["dialogue", "affirmation"].includes(kind.toLowerCase()) && !route.startsWith("/syd-and-oliver/"));
+const selectedGuest = creditedGuests.find(({ route }) => !curatedRoutes.includes(route));
 const { route: guestRoute = "", source: guestSource = "", author: guestAuthor = "" } = selectedGuest || {};
 const guestEligible = Boolean(selectedGuest);
 // Check public authorship independently of the homepage selector, including mixed bylines.
@@ -65,12 +73,6 @@ const regularPublishedRoutes = publishedPages.filter((page) => {
     .flatMap((match) => { const node = JSON.parse(match[1]); return node["@graph"] || [node]; });
   return isBobAuthoredReadingWork(nodes);
 }).map((page) => page.route);
-const pinnedRoutes = [
-  "/essays/what-armistice-day-meant/",
-  "/essays/the-other-side-of-the-mountain/",
-  "/essays/whos-drinking-all-the-modelo/",
-  "/syd-and-oliver/the-ant-problem/",
-];
 const metricsSource = fs.readFileSync(path.resolve("data/homepage_metrics.yaml"), "utf8");
 const threshold = Number(metricsSource.match(/^reader_threshold: (\d+)$/m)?.[1]);
 const metricRecords = new Map([...metricsSource.matchAll(/^ {2}"([^"]+)":\n([\s\S]*?)(?=^ {2}"|$(?![\s\S]))/gm)]
@@ -125,14 +127,14 @@ test("Dolphin correction retains the original publication date and renders a con
     || text(dolphinHtml).includes(currentRevision[2]), "the complete correction note must render");
 });
 
-test("rendered homepage leads with How Armistice Day Became Veterans Day, then the newest remaining publication", () => {
+test("rendered homepage leads with The Last Voyage of the SS United States, then the newest remaining publication", () => {
   const cards = [...html.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/g)]
     .filter((match) => /\bhome-v2-featured__(?:lead|item)\b/.test(attribute(`<article ${match[1]}>`, "class")));
   assert.ok(regularPublishedRoutes.length >= 5, "the production archive must supply five regular published reading pages");
   const flagship = regularPublishedRoutes.includes(pinnedRoutes[0]) ? pinnedRoutes[0] : regularPublishedRoutes[0];
   const latest = regularPublishedRoutes.find((route) => route !== flagship);
-  const expected = [...new Set([flagship, latest, ...pinnedRoutes.slice(1).filter((route) =>
-    regularPublishedRoutes.includes(route)), ...regularPublishedRoutes])].slice(0, 5);
+  const expected = [...new Set([flagship, latest, ...curatedRoutes.filter((route) =>
+    regularPublishedRoutes.includes(route) || creditedGuests.some((guest) => guest.route === route)), ...regularPublishedRoutes])].slice(0, 5);
   assert.equal(cards.length, 5);
   for (const [index, card] of cards.entries()) {
     const route = expected[index];
@@ -144,7 +146,10 @@ test("rendered homepage leads with How Armistice Day Became Veterans Day, then t
     const kind = route === "/essays/the-dolphin-company/" ? "Case study" : canonicalKind;
     if (route === "/essays/the-dolphin-company/") assert.equal(canonicalKind, "Essay", "Dolphin's homepage label must not reclassify its destination");
     if (route === pinnedRoutes[0]) assert.equal(canonicalKind, "Essay");
-    if (route === pinnedRoutes[1]) assert.equal(canonicalKind, "Musing");
+    if (route === pinnedRoutes[1]) {
+      assert.equal(canonicalKind, "Essay");
+      assert.match(text(card[2]), /By Tristan Kim/);
+    }
     if (route === pinnedRoutes[2]) assert.equal(canonicalKind, "Essay");
     if (route === pinnedRoutes[3]) assert.equal(canonicalKind, "Dialogue");
     const metric = metricRecords.get(route);
@@ -275,8 +280,8 @@ test("rendered homepage leads with How Armistice Day Became Veterans Day, then t
   assert.doesNotMatch(html, /25 reads|Medium reads|(?:3\.4K|1\.95K|1\.8K) readers/);
 });
 
-test("the Armistice Day lead and zoom use Rifles in the Mud", () => {
-  const route = "/essays/what-armistice-day-meant/";
+test("the SS United States lead and zoom use Full Steam Ahead", () => {
+  const route = pinnedRoutes[0];
   if (!regularPublishedRoutes.includes(route)) return;
   const source = fs.readFileSync(path.resolve(`content${route.slice(0, -1)}.md`), "utf8");
   const scalar = key => JSON.parse(source.match(new RegExp(`^${key}: (".*")\\r?$`, "m"))?.[1] || '""');
@@ -286,7 +291,7 @@ test("the Armistice Day lead and zoom use Rifles in the Mud", () => {
   assert.equal(attribute(image, "data-oip-image-id"), scalar("featured_image"));
   assert.equal(attribute(image, "alt"), scalar("featured_image_alt"));
   assert.equal(attribute(zoom, "data-alt"), scalar("featured_image_alt"));
-  assert.ok(attribute(zoom, "data-image").includes("/essays/what-armistice-day-meant/hero/"));
+  assert.ok(attribute(zoom, "data-image").includes(route + "hero/"));
 });
 
 test("the former Franklin lead retains its Gallery record, biography portrait and social image", () => {

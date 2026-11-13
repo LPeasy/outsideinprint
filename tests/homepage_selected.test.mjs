@@ -10,6 +10,7 @@ const homeFrontPage = read("layouts/partials/home_front_page.html");
 const homeV2 = read("layouts/partials/home_v2_front_page.html");
 const masthead = read("layouts/partials/masthead.html");
 const selected = read("layouts/partials/home_v2_selected.html");
+const features = read("data/homepage_features.yaml");
 const guestSelected = read("layouts/partials/home_guest_selected.html");
 const guestFeature = read("layouts/partials/home_guest_feature.html");
 const readerBanner = read("layouts/partials/home_reader_banner.html");
@@ -88,19 +89,19 @@ test("masthead proof sits between its controls and lead summaries keep supportin
   assert.equal((homeV2.match(/partial "discovery\/page-summary\.html"/g) || []).length, 1);
 });
 
-test("featured reading leads with Armistice Day, then the latest publication and curated supports", () => {
+test("featured reading leads with the SS United States, then the latest publication and curated supports", () => {
   const routes = [
-    "/essays/what-armistice-day-meant/",
-    "/essays/the-other-side-of-the-mountain/",
-    "/essays/whos-drinking-all-the-modelo/",
-    "/syd-and-oliver/the-ant-problem/",
+    "/essays/the-last-voyage-of-the-ss-united-states/",
+    "/essays/between-buses-in-seoul/",
+    "/essays/disney-world-2020s/",
+    "/syd-and-oliver/the-last-cheese/",
   ];
-  const indexes = routes.map((route) => selected.indexOf(`"${route}"`));
+  const indexes = routes.map((route) => features.indexOf(route));
   assert.ok(indexes.every((index) => index >= 0));
   assert.deepEqual(indexes, [...indexes].sort((left, right) => left - right));
   assert.doesNotMatch(selected, /what-happened-at-camp-mystic|why-a-return-to-the-gold-standard|the-little-prince|russias-slow-surrender/);
   assert.match(selected, /\$eligible = sort \(sort \$eligible "Title" "asc"\) "PublishDate" "desc"/);
-  assert.match(selected, /\$flagshipRoute := "\/essays\/what-armistice-day-meant\/"/);
+  assert.match(selected, /\$flagshipRoute := hugo\.Data\.homepage_features\.lead/);
   assert.match(selected, /range where \$eligible "RelPermalink" \$flagshipRoute/);
   assert.match(selected, /range first 1 \$eligible/);
   assert.ok(selected.indexOf('range where $eligible "RelPermalink" $flagshipRoute') < selected.indexOf("range first 1 $eligible"));
@@ -143,7 +144,7 @@ test("featured eligibility excludes drafts, future and expired work before choos
   assert.match(selected, /le \.PublishDate\.Unix \$now\.Unix/);
   assert.match(selected, /le \.Date\.Unix \$now\.Unix/);
   assert.match(selected, /or \.ExpiryDate\.IsZero \(gt \.ExpiryDate\.Unix \$now\.Unix\)/);
-  assert.match(selected, /range where \$eligible "RelPermalink" \$route/);
+  assert.match(selected, /range where \$curatedEligible "RelPermalink" \$route/);
   assert.match(selected, /\$fallbackPaths := \$selectedPaths/);
   assert.match(selected, /not \(in \$fallbackPaths \.RelPermalink\)/);
   assert.match(homeV2, /partial "archive\/longform-kind\.html" \$page\) "dialogue"/);
@@ -158,10 +159,11 @@ test("featured eligibility excludes drafts, future and expired work before choos
   assert.match(read("content/essays/dialogues/what-i-had.md"), /^section_label: 'Dialogue'\r?$/m);
 });
 
-test("regular slots resolve Bob's authorship and the Guest Feature keeps credited reading beneath the lead", () => {
+test("automatic slots resolve Bob's authorship and the Guest Feature keeps credited reading beneath the lead", () => {
   assert.match(guestSelected, /range site\.RegularPages/);
   assert.match(guestSelected, /\$eligible = sort \(sort \$eligible "Title" "asc"\) "PublishDate" "desc"/);
   assert.match(guestSelected, /range first 1 \$eligible/);
+  assert.match(guestSelected, /not \(in \$supportingRoutes \.RelPermalink\)/);
   assert.doesNotMatch(guestSelected, /\$guestRoutes|"\/essays\//);
   for (const source of [selected, guestSelected]) {
     assert.match(source, /not \.Draft/);

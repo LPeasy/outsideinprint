@@ -127,15 +127,16 @@ if ($homeFrontPageTemplate -notmatch [regex]::Escape('partial "home_v2_front_pag
 }
 
 $homeSelectionTemplate = Get-Content -Path (Join-Path $repoRoot 'layouts/partials/home_v2_selected.html') -Raw -Encoding utf8
+$homepageFeatures = Get-Content -Path (Join-Path $repoRoot 'data/homepage_features.yaml') -Raw -Encoding utf8
 $featuredRoutes = @(
-  '"/essays/what-armistice-day-meant/"',
-  '"/essays/the-other-side-of-the-mountain/"',
-  '"/essays/whos-drinking-all-the-modelo/"',
-  '"/syd-and-oliver/the-ant-problem/"'
+  'lead: /essays/the-last-voyage-of-the-ss-united-states/',
+  '- /essays/between-buses-in-seoul/',
+  '- /essays/disney-world-2020s/',
+  '- /syd-and-oliver/the-last-cheese/'
 )
 $previousFeaturedIndex = -1
 foreach ($route in $featuredRoutes) {
-  $routeIndex = $homeSelectionTemplate.IndexOf($route, [System.StringComparison]::Ordinal)
+  $routeIndex = $homepageFeatures.IndexOf($route, [System.StringComparison]::Ordinal)
   if ($routeIndex -le $previousFeaturedIndex) {
     throw "Expected homepage featured route order to include $route after the preceding route."
   }
@@ -144,7 +145,9 @@ foreach ($route in $featuredRoutes) {
 foreach ($requiredSnippet in @(
   'partial "archive/longform-kind.html"',
   '$eligible = sort (sort $eligible "Title" "asc") "PublishDate" "desc"',
-  '$flagshipRoute := "/essays/what-armistice-day-meant/"',
+  '$flagshipRoute := hugo.Data.homepage_features.lead',
+  '$supportingRoutes := hugo.Data.homepage_features.supporting',
+  'range where $curatedEligible "RelPermalink" $route',
   'range where $eligible "RelPermalink" $flagshipRoute',
   'range first 1 $eligible',
   'not (in $selectedPaths .RelPermalink)',
@@ -169,8 +172,7 @@ if ($homeGuestSelection -notmatch 'range site\.RegularPages' -or
     $homeGuestSelection -notmatch 'le \.Date\.Unix \$now\.Unix' -or
     $homeGuestSelection -notmatch 'le \.PublishDate\.Unix \$now\.Unix' -or
     $homeGuestSelection -notmatch 'or \.ExpiryDate\.IsZero \(gt \.ExpiryDate\.Unix \$now\.Unix\)' -or
-    $homeSelectionTemplate -notmatch 'partial "home_guest_selected\.html"' -or
-    $homeSelectionTemplate -notmatch 'ne \.RelPermalink \$guestRoute') {
+    -not $homeGuestSelection.Contains('not (in $supportingRoutes .RelPermalink)')) {
   throw 'Expected the guest placement to reserve the newest eligible guest essay with an explicit writer.'
 }
 foreach ($requiredSnippet in @(
