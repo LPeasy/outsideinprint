@@ -70,7 +70,9 @@ test("reader banner contains only owner-provided proof and the newsletter offer 
   assert.match(readerNewsletter, /partial "collections\/lookup-definition\.html" "bobs-almanack"/);
   assert.match(readerNewsletter, /partial "collections\/resolve-items\.html"[\s\S]*"publishedOnly" true/);
   assert.match(readerNewsletter, /home-reader-newsletter__issue/);
-  assert.match(readerNewsletter, /New writing:|One number:|This week's virtue:/);
+  assert.match(readerNewsletter, /Read a sample of Bob’s Almanack/);
+  assert.match(readerNewsletter, /partial "almanack\/approved-sheet\.html" \(dict "page" \. "sample" true\)/);
+  assert.match(readerNewsletter, /Read the free issue/);
 });
 
 test("masthead proof sits between its controls and lead summaries keep supporting precedence", () => {
@@ -216,7 +218,7 @@ test("homepage follows the proof, note, featured reading, library, newsletter, c
     /<p class="home-front-page__welcome-links"><a href="\{\{ "about\/" \| relURL \}\}">About the imprint<\/a><a href="\{\{ "authors\/robert-v-ussley\/" \| relURL \}\}">About the author<\/a><\/p>/,
   );
   assert.doesNotMatch(homeV2, /<p class="home-front-page__welcome-links">[\s\S]*?Start reading[\s\S]*?<\/p>/);
-  assert.match(homeV2, /<h2 id="home-v2-featured-title">Featured Articles<\/h2>/);
+  assert.match(homeV2, /<h2 id="home-v2-featured-title" class="visually-hidden">Featured Articles<\/h2>/);
   assert.doesNotMatch(homeV2, /Where to begin/);
   assert.match(homeV2, /homepage_v2_featured_lead/);
   assert.match(homeV2, /homepage_v2_featured_supporting/);
@@ -228,9 +230,9 @@ test("homepage follows the proof, note, featured reading, library, newsletter, c
   ]);
   assert.equal((library.match(/<a\b/g) || []).length, 2);
   assert.match(homeV2, /aria-label="Keep reading"/);
-  assert.match(homeV2, /aria-label="Become a contributor"/);
+  assert.match(homeV2, /aria-label="Want to write for Outside in Print\?"/);
   assert.doesNotMatch(homeV2, /The full imprint|Find your next question|Browse the archive|Search the library|home-v2-next__browse|"archive\/"/);
-  assert.match(homeV2, /Become a contributor/);
+  assert.match(homeV2, /Want to write for Outside in Print\?/);
   assert.doesNotMatch(homeV2, /home_imprint_statement|home-manifesto/);
 
   const order = [
@@ -333,8 +335,8 @@ test("contributor lane is public, specific, and linked from the homepage", () =>
   assert.match(contributor, /## Start With a Pitch/);
   assert.match(contributor, /support@outsideinprint\.org/);
   assert.match(contributor, /Sending a pitch does not guarantee publication\./);
-  assert.match(homeV2, /href="\{\{ "contribute\/" \| relURL \}\}">Become a contributor<\/a>/);
-  assert.match(homeV2, /partial "home_reader_newsletter\.html"[^]*?<section class="home-v2-next page-shell page-shell--wide" aria-label="Become a contributor">\s*<a class="home-v2-next__cta" href="\{\{ "contribute\/" \| relURL \}\}">Become a contributor<\/a>\s*<\/section>/);
+  assert.match(homeV2, /href="\{\{ "contribute\/" \| relURL \}\}">Want to write for Outside in Print\?<\/a>/);
+  assert.match(homeV2, /partial "home_reader_newsletter\.html"[^]*?<section class="home-v2-next page-shell page-shell--wide" aria-label="Want to write for Outside in Print\?">\s*<a class="home-v2-next__cta" href="\{\{ "contribute\/" \| relURL \}\}">Want to write for Outside in Print\?<\/a>\s*<\/section>/);
   assert.doesNotMatch(homeV2, /home-v2-next__contribute|Publish with us|Write for Outside In Print\.|Have an original article or essay/);
   assert.match(css, /\.home-v2-next\{[^}]*display:flex;[^}]*justify-content:center;[^}]*margin-top:\.5rem;/);
   assert.doesNotMatch(css.match(/\.home-v2-next\{([^}]*)\}/)?.[1] || "", /border|background/);
@@ -363,7 +365,6 @@ test("new homepage system has responsive, keyboard-visible editorial styling", (
   assert.match(css, /\.home-reader-banner__newsletter-link\{[^}]*min-height:34px;/);
   assert.match(css, /\.home-reader-banner__newsletter-link::before\{[^}]*inset:-5px 0;/);
   assert.match(css, /\.home-v2-featured\{[^}]*margin-top:\.45rem;[^}]*padding-top:\.45rem;/);
-  assert.match(css, /\.home-v2-featured__header\{[^}]*padding-bottom:\.45rem;/);
   assert.match(css, /\.home-v2-featured__lead\{[^}]*padding:\.9rem/);
   assert.match(css, /\.home-v2-featured__lead-heading\{[^}]*margin-bottom:\.7rem;/);
   assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-library\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);

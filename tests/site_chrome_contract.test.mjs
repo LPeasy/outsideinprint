@@ -521,7 +521,6 @@ test("newsletter proposition is plain-language across signup and checkout surfac
     'checkout_label = "Send me the weekly Outside In Print newsletter. Free. No spam ever."',
     'sample_url = "/collections/bobs-almanack/"',
     'sample_label = "Read the latest issue"',
-    'privacy_promise = "Buttondown manages the Saturday newsletter. Resend delivers three introductory emails, including an optional Pressroom invitation. The two email series have separate unsubscribe links. Outside In Print does not sell or rent subscriber information."',
     'privacy_url = "/privacy/"',
     'privacy_label = "Privacy details"'
   ]) {
@@ -532,18 +531,19 @@ test("newsletter proposition is plain-language across signup and checkout surfac
     'newsletter-signup__details',
     'newsletter-signup__price',
     'newsletter-signup__links',
-    'newsletter-signup__privacy',
     '$newsletter.cadence',
     '$newsletter.contents',
     '$newsletter.price_promise',
     'partial "almanack/latest-issue-url.html" $page',
-    '$newsletter.privacy_promise',
+    '$newsletter.privacy_url',
+    '$newsletter.privacy_label',
     'data-analytics-event="internal_promo_click"',
     'data-analytics-source-slot="{{ $sampleSourceSlot }}"'
   ]) {
     assert.match(newsletterSignup, new RegExp(escapeRegex(expected)));
   }
-  assert.match(newsletterSignup, /aria-describedby="\{\{ \$dekID \}\} \{\{ \$priceID \}\} \{\{ \$privacyID \}\}"/);
+  assert.match(newsletterSignup, /aria-describedby="\{\{ \$dekID \}\} \{\{ \$priceID \}\}"/);
+  assert.doesNotMatch(newsletterSignup, /privacy_promise|newsletter-signup__privacy|pressroom/i);
   assert.match(newsletterSignup, /\$anchorID := \.anchorID \| default ""/);
   assert.match(newsletterSignup, /\$isSamplePage := and \(eq \$page\.Section "almanack"\) \(eq \$page\.RelPermalink \$samplePath\)/);
   assert.match(newsletterSignup, /You&rsquo;re reading the latest issue\./);
@@ -563,6 +563,7 @@ test("newsletter proposition is plain-language across signup and checkout surfac
   assert.match(articleSingle, /"sourceSlot" "article_exit_newsletter"/);
   assert.match(articleSingle, /if and \$showCollectionContinuation \(not \$isStandardReadingPage\)[\s\S]*?partial "newsletter_prompt\.html"[\s\S]*?"sourceSlot" "article_exit_newsletter_prompt"/);
   assert.match(articleSingle, /"anchorID" "bobs-almanack-signup"/);
+  assert.doesNotMatch(articleSingle, /"pressroom" true/);
   assert.ok(articleSingle.indexOf('partial "collections/reading-path.html"') < articleSingle.indexOf('class="article-publication-record"'));
   assert.match(cssRule(css, ".newsletter-prompt a"), /min-height:44px;/);
   assert.match(cssRule(css, ".newsletter-signup[id]"), /scroll-margin-top:6rem;/);
@@ -674,14 +675,14 @@ test("homepage offers separate library navigation and a centered contributor but
   for (const token of ["home-v2-library", "home-v2-next__links", "page-shell", "page-shell--wide"]) {
     assert.ok(libraryClasses.has(token), `expected homepage library class token: ${token}`);
   }
-  const nextClasses = classTokensForElement(homeV2FrontPage, /<section\b[^>]*aria-label="Become a contributor"[^>]*>/, "homepage contribution");
+  const nextClasses = classTokensForElement(homeV2FrontPage, /<section\b[^>]*aria-label="Want to write for Outside in Print\?"[^>]*>/, "homepage contribution");
   for (const token of ["home-v2-next", "page-shell", "page-shell--wide"]) {
     assert.ok(nextClasses.has(token), `expected homepage next-step class token: ${token}`);
   }
   assert.match(homeV2FrontPage, /Browse the library/);
   assert.match(homeV2FrontPage, /Surprise me/);
   assert.doesNotMatch(homeV2FrontPage, /Publish with us|Write for Outside In Print\.|Have an original article or essay/);
-  assert.match(homeV2FrontPage, /Become a contributor/);
+  assert.match(homeV2FrontPage, /Want to write for Outside in Print\?/);
   assert.doesNotMatch(homeV2FrontPage, /Gallery|Collections|home-browse|home-v2-next__browse|The full imprint|Find your next question|Browse the archive|Search the library/);
   assert.match(cssRule(css, ".home-v2-next"), /display:flex;[\s\S]*justify-content:center;/);
   assert.doesNotMatch(cssRule(css, ".home-v2-next"), /border|background|grid-template-columns/);
@@ -711,7 +712,7 @@ test("homepage composition puts reading before newsletter and contribution", () 
   assert.match(homeV2FrontPage, /Featured Articles/);
   assert.match(homeV2FrontPage, /homepage_v2_featured_lead/);
   assert.match(homeV2FrontPage, /homepage_v2_featured_supporting/);
-  assert.match(homeV2FrontPage, /Become a contributor/);
+  assert.match(homeV2FrontPage, /Want to write for Outside in Print\?/);
   assert.doesNotMatch(homeV2FrontPage, /home_bookstore|home-almanack|home-selected-collections|home_2045_launch|home_imprint_statement|home-manifesto/);
   assert.doesNotMatch(homepage, /home_bookstore_spotlight|home_selected_collections|home_2045_launch|newsletter_signup/);
 

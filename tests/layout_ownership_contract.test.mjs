@@ -73,7 +73,7 @@ test("homepage V2 owns separate proof, featured-reading, library, newsletter, an
     'class="home-v2-library home-v2-next__links page-shell page-shell--wide"',
     'partial "home_reader_newsletter.html" .',
     'class="home-v2-next page-shell page-shell--wide"',
-    'aria-label="Become a contributor"',
+    'aria-label="Want to write for Outside in Print?"',
     'class="home-v2-next__cta"'
   ]) {
     assert.match(homeV2FrontPage, new RegExp(escapeRegex(snippet)));

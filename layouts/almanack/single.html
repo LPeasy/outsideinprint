@@ -1,4 +1,4 @@
-{{ define "main" }}{{ if isset .Params "almanack_layout" }}{{ partial "almanack/approved-sheet.html" . }}{{ else }}
+{{ define "main" }}{{ if isset .Params "almanack_layout" }}{{ partial "almanack/approved-sheet.html" (dict "page" .) }}{{ else }}
   {{ $issueDate := .Date }}
   {{ $essays := .Params.essays | default (slice) }}
   {{ $lead := dict }}

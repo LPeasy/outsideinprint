@@ -1,7 +1,9 @@
-{{- if ne .Params.almanack_layout "alternating-margins-v1" -}}
-  {{- errorf "Unsupported Almanack layout %q on %s" .Params.almanack_layout .File.Path -}}
+{{- $page := .page -}}
+{{- $sample := .sample | default false -}}
+{{- if ne $page.Params.almanack_layout "alternating-margins-v1" -}}
+  {{- errorf "Unsupported Almanack layout %q on %s" $page.Params.almanack_layout $page.File.Path -}}
 {{- end -}}
-{{- $date := .Date.Format "2006-01-02" -}}
+{{- $date := $page.Date.Format "2006-01-02" -}}
 {{- $root := printf "almanack/%s" $date -}}
 {{- $body := resources.Get (printf "%s/body.html" $root) -}}
 {{- $record := resources.Get (printf "%s/manifest.json" $root) -}}
@@ -10,17 +12,17 @@
   {{- errorf "Missing approved Almanack presentation assets for %s; stage the approved package" $date -}}
 {{- else -}}
   {{- $manifest := $record.Content | transform.Unmarshal -}}
-  {{- $source := readFile .File.Filename -}}
-  {{- if or (ne $manifest.schema "oip-almanack-web-fragment/v1") (ne $manifest.layout .Params.almanack_layout) (ne $manifest.issue_date $date) (ne (int $manifest.issue_number) (int .Params.issue_number)) (ne $manifest.staged_source_sha256 (crypto.SHA256 $source)) (ne $manifest.fragment_sha256 (crypto.SHA256 $body.Content)) (ne $manifest.css_sha256 (crypto.SHA256 $css.Content)) -}}
+  {{- $source := readFile $page.File.Filename -}}
+  {{- if or (ne $manifest.schema "oip-almanack-web-fragment/v1") (ne $manifest.layout $page.Params.almanack_layout) (ne $manifest.issue_date $date) (ne (int $manifest.issue_number) (int $page.Params.issue_number)) (ne $manifest.staged_source_sha256 (crypto.SHA256 $source)) (ne $manifest.fragment_sha256 (crypto.SHA256 $body.Content)) (ne $manifest.css_sha256 (crypto.SHA256 $css.Content)) -}}
     {{- errorf "Stale approved Almanack source/presentation binding for %s; regenerate from the approved package" $date -}}
   {{- end -}}
   {{- $cards := slice -}}
-  {{- range .Params.essays }}{{ $cards = $cards | append . }}{{ end -}}
-  {{- range .Params.guest_features }}{{ $cards = $cards | append . }}{{ end -}}
-  {{- with .Params.guest_feature }}{{ $cards = $cards | append . }}{{ end -}}
-  {{- with .Params.bookshelf }}{{ $cards = $cards | append . }}{{ end -}}
-  {{- with .Params.worth_reprinting }}{{ $cards = $cards | append . }}{{ end -}}
-  {{- with .Params.campaign }}{{ $cards = $cards | append . }}{{ end -}}
+  {{- range $page.Params.essays }}{{ $cards = $cards | append . }}{{ end -}}
+  {{- range $page.Params.guest_features }}{{ $cards = $cards | append . }}{{ end -}}
+  {{- with $page.Params.guest_feature }}{{ $cards = $cards | append . }}{{ end -}}
+  {{- with $page.Params.bookshelf }}{{ $cards = $cards | append . }}{{ end -}}
+  {{- with $page.Params.worth_reprinting }}{{ $cards = $cards | append . }}{{ end -}}
+  {{- with $page.Params.campaign }}{{ $cards = $cards | append . }}{{ end -}}
   {{- $approvedImages := dict -}}
   {{- range $cards -}}
     {{- if and .image .email_image .image_alt -}}
@@ -28,20 +30,43 @@
     {{- end -}}
   {{- end -}}
   {{- $renderedBody := $body.Content -}}
+  {{- if $sample -}}
+    {{- $opening := findRESubmatch `(?s)(<div class="demo-intro">.*?</div>)(<div class="demo-columns demo-alternating">)(<div class="demo-main demo-main-block" data-row="1".*?)(?:<div class="demo-main demo-main-block" data-row="2")` $renderedBody 1 -}}
+    {{- $margin := findRE `(?s)<aside class="demo-rail demo-margin-cell demo-first-notice" data-row="1".*?</aside>` $renderedBody 1 -}}
+    {{- if not (and $opening $margin) -}}
+      {{- errorf "Missing the top of the approved Almanack issue for %s" $date -}}
+    {{- else -}}
+      {{- $sheet := index $opening 0 -}}
+      {{- $renderedBody = printf "%s%s%s%s</div>" (index $sheet 1) (index $sheet 2) (index $sheet 3) (index $margin 0) -}}
+      {{- $renderedBody = replace $renderedBody "almanack-title" "almanack-sample-title" 1 -}}
+      {{- $renderedBody = replaceRE `<(/?)h3\b` "<${1}h6" $renderedBody -}}
+      {{- $renderedBody = replaceRE `<(/?)h2\b` "<${1}h5" $renderedBody -}}
+      {{- $renderedBody = replaceRE `<(/?)h1\b` "<${1}h4" $renderedBody -}}
+    {{- end -}}
+  {{- end -}}
   {{- range $manifest.managed_images -}}
-    {{- $image := . -}}
     {{- $approved := index $approvedImages .source_url -}}
-    {{- if or (not $approved) (ne $approved.ref .ref) (ne $approved.alt .alt) (ne (sub (len (split $renderedBody .token)) 1) 1) -}}
+    {{- if or (not $approved) (ne $approved.ref .ref) (ne $approved.alt .alt) (ne (sub (len (split $body.Content .token)) 1) 1) -}}
       {{- errorf "Stale or duplicated approved Almanack image binding for %s" $date -}}
     {{- end -}}
-    {{- $model := partial "images/model.html" (dict "page" $ "ref" .ref "display" true) -}}
-    {{- if not $model.managed }}{{ errorf "Almanack web artwork must resolve as managed: %s" .ref }}{{ end -}}
-    {{- $picture := partial "images/picture.html" (dict "model" $model "alt" .alt "class" "almanack-approved-picture" "sizes" .sizes "loading" .loading "fetchpriority" .fetchpriority "lightbox" false) -}}
-    {{- $picture = replace (printf "%s" $picture) "<img" (printf "<img style=\"%s\"" (htmlEscape .display_style)) 1 -}}
-    {{- $renderedBody = replace $renderedBody .token $picture 1 -}}
+    {{- if strings.Contains $renderedBody .token -}}
+      {{- $model := partial "images/model.html" (dict "page" $page "ref" .ref "display" true) -}}
+      {{- if not $model.managed }}{{ errorf "Almanack web artwork must resolve as managed: %s" .ref }}{{ end -}}
+      {{- $loading := cond $sample "lazy" .loading -}}
+      {{- $priority := cond $sample "auto" .fetchpriority -}}
+      {{- $picture := partial "images/picture.html" (dict "model" $model "alt" .alt "class" "almanack-approved-picture" "sizes" .sizes "loading" $loading "fetchpriority" $priority "lightbox" false) -}}
+      {{- $picture = replace (printf "%s" $picture) "<img" (printf "<img style=\"%s\"" (htmlEscape .display_style)) 1 -}}
+      {{- $renderedBody = replace $renderedBody .token $picture 1 -}}
+    {{- end -}}
   {{- end -}}
   {{- if strings.Contains $renderedBody "<!--ALMANACK-MANAGED-IMAGE-" }}{{ errorf "Unresolved approved Almanack image for %s" $date }}{{ end -}}
-  {{- with partial "almanack/share-toolbar.html" . -}}
+  {{- if $sample -}}
+    <style>{{ replace $css.Content "#almanack-approved" "#almanack-sample-sheet" | safeCSS }}</style>
+    <div id="almanack-sample-sheet" class="almanack-sample-sheet" aria-labelledby="almanack-sample-title">
+      <div class="review-issue">{{ $renderedBody | safeHTML }}</div>
+    </div>
+  {{- else -}}
+  {{- with partial "almanack/share-toolbar.html" $page -}}
     {{- if not (strings.Contains $renderedBody "</header>") -}}
       {{- errorf "Missing approved Almanack masthead header for %s" $date -}}
     {{- end -}}
@@ -52,4 +77,5 @@
   <section id="almanack-approved" aria-labelledby="almanack-title" data-almanack-layout="alternating-margins-v1">
     <div class="review-shell"><article class="review-issue" id="issue">{{ $renderedBody | safeHTML }}</article></div>
   </section>
+  {{- end -}}
 {{- end -}}

@@ -2006,50 +2006,83 @@ html[data-theme="light"] .paper-route-toggle{
   color:inherit;
 }
 .home-reader-newsletter__issue{
-  display:grid;
-  grid-template-columns:minmax(10rem, .6fr) minmax(0, 1.8fr) auto;
-  gap:.5rem 1.2rem;
-  align-items:start;
-  padding:.8rem .9rem .88rem;
+  padding:1rem .9rem .85rem;
   border-top:1px solid var(--oip-rule-standard);
 }
-.home-reader-newsletter__issue-heading p{
-  margin:0 0 .18rem;
-  color:var(--accent-hover);
-  font:750 .7rem/1.35 var(--font-ui);
-  letter-spacing:.11em;
-  text-transform:uppercase;
-}
-.home-reader-newsletter__issue-heading strong{
-  display:block;
+.home-reader-newsletter__issue > h3{
+  margin:0 0 .7rem;
   color:var(--text-primary);
-  font:700 1.1rem/1.2 var(--font-display);
+  font:700 clamp(1.2rem, 2.2vw, 1.55rem)/1.2 var(--font-display);
 }
-.home-reader-newsletter__issue-heading span{
-  display:block;
-  margin-top:.18rem;
-  color:var(--text-muted);
-  font:.78rem/1.4 var(--font-ui);
+.home-reader-newsletter__issue #almanack-sample-sheet{
+  margin:0 auto;
+  max-width:58rem;
+  border:1px solid #b0a087;
 }
-.home-reader-newsletter__issue-brief p{
+.home-reader-newsletter__issue #almanack-sample-sheet .review-issue{
   margin:0;
-  color:var(--text-secondary);
-  font-size:.86rem;
-  line-height:1.45;
+  padding:clamp(.9rem, 2.7vw, 1.75rem);
 }
-.home-reader-newsletter__issue-brief p + p{margin-top:.22rem}
-.home-reader-newsletter__issue-brief strong{color:var(--text-primary)}
-.home-reader-newsletter__issue-link{
-  display:inline-flex;
-  align-items:center;
-  gap:.28rem;
-  min-height:44px;
-  color:var(--accent);
-  font:750 .77rem/1.35 var(--font-ui);
-  letter-spacing:.05em;
+.home-reader-newsletter__issue #almanack-sample-sheet .almanack-approved-picture{
+  display:block;
+  max-width:100%;
+}
+.home-reader-newsletter__issue #almanack-sample-sheet .demo-columns.demo-alternating{
+  display:grid;
+  grid-template-columns:minmax(10rem, 1fr) 1rem minmax(0, 2fr) 0 0;
+}
+.home-reader-newsletter__issue #almanack-sample-sheet .demo-alternating > .demo-rail[data-side="left"]{
+  padding:0 .9rem 0 0;
+  border:0;
+  border-right:1px solid #b0a087;
+  margin:0;
+}
+.home-reader-newsletter__issue #almanack-sample-sheet .demo-margin-section > h5{
+  margin:0;
+  padding-bottom:.65rem;
+  border-bottom:3px double #74624d;
+}
+.home-reader-newsletter__issue #almanack-sample-sheet .demo-notice h6{
+  margin:0 0 .4rem;
   text-transform:uppercase;
-  text-underline-offset:.16em;
-  white-space:nowrap;
+  letter-spacing:.08em;
+}
+@media (max-width:720px){
+  .home-reader-newsletter__issue #almanack-sample-sheet .demo-columns.demo-alternating{
+    display:block;
+  }
+  .home-reader-newsletter__issue #almanack-sample-sheet .demo-alternating > .demo-rail[data-side="left"]{
+    padding:.8rem 0 0;
+    border:0;
+    border-top:1px solid #b0a087;
+  }
+}
+.home-reader-newsletter__issue-link{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.65rem;
+  max-width:58rem;
+  min-height:4rem;
+  margin:.85rem auto 0;
+  padding:.85rem 1rem;
+  border:1px solid var(--oip-rubric);
+  border-radius:var(--radius-ui);
+  background:var(--oip-rubric);
+  color:var(--oip-paper-light);
+  font:800 clamp(1rem, 2.2vw, 1.25rem)/1.25 var(--font-ui);
+  letter-spacing:.07em;
+  text-align:center;
+  text-transform:uppercase;
+  text-decoration:none;
+}
+.home-reader-newsletter__issue-link:hover{
+  background:color-mix(in srgb, var(--oip-rubric) 80%, var(--oip-ink));
+  color:var(--oip-paper-light);
+}
+.home-reader-newsletter__issue-link > span{
+  font-size:1.3em;
+  line-height:1;
 }
 .home-reader-newsletter__issue-link:focus-visible{
   outline:3px solid var(--focus-ring);
@@ -2128,19 +2161,6 @@ html[data-theme="light"] .paper-route-toggle{
   margin-top:.45rem;
   padding-top:.45rem;
   border-top:4px double var(--oip-rule-engraved-strong);
-}
-.home-v2-featured__header{
-  padding-bottom:.45rem;
-  border-bottom:1px solid var(--oip-rule-standard);
-}
-.home-v2-featured__header h2{
-  margin:0;
-  color:var(--text-primary);
-  font-family:var(--font-display);
-  font-weight:720;
-  letter-spacing:-.025em;
-  line-height:1.05;
-  font-size:clamp(1.75rem, 3vw, 2.5rem);
 }
 .home-v2-featured__grid{
   display:grid;
@@ -2567,10 +2587,10 @@ html[data-theme="light"] .paper-route-toggle{
   min-height:44px;
   font:750 .875rem/1.3 var(--font-ui);
   letter-spacing:.07em;
-  text-transform:uppercase;
 }
 .home-v2-next__links a{
   color:var(--accent);
+  text-transform:uppercase;
   text-underline-offset:.18em;
 }
 .home-v2-next__cta{
@@ -2594,13 +2614,6 @@ html[data-theme="light"] .paper-route-toggle{
     grid-template-columns:1fr;
     gap:.9rem;
   }
-  .home-reader-newsletter__issue{
-    grid-template-columns:1fr;
-    gap:.45rem;
-  }
-  .home-reader-newsletter__issue-heading strong,
-  .home-reader-newsletter__issue-heading span{display:inline}
-  .home-reader-newsletter__issue-heading span{margin-left:.3rem}
   .home-front-page__orientation{
     display:block;
     margin-bottom:.35rem;
@@ -5108,23 +5121,15 @@ html[data-theme="light"] .paper-route-toggle{
 .bookstore-epub-checkout__newsletter-links span{
   color:var(--text-faint);
 }
-.bookstore-epub-checkout__newsletter-links a,
-.bookstore-epub-checkout__newsletter-privacy a{
+.bookstore-epub-checkout__newsletter-links a{
   color:var(--accent-hover);
   font-weight:650;
   text-decoration-color:rgba(153,173,191,.62);
   text-underline-offset:.18em;
 }
-.bookstore-epub-checkout__newsletter-links a:hover,
-.bookstore-epub-checkout__newsletter-privacy a:hover{
+.bookstore-epub-checkout__newsletter-links a:hover{
   color:var(--text-primary);
   text-decoration-color:currentColor;
-}
-.bookstore-epub-checkout__preferences .bookstore-epub-checkout__newsletter-privacy{
-  margin:0;
-  color:var(--text-muted);
-  font-size:.67rem;
-  line-height:1.5;
 }
 .bookstore-epub-checkout__preferences .bookstore-epub-checkout__preference-note{
   margin:.08rem 0 0;
@@ -5134,8 +5139,7 @@ html[data-theme="light"] .paper-route-toggle{
 }
 .bookstore-epub-checkout__field input:focus-visible,
 .bookstore-epub-checkout__preferences input:focus-visible,
-.bookstore-epub-checkout__newsletter-links a:focus-visible,
-.bookstore-epub-checkout__newsletter-privacy a:focus-visible{
+.bookstore-epub-checkout__newsletter-links a:focus-visible{
   outline:2px solid var(--focus-ring);
   outline-offset:2px;
 }
@@ -7055,25 +7059,18 @@ body.cartoon-lightbox-open{
 .newsletter-signup--home-ribbon .newsletter-signup__price{
   color:#201a15;
 }
-.newsletter-signup--home-ribbon .newsletter-signup__privacy{
-  grid-column:1 / -1;
-}
-.newsletter-signup--home-ribbon .newsletter-signup__links,
-.newsletter-signup--home-ribbon .newsletter-signup__privacy{
+.newsletter-signup--home-ribbon .newsletter-signup__links{
   color:#5a4938;
 }
-.newsletter-signup--home-ribbon .newsletter-signup__links a,
-.newsletter-signup--home-ribbon .newsletter-signup__privacy a{
+.newsletter-signup--home-ribbon .newsletter-signup__links a{
   color:#284f63;
   text-decoration-color:rgba(40,79,99,.55);
 }
-.newsletter-signup--home-ribbon .newsletter-signup__links a:hover,
-.newsletter-signup--home-ribbon .newsletter-signup__privacy a:hover{
+.newsletter-signup--home-ribbon .newsletter-signup__links a:hover{
   color:#201a15;
   text-decoration-color:currentColor;
 }
 .newsletter-signup--home-ribbon .newsletter-signup__links a:focus-visible,
-.newsletter-signup--home-ribbon .newsletter-signup__privacy a:focus-visible,
 .newsletter-signup--home-ribbon .newsletter-signup__input:focus-visible,
 .newsletter-signup--home-ribbon .newsletter-signup__button:focus-visible{
   outline-color:#284f63;
@@ -10311,8 +10308,7 @@ html[data-theme="light"] .collection-section[data-collection-identity]{
   text-transform:none;
 }
 .newsletter-signup__price,
-.newsletter-signup__links,
-.newsletter-signup__privacy{
+.newsletter-signup__links{
   margin:0;
   letter-spacing:0;
   text-transform:none;
@@ -10331,68 +10327,25 @@ html[data-theme="light"] .collection-section[data-collection-identity]{
   font-size:.74rem;
   line-height:1.5;
 }
-.newsletter-signup__links a,
-.newsletter-signup__privacy a{
+.newsletter-signup__links a{
   color:var(--accent-hover);
   font-weight:650;
   text-decoration-color:rgba(153,173,191,.62);
   text-underline-offset:.18em;
 }
-.newsletter-signup__links a:hover,
-.newsletter-signup__privacy a:hover{
+.newsletter-signup__links a:hover{
   color:var(--text-primary);
   text-decoration-color:currentColor;
 }
-.newsletter-signup__privacy{
-  color:var(--text-muted);
-  font-size:.71rem;
-  line-height:1.55;
-}
 .newsletter-signup__input:focus-visible,
 .newsletter-signup__button:focus-visible,
-.newsletter-signup__links a:focus-visible,
-.newsletter-signup__privacy a:focus-visible{
+.newsletter-signup__links a:focus-visible{
   outline:2px solid var(--focus-ring);
   outline-offset:2px;
 }
-.pressroom-invitation{
-  margin-top:1rem;
-  padding-top:.85rem;
-  border-top:1px solid var(--oip-rule-faint);
-  color:var(--text-secondary);
-  font-family:var(--font-ui);
-  font-size:.82rem;
-  line-height:1.6;
-}
-.pressroom-invitation p{
-  margin:0;
-}
-.pressroom-invitation p + p{
-  margin-top:.35rem;
-}
-.pressroom-invitation a{
-  color:var(--accent-hover);
-  font-weight:650;
-  text-underline-offset:.18em;
-}
-.pressroom-invitation a:hover{
-  color:var(--text-primary);
-}
-.pressroom-invitation a:focus-visible,
 .support-pressroom a:focus-visible{
   outline:2px solid var(--focus-ring);
   outline-offset:3px;
-}
-.pressroom-invitation__note{
-  color:var(--text-muted);
-  font-size:.76rem;
-}
-.pressroom-invitation--compact{
-  margin:0;
-  padding:0 .9rem .7rem;
-  border:0;
-  color:var(--text-muted);
-  font-size:.78rem;
 }
 @media (max-width:768px){
   .newsletter-prompt{
@@ -11257,9 +11210,6 @@ html[data-theme="light"] .collection-section[data-collection-identity]{
     grid-template-columns:1fr;
     width:100%;
     margin-top:0;
-  }
-  .newsletter-signup--home-ribbon .newsletter-signup__privacy{
-    grid-column:1;
   }
   .newsletter-signup__links,
   .bookstore-epub-checkout__newsletter-links{

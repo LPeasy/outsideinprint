@@ -64,7 +64,6 @@ prompt_label = "Join the weekly Outside In Print newsletter."
 checkout_label = "Send me the weekly Outside In Print newsletter. Free. No spam ever."
 sample_url = "/collections/bobs-almanack/"
 sample_label = "Read the latest issue"
-privacy_promise = "Buttondown manages the Saturday newsletter. Resend delivers three introductory emails, including an optional Pressroom invitation. The two email series have separate unsubscribe links. Outside In Print does not sell or rent subscriber information."
 privacy_url = "/privacy/"
 privacy_label = "Privacy details"
 
@@ -74,7 +73,6 @@ allow_local = false
 
 [params.pressroom]
 url = "https://www.patreon.com/bobviously"
-start_here_url = "https://www.patreon.com/bobviously/posts/start-here-what-173281800"
 pressroom_join_url = "https://www.patreon.com/checkout/bobviously?rid=29901304"
 correspondence_join_url = "https://www.patreon.com/checkout/bobviously?rid=29903630"
 desk_join_url = "https://www.patreon.com/checkout/bobviously?rid=29903634"

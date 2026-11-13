@@ -397,15 +397,15 @@ if ($homeLeadSummary -notmatch '(?s)strings\.TrimSpace.*?\.Params\.description.*
 foreach ($requiredSnippet in @(
   '<h1 id="home-front-page-title" class="title visually-hidden">{{ site.Title }}</h1>',
   'A note to the reader',
-  '<h2 id="home-v2-featured-title">Featured Articles</h2>',
+  '<h2 id="home-v2-featured-title" class="visually-hidden">Featured Articles</h2>',
   'homepage_v2_featured_lead',
   'homepage_v2_featured_supporting',
   'hugo.Data.homepage_metrics',
   'Read the piece',
   'Browse the library',
   'Surprise me',
-  '<section class="home-v2-next page-shell page-shell--wide" aria-label="Become a contributor">',
-  'Become a contributor'
+  '<section class="home-v2-next page-shell page-shell--wide" aria-label="Want to write for Outside in Print?">',
+  'Want to write for Outside in Print?'
 )) {
   if ($homeV2Template -notmatch [regex]::Escape($requiredSnippet)) {
     throw "Expected focused homepage composition to contain: $requiredSnippet"
@@ -431,10 +431,10 @@ if (-not [string]::IsNullOrWhiteSpace($homeLibraryLinks)) {
   throw 'Expected the homepage library navigation to contain only its two reading links, without a heading or description.'
 }
 
-$homeContribution = [regex]::Match($homeV2Template, '(?s)<section class="home-v2-next page-shell page-shell--wide" aria-label="Become a contributor">(?<body>.*?)</section>')
-$homeContributorButton = '<a class="home-v2-next__cta" href="{{ "contribute/" | relURL }}">Become a contributor</a>'
+$homeContribution = [regex]::Match($homeV2Template, '(?s)<section class="home-v2-next page-shell page-shell--wide" aria-label="Want to write for Outside in Print\?">(?<body>.*?)</section>')
+$homeContributorButton = '<a class="home-v2-next__cta" href="{{ "contribute/" | relURL }}">Want to write for Outside in Print?</a>'
 if (-not $homeContribution.Success -or $homeContribution.Groups['body'].Value.Trim() -cne $homeContributorButton) {
-  throw 'Expected the final homepage region to contain only the Become a contributor button link.'
+  throw 'Expected the final homepage region to contain only the contributor button link.'
 }
 if ($homeV2Template -match 'home-v2-next__contribute|Publish with us|Write for Outside In Print\.|Have an original article or essay') {
   throw 'Expected the homepage to omit the retired contributor box and its copy.'
@@ -638,7 +638,6 @@ if ($mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link\{[^}]*position
     $mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link span\{[^}]*text-decoration:underline;' -or
     $mainCss -notmatch '(?s)\.home-reader-banner__newsletter-link:focus-visible[^{}]*\{[^}]*outline:3px solid var\(--focus-ring\);' -or
     $mainCss -notmatch '(?s)\.home-v2-featured\{[^}]*margin-top:\.45rem;[^}]*padding-top:\.45rem;' -or
-    $mainCss -notmatch '(?s)\.home-v2-featured__header\{[^}]*padding-bottom:\.45rem;' -or
     $mainCss -notmatch '(?s)\.home-v2-featured__lead\{[^}]*padding:\.9rem' -or
     $mainCss -notmatch '(?s)\.home-v2-featured__lead-heading\{[^}]*margin-bottom:\.7rem;') {
   throw 'Expected an underlined, keyboard-visible newsletter link with a 44px tap target and compact Featured Articles spacing.'

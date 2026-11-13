@@ -18,7 +18,6 @@
 {{- $newsletterContents := index $newsletter "contents" -}}
 {{- $newsletterSampleURL := partial "almanack/latest-issue-url.html" . -}}
 {{- $newsletterSampleLabel := index $newsletter "sample_label" -}}
-{{- $newsletterPrivacyPromise := index $newsletter "privacy_promise" -}}
 {{- $newsletterPrivacyURL := index $newsletter "privacy_url" -}}
 {{- $newsletterPrivacyLabel := index $newsletter "privacy_label" -}}
 {{- $newsletterSampleSourceSlot := printf "%s_sample_issue" $sourceSlot -}}
@@ -156,7 +155,6 @@
                       <span aria-hidden="true">&middot;</span>
                       <a href="{{ $newsletterPrivacyURL | relURL }}">{{ $newsletterPrivacyLabel }}</a>
                     </p>
-                    <p class="bookstore-epub-checkout__newsletter-privacy">{{ $newsletterPrivacyPromise }}</p>
                     <p class="bookstore-epub-checkout__preference-note">Optional. Not required to buy.</p>
                   </div>
                 </fieldset>

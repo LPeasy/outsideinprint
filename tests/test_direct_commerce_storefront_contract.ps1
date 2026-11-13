@@ -245,7 +245,6 @@ foreach ($requiredConfig in @(
   'checkout_label = "Send me the weekly Outside In Print newsletter. Free. No spam ever."',
   'sample_url = "/collections/bobs-almanack/"',
   'sample_label = "Read the latest issue"',
-  'privacy_promise = "Buttondown manages the Saturday newsletter. Resend delivers three introductory emails, including an optional Pressroom invitation. The two email series have separate unsubscribe links. Outside In Print does not sell or rent subscriber information."',
   'privacy_url = "/privacy/"',
   'privacy_label = "Privacy details"'
 )) {
@@ -277,7 +276,6 @@ foreach ($requiredTemplateText in @(
   '$newsletterContents',
   '$newsletterSampleURL',
   '$newsletterSampleLabel',
-  '$newsletterPrivacyPromise',
   '$newsletterPrivacyURL',
   '$newsletterPrivacyLabel',
   'class="bookstore-epub-checkout__newsletter-details"',
@@ -900,7 +898,6 @@ foreach ($requiredNewsletterText in @(
   'New essays, original pictures, and selected archive work from Outside In Print. Free each Saturday, plus three short introductory emails after you confirm.',
   'Read the latest issue',
   'Privacy details',
-  'Buttondown manages the Saturday newsletter. Resend delivers three introductory emails, including an optional Pressroom invitation. The two email series have separate unsubscribe links. Outside In Print does not sell or rent subscriber information.',
   'Optional. Not required to buy.'
 )) {
   Assert-Contains -Text ([Net.WebUtility]::HtmlDecode($shopOutput)) -Expected $requiredNewsletterText -Context 'Built bookstore newsletter opt-in'
@@ -911,7 +908,7 @@ if ($shopOutput -notmatch '(?is)href=(?:"|'')?(?:https://outsideinprint\.org)?/a
 if ($shopOutput -notmatch '(?is)href=(?:"|'')?(?:https://outsideinprint\.org)?/privacy/(?:"|'')?[^>]*>\s*Privacy details\s*</a>') {
   throw 'Built bookstore newsletter opt-ins must link the privacy details.'
 }
-if ($shopOutput -match '(?i)Limited time|launch window|No ads|Easy to leave') {
+if ($shopOutput -match '(?i)Limited time|launch window|No ads|Easy to leave|bookstore-epub-checkout__newsletter-privacy|Buttondown manages the Saturday newsletter') {
   throw 'Built bookstore retained retired temporary or vague newsletter trust copy.'
 }
 if ($shopOutput -match '(?i)OIP-(?:AN|PS|WC)-PB|data-physical|bookstore-physical|/api/books/physical|USPS Media Mail|Shipping &amp; returns') {

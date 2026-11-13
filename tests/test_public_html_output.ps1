@@ -3456,7 +3456,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/index.html'
-    Pattern = '(?s)home-v2-library.*?Browse the library.*?Surprise me.*?home-reader-newsletter.*?home-v2-next__cta[^>]*href=(?:"|'''')?(?:https://outsideinprint\.org)?/contribute/(?:"|'''')?[^>]*>\s*Become a contributor'
+    Pattern = '(?s)home-v2-library.*?Browse the library.*?Surprise me.*?home-reader-newsletter.*?home-v2-next__cta[^>]*href=(?:"|'''')?(?:https://outsideinprint\.org)?/contribute/(?:"|'''')?[^>]*>\s*Want to write for Outside in Print\?'
     Message = 'expected library links before the newsletter and its final contributor button'
   },
   @{
@@ -4278,7 +4278,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/almanack/2026-07-25/index.html'
-    Pattern = $almanackIssueExitBoundary + '<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?The weekly newsletter.*?New essays, original pictures, and selected archive work from Outside In Print\. Free each Saturday, plus three short introductory emails after you confirm\..*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Free\. Each email series has an unsubscribe link\..*?Read the latest issue.*?(?:https://outsideinprint\.org)?/privacy/.*?Buttondown manages the Saturday newsletter\. Resend delivers three introductory emails, including an optional Pressroom invitation\. The two email series have separate unsubscribe links\. Outside In Print does not sell or rent subscriber information\.'
+    Pattern = $almanackIssueExitBoundary + '<section\b(?=[^>]*newsletter-signup--article-exit)(?=[^>]*page-shell)(?=[^>]*page-shell--wide)[^>]*>.*?Every Saturday.*?The weekly newsletter.*?New essays, original pictures, and selected archive work from Outside In Print\. Free each Saturday, plus three short introductory emails after you confirm\..*?data-analytics-source-slot=(?:"|'''')?almanack_issue_exit_newsletter(?:"|'''')?.*?Free\. Each email series has an unsubscribe link\..*?Read the latest issue.*?(?:https://outsideinprint\.org)?/privacy/'
     Message = 'expected an archived Almanack issue to end with the plain-language weekly newsletter proposition and issue-exit analytics slot'
   },
   @{
@@ -4953,7 +4953,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/essays/the-risk-management-buffet/index.html'
-    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original pictures, and selected archive work from Outside In Print\. Free each Saturday, plus three short introductory emails after you confirm\..*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Join the newsletter.*?Free\. Each email series has an unsubscribe link\..*?(?:https://outsideinprint\.org)?/almanack/\d{4}-\d{2}-\d{2}/[^>]*>\s*Read the latest issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<.*?Buttondown manages the Saturday newsletter\. Resend delivers three introductory emails, including an optional Pressroom invitation\. The two email series have separate unsubscribe links\. Outside In Print does not sell or rent subscriber information\.'
+    Pattern = '(?s)article-publication-record.*?newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original pictures, and selected archive work from Outside In Print\. Free each Saturday, plus three short introductory emails after you confirm\..*?data-analytics-source-slot=(?:"|'''')?article_exit_newsletter(?:"|'''')?.*?Join the newsletter.*?Free\. Each email series has an unsubscribe link\..*?(?:https://outsideinprint\.org)?/almanack/\d{4}-\d{2}-\d{2}/[^>]*>\s*Read the latest issue\s*<.*?(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*<'
     Message = 'expected article aftermatter to place the full weekly newsletter signup after the publication record'
   },
   @{
@@ -5759,14 +5759,14 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   $homeSections = @(Get-OpenTags -Html $homeIndexHtml -TagName 'section')
   $homeProofSections = @($homeSections | Where-Object { (Get-AttributeValue -Tag $_ -Name 'aria-label') -ceq 'Outside In Print at a glance' })
   $homeNewsletterSections = @($homeSections | Where-Object { Test-TagHasClass -Tag $_ -ClassName 'home-reader-newsletter' })
-  $homeContributorSections = @($homeSections | Where-Object { (Get-AttributeValue -Tag $_ -Name 'aria-label') -ceq 'Become a contributor' })
+  $homeContributorSections = @($homeSections | Where-Object { (Get-AttributeValue -Tag $_ -Name 'aria-label') -ceq 'Want to write for Outside in Print?' })
   if ($homeProofSections.Count -ne 1 -or $homeNewsletterSections.Count -ne 1 -or $homeContributorSections.Count -ne 1) {
-    $uxIssues.Add('public/index.html => expected one named proof region, one newsletter region, and one Become a contributor button region')
+    $uxIssues.Add('public/index.html => expected one named proof region, one newsletter region, and one contributor button region')
   }
   if ($homeContributorSections.Count -eq 1) {
     $contributorStart = $homeIndexHtml.IndexOf($homeContributorSections[0], [System.StringComparison]::Ordinal) + $homeContributorSections[0].Length
     $contributorEnd = $homeIndexHtml.IndexOf('</section>', $contributorStart, [System.StringComparison]::Ordinal)
-    if ($contributorEnd -lt 0 -or $homeIndexHtml.Substring($contributorStart, $contributorEnd - $contributorStart) -notmatch '^\s*<a\b[^>]*>Become a contributor</a>\s*$') {
+    if ($contributorEnd -lt 0 -or $homeIndexHtml.Substring($contributorStart, $contributorEnd - $contributorStart) -notmatch '^\s*<a\b[^>]*>Want to write for Outside in Print\?</a>\s*$') {
       $uxIssues.Add('public/index.html => the final contributor region must contain only its button link, without article wrapper, heading, or descriptive copy')
     }
   }
@@ -6372,8 +6372,8 @@ foreach ($articlePath in @(
     $uxIssues.Add("$articlePath => expected exactly one standard reading continuation, not the retired article-paths exit")
   }
 
-  if ($newsletterHtml -notmatch '(?s)newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original pictures, and selected archive work from Outside In Print\. Free each Saturday, plus three short introductory emails after you confirm\..*?Join the newsletter.*?Free\. Each email series has an unsubscribe link\..*?(?:https://outsideinprint\.org)?/almanack/\d{4}-\d{2}-\d{2}/.*?(?:https://outsideinprint\.org)?/privacy/.*?Buttondown manages the Saturday newsletter\. Resend delivers three introductory emails, including an optional Pressroom invitation\. The two email series have separate unsubscribe links\. Outside In Print does not sell or rent subscriber information\.') {
-    $uxIssues.Add("$articlePath => expected the weekly newsletter cadence, contents, no-spam promise, sample, and privacy proposition")
+  if ($newsletterHtml -notmatch '(?s)newsletter-signup--article-exit.*?Every Saturday.*?The weekly newsletter.*?New essays, original pictures, and selected archive work from Outside In Print\. Free each Saturday, plus three short introductory emails after you confirm\..*?Join the newsletter.*?Free\. Each email series has an unsubscribe link\..*?(?:https://outsideinprint\.org)?/almanack/\d{4}-\d{2}-\d{2}/.*?(?:https://outsideinprint\.org)?/privacy/') {
+    $uxIssues.Add("$articlePath => expected the weekly newsletter cadence, contents, no-spam promise, sample, and privacy link")
   }
 
   if ($newsletterHtml -match '(?i)Limited time|launch window|Easy to leave') {
