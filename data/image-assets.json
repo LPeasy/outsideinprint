@@ -17,6 +17,35 @@
     "social_max_width": 1200
   },
   "assets": {
+    "essays/inter-not/section-1": {
+      "id": "essays/inter-not/section-1",
+      "source": "images/originals/essays/inter-not/section-1.png",
+      "sha256": "24948afa6de1892aee14960f61d2ae8db17968da7a761261c4b2bbd14d95273a",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null
+    },
+    "essays/inter-not/hero": {
+      "id": "essays/inter-not/hero",
+      "source": "images/originals/essays/inter-not/hero.png",
+      "sha256": "e8d4d208b4c0c9e4366768abb0519634611355eecb4ac75f8ed0cc9acc2f9d91",
+      "width": 1672,
+      "height": 941,
+      "image_class": "essay_illustration",
+      "processing_hint": "drawing",
+      "review_state": "approved",
+      "usage_state": "referenced",
+      "processing_state": "derivative_capable",
+      "processing_note": null,
+      "quality_override": null,
+      "artwork_title": "Please Stand By"
+    },
     "essays/the-last-voyage-of-the-ss-united-states/hero": {
       "id": "essays/the-last-voyage-of-the-ss-united-states/hero",
       "source": "images/originals/essays/the-last-voyage-of-the-ss-united-states/hero.png",
@@ -9341,6 +9370,8 @@
     }
   },
   "aliases": {
+    "/images/essays/inter-not/section-1.png": "essays/inter-not/section-1",
+    "/images/essays/inter-not/hero.png": "essays/inter-not/hero",
     "/images/essays/the-last-voyage-of-the-ss-united-states/hero.png": "essays/the-last-voyage-of-the-ss-united-states/hero",
     "/images/essays/the-last-voyage-of-the-ss-united-states/section-1.png": "essays/the-last-voyage-of-the-ss-united-states/section-1",
     "/images/essays/the-last-voyage-of-the-ss-united-states/section-2.png": "essays/the-last-voyage-of-the-ss-united-states/section-2",
