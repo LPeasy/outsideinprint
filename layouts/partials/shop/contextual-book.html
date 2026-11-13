@@ -2,12 +2,16 @@
 {{- $placement := .placement -}}
 {{- $visible := eq .visible true -}}
 {{- $books := dict
+  "fifty_years_of_magic" (dict "path" "/shop/fifty-years-of-magic" "slug" "fifty-years-of-magic" "sku" "OIP-FM-EPUB" "sample_path" "/shop/fifty-years-of-magic/sample")
+  "pending" (dict "path" "/shop/pending" "slug" "pending" "sku" "OIP-PENDING-EPUB" "sample_path" "/shop/pending/sample")
   "the_water_cycle" (dict "path" "/shop/the-water-cycle" "slug" "the-water-cycle" "sku" "OIP-WC-EPUB")
   "2045" (dict "path" "/shop/2045" "slug" "2045" "sku" "OIP-TD-EPUB" "sample_path" "/shop/2045/sample")
   "american_nightmare" (dict "path" "/shop/the-american-nightmare-keep-dreaming-kid" "slug" "the-american-nightmare-keep-dreaming-kid" "sku" "OIP-AN-EPUB")
   "parable_of_the_sheep" (dict "path" "/shop/the-parable-of-the-sheep" "slug" "the-parable-of-the-sheep" "sku" "OIP-PS-EPUB")
 -}}
 {{- $allowed := dict
+  "collections/brands-business-consumer-choice.md" (dict "path" "/collections/brands-business-consumer-choice/" "placement" "collection" "book_key" "fifty_years_of_magic")
+  "collections/civic-institutions-and-public-power.md" (dict "path" "/collections/civic-institutions-and-public-power/" "placement" "collection" "book_key" "pending")
   "collections/technology-ai-machine-future.md" (dict "path" "/collections/technology-ai-machine-future/" "placement" "collection" "book_key" "2045")
   "essays/the-new-meta-economy.md" (dict "path" "/essays/the-new-meta-economy/" "placement" "article" "book_key" "2045")
   "collections/household-economy-work-and-cost.md" (dict "path" "/collections/household-economy-work-and-cost/" "placement" "collection" "book_key" "american_nightmare")
@@ -77,7 +81,7 @@
                 {{- $catalogProduct := index $catalog $key -}}
                 {{- $offers := where (index $catalogProduct "direct_offers" | default (slice)) "sku" $bookDefinition.sku -}}
                 {{- if isset $bookDefinition "sample_path" -}}
-                  {{/* 2045 keeps its existing standalone published story; other books require bundled samples. */}}
+                  {{/* A book with a standalone sample must resolve its exact published route. */}}
                   {{- if ne $book.Params.sample_page $bookDefinition.sample_path -}}
                     {{- errorf "Contextual book target for %s requires its exact standalone sample %s" $sourcePath $bookDefinition.sample_path -}}
                     {{- $valid = false -}}

@@ -268,10 +268,29 @@ const contextualCatalogSource = fs.readFileSync(path.join(repoRoot, "data/bookst
 const contextualImageManifest = JSON.parse(fs.readFileSync(path.join(repoRoot, "data/image-assets.json"), "utf8"));
 const contextualBookEntries = [
   {
+    "path": "/collections/brands-business-consumer-choice/",
+    "slot": "collection",
+    "key": "fifty_years_of_magic",
+    "bookPath": "/shop/fifty-years-of-magic",
+    "samplePath": "/shop/fifty-years-of-magic/sample/",
+    "heading": "Continue with Fifty Years of Magic",
+    "connection": "Follow the Disney World essays in one illustrated book. Fifty Years of Magic traces how Disney planned, financed, and built the Florida resort, then gave families reasons to come back."
+  },
+  {
+    "path": "/collections/civic-institutions-and-public-power/",
+    "slot": "collection",
+    "key": "pending",
+    "bookPath": "/shop/pending",
+    "samplePath": "/shop/pending/sample/",
+    "heading": "Continue with PENDING",
+    "connection": "What happens when a public agency’s official story gets ahead of the evidence? PENDING follows a government economist who tries to correct the record and learns what speaking up can cost."
+  },
+  {
     "path": "/collections/technology-ai-machine-future/",
     "slot": "collection",
     "key": "2045",
     "bookPath": "/shop/2045",
+    "samplePath": "/shop/2045/sample/",
     "heading": "Continue with 2045",
     "connection": "Follow these questions about AI into fiction. 2045 brings together ten dark fables about machine intelligence, grief, ambition, faith, and the search for meaning."
   },
@@ -280,6 +299,7 @@ const contextualBookEntries = [
     "slot": "article",
     "key": "2045",
     "bookPath": "/shop/2045",
+    "samplePath": "/shop/2045/sample/",
     "heading": "Continue with 2045",
     "connection": "This essay asks what happens when AI reshapes work, attention, and everyday life. 2045 explores those pressures through dark fables, beginning with a man surrounded by helpful machines and searching for a purpose."
   },
@@ -343,8 +363,8 @@ const contextualBookEntries = [
   assert.equal(value("suggested_slug"), slug);
   const productPath = `${entry.bookPath}/`;
   return { ...entry, slug, productPath,
-    sampleHref: entry.key === "2045" ? `${productPath}sample/` : `${productPath}#reading-sample`,
-    samplePath: entry.key === "2045" ? `${productPath}sample/` : productPath,
+    sampleHref: entry.samplePath || `${productPath}#reading-sample`,
+    samplePath: entry.samplePath || productPath,
     coverRef: value("cover_image"), coverAlt: value("cover_alt"),
     coverName: `View ${value("title")} and buying options`,
   };
@@ -504,7 +524,7 @@ test("contextual book native navigation emits one bounded event per activation a
           await waitFor(() => promoEvents().length >= index + 1, "Contextual link event was not intercepted.");
           assert.equal(await page.locator(".contextual-book").count(), 0, "Product/sample destination must not repeat the module.");
           if (action === "sample") {
-            assert.equal(await page.locator(entry.key === "2045" ? ".bookstore-reading-sample--standalone" : "#reading-sample").count(), 1);
+            assert.equal(await page.locator(entry.sampleHref === entry.samplePath ? ".bookstore-reading-sample--standalone" : "#reading-sample").count(), 1);
             if (entry.key === "2045") assert.equal(await page.locator("#page-title").textContent(), "The Cracked Pot");
           }
           assert.deepEqual(eventParts(promoEvents()[index]), {
