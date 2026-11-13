@@ -175,6 +175,7 @@ function Test-ContextualBookFixtures {
         [void](New-Item -ItemType Directory -Path $bookDir -Force)
         $isWater = $key -eq 'the_water_cycle'
         $is2045 = $key -eq '2045'
+        $standalonePath = $bookSpec.PSObject.Properties['sample_path']?.Value
         $bookKey = if (($isWater -and $case -eq 'wrong-key') -or ($key -eq 'american_nightmare' -and $case -eq 'new-book-wrong-key')) { 'unrelated' } else { $key }
         $productFields = 'book_key: "' + $bookKey + '"'
         if ($isWater) {
@@ -186,13 +187,13 @@ function Test-ContextualBookFixtures {
             default { '' }
           }
         }
-        if ($is2045 -and $case -ne '2045-missing-override') {
-          $override = if ($case -eq '2045-wrong-override') { '/shop/the-water-cycle' } else { '/shop/2045/sample' }
+        if ($standalonePath -and -not ($is2045 -and $case -eq '2045-missing-override')) {
+          $override = if ($is2045 -and $case -eq '2045-wrong-override') { '/shop/the-water-cycle' } else { $standalonePath }
           $productFields += "`nsample_page: $override"
         }
-        $indexName = if ($is2045) { '_index.md' } else { 'index.md' }
+        $indexName = if ($standalonePath) { '_index.md' } else { 'index.md' }
         [IO.File]::WriteAllText((Join-Path $bookDir $indexName), "---`ntitle: Fixture $key`ndate: 2020-01-01`n$productFields`n---`n")
-        $sampleStatus = if ($is2045) { 'published' } else { 'ready' }
+        $sampleStatus = if ($standalonePath) { 'published' } else { 'ready' }
         $sampleKey = $key
         $sampleDraft = 'false'
         $sampleExtra = ''
@@ -261,7 +262,7 @@ function Test-ContextualBookFixtures {
         if ($modules.Count -ne 0) { throw "Contextual-book fixture $case must render no module." }
         continue
       }
-      if ($modules.Count -ne $contextualEntries.Count) { throw 'Valid fixture must render exactly the eight explicitly allowed modules.' }
+      if ($modules.Count -ne $contextualEntries.Count) { throw 'Valid fixture must render exactly the ten explicitly allowed modules.' }
       foreach ($index in 0..($contextualEntries.Count - 1)) {
         $entry = $contextualEntries[$index]
         $module = $modules[$index].Value
@@ -275,8 +276,9 @@ function Test-ContextualBookFixtures {
         Assert-Contains -Text $module -Expected ('src="' + $fixtureCover + '"') -Context 'Fixture catalog cover source'
         Assert-Contains -Text $module -Expected 'alt="Fixture cover alternative text"' -Context 'Fixture catalog cover alt'
         Assert-Contains -Text $module -Expected ('aria-label="View Fixture ' + $entry.key + ' and buying options"') -Context 'Fixture cover accessible name'
-        $sampleHref = if ($entry.key -eq '2045') { '/shop/2045/sample/' } else { $entry.book_path + '/#reading-sample' }
-        $samplePath = if ($entry.key -eq '2045') { '/shop/2045/sample/' } else { $entry.book_path + '/' }
+        $standalonePath = $entry.PSObject.Properties['sample_path']?.Value
+        $sampleHref = if ($standalonePath) { $standalonePath + '/' } else { $entry.book_path + '/#reading-sample' }
+        $samplePath = if ($standalonePath) { $sampleHref } else { $entry.book_path + '/' }
         $sampleAnchor = [regex]::Match($module, '(?is)<a\b(?=[^>]*data-analytics-source-slot="' + $entry.placement + '_book_sample")[^>]*>.*?</a>').Value
         if ((Get-ContextualHtmlAttribute -Tag $sampleAnchor -Name 'href') -cne $sampleHref -or (Get-ContextualHtmlAttribute -Tag $sampleAnchor -Name 'data-analytics-path') -cne $samplePath) {
           throw "Fixture $($entry.key) must retain its exact sample destination and analytics path."
@@ -284,7 +286,7 @@ function Test-ContextualBookFixtures {
         if ($entry.key -eq '2045') { Assert-Contains -Text $plain -Expected 'complete story' -Context '2045 standalone sample distinction' }
       }
     }
-    Write-Host "Contextual-book tiny fixtures passed: $($cases.Count) cases, eight explicitly bound placements."
+    Write-Host "Contextual-book tiny fixtures passed: $($cases.Count) cases, ten explicitly bound placements."
   }
   finally {
     $resolvedFixture = [IO.Path]::GetFullPath($fixture)
@@ -875,12 +877,37 @@ if ($homepageSampleMatches.Count -gt 0) {
 $contextualEntries = @'
 [
   {
+    "source": "collections/brands-business-consumer-choice.md",
+    "route": "/collections/brands-business-consumer-choice/",
+    "placement": "collection",
+    "key": "fifty_years_of_magic",
+    "sku": "OIP-FM-EPUB",
+    "book_path": "/shop/fifty-years-of-magic",
+    "heading": "Continue with Fifty Years of Magic",
+    "connection": "Follow the Disney World essays in one illustrated book. Fifty Years of Magic traces how Disney planned, financed, and built the Florida resort, then gave families reasons to come back.",
+    "before": "collection-section__lead",
+    "sample_path": "/shop/fifty-years-of-magic/sample"
+  },
+  {
+    "source": "collections/civic-institutions-and-public-power.md",
+    "route": "/collections/civic-institutions-and-public-power/",
+    "placement": "collection",
+    "key": "pending",
+    "sku": "OIP-PENDING-EPUB",
+    "book_path": "/shop/pending",
+    "heading": "Continue with PENDING",
+    "connection": "What happens when a public agency’s official story gets ahead of the evidence? PENDING follows a government economist who tries to correct the record and learns what speaking up can cost.",
+    "before": "collection-section__lead",
+    "sample_path": "/shop/pending/sample"
+  },
+  {
     "source": "collections/technology-ai-machine-future.md",
     "route": "/collections/technology-ai-machine-future/",
     "placement": "collection",
     "key": "2045",
     "sku": "OIP-TD-EPUB",
     "book_path": "/shop/2045",
+    "sample_path": "/shop/2045/sample",
     "heading": "Continue with 2045",
     "connection": "Follow these questions about AI into fiction. 2045 brings together ten dark fables about machine intelligence, grief, ambition, faith, and the search for meaning.",
     "before": "collection-section__lead"
@@ -892,6 +919,7 @@ $contextualEntries = @'
     "key": "2045",
     "sku": "OIP-TD-EPUB",
     "book_path": "/shop/2045",
+    "sample_path": "/shop/2045/sample",
     "heading": "Continue with 2045",
     "connection": "This essay asks what happens when AI reshapes work, attention, and everyday life. 2045 explores those pressures through dark fables, beginning with a man surrounded by helpful machines and searching for a purpose.",
     "before": "reading-path"
@@ -976,7 +1004,7 @@ foreach ($file in Get-ChildItem -LiteralPath (Join-Path $repoRoot 'content') -Re
   if ($source -notmatch '(?i)book_promo') { continue }
   $relativePath = [IO.Path]::GetRelativePath($repoRoot, $file.FullName).Replace('\', '/')
   if ($relativePath -cnotin $contextualSources -or [regex]::Matches($source, '(?i)book_promo').Count -ne 1) {
-    throw "Only the eight approved source front matters may declare book_promo; found $relativePath."
+    throw "Only the ten approved source front matters may declare book_promo; found $relativePath."
   }
   $promo = [regex]::Match($frontMatter, '(?m)^book_promo:\s*\r?\n(?<fields>(?:[ \t]+[^\r\n]*\r?\n?)+)')
   if (-not $promo.Success -or $frontMatter -match '(?im)^\s*cascade\s*:') {
@@ -997,7 +1025,7 @@ foreach ($file in Get-ChildItem -LiteralPath (Join-Path $repoRoot 'content') -Re
   $declaredPromos += $relativePath
 }
 if ((($declaredPromos | Sort-Object) -join '|') -cne (($contextualSources | Sort-Object) -join '|')) {
-  throw 'Exactly the eight approved Markdown front matters must opt in to contextual books.'
+  throw 'Exactly the ten approved Markdown front matters must opt in to contextual books.'
 }
 foreach ($file in @(
   Get-ChildItem -LiteralPath $repoRoot -File | Where-Object { $_.Name -match '^(?:hugo|config)\.(?:toml|ya?ml|json)$' }
@@ -1025,7 +1053,7 @@ foreach ($required in @(
 $allowedMap = [regex]::Match($contextualPartial, '(?s)\$allowed := dict(?<entries>.*?)\r?\n-\}\}').Groups['entries'].Value
 $allowedLines = @([regex]::Matches($allowedMap, '(?m)^\s*"(?<source>[^"]+\.md)"(?<definition>[^\r\n]+)\r?$'))
 if ((($allowedLines | ForEach-Object { $_.Groups['source'].Value } | Sort-Object) -join '|') -cne (($contextualEntries.source | Sort-Object) -join '|')) {
-  throw 'The contextual partial must allow exactly the eight approved source files.'
+  throw 'The contextual partial must allow exactly the ten approved source files.'
 }
 foreach ($entry in $contextualEntries) {
   $definition = @($allowedLines | Where-Object { $_.Groups['source'].Value -ceq $entry.source })[0].Groups['definition'].Value
@@ -1129,11 +1157,12 @@ foreach ($entry in $contextualEntries) {
   $canonicalImage = [regex]::Match($productCover, '(?is)<img\b[^>]*>').Value
   if (-not $canonicalImage) { throw "$($entry.key) product must retain its canonical rendered cover." }
   $expectedSrc = Get-ContextualHtmlAttribute -Tag $canonicalImage -Name 'src'
-  if ($entry.key -eq '2045') {
-    if ($expectedCover -cne 'books/2045/cover' -or (Get-ContextualHtmlAttribute -Tag $canonicalImage -Name 'data-oip-image-id') -cne $expectedCover) { throw '2045 must retain its exact managed catalog cover.' }
+  $managedCover = -not $expectedCover.StartsWith('/')
+  if ($managedCover) {
+    if ((Get-ContextualHtmlAttribute -Tag $canonicalImage -Name 'data-oip-image-id') -cne $expectedCover) { throw "$($entry.key) must retain its exact managed catalog cover." }
     $asset = $renderManifest.assets.$expectedCover
     $prefix = '/images/rendered/' + $expectedCover + '/' + (Get-OipSignatureRenderPrefix -Asset $asset -SignaturePolicy $imageSignaturePolicy) + '/'
-    if (-not $expectedSrc.StartsWith($prefix, [StringComparison]::Ordinal)) { throw '2045 cover must resolve to its managed rendition-hash derivatives.' }
+    if (-not $expectedSrc.StartsWith($prefix, [StringComparison]::Ordinal)) { throw "$($entry.key) cover must resolve to its managed rendition-hash derivatives." }
   } elseif ($expectedSrc -cne $expectedCover) { throw "$($entry.key) must retain its exact static catalog cover." }
   $coverDimensions = Get-OipImageDimensions -Path (Join-Path $SiteDir $expectedSrc.TrimStart('/'))
   $html = Get-Content -LiteralPath (Join-Path $SiteDir $outputPath) -Raw -Encoding utf8
@@ -1149,11 +1178,12 @@ foreach ($entry in $contextualEntries) {
   if ([regex]::Matches($module, '<a\b').Count -ne 3 -or [regex]::Matches($module, '<img\b').Count -ne 1 -or $module -match '(?i)<form\b|<script\b|onclick=|target=|utm_|order_id|payment_id|download_token|email=|checkout_start') {
     throw "$outputPath must contain two text links and one native cover link without private fields."
   }
+  $standalonePath = $entry.PSObject.Properties['sample_path']?.Value
   foreach ($action in @('sample', 'detail', 'cover')) {
     $slot = $entry.placement + '_book_' + $action
     $event = if ($action -eq 'sample') { 'book_sample_open' } else { 'internal_promo_click' }
-    $href = if ($action -eq 'sample') { if ($entry.key -eq '2045') { '/shop/2045/sample/' } else { $bookPath + '#reading-sample' } } else { $bookPath }
-    $analyticsPath = if ($action -eq 'sample' -and $entry.key -eq '2045') { '/shop/2045/sample/' } else { $bookPath }
+    $analyticsPath = if ($action -eq 'sample' -and $standalonePath) { $standalonePath + '/' } else { $bookPath }
+    $href = if ($action -eq 'sample' -and -not $standalonePath) { $bookPath + '#reading-sample' } else { $analyticsPath }
     $anchor = [regex]::Match($module, '(?is)<a\b(?=[^>]*data-analytics-source-slot="?' + $slot + '"?(?=\s|>))[^>]*>.*?</a>').Value
     foreach ($attribute in @{ href = $href; 'data-analytics-event' = $event; 'data-analytics-slug' = $slug; 'data-analytics-title' = $expectedTitle; 'data-analytics-section' = 'Bookstore'; 'data-analytics-path' = $analyticsPath }.GetEnumerator()) {
       if ((Get-ContextualHtmlAttribute -Tag $anchor -Name $attribute.Key) -cne $attribute.Value) { throw "$outputPath $slot has a missing or wrong $($attribute.Key)." }
@@ -1164,15 +1194,15 @@ foreach ($entry in $contextualEntries) {
       foreach ($attribute in @{ src = $expectedSrc; alt = $expectedCoverAlt; width = [string]$coverDimensions.Width; height = [string]$coverDimensions.Height; loading = 'lazy'; decoding = 'async' }.GetEnumerator()) {
         if ((Get-ContextualHtmlAttribute -Tag $image -Name $attribute.Key) -cne $attribute.Value) { throw "$outputPath cover $($attribute.Key) must preserve the canonical catalog cover." }
       }
-      if ($entry.key -eq '2045') {
-        if ((Get-ContextualHtmlAttribute -Tag $image -Name 'data-oip-image-id') -cne $expectedCover -or [regex]::Matches($anchor, '<picture\b').Count -ne 1) { throw '2045 invitation must use its managed responsive cover.' }
+      if ($managedCover) {
+        if ((Get-ContextualHtmlAttribute -Tag $image -Name 'data-oip-image-id') -cne $expectedCover -or [regex]::Matches($anchor, '<picture\b').Count -ne 1) { throw "$($entry.key) invitation must use its managed responsive cover." }
         foreach ($type in @('image/avif', 'image/webp')) {
           $pattern = '(?is)<source\b(?=[^>]*\btype="?' + [regex]::Escape($type) + '"?(?=\s|>))[^>]*>'
           $source = [regex]::Match($anchor, $pattern).Value
           $canonicalSource = [regex]::Match($productCover, $pattern).Value
-          if (-not $source -or (Get-ContextualHtmlAttribute -Tag $source -Name 'srcset') -cne (Get-ContextualHtmlAttribute -Tag $canonicalSource -Name 'srcset')) { throw "2045 invitation $type must retain canonical responsive candidates." }
+          if (-not $source -or (Get-ContextualHtmlAttribute -Tag $source -Name 'srcset') -cne (Get-ContextualHtmlAttribute -Tag $canonicalSource -Name 'srcset')) { throw "$($entry.key) invitation $type must retain canonical responsive candidates." }
         }
-        if ([Math]::Abs(($coverDimensions.Width / $coverDimensions.Height) - ($asset.width / $asset.height)) -gt 0.001) { throw '2045 cover must preserve the source aspect ratio.' }
+        if ([Math]::Abs(($coverDimensions.Width / $coverDimensions.Height) - ($asset.width / $asset.height)) -gt 0.001) { throw "$($entry.key) cover must preserve the source aspect ratio." }
       }
     } else {
       $label = if ($action -eq 'sample') { 'Read a sample' } else { 'View book and buying options' }
@@ -1182,7 +1212,9 @@ foreach ($entry in $contextualEntries) {
   if ($module -notmatch '\d+ min read') { throw "$outputPath must retain calculated sample reading time." }
   if ($entry.key -eq '2045') {
     foreach ($probe in @('The Cracked Pot', 'complete story')) { Assert-Contains -Text $plain -Expected $probe -Context '2045 standalone sample distinction' }
-    if (-not (Test-Path -LiteralPath (Join-Path $SiteDir 'shop/2045/sample/index.html') -PathType Leaf)) { throw '2045 sample destination must be published.' }
+  }
+  if ($standalonePath -and -not (Test-Path -LiteralPath (Join-Path $SiteDir ($standalonePath.TrimStart('/') + '/index.html')) -PathType Leaf)) {
+    throw "$($entry.key) standalone sample destination must be published."
   }
   $before = $entry.before
   if ($entry.source -eq 'collections/syd-and-oliver-dialogues.md') {
@@ -1198,7 +1230,7 @@ foreach ($file in Get-ChildItem -LiteralPath $SiteDir -Recurse -File -Filter '*.
   $relativePath = [IO.Path]::GetRelativePath($SiteDir, $file.FullName).Replace('\', '/')
   if ($relativePath -cin $contextualOutput) { continue }
   if ((Get-Content -LiteralPath $file.FullName -Raw -Encoding utf8) -match '(?i)<aside\b[^>]*\bcontextual-book\b|data-analytics-source-slot="?(?:article|collection)_book_(?:sample|detail|cover)') {
-    throw "Contextual-book module leaked outside its eight approved pages: $relativePath"
+    throw "Contextual-book module leaked outside its ten approved pages: $relativePath"
   }
 }
 
