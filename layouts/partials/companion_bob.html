@@ -1,11 +1,6 @@
 <div id="companion-bob" class="companion-bob{{ if not .IsHome }} companion-bob--compact{{ end }}" data-bob-companion data-bob-reading-enabled="{{ eq site.Params.bob_reading.enabled true }}" data-bob-api-base="{{ site.Params.bob_reading.api_base | default "" }}" data-bob-catalog="{{ "companion-bob/catalog.json" | relURL }}" data-docked="false" data-greeting="hidden" hidden>
   <iframe class="companion-bob__frame" data-bob-frame data-src="{{ "companion-bob/runtime/" | relURL }}" title="Interactive Bob" allow="autoplay" referrerpolicy="same-origin" inert></iframe>
   <p class="companion-bob__greeting" data-bob-greeting role="status" aria-live="polite" aria-atomic="true"></p>
-  <div class="companion-bob__dock" data-bob-dock hidden>
-    <button class="companion-bob__dock-button" data-bob-dock-button type="button" aria-label="Open Bob controls" aria-expanded="false">
-      <img src="{{ "companion-bob/idle.webp" | relURL }}" width="32" height="32" alt="">
-    </button>
-  </div>
   <div class="companion-bob__fallback" data-bob-fallback>
     <button class="companion-bob__open" data-bob-open type="button" aria-label="Open Bob controls">
       <img src="{{ "companion-bob/idle.webp" | relURL }}" width="160" height="160" alt="" aria-hidden="true" decoding="async">
