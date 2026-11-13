@@ -1,14 +1,8 @@
-{{- $flagshipRoute := "/essays/what-armistice-day-meant/" -}}
-{{- $supportingRoutes := slice
-  "/essays/the-other-side-of-the-mountain/"
-  "/essays/whos-drinking-all-the-modelo/"
-  "/syd-and-oliver/the-ant-problem/"
--}}
+{{- $flagshipRoute := hugo.Data.homepage_features.lead -}}
+{{- $supportingRoutes := hugo.Data.homepage_features.supporting -}}
 {{- $now := now -}}
-{{- $guest := partial "home_guest_selected.html" . -}}
-{{- $guestRoute := "" -}}
-{{- with $guest }}{{ $guestRoute = .RelPermalink }}{{ end -}}
 {{- $eligible := slice -}}
+{{- $curatedGuests := slice -}}
 {{- range site.RegularPages -}}
   {{- $kind := partial "archive/longform-kind.html" . -}}
   {{- $published := and (not .Draft) (le .Date.Unix $now.Unix) (le .PublishDate.Unix $now.Unix) -}}
@@ -21,8 +15,12 @@
     {{- end -}}
   {{- end -}}
   {{- $contributorRole := strings.TrimSpace (printf "%v" (.Params.contributor_role | default "")) -}}
-  {{- if and $published $unexpired $bobOnly (not $contributorRole) (ne .RelPermalink $guestRoute) (in (slice "essay" "affirmation" "dialogue") $kind) -}}
-    {{- $eligible = $eligible | append . -}}
+  {{- if and $published $unexpired -}}
+    {{- if and $bobOnly (not $contributorRole) (in (slice "essay" "affirmation" "dialogue") $kind) -}}
+      {{- $eligible = $eligible | append . -}}
+    {{- else if and (in $supportingRoutes .RelPermalink) (eq $kind "essay") (eq $contributorRole "guest") (strings.TrimSpace (printf "%v" (.Params.author | default ""))) -}}
+      {{- $curatedGuests = $curatedGuests | append . -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 {{- $eligible = sort (sort $eligible "Title" "asc") "PublishDate" "desc" -}}
@@ -48,8 +46,9 @@
   {{- end -}}
 {{- end -}}
 
+{{- $curatedEligible := $eligible | append $curatedGuests -}}
 {{- range $route := $supportingRoutes -}}
-  {{- range where $eligible "RelPermalink" $route -}}
+  {{- range where $curatedEligible "RelPermalink" $route -}}
     {{- if not (in $selectedPaths .RelPermalink) -}}
       {{- $featured = $featured | append . -}}
       {{- $selectedPaths = $selectedPaths | append .RelPermalink -}}

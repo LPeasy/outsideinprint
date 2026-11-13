@@ -7,11 +7,11 @@ import { execFileSync } from "node:child_process";
 
 const hugo = process.env.OIP_HUGO_BIN || (fs.existsSync(".tools/hugo-0.167.0/hugo")
   ? path.resolve(".tools/hugo-0.167.0/hugo") : "hugo");
-const flagship = "/essays/what-armistice-day-meant/";
+const flagship = "/essays/the-last-voyage-of-the-ss-united-states/";
 const formerFlagship = "/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/";
-const mountain = "/essays/the-other-side-of-the-mountain/";
-const modelo = "/essays/whos-drinking-all-the-modelo/";
-const antProblem = "/syd-and-oliver/the-ant-problem/";
+const seoul = "/essays/between-buses-in-seoul/";
+const disney = "/essays/disney-world-2020s/";
+const lastCheese = "/syd-and-oliver/the-last-cheese/";
 const guestRoute = "/essays/a-public-record-must-outlast-the-feed/";
 const guestMetadata = {
   title: "A Public Record Must Outlast the Feed", url: guestRoute,
@@ -50,6 +50,7 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   for (const partial of ["home_v2_selected.html", "home_guest_selected.html", "home_guest_feature.html", "authors/resolve.html", "archive/longform-kind.html", "collections/normalize-values.html", "home_lead_summary.html", "discovery/page-summary.html", "metadata_description.html", "metadata/route.html", "collections/lookup-definition.html"]) {
     write(`layouts/partials/${partial}`, fs.readFileSync(`layouts/partials/${partial}`, "utf8"));
   }
+  write("data/homepage_features.yaml", fs.readFileSync("data/homepage_features.yaml", "utf8"));
   write("data/organization.json", JSON.stringify({ default_author_id: "robert-v-ussley" }));
   write("data/authors.json", JSON.stringify({ authors: { "robert-v-ussley": { type: "Person", name: "Robert V. Ussley" } } }));
   if (summaries === "guest" || summaries === "frontpage") {
@@ -92,11 +93,11 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   write("layouts/_default/single.html", '{{ .Title }}<img src="{{ .Params.featured_image }}" alt="{{ .Params.featured_image_alt }}">');
   write("layouts/_default/list.html", "{{ .Title }}");
   const entries = {
-    flagship: { title: "How Armistice Day Became Veterans Day", url: flagship, date: "2020-01-01", section_label: "Essay" },
+    flagship: { title: "The Last Voyage of the SS United States", url: flagship, date: "2020-01-01", section_label: "Essay" },
     formerFlagship: { title: "Benjamin Franklin", url: formerFlagship, date: "2019-01-01", section_label: "Modern Bio" },
-    mountain: { title: "The Other Side of the Mountain", url: mountain, date: "2020-01-01", section_label: "Musing", library_type: "musing", collections: ["musings"], source_mode: "SOURCE_FREE", external_factual_claims: "none" },
-    modelo: { title: "Who’s Drinking All the Modelo?", url: modelo, date: "2020-01-01", section_label: "Essay" },
-    antProblem: { title: "The Ant Problem", url: antProblem, date: "2020-01-01", section_label: "Dialogue", library_type: "dialogue" },
+    seoul: { title: "Between Buses in Seoul", url: seoul, date: "2020-01-01", section_label: "Essay" },
+    disney: { title: "Disney World in the 2020s", url: disney, date: "2020-01-01", section_label: "Essay" },
+    lastCheese: { title: "The Last Cheese", url: lastCheese, date: "2020-01-01", section_label: "Dialogue", library_type: "dialogue" },
     earlier: { title: "A earlier release", date: "2020-06-01", publishDate: "2020-06-01T09:00:00Z" },
     latest: { title: "Z later release", date: "2020-06-01", publishDate: "2020-06-01T12:00:00Z" },
     draft: { title: "Draft", date: "2020-07-01", draft: true },
@@ -131,8 +132,8 @@ function renderSelection(t, overrides = {}, summaries = false, clock = "2020-09-
   return JSON.parse(output);
 }
 
-test("How Armistice Day Became Veterans Day leads, followed by the latest release, while preview-only work stays excluded", (t) => {
-  assert.deepEqual(renderSelection(t), [flagship, "/essays/latest/", mountain, modelo, antProblem]);
+test("The Last Voyage of the SS United States leads, followed by the latest release, while preview-only work stays excluded", (t) => {
+  assert.deepEqual(renderSelection(t), [flagship, "/essays/latest/", seoul, disney, lastCheese]);
 });
 
 test("the four queued dialogues enter the latest slot only at their approved Eastern instants", (t) => {
@@ -151,11 +152,11 @@ test("the four queued dialogues enter the latest slot only at their approved Eas
     const before = renderSelection(t, entries, "release", new Date(at - 1000).toISOString());
     assert.equal(before.selected[1], previous);
     assert.equal(before.feedLinks.length, slugs.indexOf(slug) + 1);
-    assert.ok(before.feedLinks.includes(antProblem));
+    assert.ok(before.feedLinks.includes(lastCheese));
     const after = renderSelection(t, entries, "release", new Date(at).toISOString());
     const selected = after.selected;
     assert.equal(after.feedLinks.length, slugs.indexOf(slug) + 2);
-    assert.ok(after.feedLinks.includes(antProblem));
+    assert.ok(after.feedLinks.includes(lastCheese));
     assert.ok(after.feedLinks.includes(release.url));
     assert.equal(selected[1], release.url);
     assert.equal(new Set(selected).size, 5);
@@ -169,33 +170,33 @@ test("the four queued dialogues enter the latest slot only at their approved Eas
 test("the former flagship follows recency instead of retaining the lead", (t) => {
   assert.deepEqual(renderSelection(t, {
     formerFlagship: { title: "Benjamin Franklin", url: formerFlagship, date: "2020-08-01", section_label: "Modern Bio" },
-  }), [flagship, formerFlagship, mountain, modelo, antProblem]);
+  }), [flagship, formerFlagship, seoul, disney, lastCheese]);
 });
 
 test("a newer flagship stays first and missing curated work receives newest eligible fallback", (t) => {
   const selection = renderSelection(t, {
-    flagship: { title: "How Armistice Day Became Veterans Day", url: flagship, date: "2020-06-01", publishDate: "2020-07-01" },
-    modelo: null,
+    flagship: { title: "The Last Voyage of the SS United States", url: flagship, date: "2020-06-01", publishDate: "2020-07-01" },
+    disney: null,
   });
-  assert.deepEqual(selection, [flagship, "/essays/latest/", mountain, antProblem, "/essays/earlier/"]);
+  assert.deepEqual(selection, [flagship, "/essays/latest/", seoul, lastCheese, "/essays/earlier/"]);
   assert.equal(new Set(selection).size, 5);
 });
 
 test("when the flagship is unavailable, the two newest releases lead", (t) => {
   assert.deepEqual(renderSelection(t, { flagship: null }), [
-    "/essays/latest/", "/essays/earlier/", mountain, modelo, antProblem,
+    "/essays/latest/", "/essays/earlier/", seoul, disney, lastCheese,
   ]);
 });
 
 test("a newly released curated piece occupies the latest slot only once", (t) => {
   assert.deepEqual(renderSelection(t, {
-    modelo: { title: "Who’s Drinking All the Modelo?", url: modelo, date: "2020-07-01", section_label: "Essay" },
-  }), [flagship, modelo, mountain, antProblem, "/essays/latest/"]);
+    disney: { title: "Disney World in the 2020s", url: disney, date: "2020-07-01", section_label: "Essay" },
+  }), [flagship, disney, seoul, lastCheese, "/essays/latest/"]);
 });
 
 test("the lead uses eligible associated Gallery art and matching zoom alt, with hero fallback and unchanged supporting art", (t) => {
   const leadMetadata = {
-    title: "How Armistice Day Became Veterans Day", url: flagship, date: "2020-01-01", section_label: "Essay",
+    title: "The Last Voyage of the SS United States", url: flagship, date: "2020-01-01", section_label: "Essay",
     featured_image: "legacy/clock-illustration", featured_image_alt: "The existing clock illustration.",
   };
   const galleryArt = {
@@ -242,7 +243,7 @@ test("the lead uses eligible associated Gallery art and matching zoom alt, with 
 
 test("the eligible guest renders once below the flagship without consuming the latest supporting slot", (t) => {
   const result = renderSelection(t, { guest: guestMetadata }, "guest");
-  assert.deepEqual(result.featured, [flagship, "/essays/latest/", mountain, modelo, antProblem]);
+  assert.deepEqual(result.featured, [flagship, "/essays/latest/", seoul, disney, lastCheese]);
   assert.equal(result.guest, guestRoute);
   assert.equal(new Set([...result.featured, result.guest]).size, 6);
   assert.equal((result.html.match(/<article\b/g) || []).length, 1);
@@ -253,9 +254,26 @@ test("the eligible guest renders once below the flagship without consuming the l
   assert.equal((result.html.match(/<a\b/g) || []).length, 1, "the image-free fixture has only its title link");
 });
 
+test("a curated guest keeps the compact slot and its byline while the Guest Feature takes the next eligible guest", (t) => {
+  const overrides = {
+    guest: guestMetadata,
+    seoul: {
+      title: "Between Buses in Seoul", url: seoul, date: "2020-08-01",
+      section_label: "Essay", contributor_role: "guest", author: "Tristan Kim",
+    },
+  };
+  const selected = renderSelection(t, overrides, "guest");
+  assert.deepEqual(selected.featured, [flagship, "/essays/latest/", seoul, disney, lastCheese]);
+  assert.equal(selected.guest, guestRoute);
+  const { html } = renderSelection(t, overrides, "frontpage");
+  const curatedCards = [...html.matchAll(/<article\b[^>]*home-v2-featured__item[^>]*>[\s\S]*?<\/article>/g)].slice(1);
+  assert.match(curatedCards[0][0], /By Tristan Kim[\s\S]*?Between Buses in Seoul/);
+  assert.doesNotMatch(selected.html, /Between Buses in Seoul/);
+});
+
 test("the reserved guest cannot become the lead or fill a missing curated slot", (t) => {
   const result = renderSelection(t, {
-    guest: guestMetadata, flagship: null, modelo: null,
+    guest: guestMetadata, flagship: null, disney: null,
     replacement: { title: "Older replacement", date: "2020-05-01" },
   }, "guest");
   assert.equal(result.guest, guestRoute);
@@ -284,9 +302,9 @@ test("absent, draft, future, expired, or uncredited guest work leaves no Guest F
   }
 });
 
-test("all regular positions reject outside authors and contributor roles, including unselected guests", (t) => {
+test("automatic positions and curated supports reject outside authors without the credited guest designation", (t) => {
   const cases = {
-    unselectedGuest: { author: "Another Guest", contributor_role: "guest" },
+    uncreditedGuest: { author: " ", contributor_role: "guest" },
     unlabelledOutsideAuthor: { author: "Another Writer" },
     regularContributor: { author: "Another Writer", contributor_role: "contributing" },
     guestEditedByBob: { author: "Another Guest", editor_name: "Robert V. Ussley" },
@@ -297,12 +315,12 @@ test("all regular positions reject outside authors and contributor roles, includ
     const result = renderSelection(t, {
       guest: { ...guestMetadata, date: "2020-08-02", publishDate: "2020-08-02T09:00:00Z" },
       flagship: { title: "Outside flagship", url: flagship, date: "2020-08-01", ...byline },
-      mountain: { title: "Outside curated piece", url: mountain, date: "2020-08-01", ...byline },
+      seoul: { title: "Outside curated piece", url: seoul, date: "2020-08-01", ...byline },
       outside: { title: "Outside latest and fallback", date: "2020-08-01", ...byline },
       replacement: { title: "Bob replacement", date: "2020-05-01" },
     }, "guest");
     assert.equal(result.guest, guestRoute, label);
-    assert.deepEqual(result.featured, ["/essays/latest/", "/essays/earlier/", modelo, antProblem, "/essays/replacement/"], label);
+    assert.deepEqual(result.featured, ["/essays/latest/", "/essays/earlier/", disney, lastCheese, "/essays/replacement/"], label);
   }
 });
 
@@ -386,7 +404,7 @@ test("the used-car essay takes the guest slot at its release instant without cha
   assert.match(atRelease.html, /By Jacob Fixture/);
   assert.equal((atRelease.html.match(/<article\b/g) || []).length, 1);
   for (const result of [before, atRelease]) {
-    assert.deepEqual(result.featured, [flagship, "/essays/latest/", mountain, modelo, antProblem]);
+    assert.deepEqual(result.featured, [flagship, "/essays/latest/", seoul, disney, lastCheese]);
     assert.equal(new Set([...result.featured, result.guest]).size, 6);
     for (const route of [usedCarRoute, elijahRoute, guestRoute]) assert.ok(!result.featured.includes(route));
   }
@@ -407,7 +425,7 @@ test("an ineligible used-car essay falls back to Elijah while preserving all gue
     const result = renderSelection(t, { guest: guestMetadata, elijah: elijahMetadata, usedCar: metadata }, "guest", "2026-10-30T13:00:00Z");
     assert.equal(result.guest, elijahRoute, name);
     assert.match(result.html, /By Elijah Fernandez, MSW, PMP, CISSP/, name);
-    assert.deepEqual(result.featured, [flagship, "/essays/latest/", mountain, modelo, antProblem], name);
+    assert.deepEqual(result.featured, [flagship, "/essays/latest/", seoul, disney, lastCheese], name);
     assert.equal(new Set([...result.featured, result.guest]).size, 6, name);
     for (const route of [usedCarRoute, elijahRoute, guestRoute]) assert.ok(!result.featured.includes(route), name);
   }
@@ -436,7 +454,7 @@ test("Gleb becomes the Guest Feature at his release and any newer guest essay re
     assert.equal(result.guest, expected);
     assert.ok(result.html.includes(`By ${byline}`));
     assert.equal((result.html.match(/<article\b/g) || []).length, 1);
-    assert.deepEqual(result.featured, [flagship, "/essays/latest/", mountain, modelo, antProblem]);
+    assert.deepEqual(result.featured, [flagship, "/essays/latest/", seoul, disney, lastCheese]);
     assert.equal(new Set([...result.featured, result.guest]).size, 6);
   }
 });
@@ -459,7 +477,7 @@ test("unlisted guests obey every eligibility guard and fall back to the newest p
   for (const [name, newcomer] of Object.entries(cases)) {
     const result = renderSelection(t, { guest: guestMetadata, usedCar: usedCarMetadata, newcomer }, "guest", "2026-11-01T14:00:00Z");
     assert.equal(result.guest, usedCarRoute, name);
-    assert.deepEqual(result.featured, [flagship, "/essays/latest/", mountain, modelo, antProblem], name);
+    assert.deepEqual(result.featured, [flagship, "/essays/latest/", seoul, disney, lastCheese], name);
     assert.equal(new Set([...result.featured, result.guest]).size, 6, name);
   }
 });

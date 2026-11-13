@@ -5923,6 +5923,12 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
   $guestSourcePath = $null
   $guestAuthor = ''
   $expectedGuestPaths = @()
+  $preferredSupportingPaths = @(
+    '/essays/between-buses-in-seoul/',
+    '/essays/disney-world-2020s/',
+    '/syd-and-oliver/the-last-cheese/'
+  )
+  $curatedGuestPaths = @()
   # Hugo's published inventory is already ordered newest-first, with title ties.
   foreach ($candidate in $publishedReadingRecords) {
     $candidateSourcePath = if ([IO.Path]::IsPathRooted($candidate.path)) { $candidate.path } else { Join-Path $repoRoot $candidate.path }
@@ -5932,15 +5938,18 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     $candidateRole = Get-FrontMatterScalarFromMarkdownFile -Path $candidateSourcePath -Key 'contributor_role'
     $candidateKind = (Get-FrontMatterScalarFromMarkdownFile -Path $candidateSourcePath -Key 'library_type').Trim().ToLowerInvariant()
     if ($candidateRole -ceq 'guest' -and $candidateAuthor -and $candidateKind -notin @('dialogue', 'affirmation')) {
-      $guestPath = Get-SitePathFromHref -Href $candidate.permalink
-      $guestSourcePath = $candidateSourcePath
-      $guestAuthor = $candidateAuthor
-      $expectedGuestPaths = @($guestPath)
-      break
+      $candidateRoute = Get-SitePathFromHref -Href $candidate.permalink
+      if ($candidateRoute -in $preferredSupportingPaths) {
+        $curatedGuestPaths += $candidateRoute
+      } elseif (-not $guestPath) {
+        $guestPath = $candidateRoute
+        $guestSourcePath = $candidateSourcePath
+        $guestAuthor = $candidateAuthor
+        $expectedGuestPaths = @($guestPath)
+      }
     }
   }
-  # Regular slots contain only Bob's work; use each article's public author references,
-  # rather than duplicating the selector's source-author resolution.
+  # Lead, latest and fallback use Bob's public author references.
   $publishedReadingPaths = @($publishedReadingRecords | Where-Object {
     $sourcePath = if ([IO.Path]::IsPathRooted($_.path)) { $_.path } else { Join-Path $repoRoot $_.path }
     $role = (Get-FrontMatterScalarFromMarkdownFile -Path $sourcePath -Key 'contributor_role').Trim()
@@ -5951,19 +5960,14 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     $articleNodes = Get-JsonLdNodes -Objects (Get-JsonLdObjects -Html $articleHtml)
     Test-JsonLdBobReadingWork -Nodes $articleNodes
   } | ForEach-Object { Get-SitePathFromHref -Href $_.permalink })
-  $flagshipPath = '/essays/what-armistice-day-meant/'
+  $flagshipPath = '/essays/the-last-voyage-of-the-ss-united-states/'
   $expectedLeadPaths = @($publishedReadingPaths | Select-Object -First 1)
   if ($flagshipPath -in $publishedReadingPaths) {
     $expectedLeadPaths = @($flagshipPath)
   }
   $latestRemainingPaths = @($publishedReadingPaths | Where-Object { $_ -notin $expectedLeadPaths } | Select-Object -First 1)
-  $preferredSupportingPaths = @(
-    '/essays/the-other-side-of-the-mountain/',
-    '/essays/whos-drinking-all-the-modelo/',
-    '/syd-and-oliver/the-ant-problem/'
-  )
   $expectedSupportingPaths = @(@($latestRemainingPaths + $preferredSupportingPaths + $publishedReadingPaths) | Where-Object {
-    $_ -notin $expectedLeadPaths -and $_ -in $publishedReadingPaths
+    $_ -notin $expectedLeadPaths -and ($_ -in $publishedReadingPaths -or $_ -in $curatedGuestPaths)
   } | Select-Object -Unique | Select-Object -First 4)
   if (($homeLeadPaths -join '|') -cne ($expectedLeadPaths -join '|')) {
     $uxIssues.Add("public/index.html => expected flagship reading piece '$($expectedLeadPaths -join ', ')' as the sole lead, found '$($homeLeadPaths -join ', ')'")
@@ -6099,10 +6103,10 @@ if ($targetPageHtml.ContainsKey('public/index.html')) {
     '/essays/the-dolphin-company/' = 'Case study'
     '/essays/benjamin-franklin-how-americas-funniest-founder-made-greatness-feel-possible/' = 'Modern Bio'
     '/essays/why-daylight-saving-time/' = 'Essay'
-    '/essays/what-armistice-day-meant/' = 'Essay'
-    '/essays/the-other-side-of-the-mountain/' = 'Musing'
-    '/essays/whos-drinking-all-the-modelo/' = 'Essay'
-    '/syd-and-oliver/the-ant-problem/' = 'Dialogue'
+    '/essays/the-last-voyage-of-the-ss-united-states/' = 'Essay'
+    '/essays/between-buses-in-seoul/' = 'Essay'
+    '/essays/disney-world-2020s/' = 'Essay'
+    '/syd-and-oliver/the-last-cheese/' = 'Dialogue'
   }
   foreach ($promo in @($homeAnchors | Where-Object { (Get-AttributeValue -Tag $_ -Name 'data-analytics-source-slot') -in @('homepage_v2_featured_lead', 'homepage_v2_featured_supporting') })) {
     $promoPath = Get-SitePathFromHref -Href (Get-AttributeValue -Tag $promo -Name 'href')

@@ -1,11 +1,12 @@
 {{- $guest := false -}}
 {{- $now := now -}}
 {{- $eligible := slice -}}
+{{- $supportingRoutes := hugo.Data.homepage_features.supporting -}}
 {{- range site.RegularPages -}}
   {{- $published := and (not .Draft) (le .Date.Unix $now.Unix) (le .PublishDate.Unix $now.Unix) -}}
   {{- $unexpired := or .ExpiryDate.IsZero (gt .ExpiryDate.Unix $now.Unix) -}}
   {{- $author := strings.TrimSpace (printf "%v" (.Params.author | default "")) -}}
-  {{- if and $published $unexpired (eq (partial "archive/longform-kind.html" .) "essay") (eq .Params.contributor_role "guest") $author -}}
+  {{- if and $published $unexpired (not (in $supportingRoutes .RelPermalink)) (eq (partial "archive/longform-kind.html" .) "essay") (eq .Params.contributor_role "guest") $author -}}
     {{- $eligible = $eligible | append . -}}
   {{- end -}}
 {{- end -}}

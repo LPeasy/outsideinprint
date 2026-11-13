@@ -10,7 +10,7 @@ test("card artwork reads first, while zoom stays separate", { skip: !siteDir }, 
   const home = page("");
   const library = page("library");
   const gallery = page("gallery");
-  assert.match(home, /class=home-v2-featured__lead-media href=\/essays\/what-armistice-day-meant\//);
+  assert.match(home, /class=home-v2-featured__lead-media href=\/essays\/the-last-voyage-of-the-ss-united-states\//);
   assert.match(home, /class=home-v2-featured__item-media href=\/(?:essays|syd-and-oliver)\/[^/]+\//);
   assert.match(home, /data-home-featured-image-trigger/);
   assert.match(library, /class=(?:"essay-cartoon-thumb[^"]*"|essay-cartoon-thumb) href=\/essays\//);
