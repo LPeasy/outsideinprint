@@ -9,13 +9,11 @@
 {{ $buttonLabel := .buttonLabel | default $newsletter.button_label }}
 {{ $sampleURL := partial "almanack/latest-issue-url.html" $page }}
 {{ $sampleLabel := $newsletter.sample_label }}
-{{ $privacyPromise := $newsletter.privacy_promise }}
 {{ $privacyURL := $newsletter.privacy_url }}
 {{ $privacyLabel := $newsletter.privacy_label }}
 {{ $class := .class }}
 {{ $anchorID := .anchorID | default "" }}
 {{ $focusTarget := .focusTarget | default false }}
-{{ $showPressroom := .pressroom | default false }}
 {{ $sampleSourceSlot := printf "%s_sample_issue" $sourceSlot }}
 {{ $samplePath := $sampleURL | relURL }}
 {{ $isSamplePage := and (eq $page.Section "almanack") (eq $page.RelPermalink $samplePath) }}
@@ -25,7 +23,6 @@
 {{ $titleID := printf "%s-title" $inputID }}
 {{ $dekID := printf "%s-contents" $inputID }}
 {{ $priceID := printf "%s-price" $inputID }}
-{{ $privacyID := printf "%s-privacy" $inputID }}
 
 {{ with $newsletter.buttondown_username }}
   {{ if eq $provider "buttondown" }}
@@ -53,7 +50,7 @@
             autocapitalize="off"
             inputmode="email"
             spellcheck="false"
-            aria-describedby="{{ $dekID }} {{ $priceID }} {{ $privacyID }}"
+            aria-describedby="{{ $dekID }} {{ $priceID }}"
             required
           />
           <input type="hidden" name="embed" value="1" />
@@ -82,11 +79,7 @@
             <span aria-hidden="true">&middot;</span>
             <a href="{{ $privacyURL | relURL }}">{{ $privacyLabel }}</a>
           </p>
-          <p id="{{ $privacyID }}" class="newsletter-signup__privacy">{{ $privacyPromise }}</p>
         </div>
-        {{ if $showPressroom }}
-          {{ partial "pressroom_invitation.html" (dict "sourceSlot" (printf "%s_pressroom" $sourceSlot)) }}
-        {{ end }}
       </div>
     </section>
   {{ end }}

@@ -73,7 +73,7 @@ test("homepage V2 owns separate proof, featured-reading, library, newsletter, an
     'class="home-v2-library home-v2-next__links page-shell page-shell--wide"',
     'partial "home_reader_newsletter.html" .',
     'class="home-v2-next page-shell page-shell--wide"',
-    'aria-label="Become a contributor"',
+    'aria-label="Want to write for Outside in Print?"',
     'class="home-v2-next__cta"'
   ]) {
     assert.match(homeV2FrontPage, new RegExp(escapeRegex(snippet)));
@@ -126,7 +126,7 @@ test("homepage V2 owns separate proof, featured-reading, library, newsletter, an
   assert.match(css, /\.home-reader-banner\.page-shell--wide\{[^}]*max-width:70rem;/);
   assert.match(css, /\.masthead-proof\{[^}]*flex:1 1 auto;[^}]*max-width:42rem;/);
   assert.match(css, /\.home-v2-featured\.page-shell--wide,\s*\.home-v2-library\.page-shell--wide,\s*\.home-v2-next\.page-shell--wide\{[^}]*max-width:70rem;/);
-  assert.match(css, /\.home-front-page__orientation\{[^}]*display:grid;[^}]*grid-template-areas:\s*"label"\s*"copy"\s*"links";[^}]*max-width:70rem;/);
+  assert.match(css, /\.home-front-page__orientation\{[^}]*display:grid;[^}]*grid-template-areas:\s*"label links"\s*"copy links";[^}]*max-width:70rem;/);
   assert.match(css, /\.home-front-page__welcome-label\{[^}]*font-size:\.8125rem;[^}]*letter-spacing:\.1em;/);
   assert.match(css, /\.home-front-page__welcome-copy\{[^}]*margin:0;[^}]*font-size:\.94rem;[^}]*line-height:1\.42;/);
   assert.doesNotMatch(`${homeV2FrontPage}\n${css}`, /home-v2-next__contribute/);

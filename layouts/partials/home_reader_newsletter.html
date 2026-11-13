@@ -17,7 +17,6 @@
       <h2 id="home-reader-banner-title" tabindex="-1">One thoughtful letter each week.</h2>
       <p>Every Saturday: new writing, one revealing number, and a thought worth keeping.</p>
       <p>Free. No spam ever. Unsubscribe anytime.</p>
-      <p>After you confirm your email, you will also receive three short introductory emails, including an optional Pressroom invitation. The introductory series and Saturday newsletter have separate unsubscribe links.</p>
     </div>
 
     {{- if and (eq $provider "buttondown") $buttondownUsername }}
@@ -50,36 +49,15 @@
     {{- end }}
   </div>
 
-  {{ partial "pressroom_invitation.html" (dict "compact" true "sourceSlot" "homepage_newsletter_pressroom") }}
-
   {{- with $currentIssue -}}
-    {{- $lead := dict -}}
-    {{- with .Params.essays -}}
-      {{- if gt (len .) 0 -}}
-        {{- $lead = index . 0 -}}
-      {{- end -}}
-    {{- end -}}
-    {{- $virtue := .Params.virtue | default (dict) -}}
-    {{- $margin := .Params.margin | default (dict) -}}
-    {{- $oneNumber := index $margin "one_number" | default (dict) -}}
-    <div class="home-reader-newsletter__issue" aria-label="Current Bob's Almanack edition">
-      <div class="home-reader-newsletter__issue-heading">
-        <p>Inside the current edition</p>
-        <strong>Bob's Almanack</strong>
-        <span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>{{ with .Params.issue_number }} · No. {{ . }}{{ end }}</span>
-      </div>
-      <div class="home-reader-newsletter__issue-brief">
-        {{- with $lead.title -}}
-          <p><strong>New writing:</strong> {{ . }}{{ with $lead.description }} — {{ . }}{{ end }}</p>
-        {{- end -}}
-        {{- with $oneNumber.note -}}
-          <p><strong>One number:</strong> {{ . }}</p>
-        {{- end -}}
-        {{- with $virtue.name -}}
-          <p><strong>This week's virtue:</strong> {{ . }}</p>
-        {{- end -}}
-      </div>
-      <a class="home-reader-newsletter__issue-link" href="{{ .RelPermalink }}">Read the full issue <span aria-hidden="true">&rarr;</span></a>
-    </div>
+    <section class="home-reader-newsletter__issue" aria-labelledby="almanack-sample">
+      <h3 id="almanack-sample">Read a sample of Bob’s Almanack</h3>
+      {{- if eq .Params.almanack_layout "alternating-margins-v1" }}
+        {{ partial "almanack/approved-sheet.html" (dict "page" . "sample" true) }}
+      {{- else }}
+        <p>{{ .Date.Format "January 2, 2006" }}{{ with .Params.issue_number }} · No. {{ . }}{{ end }}</p>
+      {{- end }}
+      <a class="home-reader-newsletter__issue-link" href="{{ .RelPermalink }}">Read the free issue <span aria-hidden="true">&rarr;</span></a>
+    </section>
   {{- end -}}
 </section>

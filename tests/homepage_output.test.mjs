@@ -150,7 +150,10 @@ test("rendered homepage leads with The Last Voyage of the SS United States, then
       assert.equal(canonicalKind, "Essay");
       assert.match(text(card[2]), /By Tristan Kim/);
     }
-    if (route === pinnedRoutes[2]) assert.equal(canonicalKind, "Essay");
+    if (route === pinnedRoutes[2]) {
+      assert.equal(canonicalKind, "Essay");
+      assert.match(text(card[2]), /Disney World reopened, turned 50, and rebuilt parts of EPCOT\./);
+    }
     if (route === pinnedRoutes[3]) assert.equal(canonicalKind, "Dialogue");
     const metric = metricRecords.get(route);
     const badge = metric?.value >= threshold ? metric.label : "";
@@ -275,7 +278,7 @@ test("rendered homepage leads with The Last Voyage of the SS United States, then
       }
     }
   }
-  assert.match(html, /A featured essay, the latest publication, and selected work\./);
+  assert.doesNotMatch(html, /A featured essay, the latest publication, and selected work\./);
   assert.match(html, /Read the piece/);
   assert.doesNotMatch(html, /25 reads|Medium reads|(?:3\.4K|1\.95K|1\.8K) readers/);
 });
@@ -409,7 +412,7 @@ test("rendered homepage puts two reading links before one newsletter signup and 
   const sections = [...html.matchAll(/<section\b[^>]*>/g)].map((match) => match[0]);
   const proofTag = sections.find((tag) => attribute(tag, "aria-label") === "Outside In Print at a glance");
   const newsletterTag = sections.find((tag) => attribute(tag, "class").split(/\s+/).includes("home-reader-newsletter"));
-  const contributionTag = sections.find((tag) => attribute(tag, "aria-label") === "Become a contributor");
+  const contributionTag = sections.find((tag) => attribute(tag, "aria-label") === "Want to write for Outside in Print?");
   assert.ok(proofTag);
   assert.ok(newsletterTag);
   assert.ok(contributionTag);
@@ -417,7 +420,7 @@ test("rendered homepage puts two reading links before one newsletter signup and 
   assert.ok(html.indexOf(proofTag) < html.indexOf('data-theme-toggle'));
   const contributionStart = html.indexOf(contributionTag) + contributionTag.length;
   const contributionBody = html.slice(contributionStart, html.indexOf("</section>", contributionStart));
-  assert.match(contributionBody, /^\s*<a\b[^>]*>Become a contributor<\/a>\s*$/);
+  assert.match(contributionBody, /^\s*<a\b[^>]*>Want to write for Outside in Print\?<\/a>\s*$/);
   assert.doesNotMatch(contributionBody, /<article\b|<h[1-6]\b|<p\b|home-v2-next__contribute/);
   const contributionLink = contributionBody.match(/<a\b[^>]*>/)?.[0];
   assert.equal(attribute(contributionLink, "class"), "home-v2-next__cta");
@@ -462,7 +465,7 @@ test("homepage signup offers a brief from the current published Almanack edition
   assert.ok(latestHeading, "the Almanack collection must identify its current issue");
   const currentRoute = attribute(latestHeading, "href");
   const briefStart = html.indexOf("home-reader-newsletter__issue");
-  const contributorStart = html.indexOf('aria-label="Become a contributor"', briefStart);
+  const contributorStart = html.indexOf('aria-label="Want to write for Outside in Print?"', briefStart);
   assert.ok(briefStart > html.indexOf('data-analytics-source-slot=homepage_reader_banner'));
   assert.ok(contributorStart > briefStart);
   const brief = html.slice(briefStart, contributorStart);
@@ -470,8 +473,33 @@ test("homepage signup offers a brief from the current published Almanack edition
     .map((match) => match[0]).find((tag) => attribute(tag, "class") === "home-reader-newsletter__issue-link");
   assert.ok(fullIssueLink);
   assert.equal(attribute(fullIssueLink, "href"), currentRoute);
-  assert.match(brief, /New writing:/);
-  assert.match(brief, /One number:/);
-  assert.match(brief, /This week(?:'|&#39;|&#x27;)s virtue:/);
+  assert.doesNotMatch(html, /homepage_newsletter_pressroom|The Pressroom is \$5 a month\./);
+  const signup = html.slice(html.indexOf("home-reader-banner__signup"), briefStart);
+  assert.doesNotMatch(signup, /After you confirm your email|separate unsubscribe links/);
+  assert.match(brief, /Read a sample of Bob’s Almanack/);
+  assert.match(brief, /Read the free issue/);
+  const currentIssue = fs.readFileSync(path.join(siteDir, currentRoute, "index.html"), "utf8");
+  if (currentIssue.includes("alternating-margins-v1")) {
+    assert.match(brief, /id=("|')?almanack-sample-sheet\b/);
+    assert.match(brief, /Note from Bob/);
+    assert.match(brief, /New from Outside In Print/);
+    assert.match(brief, /In the Margins/);
+    const publishedLead = currentIssue.match(/<div\b[^>]*class="demo-main demo-main-block"[^>]*data-row=(?:"1"|1)[^>]*>([\s\S]*?)<\/article>/)?.[1];
+    assert.ok(publishedLead);
+    const sampleLead = brief.match(/<div\b[^>]*class="demo-main demo-main-block"[^>]*data-row=(?:"1"|1)[^>]*>([\s\S]*?)<\/article>/)?.[1];
+    assert.ok(sampleLead);
+    const paragraphs = (markup) => [...markup.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/g)].map((match) => text(match[1]));
+    assert.deepEqual(paragraphs(sampleLead), paragraphs(publishedLead));
+    const images = (markup) => [...markup.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);
+    const art = images(sampleLead).find((tag) => attribute(tag, "data-oip-image-id"));
+    assert.ok(art, "the sampled lead includes its illustration");
+    assert.ok(images(publishedLead).some((tag) => attribute(tag, "data-oip-image-id") === attribute(art, "data-oip-image-id")
+      && attribute(tag, "alt") === attribute(art, "alt")));
+    for (const slot of ["masthead", "lead"]) {
+      const ornament = new RegExp(`data-bob=(?:"${slot}"|${slot})(?:\\s|>)`);
+      if (ornament.test(currentIssue)) assert.match(brief, ornament);
+    }
+    assert.doesNotMatch(brief, /data-row=(?:"2"|2)(?:\s|>)/, "the inset stops after the first editorial row");
+  }
   assert.equal((brief.match(/<form\b/g) || []).length, 0, "the brief must not add another signup form");
 });

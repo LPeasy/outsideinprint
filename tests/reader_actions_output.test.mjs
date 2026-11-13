@@ -73,8 +73,13 @@ test("built newsletter archive has one correctly placed signup and a real native
   assert.equal(attr(forms[0], "method"), "post");
   assert.equal(attr(forms[0], "data-analytics-source-slot"), "almanack_collection_newsletter");
   assert.equal(attr(forms[0], "data-analytics-event"), "newsletter_submit");
-  for (const promise of ["Every Saturday", "The weekly newsletter", "Free. Each email series has an unsubscribe link.", "three short introductory emails after you confirm", "The two email series have separate unsubscribe links."]) assert.ok(text(html).includes(promise));
-  assert.ok(links(html).some((link) => attr(link.tag, "href") === "/privacy/"));
+  const signupBlock = html.slice(signup, html.indexOf("</section>", signup));
+  const copy = text(signupBlock);
+  for (const promise of ["Every Saturday", "The weekly newsletter", "Free. Each email series has an unsubscribe link.", "three short introductory emails after you confirm"]) {
+    assert.ok(copy.includes(promise), "missing signup text: " + promise);
+  }
+  assert.doesNotMatch(copy, /Buttondown manages the Saturday newsletter|The two email series have separate unsubscribe links|See what \$5 includes/);
+  assert.ok(links(signupBlock).some((link) => link.label === "Privacy details" && attr(link.tag, "href") === "/privacy/"));
   const ids = [...html.matchAll(/<[a-z][^>]*\bid=(?:"[^"]*"|'[^']*'|[^\s>]+)[^>]*>/g)].map((m) => attr(m[0], "id"));
   assert.equal(new Set(ids).size, ids.length, "signup IDs must remain unique");
 });

@@ -127,6 +127,10 @@ $previewCount = 0
 foreach ($route in $routes) {
   $file = Join-Path $SiteDir ($route.Trim('/') + '/index.html').TrimStart('/')
   $html = Get-Content -LiteralPath $file -Raw
+  foreach ($block in [regex]::Matches($html, '(?is)<section\b(?=[^>]*\b(?:newsletter-signup|home-reader-newsletter)\b)[^>]*>.*?</section>|<fieldset\b(?=[^>]*\bbookstore-epub-checkout__preferences\b)[^>]*>.*?</fieldset>')) {
+    Assert-Discovery ($block.Value -notmatch 'newsletter-signup__privacy|bookstore-epub-checkout__newsletter-privacy|pressroom-invitation|Buttondown manages the Saturday newsletter|See what \$5 includes') "$route must omit the provider paragraph and paid Pressroom offer from its newsletter signup."
+    Assert-Discovery ($block.Value -match '(?:https://outsideinprint\.org)?/privacy/[^>]*>\s*Privacy details\s*</a>') "$route must retain a privacy link in its newsletter signup."
+  }
   $nav = [regex]::Match($html, '(?is)<nav\b(?=[^>]*aria-label=(?:"Primary"|Primary))[^>]*>.*?</nav>').Value
   foreach ($class in @('nav-disclosure--read', 'nav-mobile-disclosure--read')) {
     $menu = [regex]::Match($nav, '(?is)<details\b(?=[^>]*\b' + $class + '\b)[^>]*>.*?</details>').Value

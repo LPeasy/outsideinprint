@@ -11,11 +11,17 @@ if (host && slot) initialize();
 function initialize() {
   const frame = host.querySelector('[data-bob-frame]');
   const fallback = host.querySelector('[data-bob-fallback]');
+  const dock = host.querySelector('[data-bob-dock]');
+  const dockButton = host.querySelector('[data-bob-dock-button]');
   const bubble = host.querySelector('[data-bob-greeting]');
   const status = host.querySelector('[data-bob-status]');
   const restore = document.querySelector('[data-bob-restore]');
   const storage = createBobStorage();
   const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const mobile = matchMedia('(max-width: 768px)');
+  let homepage = false;
+  let dockActive = false;
+  let dockOpen = false;
   let minimized = storage.read(PREFERENCES_KEY)?.hidden === true;
   let savedPosition = validPosition(storage.read(POSITION_KEY));
   let anchor = { x: 0, y: 0 };
@@ -80,15 +86,21 @@ function initialize() {
     if (viewportMessage !== lastViewport) { send({ type: 'viewport', ...JSON.parse(viewportMessage) }); lastViewport = viewportMessage; }
     if (dragging || !slot?.isConnected || routing) return;
     const rect = slot.getBoundingClientRect();
+    const docked = rect.top < view.top + 8 || rect.bottom > view.top + view.height;
+    const needsDock = homepage && mobile.matches && docked && !savedPosition && !minimized;
+    if (needsDock !== dockActive) {
+      dockActive = needsDock;
+      dockOpen = false;
+      syncVisibility();
+    }
     let mode, point;
     if (savedPosition) {
       mode = 'free';
       point = { x: view.left + savedPosition.x * view.width, y: view.top + savedPosition.y * view.height };
     } else {
-      const docked = rect.top < view.top + 8 || rect.bottom > view.top + view.height;
       mode = docked ? 'docked' : 'masthead';
       const safeBottom = parseFloat(getComputedStyle(host).getPropertyValue('--bob-safe-bottom')) || 0;
-      point = docked ? { x: view.left + view.width - 80, y: view.top + view.height - 24 - safeBottom }
+      point = docked ? { x: view.left + view.width - 80, y: view.top + view.height - (dockActive ? 64 : 24) - safeBottom }
         : { x: rect.left + rect.width / 2, y: rect.bottom - 5 };
     }
     host.dataset.mode = minimized ? 'hidden' : mode;
@@ -155,7 +167,7 @@ function initialize() {
     regionCount = 0;
     frame.inert = true;
     frame.style.clipPath = emptyMask;
-    fallback.hidden = false;
+    fallback.hidden = dockActive;
     delete host.dataset.failed;
     host.dataset.painted = 'false';
     if (status) { status.hidden = true; status.textContent = ''; }
@@ -170,7 +182,7 @@ function initialize() {
     frame.style.clipPath = emptyMask;
     regionCount = 0;
     host.dataset.failed = 'true';
-    fallback.hidden = false;
+    fallback.hidden = dockActive;
     if (status) { status.textContent = message; status.hidden = false; }
     startVisit();
   }
@@ -179,13 +191,19 @@ function initialize() {
   }
   function syncVisibility() {
     const covered = obscured();
-    const next = visible() && !minimized && !covered;
+    const next = visible() && !minimized && !covered && (!dockActive || dockOpen);
     // Music continues through page/menu transitions and background tabs.
     // Hide leaves playback available through compact controls; only the arcade suspends it.
     const nextAudio = !suspended && !document.body.classList.contains('paper-route-open');
     host.hidden = minimized || covered;
-    host.inert = !next;
+    host.inert = !visible() || minimized || covered;
     host.dataset.obscured = String(covered);
+    host.dataset.bobDockActive = String(dockActive);
+    host.dataset.bobDockOpen = String(dockOpen);
+    dock.hidden = !dockActive || covered || minimized;
+    dockButton.setAttribute('aria-expanded', String(dockOpen));
+    dockButton.setAttribute('aria-label', dockOpen ? 'Close Bob controls' : 'Open Bob controls');
+    fallback.hidden = dockActive || painted;
     restore.hidden = !minimized || covered;
     if (next !== active || nextAudio !== audioActive) {
       active = next;
@@ -203,6 +221,7 @@ function initialize() {
   }
   function setHidden(hidden) {
     minimized = hidden;
+    dockOpen = false;
     pendingOpen = false;
     pendingFocus = !hidden;
     storage.write(PREFERENCES_KEY, { version: 1, hidden });
@@ -219,7 +238,11 @@ function initialize() {
     pendingFocus = false;
     syncVisibility();
     if (host.dataset.failed === 'true') load();
-    if (ready && painted) { send({ type: 'reveal-controls', keyboard: pendingOpenKeyboard }); pendingOpen = false; }
+    if (ready && painted && !dockActive) revealControls();
+  }
+  function revealControls() {
+    send(dockActive ? { type: 'open-settings' } : { type: 'reveal-controls', keyboard: pendingOpenKeyboard });
+    pendingOpen = false;
   }
   function home() {
     dragging = false;
@@ -235,6 +258,9 @@ function initialize() {
     slotObserver.disconnect();
     overlayObserver.disconnect();
     slot = document.querySelector('[data-bob-slot]');
+    homepage = Boolean(document.querySelector('.home-v2'));
+    dockActive = false;
+    dockOpen = false;
     if (slot) {
       slotObserver.observe(slot);
       host.classList.toggle('companion-bob--compact', Boolean(slot.closest('.masthead--compressed')));
@@ -250,6 +276,14 @@ function initialize() {
   }
   bindPage();
   restore.addEventListener('click', () => { setHidden(false); });
+  dockButton.addEventListener('click', event => {
+    dockOpen = !dockOpen;
+    if (dockOpen) openControls(event);
+    else {
+      pendingOpen = false;
+      syncVisibility();
+    }
+  });
   window.addEventListener('message', event => {
     if (event.origin !== location.origin || event.source !== frame.contentWindow || event.data?.channel !== CHANNEL) return;
     const data = event.data;
@@ -270,7 +304,7 @@ function initialize() {
       focusRuntime();
       clearTimeout(loadTimer);
       startVisit();
-      if (pendingOpen && active) { send({ type: 'reveal-controls', keyboard: pendingOpenKeyboard }); pendingOpen = false; }
+      if (pendingOpen && active) revealControls();
     } else if (data.type === 'hit-regions') {
       applyRegions(data.rects);
     } else if (data.type === 'position' && Number.isFinite(data.x) && Number.isFinite(data.y)) {
@@ -293,7 +327,23 @@ function initialize() {
     else if (data.type === 'activity') { dismissGreeting(); visit(); }
     else if (data.type === 'error') fail('Bob could not load. Select Bob to try again.');
   });
-  window.addEventListener('scroll', () => { schedulePosition(); visit(); }, { passive: true });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && dockOpen) {
+      dockOpen = false;
+      pendingOpen = false;
+      syncVisibility();
+      dockButton.focus({ preventScroll: true });
+    }
+  });
+  window.addEventListener('scroll', () => {
+    if (dockOpen) {
+      dockOpen = false;
+      pendingOpen = false;
+      syncVisibility();
+    }
+    schedulePosition();
+    visit();
+  }, { passive: true });
   window.addEventListener('resize', () => { lastPlacement = ''; schedulePosition(); }, { passive: true });
   window.visualViewport?.addEventListener('resize', () => { lastPlacement = ''; schedulePosition(); });
   window.visualViewport?.addEventListener('scroll', schedulePosition);

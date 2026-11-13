@@ -17,12 +17,7 @@
 
   {{- if gt (len $featured) 0 }}
     <section class="home-v2-featured page-shell page-shell--wide" aria-labelledby="home-v2-featured-title">
-      <header class="home-v2-featured__header">
-        <div>
-          <h2 id="home-v2-featured-title">Featured Articles</h2>
-        </div>
-        <p>A featured essay, the latest publication, and selected work.</p>
-      </header>
+      <h2 id="home-v2-featured-title" class="visually-hidden">Featured Articles</h2>
 
       <div class="home-v2-featured__grid">
         {{- range $index, $page := $featured -}}
@@ -131,7 +126,9 @@
                 </div>
               {{- end }}
               <div class="home-v2-featured__item-copy">
-                {{- with (partial "discovery/page-summary.html" $page) }}<p>{{ . }}</p>{{ end }}
+                {{- $summary := index hugo.Data.homepage_features.summaries $page.RelPermalink -}}
+                {{- if not $summary -}}{{ $summary = partial "discovery/page-summary.html" $page }}{{- end -}}
+                {{- with $summary }}<p>{{ . }}</p>{{ end }}
               </div>
             </article>
             {{- if eq $index (sub (len $featured) 1) }}</div>{{ end }}
@@ -148,8 +145,8 @@
 
   {{ partial "home_reader_newsletter.html" . }}
 
-  <section class="home-v2-next page-shell page-shell--wide" aria-label="Become a contributor">
-    <a class="home-v2-next__cta" href="{{ "contribute/" | relURL }}">Become a contributor</a>
+  <section class="home-v2-next page-shell page-shell--wide" aria-label="Want to write for Outside in Print?">
+    <a class="home-v2-next__cta" href="{{ "contribute/" | relURL }}">Want to write for Outside in Print?</a>
   </section>
 </section>
 {{ partial "home_featured_image_dialog.html" . }}
