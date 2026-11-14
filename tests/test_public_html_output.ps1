@@ -1220,7 +1220,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/authors/robert-v-ussley/index.html' = @{
     Title = 'Robert V. Ussley'
-    Description = 'Essays, stories, and reflections on public life and everyday experience.'
+    Description = 'Meet the writer and publisher behind Outside In Print. Explore Robert V. Ussley''s essays, dialogues, fiction, and books.'
     Canonical = 'https://outsideinprint.org/authors/robert-v-ussley/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
