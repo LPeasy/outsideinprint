@@ -1190,7 +1190,7 @@ $requiredMetadataPages = [ordered]@{
   }
   'public/about/index.html' = @{
     Title = 'About Outside In Print'
-    Description = 'Independent essays, stories, and reflections on public life, faith, and the choices we make every day.'
+    Description = 'An independent, illustrated publication of reporting, essays, stories, and reflections, published and edited by Robert V. Ussley with work from contributing writers.'
     Canonical = 'https://outsideinprint.org/about/'
     OgType = 'website'
     TwitterCard = 'summary_large_image'
@@ -3947,17 +3947,17 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/about/index.html'
-    Pattern = '(?s)Behind Outside In Print.*?<h2\b[^>]*>A place to stay with an idea\.</h2>.*?Independent essays, stories, and reflections on public life, faith, and the choices we make every day\.'
+    Pattern = '(?s)<h1\b[^>]*>A place to stay with an idea\.</h1>.*?Outside In Print is an independent, illustrated publication about public life and everyday experience\.'
     Message = 'expected About to introduce the reader-focused purpose and subject territory'
   },
   @{
     Path = 'public/about/index.html'
-    Pattern = '(?s)<a\b[^>]*href="?#about-newsletter"?[^>]*>Join the weekly newsletter</a>.*?<a\b[^>]*href="?(?:https://outsideinprint\.org)?/#home-v2-featured-title"?[^>]*>Explore the writing</a>.*?<h3\b[^>]*>At a glance</h3>.*?<dt\b[^>]*>Author</dt>'
-    Message = 'expected About to prioritize newsletter signup and featured writing before the publication record'
+    Pattern = '(?s)href="?#about-start"?[^>]*>Find a first piece.*?href="?#about-newsletter"?[^>]*>Join the weekly newsletter.*?id="?about-start"?[^>]*>Start here.*?The Last Voyage of the SS United States.*?The Last Cheese.*?Between Buses in Seoul.*?By Tristan Kim'
+    Message = 'expected About to offer three curated starting pieces with the guest writer credited'
   },
   @{
     Path = 'public/about/index.html'
-    Pattern = '(?s)An independent publication.*?<a\b[^>]*href="?(?:https://outsideinprint\.org)?/authors/robert-v-ussley/"?[^>]*>.*?</a>.*?Contribute.*?<a\b[^>]*href="?(?:https://outsideinprint\.org)?/contribute/"?[^>]*>'
+    Pattern = '(?s)The people behind the imprint.*?<a\b[^>]*href="?(?:https://outsideinprint\.org)?/authors/robert-v-ussley/"?[^>]*>.*?</a>.*?Want to write for Outside in Print\?.*?<a\b[^>]*href="?(?:https://outsideinprint\.org)?/contribute/"?[^>]*>'
     Message = 'expected About to connect readers with the author and invite contributor pitches'
   },
   @{
@@ -3967,14 +3967,14 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/about/index.html'
-    Pattern = 'Imprint Record|Current File|Principal Byline|principal authorial byline|essay corpus|without pretending to be a large editorial institution'
+    Pattern = 'Imprint Record|Current File|Principal Byline|principal authorial byline|essay corpus|without pretending to be a large editorial institution|At a glance|Reading Map|Behind Outside In Print'
     Message = 'expected About to omit the retired institutional opening and ownership wording'
     ShouldNotMatch = $true
   },
   @{
     Path = 'public/about/index.html'
-    Pattern = 'Outside In Print is written and published by Robert V\. Ussley\.'
-    Message = 'expected the about page to explain the author and publisher relationship'
+    Pattern = 'Robert V\. Ussley publishes and edits Outside In Print\.'
+    Message = 'expected the about page to explain the publisher and editor relationship'
   },
   @{
     Path = 'public/about/index.html'
@@ -3983,8 +3983,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/about/index.html'
-    Pattern = '(?s)Reading Map.*?Featured reading.*?Browse collections.*?Search the library.*?Meet the author'
-    Message = 'expected the about page to offer a reading map into featured work, collections, the library, and the author archive'
+    Pattern = '(?s)How we approach the work.*?href="?(?:https://outsideinprint\.org)?/contact/.*?Beyond the essays.*?href="?(?:https://outsideinprint\.org)?/gallery/.*?href="?(?:https://outsideinprint\.org)?/shop/.*?href="?(?:https://outsideinprint\.org)?/games/.*?href="?(?:https://outsideinprint\.org)?/music/.*?browse the collections.*?search the library'
+    Message = 'expected About to connect editorial accountability and the wider creative work'
   },
   @{
     Path = 'public/shop/index.html'
@@ -4122,7 +4122,7 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
-    Pattern = 'Bobviously_Portrait_v1\.png'
+    Pattern = 'Bobviously_Portrait_Watercolor_v3\.png'
     Message = 'expected the refined author page to keep the portrait surface'
   },
   @{
@@ -4137,8 +4137,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
-    Pattern = '(?s)href=(?:"#author-selected-title"|#author-selected-title).*?href=(?:"#author-newsletter"|#author-newsletter).*?id=(?:"author-selected-title"|author-selected-title).*?id=(?:"author-newsletter"|author-newsletter).*?id=(?:"author-recent-title"|author-recent-title).*?id=(?:"author-books-title"|author-books-title)'
-    Message = 'expected author profile links to reach Selected Writing and Newsletter, with writing and signup before books'
+    Pattern = '(?s)href=(?:"#author-selected-title"|#author-selected-title).*?href=(?:"#author-newsletter"|#author-newsletter).*?id=(?:"author-selected-title"|author-selected-title).*?id=(?:"author-books-title"|author-books-title).*?id=(?:"author-music-title"|author-music-title).*?id=(?:"author-recent-title"|author-recent-title).*?id=(?:"author-newsletter"|author-newsletter)'
+    Message = 'expected author profile links to reach Selected Writing and Newsletter, with books, music, and recent writing before signup'
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
@@ -4147,8 +4147,8 @@ $requiredUxChecks = @(
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'
-    Pattern = '(?s)Browse archive.*?Browse collections.*?Search the library.*?Visit the Bookstore.*?About the imprint'
-    Message = 'expected the refined author page to expose the compact route-based reading map'
+    Pattern = '(?s)Visit the Bookstore.*?Listen with JukeBob.*?Get in touch.*?send a note.*?Outside In Print Studio.*?About the imprint'
+    Message = 'expected the refined author page to offer books, music, contact, Studio, and imprint destinations'
   },
   @{
     Path = 'public/authors/robert-v-ussley/index.html'

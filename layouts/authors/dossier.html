@@ -1,6 +1,18 @@
 {{ define "main" }}
-  {{ $portraitPath := .Params.portrait | default "Bobviously_Portrait_v1.png" }}
+  {{ $portraitPath := .Params.portrait | default "Bobviously_Portrait_Watercolor_v3.png" }}
   {{ $portrait := .Resources.GetMatch $portraitPath }}
+  {{ $portraits := slice }}
+  {{ with $portrait }}
+    {{ $portraits = $portraits | append (dict "image" . "alt" ($.Params.portrait_alt | default "Portrait of Robert V. Ussley")) }}
+  {{ end }}
+  {{ range .Params.portrait_alternates }}
+    {{ $alternate := $.Resources.GetMatch .image }}
+    {{ if $alternate }}
+      {{ $portraits = $portraits | append (dict "image" $alternate "alt" .alt) }}
+    {{ else }}
+      {{ errorf "Author portrait does not resolve: %s" .image }}
+    {{ end }}
+  {{ end }}
   {{ $resolvedAuthor := partial "authors/resolve.html" (dict "page" . "fallbackDefault" true) }}
   {{ $author := $resolvedAuthor.primary }}
   {{ $bookstore := site.GetPage "/shop" }}
@@ -22,10 +34,9 @@
     {{ with $configuredPage }}
       {{ $selectedPage := . }}
       {{ $policy := partial "metadata/policy.html" (dict "page" $selectedPage) }}
-      {{ $selectedAuthor := partial "authors/resolve.html" (dict "page" $selectedPage "fallbackDefault" true) }}
       {{ if not $policy.indexable }}
         {{ errorf "Author featured work %s is not indexable" $configuredPath }}
-      {{ else if or (not $selectedAuthor.primary) (ne $selectedAuthor.primary.key $author.key) }}
+      {{ else if not (partial "authors/owns-page.html" (dict "page" $selectedPage "author" $author)) }}
         {{ errorf "Author featured work %s is not attributed to %s" $configuredPath $author.key }}
       {{ else if isset $selectedPaths $selectedPage.RelPermalink }}
         {{ errorf "Author featured work is configured more than once: %s" $configuredPath }}
@@ -39,13 +50,13 @@
   {{ end }}
 
   {{ $recentWorks := slice }}
-  {{ $latestLimit := $author.latest_limit | default 6 }}
+  {{ $latestLimit := $author.latest_limit | default 3 }}
   {{ range partial "archive/resolve-pages.html" (dict "site" site "mode" "archive") }}
     {{ if lt (len $recentWorks) $latestLimit }}
       {{ $candidate := . }}
-      {{ $candidateAuthor := partial "authors/resolve.html" (dict "page" $candidate "fallbackDefault" true) }}
       {{ $candidatePolicy := partial "metadata/policy.html" (dict "page" $candidate) }}
-      {{ if and $candidatePolicy.indexable $candidateAuthor.primary (eq $candidateAuthor.primary.key $author.key) (not (isset $selectedPaths $candidate.RelPermalink)) }}
+      {{ $owned := partial "authors/owns-page.html" (dict "page" $candidate "author" $author) }}
+      {{ if and $candidatePolicy.indexable $owned (not (isset $selectedPaths $candidate.RelPermalink)) }}
         {{ $recentWorks = $recentWorks | append $candidate }}
       {{ end }}
     {{ end }}
@@ -53,47 +64,42 @@
 
   <article class="author-route">
     <div class="section-front section-front--author">
-      <header class="page-header page-header--section-centered page-shell page-shell--wide section-front__header">
-        <h1>{{ .Title }}</h1>
-      </header>
-
-      <div class="section-front__body page-shell page-shell--wide">
-        <section class="author-route__profile" aria-labelledby="author-profile-title">
-          {{ with $portrait }}
-            <figure class="author-route__portrait">
-              <img
-                src="{{ .RelPermalink }}"
-                alt="{{ $.Params.portrait_alt | default "Portrait of Robert V. Ussley" }}"
-                width="{{ .Width }}"
-                height="{{ .Height }}"
-              />
-            </figure>
-          {{ end }}
-
-          <div class="author-route__intro">
-            <h2 id="author-profile-title" class="visually-hidden">Author profile</h2>
-            {{ with .Params.description }}
-              <p class="author-route__summary">{{ . }}</p>
+      <section class="author-route__profile page-shell page-shell--wide" aria-labelledby="author-profile-title">
+        <header class="author-route__heading">
+          <p class="author-route__summary">About the author</p>
+          <h1 id="author-profile-title">{{ .Title }}</h1>
+          <p class="author-route__role">Writer &amp; publisher, Outside In Print</p>
+        </header>
+        {{ if gt (len $portraits) 0 }}
+          <figure class="author-route__portrait" data-author-portraits role="group" aria-roledescription="carousel" aria-label="Portraits of Robert V. Ussley">
+            {{ range $index, $entry := $portraits }}
+              {{ $small := $entry.image.Resize "320x webp q85" }}
+              {{ $large := $entry.image.Resize "640x webp q85" }}
+              <div data-portrait-slide role="group" aria-roledescription="slide" aria-label="{{ add $index 1 }} of {{ len $portraits }}"{{ if gt $index 0 }} hidden{{ end }}>
+                <img src="{{ $large.RelPermalink }}" srcset="{{ $small.RelPermalink }} 320w, {{ $large.RelPermalink }} 640w" sizes="(max-width: 420px) 192px, (max-width: 760px) 256px, 304px" alt="{{ $entry.alt }}" width="{{ $large.Width }}" height="{{ $large.Height }}"{{ if eq $index 0 }} fetchpriority="high"{{ else }} loading="lazy"{{ end }}>
+              </div>
             {{ end }}
-            {{ with .Params.header_bio }}
-              <p class="author-route__bio">{{ . }}</p>
+            {{ if gt (len $portraits) 1 }}
+              <button class="author-route__portrait-arrow author-route__portrait-arrow--previous" type="button" data-portrait-previous aria-label="Previous portrait" hidden>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>
+              </button>
+              <button class="author-route__portrait-arrow author-route__portrait-arrow--next" type="button" data-portrait-next aria-label="Next portrait" hidden>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg>
+              </button>
+              <figcaption class="visually-hidden" data-portrait-status aria-live="polite" aria-atomic="true">Portrait 1 of {{ len $portraits }}</figcaption>
             {{ end }}
-            {{ range .Params.bio_paragraphs }}
-              <p class="author-route__bio">{{ . }}</p>
-            {{ end }}
-            {{ with .Params.reader_note }}
-              <p class="author-route__invitation">{{ . }}</p>
-            {{ end }}
-            {{ with .Params.role_line }}
-              <p class="author-route__role">{{ . }}</p>
-            {{ end }}
-            <div class="author-route__actions">
-              {{ if gt (len $selectedWorks) 0 }}<a href="#author-selected-title">Find a first piece</a>{{ else }}<a href="{{ "archive/" | relURL }}">Explore the writing</a>{{ end }}
-              <a href="#author-newsletter">Join the weekly newsletter</a>
-            </div>
+          </figure>
+        {{ end }}
+        <div class="author-route__intro">
+          {{ with .Params.header_bio }}<p class="author-route__bio author-route__bio--lead">{{ . }}</p>{{ end }}
+          {{ range .Params.bio_paragraphs }}<p class="author-route__bio">{{ . }}</p>{{ end }}
+          {{ with .Params.reader_note }}<p class="author-route__invitation">{{ . }}</p>{{ end }}
+          <div class="author-route__actions">
+            {{ if gt (len $selectedWorks) 0 }}<a class="author-route__primary-action" href="#author-selected-title">Find a first piece <span aria-hidden="true">&rarr;</span></a>{{ else }}<a class="author-route__primary-action" href="{{ "archive/" | relURL }}">Explore the writing</a>{{ end }}
+            <a href="#author-newsletter">Get Bob's Almanack</a>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
 
     {{ if gt (len $selectedWorks) 0 }}
@@ -113,18 +119,47 @@
       </section>
     {{ end }}
 
-    <div class="page-shell page-shell--reading">
-      {{ partial "newsletter_signup.html" (dict
-        "page" .
-        "class" "newsletter-signup--page"
-        "sourceSlot" "author_newsletter"
-        "anchorID" "author-newsletter"
-      ) }}
-    </div>
+    {{ if gt (len $publishedBooks) 0 }}
+      <section class="author-route__work-section page-shell page-shell--wide" aria-labelledby="author-books-title">
+        <h2 id="author-books-title" class="list-title">Books</h2>
+        <p class="author-route__section-intro">Fiction and nonfiction, with room to follow a question or a story further.</p>
+        <div class="author-route__shelf">
+          {{ range $publishedBooks }}
+            {{ $book := . }}
+            {{ $product := partial "shop/product-data.html" (dict "key" $book.Params.book_key "page" $book) }}
+            <article class="author-route__book">
+              <a href="{{ $book.RelPermalink }}">
+                {{ partial "images/picture.html" (dict "page" $book "ref" (index $product "cover_image") "alt" "" "loading" "lazy" "sizes" "(min-width: 48rem) 12rem, 40vw") }}
+                <h3>{{ index $product "title" | default $book.Title }}</h3>
+              </a>
+            </article>
+          {{ end }}
+        </div>
+        <a class="author-route__text-link" href="{{ "shop/" | relURL }}">Visit the Bookstore <span aria-hidden="true">&rarr;</span></a>
+      </section>
+    {{ end }}
+
+    <section class="author-route__music page-shell page-shell--wide" aria-labelledby="author-music-title">
+      <div>
+        <p class="author-route__summary">Beyond the page</p>
+        <h2 id="author-music-title">There's music here, too.</h2>
+        <p>Outside In Print has a listening room. Put on an album by Robby V and The Paperboys, then keep reading while JukeBob plays.</p>
+        <a class="author-route__text-link" href="{{ "music/" | relURL }}" data-analytics-event="internal_promo_click" data-analytics-source-slot="author_music" data-analytics-path="/music/">Listen with JukeBob <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="author-route__albums">
+        {{ range first 2 (sort hugo.Data.music.albums "displayOrder") }}
+          <figure>
+            {{ partial "music/cover.html" (dict "album" .) }}
+            <figcaption><strong>{{ .title }}</strong><span>{{ .artist }}</span></figcaption>
+          </figure>
+        {{ end }}
+      </div>
+    </section>
 
     {{ if gt (len $recentWorks) 0 }}
       <section class="author-route__work-section page-shell page-shell--reading" aria-labelledby="author-recent-title">
         <h2 id="author-recent-title" class="list-title">Recent Writing</h2>
+        <p class="author-route__section-intro">Three more from the latest work.</p>
         {{ range $recentWorks }}
           {{ partial "discovery/page-list-item.html" (dict
             "page" .
@@ -138,38 +173,23 @@
       </section>
     {{ end }}
 
-    {{ if gt (len $publishedBooks) 0 }}
-      <section class="author-route__work-section page-shell page-shell--reading" aria-labelledby="author-books-title">
-        <h2 id="author-books-title" class="list-title">Books</h2>
-        <p class="author-route__section-intro">Fiction and nonfiction, with room to follow a question or a story further.</p>
-        {{ range $publishedBooks }}
-          {{ $book := . }}
-          {{ $product := partial "shop/product-data.html" (dict "key" $book.Params.book_key "page" $book) }}
-          <article class="item">
-            <div class="t"><a href="{{ $book.RelPermalink }}"><cite>{{ index $product "title" | default $book.Title }}</cite></a></div>
-            {{ with index $product "deck" }}<div class="d">{{ . }}</div>{{ end }}
-          </article>
-        {{ end }}
-      </section>
-    {{ end }}
-
-    <section class="author-route__reading-map page-shell page-shell--wide" aria-labelledby="author-reading-map-title">
-      <div class="author-route__reading-map-header">
-        <h2 id="author-reading-map-title" class="list-title">Reading Map</h2>
-        <p class="author-route__reading-map-copy">Follow a subject, find another story, or learn more about the imprint.</p>
-      </div>
-
-      {{ partial "journey_links.html" (dict
-        "class" "journey-links--page author-route__journey"
-        "eyebrow" "Continue reading"
-        "links" (slice
-          (dict "href" ("archive/" | absURL) "label" "Browse archive")
-          (dict "href" ("collections/" | absURL) "label" "Browse collections")
-          (dict "href" ("library/" | absURL) "label" "Search the library")
-          (dict "href" ("shop/" | absURL) "label" "Visit the Bookstore")
-          (dict "href" ("about/" | absURL) "label" "About the imprint")
-        )
+    <div class="page-shell page-shell--reading">
+      {{ partial "newsletter_signup.html" (dict
+        "page" .
+        "class" "newsletter-signup--page"
+        "sourceSlot" "author_newsletter"
+        "anchorID" "author-newsletter"
       ) }}
-    </section>
+    </div>
+
+    <footer class="author-route__contact page-shell page-shell--reading">
+      <h2>Get in touch</h2>
+      <p>For a question about the work, a correction, or an editorial inquiry, <a href="{{ "contact/" | relURL }}">send a note</a>. For help shaping your own material, <a href="{{ "studio/" | relURL }}">visit Outside In Print Studio</a>.</p>
+      <a class="author-route__text-link" href="{{ "about/" | relURL }}">About the imprint <span aria-hidden="true">&rarr;</span></a>
+    </footer>
   </article>
+  {{ if gt (len $portraits) 1 }}
+    {{ $portraitScript := resources.Get "js/author-portraits.js" | resources.Minify | resources.Fingerprint }}
+    <script data-oip-route-script="author-portraits" defer src="{{ $portraitScript.RelPermalink }}" integrity="{{ $portraitScript.Data.Integrity }}"></script>
+  {{ end }}
 {{ end }}

@@ -9,13 +9,10 @@ authors:
     focus: History, economics, culture, technology, and public life, with an interest in how institutions and individual choices shape everyday experience.
     bio: Robert V. Ussley is the writer and publisher behind Outside In Print. His work explores institutions, incentives, belief, and the consequences of the choices people make.
     featured_work:
-      - /essays/default-owner/
-      - /essays/what-is-risk-a-four-part-framework/
+      - /essays/inter-not/
       - /syd-and-oliver/what-i-had/
-      - /essays/reverse-origami/
       - /essays/all-is-a-gift/
-      - /shop/2045/sample/
-    latest_limit: 6
+    latest_limit: 3
     knows_about:
       - Risk and uncertainty
       - Public institutions

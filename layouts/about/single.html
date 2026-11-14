@@ -1,76 +1,122 @@
 {{ define "main" }}
   <article class="about-route">
-    <div class="section-front section-front--about">
-      <header class="page-header page-header--section-centered page-shell page-shell--wide section-front__header">
-        {{ with .Params.section_label }}<p class="about-route__eyebrow">{{ . }}</p>{{ end }}
-        <h1>{{ .Title }}</h1>
-      </header>
-
-      <div class="section-front__body page-shell page-shell--wide">
-        <section class="about-route__artifact" aria-labelledby="about-imprint-record-title">
-          <div class="about-route__artifact-panel">
-            <p class="about-route__artifact-kicker">Behind Outside In Print</p>
-            <h2 id="about-imprint-record-title" class="about-route__artifact-title">A place to stay with an idea.</h2>
-            {{ with .Params.description }}<p class="about-route__artifact-dek">{{ . }}</p>{{ end }}
-            <div class="about-route__actions">
-              <a href="#about-newsletter">Join the weekly newsletter</a>
-              <a href="{{ "#home-v2-featured-title" | relURL }}">Explore the writing</a>
-            </div>
-          </div>
-
-          <section class="about-route__record" aria-labelledby="about-current-file-title">
-            <h3 id="about-current-file-title" class="about-route__record-title">At a glance</h3>
-            <dl class="about-route__record-rows">
-              <div class="about-route__record-row">
-                <dt class="about-route__record-label">Author</dt>
-                <dd class="about-route__record-value"><a href="{{ "authors/robert-v-ussley/" | absURL }}">Robert V. Ussley</a></dd>
-              </div>
-              <div class="about-route__record-row">
-                <dt class="about-route__record-label">Forms</dt>
-                <dd class="about-route__record-value">Essays, stories, dialogues, and reflections</dd>
-              </div>
-              <div class="about-route__record-row">
-                <dt class="about-route__record-label">Newsletter</dt>
-                <dd class="about-route__record-value"><a href="#about-newsletter">One thoughtful email each week</a></dd>
-              </div>
-            </dl>
-          </section>
-        </section>
+    <header class="about-route__intro page-shell page-shell--wide">
+      <div class="about-route__welcome">
+        <p class="about-route__eyebrow">{{ .Title }}</p>
+        <h1>{{ .Params.opening_title }}</h1>
+        <div class="about-route__opening">{{ .Params.opening | .RenderString (dict "display" "block") }}</div>
+        <div class="about-route__actions">
+          <a href="#about-start">Find a first piece <span aria-hidden="true">&rarr;</span></a>
+          <a href="#about-newsletter">Join the weekly newsletter</a>
+        </div>
       </div>
-    </div>
+      {{ with site.GetPage .Params.opening_art }}
+        {{ $art := . }}
+        <figure class="about-route__illustration">
+          {{ partial "images/picture.html" (dict "page" . "ref" .Params.featured_image "alt" .Params.featured_image_alt "loading" "eager" "fetchpriority" "high" "sizes" "(max-width: 760px) calc(100vw - 2rem), 540px") }}
+          <figcaption>{{ .Params.featured_image_caption }} · From <a href="{{ $art.RelPermalink }}">{{ $art.Title }}</a></figcaption>
+        </figure>
+      {{ end }}
+    </header>
 
-    <section class="about-route__body page-shell page-shell--reading" aria-labelledby="about-body-title">
-      <h2 id="about-body-title" class="visually-hidden">About the Imprint</h2>
-      <div class="piece-body">
-        {{ .Content }}
+    <section class="about-route__start page-shell page-shell--wide" aria-labelledby="about-start">
+      <div class="about-route__section-heading">
+        <h2 id="about-start" tabindex="-1">Start here</h2>
+        <p>Three pieces, three ways into the imprint.</p>
+      </div>
+      <div class="about-route__selections">
+        {{ range .Params.selected_reading }}
+          {{ $selection := . }}
+          {{ with site.GetPage .page }}
+            {{ if partial "collections/is-published.html" . }}
+              <article class="about-route__selection">
+                <p class="about-route__label">{{ $selection.label }}</p>
+                <a class="about-route__story-image" href="{{ .RelPermalink }}" tabindex="-1" aria-hidden="true">
+                  {{ partial "images/picture.html" (dict "page" . "ref" .Params.featured_image "alt" "" "loading" "lazy" "sizes" "(max-width: 640px) calc(100vw - 2rem), (max-width: 900px) 30vw, 340px") }}
+                </a>
+                <h3><a href="{{ .RelPermalink }}"
+                  data-analytics-event="internal_promo_click"
+                  data-analytics-source-slot="about_start_here"
+                  data-analytics-slug="{{ .Params.slug | default .File.BaseFileName }}"
+                  data-analytics-title="{{ .Title }}"
+                  data-analytics-section="{{ .Params.section_label }}"
+                  data-analytics-path="{{ .RelPermalink }}"
+                >{{ .Title }}</a></h3>
+                <p class="about-route__byline">By {{ .Params.author | default "Robert V. Ussley" }} · {{ .ReadingTime }} min read</p>
+                <p class="about-route__story-note">{{ $selection.note }}</p>
+              </article>
+            {{ end }}
+          {{ else }}
+            {{ errorf "About selected reading could not resolve %q" .page }}
+          {{ end }}
+        {{ end }}
       </div>
     </section>
 
-    <div class="page-shell page-shell--reading">
+    <section class="about-route__music page-shell page-shell--wide" aria-labelledby="about-music-title">
+      <div class="about-route__music-copy">
+        <p class="about-route__label">Music from the imprint</p>
+        <h2 id="about-music-title">Put a record on.</h2>
+        <p>Robby V and The Paperboys provide a little company for your reading. Explore the albums and listen with JukeBob, Outside In Print's music player.</p>
+        <a class="about-route__music-link" href="{{ "music/" | relURL }}"
+          data-analytics-event="internal_promo_click"
+          data-analytics-source-slot="about_music"
+          data-analytics-slug="music"
+          data-analytics-title="Listen with JukeBob"
+          data-analytics-section="Music"
+          data-analytics-path="/music/"
+        >Listen with JukeBob <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="about-route__albums">
+        {{ range first 2 (sort hugo.Data.music.albums "displayOrder") }}
+          <figure class="about-route__album">
+            {{ partial "music/cover.html" (dict "album" .) }}
+            <figcaption><strong>{{ .title }}</strong><span>{{ .artist }}</span><span>{{ len .tracks }} tracks</span></figcaption>
+          </figure>
+        {{ end }}
+      </div>
+    </section>
+
+    <section class="about-route__body page-shell page-shell--reading" aria-label="The publication and its people">
+      <div class="piece-body">{{ .Content }}</div>
+    </section>
+
+    <div class="about-route__newsletter page-shell page-shell--wide">
       {{ partial "newsletter_signup.html" (dict
         "page" .
-        "class" "newsletter-signup--page"
+        "class" "newsletter-signup--page about-route__signup"
         "sourceSlot" "about_newsletter"
         "anchorID" "about-newsletter"
       ) }}
+      {{ with site.GetPage (partial "almanack/latest-issue-url.html" .) }}
+        {{ $issue := . }}
+        <aside class="about-route__issue" aria-labelledby="about-issue-title">
+          <p class="about-route__label">A look inside</p>
+          <h3 id="about-issue-title">Bob's Almanack</h3>
+          <p class="about-route__issue-intro">The weekly newsletter, in its Saturday paper.</p>
+          <a class="about-route__masthead" href="{{ .RelPermalink }}" aria-label="Read Bob's Almanack for {{ .Date.Format "January 2, 2006" }}">
+            {{ with .Params.email_masthead.web_image_url }}
+              <img src="{{ . }}" alt="{{ $issue.Params.email_masthead.web_image_alt }}" loading="lazy" width="1080" height="170">
+            {{ else }}
+              <span>{{ .Date.Format "January 2, 2006" }}</span>
+            {{ end }}
+          </a>
+          <div class="about-route__issue-note">
+            {{ partial "almanack/bob-ornament.html" (dict "issue" .Params "slot" "lead") }}
+            <p class="about-route__label">Note from Bob</p>
+            <p>{{ .Params.bob_note }}</p>
+          </div>
+          <a class="about-route__issue-link" href="{{ .RelPermalink }}">Read the free issue <span aria-hidden="true">&rarr;</span></a>
+        </aside>
+      {{ end }}
     </div>
 
-    <section class="about-route__reading-map page-shell page-shell--wide" aria-labelledby="about-reading-map-title">
-      <div class="about-route__reading-map-header">
-        <h2 id="about-reading-map-title" class="list-title">Reading Map</h2>
-        <p class="about-route__reading-map-copy">Find a first piece, follow a subject, or see where your curiosity takes you.</p>
+    <footer class="about-route__invitation page-shell page-shell--wide">
+      <div>
+        <h2>Want to write for Outside in Print?</h2>
+        <p>Bring an original essay or reported article, a clear question, and your own point of view. <a href="{{ "contribute/" | relURL }}">Start with a pitch <span aria-hidden="true">&rarr;</span></a></p>
       </div>
-
-      {{ partial "journey_links.html" (dict
-        "class" "journey-links--page about-route__journey"
-        "eyebrow" "Choose a path"
-        "links" (slice
-          (dict "href" ("#home-v2-featured-title" | relURL) "label" "Featured reading")
-          (dict "href" ("collections/" | absURL) "label" "Browse collections")
-          (dict "href" ("library/" | absURL) "label" "Search the library")
-          (dict "href" ("authors/robert-v-ussley/" | absURL) "label" "Meet the author")
-        )
-      ) }}
-    </section>
+      <p class="about-route__studio">Have material you'd like help turning into an essay? <a href="{{ "studio/" | relURL }}">Visit Outside In Print Studio</a>.</p>
+    </footer>
   </article>
 {{ end }}

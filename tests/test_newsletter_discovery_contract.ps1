@@ -161,8 +161,8 @@ foreach ($route in $routes) {
     Assert-Discovery ($routePreviewCount -gt 0) "$route must retain a tracked newsletter preview link."
   }
   if ($route -ceq '/about/') {
-    $inlineLink = @([regex]::Matches($html, '(?s)<a\b[^>]*>\s*read the latest issue\s*</a>'))
-    Assert-Discovery ($inlineLink.Count -eq 1 -and (Get-DiscoveryPath (Get-DiscoveryAttribute $inlineLink[0].Value 'href')) -ceq $latestPath) 'About inline newsletter link must use the current issue.'
+    $inlineLink = @([regex]::Matches($html, '(?s)<a\b[^>]*class=(?:"about-route__issue-link"|about-route__issue-link)[^>]*>.*?</a>'))
+    Assert-Discovery ($inlineLink.Count -eq 1 -and (Get-DiscoveryPath (Get-DiscoveryAttribute $inlineLink[0].Value 'href')) -ceq $latestPath) 'About issue preview must use the current issue.'
   }
   if ($route -ceq '/collections/bobs-almanack/') {
     $latestHeading = [regex]::Match($html, '(?is)<h2\b(?=[^>]*id=(?:"almanack-collection-latest-title"|almanack-collection-latest-title))[^>]*>.*?</h2>').Value
