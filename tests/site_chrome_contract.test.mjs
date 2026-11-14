@@ -515,7 +515,7 @@ test("newsletter proposition is plain-language across signup and checkout surfac
     'cadence = "Every Saturday"',
     'title = "The weekly newsletter"',
     'contents = "New essays, original pictures, and selected archive work from Outside In Print. Free each Saturday, plus three short introductory emails after you confirm."',
-    'price_promise = "Free. Each email series has an unsubscribe link."',
+    'price_promise = "Free. No spam. Ever."',
     'button_label = "Join the newsletter"',
     'prompt_label = "Join the weekly Outside In Print newsletter."',
     'checkout_label = "Send me the weekly Outside In Print newsletter. Free. No spam ever."',

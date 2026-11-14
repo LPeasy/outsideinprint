@@ -75,7 +75,7 @@ test("built newsletter archive has one correctly placed signup and a real native
   assert.equal(attr(forms[0], "data-analytics-event"), "newsletter_submit");
   const signupBlock = html.slice(signup, html.indexOf("</section>", signup));
   const copy = text(signupBlock);
-  for (const promise of ["Every Saturday", "The weekly newsletter", "Free. Each email series has an unsubscribe link.", "three short introductory emails after you confirm"]) {
+  for (const promise of ["Every Saturday", "The weekly newsletter", "Free. No spam. Ever.", "three short introductory emails after you confirm"]) {
     assert.ok(copy.includes(promise), "missing signup text: " + promise);
   }
   assert.doesNotMatch(copy, /Buttondown manages the Saturday newsletter|The two email series have separate unsubscribe links|See what \$5 includes/);
