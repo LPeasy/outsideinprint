@@ -1,0 +1,9 @@
+{{- /* Match both registry IDs and public bylines without changing site-wide author metadata. */ -}}
+{{- $resolved := partial "authors/resolve.html" (dict "page" .page "fallbackDefault" true) -}}
+{{- $keys := slice .author.key (lower .author.name) -}}
+{{- $owned := gt (len $resolved.entries) 0 -}}
+{{- range $resolved.entries -}}
+  {{- if not (in $keys .key) -}}{{- $owned = false -}}{{- end -}}
+{{- end -}}
+{{- if .page.Params.contributor_role -}}{{- $owned = false -}}{{- end -}}
+{{- return $owned -}}

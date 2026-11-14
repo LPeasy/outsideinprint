@@ -387,24 +387,26 @@ test("article single template removes dead generic layout hooks and uses page-fl
 
 test("about and author routes own distinct imprint-aligned shells", () => {
   assert.match(aboutSingle, /class="about-route"/);
-  assert.match(aboutSingle, /section-front section-front--about/);
-  assert.match(aboutSingle, /about-route__artifact/);
-  assert.match(aboutSingle, /about-route__record/);
-  assert.match(aboutSingle, /Reading Map/);
-  assert.match(aboutSingle, /"label" "Featured reading"/);
-  assert.match(aboutSingle, /"label" "Meet the author"/);
-  assert.match(aboutSingle, /<p class="about-route__artifact-kicker">Behind Outside In Print<\/p>/);
-  assert.match(aboutSingle, /<h2 id="about-imprint-record-title" class="about-route__artifact-title">[^<]+<\/h2>/);
-  assert.match(aboutSingle, /with \.Params\.description[\s\S]*?class="about-route__artifact-dek"/);
-  assert.match(aboutSingle, /class="about-route__actions"[\s\S]*?<a href="#about-newsletter">[^<]*newsletter<\/a>[\s\S]*?#home-v2-featured-title/);
+  assert.match(aboutSingle, /about-route__intro/);
+  assert.match(aboutSingle, /about-route__illustration/);
+  assert.match(aboutSingle, /about-route__selections/);
+  assert.match(aboutSingle, /about-route__music[\s\S]*?music\/cover\.html[\s\S]*?about-route__body/);
+  assert.match(aboutSingle, /range \.Params\.selected_reading/);
+  assert.match(aboutSingle, /partial "collections\/is-published\.html"/);
+  assert.match(aboutSingle, /data-analytics-source-slot="about_start_here"/);
+  assert.match(aboutSingle, /\.Params\.author \| default "Robert V\. Ussley"/);
+  assert.match(aboutSingle, /class="about-route__actions"[\s\S]*?href="#about-start"[\s\S]*?href="#about-newsletter"/);
   assert.match(aboutSingle, /partial "newsletter_signup\.html"[\s\S]*?"sourceSlot" "about_newsletter"[\s\S]*?"anchorID" "about-newsletter"/);
   assert.doesNotMatch(aboutSingle, /"shop\/"/);
-  assert.match(aboutSingle, /<h3[^>]*>At a glance<\/h3>/);
-  assert.match(aboutSingle, /<dt class="about-route__record-label">Author<\/dt>/);
+  assert.match(aboutSingle, /partial "almanack\/latest-issue-url\.html"/);
+  assert.match(aboutSingle, /Want to write for Outside in Print\?/);
+  assert.doesNotMatch(aboutSingle, /At a glance|Reading Map|Behind Outside In Print/);
   assert.doesNotMatch(aboutSingle, />Imprint Record<|>Current File<|>Principal Byline</);
-  assert.match(aboutContent, /description: "Independent essays, stories, and reflections on public life, faith, and the choices we make every day\./);
-  assert.match(aboutContent, /## An independent publication[\s\S]*?\]\(\/authors\/robert-v-ussley\/\)/);
-  assert.match(aboutContent, /\]\(\/contribute\/\)/);
+  assert.match(aboutContent, /description: "An independent, illustrated publication/);
+  assert.match(aboutContent, /## The people behind the imprint[\s\S]*?\]\(\/authors\/robert-v-ussley\/\)/);
+  assert.match(aboutContent, /\]\(\/collections\/the-outside-byline\/\)/);
+  assert.match(aboutContent, /\]\(\/contact\/\)/);
+  assert.match(aboutSingle, /"contribute\/" \| relURL/);
   assert.doesNotMatch(aboutContent, /principal authorial byline|essay corpus|without pretending to be a large editorial institution/);
   assert.match(authorList, /partial "authors\/directory\.html" \./);
   assert.match(authorSection, /partial "authors\/directory\.html" \./);
@@ -419,8 +421,8 @@ test("about and author routes own distinct imprint-aligned shells", () => {
   assert.match(authorDossier, /author-route__bio/);
   assert.match(authorDossier, /author-route__invitation/);
   assert.match(authorDossier, /author-route__actions/);
-  assert.match(authorDossier, /author-route__reading-map/);
-  assert.match(authorDossier, /journey-links--page author-route__journey/);
+  assert.match(authorDossier, /author-route__contact/);
+  assert.match(authorDossier, /author-route__albums/);
   assert.doesNotMatch(authorDossier, /Author Dossier/);
   assert.doesNotMatch(authorDossier, /Selected Works/);
   assert.doesNotMatch(authorDossier, /Themes/);
@@ -428,19 +430,19 @@ test("about and author routes own distinct imprint-aligned shells", () => {
 
   for (const selector of [
     ".about-route{",
-    ".about-route__artifact{",
-    ".about-route__artifact-panel,",
-    ".about-route__record{",
-    ".about-route__record-row{",
-    ".about-route__journey{",
+    ".about-route__intro{",
+    ".about-route__illustration{",
+    ".about-route__selections{",
+    ".about-route__newsletter{",
+    ".about-route__invitation{",
     ".section-front--author{",
     ".author-route{",
     ".author-route__profile{",
     ".author-route__portrait{",
     ".author-route__summary{",
     ".author-route__bio{",
-    ".author-route__reading-map{",
-    ".author-route__journey{",
+    ".author-route__contact{",
+    ".author-route__shelf{",
     ".piece-byline{",
     ".author-note{",
     ".profile-page{",
@@ -472,11 +474,10 @@ test("layout ownership matrix tracks homepage V2, contributor, archive, Apps, an
     "`.home-v2-next__cta`",
     "| Contributor route | `/contribute/`",
     "| About route | `/about/`",
-    "`section-front--about`",
     "`about-route`",
-    "`about-route__artifact`",
-    "`about-route__record`",
-    "`about-route__journey`",
+    "`about-route__intro`",
+    "`about-route__selections`",
+    "`about-route__newsletter`",
     "| Author route | `/authors/robert-v-ussley/`",
     "`section-front--author`",
     "`author-route`",
@@ -484,8 +485,8 @@ test("layout ownership matrix tracks homepage V2, contributor, archive, Apps, an
     "`author-route__portrait`",
     "`author-route__summary`",
     "`author-route__bio`",
-    "`author-route__reading-map`",
-    "`author-route__journey`",
+    "`author-route__contact`",
+    "`author-route__shelf`",
     "`essays-front`",
     "`essays-front__masthead`",
     "`essays-front__stats`",

@@ -17,13 +17,13 @@ function collectionSlugs(source) {
   return block ? [...block[1].matchAll(/^\s+-\s*["']?([^"'\r\n]+)["']?\s*$/gm)].map((match) => match[1].trim()) : [];
 }
 
-test("author hub resolves six unique selected works, six distinct recent works, and every book", () => {
+test("author hub resolves three unique selected works, three distinct recent works, and every book", () => {
   const authorData = read("data/authors.yaml");
   const dossier = read("layouts/authors/dossier.html");
   const featured = [...authorData.matchAll(/^\s{6}- (\/(?:essays|syd-and-oliver|shop)\/[^\s]+\/)$/gm)].map((match) => match[1]);
-  assert.equal(featured.length, 6);
-  assert.equal(new Set(featured).size, 6);
-  assert.match(authorData, /^\s{4}latest_limit: 6$/m);
+  assert.equal(featured.length, 3);
+  assert.equal(new Set(featured).size, 3);
+  assert.match(authorData, /^\s{4}latest_limit: 3$/m);
   assert.match(dossier, /Author featured work is configured more than once/);
   assert.match(dossier, /not \(isset \$selectedPaths \$candidate\.RelPermalink\)/);
   assert.match(dossier, /where \.Pages "Params\.book_key" "!=" nil/);
@@ -37,11 +37,12 @@ test("author hub resolves six unique selected works, six distinct recent works, 
 
   const sectionPositions = [
     'id="author-selected-title"',
-    'partial "newsletter_signup.html"',
-    'id="author-recent-title"',
     'id="author-books-title"',
+    'id="author-music-title"',
+    'id="author-recent-title"',
+    'partial "newsletter_signup.html"',
   ].map((marker) => dossier.indexOf(marker));
-  assert.ok(sectionPositions.every((position, index) => position >= 0 && (!index || position > sectionPositions[index - 1])), "reading and newsletter discovery must precede the books");
+  assert.ok(sectionPositions.every((position, index) => position >= 0 && (!index || position > sectionPositions[index - 1])), "writing, books, music, recent work, then newsletter");
   assert.match(dossier, /href="#author-selected-title"/);
   assert.match(dossier, /href="#author-newsletter"/);
   assert.match(dossier, /partial "newsletter_signup\.html"[\s\S]*?"sourceSlot" "author_newsletter"[\s\S]*?"anchorID" "author-newsletter"/);

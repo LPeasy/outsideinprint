@@ -1,12 +1,14 @@
+param([string]$PublicDir = "")
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $authorPagePath = Join-Path $repoRoot 'content/authors/robert-v-ussley/index.md'
-$portraitPath = Join-Path $repoRoot 'content/authors/robert-v-ussley/Bobviously_Portrait_v1.png'
+$portraitPath = Join-Path $repoRoot 'content/authors/robert-v-ussley/Bobviously_Portrait_Watercolor_v3.png'
 $layoutPath = Join-Path $repoRoot 'layouts/authors/dossier.html'
 $buildDir = Join-Path $repoRoot '.tmp-test-robert-dossier'
-$builtPagePath = Join-Path $buildDir 'authors/robert-v-ussley/index.html'
+$reuseOutput = -not [string]::IsNullOrWhiteSpace($PublicDir)
+$builtPagePath = Join-Path $(if ($reuseOutput) { $PublicDir } else { $buildDir }) 'authors/robert-v-ussley/index.html'
 $layoutTemplate = Get-Content -Path $layoutPath -Raw
 $buildClock = if ($env:OIP_BUILD_CLOCK_UTC) { [datetimeoffset]::Parse($env:OIP_BUILD_CLOCK_UTC) } else { [datetimeoffset]::UtcNow }
 $magicProductSource = Get-Content -LiteralPath (Join-Path $repoRoot 'content/shop/fifty-years-of-magic/_index.md') -Raw
@@ -26,7 +28,7 @@ $authorPage = Get-Content -Path $authorPagePath -Raw
 foreach ($requiredPattern in @(
   'layout:\s*"?dossier"?',
   'description:\s*".+?"',
-  'portrait:\s*"?Bobviously_Portrait_v1\.png"?',
+  'portrait:\s*"?Bobviously_Portrait_Watercolor_v3\.png"?',
   'header_bio:\s*".+?"',
   'reader_note:\s*".+?"',
   'bio_paragraphs:[\s\S]*I also design and develop Outside In Print\.'
@@ -50,12 +52,12 @@ foreach ($requiredSnippet in @(
   'author-route__profile',
   'author-route__summary',
   'author-route__bio',
-  'Bobviously_Portrait_v1.png',
-  'Reading Map',
-  'journey-links--page author-route__journey',
-  'Browse archive',
-  'Browse collections',
-  'Search the library',
+  'Bobviously_Portrait_Watercolor_v3.png',
+  'Listen with JukeBob',
+  'author-route__shelf',
+  'Get in touch',
+  'send a note',
+  'Outside In Print Studio',
   'About the imprint',
   'author-route__role',
   'author-route__invitation',
@@ -88,15 +90,17 @@ foreach ($forbiddenSnippet in @(
 }
 
 try {
-  if (Test-Path -LiteralPath $buildDir) {
-    Remove-Item -LiteralPath $buildDir -Recurse -Force
-  }
+  if (-not $reuseOutput) {
+    if (Test-Path -LiteralPath $buildDir) {
+      Remove-Item -LiteralPath $buildDir -Recurse -Force
+    }
 
-  & $hugo.Command --quiet --panicOnWarning --clock $buildClock.ToString('o') --destination $buildDir | Out-Null
-  if ($LASTEXITCODE -ne 0) {
-    throw 'Hugo build failed while validating the Robert dossier page.'
-  }
+    & $hugo.Command --quiet --panicOnWarning --clock $buildClock.ToString('o') --destination $buildDir | Out-Null
+    if ($LASTEXITCODE -ne 0) {
+      throw 'Hugo build failed while validating the Robert dossier page.'
+    }
 
+  }
   if (-not (Test-Path -LiteralPath $builtPagePath -PathType Leaf)) {
     throw "Expected Hugo to render the Robert dossier page at $builtPagePath."
   }
@@ -104,18 +108,18 @@ try {
   $builtPage = Get-Content -Path $builtPagePath -Raw
   foreach ($requiredSnippet in @(
     'Robert V. Ussley',
-    'Bobviously_Portrait_v1.png',
-    'Reading Map',
-    'Browse archive',
-    'Browse collections',
-    'Search the library',
+    'Bobviously_Portrait_Watercolor_v3.png',
+    'Listen with JukeBob',
+    'Get in touch',
+    'send a note',
+    'Outside In Print Studio',
     'About the imprint',
     'I also design and develop Outside In Print.',
     'The American Nightmare: Keep Dreaming, Kid',
     'The Parable of the Sheep',
     'The Water Cycle: Risk, Infrastructure, and Public Memory',
     'Visit the Bookstore',
-    'journey-links--page author-route__journey'
+    'author-route__shelf'
   )) {
     if ($builtPage -notmatch [regex]::Escape($requiredSnippet)) {
       throw "Expected rendered Robert dossier page to include '$requiredSnippet'."
@@ -127,41 +131,42 @@ try {
     'href=(?:"#author-newsletter"|#author-newsletter)',
     '(?s)<section[^>]*id=(?:"author-newsletter"|author-newsletter)[^>]*>.*?<form[^>]*action=(?:"https://buttondown\.com/api/emails/embed-subscribe/[^"]+"|https://buttondown\.com/api/emails/embed-subscribe/[^\s>]+)[^>]*data-analytics-event=(?:"newsletter_submit"|newsletter_submit)[^>]*data-analytics-source-slot=(?:"author_newsletter"|author_newsletter)',
     'class=(?:"author-route"|author-route)',
-    'class=(?:"author-route__profile"|author-route__profile)',
+    'class=(?:"[^"]*\bauthor-route__profile\b[^"]*"|[^\s>]*author-route__profile[^\s>]*)',
     'class=(?:"author-route__portrait"|author-route__portrait)',
     'class=(?:"author-route__summary"|author-route__summary)',
     'class=(?:"author-route__bio"|author-route__bio)',
-    'class=(?:"[^"]*\bauthor-route__reading-map\b[^"]*"|[^\s>]*author-route__reading-map[^\s>]*)'
+    'class=(?:"[^"]*\bauthor-route__contact\b[^"]*"|[^\s>]*author-route__contact[^\s>]*)'
   )) {
     if ($builtPage -notmatch $requiredPattern) {
       throw "Expected rendered Robert dossier page to match '$requiredPattern'."
     }
   }
 
-  $sectionOrder = [regex]::Matches($builtPage, '\bid=(?:"(author-selected-title|author-newsletter|author-recent-title|author-books-title)"|(author-selected-title|author-newsletter|author-recent-title|author-books-title)(?=[\s>]))') | ForEach-Object {
+  $sectionOrder = [regex]::Matches($builtPage, '\bid=(?:"(author-selected-title|author-books-title|author-music-title|author-recent-title|author-newsletter)"|(author-selected-title|author-books-title|author-music-title|author-recent-title|author-newsletter)(?=[\s>]))') | ForEach-Object {
     if ($_.Groups[1].Success) { $_.Groups[1].Value } else { $_.Groups[2].Value }
   }
-  if (($sectionOrder -join ',') -cne 'author-selected-title,author-newsletter,author-recent-title,author-books-title') {
-    throw 'Expected Selected Writing, Newsletter, Recent Writing, then Books exactly once in the rendered author page.'
+  if (($sectionOrder -join ',') -cne 'author-selected-title,author-books-title,author-music-title,author-recent-title,author-newsletter') {
+    throw 'Expected Selected Writing, Books, Music, Recent Writing, then Newsletter exactly once in the rendered author page.'
   }
 
   $workPaths = @()
   foreach ($slot in @('author_selected', 'author_recent')) {
     $links = [regex]::Matches($builtPage, ('<a\b(?=[^>]*\bclass=(?:"[^"]*\breading-card__link\b[^"]*"|[^\s>]*\breading-card__link\b[^\s>]*))[^>]*data-analytics-source-slot=(?:"' + $slot + '"|' + $slot + '(?=[\s>]))[^>]*>'))
-    if ($links.Count -ne 6) {
-      throw "Expected six rendered $slot writing links; found $($links.Count)."
+    if ($links.Count -ne 3) {
+      throw "Expected three rendered $slot writing links; found $($links.Count)."
     }
     foreach ($link in $links) {
       $href = [regex]::Match($link.Value, '\bhref=(?:"([^"]+)"|([^\s>]+))')
       $workPaths += if ($href.Groups[1].Success) { $href.Groups[1].Value } else { $href.Groups[2].Value }
     }
   }
-  if (@($workPaths | Select-Object -Unique).Count -ne 12) {
+  if (@($workPaths | Select-Object -Unique).Count -ne 6) {
     throw 'Expected selected and recent writing destinations to remain duplicate-free.'
   }
-  if ($workPaths[2] -cne '/syd-and-oliver/what-i-had/') {
-    throw 'Expected What I Had in the third selected slot, using its canonical dialogue URL.'
+  if ($workPaths[1] -cne '/syd-and-oliver/what-i-had/') {
+    throw 'Expected What I Had in the second selected slot, using its canonical dialogue URL.'
   }
+  if ($workPaths[0] -cne '/essays/inter-not/') { throw 'Expected current full-name-attributed Inter-Not in the selected work.' }
   $selectedSection = [regex]::Match($builtPage, '(?s)<section[^>]*aria-labelledby=(?:"author-selected-title"|author-selected-title)[^>]*>(.*?)</section>').Value
   if ($selectedSection -notmatch 'Dialogue' -or $selectedSection -match '/essays/synthetic-reasoning/') {
     throw 'Selected Writing must demonstrate dialogue work in place of Synthetic Reasoning.'
@@ -194,7 +199,7 @@ try {
   }
 }
 finally {
-  if (Test-Path -LiteralPath $buildDir) {
+  if (-not $reuseOutput -and (Test-Path -LiteralPath $buildDir)) {
     Remove-Item -LiteralPath $buildDir -Recurse -Force
   }
 }

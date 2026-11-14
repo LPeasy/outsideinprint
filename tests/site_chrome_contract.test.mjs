@@ -1114,8 +1114,7 @@ test("homepage editorial layout keeps the reader note compact and drops retired 
   assert.match(cssRule(css, ".essays-front__year-link"), /min-height:44px;/);
 
   assert.match(css, /\.item\{[\s\S]*border-bottom:1px solid var\(--oip-rule-list\);/);
-  assert.match(css, /\.author-route__reading-map\{[\s\S]*border-top:1px solid var\(--oip-rule-engraved\);/);
-  assert.match(css, /\.about-route__reading-map::before,\s*\.author-route__reading-map::before\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);
+  assert.match(css, /\.author-route__contact\{[\s\S]*border-top:1px solid var\(--oip-rule-engraved\);/);
   assert.match(css, /\.essays-front__masthead,\s*\.section-front__header\{[\s\S]*border-bottom:1px solid var\(--oip-rule-engraved\);/);
   assert.match(css, /\.nav--section-rail\{[\s\S]*border-top-color:var\(--oip-rule-engraved\);[\s\S]*border-bottom-color:var\(--oip-rule-engraved\);/);
   assert.match(css, /\.nav--section-rail::before,\s*\.nav--section-rail::after\{[\s\S]*background:var\(--oip-rule-engraved-gradient\);/);

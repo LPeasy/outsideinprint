@@ -23,12 +23,9 @@ test("author selection spans the accepted writing set and preserves canonical ro
   const selected = data.split("featured_work:")[1].split("latest_limit:")[0];
   const routes = [...selected.matchAll(/- (\/\S+)/g)].map((match) => match[1]);
   assert.deepEqual(routes, [
-    "/essays/default-owner/",
-    "/essays/what-is-risk-a-four-part-framework/",
+    "/essays/inter-not/",
     "/syd-and-oliver/what-i-had/",
-    "/essays/reverse-origami/",
     "/essays/all-is-a-gift/",
-    "/shop/2045/sample/",
   ]);
   const author = read("layouts/authors/dossier.html");
   assert.match(author, /A few places to begin, across the different kinds of work I publish\./);
